@@ -2,104 +2,619 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mis Cursos — Repositorio de Estudio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>📚 Mis Estudios — Repositorio UNALM</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Source Sans 3',sans-serif;background:#0a0f1a;color:#e2e8f0;min-height:100vh}
-header{background:#0f1e3a;padding:24px 20px 20px;border-bottom:1px solid rgba(255,255,255,0.07)}
-.hinner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-header h1{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.4px}
-header p{font-size:12px;color:#475569;margin-top:2px}
-#total-badge{font-size:11px;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,0.08);color:#64748b}
-.search-wrap{background:#0d1525;border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 20px}
-.search-wrap input{width:100%;max-width:960px;display:block;margin:0 auto;background:#1a2332;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 16px;color:#e2e8f0;font-size:14px;font-family:'Source Sans 3',sans-serif;outline:none}
-.search-wrap input:focus{border-color:#3b82f6}
-.search-wrap input::placeholder{color:#334155}
-main{max-width:960px;margin:0 auto;padding:20px 20px 60px}
-.curso-section{margin-bottom:32px}
-.curso-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.06)}
-.curso-icon{font-size:18px;line-height:1}
-.curso-title{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;letter-spacing:.3px}
-.curso-count{font-size:11px;padding:2px 8px;border-radius:20px;margin-left:auto}
-.color-blue .curso-title{color:#93c5fd}.color-blue .curso-count{background:#1e3a5f;color:#93c5fd}
-.color-green .curso-title{color:#86efac}.color-green .curso-count{background:#14532d;color:#86efac}
-.color-amber .curso-title{color:#fcd34d}.color-amber .curso-count{background:#431407;color:#fcd34d}
-.color-purple .curso-title{color:#d8b4fe}.color-purple .curso-count{background:#2e1065;color:#d8b4fe}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
-.card{background:#111827;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px;cursor:pointer;text-decoration:none;display:block;transition:transform 0.12s,border-color 0.12s,background 0.12s}
-.card:hover{transform:translateY(-2px);background:#1a2332}
-.color-blue .card:hover{border-color:rgba(59,130,246,0.35)}
-.color-green .card:hover{border-color:rgba(34,197,94,0.35)}
-.color-amber .card:hover{border-color:rgba(245,158,11,0.35)}
-.color-purple .card:hover{border-color:rgba(168,85,247,0.35)}
-.card-num{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px;opacity:.7}
-.color-blue .card-num{color:#60a5fa}.color-green .card-num{color:#4ade80}
-.color-amber .card-num{color:#fbbf24}.color-purple .card-num{color:#c084fc}
-.card h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:6px;line-height:1.3}
-.card p{font-size:12px;color:#475569;line-height:1.5}
-.card-dot-row{display:flex;align-items:center;gap:5px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.05)}
-.dot{width:5px;height:5px;border-radius:50%;background:#22c55e;flex-shrink:0}
-.card-dot-row span{font-size:10px;color:#334155}
-.empty-state{background:#0d1525;border:1px dashed rgba(255,255,255,0.08);border-radius:12px;padding:20px;text-align:center}
-.empty-state p{font-size:12px;color:#1e3a5f}
-.hidden{display:none!important}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #0a0f1a;
+    color: #e2e8f0;
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(135deg, #0f1e3a 0%, #1a2332 100%);
+    padding: 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.hinner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(20px, 5vw, 24px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+header p {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+#total-badge {
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.search-wrap {
+    background: #0d1525;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 12px 16px;
+    position: sticky;
+    top: 72px;
+    z-index: 99;
+    transition: all 0.2s;
+}
+
+.search-wrap input {
+    width: 100%;
+    max-width: 1200px;
+    display: block;
+    margin: 0 auto;
+    background: #1a2332;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px 18px;
+    color: #e2e8f0;
+    font-size: 15px;
+    font-family: 'Source Sans 3', sans-serif;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.search-wrap input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-wrap input::placeholder {
+    color: #475569;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 16px 80px;
+}
+
+/* ========= NUEVA VISTA: CUADROS POR CURSO ========= */
+.cursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.curso-card {
+    background: #111827;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.curso-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+}
+
+.curso-header {
+    background: rgba(0,0,0,0.3);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.curso-icon {
+    font-size: 32px;
+}
+
+.curso-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    flex: 1;
+}
+
+.curso-count {
+    font-size: 11px;
+    background: #1e293b;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+/* Los 4 bloques (categorías) */
+.categorias {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.05);
+}
+
+.categoria-item {
+    background: #0f172a;
+    padding: 20px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    color: #e2e8f0;
+    font-family: inherit;
+}
+
+.categoria-item:hover {
+    filter: brightness(1.2);
+    transform: scale(0.98);
+}
+
+.categoria-icono {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.categoria-nombre {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.categoria-cantidad {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+/* Colores específicos para cada categoría (al hacer hover o fondo) */
+.categoria-teoria:hover { background: #1e3a8a; }
+.categoria-pc:hover { background: #065f46; }
+.categoria-examenes:hover { background: #9a3412; }
+.categoria-lecturas:hover { background: #6b21a5; }
+
+/* ========= VISTA DE DETALLE (ARCHIVOS) ========= */
+.detail-view {
+    display: none;
+}
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.back-btn {
+    background: #1e293b;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    color: #e2e8f0;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    background: #334155;
+}
+
+.detail-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+}
+
+.detail-subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.grid-archivos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.card-archivo {
+    background: #111827;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 18px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s;
+}
+
+.card-archivo:hover {
+    transform: translateY(-3px);
+    background: #1a2332;
+    border-color: #3b82f6;
+}
+
+.card-num {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: #60a5fa;
+}
+
+.card-archivo h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.card-archivo p {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+.empty-state {
+    background: #0d1525;
+    border: 1px dashed rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 40px;
+    text-align: center;
+    color: #64748b;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.fab-add {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #3b82f6;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.fab-add:hover {
+    transform: scale(1.05);
+    background: #2563eb;
+}
+
+.loading {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(59,130,246,0.2);
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+    .categorias {
+        grid-template-columns: 1fr;
+    }
+    .categoria-item {
+        padding: 14px;
+    }
+    .fab-add {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+}
 </style>
 </head>
 <body>
+
 <header>
-  <div class="hinner">
-    <div><h1>📚 Mis Cursos</h1><p>Repositorio de resúmenes por lectura</p></div>
-    <span id="total-badge">cargando...</span>
-  </div>
-</header>
-<div class="search-wrap">
-  <input type="text" id="searchInput" placeholder="Buscar por tema, concepto, lectura..." oninput="filterCards()">
-</div>
-<main id="main"></main>
-<script>
-fetch('lecturas.json')
-  .then(r=>r.json())
-  .then(data=>{
-    const main=document.getElementById('main');
-    let total=0;
-    data.forEach(curso=>{
-      total+=curso.lecturas.length;
-      const sec=document.createElement('div');
-      sec.className=`curso-section color-${curso.color}`;
-      const count=curso.lecturas.length;
-      sec.innerHTML=`
-        <div class="curso-header">
-          <span class="curso-icon">${curso.icono}</span>
-          <span class="curso-title">${curso.curso}</span>
-          <span class="curso-count">${count} lectura${count!==1?'s':''}</span>
+    <div class="hinner">
+        <div>
+            <h1><span>📚</span> Mis Estudios</h1>
+            <p>Repositorio de resúmenes UNALM</p>
         </div>
-        <div class="grid">
-          ${count===0
-            ?'<div class="empty-state"><p>Sin lecturas aún — agrega archivos en la carpeta y actualiza lecturas.json</p></div>'
-            :curso.lecturas.map(l=>`
-              <a class="card" href="${l.archivo}" data-keywords="${l.keywords} ${l.titulo} ${curso.curso}">
-                <div class="card-num">${l.numero}</div>
-                <h2>${l.titulo}</h2>
-                <p>${l.descripcion}</p>
-                <div class="card-dot-row"><span class="dot"></span><span>Canvas disponible</span></div>
-              </a>`).join('')}
-        </div>`;
-      main.appendChild(sec);
+        <span id="total-badge">📊 Cargando...</span>
+    </div>
+</header>
+
+<div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="🔍 Buscar por tema, concepto, curso..." oninput="filterArchivos()">
+</div>
+
+<main id="main">
+    <div class="loading">
+        <div class="loading-spinner"></div>
+        <p>Cargando materiales de estudio...</p>
+    </div>
+</main>
+
+<button class="fab-add" onclick="scrollToTop()">↑</button>
+
+<script>
+// Datos globales
+let allCoursesData = [];     // guarda el JSON original
+let currentView = 'cursos';  // 'cursos' o 'detalle'
+let currentCategory = null;   // { cursoNombre, tipo }  tipo: 'TEORIA', 'PC', 'EXAMENES', 'LECTURAS'
+let currentFilter = '';       // filtro de búsqueda en vista detalle
+
+// Cargar JSON
+fetch('lecturas.json')
+    .then(r => {
+        if (!r.ok) throw new Error('No se pudo cargar lecturas.json');
+        return r.json();
+    })
+    .then(data => {
+        allCoursesData = data;
+        renderCursosView(data);
+        updateTotalBadge(data);
+    })
+    .catch(err => {
+        document.getElementById('main').innerHTML = `<div class="empty-state">⚠️ Error: ${err.message}<br>Asegúrate de que lecturas.json existe.</div>`;
     });
-    document.getElementById('total-badge').textContent=`${data.length} cursos · ${total} lecturas`;
-  })
-  .catch(()=>{
-    document.getElementById('main').innerHTML='<p style="color:#475569;padding:2rem;text-align:center">Abre desde Netlify, no directamente como archivo local.</p>';
-  });
-function filterCards(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  document.querySelectorAll('.card').forEach(card=>{
-    const text=(card.innerText+' '+(card.dataset.keywords||'')).toLowerCase();
-    card.classList.toggle('hidden',q.length>1&&!text.includes(q));
-  });
+
+// ===================== VISTA PRINCIPAL (CUADROS POR CURSO) =====================
+function renderCursosView(data) {
+    const main = document.getElementById('main');
+    main.innerHTML = '';
+    currentView = 'cursos';
+    
+    const cursosGrid = document.createElement('div');
+    cursosGrid.className = 'cursos-grid';
+    
+    data.forEach(curso => {
+        // Agrupar lecturas por tipo (según la palabra en "numero" o según la carpeta en "archivo")
+        const grupos = {
+            TEORIA: [],
+            PC: [],
+            EXAMENES: [],
+            LECTURAS: []
+        };
+        
+        curso.lecturas.forEach(lectura => {
+            const archivo = lectura.archivo;
+            // Detectar tipo por la ruta (carpeta) o por el campo "numero"
+            if (archivo.includes('/TEORIA/') || lectura.numero.toUpperCase().includes('TEORÍA')) {
+                grupos.TEORIA.push(lectura);
+            } else if (archivo.includes('/PC/') || lectura.numero.toUpperCase().includes('PC')) {
+                grupos.PC.push(lectura);
+            } else if (archivo.includes('/EXAMENES/') || lectura.numero.toUpperCase().includes('EXAMEN')) {
+                grupos.EXAMENES.push(lectura);
+            } else if (archivo.includes('/LECTURAS/') || lectura.numero.toUpperCase().includes('LECTURA')) {
+                grupos.LECTURAS.push(lectura);
+            } else {
+                // Fallback: si no coincide, lo guardamos en LECTURAS
+                grupos.LECTURAS.push(lectura);
+            }
+        });
+        
+        const cursoCard = document.createElement('div');
+        cursoCard.className = 'curso-card';
+        cursoCard.innerHTML = `
+            <div class="curso-header">
+                <span class="curso-icon">${curso.icono}</span>
+                <span class="curso-title">${curso.curso}</span>
+                <span class="curso-count">${curso.lecturas.length} archivos</span>
+            </div>
+            <div class="categorias">
+                <div class="categoria-item categoria-teoria" data-curso="${curso.curso}" data-tipo="TEORIA">
+                    <span class="categoria-icono">📘</span>
+                    <div class="categoria-nombre">TEORÍA</div>
+                    <div class="categoria-cantidad">${grupos.TEORIA.length} archivos</div>
+                </div>
+                <div class="categoria-item categoria-pc" data-curso="${curso.curso}" data-tipo="PC">
+                    <span class="categoria-icono">✍️</span>
+                    <div class="categoria-nombre">PC</div>
+                    <div class="categoria-cantidad">${grupos.PC.length} archivos</div>
+                </div>
+                <div class="categoria-item categoria-examenes" data-curso="${curso.curso}" data-tipo="EXAMENES">
+                    <span class="categoria-icono">📝</span>
+                    <div class="categoria-nombre">EXÁMENES</div>
+                    <div class="categoria-cantidad">${grupos.EXAMENES.length} archivos</div>
+                </div>
+                <div class="categoria-item categoria-lecturas" data-curso="${curso.curso}" data-tipo="LECTURAS">
+                    <span class="categoria-icono">📖</span>
+                    <div class="categoria-nombre">LECTURAS</div>
+                    <div class="categoria-cantidad">${grupos.LECTURAS.length} archivos</div>
+                </div>
+            </div>
+        `;
+        
+        // Añadir eventos a los 4 cuadros
+        cursoCard.querySelectorAll('.categoria-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const cursoNombre = item.dataset.curso;
+                const tipo = item.dataset.tipo;
+                showDetailView(cursoNombre, tipo);
+            });
+        });
+        
+        cursosGrid.appendChild(cursoCard);
+    });
+    
+    main.appendChild(cursosGrid);
+    
+    // Ocultar búsqueda? La dejamos visible, pero filtraremos en la vista detalle.
+    // Para la vista cursos, la búsqueda no aplica; pero al cambiar a detalle sí.
+    const searchInput = document.getElementById('searchInput');
+    searchInput.value = '';
+    searchInput.disabled = false;
+    searchInput.placeholder = "🔍 Buscar dentro de la vista actual...";
 }
+
+// ===================== VISTA DE DETALLE (ARCHIVOS DE UNA CATEGORÍA) =====================
+function showDetailView(cursoNombre, tipo) {
+    currentCategory = { cursoNombre, tipo };
+    currentFilter = '';
+    document.getElementById('searchInput').value = '';
+    
+    // Obtener los archivos de ese curso y tipo
+    const curso = allCoursesData.find(c => c.curso === cursoNombre);
+    if (!curso) return;
+    
+    // Filtrar lecturas por tipo (misma lógica que en agrupación)
+    const archivos = curso.lecturas.filter(lectura => {
+        const archivo = lectura.archivo;
+        if (tipo === 'TEORIA') return archivo.includes('/TEORIA/') || lectura.numero.toUpperCase().includes('TEORÍA');
+        if (tipo === 'PC') return archivo.includes('/PC/') || lectura.numero.toUpperCase().includes('PC');
+        if (tipo === 'EXAMENES') return archivo.includes('/EXAMENES/') || lectura.numero.toUpperCase().includes('EXAMEN');
+        if (tipo === 'LECTURAS') return archivo.includes('/LECTURAS/') || lectura.numero.toUpperCase().includes('LECTURA');
+        return false;
+    });
+    
+    renderDetailView(cursoNombre, tipo, archivos);
+}
+
+function renderDetailView(cursoNombre, tipo, archivos, filteredArchivos = null) {
+    const main = document.getElementById('main');
+    currentView = 'detalle';
+    
+    const itemsToShow = filteredArchivos !== null ? filteredArchivos : archivos;
+    
+    let html = `
+        <div class="detail-view" style="display: block;">
+            <div class="detail-header">
+                <button class="back-btn" id="backToCursosBtn">← Volver a cursos</button>
+                <div>
+                    <div class="detail-title">${cursoNombre}</div>
+                    <div class="detail-subtitle">${tipo} · ${itemsToShow.length} archivos</div>
+                </div>
+            </div>
+            <div class="grid-archivos" id="archivosGrid">
+    `;
+    
+    if (itemsToShow.length === 0) {
+        html += `<div class="empty-state">📭 No hay archivos en esta categoría aún.<br>Agrega tus PDFs o HTML en la carpeta correspondiente.</div>`;
+    } else {
+        itemsToShow.forEach(arch => {
+            html += `
+                <a class="card-archivo" href="${arch.archivo}">
+                    <div class="card-num">${arch.numero}</div>
+                    <h3>${arch.titulo}</h3>
+                    <p>${arch.descripcion || 'Sin descripción'}</p>
+                </a>
+            `;
+        });
+    }
+    
+    html += `</div></div>`;
+    main.innerHTML = html;
+    
+    // Evento del botón volver
+    document.getElementById('backToCursosBtn').addEventListener('click', () => {
+        renderCursosView(allCoursesData);
+        updateTotalBadge(allCoursesData);
+        document.getElementById('searchInput').value = '';
+        currentView = 'cursos';
+    });
+    
+    // Guardar referencia a los archivos originales para el filtro
+    window.currentDetailArchivos = archivos;
+    window.currentDetailCurso = cursoNombre;
+    window.currentDetailTipo = tipo;
+}
+
+// ===================== BÚSQUEDA EN VISTA DETALLE =====================
+function filterArchivos() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    
+    if (currentView !== 'detalle') {
+        // Si estamos en vista cursos, la búsqueda podría no tener efecto, o podríamos implementar filtrado de cursos
+        // Por simplicidad, no hacemos nada en vista cursos.
+        return;
+    }
+    
+    if (!window.currentDetailArchivos) return;
+    
+    if (query.length < 2 && query !== '') {
+        // Si el usuario escribe una letra, no filtramos hasta 2 caracteres (mejor experiencia)
+        if (query.length === 1) return;
+    }
+    
+    let filtered = window.currentDetailArchivos;
+    if (query.length >= 2) {
+        filtered = window.currentDetailArchivos.filter(arch => {
+            const texto = `${arch.numero} ${arch.titulo} ${arch.descripcion} ${arch.keywords || ''}`.toLowerCase();
+            return texto.includes(query);
+        });
+    }
+    
+    // Re-renderizar la vista detalle con los archivos filtrados
+    renderDetailView(window.currentDetailCurso, window.currentDetailTipo, window.currentDetailArchivos, filtered);
+}
+
+// ===================== UTILIDADES =====================
+function updateTotalBadge(data) {
+    const totalLecturas = data.reduce((acc, curso) => acc + curso.lecturas.length, 0);
+    document.getElementById('total-badge').textContent = `📊 ${data.length} cursos · ${totalLecturas} archivos`;
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Ajustar FAB al hacer scroll
+window.addEventListener('scroll', () => {
+    const fab = document.querySelector('.fab-add');
+    if (window.scrollY > 300) fab.style.opacity = '1';
+    else fab.style.opacity = '0.7';
+});
 </script>
+
 </body>
 </html>

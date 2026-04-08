@@ -1,0 +1,536 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:3px}
+.titlebar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.tagrow{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;background:rgba(255,255,255,.1);color:#cbd5e1;padding:2px 8px;border-radius:20px;font-family:'Source Sans 3',sans-serif}
+.secbar{grid-column:1/-1;padding:7px 14px;border-radius:8px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.sec-blue{background:#1e3a5f;color:#93c5fd}
+.sec-green{background:#14532d;color:#86efac}
+.sec-amber{background:#422006;color:#fef08a}
+.sec-teal{background:#042f2e;color:#5eead4}
+.sec-purple{background:#2e1065;color:#c4b5fd}
+.sec-orange{background:#431407;color:#fed7aa}
+.sec-pink{background:#4a044e;color:#f0abfc}
+@media(prefers-color-scheme:light){
+.sec-blue{background:#dbeafe;color:#1e3a8a}
+.sec-green{background:#dcfce7;color:#14532d}
+.sec-amber{background:#fef9c3;color:#713f12}
+.sec-teal{background:#ccfbf1;color:#134e4a}
+.sec-purple{background:#ede9fe;color:#4c1d95}
+.sec-orange{background:#ffedd5;color:#7c2d12}
+.sec-pink{background:#fce7f3;color:#831843}
+}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.3px}
+.bh-blue{background:#dbeafe;color:#1e3a8a} .bh-green{background:#dcfce7;color:#14532d}
+.bh-amber{background:#fef9c3;color:#713f12} .bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-purple{background:#ede9fe;color:#4c1d95} .bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-red{background:#fee2e2;color:#991b1b} .bh-pink{background:#fce7f3;color:#831843}
+.bh-gray{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd}.bh-green{background:#14532d;color:#86efac}
+.bh-amber{background:#422006;color:#fef08a}.bh-teal{background:#042f2e;color:#5eead4}
+.bh-purple{background:#2e1065;color:#c4b5fd}.bh-orange{background:#431407;color:#fed7aa}
+.bh-red{background:#450a0a;color:#fca5a5}.bh-pink{background:#4a044e;color:#f0abfc}
+.bh-gray{background:#1e293b;color:#94a3b8}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5;color:var(--color-text-primary)}
+.def-blue{border-color:#3b82f6}.def-green{border-color:#22c55e}.def-amber{border-color:#f59e0b}
+.def-teal{border-color:#14b8a6}.def-purple{border-color:#8b5cf6}.def-orange{border-color:#f97316}
+.def-red{border-color:#ef4444}.def-pink{border-color:#ec4899}.def-gray{border-color:#94a3b8}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;color:var(--color-text-primary)}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}.dot-green{background:#22c55e}.dot-amber{background:#f59e0b}
+.dot-teal{background:#14b8a6}.dot-purple{background:#8b5cf6}.dot-orange{background:#f97316}
+.dot-red{background:#ef4444}.dot-pink{background:#ec4899}.dot-gray{background:#94a3b8}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:7px 0;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;border-color:#fef08a;color:#fef08a}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;color:var(--color-text-primary);line-height:1.5}
+.mini b{display:block;font-weight:600;margin-bottom:3px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:7px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:7px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0;font-size:11.5px}
+.fbox{background:var(--color-background-secondary);padding:4px 9px;border-radius:7px;color:var(--color-text-primary)}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.num-badge{display:inline-flex;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;align-items:center;justify-content:center;flex-shrink:0;margin-right:4px}
+.nb-b{background:#dbeafe;color:#1e3a8a}.nb-g{background:#dcfce7;color:#14532d}.nb-r{background:#fee2e2;color:#991b1b}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);text-align:left;font-weight:600;color:var(--color-text-primary)}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;color:var(--color-text-primary)}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;font-size:11px}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;font-weight:700;white-space:nowrap}
+.fc{font-size:11px;color:#94a3b8;line-height:1.6}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:9px;margin-top:3px;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:20px}
+.label-stat{font-size:11px;display:flex;justify-content:space-between;color:var(--color-text-secondary);margin-top:2px}
+h3.bk{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;color:var(--color-text-secondary);margin:6px 0 4px;text-transform:uppercase;letter-spacing:.3px}
+</style>
+
+<div class="cv">
+
+<!-- ═══ TÍTULO ═══ -->
+<div class="titlebar">
+  <h1>⚡ LAS ENERGÍAS RENOVABLES EN EL CONTEXTO MUNDIAL Y PERUANO</h1>
+  <p>Unidad 1 · Laboratorio de Energías Renovables (LER) · UNALM · Dr. José Calle Maraví, Ph.D. · Profesor Principal</p>
+  <div class="tagrow">
+    <span class="tag">☀️ Solar FV/FT</span><span class="tag">💨 Eólica</span><span class="tag">🌿 Biomasa</span>
+    <span class="tag">💧 Hidro</span><span class="tag">🌋 Geotermia</span><span class="tag">🌊 Maremotriz</span>
+    <span class="tag">🔋 Almacenamiento</span><span class="tag">🇵🇪 Contexto Perú</span><span class="tag">📊 Matriz energética</span>
+  </div>
+</div>
+
+<!-- ═══ SECCIÓN 1: FUNDAMENTOS ═══ -->
+<div class="secbar sec-blue">🔵 SECCIÓN 1 — FUNDAMENTOS DE LAS ENERGÍAS RENOVABLES (RER)</div>
+
+<!-- BLOQUE: Importancia RER -->
+<div class="block s2">
+  <span class="bh bh-blue">Importancia de las RER (Diap. 3)</span>
+  <div class="def def-blue">Las <b>Recursos Energéticos Renovables (RER)</b> son fuentes de energía que se regeneran de forma natural en escalas de tiempo humanas (sol, viento, agua, biomasa, calor terrestre). Su importancia no radica únicamente en ser "limpias", sino en transformar la estructura económica, política y sanitaria global.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <b>🌡️ Mitigación climática</b>
+      Los combustibles fósiles generan más del 75% de las emisiones globales de GEI. Las RER producen emisiones cercanas a cero en operación, siendo la herramienta más directa contra el cambio climático.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <b>🏭 Seguridad energética</b>
+      Reducen la dependencia de importaciones de petróleo y gas, fortaleciendo la autonomía nacional. Países con alta dependencia fósil son vulnerables a crisis geopolíticas y volatilidad de precios.
+    </div>
+    <div class="mini" style="border-top:3px solid #f59e0b">
+      <b>💰 Ahorro y competitividad</b>
+      Solar y eólica han reducido sus costos en más de un 90% en 15 años. La generación solar FV ya es la electricidad más barata de la historia en muchas regiones, siendo clave para exportar con huella de carbono reducida.
+    </div>
+    <div class="mini" style="border-top:3px solid #ec4899">
+      <b>🫁 Salud pública</b>
+      La contaminación del aire por fósiles genera enfermedades respiratorias, cardiovasculares y cáncer. Las RER eliminan PM2.5, NOx, SOx y ozono troposférico de las ciudades, mejorando calidad de vida.
+    </div>
+  </div>
+  <div class="flow">
+    <span class="fbox">🌍 Meta ONU-IRENA</span><span class="farrow">→</span>
+    <span class="fbox">90% electricidad RER al 2050</span><span class="farrow">→</span>
+    <span class="fbox">COP28: +eficiencia energética</span><span class="farrow">→</span>
+    <span class="fbox">América Latina: 80% RER al 2050</span>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "renovable" con "sostenible". Una gran represa puede ser renovable pero tener impactos ambientales severos. La sostenibilidad requiere evaluar todo el ciclo de vida.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la reducción de costos de energía solar y eólica representa una ventaja competitiva para el Perú en el contexto de los compromisos de la COP28. ¿Qué implicaciones tiene para el sector exportador peruano?</div>
+</div>
+
+<!-- BLOQUE: Fuentes futuras RER -->
+<div class="block">
+  <span class="bh bh-teal">Fuentes Futuras de los RER (Diap. 4)</span>
+  <div class="def def-teal">Las tecnologías emergentes amplían el concepto de "renovable" hacia fuentes que hoy son experimentales pero que podrían dominar la matriz energética del siglo XXII. Conocerlas es esencial para anticipar inversiones y políticas.</div>
+  <div class="item"><span class="dot dot-teal"></span><div><b>Hidrógeno verde:</b> Se produce por electrólisis del agua usando electricidad RER. No emite CO₂ y sirve como vector energético para transporte pesado, industria siderúrgica y almacenamiento estacional.</div></div>
+  <div class="item"><span class="dot dot-blue"></span><div><b>Energía marina:</b> Mareas (predecibles), corrientes oceánicas (constantes), gradiente térmico (OTEC), osmosis (diferencia de salinidad). Potencial enorme en Perú por su extensa costa del Pacífico.</div></div>
+  <div class="item"><span class="dot dot-purple"></span><div><b>Celdas Perovskita:</b> Nueva generación de paneles solares con eficiencia >33% (vs ~22% silicio) y fabricación más económica. Bifaciales y de película delgada también ganan terreno.</div></div>
+  <div class="item"><span class="dot dot-amber"></span><div><b>BECCS (Bioenergía + Captura de CO₂):</b> Combina biomasa de segunda generación (algas, residuos) con captura y almacenamiento de carbono. Permite emisiones netas NEGATIVAS.</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>Smart Grids:</b> Redes eléctricas inteligentes que integran generación distribuida, almacenamiento y demanda variable en tiempo real. Esenciales para integrar masivamente RER intermitentes.</div></div>
+  <div class="item"><span class="dot dot-orange"></span><div><b>Tecnologías disruptivas:</b> Evapolectrics (electricidad del vapor de agua), turbinas aéreas a gran altura (corrientes en chorro), membranas de gradiente salino.</div></div>
+  <div class="exam">🎯 EXAMEN: Compare el potencial del hidrógeno verde y la energía marina para el caso peruano. ¿Cuáles son las barreras técnicas y económicas de cada una al año 2025?</div>
+</div>
+
+<!-- ═══ SECCIÓN 2: MATRIZ ENERGÉTICA ═══ -->
+<div class="secbar sec-orange">🟠 SECCIÓN 2 — MATRIZ ENERGÉTICA MUNDIAL Y PERUANA</div>
+
+<!-- Matriz Mundial -->
+<div class="block">
+  <span class="bh bh-orange">Matriz Energética Mundial 2022 (Diap. 5-8)</span>
+  <div class="def def-orange">La <b>matriz energética mundial</b> es la distribución porcentual de las fuentes de energía primaria que una economía o el mundo consume. En 2022, los fósiles siguen dominando con ~80%, pese al crecimiento exponencial de las RER.</div>
+  <h3 class="bk">Composición 2022 (Statistical Review of World Energy)</h3>
+  <div class="item"><span class="dot dot-orange"></span><div><b>Petróleo ~31%:</b> Domina el transporte (92% del parque automotor mundial). Precio extremadamente volátil: pasó de ~$20 en 1990 a ~$140 en 2008, ~$-37 en 2020, ~$90 en 2022.</div></div>
+  <div class="item"><span class="dot dot-gray"></span><div><b>Gas Natural ~25%:</b> Transición hacia energía limpia; menos emisiones que carbón. Crece en industria y generación eléctrica en economías emergentes.</div></div>
+  <div class="item"><span class="dot dot-red"></span><div><b>Carbón ~27%:</b> Más contaminante por unidad de energía. China e India explican el 75% del consumo. El mundo lo abandona lentamente por presiones climáticas.</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>RER + Nuclear ~17%:</b> Hidráulica ~6%, Solar+Eólica ~5% y subiendo rápido, Nuclear ~4%, Biomasa ~2%.</div></div>
+  <div class="warn">⚠️ BP 2018 "Evolving Transition": Para 2040 habrá el mix más diverso de la historia. Las RER crecerán >400% y representarán >50% del aumento en generación eléctrica. Pero petróleo + gas seguirán siendo >50% de la energía total.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la tendencia de precios del petróleo en los últimos 25 años justifica la transición hacia las RER desde una perspectiva de seguridad energética? Mencione al menos 3 eventos que generaron shocks de precio.</div>
+</div>
+
+<!-- Matriz Peruana -->
+<div class="block s2">
+  <span class="bh bh-green">Matriz Energética Peruana — RER al 8.62% (2024) → 20% al 2030 (Diap. 9-16)</span>
+  <div class="def def-green">Perú tiene una particularidad única: su electricidad ya es mayoritariamente limpia gracias a su potencial hidráulico. Sin embargo, la energía PRIMARIA total (incluyendo transporte e industria) sigue dominada por fósiles, especialmente gas natural del Camisea.</div>
+  <div class="two">
+    <div>
+      <h3 class="bk">Electricidad 2024 (Osinerming)</h3>
+      <div class="label-stat"><span>Hidroeléctricas</span><span><b>51.33%</b></span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:51.33%;background:#3b82f6"></div></div>
+      <div class="label-stat"><span>Gas Natural</span><span><b>38%</b></span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:38%;background:#f97316"></div></div>
+      <div class="label-stat"><span>Eólica</span><span><b>6.52%</b></span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:6.52%;background:#22c55e"></div></div>
+      <div class="label-stat"><span>Solar</span><span><b>2.1%</b></span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:2.1%;background:#f59e0b"></div></div>
+      <div class="label-stat"><span>Biodiesel</span><span><b>0.71%</b></span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:0.71%;background:#8b5cf6"></div></div>
+      <div class="label-stat"><span>Biomasa</span><span><b>0.62%</b></span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:0.62%;background:#14b8a6"></div></div>
+    </div>
+    <div>
+      <h3 class="bk">Reservas Primarias (MINEM 2022)</h3>
+      <div class="item"><span class="dot dot-orange"></span><div><b>Fósiles 73.8%:</b> Gas Natural liqu./gaseoso 81.8% de los fósiles, petróleo 7.9%, carbón 0.55%.</div></div>
+      <div class="item"><span class="dot dot-red"></span><div><b>Transporte consume</b> el 43% de la energía fósil: 92% petróleo + 8% gas.</div></div>
+      <div class="item"><span class="dot dot-blue"></span><div><b>Industria:</b> 36% electricidad, con petróleo 31%, gas natural creciendo al 16% anual.</div></div>
+      <div class="item"><span class="dot dot-green"></span><div><b>Gas natural:</b> Al ritmo actual alcanzaría ~60 años más. Urge desarrollar alternativas limpias.</div></div>
+      <h3 class="bk" style="margin-top:8px">Capacidad instalada RER (2024)</h3>
+      <div class="three" style="margin-top:4px">
+        <div class="mini" style="border-top:3px solid #22c55e"><b>🌀 Eólica</b>1,020 MW instalados</div>
+        <div class="mini" style="border-top:3px solid #f59e0b"><b>☀️ Solar</b>476 MW instalados</div>
+        <div class="mini" style="border-top:3px solid #3b82f6"><b>🏗️ En obra</b>2,321 MW adicionales</div>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ PARADOJA PERUANA: El 97.7% de la disponibilidad hídrica está en la selva y sierra, pero el 56% de la población (Lima, costa) vive donde solo existe el 1.8% del agua. Esto encarece la transmisión y obliga a invertir en solar y eólica costera.</div>
+  <div class="exam">🎯 EXAMEN: Analice la contradicción entre la estructura de generación eléctrica peruana (51% hídrica) y la composición de reservas de energía primaria (73.8% fósiles). ¿Qué implica esto para la descarbonización del sector transporte?</div>
+</div>
+
+<!-- ═══ SECCIÓN 3: EMISIONES Y TENDENCIAS ═══ -->
+<div class="secbar sec-red" style="background:#450a0a;color:#fca5a5">🔴 SECCIÓN 3 — CRISIS CLIMÁTICA, EMISIONES Y DEMANDA ENERGÉTICA</div>
+
+<!-- Emisiones CO2 -->
+<div class="block">
+  <span class="bh bh-red">Emisiones de Carbono y Crisis Climática (Diap. 17-22)</span>
+  <div class="def def-red">El CO₂ atmosférico ha superado las 420 ppm (2024), nivel sin precedentes en 3 millones de años. La quema de combustibles fósiles es el principal driver, y el sistema energético es el mayor emisor por sector.</div>
+  <div class="item"><span class="dot dot-red"></span><div><b>Por sector:</b> Energía (34%), Industria (25%), Transporte (16%), Agricultura (12%), Edificios (6%), otros. El sector energía es el más crítico.</div></div>
+  <div class="item"><span class="dot dot-orange"></span><div><b>Por recurso:</b> Carbón emite ~820 gCO₂/kWh, Gas ~450, Petróleo ~650. Solar emite ~20-50, Eólica ~7-15, Nuclear ~12 gCO₂/kWh (incluyendo fabricación).</div></div>
+  <div class="rx">1 BEP (barril equiv. petróleo) = 42 gal USA = 158.98 L<br>Genera 300–450 kg CO₂ al quemarse</div>
+  <div class="item"><span class="dot dot-blue"></span><div><b>Retracción del Ártico:</b> El casquete glacial ártico ha perdido ~40% de su extensión de verano desde 1980. Es el indicador más visual del calentamiento global y retroalimenta el calentamiento al reducir el albedo.</div></div>
+  <div class="exam">🎯 EXAMEN: Si 1 BEP genera 400 kg CO₂ y Perú consume ~200,000 MBEP/día en transporte, estime las emisiones anuales de CO₂ del sector transporte peruano. ¿Cómo las RER podrían mitigar esto?</div>
+</div>
+
+<!-- Tendencias demanda -->
+<div class="block">
+  <span class="bh bh-amber">Tendencias de Demanda Energética — BP 2018 (Diap. 23)</span>
+  <div class="def def-amber">El reporte "Evolving Transition" de BP (2018) proyecta que la transición energética será más lenta de lo que los escenarios optimistas sugieren: el mundo necesitará MÁS energía total mientras diversifica sus fuentes.</div>
+  <div class="item"><span class="dot dot-amber"></span><div><b>Demanda global +33%:</b> Las economías en desarrollo (India, África, Sudeste Asiático) elevarán la demanda. La eficiencia energética no alcanza a compensar el crecimiento poblacional.</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>RER crecen +400%:</b> Representarán >50% del aumento en generación eléctrica al 2040. Solar y eólica son los de crecimiento más rápido, impulsados por la caída de costos.</div></div>
+  <div class="item"><span class="dot dot-orange"></span><div><b>Gas natural gana participación:</b> Apoyado por la industrialización de emergentes. Es el "combustible puente" por sus menores emisiones vs carbón.</div></div>
+  <div class="item"><span class="dot dot-blue"></span><div><b>Autos eléctricos:</b> Crecen 15%, alcanzando 300 millones (de 2,000M total). Para 2050, proyecciones más agresivas hablan de 800M-1,000M vehículos eléctricos.</div></div>
+  <div class="warn">⚠️ OJO: Petróleo + Gas seguirán siendo >50% de la energía MUNDIAL al 2040 según BP. La electricidad solo es ~20% del consumo final de energía global: el 80% restante (calor industrial, transporte) es mucho más difícil de descarbonizar.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el "Factor Planta" (eficiencia de producción) es un criterio decisivo al comparar centrales solares, eólicas y de gas natural? Explique sus implicancias en el despacho eléctrico peruano.</div>
+</div>
+
+<!-- Nuclear -->
+<div class="block">
+  <span class="bh bh-purple">Energía Nuclear en el Mundo (Diap. 24-25)</span>
+  <div class="def def-purple">La energía nuclear produce electricidad por fisión de átomos de uranio enriquecido (&lt;6%). No emite CO₂ en operación, tiene el factor planta más alto (~90%) y es la única fuente de base que puede reemplazar fósiles en gran escala.</div>
+  <div class="item"><span class="dot dot-purple"></span><div><b>Enriquecimiento:</b> Uranio natural tiene ~0.7% U-235. Se enriquece a &lt;5% para reactores civiles (vs 90%+ para armas). Es el requisito técnico central de no proliferación.</div></div>
+  <div class="item"><span class="dot dot-blue"></span><div><b>Ventajas:</b> 0 emisiones operativas, densidad energética altísima (1 kg de uranio = ~3 millones de kg de carbón), factor planta ~90% vs ~25% solar y ~35% eólico.</div></div>
+  <div class="item"><span class="dot dot-red"></span><div><b>Desventajas:</b> Alto costo de construcción, gestión de residuos radiactivos (vida útil &gt;10,000 años), percepción pública negativa post-Fukushima (2011).</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>Fusión nuclear:</b> Proceso inverso (unir deuterio + tritio → helio + energía). ITER (Francia) y NIF (USA) han logrado avances históricos. Prometedora para segunda mitad del siglo XXI.</div></div>
+  <div class="exam">🎯 EXAMEN: Dado que el Factor Planta de la energía nuclear es ~90% vs ~25% de la solar, ¿por qué Perú no considera la nuclear en su matriz al 2030? Discuta factores económicos, técnicos y políticos.</div>
+</div>
+
+<!-- ═══ SECCIÓN 4: ENERGÍA SOLAR ═══ -->
+<div class="secbar sec-amber">☀️ SECCIÓN 4 — ENERGÍA SOLAR FOTOVOLTAICA Y FOTOTÉRMICA</div>
+
+<!-- El Sol como fuente -->
+<div class="block">
+  <span class="bh bh-amber">El Sol como Fuente de Energía (Diap. 33)</span>
+  <div class="def def-amber">El Sol es una fuente de energía prácticamente inagotable a escala humana. Comprender la magnitud de su potencial es fundamental para entender por qué es la fuente del futuro.</div>
+  <div class="rx">Potencia del Sol: 3.8 × 10²³ kW<br>Interceptada por Tierra: 1.7 × 10¹⁴ kW<br>1 día solar = 40× consumo energético anual mundial<br>10 días de sol = todas las reservas fósiles conocidas</div>
+  <div class="item"><span class="dot dot-amber"></span><div><b>3% del desierto mundial:</b> Si se aprovechase la radiación solar del 3% de la superficie desértica terrestre, se cubriría toda la demanda energética mundial. La limitante es tecnológica y de transmisión, no de recurso.</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>Perú tiene alto potencial:</b> La costa sur (Ica, Arequipa, Moquegua, Tacna) recibe 5.5-6.5 kWh/m²/día de irradiación, entre las más altas del planeta. El altiplano recibe hasta 7 kWh/m²/día.</div></div>
+  <div class="exam">🎯 EXAMEN: Exprese en unidades comparables cuánta energía solar recibe la Tierra en un año y compárela con las reservas mundiales de gas natural. ¿Qué limitaciones prácticas impiden aprovechar este potencial al 100%?</div>
+</div>
+
+<!-- Solar FV -->
+<div class="block s2">
+  <span class="bh bh-amber">Energía Solar Fotovoltaica — FV (Diap. 34-39)</span>
+  <div class="def def-amber">La <b>energía solar fotovoltaica</b> convierte directamente la radiación solar en electricidad mediante el efecto fotoeléctrico en semiconductores (principalmente silicio). La electricidad generada es corriente continua (DC) que se convierte a alterna (AC) mediante inversores.</div>
+  <div class="two">
+    <div>
+      <h3 class="bk">Tecnologías de Celdas FV</h3>
+      <div class="item"><span class="dot dot-amber"></span><div><b>Silicio monocristalino:</b> Eficiencia 19-22%, mayor costo. El estándar actual de la industria residencial y comercial.</div></div>
+      <div class="item"><span class="dot dot-amber"></span><div><b>Silicio policristalino:</b> Eficiencia 15-18%, menor costo. Perdiendo mercado ante monocristalino.</div></div>
+      <div class="item"><span class="dot dot-purple"></span><div><b>Celdas Perovskita:</b> Eficiencia laboratorio &gt;33%, bajo costo de fabricación. Problema: degradación por humedad. El futuro de la industria.</div></div>
+      <div class="item"><span class="dot dot-blue"></span><div><b>Bifaciales:</b> Captan radiación por ambas caras (directa y reflejada del suelo). Ganan 10-30% de producción adicional.</div></div>
+    </div>
+    <div>
+      <h3 class="bk">Plantas Solares en Perú (7 parques = 250 MW)</h3>
+      <div class="item"><span class="dot dot-orange"></span><div><b>Arequipa - La Joya:</b> 121 has, 40 MW, 151,305 paneles. Evita 130,000 tn CO₂/año.</div></div>
+      <div class="item"><span class="dot dot-orange"></span><div><b>Tacna:</b> 141 has, 47.2 MW</div></div>
+      <div class="item"><span class="dot dot-orange"></span><div><b>Moquegua:</b> 123 has, 50.6 MW</div></div>
+      <div class="item"><span class="dot dot-green"></span><div><b>Inversión:</b> S/.410MM (~US$97M). Empresas españolas Solar Pack y Gestamp. Concesionadas por subasta a 20 años.</div></div>
+      <div class="item"><span class="dot dot-blue"></span><div><b>En construcción:</b> +150 MW adicionales → Total proyectado: ~400 MW.</div></div>
+    </div>
+  </div>
+  <div class="rx">Tendencia de precios FV: de $76.67/Wp (1977) → $0.36/Wp (2023)<br>Reducción del 99.5% en 46 años. Meta 2050: 4,600 GW instalados globales (16% electricidad mundial)</div>
+  <div class="flow">
+    <span class="fbox">Radiación solar</span><span class="farrow">→</span>
+    <span class="fbox">Celda FV (efecto fotoeléctrico)</span><span class="farrow">→</span>
+    <span class="fbox">Corriente DC</span><span class="farrow">→</span>
+    <span class="fbox">Inversor</span><span class="farrow">→</span>
+    <span class="fbox">Corriente AC</span><span class="farrow">→</span>
+    <span class="fbox">Red/consumo</span>
+  </div>
+  <h3 class="bk">Investigaciones LER-UNALM en FV</h3>
+  <div class="item"><span class="dot dot-blue"></span><div>Bombeo solar con sistemas de riego tecnificado a baja presión · Sistema FV 3.5 kW interconectado en campus UNALM · Electrificación rural con SFV domiciliarios · Fotocatálisis para tratamiento de agua (TiO₂, CuO como semiconductores).</div></div>
+  <div class="warn">⚠️ FOTOCATÁLISIS: Es un proceso donde un semiconductor (TiO₂ o CuO) excitado por luz solar genera radicales libres que rompen moléculas contaminantes por oxidorreducción. No confundir con FV (no genera electricidad, descontamina agua).</div>
+  <div class="exam">🎯 EXAMEN: Calcule la reducción de CO₂ anual si Perú instalara 1,000 MW solares adicionales con un Factor Planta del 25% y un factor de emisión de la red de 0.35 tCO₂/MWh. Exprese el resultado en toneladas anuales.</div>
+</div>
+
+<!-- Solar FT -->
+<div class="block">
+  <span class="bh bh-orange">Energía Solar Fototérmica — FT (Diap. 40-50)</span>
+  <div class="def def-orange">La <b>energía solar fototérmica</b> convierte la radiación solar en CALOR (no electricidad). Según la temperatura de trabajo, se divide en baja temperatura (termas), media (concentradores parabólicos) y alta temperatura (hornos solares, CSP).</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #f97316">
+      <b>🌡️ Baja temperatura (&lt;80°C)</b>
+      Colectores planos (sin/con cobertura) y tubos al vacío. Aplicación: calefacción de agua (termas solares), calefacción de espacios. LER-UNALM ha evaluado eficiencia de terma solar con colectores de placa plana tipo rejilla.
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <b>🌀 Temperatura media (80-300°C)</b>
+      Concentradores parabólicos de canal (CPC). Usos: vapor industrial, refrigeración solar (absorción/adsorción), secado de productos agrícolas (té negro en Cusco, granos).
+    </div>
+    <div class="mini" style="border-left:3px solid #991b1b">
+      <b>🔥 Alta temperatura (&gt;300°C)</b>
+      Hornos solares, plantas CSP (Gemasolar, Sevilla). Generan vapor para turbinas eléctricas. Eficiencia global ~15-20%. Ventaja: almacenamiento térmico con sales fundidas.
+    </div>
+  </div>
+  <h3 class="bk" style="margin-top:8px">Cocinas y Hornos Solares — Características</h3>
+  <div class="item"><span class="dot dot-orange"></span><div>Temperatura promedio: 95–135°C. Temperaturas &gt;150-200°C secan y queman el producto. Usar ollas de material delgado, vidrio pintado o pintadas de color oscuro (mayor absorción).</div></div>
+  <div class="item"><span class="dot dot-red"></span><div>No usar ollas de cerámica (absorbe calor y no lo transfiere). Tapa hermética. Usar foil de aluminio como reflectante. Tiempo de cocción: el doble vs cocina convencional.</div></div>
+  <h3 class="bk" style="margin-top:6px">Refrigeración Solar</h3>
+  <div class="item"><span class="dot dot-blue"></span><div><b>Sistemas mecánicos:</b> Compresor con eficiencia &gt;0.5. Usan CFC, HCFC, HFC — dañan la capa de ozono y aceleran el calentamiento. Consumen el 15% de la energía mundial.</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>Sistemas de absorción:</b> Eficiencia &lt;0.35. No contaminan, bajo consumo eléctrico. Usan amoniaco+agua (120°C), bromuro de litio+agua. Ideales para zonas rurales con disponibilidad solar.</div></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué en los invernaderos de Almería (35,000 has) se ha observado un efecto de reducción del calentamiento global local, a diferencia de lo esperado. ¿Qué principios físicos explican este fenómeno?</div>
+</div>
+
+<!-- ═══ SECCIÓN 5: EÓLICA ═══ -->
+<div class="secbar sec-teal">💨 SECCIÓN 5 — ENERGÍA EÓLICA MUNDIAL Y PERÚ</div>
+
+<!-- Eólica -->
+<div class="block s2">
+  <span class="bh bh-teal">Energía Eólica — Potencial Mundial y Perú (Diap. 52-62)</span>
+  <div class="def def-teal">La energía eólica convierte la energía cinética del viento en electricidad mediante aerogeneradores. El potencial es proporcional al cubo de la velocidad del viento (P ∝ v³), por eso pequeñas diferencias de velocidad generan grandes diferencias en potencia.</div>
+  <div class="rx">Potencia eólica: P = ½ · ρ · A · v³ · Cp<br>ρ = densidad del aire (1.225 kg/m³), A = área del rotor (m²)<br>v = velocidad del viento (m/s), Cp = coeficiente de potencia (máx. teórico 0.59, Límite de Betz)</div>
+  <div class="two">
+    <div>
+      <h3 class="bk">Tipos de aerogeneradores</h3>
+      <div class="item"><span class="dot dot-teal"></span><div><b>Onshore (tierra):</b> Hasta 6 MW unitario. Factor planta 25-40%. Parques eólicos de decenas a cientos de MW.</div></div>
+      <div class="item"><span class="dot dot-blue"></span><div><b>Offshore (mar):</b> Hasta 15-20 MW unitario. Factor planta 40-55%. Vientos más constantes y fuertes. Mayor costo de instalación y mantenimiento.</div></div>
+      <div class="item"><span class="dot dot-purple"></span><div><b>Pequeños sistemas:</b> Micropotencia (&lt;1,000W) para viviendas aisladas. Baja potencia (1-100 kW) para electrificación rural. Con almacenamiento en baterías o hidráulico.</div></div>
+      <div class="item"><span class="dot dot-green"></span><div><b>Savonious:</b> Aerogenerador de eje vertical, eficiencia menor pero funciona con vientos de cualquier dirección. Estudiado en LER-UNALM. Ideal para entornos urbanos.</div></div>
+    </div>
+    <div>
+      <h3 class="bk">Potencial Eólico Perú (Atlas Eólico)</h3>
+      <div class="item"><span class="dot dot-orange"></span><div><b>Potencial total:</b> 77,000 MW · <b>Aprovechable:</b> 22,000 MW</div></div>
+      <div class="item"><span class="dot dot-orange"></span><div><b>Marcona (Ica):</b> 9 m/s promedio — el mejor sitio del Perú</div></div>
+      <div class="item"><span class="dot dot-orange"></span><div><b>Malabrigo (La Lib.):</b> 8 m/s · <b>Paita (Piura):</b> 7.8 m/s</div></div>
+      <div class="item"><span class="dot dot-orange"></span><div><b>Pacasmayo:</b> 6.9 m/s</div></div>
+      <div class="item"><span class="dot dot-green"></span><div><b>Central WAYRA I (Nazca):</b> 132 MW, la mayor planta eólica del Perú. "Wayra" significa viento en quechua.</div></div>
+      <div class="item"><span class="dot dot-blue"></span><div><b>Sistemas marítimos:</b> LER-UNALM estudia aerogeneradores para transporte marítimo (velas rígidas tipo rotor Flettner).</div></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ DIFERENCIA CLAVE: La potencia eólica varía con el CUBO de la velocidad: si el viento duplica su velocidad, la potencia se multiplica por 8. Por eso Marcona (9 m/s) es radicalmente superior a un sitio de 6 m/s: (9/6)³ = 3.375 veces más potencia.</div>
+  <div class="exam">🎯 EXAMEN: Si un aerogenerador de 3 MW en Marcona (9 m/s) tiene un Factor Planta del 40%, ¿cuánta energía anual produce en MWh? ¿Cuántos hogares peruanos (consumo promedio ~150 kWh/mes) abastecería?</div>
+</div>
+
+<!-- ═══ SECCIÓN 6: BIOMASA ═══ -->
+<div class="secbar sec-green">🌿 SECCIÓN 6 — BIOMASA: BIOCHAR, BIODIGESTORES, BIODIESEL Y ALGAS</div>
+
+<!-- Fuentes de Biomasa -->
+<div class="block">
+  <span class="bh bh-green">Fuentes y Clasificación de la Biomasa (Diap. 63-64)</span>
+  <div class="def def-green">La <b>biomasa energética</b> es materia orgánica (vegetal o animal) que almacena energía solar fijada por fotosíntesis. Es renovable si su tasa de consumo no supera la de regeneración. Es la única RER que puede almacenar energía de forma estable (como los fósiles).</div>
+  <div class="item"><span class="dot dot-green"></span><div><b>A. Natural/Nativa:</b> Madera de bosques nativos, pastos, peces, algas silvestres. Riesgo de sobreexplotación si no hay manejo sostenible.</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>B. Cultivada:</b> Plantaciones forestales (eucalipto, paulownia), cultivos energéticos (caña, palma), acuicultura. Mayor control pero compite con suelos agrícolas.</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>C. Residual:</b> Residuos forestales, agrícolas (rastrojos, cáscaras), agroindustriales (bagazo, pulpas), pecuarios (estiércol bovino, porcino, aviar), RSU, residuos cloacales. El más sostenible: convierte un pasivo en energía.</div></div>
+  <div class="rx">Fotosíntesis: 6CO₂ + 6H₂O + luz → C₆H₁₂O₆ + 6O₂<br>Algas: H₂O + CO₂ + NH₃ + fotones → Biomasa(CNₓHᵧOᵤ) + O₂</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la biomasa residual es considerada la fuente más sostenible dentro de las categorías de biomasa energética? Explique el concepto de "neutralidad de carbono" aplicado a la biomasa.</div>
+</div>
+
+<!-- Biochar y aplicaciones del carbón vegetal -->
+<div class="block">
+  <span class="bh bh-gray">Biochar y Carbón Vegetal (Diap. 65-66)</span>
+  <div class="def def-gray">El <b>Biochar</b> (carbón vegetal activado para suelos) se produce por pirólisis de biomasa lignocelulósica en ausencia de oxígeno. A diferencia del carbón vegetal combustible, el Biochar se incorpora al suelo como enmienda, secuestrando carbono a largo plazo.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #334155">
+      <b>🔥 Carbón combustible</b>
+      Para industria y parrillas. Se obtiene de madera dura por carbonización. Libera CO₂ al quemarse.
+    </div>
+    <div class="mini" style="border-top:3px solid #334155">
+      <b>💊 Carbón medicinal/activado</b>
+      De cáscara de coco, haya, eucalipto. Absorbe gases tóxicos, drogas, bacterias, virus. También como colorante negro alimentario (&lt;5 micrones).
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <b>🌱 Biochar agrícola</b>
+      Enmienda de suelos: mejora retención de agua, CIC (capacidad de intercambio catiónico), actividad microbiana. Secuestra carbono por &gt;1,000 años. Potencial para BECCS.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Diferencie Biochar de carbón activado y de carbón vegetal combustible en términos de proceso de producción, aplicación y ciclo de carbono. ¿Por qué el Biochar se considera una tecnología de carbono negativo?</div>
+</div>
+
+<!-- Biodigestores + Biodiesel -->
+<div class="block s2">
+  <span class="bh bh-purple">Biodigestores — Biogás y Biofertilizantes (Diap. 67-68)</span>
+  <div class="def def-purple">Un <b>biodigestor</b> es un sistema anaerobio (sin oxígeno) en el que microorganismos descomponen materia orgánica (estiércol, residuos) y producen biogás (mezcla de CH₄ ~60% + CO₂ ~40%) y biol (biofertilizante líquido). Es una tecnología dual: energía + fertilización.</div>
+  <div class="two">
+    <div>
+      <div class="flow" style="margin-bottom:8px">
+        <span class="fbox">Estiércol + agua</span><span class="farrow">→</span>
+        <span class="fbox">Biodigestor anaerobio</span><span class="farrow">→</span>
+        <span class="fbox">Biogás (CH₄)</span><span class="farrow">→</span>
+        <span class="fbox">Cocina/generador</span>
+      </div>
+      <div class="item"><span class="dot dot-purple"></span><div><b>Investigación UNALM:</b> Determinación de sustratos óptimos (ovino, vacuno, porcino). Objetivo: volumen de biogás por kg de estiércol y proporción mínima de sustrato.</div></div>
+      <div class="item"><span class="dot dot-green"></span><div><b>Biofertilizante (biol):</b> El efluente líquido es rico en N, P, K disponibles. Reduce necesidad de fertilizantes sintéticos en hasta 40%.</div></div>
+    </div>
+    <div>
+      <span class="bh bh-orange" style="margin-top:4px">Biodiesel y Etanol (Diap. 69-72)</span>
+      <div class="item"><span class="dot dot-orange"></span><div><b>Biodiesel:</b> Ésteres metílicos de ácidos grasos (FAME) producidos por transesterificación de aceites vegetales o grasas animales con metanol y catalizador (NaOH). Reemplaza al diesel en motores sin modificación.</div></div>
+      <div class="item"><span class="dot dot-orange"></span><div><b>UNALM:</b> Produce biodiesel de aceites vegetales usados (restaurantes). Primer bus ecológico con biodiesel en Perú operó en campus UNALM.</div></div>
+      <div class="item"><span class="dot dot-amber"></span><div><b>Etanol:</b> Fermentación de azúcares (caña de azúcar, maíz) + destilación. Brasil usa E100 (etanol puro) en vehículos flex. Perú tiene potencial en regiones cañeras (La Libertad).</div></div>
+    </div>
+  </div>
+  <h3 class="bk" style="margin-top:6px">Microalgas — Biofijación CO₂ y Aceites (Diap. 73-74)</h3>
+  <div class="item"><span class="dot dot-teal"></span><div><b>Spirulina en pozos circulantes abiertos (raceways):</b> Sistema Earthrise (California). Las microalgas son 10-100× más productivas que cultivos terrestres en aceite/ha. No compiten con suelos agrícolas. Requieren CO₂ concentrado (p.ej. gases de combustión) para máximo rendimiento.</div></div>
+  <div class="exam">🎯 EXAMEN: Escriba la reacción de transesterificación para producción de biodiesel a partir de trioleína (C₅₇H₁₀₄O₆) con metanol. ¿Qué subproducto de valor económico se obtiene y cuáles son sus usos?</div>
+</div>
+
+<!-- ═══ SECCIÓN 7: LER-UNALM ═══ -->
+<div class="secbar sec-gray" style="background:#1e293b;color:#94a3b8">🔬 SECCIÓN 7 — EQUIPOS DEL LER-UNALM: ANÁLISIS DE BIOMASA</div>
+<div class="block s3">
+  <span class="bh bh-gray">Laboratorio de Energías Renovables — Equipos (Diap. 75-78)</span>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #94a3b8">
+      <b>⚗️ Análisis Elemental (Método DUMAS)</b>
+      Determina C, H, N, O y S por combustión completa de la muestra. El gas generado se analiza cromatográficamente. Permite calcular el poder calórico teórico y la fórmula empírica de la biomasa. Esencial para caracterizar nuevos combustibles.
+      <div class="rx" style="margin-top:5px">CₓHᵧNᵤOᵥ + O₂ → CO₂ + H₂O + N₂ + SO₂</div>
+    </div>
+    <div class="mini" style="border-top:3px solid #94a3b8">
+      <b>⚖️ Análisis Termogravimétrico — TGA 701</b>
+      Análisis Proximal o Inmediato: mide pérdida de masa en función de temperatura. Determina: Humedad (evaporación &lt;120°C), Volátiles (pirólisis 120-900°C) y Cenizas (residuo final). La curva termogravimétrica es la "huella digital" de una biomasa. Alta volatilidad = alta reactividad.
+    </div>
+    <div class="mini" style="border-top:3px solid #94a3b8">
+      <b>💥 Bomba Calorimétrica — AC600</b>
+      Determina el Poder Calórico Superior (PCS) e Inferior (PCI). La muestra se quema en oxígeno a 30 atm dentro de un recipiente hermético (bomba). El calor generado eleva la temperatura del agua circundante. PCI = PCS - calor de vaporización del H₂O formada. Unidades: MJ/kg o kcal/kg.
+      <div class="rx" style="margin-top:5px">PCI = PCS − 2.442 × (9H/100) MJ/kg<br>H = % masa de hidrógeno en la muestra</div>
+    </div>
+  </div>
+  <div class="warn">⚠️ DIFERENCIA CRÍTICA: PCS incluye el calor de condensación del vapor de agua de la combustión. PCI no lo incluye (asume que el agua sale como vapor). Los motores reales trabajan con PCI. No comparar PCS de un combustible con PCI de otro.</div>
+  <div class="exam">🎯 EXAMEN: Una muestra de biomasa contiene 48% C, 6% H, 44% O y 2% cenizas (base seca). El TGA muestra 75% de volátiles. ¿Qué indica este porcentaje de volátiles sobre su idoneidad para gasificación vs combustión directa? Justifique.</div>
+</div>
+
+<!-- ═══ SECCIÓN 8: HIDRO Y GEOTERMIA ═══ -->
+<div class="secbar sec-blue">💧 SECCIÓN 8 — ENERGÍA HIDRÁULICA Y GEOTÉRMICA</div>
+
+<div class="block">
+  <span class="bh bh-blue">Energía Hidráulica en Perú (Diap. 79-82)</span>
+  <div class="def def-blue">La energía hidráulica convierte la energía potencial del agua en electricidad. Perú tiene el mayor potencial hidráulico per cápita de Sudamérica, pero su aprovechamiento enfrenta retos de distribución geográfica, costo e impacto ambiental.</div>
+  <div class="item"><span class="dot dot-blue"></span><div><b>Potencial técnico:</b> 328 proyectos identificados, 58,937 MW instalables, 395,118 GWh/año de energía (Misión Almenan 1973-1979).</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>Renovable si &lt;20 MW</b> (criterio ambiental). &gt;20 MW no se considera renovable por impactos de inundación, desplazamiento de comunidades y alteración ecológica del río.</div></div>
+  <div class="item"><span class="dot dot-amber"></span><div><b>Costos:</b> 1.2-1.8 MM$ por MW instalado vs 0.5 MM$/MW de termoeléctrica ciclo simple. Alto capex, pero bajo opex y larga vida útil (50-100 años).</div></div>
+  <div class="item"><span class="dot dot-orange"></span><div><b>Comparativa Latam:</b> Ecuador 16.5%, Perú 11.8%, Panamá 11%, Chile 7.87% de su energía primaria proviene de hidroelectricidad.</div></div>
+  <div class="warn">⚠️ Perú: El 97.7% del agua está en selva y sierra (cuencas atlánticas), pero el 56% de la población vive en la costa árida (cuencas pacíficas, solo 1.8% del agua). Esto hace que la energía hidráulica sea "renovable pero no siempre accesible".</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué una central hidroeléctrica de 50 MW no es considerada renovable según los criterios actuales? Mencione los impactos ambientales que justifican esta clasificación.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Energía Geotérmica (Diap. 83-86)</span>
+  <div class="def def-teal">La energía geotérmica aprovecha el calor del interior de la Tierra (magma, gradiente geotérmico, fluidos hidrotermales) para generar electricidad y calor. Es la única RER que no depende del sol ni del clima: está disponible 24/7 con factor planta ~90%.</div>
+  <div class="item"><span class="dot dot-teal"></span><div><b>Ventajas únicas:</b> Autóctona (mejora balanza comercial), larga vida productiva (ejemplo: Larderello, Italia, desde 1817 = más de 200 años), confiable los 365 días, uso multipropósito (calor + electricidad).</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>Perú:</b> El INGEMMET ha actualizado el Mapa Geotermal por regiones (V. Vargas &amp; V. Cruz, 2010). Potencial en Puno, Arequipa, Moquegua (correlación con arco volcánico de los Andes).</div></div>
+  <div class="item"><span class="dot dot-purple"></span><div><b>EGS (Enhanced Geothermal Systems):</b> Geotermia mejorada que inyecta agua a roca caliente fracturada. Expande el recurso a zonas sin fluidos naturales. Tecnología emergente con potencial global enorme.</div></div>
+  <div class="exam">🎯 EXAMEN: Compare la energía geotérmica con la hidráulica como fuentes de energía base (no intermitente). ¿Por qué Perú no ha desarrollado más su potencial geotérmico pese a tener el INGEMMET con el mapa actualizado?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Eficiencia Energética (Diap. 87-89)</span>
+  <div class="def def-green">La <b>eficiencia energética (EE)</b> es obtener los mismos servicios energéticos (calefacción, iluminación, movilidad) con menos energía. Es la medida de mayor relación costo-beneficio para reducir emisiones: "la energía más limpia es la que no se usa".</div>
+  <div class="item"><span class="dot dot-green"></span><div><b>Justificación económica:</b> Cada BEP ahorrado evita 300-450 kg CO₂ y reduce la factura energética. La globalización exige reducir costos vía EE para ser competitivos y exportar con menor huella de carbono (SGA, ecoetiquetado).</div></div>
+  <div class="item"><span class="dot dot-orange"></span><div><b>Cocinas mejoradas:</b> Leña con eficiencia &lt;10% → Cocina mejorada de adobe llega a 25-30%. GLP tiene 55-60% de eficiencia. Las cocinas solares (&lt;100°C), parabólicas (100-160°C) tienen problema cultural y de uso nocturno.</div></div>
+  <div class="item"><span class="dot dot-blue"></span><div><b>Viviendas pasivas:</b> Diseño con ventanas al norte (hemisferio sur), muros Trombe, pisos radiantes, invernaderos tipo túnel. Reducen hasta 70% la demanda de calefacción sin equipos activos.</div></div>
+  <div class="exam">🎯 EXAMEN: Un agricultor de la sierra peruana usa 5 kg de leña/día para cocinar (poder calórico 15 MJ/kg, eficiencia 8%). Si cambia a cocina mejorada (eficiencia 28%), ¿cuánto leña ahorra diariamente? ¿Cuánto CO₂ evita al año?</div>
+</div>
+
+<!-- ═══ SECCIÓN 9: ENERGÍAS EMERGENTES ═══ -->
+<div class="secbar sec-pink">🌊 SECCIÓN 9 — ENERGÍAS EMERGENTES: MAR, HIDRÓGENO Y ALMACENAMIENTO</div>
+
+<div class="block">
+  <span class="bh bh-teal">Energía del Mar (Diap. 90-92)</span>
+  <div class="def def-teal">Los océanos cubren el 70% de la Tierra y contienen enormes reservas de energía en múltiples formas. El Perú, con más de 3,000 km de costa, tiene potencial aún no cuantificado a nivel comercial.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #14b8a6"><b>🌊 Olas y Ondulaje</b>Energía cinética de las olas superficiales. Dispositivos: OWC (columna de agua oscilante), boyas WEC. Costa peruana tiene oleaje constante del Pacífico.</div>
+    <div class="mini" style="border-top:3px solid #14b8a6"><b>🌙 Mareas</b>Energía potencial entre marea alta y baja. Predecible con &gt;99% exactitud. Requiere rango &gt;5m. Turbinas de bulbo (similar a hidráulica). Perú tiene rango bajo (~1-2m).</div>
+    <div class="mini" style="border-top:3px solid #14b8a6"><b>🌡️ OTEC / Osmosis</b>OTEC: gradiente térmico océano (superficie cálida vs profundo frío). Osmosis: gradiente de salinidad entre agua dulce y salada en estuarios. Ambas tecnologías experimentales.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la energía de mareas es más predecible que la solar o eólica? Explique el principio físico y cuál es la limitación geográfica para su aplicación en el litoral peruano.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Hidrógeno Verde y Celdas de Combustible (Diap. 93-96)</span>
+  <div class="def def-blue">Las <b>celdas de combustible</b> convierten la energía química del hidrógeno directamente en electricidad por reacción electroquímica (sin combustión). El <b>hidrógeno verde</b> es producido por electrólisis del agua usando electricidad renovable: es el único con huella de carbono nula.</div>
+  <div class="rx">Electrólisis: 2H₂O + electricidad → 2H₂ + O₂<br>Celda de combustible: H₂ + ½O₂ → H₂O + electricidad + calor<br>Eficiencia celda: hasta 60% (vs turbina gas 40%, motor ciclo Otto 10-20%)</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6"><b>🔥 Alta temperatura (&gt;200°C)</b>Mayor eficiencia. Tipos: SOFC (óxido sólido), MCFC (carbonato fundido). Aplicación industrial y generación estacionaria.</div>
+    <div class="mini" style="border-top:3px solid #93c5fd"><b>❄️ Baja temperatura (&lt;200°C)</b>PEMFC (membrana de intercambio protónico). Respuesta rápida. Aplicación: vehículos, electrónica portátil.</div>
+  </div>
+  <div class="item"><span class="dot dot-blue"></span><div><b>Paradoja actual:</b> El 96% del hidrógeno mundial se produce de gas natural (hidrógeno gris). Para crear la infraestructura de H₂ verde aún se dependerá de fósiles como "combustible puente" hasta que la electrólisis escale masivamente.</div></div>
+  <div class="item"><span class="dot dot-blue"></span><div><b>Curiosidad:</b> El 75% de la superficie terrestre está cubierta de H₂O. El recurso es prácticamente ilimitado; la limitante es la energía renovable barata para electrolizar.</div></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué se dice que la celda de combustible es una "batería que no se agota siempre que haya combustible". Compárela con un motor de combustión interna en términos de eficiencia energética y emisiones.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Almacenamiento y Vehículos Eléctricos (Diap. 97-101)</span>
+  <div class="def def-purple">El almacenamiento de energía es el talón de Aquiles de las RER intermitentes (solar, eólica). Sin almacenamiento masivo, no se puede garantizar el suministro 24/7. Los vehículos eléctricos son al mismo tiempo el mayor reto y la mayor oportunidad: 1,000M de vehículos = 1 TW de almacenamiento distribuido.</div>
+  <div class="item"><span class="dot dot-purple"></span><div><b>Baterías ion-litio:</b> Estándar actual. Densidad energética 150-300 Wh/kg. El coste ha caído de ~$1,200/kWh (2010) a ~$100/kWh (2024). Limitación: litio concentrado en pocas regiones (triángulo del litio: Bolivia, Chile, Argentina).</div></div>
+  <div class="item"><span class="dot dot-blue"></span><div><b>Alternativas emergentes:</b> Baterías de flujo de vanadio (para grid), baterías de sodio (sin litio), baterías de arena (calor), aire comprimido (CAES), almacenamiento hidráulico por bombeo.</div></div>
+  <div class="item"><span class="dot dot-green"></span><div><b>V2G (Vehicle-to-Grid):</b> Los vehículos eléctricos cargados con solar durante el día devuelven energía a la red por la noche. Perú tiene ventaja: alto irradiación solar + baja penetración de EVs = oportunidad de entrar "bien" en la transición.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el almacenamiento de energía es la "tecnología crítica" para la transición energética, más que los propios paneles solares o aerogeneradores? Mencione tres tipos distintos de tecnologías de almacenamiento y su aplicación óptima.</div>
+</div>
+
+<!-- ═══ TABLA INTEGRADORA ═══ -->
+<div class="secbar sec-gray" style="background:#1e293b;color:#e2e8f0">📊 TABLA INTEGRADORA — COMPARACIÓN DE TODAS LAS RER</div>
+
+<div class="block s3">
+  <span class="bh bh-gray">Resumen Comparativo de Energías Renovables (Tabla de repaso)</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Fuente</th>
+        <th>Principio físico</th>
+        <th>Factor Planta típico</th>
+        <th>Costo (US$/MWh, 2024)</th>
+        <th>Intermitencia</th>
+        <th>Potencial Perú</th>
+        <th>Estado en Perú</th>
+        <th>Emisiones CO₂ (gCO₂/kWh)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>☀️ Solar FV</td><td>Efecto fotoeléctrico</td><td>18-25%</td><td>20-45</td><td>Alta (día/nube)</td><td>Muy alto (sur costa)</td><td>476 MW + 150 MW en obra</td><td>20-50</td></tr>
+      <tr><td>🌀 Solar CSP</td><td>Calor → vapor → turbina</td><td>25-40%</td><td>80-120</td><td>Media (almac. térmico)</td><td>Alto (Ica, Arequipa)</td><td>Sin plantas operativas</td><td>15-25</td></tr>
+      <tr><td>💨 Eólica onshore</td><td>Energía cinética del viento</td><td>25-40%</td><td>30-55</td><td>Alta (variable)</td><td>Muy alto (costa N-S)</td><td>1,020 MW instalados</td><td>7-15</td></tr>
+      <tr><td>💨 Eólica offshore</td><td>Energía cinética (mar)</td><td>40-55%</td><td>80-130</td><td>Media</td><td>Por evaluar</td><td>Sin proyectos formales</td><td>9-18</td></tr>
+      <tr><td>💧 Hidráulica &lt;20MW</td><td>Energía potencial agua</td><td>40-60%</td><td>40-70</td><td>Baja (estacional)</td><td>Muy alto (sierra/selva)</td><td>Mayoritaria (51% elect.)</td><td>4-15</td></tr>
+      <tr><td>🌿 Biomasa/Biogás</td><td>Combustión/fermentación</td><td>60-85%</td><td>60-120</td><td>Muy baja (almacenable)</td><td>Alto (agroindustrial)</td><td>0.62% electricidad</td><td>15-100*</td></tr>
+      <tr><td>🌋 Geotérmica</td><td>Calor terrestre</td><td>85-95%</td><td>50-80</td><td>Muy baja (continua)</td><td>Medio (Andes volcánicos)</td><td>Sin explotación comercial</td><td>15-55</td></tr>
+      <tr><td>🌊 Maremotriz</td><td>Gradiente mareal/olas</td><td>25-40%</td><td>150-300</td><td>Baja (predecible)</td><td>Bajo (rango marea &lt;2m)</td><td>Investigación (LER)</td><td>15-25</td></tr>
+      <tr><td>⚛️ Nuclear</td><td>Fisión U-235</td><td>85-95%</td><td>60-100</td><td>Muy baja (continua)</td><td>Sin uranio significativo</td><td>No en planes al 2030</td><td>10-12</td></tr>
+      <tr><td>🔵 H₂ Verde</td><td>Electrólisis + celda</td><td>Depende RER fuente</td><td>200-400</td><td>Depende de fuente</td><td>Alto con solar/eólica</td><td>Proyectos piloto en estudio</td><td>0 (ciclo completo)</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:10px;color:var(--color-text-secondary);margin-top:5px">*Biomasa: si es residual y bien gestionada puede ser carbono neutro o negativo (BECCS). Los valores altos corresponden a biomasa forestal insostenible.</p>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: No existe una fuente "perfecta". La transición energética exitosa requiere una MIX COMPLEMENTARIO: solar + eólica cubren el día (intermitentes, baratas), hidráulica + geotérmica cubren la noche y base (estables, más caras), biomasa + almacenamiento cubren los picos. Perú ya tiene esta complementariedad natural: sol/viento en la costa + agua en la sierra. El reto es la transmisión y la inversión en almacenamiento.</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">
+    Statistical Review of World Energy 2023 (BP) · Balance Nacional de Energía MINEM 2021-2022 · Osinerming - Evolución RER Perú 2017 · Atlas Eólico del Perú (Juan Olazabal Reyes) · Mapa Geotermal del Perú, INGEMMET (V. Vargas &amp; V. Cruz, 2010) · Clara Sanchez G. - Alimentos por Poder (Ago 2023) · BP 2018 "Evolving Transition" · Calle Maraví, J. - Diapositivas LER-UNALM v1 · IRENA Global Renewable Energy Outlook 2023 · El Periódico de la Energía (2050 escenarios)
+  </span>
+</div>
+
+</div>

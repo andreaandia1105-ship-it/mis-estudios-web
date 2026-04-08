@@ -1,0 +1,467 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.cv-title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.cv-title .sub{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.cv-title .pills{display:flex;flex-wrap:wrap;gap:5px}
+.cv-title .pill-t{font-size:10px;padding:2px 9px;border-radius:20px;background:rgba(255,255,255,.12);color:#e2e8f0}
+.secbar{grid-column:1/-1;border-radius:8px;padding:7px 13px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px}
+.sec-blue{background:#1e3a5f;color:#93c5fd}
+.sec-green{background:#14532d;color:#86efac}
+.sec-orange{background:#431407;color:#fed7aa}
+.sec-purple{background:#2e1065;color:#c4b5fd}
+.sec-red{background:#450a0a;color:#fca5a5}
+.sec-teal{background:#042f2e;color:#5eead4}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.bh{font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:700}
+.bh-blue{background:#1e3a5f;color:#93c5fd}
+.bh-green{background:#14532d;color:#86efac}
+.bh-orange{background:#431407;color:#fed7aa}
+.bh-purple{background:#2e1065;color:#c4b5fd}
+.bh-red{background:#450a0a;color:#fca5a5}
+.bh-teal{background:#042f2e;color:#5eead4}
+.bh-yellow{background:#422006;color:#fef08a}
+.bh-gray{background:#1e293b;color:#94a3b8}
+.bh-pink{background:#4a044e;color:#f0abfc}
+.def{border-radius:0 7px 7px 0;font-size:11.5px;padding:7px 10px;background:var(--color-background-secondary);margin-bottom:7px;line-height:1.5}
+.def-blue{border-left:3px solid #3b82f6}
+.def-green{border-left:3px solid #22c55e}
+.def-orange{border-left:3px solid #f97316}
+.def-purple{border-left:3px solid #8b5cf6}
+.def-teal{border-left:3px solid #14b8a6}
+.def-red{border-left:3px solid #ef4444}
+.def-yellow{border-left:3px solid #eab308}
+.def-pink{border-left:3px solid #ec4899}
+.item{display:flex;gap:7px;font-size:11.5px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-orange{background:#f97316}
+.dot-purple{background:#8b5cf6}
+.dot-teal{background:#14b8a6}
+.dot-yellow{background:#eab308}
+.dot-red{background:#ef4444}
+.dot-pink{background:#ec4899}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.7;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11px;color:#7c2d12;padding:6px 9px;margin:5px 0;line-height:1.4}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11px;color:#713f12;padding:7px 9px;margin:5px 0;line-height:1.5}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11px;line-height:1.4}
+.mini strong{font-size:11.5px;display:block;margin-bottom:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:6px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:10.5px}
+.farrow{color:var(--color-text-secondary);font-size:14px}
+.num-badge{width:20px;height:20px;border-radius:50%;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-right:4px}
+.nb-b{background:#1e40af;color:#bfdbfe}
+.nb-g{background:#166534;color:#bbf7d0}
+.nb-o{background:#9a3412;color:#fed7aa}
+.pill{font-size:10.5px;padding:2px 7px;border-radius:20px;display:inline-block;margin:2px}
+.pill-blue{background:#1e3a5f;color:#93c5fd}
+.pill-green{background:#14532d;color:#86efac}
+.pill-orange{background:#431407;color:#fed7aa}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:10px;margin:3px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.tbl{width:100%;border-collapse:collapse;font-size:10.5px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);font-family:'Oswald',sans-serif;font-size:11px;text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;line-height:1.4}
+.tbl tr:last-child td{border-bottom:none}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;flex-shrink:0}
+.fc{font-size:10.5px;color:#94a3b8;line-height:1.6}
+@media(prefers-color-scheme:light){
+  .warn{background:#fff7ed;color:#7c2d12}
+  .exam{background:#fefce8;color:#713f12}
+}
+@media(prefers-color-scheme:dark){
+  .warn{background:#431407;color:#fed7aa;border-left-color:#f97316}
+  .exam{background:#422006;color:#fef08a;border-color:#d97706}
+}
+</style>
+
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="cv-title">
+  <h1>🌱 Introducción a las Energías Renovables</h1>
+  <div class="sub">Kenyi Cavalcanti Cárdenas · Dpto. Ordenamiento Territorial y Construcción – FIA · UNALM · 12/03/2026</div>
+  <div class="pills">
+    <span class="pill-t">Conceptos Generales</span>
+    <span class="pill-t">Situación Mundial REN21-2025</span>
+    <span class="pill-t">SEIN Perú 2025</span>
+    <span class="pill-t">Cambio Climático</span>
+    <span class="pill-t">NDC Perú</span>
+    <span class="pill-t">Subastas RER</span>
+    <span class="pill-t">Modelo 2050 Deloitte</span>
+  </div>
+</div>
+
+<!-- ─── SECCIÓN I: CONCEPTOS GENERALES ─── -->
+<div class="secbar sec-blue">🔵 I. CONCEPTOS GENERALES — Energía Renovable vs No Renovable</div>
+
+<div class="block">
+  <span class="bh bh-blue">¿Qué son las EERR?</span>
+  <div class="def def-blue">Las energías renovables son aquellas que provienen de fuentes naturales que se regeneran a una tasa igual o superior a la que se consumen, siendo prácticamente inagotables en escala humana. Su importancia radica en que reducen la dependencia de combustibles fósiles y las emisiones de GEI.</div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Solar fotovoltaica y solar térmica:</strong> aprovechan la radiación del sol, recurso abundante en el Perú (especialmente en el altiplano y costa norte).</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Eólica:</strong> cinética del viento convertida en electricidad; requiere velocidades ≥ 6 m/s. Potencial alto en la costa peruana.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><strong>Hidroeléctrica:</strong> energía potencial del agua. Es la renovable dominante en Perú (≈49% de generación 2025). Se divide en gran hidro y mini hidro.</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div><strong>Biomasa / Biogás / Bagazo:</strong> conversión termoquímica o biológica de materia orgánica. El bagazo de caña es clave en Perú.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir energía renovable con "energía limpia". La gran hidroeléctrica es renovable pero genera impactos socioambientales significativos (inundación de ecosistemas, desplazamiento de poblaciones).</div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia conceptual entre energía renovable y energía sostenible? Dé un ejemplo de una fuente que sea renovable pero cuestionable en sostenibilidad.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Clasificación de RER</span>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <strong>⚡ Convencionales (REC)</strong>
+      Gran hidroeléctrica (&gt;20 MW). Presentes en el SEIN desde hace décadas. Statu quo del sistema eléctrico peruano.
+    </div>
+    <div class="mini" style="border-top:3px solid #8b5cf6">
+      <strong>🌀 No Convencionales (RER/ERNC)</strong>
+      Solar, eólica, mini hidro, biomasa, geotérmica, mareomotriz. En Perú se incentivan mediante subastas desde 2009.
+    </div>
+  </div>
+  <hr class="divh">
+  <div class="item"><div class="dot dot-teal"></div><div><strong>TFEC:</strong> Consumo Final Total de Energía — incluye transporte, industria, calor residencial. Solo ~32% de este total es electricidad; el resto es calor y transporte directo.</div></div>
+  <div class="item"><div class="dot dot-yellow"></div><div><strong>SEIN:</strong> Sistema Eléctrico Interconectado Nacional. Opera el 85% de la electricidad peruana. Coordinado por el COES.</div></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué un país puede tener alta participación renovable en electricidad pero baja participación renovable en su TFEC. Use el concepto de TFEC en su respuesta.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Componentes del TFEC</span>
+  <div class="def def-purple">El TFEC es el total de energía consumida por usuarios finales. La electrificación de usos finales (calefacción, transporte) es clave para que las EERR penetren más allá del sector eléctrico.</div>
+  <div class="flow">
+    <div class="fbox">☀️ Solar térm.</div><div class="farrow">+</div>
+    <div class="fbox">🔥 Biomasa</div><div class="farrow">+</div>
+    <div class="fbox">⚡ Electricidad</div><div class="farrow">+</div>
+    <div class="fbox">🚗 Biocombust.</div>
+    <div class="farrow">= TFEC renovable</div>
+  </div>
+  <div class="rx">TFEC = Sector Transporte + Industria + Residencial + Servicios<br>REN% = (Energía Renovable Consumida / TFEC) × 100</div>
+  <div class="warn">⚠️ El 79.5% del TFEC global sigue siendo fósil (2023), a pesar de que las renovables dominan el discurso político. La transición energética aún es incipiente en el balance total de energía.</div>
+</div>
+
+<!-- ─── SECCIÓN II: SITUACIÓN MUNDIAL ─── -->
+<div class="secbar sec-green">🌍 II. SITUACIÓN MUNDIAL — Datos REN21 Global Status Report 2025</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Consumo Final Total de Energía Mundial (2013–2023)</span>
+  <div class="def def-green">Entre 2013 y 2023 el TFEC global creció +14%. Los combustibles fósiles siguen dominando con 79.5% en 2023, pero los renovables modernos escalaron de 9.9% a 13.5% (+56%), evidenciando que el crecimiento energético es liderado por renovables aunque los fósiles no decrecen en valores absolutos.</div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot dot-red"></div><div><strong>Combustibles fósiles 2023: 79.5%</strong> — bajaron desde 80.9% en 2013. Reducción de apenas 1.4 puntos porcentuales en una década.</div></div>
+      <div class="item"><div class="dot dot-green"></div><div><strong>Renovables modernas 2023: 13.5%</strong> — subieron desde 9.9%. Crecimiento real de +56% en volumen absoluto de energía.</div></div>
+      <div class="item"><div class="dot dot-blue"></div><div><strong>Electricidad renovable: 7.8%</strong> del TFEC; calor renovable: 4.5%; biocombustibles para transporte: 1.2%.</div></div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:600;margin-bottom:4px;color:var(--color-text-secondary)">Estructura TFEC 2023</div>
+      <div style="font-size:10.5px;margin-bottom:2px">Fósiles</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:79.5%;background:#ef4444"></div></div>
+      <div style="font-size:10.5px;margin-bottom:2px">Renov. modernas</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:13.5%;background:#22c55e"></div></div>
+      <div style="font-size:10.5px;margin-bottom:2px">Otros (biomasa trad.)</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:6.9%;background:#94a3b8"></div></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ Dato clave para el examen: aunque renovables crecen %, los fósiles también crecen en GJ absolutos porque la demanda total crece más rápido que la instalación de renovables. Esto explica por qué las emisiones no bajan aún.</div>
+  <div class="exam">🎯 EXAMEN: Si el TFEC crece +14% en 10 años y los fósiles pasaron de 80.9% a 79.5%, ¿aumentaron o disminuyeron los GJ de fósiles consumidos? Justifique cuantitativamente.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Generación Eléctrica Mundial 2015–2024</span>
+  <div class="def def-teal">En el sector eléctrico específico —no en el TFEC total— las renovables avanzan mucho más rápido porque la electricidad es más fácil de descarbonizar que el calor industrial o el transporte. En 2024 alcanzaron el 32% de la generación eléctrica global.</div>
+  <div style="font-size:10.5px;font-weight:600;margin-bottom:5px">Estructura generación eléctrica 2024:</div>
+  <div class="item"><div class="dot dot-red"></div><div><strong>Fósiles: 59.1%</strong> (bajando desde ~65% en 2015)</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div><strong>Hidroeléctrica: 14.3%</strong> (estable, recurso casi saturado)</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Eólica: 8.1%</strong> · <strong>Solar: 6.9%</strong> (crecimiento exponencial)</div></div>
+  <div class="item"><div class="dot dot-purple"></div><div><strong>Nuclear: 9.0%</strong> · <strong>Biopower+Geotérmica: 2.6%</strong></div></div>
+  <div class="rx">Renovables totales en electricidad 2024 = 32%<br>(Hidro 14.3% + Eólica 8.1% + Solar 6.9% + Bio 2.6%)</div>
+  <div class="mini" style="border-left:3px solid #14b8a6;margin-top:6px">
+    <strong>🏆 Líderes eólica+solar 2024:</strong> Dinamarca (~88%), Lituania (~60%), Uruguay (~65%). Muestran que sistemas 100% RER son técnicamente posibles. En Latinoamérica, Uruguay es el caso más destacado.
+  </div>
+</div>
+
+<!-- ─── SECCIÓN III: PERÚ SEIN ─── -->
+<div class="secbar sec-orange">🇵🇪 III. SITUACIÓN PERÚ — SEIN 2025 (Fuente: SPR 2025 / COES / Minem)</div>
+
+<div class="block">
+  <span class="bh bh-orange">Capacidad Instalada SEIN (2016–2025)</span>
+  <div class="def def-orange">La capacidad instalada total del SEIN pasó de 12,756 MW (2016) a 14,861 MW (2025), un incremento del 16.5%. La composición ha cambiado: el gas natural mantiene ~35-36%, la hidráulica oscila según año hidrológico, y la solar crece de 0% a ~6.9% en este periodo. El diésel se mantiene como respaldo.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>⛽ Gas natural ~36%</strong>
+      Base firme del sistema. Centralizado en el gasoducto TGP. Planta de Camisea (G.N. de Camisea 21,199 GJ).
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>💧 Hidroeléctrica ~36%</strong>
+      Recurso principal. Gran Hidro 30,261 GJ + Mini Hidro 2,419 GJ. Variable según precipitaciones (El Niño).
+    </div>
+    <div class="mini" style="border-top:3px solid #eab308">
+      <strong>☀️ Solar + Eólica ~7-8%</strong>
+      Crecimiento sostenido. Resultado de 4 subastas RER (2009–2015). Aún intermitentes, requieren respaldo.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el Perú no puede aumentar arbitrariamente la participación solar/eólica en el SEIN sin modificar la infraestructura de respaldo? Explique el concepto de "firmeza" en la generación eléctrica.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Volumen de Generación 2024–2025</span>
+  <div class="def def-orange">En 2025 el SEIN generó 61,244.1 GWh (+2% vs 2024). La Gran Hidroeléctrica lidera con 49.4%, desplazando a los fósiles en años húmedos. Los RER no convencionales alcanzaron ~16.3% en 2025 frente al 12.9% en 2024.</div>
+  <div class="two">
+    <div>
+      <div style="font-size:10.5px;font-weight:600;margin-bottom:5px">2024 — 60,028.7 GWh</div>
+      <div style="font-size:10px;margin-bottom:2px">Gran Hidro 47.8%</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:47.8%;background:#3b82f6"></div></div>
+      <div style="font-size:10px;margin-bottom:2px">Térmica HC 39.4%</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:39.4%;background:#ef4444"></div></div>
+      <div style="font-size:10px;margin-bottom:2px">RER 12.9%</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:12.9%;background:#22c55e"></div></div>
+    </div>
+    <div>
+      <div style="font-size:10.5px;font-weight:600;margin-bottom:5px">2025 — 61,244.1 GWh</div>
+      <div style="font-size:10px;margin-bottom:2px">Gran Hidro 49.4%</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:49.4%;background:#3b82f6"></div></div>
+      <div style="font-size:10px;margin-bottom:2px">Térmica HC 35.2%</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:35.2%;background:#ef4444"></div></div>
+      <div style="font-size:10px;margin-bottom:2px">RER 16.3%</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:16.3%;background:#22c55e"></div></div>
+    </div>
+  </div>
+  <div class="item" style="margin-top:6px"><div class="dot dot-teal"></div><div>Las ERNC (solar + eólica + biomasa + mini hidro) son estacionales: la solar alcanza picos en oct-dic; la eólica en jun-ago.</div></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Generación RER Mensual SEIN 2025</span>
+  <div class="def def-teal">La generación mensual de ERNC en el SEIN muestra valores entre 535 GWh (febrero, mes corto y seco) y 927 GWh (octubre). El agua domina con ~45-50% del mix renovable mensual; la eólica aporta ~30-35%; solar y biomasa completan el resto.</div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Agua (mini hidro + gran hidro en ERNC):</strong> picos en época lluviosa (ene-mar y sep-dic). Vulnerable a eventos El Niño.</div></div>
+  <div class="item"><div class="dot dot-yellow"></div><div><strong>Solar:</strong> mayor producción en primavera-verano austral (oct-ene). La costa norte y el altiplano son las zonas más productivas.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><strong>Biogás / Bagazo:</strong> estacional, ligada a la zafra de caña (may-nov). Representa el 4-5% de la generación RER mensual.</div></div>
+  <div class="warn">⚠️ La estacionalidad es el principal desafío de las ERNC en Perú: cuando llueve menos (año El Niño), cae la hidro Y la solar es más dispersa. La complementariedad hidro-solar-eólica es estratégica.</div>
+  <div class="exam">🎯 EXAMEN: Analice la complementariedad estacional entre la generación hidráulica y la solar en el SEIN peruano. ¿Cómo mitiga este patrón el riesgo de desabastecimiento?</div>
+</div>
+
+<!-- ─── SECCIÓN IV: CAMBIO CLIMÁTICO ─── -->
+<div class="secbar sec-purple">🌡️ IV. EERR Y CAMBIO CLIMÁTICO — NDC Perú, Modelo 2050, Subastas RER</div>
+
+<div class="block s2">
+  <span class="bh bh-purple">Las NDC del Perú — Compromisos Climáticos Nacionales</span>
+  <div class="def def-purple">Las NDC (Nationally Determined Contributions / Contribuciones Determinadas a Nivel Nacional) son el mecanismo del Acuerdo de París (2015) para que cada país concrete sus compromisos de mitigación y adaptación. Perú presentó sus NDC en 2016 y las actualizó en 2020, con validación legal mediante la Ley Marco de Cambio Climático (2018) y su Reglamento.</div>
+  <div class="two">
+    <div>
+      <div class="bh bh-green" style="margin-bottom:5px">84 Medidas de Adaptación</div>
+      <div class="item"><div class="dot dot-green"></div><div>Reducir vulnerabilidad y riesgo ante el cambio climático en: pesca, acuicultura, agua, bosques, salud, agricultura, turismo.</div></div>
+      <div class="item"><div class="dot dot-green"></div><div>Sistemas de Alerta Temprana (SAT), fortalecimiento de capacidades en zonas vulnerables, intervenciones para cosecha de agua.</div></div>
+    </div>
+    <div>
+      <div class="bh bh-purple" style="margin-bottom:5px">66 Medidas de Mitigación</div>
+      <div class="item"><div class="dot dot-purple"></div><div><strong>Meta: -40% de GEI al 2030</strong> respecto a 2015. Sectores: energía, transporte, desechos, procesos industriales, UTCUTS, agricultura.</div></div>
+      <div class="item"><div class="dot dot-orange"></div><div>Medidas clave: uso de ERNC, transporte urbano sostenible, segregación de residuos sólidos, manejo forestal comunitario.</div></div>
+    </div>
+  </div>
+  <div class="flow" style="margin-top:6px">
+    <div class="fbox">COP20 Lima 2014</div><div class="farrow">→</div>
+    <div class="fbox">Acuerdo París 2015</div><div class="farrow">→</div>
+    <div class="fbox">Estrat. Nac. CC 2015</div><div class="farrow">→</div>
+    <div class="fbox">Ley Marco CC 2018</div><div class="farrow">→</div>
+    <div class="fbox">NDC presentadas 2019</div><div class="farrow">→</div>
+    <div class="fbox">Actualización NDC 2020</div>
+  </div>
+  <div class="warn">⚠️ Las NDC son compromisos voluntarios pero vinculantes en el marco del Acuerdo de París. No cumplirlas genera presión diplomática pero no hay sanciones directas. Su fortaleza reside en la transparencia y rendición de cuentas.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué sectores incluye el componente de mitigación de las NDC del Perú? ¿En qué se diferencia una medida de mitigación de una de adaptación? Dé un ejemplo de cada una en el contexto peruano.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">RER y reducción de CO₂ en Perú</span>
+  <div class="def def-blue">Existe una relación inversa estadísticamente confirmada entre el porcentaje de producción eléctrica a partir de RER y las emisiones de CO₂ per cápita en el Perú (1990–2015). A mayor penetración RER, menor intensidad de carbono por unidad de electricidad.</div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Emisiones CO₂ por tipo de combustible (2015):</strong> Carbón ≈ 1,600 tCO₂/MW → Petróleo ≈ 1,250 tCO₂/MW → Gas natural ≈ 550 tCO₂/MW. El gas natural es el "combustible puente" de menor intensidad fósil.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><strong>Diversificación eléctrica (2018):</strong> Gas natural 55.2%, Hidráulica 37.2%, ERNC: Eólica 2.9%, Solar 1.5%, Biomasa 1.5%, Mini hidro 2.5%, Otros 0.3%.</div></div>
+  <div class="rx">Factor de emisión eléctrico Perú ≈ 0.2 tCO₂/MWh<br>(bajo vs. países con alta generación a carbón ~0.9 tCO₂/MWh)</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el Perú tiene un factor de emisión eléctrico relativamente bajo comparado con la media global? ¿Qué riesgo representa la alta dependencia de la gran hidroeléctrica frente al cambio climático?</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-yellow">Modelo Energético Peruano al 2050 — Análisis Deloitte</span>
+  <div class="def def-yellow">El estudio Deloitte proyecta dos escenarios de transición energética para Perú al 2050. Ambos requieren triplicar o cuadruplicar la capacidad instalada de ERNC. El escenario "Green Development" logra neutralidad de carbono; el "Increased Ambition" reduce emisiones -8% per cápita.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #eab308">
+      <strong>📊 Línea Base 2014</strong>
+      Emisiones per cápita: 5.46 tCO₂e<br>
+      ERNC (sin hidro): 3% · Con hidro: 55%<br>
+      Electrificación usos finales: 20%<br>
+      Generación ERNC: 0.72 TWh
+    </div>
+    <div class="mini" style="border-left:3px solid #22c55e">
+      <strong>🎯 Increased Ambition 2050</strong>
+      Emisiones: 5.04 tCO₂e (-8%)<br>
+      ERNC sin hidro: <strong>52%</strong> · Con hidro: <strong>82%</strong><br>
+      Electrificación usos finales: <strong>41%</strong><br>
+      Generación ERNC: <strong>46.09 TWh</strong>
+    </div>
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>🌿 Green Development 2050</strong>
+      Emisiones: neutralidad de carbono<br>
+      ERNC sin hidro: <strong>58%</strong> · Con hidro: <strong>88%</strong><br>
+      Electrificación usos finales: <strong>62%</strong><br>
+      Generación ERNC: <strong>55.28 TWh</strong>
+    </div>
+  </div>
+  <div class="rx">Capacidad instalada 2050 (Increased Ambition) = 35.04 GW total<br>
+Eólica: 15.43 GW · Solar: 7.02 GW · Hidro: 9.12 GW · Térmica: 0.80 GW<br>
+CAGR capacidad 2018→2050: 4.99%/año</div>
+  <div class="item" style="margin-top:6px"><div class="dot dot-purple"></div><div><strong>Vehículos eléctricos (Green Dev. 2050):</strong> 5.4 millones de autos eléctricos frente a 0 en 2014. La electrificación del transporte es la variable más determinante en la demanda futura.</div></div>
+  <div class="warn">⚠️ La descarbonización requiere 82-88% de potencia renovable al 2050. Esto implica multiplicar por 5-7 veces la capacidad eólica y solar actual. Sin reformas regulatorias e inversión sostenida, estos escenarios son inalcanzables.</div>
+  <div class="exam">🎯 EXAMEN: Compare los escenarios Increased Ambition y Green Development para Perú al 2050 en términos de: (a) capacidad instalada total, (b) emisiones per cápita, (c) electrificación de usos finales. ¿Cuál es la brecha entre ambos y qué variables la explican?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-pink">Subastas RER en Perú (2009–2018)</span>
+  <div class="def def-pink">El mecanismo de subastas fue implementado por Osinergmin/Minem como instrumento de mercado para atraer inversión privada en ERNC. El resultado más relevante: los precios cayeron drásticamente, haciendo competitivas a las renovables frente a la generación convencional.</div>
+  <div class="item"><div class="dot dot-pink"></div><div><strong>1ª Subasta (2009):</strong> Solar US$ 221/MWh · Eólica US$ 80/MWh. Precios de mercado embrionario, alta incertidumbre tecnológica.</div></div>
+  <div class="item"><div class="dot dot-pink"></div><div><strong>2ª Subasta (2011):</strong> Solar US$ 120/MWh · Eólica US$ 69/MWh. Reducción significativa.</div></div>
+  <div class="item"><div class="dot dot-pink"></div><div><strong>4ª Subasta (2015):</strong> Solar <strong>US$ 48/MWh</strong> · Eólica <strong>US$ 38/MWh</strong>. Precios más bajos del mercado eléctrico peruano. Solar -78%, Eólica -53% respecto a 2009.</div></div>
+  <div class="rx">Reducción precio solar 2009→2015: -78% (221→48 US$/MWh)<br>Reducción precio eólica 2009→2015: -53% (80→38 US$/MWh)</div>
+  <div class="item"><div class="dot dot-orange"></div><div><strong>Producción 2017:</strong> Hidráulica 56.6% · Térmica 40.6% · ERNC 2.7% (solar+eólica). Los proyectos de la 4ª Subasta representarían solo el 2% de la producción al 2019.</div></div>
+  <div class="warn">⚠️ La crisis energética ucraniana 2022 aceleró la transición global: la respuesta no es solo por razones climáticas sino por SEGURIDAD ENERGÉTICA. Los países reducen importación de gas y petróleo invirtiendo en renovables propias.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué factores explican la caída del 78% en el precio de la energía solar entre la 1ª y 4ª subasta RER en Perú? Relacione con la curva de aprendizaje tecnológica de los paneles fotovoltaicos.</div>
+</div>
+
+<!-- ─── SECCIÓN V: BRECHA RURAL Y COMENTARIOS ─── -->
+<div class="secbar sec-teal">🌐 V. IMPACTO SOCIAL Y COMENTARIOS FINALES — Acceso rural y Cambio de paradigma</div>
+
+<div class="block">
+  <span class="bh bh-teal">Brecha de Acceso Rural a Electricidad</span>
+  <div class="def def-teal">Las ERNC —especialmente solar fotovoltaica y mini hidráulica— son la solución técnicamente óptima para electrificar zonas rurales remotas donde extender la red nacional resulta antieconómico. El Perú tiene una brecha significativa con respecto al promedio latinoamericano.</div>
+  <div class="item"><div class="dot dot-teal"></div><div><strong>Perú 2017: 77.97%</strong> de acceso rural — por debajo del promedio latinoamericano de 83.68%. Evolución desde 69.91% en 2013 a 83.68% en 2017 en Latam vs 72.77% → 77.97% en Perú.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><strong>Países con acceso rural 100%</strong> en Latam (2017): Venezuela, Uruguay, Trinidad & Tobago, El Salvador, Ecuador, Panamá. La diferencia es política pública + densidad poblacional.</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div><strong>Ergon Perú</strong> es ejemplo de empresa que usa paneles solares para electrificar comunidades andinas y amazónicas sin conexión al SEIN.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué las ERNC (particularmente la solar fotovoltaica) son preferibles a extender la red eléctrica convencional para electrificar comunidades rurales remotas en Perú? Considere costos, tiempo de implementación y sostenibilidad.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-gray">Comentarios Finales — Paradigma del Docente</span>
+  <div class="def def-blue">El profesor plantea que la transición energética requiere cambios sistémicos, no solo tecnológicos. Las metáforas utilizadas reflejan una visión pedagógica sobre la urgencia y el realismo en la acción climática.</div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>"Cambio de paradigma":</strong> no se trata solo de cambiar tecnologías, sino de transformar sistemas sociales, económicos y regulatorios. El paradigma energético actual fue construido en 100 años; la transición requiere décadas.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><strong>"No por mucho madrugar, amanece más temprano":</strong> la urgencia climática real no garantiza aceleración proporcional de la transición. Las inercias institucionales y de mercado actúan como frenos.</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div><strong>"Sueña pero no te quedes dormido":</strong> visión aspiracional necesaria (metas NDC, neutralidad carbono 2050) pero que debe ir acompañada de acción concreta e inmediata.</div></div>
+  <div class="item"><div class="dot dot-purple"></div><div><strong>"Se requieren esfuerzos integrados":</strong> sector público (regulación, subastas), privado (inversión), academia (innovación), sociedad civil (demanda, fiscalización). Ningún actor puede hacerlo solo.</div></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Triángulo de Sostenibilidad de las EERR</span>
+  <div class="def def-orange">La importancia de las EERR frente al cambio climático se analiza desde tres dimensiones integradas que no pueden maximizarse de forma independiente, generando inevitables trade-offs de política energética.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #22c55e">
+      <strong>🌿 Ambiental</strong>
+      Reducción GEI, menor contaminación atmosférica, preservación de ecosistemas. Pero: impacto de grandes represas, extracción de minerales críticos (Li, Co) para baterías.
+    </div>
+    <div class="mini" style="border-left:3px solid #3b82f6">
+      <strong>🏘️ Social</strong>
+      Acceso a electricidad limpia y asequible, empleo verde, seguridad energética para comunidades. Pero: conflictos socioambientales por proyectos eólicos/solares en tierras comunales.
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316">
+      <strong>💰 Económico</strong>
+      Costos marginales de ERNC en caída libre (LCOE solar &lt; US$30/MWh en 2024). Atracción de inversión. Pero: necesidad de inversión en redes inteligentes y almacenamiento.
+    </div>
+  </div>
+  <div class="warn">⚠️ El "pez en la pecera" que cierra la presentación es una metáfora sobre la ignorancia del entorno inmediato: así como el pez no reconoce el agua, las sociedades no perciben su dependencia de los combustibles fósiles hasta que escasean (crisis Ucrania 2022).</div>
+</div>
+
+<!-- ─── TABLA INTEGRADORA ─── -->
+<div class="secbar sec-red">📊 TABLA INTEGRADORA — Repaso rápido para examen</div>
+
+<div class="block s3">
+  <span class="bh bh-red">Síntesis Comparativa: Energías Renovables — Mundial y Perú</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Indicador / Variable</th>
+        <th>Dato Mundial (REN21-2025)</th>
+        <th>Dato Perú (SPR 2025 / COES)</th>
+        <th>Tendencia</th>
+        <th>Implicancia para el Examen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>% Fósiles en TFEC</strong></td>
+        <td>79.5% (2023) — bajó desde 80.9% en 2013</td>
+        <td>Gas natural + diésel ≈ 35% en SEIN; pero TFEC peruano incluye leña y derivados</td>
+        <td>↓ lento</td>
+        <td>La transición energética total (no solo electricidad) es el reto mayor</td>
+      </tr>
+      <tr>
+        <td><strong>% ERNC en electricidad</strong></td>
+        <td>32% generación eléctrica 2024</td>
+        <td>RER SEIN 2025: ~16.3% (ERNC) + Hidro ~49.4% = ~65.7% total renovable</td>
+        <td>↑ rápido</td>
+        <td>Perú supera la media mundial si se incluye la gran hidro</td>
+      </tr>
+      <tr>
+        <td><strong>Precio solar (subastas)</strong></td>
+        <td>LCOE solar global &lt; US$30/MWh (2024)</td>
+        <td>4ª Subasta Perú 2015: US$48/MWh (mínimo histórico)</td>
+        <td>↓ acelerado</td>
+        <td>La economía de escala y curva de aprendizaje explican la caída del 78%</td>
+      </tr>
+      <tr>
+        <td><strong>NDC Perú — Mitigación</strong></td>
+        <td>Acuerdo de París: limitar calentamiento a 1.5–2°C</td>
+        <td>-40% GEI al 2030 respecto a 2015 · 66 medidas sectoriales</td>
+        <td>→ en proceso</td>
+        <td>Involucra energía, transporte, UTCUTS, agricultura y desechos</td>
+      </tr>
+      <tr>
+        <td><strong>Modelo 2050 (Perú)</strong></td>
+        <td>Descarbonización global requiere ≥80% renovable en electricidad</td>
+        <td>Increased Ambition: 82% · Green Development: 88% de potencia renovable</td>
+        <td>↑ proyectado</td>
+        <td>Implica multiplicar por ~5 la capacidad eólica+solar actual</td>
+      </tr>
+      <tr>
+        <td><strong>Capacidad instalada SEIN</strong></td>
+        <td>Global: crecimiento liderado por China e India</td>
+        <td>14,861 MW en 2025 (de 12,756 MW en 2016, +16.5%)</td>
+        <td>↑ moderado</td>
+        <td>El crecimiento es menor al necesario para los escenarios 2050</td>
+      </tr>
+      <tr>
+        <td><strong>Acceso rural electricidad</strong></td>
+        <td>Latam promedio: 83.68% (2017)</td>
+        <td>Perú rural: 77.97% (2017). Meta: cierre de brecha con ERNC</td>
+        <td>↑ gradual</td>
+        <td>Las ERNC (solar, mini hidro) son la solución técnica para zonas remotas</td>
+      </tr>
+      <tr>
+        <td><strong>Seguridad energética</strong></td>
+        <td>Crisis Ucrania 2022: precios petróleo &gt;$100/barril, gas &gt;$174/MMBtu</td>
+        <td>Perú tiene ventaja: diversificación hidro+gas; menor exposición a importaciones</td>
+        <td>Riesgo global</td>
+        <td>La transición energética es también respuesta a la vulnerabilidad geopolítica</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ DATO INTEGRADOR CLAVE: Perú tiene el 65.7% de su electricidad de fuentes renovables (hidro+ERNC), muy por encima del promedio mundial del 32%, pero su TFEC total sigue siendo altamente fósil por los sectores transporte e industria. La electrificación de usos finales (meta: 41-62% al 2050) es la variable que determinará si Perú logra la neutralidad de carbono.</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">
+    REN21 (2025). Renewables Global Status Report 2025. · 
+    SPR – Minem/COES (2025). Reporte Estadístico Anual SEIN 2025. · 
+    COES (2019). Elaboración: GPAE-Osinergmin. · 
+    Deloitte / Análisis (2022). Modelo Energético Peruano al 2050. · 
+    Campodónico, H. &amp; Carrera, C. (2022). Transición energética y EERR: Desafíos para el Perú. Política Energética, 171, 113261. · 
+    IEA (2014–2017). Elaboración: GPAE-Osinergmin. · 
+    Banco Mundial (2018). Acceso a electricidad rural, Latam 2017.
+  </span>
+</div>
+
+</div>
