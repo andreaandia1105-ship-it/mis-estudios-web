@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Canvas: Mapa Nacional de Ecosistemas del Perú | MINAM 2019</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            padding: 24px 20px;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        /* Contenedor principal del canvas con variables compatibles modo claro/oscuro */
+        .canvas-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--color-background-tertiary);
+            border-radius: 24px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Variables del sistema (claro por defecto) */
+        :root {
+            --color-background-primary: #ffffff;
+            --color-background-secondary: #f8fafc;
+            --color-background-tertiary: #f1f5f9;
+            --color-text-primary: #0f172a;
+            --color-text-secondary: #334155;
+            --color-border-tertiary: #e2e8f0;
+            --color-border-secondary: #cbd5e1;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background-primary: #0f172a;
+                --color-background-secondary: #1e293b;
+                --color-background-tertiary: #0f172a;
+                --color-text-primary: #f1f5f9;
+                --color-text-secondary: #cbd5e6;
+                --color-border-tertiary: #334155;
+                --color-border-secondary: #475569;
+            }
+        }
+
+        /* Estructura base del canvas */
+        .cv {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 9px;
+            padding: 12px;
+            background: var(--color-background-tertiary);
+            border-radius: 20px;
+        }
+
+        /* bloques generales */
+        .block {
+            background: var(--color-background-primary);
+            border: 0.5px solid var(--color-border-tertiary);
+            border-radius: 11px;
+            padding: 12px 13px;
+            transition: all 0.1s ease;
+        }
+
+        .block.s2 { grid-column: span 2; }
+        .block.s3 { grid-column: span 3; }
+
+        /* barra título */
+        .title-bar {
+            grid-column: 1 / -1;
+            background: #0f1e3a;
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title-main h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        .title-main p {
+            font-size: 11px;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+        .title-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .pill {
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* sección separador */
+        .section-bar {
+            grid-column: 1 / -1;
+            background: var(--color-background-secondary);
+            border-left: 6px solid #0f1e3a;
+            padding: 8px 15px;
+            border-radius: 12px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-text-primary);
+        }
+
+        /* headers de bloque */
+        .bh {
+            font-family: 'Oswald', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding: 3px 9px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+        }
+
+        .def {
+            border-left: 3px solid;
+            padding: 7px 10px;
+            border-radius: 0 7px 7px 0;
+            font-size: 12px;
+            background: var(--color-background-secondary);
+            margin: 10px 0;
+        }
+
+        .item {
+            display: flex;
+            gap: 7px;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .rx {
+            background: #0f172a;
+            color: #7dd3fc;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 7px 11px;
+            border-radius: 7px;
+            text-align: center;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .warn {
+            background: #fff7ed;
+            border-left: 3px solid #f97316;
+            border-radius: 0 8px 8px 0;
+            font-size: 11.5px;
+            color: #7c2d12;
+            padding: 8px 12px;
+            margin: 12px 0;
+        }
+        @media (prefers-color-scheme: dark) {
+            .warn { background: #2d1a0a; color: #fed7aa; border-left-color: #fb923c; }
+        }
+
+        .exam {
+            background: #fefce8;
+            border: 1px solid #facc15;
+            border-radius: 8px;
+            font-size: 11.5px;
+            color: #713f12;
+            padding: 10px 12px;
+            margin-top: 12px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .exam { background: #332a0c; color: #fde047; border-color: #ca8a04; }
+        }
+
+        .mini {
+            background: var(--color-background-secondary);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 11.5px;
+            margin-bottom: 8px;
+        }
+        .two, .three {
+            display: grid;
+            gap: 7px;
+        }
+        .two { grid-template-columns: 1fr 1fr; }
+        .three { grid-template-columns: 1fr 1fr 1fr; }
+
+        .flow {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 12px 0;
+        }
+        .fbox {
+            background: var(--color-background-secondary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .farrow {
+            color: var(--color-text-secondary);
+            font-size: 15px;
+        }
+
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        .tbl th {
+            background: var(--color-background-secondary);
+            padding: 5px 7px;
+            border-bottom: 0.5px solid var(--color-border-secondary);
+            text-align: left;
+        }
+        .tbl td {
+            padding: 5px 7px;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+            vertical-align: top;
+        }
+
+        .footer-bar {
+            grid-column: 1 / -1;
+            background: #0f1e3a;
+            border-radius: 10px;
+            padding: 11px 18px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            color: white;
+        }
+        .ft { font-family: 'Oswald', sans-serif; font-size: 12px; color: #7dd3fc; }
+        .fc { font-size: 11px; color: #94a3b8; }
+
+        hr.divh { margin: 7px 0; border: 0; border-top: 0.5px solid var(--color-border-tertiary); }
+        .stat-bar-wrap { background: var(--color-background-secondary); border-radius: 20px; height: 11px; width: 100%; margin: 6px 0; }
+        .stat-bar-fill { height: 100%; border-radius: 20px; background: #2c7da0; width: 0%; }
+    </style>
+</head>
+<body>
+<div class="canvas-wrapper">
+    <div class="cv">
+
+        <!-- BARRA TÍTULO PRINCIPAL -->
+        <div class="title-bar">
+            <div class="title-main">
+                <h1>🗺️ Mapa Nacional de Ecosistemas del Perú</h1>
+                <p>Memoria descriptiva | MINAM 2019 | Resolución Ministerial N° 440-2018-MINAM</p>
+            </div>
+            <div class="title-tags">
+                <span class="pill">36 ecosistemas mapeados</span>
+                <span class="pill">escala 1:100 000</span>
+                <span class="pill">Kappa 0.81</span>
+                <span class="pill">validación 801 puntos</span>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 1: METODOLOGÍA Y CRITERIOS -->
+        <div class="section-bar">📐 MARCO METODOLÓGICO · CRITERIOS DE IDENTIFICACIÓN</div>
+
+        <div class="block s2">
+            <div class="bh" style="background:#dbeafe; color:#1e3a8a;">🔷 Enfoque integrador</div>
+            <div class="def" style="border-left-color:#2563eb;">El Mapa Nacional de Ecosistemas combina 5 factores diagnósticos: Región Natural, Bioclima (macroprovincia de humedad), Cobertura vegetal (fisonomía), Fisiografía y Piso ecológico (para Yunga). Construcción participativa (MINAM, SERNANP, IIAP, gobiernos regionales).</div>
+            <div class="flow">
+                <span class="fbox">🌳 Cobertura vegetal</span><span class="farrow">→</span>
+                <span class="fbox">⛰️ Fisiografía</span><span class="farrow">→</span>
+                <span class="fbox">💧 Bioclima (Holdridge)</span><span class="farrow">→</span>
+                <span class="fbox">📊 Piso ecológico</span><span class="farrow">→</span>
+                <span class="fbox">🧩 ECOSISTEMA</span>
+            </div>
+            <div class="mini">📌 <strong>Escala nacional 1:100 000</strong> · área mínima cartografiable: 20 ha (selva/andino) y 5 ha para humedales/lomas. Año base 2016.</div>
+            <div class="rx">🌐 Ejemplo integración: Bosque + Colina baja + Húmedo/Perhúmedo → Bosque de colina baja (Amazonía)</div>
+            <div class="exam">🎯 EXAMEN: Explique cómo se integraron las capas de cobertura vegetal, fisiografía y macroprovincias de humedad para generar la leyenda del Mapa Nacional de Ecosistemas. Mencione al menos dos ajustes realizados.</div>
+        </div>
+
+        <div class="block">
+            <div class="bh" style="background:#fef9c3; color:#713f12;">🟡 Macroprovincias de humedad</div>
+            <div class="item"><div class="dot"></div>Agrupación de 6 categorías: Árido, Semiárido, Subhúmedo, Húmedo/Perhúmedo, Superhúmedo/Semisaturado.</div>
+            <div class="item"><div class="dot"></div>Base: Mapa Ecológico ONERN 1976, ajustado con fenología y vegetación indicadora.</div>
+            <div class="warn">⚠️ ERROR COMÚN: No se usaron solamente zonas de vida; se reclasificaron en macroprovincias para simplificar la legibilidad a escala nacional.</div>
+            <div class="exam">🎯 EXAMEN: ¿Qué ventajas metodológicas ofrece la agrupación en macroprovincias de humedad frente al uso directo de las 84 zonas de vida?</div>
+        </div>
+
+        <!-- SECCIÓN 2: REGIONES NATURALES (4 regiones) -->
+        <div class="section-bar">🌎 REGIONES NATURALES · BASE ESPACIAL</div>
+        
+        <div class="block s3">
+            <div class="two">
+                <div class="mini"><strong>🌴 SELVA TROPICAL</strong><br>Llanura amazónica < 600 m s.n.m. Precipitación 1300-3000 mm/año. Alta diversidad, bosques de terraza, colinas, pantanos de palmeras.</div>
+                <div class="mini"><strong>⛰️ YUNGA (selva alta)</strong><br>Flanco oriental 600-3600 m s.n.m. Bosques nublados, epífitas abundantes, pendientes pronunciadas.</div>
+                <div class="mini"><strong>🏔️ ANDINA</strong><br>Puna, jalca, páramo, valles interandinos. Pastizales, bofedales, bosques relictos de Polylepis.</div>
+                <div class="mini"><strong>🏜️ COSTA</strong><br>Desierto costero, lomas, bosques secos del Noroeste, manglares, influencia de corrientes marinas.</div>
+            </div>
+            <div class="def" style="border-left-color:#0f1e3a;">🌿 Las cuatro regiones naturales permitieron una primera partición territorial; dentro de cada una se aplicaron factores específicos (pisos ecológicos en Yunga, fisiografía detallada en Selva baja).</div>
+        </div>
+
+        <!-- SECCIÓN 3: ECOSISTEMAS SELVA TROPICAL (11) -->
+        <div class="section-bar">🌳 SELVA TROPICAL · 11 ECOSISTEMAS CLAVE</div>
+
+        <div class="block">
+            <div class="bh" style="background:#dcfce7; color:#14532d;">🟢 Más extenso: Bosque de colina baja</div>
+            <div class="item"><div class="dot"></div><strong>24.58% del territorio nacional</strong> (31.8 millones ha). Colinas de 20-80 m, suelos no inundables, dosel 25-30 m.</div>
+            <div class="item"><div class="dot"></div>Otros destacados: <strong>Bosque aluvial inundable</strong> (9.04 M ha, 6.99%), <strong>Pantano de palmeras</strong> (5.53 M ha, aguajales).</div>
+            <div class="mini"><strong>🌴 Varillal</strong> (50.6 mil ha) sobre arenas blancas, flora endémica y fustes delgados. <strong>Pacal</strong> (29.7 mil ha) dominado por pacae (Inga spp.) en terrazas bajas.</div>
+            <div class="warn">⚠️ NOTA: Los bosques estacionalmente secos orientales (Huallaga, Ene–Perené) ocupan solo 87 254 ha y representan transición a bosque seco tropical.</div>
+            <div class="exam">🎯 EXAMEN: Compare las características fisiográficas y de inundabilidad entre el bosque de terraza no inundable, el bosque aluvial inundable y el pantano de palmeras. ¿Por qué el primero es el de mayor superficie?</div>
+        </div>
+
+        <div class="block">
+            <div class="bh" style="background:#ccfbf1; color:#134e4a;">🩵 Humedales amazónicos</div>
+            <div class="item"><div class="dot"></div><strong>Pantano herbáceo-arbustivo</strong> (0.61%): gramíneas, ciperáceas, turberas.</div>
+            <div class="item"><div class="dot"></div><strong>Sabana húmeda con palmeras</strong> (Pampas del Heath, Madre de Dios) relicto de sabanas amazónicas.</div>
+            <div class="rx">🌾 Mauritia flexuosa (aguaje) domina en pantanos de palmeras, formando bosques anegados de hasta 25 m.</div>
+        </div>
+
+        <!-- SECCIÓN 4: YUNGA -->
+        <div class="section-bar">🌿 YUNGA · BOSQUES MONTANOS ORIENTALES</div>
+        <div class="block s2">
+            <div class="two">
+                <div class="mini"><strong>Bosque basimontano (6.37%)</strong><br>600-1800 m, dosel 25 m, transición amazónico-yunga.</div>
+                <div class="mini"><strong>Bosque montano (3.50%)</strong><br>1800-2500 m, abundantes helechos arborescentes (Cyathea).</div>
+                <div class="mini"><strong>Bosque altimontano (1.84%)</strong><br>2500-3800 m, bosque enano en límite con puna/páramo, epífitas y ericáceas.</div>
+            </div>
+            <div class="def" style="border-left-color:#0f766e;">Altitudinalmente los pisos se delimitaron con Modelo Digital de Elevación (ASTER GDEM). Presencia de neblina persistente en el montano y altimontano.</div>
+            <div class="exam">🎯 EXAMEN: Describa la variación de la estructura del dosel y la composición florística a lo largo de los tres pisos ecológicos de Yunga. Incluya rangos altitudinales.</div>
+        </div>
+
+        <!-- SECCIÓN 5: ECOSISTEMAS ANDINOS -->
+        <div class="section-bar">⛰️ REGIÓN ANDINA · PASTIZALES, BOFEDALES, BOSQUES RELICTOS</div>
+        <div class="block">
+            <div class="bh" style="background:#ede9fe; color:#4c1d95;">🟣 Puna húmeda (9.26%) y seca (3.78%)</div>
+            <div class="item"><div class="dot"></div><strong>Pajonal de puna húmeda</strong>: 11.98 M ha, gramíneas amacolladas, Festuca, Calamagrostis. Zona de pastoreo.</div>
+            <div class="item"><div class="dot"></div><strong>Pajonal de puna seca</strong> hacia el sur y oeste, xerofítico, presencia de Puya raimondii.</div>
+            <div class="item"><div class="dot"></div><strong>Bofedal</strong> (548 mil ha): humedal altoandino, vegetación en cojín (Distichia, Plantago), turberas.</div>
+            <div class="warn">⚠️ Importancia hídrica: Los bofedales regulan agua de cabecera de cuenca, amenazados por sobrepastoreo y minería.</div>
+        </div>
+        <div class="block">
+            <div class="bh" style="background:#ffedd5; color:#7c2d12;">🟠 Ecosistemas especiales</div>
+            <div class="item"><div class="dot"></div><strong>Jalca</strong> (1.04%): transición norteña entre páramo y puna, herbazal-arbustivo, endemismos.</div>
+            <div class="item"><div class="dot"></div><strong>Zona periglaciar y glaciar</strong> (2.29%): >4500 m, suelos crioturbados, vegetación dispersa (almohadillas, líquenes).</div>
+            <div class="item"><div class="dot"></div><strong>Bosques relictos</strong> (queñoal, mesoandino, vertiente occidental) suman ~0.21% del país, clave para biodiversidad y servicios hídricos.</div>
+            <div class="exam">🎯 EXAMEN: Compare el páramo, la jalca y el pajonal de puna húmeda en términos de clima, fisonomía de la vegetación y distribución geográfica en el Perú.</div>
+        </div>
+
+        <!-- SECCIÓN 6: COSTA -->
+        <div class="section-bar">🏝️ REGIÓN COSTA · DESIERTOS, BOSQUES SECOS, LOMAS Y MANGLARES</div>
+        <div class="block s2">
+            <div class="two">
+                <div class="mini"><strong>Desierto costero (5.49%)</strong> Hiperárido, tillandsiales, cactáceas. Se extiende desde playas hasta 2500 m en el sur.</div>
+                <div class="mini"><strong>Bosque estacionalmente seco de llanura (1.12%)</strong> Algarrobal (Prosopis), influencia de El Niño.</div>
+                <div class="mini"><strong>Loma costera (0.23%)</strong> Oasis de niebla, alto endemismo (Solanum, Sicyos), entre 100-1000 m.</div>
+                <div class="mini"><strong>Manglar (0.01%)</strong> Tumbes-Piura, Rhizophora, Avicennia, humedal costero crítico.</div>
+            </div>
+            <div class="def" style="border-left-color:#ea580c;">El Bosque tropical del Pacífico (Tumbes, 20 692 ha) es perennifolio, dosel >25 m, único remanente en Perú del Chocó ecuatorial.</div>
+            <div class="rx">📊 Matorral xérico (0.05%): cactáceas columnares y arbustos espinosos en laderas de valles, 300-2000 m.</div>
+        </div>
+
+        <!-- SECCIÓN 7: ECOSISTEMAS ACUÁTICOS + ZONAS INTERVENIDAS -->
+        <div class="section-bar">💧 ECOSISTEMAS ACUÁTICOS · ZONAS INTERVENIDAS</div>
+        <div class="block">
+            <div class="bh" style="background:#ccfbf1; color:#134e4a;">Lagos, lagunas y ríos</div>
+            <div class="item"><div class="dot"></div><strong>Lagos y lagunas (0.65%):</strong> Titicaca, Junín, más de 840 mil ha.</div>
+            <div class="item"><div class="dot"></div><strong>Ríos (1.14%):</strong> 1.47 millones ha, drenajes amazónico, pacífico y endorreico.</div>
+            <div class="mini"><strong>Zonas intervenidas</strong> (agrícola, urbana, minería, plantaciones forestales, vegetación secundaria) fueron excluidas del mapeo de ecosistemas naturales pero se representan como coberturas antrópicas.</div>
+        </div>
+
+        <!-- SECCIÓN 8: VALIDACIÓN Y EXACTITUD -->
+        <div class="section-bar">✅ VALIDACIÓN · EXACTITUD TEMÁTICA</div>
+        <div class="block s3">
+            <div class="two">
+                <div class="mini"><strong>📌 Diseño muestral</strong><br>Muestreo aleatorio estratificado, 801 puntos, mínimo 10 por ecosistema. Fórmula de Cochran (precisión general 75%, IC 95%).</div>
+                <div class="mini"><strong>🔎 Fuentes</strong><br>19 puntos campo + 782 gabinete (imágenes satelitales, Inventario Nacional Forestal, ZEE, OSINFOR, etc.)</div>
+                <div class="mini"><strong>📈 Resultados</strong><br>Exactitud global: <strong>81.77%</strong><br>Coeficiente Kappa: <strong>0.81</strong> → “Fuerza de concordancia casi perfecta” (Landis & Koch).</div>
+            </div>
+            <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:81.77%;"></div></div>
+            <div class="warn">⚡ 146 puntos de muestreo pertenecían a otro ecosistema o zonas intervenidas; los mayores errores de comisión se dieron en bosques de colina alta/baja y matorral andino.</div>
+            <div class="exam">🎯 EXAMEN: ¿Qué significa un coeficiente Kappa de 0.81 en el contexto del Mapa Nacional de Ecosistemas? ¿Cómo se calculó y qué limitaciones tuvo el proceso de validación?</div>
+        </div>
+
+        <!-- SECCIÓN 9: TABLA INTEGRADORA DE SUPERFICIES -->
+        <div class="section-bar">📊 TABLA INTEGRADORA · SUPERFICIE POR REGIÓN (ha y % nacional)</div>
+        <div class="block s3">
+            <table class="tbl">
+                <thead>
+                    <tr><th>Región natural</th><th>Ecosistema representativo</th><th>Superficie (ha)</th><th>% del Perú</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Selva tropical</td><td>Bosque de colina baja</td><td>31 801 303</td><td>24.58%</td></tr>
+                    <tr><td>Selva tropical</td><td>Bosque aluvial inundable</td><td>9 038 741</td><td>6.99%</td></tr>
+                    <tr><td>Yunga</td><td>Bosque basimontano</td><td>8 237 634</td><td>6.37%</td></tr>
+                    <tr><td>Andina</td><td>Pajonal de puna húmeda</td><td>11 981 914</td><td>9.26%</td></tr>
+                    <tr><td>Andina</td><td>Matorral andino</td><td>10 304 036</td><td>7.96%</td></tr>
+                    <tr><td>Costa</td><td>Desierto costero</td><td>7 107 338</td><td>5.49%</td></tr>
+                    <tr><td>Acuáticos</td><td>Ríos + lagos/lagunas</td><td>2 320 225</td><td>1.79%</td></tr>
+                </tbody>
+            </table>
+            <div class="warn">🔍 Dato integrador: Los tres ecosistemas más extensos son bosque de colina baja (24.6%), pajonal de puna húmeda (9.3%) y matorral andino (8.0%). Juntos representan más del 41% del territorio nacional continental.</div>
+        </div>
+
+        <!-- SECCIÓN 10: CONCLUSIONES CLAVE -->
+        <div class="section-bar">📌 CONCLUSIONES Y APORTES A LA GESTIÓN</div>
+        <div class="block s3">
+            <div class="two">
+                <div class="mini"><strong>🎯 Instrumento de política pública</strong><br>Base para ordenamiento territorial, Zonificación Ecológica Económica (ZEE), y monitoreo de servicios ecosistémicos.</div>
+                <div class="mini"><strong>📐 Limitaciones</strong><br>Ecosistemas como matorral de puna seca, bosques de agua blanca/negra requieren mapeo a mayor escala para discriminarlos.</div>
+                <div class="mini"><strong>📅 Actualización</strong><br>El mapa fue aprobado mediante R.M. N°440-2018-MINAM, con memoria descriptiva y definiciones conceptuales.</div>
+            </div>
+            <div class="exam">🎯 EXAMEN (integradora): Con base en la metodología del Mapa Nacional de Ecosistemas, ¿cómo podría usarse esta herramienta para identificar ecosistemas frágiles y priorizar acciones de conservación en la región andina? Mencione al menos dos ecosistemas andinos con baja extensión y alta vulnerabilidad.</div>
+            <div class="def" style="border-left-color:#2b9348;">🌱 El MINAM, a través del Programa Presupuestal 144, utiliza el mapa para conservar ecosistemas proveedores de servicios y restaurar los degradados, alineado a la Estrategia Nacional de Diversidad Biológica al 2021.</div>
+        </div>
+
+        <!-- FOOTER con referencias oficiales -->
+        <div class="footer-bar">
+            <div class="ft">📚 REFERENCIAS:</div>
+            <div class="fc">Ministerio del Ambiente (2019). Mapa Nacional de Ecosistemas del Perú – Memoria Descriptiva. Resolución Ministerial N° 440-2018-MINAM. Lima, Perú.</div>
+            <div class="fc">| Definiciones conceptuales de los Ecosistemas del Perú | Validación con SERNANP, IIAP, INAIGEM, SERFOR | Escala 1:100 000, 36 ecosistemas mapeados.</div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

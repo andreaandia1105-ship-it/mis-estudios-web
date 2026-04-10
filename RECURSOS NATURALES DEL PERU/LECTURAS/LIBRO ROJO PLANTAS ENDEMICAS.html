@@ -1,0 +1,423 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.block{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:500}
+.sec{grid-column:1/-1;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;padding:7px 13px;border-radius:8px;display:flex;align-items:center;gap:8px;margin-top:2px}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;line-height:1.5;background:var(--color-background-secondary);margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.exam b{font-weight:600}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:6px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:6px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-top:6px}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:white;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin-top:4px}
+.stat-bar-fill{height:100%;border-radius:20px}
+/* azul */
+.bh-az{background:#dbeafe;color:#1e3a8a}
+.def-az{border-left:3px solid #3b82f6}
+.dot-az{background:#3b82f6}
+/* verde */
+.bh-vd{background:#dcfce7;color:#14532d}
+.def-vd{border-left:3px solid #22c55e}
+.dot-vd{background:#22c55e}
+/* rojo */
+.bh-rj{background:#fee2e2;color:#991b1b}
+.def-rj{border-left:3px solid #ef4444}
+.dot-rj{background:#ef4444}
+/* amarillo */
+.bh-am{background:#fef9c3;color:#713f12}
+.def-am{border-left:3px solid #eab308}
+.dot-am{background:#eab308}
+/* morado */
+.bh-mo{background:#ede9fe;color:#4c1d95}
+.def-mo{border-left:3px solid #8b5cf6}
+.dot-mo{background:#8b5cf6}
+/* teal */
+.bh-tl{background:#ccfbf1;color:#134e4a}
+.def-tl{border-left:3px solid #14b8a6}
+.dot-tl{background:#14b8a6}
+/* naranja */
+.bh-nr{background:#ffedd5;color:#7c2d12}
+.def-nr{border-left:3px solid #f97316}
+.dot-nr{background:#f97316}
+/* rosa */
+.bh-rs{background:#fce7f3;color:#831843}
+.def-rs{border-left:3px solid #ec4899}
+.dot-rs{background:#ec4899}
+/* gris */
+.bh-gr{background:#f1f5f9;color:#334155}
+.sec-az{background:#dbeafe;color:#1e3a8a}
+.sec-vd{background:#dcfce7;color:#14532d}
+.sec-rj{background:#fee2e2;color:#991b1b}
+.sec-am{background:#fef9c3;color:#713f12}
+.sec-tl{background:#ccfbf1;color:#134e4a}
+.sec-mo{background:#ede9fe;color:#4c1d95}
+.mini-az{border-top:3px solid #3b82f6}
+.mini-vd{border-top:3px solid #22c55e}
+.mini-rj{border-top:3px solid #ef4444}
+.mini-am{border-top:3px solid #eab308}
+.mini-mo{border-top:3px solid #8b5cf6}
+.mini-tl{border-top:3px solid #14b8a6}
+.mini-nr{border-top:3px solid #f97316}
+@media(prefers-color-scheme:dark){
+.bh-az{background:#1e3a5f;color:#93c5fd}.def-az{border-left-color:#60a5fa}
+.bh-vd{background:#14532d;color:#86efac}.def-vd{border-left-color:#4ade80}
+.bh-rj{background:#450a0a;color:#fca5a5}.def-rj{border-left-color:#f87171}
+.bh-am{background:#422006;color:#fef08a}.def-am{border-left-color:#facc15}
+.bh-mo{background:#2e1065;color:#c4b5fd}.def-mo{border-left-color:#a78bfa}
+.bh-tl{background:#042f2e;color:#5eead4}.def-tl{border-left-color:#2dd4bf}
+.bh-nr{background:#431407;color:#fed7aa}.def-nr{border-left-color:#fb923c}
+.bh-rs{background:#4a044e;color:#f0abfc}
+.sec-az{background:#1e3a5f;color:#93c5fd}.sec-vd{background:#14532d;color:#86efac}
+.sec-rj{background:#450a0a;color:#fca5a5}.sec-am{background:#422006;color:#fef08a}
+.sec-tl{background:#042f2e;color:#5eead4}.sec-mo{background:#2e1065;color:#c4b5fd}
+.warn{background:#3a1a00;color:#fed7aa}
+.exam{background:#3a2e00;color:#fef08a;border-color:#854d0e}
+}
+</style>
+
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="block s3" style="background:#0f1e3a;color:white;border-radius:12px;padding:14px 18px">
+  <div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px">📕 EL LIBRO ROJO DE LAS PLANTAS ENDÉMICAS DEL PERÚ</div>
+  <div style="font-size:11px;color:#94a3b8;margin-bottom:8px">Rev. Peru. Biol. Vol. 13, N° 2 Especial · Diciembre 2006 · UNMSM – Facultad de Ciencias Biológicas · Editores: Blanca León, José Roque, Carmen Ulloa Ulloa, Nigel Pitman, Peter Jørgensen, Asunción Cano</div>
+  <div>
+    <span class="pill" style="background:#1e3a5f;color:#93c5fd">Endemismo</span>
+    <span class="pill" style="background:#14532d;color:#86efac">Conservación</span>
+    <span class="pill" style="background:#422006;color:#fef08a">Categorías UICN</span>
+    <span class="pill" style="background:#2e1065;color:#c4b5fd">Flora vascular</span>
+    <span class="pill" style="background:#042f2e;color:#5eead4">159 familias</span>
+    <span class="pill" style="background:#431407;color:#fed7aa">Contexto peruano</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: QUÉ ES Y POR QUÉ EXISTE -->
+<div class="sec sec-az">🔵 ¿QUÉ ES ESTE LIBRO Y POR QUÉ FUE NECESARIO?</div>
+
+<div class="block">
+  <span class="bh bh-az">Endemismo Nacional</span>
+  <div class="def def-az">Una especie es <b>endémica</b> cuando su distribución se restringe exclusivamente al territorio de un país. En este libro se trabajó con el concepto de <b>endemismo nacional peruano</b>: especies que solo existen dentro de las fronteras del Perú y en ningún otro lugar del planeta.</div>
+  <div class="item"><span class="dot dot-az"></span><span>El Perú posee una de las floras más ricas del mundo (~13 300 taxones totales) y casi el 28% son endémicos.</span></div>
+  <div class="item"><span class="dot dot-az"></span><span>Antes de este libro no existía una herramienta sistematizada para saber cuáles de esas miles de especies estaban en peligro real de extinción.</span></div>
+  <div class="item"><span class="dot dot-az"></span><span>La idea surgió de la visión de Nigel Pitman y fue financiada por la <b>Gordon & Betty Moore Foundation</b>.</span></div>
+  <div class="exam"><b>🎯 EXAMEN:</b> ¿Qué se entiende por «endemismo nacional» y por qué el Perú tiene una responsabilidad especial sobre estas especies?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-az">Contexto y Vacío que Llenó</span>
+  <div class="def def-az">En 1993, Brako y Zarucchi publicaron el primer catálogo completo con ~5 372 taxones endémicos identificados. Sin embargo, no existía ninguna evaluación del <b>grado de amenaza</b> de esas especies bajo criterios internacionales comparables. Este libro llena ese vacío.</div>
+  <div class="flow">
+    <span class="fbox">Flora peruana descrita</span>
+    <span class="farrow">→</span>
+    <span class="fbox">Lista Brako & Zarucchi 1993</span>
+    <span class="farrow">→</span>
+    <span class="fbox">Vacío de evaluación</span>
+    <span class="farrow">→</span>
+    <span class="fbox">Libro Rojo 2006</span>
+  </div>
+  <div class="item" style="margin-top:7px"><span class="dot dot-az"></span><span>El Decreto Supremo 043-2006-AG fue promulgado el mismo año, consolidando la lista oficial de flora amenazada del Perú.</span></div>
+  <div class="exam"><b>🎯 EXAMEN:</b> ¿Cuál fue el principal antecedente bibliográfico del Libro Rojo y qué aporte específico añadió esta obra a ese antecedente?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-az">Cifra Central</span>
+  <div style="text-align:center;padding:10px 0">
+    <div style="font-family:'Oswald',sans-serif;font-size:42px;color:#1e3a8a;font-weight:700">5 509</div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">taxones endémicos reconocidos</div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px">= 27,9% de la flora vascular total del Perú</div>
+  </div>
+  <hr class="divh">
+  <div style="font-size:11.5px;color:var(--color-text-secondary)">Evaluados con criterios UICN:</div>
+  <div style="font-size:11px;font-weight:600;margin-top:3px">76% del total (~4 187 taxones)</div>
+  <div class="warn">⚠️ El 24% restante no pudo evaluarse por falta suficiente de colecciones. Estos taxones permanecen en la categoría <b>Datos Insuficientes (DD)</b>.</div>
+</div>
+
+<!-- SECCIÓN 2: METODOLOGÍA -->
+<div class="sec sec-vd">🟢 METODOLOGÍA Y PROCESO DE ELABORACIÓN</div>
+
+<div class="block s2">
+  <span class="bh bh-vd">Cómo se Construyó el Libro (2003–2005)</span>
+  <div class="def def-vd">El proceso duró <b>30 meses</b> e involucró a <b>43–45 botánicos</b> peruanos y extranjeros que revisaron colecciones de herbario, literatura taxonómica y bases de datos globales para reconstruir la historia de cada especie. Los datos se centralizaron en Microsoft Access™.</div>
+  <div class="three" style="margin-top:7px">
+    <div class="mini mini-vd"><b>Paso 1</b><br>Lista preliminar basada en Brako & Zarucchi (1993) + taxones nuevos post-1993</div>
+    <div class="mini mini-vd"><b>Paso 2</b><br>Verificación nomenclatural (nombre válido, citación correcta, restricción geográfica al Perú)</div>
+    <div class="mini mini-vd"><b>Paso 3</b><br>Aplicación de criterios UICN v3.1: contracción de población, rango geográfico, tamaño poblacional, análisis cuantitativo</div>
+  </div>
+  <div class="exam" style="margin-top:8px"><b>🎯 EXAMEN:</b> Explica los cuatro criterios (A, B, C, D) de la UICN versión 3.1 y cómo se aplicaron a las especies endémicas del Perú usando colecciones de herbario.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-vd">Fuentes de Información</span>
+  <div class="item"><span class="dot dot-vd"></span><span><b>Herbarios peruanos:</b> USM (San Marcos), CUZ (Vargas-Cusco), MOL (La Molina), AMAZ, HAO, HUT, CPUN</span></div>
+  <div class="item"><span class="dot dot-vd"></span><span><b>Herbarios extranjeros:</b> F (Field Museum), MO (Missouri Botanical Garden), K (Kew), NY, Smithsoniano</span></div>
+  <div class="item"><span class="dot dot-vd"></span><span><b>Bases de datos:</b> TROPICOS (MBG), GBIF, Gallica, portales de herbarios vía Internet</span></div>
+  <div class="item"><span class="dot dot-vd"></span><span>Para localidades se consultó mapas del IGN, INEI y Ministerio de Transportes</span></div>
+  <div class="warn">⚠️ Muchos taxones descritos antes de 1950 fueron colectados por extranjeros y sus tipos están en herbarios de Europa y EE.UU., dificultando la verificación directa.</div>
+</div>
+
+<!-- SECCIÓN 3: CATEGORÍAS DE AMENAZA -->
+<div class="sec sec-rj">🔴 CATEGORÍAS DE AMENAZA UICN Y RESULTADOS</div>
+
+<div class="block">
+  <span class="bh bh-rj">Categorías UICN v3.1 Aplicadas</span>
+  <div class="def def-rj">La UICN define categorías estandarizadas para clasificar el riesgo de extinción de una especie. En el Libro Rojo se emplearon 5 categorías principales para los taxones evaluados. Las siglas se mantienen en inglés por convención internacional.</div>
+  <div class="three" style="margin-top:6px">
+    <div class="mini mini-rj" style="text-align:center"><div style="font-size:16px;font-weight:700;color:#991b1b">CR</div><div style="font-size:10.5px"><i>Critically Endangered</i><br><b>En Peligro Crítico</b><br>18%</div></div>
+    <div class="mini mini-rj" style="text-align:center"><div style="font-size:16px;font-weight:700;color:#b91c1c">EN</div><div style="font-size:10.5px"><i>Endangered</i><br><b>En Peligro</b><br>33%</div></div>
+    <div class="mini mini-am" style="text-align:center"><div style="font-size:16px;font-weight:700;color:#713f12">VU</div><div style="font-size:10.5px"><i>Vulnerable</i><br><b>Vulnerable</b><br>10%</div></div>
+  </div>
+  <div class="two" style="margin-top:6px">
+    <div class="mini mini-vd" style="text-align:center"><div style="font-size:13px;font-weight:700;color:#14532d">NT</div><div style="font-size:10.5px">Casi amenazada</div></div>
+    <div class="mini mini-az" style="text-align:center"><div style="font-size:13px;font-weight:700;color:#1e3a8a">LC</div><div style="font-size:10.5px">Preocupación menor</div></div>
+  </div>
+  <div class="exam"><b>🎯 EXAMEN:</b> ¿Cuál es la categoría más amenazada del sistema UICN y cuántos taxones endémicos del Perú cayeron en ella? ¿Qué implica esa categoría?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-rj">Distribución de Categorías</span>
+  <div style="font-size:11.5px;margin-bottom:6px;color:var(--color-text-secondary)">Del total evaluado (~76% de 5 509 taxones):</div>
+  
+  <div style="font-size:11.5px;margin:4px 0 2px;font-weight:600;color:#991b1b">CR — En Peligro Crítico (18%)</div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:18%;background:#ef4444"></div></div>
+  
+  <div style="font-size:11.5px;margin:6px 0 2px;font-weight:600;color:#b91c1c">EN — En Peligro (33%)</div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:33%;background:#f87171"></div></div>
+  
+  <div style="font-size:11.5px;margin:6px 0 2px;font-weight:600;color:#713f12">VU — Vulnerable (10%)</div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:10%;background:#eab308"></div></div>
+  
+  <div style="font-size:11.5px;margin:6px 0 2px;font-weight:600;color:#64748b">DD — Sin datos (24%)</div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:24%;background:#94a3b8"></div></div>
+  
+  <div class="warn" style="margin-top:8px">⚠️ El 61% del total evaluado está en las categorías más críticas (CR + EN). Esto significa que más de 3 000 taxones tienen alta probabilidad de extinción si no se toman medidas.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-rj">Causas de Amenaza</span>
+  <div class="def def-rj">El prólogo del libro identifica las principales presiones sobre la flora endémica peruana. No son fenómenos aislados: se retroalimentan y actúan simultáneamente.</div>
+  <div class="item"><span class="dot dot-rj"></span><span><b>Apertura agrícola y ganadera:</b> deforestación de bosques montanos para cultivos y pasturas</span></div>
+  <div class="item"><span class="dot dot-rj"></span><span><b>Cultivos ilícitos:</b> expansión de la coca en zonas de alta diversidad endémica (selva alta)</span></div>
+  <div class="item"><span class="dot dot-rj"></span><span><b>Ausencia de planes de desarrollo:</b> sin ordenamiento territorial, las áreas críticas quedan desprotegidas</span></div>
+  <div class="item"><span class="dot dot-rj"></span><span><b>Especies poco conocidas:</b> cientos no han sido recolectadas en más de un siglo; no se sabe si aún existen</span></div>
+  <div class="exam"><b>🎯 EXAMEN:</b> ¿Por qué la ausencia de información sobre una especie es en sí misma un factor de riesgo para su conservación?</div>
+</div>
+
+<!-- SECCIÓN 4: DISTRIBUCIÓN GEOGRÁFICA -->
+<div class="sec sec-tl">🩵 DISTRIBUCIÓN: REGIONES ECOLÓGICAS Y DEPARTAMENTOS</div>
+
+<div class="block s2">
+  <span class="bh bh-tl">Regiones Ecológicas del Perú (Zamora 1996)</span>
+  <div class="def def-tl">El libro empleó 13 regiones ecológicas para ubicar cada especie. Los endemismos peruanos están vinculados predominantemente a los <b>Andes</b>, igual que en otras floras del occidente tropical suramericano.</div>
+  <div class="three">
+    <div class="mini mini-tl"><b>DCT / DST</b><br>Desiertos costeros (caliente y semicálido). 0–1000 m. Costa norte y centro.</div>
+    <div class="mini mini-tl"><b>MDE / BS</b><br>Matorral desértico y bosques secos. 1000–2500 m. Vertiente Pacífica y Tumbes-Piura.</div>
+    <div class="mini mini-tl"><b>MA / PSH / PD</b><br>Mesoandina + Puna húmeda, seca y desértica. 2500–4200 m.</div>
+    <div class="mini mini-vd"><b>PAR / AA</b><br>Páramo (Cajamarca-Piura) y Altoandina. 3500–4200+ m. Muy alta diversidad endémica.</div>
+    <div class="mini mini-vd"><b>BPM / BMHM / BMHP</b><br>Bosques montanos en vertiente oriental. 500–3500 m. Zona de máxima riqueza.</div>
+    <div class="mini mini-az"><b>BHA</b><br>Bosques húmedos amazónicos. 100–500 m. Loreto, Ucayali, Madre de Dios.</div>
+  </div>
+  <div class="exam" style="margin-top:8px"><b>🎯 EXAMEN:</b> ¿Por qué los departamentos con territorios en las vertientes andinas concentran el mayor número de taxones endémicos del Perú?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-tl">Departamentos con Mayor Endemismo</span>
+  <div class="def def-tl">Los departamentos con mayor endemismo son aquellos que tienen <b>amplio rango altitudinal y ecológico</b> en sus vertientes andinas, lo que permite la especialización de especies en microhábitats específicos.</div>
+  <div class="item"><span class="dot dot-tl"></span><span><b>Cusco (CU), Puno (PU), Huánuco (HU), Junín (JU):</b> combinan Andes altos + vertiente oriental</span></div>
+  <div class="item"><span class="dot dot-tl"></span><span><b>Cajamarca (CA), La Libertad (LL), Amazonas (AM):</b> zona de Páramo y bosques montanos del norte</span></div>
+  <div class="item"><span class="dot dot-tl"></span><span><b>Lima (LI), Ancash (AN):</b> vertiente pacífica con muchos microhábitats áridos únicos</span></div>
+  <div class="warn">⚠️ Algunas localidades históricas cayeron fuera de las fronteras actuales (ej. Tarapacá hoy en Chile, Leticia en Colombia) y esas especies fueron excluidas del listado.</div>
+</div>
+
+<!-- SECCIÓN 5: FORMATO DE LAS FICHAS -->
+<div class="sec sec-am">🟡 ESTRUCTURA DE CADA FICHA DE ESPECIE</div>
+
+<div class="block">
+  <span class="bh bh-am">Campos de Cada Taxón (159 familias, ~5509 fichas)</span>
+  <div class="def def-am">Cada especie tiene una ficha estandarizada con 11 campos. El objetivo es que cualquier investigador pueda reproducir la evaluación con los mismos datos.</div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(1) Nombre científico + autores</b> – abreviados según Brummitt & Powell 1992</span></div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(2) Categoría y criterios UICN</b> – CR, EN, VU, NT, LC o vacío si sin datos</span></div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(3) Publicación original</b> – dónde se describió el taxón por primera vez</span></div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(4) Colección tipo</b> – ejemplar de referencia designado por el autor</span></div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(5) Herbarios</b> – acrónimos institucionales (MO, USM, K, etc.)</span></div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(6) Nombre común</b> – si existe en literatura o datos de campo</span></div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(7) Registro departamental</b> – abreviaturas de los 24 departamentos</span></div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(8) Regiones ecológicas</b> – siglas de Zamora 1996 + rango altitudinal</span></div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(9) SINANPE</b> – si hay registro en áreas naturales protegidas del Estado</span></div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(10) Herbarios peruanos</b> – colecciones nacionales (subrayadas, con ! si verificadas)</span></div>
+  <div class="item"><span class="dot dot-am"></span><span><b>(11) Observaciones</b> – hábito, hábitat, amenazas específicas</span></div>
+  <div class="exam"><b>🎯 EXAMEN:</b> ¿Por qué se usa el ejemplar tipo (holotipo) como referencia taxonómica? ¿Qué sucede cuando el tipo está en un herbario de Berlín marcado con "(d)"?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-am">Hábitos y Formas de Vida Registradas</span>
+  <div class="def def-am">La diversidad de formas de vida refleja la complejidad ecosistémica del Perú. No solo hay plantas pequeñas o herbáceas: hay árboles, lianas y epífitas únicas que estructuran ecosistemas completos.</div>
+  <div class="two">
+    <div class="mini mini-am"><b>Hierbas terrestres</b><br>Incluyendo epipétricas y escandentes. Las más numerosas.</div>
+    <div class="mini mini-am"><b>Hierbas epífitas</b><br>Especialmente orquídeas y bromelias. Vitales para polinizadores.</div>
+    <div class="mini mini-vd"><b>Arbustos y subarbustos</b><br>Dominantes en puna y matorral desértico.</div>
+    <div class="mini mini-vd"><b>Árboles y lianas</b><br>En bosques montanos y amazónicos. Alta riqueza de Fabaceae, Lauraceae.</div>
+  </div>
+  <div class="item" style="margin-top:7px"><span class="dot dot-am"></span><span>Casos especiales reconocidos: helechos arborescentes, bambúes, cactus y palmeras</span></div>
+  <div class="exam"><b>🎯 EXAMEN:</b> ¿Por qué las plantas epífitas (como orquídeas) son particularmente vulnerables a la deforestación, aunque no estén directamente en el suelo?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-am">Familias Más Importantes</span>
+  <div class="def def-am">El libro cubre <b>159 familias botánicas</b> (fanerógamas, helechos y afines). Las familias con mayor número de endémicos concentran la mayor atención conservacionista.</div>
+  <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px">
+    <span class="pill" style="background:#fef9c3;color:#713f12">Orchidaceae (mayor # global)</span>
+    <span class="pill" style="background:#dcfce7;color:#14532d">Asteraceae</span>
+    <span class="pill" style="background:#dbeafe;color:#1e3a8a">Fabaceae</span>
+    <span class="pill" style="background:#ede9fe;color:#4c1d95">Solanaceae</span>
+    <span class="pill" style="background:#ccfbf1;color:#134e4a">Calceolariaceae</span>
+    <span class="pill" style="background:#ffedd5;color:#7c2d12">Bromeliaceae</span>
+    <span class="pill" style="background:#fee2e2;color:#991b1b">Cactaceae</span>
+    <span class="pill" style="background:#fce7f3;color:#831843">Melastomataceae</span>
+    <span class="pill" style="background:#fef9c3;color:#713f12">Poaceae</span>
+  </div>
+  <div class="exam" style="margin-top:8px"><b>🎯 EXAMEN:</b> ¿Por qué la familia Orchidaceae suele concentrar el mayor número de endémicos en floras tropicales? ¿Qué característica biológica la hace propensa al endemismo?</div>
+</div>
+
+<!-- SECCIÓN 6: GÉNEROS ENDÉMICOS Y CONSERVACIÓN -->
+<div class="sec sec-mo">🟣 GÉNEROS ENDÉMICOS Y ÁREAS PROTEGIDAS</div>
+
+<div class="block">
+  <span class="bh bh-mo">Géneros Endémicos</span>
+  <div class="def def-mo">Algunos géneros completos son exclusivos del Perú. Esto es aún más significativo que el endemismo a nivel de especie: representa linajes evolutivos únicos que, de extinguirse, no existen en ninguna otra parte del mundo.</div>
+  <div class="item"><span class="dot dot-mo"></span><span>El libro lista los géneros endémicos de la flora vascular peruana en la Tabla 1 de la introducción, con riqueza de especies, hábito y distribución.</span></div>
+  <div class="item"><span class="dot dot-mo"></span><span>La existencia de géneros endémicos indica una larga historia evolutiva aislada, probablemente vinculada al levantamiento andino del Mioceno-Plioceno.</span></div>
+  <div class="item"><span class="dot dot-mo"></span><span>Géneros con distribución restringida a 1–2 departamentos son de máxima prioridad para colección ex situ (jardines botánicos, bancos de semillas).</span></div>
+  <div class="exam"><b>🎯 EXAMEN:</b> ¿Qué diferencia hay entre el endemismo a nivel de especie y a nivel de género? ¿Por qué los géneros endémicos tienen mayor valor para la conservación evolutiva?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-mo">SINANPE y Áreas Protegidas</span>
+  <div class="def def-mo">Para cada taxón se verificó si tenía algún registro dentro del <b>SINANPE</b> (Sistema Nacional de Áreas Naturales Protegidas por el Estado). Muchas especies endémicas <b>no tienen registros en ninguna área protegida</b>.</div>
+  <div class="two">
+    <div class="mini mini-mo"><b>Con registro SINANPE</b><br>Parques Nacionales, Reservas Nacionales, Santuarios Históricos/Nacionales, Bosques de Protección, Zonas Reservadas</div>
+    <div class="mini mini-rj"><b>Sin registro SINANPE</b><br>Especies que dependen exclusivamente de hábitats fuera del sistema oficial de áreas protegidas → máxima vulnerabilidad</div>
+  </div>
+  <div class="warn" style="margin-top:8px">⚠️ Una especie puede tener colectas históricas dentro de un área protegida, pero si esas colectas son antiguas y no hay monitoreo reciente, su presencia actual es desconocida.</div>
+  <div class="exam"><b>🎯 EXAMEN:</b> ¿Qué implicación tiene para una especie endémica el hecho de no tener ningún registro dentro del SINANPE?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-mo">Apéndices del Libro</span>
+  <div class="def def-mo">El libro incluye tres apéndices y un conjunto de láminas fotográficas que complementan las fichas técnicas.</div>
+  <div class="item"><span class="dot dot-mo"></span><span><b>Apéndice 1:</b> Taxones que perdieron estatus endémico por cambio en distribución (registrados en otros países después de 1993)</span></div>
+  <div class="item"><span class="dot dot-mo"></span><span><b>Apéndice 2:</b> Taxones que perdieron estatus endémico por sinonimia o error en la citación original</span></div>
+  <div class="item"><span class="dot dot-mo"></span><span><b>Apéndice 3:</b> Lista de literatura citada y referencias de las 159 familias</span></div>
+  <div class="item"><span class="dot dot-mo"></span><span><b>Láminas:</b> fotografías de especies endémicas representativas (portada: <i>Maxillaria pyhalae</i> © B. Collantes)</span></div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="sec sec-az" style="margin-top:6px">📊 TABLA INTEGRADORA: CONCEPTOS CLAVE EN UNA VISTA</div>
+<div class="block s3">
+  <span class="bh bh-az">Resumen Integrador para Repaso</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Concepto</th>
+        <th>Definición operativa</th>
+        <th>Dato clave</th>
+        <th>Categoría UICN</th>
+        <th>Contexto peruano</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Endemismo nacional</b></td>
+        <td>Especie cuya distribución se restringe al Perú</td>
+        <td>5 509 taxones (27,9% flora)</td>
+        <td>—</td>
+        <td>Base: Brako & Zarucchi 1993</td>
+      </tr>
+      <tr>
+        <td><b>CR – Peligro Crítico</b></td>
+        <td>Reducción ≥80% población o AOO < 10 km²</td>
+        <td>18% de evaluados</td>
+        <td>Más grave evaluada</td>
+        <td>Muchas conocidas de 1 sola localidad</td>
+      </tr>
+      <tr>
+        <td><b>EN – En Peligro</b></td>
+        <td>Reducción ≥50% o AOO < 500 km²</td>
+        <td>33% de evaluados</td>
+        <td>Segunda más grave</td>
+        <td>Bosques montanos + deforestación</td>
+      </tr>
+      <tr>
+        <td><b>VU – Vulnerable</b></td>
+        <td>Reducción ≥30% o AOO < 2000 km²</td>
+        <td>10% de evaluados</td>
+        <td>Primera amenazada</td>
+        <td>Puna + agricultura expansiva</td>
+      </tr>
+      <tr>
+        <td><b>DD – Datos insuficientes</b></td>
+        <td>Información insuficiente para evaluar riesgo</td>
+        <td>~24% del total</td>
+        <td>No es categoría de amenaza</td>
+        <td>Taxones no vistos en > 100 años</td>
+      </tr>
+      <tr>
+        <td><b>Región ecológica BPM</b></td>
+        <td>Bosques pluviales montanos (2500–3500 m)</td>
+        <td>Mayor concentración de endémicos</td>
+        <td>Mayoría EN y CR</td>
+        <td>Vertiente oriental andina</td>
+      </tr>
+      <tr>
+        <td><b>SINANPE</b></td>
+        <td>Sistema de áreas naturales protegidas del Perú</td>
+        <td>Muchas spp. sin registro</td>
+        <td>Factor determinante en criterio B</td>
+        <td>PN Manu, Huascarán, Abiseo, etc.</td>
+      </tr>
+      <tr>
+        <td><b>Tipo nomenclatural</b></td>
+        <td>Ejemplar de herbario que define el nombre de la especie</td>
+        <td>Citado en toda ficha (campo 4)</td>
+        <td>—</td>
+        <td>Muchos en herbarios extranjeros (K, NY, MO)</td>
+      </tr>
+      <tr>
+        <td><b>Herbarios peruanos clave</b></td>
+        <td>USM, CUZ, MOL, AMAZ, HAO, CPUN, HUT</td>
+        <td>8 instituciones nacionales</td>
+        <td>—</td>
+        <td>USM (UNMSM) = herbario principal</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: El 61% de los taxones evaluados (CR + EN) están bajo alta amenaza. Sin embargo, el 24% adicional ni siquiera pudo evaluarse por falta de colecciones recientes. Esto significa que el verdadero porcentaje de species amenazadas podría ser sustancialmente mayor al reportado.</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIA PRINCIPAL:</span>
+  <span class="fc">León B., Roque J., Ulloa Ulloa C., Pitman N., Jørgensen P.M. & Cano A. (Eds.) 2006. El libro rojo de las plantas endémicas del Perú. Rev. peru. biol. 13(2) número especial. UNMSM, Lima.</span>
+  <span class="ft">OTRAS REFS:</span>
+  <span class="fc">Brako & Zarucchi 1993 · UICN v3.1 (2001) · Zamora 1996 (regiones ecológicas) · D.S. 043-2006-AG</span>
+</div>
+
+</div>

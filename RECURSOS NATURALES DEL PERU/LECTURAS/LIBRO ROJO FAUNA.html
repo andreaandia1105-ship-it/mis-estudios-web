@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Canvas Visual: Libro Rojo de la Fauna Silvestre Amenazada del Perú</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--color-background-secondary);
+            font-family: 'Source Sans 3', sans-serif;
+            padding: 20px;
+        }
+
+        /* Variables de sistema de Claude (compatibilidad claro/oscuro) */
+        :root {
+            --color-background-primary: #ffffff;
+            --color-background-secondary: #f8fafc;
+            --color-background-tertiary: #f1f5f9;
+            --color-text-primary: #0f172a;
+            --color-text-secondary: #334155;
+            --color-border-tertiary: #e2e8f0;
+            --color-border-secondary: #cbd5e1;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background-primary: #1e293b;
+                --color-background-secondary: #0f172a;
+                --color-background-tertiary: #111827;
+                --color-text-primary: #f1f5f9;
+                --color-text-secondary: #cbd5e1;
+                --color-border-tertiary: #334155;
+                --color-border-secondary: #475569;
+            }
+        }
+
+        /* Grid principal */
+        .cv {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 9px;
+            padding: 12px;
+            background: var(--color-background-tertiary);
+            border-radius: 16px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Bloques base */
+        .block {
+            background: var(--color-background-primary);
+            border: 0.5px solid var(--color-border-tertiary);
+            border-radius: 11px;
+            padding: 12px 13px;
+            transition: all 0.1s ease;
+        }
+        .block.s2 { grid-column: span 2; }
+        .block.s3 { grid-column: span 3; }
+
+        /* Encabezados de bloque */
+        .bh {
+            font-family: 'Oswald', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding: 3px 9px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        /* Cajas de definición */
+        .def {
+            border-left: 3px solid;
+            padding: 7px 10px;
+            border-radius: 0 7px 7px 0;
+            font-size: 12px;
+            background: var(--color-background-secondary);
+            margin-bottom: 10px;
+        }
+
+        /* Items con punto */
+        .item {
+            display: flex;
+            gap: 7px;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-text-secondary);
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        /* Fórmulas */
+        .rx {
+            background: #0f172a;
+            color: #7dd3fc;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 7px 11px;
+            border-radius: 7px;
+            text-align: center;
+            line-height: 1.6;
+            margin: 8px 0;
+            overflow-x: auto;
+        }
+
+        /* Advertencias */
+        .warn {
+            background: #fff7ed;
+            border-left: 3px solid #f97316;
+            border-radius: 0 8px 8px 0;
+            font-size: 11.5px;
+            color: #7c2d12;
+            padding: 8px 10px;
+            margin: 8px 0;
+        }
+        @media (prefers-color-scheme: dark) {
+            .warn { background: #2d1a0c; color: #fed7aa; border-left-color: #f97316; }
+        }
+
+        /* Preguntas de examen */
+        .exam {
+            background: #fefce8;
+            border: 1px solid #facc15;
+            border-radius: 8px;
+            font-size: 11.5px;
+            color: #713f12;
+            padding: 8px 12px;
+            margin-top: 12px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .exam { background: #2d2a0c; color: #fef08a; border-color: #ca8a04; }
+        }
+
+        /* Mini tarjetas */
+        .mini {
+            background: var(--color-background-secondary);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 11.5px;
+            margin-bottom: 8px;
+        }
+        .two, .three {
+            display: grid;
+            gap: 7px;
+        }
+        .two { grid-template-columns: 1fr 1fr; }
+        .three { grid-template-columns: 1fr 1fr 1fr; }
+
+        /* Flujos causales */
+        .flow {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 8px 0;
+        }
+        .fbox {
+            background: var(--color-background-secondary);
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+        }
+        .farrow {
+            color: var(--color-text-secondary);
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        /* Badges y pills */
+        .pill {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 2px;
+            background: var(--color-background-tertiary);
+        }
+
+        /* Tabla comparativa */
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        .tbl th {
+            background: var(--color-background-secondary);
+            padding: 5px 7px;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+            text-align: left;
+            font-weight: 600;
+        }
+        .tbl td {
+            padding: 5px 7px;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+            vertical-align: top;
+        }
+
+        /* Barras de sección */
+        .section-bar {
+            grid-column: 1/-1;
+            background: var(--color-background-primary);
+            border-radius: 12px;
+            padding: 8px 15px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            border-left: 6px solid;
+            margin-top: 4px;
+        }
+
+        /* Título principal */
+        .title-bar {
+            grid-column: 1/-1;
+            background: #0f1e3a;
+            color: white;
+            border-radius: 12px;
+            padding: 12px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title-main { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; }
+        .title-sub { font-size: 11px; opacity: 0.8; margin-top: 3px; }
+        .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag-pill { background: #2d3a5e; padding: 4px 10px; border-radius: 20px; font-size: 11px; }
+
+        /* Footer */
+        .footer {
+            grid-column: 1/-1;
+            background: #0f1e3a;
+            color: white;
+            border-radius: 10px;
+            padding: 11px 18px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 11px;
+        }
+        .ft { font-family: 'Oswald', sans-serif; color: #7dd3fc; margin-right: 6px; }
+
+        /* Utilidades de color para los bloques (bg y bordes) */
+        .bh.azul { background: #dbeafe; color: #1e3a8a; }
+        .bh.verde { background: #dcfce7; color: #14532d; }
+        .bh.rojo { background: #fee2e2; color: #991b1b; }
+        .bh.amarillo { background: #fef9c3; color: #713f12; }
+        .bh.morado { background: #ede9fe; color: #4c1d95; }
+        .bh.teal { background: #ccfbf1; color: #134e4a; }
+        .bh.naranja { background: #ffedd5; color: #7c2d12; }
+
+        .def.azul { border-left-color: #3b82f6; }
+        .def.verde { border-left-color: #10b981; }
+        .def.rojo { border-left-color: #ef4444; }
+        .def.morado { border-left-color: #8b5cf6; }
+
+        .mini.borde-azul { border-top: 2px solid #3b82f6; }
+        .mini.borde-verde { border-top: 2px solid #10b981; }
+        .mini.borde-rojo { border-top: 2px solid #ef4444; }
+
+        @media (prefers-color-scheme: dark) {
+            .bh.azul { background: #1e3a5f; color: #93c5fd; }
+            .bh.verde { background: #14532d; color: #86efac; }
+            .bh.rojo { background: #450a0a; color: #fca5a5; }
+            .bh.amarillo { background: #422006; color: #fef08a; }
+            .bh.morado { background: #2e1065; color: #c4b5fd; }
+            .bh.teal { background: #042f2e; color: #5eead4; }
+            .bh.naranja { background: #431407; color: #fed7aa; }
+        }
+    </style>
+</head>
+<body>
+<div class="cv">
+
+    <!-- BARRA DE TÍTULO -->
+    <div class="title-bar">
+        <div>
+            <div class="title-main">📘 Libro Rojo de la Fauna Silvestre Amenazada del Perú</div>
+            <div class="title-sub">Evaluación 2014 · D.S. N° 004-2014-MINAGRI · Categorías UICN v3.1</div>
+        </div>
+        <div class="tags">
+            <span class="tag-pill">🐸 389 spp. amenazadas</span>
+            <span class="tag-pill">🇵🇪 Megadiverso</span>
+            <span class="tag-pill">🎓 Categorización nacional</span>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN Y MÉTODO -->
+    <div class="section-bar" style="border-left-color: #3b82f6;">📌 MARCO GENERAL · ¿QUÉ ES EL LIBRO ROJO? (Diapositivas 4–20)</div>
+
+    <!-- Bloque 1: Definición y utilidad -->
+    <div class="block">
+        <div class="bh azul">📖 DEFINICIÓN</div>
+        <div class="def azul">El <strong>Libro Rojo peruano</strong> (2018) lista oficialmente las especies de fauna silvestre amenazadas, usando criterios cuantitativos UICN. Incluye 389 spp. en las categorías CR (64), EN (122) y VU (203), además de NT y DD. Herramienta clave para la conservación y toma de decisiones.</div>
+        <div class="item"><div class="dot"></div><span><strong>Importancia:</strong> Primera evaluación nacional masiva (anfibios, aves, mamíferos, reptiles, invertebrados). Identifica áreas de endemismo y prioriza acciones.</span></div>
+        <div class="item"><div class="dot"></div><span><strong>Proceso:</strong> >150 investigadores, reuniones 2009-2013, uso de criterios A–E (reducción poblacional, distribución geográfica, tamaño poblacional).</span></div>
+        <div class="exam">🎯 EXAMEN: ¿Por qué el número de especies amenazadas aumentó de 104 (1977) a 389 (2014)? ¿Refleja un empeoramiento real o un mayor conocimiento? Explique.</div>
+    </div>
+
+    <!-- Bloque 2: Categorías y criterios -->
+    <div class="block">
+        <div class="bh amarillo">📊 CATEGORÍAS UICN (CR, EN, VU)</div>
+        <div class="mini borde-azul"><strong>🔴 CR (En Peligro Crítico)</strong> – riesgo extremadamente alto. Ej: <em>Penelope albipennis, Telmatobius culeus, Polioptila clementsi</em>.</div>
+        <div class="mini borde-azul"><strong>🟠 EN (En Peligro)</strong> – riesgo alto. <em>Vultur gryphus, Lagothrix flavicauda, Bothrops pictus</em>.</div>
+        <div class="mini borde-azul"><strong>🟡 VU (Vulnerable)</strong> – riesgo moderado. <em>Tremarctos ornatus, Dynastes hercules, Podocnemis unifilis</em>.</div>
+        <div class="rx">Criterio B (extensión de presencia &lt;20.000 km² + fragmentación) usado en >70% de reptiles y anfibios.</div>
+        <div class="exam">🎯 EXAMEN: Un ave endémica tiene un área de ocupación de 150 km², hábitat en disminución y población estimada en 800 individuos. ¿Qué categoría le asignaría según UICN? Justifique.</div>
+    </div>
+
+    <!-- Bloque 3: Amenazas transversales -->
+    <div class="block s2">
+        <div class="bh rojo">⚠️ AMENAZAS PRIORITARIAS (PERÚ)</div>
+        <div class="two">
+            <div class="mini borde-rojo"><strong>🌾 Agricultura/ganadería</strong> – Afecta al 68% de mamíferos amenazados y la mayoría de anfibios de yungas. Expansión de cultivos (coca, café, palma aceitera).</div>
+            <div class="mini borde-rojo"><strong>⛏️ Minería ilegal/formal</strong> – Contaminación por mercurio (Madre de Dios), relaves en lagos altoandinos (Junín, La Oroya).</div>
+            <div class="mini borde-rojo"><strong>🌲 Deforestación y tala</strong> – Bosques secos de Tumbes, yungas y selva baja. Pérdida de hábitat de primates y aves endémicas.</div>
+            <div class="mini borde-rojo"><strong>🦠 Quitridiomicosis</strong> – En anfibios de altura (Atelopus, Telmatobius). Brotes asociados a cambio climático.</div>
+        </div>
+        <div class="flow"><div class="fbox">Expansión agrícola</div><span class="farrow">→</span><div class="fbox">Fragmentación</div><span class="farrow">→</span><div class="fbox">Aislamiento poblacional</div><span class="farrow">→</span><div class="fbox">Extinción local</div></div>
+        <div class="warn">⚠️ ERROR COMÚN: No toda deforestación en Amazonía afecta igual. Especies de bosques de arena blanca (varillales) son microendémicas y extremadamente vulnerables (ej. <em>Polioptila clementsi</em>).</div>
+        <div class="exam">🎯 EXAMEN: Describa dos sinergias entre la minería aurífera y la quitridiomicosis en anfibios andinos. Mencione al menos un caso concreto del libro.</div>
+    </div>
+
+    <!-- SECCIÓN 2: ANFIBIOS (mayor diversidad amenazada) -->
+    <div class="section-bar" style="border-left-color: #10b981;">🐸 ANFIBIOS: CRISIS POR QUITRIDIO Y PÉRDIDA DE HÁBITAT (págs. 27–158)</div>
+
+    <div class="block">
+        <div class="bh verde">📈 ESTADÍSTICAS CLAVE</div>
+        <div class="def verde">Perú: 599 spp. de anfibios (2015). 120 spp. amenazadas (33 CR, 42 EN, 45 VU). 80% de endemismo en especies >1000 msnm. Familias más críticas: Craugastoridae (42.5%), Telmatobiidae (15.8%), Bufonidae (18.3%).</div>
+        <div class="item"><div class="dot"></div><span><strong>Géneros más afectados:</strong> <em>Atelopus</em> (14 spp. amenazadas) y <em>Telmatobius</em> (19 spp.) – desarrollo acuático, sensibles a Bd.</span></div>
+        <div class="item"><div class="dot"></div><span><strong>Ejemplos CR:</strong> <em>Atelopus patazensis</em> (quitridio + minería), <em>Telmatobius culeus</em> (laguna Titicaca, sobrepesca y truchas), <em>Phrynopus juninensis</em> (microendémico).</span></div>
+        <div class="exam">🎯 EXAMEN: ¿Por qué los anfibios del género <em>Telmatobius</em> son tan vulnerables a la quitridiomicosis y a la introducción de truchas? Relacione con su historia de vida.</div>
+    </div>
+
+    <div class="block">
+        <div class="bh teal">🧬 MECANISMOS DE DECLINACIÓN</div>
+        <div class="flow"><div class="fbox">Cambio climático + deglaciación</div><span class="farrow">→</span><div class="fbox">Expansión altitudinal de Bd</div><span class="farrow">→</span><div class="fbox">Mortalidad masiva en <em>Atelopus</em></div></div>
+        <div class="mini borde-verde"><strong>🔬 Evidencia en Manu</strong> – Colapso de comunidades entre 1999 y 2009; 1/3 de especies desaparecieron (Catenazzi et al. 2011).</div>
+        <div class="warn">⚠️ Dato clave: <em>Atelopus epikeisthos</em> y <em>A. eusebiodiazii</em> podrían estar extintos; no registrados desde 1987/1997.</div>
+        <div class="exam">🎯 EXAMEN: Explique la hipótesis de las "tres olas" de propagación del hongo <em>Batrachochytrium dendrobatidis</em> en los Andes y su relación con los primeros registros en Perú (norte).</div>
+    </div>
+
+    <div class="block">
+        <div class="bh naranja">🛡️ CONSERVACIÓN DE ANFIBIOS</div>
+        <div class="item"><div class="dot"></div><span>✅ Áreas protegidas: solo el 32% de las especies amenazadas habitan en ANP. Creación de ACR y ACP (ej. Abra Málaga).</span></div>
+        <div class="item"><div class="dot"></div><span>✅ Recomendaciones: control de especies invasoras (truchas), monitoreo de quitridio, prohibición de extracción para consumo (ranas de Junín).</span></div>
+        <div class="exam">🎯 EXAMEN: Proponga una estrategia de conservación <em>ex situ</em> para <em>Telmatobius brachydactylus</em> de la Reserva Nacional de Junín, considerando las amenazas descritas en el libro.</div>
+    </div>
+
+    <!-- SECCIÓN 3: AVES (endemismo tumbesino y altoandino) -->
+    <div class="section-bar" style="border-left-color: #f97316;">🦜 AVES: ENDEMISMOS FRAGMENTADOS Y ESPECIALISTAS (págs. 159–302)</div>
+
+    <div class="block s2">
+        <div class="bh naranja">🌎 REGIONES CON MAYOR NÚMERO DE AVES AMENAZADAS</div>
+        <div class="two">
+            <div class="mini borde-azul"><strong>🌵 Región tumbesina (bosque seco ecuatorial)</strong> – 13.1% de aves amenazadas. Ej: <em>Brotogeris pyrrhoptera</em> (EN, tráfico), <em>Phytotoma raimondii</em> (EN, pérdida de algarrobales).</div>
+            <div class="mini borde-azul"><strong>⛰️ Altos Andes y bosques de Polylepis</strong> – <em>Cinclodes aricomae</em> (CR, ~250 ind.), <em>Anairetes alpinus</em> (EN, especialista de queñua).</div>
+            <div class="mini borde-azul"><strong>🌊 Mar y ecosistemas pelágicos</strong> – <em>Phoebastria irrorata</em> (CR, captura incidental), <em>Spheniscus humboldti</em> (EN, eventos El Niño).</div>
+            <div class="mini borde-azul"><strong>🌲 Arenas blancas (varillales)</strong> – <em>Polioptila clementsi</em> (CR, <50 individuos), <em>Pithys castaneus</em> (VU).</div>
+        </div>
+        <div class="exam">🎯 EXAMEN: Compare las amenazas que afectan a la “pava aliblanca” (<em>Penelope albipennis</em>) y al “zambullidor de Junín” (<em>Podiceps taczanowskii</em>). ¿Qué acciones específicas se han implementado para cada una?</div>
+    </div>
+
+    <div class="block">
+        <div class="bh rojo">📉 CRITERIOS DE AMENAZA EN AVES</div>
+        <div class="item"><div class="dot"></div><span>✔ Criterio B (pequeña distribución) usado en 52% de las EN y 38% de las VU.</span></div>
+        <div class="item"><div class="dot"></div><span>✔ Especies con poblaciones muy pequeñas (criterio D): <em>Laterallus jamaicensis tuerosi</em> (~6200 ind., pero restringida a totorales del lago Junín).</span></div>
+        <div class="rx">Ejemplo: <em>Grallaria ridgelyi</em> (CR) – conocida solo en un parche de bosque en la cordillera del Cóndor, amenazada por minería y concesiones.</div>
+        <div class="exam">🎯 EXAMEN: ¿Qué significa que un ave sea “endémica del Perú” y por qué más del 40% de las aves endémicas están amenazadas? Ponga tres ejemplos de especies endémicas con su categoría.</div>
+    </div>
+
+    <!-- SECCIÓN 4: MAMÍFEROS (roedores, primates y carnívoros) -->
+    <div class="section-bar" style="border-left-color: #8b5cf6;">🐒 MAMÍFEROS: 92 ESPECIES AMENAZADAS, PRIMATES Y ROEDORES LIDERAN (págs. 327–445)</div>
+
+    <div class="block">
+        <div class="bh morado">📋 PANORAMA GENERAL</div>
+        <div class="def morado">Perú 4° país con mayor riqueza de mamíferos (519 spp.). 70 endémicas. 92 spp. amenazadas: 10 CR, 32 EN, 50 VU. Órdenes con mayor proporción: Primates (31.3%), Cetartiodactyla (40%), Cingulata (42.9%).</div>
+        <div class="item"><div class="dot"></div><span><strong>CR destacados:</strong> <em>Callicebus oenanthe</em> (tocón de San Martín, pérdida de hábitat >80%), <em>Oreonax flavicauda</em> (mono choro cola amarilla, deforestación), <em>Tapirus pinchaque</em> (tapir andino, ~350 ind.).</span></div>
+        <div class="exam">🎯 EXAMEN: ¿Por qué los roedores y murciélagos son el grupo con más especies amenazadas en la lista del 2014 (48 spp.), a pesar de su alta diversidad? Relacione con vacíos de información y criterios utilizados.</div>
+    </div>
+
+    <div class="block s2">
+        <div class="bh teal">🌍 AMENAZAS POR ECORREGIÓN (MAMÍFEROS)</div>
+        <div class="two">
+            <div class="mini borde-azul"><strong>Yungas (46 spp. amenazadas)</strong> – Principal amenaza: agricultura (84.8%). Especies como <em>Mazama chunyi</em> (VU) y <em>Dasypus pilosus</em> (VU).</div>
+            <div class="mini borde-azul"><strong>Desierto costero</strong> – Expansión urbana (50%) y caza por temor. Ej. <em>Phyllodactylus sentosus</em> (CR, gecko de Lima).</div>
+            <div class="mini borde-azul"><strong>Selva baja</strong> – Caza para consumo (54.2%) y deforestación. <em>Priodontes maximus</em> (VU), <em>Pteronura brasiliensis</em> (EN).</div>
+            <div class="mini borde-azul"><strong>Puna</strong> – Cambios fortuitos/climáticos (42.9%) y pastoreo. <em>Lama guanicoe</em> (CR, caza furtiva).</div>
+        </div>
+        <div class="flow"><div class="fbox">Carretera Interoceánica</div><span class="farrow">→</span><div class="fbox">Acceso a áreas remotas</div><span class="farrow">→</span><div class="fbox">Cacería comercial + tala</div><span class="farrow">→</span><div class="fbox">Extinción local de <em>Lagothrix</em> y <em>Ateles</em></div></div>
+        <div class="exam">🎯 EXAMEN: Seleccione un mamífero marino (<em>Arctocephalus australis</em> u <em>Otaria flavescens</em>) y explique cómo el fenómeno El Niño, sumado a actividades humanas, ha afectado drásticamente su población en el Perú.</div>
+    </div>
+
+    <!-- SECCIÓN 5: REPTILES (especies costeras muy endémicas) -->
+    <div class="section-bar" style="border-left-color: #3b82f6;">🐍 REPTILES: ALTO ENDEMISMO EN COSTA, DATOS INSUFICIENTES EN AMAZONÍA (págs. 447–486)</div>
+
+    <div class="block">
+        <div class="bh azul">📌 ESTADO DE CONSERVACIÓN</div>
+        <div class="def azul">483 spp. de reptiles en Perú (2016). 52 spp. protegidas (6 CR, 16 EN, 21 VU, 10 NT). El 86% de las categorías se basan exclusivamente en el criterio B (distribución geográfica reducida).</div>
+        <div class="item"><div class="dot"></div><span><strong>CR:</strong> <em>Crocodylus acutus</em> (Tumbes, <1000 km²), <em>Eretmochelys imbricata</em> (captura incidental y tráfico de caparazón), <em>Phyllodactylus sentosus</em> (gecko de huacas, Lima).</span></div>
+        <div class="item"><div class="dot"></div><span><strong>EN:</strong> <em>Boa constrictor ortonii</em> (matanza por temor), <em>Podocnemis expansa</em> (sobreexplotación de huevos).</span></div>
+        <div class="exam">🎯 EXAMEN: ¿Por qué las lagartijas del género <em>Liolaemus</em> en la costa peruana presentan una vulnerabilidad extrema? Cite dos especies endémicas y sus principales presiones.</div>
+    </div>
+
+    <div class="block">
+        <div class="bh verde">🐢 TORTUGAS AMAZÓNICAS Y MARINAS</div>
+        <div class="mini borde-verde"><strong>Podocnemis unifilis (taricaya, VU)</strong> – Colecta de huevos y extracción de oro. Programas de repoblamiento en Pacaya Samiria.</div>
+        <div class="mini borde-verde"><strong>Dermochelys coriacea (EN)</strong> – Captura incidental en espinel, ingestión de plásticos. Perú es área de forrajeo clave.</div>
+        <div class="warn">⚠️ Vacío crítico: No se tienen datos poblacionales actualizados para <em>Paleosuchus palpebrosus</em> ni <em>Peltocephalus dumerilianus</em>. Se requiere monitoreo urgente.</div>
+        <div class="exam">🎯 EXAMEN: Explique la problemática de la “charapa” (<em>Podocnemis expansa</em>) en la Reserva Nacional Pacaya Samiria. ¿Qué medidas de manejo se han implementado y con qué resultados?</div>
+    </div>
+
+    <!-- SECCIÓN 6: INVERTEBRADOS (primer ingreso a lista oficial) -->
+    <div class="section-bar" style="border-left-color: #a855f7;">🦋 INVERTEBRADOS: GRUPO POCO CONOCIDO, 21 ESPECIES AMENAZADAS (págs. 303–326)</div>
+
+    <div class="block s2">
+        <div class="bh morado">📊 TAXONES EVALUADOS</div>
+        <div class="three">
+            <div class="mini borde-azul"><strong>Coleoptera</strong> – <em>Dynastes hercules</em> (VU, trampa por luces), <em>Macrodontia cervicornis</em> (VU, colecta masiva).</div>
+            <div class="mini borde-azul"><strong>Arachnida</strong> – <em>Pamphobeteus antinous</em> (VU, comercio de tarántulas), <em>Charinus koepckei</em> (EN, lomas de Atiquipa).</div>
+            <div class="mini borde-azul"><strong>Onychophora</strong> – <em>Oroperipatus omeyrus</em> (VU), endémicos de bosques montanos, muy sensibles a perturbación.</div>
+        </div>
+        <div class="def morado">El 80% de especies de invertebrados amenazados son endémicas del Perú. La falta de especialistas limita su evaluación. La principal amenaza es la pérdida de microhábitats (troncos podridos, palmeras, cuevas).</div>
+        <div class="exam">🎯 EXAMEN: ¿Por qué el escarabajo <em>Titanus giganteus</em> (VU) es sensible a la iluminación artificial en campamentos madereros y petroleros? Proponga una medida de mitigación concreta.</div>
+    </div>
+
+    <div class="block">
+        <div class="bh naranja">🌿 CASOS EMBLEMÁTICOS</div>
+        <div class="item"><div class="dot"></div><span><strong><em>Megalobulimus lichtensteini</em> (EN)</strong> – Caracol terrestre de bosque seco de Cajamarca, sobreexplotado como alimento. Crianza ex situ como alternativa.</span></div>
+        <div class="item"><div class="dot"></div><span><strong><em>Orobothriurus atiquipa</em> (EN)</strong> – Alacrán endémico de lomas de Atiquipa, amenazado por pastoreo y tala de bosques de <em>Ceiba</em>.</span></div>
+        <div class="exam">🎯 EXAMEN: Describa la importancia ecológica de los onicóforos (gusanos aterciopelados) y por qué se consideran “taxones paraguas” en la conservación de bosques montanos peruanos.</div>
+    </div>
+
+    <!-- TABLA INTEGRADORA FINAL -->
+    <div class="block s3">
+        <div class="bh amarillo">📊 TABLA INTEGRADORA: COMPARATIVA POR GRUPO TAXONÓMICO</div>
+        <table class="tbl">
+            <thead>
+                <tr><th>Grupo</th><th>Especies amenazadas (CR/EN/VU)</th><th>Endemismo (%)</th><th>Principal amenaza</th><th>Ejemplo CR</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Anfibios</td><td>120 (33/42/45)</td><td>~80% en especies altoandinas</td><td>Quitridiomicosis + agricultura</td><td><em>Atelopus patazensis</em></td></tr>
+                <tr><td>Aves</td><td>106 (15/29/78)</td><td>41% de endémicas amenazadas</td><td>Pérdida de bosque seco/puna</td><td><em>Penelope albipennis</em></td></tr>
+                <tr><td>Mamíferos</td><td>92 (10/32/50)</td><td>13.5% (70 endémicas totales)</td><td>Agricultura (68.5%), cacería</td><td><em>Callicebus oenanthe</em></td></tr>
+                <tr><td>Reptiles</td><td>52 (6/16/21)</td><td>Alto en costa (ej. <em>Liolaemus</em>)</td><td>Expansión urbana, minería</td><td><em>Crocodylus acutus</em></td></tr>
+                <tr><td>Invertebrados</td><td>21 (2/6/13)</td><td>Muy alto (microendemismos)</td><td>Pérdida de palmeras, colecta</td><td><em>Tingomaria hydrophila</em> (opilión)</td></tr>
+            </tbody>
+        </table>
+        <div class="warn" style="margin-top: 10px;">🔍 Dato integrador clave: El 32% de las especies amenazadas no se encuentran dentro de Áreas Naturales Protegidas. Las ecorregiones más críticas son la yunga, la puna y el bosque seco del Marañón, donde la fragmentación avanza sin control.</div>
+        <div class="exam">🎯 PREGUNTA FINAL DE SÍNTESIS: A partir de la información del Libro Rojo, diseñe una propuesta de conservación para dos ecosistemas prioritarios: los bosques de Polylepis de Áncash y los varillales de arena blanca de Loreto. Incluya especies bandera y acciones concretas.</div>
+    </div>
+
+    <!-- FOOTER CON REFERENCIAS -->
+    <div class="footer">
+        <div class="ft">📚 REFERENCIAS CLAVE:</div>
+        <div class="fc">SERFOR (2018). Libro Rojo de la Fauna Silvestre Amenazada del Perú. Decreto Supremo N°004-2014-MINAGRI. UICN (2012) Categorías y Criterios v3.1. Catenazzi et al. 2011 (Conservation Biology). Angulo et al. 2008 (Corredor de Conservación Marañón). Pacheco et al. 2009 (Mamíferos del Perú).</div>
+        <div class="ft">📌 D.S. N° 004-2014-MINAGRI – Lista oficial de especies amenazadas del Perú.</div>
+    </div>
+</div>
+</body>
+</html>
