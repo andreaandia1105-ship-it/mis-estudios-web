@@ -1,0 +1,636 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.cv-title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.cv-title p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.cv-title .tags{display:flex;flex-wrap:wrap;gap:5px}
+.cv-title .tag{background:rgba(255,255,255,0.1);color:#7dd3fc;font-size:10px;padding:2px 8px;border-radius:20px}
+.sec{grid-column:1/-1;background:var(--color-background-secondary);border-radius:8px;padding:7px 12px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--color-text-primary);border:0.5px solid var(--color-border-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;font-size:12px;color:var(--color-text-primary)}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-pink{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd}
+.bh-green{background:#14532d;color:#86efac}
+.bh-red{background:#450a0a;color:#fca5a5}
+.bh-yellow{background:#422006;color:#fef08a}
+.bh-purple{background:#2e1065;color:#c4b5fd}
+.bh-teal{background:#042f2e;color:#5eead4}
+.bh-orange{background:#431407;color:#fed7aa}
+.bh-gray{background:#1e293b;color:#94a3b8}
+.bh-pink{background:#4a044e;color:#f0abfc}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#22c55e}
+.def-red{border-color:#ef4444}
+.def-yellow{border-color:#eab308}
+.def-purple{border-color:#a855f7}
+.def-teal{border-color:#14b8a6}
+.def-orange{border-color:#f97316}
+.def-gray{border-color:#94a3b8}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-red{background:#ef4444}
+.dot-yellow{background:#eab308}
+.dot-purple{background:#a855f7}
+.dot-teal{background:#14b8a6}
+.dot-orange{background:#f97316}
+.dot-gray{background:#94a3b8}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:7px}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:9px 11px;margin-top:8px}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#eab308}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.cv-footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.num-badge{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-r{background:#fee2e2;color:#991b1b}
+.nb-y{background:#fef9c3;color:#713f12}
+.nb-p{background:#ede9fe;color:#4c1d95}
+
+/* QUIZ */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.quiz-progress{margin-bottom:14px}
+.quiz-progress-text{font-size:12px;color:var(--color-text-secondary);margin-bottom:5px}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px}
+.stat-bar-fill{height:100%;border-radius:20px;background:#22c55e;transition:width 0.3s}
+.qcard{margin-bottom:16px;padding:12px;background:var(--color-background-secondary);border-radius:10px;display:none}
+.qcard.active{display:block}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif;font-weight:500}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:10px;color:var(--color-text-primary)}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:0.65;cursor:not-allowed}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.correct-fb{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.incorrect-fb{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.quiz-nav{display:flex;gap:8px;margin-top:10px}
+.quiz-nav button{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:6px 14px;font-size:12px;cursor:pointer;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.quiz-nav button:hover{background:var(--color-background-tertiary)}
+#quiz-results{display:none;padding:14px;border-radius:10px;text-align:center;margin-top:10px}
+#quiz-results h3{font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px}
+#quiz-results p{font-size:13px}
+#quiz-reset{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer;margin-top:12px;font-family:'Source Sans 3',sans-serif}
+</style>
+
+<div class="cv">
+
+<div class="cv-title">
+  <h1>Materiales en la Fabricación de Maquinaria Agrícola</h1>
+  <p>Curso: Maquinaria Agrícola &nbsp;|&nbsp; Ingeniería Agrícola</p>
+  <div class="tags">
+    <span class="tag">Propiedades</span>
+    <span class="tag">Aleaciones</span>
+    <span class="tag">Plásticos</span>
+    <span class="tag">Cerámicos</span>
+    <span class="tag">Caucho</span>
+    <span class="tag">Vidrio</span>
+    <span class="tag">Escala de Mohs</span>
+  </div>
+</div>
+
+<div class="sec">🔵 PROPIEDADES DE LOS MATERIALES — Diap. 2–13</div>
+
+<div class="block">
+  <span class="bh bh-blue">Propiedades Sensoriales (Diap. 3)</span>
+  <div class="def def-blue">Son las características perceptibles directamente por los sentidos humanos. En ingeniería, sirven como primer criterio de identificación y control de calidad visual antes de pruebas técnicas.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Textura:</b> rugosidad o suavidad superficial que afecta el agarre y el desgaste.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Olor:</b> relevante para identificar plásticos o cauchos degradados.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Brillo:</b> indica acabado superficial; metales más brillantes suelen tener menor oxidación superficial.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Color:</b> en aceros, el color azulado indica temple; en cobre, el verdoso indica corrosión.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué las propiedades sensoriales, aunque subjetivas, son relevantes en la inspección técnica de materiales para maquinaria agrícola?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-red">Propiedades Químicas (Diap. 4)</span>
+  <div class="def def-red">Describen la capacidad del material para resistir la degradación por reacciones con su entorno. En maquinaria agrícola, el contacto con humedad del suelo, fertilizantes y agroquímicos hace estas propiedades críticas.</div>
+  <div class="flow">
+    <div class="fbox">Oxígeno + Humedad</div><span class="farrow">→</span>
+    <div class="fbox">Oxidación</div><span class="farrow">→</span>
+    <div class="fbox">Óxido Fe₂O₃</div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Agente corrosivo</div><span class="farrow">→</span>
+    <div class="fbox">Pérdida de material</div><span class="farrow">→</span>
+    <div class="fbox">Falla estructural</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Oxidación y corrosión no son sinónimos. La oxidación es una reacción química específica con oxígeno; la corrosión es un proceso más general de deterioro que puede incluir ataques ácidos, electroquímicos, etc.</div>
+  <div class="exam">🎯 EXAMEN: Explique la diferencia entre oxidación y corrosión, y mencione cuál de las dos representa mayor riesgo para una reja de arado de acero al carbono en suelos con alta humedad.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Propiedades Mecánicas: Elasticidad y Plasticidad (Diap. 5–6)</span>
+  <div class="def def-green">Las propiedades mecánicas describen el comportamiento del material ante fuerzas externas. Son las más determinantes para elegir un material en componentes sometidos a cargas.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <b>Elasticidad</b><br>
+      Capacidad de recuperar la forma original al retirar la carga. El material "regresa". Ej: goma, globo. Clave en sellos y amortiguadores.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <b>Plasticidad</b><br>
+      Opuesta a elasticidad: el material mantiene la deformación. No "regresa". Ej: clavo doblado. Clave en piezas que requieren conformado permanente.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Un eje de tractor se deforma bajo carga pero no recupera su forma al retirarla. ¿Qué propiedad mecánica está evidenciando y qué consecuencias tiene esto en servicio?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Maleabilidad y Ductilidad (Diap. 7–8)</span>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <b>Maleabilidad</b><br>
+      El material puede laminarse en hojas delgadas sin romperse. Ej: aluminio (papel de aluminio). En maquinaria: chapas de carrocería de tractores.
+    </div>
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <b>Ductilidad</b><br>
+      El material puede estirarse en hilos finos. Ej: cobre en cables eléctricos. Mide cuánto puede deformarse antes de fracturar (% elongación).
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir maleabilidad con ductilidad. La maleabilidad es deformación en láminas (compresión bidimensional); la ductilidad es deformación en hilos (tensión uniaxial). Un material puede ser maleable pero poco dúctil (plomo).</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el cobre es ampliamente utilizado en el cableado eléctrico de maquinaria agrícola? Relacione su respuesta con la propiedad mecánica de ductilidad.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-yellow">Dureza — Escala de Mohs (Diap. 9–10)</span>
+  <div class="def def-yellow">La dureza es la oposición del material a ser rayado, penetrado o desgastado. Es la propiedad más crítica para piezas en contacto con el suelo: discos, rejas, cuchillas.</div>
+  <table class="tbl">
+    <thead><tr><th>Dureza</th><th>Mineral</th><th>Se raya con...</th><th>Analogía práctica</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Talco</td><td>Uña</td><td>El más blando; polvo lubricante</td></tr>
+      <tr><td>2</td><td>Yeso</td><td>Uña (con esfuerzo)</td><td>Escayolas, moldes</td></tr>
+      <tr><td>3</td><td>Calcita</td><td>Moneda de cobre</td><td>Calizas, mármol</td></tr>
+      <tr><td>5</td><td>Apatito</td><td>Cuchillo de acero</td><td>≈ Acero blando</td></tr>
+      <tr><td>7</td><td>Cuarzo</td><td>Raya el vidrio</td><td>Arenas abrasivas del suelo</td></tr>
+      <tr><td>8–9</td><td>Topacio/Corindón</td><td>Herram. carburo</td><td>Herramientas de corte</td></tr>
+      <tr><td>10</td><td>Diamante</td><td>Solo otro diamante</td><td>Recubrimientos abrasivos</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ DATO CLAVE: El cuarzo (dureza 7) está presente en casi todos los suelos agrícolas. Las piezas que labran el suelo deben tener dureza mayor a 7 para no desgastarse rápidamente. Por eso se usan aceros al boro o recubrimientos de carburo.</div>
+  <div class="exam">🎯 EXAMEN: Un fabricante utiliza un acero con dureza Vickers 350 HV para una reja de arado. ¿Por qué el cuarzo presente en los suelos representa un factor crítico de desgaste para este componente? Relacione con la escala de Mohs.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Tenacidad, Fragilidad y Esfuerzos (Diap. 11–13)</span>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #a855f7">
+      <b>Tenacidad</b><br>
+      Resistencia a la rotura bajo esfuerzos lentos y progresivos. El material absorbe energía antes de fracturarse. Ej: acero estructural.
+    </div>
+    <div class="mini" style="border-top:3px solid #ef4444">
+      <b>Fragilidad</b><br>
+      Opuesto a tenacidad: el material se rompe sin deformación previa, de forma repentina. Ej: vidrio, fundición gris.
+    </div>
+  </div>
+  <hr class="divh">
+  <b style="font-size:12px">Tipos de esfuerzos en maquinaria:</b>
+  <div class="three" style="margin-top:5px">
+    <div class="mini" style="border-left:3px solid #3b82f6"><b>Tracción</b><br>Fuerzas que tiran del material en sentidos opuestos (tensión positiva). Ej: cadenas, tirantes.</div>
+    <div class="mini" style="border-left:3px solid #f97316"><b>Compresión</b><br>Fuerzas que comprimen. Tensión negativa. Ej: ruedas sobre el suelo.</div>
+    <div class="mini" style="border-left:3px solid #a855f7"><b>Torsión / Flexión</b><br>Giro alrededor del eje o curvatura. Ej: ejes de transmisión del tractor.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la fundición gris, a pesar de ser un material duro, no es apta para fabricar ejes de transmisión sometidos a cargas dinámicas? Explique en términos de tenacidad y fragilidad.</div>
+</div>
+
+<div class="sec">🟡 TIPOS DE ALEACIONES — Diap. 14–25</div>
+
+<div class="block">
+  <span class="bh bh-yellow">¿Por qué aleaciones y no metales puros? (Diap. 15)</span>
+  <div class="def def-yellow">Los metales en estado puro raramente se usan en maquinaria agrícola porque tienen propiedades mecánicas insuficientes y malas condiciones de fundición. Las aleaciones combinan metales entre sí o con no metales para obtener propiedades controladas y superiores.</div>
+  <div class="flow">
+    <div class="fbox">Metal puro</div><span class="farrow">→</span>
+    <div class="fbox">Propiedades insuficientes</div><span class="farrow">→</span>
+    <div class="fbox">Aleación (Fe+C, Cu+Zn, etc.)</div><span class="farrow">→</span>
+    <div class="fbox">Propiedades definidas</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Argumente por qué el hierro puro no es un material adecuado para fabricar el bastidor de un tractor, y explique qué solución ofrece la metalurgia a este problema.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-yellow">Aleaciones Férricas — Acero y Carbono (Diap. 16–17)</span>
+  <div class="def def-yellow">Son aleaciones basadas en hierro (Fe) + carbono (C). Cuando el %C ≤ 2%, el resultado es <b>acero</b>. Si %C > 2%, se denomina <b>fundición</b>. El carbono es el principal modificador de las propiedades mecánicas.</div>
+  <div class="rx">Fe + C (≤ 2%) = ACERO &nbsp;|&nbsp; Fe + C (> 2%) = FUNDICIÓN</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <b>Acero bajo carbono</b><br>C ≤ 0,25%<br>Alta ductilidad, fácil de soldar. Chapas, tornillos, estructuras.
+    </div>
+    <div class="mini" style="border-top:3px solid #eab308">
+      <b>Acero medio carbono</b><br>0,25% ≤ C ≤ 0,60%<br>Balance resistencia/ductilidad. Ejes, engranajes.
+    </div>
+    <div class="mini" style="border-top:3px solid #ef4444">
+      <b>Acero alto carbono</b><br>0,60% ≤ C ≤ 2%<br>Alta dureza, frágil. Herramientas de corte, resortes.
+    </div>
+  </div>
+  <div class="rx">↑ %C → ↑ Resistencia &amp; ↑ Dureza &amp; ↑ Fragilidad &amp; ↓ Ductilidad</div>
+  <div class="warn">⚠️ DILEMA DE DISEÑO: Más carbono = más duro pero más frágil. En piezas de maquinaria agrícola sometidas a golpes (como en terrenos pedregosos), un acero de alto carbono puede fracturarse catastróficamente. Se prefieren aceros medios con tratamiento térmico.</div>
+  <div class="exam">🎯 EXAMEN: Un disco de arado fabricado con acero de 0,8% de carbono se fractura en terrenos pedregosos, mientras que otro de 0,3% se desgasta rápidamente. ¿Cómo justifica esta situación desde la teoría de aleaciones férricas?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Aleaciones No Férricas (Diap. 18–22)</span>
+  <div class="def def-teal">Aleaciones sin hierro. Destacan por su alta resistencia a la corrosión, buena conductividad y menor densidad que el acero. Fundamentales en sistemas eléctricos y componentes expuestos a la intemperie.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Cobre:</b> excelente conductividad eléctrica/calórica. Usado en radiadores, cableado, tuberías.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Base Níquel:</b> alta resistencia a corrosión y oxidación, buenas prop. magnéticas. Piezas de alta temperatura.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Superaleaciones:</b> mantienen propiedades mecánicas a altísimas temperaturas. Turbocompresores.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Zn, Pb, Estaño:</b> bajo punto de fusión, baja resistencia mecánica. Baterías, soldaduras, galvanizado.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué las aleaciones de cobre son la elección preferida para el cableado eléctrico y los radiadores de un tractor, en lugar de aleaciones férricas?</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-green">Aleaciones Ligeras — Al, Mg, Ti (Diap. 23–25)</span>
+  <div class="def def-green">Aleaciones cuya densidad es inferior a la del acero, pero con dureza comparable. El principio clave es la relación resistencia/peso, que determina cuánta carga soporta la pieza por unidad de masa.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <b>Aleaciones de Aluminio</b><br>
+      Bajas características mecánicas absolutas, pero excelente relación resistencia/peso. Usos: bloques de motor, culatas, aros de llantas. Ampliamente usadas donde importa reducir peso total del equipo.
+    </div>
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <b>Aleaciones de Magnesio</b><br>
+      Fáciles de mecanizar pero se endurecen rápido a temperatura ambiente, requiriendo gran velocidad de trabajo. Usos: cárter de motor, sierras dentadas, carcasas de herramientas. Más ligeras que el aluminio.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <b>Aleaciones de Titanio (HSLA)</b><br>
+      Alta resistencia, dureza y resistencia a la corrosión. No se desgastan fácilmente. Usos: brocas, discos de corte, carrocerías HSLA, industria aeronáutica/naval. Mayor costo que Al y Mg.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: "Ligero" no significa "débil". El titanio tiene resistencia comparable al acero pero con casi la mitad de su densidad. Las aleaciones ligeras son preferidas en equipos donde el peso afecta directamente el rendimiento y la compactación del suelo.</div>
+  <div class="exam">🎯 EXAMEN: Compare las aleaciones de aluminio y titanio para la fabricación de culatas de motor en maquinaria agrícola. Considere resistencia mecánica, peso y costo en su análisis.</div>
+</div>
+
+<div class="sec">🟣 PLÁSTICOS EN MAQUINARIA AGRÍCOLA — Diap. 26–31</div>
+
+<div class="block s3">
+  <span class="bh bh-purple">Los 6 Plásticos Clave (Diap. 26–31)</span>
+  <div class="def def-purple">Los plásticos combinan buenas propiedades mecánicas con procesamiento fácil, reciclabilidad y bajo costo. Han reemplazado progresivamente al vidrio y a algunos metales en componentes no estructurales de maquinaria agrícola.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #a855f7">
+      <b>Polietileno (PE)</b><br>
+      Derivado del petróleo, económico y moldeable en casi cualquier forma. Baja resistencia química. Usos: tuberías, aislantes de cables, contenedores de agroquímicos.
+    </div>
+    <div class="mini" style="border-left:3px solid #a855f7">
+      <b>Polipropileno (PP)</b><br>
+      Superior al PE en resistencia al calor, flexión y agrietamiento. Mayor rango de temperatura. Usos: cajas de baterías, carcasas de AC, revestimientos interiores de tractores.
+    </div>
+    <div class="mini" style="border-left:3px solid #a855f7">
+      <b>Policarbonato (PC)</b><br>
+      Excelente estabilidad exterior y resistencia al impacto. Usos: cristales de ventanas de cabinas, micas de faros, gafas de seguridad. Sustituye al vidrio donde se requiere resistencia al impacto.
+    </div>
+    <div class="mini" style="border-left:3px solid #7c3aed">
+      <b>Nylon (PA)</b><br>
+      Alta resistencia mecánica, bajo coeficiente de expansión térmica, costo elevado. Fácil mecanizado. Usos: bujes, guías de deslizamiento, carenados. Ideal para piezas de desgaste.
+    </div>
+    <div class="mini" style="border-left:3px solid #7c3aed">
+      <b>PVC</b><br>
+      Diseñado para durar. Segundo plástico más usado globalmente por su facilidad de proceso. Usos: tuberías de riego, aislantes eléctricos, apoyabrazos de tractores. Muy versátil.
+    </div>
+    <div class="mini" style="border-left:3px solid #7c3aed">
+      <b>Teflón (PTFE)</b><br>
+      Resistencia eléctrica y química sobresaliente, baja fricción, estable a altas T°. Caro. Usos: sellos de bombas, bujes de alta fricción, engranajes. Casi inerte químicamente.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Seleccione el plástico más adecuado para fabricar las tuberías del sistema de riego de un tractor fumigador que trabaja con agroquímicos corrosivos, y justifique su elección en base a las propiedades del material.</div>
+</div>
+
+<div class="sec">⚫ CERÁMICOS, CAUCHO Y VIDRIO — Diap. 32–37</div>
+
+<div class="block">
+  <span class="bh bh-gray">Cerámicos de Ingeniería (Diap. 32–33)</span>
+  <div class="def def-gray">Compuestos de óxidos metálicos (Al₂O₃, ZrO₂), carburos, boruros o nitruros. Se producen por sinterizado de polvos compactados. Su estructura cristalina rígida les da propiedades únicas que los metales no pueden igualar a altas temperaturas.</div>
+  <div class="item"><span class="dot dot-gray"></span><span><b>Alta resistencia a compresión</b> y al desgaste por abrasión — superiores a los metales.</span></div>
+  <div class="item"><span class="dot dot-gray"></span><span><b>Durabilidad química</b> extrema: no se corroen ni oxidan.</span></div>
+  <div class="item"><span class="dot dot-gray"></span><span><b>Resistencia a altas temperaturas</b> — mantienen propiedades donde los metales ceden.</span></div>
+  <div class="item"><span class="dot dot-gray"></span><span><b>Limitación:</b> demasiado duros para mecanizar con técnicas convencionales; se moldean antes de sinterizar.</span></div>
+  <div class="item"><span class="dot dot-gray"></span><span><b>Aplicaciones:</b> bujías, rotores de turbocompresor, cojinetes, sistemas de frenos, armaduras térmicas.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué los materiales cerámicos son utilizados en las bujías del motor de un tractor y no los metales, a pesar de que los metales son más resistentes mecánicamente?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Caucho — Natural y Sintético (Diap. 34–35)</span>
+  <div class="def def-green">Polímero elástico derivado del látex de plantas (Hevea brasiliensis) o producido sintéticamente. Su estructura molecular de cadenas largas le permite grandes deformaciones reversibles (elasticidad extrema).</div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Elasticidad:</b> base de su aplicación en neumáticos y sellos dinámicos.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Aislante</b> térmico y eléctrico, repelente al agua.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Resistente</b> a ácidos, bensolatos y álcalis.</span></div>
+  <hr class="divh">
+  <b style="font-size:11.5px">Aplicaciones en maquinaria:</b>
+  <div class="item"><span class="dot dot-green"></span><span>Neumáticos y cámaras, mangueras, bandas de orugas, cintas aislantes, sellos de puertas.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el caucho es el material dominante para la fabricación de neumáticos de tractor, relacionando sus propiedades con las condiciones de trabajo en campo.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Vidrio en Maquinaria Agrícola (Diap. 36–37)</span>
+  <div class="def def-blue">Material inorgánico amorfo con alta resistencia a la corrosión y propiedades ópticas únicas. En maquinaria agrícola su uso es decreciente, siendo reemplazado progresivamente por policarbonato.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Alta resistencia a compresión</b> y a la corrosión química.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Excelente aislante eléctrico</b> y alta conductividad térmica.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Aplicaciones actuales:</b> parabrisas de tractores, cubiertas de indicadores, micas de faros, paneles solares.</span></div>
+  <div class="warn">⚠️ TENDENCIA: El policarbonato ha reemplazado al vidrio en muchas aplicaciones porque es más liviano y no se fragmenta en astillas peligrosas. Sin embargo, el vidrio persiste donde se requiere alta resistencia al rayado y claridad óptica permanente.</div>
+  <div class="exam">🎯 EXAMEN: Analice las razones técnicas por las cuales el vidrio está siendo desplazado por los plásticos en la construcción de cabinas de tractores modernos, y mencione un caso donde el vidrio aún resulte insustituible.</div>
+</div>
+
+<div class="sec">📊 TABLA INTEGRADORA FINAL — Todos los materiales</div>
+
+<div class="block s3">
+  <span class="bh bh-gray">Comparativa General de Materiales para Maquinaria Agrícola</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Material</th>
+        <th>Prop. Mecánicas</th>
+        <th>Resistencia Química</th>
+        <th>Peso/Densidad</th>
+        <th>Costo Relativo</th>
+        <th>Ejemplo de Aplicación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Acero bajo C</b></td><td>Moderada, dúctil</td><td>Baja (oxida)</td><td>Alta (≈7.8 g/cc)</td><td>Bajo</td><td>Chasis, tornillos, estructuras</td></tr>
+      <tr><td><b>Acero alto C</b></td><td>Alta, frágil</td><td>Baja</td><td>Alta</td><td>Medio</td><td>Discos de arado, herramientas</td></tr>
+      <tr><td><b>Al. de Cobre</b></td><td>Moderada</td><td>Alta</td><td>Media (≈8.9 g/cc)</td><td>Medio-alto</td><td>Radiadores, cableado</td></tr>
+      <tr><td><b>Aleación de Al</b></td><td>Moderada</td><td>Alta</td><td>Baja (≈2.7 g/cc)</td><td>Medio</td><td>Bloques motor, llantas</td></tr>
+      <tr><td><b>Superaleación</b></td><td>Muy alta, T° alta</td><td>Muy alta</td><td>Media-alta</td><td>Muy alto</td><td>Turbocompresores</td></tr>
+      <tr><td><b>Polipropileno</b></td><td>Buena</td><td>Buena</td><td>Muy baja (≈0.9 g/cc)</td><td>Bajo</td><td>Cajas de batería, carcasas</td></tr>
+      <tr><td><b>Nylon</b></td><td>Muy buena</td><td>Buena</td><td>Muy baja (≈1.1 g/cc)</td><td>Alto</td><td>Bujes, guías deslizamiento</td></tr>
+      <tr><td><b>Teflón</b></td><td>Moderada</td><td>Excelente</td><td>Baja</td><td>Muy alto</td><td>Sellos de bombas</td></tr>
+      <tr><td><b>Cerámico</b></td><td>Alta compresión, frágil a tensión</td><td>Excelente</td><td>Media</td><td>Alto</td><td>Bujías, rotores turbo</td></tr>
+      <tr><td><b>Caucho</b></td><td>Elástica</td><td>Buena</td><td>Muy baja</td><td>Bajo-medio</td><td>Neumáticos, sellos</td></tr>
+      <tr><td><b>Vidrio</b></td><td>Compresión alta, frágil</td><td>Muy alta</td><td>Media (≈2.5 g/cc)</td><td>Bajo</td><td>Parabrisas, indicadores</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La elección de material siempre implica un compromiso (trade-off). No existe un material perfecto para todas las condiciones. Un acero de alto carbono es ideal para una cuchilla de corte, pero sería catastrófico en un eje de transmisión. El ingeniero debe ponderar: resistencia mecánica, resistencia química, peso, costo y maquinabilidad según la función específica del componente.</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta. La respuesta correcta siempre se muestra.</p>
+  </div>
+  <div class="quiz-progress">
+    <div class="quiz-progress-text" id="prog-text">Pregunta 0 de 10 respondidas &nbsp;|&nbsp; Aciertos: 0 / 0</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard active" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes propiedades mecánicas describe la capacidad de un material para recuperar su forma original después de que cesa la fuerza que lo deformó?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Plasticidad</button>
+      <button class="qbtn" data-q="1" data-correct="true">B) Elasticidad</button>
+      <button class="qbtn" data-q="1" data-correct="false">C) Ductilidad</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Tenacidad</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+    <div class="quiz-nav"><button onclick="showQ(2)">Siguiente →</button></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Según la Escala de Mohs, el cuarzo tiene una dureza de 7. ¿Qué implicancia tiene esto para las piezas de maquinaria agrícola que trabajan en contacto con el suelo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) Las piezas deben ser de madera para evitar rayarse con el cuarzo.</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) Solo las piezas de vidrio (dureza 5–6) pueden resistir el cuarzo.</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) Las piezas de contacto deben tener dureza mayor a 7 para no desgastarse por el cuarzo.</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) El cuarzo no afecta a materiales metálicos, solo a los plásticos.</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+    <div class="quiz-nav"><button onclick="showQ(1)">← Anterior</button><button onclick="showQ(3)">Siguiente →</button></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Una aleación Fe + C con un contenido de carbono del 2,5% se denomina:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) Acero de alto carbono</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) Acero inoxidable</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) Fundición</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Superaleación férrica</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+    <div class="quiz-nav"><button onclick="showQ(2)">← Anterior</button><button onclick="showQ(4)">Siguiente →</button></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el efecto del carbono en el acero es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) A mayor contenido de carbono, mayor dureza del acero.</button>
+      <button class="qbtn" data-q="4" data-correct="true">B) A mayor contenido de carbono, mayor ductilidad del acero.</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) A mayor contenido de carbono, mayor fragilidad del acero.</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) A mayor contenido de carbono, mayor resistencia mecánica del acero.</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+    <div class="quiz-nav"><button onclick="showQ(3)">← Anterior</button><button onclick="showQ(5)">Siguiente →</button></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Se necesita fabricar el radiador de un tractor que debe transferir calor eficientemente y resistir la corrosión. ¿Qué tipo de aleación metálica es la más adecuada?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Acero de alto carbono</button>
+      <button class="qbtn" data-q="5" data-correct="false">B) Aleación de titanio (HSLA)</button>
+      <button class="qbtn" data-q="5" data-correct="true">C) Aleación de cobre</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) Superaleación de base níquel</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+    <div class="quiz-nav"><button onclick="showQ(4)">← Anterior</button><button onclick="showQ(6)">Siguiente →</button></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿En qué se diferencia la maleabilidad de la ductilidad como propiedades mecánicas?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) La maleabilidad es exclusiva de los metales; la ductilidad es de los plásticos.</button>
+      <button class="qbtn" data-q="6" data-correct="true">B) La maleabilidad permite laminar en láminas planas; la ductilidad permite estirar en hilos o alambres.</button>
+      <button class="qbtn" data-q="6" data-correct="false">C) Son propiedades sinónimas que describen lo mismo con distinto nombre.</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) La maleabilidad mide dureza superficial; la ductilidad mide tenacidad interna.</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+    <div class="quiz-nav"><button onclick="showQ(5)">← Anterior</button><button onclick="showQ(7)">Siguiente →</button></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Se requiere un plástico para fabricar los cristales de la cabina de un tractor. El material debe resistir impactos sin fragmentarse y ser estable ante la radiación solar. ¿Cuál es la mejor opción?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Polietileno (PE)</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) Teflón (PTFE)</button>
+      <button class="qbtn" data-q="7" data-correct="false">C) PVC</button>
+      <button class="qbtn" data-q="7" data-correct="true">D) Policarbonato (PC)</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+    <div class="quiz-nav"><button onclick="showQ(6)">← Anterior</button><button onclick="showQ(8)">Siguiente →</button></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Los cerámicos de ingeniería son ideales para fabricar bujías de motores agrícolas principalmente porque:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Son los materiales más baratos disponibles para ese componente.</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Tienen alta ductilidad que les permite absorber vibraciones del motor.</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Son excelentes aislantes eléctricos y resisten altas temperaturas sin degradarse.</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Son fácilmente maquinables con técnicas convencionales de torno y fresa.</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+    <div class="quiz-nav"><button onclick="showQ(7)">← Anterior</button><button onclick="showQ(9)">Siguiente →</button></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cuál propiedad química del caucho lo hace especialmente valioso para fabricar neumáticos de tractores que trabajan en zonas con lluvia o riego?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="true">A) Es repelente al agua y aislante eléctrico, protegiendo además los componentes internos.</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) Su alta conductividad térmica permite disipar el calor generado por fricción.</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) Reacciona con el agua para aumentar su rigidez, mejorando el agarre.</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Absorbe la humedad para auto-lubricarse y reducir el desgaste.</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+    <div class="quiz-nav"><button onclick="showQ(8)">← Anterior</button><button onclick="showQ(10)">Siguiente →</button></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">Las aleaciones ligeras de aluminio se usan en bloques y culatas de motor de tractores modernos, a pesar de tener menores propiedades mecánicas absolutas que el acero, porque:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) El aluminio es más barato que cualquier acero disponible en el mercado.</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) El aluminio resiste mejor las altas temperaturas de combustión que el acero.</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) Su excelente relación resistencia/peso reduce el peso total del tractor, mejorando eficiencia y compactación del suelo.</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) El aluminio es más dúctil que el acero, facilitando la reparación en campo.</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+    <div class="quiz-nav"><button onclick="showQ(9)">← Anterior</button></div>
+  </div>
+
+  <div id="quiz-results">
+    <h3 id="res-score"></h3>
+    <p id="res-msg"></p>
+    <button id="quiz-reset" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<div class="cv-footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Material didáctico del curso de Maquinaria Agrícola, Ingeniería Agrícola.</span>
+  <span class="fc">Escala de dureza de Mohs, Friedrich Mohs (1812).</span>
+  <span class="fc">Callister, W.D. — Introducción a la Ciencia e Ingeniería de Materiales.</span>
+  <span class="fc">Norma ASTM A29 — Aceros al carbono y aleados.</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: { correct: '✅ ¡Correcto! La elasticidad es precisamente la capacidad de recuperar la forma original al retirar la carga. Un globo y los sellos de caucho son ejemplos clásicos. Se diferencia de la plasticidad porque en esta última la deformación es permanente.', incorrect: '❌ Incorrecto. La respuesta correcta es B) Elasticidad. La plasticidad es la propiedad opuesta: el material mantiene su deformación. La ductilidad se refiere a formar hilos, y la tenacidad a resistir cargas lentas sin romperse.' },
+  2: { correct: '✅ ¡Correcto! El cuarzo (dureza 7) es uno de los minerales más abundantes en los suelos. Las piezas en contacto con el suelo deben superar esa dureza para no desgastarse. Por eso se usan aceros con tratamientos térmicos o recubrimientos de carburo de tungsteno.', incorrect: '❌ Incorrecto. La respuesta correcta es C). La escala de Mohs establece que un material solo puede ser rayado por otro de mayor dureza. Como el cuarzo es dureza 7, las piezas que labran el suelo deben tener dureza >7 para resistir el desgaste abrasivo.' },
+  3: { correct: '✅ ¡Correcto! Cuando el contenido de carbono en la aleación Fe+C supera el 2%, el material se denomina fundición (o hierro colado). El acero es Fe+C con C ≤ 2%. Esta distinción es fundamental: la fundición es más frágil y no se trabaja por deformación plástica.', incorrect: '❌ Incorrecto. La respuesta correcta es C) Fundición. El límite que diferencia acero de fundición es el 2% de carbono. Con 2,5% de C, la aleación tiene una estructura microestructural diferente (con grafito precipitado) que la hace frágil y con malas condiciones para el conformado.' },
+  4: { correct: '✅ ¡Correcto! La afirmación FALSA es B). El carbono reduce la ductilidad del acero. Un acero de alto carbono es más duro y resistente, pero menos dúctil y más frágil. Esta es una compensación (trade-off) fundamental: no se puede tener máxima dureza y máxima ductilidad simultáneamente.', incorrect: '❌ Incorrecto. La respuesta correcta es B). El carbono aumenta dureza y resistencia, pero DISMINUYE la ductilidad. Por eso un acero de alto carbono se puede usar para herramientas de corte pero no para piezas que deben absorber deformación sin fracturarse.' },
+  5: { correct: '✅ ¡Correcto! Las aleaciones de cobre tienen excelente conductividad calórica y eléctrica, lo que las hace ideales para radiadores (transferencia de calor) y también resisten bien la corrosión por el agua del sistema de refrigeración. El cobre es el material estándar para radiadores de equipos agrícolas.', incorrect: '❌ Incorrecto. La respuesta correcta es C) Aleación de cobre. El acero de alto carbono es frágil y se corrroe; el titanio es excesivamente caro para esta aplicación; el níquel no ofrece la conductividad calórica necesaria. El cobre combina la máxima conductividad con buena resistencia a la corrosión.' },
+  6: { correct: '✅ ¡Correcto! Son propiedades distintas. La maleabilidad implica deformación bidimensional en láminas (compresión). La ductilidad implica deformación uniaxial en hilos (tensión). Un metal puede ser maleable pero no muy dúctil: el plomo se lamina bien pero sus hilos se rompen fácilmente.', incorrect: '❌ Incorrecto. La respuesta correcta es B). Ambas implican deformación plástica permanente, pero en diferentes geometrías. Maleabilidad → láminas delgadas (papel aluminio); Ductilidad → hilos o alambres (cable de cobre eléctrico). No son sinónimos.' },
+  7: { correct: '✅ ¡Correcto! El policarbonato (PC) tiene excelente resistencia al impacto sin fragmentarse en astillas (a diferencia del vidrio), y buena estabilidad frente a la radiación UV exterior. Es el material estándar para cabinas de tractores modernos, cascos de seguridad y cristales de protección.', incorrect: '❌ Incorrecto. La respuesta correcta es D) Policarbonato. El PE y el PVC no tienen transparencia óptica adecuada; el Teflón es opaco. El PC combina transparencia, resistencia al impacto y estabilidad exterior, que son exactamente los requisitos de un cristal de cabina.' },
+  8: { correct: '✅ ¡Correcto! La bujía necesita aislar eléctricamente el electrodo central (el cerámico no conduce electricidad) y resistir temperaturas de hasta 800–900°C en la cámara de combustión sin degradarse. Ningún plástico ni aleación metálica común puede cumplir ambos requisitos simultáneamente.', incorrect: '❌ Incorrecto. La respuesta correcta es C). Los cerámicos no son baratos, no son dúctiles y son difíciles de mecanizar. Su ventaja exclusiva en bujías es la combinación de aislamiento eléctrico extremo + resistencia térmica, que es exactamente lo que necesita este componente.' },
+  9: { correct: '✅ ¡Correcto! El caucho es hidrófobo (repele el agua), lo que impide que el neumático absorba humedad y se degrade. Además, su aislamiento eléctrico protege al operario en condiciones de suelo mojado. Estas propiedades, combinadas con la elasticidad, hacen del caucho el único material viable para neumáticos.', incorrect: '❌ Incorrecto. La respuesta correcta es A). El caucho no conduce el calor eficientemente (es aislante térmico), no reacciona con el agua para endurecerse, y no se auto-lubrica. Su repelencia al agua (hidrofobicidad) sí es una propiedad química real y valiosa para neumáticos en campo mojado.' },
+  10: { correct: '✅ ¡Correcto! La relación resistencia/peso es clave en ingeniería de maquinaria. El aluminio tiene densidad ≈ 2.7 g/cc vs. ≈ 7.8 g/cc del acero. Un tractor más liviano compacta menos el suelo agrícola (reduciendo el "piso de arado"), consume menos combustible y es más fácil de maniobrar. Esos beneficios justifican el mayor costo del aluminio.', incorrect: '❌ Incorrecto. La respuesta correcta es C). El aluminio NO es más barato que el acero (es más caro), NO resiste mejor las altas temperaturas (el acero lo supera en ese aspecto), y NO es más dúctil que el acero. Su ventaja real es la excelente relación resistencia/peso que reduce el peso total del equipo.' }
+};
+
+let answered = 0;
+let correct = 0;
+let currentQ = 1;
+
+function showQ(n) {
+  document.querySelectorAll('.qcard').forEach(c => c.classList.remove('active'));
+  const card = document.getElementById('q' + n);
+  if (card) { card.classList.add('active'); currentQ = n; }
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.classList.contains('qbtn')) return;
+  const btn = e.target;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll('.qbtn[data-q="' + q + '"]');
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('correct');
+  });
+  if (!isCorrect) btn.classList.add('incorrect');
+  else correct++;
+  answered++;
+  const fb = document.getElementById('fb' + q);
+  fb.style.display = 'block';
+  fb.className = 'qfeedback ' + (isCorrect ? 'correct-fb' : 'incorrect-fb');
+  fb.innerHTML = (isCorrect ? feedbacks[q].correct : feedbacks[q].incorrect);
+  const pct = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+  document.getElementById('prog-text').textContent = 'Pregunta ' + answered + ' de 10 respondidas | Aciertos: ' + correct + ' / ' + answered + ' (' + pct + '%)';
+  document.getElementById('prog-bar').style.width = (answered * 10) + '%';
+  if (answered === 10) {
+    const res = document.getElementById('quiz-results');
+    res.style.display = 'block';
+    document.getElementById('res-score').textContent = correct + ' / 10 correctas';
+    let msg, bg;
+    if (correct <= 4) { msg = '📚 Necesitas repasar el material con más detalle. ¡Vuelve a leer cada sección!'; bg = '#fee2e2'; }
+    else if (correct <= 7) { msg = '📈 ¡Buen avance! Estás en el camino correcto. Repasa los bloques donde fallaste.'; bg = '#fef9c3'; }
+    else { msg = '🏆 ¡Excelente dominio del tema! Estás listo para el examen.'; bg = '#dcfce7'; }
+    res.style.background = bg;
+    res.style.borderRadius = '10px';
+    res.style.padding = '14px';
+    document.getElementById('res-msg').textContent = msg;
+  }
+});
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct', 'incorrect');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f => { f.style.display = 'none'; f.innerHTML = ''; });
+  document.getElementById('prog-text').textContent = 'Pregunta 0 de 10 respondidas | Aciertos: 0 / 0';
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('quiz-results').style.display = 'none';
+  showQ(1);
+}
+</script>

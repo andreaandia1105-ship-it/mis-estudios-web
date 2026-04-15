@@ -1,0 +1,564 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh.az{background:#dbeafe;color:#1e3a8a} .bh.vd{background:#dcfce7;color:#14532d} .bh.am{background:#fef9c3;color:#713f12} .bh.mo{background:#ede9fe;color:#4c1d95} .bh.tl{background:#ccfbf1;color:#134e4a} .bh.na{background:#ffedd5;color:#7c2d12} .bh.gr{background:#f1f5f9;color:#334155} .bh.ro{background:#fee2e2;color:#991b1b}
+@media(prefers-color-scheme:dark){.bh.az{background:#1e3a5f;color:#93c5fd}.bh.vd{background:#14532d;color:#86efac}.bh.am{background:#422006;color:#fef08a}.bh.mo{background:#2e1065;color:#c4b5fd}.bh.tl{background:#042f2e;color:#5eead4}.bh.na{background:#431407;color:#fed7aa}.bh.gr{background:#1e293b;color:#94a3b8}.bh.ro{background:#450a0a;color:#fca5a5}}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:7px}
+.def.az{border-color:#3b82f6} .def.vd{border-color:#22c55e} .def.am{border-color:#eab308} .def.mo{border-color:#8b5cf6} .def.tl{border-color:#14b8a6} .def.na{border-color:#f97316} .def.ro{border-color:#ef4444}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot.az{background:#3b82f6} .dot.vd{background:#22c55e} .dot.am{background:#eab308} .dot.mo{background:#8b5cf6} .dot.tl{background:#14b8a6} .dot.na{background:#f97316} .dot.ro{background:#ef4444}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0}
+@media(prefers-color-scheme:dark){.warn{background:#1c1008;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+@media(prefers-color-scheme:dark){.exam{background:#1a1500;color:#fef08a;border-color:#ca8a04}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px}
+.mini.az{border-left:3px solid #3b82f6} .mini.vd{border-left:3px solid #22c55e} .mini.am{border-left:3px solid #eab308} .mini.mo{border-left:3px solid #8b5cf6} .mini.tl{border-left:3px solid #14b8a6} .mini.na{border-left:3px solid #f97316} .mini.gr{border-left:3px solid #94a3b8}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.sbar{background:#0f1e3a;color:#fff;border-radius:12px;padding:10px 14px;grid-column:1/-1;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:20px;background:#22c55e;transition:width .3s}
+.qcard{background:var(--color-background-secondary);border-radius:10px;padding:12px;margin-bottom:10px}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.show-correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:0.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.err{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){.qfeedback.ok{background:#052e16;color:#86efac}.qfeedback.err{background:#1f0707;color:#fca5a5}.qbtn.correct{background:#052e16;border-color:#16a34a;color:#86efac}.qbtn.incorrect{background:#1f0707;border-color:#dc2626;color:#fca5a5}.qbtn.show-correct{background:#052e16;border-color:#16a34a;color:#86efac}}
+#quiz-results{display:none;border-radius:10px;padding:14px;margin-top:10px;text-align:center}
+#quiz-results h3{font-size:16px;font-weight:600;margin-bottom:6px}
+#quiz-results p{font-size:12px}
+.reset-btn{margin-top:10px;padding:8px 18px;border-radius:8px;border:1px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;font-size:12px;font-family:'Source Sans 3',sans-serif}
+.reset-btn:hover{background:var(--color-background-secondary)}
+</style>
+
+<div class="cv">
+
+<!-- TÍTULO -->
+<div style="grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:12px 16px">
+  <div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:700">⚙️ PARTES PARA LA TRANSMISIÓN Y TRANSFORMACIÓN DE FUERZAS Y MOVIMIENTO</div>
+  <div style="font-size:11px;color:#94a3b8;margin-top:4px">Mecánica de Máquinas | Elementos de Transmisión</div>
+  <div style="margin-top:6px">
+    <span class="pill" style="background:#1e3a5f;color:#93c5fd">Engranajes</span>
+    <span class="pill" style="background:#14532d;color:#86efac">Cadenas y Piñones</span>
+    <span class="pill" style="background:#422006;color:#fef08a">Poleas y Fajas</span>
+    <span class="pill" style="background:#2e1065;color:#c4b5fd">Trenes de Engranajes</span>
+    <span class="pill" style="background:#1f2937;color:#9ca3af">Razón de Transmisión</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: ENGRANAJES -->
+<div class="sbar">🔵 MÓDULO 1: ENGRANAJES — Clasificación y Tipos</div>
+
+<!-- Bloque: Qué es un engranaje -->
+<div class="block">
+  <span class="bh az">Concepto Base (Diap. 2–3)</span>
+  <div class="def az">Un <strong>engranaje</strong> es un mecanismo de transmisión de movimiento y fuerza mediante ruedas dentadas que engranan entre sí. Su principal ventaja frente a fajas es que no existe deslizamiento: cada diente empuja directamente al siguiente, garantizando relación de velocidad exacta y constante.</div>
+  <div class="item"><div class="dot az"></div><div>Los tres grandes grupos de transmisión mecánica son: <strong>engranajes</strong> (contacto directo, sin elemento intermedio), <strong>cadenas y piñones</strong> (con eslabones metálicos como elemento intermedio) y <strong>poleas y fajas</strong> (con correa flexible como elemento intermedio).</div></div>
+  <div class="item"><div class="dot az"></div><div>La elección entre estos sistemas depende de la distancia entre ejes, el ambiente (humedad, aceite, temperatura), la velocidad requerida y si se necesita relación de transmisión exacta o aproximada.</div></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué los engranajes garantizan una relación de transmisión exacta mientras que las poleas con faja no lo hacen, y mencione en qué situaciones industriales se preferiría cada sistema.</div>
+</div>
+
+<!-- Bloque: Clasificación por ejes -->
+<div class="block s2">
+  <span class="bh mo">Clasificación por Geometría de Ejes (Diap. 3–6)</span>
+  <div class="def mo">Los engranajes se clasifican según la orientación espacial de los ejes que conectan. Este criterio es fundamental porque determina la geometría del diente, el tipo de contacto y las fuerzas que se generan durante el engrane.</div>
+  <div class="three">
+    <div class="mini az">
+      <strong>Ejes Paralelos → Engranajes Cilíndricos</strong><br>
+      Los ejes de ambas ruedas son paralelos en el espacio. Son los más comunes en maquinaria industrial. Incluyen: contacto exterior (giran en sentido contrario), contacto interior (giran en el mismo sentido), cremallera y piñón (convierte rotación en traslación), helicoidal (dientes inclinados, engrane progresivo) y doble helicoidal (anula empuje axial del helicoidal simple).
+    </div>
+    <div class="mini mo">
+      <strong>Ejes que se Interceptan → Engranajes Cónicos</strong><br>
+      Los ejes se cruzan en un punto formando un ángulo (generalmente 90°). La forma del engranaje es cónica. Existen cónicos rectos (dientes radiales, para bajas velocidades) y cónicos helicoidales o "spiral bevel" (dientes curvados, mayor suavidad y capacidad de carga). Muy usados en diferenciales automotrices.
+    </div>
+    <div class="mini tl">
+      <strong>Ejes Alabeados → Engranajes Oblicuos</strong><br>
+      Los ejes ni son paralelos ni se interceptan: están en distintos planos. Incluyen engranajes helicoidales cruzados (para bajas cargas) y el tornillo sinfín con rueda dentada (reductores de gran relación en un solo paso, con capacidad de ser irreversibles). Este último es clave en aplicaciones donde se requiere autobloqueo.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Los engranajes helicoidales de ejes paralelos y los de ejes cruzados tienen el mismo nombre pero son geometrías completamente distintas. En ejes paralelos el eje del tornillo no cruza al de la rueda; en oblicuos sí se cruzan a cualquier ángulo.</div>
+</div>
+
+<!-- SECCIÓN 2: PARTES Y CÁLCULOS -->
+<div class="sbar">🟡 MÓDULO 2: PARÁMETROS DE UN ENGRANAJE — Geometría y Cálculo</div>
+
+<!-- Bloque: Circunferencias -->
+<div class="block">
+  <span class="bh am">Circunferencias del Engranaje (Diap. 7)</span>
+  <div class="def am">Un engranaje tiene tres circunferencias de referencia clave, cada una con un rol distinto en el engrane y en los cálculos de diseño. Entenderlas es imprescindible para aplicar correctamente las fórmulas de paso.</div>
+  <div class="item"><div class="dot am"></div><div><strong>Circunferencia Primitiva (D):</strong> Circunferencia imaginaria de referencia donde ocurre el contacto teórico entre dientes. El diámetro primitivo D es la dimensión más importante del engranaje.</div></div>
+  <div class="item"><div class="dot am"></div><div><strong>Circunferencia Exterior:</strong> Define el tamaño total del engranaje (punta de los dientes). Siempre mayor que la primitiva.</div></div>
+  <div class="item"><div class="dot am"></div><div><strong>Circunferencia Base:</strong> A partir de ella se generan los perfiles de los dientes (evolvente). Siempre menor que la primitiva.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la relación de orden entre la circunferencia base, primitiva y exterior de un engranaje? Explique qué representa físicamente cada una.</div>
+</div>
+
+<!-- Bloque: Paso circunferencial -->
+<div class="block">
+  <span class="bh am">Paso Circunferencial — Pc (Diap. 7–8)</span>
+  <div class="def am">El <strong>Paso Circunferencial (Pc)</strong> es la longitud de arco sobre la circunferencia primitiva medida de centro a centro entre dos dientes consecutivos. Mide qué tan "juntos" están los dientes a lo largo de la rueda.</div>
+  <div class="rx">Pc = (π × D) / Z<br><span style="font-size:10px">Pc = paso circunferencial | D = diámetro primitivo | Z = número de dientes | π = 3.1416</span></div>
+  <div class="item"><div class="dot am"></div><div><strong>Ejemplo resuelto:</strong> D = 6" y Z = 24 dientes:<br>Pc = (3.1416 × 6) / 24 = 18.85 / 24 = <strong>0.7854 "</strong></div></div>
+  <div class="warn">⚠️ ERROR COMÚN: El Pc no es la longitud del diente ni la separación entre flancos, sino el arco que separa los centros de dientes consecutivos sobre la circunferencia primitiva. Incluye el diente más el espacio.</div>
+</div>
+
+<!-- Bloque: Paso diametral -->
+<div class="block">
+  <span class="bh am">Paso Diametral — Pd (Diap. 9–10)</span>
+  <div class="def am">El <strong>Paso Diametral (Pd)</strong> es el número de dientes que tiene el engranaje por cada pulgada de diámetro primitivo. Es una medida de la "fineza" o densidad del dentado: un Pd alto significa dientes más pequeños y numerosos.</div>
+  <div class="rx">Pd = Z / D<br><span style="font-size:10px">unidades: dientes/pulgada | Relación de consistencia: Pd × Pc = π</span></div>
+  <div class="item"><div class="dot am"></div><div>Con D = 6" y Z = 24: Pd = 24/6 = <strong>4 dientes/pulgada</strong>. Esto significa que en cada pulgada de diámetro caben 4 dientes.</div></div>
+  <div class="item"><div class="dot am"></div><div>Verificación: Pd × Pc = 4 × 0.7854 = 3.1416 = π ✓ Esta igualdad es siempre verdadera y sirve para comprobar resultados.</div></div>
+  <div class="exam">🎯 EXAMEN: Un engranaje tiene 36 dientes y diámetro primitivo de 9 pulgadas. Calcule el paso diametral y el paso circunferencial. Verifique que Pd × Pc = π.</div>
+</div>
+
+<!-- SECCIÓN 3: CONDICIÓN DE ENGRANE -->
+<div class="sbar">🟣 MÓDULO 3: CONDICIÓN DE ENGRANE Y RAZÓN DE TRANSMISIÓN</div>
+
+<!-- Bloque: Condición de engrane -->
+<div class="block s2">
+  <span class="bh mo">Condición de Engrane (Diap. 11)</span>
+  <div class="def mo">Para que dos ruedas dentadas puedan trabajar apareadas y transmitir potencia sin interferencia ni saltos, es obligatorio que compartan el mismo paso diametral Y el mismo paso circunferencial. Esto asegura que los dientes de una encajen perfectamente en los espacios de la otra.</div>
+  <div class="two">
+    <div>
+      <div class="rx">Pd₁ = Pd₂<br><span style="font-size:10px">Igual número de dientes por pulgada</span></div>
+      <div class="rx">Pc₁ = Pc₂<br><span style="font-size:10px">Igual longitud de arco entre dientes</span></div>
+    </div>
+    <div>
+      <div class="item"><div class="dot mo"></div><div>Que Pd₁ = Pd₂ NO implica que Pd = Pc. Son parámetros con unidades distintas: Pd es dientes/pulgada, Pc es longitud de arco (pulgadas).</div></div>
+      <div class="item"><div class="dot mo"></div><div>Ejemplo: Z₁=10, D₁=2.5" → Pd₁=4, Pc₁=0.7854. Z₂=20, D₂=5" → Pd₂=4, Pc₂=0.7854. Como Pd₁=Pd₂ y Pc₁=Pc₂, pueden engranar. ✓</div></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR CRÍTICO: En la práctica, dos engranajes pueden tener la misma cantidad de dientes pero diferente paso diametral (distintos tamaños de diente). Jamás deben mezclarse en un mismo par porque no encajarían.</div>
+</div>
+
+<!-- Bloque: Razón de transmisión -->
+<div class="block">
+  <span class="bh mo">Razón de Transmisión — R₁₂ (Diap. 12–14)</span>
+  <div class="def mo">La <strong>razón de transmisión</strong> es el cociente entre la velocidad angular de la rueda conducida y la conductora. Expresa cuánto más rápido o lento gira la rueda conducida respecto a la conductora.</div>
+  <div class="rx">R₁₂ = ω₂/ω₁ = N₂/N₁ = Z₁/Z₂ = Ø₁/Ø₂<br><span style="font-size:10px">ω=vel. angular | N=RPM | Z=dientes | Ø=diámetro primitivo</span></div>
+  <div class="item"><div class="dot mo"></div><div>La deducción parte de que la velocidad tangencial en el punto de contacto es la misma para ambas ruedas: V₁=V₂, por tanto ω₁·R₁ = ω₂·R₂.</div></div>
+  <div class="item"><div class="dot mo"></div><div>Aplicando la condición de engrane (Pd₁=Pd₂), el diámetro es proporcional al número de dientes, lo que permite expresar R₁₂ directamente con Z₁/Z₂.</div></div>
+</div>
+
+<!-- Bloque: Convención de signos -->
+<div class="block">
+  <span class="bh ro">Convención de Signos (Diap. 15)</span>
+  <div class="def ro">El signo de la razón de transmisión indica el sentido relativo de rotación entre la rueda conductora y la conducida.</div>
+  <div class="two">
+    <div class="mini ro">
+      <strong>R₁₂ Negativa (−)</strong><br>
+      Engranajes de <strong>contacto exterior</strong>. Las ruedas giran en sentidos opuestos: si la conductora gira en sentido horario (dextrógiro), la conducida gira en antihorario (levógiro). Es el caso más común.
+    </div>
+    <div class="mini vd">
+      <strong>R₁₂ Positiva (+)</strong><br>
+      Engranajes de <strong>contacto interior</strong>. La rueda conducida gira en el mismo sentido que la conductora. También aplica a poleas con faja directa (sin cruzar). Menos frecuente en engranajes.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Una rueda conductora de 15 dientes gira a 600 RPM en sentido horario. Se engrana exteriormente con una rueda de 45 dientes. Determine la razón de transmisión con signo y la velocidad y sentido de la rueda conducida.</div>
+</div>
+
+<!-- SECCIÓN 4: TRENES DE ENGRANAJES -->
+<div class="sbar">🩵 MÓDULO 4: TRENES DE ENGRANAJES</div>
+
+<!-- Bloque: Tren simple -->
+<div class="block">
+  <span class="bh tl">Tren Simple (Diap. 16–18)</span>
+  <div class="def tl">Un <strong>tren simple</strong> es una serie de ruedas dentadas acopladas en cadena, donde cada rueda tiene un único eje. Las ruedas intermedias no afectan la magnitud de la razón de tren: solo invierten el sentido de rotación.</div>
+  <div class="rx">R₁ₙ = (−1)^(n-1) × Z₁/Zₙ<br><span style="font-size:10px">Para n ruedas en serie | Conclusión clave: solo importan la primera y la última rueda</span></div>
+  <div class="item"><div class="dot tl"></div><div>Para 4 ruedas en serie: R₁₄ = R₁₂ × R₂₃ × R₃₄. Al desarrollarlo, Z₂ y Z₃ aparecen en numerador y denominador simultáneamente y se cancelan. Solo quedan Z₁ (conductora) y Z₄ (conducida final).</div></div>
+  <div class="item"><div class="dot tl"></div><div>Las ruedas intermedias se llaman <strong>ruedas locas</strong> porque su número de dientes no altera la relación de velocidades. Su función es invertir el sentido de giro o cubrir la distancia entre ejes.</div></div>
+  <div class="exam">🎯 EXAMEN: Un tren simple tiene 4 ruedas: Z₁=20, Z₂=40, Z₃=15, Z₄=60. La rueda 1 gira a 900 RPM. ¿A cuántas RPM gira la rueda 4? ¿En qué sentido respecto a la 1?</div>
+</div>
+
+<!-- Bloque: Tren compuesto -->
+<div class="block">
+  <span class="bh tl">Tren Compuesto (Diap. 19–21)</span>
+  <div class="def tl">Un <strong>tren compuesto</strong> tiene al menos dos ruedas rígidamente solidarias en el mismo eje (giran a la misma velocidad). Esto permite obtener relaciones de transmisión mucho más grandes que con un tren simple de igual número de ruedas, porque se multiplican los efectos de reducción.</div>
+  <div class="rx">R₁ₙ = (Z₁×Z₃×Z₅...) / (Z₂×Z₄×Z₆...)<br><span style="font-size:10px">= Producto dientes impulsores / Producto dientes impulsados</span></div>
+  <div class="item"><div class="dot tl"></div><div>La condición clave: las ruedas solidarias en el mismo eje tienen la misma velocidad angular (N₂=N₃ si están en el mismo eje). Esto "hereda" la velocidad de una etapa a la siguiente sin pérdida.</div></div>
+  <div class="item"><div class="dot tl"></div><div>Esta configuración es la base de las cajas de cambios de automóviles y reductores industriales: cada par de engranajes forma una etapa de reducción, y las etapas se multiplican.</div></div>
+</div>
+
+<!-- Bloque: Tren recurrente y epicíclico -->
+<div class="block">
+  <span class="bh tl">Tren Recurrente y Epicíclico (Diap. 22–23)</span>
+  <div class="def tl">El <strong>tren recurrente</strong> tiene la primera y última rueda coaxiales (en el mismo eje), lo que impone una restricción geométrica adicional. El <strong>tren epicíclico</strong> incluye un engranaje satélite que orbita alrededor del solar, permitiendo relaciones de transmisión muy altas en espacios compactos.</div>
+  <div class="two">
+    <div>
+      <div class="mini tl">
+        <strong>Tren Recurrente — Condición Coaxial</strong><br>
+        Por ser coaxiales las ruedas extremas: R₁+R₂ = R₃+R₄, lo que equivale a Z₁+Z₂ = Z₃+Z₄. Esta condición limita los números de dientes que se pueden elegir libremente.
+      </div>
+    </div>
+    <div>
+      <div class="mini mo">
+        <strong>Tren Epicíclico — Fórmula de Willis</strong><br>
+        Q₁/₂ = (N₂−N₃)/(N₁−N₃) = Z₁/Z₂<br>
+        Donde N₃ es la velocidad del brazo porta-satélites. Fijando uno de los tres elementos (solar, corona o brazo) se obtienen distintas relaciones de transmisión con el mismo tren.
+      </div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: En un tren epicíclico simple, el solar tiene 20 dientes y el engranaje de corona interior tiene 60 dientes. Si el brazo está fijo y el solar gira a 300 RPM, ¿a cuántas RPM y en qué sentido gira la corona?</div>
+</div>
+
+<!-- SECCIÓN 5: CADENAS Y PIÑONES -->
+<div class="sbar">🟠 MÓDULO 5: CADENAS Y PIÑONES</div>
+
+<!-- Bloque: Introducción cadenas -->
+<div class="block">
+  <span class="bh na">Introducción — Cuándo usar cadenas (Diap. 24)</span>
+  <div class="def na">La transmisión por cadena es la solución cuando los ejes están a cierta distancia y el entorno impide usar correas: la humedad, el calor, los vapores de aceite o los sólidos en suspensión degradan las fajas pero no afectan a las cadenas metálicas. Además, a diferencia de las fajas, las cadenas transmiten sin deslizamiento.</div>
+  <div class="item"><div class="dot na"></div><div>Ventaja frente a engranajes: permiten mayor distancia entre ejes sin necesidad de engranajes intermedios. Ventaja frente a fajas: no hay deslizamiento y soportan ambientes agresivos.</div></div>
+  <div class="item"><div class="dot na"></div><div>Desventaja: requieren lubricación periódica, generan más ruido que las fajas a altas velocidades y el mantenimiento (tensión, desgaste de eslabones) es más exigente.</div></div>
+</div>
+
+<!-- Bloque: Tipos de cadenas -->
+<div class="block s2">
+  <span class="bh na">Tipos de Cadenas (Diap. 24–27)</span>
+  <div class="def na">Las cadenas se diferencian por su construcción, velocidad de trabajo y aplicación. La selección correcta depende principalmente del rango de velocidad y la capacidad de carga requerida.</div>
+  <div class="three">
+    <div class="mini gr">
+      <strong>🔴 Cadenas Redondas</strong><br>
+      Construidas con eslabones circulares de acero. Diseñadas para <strong>velocidades muy reducidas</strong> (0.5 a 0.8 m/min). Su diseño simple las hace robustas ante condiciones adversas. Aplicaciones típicas: sembradoras de cereales de precisión y desbrozadoras agrícolas.
+    </div>
+    <div class="mini na">
+      <strong>🟠 Cadenas de Ganchos</strong><br>
+      Eslabones en forma de gancho que se ensamblan fácilmente. Trabajan a <strong>baja velocidad</strong>, son fuertes y sencillas de montar y desmontar. Muy utilizadas en bandas transportadoras y cosechadoras de papa, donde la cadena actúa como elemento de arrastre.
+    </div>
+    <div class="mini az">
+      <strong>🔵 Cadenas de Rodillos</strong><br>
+      Fabricadas con rodillos de acero de alta calidad. Trabajan a <strong>velocidades elevadas</strong> (2 a 20 m/s). Mínima pérdida de potencia por fricción. Pueden ser simples (una fila de rodillos) o múltiples (varias filas en paralelo para mayor carga). Aplicaciones: motocicletas, distribución de motores de combustión.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Compare las cadenas redondas, de ganchos y de rodillos en términos de rango de velocidad, pérdida de potencia y aplicaciones típicas. ¿Por qué las cadenas de rodillos son más eficientes?</div>
+</div>
+
+<!-- SECCIÓN 6: POLEAS Y FAJAS -->
+<div class="sbar">🟢 MÓDULO 6: POLEAS Y FAJAS — Tipos y Sistemas</div>
+
+<!-- Bloque: Principio poleas -->
+<div class="block">
+  <span class="bh vd">Principio de Funcionamiento (Diap. 28)</span>
+  <div class="def vd">Las poleas y fajas transmiten movimiento entre ejes paralelos separados, usando una correa flexible como elemento de unión. La velocidad tangencial en el borde de ambas poleas es la misma (la faja es inextensible), por lo que la razón de transmisión depende exclusivamente de los radios de las poleas.</div>
+  <div class="rx">ωₐ × Rₐ = ω_b × R_b → R_AB = ωₐ/ω_b = R_b/Rₐ = D_b/Dₐ<br><span style="font-size:10px">VA=VB (velocidad tangencial igual) | mismo sentido de giro en sistema directo</span></div>
+  <div class="item"><div class="dot vd"></div><div>Si se necesita invertir el sentido de giro de la polea conducida sin cambiar su relación de tamaños, se cruza la faja (sistema de faja invertida).</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: En poleas y fajas la razón de transmisión usa los RADIOS (o diámetros), no el número de dientes. Al revés que en engranajes: la polea GRANDE gira más lento, la PEQUEÑA gira más rápido.</div>
+</div>
+
+<!-- Bloque: Tipos de fajas -->
+<div class="block">
+  <span class="bh vd">Tipos de Fajas (Diap. 29–33)</span>
+  <div class="def vd">La geometría de la sección transversal de la faja determina su capacidad de agarre, la velocidad máxima admisible y las aplicaciones adecuadas.</div>
+  <div class="item"><div class="dot vd"></div><div><strong>Trapezoidales (V-belt):</strong> Las más usadas. El perfil en V se adapta al canal de la polea y aumenta la fricción por efecto cuña, evitando deslizamiento. Ideales para transmisiones generales de potencia.</div></div>
+  <div class="item"><div class="dot vd"></div><div><strong>Redondas:</strong> Perfil circular. Se usan cuando la faja debe adaptarse a curvas cerradas o cambios de dirección (máquinas de coser, pequeños electrodomésticos). Solo para fuerzas pequeñas.</div></div>
+  <div class="item"><div class="dot vd"></div><div><strong>Planas:</strong> Sección rectangular. De uso cada vez menor, aunque permiten alta velocidad. Se emplean en transmisiones antiguas motor-máquina.</div></div>
+  <div class="item"><div class="dot vd"></div><div><strong>Dentadas (síncronas):</strong> Combinan el perfil trapezoidal con dientes en la cara interior. Eliminan el deslizamiento por acople positivo con dientes en la polea. Equivalen a un engranaje con separación entre ejes. Usadas en distribuciones de motores.</div></div>
+  <div class="exam">🎯 EXAMEN: Un diseñador debe elegir entre faja trapezoidal y faja dentada para la distribución de un motor de combustión interna. ¿Cuál recomienda y por qué? Mencione al menos dos factores determinantes.</div>
+</div>
+
+<!-- Bloque: Sistemas de poleas -->
+<div class="block">
+  <span class="bh vd">Sistemas de Poleas (Diap. 34–36)</span>
+  <div class="def vd">Los sistemas de poleas difieren en la forma en que se tiende la faja entre los ejes, lo cual determina el sentido de giro de la polea conducida y la posición relativa de los ejes.</div>
+  <div class="three">
+    <div class="mini vd">
+      <strong>Sistema Directo</strong><br>
+      La faja corre en paralelo entre dos poleas con ejes paralelos. La conducida gira en el <strong>mismo sentido</strong> que la conductora. Es el sistema más simple y eficiente.
+    </div>
+    <div class="mini na">
+      <strong>Faja Invertida (Cruzada)</strong><br>
+      La faja se cruza en forma de "8" entre las poleas. La conducida gira en <strong>sentido opuesto</strong> a la conductora. Los ejes siguen siendo paralelos. La faja sufre mayor desgaste en el cruce.
+    </div>
+    <div class="mini mo">
+      <strong>Eje Cruzado (Semi-invertida)</strong><br>
+      Los ejes de las poleas se cruzan a 90°. La faja debe ser ancha y flexible para girar sin retorcerse. Limitada a bajas velocidades y cargas moderadas.
+    </div>
+  </div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="sbar">📊 TABLA INTEGRADORA — Comparación de Sistemas de Transmisión</div>
+
+<div class="block s3">
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Característica</th>
+        <th>Engranajes</th>
+        <th>Cadenas y Piñones</th>
+        <th>Poleas y Fajas</th>
+        <th>Aplicación típica</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Deslizamiento</strong></td><td style="color:#16a34a">Ninguno (positivo)</td><td style="color:#16a34a">Ninguno (positivo)</td><td style="color:#dc2626">Posible (fricción)</td><td>-</td></tr>
+      <tr><td><strong>Distancia ejes</strong></td><td>Mínima (contacto directo)</td><td>Media a grande</td><td>Media a grande</td><td>-</td></tr>
+      <tr><td><strong>Velocidad máx.</strong></td><td>Alta (>20 m/s posible)</td><td>Media (hasta 20 m/s con rodillos)</td><td>Alta con fajas planas/V</td><td>-</td></tr>
+      <tr><td><strong>Relación transmisión</strong></td><td>Exacta y constante</td><td>Exacta y constante</td><td>Aproximada (slip)</td><td>-</td></tr>
+      <tr><td><strong>Mantenimiento</strong></td><td>Lubricación periódica</td><td>Lubricación + tensión</td><td>Ajuste de tensión</td><td>-</td></tr>
+      <tr><td><strong>Ambiente adverso</strong></td><td>Carcasa necesaria</td><td style="color:#16a34a">Resiste humedad/aceite</td><td style="color:#dc2626">Degradación por aceite</td><td>-</td></tr>
+      <tr><td><strong>Ejemplo industrial</strong></td><td>Caja de cambios, reloj</td><td>Bicicleta, cosechadora</td><td>Motor eléctrico-bomba</td><td>-</td></tr>
+      <tr><td><strong>Razón transmisión</strong></td><td>R = Z₁/Z₂</td><td>R = Z₁/Z₂</td><td>R = D_a/D_b</td><td>-</td></tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ DATO INTEGRADOR CLAVE: La condición de "sin deslizamiento" en engranajes y cadenas permite garantizar sincronización exacta (vital en motores y robots). Las fajas, por ser de fricción, admiten pequeño deslizamiento que impide usar R₁₂ = N₂/N₁ con precisión absoluta — por eso los motores de distribución modernos usan cadena o faja DENTADA, no faja V.</div>
+</div>
+
+<!-- QUIZ INTERACTIVO -->
+<div class="sbar">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+
+<div class="block s3" id="quiz-section">
+  <div style="background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px">
+    <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:700">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+    <div style="font-size:11px;color:#94a3b8;margin-top:3px">Marca tu respuesta y descubre si es correcta · Retroalimentación inmediata</div>
+  </div>
+
+  <!-- Barra de progreso -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px">
+    <span id="prog-text" style="min-width:90px;color:var(--color-text-secondary)">Pregunta 0 de 10</span>
+    <div class="stat-bar-wrap" style="flex:1"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+    <span id="score-text" style="min-width:60px;text-align:right;color:var(--color-text-secondary)">0 / 0 correctas</span>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál de los siguientes sistemas de transmisión garantiza una relación de velocidades exacta y constante SIN posibilidad de deslizamiento?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Faja trapezoidal con poleas de distinto diámetro</button>
+      <button class="qbtn" data-q="1" data-correct="true">B) Par de engranajes cilíndricos de contacto exterior</button>
+      <button class="qbtn" data-q="1" data-correct="false">C) Faja plana con ejes paralelos directos</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Sistema de polea con eje cruzado a 90°</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Un engranaje tiene D = 8" y Z = 32 dientes. ¿Cuál es su paso circunferencial (Pc)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) 4 dientes/pulgada</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) 0.5000 pulgadas</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) 0.7854 pulgadas</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) 3.1416 pulgadas</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Para que dos ruedas dentadas puedan engranar correctamente y transmitir potencia, ¿qué condición OBLIGATORIA deben cumplir?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) Que tengan el mismo número de dientes</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) Que tengan el mismo diámetro primitivo</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) Que tengan el mismo paso diametral (Pd) y el mismo paso circunferencial (Pc)</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Que el número de dientes de una sea múltiplo del de la otra</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">Una rueda conductora de 20 dientes gira a 1200 RPM y engrana exteriormente con una rueda conducida de 60 dientes. ¿Cuál es la razón de transmisión R₁₂ y la velocidad de la rueda conducida?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) R₁₂ = +1/3 ; N₂ = 400 RPM (mismo sentido)</button>
+      <button class="qbtn" data-q="4" data-correct="true">B) R₁₂ = −1/3 ; N₂ = 400 RPM (sentido opuesto)</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) R₁₂ = −3 ; N₂ = 3600 RPM (sentido opuesto)</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) R₁₂ = +3 ; N₂ = 3600 RPM (mismo sentido)</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">En un tren simple de 5 ruedas dentadas en serie, ¿qué ruedas determinan el valor absoluto de la razón de tren final?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Todas las ruedas por igual, ya que cada una aporta su propia razón parcial</button>
+      <button class="qbtn" data-q="5" data-correct="true">B) Solo la primera (conductora) y la última (conducida), pues las intermedias se cancelan</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) Las ruedas de los extremos y las de los extremos impares</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) Las ruedas que tienen mayor número de dientes en el tren</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Cuál es la característica definitoria de un tren de engranajes COMPUESTO frente a un tren SIMPLE?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) Que tiene más de cuatro ruedas dentadas en total</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) Que la primera y la última rueda comparten el mismo eje</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) Que al menos dos ruedas están rígidamente solidarias sobre un mismo eje</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Que incluye engranajes cónicos para cambiar el plano de transmisión</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Cuál tipo de cadena trabaja a las velocidades más altas y tiene la menor pérdida de potencia por fricción?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Cadena redonda, por su perfil circular que reduce el contacto</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) Cadena de ganchos, porque sus eslabones son robustos y simples</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) Cadena de rodillos, fabricada con acero de alta calidad y velocidades de 2 a 20 m/s</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Cadena dentada, porque combina las ventajas de engranaje y cadena</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Cuál afirmación sobre las fajas trapezoidales es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Son las fajas más utilizadas en transmisiones industriales generales</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Su sección en V se adapta al canal de la polea evitando deslizamiento por efecto cuña</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Garantizan relación de transmisión exacta porque no tienen deslizamiento de ningún tipo</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Pueden deslizarse ligeramente bajo sobrecarga, a diferencia de las fajas dentadas</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">En un sistema de poleas directo, la polea A (conductora) tiene diámetro 200 mm y gira a 900 RPM. La polea B tiene diámetro 600 mm. ¿A cuántas RPM gira B y en qué sentido?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="true">A) 300 RPM en el mismo sentido que A</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) 300 RPM en sentido contrario a A</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) 2700 RPM en el mismo sentido que A</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) 1800 RPM en sentido contrario a A</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">En el tren epicíclico simple, ¿cuál es el rol del "brazo" porta-satélites (elemento 3, N₃) en la fórmula de Willis Q₁/₂ = (N₂−N₃)/(N₁−N₃)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) Es la rueda conductora principal del tren y siempre gira a la velocidad más alta</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) Es la rueda de mayor diámetro y determina la relación de reducción directamente</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) Es el tercer elemento móvil; al fijarlo (N₃=0) o controlarlo, permite distintas relaciones de transmisión con el mismo tren</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) Es siempre fijo en cualquier tren epicíclico, y su velocidad siempre es cero</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <!-- Panel de resultados -->
+  <div id="quiz-results">
+    <h3 id="results-title"></h3>
+    <p id="results-msg"></p>
+    <button class="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start">
+  <span style="font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc">REFERENCIAS:</span>
+  <span style="font-size:11px;color:#94a3b8">Material de clase: Partes para la Transmisión y Transformación de Fuerzas y Movimiento (37 diapositivas) | Shigley, J.E. &amp; Mischke, C.R. — Mechanical Engineering Design | Norton, R.L. — Machine Design | Maitra, G.M. — Handbook of Gear Design | Budynas &amp; Nisbett — Diseño en Ingeniería Mecánica</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1:{ok:"✅ ¡Correcto! Los engranajes transmiten por contacto directo diente-a-diente: cada diente empuja positivamente al siguiente. No hay elemento flexible intermedio, por lo que es imposible el deslizamiento. Las fajas de fricción (trapezoidal, plana, redonda) dependen de la fuerza de rozamiento y pueden deslizarse bajo sobrecarga.",err:"❌ Incorrecto. La respuesta correcta es B. Los engranajes (cilíndricos, cónicos, etc.) transmiten por engrane positivo diente-a-diente. Las fajas trapezoidales y planas dependen de la fricción y pueden deslizarse. Las fajas dentadas (síncronas) también son positivas, pero no eran opción aquí."},
+  2:{ok:"✅ ¡Correcto! Pc = (π × D) / Z = (3.1416 × 8) / 32 = 25.133 / 32 = 0.7854 pulgadas. Nótese que Pc siempre vale π/Pd. Aquí Pd=32/8=4, y π/4=0.7854. Este valor es el mismo que en el ejemplo de clase porque coincide el paso diametral (4), no el tamaño del engranaje.",err:"❌ Incorrecto. La respuesta correcta es C. Pd=Z/D=32/8=4 (ese es el paso diametral, opción A). Pc=(π×D)/Z=(3.1416×8)/32=0.7854 pulgadas. El valor π=3.1416 no es el Pc sino la constante usada en el cálculo."},
+  3:{ok:"✅ ¡Correcto! La condición de engrane exige Pd₁=Pd₂ Y Pc₁=Pc₂ simultáneamente. Esto garantiza que el espacio entre dientes de una rueda sea igual a la anchura del diente de la otra. En la práctica, cumplir Pd₁=Pd₂ automáticamente implica Pc₁=Pc₂ (pues Pd×Pc=π), pero ambas condiciones son necesarias conceptualmente.",err:"❌ Incorrecto. La respuesta correcta es C. No es necesario que ambas ruedas tengan el mismo número de dientes ni el mismo diámetro (si lo tuvieran sería una razón de transmisión 1:1). Lo obligatorio es que el tamaño relativo de los dientes sea idéntico, expresado como igualdad de paso diametral y circunferencial."},
+  4:{ok:"✅ ¡Correcto! R₁₂ = Z₁/Z₂ = 20/60 = 1/3. Al ser contacto exterior, el signo es negativo: R₁₂ = −1/3. La rueda conducida gira en sentido opuesto. N₂ = N₁ × |R₁₂| = 1200 × (1/3) = 400 RPM. La rueda grande siempre gira más lento que la pequeña.",err:"❌ Incorrecto. La respuesta correcta es B. R₁₂=Z₁/Z₂=20/60=1/3 (reducción de velocidad). El signo negativo se debe al contacto exterior (giran en sentidos opuestos). N₂=1200×(1/3)=400 RPM. La opción C invertiría el cociente: sería el caso si la rueda grande fuera la conductora."},
+  5:{ok:"✅ ¡Correcto! En un tren simple, al desarrollar el producto R₁ₙ=R₁₂×R₂₃×...×R(n-1)n, las ruedas intermedias (2, 3, ..., n-1) aparecen a la vez en numerador y denominador, por lo que se cancelan algebraicamente. El resultado es R₁ₙ=(−1)^(n−1) × Z₁/Zₙ. Las ruedas locas solo afectan el sentido de giro.",err:"❌ Incorrecto. La respuesta correcta es B. Aunque intuitivamente parezca que cada rueda 'aporta', al multiplicar las razones parciales los dientes de las ruedas intermedias se cancelan: aparecen en el numerador de una razón parcial y en el denominador de la siguiente. Solo quedan Z₁ y Zₙ."},
+  6:{ok:"✅ ¡Correcto! El tren compuesto se define por tener al menos un par de ruedas solidarias en el mismo eje (giran a la misma velocidad angular). Esto permite 'conectar' etapas de reducción en serie: la rueda conducida de la primera etapa comparte eje con la conductora de la segunda, multiplicando las reducciones.",err:"❌ Incorrecto. La respuesta correcta es C. El tren recurrente (no el compuesto) es el que tiene primera y última rueda coaxiales (opción B). El número total de ruedas no define el tipo. La característica clave del tren compuesto es la solidaridad de dos ruedas en un mismo eje."},
+  7:{ok:"✅ ¡Correcto! Las cadenas de rodillos están construidas con rodillos de acero de alta calidad que reducen la fricción a un mínimo. Trabajan a velocidades de 2 a 20 m/s (vs 0.5-0.8 m/min de las redondas). Son las usadas en motocicletas y distribuciones de motores precisamente por su eficiencia y durabilidad.",err:"❌ Incorrecto. La respuesta correcta es C. Las cadenas redondas y de ganchos están diseñadas para baja velocidad (0.5-0.8 m/min y baja velocidad respectivamente). Las cadenas de rodillos son las únicas del PDF que menciona velocidades de 2 a 20 m/s con mínima pérdida por fricción."},
+  8:{ok:"✅ ¡Correcto! La afirmación falsa es C. Las fajas trapezoidales son de fricción: aunque el efecto cuña reduce mucho el deslizamiento, bajo sobrecarga extrema pueden deslizarse. Por eso la relación de transmisión no es matemáticamente exacta. Las fajas dentadas (síncronas) sí son positivas y dan relación exacta.",err:"❌ Incorrecto. La respuesta correcta es C. Las afirmaciones A, B y D son todas verdaderas. La C es falsa porque las fajas trapezoidales transmiten por FRICCIÓN: aunque el efecto cuña es muy eficiente, no eliminan el deslizamiento al 100%. Solo las fajas dentadas (síncronas) garantizan relación exacta."},
+  9:{ok:"✅ ¡Correcto! En sistema directo: ωₐ×Rₐ=ω_b×R_b. Como R=D/2: 900×100=ω_b×300 → ω_b=300 RPM. El sistema directo mantiene el mismo sentido de giro en ambas poleas (la faja no se cruza). La polea grande (B, D=600mm) gira más lento que la pequeña (A, D=200mm).",err:"❌ Incorrecto. La respuesta correcta es A. Sistema directo: N_b=N_a×(D_a/D_b)=900×(200/600)=300 RPM. Al no cruzarse la faja, ambas poleas giran en el MISMO sentido. Si la faja se cruzara (sistema de faja invertida), girarían en sentidos opuestos."},
+  10:{ok:"✅ ¡Correcto! El brazo N₃ es el tercer elemento del epicíclico. La fórmula de Willis Q₁/₂=(N₂−N₃)/(N₁−N₃)=Z₁/Z₂ permite manejar el tren de tres formas: 1) fijar el brazo (N₃=0, tren ordinario), 2) fijar el solar (N₁=0), o 3) fijar la corona. Cada configuración da una relación distinta con los mismos engranajes.",err:"❌ Incorrecto. La respuesta correcta es C. El brazo no es necesariamente el más rápido ni el de mayor diámetro, y NO siempre está fijo (eso sería solo un caso particular). Su rol es ser el tercer grado de libertad del epicíclico: controlando N₃ se obtienen distintas relaciones. Es la base de las transmisiones automáticas de automóviles."}
+};
+
+let answered=0,correct=0;
+const answered_q=new Set();
+
+document.getElementById('quiz-section').addEventListener('click',function(e){
+  const btn=e.target.closest('.qbtn');
+  if(!btn||btn.disabled)return;
+  const q=btn.dataset.q;
+  if(answered_q.has(q))return;
+  answered_q.add(q);
+  const isCorrect=btn.dataset.correct==='true';
+  const allBtns=document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.correct==='true')b.classList.add('show-correct');
+  });
+  if(isCorrect){
+    btn.classList.add('correct');
+    correct++;
+  } else {
+    btn.classList.add('incorrect');
+  }
+  const fb=document.getElementById('fb'+q);
+  fb.style.display='block';
+  fb.className='qfeedback '+(isCorrect?'ok':'err');
+  fb.textContent=isCorrect?feedbacks[q].ok:feedbacks[q].err;
+  answered++;
+  const pct=Math.round((answered/10)*100);
+  document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('prog-text').textContent='Pregunta '+answered+' de 10';
+  document.getElementById('score-text').textContent=correct+' / '+answered+' correctas';
+  if(answered===10) showResults();
+});
+
+function showResults(){
+  const r=document.getElementById('quiz-results');
+  r.style.display='block';
+  const t=document.getElementById('results-title');
+  const m=document.getElementById('results-msg');
+  if(correct<=4){r.style.background='#fef2f2';r.style.color='#991b1b';t.textContent='Puntaje: '+correct+'/10';m.textContent='Necesitas repasar el material. Revisa los conceptos de paso circunferencial, razón de transmisión y tipos de cadenas.';}
+  else if(correct<=7){r.style.background='#fefce8';r.style.color='#713f12';t.textContent='Puntaje: '+correct+'/10';m.textContent='¡Buen avance! Repasa los trenes de engranajes compuestos y epicíclicos para consolidar el tema.';}
+  else{r.style.background='#f0fdf4';r.style.color='#14532d';t.textContent='Puntaje: '+correct+'/10 🎉';m.textContent='¡Excelente dominio del tema! Estás listo para el examen sobre transmisión de fuerzas y movimiento.';}
+}
+
+function resetQuiz(){
+  answered=0;correct=0;answered_q.clear();
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('prog-text').textContent='Pregunta 0 de 10';
+  document.getElementById('score-text').textContent='0 / 0 correctas';
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.disabled=false;
+    b.classList.remove('correct','incorrect','show-correct');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f=>{f.style.display='none';f.textContent='';});
+  const r=document.getElementById('quiz-results');
+  r.style.display='none';r.style.background='';r.style.color='';
+}
+</script>

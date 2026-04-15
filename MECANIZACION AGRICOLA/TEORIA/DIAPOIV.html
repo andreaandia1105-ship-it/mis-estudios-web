@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas — Fuentes de Energía en la Agricultura</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f1f5f9;font-family:'Source Sans 3',sans-serif;color:#1e293b;padding:16px}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;max-width:1200px;margin:0 auto}
+.title-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700}
+.title-bar p{font-size:11px;color:#94a3b8;margin-top:3px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tag{font-size:10px;background:#1e3a5f;color:#93c5fd;border-radius:20px;padding:2px 9px}
+.sec{grid-column:1/-1;padding:7px 13px;border-radius:8px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:#fff}
+.sec.blu{background:#1e40af}.sec.grn{background:#166534}.sec.tea{background:#0f766e}
+.sec.amb{background:#92400e}.sec.org{background:#9a3412}.sec.gry{background:#334155}.sec.pur{background:#5b21b6}
+.block{background:#fff;border:0.5px solid #cbd5e1;border-radius:11px;padding:12px 14px;font-size:12px;color:#1e293b}
+.block.s2{grid-column:span 2}.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh.blu{background:#dbeafe;color:#1e3a8a}.bh.grn{background:#dcfce7;color:#14532d}
+.bh.tea{background:#ccfbf1;color:#134e4a}.bh.amb{background:#fef9c3;color:#713f12}
+.bh.org{background:#ffedd5;color:#7c2d12}.bh.gry{background:#f1f5f9;color:#334155}.bh.pur{background:#ede9fe;color:#4c1d95}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:#f8fafc;margin-bottom:8px;line-height:1.55}
+.def.blu{border-color:#3b82f6}.def.grn{border-color:#22c55e}.def.tea{border-color:#14b8a6}
+.def.amb{border-color:#f59e0b}.def.org{border-color:#f97316}.def.pur{border-color:#8b5cf6}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot.blu{background:#3b82f6}.dot.grn{background:#22c55e}.dot.tea{background:#14b8a6}
+.dot.amb{background:#f59e0b}.dot.org{background:#f97316}.dot.gry{background:#64748b}.dot.pur{background:#8b5cf6}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:8px 12px;border-radius:7px;text-align:center;line-height:1.8;margin:8px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;line-height:1.4}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;line-height:1.5}
+.mini{background:#f8fafc;border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px;line-height:1.4}
+.mini.blu{border-top:3px solid #3b82f6}.mini.grn{border-top:3px solid #22c55e}
+.mini.tea{border-top:3px solid #14b8a6}.mini.amb{border-top:3px solid #f59e0b}
+.mini.org{border-top:3px solid #f97316}.mini.gry{border-top:3px solid #64748b}.mini.pur{border-top:3px solid #8b5cf6}
+.mini b{display:block;font-weight:600;margin-bottom:3px;font-size:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:#f1f5f9;padding:4px 9px;border-radius:6px;font-size:11px;line-height:1.4;text-align:center}
+.farrow{color:#64748b;font-size:14px}
+.divh{border:none;border-top:0.5px solid #e2e8f0;margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:#f1f5f9;padding:5px 7px;border-bottom:0.5px solid #e2e8f0;text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid #f1f5f9;vertical-align:top}
+.pill{font-size:10px;padding:2px 7px;border-radius:20px;display:inline-block;margin:1px;font-weight:600}
+.pill.grn{background:#dcfce7;color:#14532d}.pill.blu{background:#dbeafe;color:#1e3a8a}
+.pill.amb{background:#fef9c3;color:#713f12}.pill.red{background:#fee2e2;color:#991b1b}
+
+/* QUIZ */
+#quiz-section{grid-column:1/-1;background:#fff;border:0.5px solid #cbd5e1;border-radius:14px;padding:16px 20px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 16px;margin-bottom:14px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700}
+.quiz-header p{font-size:11px;color:#94a3b8;margin-top:3px}
+.qcard{margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0}
+.qcard:last-of-type{border-bottom:none}
+.qnum{font-size:11px;color:#64748b;margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:13px;font-weight:600;margin-bottom:8px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;font-family:'Source Sans 3',sans-serif;line-height:1.4}
+.qbtn:hover:not(:disabled){background:#f1f5f9}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:0.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;display:none}
+.qfeedback.show{display:block}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.ko{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.quiz-progress{margin-bottom:12px}
+.quiz-progress p{font-size:12px;color:#64748b;margin-bottom:5px}
+.stat-bar-wrap{width:100%;background:#f1f5f9;border-radius:20px;height:10px}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width 0.3s}
+#result-panel{display:none;border-radius:10px;padding:14px 16px;text-align:center;margin-top:12px}
+#result-panel h3{font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px}
+#result-panel p{font-size:12px;margin-bottom:10px}
+#restart-btn{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:12px;cursor:pointer;font-family:'Source Sans 3',sans-serif}
+#restart-btn:hover{background:#1e3a5f}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="title-bar">
+  <h1>⚡ Fuentes de Energía en la Agricultura</h1>
+  <p>Resumen visual completo · 63 diapositivas · Curso de Mecanización Agrícola</p>
+  <div class="tags">
+    <span class="tag">Energía Renovable</span><span class="tag">No Renovable</span><span class="tag">Energía Humana</span>
+    <span class="tag">Tracción Animal</span><span class="tag">Hidráulica</span><span class="tag">Solar</span>
+    <span class="tag">Eólica</span><span class="tag">Biomasa</span><span class="tag">Petróleo</span><span class="tag">Nuclear</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: FUNDAMENTOS -->
+<div class="sec blu">🔵 FUNDAMENTOS — CONCEPTO DE ENERGÍA Y CLASIFICACIÓN (Diap. 2–4)</div>
+
+<div class="block">
+  <span class="bh blu">¿Qué es Energía?</span>
+  <div class="def blu">Capacidad de un cuerpo de producir trabajo o transformación en otro. En agricultura, la energía invertida debe ser <b>menor</b> a la obtenida en cosechas para que el sistema sea viable económicamente.</div>
+  <div class="item"><div class="dot blu"></div><span>Toda labor agrícola consume energía: arar, regar, cosechar, transportar y procesar requieren de una fuente energética.</span></div>
+  <div class="item"><div class="dot blu"></div><span>Si la energía gastada supera la energía producida (cosecha), el sistema colapsa económicamente — principio de balance energético agrícola.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique el concepto de "balance energético" en la agricultura y por qué es fundamental que la energía empleada sea menor a la obtenida en cosechas útiles.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh blu">Clasificación de Fuentes de Energía (Diap. 3–4)</span>
+  <div class="two">
+    <div class="mini grn"><b>♻ Renovables — Ilimitadas</b> Existen en la naturaleza de forma ilimitada o se regeneran continuamente. No se agotan con el uso. Ejemplos: solar, eólica, hidráulica, biomasa, energía humana y animal.</div>
+    <div class="mini org"><b>⛽ No Renovables — Limitadas</b> Existen en cantidades limitadas y no se regeneran en escala de tiempo humana. Su uso implica agotamiento progresivo. Ejemplos: petróleo, carbón, gas natural, energía nuclear (uranio).</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: La energía nuclear es NO renovable aunque no emita CO₂. "Limpia" y "renovable" NO son sinónimos. El uranio es un recurso mineral que se agota.</div>
+  <div class="exam">🎯 EXAMEN: Clasifique las siguientes fuentes en renovable/no renovable justificando su respuesta: energía solar, gas natural, biomasa, carbón mineral, energía eólica, energía nuclear.</div>
+</div>
+
+<!-- SECCIÓN 2: ENERGÍA HUMANA -->
+<div class="sec grn">🟢 FUENTES RENOVABLES — ENERGÍA HUMANA (Diap. 5–10)</div>
+
+<div class="block s2">
+  <span class="bh grn">Energía Humana — Rendimiento y Rol Insustituible</span>
+  <div class="def grn">El ser humano convierte energía química de alimentos en trabajo mecánico mediante la contracción muscular, con una eficiencia del 20–25%. Su valor no es energético sino intelectual: dirección, coordinación y toma de decisiones inteligentes.</div>
+  <div class="rx">3,200 Kcal/día × 25% eficiencia = 800 Kcal de trabajo útil/día<br>Trabajo agrícola: 8 horas × 4 Kcal/min = 1,920 Kcal gastadas en labor</div>
+  <div class="item"><div class="dot grn"></div><span><b>Bajo pero valioso:</b> aunque el rendimiento es solo 25%, la inteligencia que acompaña al trabajo muscular no puede medirse cuantitativamente ni reemplazarse por ninguna máquina.</span></div>
+  <div class="item"><div class="dot grn"></div><span><b>Aplicaciones clave:</b> labores manuales (siembra, cosecha, poda), monitoreo de cultivos, operación de maquinaria y diseño de planes productivos — todas requieren decisión humana.</span></div>
+  <div class="item"><div class="dot grn"></div><span><b>Autonomía y elasticidad:</b> el trabajo humano ofrece máxima capacidad de dirigir inteligentemente cualquier otra fuente energética utilizada.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: El 25% de rendimiento NO hace al trabajo humano prescindible. La inteligencia aplicada al trabajo agrega un valor inmensurable que ningún dato energético puede capturar.</div>
+  <div class="exam">🎯 EXAMEN: Un agricultor de 70 kg con ración diaria de 3,200 Kcal y eficiencia del 25% trabaja 8 horas a 4 Kcal/min. Calcule las Kcal transformadas en trabajo útil. ¿Por qué sigue siendo insustituible a pesar del bajo rendimiento?</div>
+</div>
+
+<div class="block">
+  <span class="bh grn">Consumo Energético Diario (Diap. 7)</span>
+  <table class="tbl">
+    <tr><th>Actividad</th><th>Horas</th><th>Kcal/min</th><th>Kcal totales</th></tr>
+    <tr><td>Dormir</td><td>8</td><td>1.08</td><td>518</td></tr>
+    <tr><td>Ejercicio</td><td>2</td><td>1.34</td><td>161</td></tr>
+    <tr><td>Trabajo agrícola</td><td>8</td><td>4.00</td><td>1,920</td></tr>
+    <tr><td>Descanso</td><td>6</td><td>1.67</td><td>601</td></tr>
+    <tr><td><b>Total</b></td><td><b>24</b></td><td>—</td><td><b>3,200</b></td></tr>
+  </table>
+  <div style="font-size:11px;color:#64748b;margin-top:5px;line-height:1.4">Hombre de 70 kg en jornada agrícola completa de 8 horas (4 Kcal/min).</div>
+</div>
+
+<!-- SECCIÓN 3: ENERGÍA ANIMAL -->
+<div class="sec grn">🐂 FUENTES RENOVABLES — ENERGÍA ANIMAL (Diap. 11–15)</div>
+
+<div class="block s2">
+  <span class="bh grn">Tracción Animal — Historia y Características</span>
+  <div class="def grn">La tracción animal fue un salto decisivo en la historia agrícola: multiplicó la productividad humana al complementar o sustituir el trabajo manual. Surgió en Mesopotamia y Egipto con bueyes; en América precolombina, llamas y alpacas transportaban carga en los Andes.</div>
+  <div class="item"><div class="dot grn"></div><span><b>Ventaja única sobre maquinaria:</b> mantiene efectividad en pendientes pronunciadas y superficies irregulares donde los tractores no pueden operar — fundamental en la sierra peruana.</span></div>
+  <div class="item"><div class="dot grn"></div><span><b>Doble función:</b> transporte de carga en lomo (llamas) y tracción de aperos agrícolas como arado y rastra (bueyes, caballos, mulos).</span></div>
+  <div class="item"><div class="dot grn"></div><span><b>Factores que determinan la potencia:</b> raza, sexo, peso, altura, calidad de alimentación y entrenamiento para el trabajo.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: La potencia de un animal NO es fija. Varía significativamente según entrenamiento y alimentación. Un caballo bien entrenado y alimentado puede duplicar su potencia efectiva.</div>
+  <div class="exam">🎯 EXAMEN: En zonas andinas del Perú se prefiere la tracción animal. Explique las características de la energía animal que justifican esta preferencia y los factores que determinan la potencia disponible.</div>
+</div>
+
+<div class="block">
+  <span class="bh grn">Potencia de Animales de Tracción (Diap. 14)</span>
+  <table class="tbl">
+    <tr><th>Animal</th><th>Peso (kg)</th><th>Vel. (m/s)</th><th>Potencia (kW)</th></tr>
+    <tr><td>Caballo</td><td>400–700</td><td>1.0</td><td><b>0.70</b></td></tr>
+    <tr><td>Buey</td><td>500–800</td><td>0.6–0.85</td><td>0.55</td></tr>
+    <tr><td>Mula</td><td>350–500</td><td>0.9–1.0</td><td>0.50</td></tr>
+    <tr><td>Vaca</td><td>400–600</td><td>0.7</td><td>0.31</td></tr>
+    <tr><td>Asno</td><td>200–300</td><td>0.7</td><td>0.24</td></tr>
+  </table>
+  <div style="font-size:11px;color:#64748b;margin-top:5px">El caballo entrega la mayor potencia (0.70 kW). Los valores son promedios para animales bien alimentados y entrenados.</div>
+</div>
+
+<!-- SECCIÓN 4: ENERGÍA HIDRÁULICA -->
+<div class="sec tea">💧 FUENTES RENOVABLES — ENERGÍA HIDRÁULICA (Diap. 16–30)</div>
+
+<div class="block s3">
+  <span class="bh tea">Energía Hidráulica — Aprovechamiento y Turbinas</span>
+  <div class="def tea">La energía hidráulica convierte la energía potencial y cinética del agua en movimiento en trabajo mecánico o electricidad. Es la fuente renovable más importante de Perú gracias a su geografía andina. Su uso data de molinos de agua en la antigüedad hasta modernas centrales hidroeléctricas.</div>
+  <div class="three">
+    <div class="mini tea"><b>💧 Caídas de Agua</b> El agua cae desde cierta altura → energía potencial se convierte en cinética → mueve aspas → rotación → trabajo mecánico. Base histórica de los molinos de agua.</div>
+    <div class="mini tea"><b>🌊 Corrientes Naturales</b> Ríos y corrientes marinas poseen energía cinética. Origen: lluvias, diferencias de temperatura, salinidad y mareas. Variedad de generadores en desarrollo.</div>
+    <div class="mini tea"><b>🏗️ Presas y Embalses</b> Principal aplicación actual. Se ubican donde hay lluvias y desniveles geológicos favorables. Acumulan energía potencial controlada que se libera a demanda.</div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Agua embalsada<br><small>Ep = mgh</small></div><div class="farrow">→</div>
+    <div class="fbox">Cae por tuberías<br><small>Ep → Ec</small></div><div class="farrow">→</div>
+    <div class="fbox">Mueve turbina<br><small>E. mecánica</small></div><div class="farrow">→</div>
+    <div class="fbox">Generador eléctrico<br><small>E. eléctrica</small></div><div class="farrow">→</div>
+    <div class="fbox">Red eléctrica</div>
+  </div>
+  <div class="divh"></div>
+  <div class="three">
+    <div class="mini tea"><b>⚡ Turbina Pelton</b> Rueda con "cucharas" en la periferia. Un chorro de agua a alta velocidad impacta las cucharas generando rotación. Ideal: <b>gran altura de caída / poco caudal</b>. Existe desde tamaño doméstico hasta centrales de toneladas.</div>
+    <div class="mini tea"><b>🔵 Turbina Kaplan</b> Aspas del rotor <b>siempre regulables</b>; distribuidores fijos o regulables. Ideal: <b>pequeños saltos / gran caudal</b> (ríos de llanura). Sus aspas móviles permiten rendimiento óptimo en amplio rango de operación.</div>
+    <div class="mini tea"><b>🔧 Turbina Francis</b> Turbina de reacción. Rotor Y distribuidor son móviles → opera en amplio margen de caídas y caudales. Muy costosa de fabricar e instalar, pero dura décadas con bajo mantenimiento. Diseñada individualmente para cada proyecto.</div>
+  </div>
+  <div class="rx">
+    P = Q × H × g<br>
+    P = Potencia (kW) | Q = Caudal (l/s) | H = Altura de caída (m) | g = 9.81 m/s²<br><br>
+    Ejemplo resuelto: Q=20 l/s, H=12 m<br>
+    P = 20 × 12 × 9.81 = 2,354 W = 2.35 kW (potencia teórica)<br>
+    <span style="color:#94a3b8;font-size:10px">* La potencia real es menor por rozamientos, fugas y eficiencia de la turbina (η)</span>
+  </div>
+  <div class="warn">⚠️ SELECCIÓN DE TURBINAS: Pelton = H alta / Q bajo · Kaplan = H baja / Q alto · Francis = rango intermedio y versátil. Usar la turbina incorrecta reduce drásticamente el rendimiento del sistema.</div>
+  <div class="exam">🎯 EXAMEN: Calcule la potencia teórica de un sistema hidráulico con caudal de 50 l/s y altura de 20 m. ¿Qué tipo de turbina recomendaría y por qué? ¿Por qué la potencia real obtenida es siempre menor a la calculada?</div>
+</div>
+
+<!-- SECCIÓN 5: ENERGÍA SOLAR -->
+<div class="sec amb">☀️ FUENTES RENOVABLES — ENERGÍA SOLAR (Diap. 31–39)</div>
+
+<div class="block s2">
+  <span class="bh amb">Energía Solar Térmica y Fotovoltaica</span>
+  <div class="def amb">El sol es la fuente de energía primaria de la Tierra, prácticamente ilimitada. Es además el origen indirecto de la energía hidráulica (evaporación→lluvia→ríos) y de la eólica (diferencias de temperatura→vientos). Perú tiene excelente potencial solar en costa y altiplano.</div>
+  <div class="two">
+    <div>
+      <div class="mini amb"><b>🌡️ Solar Térmica — Baja Concentración</b> La más extendida comercialmente. Colectores instalados en tejados capturan calor solar para agua caliente y calefacción doméstica. <b>Ventaja exclusiva: puede almacenarse</b>, a diferencia de otras fuentes que deben consumirse al generarse.</div>
+      <div class="mini amb"><b>🔥 Solar Térmica — Alta Concentración</b> Espejos concentran luz en un punto focal calentando un fluido transmisor. Tres tipos según temperatura: Cilindro Parabólico (150–350 °C), Disco Stirling (250–700 °C), Torre Central (500–1,000 °C). Generan vapor para turbinas eléctricas.</div>
+    </div>
+    <div>
+      <div class="mini amb"><b>⚡ Solar Fotovoltaica</b> Convierte luz solar directamente en electricidad mediante el efecto fotoeléctrico en celdas semiconductoras (silicio). La luz genera diferencia de potencial → flujo de electrones → corriente eléctrica. Características: inagotable · sin emisiones CO₂ · mantenimiento casi nulo · modular (paneles domésticos a plantas de MW).</div>
+      <div class="flow" style="margin-top:6px">
+        <div class="fbox">Panel FV</div><div class="farrow">→</div>
+        <div class="fbox">Inversor</div><div class="farrow">→</div>
+        <div class="fbox">Bomba</div><div class="farrow">→</div>
+        <div class="fbox">Depósito</div><div class="farrow">→</div>
+        <div class="fbox">Riego</div>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Solar térmica ≠ fotovoltaica. La térmica produce CALOR (para agua/calefacción/vapor); la fotovoltaica produce ELECTRICIDAD directamente. Son tecnologías distintas con aplicaciones diferentes.</div>
+  <div class="exam">🎯 EXAMEN: Explique el principio de funcionamiento de la energía solar fotovoltaica y diferénciela de la solar térmica. ¿Por qué la solar térmica tiene la ventaja del almacenamiento energético?</div>
+</div>
+
+<!-- SECCIÓN 6: ENERGÍA EÓLICA -->
+<div class="sec grn">🌬️ FUENTES RENOVABLES — ENERGÍA EÓLICA (Diap. 40–45)</div>
+
+<div class="block s2">
+  <span class="bh grn">Energía Eólica — Historia y Turbinas</span>
+  <div class="def grn">Posiblemente la más antigua fuente de energía aprovechada por el ser humano (3,000 a.C., Mesopotamia y Egipto). Aprovecha la energía cinética del viento mediante aerogeneradores que convierten el movimiento del aire en energía mecánica y luego eléctrica.</div>
+  <div class="item"><div class="dot grn"></div><span><b>Historia:</b> Primeros molinos en Sistán y Afganistán (siglo VII) — eje vertical, 8 velas para moler grano. Primera máquina generadora de electricidad eólica: Dinamarca, 1890.</span></div>
+  <div class="two" style="margin-top:8px">
+    <div class="mini grn"><b>↔ Turbinas Eje Horizontal</b> Generador en la cima de la torre; eje de rotación paralelo al suelo. Deben orientarse hacia el viento. Mayor potencia generada. Estándar industrial en parques eólicos modernos.</div>
+    <div class="mini grn"><b>↕ Turbinas Eje Vertical</b> Siempre alineadas con el viento sin importar su dirección. Más pequeñas y livianas que las horizontales. Operan a velocidades de viento muy bajas. Generan menos energía pero son ideales para zonas urbanas o rurales con vientos variables.</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Las turbinas de eje HORIZONTAL generan más energía y son las usadas en parques eólicos industriales. Las de eje vertical son "menores" pero no "peores" — sirven para contextos distintos.</div>
+  <div class="exam">🎯 EXAMEN: Compare las turbinas de eje horizontal y vertical en términos de orientación al viento, potencia generada y contextos de uso apropiados.</div>
+</div>
+
+<div class="block">
+  <span class="bh grn">Perú y Energía Eólica</span>
+  <div class="mini grn"><b>🌬️ Costa Peruana</b> Vientos constantes del Pacífico sur. El parque eólico de Marcona (Ica) es uno de los más importantes de Sudamérica. La costa sur tiene potencial eólico significativo y creciente.</div>
+  <div class="mini grn"><b>🏔️ Sierra y Zonas Altas</b> Vientos andinos intensos y constantes. Turbinas de eje vertical de pequeña escala sirven para comunidades rurales sin conexión a la red eléctrica nacional.</div>
+  <div class="mini grn"><b>📅 Historia</b> 3,000 a.C.: velas en barcos de Mesopotamia y Egipto. Siglo VII: molinos de eje vertical en Sistán. 1890: primer aerogenerador eléctrico en Dinamarca.</div>
+</div>
+
+<!-- SECCIÓN 7: BIOMASA Y BIOCOMBUSTIBLES -->
+<div class="sec grn">🌿 BIOMASA Y BIOCOMBUSTIBLES (Diap. 46–51)</div>
+
+<div class="block s2">
+  <span class="bh grn">Biomasa — Ciclo y Fuentes</span>
+  <div class="def grn">La biomasa es materia vegetal orgánica que almacena energía solar en forma de energía química (fotosíntesis). Al combustionar, libera esa energía. Es parte de un ciclo neutro en carbono: el CO₂ liberado fue previamente absorbido durante el crecimiento de la planta.</div>
+  <div class="flow">
+    <div class="fbox">Luz Solar</div><div class="farrow">→</div>
+    <div class="fbox">Fotosíntesis<br><small>Planta crece</small></div><div class="farrow">→</div>
+    <div class="fbox">Biomasa<br><small>Materia orgánica</small></div><div class="farrow">→</div>
+    <div class="fbox">Combustión<br><small>Libera calor</small></div><div class="farrow">→</div>
+    <div class="fbox">CO₂<br><small>Vuelve al ciclo</small></div>
+  </div>
+  <div class="item" style="margin-top:8px"><div class="dot grn"></div><span><b>Fuentes:</b> plantas acuáticas y terrestres, residuos forestales y agropecuarios, óleos vegetales y ciertos residuos industriales orgánicos.</span></div>
+  <div class="item"><div class="dot grn"></div><span><b>Aplicación agrícola:</b> desechos de cosechas (rastrojos, cáscaras, estiércol) se reutilizan en centrales térmicas especiales para producir electricidad, cerrando el ciclo productivo.</span></div>
+  <div class="warn">⚠️ CONCEPTUAL: La biomasa es renovable porque los cultivos se reponen, pero NO es inagotable si se sobreexplota el suelo. Su quema genera emisiones locales aunque sea neutra en CO₂ neto.</div>
+</div>
+
+<div class="block">
+  <span class="bh grn">Biocombustibles (Diap. 48–51)</span>
+  <div class="def grn">Derivados de biomasa diseñados para sustituir gasolina o diésel en motores de combustión interna, reduciendo la dependencia de combustibles fósiles.</div>
+  <div class="mini grn"><b>🌿 Biodiesel</b> De aceites vegetales (palma, soya, girasol, jatrofa) debidamente procesados y fluidificados. Fórmula base: C₂H₅OH. Para motores Diésel. Se mezcla con diésel convencional: B5, B20, hasta B100.</div>
+  <div class="mini grn"><b>🌽 Bioetanol</b> Por fermentación alcohólica de productos ricos en azúcares (caña de azúcar, maíz, yuca). Para motores de gasolina. Brasil: mayor productor mundial; mezclas hasta E85 (85% etanol).</div>
+  <div class="warn">⚠️ Biodiesel ≠ Bioetanol en materia prima, proceso y motor. Confundirlos puede dañar motores. Biodiesel → diésel; Bioetanol → gasolina.</div>
+  <div class="exam">🎯 EXAMEN: Diferencie biodiesel y bioetanol en cuanto a materia prima, proceso de producción y tipo de motor en que se utiliza.</div>
+</div>
+
+<!-- SECCIÓN 8: NO RENOVABLES -->
+<div class="sec org">⛽ FUENTES NO RENOVABLES — PETRÓLEO Y CARBÓN (Diap. 52–57)</div>
+
+<div class="block s2">
+  <span class="bh org">Petróleo en la Agricultura (Diap. 52–55)</span>
+  <div class="def org">El petróleo es una mezcla líquida de hidrocarburos de origen orgánico marino, formada hace millones de años. A partir de 1850 revolucionó la agricultura: desplazó la tracción animal/humana del 65% al 1% en solo un siglo de mecanización intensiva.</div>
+  <div class="three">
+    <div class="mini org"><b>⚗️ Fertilizantes</b> Materia prima del amoniaco (NH₃) y urea (46% N). Sin petróleo, los fertilizantes nitrogenados serían escasos y la producción agrícola mundial colapsaría. La "Revolución Verde" dependió del petróleo barato.</div>
+    <div class="mini org"><b>🛢️ Derivados Plásticos</b> Mangueras de riego, contenedores, mallas de protección, cubiertas de invernaderos, sistemas de micro-riego por goteo. La producción intensiva moderna es inseparable de los plásticos.</div>
+    <div class="mini org"><b>🚜 Combustible Directo</b> Tractores, cosechadoras, vehículos de carga, generadores eléctricos de emergencia y motobombas para riego. El diesel es la "sangre" de la mecanización agrícola actual.</div>
+  </div>
+  <div class="warn">⚠️ PARA PERÚ: Cuando sube el precio del petróleo, suben simultáneamente el combustible, los fertilizantes y los plásticos agrícolas — triple impacto en los costos de producción y la rentabilidad del agricultor.</div>
+  <div class="exam">🎯 EXAMEN: Describa cuatro usos del petróleo y sus derivados en el sistema agrícola actual. ¿Por qué se afirma que la agricultura moderna es "dependiente del petróleo"?</div>
+</div>
+
+<div class="block">
+  <span class="bh org">Carbón Mineral (Diap. 56–57)</span>
+  <div class="def org">Roca sedimentaria orgánica rica en carbono, formada por millones de años de presión y calor sobre materia vegetal. El combustible fósil más abundante pero el más contaminante (SO₂, CO₂, partículas).</div>
+  <div class="flow">
+    <div class="fbox">Carbón al horno</div><div class="farrow">→</div>
+    <div class="fbox">Calor → vapor</div><div class="farrow">→</div>
+    <div class="fbox">Turbina giratoria</div><div class="farrow">→</div>
+    <div class="fbox">Generador</div><div class="farrow">→</div>
+    <div class="fbox">Electricidad</div>
+  </div>
+  <div style="font-size:11px;color:#64748b;margin-top:6px">El agua bombeada se recircula: de la turbina vuelve a la caldera en ciclo cerrado.</div>
+</div>
+
+<!-- SECCIÓN 9: GAS Y NUCLEAR -->
+<div class="sec gry">⚫ GAS NATURAL Y ENERGÍA NUCLEAR (Diap. 58–62)</div>
+
+<div class="block s2">
+  <span class="bh gry">Gas Natural — GNV y GLP (Diap. 58–59)</span>
+  <div class="def gry">Mezcla de hidrocarburos en estado gaseoso (principalmente metano CH₄) obtenida durante la extracción de petróleo o en pozos independientes. Es el combustible fósil más limpio en términos de emisiones CO₂ por unidad de energía.</div>
+  <div class="two">
+    <div class="mini gry"><b>🚗 GNV — Gas Natural Vehicular</b> Metano comprimido a alta presión para vehículos. En Perú, masivamente adoptado en Lima (taxis, transporte) gracias al gas de Camisea. Aplicación agrícola: maquinaria pesada y vehículos de carga.</div>
+    <div class="mini gry"><b>🏠 GLP — Gas Licuado de Petróleo</b> Mezcla de butano y propano; el mismo de los balones domésticos. No confundir con gas natural (metano). En agricultura: calefacción de invernaderos y corrales avícolas para regular temperatura.</div>
+  </div>
+  <div class="warn">⚠️ GNV ≠ GLP en composición química y almacenamiento. El GNV es metano a alta presión; el GLP es butano+propano licuado. Confundirlos puede ser peligroso.</div>
+  <div class="exam">🎯 EXAMEN: Diferencie GNV y GLP en composición química, almacenamiento y usos en el sector agrícola peruano.</div>
+</div>
+
+<div class="block">
+  <span class="bh pur">Energía Nuclear (Diap. 60–62)</span>
+  <div class="def pur">Fisión de átomos de uranio libera energía millones de veces mayor que la combustión química. No renovable (el uranio se agota). Cero emisiones CO₂ en operación, pero genera residuos radiactivos de larga vida.</div>
+  <div class="flow">
+    <div class="fbox">Fisión nuclear<br><small>Uranio</small></div><div class="farrow">→</div>
+    <div class="fbox">Energía térmica</div><div class="farrow">→</div>
+    <div class="fbox">Vapor de agua</div><div class="farrow">→</div>
+    <div class="fbox">Turbina</div><div class="farrow">→</div>
+    <div class="fbox">Electricidad</div>
+  </div>
+  <div class="mini pur"><b>⚛️ Isótopos en Agricultura (IAEA)</b> ¹⁵N: mide eficiencia de captación de fertilizantes · ¹³C: estudia tolerancia a sequía y salinidad · ¹⁸O: separa evaporación y transpiración para calcular pérdida de agua en cultivos.</div>
+  <div class="warn">⚠️ "Nuclear" no implica explosión. La diferencia entre una central nuclear y una bomba atómica es el grado de control de la reacción en cadena: la central la controla; la bomba la libera instantáneamente.</div>
+  <div class="exam">🎯 EXAMEN: Mencione tres isótopos usados en agricultura nuclear y explique qué información específica aporta cada uno.</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="sec gry">📊 TABLA INTEGRADORA FINAL — RESUMEN COMPARATIVO</div>
+
+<div class="block s3">
+  <span class="bh gry">Todas las Fuentes de Energía en la Agricultura</span>
+  <table class="tbl">
+    <tr>
+      <th>Fuente</th><th>Tipo</th><th>Principio energético</th>
+      <th>Aplicación agrícola principal</th><th>Ventaja clave</th><th>Limitación principal</th>
+    </tr>
+    <tr><td><span class="pill grn">Humana</span></td><td>Renovable</td><td>Química → mecánica (25% efic.)</td><td>Todas las labores; dirección de cualquier fuente</td><td>Inteligencia + autonomía insustituibles</td><td>Bajo rendimiento energético</td></tr>
+    <tr><td><span class="pill grn">Animal</span></td><td>Renovable</td><td>Alimento → trabajo mecánico</td><td>Arado, carga en zonas andinas y pendientes</td><td>Opera en terrenos irregulares/pendientes</td><td>Potencia limitada: 0.24–0.70 kW</td></tr>
+    <tr><td><span class="pill blu">Hidráulica</span></td><td>Renovable</td><td>Energía potencial/cinética → eléctrica</td><td>Riego, generación eléctrica rural y nacional</td><td>Gran potencia, sin emisiones, confiable</td><td>Requiere desniveles y lluvias</td></tr>
+    <tr><td><span class="pill amb">Solar Térmica</span></td><td>Renovable</td><td>Radiación solar → calor</td><td>Calefacción invernaderos, secado de productos</td><td>Almacenable, sin emisiones directas</td><td>Intermitente (noche y nubosidad)</td></tr>
+    <tr><td><span class="pill amb">Solar FV</span></td><td>Renovable</td><td>Efecto fotoeléctrico → electricidad</td><td>Bombeo solar para riego, electrificación rural</td><td>Modular, sin emisiones, sin mantenimiento</td><td>Alto costo inicial de instalación</td></tr>
+    <tr><td><span class="pill grn">Eólica</span></td><td>Renovable</td><td>Energía cinética viento → eléctrica</td><td>Generación eléctrica, bombeo de agua</td><td>Abundante en costa peruana (Marcona)</td><td>Intermitente, ruido, impacto visual</td></tr>
+    <tr><td><span class="pill grn">Biomasa</span></td><td>Renovable</td><td>Combustión materia orgánica</td><td>Electricidad a partir de residuos agrícolas</td><td>Aprovecha desechos, ciclo neutro CO₂</td><td>Emisiones locales, requiere volumen</td></tr>
+    <tr><td><span class="pill grn">Biocombustibles</span></td><td>Renovable</td><td>Fermentación / transesterificación</td><td>Sustituye gasolina y diésel en maquinaria</td><td>Reduce dependencia de combustibles fósiles</td><td>Puede competir con producción alimentaria</td></tr>
+    <tr><td><span class="pill red">Petróleo</span></td><td>No Renovable</td><td>Combustión de hidrocarburos líquidos</td><td>Tractores, fertilizantes, plásticos, riego</td><td>Alta densidad energética, versátil</td><td>Finito, contaminante, precio volátil</td></tr>
+    <tr><td><span class="pill red">Carbón</span></td><td>No Renovable</td><td>Combustión → vapor → turbina</td><td>Generación eléctrica industrial</td><td>Abundante y de bajo costo</td><td>El combustible fósil más contaminante</td></tr>
+    <tr><td><span class="pill red">Gas Natural</span></td><td>No Renovable</td><td>Combustión de metano/propano</td><td>Calefacción, maquinaria, corrales avícolas</td><td>Más limpio que carbón y petróleo</td><td>Finito, requiere infraestructura especial</td></tr>
+    <tr><td><span class="pill red">Nuclear</span></td><td>No Renovable</td><td>Fisión de uranio → calor → turbina</td><td>Electricidad industrial + isótopos agrícolas</td><td>Cero CO₂ operacional, altísima potencia</td><td>Residuos radiactivos, alto costo, riesgo</td></tr>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: La agricultura moderna depende críticamente del petróleo — la tracción animal/humana pasó del 65% al 1% desde 1850. La tendencia global es hacia la transición a renovables (solar FV para riego, eólica, biocombustibles) para reducir la vulnerabilidad ante precios volátiles de combustibles fósiles y mitigar el cambio climático.</div>
+</div>
+
+<!-- QUIZ INTERACTIVO -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta. Las preguntas cubren todo el material del PDF.</p>
+  </div>
+  <div class="quiz-progress">
+    <p id="progress-text">Pregunta 0 de 10 respondidas · Aciertos: 0 / 0</p>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="progress-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">Un agricultor consume 3,200 Kcal al día y trabaja 8 horas en campo. Si su rendimiento de conversión energética es del 25%, ¿cuántas Kcal transforma en trabajo útil por día?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) 3,200 Kcal — toda la energía consumida se transforma en trabajo</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) 1,920 Kcal — la energía gastada solo durante las 8 horas de trabajo agrícola</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) 800 Kcal — el 25% del total de 3,200 Kcal diarias ingeridas</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) 480 Kcal — aplicando solo el 15% del total diario</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes características es EXCLUSIVA de la energía animal en comparación con la maquinaria agrícola convencional?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) Mayor velocidad de trabajo en terrenos planos y bien preparados</button>
+      <button class="qbtn" data-q="2" data-correct="true">B) Mantiene efectividad en zonas de gran pendiente y superficies irregulares</button>
+      <button class="qbtn" data-q="2" data-correct="false">C) Requiere menor mantenimiento y atención que un tractor moderno</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) Genera mayor potencia por unidad de peso que cualquier máquina agrícola</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Para calcular la potencia de un aprovechamiento hidráulico con caudal de 50 l/s y altura de caída de 20 m, ¿cuál es el resultado correcto?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) 1,000 W — multiplicando caudal por altura solamente</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) 5,000 W — usando P = Q × H sin incluir la constante de gravedad</button>
+      <button class="qbtn" data-q="3" data-correct="false">C) 1,962 W — dividiendo caudal × altura entre la gravedad</button>
+      <button class="qbtn" data-q="3" data-correct="true">D) 9,810 W (9.81 kW) — aplicando correctamente P = Q × H × g = 50 × 20 × 9.81</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia fundamental entre la energía solar térmica de baja concentración y la de alta concentración?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="true">A) La baja concentración usa colectores en tejados para calor doméstico (agua caliente, calefacción); la alta usa espejos que concentran luz en un punto focal alcanzando temperaturas muy elevadas para generar electricidad</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) La baja concentración produce electricidad directamente; la alta solo produce agua caliente para uso doméstico</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) La baja concentración alcanza temperaturas más altas y es más eficiente que la alta concentración</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Ambas producen exactamente lo mismo; solo difieren en el tamaño de los paneles utilizados</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Un ingeniero agrícola debe instalar una turbina en un río con pequeños desniveles (3 m) pero gran caudal (500 l/s). ¿Qué tipo de turbina es la más adecuada?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Turbina Pelton — diseñada para alta velocidad de chorro de agua</button>
+      <button class="qbtn" data-q="5" data-correct="true">B) Turbina Kaplan — idónea para pequeños saltos con gran caudal, con aspas de rotor regulables</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) Turbina Francis — porque solo funciona adecuadamente con grandes desniveles</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) Cualquiera de las tres, pues tienen el mismo campo de aplicación hidráulica</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la energía nuclear aplicada a la agricultura es VERDADERA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) La energía nuclear solo produce electricidad y no tiene otras aplicaciones agrícolas directas</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) La energía nuclear es renovable porque el uranio se puede regenerar naturalmente en los océanos</button>
+      <button class="qbtn" data-q="6" data-correct="false">C) El nitrógeno-15 se usa exclusivamente para medir la eficiencia del sistema de bombeo de agua</button>
+      <button class="qbtn" data-q="6" data-correct="true">D) El nitrógeno-15 determina la eficiencia de captación de fertilizantes; el carbono-13 estudia tolerancia a sequía y salinidad en cultivos</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Qué diferencia al biodiesel del bioetanol en cuanto a su materia prima y aplicación en motores?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Ambos provienen de azúcares fermentados y se usan en motores diésel indistintamente</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) El bioetanol se produce de aceites vegetales y es para motores diésel; el biodiesel de azúcares para gasolina</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) El biodiesel proviene de aceites vegetales procesados (para motores diésel); el bioetanol de fermentación de azúcares agrícolas (para motores de gasolina)</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) No hay diferencia real; son el mismo combustible con nombre comercial diferente</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">En el contexto peruano, ¿por qué la tracción animal sigue siendo relevante en la sierra a pesar de la disponibilidad de tractores?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Porque los tractores no pueden importarse al Perú andino por restricciones comerciales</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Porque la energía animal es más potente que cualquier tractor en cualquier condición de trabajo</button>
+      <button class="qbtn" data-q="8" data-correct="false">C) Porque el gobierno peruano prohíbe el uso de maquinaria agrícola en zonas andinas</button>
+      <button class="qbtn" data-q="8" data-correct="true">D) Porque los animales operan eficazmente en pendientes pronunciadas e irregularidades donde tractores no acceden, con menor costo de adquisición y operación para el pequeño agricultor</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cuál es la relación correcta entre la energía solar y otras fuentes renovables como la hidráulica y la eólica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Son fuentes completamente independientes sin ninguna relación energética entre sí</button>
+      <button class="qbtn" data-q="9" data-correct="true">B) La energía solar es el origen indirecto de la hidráulica (evapora agua → lluvia → ríos) y de la eólica (diferencias de temperatura solar generan gradientes de presión → vientos)</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) La energía eólica genera la solar mediante la fricción del viento con la atmósfera terrestre</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) La energía hidráulica es el origen de la solar, pues el agua evaporada forma nubes que reflejan la radiación</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la energía eólica es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) Las turbinas de eje vertical pueden operar incluso cuando el viento sopla a velocidades muy bajas</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) La primera máquina generadora de electricidad eólica operó en Dinamarca en 1890</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) Las turbinas de eje vertical generan más energía que las de eje horizontal y son el estándar en parques eólicos industriales</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) Los primeros molinos de viento de la historia se usaron para moler grano y sacar agua de los pozos</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="result-panel">
+    <h3 id="result-title"></h3>
+    <p id="result-msg"></p>
+    <p id="result-score" style="font-size:24px;font-weight:700;margin:8px 0"></p>
+    <button id="restart-btn" onclick="restartQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="block s3" style="background:#0f1e3a;border-radius:10px;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start">
+  <span style="font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc">REFERENCIAS:</span>
+  <span style="font-size:11px;color:#94a3b8;line-height:1.5">Material académico "Fuentes de Energía en la Agricultura" (63 diapositivas) · FAO — Manual de Mecanización Agrícola · OLADE — Energías Renovables en América Latina · IAEA — Nuclear Techniques in Food and Agriculture · MINEM Perú — Matriz Energética Nacional</span>
+</div>
+
+</div><!-- fin .cv -->
+
+<script>
+const feedbacks = {
+  1: {
+    c: "✅ ¡Correcto! La fórmula es 3,200 Kcal × 25% = 800 Kcal/día de trabajo útil. El resto (2,400 Kcal) se disipa como calor corporal durante todas las actividades del día.",
+    w: "❌ Incorrecto. Respuesta correcta: C. El rendimiento del 25% se aplica al TOTAL de calorías ingeridas (3,200): 3,200 × 0.25 = 800 Kcal/día de trabajo real."
+  },
+  2: {
+    c: "✅ ¡Correcto! Los animales operan en pendientes e irregularidades donde los tractores son ineficaces o peligrosos. Esta es la ventaja única de la tracción animal, especialmente relevante en la sierra peruana.",
+    w: "❌ Incorrecto. Respuesta correcta: B. La ventaja única de la energía animal es su adaptabilidad a pendientes pronunciadas y superficies irregulares — algo imposible para la maquinaria convencional."
+  },
+  3: {
+    c: "✅ ¡Correcto! P = Q × H × g = 50 × 20 × 9.81 = 9,810 W = 9.81 kW. La potencia real sería menor por pérdidas de rozamiento y eficiencia de la turbina.",
+    w: "❌ Incorrecto. Respuesta correcta: D. La fórmula completa es P = Q × H × g. La constante gravitacional g = 9.81 m/s² es obligatoria. Omitirla da resultados erróneos."
+  },
+  4: {
+    c: "✅ ¡Correcto! Baja concentración: colectores en tejados para agua caliente y calefacción (temperaturas moderadas). Alta concentración: espejos parabólicos enfocan luz en un tubo absorbente alcanzando 150–1,000 °C para generar vapor y electricidad.",
+    w: "❌ Incorrecto. Respuesta correcta: A. Baja concentración = colectores en tejados para calor doméstico. Alta concentración = espejos para altas temperaturas y generación eléctrica a gran escala."
+  },
+  5: {
+    c: "✅ ¡Correcto! La Turbina Kaplan está específicamente diseñada para pequeños saltos con gran caudal. Sus aspas de rotor regulables le dan rendimiento óptimo en amplio rango de condiciones.",
+    w: "❌ Incorrecto. Respuesta correcta: B. La Pelton requiere grandes alturas con poco caudal. La Francis es versátil para rangos intermedios. La Kaplan es ideal para pequeñas caídas y gran volumen de agua."
+  },
+  6: {
+    c: "✅ ¡Correcto! Los isótopos tienen aplicaciones específicas: ¹⁵N mide qué porcentaje del fertilizante realmente absorbe la planta; ¹³C estudia el metabolismo bajo estrés hídrico o salino; ¹⁸O mide pérdida de agua por evapotranspiración.",
+    w: "❌ Incorrecto. Respuesta correcta: D. La energía nuclear tiene aplicaciones agrícolas directas mediante isótopos trazadores (¹⁵N, ¹³C, ¹⁸O) para mejorar la eficiencia de fertilizantes y estudiar el comportamiento de cultivos."
+  },
+  7: {
+    c: "✅ ¡Correcto! Biodiesel: de aceites vegetales (palma, soya, girasol) → motores Diésel. Bioetanol: de fermentación de azúcares (caña, maíz) → motores de gasolina. Confundirlos puede dañar los motores.",
+    w: "❌ Incorrecto. Respuesta correcta: C. Biodiesel = aceites vegetales → motores diésel. Bioetanol = fermentación de azúcares → motores de gasolina. Son procesos y aplicaciones distintos."
+  },
+  8: {
+    c: "✅ ¡Correcto! En la sierra peruana las parcelas son pequeñas (minifundios), los terrenos están en pendiente y el acceso a combustible es limitado. Los animales son económicamente accesibles y superiores operativamente en esas condiciones.",
+    w: "❌ Incorrecto. Respuesta correcta: D. La tracción animal persiste porque opera en pendientes donde tractores son ineficaces o peligrosos, y su costo de adquisición y mantenimiento es accesible para el pequeño agricultor andino."
+  },
+  9: {
+    c: "✅ ¡Correcto! El sol es el motor indirecto de casi toda la energía renovable. Calienta mares y superficies → evaporación → lluvia → ríos (hidráulica). Las diferencias de temperatura atmosférica crean gradientes de presión → vientos (eólica).",
+    w: "❌ Incorrecto. Respuesta correcta: B. La energía solar es la fuente primaria indirecta de la hidráulica (ciclo hidrológico) y la eólica (diferencias de calentamiento en la atmósfera)."
+  },
+  10: {
+    c: "✅ ¡Correcto! La afirmación FALSA es C. Las turbinas de eje HORIZONTAL son las más potentes y las usadas en parques eólicos industriales. Las de eje vertical son más pequeñas y producen menos energía, aunque más flexibles.",
+    w: "❌ Incorrecto. Respuesta correcta: C (la FALSA). Las turbinas de eje horizontal son las más potentes y el estándar industrial. Las de eje vertical son menores, adecuadas para zonas urbanas o de baja demanda."
+  }
+};
+
+let answered = 0, correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const btns = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  btns.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true') b.classList.add('correct');
+  });
+  if(!isCorrect) btn.classList.add('incorrect');
+  const fb = document.getElementById('fb'+q);
+  fb.className = 'qfeedback show ' + (isCorrect ? 'ok' : 'ko');
+  fb.innerHTML = isCorrect ? feedbacks[q].c : feedbacks[q].w;
+  answered++;
+  if(isCorrect) correct++;
+  document.getElementById('progress-text').textContent = 'Pregunta '+answered+' de 10 respondidas · Aciertos: '+correct+' / '+answered;
+  document.getElementById('progress-bar').style.width = (answered/10*100)+'%';
+  if(answered === 10) showResult();
+});
+
+function showResult(){
+  const panel = document.getElementById('result-panel');
+  panel.style.display = 'block';
+  document.getElementById('result-score').textContent = correct + ' / 10 correctas';
+  if(correct <= 4){
+    panel.style.background='#fee2e2';
+    document.getElementById('result-title').innerHTML='<span style="color:#991b1b">📚 Necesitas repasar el material</span>';
+    document.getElementById('result-msg').innerHTML='<span style="color:#991b1b">Repasa las secciones de energía humana, hidráulica y biocombustibles. ¡Vuelve a intentarlo!</span>';
+  } else if(correct <= 7){
+    panel.style.background='#fef9c3';
+    document.getElementById('result-title').innerHTML='<span style="color:#713f12">📖 ¡Buen avance, sigue repasando!</span>';
+    document.getElementById('result-msg').innerHTML='<span style="color:#713f12">Tienes una base sólida. Refuerza los cálculos de potencia hidráulica y los tipos de turbinas.</span>';
+  } else {
+    panel.style.background='#dcfce7';
+    document.getElementById('result-title').innerHTML='<span style="color:#14532d">🏆 ¡Excelente dominio del tema!</span>';
+    document.getElementById('result-msg').innerHTML='<span style="color:#14532d">Dominas los conceptos clave de fuentes de energía en agricultura. ¡Listo para el examen!</span>';
+  }
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function restartQuiz(){
+  answered=0; correct=0;
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.disabled=false;
+    b.classList.remove('correct','incorrect');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f=>{
+    f.className='qfeedback'; f.innerHTML='';
+  });
+  document.getElementById('result-panel').style.display='none';
+  document.getElementById('progress-bar').style.width='0%';
+  document.getElementById('progress-text').textContent='Pregunta 0 de 10 respondidas · Aciertos: 0 / 0';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
