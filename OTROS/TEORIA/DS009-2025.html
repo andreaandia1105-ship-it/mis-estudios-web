@@ -1,0 +1,659 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;letter-spacing:.5px;margin-bottom:4px}
+.titlebar .sub{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.titlebar .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.titlebar .tag{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.12);color:#cbd5e1}
+.secbar{grid-column:1/-1;border-radius:8px;padding:7px 13px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.block{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:700}
+.def{border-left:3px solid #3b82f6;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0;white-space:pre-line}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:7px 0}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px}
+.mini strong{display:block;margin-bottom:3px;font-size:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;border:.5px solid var(--color-border-tertiary)}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:.5px solid var(--color-border-tertiary);margin:7px 0}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:4px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+/* BLUE */
+.bh-b{background:#dbeafe;color:#1e3a8a}
+.dot-b{background:#3b82f6}
+.def-b{border-left-color:#3b82f6}
+/* GREEN */
+.bh-g{background:#dcfce7;color:#14532d}
+.dot-g{background:#16a34a}
+.mini-g{border-top:3px solid #16a34a}
+/* RED */
+.bh-r{background:#fee2e2;color:#991b1b}
+.dot-r{background:#dc2626}
+/* YELLOW */
+.bh-y{background:#fef9c3;color:#713f12}
+.dot-y{background:#ca8a04}
+/* PURPLE */
+.bh-p{background:#ede9fe;color:#4c1d95}
+.dot-p{background:#7c3aed}
+.mini-p{border-top:3px solid #7c3aed}
+/* TEAL */
+.bh-t{background:#ccfbf1;color:#134e4a}
+.dot-t{background:#0d9488}
+.mini-t{border-top:3px solid #0d9488}
+/* ORANGE */
+.bh-o{background:#ffedd5;color:#7c2d12}
+.dot-o{background:#ea580c}
+.mini-o{border-top:3px solid #ea580c}
+/* GRAY */
+.bh-gr{background:#f1f5f9;color:#334155}
+/* SECTION BARS */
+.sb-b{background:#1e3a8a;color:#dbeafe}
+.sb-g{background:#14532d;color:#dcfce7}
+.sb-p{background:#4c1d95;color:#ede9fe}
+.sb-t{background:#134e4a;color:#ccfbf1}
+.sb-r{background:#991b1b;color:#fee2e2}
+.sb-o{background:#7c2d12;color:#ffedd5}
+@media(prefers-color-scheme:dark){
+.bh-b{background:#1e3a5f;color:#93c5fd}
+.bh-g{background:#14532d;color:#86efac}
+.bh-r{background:#450a0a;color:#fca5a5}
+.bh-y{background:#422006;color:#fef08a}
+.bh-p{background:#2e1065;color:#c4b5fd}
+.bh-t{background:#042f2e;color:#5eead4}
+.bh-o{background:#431407;color:#fed7aa}
+.warn{background:#431407;color:#fed7aa;border-left-color:#f97316}
+.exam{background:#1c1a00;border-color:#ca8a04;color:#fef08a}
+}
+/* QUIZ */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;margin-bottom:3px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.qcard{margin-bottom:16px;padding:12px;border:.5px solid var(--color-border-tertiary);border-radius:10px;background:var(--color-background-secondary)}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;color:var(--color-text-primary)}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.7;cursor:not-allowed}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+#quiz-progress{margin-bottom:12px}
+#result-panel{display:none;padding:14px;border-radius:10px;text-align:center;margin-top:14px}
+#result-panel h3{font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px}
+#result-panel p{font-size:12px;margin-bottom:10px}
+#reset-btn{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;cursor:pointer;font-family:'Oswald',sans-serif}
+</style>
+
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="titlebar">
+  <h1>DS N° 009-2025-EF — REGLAMENTO DE LA LEY N° 32069</h1>
+  <div class="sub">Ley General de Contrataciones Públicas del Perú · El Peruano, 22 enero 2025 · 196 pp · 13 Títulos · 389 Arts.</div>
+  <div class="tags">
+    <span class="tag">Contrataciones Públicas</span>
+    <span class="tag">OECE / DGA / Perú Compras</span>
+    <span class="tag">RNP · Pladicop · TCP</span>
+    <span class="tag">Procedimientos de Selección</span>
+    <span class="tag">Ejecución Contractual</span>
+    <span class="tag">Régimen Sancionador</span>
+    <span class="tag">Disposiciones Transitorias</span>
+  </div>
+</div>
+
+<!-- SECCIÓN I: DISPOSICIONES GENERALES Y ACTORES -->
+<div class="secbar sb-b">⚖️ TÍTULO I–II — DISPOSICIONES GENERALES Y ACTORES DEL SISTEMA</div>
+
+<div class="block">
+  <span class="bh bh-b">Título I · Arts. 1–3 · Objeto y Finalidad</span>
+  <div class="def">El Reglamento establece los procedimientos, requisitos y condiciones de la Ley N° 32069. Su finalidad es promover el <strong>valor por dinero</strong> en las contrataciones públicas, satisfaciendo las necesidades de las entidades contratantes en beneficio de la ciudadanía.</div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Acrónimos clave:</strong> DEC (Dep. de compras), CMN (Cuadro Multianual), FUP (Ficha Única de Proveedor), CCLC (Constancia Capacidad Libre), Pladicop (Plataforma Digital), TCP (Tribunal de Contrataciones), UIT (Unidad Impositiva Tributaria).</span></div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Ámbito:</strong> Aplica a todas las entidades contratantes para bienes, servicios y obras, excepto los supuestos excluidos del Art. 7 de la Ley.</span></div>
+  <div class="rx">Art. 3.2 — Al mencionar un artículo sin referencia a norma = se refiere al Reglamento
+Art. 3.3 — "Bienes y servicios" en Título IV incluye consultorías de obra</div>
+  <div class="exam">🎯 EXAMEN: Explique la diferencia entre "finalidad" y "objeto" del Reglamento según sus Arts. 1 y 2, y por qué el principio de valor por dinero es el eje central del sistema de contrataciones públicas.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-b">Título II · Arts. 4–22 · Actores del Sistema</span>
+  <div class="def">El sistema peruano de contrataciones involucra tres órganos rectores con competencias distintas: <strong>DGA</strong> (órgano rector técnico-normativo), <strong>OECE</strong> (organismo especializado, autónomo) y <strong>Perú Compras</strong> (central de compras públicas). Ninguno puede invadir las competencias del otro.</div>
+  <div class="three">
+    <div class="mini mini-b" style="border-top:3px solid #3b82f6">
+      <strong>DGA (Art. 5)</strong>
+      Dicta normas, emite opinión vinculante, supervisa la cadena de abastecimiento. Órgano rector máximo.
+    </div>
+    <div class="mini mini-g">
+      <strong>OECE (Arts. 6–11)</strong>
+      Aprueba plan de supervisión, absuelve consultas del sector privado (servicio TUPA), publica en Pladicop.
+    </div>
+    <div class="mini mini-o">
+      <strong>Perú Compras (Art. 12)</strong>
+      Estandariza requerimientos, gestiona acuerdos marco, acompaña pilotos. Ejecuta y conduce.
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Entidad contratante (Art. 13–21):</strong> Registra en REC; la DEC ejecuta las 3 fases. El Titular (Art. 18) autoriza prestaciones adicionales y resoluciones. El Área Técnica Estratégica (Art. 21) formula requerimientos técnicos.</span></div>
+  <div class="item"><span class="dot dot-p"></span><span><strong>Compradores Públicos (Arts. 15–17):</strong> Certificación OECE en niveles básico, intermedio y avanzado vía SICAN. Para integrar comité o ser OC: nivel intermedio o avanzado.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir DGA (órgano normativo del MEF) con OECE (organismo autónomo especializado). La DGA dicta la norma; el OECE supervisa y absuelve consultas técnicas. La absolución al sector privado tiene costo (TUPA), la de entidades es gratuita.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la Ley distingue tres órganos del sistema (DGA, OECE, Perú Compras) en lugar de centralizar funciones en uno solo? Analice la complementariedad de sus competencias.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-g">RNP y Proveedores · Arts. 22–45</span>
+  <div class="def">El <strong>Registro Nacional de Proveedores (RNP)</strong> es el sistema único de información pública que registra y valida a todos los proveedores del Estado. Sin inscripción vigente no se puede ser postor, contratista ni subcontratista.</div>
+  <div class="item"><span class="dot dot-g"></span><span><strong>4 Registros del RNP:</strong> Proveedores de bienes, proveedores de servicios, consultores de obras, ejecutores de obras. Inscripción = aprobación automática (salvo aumento de capacidad).</span></div>
+  <div class="item"><span class="dot dot-g"></span><span><strong>FUP (Art. 36):</strong> La Ficha Única de Proveedor reemplaza documentos físicos. El proveedor declara jurada. Actualización permanente; la DEC verifica en Pladicop automáticamente.</span></div>
+  <div class="item"><span class="dot dot-g"></span><span><strong>Desempeño (Arts. 37–38):</strong> RNP clasifica trimestralmente en 5 categorías (A–E) según atributos y méritos. Categorías A, B, C obtienen puntaje en factor de evaluación de desempeño.</span></div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Impedimentos (Arts. 39–45):</strong> Verificación automática vía Pladicop. Tipo 4.D (deudores alimentarios = REDAM): proveedor debe cancelar deuda o autorizar descuento de pensión.</span></div>
+  <div class="rx">Clasificación de proveedores por desempeño:
+A (mejor) → B → C → D → E (menor)
+Actualización: trimestral
+Puntaje extra: solo A, B o C</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué diferencia existe entre un impedimento verificado automáticamente por la Pladicop y uno que requiere declaración jurada del proveedor? Cite ejemplos de cada tipo.</div>
+</div>
+
+<!-- SECCIÓN II: PLANIFICACIÓN Y PROCEDIMIENTOS -->
+<div class="secbar sb-g">📋 TÍTULOS III–V — PLANIFICACIÓN, PROCEDIMIENTOS DE SELECCIÓN Y FASES</div>
+
+<div class="block s2">
+  <span class="bh bh-g">Procedimientos de Selección · Arts. 52–87</span>
+  <div class="def">Un <strong>procedimiento de selección</strong> es el conjunto de actos administrativos que la entidad realiza para elegir al proveedor idóneo. Se clasifica según el objeto (bienes/servicios/obras/consultoría), la cuantía, y la modalidad. La elección incorrecta del tipo genera nulidad.</div>
+  <div class="two" style="margin-bottom:8px">
+    <div>
+      <div class="item"><span class="dot dot-g"></span><span><strong>LP (Licitación Pública):</strong> Bienes y obras por encima del umbral anual del PGR. Lista abierta, comité o jurado, evaluación técnica y económica posterior.</span></div>
+      <div class="item"><span class="dot dot-g"></span><span><strong>CP (Concurso Público):</strong> Servicios en general y consultorías ≥ umbral. Lista abierta, evaluación técnica + económica.</span></div>
+      <div class="item"><span class="dot dot-y"></span><span><strong>Adjudicación Simplificada:</strong> Bienes, servicios y consultorías entre límites inferiores. Lista abierta, oficial de compra o comité.</span></div>
+      <div class="item"><span class="dot dot-y"></span><span><strong>Comparación de Precios:</strong> Bienes y servicios de disponibilidad en el mercado; sin elaboración especial.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-p"></span><span><strong>Subasta Inversa Electrónica:</strong> Bienes y servicios con ficha técnica aprobada; puja en línea a la baja.</span></div>
+      <div class="item"><span class="dot dot-t"></span><span><strong>Sel. de Consultores:</strong> Personas naturales para servicios de consultoría individual.</span></div>
+      <div class="item"><span class="dot dot-o"></span><span><strong>MDA (Mecanismos Diferenciados):</strong> Para bienes/servicios sin proveedor disponible.</span></div>
+      <div class="item"><span class="dot dot-o"></span><span><strong>CPI (Compra Pública de Innovación):</strong> Para soluciones innovadoras sin spec previa.</span></div>
+    </div>
+  </div>
+  <div class="flow">
+    <span class="fbox">1. Convocatoria</span><span class="farrow">→</span>
+    <span class="fbox">2. Reg. participantes</span><span class="farrow">→</span>
+    <span class="fbox">3. Consultas / Obs.</span><span class="farrow">→</span>
+    <span class="fbox">4. Precalificación*</span><span class="farrow">→</span>
+    <span class="fbox">5. Eval. Oferta Técnica</span><span class="farrow">→</span>
+    <span class="fbox">6. Eval. Oferta Económica</span><span class="farrow">→</span>
+    <span class="fbox">7. Otorgamiento BP</span>
+  </div>
+  <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:6px">*La etapa de precalificación solo aplica en LP obras con precalificación y Licit. con diálogo competitivo.</div>
+  <div class="item"><span class="dot dot-g"></span><span><strong>Cronograma (Art. 64):</strong> Convocatoria → presentación de ofertas: mínimo 22 días hábiles en competitivos. Prórroga se registra en Pladicop. Anuncio con ≥ 40 días de anticipación para futura contratación.</span></div>
+  <div class="item"><span class="dot dot-g"></span><span><strong>Cancelación (Art. 85):</strong> La autoridad de gestión administrativa puede cancelar en cualquier momento previo a la adjudicación. No genera responsabilidad de la entidad. Se comunica a participantes en Pladicop.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que el desierto implica sanción a la entidad. El procedimiento desierto (Art. 83–84) no genera responsabilidad: si no hay ofertas válidas o ninguna supera los filtros, simplemente se puede reconvocar con las modificaciones que correspondan.</span></div>
+  <div class="exam">🎯 EXAMEN: Una entidad necesita contratar servicios de consultoría por S/ 250,000. ¿Qué tipo de procedimiento de selección debe usar, quiénes integrarán el comité evaluador y cuáles son las etapas obligatorias del proceso?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-t">Evaluadores y Bases · Arts. 55–61</span>
+  <div class="def">Las <strong>bases</strong> son el documento rector del procedimiento: fijan los requisitos, factores de evaluación y condiciones contractuales. Los <strong>evaluadores</strong> (oficial de compra o comité/jurado) aplican las bases sin discrecionalidad.</div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Bases estándar:</strong> Elaboradas por evaluadores o DEC. Las bases integradas incorporan modificaciones tras consultas. No pueden modificarse después de integradas salvo orden judicial.</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Factores de evaluación técnica:</strong> Experiencia, capacidad técnica, plazo, metodología, desempeño del proveedor (obligatorio en obras). Ponderación definida en bases.</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Factor desempeño (Art. 164):</strong> En obras y consultoría de obras es <em>obligatorio</em> considerar la clasificación de la FUP del proveedor.</span></div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Impedimentos evaluadores (Art. 61):</strong> Titular, autoridad administrativa, servidores con funciones de control (regidores, consejeros, directores), quien aprobó el expediente.</span></div>
+  <div class="rx">Oferta económica limitada (obras, solo construcción):
+Válida si: 95% ≤ oferta ≤ 110% de cuantía
+Fuera de rango → descalificación automática</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la norma prohíbe que el titular de la entidad integre el comité evaluador? ¿Qué riesgo institucional se previene con esta restricción y cuál es el régimen de responsabilidad aplicable?</div>
+</div>
+
+<!-- SECCIÓN III: EJECUCIÓN CONTRACTUAL -->
+<div class="secbar sb-p">📄 TÍTULO VI — EJECUCIÓN CONTRACTUAL</div>
+
+<div class="block">
+  <span class="bh bh-p">Perfeccionamiento del Contrato · Arts. 86–92</span>
+  <div class="def">Una vez consentida la buena pro, <strong>ambas partes están obligadas a contratar</strong>. El contrato se suscribe digitalmente en la Pladicop (con certificado digital vigente) salvo sustento para firma manual. El plazo para presentar requisitos es 8 días hábiles desde el registro del consentimiento.</div>
+  <div class="item"><span class="dot dot-p"></span><span><strong>Negativa a contratar (Art. 86.2):</strong> La entidad NO puede negarse salvo: recorte presupuestal acreditado, norma expresa, desaparición de la necesidad. La negativa injustificada genera responsabilidad funcional y penal.</span></div>
+  <div class="item"><span class="dot dot-p"></span><span><strong>Requisitos para perfeccionar (Art. 88):</strong> Garantías (salvo excepciones), contrato de consorcio si aplica, CCI o cuenta bancaria, documento de representación, propuesta de institución arbitral y JPRD.</span></div>
+  <div class="item"><span class="dot dot-p"></span><span><strong>Contrato de consorcio (Art. 89):</strong> Documento privado con firmas legalizadas ante notario. Los actos del representante común vinculan a todos los integrantes.</span></div>
+  <div class="rx">Plazo perfeccionamiento:
+Postor ganador: 8 días hábiles desde consentimiento BP
+Si requiere garantía de fiel cumplimiento: mismos 8 días
+Sin garantía (contratos menores): 5 días hábiles</div>
+  <div class="exam">🎯 EXAMEN: El postor ganador se niega a firmar el contrato alegando un error en su oferta. ¿Cuáles son las consecuencias jurídicas según el Reglamento y bajo qué supuestos excepcionales la entidad puede eximirle de responsabilidad?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-p">Garantías y Modificaciones · Arts. 93–115</span>
+  <div class="def">Las <strong>garantías</strong> protegen a la entidad frente al incumplimiento del contratista. Pueden ser: fiel cumplimiento (10% del monto), adelanto directo y adelanto para materiales. La <strong>modificación contractual</strong> permite ajustar el objeto, plazo o precio bajo supuestos tasados.</div>
+  <div class="item"><span class="dot dot-p"></span><span><strong>Prestaciones adicionales (Art. 64 Ley):</strong> Bienes/servicios: hasta 25% del monto original. Obras: hasta 15% con aprobación del titular. Mayores a esos porcentajes requieren resolución del titular y liquidación.</span></div>
+  <div class="item"><span class="dot dot-y"></span><span><strong>Ampliaciones de plazo (Art. 109):</strong> Causales: caso fortuito/fuerza mayor, deficiencia del expediente, atraso en entrega de terreno, interferencias por otras obras, suspensión dispuesta por entidad.</span></div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Penalidades (Art. 110):</strong> Penalidad por mora = 0.10 UIT/día de atraso × monto contrato ÷ (0.40 × plazo). Tope: 10% del monto. Superar el tope habilita resolución por incumplimiento.</span></div>
+  <div class="rx">Fórmula penalidad diaria por mora:
+F = 0.10 × (Monto Contrato) / (0.40 × Plazo días)
+Tope máximo = 10% del monto del contrato
+Superado el tope → causal de resolución</div>
+  <div class="exam">🎯 EXAMEN: Un contratista acumula 30 días de atraso en un contrato de S/ 500,000 con plazo de 120 días. Calcule la penalidad acumulada y determine si procede la resolución del contrato.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-p">Resolución del Contrato y Controversias · Arts. 116–132</span>
+  <div class="def">La <strong>resolución</strong> extingue el vínculo contractual anticipadamente. Las <strong>controversias</strong> derivadas del contrato se resuelven mediante conciliación, arbitraje o JPRD (Junta de Prevención y Resolución de Disputas), nunca en sede judicial ordinaria para asuntos arbitrables.</div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Causales de resolución por entidad:</strong> Incumplimiento del contratista, acumulación de penalidades al tope, paralización injustificada, caso fortuito que impide ejecución definitiva.</span></div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Causales por el contratista:</strong> Incumplimiento de la entidad en pagos por más de 60 días, prestaciones adicionales no reconocidas, modificación unilateral.</span></div>
+  <div class="item"><span class="dot dot-p"></span><span><strong>JPRD:</strong> Panel de expertos que emite decisiones de cumplimiento durante la ejecución, antes de que surja una controversia formal. Reduce el arbitraje diferido.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que toda controversia va a arbitraje. La conciliación y la JPRD son medios previos obligatorios o disponibles según el tipo de contrato. Solo las controversias no resueltas en esas instancias van a arbitraje.</div>
+  <div class="exam">🎯 EXAMEN: Describa el procedimiento de resolución de un contrato de obra por incumplimiento del contratista, desde la comunicación notarial hasta los efectos jurídicos, incluyendo las garantías involucradas.</div>
+</div>
+
+<!-- SECCIÓN IV: OBRAS Y CONSULTORÍA -->
+<div class="secbar sb-t">🏗️ TÍTULOS VII–VIII — EJECUCIÓN DE OBRAS Y CONSULTORÍA</div>
+
+<div class="block">
+  <span class="bh bh-t">Obras · Arts. 168–230</span>
+  <div class="def">La ejecución de obras bajo la Ley 32069 se regula con mayor rigor por el riesgo patrimonial y social que implica. El sistema de entrega (solo construcción, diseño+construcción, D+C+operación+mantenimiento, gestión del riesgo, agencia e integrada) determina la distribución de responsabilidades y los umbrales de contratación.</div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Requisitos adicionales al contrato (Art. 168):</strong> Plan de trabajo, CCLC de ejecutor (salvo excepciones), registro de plantilla supervisión, documentos de calidad técnica y profesional.</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Coordinador (Art. 169):</strong> Profesional colegiado de ingeniería o arquitectura designado por la entidad. Gestiona uno o más contratos sin ser responsable de las opiniones técnicas de la supervisión.</span></div>
+  <div class="item"><span class="dot dot-y"></span><span><strong>Valorización (Art. 200):</strong> Obras por precios unitarios → valorización mensual. Por suma alzada → avance físico ponderado. Plazo de revisión: 7 días hábiles.</span></div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Adicionales de obra (Art. 64 Ley):</strong> Hasta 15% por el titular de entidad. Entre 15–50% con opinión favorable del OECE. El OECE tiene 15 días hábiles para opinar (silencio = negativo).</span></div>
+  <div class="rx">LP obras (solo construcción): cuantía < S/ 79,000,000
+LP obras diferenciada: cuantía ≥ S/ 79,000,000
+LP obras con precalificación: ≥ S/ 79,000,000 + complejidad</div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es el procedimiento para aprobar una prestación adicional de obra que supera el 15% del monto contractual original? Identifique los actores intervinientes y sus plazos.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-t">Supervisión, Recepción y Liquidación · Arts. 231–255</span>
+  <div class="def">La <strong>supervisión</strong> garantiza que la obra se ejecute conforme al expediente técnico. La <strong>recepción</strong> marca el fin de la ejecución física. La <strong>liquidación</strong> cierra financieramente el contrato. Estos tres hitos determinan el cómputo de plazos de garantía y responsabilidad.</div>
+  <div class="flow">
+    <span class="fbox">Ejecución</span><span class="farrow">→</span>
+    <span class="fbox">Recepción (comité)</span><span class="farrow">→</span>
+    <span class="fbox">Observaciones</span><span class="farrow">→</span>
+    <span class="fbox">Subsanación</span><span class="farrow">→</span>
+    <span class="fbox">Recepción definitiva</span><span class="farrow">→</span>
+    <span class="fbox">Liquidación</span>
+  </div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Recepción (Art. 236):</strong> Contratista solicita con 5 días de anticipación. Comité verifica en 20 días hábiles. Observaciones: plazo de subsanación máximo 1/10 del plazo de ejecución (mín. 30 días).</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Liquidación (Art. 250):</strong> Contratista presenta en 15 días hábiles post-recepción. Entidad revisa en 30 días hábiles. Si no se pronuncia: silencio positivo → aprobación. Controversias a arbitraje.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Qué ocurre si la entidad no se pronuncia sobre la liquidación presentada por el contratista dentro del plazo establecido? ¿Qué efecto legal produce ese silencio?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-t">Estandarización de Req. y Pladicop · Arts. 256–280</span>
+  <div class="def">La <strong>Pladicop</strong> (Plataforma Digital de Contrataciones Públicas) es el sistema digital que concentra todos los actos del proceso contractual: publicaciones, ofertas, contratos, liquidaciones. Todos los actos publicados en Pladicop tienen plena validez legal, sustituyendo completamente el soporte físico.</div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Estandarización (Arts. 259–265):</strong> Perú Compras o Ministerios aprueban fichas técnicas (bienes/servicios comunes) y fichas de homologación (requerimientos específicos). Uso obligatorio desde su publicación.</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Catálogos electrónicos (Arts. 245–250):</strong> Acuerdos marco que permiten contratar directamente sin procedimiento de selección. Contratistas ya seleccionados; la entidad elige y genera orden de compra.</span></div>
+  <div class="item"><span class="dot dot-y"></span><span><strong>Interoperabilidad (Art. 258):</strong> RENIEC, SUNAT, SUNARP, INDECOPI, SBS, PNP, CGR brindan datos a la Pladicop automáticamente para verificación de proveedores.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir ficha técnica (estandariza el requerimiento de bienes/servicios comunes → Subasta Inversa Electrónica obligatoria) con ficha de homologación (estandariza para un sector/requerimiento específico → no necesariamente SIE).</div>
+  <div class="exam">🎯 EXAMEN: ¿Bajo qué supuesto una entidad contratante puede exceptuarse de usar una ficha técnica aprobada por Perú Compras? Analice las condiciones y el procedimiento que debe seguir.</div>
+</div>
+
+<!-- SECCIÓN V: RÉGIMEN SANCIONADOR -->
+<div class="secbar sb-r">⚠️ TÍTULOS IX–X — RÉGIMEN SANCIONADOR Y TRIBUNAL TCP</div>
+
+<div class="block s2">
+  <span class="bh bh-r">TCP y Sanciones · Arts. 335–369</span>
+  <div class="def">El <strong>Tribunal de Contrataciones Públicas (TCP)</strong> es el órgano administrativo sancionador que impone multas e inhabilitaciones a proveedores, árbitros e instituciones arbitrales. Las sanciones se aplican de forma objetiva según la gravedad de la infracción, con criterios de gradualidad tasados.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-r"></span><span><strong>Sanciones a proveedores:</strong> Multa (% de la oferta económica o de la cuantía, en UIT) o inhabilitación temporal/permanente, dependiendo de la infracción.</span></div>
+      <div class="item"><span class="dot dot-r"></span><span><strong>Infracciones graves:</strong> Presentar documentos falsos, fraccionamiento ilegal, incumplimiento injustificado de contrato, impedimento oculto, colusión.</span></div>
+      <div class="item"><span class="dot dot-y"></span><span><strong>Pronto pago (Art. 364.4):</strong> Descuento hasta 30% si se paga antes de interponer recurso impugnativo; hasta 30% en 5 días; hasta 15% entre 6° y 10° día hábil.</span></div>
+      <div class="item"><span class="dot dot-r"></span><span><strong>Prescripción (Art. 363):</strong> 3 años desde comisión de la infracción. Se interrumpe con el inicio del procedimiento sancionador.</span></div>
+    </div>
+    <div>
+      <table class="tbl">
+        <tr><th>Tipo</th><th>Infracc. a–e</th><th>Infracc. f–h</th></tr>
+        <tr><td><strong>General</strong></td><td>3–6% / 1–7 UIT</td><td>7–10% / 1–15 UIT</td></tr>
+        <tr><td><strong>MYPE</strong></td><td>1–4% / 1–3 UIT</td><td>5–8% / 1–8 UIT</td></tr>
+        <tr><td><strong>Cont. Menor</strong></td><td>1–3% / 1–3 UIT</td><td>—</td></tr>
+      </table>
+      <div style="font-size:10.5px;color:var(--color-text-secondary);margin-top:4px">*% de oferta económica cuando hay monto de contrato; UIT cuando no hay monto.</div>
+      <div class="item" style="margin-top:8px"><span class="dot dot-p"></span><span><strong>Gradualidad (Art. 366):</strong> Criterios: naturaleza infracción, intencionalidad, daño a entidad, reconocimiento, antecedentes, multa impaga.</span></div>
+      <div class="item"><span class="dot dot-p"></span><span><strong>Caducidad proc. sancionador (Art. 369):</strong> Máximo 9 meses desde notificación de inicio (ampliable 3 meses por resolución sustentada).</span></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir prescripción de la infracción (3 años desde comisión) con caducidad del procedimiento sancionador (9 meses desde notificación de inicio). Son plazos distintos con efectos distintos: la prescripción impide iniciar el procedimiento; la caducidad lo archiva si ya inició pero no terminó a tiempo.</div>
+  <div class="exam">🎯 EXAMEN: Una empresa presentó un documento falso en un proceso de selección hace 2 años y 10 meses. ¿Puede el TCP iniciar el procedimiento sancionador? ¿Cuánto tiempo tendría para resolverlo? Desarrolle el régimen de plazos aplicable.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-r">Recursos Impugnativos · Arts. 370–390</span>
+  <div class="def">El <strong>recurso de apelación</strong> es el mecanismo para cuestionar actos del procedimiento de selección. Se interpone ante la autoridad competente según la cuantía: el titular (cuando la cuantía sea menor al umbral LP) o el TCP (cuantías mayores). Es requisito previo indispensable antes de la vía judicial.</div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Garantía de interposición:</strong> 3% de la cuantía del procedimiento (mínimo 1 UIT, máximo 50 UIT). Se ejecuta si el recurso es declarado infundado o inadmisible. Se devuelve si es fundado.</span></div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Efectos:</strong> La interposición suspende el procedimiento de selección hasta que se resuelva. El TCP resuelve en 15 días hábiles.</span></div>
+  <div class="item"><span class="dot dot-y"></span><span><strong>Actos impugnables:</strong> Bases, adendas, absolución de consultas integradas, descalificación de oferta, otorgamiento de buena pro, cancelación.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuáles son los efectos de interponer un recurso de apelación sobre el cronograma del procedimiento de selección? ¿Puede la entidad continuar el proceso mientras se resuelve el recurso?</div>
+</div>
+
+<!-- SECCIÓN VI: DISPOSICIONES COMPLEMENTARIAS -->
+<div class="secbar sb-o">📌 DISPOSICIONES COMPLEMENTARIAS, TRANSITORIAS Y ANEXOS</div>
+
+<div class="block s2">
+  <span class="bh bh-o">Disposiciones Complementarias Finales · DCF I–XIV</span>
+  <div class="def">Las 14 DCF establecen regímenes de implementación progresiva, plazos para la adecuación normativa y habilitaciones específicas. Son tan vinculantes como el articulado principal pero tienen carácter transitorio o complementario.</div>
+  <div class="three">
+    <div class="mini mini-o">
+      <strong>DCF I – Contratos menores (Cap. I Tít. VI)</strong>
+      Aplicación progresiva por cuantías y tipos. La DGA fija etapas de implementación.
+    </div>
+    <div class="mini mini-o">
+      <strong>DCF XIV – Pilotos contratos estándar intl.</strong>
+      DGA establece pilotos para contratos de ingeniería y construcción de uso internacional.
+    </div>
+    <div class="mini mini-o">
+      <strong>DCF XIX – Notificaciones coactivas RNP</strong>
+      Mientras no funcione el módulo Pladicop, se usa casilla electrónica del RNP para notificaciones coactivas.
+    </div>
+    <div class="mini mini-o">
+      <strong>DCF XV – Estructura costos Exped. Técnico</strong>
+      180 días para aprobar estructuras estandarizadas por especialidad y subespecialidad.
+    </div>
+    <div class="mini mini-o">
+      <strong>DCF XVI – Acuerdos Marco (pilotos)</strong>
+      Implementación progresiva vía pilotos. DGA determina entidades y fechas de obligatoriedad.
+    </div>
+    <div class="mini mini-o">
+      <strong>DCF XXII – Formularios OECE</strong>
+      Pueden modificarse con sustento técnico del órgano responsable del procedimiento.
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Derogatoria única:</strong> Quedan derogados: DS N° 344-2018-EF (Reglamento Ley 30225), DS N° 236-2020-EF (ASISTE), DS N° 011-79-VC (obras públicas).</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el Reglamento establece una implementación "progresiva" de muchas de sus disposiciones en lugar de hacerlas exigibles desde el día de entrada en vigor? Analice al menos dos DCF como ejemplo.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-o">Anexo I — Definiciones Clave</span>
+  <div class="def">El Anexo I consolida las definiciones que aplican a todo el Reglamento. Son vinculantes y deben aplicarse con preferencia sobre el lenguaje ordinario o interpretaciones extensivas.</div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Adjudicador:</strong> Miembro de la JPRD.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Avance físico real:</strong> Porcentaje actual de ejecución de obra o consultoría.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Bases integradas:</strong> Bases que incorporan modificaciones por consultas, observaciones e implementación de pronunciamiento OECE.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>CCLC:</strong> Constancia de Capacidad Libre de Contratación — acredita que el ejecutor tiene capacidad disponible para asumir el nuevo contrato.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Contratista vs. proveedor:</strong> Proveedor = quien se registra en RNP. Contratista = el proveedor que ya firmó contrato con una entidad.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Expediente de contratación:</strong> Conjunto de documentos que sustentan todas las actuaciones del proceso desde el requerimiento hasta la liquidación.</span></div>
+  <div class="exam">🎯 EXAMEN: Diferencie los conceptos de "postor", "participante", "proveedor" y "contratista" según las definiciones del Anexo I, y ubique el momento procesal en que cada calidad se adquiere.</span></div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="secbar sb-b">📊 TABLA INTEGRADORA — SÍNTESIS DEL SISTEMA DE CONTRATACIONES</div>
+
+<div class="block s3">
+  <span class="bh bh-b">Cuadro comparativo de procedimientos de selección</span>
+  <table class="tbl" style="margin-top:8px">
+    <tr>
+      <th>Procedimiento</th>
+      <th>Objeto</th>
+      <th>Cuantía referencial</th>
+      <th>Lista</th>
+      <th>Evaluadores</th>
+      <th>Eval. Económica</th>
+      <th>Etapas especiales</th>
+    </tr>
+    <tr><td><strong>Licitación Pública</strong></td><td>Bienes y obras</td><td>≥ umbral anual PGR</td><td>Abierta</td><td>Comité o Jurado</td><td>Posterior</td><td>Precalificación (opcional obras)</td></tr>
+    <tr><td><strong>Concurso Público</strong></td><td>Servicios / Consultoría</td><td>≥ umbral anual PGR</td><td>Abierta</td><td>Comité o Jurado</td><td>Posterior</td><td>Negociación (diálogo competitivo)</td></tr>
+    <tr><td><strong>Adjudicación Simplificada</strong></td><td>Bienes, servicios, consultoría</td><td>< umbral LP</td><td>Abierta</td><td>Oficial compra o comité</td><td>Posterior</td><td>—</td></tr>
+    <tr><td><strong>Subasta Inversa Electrónica</strong></td><td>Bienes/servicios con ficha técnica</td><td>Cualquier cuantía</td><td>Abierta</td><td>DEC / Perú Compras</td><td>Puja a la baja</td><td>Obligatoria si hay ficha técnica</td></tr>
+    <tr><td><strong>Comparación de Precios</strong></td><td>Bienes/servicios disponibles</td><td>Límites bajos</td><td>Abierta</td><td>Oficial de compra</td><td>Solo económica</td><td>Sin etapa técnica</td></tr>
+    <tr><td><strong>Sel. de Consultores</strong></td><td>Consultoría individual</td><td>< umbral CP</td><td>Cerrada/Abierta</td><td>Comité</td><td>Posterior</td><td>Precalificación posible</td></tr>
+    <tr><td><strong>Catálogo Acuerdo Marco</strong></td><td>Bienes/servicios estándar</td><td>Cualquier cuantía</td><td>Restringida</td><td>DEC</td><td>Precio ya fijado</td><td>Sin procedimiento de selección</td></tr>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: La elección del procedimiento de selección NO es discrecional. Depende de tres variables simultáneas: (1) objeto de la contratación, (2) cuantía referencial del valor estimado/referencial, y (3) características del mercado (si existe ficha técnica → SIE obligatoria). Un error en la elección del procedimiento genera nulidad del proceso (Art. 26 Ley 32069).</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta · DS 009-2025-EF · Ley General de Contrataciones Públicas</p>
+  </div>
+  <div id="quiz-progress">
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">
+      <span id="prog-text">0 / 10 respondidas</span>
+      <span id="score-text">Puntaje: 0 / 0</span>
+    </div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la FINALIDAD del Reglamento de la Ley N° 32069 según su Art. 2?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Regular los procedimientos de selección para garantizar la transparencia de las licitaciones públicas</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) Supervisar el desempeño de los proveedores inscritos en el RNP mediante el OECE</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) Promover el valor por dinero en las contrataciones públicas, satisfaciendo necesidades de las entidades contratantes en beneficio de la ciudadanía</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Establecer sanciones para proveedores que incumplan obligaciones contractuales ante el TCP</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Una entidad necesita contratar servicios de consultoría de obra. Según el Art. 164, ¿qué factor de evaluación es OBLIGATORIO incluir en las bases?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) El precio como único criterio, dado que la consultoría es un servicio estándar</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) La experiencia del consultor medida exclusivamente en años de ejercicio profesional</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) El factor de evaluación de desempeño del proveedor, considerando la clasificación en la FUP</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) La propuesta metodológica con peso mínimo de 60 puntos sobre 100</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia entre la DGA, el OECE y Perú Compras en el sistema de contrataciones públicas?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) La DGA ejecuta contratos, el OECE los supervisa y Perú Compras los adjudica</button>
+      <button class="qbtn" data-q="3" data-correct="true">B) La DGA es el órgano rector normativo, el OECE es el organismo autónomo especializado que supervisa y absuelve consultas, y Perú Compras centraliza y estandariza compras</button>
+      <button class="qbtn" data-q="3" data-correct="false">C) Son tres nombres distintos del mismo organismo según el tipo de contratación que regulan</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) La DGA sanciona a proveedores, el OECE aprueba expedientes y Perú Compras registra en el RNP</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">Un proveedor presenta documentos falsos en un proceso de selección. ¿Cuál es la sanción aplicable para una empresa del régimen GENERAL, si la infracción corresponde a la categoría a–e?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Inhabilitación permanente automática sin posibilidad de reducción</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) Multa entre 5% y 15% de la oferta económica o entre 2 y 20 UIT</button>
+      <button class="qbtn" data-q="4" data-correct="true">C) Multa entre 3% y 6% de la oferta económica o entre 1 y 7 UIT cuando no hay monto de contrato</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Solo amonestación escrita si es primera infracción documentada</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál es el plazo máximo para que un procedimiento sancionador del TCP concluya desde la notificación de su inicio, y qué ocurre si ese plazo vence sin resolución?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) 12 meses; si vence se archiva el expediente y prescribe la infracción automáticamente</button>
+      <button class="qbtn" data-q="5" data-correct="true">B) 9 meses (ampliable en 3 meses adicionales por resolución fundamentada); si vence se declara la caducidad de oficio y se archiva el expediente</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) 6 meses sin posibilidad de prórroga; el TCP queda impedido de iniciar un nuevo procedimiento</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) 3 años, igual que el plazo de prescripción de la infracción</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Qué mecanismo digital permite a una entidad contratar bienes y servicios estandarizados SIN necesidad de convocar un procedimiento de selección?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) La Ficha Técnica aprobada por Perú Compras, que obliga a usar Subasta Inversa Electrónica</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) La Comparación de Precios, que simplifica la etapa de evaluación técnica</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) Los Catálogos Electrónicos de Acuerdos Marco, donde los contratistas ya fueron seleccionados y la entidad solo genera la orden de compra</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) La Adjudicación Simplificada Electrónica disponible en la Pladicop para cuantías menores</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Un contratista acumula una penalidad equivalente al 10% del monto del contrato por mora en la entrega. ¿Qué consecuencia jurídica genera este hecho según el Reglamento?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) La entidad debe perdonar el resto de la deuda y renegociar el plazo sin penalidades adicionales</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) El TCP inicia automáticamente un procedimiento sancionador por incumplimiento grave</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) Se habilita la causal de resolución del contrato por incumplimiento, que la entidad puede ejercer discrecionalmente</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) El contratista pierde automáticamente la garantía de fiel cumplimiento sin necesidad de resolución</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Cuál afirmación sobre la liquidación de un contrato de obra es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) El contratista presenta la liquidación dentro de los 15 días hábiles posteriores a la recepción de la obra</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) La entidad tiene 30 días hábiles para revisar y pronunciarse sobre la liquidación presentada</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Si la entidad no se pronuncia en el plazo, la liquidación queda rechazada por silencio negativo</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Las controversias sobre la liquidación se resuelven mediante arbitraje</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Qué certifica la Constancia de Capacidad Libre de Contratación (CCLC) y cuándo es exigible en un contrato de ejecución de obra?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Certifica que el ejecutor no tiene sanciones vigentes en el RNP; se exige siempre al suscribir el contrato</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) Certifica que el contratista pagó sus impuestos; la emite SUNAT antes de cada proceso de selección</button>
+      <button class="qbtn" data-q="9" data-correct="true">C) Certifica que el ejecutor tiene capacidad de contratación disponible para asumir el nuevo contrato; es requisito adicional para la suscripción de contratos de obras, salvo excepciones reglamentarias</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Certifica la experiencia mínima en obras similares; la emite el Colegio de Ingenieros del Perú</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál es el efecto legal del silencio de la entidad cuando no se pronuncia sobre la liquidación de un contrato de obra presentada por el contratista dentro del plazo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) Silencio negativo: la liquidación se considera rechazada y el contratista debe presentar una nueva</button>
+      <button class="qbtn" data-q="10" data-correct="true">B) Silencio positivo: la liquidación presentada por el contratista se considera aprobada de pleno derecho</button>
+      <button class="qbtn" data-q="10" data-correct="false">C) Silencio neutral: se suspende el plazo y la entidad tiene 30 días adicionales automáticos</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) No existe efecto legal; ambas partes deben acordar una nueva fecha de presentación</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="result-panel">
+    <h3 id="result-score"></h3>
+    <p id="result-msg"></p>
+    <button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">FUENTE:</span>
+  <span class="fc">Decreto Supremo N° 009-2025-EF — Reglamento de la Ley N° 32069, Ley General de Contrataciones Públicas · Diario Oficial El Peruano, Edición Extraordinaria, Miércoles 22 de enero de 2025 · Ministerio de Economía y Finanzas, República del Perú · 196 págs., 13 Títulos, 389 Arts., 14 DCF, 22 DCT, 1 DCD, 2 Anexos.</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {correct: 'C', text: {C:'✅ ¡Correcto! El Art. 2 define que la finalidad es promover el valor por dinero en las contrataciones. Esto es distinto del objeto (Art. 1), que es establecer procedimientos. La finalidad es el resultado esperado; el objeto, el ámbito de regulación.', A:'❌ Incorrecto. La respuesta correcta es C. La transparencia es un principio (Art. 5 Ley 32069), no la finalidad del Reglamento. La finalidad, según el Art. 2, es el valor por dinero en beneficio de la ciudadanía.', B:'❌ Incorrecto. La respuesta correcta es C. La supervisión del RNP es una competencia del OECE, no la finalidad del Reglamento.', D:'❌ Incorrecto. La respuesta correcta es C. Las sanciones son competencia del TCP; no constituyen la finalidad del Reglamento.'}},
+  2: {correct: 'C', text: {C:'✅ ¡Correcto! El Art. 164 establece explícitamente que en obras y consultoría de obras es OBLIGATORIO incluir el factor de evaluación de desempeño del proveedor (clasificación en la FUP). No es facultativo.', A:'❌ Incorrecto. La respuesta correcta es C. La consultoría de obra no se adjudica solo por precio; la evaluación técnica es esencial y el factor desempeño es obligatorio.', B:'❌ Incorrecto. La respuesta correcta es C. Los años de experiencia son un factor posible pero no el obligatorio. El Art. 164 señala específicamente el desempeño del proveedor como factor obligatorio.', D:'❌ Incorrecto. La respuesta correcta es C. El Reglamento no fija pesos mínimos de 60 puntos para la propuesta metodológica; eso lo definen las bases estándar de cada procedimiento.'}},
+  3: {correct: 'B', text: {B:'✅ ¡Correcto! Los tres tienen roles complementarios: DGA (Art. 5) dicta normas y emite opinión vinculante; OECE (Arts. 6–11) supervisa y absuelve consultas; Perú Compras (Art. 12) estandariza y ejecuta procesos de compra centralizada.', A:'❌ Incorrecto. La respuesta correcta es B. La DGA no ejecuta contratos (eso lo hace la DEC de cada entidad). El OECE no adjudica.', C:'❌ Incorrecto. La respuesta correcta es B. Son tres organismos distintos con personalidades jurídicas y competencias diferentes. El OECE tiene autonomía funcional.', D:'❌ Incorrecto. La respuesta correcta es B. El TCP sanciona a proveedores. La DGA no tiene función sancionadora directa sobre proveedores.'}},
+  4: {correct: 'C', text: {C:'✅ ¡Correcto! Para el régimen general, infracciones categoría a–e, la multa es 3–6% de la oferta económica o 1–7 UIT cuando no hay monto de contrato. Así lo establece la tabla del Art. 364/366.', A:'❌ Incorrecto. La respuesta correcta es C. La inhabilitación permanente es la sanción más grave y no aplica automáticamente por presentar documentos falsos en primera instancia.', B:'❌ Incorrecto. La respuesta correcta es C. Esos porcentajes (5–15%) no corresponden a la tabla del régimen sancionador del DS 009-2025-EF para infracciones a–e del régimen general.', D:'❌ Incorrecto. La respuesta correcta es C. No existe la figura de "amonestación escrita" como sanción en el TCP; las sanciones son multa o inhabilitación.'}},
+  5: {correct: 'B', text: {B:'✅ ¡Correcto! El Art. 369 establece que el procedimiento sancionador no puede exceder 9 meses desde la notificación, ampliable en 3 meses adicionales mediante resolución sustentada. Si vence sin resolución, el TCP declara la caducidad de oficio.', A:'❌ Incorrecto. La respuesta correcta es B. El plazo es 9 meses, no 12. Además, la caducidad del procedimiento no extingue la prescripción de la infracción (3 años).', C:'❌ Incorrecto. La respuesta correcta es B. El plazo es 9 meses con posibilidad de ampliación de 3 meses más, no 6 meses sin prórroga.', D:'❌ Incorrecto. La respuesta correcta es B. Los 3 años son el plazo de prescripción de la infracción (desde su comisión), no el plazo del procedimiento sancionador.'}},
+  6: {correct: 'C', text: {C:'✅ ¡Correcto! Los Catálogos Electrónicos de Acuerdos Marco (Arts. 245–250) permiten contratar directamente porque los proveedores ya fueron seleccionados mediante un procedimiento previo. La entidad solo elige de la lista y genera la orden.', A:'❌ Incorrecto. La respuesta correcta es C. La ficha técnica obliga a usar Subasta Inversa Electrónica (que SÍ es un procedimiento de selección). El Acuerdo Marco salta ese paso.', B:'❌ Incorrecto. La respuesta correcta es C. La Comparación de Precios es un procedimiento de selección simplificado, no elimina el proceso de selección.', D:'❌ Incorrecto. La respuesta correcta es C. La "Adjudicación Simplificada Electrónica" no es una figura independiente; existe la Adjudicación Simplificada que sí sigue siendo un procedimiento de selección.'}},
+  7: {correct: 'C', text: {C:'✅ ¡Correcto! Acumular penalidades hasta el tope del 10% del monto del contrato es una causal de resolución por incumplimiento. Sin embargo, la resolución no es automática: la entidad puede ejercerla discrecionalmente mediante resolución motivada.', A:'❌ Incorrecto. La respuesta correcta es C. El Reglamento no contempla ningún mecanismo de "perdón" de deuda por mora. La entidad está obligada a exigir el cumplimiento o resolver.', B:'❌ Incorrecto. La respuesta correcta es C. El TCP no actúa automáticamente por mora contractual. Su competencia sancionadora requiere un procedimiento formal con denuncia o de oficio.', D:'❌ Incorrecto. La respuesta correcta es C. La ejecución de la garantía de fiel cumplimiento no ocurre automáticamente; requiere la resolución previa del contrato y la comunicación formal.'}},
+  8: {correct: 'C', text: {C:'✅ ¡Correcto! Esta afirmación es FALSA. El silencio de la entidad ante la liquidación presentada produce efecto de SILENCIO POSITIVO (aprobación tácita), no negativo. Si no se pronuncia en 30 días hábiles, la liquidación del contratista queda aprobada.', A:'❌ Incorrecto. Esta afirmación es VERDADERA. El contratista sí presenta la liquidación en 15 días hábiles post-recepción según el Art. 250.', B:'❌ Incorrecto. Esta afirmación es VERDADERA. La entidad tiene exactamente 30 días hábiles para revisar y pronunciarse, según el Art. 250.', D:'❌ Incorrecto. Esta afirmación es VERDADERA. Las controversias sobre liquidación de obras van a arbitraje, no a sede judicial ordinaria.'}},
+  9: {correct: 'C', text: {C:'✅ ¡Correcto! La CCLC (Art. 88 y definición Anexo I) certifica que el ejecutor de obras tiene capacidad libre de contratación disponible, es decir, que sus contratos vigentes no saturan su capacidad máxima registrada en el RNP. Es requisito para suscribir contratos de obras, salvo excepciones.', A:'❌ Incorrecto. La respuesta correcta es C. La verificación de sanciones en el RNP es automática vía Pladicop. La CCLC certifica capacidad disponible, no ausencia de sanciones.', B:'❌ Incorrecto. La respuesta correcta es C. La certificación tributaria la emite SUNAT pero no es la CCLC. La CCLC la gestiona el OECE a través del RNP/Pladicop.', D:'❌ Incorrecto. La respuesta correcta es C. La experiencia en obras similares se acredita con contratos registrados en la FUP, no con un certificado del CIP.'}},
+  10: {correct: 'B', text: {B:'✅ ¡Correcto! El Art. 250 establece expresamente que si la entidad no se pronuncia sobre la liquidación dentro del plazo de 30 días hábiles, opera el SILENCIO POSITIVO: la liquidación presentada por el contratista queda aprobada de pleno derecho. Esto protege al contratista del desinterés de la entidad.', A:'❌ Incorrecto. La respuesta correcta es B. Es lo opuesto: opera silencio POSITIVO, no negativo. El silencio negativo penalizaría al contratista por la inacción de la entidad, lo que el Reglamento expresamente evita.', C:'❌ Incorrecto. La respuesta correcta es B. No existe suspensión automática del plazo ni prórroga de 30 días. El vencimiento produce efecto inmediato.', D:'❌ Incorrecto. La respuesta correcta es B. El silencio administrativo tiene efectos jurídicos expresamente regulados. No se requiere acuerdo de partes.'}},
+};
+
+let answered = 0, correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn) return;
+  const q = btn.getAttribute('data-q');
+  const isCorrect = btn.getAttribute('data-correct') === 'true';
+  const card = document.getElementById('q'+q);
+  const fb = document.getElementById('fb'+q);
+  const btns = card.querySelectorAll('.qbtn');
+  if(btn.disabled) return;
+  btns.forEach(b=>{
+    b.disabled = true;
+    if(b.getAttribute('data-correct')==='true'){
+      b.classList.add('correct');
+      b.textContent = '✅ '+b.textContent;
+    }
+  });
+  if(!isCorrect){
+    btn.classList.remove('correct');
+    btn.classList.add('incorrect');
+    btn.textContent = '❌ '+btn.textContent.replace('✅ ','');
+  }
+  const feedbackData = feedbacks[parseInt(q)];
+  const opt = ['A','B','C','D'];
+  const btnsArr = Array.from(btns);
+  const clickedIdx = btnsArr.indexOf(btn);
+  const clickedLetter = opt[clickedIdx];
+  fb.className = 'qfeedback '+(isCorrect?'ok':'fail');
+  fb.innerHTML = feedbackData.text[clickedLetter] || (isCorrect?'✅ ¡Correcto!':'❌ Respuesta incorrecta. La correcta es '+feedbackData.correct+'.');
+  fb.style.display='block';
+  answered++;
+  if(isCorrect) correct++;
+  const pct = Math.round((answered/10)*100);
+  document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=answered+' / 10 respondidas';
+  document.getElementById('score-text').textContent='Puntaje: '+correct+' / '+answered;
+  if(answered===10){
+    const panel=document.getElementById('result-panel');
+    panel.style.display='block';
+    document.getElementById('result-score').textContent=correct+' / 10 correctas';
+    let msg='',bg='';
+    if(correct<=4){msg='Necesitas repasar el material con más detalle.';bg='#fef2f2';}
+    else if(correct<=7){msg='¡Buen avance! Refuerza los temas de sanciones y procedimientos.';bg='#fefce8';}
+    else{msg='¡Excelente dominio del DS 009-2025-EF!';bg='#f0fdf4';}
+    panel.style.background=bg;
+    document.getElementById('result-msg').textContent=msg;
+  }
+});
+
+function resetQuiz(){
+  answered=0; correct=0;
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('prog-text').textContent='0 / 10 respondidas';
+  document.getElementById('score-text').textContent='Puntaje: 0 / 0';
+  document.getElementById('result-panel').style.display='none';
+  for(let i=1;i<=10;i++){
+    const card=document.getElementById('q'+i);
+    card.querySelectorAll('.qbtn').forEach(b=>{
+      b.disabled=false;
+      b.classList.remove('correct','incorrect');
+      b.textContent=b.textContent.replace('✅ ','').replace('❌ ','');
+    });
+    const fb=document.getElementById('fb'+i);
+    fb.style.display='none';
+    fb.className='qfeedback';
+  }
+}
+</script>
