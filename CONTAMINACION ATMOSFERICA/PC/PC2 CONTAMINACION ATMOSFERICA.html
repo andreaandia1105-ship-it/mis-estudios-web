@@ -1,0 +1,582 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  .cv { display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; padding:12px; background:var(--color-background-tertiary); font-family:'Source Sans 3',sans-serif; }
+  .block { background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:11px; padding:12px 13px; }
+  .block.s2 { grid-column: span 2; }
+  .block.s3 { grid-column: 1/-1; }
+  .bh { font-family:'Oswald',sans-serif; font-size:12px; text-transform:uppercase; padding:3px 9px; border-radius:6px; display:inline-block; margin-bottom:8px; font-weight:500; }
+  .bh-blue { background:#dbeafe; color:#1e3a8a; }
+  .bh-green { background:#dcfce7; color:#14532d; }
+  .bh-red { background:#fee2e2; color:#991b1b; }
+  .bh-yellow { background:#fef9c3; color:#713f12; }
+  .bh-purple { background:#ede9fe; color:#4c1d95; }
+  .bh-teal { background:#ccfbf1; color:#134e4a; }
+  .bh-orange { background:#ffedd5; color:#7c2d12; }
+  .bh-gray { background:#f1f5f9; color:#334155; }
+  .bh-pink { background:#fce7f3; color:#831843; }
+  @media(prefers-color-scheme:dark){
+    .bh-blue{background:#1e3a5f;color:#93c5fd}
+    .bh-green{background:#14532d;color:#86efac}
+    .bh-red{background:#450a0a;color:#fca5a5}
+    .bh-yellow{background:#422006;color:#fef08a}
+    .bh-purple{background:#2e1065;color:#c4b5fd}
+    .bh-teal{background:#042f2e;color:#5eead4}
+    .bh-orange{background:#431407;color:#fed7aa}
+    .bh-gray{background:#1e293b;color:#94a3b8}
+    .bh-pink{background:#4a044e;color:#f0abfc}
+  }
+  .def { border-left:3px solid; padding:7px 10px; border-radius:0 7px 7px 0; font-size:12px; background:var(--color-background-secondary); margin-bottom:8px; }
+  .def-blue{border-color:#3b82f6;} .def-green{border-color:#22c55e;} .def-yellow{border-color:#eab308;}
+  .def-red{border-color:#ef4444;} .def-purple{border-color:#a855f7;} .def-teal{border-color:#14b8a6;}
+  .def-orange{border-color:#f97316;} .def-gray{border-color:#64748b;}
+  .item { display:flex; gap:7px; font-size:12px; line-height:1.5; margin-bottom:4px; }
+  .dot { width:6px; height:6px; border-radius:50%; margin-top:5px; flex-shrink:0; }
+  .dot-blue{background:#3b82f6;} .dot-green{background:#22c55e;} .dot-yellow{background:#eab308;}
+  .dot-red{background:#ef4444;} .dot-purple{background:#a855f7;} .dot-teal{background:#14b8a6;}
+  .dot-orange{background:#f97316;} .dot-gray{background:#64748b;}
+  .rx { background:#0f172a; color:#7dd3fc; font-family:monospace; font-size:11px; padding:7px 11px; border-radius:7px; text-align:center; line-height:1.6; margin:8px 0; }
+  .warn { background:#fff7ed; border-left:3px solid #f97316; border-radius:0 8px 8px 0; font-size:11.5px; color:#7c2d12; padding:7px 10px; margin:6px 0; }
+  @media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa;}}
+  .exam { background:#fefce8; border:1px solid #facc15; border-radius:8px; font-size:11.5px; color:#713f12; padding:8px 10px; margin-top:8px; }
+  @media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#d97706;}}
+  .mini { background:var(--color-background-secondary); border-radius:8px; padding:8px 10px; font-size:11.5px; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin:6px 0; }
+  .three { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin:6px 0; }
+  .flow { display:flex; align-items:center; flex-wrap:wrap; gap:5px; margin:6px 0; }
+  .fbox { background:var(--color-background-secondary); padding:4px 8px; border-radius:6px; font-size:11px; }
+  .farrow { color:var(--color-text-secondary); font-size:15px; }
+  .tbl { width:100%; border-collapse:collapse; font-size:11px; }
+  .tbl th { background:var(--color-background-secondary); padding:5px 7px; border-bottom:0.5px solid var(--color-border-secondary); font-weight:600; text-align:left; }
+  .tbl td { padding:5px 7px; border-bottom:0.5px solid var(--color-border-tertiary); vertical-align:top; }
+  .divh { border:none; border-top:0.5px solid var(--color-border-tertiary); margin:7px 0; }
+  .sec-bar { grid-column:1/-1; border-radius:8px; padding:7px 14px; font-family:'Oswald',sans-serif; font-size:13px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .sec-blue { background:#1e3a8a; color:#bfdbfe; }
+  .sec-yellow { background:#713f12; color:#fef9c3; }
+  .sec-green { background:#14532d; color:#bbf7d0; }
+  .sec-orange { background:#7c2d12; color:#ffedd5; }
+  .sec-purple { background:#4c1d95; color:#ede9fe; }
+  .pill { font-size:11px; padding:2px 8px; border-radius:20px; display:inline-block; margin:2px; }
+  .stat-bar-wrap { width:100%; background:var(--color-background-secondary); border-radius:20px; height:11px; overflow:hidden; margin:3px 0; }
+  .stat-bar-fill { height:100%; border-radius:20px; }
+  /* QUIZ */
+  #quiz-section { grid-column:1/-1; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:14px; padding:16px 18px; }
+  .quiz-head { background:#0f1e3a; color:white; border-radius:10px; padding:12px 16px; margin-bottom:14px; }
+  .quiz-head h2 { font-family:'Oswald',sans-serif; font-size:14px; margin:0 0 4px; }
+  .quiz-head p { font-size:11.5px; color:#94a3b8; margin:0; }
+  .qcard { margin-bottom:16px; padding-bottom:16px; border-bottom:0.5px solid var(--color-border-tertiary); }
+  .qcard:last-of-type { border-bottom:none; }
+  .qnum { font-size:11px; color:var(--color-text-secondary); margin:0 0 4px; font-family:'Oswald',sans-serif; }
+  .qtext { font-size:12.5px; font-weight:600; margin:0 0 8px; color:var(--color-text-primary); }
+  .qopts { display:flex; flex-direction:column; gap:5px; }
+  .qbtn { background:var(--color-background-secondary); border:1px solid var(--color-border-tertiary); border-radius:8px; padding:8px 12px; font-size:12px; text-align:left; cursor:pointer; width:100%; transition:all 0.2s; color:var(--color-text-primary); font-family:'Source Sans 3',sans-serif; }
+  .qbtn:hover:not(:disabled) { background:var(--color-background-tertiary); }
+  .qbtn.correct { background:#dcfce7; border-color:#16a34a; color:#14532d; }
+  .qbtn.incorrect { background:#fee2e2; border-color:#dc2626; color:#991b1b; }
+  .qbtn:disabled { opacity:0.65; cursor:not-allowed; pointer-events:none; }
+  .qfeedback { border-radius:0 8px 8px 0; padding:8px 11px; font-size:11.5px; margin-top:8px; display:none; }
+  .qfeedback.ok { background:#f0fdf4; border-left:3px solid #16a34a; color:#14532d; }
+  .qfeedback.fail { background:#fef2f2; border-left:3px solid #dc2626; color:#991b1b; }
+  .prog-bar-wrap { background:var(--color-background-secondary); border-radius:20px; height:10px; margin:6px 0 12px; overflow:hidden; }
+  .prog-bar-fill { height:100%; border-radius:20px; background:#16a34a; width:0%; transition:width 0.3s; }
+  #result-panel { display:none; border-radius:10px; padding:14px 16px; text-align:center; margin-top:12px; }
+  #reset-btn { background:#0f1e3a; color:white; border:none; border-radius:8px; padding:8px 18px; cursor:pointer; font-size:12px; margin-top:10px; font-family:'Source Sans 3',sans-serif; }
+  @media(prefers-color-scheme:dark){
+    .qbtn.correct{background:#14532d;border-color:#22c55e;color:#bbf7d0;}
+    .qbtn.incorrect{background:#450a0a;border-color:#ef4444;color:#fca5a5;}
+    .qfeedback.ok{background:#052e16;border-color:#22c55e;color:#86efac;}
+    .qfeedback.fail{background:#300;border-color:#ef4444;color:#fca5a5;}
+  }
+</style>
+
+<div class="cv">
+
+  <!-- TÍTULO -->
+  <div style="grid-column:1/-1; background:#0f1e3a; color:white; border-radius:12px; padding:14px 18px;">
+    <div style="font-family:'Oswald',sans-serif; font-size:20px; font-weight:700; margin-bottom:4px;">PRÁCTICA 2 — CONTAMINANTES SÓLIDOS SEDIMENTABLES (CSS)</div>
+    <div style="font-size:11px; color:#94a3b8; margin-bottom:8px;">Contaminación Atmosférica · UNALM · Docente: Jean Carlos Paucar Baldeón</div>
+    <span class="pill" style="background:#1e3a8a; color:#bfdbfe;">CSS & Métodos de Monitoreo</span>
+    <span class="pill" style="background:#134e4a; color:#99f6e4;">Normas DIGESA/SENAMHI</span>
+    <span class="pill" style="background:#422006; color:#fef08a;">Fórmulas de Cálculo</span>
+    <span class="pill" style="background:#14532d; color:#bbf7d0;">Estaciones UNALM</span>
+    <span class="pill" style="background:#4c1d95; color:#ede9fe;">Variables Meteorológicas</span>
+  </div>
+
+  <!-- SECCIÓN 1: FUNDAMENTOS -->
+  <div class="sec-bar sec-blue">🔵 SECCIÓN 1: FUNDAMENTOS — ¿Qué son los CSS y por qué se monitorean?</div>
+
+  <div class="block s2">
+    <span class="bh bh-blue">Definición de CSS (Diap. 1–2)</span>
+    <div class="def def-blue">Los <strong>Contaminantes Sólidos Sedimentables (CSS)</strong> son partículas de polvo, hollín u otros materiales sólidos presentes en la atmósfera que, por su peso y tamaño, tienden a depositarse sobre superficies por acción de la gravedad. Se expresan en toneladas por kilómetro cuadrado por período de 30 días (Tn/km²/30días). Su monitoreo es clave porque revelan la carga contaminante total que se deposita sobre suelos, cultivos, agua y tejidos vivos en un área determinada.</div>
+    <div class="item"><span class="dot dot-blue"></span><span><strong>¿Por qué 30 días?</strong> Este periodo estándar permite capturar variaciones cíclicas (lluvia, viento, actividad humana) y es compatible con las normas DIGESA y SENAMHI, facilitando la comparación entre estaciones y períodos distintos.</span></div>
+    <div class="item"><span class="dot dot-blue"></span><span><strong>¿Por qué importa en la UNALM?</strong> La universidad está rodeada por la autopista Panamericana Sur y Lima Metropolitana, con tráfico intenso. Los CSS pueden afectar la calidad de suelos agrícolas experimentales y la salud del personal universitario.</span></div>
+    <div class="item"><span class="dot dot-blue"></span><span><strong>Distinción clave:</strong> No confundir con PM10 o PM2.5 (partículas en suspensión). Los CSS son partículas que YA sedimentaron, capturando lo que la atmósfera deposita sobre el territorio en cierto tiempo.</span></div>
+    <div class="exam">🎯 EXAMEN: Explique la diferencia conceptual entre los contaminantes sólidos sedimentables (CSS) y el material particulado en suspensión (PM10, PM2.5). ¿Por qué los CSS se miden en Tn/km²/30días y no en µg/m³?</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-green">Objetivos de la Práctica (Diap. 3)</span>
+    <div class="def def-green">La práctica busca cuantificar, describir espacialmente e interrelacionar con el clima los CSS en el campus universitario durante 3 meses consecutivos, usando dos métodos complementarios de recolección.</div>
+    <div class="three">
+      <div class="mini" style="border-top:3px solid #22c55e;">
+        <strong>Objetivo 1</strong><br>Determinar cantidades de CSS por mes y punto de muestreo (frecuencia 30 días).
+      </div>
+      <div class="mini" style="border-top:3px solid #3b82f6;">
+        <strong>Objetivo 2</strong><br>Analizar variación <em>temporal y espacial</em> dentro del campus.
+      </div>
+      <div class="mini" style="border-top:3px solid #a855f7;">
+        <strong>Objetivo 3</strong><br>Correlacionar CSS con variables meteorológicas: viento, lluvia, temperatura.
+      </div>
+    </div>
+    <div class="warn">⚠️ ERROR COMÚN: No es suficiente medir solo la concentración promedio. El objetivo incluye la dimensión <em>espacial</em> (¿en qué punto del campus hay más?) y la dimensión <em>temporal</em> (¿en qué mes fue mayor?) y la meteorológica. Los tres ejes son parte del análisis exigido.</div>
+  </div>
+
+  <!-- SECCIÓN 2: NORMATIVA -->
+  <div class="sec-bar sec-orange">🟠 SECCIÓN 2: NORMATIVA PERUANA — Límites y regulación de CSS</div>
+
+  <div class="block s2">
+    <span class="bh bh-orange">Normas DIGESA y SENAMHI (Diap. 4)</span>
+    <div class="def def-orange">En el Perú, tanto DIGESA como SENAMHI establecen un <strong>límite máximo referencial de 5 Tn/km²/30días</strong> para polvo sedimentable. Ambas instituciones usan el método gravimétrico, aunque con colectores ligeramente distintos.</div>
+    <table class="tbl">
+      <thead><tr><th>Institución</th><th>Límite (Tn/km²/30d)</th><th>Método Principal</th><th>Colector</th></tr></thead>
+      <tbody>
+        <tr><td>DIGESA</td><td style="color:#b45309; font-weight:600;">5</td><td>Gravimétrico</td><td>Jarras (Bergerhoff)</td></tr>
+        <tr><td>SENAMHI</td><td style="color:#b45309; font-weight:600;">5</td><td>Gravimétrico</td><td>Jarras + Placas de vidrio</td></tr>
+      </tbody>
+    </table>
+    <div class="warn">⚠️ CONTEXTO LIMA: Según datos del INEI (2005), Lima Metropolitana superaba el límite referencial de 5 Tn/km²/30días en todos los conos (Norte, Centro/Este, Sur) con valores entre 15 y 37 Tn/km²/30días. Es decir, entre 3 y 7 veces el límite. Esto indica que la norma peruana es solo referencial, no vinculante con sanciones.</div>
+    <div class="exam">🎯 EXAMEN: ¿Cuál es el límite máximo de CSS establecido por DIGESA y SENAMHI en el Perú? ¿Qué técnica analítica y qué colector utiliza cada institución para su determinación?</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-orange">CSS en Lima Metropolitana — Contexto (Diap. 5–6)</span>
+    <div class="def def-orange">Los datos del INEI (2005) muestran que Lima Metropolitana tiene niveles de CSS crónicamente elevados, con el Cono Norte como el más contaminado y tendencia creciente de 2004 a 2005.</div>
+    <div class="item"><span class="dot dot-orange"></span><span><strong>Cono Norte (Comas):</strong> 22.9 → 31.0 Tn/km²/30días (Mar 04→05). El más alto. Fuentes: tráfico, polvo de vías sin pavimentar, industria liviana.</span></div>
+    <div class="item"><span class="dot dot-orange"></span><span><strong>Cono Centro/Este (El Agustino):</strong> 22.7 → 24.9 Tn/km²/30días. Zona densamente urbanizada, influencia del río Rímac.</span></div>
+    <div class="item"><span class="dot dot-orange"></span><span><strong>Cono Sur (Villa María del Triunfo):</strong> 25.0 → 24.1 Tn/km²/30días. Única que bajó ligeramente.</span></div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:100%; background:#f97316;"></div></div>
+    <div style="font-size:10px; color:var(--color-text-secondary);">Lima 2005: 24–31 Tn/km²/mes vs límite referencial de 5 Tn/km²/mes</div>
+    <div class="flow">
+      <span class="fbox">Urbanización acelerada</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Vías sin pavimentar</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Resuspensión de polvo</span>
+      <span class="farrow">→</span>
+      <span class="fbox">↑ CSS</span>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 3: METODOLOGÍA -->
+  <div class="sec-bar sec-yellow">🟡 SECCIÓN 3: METODOLOGÍA — Estaciones, Métodos y Materiales</div>
+
+  <div class="block">
+    <span class="bh bh-yellow">Estaciones de Monitoreo (Diap. 7)</span>
+    <div class="def def-yellow">Se establecieron 10 puntos de muestreo distribuidos estratégicamente en el campus de la UNALM, cubriendo zonas con diferente uso de suelo (áreas académicas, agrícolas, límites perimetrales) para capturar la variabilidad espacial.</div>
+    <table class="tbl">
+      <thead><tr><th>Grupo</th><th>Punto</th><th>Tipo de zona</th></tr></thead>
+      <tbody>
+        <tr><td>G1</td><td>OVH</td><td>Pecuaria</td></tr>
+        <tr><td>G2</td><td>OSI</td><td>Agrícola</td></tr>
+        <tr><td>G3</td><td>Campo Ferial</td><td>Perimetral norte</td></tr>
+        <tr><td>G4</td><td>Pozo de Agua</td><td>Agrícola interior</td></tr>
+        <tr><td>G5</td><td>Hidroponía</td><td>Experimental</td></tr>
+        <tr><td>G6</td><td>P. Principal</td><td>Perimetral oeste</td></tr>
+        <tr><td>G7</td><td>Aulas Turqueza</td><td>Académica</td></tr>
+        <tr><td>G8</td><td>Aulas Plomas</td><td>Académica</td></tr>
+        <tr><td>G9</td><td>Huerto</td><td>Agrícola</td></tr>
+        <tr><td>G10</td><td>Puerta 5</td><td>Perimetral sur</td></tr>
+      </tbody>
+    </table>
+    <div class="exam">🎯 EXAMEN: Justifique desde el punto de vista metodológico por qué se seleccionaron puntos de muestreo en zonas perimetrales (Puerta 5, Campo Ferial, P. Principal) además de zonas interiores del campus.</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-teal">Método de Placas (Diap. 8–9, 12)</span>
+    <div class="def def-teal">Utiliza placas de vidrio de 100 cm² cubiertas con vaselina como agente adhesivo. Captura partículas por contacto directo en superficie horizontal expuesta al aire libre. Mide la deposición seca.</div>
+    <div class="item"><span class="dot dot-teal"></span><span><strong>Material:</strong> 2 placas de vidrio 10×10 cm (100 cm²) + vaselina (sustancia adherente).</span></div>
+    <div class="item"><span class="dot dot-teal"></span><span><strong>Instalación:</strong> Una placa se expone <em>sin techo</em> (deposición total: seca + húmeda) y otra <em>con techo</em> (deposición seca únicamente). La comparación entre ambas permite estimar aporte de la lluvia.</span></div>
+    <div class="item"><span class="dot dot-teal"></span><span><strong>Recolección:</strong> Cada 30 días se pesan. La diferencia de masa (Pf − Pi) expresada sobre el área y convertida a Tn/km² es el CSS del período.</span></div>
+    <div class="flow">
+      <span class="fbox">Pesar placa (Pi)</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Instalar 30 días</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Retirar y pesar (Pf)</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Calcular CSS</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-purple">Método Bergerhoff (Diap. 8–10, 12–13)</span>
+    <div class="def def-purple">Utiliza un vaso colector cilíndrico (beaker de 1 litro) con agua destilada como medio receptor. Capta deposición húmeda y seca. Es el método estándar internacional (norma DIN 19739) para polvo sedimentable.</div>
+    <div class="item"><span class="dot dot-purple"></span><span><strong>Diseño del soporte:</strong> El vaso se instala sobre un poste de hierro a 1.5–2 m de altura. La regla <em>Δd ≥ 10·Δh</em> garantiza que ningún obstáculo cercano bloquee la captación: la distancia al obstáculo debe ser al menos 10 veces su altura.</span></div>
+    <div class="item"><span class="dot dot-purple"></span><span><strong>Trampa para aves:</strong> Se coloca en el borde del vaso para evitar contaminación por deyecciones, que distorsionarían los resultados gravimétricos.</span></div>
+    <div class="item"><span class="dot dot-purple"></span><span><strong>Proceso en laboratorio:</strong> Se retiran residuos orgánicos (hojas, insectos), se raspa el vaso con agua destilada, se pre-evapora a ≤80°C, luego se transfiere a placa Petri y se seca en estufa 24h a 105°C.</span></div>
+    <div class="warn">⚠️ CRÍTICO: La temperatura de estufa de 105°C es estándar gravimétrico. A esa temperatura se elimina toda el agua libre, pero no se destruye la materia orgánica. Si se excede (>550°C), habría que hablar de sólidos volátiles, no de CSS totales.</div>
+  </div>
+
+  <!-- SECCIÓN 4: CÁLCULOS -->
+  <div class="sec-bar sec-green">🟢 SECCIÓN 4: CÁLCULOS — Fórmulas y ejemplos numéricos</div>
+
+  <div class="block s2">
+    <span class="bh bh-yellow">Fórmulas de Cálculo CSS (Diap. 14)</span>
+    <div class="two">
+      <div>
+        <strong style="font-size:12px;">Método de Placas</strong>
+        <div class="rx">
+          CSS = [(Pf − Pi) / (100 cm² × 30 días)] × (10¹⁰ cm²/km²) × (1 Ton / 10⁶ g)<br><br>
+          CSS (Ton/km²·30días) = (Pf − Pi) × 100
+        </div>
+        <div style="font-size:11px; color:var(--color-text-secondary);">Pi = peso inicial (g) · Pf = peso final (g) · Área = 100 cm²</div>
+        <div class="rx" style="background:#0f2d1a; color:#86efac;">
+          EJEMPLO: Si Pi = 45.320 g y Pf = 45.375 g<br>
+          CSS = (45.375 − 45.320) × 100 = 0.055 × 100<br>
+          <strong>CSS = 5.5 Ton/km²/30días → SUPERA el límite (5)</strong>
+        </div>
+      </div>
+      <div>
+        <strong style="font-size:12px;">Método Bergerhoff</strong>
+        <div class="rx">
+          CSS = (Pf − Pi) / (A × T)<br><br>
+          Pf = masa placa Petri + CSS (g)<br>
+          Pi = masa placa Petri vacía (g)<br>
+          A = área boca vaso colector (m²)<br>
+          T = tiempo muestreo (días → convertir a unidades compatibles)
+        </div>
+        <div class="rx" style="background:#0f2d1a; color:#86efac;">
+          EJEMPLO: Vaso con boca Ø 11.3 cm → A = π×(0.0565)² ≈ 0.01 m²<br>
+          Si (Pf−Pi) = 0.08 g; T = 30 días<br>
+          CSS = 0.08 g / (0.01 m² × 30 días) = 0.267 g/m²/día<br>
+          Conversión: × 10 → <strong>≈ 2.67 Ton/km²/30días</strong>
+        </div>
+      </div>
+    </div>
+    <div class="warn">⚠️ ERROR FRECUENTE: En el método de placas, la simplificación (Pf−Pi)×100 asume exactamente 100 cm² y 30 días. Si el área o el tiempo difieren, se debe usar la fórmula completa. En el método Bergerhoff, el área (A) corresponde a la <em>abertura real</em> del vaso, no a su diámetro exterior.</div>
+    <div class="exam">🎯 EXAMEN: Una placa de vidrio (100 cm²) pesaba 41.200 g antes de instalarse. Al cabo de 30 días pesó 41.263 g. Calcule el CSS en Ton/km²/30días e indique si supera el límite referencial peruano. Justifique su respuesta.</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-gray">Materiales de Laboratorio (Diap. 11)</span>
+    <div class="def def-gray">El tratamiento de las muestras en laboratorio requiere equipamiento preciso para garantizar la reproducibilidad del análisis gravimétrico: cada paso de la cadena analítica tiene un propósito específico.</div>
+    <div class="three">
+      <div class="mini" style="border-left:3px solid #a855f7;">
+        <strong>Placa Petri + Balanza</strong><br>Contiene la muestra evaporada. La balanza gravimétrica (precisión 0.0001 g) detecta diferencias mínimas de masa.
+      </div>
+      <div class="mini" style="border-left:3px solid #eab308;">
+        <strong>Estufa (105°C/24h)</strong><br>Elimina toda el agua libre sin incinerar materia orgánica. Tiempo estándar para lograr masa constante.
+      </div>
+      <div class="mini" style="border-left:3px solid #14b8a6;">
+        <strong>Desecador</strong><br>Enfría la placa Petri tras la estufa sin reabsorber humedad del ambiente. Sin desecador, la masa aumentaría artificialmente.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 5: SISTEMA BERGERHOFF y DISEÑO -->
+  <div class="sec-bar sec-purple">🟣 SECCIÓN 5: DISEÑO DEL SISTEMA BERGERHOFF — Criterios de instalación</div>
+
+  <div class="block s2">
+    <span class="bh bh-purple">Regla de Instalación del Bergerhoff (Diap. 10)</span>
+    <div class="def def-purple">El sistema Bergerhoff exige cumplir la regla geométrica <strong>Δd ≥ 10·Δh</strong>, donde Δd es la distancia horizontal al obstáculo más cercano y Δh es su altura sobre el nivel del colector. Esta regla evita que edificios, árboles o muros bloqueen la entrada de partículas sedimentables al vaso.</div>
+    <div class="two">
+      <div>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Altura del poste:</strong> 1.5 a 2 metros. Altura estándar que evita contaminación por resuspensión de polvo del suelo pero no supera la zona de turbulencia de edificios bajos.</span></div>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Canasta protectora:</strong> Malla metálica en el borde del vaso que impide caída de objetos grandes (hojas, ramas) y aves sin impedir el paso de partículas finas.</span></div>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Techo parasol:</strong> Lámina inclinada sobre el vaso que protege de la lluvia directa en el método de medición de deposición seca.</span></div>
+      </div>
+      <div>
+        <div class="rx">
+          Regla fundamental:<br>
+          <strong>Δd ≥ 10 × Δh</strong><br><br>
+          Ejemplo: árbol de 3 m de altura<br>
+          El vaso debe estar a ≥ 30 m del árbol<br><br>
+          Si poste = 1.5 m y árbol = 4.5 m<br>
+          Δh = 4.5 − 1.5 = 3 m<br>
+          ∴ Δd ≥ 30 m
+        </div>
+        <div class="warn">⚠️ Si se viola la regla Δd ≥ 10·Δh, el obstáculo genera un "cono de sombra" aerodinámico que reduce artificialmente el CSS medido. La estación quedaría en zona de sotavento y los datos no serían representativos del área.</div>
+      </div>
+    </div>
+    <div class="exam">🎯 EXAMEN: Explique el criterio de instalación del sistema Bergerhoff (Δd ≥ 10·Δh) y describa qué consecuencias tendría sobre los resultados si no se cumpliera esta condición durante el muestreo.</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-teal">Cronograma de la Práctica (Diap. 15)</span>
+    <div class="def def-teal">El muestreo abarca 3 periodos mensuales consecutivos de setiembre a diciembre de 2017, usando la Estación Alexander Von Humboldt de la UNALM como fuente de datos meteorológicos de referencia.</div>
+    <div class="flow" style="flex-direction:column; align-items:flex-start; gap:3px;">
+      <div class="flow"><span class="fbox" style="background:#1e3a5f; color:#93c5fd;">09 Sep</span><span class="farrow">→</span><span style="font-size:11.5px;">Instalación de todas las estaciones</span></div>
+      <div class="flow"><span class="fbox" style="background:#134e4a; color:#5eead4;">10 Oct</span><span class="farrow">→</span><span style="font-size:11.5px;">Primer cambio de muestras (mes 1 completado)</span></div>
+      <div class="flow"><span class="fbox" style="background:#4c1d95; color:#ede9fe;">09 Nov</span><span class="farrow">→</span><span style="font-size:11.5px;">Segundo cambio de muestras (mes 2 completado)</span></div>
+      <div class="flow"><span class="fbox" style="background:#7c2d12; color:#ffedd5;">08 Dic</span><span class="farrow">→</span><span style="font-size:11.5px;">Desinstalación final (mes 3 completado)</span></div>
+      <div class="flow"><span class="fbox" style="background:#1e293b; color:#94a3b8;">11 Dic</span><span class="farrow">→</span><span style="font-size:11.5px;">Entrega de datos al docente</span></div>
+      <div class="flow"><span class="fbox" style="background:#1e293b; color:#94a3b8;">15 Dic</span><span class="farrow">→</span><span style="font-size:11.5px;">Entrega de trabajo final escrito</span></div>
+    </div>
+  </div>
+
+  <!-- TABLA INTEGRADORA -->
+  <div class="block s3">
+    <span class="bh bh-gray">TABLA INTEGRADORA — Comparación de métodos y aspectos clave</span>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Método de Placas</th>
+          <th>Método Bergerhoff</th>
+          <th>Límite Peruano</th>
+          <th>Contexto Lima (2004–05)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Colector</td><td>Placa vidrio 100 cm² + vaselina</td><td>Beaker 1 L + agua destilada</td><td>—</td><td>Jarras (SENAMHI)</td></tr>
+        <tr><td>Sustancia adherente</td><td>Vaselina (sólida, grasa)</td><td>Agua destilada (líquida)</td><td>—</td><td>—</td></tr>
+        <tr><td>Tipo de deposición captada</td><td>Seca (con techo) / Total (sin techo)</td><td>Seca + húmeda (total)</td><td>—</td><td>Total</td></tr>
+        <tr><td>Período de muestreo</td><td>30 días</td><td>30 días</td><td>30 días</td><td>30 días</td></tr>
+        <tr><td>Fórmula simplificada</td><td>CSS = (Pf−Pi) × 100</td><td>CSS = (Pf−Pi) / (A × T)</td><td>—</td><td>—</td></tr>
+        <tr><td>Análisis en laboratorio</td><td>Solo pesado gravimétrico</td><td>Evaporación + estufa 105°C/24h</td><td>Gravimétrico</td><td>Gravimétrico</td></tr>
+        <tr><td>Valor máximo permitido</td><td>—</td><td>—</td><td>5 Tn/km²/30días</td><td>22–37 Tn/km²/30días</td></tr>
+        <tr><td>Veces sobre el límite (Lima)</td><td>—</td><td>—</td><td>1x (=límite)</td><td>4.4–7.4x el límite</td></tr>
+        <tr><td>Regla de instalación</td><td>Superficie horizontal libre</td><td>Δd ≥ 10·Δh; altura 1.5–2 m</td><td>—</td><td>Norma SENAMHI</td></tr>
+        <tr><td>Riesgo de contaminación</td><td>Viento puede arrastrar partículas</td><td>Aves, hojas, lluvia directa</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="warn">⚠️ DATO INTEGRADOR CLAVE: Ambos métodos producen resultados comparables pero NO idénticos. Las diferencias entre Placas y Bergerhoff en el mismo punto reflejan la fracción de deposición húmeda. Si la placa sin techo da un valor notablemente mayor que la con techo, indica que hubo lluvia que arrastró partículas. La relación entre ambos métodos es, en sí misma, información sobre el mecanismo de deposición dominante.</div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-section">
+    <div class="quiz-head">
+      <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+      <p>Marca tu respuesta y descubre si es correcta · Práctica 2: CSS en UNALM</p>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; font-size:11.5px; color:var(--color-text-secondary);">
+      <span id="prog-text">Respondidas: 0 / 10 &nbsp;|&nbsp; Correctas: 0</span>
+      <span id="pct-text">0%</span>
+    </div>
+    <div class="prog-bar-wrap"><div class="prog-bar-fill" id="prog-fill"></div></div>
+
+    <!-- Q1 -->
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">¿Cuál es la unidad estándar con la que se expresan los contaminantes sólidos sedimentables (CSS) en el Perú?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) µg/m³/24 horas</button>
+        <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) mg/m²/día</button>
+        <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Tn/km²/30días</button>
+        <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) ppm/mes</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">Según la normativa peruana (DIGESA y SENAMHI), ¿cuál es el límite máximo referencial de CSS?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) 10 Tn/km²/30días</button>
+        <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) 5 Tn/km²/30días</button>
+        <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) 50 µg/m³</button>
+        <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) 1 Tn/km²/30días</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">En el método de placas, ¿cuál es la sustancia adherente utilizada y qué función cumple?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Agua destilada, para atrapar partículas hidrosolubles</button>
+        <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) Vaselina, para adherir por contacto las partículas sólidas sedimentables</button>
+        <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Glicerina, para evitar la evaporación de la muestra</button>
+        <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Aceite mineral, para neutralizar la acidez de las partículas</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">¿Qué representa la regla de instalación Bergerhoff Δd ≥ 10·Δh?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) La altura mínima del poste debe ser 10 veces el diámetro del vaso</button>
+        <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) El volumen del vaso debe ser 10 veces el volumen de lluvia esperada</button>
+        <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) La distancia horizontal al obstáculo debe ser ≥ 10 veces la altura de dicho obstáculo sobre el colector</button>
+        <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) El período de muestreo debe ser 10 veces el tiempo de secado en estufa</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">Una placa de vidrio tiene peso inicial Pi = 50.400 g y peso final Pf = 50.465 g tras 30 días expuesta. Usando el método de placas, ¿cuál es el CSS en Tn/km²/30días y qué conclusión se obtiene respecto al límite peruano?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) CSS = 0.065 Tn/km²/30días; dentro del límite</button>
+        <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) CSS = 65 Tn/km²/30días; supera el límite</button>
+        <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) CSS = 6.5 Tn/km²/30días; supera el límite de 5</button>
+        <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) CSS = 0.65 Tn/km²/30días; dentro del límite</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">En el método Bergerhoff, ¿a qué temperatura y por cuánto tiempo se lleva la placa Petri a la estufa?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) 200°C por 2 horas</button>
+        <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) 105°C por 24 horas</button>
+        <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) 80°C por 12 horas</button>
+        <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) 550°C por 1 hora</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">Según los datos del INEI (2005), ¿en qué cono de Lima Metropolitana se registraron los mayores niveles de CSS en marzo de 2005?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Cono Sur (Villa María del Triunfo) con 24.1 Tn/km²</button>
+        <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Cono Centro/Este (El Agustino) con 24.9 Tn/km²</button>
+        <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) Todos los conos presentaron exactamente el mismo nivel</button>
+        <button class="qbtn" data-q="7" data-opt="d" data-correct="true">D) Cono Norte (Comas) con 31.0 Tn/km²</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">¿Cuál afirmación es FALSA respecto al método Bergerhoff?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) El vaso colector se instala sobre un poste a 1.5–2 m de altura</button>
+        <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Se usa una trampa para aves para evitar contaminación por deyecciones</button>
+        <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) La sustancia adherente es la vaselina colocada dentro del vaso</button>
+        <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Luego del campo, se pre-evapora a no más de 80°C antes de la estufa</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">¿Por qué en el método de placas se instala una placa CON techo y otra SIN techo en la misma estación?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Para duplicar la muestra y promediar, reduciendo el error de pesaje</button>
+        <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) Para diferenciar la deposición seca (con techo) de la deposición húmeda incluida en la total (sin techo)</button>
+        <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Porque la normativa DIGESA exige duplicar siempre las muestras</button>
+        <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Para comparar distintas alturas de exposición según el viento</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">En la Práctica 2 de la UNALM, ¿cuántos puntos de muestreo se distribuyeron en el campus y cuántos meses duró el período de monitoreo?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) 5 puntos, 6 meses</button>
+        <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) 8 puntos, 2 meses</button>
+        <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) 12 puntos, 3 meses</button>
+        <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) 10 puntos, 3 meses</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div id="result-panel"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="grid-column:1/-1; background:#0f1e3a; color:white; border-radius:10px; padding:11px 18px; display:flex; gap:12px; flex-wrap:wrap; align-items:flex-start;">
+    <span style="font-family:'Oswald',sans-serif; font-size:12px; color:#7dd3fc;">REFERENCIAS:</span>
+    <span style="font-size:11px; color:#94a3b8;">Paucar Baldeón, J.C. — Presentación Práctica 2: CSS, UNALM · DIGESA / SENAMHI (Marcos, Cabrera, Laos, Mamani y Valderrama, 2008) — Límite referencial 5 Tn/km²/30días · INEI (2005) — CSS Lima Metropolitana 2004–2005 · Estación Meteorológica Alexander Von Humboldt, UNALM · Período: sep–dic 2017</span>
+  </div>
+
+</div>
+
+<script>
+const feedbackData = {
+  1: { correct: 'c', explanation: '✅ ¡Correcto! Los CSS en el Perú se expresan en Tn/km²/30días porque se mide la masa de partículas que se depositan sobre una superficie de 1 km² durante un período estándar de 30 días, lo que facilita comparar entre puntos y períodos distintos.', wrongExpl: '❌ Incorrecto. La respuesta correcta es C: Tn/km²/30días. Las unidades µg/m³ corresponden a partículas en suspensión (PM10/PM2.5), no a CSS. Los CSS miden deposición acumulada sobre área, no concentración en volumen de aire.' },
+  2: { correct: 'b', explanation: '✅ ¡Correcto! Tanto DIGESA como SENAMHI establecen 5 Tn/km²/30días como límite máximo referencial. Es importante notar que Lima lo supera en 4–7 veces, lo que indica que es un límite "referencial" sin mecanismos de sanción inmediata.', wrongExpl: '❌ Incorrecto. La respuesta correcta es B: 5 Tn/km²/30días. Este valor es establecido por ambas instituciones peruanas (DIGESA y SENAMHI) para el método gravimétrico con período de 30 días.' },
+  3: { correct: 'b', explanation: '✅ ¡Correcto! La vaselina es una sustancia grasa semisólida que actúa como trampa adhesiva: las partículas sólidas sedimentables que caen o contactan la placa quedan retenidas por adherencia física, permitiendo su posterior pesaje gravimétrico.', wrongExpl: '❌ Incorrecto. La respuesta correcta es B: vaselina. En el método Bergerhoff se usa agua destilada, pero en el método de PLACAS la sustancia adherente es la vaselina, que atrapa partículas por contacto físico.' },
+  4: { correct: 'c', explanation: '✅ ¡Correcto! La regla Δd ≥ 10·Δh garantiza que el colector esté lo suficientemente lejos de obstáculos para que no generen una zona de sombra aerodinámica que impida la llegada de partículas. Si un árbol mide 5 m sobre el colector, este debe estar al menos a 50 m de distancia.', wrongExpl: '❌ Incorrecto. La respuesta correcta es C. Δd es la distancia horizontal al obstáculo y Δh es su altura relativa sobre el colector. La regla protege al colector de quedar en el sotavento de obstáculos cercanos.' },
+  5: { correct: 'c', explanation: '✅ ¡Correcto! Aplicando CSS = (Pf−Pi)×100 = (50.465−50.400)×100 = 0.065×100 = 6.5 Tn/km²/30días. Este valor supera el límite peruano de 5 Tn/km²/30días, por lo tanto el punto de muestreo estaría incumpliendo el valor referencial.', wrongExpl: '❌ Incorrecto. La respuesta correcta es C: 6.5 Tn/km²/30días. La fórmula simplificada es CSS = (Pf−Pi)×100, donde el factor 100 resulta de la conversión de unidades: 10¹⁰cm²/km² ÷ 100cm²/placa ÷ 10⁶g/Ton.' },
+  6: { correct: 'b', explanation: '✅ ¡Correcto! 105°C por 24 horas es la temperatura y tiempo estándar gravimétrico para eliminar toda el agua libre de la muestra y alcanzar masa constante. Este protocolo lo usan tanto DIGESA como SENAMHI y es coherente con la norma DIN para sólidos totales.', wrongExpl: '❌ Incorrecto. La respuesta correcta es B: 105°C por 24 horas. A 80°C solo se hace la pre-evaporación en calentador eléctrico (no la estufa final). A 550°C se calcinaría la materia orgánica (análisis de cenizas, diferente parámetro).' },
+  7: { correct: 'd', explanation: '✅ ¡Correcto! El Cono Norte (Comas) registró 31.0 Tn/km²/30días en marzo de 2005, el valor más alto del período. Esto se explica por la alta densidad de tráfico, vías sin pavimentar en los asentamientos y la actividad industrial del norte de Lima.', wrongExpl: '❌ Incorrecto. La respuesta correcta es D: Cono Norte (Comas) con 31.0 Tn/km². El Cono Sur fue el único que disminuyó entre 2004 y 2005 (de 25.0 a 24.1), mientras el Norte aumentó de 22.9 a 31.0.' },
+  8: { correct: 'c', explanation: '✅ ¡Correcto! La afirmación falsa es C. En el método Bergerhoff NO se usa vaselina: el medio receptor es agua destilada (líquida). La vaselina es el adhesivo del método de PLACAS. Confundir ambas sustancias es un error conceptual típico de examen.', wrongExpl: '❌ Incorrecto. La respuesta correcta es C (la falsa). En el Bergerhoff la sustancia receptora es AGUA DESTILADA, no vaselina. La vaselina pertenece exclusivamente al método de placas.' },
+  9: { correct: 'b', explanation: '✅ ¡Correcto! La placa con techo mide solo deposición seca (partículas que caen por gravedad sin lluvia). La placa sin techo mide deposición total (seca + húmeda). La diferencia entre ambas permite cuantificar la fracción de CSS arrastrada por la lluvia, lo cual es información valiosa sobre el mecanismo de deposición dominante.', wrongExpl: '❌ Incorrecto. La respuesta correcta es B. El objetivo es discriminar la deposición seca de la húmeda, no duplicar para promediar. La normativa no exige duplicados obligatorios con techo/sin techo por razones estadísticas.' },
+  10: { correct: 'd', explanation: '✅ ¡Correcto! La práctica involucra 10 grupos, cada uno a cargo de un punto de muestreo diferente (OVH, OSI, Campo Ferial, Pozo de Agua, Hidroponía, P. Principal, Aulas Turqueza, Aulas Plomas, Huerto, Puerta 5), durante 3 meses consecutivos (setiembre–noviembre 2017).', wrongExpl: '❌ Incorrecto. La respuesta correcta es D: 10 puntos, 3 meses. Los 10 grupos de trabajo corresponden exactamente a los 10 puntos de muestreo distribuidos por el campus, con muestreo mensual por 3 períodos.' }
+};
+
+let respondidas = 0;
+let correctas = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  if (e.target.classList.contains('qbtn') && !e.target.disabled) {
+    const q = e.target.getAttribute('data-q');
+    const isCorrect = e.target.getAttribute('data-correct') === 'true';
+    const btns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+    
+    btns.forEach(btn => {
+      btn.disabled = true;
+      if (btn.getAttribute('data-correct') === 'true') {
+        btn.classList.add('correct');
+        btn.textContent = '✅ ' + btn.textContent;
+      }
+    });
+    
+    if (!isCorrect) {
+      e.target.classList.add('incorrect');
+      e.target.textContent = '❌ ' + e.target.textContent;
+    }
+    
+    const fb = document.getElementById('fb' + q);
+    const fd = feedbackData[parseInt(q)];
+    fb.style.display = 'block';
+    if (isCorrect) {
+      fb.className = 'qfeedback ok';
+      fb.textContent = fd.explanation;
+      correctas++;
+    } else {
+      fb.className = 'qfeedback fail';
+      fb.textContent = fd.wrongExpl;
+    }
+    
+    respondidas++;
+    const pct = Math.round((correctas / respondidas) * 100);
+    document.getElementById('prog-text').textContent = `Respondidas: ${respondidas} / 10 | Correctas: ${correctas}`;
+    document.getElementById('pct-text').textContent = pct + '%';
+    document.getElementById('prog-fill').style.width = (respondidas / 10 * 100) + '%';
+    
+    if (respondidas === 10) {
+      const panel = document.getElementById('result-panel');
+      panel.style.display = 'block';
+      let bg, msg;
+      if (correctas <= 4) { bg='#fee2e2'; msg='Necesitas repasar el material con más profundidad.'; }
+      else if (correctas <= 7) { bg='#fef9c3'; msg='¡Buen avance! Repasa los temas donde fallaste.'; }
+      else { bg='#dcfce7'; msg='¡Excelente dominio del tema de CSS!'; }
+      panel.style.background = bg;
+      panel.style.borderRadius = '10px';
+      panel.style.padding = '14px';
+      panel.innerHTML = `<div style="font-size:16px; font-weight:600; color:#0f172a; margin-bottom:6px;">${correctas} / 10 correctas</div><div style="font-size:13px; color:#334155; margin-bottom:10px;">${msg}</div><button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>`;
+    }
+  }
+});
+
+function resetQuiz() {
+  respondidas = 0; correctas = 0;
+  document.getElementById('prog-text').textContent = 'Respondidas: 0 / 10 | Correctas: 0';
+  document.getElementById('pct-text').textContent = '0%';
+  document.getElementById('prog-fill').style.width = '0%';
+  document.getElementById('result-panel').style.display = 'none';
+  document.querySelectorAll('.qbtn').forEach(btn => {
+    btn.disabled = false;
+    btn.classList.remove('correct','incorrect');
+    const t = btn.textContent;
+    btn.textContent = t.replace(/^[✅❌] /, '');
+  });
+  document.querySelectorAll('.qfeedback').forEach(fb => { fb.style.display = 'none'; fb.className = 'qfeedback'; });
+}
+</script>

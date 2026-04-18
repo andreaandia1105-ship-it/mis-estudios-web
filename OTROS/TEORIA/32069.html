@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;padding:12px}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;letter-spacing:.5px;margin-bottom:4px}
+.titlebar .sub{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{font-size:10px;padding:2px 9px;border-radius:20px;display:inline-block}
+.pill-b{background:#1e3a5f;color:#93c5fd}
+.pill-g{background:#14532d;color:#86efac}
+.pill-o{background:#431407;color:#fed7aa}
+.pill-p{background:#2e1065;color:#c4b5fd}
+.pill-r{background:#450a0a;color:#fca5a5}
+.sectionbar{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+.sb-blue{background:#dbeafe;color:#1e3a8a}
+.sb-green{background:#dcfce7;color:#14532d}
+.sb-purple{background:#ede9fe;color:#4c1d95}
+.sb-teal{background:#ccfbf1;color:#134e4a}
+.sb-orange{background:#ffedd5;color:#7c2d12}
+.sb-red{background:#fee2e2;color:#991b1b}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;font-size:12px;line-height:1.55}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.4px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-pink{background:#fce7f3;color:#831843}
+.bh-gray{background:#f1f5f9;color:#334155}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#22c55e}
+.def-yellow{border-color:#eab308}
+.def-purple{border-color:#8b5cf6}
+.def-teal{border-color:#14b8a6}
+.def-orange{border-color:#f97316}
+.def-red{border-color:#ef4444}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-yellow{background:#eab308}
+.dot-purple{background:#8b5cf6}
+.dot-teal{background:#14b8a6}
+.dot-orange{background:#f97316}
+.dot-red{background:#ef4444}
+.dot-gray{background:#94a3b8}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:6px 10px;margin-top:7px}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:7px 10px;margin-top:7px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:7px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:7px 0}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.mini-blue{border-top:3px solid #3b82f6}
+.mini-green{border-top:3px solid #22c55e}
+.mini-purple{border-top:3px solid #8b5cf6}
+.mini-teal{border-top:3px solid #14b8a6}
+.mini-orange{border-top:3px solid #f97316}
+.mini-yellow{border-top:3px solid #eab308}
+.mini-red{border-top:3px solid #ef4444}
+.mini-gray{border-top:3px solid #94a3b8}
+.mini-pink{border-top:3px solid #ec4899}
+.mini b{display:block;margin-bottom:3px;font-size:11.5px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:14px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:7px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;white-space:nowrap;margin-top:2px}
+.fc{font-size:11px;color:#94a3b8}
+h3{font-size:12px;font-weight:600;margin-bottom:5px;color:var(--color-text-primary)}
+@media(prefers-color-scheme:dark){
+.sb-blue{background:#1e3a5f;color:#93c5fd}
+.sb-green{background:#14532d;color:#86efac}
+.sb-purple{background:#2e1065;color:#c4b5fd}
+.sb-teal{background:#042f2e;color:#5eead4}
+.sb-orange{background:#431407;color:#fed7aa}
+.sb-red{background:#450a0a;color:#fca5a5}
+.bh-blue{background:#1e3a5f;color:#93c5fd}
+.bh-green{background:#14532d;color:#86efac}
+.bh-yellow{background:#422006;color:#fef08a}
+.bh-purple{background:#2e1065;color:#c4b5fd}
+.bh-teal{background:#042f2e;color:#5eead4}
+.bh-orange{background:#431407;color:#fed7aa}
+.bh-red{background:#450a0a;color:#fca5a5}
+.bh-pink{background:#4a044e;color:#f0abfc}
+.bh-gray{background:#1e293b;color:#94a3b8}
+.warn{background:#431407;border-left-color:#f97316;color:#fed7aa}
+.exam{background:#422006;border-color:#facc15;color:#fef08a}
+}
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:8px;padding:10px 16px;margin-bottom:12px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.progress-wrap{margin-bottom:12px}
+.progress-txt{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px;display:flex;justify-content:space-between}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .4s}
+.qcard{background:var(--color-background-secondary);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:600}
+.qtext{font-size:12.5px;color:var(--color-text-primary);margin-bottom:8px;line-height:1.5;font-weight:600}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif;line-height:1.4}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.reveal{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.no{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.result-panel{display:none;background:var(--color-background-secondary);border-radius:10px;padding:14px;margin-top:12px;text-align:center}
+.result-panel h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.result-panel p{font-size:13px;margin-bottom:10px;color:var(--color-text-secondary)}
+.result-btn{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer;font-family:'Source Sans 3',sans-serif}
+@media(prefers-color-scheme:dark){
+.qbtn.correct{background:#14532d;border-color:#16a34a;color:#86efac}
+.qbtn.incorrect{background:#450a0a;border-color:#dc2626;color:#fca5a5}
+.qbtn.reveal{background:#14532d;border-color:#16a34a;color:#86efac}
+.qfeedback.ok{background:#14532d;color:#86efac}
+.qfeedback.no{background:#450a0a;color:#fca5a5}
+}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- TITLE -->
+<div class="titlebar">
+  <h1>LEY N° 32069 — LEY GENERAL DE CONTRATACIONES PÚBLICAS</h1>
+  <div class="sub">Publicada el 24 de junio de 2024 en El Peruano · Congreso de la República del Perú · 100 artículos + 35 disposiciones</div>
+  <div class="pills">
+    <span class="pill pill-b">Objeto y Finalidad</span>
+    <span class="pill pill-g">Actores: DGA · OECE · Perú Compras</span>
+    <span class="pill pill-o">Procedimientos de Selección</span>
+    <span class="pill pill-p">Solución de Controversias</span>
+    <span class="pill pill-r">Infracciones y Sanciones</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1 -->
+<div class="sectionbar sb-blue">🏛️ TÍTULO I — DISPOSICIONES GENERALES (Arts. 1-8)</div>
+
+<!-- OBJETO Y FINALIDAD -->
+<div class="block">
+  <span class="bh bh-blue">Objeto y Finalidad (Arts. 1-2)</span>
+  <div class="def def-blue">La ley busca <strong>efectivizar la contratación oportuna</strong> de bienes, servicios y obras, regulando a todos los actores del Sistema Nacional de Abastecimiento, con miras a <strong>maximizar el valor del recurso público</strong> en términos de eficacia, eficiencia y economía.</div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>¿Por qué importa el "valor por dinero"?</b> La ley rompe con la lógica del "menor precio a toda costa": contrate a quien garantice calidad, sostenibilidad y plazo —no solo al más barato. Esto protege al Estado de contratos con proveedores que luego incumplen.</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>Fines públicos sobre formalidades:</b> Los principios de eficacia y eficiencia obligan a eliminar trámites irracionales. Una entidad que paraliza una obra por exceso burocrático incumple la ley.</div></div>
+  <div class="exam">🎯 EXAMEN: Explique la diferencia conceptual entre "objeto" y "finalidad" de la Ley 32069, indicando por qué la ley prohíbe priorizar únicamente el menor precio.</div>
+</div>
+
+<!-- ÁMBITO DE APLICACIÓN -->
+<div class="block">
+  <span class="bh bh-blue">Ámbito de aplicación (Art. 3)</span>
+  <div class="def def-blue">Se aplica a <strong>toda entidad que use fondos públicos</strong> para contratar bienes, servicios u obras, incluyendo los contratos menores. El término genérico es <strong>"entidad contratante"</strong>.</div>
+  <div class="two">
+    <div class="mini mini-blue"><b>Poderes del Estado</b> Legislativo, Judicial, OOCC Autónomos, Ministerios, FFAA, PNP</div>
+    <div class="mini mini-blue"><b>Subnacionales</b> Gobiernos Regionales y Locales, sus programas y proyectos</div>
+    <div class="mini mini-blue"><b>Empresas y Fondos</b> Empresas del Estado (3 niveles), fondos con recursos públicos</div>
+    <div class="mini mini-blue"><b>Otros</b> ESSALUD, universidades públicas, órganos desconcentrados</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que solo los ministerios están bajo esta ley. ESSALUD, universidades públicas y hasta fondos privados con aporte estatal están incluidos.</div>
+  <div class="exam">🎯 EXAMEN: ¿Una universidad pública que firma un contrato de servicios con fondos de canon universitario está sujeta a la Ley 32069? Fundamente.</div>
+</div>
+
+<!-- PRINCIPIOS -->
+<div class="block s3">
+  <span class="bh bh-purple">15 Principios Rectores (Art. 5)</span>
+  <div class="def def-purple">Los principios actúan como <strong>criterio de interpretación, integración ante vacíos y parámetros de actuación</strong>. No son meras declaraciones: incumplirlos genera responsabilidad.</div>
+  <div class="three">
+    <div class="mini mini-blue"><b>Legalidad</b> Actuar con respeto a la Constitución, la ley y el derecho. Marco de facultades atribuidas.</div>
+    <div class="mini mini-green"><b>Eficacia y Eficiencia</b> Fines públicos sobre formalidades. Revisión periódica de procesos irracionales.</div>
+    <div class="mini mini-yellow"><b>Valor por Dinero</b> Maximizar lo obtenido: calidad + sostenibilidad + costos + plazos. No solo precio.</div>
+    <div class="mini mini-red"><b>Integridad</b> Honestidad, veracidad y rendición de cuentas. Deber de denunciar corrupción.</div>
+    <div class="mini mini-purple"><b>Publicidad</b> Difusión para promover libre concurrencia y facilitar el control.</div>
+    <div class="mini mini-blue"><b>Libertad de Concurrencia</b> Evitar exigencias innecesarias que excluyan proveedores.</div>
+    <div class="mini mini-teal"><b>Transparencia y Facilidad de Uso</b> Reglas claras, acceso público, plataformas amigables.</div>
+    <div class="mini mini-green"><b>Competencia</b> Condiciones para la propuesta más ventajosa. Prohíbe prácticas restrictivas.</div>
+    <div class="mini mini-orange"><b>Igualdad de Trato</b> Mismas oportunidades en todas las etapas. Sin privilegios ni discriminación.</div>
+    <div class="mini mini-purple"><b>Equidad y Colaboración</b> Equilibrio de derechos/obligaciones + colaboración eficaz.</div>
+    <div class="mini mini-teal"><b>Sostenibilidad</b> Aspectos económicos, sociales y medioambientales en cada compra.</div>
+    <div class="mini mini-yellow"><b>Innovación</b> Contratar bienes/servicios/obras que generen soluciones nuevas.</div>
+    <div class="mini mini-blue"><b>Vigencia Tecnológica</b> Adquirir lo que reúna modernidad y permita repotenciarse.</div>
+    <div class="mini mini-gray"><b>Presunción de Veracidad</b> Los documentos de los administrados se presumen verídicos (admite prueba en contrario).</div>
+    <div class="mini mini-red"><b>Causalidad</b> Solo responde quien realiza la conducta infractora, no por hechos ajenos.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Un comité de selección rechaza la oferta más económica por carecer de un sello notarial no exigido en las bases. ¿Qué principios se vulneran y por qué?</div>
+</div>
+
+<!-- ENFOQUES -->
+<div class="block s2">
+  <span class="bh bh-teal">5 Enfoques de la Ley (Art. 6)</span>
+  <div class="def def-teal">Los enfoques son <strong>estrategias de gestión transversales</strong> que los operadores deben considerar al aplicar la ley. Complementan los principios con perspectivas más operativas.</div>
+  <div class="flow">
+    <div class="fbox">🛡️ Integridad</div><div class="farrow">→</div>
+    <div class="fbox">📊 Gestión por Resultados</div><div class="farrow">→</div>
+    <div class="fbox">⚠️ Gestión de Riesgos</div><div class="farrow">→</div>
+    <div class="fbox">🏛️ Gobernanza</div><div class="farrow">→</div>
+    <div class="fbox">🎓 Profesionalización</div>
+  </div>
+  <div class="item"><div class="dot dot-teal"></div><div><b>Gestión de riesgos:</b> Es dinámica, abarca todas las etapas y busca aumentar riesgos positivos (oportunidades) y disminuir negativos. No es solo una checklist previa.</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div><b>Profesionalización:</b> El OECE (con la DGA) certifica a los compradores públicos. La meta es reducir riesgos jurídicos y garantizar eficiencia en todo el Estado.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿En qué se diferencia el "enfoque de gestión de riesgos" del "principio de causalidad" en la Ley 32069? Dé un ejemplo de cada uno.</div>
+</div>
+
+<!-- EXCLUSIONES -->
+<div class="block">
+  <span class="bh bh-red">Supuestos Excluidos (Art. 7)</span>
+  <div class="def def-red">Existen <strong>17 supuestos excluidos</strong> del ámbito de la ley. Sin embargo, los <strong>principios rectores siguen aplicando</strong> a todos ellos. La diferencia es que no se rigen por los procedimientos formales de selección.</div>
+  <div class="item"><div class="dot dot-red"></div><div>Contratos bancarios/financieros, órganos del Servicio Exterior, notarios públicos (bajo umbral), servicios de árbitros/conciliadores/peritos</div></div>
+  <div class="item"><div class="dot dot-red"></div><div>Convenios entre entidades públicas sin fines de lucro, contrataciones G2G, servicios públicos sin competencia</div></div>
+  <div class="item"><div class="dot dot-red"></div><div>Contrataciones con organismos internacionales financiadas con donaciones ≥ 25% del total (sin porcentaje si el donante es multilateral financiero)</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que los supuestos excluidos del Art. 7 quedan completamente fuera de toda regulación. Los principios del Art. 5 siempre aplican. El OECE supervisa varios de ellos (literales f, g, h, i, j, l, m, n, o, p, q).</div>
+</div>
+
+<!-- SECCIÓN 2 -->
+<div class="sectionbar sb-green">👥 TÍTULO II — ACTORES (Arts. 9-33)</div>
+
+<!-- DGA Y OECE -->
+<div class="block">
+  <span class="bh bh-green">DGA y OECE (Arts. 10-19)</span>
+  <div class="def def-green"><b>DGA</b> (Dirección General de Abastecimiento - MEF) = ente rector y máxima autoridad técnico-normativa del Sistema Nacional de Abastecimiento.<br><b>OECE</b> = organismo técnico especializado adscrito al MEF, con autonomía técnica, administrativa, económica y financiera. Reemplaza al OSCE.</div>
+  <div class="item"><div class="dot dot-green"></div><div><b>Funciones del OECE:</b> supervisión selectiva o aleatoria (incluye contratos menores), suspensión de procesos con riesgos, manejo de la PLADICOP, registro de proveedores (RNP), certificación de compradores públicos, banco de laudos arbitrales, registro de instituciones arbitrales y centros JPRD.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><b>Tribunal de Contrataciones Públicas</b> (dentro del OECE): resuelve controversias precontractuales, aplica sanciones (multas, inhabilitaciones), emite precedentes de observancia obligatoria.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><b>Vocales del Tribunal:</b> elegidos por concurso público de méritos por 3 años. Árbitro único o presidente debe ser abogado con especialización en derecho administrativo, arbitraje y contrataciones públicas.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia funcional entre el OECE y el Tribunal de Contrataciones Públicas, siendo este último un órgano del primero?</div>
+</div>
+
+<!-- PERÚ COMPRAS -->
+<div class="block">
+  <span class="bh bh-green">Perú Compras (Arts. 20-24)</span>
+  <div class="def def-green">Organismo público ejecutor adscrito al MEF. Gestiona las <strong>modalidades de compra eficiente</strong>: compras corporativas, centralizadas (incluyendo de emergencia), catálogos electrónicos de acuerdos marco y contrataciones por encargo.</div>
+  <div class="item"><div class="dot dot-green"></div><div><b>Estandarización:</b> Perú Compras conduce la elaboración de fichas técnicas. Los ministerios generan fichas de homologación en su sector. Ambas son de uso obligatorio sin importar el monto.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><b>Catálogos electrónicos (acuerdos marco):</b> Las entidades compran de ellos sin procedimiento de selección, aplicando criterios de precio y calidad. Su uso es obligatorio según los plazos que fije Perú Compras.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "compra corporativa" (agrupa demanda de varias entidades) con "compra centralizada" (una entidad gestiona todo el proceso por encargo de otras, incluida la liquidación).</div>
+</div>
+
+<!-- ENTIDADES Y PROVEEDORES -->
+<div class="block">
+  <span class="bh bh-teal">Entidades Contratantes y Proveedores (Arts. 25-33)</span>
+  <div class="def def-teal">Dentro de la entidad conviven 6 roles: Titular, Autoridad de Gestión Administrativa (AGA), Área Usuaria, Área Técnica Estratégica, Dependencia Encargada de Contrataciones y Compradores Públicos.</div>
+  <div class="item"><div class="dot dot-teal"></div><div><b>AGA:</b> Aprueba, autoriza y supervisa. En ministerios = Secretaría General; en gobiernos regionales = Gerencia General Regional; en municipalidades = Gerencia Municipal.</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div><b>Impedimentos para contratar (Art. 30):</b> 4 categorías: personales (Tipos 1.A a 1.G), parentesco (2.A a 2.E), personas jurídicas/representación (3.A a 3.G), sanciones/registros (4.A a 4.E).</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div><b>Ficha Única del Proveedor (FUP):</b> Consolida información relevante; las entidades no pueden exigir al proveedor lo que ya consta en la FUP. La inconsistencia en la FUP es responsabilidad del OECE.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el artículo 27 distingue "facultad discrecional" de "arbitrariedad"? ¿Qué protección otorga al funcionario que toma decisiones técnicas sustentadas?</div>
+</div>
+
+<!-- SECCIÓN 3 -->
+<div class="sectionbar sb-purple">🛒 TÍTULO III — MODALIDADES Y HERRAMIENTAS (Arts. 34-44)</div>
+
+<!-- MODALIDADES -->
+<div class="block s2">
+  <span class="bh bh-purple">Modalidades de Contratación Eficiente</span>
+  <div class="three">
+    <div class="mini mini-purple"><b>Contratos Menores (Art. 34)</b> ≤ 8 UIT. Sin procedimiento de selección. Supervisados por OECE. Se publican en PLADICOP.</div>
+    <div class="mini mini-purple"><b>Compra por Encargo (Art. 35)</b> Una entidad encarga a otra entidad u organismo internacional las fases de actuaciones preparatorias o selección.</div>
+    <div class="mini mini-purple"><b>Compra Centralizada (Art. 36)</b> Por complejidad o especialización, se encarga a Perú Compras u otra entidad todas las fases hasta liquidación/pago total.</div>
+    <div class="mini mini-blue"><b>Compra Corporativa (Art. 37)</b> Dos o más entidades consolidan su demanda de bienes/servicios similares. Puede ser facultativa u obligatoria (Perú Compras).</div>
+    <div class="mini mini-green"><b>Compra Pública de Innovación (Art. 38)</b> Para soluciones no disponibles en el mercado. Asume riesgos de innovación. Puede definir requerimiento solo por objetivos o funcionalidades.</div>
+    <div class="mini mini-teal"><b>Acuerdos Marco (Art. 39)</b> Proceso en 2 etapas: selección de proveedores del catálogo + adjudicación del contrato al comprar. Gestiona Perú Compras.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Una entidad necesita adquirir medicamentos para una emergencia sanitaria. ¿Qué modalidades o procedimientos tiene disponibles según la Ley 32069? Justifique.</div>
+</div>
+
+<!-- PLADICOP -->
+<div class="block">
+  <span class="bh bh-purple">PLADICOP — Plataforma Digital (Art. 41)</span>
+  <div class="def def-purple">Sistema que gestiona <strong>todas las transacciones electrónicas, el intercambio de información y la transparencia</strong> de las contrataciones públicas. Las actuaciones en ella tienen la misma validez que los actos físicos y se notifican el mismo día de su publicación.</div>
+  <div class="item"><div class="dot dot-purple"></div><div>Administrada por el OECE. Incluye el RNP, el SEACE, la plataforma de contratos menores y herramientas de Perú Compras.</div></div>
+  <div class="item"><div class="dot dot-purple"></div><div>El OECE gestiona periódicamente auditorías especializadas en ciberseguridad bajo estándares internacionales.</div></div>
+  <div class="item"><div class="dot dot-purple"></div><div>Los laudos arbitrales se notifican a las partes a través de la PLADICOP y son de acceso público.</div></div>
+</div>
+
+<!-- SECCIÓN 4 -->
+<div class="sectionbar sb-orange">📋 TÍTULO IV — PROCESO DE CONTRATACIÓN (Arts. 45-71)</div>
+
+<!-- FASES DEL PROCESO -->
+<div class="block s3">
+  <span class="bh bh-orange">Fases del Proceso de Contratación (Art. 45)</span>
+  <div class="flow">
+    <div class="fbox" style="border-left:3px solid #f97316"><b>FASE 1</b><br>Actuaciones Preparatorias</div><div class="farrow">→</div>
+    <div class="fbox" style="border-left:3px solid #3b82f6"><b>FASE 2</b><br>Selección</div><div class="farrow">→</div>
+    <div class="fbox" style="border-left:3px solid #22c55e"><b>FASE 3</b><br>Ejecución Contractual</div>
+  </div>
+  <div class="two">
+    <div>
+      <h3>FASE 1: Actuaciones Preparatorias (Arts. 46-52)</h3>
+      <div class="item"><div class="dot dot-orange"></div><div><b>Requerimiento (Art. 46):</b> Da inicio al proceso. Lo formula el Área Usuaria/Técnica Estratégica. Para bienes = especificaciones técnicas; servicios = términos de referencia; obras = expediente técnico o BIM.</div></div>
+      <div class="item"><div class="dot dot-orange"></div><div><b>Interacción con el mercado (Art. 47):</b> Determina oferta/competencia, perfecciona el requerimiento y estima el presupuesto antes de convocar.</div></div>
+      <div class="item"><div class="dot dot-orange"></div><div><b>Estrategia de contratación (Art. 49):</b> Análisis integral de variables. Incluye perfil de riesgos, tipo de procedimiento, modalidad de pago. Para obras complejas incluye análisis de sistema de entrega y metodología BIM.</div></div>
+      <div class="item"><div class="dot dot-orange"></div><div><b>Fraccionamiento prohibido (Art. 50):</b> No se puede dividir para evitar el procedimiento que corresponda o evadir la ley. No constituye fraccionamiento comprar por catálogos de acuerdo marco.</div></div>
+    </div>
+    <div>
+      <h3>FASE 2: Selección (Arts. 53-57)</h3>
+      <div class="item"><div class="dot dot-blue"></div><div><b>Procedimientos competitivos (Art. 54):</b> Licitación pública (bienes y obras) y Concurso público (servicios). Modalidades abreviadas: subasta inversa electrónica, comparación de precios.</div></div>
+      <div class="item"><div class="dot dot-blue"></div><div><b>Procedimiento no competitivo / Contratación directa (Art. 55):</b> 13 causales: emergencia, desabastecimiento, proveedor único, servicios personalísimos, compras de I+D+i, inmuebles privados, asesoría legal defensa del Estado, entre otros.</div></div>
+      <div class="item"><div class="dot dot-blue"></div><div><b>Desierto (Art. 56):</b> Cuando ninguna oferta es válida. El reglamento determina el procedimiento sustituto.</div></div>
+      <div class="item"><div class="dot dot-blue"></div><div><b>Cancelación (Art. 57):</b> Antes de adjudicar la buena pro, por fuerza mayor/caso fortuito o desaparición de la necesidad. No genera responsabilidad frente a los postores.</div></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia entre "declaratoria de desierto" y "cancelación" de un procedimiento de selección, y qué efectos produce cada uno para las partes involucradas?</div>
+</div>
+
+<!-- EJECUCIÓN CONTRACTUAL -->
+<div class="block s2">
+  <span class="bh bh-green">Ejecución Contractual (Arts. 58-71)</span>
+  <div class="def def-green">Una vez perfeccionado el contrato comienza la ejecución. El contrato debe incluir <strong>5 cláusulas obligatorias:</strong> garantías, anticorrupción-antisoborno, solución de controversias, resolución por incumplimiento y gestión de riesgos.</div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot dot-green"></div><div><b>Garantías (Art. 61):</b> 4 mecanismos: Fideicomiso, Carta fianza financiera, Contrato de seguro y Retención de pago. Las garantías financieras deben ser incondicionales, solidarias, irrevocables y de realización automática en 3 días hábiles.</div></div>
+      <div class="item"><div class="dot dot-green"></div><div><b>Adelantos (Art. 66):</b> No exceden el 30% del monto del contrato original. Pueden ser directos o para materiales/insumos.</div></div>
+      <div class="item"><div class="dot dot-green"></div><div><b>Pagos (Art. 67):</b> Plazo máximo de 10 días hábiles tras la conformidad del área usuaria (prorrogable 5 días). El retraso injustificado es falta grave del AGA. La entidad reconoce intereses legales por mora.</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="dot dot-green"></div><div><b>Prestaciones adicionales (Art. 64):</b> AGA autoriza hasta 25% del contrato original (bienes/servicios/consultorías) y hasta 15% en obras de solo construcción. Titular de entidad puede llegar al 30% y hasta 50% con autorización de la Contraloría.</div></div>
+      <div class="item"><div class="dot dot-green"></div><div><b>Responsabilidades por vicios (Art. 69):</b> Obras = mínimo 7 años; bienes/servicios = mínimo 1 año; consultoría de expediente técnico = mínimo 3 años; supervisión = no menor a la responsabilidad del contratista de obra.</div></div>
+      <div class="item"><div class="dot dot-green"></div><div><b>Resolución del contrato (Art. 68):</b> 6 causales: caso fortuito, incumplimiento, hecho sobreviniente, cláusula anticorrupción, documentación falsa y terminación anticipada pactada.</div></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que la Contraloría "aprueba" o "autoriza" todos los adicionales. Solo interviene cuando los adicionales de obra superan el 30% del monto original. La AGA tiene autonomía hasta el 15% y el Titular hasta el 30%.</div>
+  <div class="exam">🎯 EXAMEN: Un contratista de obras solicita el pago por valorización n°5. El área usuaria otorga conformidad pero el AGA no gestiona el pago por 20 días hábiles sin justificación. ¿Qué consecuencias prevé la Ley 32069?</div>
+</div>
+
+<!-- NULIDADES -->
+<div class="block">
+  <span class="bh bh-red">Nulidades (Arts. 70-71)</span>
+  <div class="def def-red">La ley distingue <strong>nulidad de actos procedimentales</strong> (durante la selección) y <strong>nulidad del contrato</strong> (después de perfeccionado).</div>
+  <div class="item"><div class="dot dot-red"></div><div><b>Nulidades precontractuales (Art. 70):</b> Órgano incompetente, contravención de normas, imposible jurídico, prescindencia de normas esenciales o formas insubsanables. Declara el Tribunal, la AGA (de oficio hasta la buena pro) o el Jefe de Perú Compras.</div></div>
+  <div class="item"><div class="dot dot-red"></div><div><b>Nulidad del contrato (Art. 71):</b> 5 causales: proveedor impedido, documentación falsa, recurso de apelación en trámite al momento de suscripción, simulación de exclusión, corrupción probada. La declara la AGA (facultad indelegable).</div></div>
+  <div class="item"><div class="dot dot-red"></div><div>Aun con vicio de nulidad, la AGA puede autorizar la continuación si un análisis costo-beneficio lo justifica y existen informes técnicos y legales favorables.</div></div>
+</div>
+
+<!-- SECCIÓN 5 -->
+<div class="sectionbar sb-teal">⚖️ TÍTULO V — SOLUCIÓN DE CONTROVERSIAS (Arts. 72-86)</div>
+
+<!-- CONTROVERSIAS -->
+<div class="block s2">
+  <span class="bh bh-teal">Mecanismos de Resolución de Controversias</span>
+  <div class="def def-teal">La ley distingue controversias <strong>previas al perfeccionamiento</strong> (recurso de apelación) y <strong>desde el perfeccionamiento</strong> (JPRD, Conciliación, Arbitraje). El inicio de un mecanismo no suspende las obligaciones contractuales.</div>
+  <div class="two">
+    <div>
+      <h3>Recurso de Apelación (Arts. 72-75)</h3>
+      <div class="item"><div class="dot dot-teal"></div><div>Solo se interpone después del otorgamiento de la buena pro o declaratoria de desierto. La garantía es ≤ 0.5% de la cuantía, máximo 50 UIT (25 UIT para MYPE).</div></div>
+      <div class="item"><div class="dot dot-teal"></div><div>Competencia: Tribunal de Contrataciones (cuantía &gt; 50 UIT) o AGA de la entidad (cuantía ≤ 50 UIT). El recurso suspende el procedimiento de selección.</div></div>
+      <div class="item"><div class="dot dot-teal"></div><div>La resolución agota la vía administrativa. Procede la acción contencioso-administrativa sin suspender su ejecución.</div></div>
+    </div>
+    <div>
+      <h3>Arbitraje (Arts. 83-84)</h3>
+      <div class="item"><div class="dot dot-teal"></div><div>Es de derecho, se desarrolla en español. Ad hoc solo cuando la controversia no supera 10 UIT; en los demás casos es institucional.</div></div>
+      <div class="item"><div class="dot dot-teal"></div><div>Plazo de caducidad: 30 días hábiles desde la entrega del bien final, entregable final u entrega de obra (según tipo de contrato). Para acuerdos marco: 10 días hábiles.</div></div>
+      <div class="item"><div class="dot dot-teal"></div><div>El laudo es inapelable, definitivo y obligatorio. Solo cabe recurso de anulación, previa resolución motivada del titular de la entidad (facultad indelegable).</div></div>
+    </div>
+  </div>
+  <div class="item"><div class="dot dot-teal"></div><div><b>JPRD (Junta de Prevención y Resolución de Disputas, Arts. 79-80):</b> Resuelve controversias técnicas y contractuales en contratos de suministro y obras. Sus decisiones son de inmediato cumplimiento. Plazo de caducidad: 20 días hábiles para someter la controversia.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Someter a arbitraje pretensiones de enriquecimiento sin causa derivadas de adicionales no aprobados por la Contraloría. Estos son de competencia exclusiva del Poder Judicial (Art. 76.3).</div>
+  <div class="exam">🎯 EXAMEN: ¿En qué supuesto una decisión de la JPRD adquiere mérito ejecutivo sin necesidad de iniciar un arbitraje?</div>
+</div>
+
+<!-- MEDIDAS CAUTELARES -->
+<div class="block">
+  <span class="bh bh-teal">Medidas Cautelares (Arts. 85-86)</span>
+  <div class="def def-teal">Las medidas cautelares se pueden solicitar en vía judicial (juez comercial o civil) o arbitral. No proceden sin traslado previo a la contraparte. El contratista que las solicita debe ofrecer <strong>contracautela</strong>.</div>
+  <div class="item"><div class="dot dot-teal"></div><div><b>Límites importantes:</b> No proceden medidas cautelares que impidan, paralicen o retrasen obras de salud, educación, infraestructura vial y saneamiento.</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div>Contracautela: caución juratoria para contratos ≤ 200 UIT o MYPE. Carta fianza financiera en los demás casos.</div></div>
+</div>
+
+<!-- SECCIÓN 6 -->
+<div class="sectionbar sb-red">🚫 TÍTULO VI — INFRACCIONES Y SANCIONES (Arts. 87-100)</div>
+
+<!-- INFRACCIONES -->
+<div class="block s3">
+  <span class="bh bh-red">Infracciones y Sanciones (Arts. 87-100)</span>
+  <div class="def def-red">La responsabilidad es <strong>objetiva</strong> (salvo tipos que admiten justificación). Las sanciones no eximen de cumplir contratos ya perfeccionados. Las infracciones prescriben en 4 años (7 años para documentos falsos).</div>
+  <div class="three">
+    <div class="mini mini-yellow"><b>Multa (Art. 89)</b> 3%–10% del monto del contrato (mínimo 1 UIT). Para MYPE: máximo 8%. Primera o segunda infracción en 4 años (literales a-e). Descuento hasta 30% por pronto pago.</div>
+    <div class="mini mini-red"><b>Inhabilitación Temporal (Art. 90)</b> 3 a 60 meses según la infracción y reincidencia. Para docs. falsos/adulterados: 24 a 60 meses. El Tribunal puede ofrecer multa alternativa en ciertos casos.</div>
+    <div class="mini mini-red"><b>Inhabilitación Definitiva (Art. 91)</b> Más de 2 inhabilitaciones temporales que sumen más de 36 meses en 4 años. Se aplica también a reorganizaciones societarias encubiertas.</div>
+    <div class="mini mini-gray"><b>Para instituciones arbitrales (OECE, Arts. 95-99)</b> Amonestación escrita → Multa (1-5 UIT) → Retiro temporal del registro (3-36 meses) → Exclusión.</div>
+    <div class="mini mini-orange"><b>Infracciones graves</b> Supervisar negligentemente, elaborar expediente técnico con deficiencias, subcontratar sin autorización, contratar impedido, provocar resolución del contrato.</div>
+    <div class="mini mini-orange"><b>Infracciones muy graves</b> Presentar documentos falsos/adulterados. Prescribe en 7 años. Inhabilitación de 24 a 60 meses desde la primera vez.</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir inhabilitación temporal con definitiva. La definitiva requiere acumulación: más de 2 sanciones de inhabilitación temporal que superen 36 meses en los últimos 4 años, en infracciones graves (literales i, j, k, l, m).</div>
+  <div class="exam">🎯 EXAMEN: Un consorcio presenta documentación falsa en la etapa de calificación y obtiene la buena pro. ¿Cuál es la infracción, a quién se aplica la sanción y cuál es el plazo de prescripción según la Ley 32069?</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="sectionbar sb-orange">📊 TABLA INTEGRADORA — RESUMEN COMPARATIVO</div>
+<div class="block s3">
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Aspecto</th>
+        <th>Contrato Menor</th>
+        <th>Procedimiento Competitivo</th>
+        <th>Contratación Directa</th>
+        <th>Acuerdo Marco</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Umbral</b></td><td>≤ 8 UIT</td><td>&gt; 8 UIT (según objeto)</td><td>Cualquier monto (causales taxativas)</td><td>Variable (fija Perú Compras)</td></tr>
+      <tr><td><b>Órgano selector</b></td><td>Entidad directamente</td><td>Evaluadores / Comité</td><td>AGA o Titular</td><td>Perú Compras (fase 1) + Entidad (fase 2)</td></tr>
+      <tr><td><b>Supervisión OECE</b></td><td>Sí, selectiva</td><td>Sí, selectiva o a pedido</td><td>Sí (varios supuestos)</td><td>Sí</td></tr>
+      <tr><td><b>Publicación PLADICOP</b></td><td>Obligatoria</td><td>Obligatoria</td><td>Obligatoria</td><td>Obligatoria</td></tr>
+      <tr><td><b>Infracciones aplicables</b></td><td>Solo d, e, i, j, l, m (Art. 87.2)</td><td>Todas (Art. 87.1 a–m)</td><td>Todas</td><td>Todas</td></tr>
+      <tr><td><b>Garantías obligatorias</b></td><td>No (reglamento)</td><td>Sí (fideicomiso, carta fianza, seguro, retención)</td><td>Según reglamento</td><td>Según reglamento</td></tr>
+      <tr><td><b>Recurso de apelación</b></td><td>No (no hay selección)</td><td>Sí (post buena pro/desierto)</td><td>No</td><td>Sí (implementación/extensión)</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La Ley 32069 derogó la Ley 30225 (Ley de Contrataciones del Estado) y creó el OECE (antes OSCE). Toda referencia legal al OSCE debe entenderse como OECE (Vigésima Tercera Disposición Complementaria Final).</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta · Ley 32069 — Ley General de Contrataciones Públicas</p>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-txt">
+      <span id="prog-text">Pregunta 0 de 10 respondidas</span>
+      <span id="prog-score">Aciertos: 0 / 0</span>
+    </div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la FINALIDAD de la Ley 32069, según el artículo 2?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Establecer el marco normativo para contratar oportunamente bienes, servicios y obras.</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Regular exclusivamente las compras de los ministerios del Poder Ejecutivo.</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Maximizar el uso de recursos públicos en términos de eficacia, eficiencia y economía, para cumplir fines públicos y mejorar la vida de los ciudadanos.</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Crear el OECE como organismo supervisor de contrataciones del Estado.</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">¿Cuántos principios rectores contempla el artículo 5 de la Ley 32069?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) 10 principios.</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) 12 principios.</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) 17 principios.</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="true">D) 15 principios, que además sirven como criterio de integración ante vacíos de la ley.</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Qué distinción fundamental hace la Ley 32069 entre "compra corporativa" y "compra centralizada"?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) La compra corporativa es solo para bienes y la centralizada solo para servicios.</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) La compra corporativa agrupa la demanda de varias entidades para contratar juntas; la centralizada encarga a una entidad la gestión completa del proceso (hasta liquidación/pago total) por razones de complejidad o especialización.</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Ambas son gestionadas exclusivamente por el OECE, pero en diferentes montos.</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) La compra corporativa requiere autorización de la Contraloría y la centralizada no.</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">El Tribunal de Contrataciones Públicas puede aplicar la sanción de inhabilitación DEFINITIVA cuando:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Se presenta documentación falsa por primera vez.</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) El proveedor incumple el contrato en dos oportunidades consecutivas.</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) En los últimos 4 años se hubieran impuesto al proveedor más de dos sanciones de inhabilitación temporal que en conjunto sumen más de 36 meses (por infracciones graves: literales i, j, k, l, m).</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) El proveedor supera el umbral de contratos menores sin inscripción en el RNP.</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el arbitraje en la Ley 32069 es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) El laudo arbitral es inapelable, definitivo y obligatorio desde su notificación.</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) El arbitraje es de derecho y se desarrolla en idioma español.</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) El arbitraje ad hoc solo procede cuando la controversia no supera las 10 UIT.</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="true">D) Las entidades pueden impugnar el laudo arbitral sin necesidad de resolución motivada del titular, bastando la opinión del área legal.</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Una entidad contratante necesita construir un hospital de alta complejidad con tecnología innovadora. ¿Qué modalidad de contratación le permite adquirir una solución que aún NO existe en el mercado?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Licitación pública con requisitos especiales técnicos.</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) Compra pública de innovación (CPI), que permite definir el requerimiento solo por objetivos y aceptar soluciones innovadoras de los proveedores.</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Contratación directa por proveedor único (desabastecimiento).</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Acuerdo marco con catálogo electrónico de Perú Compras.</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿En qué casos la Autoridad de la Gestión Administrativa (AGA) puede declarar la nulidad del contrato YA perfeccionado?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Cuando el contratista solicita una ampliación de plazo injustificada.</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Solo cuando la Contraloría General emite un informe de control desfavorable.</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) Ante cualquier irregularidad detectada por el área de control institucional.</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="true">D) Por proveedor impedido, documentación falsa, recurso de apelación en trámite al suscribir, simulación de exclusión al Art. 7 o corrupción probada por sentencia.</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Respecto a los plazos de responsabilidad por vicios ocultos, ¿cuál afirmación es CORRECTA según el Art. 69 de la Ley 32069?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Para obras, la responsabilidad mínima es de 5 años desde la conformidad de recepción.</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) Para obras es mínimo 7 años; para bienes/servicios mínimo 1 año; para consultoría de expediente técnico mínimo 3 años.</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Para todos los contratos, la responsabilidad es de 2 años por regla general.</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) La responsabilidad por vicios ocultos en bienes perecibles es siempre de 1 año sin excepciones.</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Qué organismo reemplaza al OSCE según la Ley 32069 y cómo debe interpretarse toda referencia legal al OSCE?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Lo reemplaza la DGA del MEF; toda referencia al OSCE se entiende como DGA.</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Lo reemplaza Perú Compras; toda referencia al OSCE se entiende como Perú Compras.</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Lo reemplaza el OECE (Organismo Especializado para las Contrataciones Públicas Eficientes); toda referencia legal al OSCE debe entenderse como OECE (Vigésima Tercera DCF).</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) El OSCE se mantiene vigente pero con nuevas funciones incorporadas por la Ley 32069.</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">Una MYPE presenta por primera vez documentos adulterados para ganar una licitación pública en Lima por S/ 500,000. ¿Qué sanción y qué plazo de prescripción corresponden?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Multa del 3% al 10% del contrato; prescripción 4 años.</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Inhabilitación temporal de 6 a 18 meses; prescripción 4 años.</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) Inhabilitación temporal de 24 a 60 meses (literal m, Art. 90.1.d); prescripción especial de 7 años (Art. 93.2). Para MYPE aplica la misma sanción, no hay reducción por tamaño en este infractor.</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Solo amonestación escrita por ser primera infracción de una MYPE.</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <h3 id="result-score"></h3>
+    <p id="result-msg"></p>
+    <button class="result-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">· Ley N° 32069, Ley General de Contrataciones Públicas, publicada el 24 de junio de 2024 en El Peruano (Separata Especial, pp. 1-36) · Decreto Legislativo 1439, Sistema Nacional de Abastecimiento · Vigésima Tercera DCF: toda referencia al OSCE = OECE · DCF Vigésima Novena: vigencia a los 90 días de publicación del reglamento</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks={
+  "1":{correct:"c",msg_ok:"La <b>finalidad</b> (Art. 2) es maximizar el valor de los recursos públicos. El <b>objeto</b> (Art. 1) es establecer el marco normativo. Son conceptos distintos: el objeto describe qué regula la ley; la finalidad describe para qué existe.",msg_no:"La opción A describe el <b>objeto</b> (Art. 1), no la finalidad. La finalidad (Art. 2) es maximizar el uso de recursos públicos en eficacia, eficiencia y economía para cumplir fines públicos y mejorar la vida ciudadana."},
+  "2":{correct:"d",msg_ok:"El Art. 5 contempla exactamente <b>15 principios</b>: Legalidad, Eficacia y Eficiencia, Valor por dinero, Integridad, Presunción de veracidad, Causalidad, Publicidad, Libertad de concurrencia, Transparencia y facilidad de uso, Competencia, Igualdad de trato, Equidad y colaboración, Sostenibilidad, Innovación y Vigencia tecnológica.",msg_no:"El Art. 5 contempla exactamente <b>15 principios</b>. No son 10 ni 12 ni 17. Además, según el Art. 5.3, sirven como criterio de integración ante los vacíos de la ley."},
+  "3":{correct:"b",msg_ok:"Distinción clave: <b>corporativa</b> = varias entidades contratan juntas (agrupan demanda); <b>centralizada</b> = una entidad gestiona todo el proceso por encargo de otras, hasta la liquidación. La centralizada puede incluir distribución.",msg_no:"La distinción no es por objeto (bienes vs. servicios) ni por quién la aprueba. <b>Corporativa</b> agrupa demanda de varias entidades; <b>centralizada</b> encarga todo el proceso de contratación a una sola entidad por complejidad o especialización."},
+  "4":{correct:"c",msg_ok:"La inhabilitación definitiva (Art. 91) requiere acumulación: <b>más de 2 sanciones de inhabilitación temporal que sumen más de 36 meses en 4 años</b>, y solo para las infracciones graves (literales i, j, k, l, m del Art. 87.1). No basta presentar docs falsos una sola vez.",msg_no:"La inhabilitación definitiva tiene requisitos estrictos de acumulación. Una sola infracción, aunque sea grave, no la genera. Se requiere más de 2 inhabilitaciones temporales acumulando más de 36 meses en los últimos 4 años."},
+  "5":{correct:"d",msg_ok:"Afirmación falsa: para anular un laudo arbitral las entidades <b>requieren resolución motivada del titular</b> (facultad indelegable), previo análisis costo-beneficio. La opinión del área legal sola es insuficiente. El Art. 84.9 es explícito en esto.",msg_no:"La afirmación falsa es la D. Las demás son correctas: el laudo es inapelable (A), el arbitraje es de derecho en español (B), el ad hoc solo para controversias ≤ 10 UIT (C). Para impugnar el laudo, el <b>titular debe emitir resolución motivada</b> —facultad indelegable."},
+  "6":{correct:"b",msg_ok:"La <b>Compra Pública de Innovación (CPI, Art. 38)</b> es la modalidad diseñada para cuando la solución no existe en el mercado. Permite definir el requerimiento solo por objetivos o funcionalidades, para que los proveedores presenten soluciones innovadoras.",msg_no:"La CPI (Art. 38) es la herramienta correcta cuando la solución <b>no está disponible en el mercado</b>. La licitación pública requiere especificaciones definidas; la contratación directa exige causales taxativas; el acuerdo marco opera con fichas técnicas de productos existentes."},
+  "7":{correct:"d",msg_ok:"El Art. 71.1 establece 5 causales de nulidad del contrato ya perfeccionado: (a) proveedor impedido, (b) documentación falsa, (c) recurso de apelación en trámite al suscribir, (d) simulación de supuesto excluido del Art. 7, (e) corrupción probada. Esta facultad de la AGA es indelegable.",msg_no:"La nulidad del contrato (Art. 71) no opera por solicitud de control interno ni por informe de la Contraloría solo. Tiene <b>5 causales taxativas</b>: proveedor impedido, documentación falsa, apelación en trámite, simulación de exclusión o corrupción probada por sentencia."},
+  "8":{correct:"b",msg_ok:"Art. 69.2: <b>Obras = mínimo 7 años</b> desde conformidad de recepción. <b>Bienes/servicios = mínimo 1 año</b> desde conformidad. <b>Consultoría de expediente técnico = mínimo 3 años</b> desde conformidad de obra. Supervisión de obra = no menor a la responsabilidad del contratista de obra.",msg_no:"Los plazos del Art. 69.2 son: obras <b>mínimo 7 años</b> (no 5), bienes/servicios <b>mínimo 1 año</b>, consultoría de expediente técnico <b>mínimo 3 años</b>. Para bienes perecibles sí puede haber excepciones si la estrategia de contratación lo determinó."},
+  "9":{correct:"c",msg_ok:"La <b>Vigésima Tercera DCF</b> establece expresamente que toda referencia legal al OSCE debe entenderse como <b>OECE</b> (Organismo Especializado para las Contrataciones Públicas Eficientes). La ley no crea un organismo nuevo desde cero: transforma y renombra al OSCE.",msg_no:"El Art. 11 y la Vigésima Tercera DCF son claros: toda referencia al OSCE = <b>OECE</b>. No lo reemplaza la DGA ni Perú Compras. El OSCE fue derogado junto con la Ley 30225 (DCF Derogatoria Única)."},
+  "10":{correct:"c",msg_ok:"La presentación de documentos adulterados es la infracción más grave (literal m, Art. 87.1). La sanción es inhabilitación temporal de <b>24 a 60 meses</b> (Art. 90.1.d). El plazo especial de prescripción es <b>7 años</b> (Art. 93.2). La condición de MYPE no reduce la sanción para este tipo infractor.",msg_no:"La infracción del literal m (documentos adulterados) tiene el régimen más severo: inhabilitación de <b>24 a 60 meses</b> (no multa ni inhabilitación menor) y prescripción de <b>7 años</b> (regla especial del Art. 93.2). La condición MYPE reduce multas pero no estas inhabilitaciones."}
+};
+
+let answered=0,correct_count=0;
+document.querySelector('#quiz-section').addEventListener('click',function(e){
+  const btn=e.target.closest('.qbtn');
+  if(!btn||btn.disabled)return;
+  const q=btn.dataset.q;
+  const isCorrect=btn.dataset.correct==='true';
+  const btns=document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  btns.forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.correct==='true'){b.classList.add('reveal');b.textContent='✅ '+b.textContent;}
+  });
+  if(!isCorrect){btn.classList.add('incorrect');btn.textContent='❌ '+btn.textContent;}
+  else{btn.classList.remove('reveal');btn.classList.add('correct');}
+  const fb=document.getElementById('fb'+q);
+  const fd=feedbacks[q];
+  fb.style.display='block';
+  if(isCorrect){fb.className='qfeedback ok';fb.innerHTML='✅ <b>¡Correcto!</b> '+fd.msg_ok;}
+  else{fb.className='qfeedback no';fb.innerHTML='❌ <b>Incorrecto.</b> '+fd.msg_no;}
+  answered++;
+  if(isCorrect)correct_count++;
+  const pct=Math.round(answered/10*100);
+  document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('prog-text').textContent='Pregunta '+answered+' de 10 respondidas';
+  document.getElementById('prog-score').textContent='Aciertos: '+correct_count+' / '+answered;
+  if(answered===10){
+    const rp=document.getElementById('result-panel');
+    rp.style.display='block';
+    const sc=document.getElementById('result-score');
+    const ms=document.getElementById('result-msg');
+    sc.textContent=correct_count+' / 10 correctas';
+    if(correct_count<=4){rp.style.background='#fee2e2';sc.style.color='#991b1b';ms.textContent='Necesitas repasar el material. Vuelve a revisar los bloques y los artículos clave.';}
+    else if(correct_count<=7){rp.style.background='#fef9c3';sc.style.color='#713f12';ms.textContent='¡Buen avance! Sigue repasando los artículos donde fallaste.';}
+    else{rp.style.background='#dcfce7';sc.style.color='#14532d';ms.textContent='¡Excelente dominio de la Ley 32069! Estás listo para el examen.';}
+  }
+});
+
+function resetQuiz(){
+  answered=0;correct_count=0;
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('prog-text').textContent='Pregunta 0 de 10 respondidas';
+  document.getElementById('prog-score').textContent='Aciertos: 0 / 0';
+  for(let q=1;q<=10;q++){
+    const btns=document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+    btns.forEach(b=>{
+      b.disabled=false;
+      b.classList.remove('correct','incorrect','reveal');
+      b.textContent=b.textContent.replace(/^[✅❌] /,'');
+    });
+    const fb=document.getElementById('fb'+q);
+    fb.style.display='none';fb.className='qfeedback';fb.innerHTML='';
+  }
+  const rp=document.getElementById('result-panel');
+  rp.style.display='none';rp.style.background='';
+}
+</script>
+</body>
+</html>
