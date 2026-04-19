@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas Visual de Resumen Universitario - Italiano</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f8fafc;
+    --color-background-tertiary: #f1f5f9;
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-border-secondary: #e2e8f0;
+    --color-border-tertiary: #cbd5e1;
+
+    /* Colores Temáticos Light */
+    --blue-bg: #dbeafe; --blue-text: #1e3a8a; --blue-border: #93c5fd;
+    --green-bg: #dcfce7; --green-text: #14532d; --green-border: #86efac;
+    --red-bg: #fee2e2; --red-text: #991b1b; --red-border: #fca5a5;
+    --yellow-bg: #fef9c3; --yellow-text: #713f12; --yellow-border: #fef08a;
+    --purple-bg: #ede9fe; --purple-text: #4c1d95; --purple-border: #c4b5fd;
+    --teal-bg: #ccfbf1; --teal-text: #134e4a; --teal-border: #5eead4;
+    --orange-bg: #ffedd5; --orange-text: #7c2d12; --orange-border: #fed7aa;
+    --gray-bg: #f1f5f9; --gray-text: #334155; --gray-border: #cbd5e1;
+    --pink-bg: #fce7f3; --pink-text: #831843; --pink-border: #fbcfe8;
+  }
+
+  @media(prefers-color-scheme:dark) {
+    :root {
+      --color-background-primary: #0f172a;
+      --color-background-secondary: #1e293b;
+      --color-background-tertiary: #020617;
+      --color-text-primary: #f8fafc;
+      --color-text-secondary: #cbd5e1;
+      --color-border-secondary: #334155;
+      --color-border-tertiary: #1e293b;
+
+      /* Colores Temáticos Dark */
+      --blue-bg: #1e3a5f; --blue-text: #93c5fd;
+      --green-bg: #14532d; --green-text: #86efac;
+      --red-bg: #450a0a; --red-text: #fca5a5;
+      --yellow-bg: #422006; --yellow-text: #fef08a;
+      --purple-bg: #2e1065; --purple-text: #c4b5fd;
+      --teal-bg: #042f2e; --teal-text: #5eead4;
+      --orange-bg: #431407; --orange-text: #fed7aa;
+      --gray-bg: #1e293b; --gray-text: #94a3b8;
+      --pink-bg: #4a044e; --pink-text: #f0abfc;
+    }
+  }
+
+  body {
+    margin: 0;
+    padding: 20px;
+    background: #e2e8f0;
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--color-text-primary);
+  }
+
+  .cv {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 9px;
+    padding: 12px;
+    background: var(--color-background-tertiary);
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  }
+
+  h1, h2, h3, h4 { margin: 0; font-family: 'Oswald', sans-serif; }
+  p { margin: 0 0 8px 0; }
+
+  /* Barra de título */
+  .title-bar {
+    grid-column: 1 / -1;
+    background: #0f1e3a;
+    color: white;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .title-bar h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .title-bar .subtitle { font-size: 11px; color: #cbd5e1; margin-bottom: 8px; }
+
+  /* Barras de sección */
+  .section-bar {
+    grid-column: 1 / -1;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sb-purple { background: var(--purple-bg); color: var(--purple-text); border-left: 4px solid var(--purple-border); }
+  .sb-blue { background: var(--blue-bg); color: var(--blue-text); border-left: 4px solid var(--blue-border); }
+  .sb-teal { background: var(--teal-bg); color: var(--teal-text); border-left: 4px solid var(--teal-border); }
+
+  /* Bloques de contenido */
+  .block {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 11px;
+    padding: 12px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .block.s2 { grid-column: span 2; }
+  .block.s3 { grid-column: 1 / -1; }
+
+  /* Encabezados de bloque */
+  .bh {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .bh.purple { background: var(--purple-bg); color: var(--purple-text); }
+  .bh.blue { background: var(--blue-bg); color: var(--blue-text); }
+  .bh.teal { background: var(--teal-bg); color: var(--teal-text); }
+
+  /* Definiciones */
+  .def {
+    padding: 7px 10px;
+    border-radius: 0 7px 7px 0;
+    font-size: 12px;
+    background: var(--color-background-secondary);
+    line-height: 1.5;
+  }
+  .def.purple { border-left: 3px solid var(--purple-text); }
+  .def.blue { border-left: 3px solid var(--blue-text); }
+  .def.teal { border-left: 3px solid var(--teal-text); }
+
+  /* Items */
+  .item {
+    display: flex;
+    gap: 7px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .dot.purple { background: var(--purple-text); }
+  .dot.blue { background: var(--blue-text); }
+  .dot.teal { background: var(--teal-text); }
+
+  /* Fórmulas / Reacciones */
+  .rx {
+    background: #0f172a;
+    color: #7dd3fc;
+    font-family: monospace;
+    font-size: 11px;
+    padding: 7px 11px;
+    border-radius: 7px;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* Alertas */
+  .warn {
+    background: #fff7ed;
+    border-left: 3px solid #f97316;
+    border-radius: 0 8px 8px 0;
+    font-size: 11.5px;
+    color: #7c2d12;
+    padding: 7px 10px;
+    line-height: 1.4;
+  }
+
+  /* Pregunta Examen */
+  .exam {
+    background: #fefce8;
+    border: 1px solid #facc15;
+    border-radius: 8px;
+    font-size: 11.5px;
+    color: #713f12;
+    padding: 8px 10px;
+    line-height: 1.4;
+    margin-top: auto;
+  }
+  .exam strong { font-weight: 600; }
+
+  /* Mini Tarjetas */
+  .mini {
+    background: var(--color-background-secondary);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 11.5px;
+    line-height: 1.4;
+  }
+  .mini strong { display: block; margin-bottom: 4px; }
+  .mini.purple { border-top: 3px solid var(--purple-text); }
+  .mini.blue { border-top: 3px solid var(--blue-text); }
+  .mini.teal { border-top: 3px solid var(--teal-text); }
+
+  /* Grillas internas */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; }
+
+  /* Flujos causales */
+  .flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 5px 0;
+  }
+  .fbox {
+    background: var(--color-background-secondary);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    border: 1px solid var(--color-border-secondary);
+  }
+  .farrow {
+    color: var(--color-text-secondary);
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  /* Badges y Pills */
+  .num-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+  }
+  .nb-p { background: #4c1d95; }
+  .nb-b { background: #1e3a8a; }
+  .nb-t { background: #134e4a; }
+
+  .pill {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 2px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  /* Tabla Comparativa */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-top: 8px;
+  }
+  .tbl th {
+    background: var(--color-background-secondary);
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--color-border-tertiary);
+    text-align: left;
+    font-weight: 600;
+  }
+  .tbl td {
+    padding: 6px 8px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    vertical-align: top;
+  }
+
+  /* Divider */
+  .divh {
+    border: none;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin: 7px 0;
+  }
+
+  /* Quiz Section */
+  #quiz-section {
+    grid-column: 1 / -1;
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-top: 10px;
+  }
+  .quiz-header {
+    background: #0f1e3a;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  .quiz-header h2 { font-size: 14px; margin-bottom: 2px; }
+  .quiz-header p { font-size: 11px; color: #cbd5e1; margin: 0; font-family: sans-serif; }
+
+  .stat-bar-wrap {
+    width: 100%;
+    background: var(--color-background-secondary);
+    border-radius: 20px;
+    height: 11px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+  }
+  .stat-bar-fill {
+    height: 100%;
+    border-radius: 20px;
+    background: #16a34a;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .qcard {
+    border: 1px solid var(--color-border-secondary);
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  .qnum { font-size: 11px; color: var(--color-text-secondary); font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
+  .qtext { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  
+  .qopts { display: flex; flex-direction: column; gap: 5px; }
+  .qbtn {
+    background: var(--color-background-secondary);
+    border: 1px solid var(--color-border-tertiary);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s;
+    color: var(--color-text-primary);
+    font-family: inherit;
+  }
+  .qbtn:hover:not(:disabled) { background: var(--color-border-secondary); }
+  .qbtn.correct { background: #dcfce7 !important; border-color: #16a34a !important; color: #14532d !important; font-weight: 600; }
+  .qbtn.incorrect { background: #fee2e2 !important; border-color: #dc2626 !important; color: #991b1b !important; }
+  .qbtn:disabled { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+
+  .qfeedback {
+    border-radius: 0 8px 8px 0;
+    padding: 8px 11px;
+    font-size: 11.5px;
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+  .qfeedback.correct { background: #f0fdf4; border-left: 3px solid #16a34a; color: #14532d; }
+  .qfeedback.incorrect { background: #fef2f2; border-left: 3px solid #dc2626; color: #991b1b; }
+
+  #quiz-results {
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 15px;
+    display: none;
+    font-weight: 600;
+  }
+  #quiz-results.low { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+  #quiz-results.mid { background: #fef9c3; color: #713f12; border: 1px solid #fde047; }
+  #quiz-results.high { background: #dcfce7; color: #14532d; border: 1px solid #86efac; }
+  
+  .btn-reset {
+    margin-top: 10px;
+    background: #0f1e3a;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  /* Footer */
+  .footer {
+    grid-column: 1 / -1;
+    background: #0f1e3a;
+    color: white;
+    border-radius: 10px;
+    padding: 11px 18px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .ft { font-family: 'Oswald', sans-serif; font-size: 12px; color: #7dd3fc; }
+  .fc { font-size: 11px; color: #94a3b8; }
+</style>
+</head>
+<body>
+
+<div class="cv">
+
+  <div class="title-bar">
+    <h1>ITALIANO BÁSICO Y CULTURA (NIVEL 1)</h1>
+    <div class="subtitle">Universidad Bolivariana de Venezuela (UBV) — Módulo Introductorio e Inmersión</div>
+    <div>
+      <span class="pill">🏛️ Bolívar en Italia</span>
+      <span class="pill">🗣️ Alfabeto y Fonética</span>
+      <span class="pill">📱 Inmersión Tecnológica</span>
+    </div>
+  </div>
+
+  <div class="section-bar sb-purple">
+    🟣 CONTEXTO HISTÓRICO Y CULTURAL: BOLÍVAR EN ITALIA
+  </div>
+
+  <div class="block s2">
+    <span class="bh purple">El Viaje a Italia (Diap. 10-11)</span>
+    <div class="def purple">
+      El viaje de Simón Bolívar a Italia en 1805 representó un encuentro directo con la civilización occidental y la cuna del Renacimiento[cite: 1]. Fue una experiencia oxigenante que forjó su visión política, pasando del hastío social en París a la inspiración emancipadora.
+    </div>
+    <div class="item">
+      <div class="dot purple"></div>
+      <div>Impulsado por su maestro <strong>Simón Rodríguez</strong> y acompañado por <strong>Fernando Rodríguez de Toro</strong>, Bolívar emprendió un viaje a pie admirando paisajes y absorbiendo la realidad europea[cite: 1].</div>
+    </div>
+    <div class="item">
+      <div class="dot purple"></div>
+      <div>En Milán (Monte Chiaro), presenció un evento histórico clave: la coronación de <strong>Napoleón Bonaparte</strong> como Rey de los Lombardos, lo cual alimentó su perspectiva sobre el poder y la libertad[cite: 1].</div>
+    </div>
+    
+    <div class="flow">
+      <div class="fbox">París (Hastío)</div> <div class="farrow">→</div>
+      <div class="fbox">Milán (Coronación Napoleón)</div> <div class="farrow">→</div>
+      <div class="fbox">Roma (Juramento)</div>
+    </div>
+
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> ¿Qué motivación principal llevó a Bolívar a viajar a Italia y qué suceso político de gran magnitud presenció en la ciudad de Milán según los registros de su viaje?
+    </div>
+  </div>
+
+  <div class="block">
+    <span class="bh purple">Juramento en Monte Sacro (Diap. 11-13)</span>
+    <div class="def purple">
+      Compromiso solemne realizado por Bolívar en Roma, jurando romper las cadenas del dominio español sobre Hispanoamérica[cite: 1].
+    </div>
+    
+    <div class="two">
+      <div class="mini purple">
+        <strong>📍 El Escenario</strong>
+        Roma, la Ciudad Eterna. Bolívar contempló las ruinas imperiales y el sufrimiento cristiano, despertando su fervor libertario[cite: 1].
+      </div>
+      <div class="mini purple">
+        <strong>🤝 Conexiones</strong>
+        Antes de volver a París, ascendió al Vesubio (Nápoles) junto a científicos de renombre como el Barón von Humboldt[cite: 1].
+      </div>
+    </div>
+
+    <div class="warn">
+      ⚠️ <strong>ERROR COMÚN:</strong> No confundir el lugar del juramento. Ocurrió en el <strong>Monte Sacro (Roma)</strong>, no en París ni en Milán[cite: 1].
+    </div>
+
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Analice la influencia del entorno geográfico e histórico (ruinas de Roma) en la proclamación del Juramento del Monte Sacro.
+    </div>
+  </div>
+
+
+  <div class="section-bar sb-blue">
+    🔵 FUNDAMENTOS LINGÜÍSTICOS: ALFABETO Y FONÉTICA
+  </div>
+
+  <div class="block">
+    <span class="bh blue">El Alfabeto (Diap. 16-17)</span>
+    <div class="def blue">
+      El alfabeto italiano consta de solo 21 letras oficiales, excluyendo 5 grafías consideradas extranjeras[cite: 1]. Es la base estructural para la interacción social.
+    </div>
+    <div class="item">
+      <div class="dot blue"></div>
+      <div><strong>Composición:</strong> 16 consonantes y 5 vocales[cite: 1].</div>
+    </div>
+    <div class="item">
+      <div class="dot blue"></div>
+      <div>Las letras <strong>J, K, W, X, Y</strong> no pertenecen al alfabeto italiano; solo se utilizan para transcribir préstamos de idiomas extranjeros[cite: 1].</div>
+    </div>
+
+    <div class="rx">
+      ∑ Letras = 21 (16 consonantes + 5 vocales)<br>
+      Letras Foráneas = { J, K, W, X, Y }
+    </div>
+
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Identifique la cantidad exacta de vocales y consonantes en el alfabeto italiano nativo y mencione dos letras consideradas extranjeras.
+    </div>
+  </div>
+
+  <div class="block s2">
+    <span class="bh blue">Sílabas y Sonidos Especiales (Diap. 19)</span>
+    <div class="def blue">
+      La fonética italiana presenta variaciones drásticas frente al español, especialmente en el uso de la "C", "G", "H" y combinaciones de consonantes dobles[cite: 1, 2].
+    </div>
+
+    <div class="three">
+      <div class="mini blue">
+        <strong>La letra 'C' con E/I</strong>
+        CE suena como /che/ (Cena). CI suena como /chi/ (Cinema)[cite: 1].
+      </div>
+      <div class="mini blue">
+        <strong>El uso de la 'H'</strong>
+        CHE suena como /ke/. CHI suena como /ki/ (Macchina). La 'H' endurece el sonido[cite: 1, 2].
+      </div>
+      <div class="mini blue">
+        <strong>Grupos Especiales</strong>
+        GLI suena como una 'lli' muy suave (Sveglia). GN suena como la 'ñ' española[cite: 1, 3].
+      </div>
+    </div>
+
+    <div class="warn">
+      ⚠️ <strong>ERROR COMÚN:</strong> Pronunciar "CI" como /si/ (incorrecto). En italiano se pronuncia como /chi/. Además, no ignorar las dobles consonantes (Ej: "Gatto", "Macchina"), ya que cambian el ritmo y significado[cite: 2].
+    </div>
+
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Explique la regla de pronunciación de la letra "C" cuando va seguida directamente por una vocal (E/I) versus cuando se interpone la letra "H" (HE/HI), brindando ejemplos.
+    </div>
+  </div>
+
+  <div class="section-bar sb-teal">
+    🩵 ESTRATEGIAS DE INMERSIÓN Y VOCABULARIO TECNOLÓGICO
+  </div>
+
+  <div class="block s2">
+    <span class="bh teal">Inmersión en Celulares (Reactivación)</span>
+    <div class="def teal">
+      Técnica de aprendizaje acelerado ("Modo Italia") que consiste en modificar el entorno digital diario para forzar al cerebro a leer y procesar términos italianos constantemente[cite: 2].
+    </div>
+    
+    <div class="item">
+      <div class="dot teal"></div>
+      <div><strong>Reactivación de Memoria:</strong> Para un estudiante que ya vio el curso, "desempolvar" estructuras es más rápido que aprender de cero[cite: 2].</div>
+    </div>
+    <div class="item">
+      <div class="dot teal"></div>
+      <div><strong>Ejecución:</strong> Cambiar el idioma del dispositivo móvil y usar podcasts (Podcast Italiano) educa el oído y la pronunciación[cite: 2].</div>
+    </div>
+
+    <div class="flow">
+      <div class="fbox">Configurar celular a Italiano</div> <div class="farrow">→</div>
+      <div class="fbox">Interacción repetitiva diaria</div> <div class="farrow">→</div>
+      <div class="fbox">Fijación de Vocabulario</div>
+    </div>
+
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Defina el concepto de "Reactivación de la Memoria" en el contexto de aprendizaje acelerado y argumente por qué cambiar el idioma del celular es una táctica efectiva de inmersión total.
+    </div>
+  </div>
+
+  <div class="block">
+    <span class="bh teal">Vocabulario de Supervivencia</span>
+    <div class="def teal">
+      Glosario básico derivado de la interfaz de usuario en iOS/Android configurados en italiano[cite: 3].
+    </div>
+
+    <div class="mini teal">
+      <strong>⚙️ Impostazioni:</strong> (/impostatsióni/) Ajustes / Configuración. <br>
+      <strong>📞 Chiamate:</strong> (/kiamáte/) Llamadas (Nota: 'chi' suena /ki/).<br>
+      <strong>⏰ Sveglia:</strong> (/zvéllia/) Alarma (Nota: 'gli' suena suave).
+    </div>
+    <div class="mini teal">
+      <strong>📱 Schermo:</strong> Pantalla.<br>
+      <strong>⌨️ Tastiera:</strong> Teclado.<br>
+      <strong>🔒 Password:</strong> Parola d'ordine.
+    </div>
+
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Traduzca al español y proporcione la pronunciación fonética de las palabras "Impostazioni" y "Chiamate".
+    </div>
+  </div>
+
+  <div class="block s3">
+    <span class="bh gray" style="background:#475569;color:white;">TABLA INTEGRADORA FINAL DE REPASO</span>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Concepto / Tema</th>
+          <th>Clasificación</th>
+          <th>Regla / Significado</th>
+          <th>Ejemplo Práctico</th>
+          <th>Contexto / Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Alfabeto Nativo</strong></td>
+          <td>Lingüística</td>
+          <td>Compuesto por 21 letras (16 cons. + 5 voc.)</td>
+          <td>A, B, C, D...</td>
+          <td>No incluye extranjeras [cite: 1]</td>
+        </tr>
+        <tr>
+          <td><strong>Regla de la C y H</strong></td>
+          <td>Fonética</td>
+          <td>C + H + e/i = Sonido fuerte /k/</td>
+          <td>Macchina (/makkina/), Chiamate (/kiamáte/)</td>
+          <td>Crítico para no sonar como "ch" [cite: 1, 2]</td>
+        </tr>
+        <tr>
+          <td><strong>Juramento de Bolívar</strong></td>
+          <td>Historia UBV</td>
+          <td>Jura liberar hispanoamérica de España</td>
+          <td>"Juro por el Dios de mis padres..."</td>
+          <td>Realizado en Roma (Monte Sacro) [cite: 1]</td>
+        </tr>
+        <tr>
+          <td><strong>Impostazioni / Sveglia</strong></td>
+          <td>Vocabulario Tech</td>
+          <td>Términos de "Inmersión total" celular</td>
+          <td>Sveglia (Alarma), Schermo (Pantalla)</td>
+          <td>Acelera reactivación cerebral [cite: 2, 3]</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warn" style="margin-top:8px;">
+      ⚠️ <strong>DATO INTEGRADOR:</strong> El aprendizaje del italiano en la UBV no solo enseña el idioma (alfabeto de 21 letras, reglas fonéticas "CHI", "GLI"), sino que vincula la lengua con el legado cultural latinoamericano (Bolívar en Italia), lo que permite un aprendizaje vivencial. Complementado con estrategias de "Inmersión Tecnológica" (celular en italiano), garantiza un repaso acelerado y efectivo.
+    </div>
+  </div>
+
+  <div id="quiz-section">
+    <div class="quiz-header">
+      <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+      <p>Marca tu respuesta y descubre si es correcta (Cobertura de Cultura, Fonética y Vocabulario)</p>
+    </div>
+
+    <div class="stat-bar-wrap">
+      <div class="stat-bar-fill" id="quiz-progress"></div>
+    </div>
+    <p style="font-size:12px; margin-bottom:15px; font-weight:600;" id="quiz-status-text">Pregunta 1 de 10 | Aciertos: 0</p>
+
+    <div id="quiz-container">
+      <div class="qcard" data-q="1">
+        <p class="qnum">Pregunta 1 / 10</p>
+        <p class="qtext">En el contexto histórico del viaje de Simón Bolívar a Italia, ¿qué importante evento político presenció en la ciudad de Milán?</p>
+        <div class="qopts">
+          <button class="qbtn" data-correct="false">A) La firma del tratado de independencia italiana.</button>
+          <button class="qbtn" data-correct="false">B) La coronación del Rey de España.</button>
+          <button class="qbtn" data-correct="true">C) La coronación de Napoleón Bonaparte como rey de los lombardos.</button>
+          <button class="qbtn" data-correct="false">D) El nombramiento del Soberano Pontífice en Roma.</button>
+        </div>
+        <div class="qfeedback"></div>
+      </div>
+
+      <div class="qcard" data-q="2">
+        <p class="qnum">Pregunta 2 / 10</p>
+        <p class="qtext">¿Cuál es la cantidad exacta de letras que conforman el alfabeto oficial italiano, sin contar letras extranjeras?</p>
+        <div class="qopts">
+          <button class="qbtn" data-correct="false">A) 27 letras</button>
+          <button class="qbtn" data-correct="false">B) 24 letras</button>
+          <button class="qbtn" data-correct="true">C) 21 letras</button>
+          <button class="qbtn" data-correct="false">D) 26 letras</button>
+        </div>
+        <div class="qfeedback"></div>
+      </div>
+
+      <div class="qcard" data-q="3">
+        <p class="qnum">Pregunta 3 / 10</p>
+        <p class="qtext">Según la regla fonética, ¿cómo se pronuncia correctamente la palabra italiana "Macchina" y por qué?</p>
+        <div class="qopts">
+          <button class="qbtn" data-correct="true">A) (/mákkina/) porque la 'C' seguida de 'H' endurece el sonido como una 'K'.</button>
+          <button class="qbtn" data-correct="false">B) (/máchina/) porque el grupo 'CHI' siempre suena como 'CH' en español.</button>
+          <button class="qbtn" data-correct="false">C) (/mássina/) porque la doble consonante suaviza la sílaba.</button>
+          <button class="qbtn" data-correct="false">D) (/mákina/) porque en italiano se ignora la doble consonante al hablar.</button>
+        </div>
+        <div class="qfeedback"></div>
+      </div>
+
+      <div class="qcard" data-q="4">
+        <p class="qnum">Pregunta 4 / 10</p>
+        <p class="qtext">¿En qué lugar físico y ciudad realizó Simón Bolívar su famoso juramento independentista?</p>
+        <div class="qopts">
+          <button class="qbtn" data-correct="false">A) En el Monte Chiaro, Milán.</button>
+          <button class="qbtn" data-correct="true">B) En el Monte Sacro, Roma.</button>
+          <button class="qbtn" data-correct="false">C) En el Volcán Vesubio, Nápoles.</button>
+          <button class="qbtn" data-correct="false">D) En Los Alpes, norte de Italia.</button>
+        </div>
+        <div class="qfeedback"></div>
+      </div>
+
+      <div class="qcard" data-q="5">
+        <p class="qnum">Pregunta 5 / 10</p>
+        <p class="qtext">Si decides aplicar la inmersión tecnológica cambiando el idioma de tu celular, ¿cómo se traducen las palabras "Ajustes/Configuración" y "Despertador/Alarma"?</p>
+        <div class="qopts">
+          <button class="qbtn" data-correct="false">A) Tastiera y Schermo.</button>
+          <button class="qbtn" data-correct="false">B) Chiamate y Messaggi.</button>
+          <button class="qbtn" data-correct="true">C) Impostazioni y Sveglia.</button>
+          <button class="qbtn" data-correct="false">D) Schermo y Sveglia.</button>
+        </div>
+        <div class="qfeedback"></div>
+      </div>
+
+      <div class="qcard" data-q="6">
+        <p class="qnum">Pregunta 6 / 10</p>
+        <p class="qtext">De las siguientes letras, ¿cuál grupo es considerado "extranjero" y NO forma parte del alfabeto oficial italiano?</p>
+        <div class="qopts">
+          <button class="qbtn" data-correct="false">A) H, Q, Z, V</button>
+          <button class="qbtn" data-correct="false">B) L, M, N, P</button>
+          <button class="qbtn" data-correct="false">C) B, C, D, F</button>
+          <button class="qbtn" data-correct="true">D) J, K, W, X, Y</button>
+        </div>
+        <div class="qfeedback"></div>
+      </div>
+
+      <div class="qcard" data-q="7">
+        <p class="qnum">Pregunta 7 / 10</p>
+        <p class="qtext">¿Cómo se pronuncia correctamente la sílaba "CE" en la palabra "Cena"?</p>
+        <div class="qopts">
+          <button class="qbtn" data-correct="false">A) /se/ (Como "se" en español).</button>
+          <button class="qbtn" data-correct="true">B) /che/ (Como "che" en español).</button>
+          <button class="qbtn" data-correct="false">C) /ke/ (Como "que" en español).</button>
+          <button class="qbtn" data-correct="false">D) /ze/ (Como una "z" sonora).</button>
+        </div>
+        <div class="qfeedback"></div>
+      </div>
+
+      <div class="qcard" data-q="8">
+        <p class="qnum">Pregunta 8 / 10</p>
+        <p class="qtext">Al aplicar la estrategia de "Reactivación de la Memoria" para un repaso acelerado (2 semanas), el documento sugiere...</p>
+        <div class="qopts">
+          <button class="qbtn" data-correct="false">A) Repasar lentamente el abecedario y la gramática básica desde cero durante 10 días.</button>
+          <button class="qbtn" data-correct="true">B) Evitar aprender de cero, hacer inmersión total con dispositivos y resolver exámenes de diagnóstico para enfocar los errores.</button>
+          <button class="qbtn" data-correct="false">C) Ignorar el vocabulario antiguo y solo concentrarse en las dobles consonantes.</button>
+          <button class="qbtn" data-correct="false">D) Viajar a Italia inmediatamente para escuchar hablantes nativos.</button>
+        </div>
+        <div class="qfeedback"></div>
+      </div>
+
+      <div class="qcard" data-q="9">
+        <p class="qnum">Pregunta 9 / 10</p>
+        <p class="qtext">Identifique la afirmación FALSA respecto a la fonética italiana:</p>
+        <div class="qopts">
+          <button class="qbtn" data-correct="true">A) La sílaba "CI" en la palabra "Cinema" suena igual que en español (/si/).</button>
+          <button class="qbtn" data-correct="false">B) El dígrafo "GN" suena como la letra "Ñ" del español.</button>
+          <button class="qbtn" data-correct="false">C) El grupo "GLI" se pronuncia similar a una "lli" muy suave.</button>
+          <button class="qbtn" data-correct="false">D) Las consonantes dobles (como "tt" en Gatto) exigen una pausa en la pronunciación.</button>
+        </div>
+        <div class="qfeedback"></div>
+      </div>
+
+      <div class="qcard" data-q="10">
+        <p class="qnum">Pregunta 10 / 10</p>
+        <p class="qtext">¿Con qué científicos renombrados se encontró Bolívar en Nápoles antes de regresar a París?</p>
+        <div class="qopts">
+          <button class="qbtn" data-correct="false">A) Albert Einstein y Marie Curie.</button>
+          <button class="qbtn" data-correct="false">B) Simón Rodríguez y el Conde de Melzi.</button>
+          <button class="qbtn" data-correct="true">C) El Barón von Humboldt y el físico químico Louis Guy Lussac.</button>
+          <button class="qbtn" data-correct="false">D) Fernando Rodríguez de Toro y Napoleón.</button>
+        </div>
+        <div class="qfeedback"></div>
+      </div>
+    </div>
+
+    <div id="quiz-results">
+      <h3 style="margin-bottom:8px; font-size:16px;">Resultados Finales</h3>
+      <p id="qr-score" style="font-size:14px; margin-bottom:5px;"></p>
+      <p id="qr-msg" style="font-size:12px; margin-bottom:12px;"></p>
+      <button class="btn-reset" id="btn-reset">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="ft">REFERENCIAS Y MATERIALES BASE:</div>
+    <div class="fc">
+      <strong>[cite: 1]</strong> UBV. (s.f.). <em>Corso di Italiano - Primo Livello</em>. Universidad Bolivariana de Venezuela. | 
+      <strong>[cite: 2]</strong> <em>Acelerar Repaso de Italiano para Examen</em>. Material de inmersión y estrategia de memoria. | 
+      <strong>[cite: 3]</strong> <em>Italian Phone Vocabulary and Phrases</em>. Glosario de dispositivos móviles.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let answered = 0;
+    let score = 0;
+    const totalQuestions = 10;
+    const progressBar = document.getElementById('quiz-progress');
+    const statusText = document.getElementById('quiz-status-text');
+    const resultsPanel = document.getElementById('quiz-results');
+    
+    // Configuración de Explicaciones Retroalimentación
+    const feedbackExplanations = {
+      1: "Bolívar presenció en Monte Chiaro, cerca de Milán, cómo Napoleón Bonaparte se hacía coronar y reconocer como rey de los lombardos.",
+      2: "El alfabeto italiano tiene exactamente 21 letras (16 consonantes y 5 vocales). Las 5 adicionales son extranjeras.",
+      3: "La regla establece que la 'C' seguida de 'H' (CHE, CHI) endurece su sonido produciendo un fonema /k/ fuerte, como en 'Macchina'.",
+      4: "El Juramento se realizó en el Monte Sacro, en las afueras de Roma, inspirado por las históricas ruinas de la ciudad.",
+      5: "Como técnica de inmersión total, verás 'Impostazioni' para Ajustes y 'Sveglia' para la Alarma en tu celular en italiano.",
+      6: "Las letras J, K, W, X, Y no pertenecen al alfabeto italiano y se usan exclusivamente para préstamos lingüísticos extranjeros.",
+      7: "A diferencia del español, en italiano la 'C' seguida de 'E' o 'I' tiene un sonido africado sordo equivalente a la 'CH' española.",
+      8: "Teniendo 2 semanas, reactivar la memoria mediante inmersión (celular, música) y pruebas de diagnóstico ahorra tiempo crucial frente al repaso teórico desde cero.",
+      9: "Es falso que suene igual. En italiano 'CI' suena como /chi/ (Ej: Cinema = /chínema/), no como /si/.",
+      10: "Ascendió al volcán Vesubio en expedición científica junto al Barón von Humboldt y Louis Guy Lussac."
+    };
+
+    const updateStatus = () => {
+      progressBar.style.width = `${(answered / totalQuestions) * 100}%`;
+      statusText.innerText = `Pregunta ${answered} de ${totalQuestions} | Aciertos: ${score}`;
+    };
+
+    document.querySelectorAll('.qbtn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const qcard = this.closest('.qcard');
+        const qNum = qcard.getAttribute('data-q');
+        const feedbackDiv = qcard.querySelector('.qfeedback');
+        const allBtns = qcard.querySelectorAll('.qbtn');
+        
+        // Evitar doble respuesta
+        if (qcard.classList.contains('answered')) return;
+        qcard.classList.add('answered');
+
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+
+        // Evaluar
+        if (isCorrect) {
+          score++;
+          this.classList.add('correct');
+          this.innerHTML = '✅ ' + this.innerHTML;
+          feedbackDiv.classList.add('correct');
+          feedbackDiv.innerHTML = `<strong>✅ ¡Correcto!</strong> ${feedbackExplanations[qNum]}`;
+        } else {
+          this.classList.add('incorrect');
+          this.innerHTML = '❌ ' + this.innerHTML;
+          feedbackDiv.classList.add('incorrect');
+          feedbackDiv.innerHTML = `<strong>❌ Incorrecto.</strong> ${feedbackExplanations[qNum]}`;
+          
+          // Mostrar cuál era la correcta
+          allBtns.forEach(b => {
+            if (b.getAttribute('data-correct') === 'true') {
+              b.classList.add('correct');
+              b.innerHTML = '✅ ' + b.innerHTML;
+            }
+          });
+        }
+
+        // Deshabilitar botones de esta pregunta
+        allBtns.forEach(b => b.disabled = true);
+        
+        // Mostrar feedback
+        feedbackDiv.style.display = 'block';
+
+        answered++;
+        updateStatus();
+
+        // Finalizar Quiz
+        if (answered === totalQuestions) {
+          setTimeout(() => {
+            resultsPanel.style.display = 'block';
+            document.getElementById('qr-score').innerText = `Puntaje Final: ${score} / 10 correctas`;
+            
+            resultsPanel.className = '';
+            if (score <= 4) {
+              resultsPanel.classList.add('low');
+              document.getElementById('qr-msg').innerText = "Necesitas repasar el material. ¡Vuelve a leer el resumen!";
+            } else if (score <= 7) {
+              resultsPanel.classList.add('mid');
+              document.getElementById('qr-msg').innerText = "¡Buen avance! Sigue repasando la inmersión y pronunciación.";
+            } else {
+              resultsPanel.classList.add('high');
+              document.getElementById('qr-msg').innerText = "¡Excelente dominio del tema! Estás listo para tu examen.";
+            }
+          }, 400);
+        }
+      });
+    });
+
+    // Reiniciar
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      answered = 0;
+      score = 0;
+      updateStatus();
+      resultsPanel.style.display = 'none';
+      resultsPanel.className = '';
+      
+      document.querySelectorAll('.qcard').forEach(qcard => {
+        qcard.classList.remove('answered');
+        const feedbackDiv = qcard.querySelector('.qfeedback');
+        feedbackDiv.style.display = 'none';
+        feedbackDiv.className = 'qfeedback';
+        feedbackDiv.innerHTML = '';
+        
+        qcard.querySelectorAll('.qbtn').forEach(btn => {
+          btn.disabled = false;
+          btn.className = 'qbtn';
+          // Limpiar prefijos ✅ y ❌
+          btn.innerHTML = btn.innerHTML.replace('✅ ', '').replace('❌ ', '');
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>
