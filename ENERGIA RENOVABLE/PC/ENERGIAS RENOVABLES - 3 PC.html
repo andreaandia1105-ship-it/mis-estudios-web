@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas — Energía Fotovoltaica</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#f0f2f5;font-family:'Source Sans 3',sans-serif;padding:12px}
+  @media(prefers-color-scheme:dark){body{background:#1a1c20}}
+
+  .cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--cv-bg,#e8eaed);border-radius:14px}
+  @media(prefers-color-scheme:dark){.cv{background:#23252a}}
+
+  .block{background:#fff;border:.5px solid #d0d4db;border-radius:11px;padding:12px 13px}
+  @media(prefers-color-scheme:dark){.block{background:#2c2f36;border-color:#3a3d45;color:#e0e2e8}}
+  .block.s2{grid-column:span 2}
+  .block.s3{grid-column:1/-1}
+
+  .title-bar{grid-column:1/-1;background:#0f1e3a;border-radius:12px;padding:14px 20px;color:#fff}
+  .title-bar h1{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;letter-spacing:.5px;color:#7dd3fc;margin-bottom:3px}
+  .title-bar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+  .pill{font-size:10px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:#1e3a5f;color:#7dd3fc;border:.5px solid #2d5a8a}
+
+  .section-bar{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px}
+  .sb-blue{background:#dbeafe;color:#1e3a8a}
+  .sb-green{background:#dcfce7;color:#14532d}
+  .sb-yellow{background:#fef9c3;color:#713f12}
+  .sb-red{background:#fee2e2;color:#991b1b}
+  .sb-purple{background:#ede9fe;color:#4c1d95}
+  .sb-teal{background:#ccfbf1;color:#134e4a}
+  .sb-orange{background:#ffedd5;color:#7c2d12}
+  @media(prefers-color-scheme:dark){
+    .sb-blue{background:#1e3a5f;color:#93c5fd}
+    .sb-green{background:#14532d;color:#86efac}
+    .sb-yellow{background:#422006;color:#fef08a}
+    .sb-red{background:#450a0a;color:#fca5a5}
+    .sb-purple{background:#2e1065;color:#c4b5fd}
+    .sb-teal{background:#042f2e;color:#5eead4}
+    .sb-orange{background:#431407;color:#fed7aa}
+  }
+
+  .bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.4px}
+  .bh-blue{background:#dbeafe;color:#1e3a8a}
+  .bh-green{background:#dcfce7;color:#14532d}
+  .bh-yellow{background:#fef9c3;color:#713f12}
+  .bh-red{background:#fee2e2;color:#991b1b}
+  .bh-purple{background:#ede9fe;color:#4c1d95}
+  .bh-teal{background:#ccfbf1;color:#134e4a}
+  .bh-orange{background:#ffedd5;color:#7c2d12}
+  .bh-gray{background:#f1f5f9;color:#334155}
+  @media(prefers-color-scheme:dark){
+    .bh-blue{background:#1e3a5f;color:#93c5fd}
+    .bh-green{background:#14532d;color:#86efac}
+    .bh-yellow{background:#422006;color:#fef08a}
+    .bh-red{background:#450a0a;color:#fca5a5}
+    .bh-purple{background:#2e1065;color:#c4b5fd}
+    .bh-teal{background:#042f2e;color:#5eead4}
+    .bh-orange{background:#431407;color:#fed7aa}
+    .bh-gray{background:#1e293b;color:#94a3b8}
+  }
+
+  .def{border-left:3px solid #3b82f6;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:#f8fafc;margin-bottom:8px;line-height:1.55}
+  .def.green{border-color:#16a34a;background:#f0fdf4}
+  .def.yellow{border-color:#ca8a04;background:#fefce8}
+  .def.red{border-color:#dc2626;background:#fef2f2}
+  .def.purple{border-color:#7c3aed;background:#faf5ff}
+  .def.teal{border-color:#0d9488;background:#f0fdfa}
+  .def.orange{border-color:#ea580c;background:#fff7ed}
+  @media(prefers-color-scheme:dark){
+    .def{background:#1e293b;border-color:#3b82f6;color:#cbd5e1}
+    .def.green{background:#052e16;border-color:#16a34a;color:#bbf7d0}
+    .def.yellow{background:#1c1403;border-color:#ca8a04;color:#fef08a}
+    .def.red{background:#1f0707;border-color:#dc2626;color:#fca5a5}
+    .def.purple{background:#140a2e;border-color:#7c3aed;color:#ddd6fe}
+    .def.teal{background:#021a19;border-color:#0d9488;color:#99f6e4}
+    .def.orange{background:#1a0600;border-color:#ea580c;color:#fed7aa}
+  }
+
+  .item{display:flex;gap:7px;font-size:12px;line-height:1.55;margin-bottom:5px}
+  .dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+  .dot-blue{background:#3b82f6}
+  .dot-green{background:#16a34a}
+  .dot-yellow{background:#ca8a04}
+  .dot-red{background:#dc2626}
+  .dot-purple{background:#7c3aed}
+  .dot-teal{background:#0d9488}
+  .dot-orange{background:#ea580c}
+  .dot-gray{background:#64748b}
+
+  .rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:8px 12px;border-radius:7px;text-align:center;line-height:1.7;margin:7px 0}
+  .rx span{color:#a5f3fc}
+  .rx em{color:#fde68a;font-style:normal}
+
+  .warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:7px 0;line-height:1.5}
+  @media(prefers-color-scheme:dark){.warn{background:#1c0a00;border-color:#f97316;color:#fed7aa}}
+
+  .exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.55}
+  @media(prefers-color-scheme:dark){.exam{background:#1c1300;border-color:#ca8a04;color:#fef08a}}
+
+  .mini{background:#f8fafc;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5;margin-bottom:6px}
+  .mini-blue{border-top:3px solid #3b82f6}
+  .mini-green{border-top:3px solid #16a34a}
+  .mini-yellow{border-top:3px solid #ca8a04}
+  .mini-red{border-top:3px solid #dc2626}
+  .mini-purple{border-top:3px solid #7c3aed}
+  .mini-teal{border-top:3px solid #0d9488}
+  .mini-orange{border-top:3px solid #ea580c}
+  @media(prefers-color-scheme:dark){
+    .mini{background:#1e293b;color:#cbd5e1}
+    .mini b{color:#e2e8f0}
+  }
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+
+  .flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+  .fbox{background:#f1f5f9;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:600;color:#334155}
+  .farrow{color:#64748b;font-size:14px}
+  @media(prefers-color-scheme:dark){.fbox{background:#334155;color:#e2e8f0}.farrow{color:#94a3b8}}
+
+  .num-badge{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .nb-b{background:#dbeafe;color:#1e3a8a}
+  .nb-g{background:#dcfce7;color:#14532d}
+  .nb-r{background:#fee2e2;color:#991b1b}
+  .nb-y{background:#fef9c3;color:#713f12}
+  @media(prefers-color-scheme:dark){
+    .nb-b{background:#1e3a5f;color:#93c5fd}
+    .nb-g{background:#14532d;color:#86efac}
+    .nb-r{background:#450a0a;color:#fca5a5}
+    .nb-y{background:#422006;color:#fef08a}
+  }
+
+  .stat-bar-wrap{width:100%;background:#e2e8f0;border-radius:20px;height:11px;margin:3px 0}
+  @media(prefers-color-scheme:dark){.stat-bar-wrap{background:#334155}}
+  .stat-bar-fill{height:100%;border-radius:20px}
+
+  .tbl{width:100%;border-collapse:collapse;font-size:11px}
+  .tbl th{background:#f1f5f9;padding:5px 7px;border-bottom:.5px solid #cbd5e1;text-align:left;font-weight:600;color:#334155;font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase}
+  .tbl td{padding:5px 7px;border-bottom:.5px solid #e2e8f0;vertical-align:top;color:#475569;font-size:11px;line-height:1.4}
+  @media(prefers-color-scheme:dark){
+    .tbl th{background:#1e293b;color:#94a3b8;border-color:#334155}
+    .tbl td{color:#94a3b8;border-color:#2d3748}
+  }
+
+  .divh{border:none;border-top:.5px solid #e2e8f0;margin:7px 0}
+  @media(prefers-color-scheme:dark){.divh{border-color:#334155}}
+
+  .footer-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+  .ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;flex-shrink:0;padding-top:2px}
+  .fc{font-size:11px;color:#94a3b8;line-height:1.6}
+
+  /* QUIZ */
+  #quiz-section{grid-column:1/-1}
+  .quiz-wrap{background:#fff;border:.5px solid #d0d4db;border-radius:14px;overflow:hidden}
+  @media(prefers-color-scheme:dark){.quiz-wrap{background:#2c2f36;border-color:#3a3d45}}
+  .quiz-header{background:#0f1e3a;color:#fff;padding:12px 18px}
+  .quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;color:#7dd3fc;margin-bottom:3px}
+  .quiz-header p{font-size:11px;color:#94a3b8}
+  .quiz-body{padding:14px 18px}
+  .quiz-progress-label{font-size:11px;color:#64748b;margin-bottom:4px;display:flex;justify-content:space-between}
+  @media(prefers-color-scheme:dark){.quiz-progress-label{color:#94a3b8}}
+  .qcard{margin-bottom:18px;padding-bottom:14px;border-bottom:.5px solid #e2e8f0}
+  @media(prefers-color-scheme:dark){.qcard{border-color:#334155}}
+  .qcard:last-child{border-bottom:none;margin-bottom:0}
+  .qnum{font-size:10px;color:#7dd3fc;font-family:'Oswald',sans-serif;font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+  .qtext{font-size:12.5px;font-weight:600;margin-bottom:9px;line-height:1.5;color:#1e293b}
+  @media(prefers-color-scheme:dark){.qtext{color:#e2e8f0}}
+  .qopts{display:flex;flex-direction:column;gap:5px}
+  .qbtn{background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .15s;color:#334155;font-family:'Source Sans 3',sans-serif}
+  @media(prefers-color-scheme:dark){.qbtn{background:#1e293b;border-color:#334155;color:#cbd5e1}}
+  .qbtn:hover:not(:disabled){background:#e0f2fe;border-color:#3b82f6}
+  .qbtn.correct{background:#dcfce7!important;border-color:#16a34a!important;color:#14532d!important;font-weight:600}
+  .qbtn.incorrect{background:#fee2e2!important;border-color:#dc2626!important;color:#991b1b!important}
+  .qbtn:disabled{opacity:.75;cursor:not-allowed;pointer-events:none}
+  .qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.55;display:none}
+  .qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+  .qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+  @media(prefers-color-scheme:dark){
+    .qfeedback.ok{background:#052e16;color:#bbf7d0}
+    .qfeedback.fail{background:#1f0707;color:#fca5a5}
+  }
+  #quiz-result{display:none;border-radius:10px;padding:14px 18px;font-size:13px;font-weight:600;margin-top:12px;text-align:center}
+  .result-good{background:#f0fdf4;color:#14532d;border:1px solid #16a34a}
+  .result-mid{background:#fefce8;color:#713f12;border:1px solid #ca8a04}
+  .result-bad{background:#fef2f2;color:#991b1b;border:1px solid #dc2626}
+  @media(prefers-color-scheme:dark){
+    .result-good{background:#052e16;color:#86efac}
+    .result-mid{background:#1c1300;color:#fef08a}
+    .result-bad{background:#1f0707;color:#fca5a5}
+  }
+  #btn-reset{display:none;margin:10px auto 0;padding:8px 24px;background:#0f1e3a;color:#7dd3fc;border:none;border-radius:8px;cursor:pointer;font-size:12px;font-family:'Source Sans 3',sans-serif;font-weight:600}
+  #btn-reset:hover{background:#1e3a5f}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- ═══════════════════════ TITLE BAR ═══════════════════════ -->
+<div class="title-bar">
+  <h1>☀ ENERGÍA FOTOVOLTAICA — CANVAS INTEGRAL</h1>
+  <p>Ingeniería Agrícola | UNALM | Docente: Kenyi Cavalcanti Cárdenas, Mg Sc</p>
+  <span class="pill">Efecto fotovoltaico</span>
+  <span class="pill">Tipos de células</span>
+  <span class="pill">Curva I-V</span>
+  <span class="pill">Efectos térmicos</span>
+  <span class="pill">Net Metering Perú</span>
+  <span class="pill">Benchmarking PR</span>
+  <span class="pill">Shaker et al. 2024</span>
+  <span class="pill">CAPEX / LCOE</span>
+</div>
+
+<!-- ═══════════════════════ SECCIÓN 1 ═══════════════════════ -->
+<div class="section-bar sb-blue">⚡ I. FUNDAMENTOS DE LA ENERGÍA FOTOVOLTAICA</div>
+
+<!-- Bloque 1: Definición y origen -->
+<div class="block">
+  <div class="bh bh-blue">¿Qué es la energía FV? (Diap. 1–4)</div>
+  <div class="def">
+    La <strong>energía solar fotovoltaica</strong> es la conversión directa de radiación luminosa en energía eléctrica mediante el <em>efecto fotovoltaico</em>: cuando fotones con energía suficiente golpean un semiconductor, liberan electrones, generando corriente eléctrica.
+  </div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>1839 — Becquerel:</strong> físico francés Edmond Becquerel descubre el efecto fotovoltaico: materiales semiconductores producen corriente al ser expuestos a luz.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>1905 — Einstein:</strong> explica el efecto fotoeléctrico basándose en la cuantización de la luz (fotones), ganando el Premio Nobel de Física en 1921.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>1954:</strong> Chapin, Fuller y Pearson desarrollan en Bell Labs la primera celda FV de silicio con <em>6% de eficiencia</em>.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>1958:</strong> las celdas FV se usan para aplicaciones espaciales; el entorno exterior a la atmósfera garantiza irradiancia constante sin pérdidas atmosféricas.</span></div>
+  <div class="warn">⚠ ERROR COMÚN: Confundir "fotovoltaico" con "fototérmico". El primero convierte luz directamente en electricidad (efecto cuántico), el segundo calienta un fluido para generar calor. Son tecnologías completamente distintas.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué los materiales semiconductores son los únicos utilizados en células fotovoltaicas y no los metales conductores ni los aislantes? Explique en términos de la estructura de bandas de energía.</div>
+</div>
+
+<!-- Bloque 2: Tipos de sistemas FV -->
+<div class="block">
+  <div class="bh bh-green">Tipos de sistemas FV (Diap. 5–8)</div>
+  <div class="def green">Un <strong>sistema fotovoltaico</strong> es el conjunto de componentes que genera, almacena y distribuye la energía eléctrica producida por los módulos. Su clasificación depende de cómo interactúa con la red eléctrica y otras fuentes de energía.</div>
+
+  <div class="mini mini-green"><b>Sistema autónomo (off-grid):</b> toda la demanda es satisfecha exclusivamente por la energía generada por el sistema FV. Requiere baterías para cubrir las horas sin sol. Ideal para zonas rurales sin acceso a red. Componentes: paneles → controlador de carga → baterías → inversor → cargas AC/DC.</div>
+  <div class="mini mini-blue"><b>Sistema conectado a red (on-grid):</b> la energía producida se inyecta a la red eléctrica. No necesita baterías porque la red actúa como "almacenamiento virtual". Componentes: paneles → inversor interactivo → medidor bidireccional → red.</div>
+  <div class="mini mini-yellow"><b>Sistema híbrido:</b> combina el FV con otra fuente auxiliar (generador diésel, eólico, etc.) para satisfacer la demanda cuando la producción solar es insuficiente. Usado en zonas con interrupciones de red frecuentes.</div>
+  <div class="mini mini-purple"><b>Sistema bimodal:</b> puede operar en modo aislado Y conectado a red, alternando según disponibilidad. Ofrece máxima flexibilidad operativa pero tiene mayor costo de inversión.</div>
+
+  <div class="exam">🎯 EXAMEN: Un agricultor en la sierra peruana requiere electricidad para riego nocturno, en una zona sin acceso a red eléctrica. ¿Qué tipo de sistema fotovoltaico le recomendaría y por qué? Indique los componentes mínimos necesarios.</div>
+</div>
+
+<!-- Bloque 3: Principio fotovoltaico -->
+<div class="block">
+  <div class="bh bh-purple">Principio de funcionamiento (Diap. 9–10)</div>
+  <div class="def purple">El principio fotovoltaico se basa en la <strong>unión p-n</strong>: al unir silicio tipo-p (dopado con boro) con silicio tipo-n (dopado con fósforo), se crea un campo eléctrico interno que separa los pares electrón-hueco generados por los fotones.</div>
+
+  <div class="flow">
+    <span class="fbox">Fotón incide</span><span class="farrow">→</span>
+    <span class="fbox">Absorción (E≥Eg)</span><span class="farrow">→</span>
+    <span class="fbox">Par e⁻-h⁺</span><span class="farrow">→</span>
+    <span class="fbox">Separación campo E</span><span class="farrow">→</span>
+    <span class="fbox">e⁻ → zona n, h⁺ → zona p</span><span class="farrow">→</span>
+    <span class="fbox">Corriente en circuito externo</span>
+  </div>
+
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Fotón útil:</strong> solo los fotones con energía ≥ energía de banda prohibida (Eg) del semiconductor generan pares electrón-hueco. Para el Si cristalino, Eg ≈ 1.1 eV. Los fotones con E &lt; Eg se convierten en calor.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Jerarquía de escala:</strong> Célula (∼0.5 V, mA) → Módulo (conjunto de celdas, ej. 72 celdas en 6×12) → Array (conjunto de módulos para grandes instalaciones).</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Rejilla conductora:</strong> los contactos metálicos frontales (fingers y bus-bars) recogen los electrones sin bloquear la luz. El contacto posterior (back contact) cierra el circuito.</span></div>
+
+  <div class="exam">🎯 EXAMEN: Explique por qué un módulo fotovoltaico de silicio cristalino NO puede convertir toda la radiación solar incidente en electricidad. ¿Cuáles son las principales fuentes de pérdida de energía en una célula FV?</div>
+</div>
+
+<!-- ═══════════════════════ SECCIÓN 2 ═══════════════════════ -->
+<div class="section-bar sb-teal">🔬 II. CONSTRUCCIÓN Y TIPOS DE CÉLULAS FOTOVOLTAICAS</div>
+
+<!-- Bloque 4: Tipos de células -->
+<div class="block s2">
+  <div class="bh bh-teal">Tipos de células fotovoltaicas (Diap. 12–16)</div>
+  <div class="def teal">Existen múltiples tecnologías de células FV que difieren en su material base, proceso de fabricación, eficiencia y costo. La elección depende del balance entre rendimiento, presupuesto y aplicación específica.</div>
+
+  <div class="three">
+    <div class="mini mini-blue">
+      <b>Monocristalina (c-Si mono)</b><br>
+      Fabricada de un único cristal de silicio puro de alta calidad. Superficie uniforme azul oscuro. Eficiencia: <em>15–22%</em>. Mayor costo de producción. Formato típico: obleas 125×125 mm. Usada en instalaciones residenciales y comerciales donde el espacio es limitado.
+    </div>
+    <div class="mini mini-green">
+      <b>Policristalina (c-Si multi)</b><br>
+      Fabricada de bloques de silicio con múltiples cristales. Superficie azul moteado. Eficiencia: <em>13–18%</em>. Menor costo que la monocristalina. Formato típico: 156×156 mm. Módulo TSM-215 DC 80.08 y CS6U-325P usados en los estudios de UNALM son de este tipo.
+    </div>
+    <div class="mini mini-yellow">
+      <b>Amorfa (a-Si)</b><br>
+      Silicio depositado en capas delgadas sin estructura cristalina definida. Eficiencia: <em>6–12%</em>. Muy bajo costo, flexible y ligera. Adecuada para aplicaciones portátiles, tejados de membrana. Más sensible a degradación por luz (efecto Staebler-Wronski). Bandgap ≈ 1.7 eV.
+    </div>
+    <div class="mini mini-teal">
+      <b>Cuasi-monocristalina</b><br>
+      Tecnología intermedia: apariencia de monocristalina pero proceso de solidificación similar a la policristalina. Busca combinar alta eficiencia con menor costo de fabricación. Representa innovación activa en el sector.
+    </div>
+    <div class="mini mini-purple">
+      <b>Teluro de cadmio (CdTe)</b><br>
+      Película delgada con eficiencias de <em>9–22%</em>. Bajo costo de fabricación. Usado en grandes plantas utilitarias. Preocupaciones ambientales por cadmio tóxico. Bandgap ≈ 1.44 eV, próximo al óptimo para espectro solar.
+    </div>
+    <div class="mini mini-orange">
+      <b>Perovskita y multiunión</b><br>
+      Perovskita: eficiencias &gt;25%, estabilidad térmica superior. En investigación intensa. Multiunión: múltiples capas semiconductoras, eficiencias &gt;40%, usadas en concentradores y aplicaciones espaciales. Futuro de la tecnología FV.
+    </div>
+  </div>
+
+  <div class="warn">⚠ ERROR COMÚN: Creer que mayor eficiencia siempre justifica el costo. Una célula monocristalina a 22% puede ser antieconómica si hay espacio suficiente para instalar más módulos policristalinos a 15%. La decisión debe incluir costo por kWh producido (LCOE), no solo la eficiencia nominal.</div>
+  <div class="exam">🎯 EXAMEN: Compare las células monocristalinas y amorfas en términos de bandgap, rango de eficiencia, pérdidas térmicas y aplicaciones principales. ¿Cuál elegiría para un proyecto de gran escala en el desierto de Ica y por qué?</div>
+</div>
+
+<!-- Bloque 5: Proceso de fabricación -->
+<div class="block">
+  <div class="bh bh-orange">Proceso de fabricación (Diap. 17–22)</div>
+  <div class="def orange">El proceso de fabricación de una célula de silicio cristalino involucra múltiples etapas de alta precisión que transforman el silicio puro mineral en un dispositivo semiconductor funcional con eficiencias de conversión de hasta 22%.</div>
+
+  <div class="flow" style="flex-direction:column;align-items:flex-start">
+    <div class="item"><span class="num-badge nb-b">1</span><span style="font-size:11.5px;margin-left:5px"><strong>Purificación del silicio:</strong> el silicio de alta pureza (grado solar) se obtiene a partir de cuarzo (SiO₂). Se requiere pureza &gt;99.9999% para aplicaciones FV.</span></div>
+    <div class="item"><span class="num-badge nb-b">2</span><span style="font-size:11.5px;margin-left:5px"><strong>Fusión en lingotes:</strong> el silicio se funde y se solidifica formando lingotes monocristalinos (método Czochralski) o bloques policristalinos.</span></div>
+    <div class="item"><span class="num-badge nb-b">3</span><span style="font-size:11.5px;margin-left:5px"><strong>Corte en obleas:</strong> los lingotes/bloques se cortan en obleas de 220 µm de espesor (±40 µm). La inspección verifica: grosor, TTV (Total Thickness Variation), conductividad, grietas.</span></div>
+    <div class="item"><span class="num-badge nb-b">4</span><span style="font-size:11.5px;margin-left:5px"><strong>Difusión de fósforo:</strong> las obleas (tipo-p) se calientan y se les difunde gas de fósforo, convirtiendo la capa exterior a tipo-n, creando así la unión p-n.</span></div>
+    <div class="item"><span class="num-badge nb-b">5</span><span style="font-size:11.5px;margin-left:5px"><strong>Capa antirreflectante:</strong> se deposita nitrato de silicio (Si₃N₄) para reducir la reflexión de hasta un 35% a menos del 3%, dando a las células su característico color azul.</span></div>
+    <div class="item"><span class="num-badge nb-b">6</span><span style="font-size:11.5px;margin-left:5px"><strong>Texturización piramidal (Ley de Snell):</strong> se crea una superficie en forma de pirámides que atrapa los fotones reflejados y los redirige al interior de la célula, aumentando la absorción.</span></div>
+    <div class="item"><span class="num-badge nb-b">7</span><span style="font-size:11.5px;margin-left:5px"><strong>Encapsulado del módulo:</strong> vidrio templado + EVA (Etileno-Vinilo-Acetato) + células + back-sheet (Tedlar) + marco de aluminio. Caja de conexiones IP-67 con diodos de protección.</span></div>
+  </div>
+
+  <div class="exam">🎯 EXAMEN: Explique la función de la capa antirreflectante de nitrato de silicio en el proceso de fabricación de células FV. ¿Por qué la texturización piramidal mejora la eficiencia y cuál principio óptico aplica?</div>
+</div>
+
+<!-- ═══════════════════════ SECCIÓN 3 ═══════════════════════ -->
+<div class="section-bar sb-yellow">📈 III. CURVA I-V, FACTOR DE FORMA Y EFICIENCIA</div>
+
+<!-- Bloque 6: Curva I-V -->
+<div class="block">
+  <div class="bh bh-yellow">Curva I-V — parámetros clave (Diap. 28–32)</div>
+  <div class="def yellow">La <strong>curva I-V</strong> (corriente vs. voltaje) describe completamente el comportamiento eléctrico de un módulo FV bajo condiciones dadas. De ella se extraen todos los parámetros de diseño y cálculo de un sistema fotovoltaico.</div>
+
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Icc (Corriente de cortocircuito):</strong> máxima corriente generada cuando V = 0 (P = 0 W). Se mide a 1000 W/m². Es directamente proporcional a la irradiancia incidente. Aumenta ligeramente con la temperatura.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Vca (Voltaje de circuito abierto):</strong> máximo voltaje cuando I = 0 (P = 0 W). Es logarítmico respecto a la irradiancia. <em>Disminuye significativamente con la temperatura</em> — este es el efecto térmico dominante.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>MPP (Maximum Power Point):</strong> punto de la curva donde la potencia P = I × V es máxima. En él operan el voltaje Vm y la corriente Im de operación. Los inversores modernos incluyen rastreadores MPPT.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Pmax = Vm × Im:</strong> potencia pico del módulo, expresada en vatios pico (Wp). Condiciones STC: 1000 W/m², Tcell = 25°C, masa de aire AM = 1.5.</span></div>
+
+  <div class="rx">
+    <span>Ecuación de Shockley (modelo de una célula FV):</span><br>
+    <em>I = Iph − I₀ · [exp(qV / nkT) − 1]</em><br>
+    <span style="font-size:10px;color:#a5f3fc">I = corriente total | Iph = fotocorriente | I₀ = corriente oscura | q = carga elemental (1.6×10⁻¹⁹ C) | n = factor de idealidad | k = cte. Boltzmann | T = temperatura absoluta (K)</span>
+  </div>
+
+  <div class="warn">⚠ ERROR COMÚN: No confundir Icc con Im, ni Vca con Vm. Los valores de operación siempre son menores: Im &lt; Icc y Vm &lt; Vca. El MPP no está en el extremo de la curva sino en el "codo" de transición entre la zona de corriente constante y la zona de tensión constante.</div>
+  <div class="exam">🎯 EXAMEN: En la ecuación de Shockley, si la temperatura T aumenta de 25°C a 60°C, ¿qué le ocurre a la corriente oscura I₀ y cómo esto afecta la tensión de circuito abierto Vca? Argumente matemáticamente.</div>
+</div>
+
+<!-- Bloque 7: Fill Factor y Eficiencia -->
+<div class="block">
+  <div class="bh bh-yellow">Factor de forma y eficiencia (Diap. 33–41)</div>
+  <div class="def yellow">El <strong>Factor de Forma (FF)</strong> y la <strong>eficiencia (η)</strong> son los dos índices de calidad más importantes de un módulo FV. El FF mide la "cuadratura" de la curva I-V y la eficiencia mide cuánta energía solar se convierte en electricidad.</div>
+
+  <div class="rx">
+    <em>FF = (Im × Vm) / (Icc × Vca)</em><br>
+    <span style="font-size:10px;color:#a5f3fc">Valores típicos: 0.70 – 0.80 | FF ideal (= 1) haría imposible el control del MPP</span>
+  </div>
+
+  <div class="rx">
+    <em>η = (Impp × Vmpp) / P_incidente × 100%</em><br>
+    <span style="font-size:10px;color:#a5f3fc">η depende del tipo y calidad del semiconductor | Valores típicos: 6% (a-Si) — 40% (multijunción)</span>
+  </div>
+
+  <div class="divh"></div>
+  <p style="font-size:11.5px;font-weight:600;margin-bottom:5px;color:#475569">Eficiencias por tecnología (Shaker et al., 2024):</p>
+
+  <div class="item"><span class="dot dot-blue"></span><span style="font-size:11.5px"><strong>Monocristalina (c-Si):</strong> 15–22%</span></div>
+  <div style="margin-left:13px;margin-bottom:4px"><div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:73%;background:#3b82f6"></div></div></div>
+
+  <div class="item"><span class="dot dot-green"></span><span style="font-size:11.5px"><strong>Policristalina (mc-Si):</strong> 13–18%</span></div>
+  <div style="margin-left:13px;margin-bottom:4px"><div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:58%;background:#16a34a"></div></div></div>
+
+  <div class="item"><span class="dot dot-yellow"></span><span style="font-size:11.5px"><strong>Silicio amorfo (a-Si):</strong> 6–12%</span></div>
+  <div style="margin-left:13px;margin-bottom:4px"><div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:30%;background:#ca8a04"></div></div></div>
+
+  <div class="item"><span class="dot dot-teal"></span><span style="font-size:11.5px"><strong>CdTe:</strong> 9–22%</span></div>
+  <div style="margin-left:13px;margin-bottom:4px"><div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:55%;background:#0d9488"></div></div></div>
+
+  <div class="item"><span class="dot dot-purple"></span><span style="font-size:11.5px"><strong>Perovskita:</strong> &gt;25% (en investigación)</span></div>
+  <div style="margin-left:13px;margin-bottom:4px"><div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:80%;background:#7c3aed"></div></div></div>
+
+  <div class="item"><span class="dot dot-red"></span><span style="font-size:11.5px"><strong>Multijunción:</strong> &gt;40% (espacio/CPV)</span></div>
+  <div style="margin-left:13px;margin-bottom:4px"><div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:100%;background:#dc2626"></div></div></div>
+
+  <div class="exam">🎯 EXAMEN: Para el módulo TSM-215 DC 80.08, calcule el Factor de Forma (FF) sabiendo que: Icc = 5.96 A, Vca = 46.7 V, Im = 5.6 A, Vm = 38.4 V. ¿Qué implica este valor en términos de pérdidas internas?</div>
+</div>
+
+<!-- Bloque 8: Asociación de módulos -->
+<div class="block">
+  <div class="bh bh-teal">Asociación y diodos de protección (Diap. 49–57)</div>
+  <div class="def teal">Las células individuales generan voltajes muy bajos (∼0.5 V). Para obtener niveles útiles de potencia y tensión, es necesario interconectar módulos en serie y/o paralelo, formando "strings" (ramas) y "arrays" (campos FV).</div>
+
+  <div class="two">
+    <div class="mini mini-blue">
+      <b>Conexión en serie:</b> la corriente que circula por todos los módulos es la MISMA; la tensión total es la SUMA de las tensiones individuales.<br>
+      V_total = N_ms × V_módulo<br>
+      I_total = I_módulo<br>
+      Se usa para elevar el voltaje del sistema.
+    </div>
+    <div class="mini mini-green">
+      <b>Conexión en paralelo:</b> la tensión de trabajo de todos los módulos es la MISMA; la corriente total es la SUMA de las corrientes individuales.<br>
+      I_total = N_mp × I_módulo<br>
+      V_total = V_módulo<br>
+      Se usa para aumentar la corriente del sistema.
+    </div>
+  </div>
+
+  <div class="divh"></div>
+  <div class="item"><span class="dot dot-red"></span><span style="font-size:11.5px"><strong>Diodo Bypass (anti-remoto):</strong> se instala en paralelo con grupos de células o módulos. Cuando una célula queda sombreada o falla, el diodo permite que la corriente "salte" ese grupo sin crear un circuito abierto que bloquee toda la rama. Evita "hot spots" (puntos calientes) destructivos.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span style="font-size:11.5px"><strong>Diodo de bloqueo (anti-retorno):</strong> se instala en serie con cada string. Previene que la energía de la batería fluya inversamente a través de los módulos durante la noche (en sistemas aislados). También evita circulación de corriente entre ramas en paralelo con diferente irradiancia.</span></div>
+
+  <div class="exam">🎯 EXAMEN: Un campo solar tiene 40 módulos TSM-215 DC 80.08 en 4 ramas de 10 módulos en serie. En condiciones STC (Voc = 46.7 V, Isc = 5.96 A, Pmpp = 215 W), calcule la tensión en vacío total, la corriente de cortocircuito del campo y la potencia pico instalada.</div>
+</div>
+
+<!-- ═══════════════════════ SECCIÓN 4 ═══════════════════════ -->
+<div class="section-bar sb-red">🌡 IV. EFECTOS TÉRMICOS EN CÉLULAS SOLARES — Shaker et al. (2024)</div>
+
+<!-- Bloque 9: Impacto temperatura -->
+<div class="block s2">
+  <div class="bh bh-red">Impacto de la temperatura en eficiencia (Shaker et al., 2024)</div>
+  <div class="def red">La temperatura es el factor más crítico que degrada el rendimiento de las células FV en operación real. A medida que sube la temperatura de célula, la eficiencia cae porque se alteran las propiedades eléctricas del semiconductor: aumenta la recombinación de portadores y disminuye el voltaje de circuito abierto.</div>
+
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-red"></span><span style="font-size:11.5px"><strong>Voc DISMINUYE con temperatura:</strong> el aumento de temperatura eleva la concentración intrínseca de portadores (ni), lo que incrementa la corriente oscura I₀. Según la ecuación de Shockley, mayor I₀ → menor Voc. El coeficiente típico es -0.31%/°C para el Voc.</span></div>
+      <div class="item"><span class="dot dot-red"></span><span style="font-size:11.5px"><strong>Fill Factor DISMINUYE con temperatura:</strong> las pérdidas resistivas internas (resistencias en serie y paralela) aumentan con la temperatura, reduciendo la "rectangularidad" de la curva I-V y por tanto el FF.</span></div>
+      <div class="item"><span class="dot dot-yellow"></span><span style="font-size:11.5px"><strong>Isc AUMENTA ligeramente con temperatura:</strong> mayor temperatura mejora la movilidad de portadores y reduce el bandgap ligeramente, permitiendo absorber fotones de menor energía. El coeficiente es +0.053%/°C — efecto pequeño que no compensa la caída de voltaje.</span></div>
+      <div class="item"><span class="dot dot-red"></span><span style="font-size:11.5px"><strong>Eficiencia global CAE:</strong> el efecto neto sobre Pmax = I × V es negativo. Para módulos policristalinos, la eficiencia cae aproximadamente -0.41%/°C. Un módulo de 215 W operando a 60°C (35°C sobre STC) produce solo ≈ 215 × [1 - 0.0039 × 35] ≈ 185 W.</span></div>
+    </div>
+    <div>
+      <div class="rx" style="margin-top:0">
+        <span>Efecto neto en potencia (ejemplo Shaker et al.):</span><br>
+        <em>Módulo policristalino a 60°C</em><br>
+        Potencia STC: 235 W<br>
+        Coeficiente Temp (Pmax): <em>-0.47%/°C</em><br>
+        ΔT = 60 − 25 = 35°C<br>
+        Pérdida = 235 × 0.0047 × 35 = <em>38.68 W</em><br>
+        <span style="color:#fde68a">P_real ≈ 196.3 W (16.5% pérdida)</span>
+      </div>
+      <div class="rx">
+        <span>Regla de oro del comportamiento térmico:</span><br>
+        <em>Por cada +1°C en Tcell:</em><br>
+        <span>Voc ↓ 0.31% | Isc ↑ 0.053%</span><br>
+        <span>Pmax ↓ 0.41% | FF ↓ levemente</span><br>
+        <span style="color:#fde68a">→ Zonas frías = mayor eficiencia FV</span>
+      </div>
+      <div class="mini mini-blue"><b>¿Por qué lugares fríos son más eficientes?</b> Pasco (sierra peruana, 4300 msnm) tiene temperaturas menores y mayor irradiancia que Lima costera. Sus módulos operan en un rango térmico más favorable, logrando los mejores Performance Ratios del benchmarking nacional (Camarena et al., 2020).</div>
+    </div>
+  </div>
+
+  <div class="warn">⚠ ERROR COMÚN: Asumir que más sol = siempre más eficiencia. El desierto costero peruano tiene alta irradiancia pero también altas temperaturas que degradan el rendimiento. La sierra andina puede superar al desierto en PR precisamente porque sus bajas temperaturas mantienen la eficiencia de la célula.</div>
+  <div class="exam">🎯 EXAMEN: Lima registra en verano temperaturas ambientales de 30°C con irradiancia de 800 W/m². Si TONC = 45°C, calcule la temperatura de célula y estime el porcentaje de pérdida de potencia respecto a condiciones STC para un módulo con coeficiente γ = -0.41%/°C.</div>
+</div>
+
+<!-- Bloque 10: Mecanismos pérdidas térmicas -->
+<div class="block">
+  <div class="bh bh-red">Mecanismos de pérdidas térmicas (Shaker et al., 2024)</div>
+  <div class="def red">Las pérdidas térmicas no son un único fenómeno sino la suma de cuatro mecanismos distintos que operan simultáneamente a nivel cuántico-semiconductoral. Entenderlos por separado permite diseñar estrategias de mitigación específicas.</div>
+
+  <div class="mini mini-red">
+    <b>1. Recombinación Auger</b><br>
+    Involucra la interacción de TRES portadores de carga (2 electrones + 1 hueco). La energía liberada se transfiere a un tercer portador en lugar de emitirse como fotón. A mayor temperatura, mayor probabilidad de este proceso. Es el mecanismo dominante a altas concentraciones de portadores. Reduce la vida útil de los portadores y por ende la eficiencia global.
+  </div>
+  <div class="mini mini-red">
+    <b>2. Recombinación Shockley-Read-Hall (SRH)</b><br>
+    Los portadores quedan atrapados en estados defectivos dentro del bandgap (causados por impurezas o defectos cristalinos). A mayor temperatura, mayor energía térmica supera las barreras de los estados trampa, incrementando la probabilidad de recombinación no-radiativa. Es especialmente sensible a la calidad del material semiconductor.
+  </div>
+  <div class="mini mini-yellow">
+    <b>3. Mayor movilidad de portadores</b><br>
+    A alta temperatura los portadores se mueven más libremente (mayor movilidad). Esto aumenta ligeramente la corriente Isc, pero también eleva la tasa de recombinación cerca de los contactos eléctricos, donde la concentración de portadores es alta. El efecto neto sobre la eficiencia es negativo.
+  </div>
+  <div class="mini mini-yellow">
+    <b>4. Corriente oscura aumentada</b><br>
+    La corriente oscura I₀ representa portadores generados térmicamente (sin luz). A mayor T, I₀ aumenta exponencialmente (ecuación de Shockley). Esta corriente "compite" con la fotocorriente útil Iph, reduciendo el Voc de manera logarítmica: Voc = (nkT/q) × ln(Iph/I₀ + 1).
+  </div>
+
+  <div class="exam">🎯 EXAMEN: Describa la diferencia fundamental entre la recombinación Auger y la recombinación SRH en términos del número de portadores involucrados y el rol de los defectos del material. ¿Cuál de los dos mecanismos es más susceptible a la calidad del proceso de fabricación?</div>
+</div>
+
+<!-- Bloque 11: Coeficientes de temperatura y fórmulas -->
+<div class="block s2">
+  <div class="bh bh-yellow">Coeficientes de temperatura y corrección de parámetros (Diap. 45–48)</div>
+  <div class="def yellow">Los <strong>coeficientes de temperatura</strong> permiten calcular los parámetros eléctricos del módulo a cualquier temperatura de célula, partiendo de los valores en condiciones STC (Tcell = 25°C). Este cálculo es indispensable para el dimensionamiento real de instalaciones en campo.</div>
+
+  <div class="two">
+    <div>
+      <p style="font-size:11.5px;font-weight:600;margin-bottom:6px">Coeficientes del módulo TSM-215 DC 80.08:</p>
+      <table class="tbl">
+        <tr><th>Parámetro</th><th>Coeficiente</th><th>Efecto al +1°C</th></tr>
+        <tr><td>Pmax (γ)</td><td>-0.41%/°C</td><td>↓ Cae potencia</td></tr>
+        <tr><td>Voc (β)</td><td>-0.31%/°C</td><td>↓ Cae voltaje</td></tr>
+        <tr><td>Isc (α)</td><td>+0.053%/°C</td><td>↑ Sube corriente</td></tr>
+        <tr><td>TONC</td><td>45±2°C</td><td>Ref. de operación</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="rx" style="margin-top:0">
+        <span>Temperatura de célula en campo:</span><br>
+        <em>Tcell = Tamb + (TONC − 20) × E / 800</em><br>
+        <span style="font-size:10px;color:#a5f3fc">TONC = Temperatura Nominal de Operación de Célula | E = Irradiancia [W/m²]</span>
+      </div>
+      <div class="rx">
+        <span>Parámetros a Tcell ≠ 25°C:</span><br>
+        <em>ISC_T = ISC_25°C × [1 + (α/100)(Tcell − 25)]</em><br>
+        <em>VOC_T = VOC_25°C × [1 + (β/100)(Tcell − 25)]</em><br>
+        <em>PMPP_T = PMPP_25°C × [1 + (γ/100)(Tcell − 25)]</em>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:8px">
+    <p style="font-size:11.5px;font-weight:600;margin-bottom:5px">Ejemplo resuelto — Solución para Tcell = 50°C (módulo TSM-215):</p>
+    <div class="rx">
+      <em>ISC_50°C = 5.96 × [1 + (0.04/100) × (50 − 25)] ≈ 6.02 A</em><br>
+      <em>VOC_50°C = 46.7 × [1 + (−0.3/100) × (50 − 25)] ≈ 43.2 V</em><br>
+      <em>PMPP_50°C = 215 × [1 − (0.39/100) × (50 − 25)] ≈ 194 W</em><br>
+      <span style="color:#fde68a">Pérdida de potencia: 215 − 194 = 21 W (≈ 9.8% menos que en STC)</span>
+    </div>
+  </div>
+
+  <div class="warn">⚠ ERROR COMÚN: Usar la temperatura ambiente directamente como temperatura de célula. En días soleados, la Tcell puede superar la Tamb en 20–30°C. Para un día de 30°C con 900 W/m² y TONC = 45°C → Tcell = 30 + (45−20)×900/800 = 30 + 28.1 = 58.1°C. Esta diferencia impacta significativamente el cálculo de rendimiento.</div>
+  <div class="exam">🎯 EXAMEN: Utilizando las fórmulas de corrección por temperatura, determine la potencia máxima (Pmpp) de un módulo FV policristalino de 300 Wp bajo las siguientes condiciones: Tamb = 35°C, irradiancia = 1000 W/m², TONC = 47°C, γ = -0.41%/°C.</div>
+</div>
+
+<!-- Bloque 12: Factores externos e internos -->
+<div class="block">
+  <div class="bh bh-purple">Factores que afectan la temperatura (Shaker et al., 2024)</div>
+  <div class="def purple">El rendimiento térmico de las células FV no depende solo de la temperatura ambiental. Una compleja interacción de factores externos (climáticos, geográficos, instalación) e internos (materiales, diseño) determina la temperatura de operación real de cada célula.</div>
+
+  <p style="font-size:11.5px;font-weight:600;margin-bottom:5px">Factores externos:</p>
+  <div class="item"><span class="dot dot-purple"></span><span style="font-size:11.5px"><strong>Clima extremo:</strong> desiertos calurosos → pérdidas térmicas elevadas. Climas fríos → menor eficiencia por baja T puede dar ventaja, pero también menor irradiancia. Nubosidad reduce irradiancia y temperatura simultáneamente.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span style="font-size:11.5px"><strong>Latitud y altitud:</strong> mayor cercanía al ecuador → más temperatura; mayor altitud → menor temperatura y mayor irradiancia (menos masa de aire). Pasco (4300 msnm) ilustra este beneficio en el contexto peruano.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span style="font-size:11.5px"><strong>Ángulo de inclinación y orientación:</strong> ajustar el ángulo de tilt según la posición solar minimiza la temperatura al reducir la absorción de calor excesivo. Orientación norte-sur vs. este-oeste impacta horas de exposición directa.</span></div>
+
+  <p style="font-size:11.5px;font-weight:600;margin:6px 0 5px">Factores internos:</p>
+  <div class="item"><span class="dot dot-teal"></span><span style="font-size:11.5px"><strong>Bandgap del material:</strong> bandgap menor → absorbe más fotones (incluyendo IR) pero genera más calor por termalización. El balance entre captura de fotones y pérdidas térmicas define la eficiencia real.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span style="font-size:11.5px"><strong>Conductividad térmica del encapsulante:</strong> materiales con alta conductividad térmica (EVA de alta calidad) disipan mejor el calor. La caja de conexiones IP-54/67 también afecta la disipación local.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span style="font-size:11.5px"><strong>Diodos bypass y grosor de célula:</strong> los diodos bypass protegen contra hot-spots activándose cuando Tcell local sube. Células más gruesas tienen mayor masa térmica → cambios de temperatura más lentos.</span></div>
+
+  <div class="exam">🎯 EXAMEN: ¿Por qué el módulo FV instalado en Pasco (sierra de Perú) presenta mejor Performance Ratio que el instalado en Lima costera, a pesar de que Lima puede recibir irradiancia similar en algunos meses? Involucre los conceptos de temperatura de célula, coeficiente de temperatura y TONC en su respuesta.</div>
+</div>
+
+<!-- Bloque 13: Estrategias de mitigación -->
+<div class="block">
+  <div class="bh bh-green">Estrategias de mitigación térmica (Shaker et al., 2024)</div>
+  <div class="def green">Dado que el calor reduce irremediablemente la eficiencia FV, la ingeniería de sistemas PV ha desarrollado un conjunto de estrategias para mantener la temperatura de célula lo más próxima a 25°C. Se clasifican en técnicas pasivas (sin energía adicional) y activas (requieren energía).</div>
+
+  <div class="two">
+    <div class="mini mini-green">
+      <b>Enfriamiento pasivo (sin energía adicional):</b><br>
+      • <em>Enfriamiento radiativo:</em> materiales con alta emisividad en el infrarrojo emiten calor hacia el cielo nocturno.<br>
+      • <em>Convección natural:</em> diseño del panel que permite circulación libre de aire por su dorso.<br>
+      • <em>Sombreado parcial y elevación:</em> instalar módulos elevados del suelo mejora la ventilación trasera.<br>
+      • <em>Recubrimientos antirreflectantes:</em> reducen absorción de calor.<br>
+      <span style="color:#14532d;font-weight:600">Ventaja: cero consumo energético propio.</span>
+    </div>
+    <div class="mini mini-blue">
+      <b>Enfriamiento activo (requiere energía):</b><br>
+      • <em>Convección forzada (ventiladores):</em> aumenta la disipación de calor donde la convección natural es insuficiente.<br>
+      • <em>Enfriamiento líquido:</em> agua circula por la parte trasera absorbiendo calor → puede aprovecharse como agua caliente (sistema PVT).<br>
+      • <em>Materiales de cambio de fase (PCM):</em> almacenan exceso de calor diurno liberándolo en la noche, regulando temperatura.<br>
+      <span style="color:#0c447c;font-weight:600">Ventaja: mayor control. Desventaja: costo adicional de operación.</span>
+    </div>
+  </div>
+
+  <div class="divh"></div>
+  <p style="font-size:11px;font-weight:600;margin-bottom:4px">Materiales y diseños avanzados (tendencias futuras):</p>
+  <div class="item"><span class="dot dot-purple"></span><span style="font-size:11.5px"><strong>Nanocapas y nanofluidos:</strong> nanorecubrimientos que controlan absorción/disipación; nanofluidos mejoran sistemas de enfriamiento líquido.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span style="font-size:11.5px"><strong>Células bifaciales:</strong> capturan luz por ambas caras, reducen temperatura promedio y generan ≈ 10–30% más energía. Ya presentes en módulos de doble vidrio.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span style="font-size:11.5px"><strong>Células tandem perovskita-silicio:</strong> eficiencias &gt;25% con mejor estabilidad térmica. Combinan fortalezas de ambas tecnologías minimizando pérdidas térmicas.</span></div>
+
+  <div class="exam">🎯 EXAMEN: Un ingeniero propone instalar un sistema de enfriamiento líquido activo en una planta FV en el desierto de Ica para reducir la temperatura de célula de 70°C a 45°C. ¿Qué porcentaje de potencia adicional se recuperaría con un coeficiente γ = -0.41%/°C? ¿Justificaría esto la inversión adicional? Calcule y discuta.</div>
+</div>
+
+<!-- ═══════════════════════ SECCIÓN 5 ═══════════════════════ -->
+<div class="section-bar sb-orange">🇵🇪 V. CONTEXTO PERUANO: NET METERING Y BENCHMARKING (Camarena et al., 2020)</div>
+
+<!-- Bloque 14: Mercado eléctrico peruano -->
+<div class="block">
+  <div class="bh bh-orange">Mercado eléctrico de Perú (2018)</div>
+  <div class="def orange">El sector eléctrico peruano está dominado por la hidroeléctrica y el gas natural. Las energías renovables no convencionales (solar y eólica) representan aún una pequeña fracción pero con alto potencial de crecimiento bajo esquemas de generación distribuida.</div>
+
+  <p style="font-size:11px;font-weight:600;margin-bottom:5px">Generación eléctrica 2018 — Total: 50,816.8 GWh (Fuente: COES-SINAC):</p>
+  <div class="item"><span class="dot dot-blue"></span><span style="font-size:11.5px"><strong>Hidroeléctrica: 57.77%</strong> (29,357.9 GWh) — Históricamente dominante antes de 2004.</span></div>
+  <div style="margin-left:13px;margin-bottom:4px"><div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:57.77%;background:#3b82f6"></div></div></div>
+  <div class="item"><span class="dot dot-yellow"></span><span style="font-size:11.5px"><strong>Termoeléctrica: 37.82%</strong> (19,220 GWh) — Principalmente ciclo combinado a gas natural (86.11% del total térmico).</span></div>
+  <div style="margin-left:13px;margin-bottom:4px"><div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:37.82%;background:#ca8a04"></div></div></div>
+  <div class="item"><span class="dot dot-teal"></span><span style="font-size:11.5px"><strong>Solar: 1.47%</strong> (745.2 GWh) — Ingresó al mercado en 2010. Alto potencial en costa y sierra.</span></div>
+  <div style="margin-left:13px;margin-bottom:4px"><div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:6%;background:#0d9488"></div></div></div>
+  <div class="item"><span class="dot dot-green"></span><span style="font-size:11.5px"><strong>Eólica: 2.94%</strong> (1,493.6 GWh) — Concentrada en la costa norte (Marcona, Cupisnique).</span></div>
+  <div style="margin-left:13px;margin-bottom:4px"><div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:10%;background:#16a34a"></div></div></div>
+
+  <div class="divh"></div>
+  <div class="item"><span class="dot dot-orange"></span><span style="font-size:11.5px"><strong>Marco legal:</strong> Decreto Legislativo N°1221 (octubre 2015) definió oficialmente la "Generación Distribuida". Al momento del estudio (2020), las regulaciones para net metering comercial aún estaban en proceso de elaboración.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span style="font-size:11.5px"><strong>Consumo por sector (2017):</strong> Minería 32%, Industrial 25%, Residencial 21%, Comercial 17%, Otros 5%.</span></div>
+
+  <div class="exam">🎯 EXAMEN: Considerando la matriz eléctrica peruana y el Decreto Legislativo N°1221, ¿cuáles son las principales barreras regulatorias y técnicas para la implementación masiva de un esquema de net metering basado en energía solar FV en Lima? Proponga dos medidas de política pública.</div>
+</div>
+
+<!-- Bloque 15: Sistema FV UNALM + producción -->
+<div class="block">
+  <div class="bh bh-teal">Sistema FV 3.25 kWp UNALM — Producción 2019</div>
+  <div class="def teal">Un sistema FV de 3.25 kWp fue instalado en el campus de la Universidad Nacional Agraria La Molina (Lima) con fines de investigación y evaluación de net metering. Sus datos de producción durante 2019 revelan la marcada estacionalidad solar de Lima costera.</div>
+
+  <div class="two">
+    <div>
+      <p style="font-size:11px;font-weight:600;margin-bottom:4px">Módulo: Canadian Solar CS6U-325P</p>
+      <table class="tbl">
+        <tr><th>Especificación</th><th>Dato</th></tr>
+        <tr><td>Tipo célula</td><td>Policristalino, 6 pulgadas</td></tr>
+        <tr><td>N° celdas</td><td>72 (6×12)</td></tr>
+        <tr><td>Dimensiones</td><td>1960×992×40 mm</td></tr>
+        <tr><td>Cubierta frontal</td><td>Vidrio templado 3.2 mm</td></tr>
+        <tr><td>Marco</td><td>Aluminio anodizado</td></tr>
+        <tr><td>Caja conexiones</td><td>IP67, 3 diodos</td></tr>
+      </table>
+    </div>
+    <div>
+      <p style="font-size:11px;font-weight:600;margin-bottom:4px">Inversor: Sunny Tripower 5000TL-20</p>
+      <table class="tbl">
+        <tr><th>Parámetro</th><th>Valor</th></tr>
+        <tr><td>Potencia nominal AC</td><td>5000 W</td></tr>
+        <tr><td>Tensión nominal AC</td><td>230/400 V (3F)</td></tr>
+        <tr><td>Eficiencia máxima</td><td>98%</td></tr>
+        <tr><td>Eficiencia europea</td><td>97.1%</td></tr>
+        <tr><td>Monitor</td><td>Sunny Home Manager 2.0</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="divh"></div>
+  <p style="font-size:11px;font-weight:600;margin-bottom:4px">Producción mensual promedio (kWh/día) — 2019:</p>
+  <div class="item"><span class="dot dot-teal"></span><span style="font-size:11.5px"><strong>Máxima producción:</strong> Marzo → 16.35 kWh/día (sol de verano, inicio de primavera)</span></div>
+  <div class="item"><span class="dot dot-red"></span><span style="font-size:11.5px"><strong>Mínima producción:</strong> Julio → 5.03 kWh/día (invierno costero, alta nubosidad garúa)</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span style="font-size:11.5px"><strong>Producción anual total:</strong> 7,118 kWh/año (sobre 365 días de monitoreo)</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span style="font-size:11.5px"><strong>Consumo edificio:</strong> Máximo Mayo → 23.20 kWh/día | Mínimo Agosto → 16.31 kWh/día</span></div>
+  <div class="item"><span class="dot dot-gray"></span><span style="font-size:11.5px">La producción FV SIEMPRE fue menor que el consumo: el sistema nunca inyectó excedentes a la red. Esto valida la necesidad del net metering para maximizar el valor económico del sistema.</span></div>
+
+  <div class="exam">🎯 EXAMEN: El sistema FV de UNALM produce en julio un promedio de 5.03 kWh/día pero el edificio consume 16.47 kWh/día. ¿Qué porcentaje de la demanda energética mensual es cubierto por el sistema FV en julio? ¿Cómo impacta esta variación estacional en el diseño de un esquema de net metering?</div>
+</div>
+
+<!-- Bloque 16: Costo-beneficio net metering -->
+<div class="block s2">
+  <div class="bh bh-orange">Análisis de costo-beneficio y net metering Lima (Camarena et al., 2020)</div>
+  <div class="def orange">El análisis económico del sistema FV de UNALM demuestra que la instalación es rentable bajo las tarifas eléctricas locales vigentes, con un período de recuperación relativamente corto que hace atractivo el net metering para usuarios finales. El LCOE calculado es significativamente menor que la tarifa de compra.</div>
+
+  <div class="three">
+    <div class="mini mini-blue">
+      <b>CAPEX — Inversión inicial</b><br>
+      Sistema 3.25 kWp:<br>
+      Costo unitario: <em>1,250 US$/kWp</em><br>
+      Total CAPEX: <em>4,063 US$</em><br>
+      <span style="color:#0c447c">Incluye: módulos, inversor, estructura, instalación y puesta en marcha.</span>
+    </div>
+    <div class="mini mini-green">
+      <b>OPEX — Costos de operación</b><br>
+      Costo unitario: <em>0.01 US$/kWh</em><br>
+      Producción anual: 7,118 kWh<br>
+      OPEX anual: <em>71 US$/año</em><br>
+      <span style="color:#14532d">Incluye: mantenimiento preventivo, limpieza y monitoreo remoto.</span>
+    </div>
+    <div class="mini mini-teal">
+      <b>LCOE y tarifa local</b><br>
+      Proyecto: 20 años<br>
+      Tasa descuento: 12%<br>
+      Factor anualidad: 7.469<br>
+      <em>LCOE = 0.032 US$/kWh</em><br>
+      Tarifa usuario: 0.15 US$/kWh<br>
+      <span style="color:#134e4a">LCOE es 4.7x menor que la tarifa → inversión muy rentable</span>
+    </div>
+  </div>
+
+  <div class="divh"></div>
+  <div class="two">
+    <div>
+      <div class="rx">
+        <span>Cálculo de retorno económico:</span><br>
+        Energía anual ahorrada: <em>7,118 kWh/año</em><br>
+        Tarifa: 0.15 US$/kWh<br>
+        Ahorro anual: <em>1,068 US$/año</em><br>
+        Costo total: CAPEX + PV(OPEX) = <em>4,594 US$</em><br>
+        <span style="color:#fde68a">Payback simple = 4,594 / 1,068 = <b>4.3 años</b></span>
+      </div>
+    </div>
+    <div>
+      <div class="mini mini-orange"><b>Implicancias del net metering:</b> si el sistema pudiera inyectar excedentes a la red en meses de alta producción (marzo: 16.35 kWh/día vs consumo ≈ 22 kWh/día), el ahorro sería aún mayor. Un esquema de net metering bien diseñado permitiría que la diferencia entre producción y consumo se acredite en la factura eléctrica mensual, acortando el payback.</div>
+    </div>
+  </div>
+
+  <div class="warn">⚠ ERROR COMÚN: Confundir LCOE con tarifa eléctrica. El LCOE (0.032 US$/kWh) es el costo promedio de producir cada kWh durante toda la vida útil del proyecto. La tarifa de red (0.15 US$/kWh) es el precio de compra. El diferencial (≈0.12 US$/kWh) representa el ahorro efectivo por cada kWh autogenerado.</div>
+  <div class="exam">🎯 EXAMEN: Si la tarifa eléctrica en Lima aumentara un 20% (de 0.15 a 0.18 US$/kWh), ¿en cuánto se reduciría el período de payback del sistema FV de 3.25 kWp de UNALM? Calcule el nuevo ahorro anual y el payback resultante. ¿Cómo afecta esto al argumento económico para el net metering?</div>
+</div>
+
+<!-- Bloque 17: Benchmarking PR -->
+<div class="block s3">
+  <div class="bh bh-orange">Benchmarking de Performance Ratio entre regiones del Perú (Camarena et al., 2020)</div>
+  <div class="def orange">El <strong>Performance Ratio (PR)</strong> es el indicador que relaciona la producción real de un sistema FV con su producción teórica esperada dado el nivel de irradiancia. Un PR = 1 (100%) significa que el sistema opera exactamente según lo esperado; PR &lt; 1 indica pérdidas por temperatura, sombreado, suciedad u otras causas.</div>
+
+  <div style="margin-bottom:10px">
+    <div class="rx" style="text-align:left;padding:10px 14px">
+      <em>PR = Energía producida real (kWh) / [Potencia pico (kWp) × Irradiancia incidente (kWh/m²)]</em><br>
+      <span style="font-size:10px;color:#a5f3fc">Un PR bajo en Lima UNALM en invierno refleja la pérdida de eficiencia por la baja irradiancia y la nubosidad característica del invierno costero</span>
+    </div>
+  </div>
+
+  <table class="tbl" style="width:100%">
+    <tr>
+      <th>Sitio</th><th>Región</th><th>Altitud aprox.</th><th>Salida promedio kW</th><th>PR mínimo</th><th>PR máximo</th><th>PR promedio anual</th><th>Característica</th>
+    </tr>
+    <tr>
+      <td><strong>Lima (MEM)</strong></td>
+      <td>Costa central</td><td>154 msnm</td><td>1.72 kW</td>
+      <td style="color:#dc2626">0.539</td><td style="color:#16a34a">1.00</td><td>0.803</td>
+      <td>Alta variación estacional; mayor PR en invierno (baja T, baja irr.)</td>
+    </tr>
+    <tr style="background:#fef9c3">
+      <td><strong>Lima (UNALM)</strong></td>
+      <td>Costa central</td><td>240 msnm</td><td style="color:#dc2626;font-weight:700">1.54 kW</td>
+      <td style="color:#dc2626">0.372</td><td>0.830</td><td style="color:#dc2626;font-weight:700">0.634</td>
+      <td>PEOR desempeño entre los 5 sitios. Mayor impacto de nubosidad invernal.</td>
+    </tr>
+    <tr style="background:#f0fdf4">
+      <td><strong>Pasco</strong></td>
+      <td>Sierra central</td><td>4,338 msnm</td><td style="color:#16a34a;font-weight:700">2.76 kW</td>
+      <td>0.792</td><td style="color:#16a34a">0.990</td><td style="color:#16a34a;font-weight:700">0.896</td>
+      <td>MEJOR salida promedio. Alta irradiancia + baja temperatura. Muy consistente todo el año.</td>
+    </tr>
+    <tr>
+      <td><strong>Piura</strong></td>
+      <td>Costa norte</td><td>29 msnm</td><td>2.00 kW</td>
+      <td>0.567</td><td>0.794</td><td>0.706</td>
+      <td>Mayor PR promedio según Camarena et al. Buena irradiancia costera norte.</td>
+    </tr>
+    <tr>
+      <td><strong>Arequipa</strong></td>
+      <td>Costa/Sierra sur</td><td>2,335 msnm</td><td>2.53 kW</td>
+      <td>0.720</td><td>0.970</td><td>0.866</td>
+      <td>Excelente consistencia. Alta irradiancia y temperatura moderada por altitud.</td>
+    </tr>
+  </table>
+
+  <div class="divh"></div>
+  <div class="two">
+    <div>
+      <div class="mini mini-red">
+        <b>¿Por qué Lima UNALM es el peor sitio?</b><br>
+        Lima costera experimenta el fenómeno meteorológico de "garúa" en invierno (junio-agosto): nubosidad persistente que reduce drásticamente la irradiancia (hasta 321 W/m² promedio en julio). Al mismo tiempo, las temperaturas no son lo suficientemente bajas para compensar esta pérdida de irradiancia. El PR de 0.372 en diciembre es el valor más bajo registrado en cualquier sitio.
+      </div>
+    </div>
+    <div>
+      <div class="mini mini-green">
+        <b>Implicación económica clave:</b><br>
+        El LCOE de Lima UNALM sería un 78.5% MÁS CARO que el de Pasco en US$/kWh, y su período de payback sería 78.5% MÁS LARGO. Esto implica que las políticas de net metering NO pueden ser uniformes a nivel nacional: los incentivos deben calibrarse según el recurso solar regional para ser equitativos y eficientes.
+      </div>
+    </div>
+  </div>
+
+  <div class="exam">🎯 EXAMEN: Si el payback de un sistema FV en Pasco es de 3.2 años, ¿cuál sería el payback esperado en Lima UNALM, considerando que su LCOE es 78.5% más caro que en Pasco? ¿Qué recomendaría a un legislador que diseña una política de net metering única para todo el Perú?</div>
+</div>
+
+<!-- ═══════════════════════ TABLA INTEGRADORA ═══════════════════════ -->
+<div class="section-bar sb-gray" style="background:#f1f5f9;color:#334155">📊 TABLA INTEGRADORA: SÍNTESIS DE CONCEPTOS CLAVE</div>
+
+<div class="block s3">
+  <div class="bh bh-gray">Tabla de integración — Energía fotovoltaica completa</div>
+  <table class="tbl" style="width:100%">
+    <tr>
+      <th>Concepto</th><th>Definición clave</th><th>Fórmula / Dato numérico</th><th>Efecto de temperatura</th><th>Contexto peruano / aplicación</th>
+    </tr>
+    <tr>
+      <td><strong>Efecto fotovoltaico</strong></td>
+      <td>Conversión de fotones en corriente eléctrica mediante unión p-n en semiconductor</td>
+      <td>Descubierto: Becquerel 1839 | Primera celda 6% eficiencia: 1954</td>
+      <td>Alta T → mayor recombinación e-h → menos corriente útil</td>
+      <td>Base de todos los sistemas FV en las 5 regiones peruanas evaluadas</td>
+    </tr>
+    <tr>
+      <td><strong>Curva I-V y parámetros</strong></td>
+      <td>Icc, Vca, Im, Vm, Pmax definen el comportamiento eléctrico del módulo</td>
+      <td>Pmax = Im × Vm | FF = Pmax/(Icc × Vca) ≈ 0.70–0.80</td>
+      <td>Voc ↓ (-0.31%/°C) | Isc ↑ (+0.053%/°C) | Pmax ↓ (-0.41%/°C)</td>
+      <td>Módulo CS6U-325P en UNALM: Pmax = 215 W bajo STC; ≈194 W a 50°C</td>
+    </tr>
+    <tr>
+      <td><strong>Eficiencia (η)</strong></td>
+      <td>Porcentaje de energía solar incidente convertido en electricidad</td>
+      <td>Mono-Si: 15–22% | Poli-Si: 13–18% | a-Si: 6–12% | Perovskita: >25%</td>
+      <td>↓ con temperatura, especialmente FF y Voc</td>
+      <td>Pasco: mejor eficiencia en campo por menor Tcell (altitud 4338 msnm)</td>
+    </tr>
+    <tr>
+      <td><strong>Temperatura de célula</strong></td>
+      <td>Tcell real en operación, siempre mayor que temperatura ambiente</td>
+      <td>Tcell = Tamb + (TONC−20)×E/800 | TONC típico: 45±2°C</td>
+      <td>Principal variable de degradación. Por cada +1°C: Pmax −0.41%</td>
+      <td>Lima verano: Tamb=30°C + 25×1000/800 = 61.25°C → pérdida ≈14.8%</td>
+    </tr>
+    <tr>
+      <td><strong>Mecanismos térmicos</strong></td>
+      <td>Auger, SRH, movilidad de portadores, corriente oscura</td>
+      <td>Shockley: I = Iph − I₀[exp(qV/nkT)−1]</td>
+      <td>Todos se intensifican con temperatura → pérdida neta de eficiencia</td>
+      <td>Clave para diseñar materiales con mejor rendimiento en costa peruana calurosa</td>
+    </tr>
+    <tr>
+      <td><strong>Performance Ratio (PR)</strong></td>
+      <td>Relación entre producción real y producción teórica según irradiancia</td>
+      <td>PR_mejor: Pasco ≈ 0.896 | PR_peor: Lima UNALM ≈ 0.634</td>
+      <td>Alta Tcell → PR más bajo por pérdidas en Voc y FF</td>
+      <td>Lima UNALM: PR mín. 0.372 en dic. por garúa invernal</td>
+    </tr>
+    <tr>
+      <td><strong>LCOE / Payback</strong></td>
+      <td>Costo nivelado de energía y período de recuperación de inversión</td>
+      <td>Lima UNALM: LCOE = 0.032 US$/kWh | Payback = 4.3 años</td>
+      <td>Mayor temperatura → menor producción → mayor LCOE efectivo</td>
+      <td>Lima UNALM: LCOE 78.5% más caro que Pasco por menor producción</td>
+    </tr>
+    <tr>
+      <td><strong>Net Metering</strong></td>
+      <td>Esquema regulatorio que permite inyectar excedentes FV a la red al precio retail</td>
+      <td>DL N°1221 (2015) — reglamento en elaboración al 2020</td>
+      <td>Sistema conectado evita pérdidas por temperatura en baterías</td>
+      <td>Tarifa Lima: 0.15 US$/kWh >> LCOE 0.032 → alta viabilidad económica</td>
+    </tr>
+  </table>
+
+  <div class="warn" style="margin-top:10px">⚠ DATO INTEGRADOR CLAVE: La temperatura es el puente entre todos los conceptos. Un mismo módulo de 215 Wp instalado en Lima costera a 60°C produce ≈185 W (14% menos), genera un PR bajo por la reducción del Voc (-0.31%/°C × 35°C = -10.85%), eleva el LCOE real un ~14% respecto al calculado en STC, y alarga el payback proporcionalmente. Por eso la ingeniería fotovoltaica no puede limitarse a la potencia nominal: debe calcular siempre con la temperatura real de operación.</div>
+</div>
+
+<!-- ═══════════════════════ QUIZ INTERACTIVO ═══════════════════════ -->
+<div id="quiz-section">
+  <div class="quiz-wrap">
+    <div class="quiz-header">
+      <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+      <p>Marca tu respuesta y descubre si es correcta. Cubre todos los temas: efecto FV, células, curva I-V, efectos térmicos, net metering y benchmarking Perú.</p>
+    </div>
+    <div class="quiz-body">
+
+      <div class="quiz-progress-label">
+        <span>Progreso: <strong id="prog-text">0 de 10 respondidas</strong></span>
+        <span id="score-text" style="color:#16a34a;font-weight:600">Aciertos: 0</span>
+      </div>
+      <div class="stat-bar-wrap" style="margin-bottom:16px">
+        <div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a;transition:width .3s"></div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="qcard" id="q1">
+        <p class="qnum">Pregunta 1 / 10</p>
+        <p class="qtext">¿Quién descubrió el efecto fotovoltaico en 1839 y cuál era la naturaleza de su hallazgo?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Albert Einstein; demostró matemáticamente que la luz está compuesta de cuantos de energía llamados fotones.</button>
+          <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) Edmond Becquerel; observó que ciertos materiales semiconductores son capaces de producir corriente eléctrica al ser expuestos a fuentes de luz.</button>
+          <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) Chapin, Fuller y Pearson; desarrollaron la primera celda de silicio con 6% de eficiencia para aplicaciones terrestres.</button>
+          <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) William Shockley; formuló la ecuación que describe el comportamiento eléctrico de los diodos semiconductores bajo exposición lumínica.</button>
+        </div>
+        <div class="qfeedback" id="fb1">✅ ¡Correcto! Edmond Becquerel, físico francés, descubrió el efecto fotovoltaico en 1839 experimentando con electrodos metálicos sumergidos en soluciones ácidas. Observó que al iluminar uno de los electrodos se generaba una corriente eléctrica. Einstein explicó el efecto fotoeléctrico en 1905 (Premio Nobel 1921), y Chapin, Fuller y Pearson crearon la primera celda práctica en 1954.</div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="qcard" id="q2">
+        <p class="qnum">Pregunta 2 / 10</p>
+        <p class="qtext">Un agricultor instala paneles FV en su granja. Normalmente vende excedentes de energía a la red eléctrica, pero durante cortes de luz opera con sus propias baterías. ¿Qué tipo de sistema FV describe esta situación?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Sistema autónomo, porque en algún momento opera completamente aislado de la red.</button>
+          <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) Sistema híbrido, porque combina energía FV con otra fuente auxiliar de generación.</button>
+          <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Sistema conectado a red, porque la función principal es vender energía a la distribuidora eléctrica.</button>
+          <button class="qbtn" data-q="2" data-opt="d" data-correct="true">D) Sistema bimodal, porque puede operar tanto en modo conectado a red como en modo aislado según las circunstancias.</button>
+        </div>
+        <div class="qfeedback" id="fb2">✅ ¡Correcto! El sistema bimodal es precisamente el que puede operar en ambos modos: conectado a red (on-grid) cuando la red está disponible, e independiente (off-grid) cuando hay cortes. Requiere baterías y un inversor bidireccional. Es el más versátil pero también el más costoso. El sistema autónomo opera siempre aislado; el híbrido combina FV con otra fuente (como diesel); el conectado a red no tiene respaldo autónomo.</div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="qcard" id="q3">
+        <p class="qnum">Pregunta 3 / 10</p>
+        <p class="qtext">¿Cuál de las siguientes afirmaciones sobre los tipos de células fotovoltaicas es FALSA?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Las células monocristalinas tienen eficiencias superiores (15-22%) comparadas con las policristalinas (13-18%) debido a la uniformidad de su estructura cristalina.</button>
+          <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Las células de perovskita han alcanzado eficiencias superiores al 25% y son objeto de intensa investigación por su prometedora estabilidad térmica.</button>
+          <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) Las células amorfas (a-Si) tienen el bandgap más pequeño (≈0.7 eV) de todos los tipos, lo que les permite capturar el espectro solar completo y alcanzar las mayores eficiencias del mercado.</button>
+          <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Las células multijunción pueden superar el 40% de eficiencia en concentradores fotovoltaicos (CPV) gracias a sus múltiples capas que capturan distintas regiones del espectro solar.</button>
+        </div>
+        <div class="qfeedback" id="fb3">❌ Incorrecto. La respuesta correcta es C. Las células amorfas (a-Si) tienen un bandgap de aproximadamente 1.7 eV, que es en realidad MAYOR que el del silicio cristalino (≈1.1 eV). Esto significa que absorben fotones de menor longitud de onda pero con más pérdidas por termalización. Su eficiencia es la MÁS BAJA del mercado (6–12%), no la más alta. Los monocristalinos y las células multijunción ocupan los extremos superiores de eficiencia.</div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="qcard" id="q4">
+        <p class="qnum">Pregunta 4 / 10</p>
+        <p class="qtext">En el contexto de la curva I-V de un módulo fotovoltaico, ¿qué representa el Factor de Forma (Fill Factor, FF) y cuáles son sus valores típicos aceptables?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) El FF es el cociente entre la eficiencia real y la eficiencia teórica del módulo, con valores típicos entre 0.9 y 1.0 para módulos de alta calidad.</button>
+          <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) El FF es la relación entre la irradiancia recibida y la energía eléctrica producida, con valores que varían entre 0.3 y 0.5 dependiendo del tipo de célula.</button>
+          <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) El FF cuantifica las pérdidas por temperatura en el módulo, siendo inversamente proporcional al coeficiente térmico de Pmax, con valores ideales cercanos a cero.</button>
+          <button class="qbtn" data-q="4" data-opt="d" data-correct="true">D) El FF es el cociente entre la potencia máxima real (Im×Vm) y el producto de la corriente de cortocircuito con el voltaje de circuito abierto (Icc×Vca), con valores típicos entre 0.70 y 0.80.</button>
+        </div>
+        <div class="qfeedback" id="fb4">✅ ¡Correcto! El Fill Factor = (Im × Vm) / (Icc × Vca) mide la "cuadratura" de la curva I-V, es decir, qué tan rectangular es la curva. Un FF de 0.77 (módulo TSM-215) significa que el módulo entrega el 77% de la potencia que teóricamente podría entregar si la curva fuera perfectamente rectangular. Valores entre 0.70 y 0.80 son típicos para módulos comerciales de buena calidad. Un FF = 1 es imposible en práctica y haría incontrolable el seguimiento del MPP.</div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="qcard" id="q5">
+        <p class="qnum">Pregunta 5 / 10</p>
+        <p class="qtext">Un módulo FV policristalino (tipo TSM-215) opera a Tcell = 75°C (50°C por encima de los 25°C de las condiciones STC). Si su coeficiente de temperatura de Pmax es γ = -0.41%/°C y su potencia nominal es 215 W, ¿cuál es su potencia de salida aproximada?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="5" data-opt="a" data-correct="true">A) Aproximadamente 171 W, porque la pérdida total es de 50 × 0.41% = 20.5%, y 215 × (1 − 0.205) ≈ 171 W.</button>
+          <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Aproximadamente 194 W, porque solo se aplica la corrección para 25°C adicionales (la temperatura STC ya parte de 25°C base).</button>
+          <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Aproximadamente 215 W, porque la temperatura solo afecta el voltaje pero no la potencia total del módulo, que permanece constante.</button>
+          <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Aproximadamente 200 W, porque el incremento de corriente por temperatura (+0.053%/°C) compensa casi completamente la caída de voltaje.</button>
+        </div>
+        <div class="qfeedback" id="fb5">✅ ¡Correcto! Aplicando la fórmula: PMPP_T = PMPP_25°C × [1 + (γ/100)(Tcell − 25)] = 215 × [1 + (−0.41/100)(75 − 25)] = 215 × [1 − 0.00410 × 50] = 215 × [1 − 0.205] = 215 × 0.795 ≈ 171 W. La opción B corresponde a 50°C (Tcell = 50°C), no 75°C. La opción C es completamente falsa: la temperatura SÍ afecta la potencia. La opción D es incorrecta porque el aumento de Isc (+0.053%/°C) es mínimo comparado con la caída de Voc (-0.31%/°C).</div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="qcard" id="q6">
+        <p class="qnum">Pregunta 6 / 10</p>
+        <p class="qtext">Según Shaker et al. (2024), ¿cuál es el mecanismo de pérdida térmica en células solares que involucra la interacción de TRES portadores de carga simultáneamente, resultando en recombinación no-radiativa?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Recombinación Shockley-Read-Hall (SRH), donde los portadores quedan atrapados en estados defectivos del bandgap causados por impurezas del semiconductor.</button>
+          <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) Recombinación Auger, donde dos electrones y un hueco interactúan simultáneamente transfiriendo la energía de recombinación a un tercer portador en lugar de emitirla como fotón.</button>
+          <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Corriente oscura aumentada, donde la energía térmica excita electrones que generan portadores adicionales sin necesidad de fotones incidentes.</button>
+          <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Mayor movilidad de portadores, donde el aumento de temperatura permite que los electrones se muevan más libremente acercándose a los contactos metálicos y recombinándose.</button>
+        </div>
+        <div class="qfeedback" id="fb6">✅ ¡Correcto! La recombinación Auger es el único mecanismo de los cuatro que involucra TRES portadores de carga simultáneamente (2 electrones + 1 hueco, o 2 huecos + 1 electrón). La energía liberada por la recombinación de un par e-h se transfiere al tercer portador como energía cinética (calor), en lugar de emitirse como fotón. Se vuelve dominante a altas concentraciones de portadores y altas temperaturas, reduciendo la vida útil de los portadores y por tanto la eficiencia.</div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="qcard" id="q7">
+        <p class="qnum">Pregunta 7 / 10</p>
+        <p class="qtext">En el estudio de Camarena et al. (2020) sobre el sistema FV de 3.25 kWp en UNALM (Lima), considerando un CAPEX de 4,063 US$, OPEX de 71 US$/año, tasa de descuento de 12%, vida del proyecto 20 años y ahorro anual de 1,068 US$/año, ¿cuál es el período de recuperación (payback simple) aproximado?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) 2.1 años, calculado como CAPEX / ahorro anual = 4,063 / 1,068 ≈ 3.8, reducido por la desgravación del OPEX.</button>
+          <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) 6.8 años, porque se debe incluir el costo total actualizado del OPEX durante 20 años a la tasa de descuento de 12%.</button>
+          <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) 20 años exactos, porque el LCOE de 0.032 US$/kWh multiplicado por la energía anual y el factor de anualidad equivale exactamente al ahorro total del proyecto.</button>
+          <button class="qbtn" data-q="7" data-opt="d" data-correct="true">D) 4.3 años, calculado como el costo total del sistema (CAPEX + PV del OPEX = 4,594 US$) dividido entre el ahorro anual (1,068 US$/año).</button>
+        </div>
+        <div class="qfeedback" id="fb7">✅ ¡Correcto! El costo total = CAPEX (4,063 US$) + PV del OPEX (71 US$/año × factor anualidad 7.469 = 530 US$) = 4,594 US$. Payback = 4,594 / 1,068 ≈ 4.3 años. La tarifa local de 0.15 US$/kWh sobre 7,118 kWh/año produce el ahorro de 1,068 US$/año. Con un LCOE de solo 0.032 US$/kWh, el diferencial de 0.118 US$/kWh con la tarifa de red justifica ampliamente la inversión, haciendo del net metering una opción muy atractiva bajo condiciones peruanas.</div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="qcard" id="q8">
+        <p class="qnum">Pregunta 8 / 10</p>
+        <p class="qtext">Según el benchmarking de Performance Ratio de Camarena et al. (2020) para cinco regiones del Perú, ¿qué sitio presenta la mayor producción promedio diaria y cuál es la razón principal de su superioridad respecto a Lima (UNALM)?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Lima (MEM), porque al estar en una zona urbana con mejor mantenimiento y limpieza de módulos, su Performance Ratio es más estable a lo largo del año.</button>
+          <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Piura, porque su ubicación en la costa norte ecuatorial garantiza irradiancia elevada y constante durante todo el año sin la nubosidad invernal de Lima.</button>
+          <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Pasco, con 2.76 kW de producción promedio diaria, porque su alta altitud (≈4,300 msnm) combina mayor irradiancia con menores temperaturas de célula, mejorando el PR durante todo el año.</button>
+          <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Arequipa, porque su clima desértico garantiza cielos despejados los 365 días del año, eliminando las pérdidas por nubosidad que afectan tanto a Lima como a Pasco en estación lluviosa.</button>
+        </div>
+        <div class="qfeedback" id="fb8">✅ ¡Correcto! Pasco logra el mejor promedio de producción diaria (2.76 kW) entre todos los sitios. Su altitud de ≈4,300 msnm genera dos ventajas simultáneas: (1) la masa de aire AM es menor → más irradiancia disponible por menor absorción atmosférica; (2) las temperaturas son significativamente menores que en la costa → el módulo opera más cerca de 25°C → coeficiente de temperatura negativo genera menos pérdidas. Arequipa (2.53 kW) es el segundo mejor, también por altitud moderada y clima árido.</div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="qcard" id="q9">
+        <p class="qnum">Pregunta 9 / 10</p>
+        <p class="qtext">En la fórmula de temperatura de célula <em>Tcell = Tamb + (TONC − 20) × E/800</em>, ¿qué representa el parámetro TONC y bajo qué condiciones se determina experimentalmente?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="9" data-opt="a" data-correct="true">A) La Temperatura Nominal de Operación de Célula: temperatura que alcanza la célula bajo condiciones estándar de prueba NOCT (irradiancia 800 W/m², Tamb 20°C, viento 1 m/s) con el módulo en circuito abierto. Valor típico: 45±2°C.</button>
+          <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) La temperatura máxima de operación certificada según norma IEC 61215, determinada bajo pruebas de resistencia térmica a 1000 W/m² con Tamb = 25°C durante 1000 horas continuas.</button>
+          <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) La temperatura de confort del módulo, definida por el fabricante como la temperatura ideal de trabajo a la que se garantiza el 100% de la potencia nominal especificada en las condiciones STC.</button>
+          <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) La temperatura nocturna de operación de la célula, que corresponde a la temperatura mínima de la célula durante la noche y sirve como referencia para calcular la corriente de fuga por los diodos bypass.</button>
+        </div>
+        <div class="qfeedback" id="fb9">✅ ¡Correcto! TONC (Temperatura Nominal de Operación de Célula, en inglés NOCT) se mide bajo condiciones controladas: irradiancia de 800 W/m², temperatura ambiente de 20°C y velocidad de viento de 1 m/s, con el módulo instalado inclinado y en circuito abierto. Para el módulo TSM-215 DC 80.08, TONC = 45±2°C. Este valor incorpora las propiedades térmicas reales del módulo (conductividad, empisividad, geometría) y permite estimar Tcell bajo cualquier condición climática de campo.</div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="qcard" id="q10">
+        <p class="qnum">Pregunta 10 / 10</p>
+        <p class="qtext">Según Shaker et al. (2024), entre las siguientes estrategias para mitigar los efectos térmicos en células solares, ¿cuál es la INCORRECTA o no mencionada como válida en la revisión?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) El uso de materiales de cambio de fase (PCMs) integrados en los módulos para absorber el calor excesivo durante el día y liberarlo gradualmente en la noche, regulando la temperatura de operación.</button>
+          <button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) El pintado de los módulos con pintura blanca reflectante en la cara frontal (sobre el vidrio templado) para reflejar la radiación solar visible, reduciendo simultáneamente la temperatura y la generación eléctrica.</button>
+          <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) El enfriamiento líquido mediante canales en la cara posterior del módulo por los que circula agua u otro fluido que absorbe el calor antes de recircularse.</button>
+          <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) El uso de células bifaciales que capturan luz por ambas caras, reducen la temperatura promedio del módulo y generan hasta un 30% más de energía que los módulos convencionales.</button>
+        </div>
+        <div class="qfeedback" id="fb10">✅ ¡Correcto! La respuesta B es incorrecta/inválida: pintar la cara frontal (la que recibe la luz solar) con pintura blanca sería contraproducente porque impediría la absorción de fotones, eliminando la generación eléctrica que es el propósito del módulo. Las estrategias válidas apuntan a reducir la temperatura SIN reducir la captación de luz: recubrimientos antirreflectantes en el frente (no reflectores blancos), radiadores/disipadores en la parte posterior, PCMs en la parte trasera, y enfriamiento líquido por la cara posterior. Las opciones A, C y D son estrategias legítimas revisadas en Shaker et al. (2024).</div>
+      </div>
+
+      <!-- Panel de resultados -->
+      <div id="quiz-result"></div>
+      <button id="btn-reset" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+
+    </div><!-- quiz-body -->
+  </div><!-- quiz-wrap -->
+</div><!-- quiz-section -->
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<div class="footer-bar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">
+    [1] Cavalcanti Cárdenas, K. (2020). <em>Energía Fotovoltaica.</em> Presentación de clase, Facultad de Ingeniería Agrícola, UNALM. ·
+    [2] Shaker, L.M. et al. (2024). Examining the influence of thermal effects on solar cells: a comprehensive review. <em>Sustainable Energy Research, 11</em>(6). DOI: 10.1186/s40807-024-00100-8. ·
+    [3] Camarena-Gamarra, C., Calle-Maravi, J., Nahui-Ortiz, J. (2020). Assessment of Cost-Benefit for a Net Metering Scheme based on Solar PV: Case Study on a University Campus located in Lima-Peru. <em>18th LACCEI Conference.</em> ·
+    [4] Camarena-Gamarra, C., Calle-Maravi, J., Nahui-Ortiz, J. (2020). Benchmarking of Solar PV Performance Ratio among different regions in Peru: sample of five small-scale systems. <em>18th LACCEI Conference.</em> ·
+    Shockley, W. & Queisser, H.J. (1961). Detailed balance limit of efficiency of p-n junction solar cells. <em>Journal of Applied Physics, 32</em>(3), 510–519.
+  </span>
+</div>
+
+</div><!-- .cv -->
+
+<script>
+let answered = 0, correct = 0;
+const totalQ = 10;
+
+document.querySelector('.quiz-body').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const card = document.getElementById('q'+q);
+  const btns = card.querySelectorAll('.qbtn');
+
+  btns.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true'){
+      b.classList.add('correct');
+      b.textContent = '✅ ' + b.textContent;
+    }
+  });
+
+  if(!isCorrect){
+    btn.classList.add('incorrect');
+  }
+
+  const fb = document.getElementById('fb'+q);
+  if(isCorrect){
+    fb.className = 'qfeedback ok';
+    correct++;
+  } else {
+    fb.className = 'qfeedback fail';
+    const correctBtn = card.querySelector('[data-correct="true"]');
+    const correctLetter = correctBtn.dataset.opt.toUpperCase();
+    fb.textContent = '❌ Incorrecto. La respuesta correcta es ' + correctLetter + '. ' + fb.textContent;
+  }
+  fb.style.display = 'block';
+
+  answered++;
+  document.getElementById('prog-text').textContent = answered + ' de ' + totalQ + ' respondidas';
+  document.getElementById('score-text').textContent = 'Aciertos: ' + correct;
+  document.getElementById('prog-bar').style.width = (answered / totalQ * 100) + '%';
+
+  if(answered === totalQ){
+    showResult();
+  }
+});
+
+function showResult(){
+  const res = document.getElementById('quiz-result');
+  const pct = Math.round(correct / totalQ * 100);
+  let cls, msg;
+  if(correct <= 4){ cls='result-bad'; msg='Necesitas repasar el material. Te recomendamos revisar los bloques de efectos térmicos y la curva I-V.'; }
+  else if(correct <= 7){ cls='result-mid'; msg='¡Buen avance! Sigue repasando especialmente los mecanismos térmicos y el benchmarking peruano.'; }
+  else { cls='result-good'; msg='¡Excelente dominio del tema! Estás preparado para el examen.'; }
+  res.className = cls;
+  res.innerHTML = '<strong>' + correct + ' / ' + totalQ + ' correctas (' + pct + '%)</strong> — ' + msg;
+  res.style.display = 'block';
+  document.getElementById('btn-reset').style.display = 'block';
+}
+
+function resetQuiz(){
+  answered = 0; correct = 0;
+  document.getElementById('prog-text').textContent = '0 de 10 respondidas';
+  document.getElementById('score-text').textContent = 'Aciertos: 0';
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('btn-reset').style.display = 'none';
+  for(let i=1;i<=totalQ;i++){
+    const card = document.getElementById('q'+i);
+    card.querySelectorAll('.qbtn').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct','incorrect');
+      b.textContent = b.textContent.replace(/^[✅❌]\s/,'');
+    });
+    const fb = document.getElementById('fb'+i);
+    fb.style.display = 'none';
+    fb.className = 'qfeedback';
+  }
+}
+</script>
+</body>
+</html>
