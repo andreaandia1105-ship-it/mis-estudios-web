@@ -1,0 +1,689 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:500}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-pink{background:#fce7f3;color:#831843}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#22c55e}
+.def-orange{border-color:#f97316}
+.def-yellow{border-color:#eab308}
+.def-purple{border-color:#8b5cf6}
+.def-teal{border-color:#14b8a6}
+.def-red{border-color:#ef4444}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-orange{background:#f97316}
+.dot-yellow{background:#eab308}
+.dot-purple{background:#8b5cf6}
+.dot-teal{background:#14b8a6}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin-bottom:8px}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-bottom:8px}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.sbar{font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border-radius:8px;margin-bottom:9px;color:white;grid-column:1/-1;display:flex;align-items:center;gap:8px}
+.title-bar{background:#0f1e3a;color:white;border-radius:12px;padding:14px 18px;grid-column:1/-1;margin-bottom:2px}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.title-bar p{font-size:11px;opacity:0.75;margin-bottom:8px}
+.footer-bar{background:#0f1e3a;color:white;border-radius:10px;padding:11px 18px;grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+
+.qcard{margin-bottom:18px}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.5px}
+.qtext{font-size:13px;font-weight:600;margin-bottom:10px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not([disabled]){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.show-correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn[disabled]{opacity:0.6;cursor:not-allowed}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px}
+.qfeedback.correct-fb{background:#f0fdf4;border-left:3px solid #16a34a}
+.qfeedback.wrong-fb{background:#fef2f2;border-left:3px solid #dc2626}
+.prog-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:8px 0}
+.prog-fill{height:100%;border-radius:20px;background:#16a34a;transition:width 0.3s}
+#result-panel{display:none;border-radius:10px;padding:14px;text-align:center;margin-top:16px}
+</style>
+
+<div class="cv">
+
+<div class="title-bar">
+  <h1>☀️ Energía Solar Fotovoltaica (PV) en el Perú — Canvas Completo de Estudio</h1>
+  <p>Cacciuttolo, Guardia &amp; Villicaña · Sustainability 2024, 16, 4388 · MDPI · DOI: 10.3390/su16114388</p>
+  <div>
+    <span class="pill" style="background:#1e3a8a;color:#bfdbfe">Potencial Solar</span>
+    <span class="pill" style="background:#14532d;color:#bbf7d0">Centrales PV</span>
+    <span class="pill" style="background:#7c2d12;color:#fed7aa">Contexto Perú</span>
+    <span class="pill" style="background:#4c1d95;color:#ddd6fe">Tecnología CSP</span>
+    <span class="pill" style="background:#134e4a;color:#99f6e4">Sostenibilidad</span>
+  </div>
+</div>
+
+<div class="sbar" style="background:#1e3a8a">🌍 SECCIÓN 1: CONTEXTO ENERGÉTICO DEL PERÚ</div>
+
+<div class="block">
+  <span class="bh bh-blue">Matriz Energética Peruana</span>
+  <div class="def def-blue">
+    Al cierre de 2023, Perú tenía una capacidad instalada total de 13,693 MW. La generación proviene principalmente de gas natural (42.7%), hidroeléctrica convencional (44%) y solo el 9.9% de fuentes renovables no convencionales como solar y eólica.
+  </div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>COES–SEIN</strong>: Creció de 37,618 GWh en 2012 a 56,084 GWh en 2022 (+49.1%). La demanda máxima en 2023 fue de 7,605 MW.</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Distribución geográfica</strong>: La zona central (Lima, Huancayo) consume 86.2% de la energía nacional — esto explica por qué la infraestructura de transmisión es crítica para aprovechar el sol del sur.</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div><strong>Riesgo de déficit</strong>: Si no se cubren 1,600 MW adicionales para 2030, entrarán en operación plantas diésel de emergencia, subiendo costos y emisiones de GEI.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "SEIN" con la institución que planifica. El COES es privado y solo orienta — no tiene rol de planificación vinculante.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el Perú enfrenta un riesgo de déficit energético a partir de 2026, y qué fuente de energía de emergencia entraría en operación si no se construyen nuevas plantas renovables?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Potencial Renovable vs. Uso Real</span>
+  <div class="def def-green">
+    El potencial renovable total usable del Perú supera los 469,000 MW, pero solo se aprovecha el 1.32% (6,200 MW instalados). El solar tiene un potencial de 25,000 MW y solo usa el 1.59% — una brecha enorme que representa la mayor oportunidad de inversión limpia del país.
+  </div>
+  <div style="margin-bottom:8px">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">☀️ Solar: 25,000 MW potencial / 398 MW instalado (1.59%)</div>
+    <div class="prog-wrap"><div class="prog-fill" style="width:1.59%;background:#f59e0b"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">💧 Hidro: 70,000 MW potencial / 5,067 MW instalado (7.23%)</div>
+    <div class="prog-wrap"><div class="prog-fill" style="width:7.23%"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">💨 Eólico onshore: 20,500 MW potencial / 668 MW instalado (3.26%)</div>
+    <div class="prog-wrap"><div class="prog-fill" style="width:3.26%;background:#22c55e"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">🌿 Biomasa: 450 MW potencial / 66 MW instalado (14.67%)</div>
+    <div class="prog-wrap"><div class="prog-fill" style="width:14.67%;background:#8b5cf6"></div></div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Según los datos de 2023, ¿cuál fuente renovable tiene el mayor porcentaje de aprovechamiento de su potencial usable en el Perú? Justifica por qué el solar, pese a tener el mayor potencial absoluto, tiene uno de los menores porcentajes de uso.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Marco Legal y Regulatorio</span>
+  <div class="def def-orange">
+    La normativa peruana de energía renovable se construye sobre el Decreto Legislativo N° 1002 y sus reglamentos (D.S. N° 050-2008-EM y N° 012-2011-EM). Esto habilitó 4 subastas RER que asignaron 64 contratos por 1,274 MW total.
+  </div>
+  <div class="item"><div class="dot dot-orange"></div><div><strong>D.S. 031-2007-EM</strong>: Crea la Dirección General de Eficiencia Energética del MINEM como ente rector de política de eficiencia y energías renovables.</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div><strong>Brecha regulatoria crítica</strong>: La "potencia firme" en Perú se calcula en el horario punta (17:00–23:00 h), cuando no hay radiación solar. Esto impide que los proyectos solares accedan a ingresos por potencia firme, desincentivando la inversión.</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div><strong>Subasta off-grid</strong>: Se instalaron hasta 500,000 sistemas fotovoltaicos autónomos en zonas rurales del país.</div></div>
+  <div class="exam">🎯 EXAMEN: Explica la principal limitación regulatoria que enfrenta la energía solar fotovoltaica en el mercado eléctrico peruano respecto al concepto de "potencia firme" y cómo esto afecta su viabilidad económica.</div>
+</div>
+
+<div class="sbar" style="background:#14532d">🌞 SECCIÓN 2: POTENCIAL SOLAR DEL PERÚ</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Distribución Geográfica de la Irradiación Solar (GHI)</span>
+  <div class="def def-green">
+    La Irradiación Horizontal Global (GHI) es el parámetro más importante para evaluar el rendimiento de módulos fotovoltaicos. En Perú, los factores climáticos y geográficos crean zonas de alta y baja irradiación muy bien diferenciadas a lo largo del territorio.
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot dot-green"></div><div><strong>Costa sur (16°–18°S)</strong>: Mayor potencial solar con GHI de 6.0–6.5 kWh/m²/día. Arequipa, Moquegua y Tacna lideran con promedios de 6.08, 6.04 y 5.83 kWh/m²/día respectivamente. Las terrazas desérticas sobre los 1,000 msnm están por encima de la capa de inversión térmica — cielos despejados todo el año.</div></div>
+      <div class="item"><div class="dot dot-green"></div><div><strong>Costa norte (3°–8°S)</strong>: Tumbes y Piura también tienen alto potencial (5.54–5.67 kWh/m²/día) pero aún sin plantas PV operativas — el desierto de Sechura es una reserva enorme sin explotar.</div></div>
+      <div class="item"><div class="dot dot-yellow"></div><div><strong>Sierra andina (&gt;2,500 msnm)</strong>: GHI de 5.5–6.0 kWh/m²/día. Su potencial es real pero el acceso a infraestructura de transmisión limita el desarrollo.</div></div>
+      <div class="item"><div class="dot dot-orange"></div><div><strong>Selva amazónica</strong>: GHI mínimo de 4.5–5.0 kWh/m²/día. La cobertura nubosa persistente y el tipo de suelo forestal restringen severamente el potencial PV.</div></div>
+    </div>
+    <div>
+      <div class="mini" style="border-left:3px solid #22c55e">
+        <strong style="font-size:12px">Factores que controlan el clima solar peruano</strong><hr class="divh">
+        <div class="item"><div class="dot dot-green"></div><div><strong>Corriente de Humboldt</strong>: Refuerza la estabilidad atmosférica en la costa, generando cielos más despejados en el sur.</div></div>
+        <div class="item"><div class="dot dot-orange"></div><div><strong>ENSO (El Niño)</strong>: Desestabiliza la atmósfera en la costa norte en verano — reduce horas de generación de 9–11h/día a solo 7–8h/día.</div></div>
+        <div class="item"><div class="dot dot-yellow"></div><div><strong>Alta de Bolivia</strong>: Sistemas convectivos en sierra y selva norte — nubosidad alta que reduce GHI estacionalmente.</div></div>
+      </div>
+      <div class="rx">
+        Potencial usable estimado = 25,000 MW<br>
+        Capacidad instalada 2024 = 398 MW<br>
+        Aprovechamiento real = 398 / 25,000 = <strong style="color:#fbbf24">1.59%</strong><br>
+        <span style="color:#94a3b8;font-size:10px">Restricciones: pendiente &lt;5%, min 4–5 kWh/m²/día,<br>densidad 25–30 MW/km², dist. líneas &lt;5km</span>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir GHI (irradiación horizontal global) con DNI (irradiación normal directa). El DNI es el parámetro clave para plantas CSP, no para PV estándar. En el sur peruano el DNI alcanza 5.2–8.8 kWh/m²/día, válido para ambas tecnologías.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el sur del Perú (Arequipa, Moquegua, Tacna) presenta mayor potencial solar que la selva amazónica, pese a que ambas regiones reciben radiación solar directa? Menciona al menos tres factores físicos o climáticos en tu respuesta.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Variación Estacional de Generación</span>
+  <div class="def def-teal">
+    Las plantas PV peruanas no generan la misma cantidad de energía todo el año. En verano (diciembre–marzo), la generación es máxima (5:30 am – 6:30 pm), mientras en invierno (junio–agosto) se reduce de 30% a 50% y el periodo de generación se acorta (6:30 am – 5:30 pm).
+  </div>
+  <div class="flow">
+    <div class="fbox">Verano ☀️ (dic–mar)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">GHI máximo</div>
+    <div class="farrow">→</div>
+    <div class="fbox">13h producción</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Pico ~150 MW (Rubi)</div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Invierno 🌥️ (jun–ago)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Aerosoles+vapor</div>
+    <div class="farrow">→</div>
+    <div class="fbox">7h estables min</div>
+    <div class="farrow">→</div>
+    <div class="fbox">–30% a –50% output</div>
+  </div>
+  <div class="item"><div class="dot dot-teal"></div><div>La reducción climatica en el sur es menor que en el norte porque los aerosoles y el vapor de agua crean un clima árido con poca nubosidad, manteniendo radiación estable aunque menor.</div></div>
+  <div class="exam">🎯 EXAMEN: Una empresa evalúa instalar una planta PV en la región de Moquegua. ¿En qué meses del año esperaría la menor producción energética y cuál sería el rango de reducción respecto al verano? ¿Cómo afecta esto al diseño financiero del proyecto?</div>
+</div>
+
+<div class="sbar" style="background:#7c2d12">⚡ SECCIÓN 3: CENTRALES SOLARES EN OPERACIÓN (2024)</div>
+
+<div class="block s3">
+  <span class="bh bh-orange">9 Centrales Solares Operativas — Resumen Técnico Comparado</span>
+  <div class="two" style="margin-bottom:10px">
+    <div>
+      <div class="def def-orange">
+        Al 2024, Perú tiene 9 centrales solares PV con capacidad total de 398.07 MW — equivalente a solo el 2% del potencial usable de 25 GW. Ocho están en el sur (Arequipa, Moquegua, Tacna) y una en Lima (Yarucaya).
+      </div>
+      <div class="item"><div class="dot dot-orange"></div><div><strong>C.S. Rubi (Moquegua)</strong>: La más grande con 144 MW y 450,000 módulos de silicio policristalino de 320W. Capacidad de 0.35 y producción ~441.5 GWh/año. Ocupa 400 Ha. Empresa: Enel Green Power.</div></div>
+      <div class="item"><div class="dot dot-orange"></div><div><strong>C.S. Clemesi (Moquegua)</strong>: 116.45 MW con 221,000 módulos <em>monocristalinos</em> de 525W — la única en usar monocristalino, tecnología de mayor eficiencia. CF=0.35. Empresa: Enel Green Power.</div></div>
+      <div class="item"><div class="dot dot-orange"></div><div><strong>C.S. Intipampa (Moquegua)</strong>: 40 MW con 125,000 módulos de 325W. Construida por Engie Energía Perú, es la primera gran planta post-2012 (operativa marzo 2018).</div></div>
+      <div class="item"><div class="dot dot-yellow"></div><div><strong>Repartición, Majes, Tacna Solar, Panamericana, Moquegua FV</strong>: Las 5 plantas pioneras (2012), todas con 58,000 módulos policristalinos de 350W y capacidades entre 16–20 MW. Misma tecnología base, diferente ángulo de seguimiento (45°–55°).</div></div>
+      <div class="item"><div class="dot dot-teal"></div><div><strong>C.S. Yarucaya (Lima)</strong>: La única fuera del sur con solo 1.62 MW. Ubicada en un valle (Sayan, Huaura) cerca de comunidades. CF más bajo (0.22) por menor irradiación en Lima.</div></div>
+    </div>
+    <div>
+      <table class="tbl">
+        <tr><th>Central</th><th>Región</th><th>MW</th><th>CF</th><th>Módulos</th></tr>
+        <tr><td>Rubi</td><td>Moquegua</td><td style="font-weight:600">144</td><td>0.35</td><td>450,000</td></tr>
+        <tr><td>Clemesi</td><td>Moquegua</td><td style="font-weight:600">116.45</td><td>0.35</td><td>221,000</td></tr>
+        <tr><td>Intipampa</td><td>Moquegua</td><td>40</td><td>0.27</td><td>125,000</td></tr>
+        <tr><td>Panamericana</td><td>Moquegua</td><td>20</td><td>0.33</td><td>58,000</td></tr>
+        <tr><td>Moquegua FV</td><td>Moquegua</td><td>16</td><td>0.34</td><td>58,000</td></tr>
+        <tr><td>Repartición</td><td>Arequipa</td><td>20</td><td>0.25</td><td>58,000</td></tr>
+        <tr><td>Majes</td><td>Arequipa</td><td>20</td><td>0.26</td><td>58,000</td></tr>
+        <tr><td>Tacna Solar</td><td>Tacna</td><td>20</td><td>0.30</td><td>58,000</td></tr>
+        <tr><td>Yarucaya</td><td>Lima</td><td>1.62</td><td>0.22</td><td>3,070</td></tr>
+        <tr style="background:var(--color-background-secondary)"><td colspan="2"><strong>TOTAL</strong></td><td><strong>398.07</strong></td><td>—</td><td>—</td></tr>
+      </table>
+      <div class="rx" style="margin-top:8px">
+        Factor de Capacidad (CF) = E_real (GWh/año) / (P_instalada × 8,760 h)<br>
+        CF Rubi = 441.5 / (144 × 8,760) = <strong style="color:#fbbf24">0.35</strong><br>
+        <span style="color:#94a3b8;font-size:10px">CF ideal fotovoltaico Perú: 0.22 (Yarucaya) – 0.35 (Rubi/Clemesi)</span>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Clemesi usa módulos MONOCRISTALINOS (525W), no policristalinos como las otras 8 centrales. El monocristalino tiene mayor eficiencia de conversión (~22%) vs. policristalino (~18%), lo que explica su alto wattaje por módulo a pesar de tener solo 221,000 paneles.</div>
+  <div class="exam">🎯 EXAMEN: La Central Solar Rubi representa el 46% de la capacidad instalada total de energía solar en el Perú. Explica las diferencias técnicas clave entre Rubi y la Central Solar Yarucaya en términos de capacidad instalada, factor de capacidad y tipo de ubicación, y analiza por qué estos factores son coherentes.</div>
+</div>
+
+<div class="sbar" style="background:#4c1d95">🏗️ SECCIÓN 4: CENTRALES EN CONSTRUCCIÓN Y PROYECTOS 2024–2028</div>
+
+<div class="block">
+  <span class="bh bh-purple">En Construcción (2024)</span>
+  <div class="def def-purple">
+    Tres centrales están en construcción con EIA aprobado en 2024, sumando 530 MW proyectados. Todas en Arequipa y Moquegua — la zona donde la irradiación y la infraestructura de transmisión son óptimas.
+  </div>
+  <div class="mini" style="border-top:3px solid #8b5cf6">
+    <strong>San Martín — Arequipa (300 MW)</strong><br>
+    Empresa: Kallpa Generación. 1,000,000 módulos policristalinos de 300W. CF proyectado: 0.40 — el más alto del país. Generará 1,000 GWh/año. Área: 550 Ha.
+  </div>
+  <div class="mini" style="border-top:3px solid #a78bfa">
+    <strong>Lupi — Moquegua (150 MW)</strong><br>
+    Empresa: Statkraft. A 4,500 msnm — uno de los proyectos PV de mayor altitud del mundo. 470,000 módulos cristalinos de 320W. Genera ~420 GWh/año.
+  </div>
+  <div class="mini" style="border-top:3px solid #c4b5fd">
+    <strong>Matarani — Arequipa (80 MW)</strong><br>
+    Empresa: Yinson Renewables. 123,500 módulos de 650W (los de mayor potencia unitaria). Solo 130 Ha — alta eficiencia por m². Genera ~245 GWh/año.
+  </div>
+  <div class="exam">🎯 EXAMEN: El proyecto Lupi en Moquegua se construirá a 4,500 msnm. ¿Qué ventajas e inconvenientes técnicos presenta la alta altitud para una planta solar fotovoltaica en comparación con plantas a menor altitud como Majes (1,680 msnm)?</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-purple">Portafolio de Proyectos 2024–2028 — Meta: 7,218 MW</span>
+  <div class="def def-purple">
+    El COES proyecta 33 nuevas centrales con 7,218 MW adicionales para 2028. Este salto representaría pasar del 2% al ~30% del potencial solar usable — una transformación radical de la matriz energética peruana si se concreta.
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot dot-purple"></div><div><strong>Distribución regional</strong>: La mayoría están en Arequipa y Moquegua. Aparecen nuevas regiones: Piura (norte), Puno (sierra) e Ica (costa sur-central), diversificando la geografía solar del SEIN.</div></div>
+      <div class="item"><div class="dot dot-purple"></div><div><strong>Mayor proyecto</strong>: Sol de Verano III en Arequipa con 600 MW — más grande que toda la capacidad solar instalada actualmente en el país.</div></div>
+      <div class="item"><div class="dot dot-purple"></div><div><strong>Menor proyecto</strong>: Windica en Ica con solo 25 MW — posiblemente un proyecto piloto en una región donde dominan los parques eólicos.</div></div>
+      <div class="item"><div class="dot dot-yellow"></div><div><strong>Empresas líderes</strong>: Enel Green Power, Engie, Kallpa, Statkraft e Ignis Partners concentran la mayor parte del portafolio, señalando la madurez del mercado inversor.</div></div>
+    </div>
+    <div>
+      <div class="rx">
+        Capacidad actual (2024): 398 MW<br>
+        En construcción (2024): +530 MW<br>
+        Proyectado 2024–2028: +7,218 MW<br>
+        ─────────────────────────────<br>
+        Total proyectado ~2028: ~8,146 MW<br>
+        <span style="color:#fbbf24">= ~32.6% del potencial usable de 25 GW</span><br>
+        <span style="color:#94a3b8;font-size:10px">Meta de carbono neutralidad: 2050</span>
+      </div>
+      <div class="warn" style="margin-top:8px">⚠️ El ritmo de crecimiento depende críticamente de que se resuelvan las brechas regulatorias (potencia firme, mercados de largo plazo) y se actualice la infraestructura de transmisión eléctrica del sur del país.</div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: El COES proyecta 7,218 MW de capacidad solar adicional para 2028. ¿Cuáles son los principales cuellos de botella regulatorios, técnicos y de infraestructura que podrían impedir que esta proyección se cumpla?</div>
+</div>
+
+<div class="sbar" style="background:#0c4a6e">🔬 SECCIÓN 5: TECNOLOGÍA — CÓMO FUNCIONA UN SISTEMA PV</div>
+
+<div class="block">
+  <span class="bh bh-blue">Celda, Módulo y Campo Fotovoltaico</span>
+  <div class="def def-blue">
+    Una celda fotovoltaica es la unidad mínima de conversión solar-eléctrica. Está fabricada de silicio (semiconductor) y genera ~0.5V al recibir radiación. Las celdas se conectan para formar módulos y los módulos forman campos fotovoltaicos a escala industrial.
+  </div>
+  <div class="flow">
+    <div class="fbox">Celda (Si) ~0.5V</div>
+    <div class="farrow">→</div>
+    <div class="fbox">36 celdas en serie</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Módulo ~18V</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Campo PV</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Central MW</div>
+  </div>
+  <div class="rx">
+    Voltaje módulo = N_celdas × V_celda<br>
+    Ej: 36 celdas × 0.5V = 18V (12V de trabajo)<br>
+    Módulos comerciales: 36, 60 o 72 celdas
+  </div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Policristalino</strong>: Múltiples cristales de Si — menor eficiencia (~18%) pero más económico. Usado en 8 de las 9 centrales peruanas.</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Monocristalino</strong>: Cristal único de Si — mayor eficiencia (~22%), mayor costo. Solo Clemesi lo usa en Perú (525W/módulo).</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la mayoría de centrales PV en el Perú utilizan módulos policristalinos y no monocristalinos, si estos últimos tienen mayor eficiencia? Considera factores técnicos y económicos en tu respuesta.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Flujo de Conversión Energética</span>
+  <div class="def def-blue">
+    El proceso de una planta PV convierte radiación solar en corriente continua (DC) mediante el efecto fotoeléctrico, la transforma en corriente alterna (AC) mediante inversores, y la inyecta a la red de transmisión para llegar a los usuarios.
+  </div>
+  <div class="flow">
+    <div class="fbox">Radiación solar ☀️</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Paneles PV (DC)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Inversor (AC)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Red 550/220/138kV</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Usuario final</div>
+  </div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Inversor</strong>: Componente crítico — convierte DC en AC con frecuencia de 60 Hz (estándar peruano). Las centrales grandes usan decenas o cientos de inversores (Rubi: 164 inversores).</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div><strong>Seguidor solar (tracker)</strong>: Todas las centrales peruanas usan seguidores de 1 eje horizontal que rotan 45°–55° para maximizar la captación durante el día. Esto aumenta la energía generada ~20–30% vs. paneles fijos.</div></div>
+  <div class="warn">⚠️ La corriente que sale del panel es DC. Antes de conectarse a la red o usarse en equipos convencionales, SIEMPRE debe pasar por un inversor que la convierte en AC. Sin inversor, la energía no puede integrarse al SEIN.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Tecnologías Emergentes en Perú</span>
+  <div class="def def-teal">
+    La industria solar peruana está adoptando herramientas de la Industria 4.0 para mejorar la eficiencia de operación y mantenimiento, y nuevas configuraciones de paneles para aumentar la generación por unidad de área.
+  </div>
+  <div class="mini" style="border-left:3px solid #14b8a6">
+    <strong>🚁 Drones con cámara térmica (UAVs)</strong><br>
+    Reducen en 70% el tiempo de inspección vs. métodos manuales. Detectan fallas por anomalías de temperatura: delaminación, grietas, fallas de inversores. Los mapas RGB+térmicos se integran a SIG para gestión de mantenimiento.
+  </div>
+  <div class="mini" style="border-left:3px solid #0891b2">
+    <strong>🤖 IA y Machine Learning</strong><br>
+    Redes neuronales convolucionales (CNN) y recurrentes (RNN) analizan patrones de nubosidad satelital para predecir irradiación solar con alta precisión. El MINEM ya incorpora estas tecnologías en su sistema de pronóstico energético.
+  </div>
+  <div class="mini" style="border-left:3px solid #06b6d4">
+    <strong>☀️ Paneles Bifaciales</strong><br>
+    Capturan radiación por ambas caras (directa + reflejada). En superficies reflectivas aumentan la potencia hasta un 25% adicional. Para 2025 se espera que representen 1/3 de la producción global de módulos solares.
+  </div>
+  <div class="exam">🎯 EXAMEN: Explica cómo la tecnología de paneles bifaciales genera más energía que los paneles monofaciales convencionales, e indica en qué tipo de ubicaciones o superficies este beneficio es mayor.</div>
+</div>
+
+<div class="sbar" style="background:#134e4a">🔆 SECCIÓN 6: ENERGÍA SOLAR CONCENTRADA (CSP) E HIBRIDACIÓN</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">CSP — Concentrated Solar Power: La Próxima Frontera</span>
+  <div class="def def-teal">
+    A diferencia del PV que convierte luz en electricidad directamente, el CSP concentra la radiación solar para generar calor, que acciona una turbina de vapor para producir electricidad. Su ventaja principal es que puede almacenar calor por hasta 15 horas, generando electricidad incluso de noche.
+  </div>
+  <div class="two">
+    <div>
+      <div class="flow">
+        <div class="fbox">Heliostatos</div>
+        <div class="farrow">→</div>
+        <div class="fbox">Torre 250m</div>
+        <div class="farrow">→</div>
+        <div class="fbox">Sales fundidas 560°C</div>
+        <div class="farrow">→</div>
+        <div class="fbox">Turbina vapor</div>
+        <div class="farrow">→</div>
+        <div class="fbox">Electricidad 24h</div>
+      </div>
+      <div class="item"><div class="dot dot-teal"></div><div><strong>Heliostatos</strong>: Espejos de 140 m² y 3 toneladas que siguen al sol en 2 ejes, dirigiendo la radiación al receptor en lo alto de la torre.</div></div>
+      <div class="item"><div class="dot dot-teal"></div><div><strong>Por qué Perú no tiene aún</strong>: Aunque los niveles de DNI en el sur de Tacna alcanzan hasta 990 W/m² (suficientes para CSP), las condiciones económicas y la falta de regulación específica frenan su implementación.</div></div>
+      <div class="item"><div class="dot dot-green"></div><div><strong>Referencia regional</strong>: Chile inauguró la primera planta CSP de Sudamérica en Cerro Dominador (Calama), sobre 1,000 Ha en el lugar con mayor radiación solar del planeta.</div></div>
+    </div>
+    <div>
+      <table class="tbl">
+        <tr><th>Tecnología CSP</th><th>Eficiencia</th><th>Almacen.</th><th>Posib. Perú</th></tr>
+        <tr><td>Canal parabólico</td><td>14–20%</td><td>Sí</td><td style="color:#16a34a;font-weight:600">Alta</td></tr>
+        <tr><td>Torre solar</td><td>23–35%</td><td>Sí</td><td style="color:#ca8a04;font-weight:600">Media</td></tr>
+        <tr><td>Fresnel lineal</td><td>18%</td><td>Sí</td><td style="color:#dc2626;font-weight:600">Baja</td></tr>
+        <tr><td>Disco parabólico</td><td>30%</td><td>Depende</td><td style="color:#dc2626;font-weight:600">Baja</td></tr>
+      </table>
+      <div class="mini" style="border-top:3px solid #14b8a6;margin-top:8px">
+        <strong>Hibridación PV + CSP</strong><br>
+        La combinación garantiza generación eléctrica en una ventana de 10–15 horas/día. PV produce durante el día; CSP almacena calor y genera durante las horas punta nocturnas (17:00–23:00h), que es exactamente cuando el SEIN requiere "potencia firme".
+      </div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la hibridación de plantas PV con plantas CSP sería una solución al principal problema regulatorio que enfrenta la energía solar en el mercado eléctrico peruano? Relaciona con el concepto de "potencia firme" y el horario punta del SEIN.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Ventajas y Limitaciones del PV en Perú</span>
+  <div class="item"><div class="dot dot-green"></div><div><strong>Emisiones</strong>: Solar util. emite 48 gCO₂eq/kWh en ciclo completo vs. carbón (820) y gas natural (490 gCO₂eq/kWh) — reducción de ~94% vs. carbón.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><strong>LCOE reducido</strong>: De $212/MWh (2010) a $48/MWh (2018) — caída del 82% en costos de producción (IRENA). Hace competitiva la solar frente a fósiles.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><strong>COVID-19 lección</strong>: Durante el aislamiento obligatorio de 2020, el 97% de la electricidad consumida fue renovable, evitando 0.4 Mton CO₂eq de emisiones.</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div><strong>Intermitencia</strong>: No genera de noche y reduce producción con nubosidad. Los paneles sucios por tormentas de polvo del desierto reducen la producción hasta en 8%.</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div><strong>CAPEX alto</strong>: Inversión inicial elevada, especialmente por infraestructura de transmisión y caminos en zonas remotas.</div></div>
+  <div class="warn">⚠️ BESS (Battery Energy Storage Systems): Aunque técnicamente viable, el almacenamiento en baterías es inviable en el corto plazo en Perú por el alto costo, regulación incipiente y variaciones del mercado spot de electricidad.</div>
+</div>
+
+<div class="sbar" style="background:#1e1b4b">📊 TABLA INTEGRADORA FINAL — VISIÓN COMPLETA DEL SISTEMA SOLAR PERUANO</div>
+
+<div class="block s3">
+  <span class="bh bh-blue">Comparativa Integral: Dimensiones Técnica, Regulatoria, Geográfica y Futura</span>
+  <table class="tbl" style="margin-bottom:10px">
+    <tr>
+      <th>Dimensión</th>
+      <th>Estado Actual (2024)</th>
+      <th>Datos Clave</th>
+      <th>Brecha / Problema</th>
+      <th>Solución / Perspectiva</th>
+    </tr>
+    <tr>
+      <td><strong>Potencial Solar</strong></td>
+      <td>25 GW usable, 1.59% aprovechado</td>
+      <td>6.0–6.5 kWh/m²/día en sur; DNI hasta 990 W/m²</td>
+      <td>98.4% del potencial sin explotar</td>
+      <td>Sechura y Costa Desértica como hotspots prioritarios</td>
+    </tr>
+    <tr style="background:var(--color-background-secondary)">
+      <td><strong>Capacidad instalada</strong></td>
+      <td>398 MW (9 centrales)</td>
+      <td>Rubi: 144 MW (46% del total); Yarucaya: 1.62 MW</td>
+      <td>Concentración en Moquegua y Arequipa</td>
+      <td>7,218 MW adicionales proyectados a 2028</td>
+    </tr>
+    <tr>
+      <td><strong>Tecnología dominante</strong></td>
+      <td>PV policristalino + tracker 1 eje</td>
+      <td>CF: 0.22–0.35; ángulo 45°–55°</td>
+      <td>Sin CSP; BESS inviable a corto plazo</td>
+      <td>Bifacial + CSP + hibridación PV-CSP-eólica</td>
+    </tr>
+    <tr style="background:var(--color-background-secondary)">
+      <td><strong>Marco regulatorio</strong></td>
+      <td>D.Leg. 1002 y reglamentos</td>
+      <td>4 subastas RER; 64 contratos; 1,274 MW</td>
+      <td>Potencia firme calculada en horario sin sol</td>
+      <td>Reforma metodología; mercados por bloques horarios</td>
+    </tr>
+    <tr>
+      <td><strong>Emisiones GEI</strong></td>
+      <td>48 gCO₂eq/kWh (ciclo vida PV)</td>
+      <td>vs. 820 (carbón) y 490 (gas CC)</td>
+      <td>9.9% de la matriz es RER no convencional</td>
+      <td>Meta carbono neutralidad 2050</td>
+    </tr>
+    <tr style="background:var(--color-background-secondary)">
+      <td><strong>O&amp;M e Industria 4.0</strong></td>
+      <td>Drones térmicos + IA/ML</td>
+      <td>Reducción 70% tiempo inspección</td>
+      <td>Polvo desértico reduce generación hasta 8%</td>
+      <td>CNN/RNN para predicción de irradiación solar</td>
+    </tr>
+    <tr>
+      <td><strong>Electrificación rural</strong></td>
+      <td>500,000 sistemas off-grid instalados</td>
+      <td>Zonas Amazonía y sierra sin red eléctrica</td>
+      <td>Alta densidad poblacional baja; costo elevado</td>
+      <td>Mini-redes y sistemas aislados con regulación DG</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: El Perú usa solo el 1.32% de su potencial renovable total (6,200 MW de 469,310 MW usables). Aunque el COES proyecta 7,218 MW adicionales de solar para 2028, sin reformas regulatorias que permitan a las plantas solares vender potencia firme y participar en licitaciones de largo plazo, la brecha de inversión no se cerrará a tiempo para evitar el déficit energético previsto desde 2026.</div>
+</div>
+
+<div class="block s3" id="quiz-section">
+  <div style="background:#0f1e3a;color:white;border-radius:10px;padding:12px 16px;margin-bottom:14px">
+    <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+    <div style="font-size:12px;opacity:0.75">Marca tu respuesta y descubre si es correcta · Cubre todo el artículo</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+    <span id="prog-text" style="font-size:12px;color:var(--color-text-secondary);white-space:nowrap">Pregunta 0 de 10 respondidas · Aciertos: 0/0</span>
+    <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+
+  <div id="quiz-body">
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es el porcentaje aproximado del potencial solar usable del Perú (25 GW) que se encontraba instalado y en operación al inicio de 2024?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) 9.9%</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) 7.23%</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) 1.59%</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) 14.67%</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Una planta solar fotovoltaica convierte la radiación solar en corriente continua (DC). ¿Qué componente transforma esa corriente en corriente alterna (AC) antes de inyectarla a la red eléctrica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) El seguidor solar (tracker)</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) El módulo fotovoltaico</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) El inversor o convertidor</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) El transformador de potencia firme</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">La Central Solar Clemesi (Moquegua) se diferencia de las otras 8 centrales peruanas principalmente en que usa módulos de:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) Silicio policristalino de 525W con 2 ejes de seguimiento</button>
+      <button class="qbtn" data-q="3" data-correct="true">B) Silicio monocristalino de 525W, la única de su tipo en el país</button>
+      <button class="qbtn" data-q="3" data-correct="false">C) Silicio amorfo de alta temperatura con almacenamiento térmico</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Paneles bifaciales de 320W del mismo tipo que los de Rubi</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál es el principal problema regulatorio que impide a los proyectos solares peruanos recibir ingresos por "potencia firme" en el SEIN?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) La falta del Decreto Legislativo N° 1002 que autorice la energía solar</button>
+      <button class="qbtn" data-q="4" data-correct="true">B) La potencia firme se calcula en el horario 17:00–23:00h, cuando no hay radiación solar</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) El COES prohíbe explícitamente la participación de energías renovables en el mercado spot</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Las plantas solares están reguladas por MINAM y no por MINEM, lo que genera conflicto</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál es la principal ventaja de una planta de Energía Solar Concentrada (CSP) con almacenamiento térmico frente a una planta fotovoltaica (PV) convencional?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Las plantas CSP usan silicio monocristalino de mayor eficiencia que el PV policristalino</button>
+      <button class="qbtn" data-q="5" data-correct="false">B) Las plantas CSP no requieren irradiación directa (DNI) alta, funcionan con cualquier nubosidad</button>
+      <button class="qbtn" data-q="5" data-correct="true">C) Las plantas CSP pueden almacenar calor y generar electricidad por hasta 15 horas, incluyendo la noche</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) Las plantas CSP tienen un costo CAPEX menor que los sistemas PV de igual capacidad</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Según los datos del artículo, ¿en qué porcentaje puede reducirse la generación de energía solar en las plantas del sur peruano durante la temporada de invierno respecto al verano?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) 10% a 20%</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) 5% a 15%</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) 30% a 50%</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) 60% a 80%</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Cuál afirmación sobre los paneles solares BIFACIALES es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Capturan energía en ambas caras del panel, tanto por radiación directa como reflejada</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) En superficies altamente reflectivas pueden generar hasta un 25% más de potencia</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) Solo usan células monocristalinas; no existen versiones con células policristalinas</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Se espera que representen un tercio de la producción mundial de módulos solares para 2025</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">La Central Solar Yarucaya (Lima) tiene el factor de capacidad más bajo de todas las plantas PV en operación en el Perú (CF=0.22). ¿Cuál es la razón principal de esta baja eficiencia relativa?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Usa tecnología PV obsoleta sin seguidores solares de 1 eje</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Está mal orientada y sus módulos tienen ángulo de seguimiento de solo 10°</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Está ubicada en la región de Lima donde la irradiación solar es significativamente menor que en el sur desértico</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Es una planta piloto que opera a solo el 50% de su capacidad nominal por regulación del MINEM</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">Según el artículo, ¿cuál fuente renovable en el Perú aprovecha el mayor porcentaje de su potencial usable (no en MW absolutos, sino en % de su propio potencial)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Solar fotovoltaica (25,000 MW potencial)</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) Hidroeléctrica convencional (70,000 MW potencial)</button>
+      <button class="qbtn" data-q="9" data-correct="true">C) Biomasa (450 MW potencial, 14.67% aprovechado)</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Eólica onshore (20,500 MW potencial)</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">El artículo concluye que si el Perú aprovecha su potencial solar con planificación estratégica del territorio, la región sur se convertirá en un territorio de clase mundial para el desarrollo de energía renovable. ¿Qué combinación tecnológica se menciona explícitamente como el camino hacia ese futuro sostenible?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) Sistemas PV con almacenamiento BESS + turbinas eólicas offshore</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) Plantas CSP de torre + geotermia + energía mareomotriz</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) Hibridación de CSP con PV + sistemas de almacenamiento de energía solar</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) Pequeñas hidroeléctricas + PV en techos residenciales + biogás</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  </div>
+
+  <div id="result-panel"></div>
+</div>
+
+<div class="footer-bar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Cacciuttolo, C.; Guardia, X.; Villicaña, E. · Sustainability 2024, 16, 4388 · DOI: 10.3390/su16114388 · MDPI Open Access CC BY 4.0</span>
+  <span class="fc">Datos: COES-SEIN 2024 · Osinergmin 2022–2023 · ESMAP/Solargis 2020 · IRENA 2019 · SENAMHI 2003</span>
+  <span class="fc">Tecnología: IPCC AR5 · Enel Green Power · Engie Energía Perú · Statkraft · Kallpa Generación</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {c:"La capacidad instalada de solar era 398 MW de un potencial usable de 25,000 MW (25 GW). 398/25,000 = 1.59%. El 9.9% corresponde al total de RER no convencionales en la matriz; el 7.23% es la hidroeléctrica; el 14.67% es la biomasa.", w:"Incorrecto. El 9.9% es el porcentaje de toda la energía no convencional RER en la matriz eléctrica, no solo solar. La solar específicamente tiene 398 MW de 25,000 MW = 1.59%."},
+  2: {c:"El inversor (o convertidor) es el componente que transforma la corriente continua (DC) generada por las celdas fotovoltaicas en corriente alterna (AC) a 60 Hz, necesaria para integrarse al SEIN y ser usada por los consumidores.", w:"Incorrecto. El componente que transforma DC en AC es el inversor o convertidor. El tracker solo orienta los paneles hacia el sol para maximizar la captación."},
+  3: {c:"Clemesi usa módulos monocristalinos de 525W — la única central con esta tecnología en Perú. El monocristalino tiene mayor eficiencia de conversión (~22% vs ~18% del policristalino), lo que explica la alta potencia por módulo.", w:"Incorrecto. Clemesi es la única central en Perú con módulos monocristalinos (525W). Las demás 8 centrales usan silicio policristalino. Los bifaciales no son la tecnología dominante en ninguna planta peruana actual."},
+  4: {c:"La normativa peruana calcula la 'potencia firme' en el horario 17:00–23:00h (horas punta). Durante ese período no hay radiación solar, por lo que las plantas PV no pueden declarar potencia firme ni recibir ingresos por ese concepto.", w:"Incorrecto. El D.Leg. 1002 SÍ existe y autoriza la energía solar. El problema es específicamente metodológico: el horario punta (17:00–23:00h) coincide con la ausencia de sol, impidiendo que los proyectos solares acrediten potencia firme."},
+  5: {c:"Las plantas CSP almacenan energía en forma de calor (sales fundidas a 560°C) que puede conservarse hasta 15 horas, permitiendo generar electricidad durante las horas nocturnas de alta demanda, a diferencia del PV que solo genera con luz solar.", w:"Incorrecto. La ventaja fundamental del CSP es el almacenamiento térmico de hasta 15 horas, que permite generar electricidad incluso de noche. El CSP requiere DNI alto (800-950 W/m²) y típicamente tiene mayor CAPEX que el PV."},
+  6: {c:"Según el artículo, la reducción en la generación solar durante el invierno puede variar entre 30% y 50% respecto a los meses de verano. Esto se debe a la menor duración del día y mayor presencia de vapor de agua y aerosoles.", w:"Incorrecto. El rango correcto es 30%-50% de reducción invernal. Este dato es importante para el diseño financiero de proyectos PV, ya que los ingresos variarán significativamente por estación."},
+  7: {c:"Esta afirmación es FALSA. Los módulos bifaciales existen tanto en versión monocristalina (la mayoría) como policristalina. No son exclusivamente monocristalinos. Lo que los distingue es la capacidad de captar radiación en ambas caras.", w:"Incorrecto — debes identificar la afirmación FALSA. La afirmación C es falsa porque los bifaciales NO son exclusivamente monocristalinos; también existen versiones policristalinas. Las afirmaciones A, B y D son verdaderas según el artículo."},
+  8: {c:"Yarucaya está en el distrito de Sayan, provincia de Huaura, Lima, a solo 1,031 msnm. Lima tiene irradiación solar significativamente menor que el sur desértico (Arequipa, Moquegua, Tacna), lo que se traduce en un factor de capacidad más bajo (0.22 vs 0.35 en Rubi).", w:"Incorrecto. Yarucaya SÍ usa seguidores solares de 1 eje (45° de ángulo de seguimiento). Su bajo CF se debe a la menor irradiación de la región Lima comparada con el sur desértico."},
+  9: {c:"La biomasa aprovecha el 14.67% de su potencial usable de 450 MW (66 MW instalados). Aunque en MW absolutos es pequeña, en porcentaje de su propio potencial lidera frente a hidro (7.23%), eólica (3.26%) y solar (1.59%).", w:"Incorrecto. Aunque la hidroeléctrica tiene más MW instalados en términos absolutos, el porcentaje de su potencial aprovechado (7.23%) es inferior al de biomasa (14.67%). La pregunta pide el porcentaje relativo al propio potencial, no el valor absoluto."},
+  10: {c:"La conclusión del artículo menciona explícitamente la 'hibridación de plantas CSP con sistemas PV y sistemas de almacenamiento de energía solar' como el camino para que el sur del Perú se convierta en territorio de clase mundial para energías renovables.", w:"Incorrecto. La combinación que menciona el artículo es CSP + PV + almacenamiento de energía solar. El BESS (almacenamiento en baterías) es declarado inviable en el corto plazo en Perú; el offshore tampoco figura como prioritario."}
+};
+
+let answered = 0, correct = 0;
+
+document.getElementById('quiz-body').addEventListener('click', e => {
+  const btn = e.target.closest('.qbtn');
+  if (!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('show-correct');
+  });
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correct++;
+  } else {
+    btn.classList.add('wrong');
+  }
+  answered++;
+  const fb = document.getElementById('fb' + q);
+  if (isCorrect) {
+    fb.className = 'qfeedback correct-fb';
+    fb.innerHTML = '<strong>✅ ¡Correcto!</strong> ' + feedbacks[q].c;
+  } else {
+    fb.className = 'qfeedback wrong-fb';
+    fb.innerHTML = '<strong>❌ Incorrecto.</strong> ' + feedbacks[q].w;
+  }
+  fb.style.display = 'block';
+  const pct = (answered / 10) * 100;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-text').textContent = 'Pregunta ' + answered + ' de 10 respondidas · Aciertos: ' + correct + '/' + answered;
+  if (answered === 10) showResult();
+});
+
+function showResult() {
+  const panel = document.getElementById('result-panel');
+  let bg, msg;
+  if (correct <= 4) { bg = '#fee2e2'; msg = '📚 Necesitas repasar el material. Revisa los bloques del canvas y vuelve a intentarlo.'; }
+  else if (correct <= 7) { bg = '#fef9c3'; msg = '📈 ¡Buen avance! Tienes las bases pero hay conceptos que reforzar — repasa las secciones de regulación y tecnología CSP.'; }
+  else { bg = '#dcfce7'; msg = '🏆 ¡Excelente dominio del tema! Estás bien preparado para el examen sobre energía solar en el Perú.'; }
+  panel.style.background = bg;
+  panel.style.display = 'block';
+  panel.style.borderRadius = '10px';
+  panel.style.padding = '16px';
+  panel.innerHTML = '<div style="font-size:22px;font-weight:600;margin-bottom:6px">' + correct + ' / 10 correctas</div><div style="font-size:13px;margin-bottom:14px">' + msg + '</div><button onclick="resetQuiz()" style="background:#0f1e3a;color:white;border:none;border-radius:8px;padding:9px 20px;cursor:pointer;font-family:\'Source Sans 3\',sans-serif;font-size:13px">🔄 Reiniciar Quiz</button>';
+}
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('prog-fill').style.width = '0%';
+  document.getElementById('prog-text').textContent = 'Pregunta 0 de 10 respondidas · Aciertos: 0/0';
+  document.getElementById('result-panel').style.display = 'none';
+  for (let i = 1; i <= 10; i++) {
+    const fb = document.getElementById('fb' + i);
+    fb.style.display = 'none'; fb.className = 'qfeedback';
+    document.querySelectorAll('.qbtn[data-q="' + i + '"]').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct','wrong','show-correct');
+    });
+  }
+}
+</script>
