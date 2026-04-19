@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas • Italiano A1 + Verbi 🇮🇹</title>
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--color-background-tertiary);
+            font-family: 'Source Sans 3', sans-serif;
+            padding: 16px;
+            line-height: 1.4;
+        }
+        :root {
+            --color-background-primary: #ffffff;
+            --color-background-secondary: #f8fafc;
+            --color-background-tertiary: #eef2f6;
+            --color-text-primary: #0f172a;
+            --color-text-secondary: #334155;
+            --color-border-tertiary: #cbd5e1;
+            --color-border-secondary: #94a3b8;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background-primary: #1e293b;
+                --color-background-secondary: #0f172a;
+                --color-background-tertiary: #020617;
+                --color-text-primary: #f1f5f9;
+                --color-text-secondary: #cbd5e1;
+                --color-border-tertiary: #334155;
+                --color-border-secondary: #475569;
+            }
+        }
+        .cv {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 9px;
+            padding: 12px;
+            background: var(--color-background-tertiary);
+            border-radius: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        /* Bloques */
+        .block {
+            background: var(--color-background-primary);
+            border: 0.5px solid var(--color-border-tertiary);
+            border-radius: 11px;
+            padding: 12px 13px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .block.s2 { grid-column: span 2; }
+        .block.s3 { grid-column: span 3; }
+        .title-bar {
+            grid-column: 1 / -1;
+            background: #0f1e3a;
+            color: white;
+            border-radius: 14px;
+            padding: 16px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .title-bar h1 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: -0.3px;
+        }
+        .title-sub {
+            font-size: 13px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        .title-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .pill {
+            background: rgba(255,255,255,0.12);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 500;
+            border: 0.5px solid #3b5b8c;
+        }
+        .section-bar {
+            grid-column: 1 / -1;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 10px 6px 4px;
+            color: var(--color-text-primary);
+            letter-spacing: 0.3px;
+            border-bottom: 2px solid;
+            margin-top: 4px;
+        }
+        .bh {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+        }
+        .def {
+            border-left-width: 4px;
+            border-left-style: solid;
+            padding: 8px 12px;
+            border-radius: 0 10px 10px 0;
+            font-size: 12.5px;
+            background: var(--color-background-secondary);
+            margin-bottom: 12px;
+        }
+        .item {
+            display: flex;
+            gap: 8px;
+            font-size: 12.5px;
+            line-height: 1.5;
+            margin-bottom: 6px;
+            color: var(--color-text-primary);
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-top: 7px;
+            flex-shrink: 0;
+        }
+        .rx {
+            background: #0f172a;
+            color: #7dd3fc;
+            font-family: 'Source Sans 3', monospace;
+            font-size: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            margin: 12px 0;
+            text-align: center;
+            line-height: 1.6;
+            border: 0.5px solid #1e293b;
+        }
+        .warn {
+            background: #fff7ed;
+            border-left: 4px solid #f97316;
+            border-radius: 0 10px 10px 0;
+            padding: 10px 12px;
+            font-size: 11.5px;
+            color: #7c2d12;
+            margin: 12px 0;
+        }
+        .exam {
+            background: #fefce8;
+            border: 1px solid #facc15;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 12px;
+            color: #713f12;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+        .mini {
+            background: var(--color-background-secondary);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 11.5px;
+            border-left: 4px solid;
+            height: 100%;
+        }
+        .two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+        .flow {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0;
+        }
+        .fbox {
+            background: var(--color-background-secondary);
+            padding: 6px 10px;
+            border-radius: 30px;
+            font-size: 11.5px;
+            border: 0.5px solid var(--color-border-tertiary);
+            font-weight: 500;
+        }
+        .farrow {
+            color: var(--color-text-secondary);
+            font-size: 18px;
+            font-weight: 300;
+        }
+        .num-badge {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 11px;
+            margin-right: 6px;
+            background: #1e3a8a;
+            color: white;
+        }
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.5px;
+        }
+        .tbl th {
+            background: var(--color-background-secondary);
+            padding: 8px 6px;
+            border-bottom: 1px solid var(--color-border-tertiary);
+            font-weight: 600;
+        }
+        .tbl td {
+            padding: 6px;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+            vertical-align: top;
+        }
+        .divh { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 12px 0; }
+        .footer {
+            grid-column: 1 / -1;
+            background: #0f1e3a;
+            color: white;
+            border-radius: 14px;
+            padding: 14px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .ft { font-family: 'Oswald', sans-serif; font-size: 13px; color: #7dd3fc; }
+        .fc { font-size: 11px; color: #94a3b8; }
+
+        /* Quiz */
+        .quiz-section {
+            grid-column: 1 / -1;
+            background: var(--color-background-primary);
+            border: 0.5px solid var(--color-border-tertiary);
+            border-radius: 16px;
+            padding: 20px 22px;
+            margin: 16px 0 8px;
+        }
+        .quiz-header {
+            background: #0f1e3a;
+            margin: -20px -22px 20px -22px;
+            padding: 16px 22px;
+            border-radius: 16px 16px 0 0;
+            color: white;
+        }
+        .qcard { margin-bottom: 24px; border-bottom: 0.5px solid var(--color-border-tertiary); padding-bottom: 16px; }
+        .qnum { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px; font-weight: 600; }
+        .qtext { font-weight: 600; margin-bottom: 12px; font-size: 14px; }
+        .qopts { display: flex; flex-direction: column; gap: 8px; }
+        .qbtn {
+            background: var(--color-background-secondary);
+            border: 1px solid var(--color-border-tertiary);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 12.5px;
+            text-align: left;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.15s;
+            font-family: inherit;
+            color: var(--color-text-primary);
+        }
+        .qbtn:hover { background: var(--color-background-primary); border-color: #3b82f6; }
+        .qbtn.correct-answer {
+            background: #dcfce7;
+            border-color: #16a34a;
+            color: #14532d;
+        }
+        .qbtn.wrong-answer {
+            background: #fee2e2;
+            border-color: #dc2626;
+            color: #991b1b;
+        }
+        .qbtn:disabled { opacity: 0.7; cursor: not-allowed; pointer-events: none; }
+        .qfeedback {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 0 10px 10px 0;
+            font-size: 12px;
+        }
+        .progress-bar {
+            height: 10px;
+            background: var(--color-background-secondary);
+            border-radius: 20px;
+            margin: 12px 0;
+        }
+        .progress-fill {
+            height: 10px;
+            background: #16a34a;
+            border-radius: 20px;
+            width: 0%;
+        }
+        .result-panel { padding: 14px; border-radius: 12px; margin-top: 16px; font-weight: 500; }
+        .reset-btn {
+            background: #0f1e3a;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="cv" id="italiano-canvas">
+
+    <!-- TITLE BAR -->
+    <div class="title-bar">
+        <div>
+            <h1>🇮🇹 CURSO A1 DE ITALIANO + VERBI</h1>
+            <div class="title-sub">María Herrero Prado 2023/24 • José García Fernández • Gramática universitaria</div>
+        </div>
+        <div class="title-tags">
+            <span class="pill">📘 MCER A1</span>
+            <span class="pill">⚡ Verbo & modi</span>
+            <span class="pill">🎯 Quiz integrado</span>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 1: INTRO + UNIDAD 1 -->
+    <div class="section-bar" style="border-bottom-color: #2563eb;">📌 UNIDAD 01 – PRESENTARSE Y EL ALFABETO</div>
+    <div class="block">
+        <div class="bh" style="background:#dbeafe; color:#1e3a8a;">🔤 Alfabeto (Diap. 8-11)</div>
+        <div class="def" style="border-left-color:#2563eb;">21 letras (5 extranjeras). La ‘c’ y ‘g’ cambian sonido con e/i. La ‘h’ es muda. Consonantes dobles alargan el sonido.</div>
+        <div class="item"><span class="dot" style="background:#2563eb;"></span><strong>C + e/i → [tʃ]</strong> (ciao), resto → [k] (casa)</div>
+        <div class="item"><span class="dot" style="background:#2563eb;"></span><strong>G + e/i → [dʒ]</strong> (gelato), resto → [g] (gatto)</div>
+        <div class="item"><span class="dot" style="background:#2563eb;"></span><strong>gn → [ɲ]</strong> (gnocchi) · <strong>gli → [ʎ]</strong> (famiglia)</div>
+        <div class="rx">🔊 ciao /ˈtʃao/ · grazie /ˈɡrattsje/ · figlio /ˈfiʎʎo/</div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#dbeafe; color:#1e3a8a;">📚 Sustantivos & Artículos</div>
+        <div class="def" style="border-left-color:#2563eb;">Género: -o / cons. → masc, -a / -i / -u → fem. Excepciones: -e puede ser ambos (studente).</div>
+        <div class="two">
+            <div class="mini" style="border-left-color:#2563eb;"><strong>📘 Definidos</strong><br>il / lo / l' / i / gli<br>la / l' / le</div>
+            <div class="mini" style="border-left-color:#2563eb;"><strong>📗 Indefinidos</strong><br>un / uno / una / un'<br>dei / degli / delle</div>
+        </div>
+        <div class="warn" style="margin-top:10px;">⚠️ Lo + s+consonante (lo studente). L' ante vocal (l'amico).</div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#2563eb; color:white;">🧍 Verbo ESSERE</div>
+        <div class="rx">io sono · tu sei · lui/lei è<br>noi siamo · voi siete · loro sono</div>
+        <div class="item"><span class="dot" style="background:#2563eb;"></span>Identidad, nacionalidad, estado: <em>Sono italiano/a.</em></div>
+        <div class="exam">🎯 EXAMEN: Coniuga "essere" in una frase negativa: "Noi non _______ stanchi." + explica concordancia.</div>
+    </div>
+
+    <!-- UNIDAD 2 -->
+    <div class="section-bar" style="border-bottom-color:#16a34a;">👪 UNIDAD 02 – FAMILIA Y DESCRIPCIONES</div>
+    <div class="block s2">
+        <div class="bh" style="background:#dcfce7; color:#14532d;">🧬 Adjetivos posesivos & calificativos</div>
+        <div class="two">
+            <div class="mini" style="border-left-color:#16a34a;"><strong>Posesivos</strong> il mio, la tua, i nostri... (artículo obligatorio, excepto familia sing: mio padre).</div>
+            <div class="mini" style="border-left-color:#16a34a;"><strong>Calificativos</strong> bello, grande, piccolo, felice. Concuerdan en género y número.</div>
+        </div>
+        <div class="flow"><span class="fbox">articolo</span><span class="farrow">→</span><span class="fbox">possessivo</span><span class="farrow">→</span><span class="fbox">sostantivo</span></div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#16a34a; color:white;">📦 Verbo AVERE</div>
+        <div class="rx">io ho · tu hai · lui/lei ha<br>noi abbiamo · voi avete · loro hanno</div>
+        <div class="item"><span class="dot" style="background:#16a34a;"></span>Posesión, edad, expresiones: <em>ho fame, ho 20 anni</em>.</div>
+        <div class="exam">🎯 EXAMEN: Traduce: "Mi hermana tiene miedo de los perros". Usa "avere paura".</div>
+    </div>
+
+    <!-- UNIDAD 3 -->
+    <div class="section-bar" style="border-bottom-color:#d97706;">⏰ UNIDAD 03 – RUTINAS Y VERBOS REFLEXIVOS</div>
+    <div class="block">
+        <div class="bh" style="background:#ffedd5; color:#7c2d12;">🔄 Reflexivos</div>
+        <div class="def" style="border-left-color:#d97706;">Acción sobre el sujeto: mi, ti, si, ci, vi, si + verbo.</div>
+        <div class="rx">alzarsi: mi alzo, ti alzi, si alza, ci alziamo, vi alzate, si alzano</div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#ffedd5; color:#7c2d12;">📆 Presente regular</div>
+        <div class="three">
+            <div class="mini" style="border-left-color:#d97706;">-are: parl<strong>o</strong>, parl<strong>i</strong>, parl<strong>a</strong>, parliamo, parlate, parlano</div>
+            <div class="mini" style="border-left-color:#d97706;">-ere: viv<strong>o</strong>, viv<strong>i</strong>, viv<strong>e</strong>, viviamo, vivete, vivono</div>
+            <div class="mini" style="border-left-color:#d97706;">-ire: apr<strong>o</strong>, apr<strong>i</strong>, apr<strong>e</strong>, apriamo, aprite, aprono (+ -isc- para finire)</div>
+        </div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#d97706; color:white;">❌ Negación & Preguntas</div>
+        <div class="item"><span class="dot" style="background:#d97706;"></span>non + verbo: <em>non mangio carne</em>.</div>
+        <div class="item"><span class="dot" style="background:#d97706;"></span>Preguntas cerradas: verbo al inicio. Abiertas: <em>Chi? Dove? Quando?</em></div>
+        <div class="exam">🎯 EXAMEN: Formula una pregunta abierta sobre la rutina usando "Che cosa".</div>
+    </div>
+
+    <!-- UNIDAD 4 -->
+    <div class="section-bar" style="border-bottom-color:#7c3aed;">❤️ UNIDAD 04 – GUSTOS Y PRESENTE PROGRESIVO</div>
+    <div class="block">
+        <div class="bh" style="background:#ede9fe; color:#4c1d95;">👍 Piacere</div>
+        <div class="def" style="border-left-color:#7c3aed;">Construcción indirecta: A me piace il gelato. (Me gusta el helado). Plural: piacciono.</div>
+        <div class="rx">Mi piace / Mi piacciono</div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#ede9fe; color:#4c1d95;">⏳ Presente progresivo</div>
+        <div class="flow"><span class="fbox">stare (conj.)</span><span class="farrow">+</span><span class="fbox">gerundio (-ando/-endo)</span></div>
+        <div class="item"><span class="dot" style="background:#7c3aed;"></span><em>Sto studiando</em> (estoy estudiando).</div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#7c3aed; color:white;">📌 Pronombres directos/indirectos</div>
+        <div class="two">
+            <div class="mini">Directos: mi, ti, lo/la, ci, vi, li/le</div>
+            <div class="mini">Indirectos: mi, ti, gli/le, ci, vi, loro/gli</div>
+        </div>
+    </div>
+
+    <!-- UNIDAD 5 -->
+    <div class="section-bar" style="border-bottom-color:#0d9488;">🚀 UNIDAD 05 – PLANES FUTUROS</div>
+    <div class="block s2">
+        <div class="bh" style="background:#ccfbf1; color:#134e4a;">🔮 Futuro prossimo</div>
+        <div class="def" style="border-left-color:#0d9488;">andare (presente) + a + infinitivo → acción inminente.</div>
+        <div class="flow"><span class="fbox">Vado a studiare</span><span class="farrow">→</span><span class="fbox">Voy a estudiar</span></div>
+        <div class="exam">🎯 EXAMEN: "Mañana voy a visitar a mis abuelos." Traduce usando futuro prossimo.</div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#0d9488; color:white;">⚙️ Verbos modales</div>
+        <div class="item"><span class="num-badge" style="background:#0d9488;">1</span> dovere (deber)</div>
+        <div class="item"><span class="num-badge" style="background:#0d9488;">2</span> potere (poder)</div>
+        <div class="item"><span class="num-badge" style="background:#0d9488;">3</span> volere (querer)</div>
+        <div class="item"><span class="num-badge" style="background:#0d9488;">4</span> sapere (saber)</div>
+        <div class="rx">devo, devi, deve, dobbiamo, dovete, devono</div>
+    </div>
+
+    <!-- UNIDAD 6 -->
+    <div class="section-bar" style="border-bottom-color:#b45309;">🛒 UNIDAD 06 – COMPRAS Y PASSATO PROSSIMO</div>
+    <div class="block">
+        <div class="bh" style="background:#ffedd5; color:#7c2d12;">🔢 Números y hora</div>
+        <div class="item">Che ore sono? Sono le due e mezza.</div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#b45309; color:white;">📜 Passato prossimo</div>
+        <div class="def" style="border-left-color:#b45309;">aux (essere/avere) + participio. Concordanza con essere.</div>
+        <div class="rx">Ho mangiato · Sono andato/a</div>
+        <div class="warn">⚠️ Con avere, participio concuerda solo si CD antepuesto (l'ho vista).</div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#b45309; color:white;">🗣️ Imperativo</div>
+        <div class="item">(tu) parla! (Lei) parli! (noi) parliamo! (voi) parlate!</div>
+        <div class="exam">🎯 EXAMEN: Imperativo negativo di "mangiare" (tu).</div>
+    </div>
+
+    <!-- EXTRAS + VERBI IRREGOLARI -->
+    <div class="section-bar" style="border-bottom-color:#a21caf;">📚 EXTRAS & VERBOS IRREGULARES (Gramática universitaria)</div>
+    <div class="block s3">
+        <div class="bh" style="background:#f3e8ff; color:#6b21a8;">🔥 Irregulares frecuentes (presente)</div>
+        <div class="three">
+            <div class="mini"><strong>andare</strong> vado, vai, va, andiamo, andate, vanno</div>
+            <div class="mini"><strong>fare</strong> faccio, fai, fa, facciamo, fate, fanno</div>
+            <div class="mini"><strong>dire</strong> dico, dici, dice, diciamo, dite, dicono</div>
+            <div class="mini"><strong>venire</strong> vengo, vieni, viene, veniamo, venite, vengono</div>
+            <div class="mini"><strong>uscire</strong> esco, esci, esce, usciamo, uscite, escono</div>
+            <div class="mini"><strong>bere</strong> bevo, bevi, beve, beviamo, bevete, bevono</div>
+        </div>
+    </div>
+    <div class="block s2">
+        <div class="bh" style="background:#6b21a8; color:white;">📖 Congiuntivo presente (regolare)</div>
+        <div class="tbl">
+            <table style="width:100%; font-size:11px;">
+                <tr><th>-are</th><th>-ere</th><th>-ire</th></tr>
+                <tr><td>parli, parli, parli, parliamo, parliate, parlino</td><td>viva, viva, viva, viviamo, viviate, vivano</td><td>apra, apra, apra, apriamo, apriate, aprano</td></tr>
+            </table>
+        </div>
+        <div class="warn">⚠️ En italiano el subjuntivo se usa más con verbos de opinión negados: "Non credo che sia vero".</div>
+    </div>
+    <div class="block">
+        <div class="bh" style="background:#6b21a8; color:white;">🎯 Condizionale</div>
+        <div class="rx">parlerei, parleresti, parlerebbe, parleremmo, parlereste, parlerebbero</div>
+        <div class="item">Cortesía: <em>Vorrei un caffè.</em></div>
+    </div>
+
+    <!-- TABLA INTEGRADORA -->
+    <div class="block s3">
+        <div class="bh" style="background:#0f172a; color:#facc15;">📊 TABLA INTEGRADORA – VERBOS CLAVE A1</div>
+        <table class="tbl">
+            <thead><tr><th>Verbo</th><th>Presente (io)</th><th>Passato prossimo</th><th>Imperativo (tu)</th><th>Nota</th></tr></thead>
+            <tbody>
+                <tr><td>essere</td><td>sono</td><td>sono stato/a</td><td>sii!</td><td>auxiliar</td></tr>
+                <tr><td>avere</td><td>ho</td><td>ho avuto</td><td>abbi!</td><td>auxiliar</td></tr>
+                <tr><td>andare</td><td>vado</td><td>sono andato/a</td><td>va'!</td><td>movimiento</td></tr>
+                <tr><td>fare</td><td>faccio</td><td>ho fatto</td><td>fa'!</td><td>irregular</td></tr>
+                <tr><td>piacere</td><td>piaccio</td><td>sono piaciuto/a</td><td>—</td><td>gustar</td></tr>
+            </tbody>
+        </table>
+        <div class="warn" style="margin-top:12px;">🧠 Dato integrador: El passato prossimo se usa para hechos pasados recientes; el passato remoto para hechos históricos lejanos.</div>
+    </div>
+
+    <!-- QUIZ INTERACTIVO -->
+    <div class="quiz-section" id="quizSection">
+        <div class="quiz-header">
+            <div style="font-family:'Oswald'; font-size:18px;">📝 QUIZ DE REPASO — 10 PREGUNTAS</div>
+            <div style="font-size:13px; opacity:0.8;">Marca tu respuesta y descubre si es correcta</div>
+        </div>
+        <div id="quizProgress" style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span id="questionCounter">Pregunta 1 de 10</span>
+            <span id="scoreDisplay">Aciertos: 0/10</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="quizProgressFill" style="width:0%;"></div></div>
+        <div id="quizContainer"></div>
+        <div id="quizResultPanel" class="result-panel" style="display:none;"></div>
+        <button class="reset-btn" id="resetQuizBtn" style="display:none;">🔄 Reiniciar Quiz</button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <span class="ft">REFERENCIAS:</span>
+        <span class="fc">Herrero Prado, M. (2023/24). Curso A1 de Italiano. • García Fernández, J. (2024). El verbo en la gramática italiana. Universidad de Oviedo.</span>
+    </div>
+</div>
+
+<script>
+(function(){
+    const quizData = [
+        { q: "¿Qué artículo definido se usa ante 'studente' (masculino singular)?", opts: ["Il", "Lo", "La", "I"], correct: 1, explanation: "Se usa 'lo' ante s+consonante, z, gn, ps, x, y semiconsonante." },
+        { q: "Coniuga 'essere' para 'loro':", opts: ["sono", "siete", "è", "siamo"], correct: 0, explanation: "Loro sono = ellos/ellas son." },
+        { q: "¿Cómo se dice 'Me gusta la pizza'?", opts: ["Mi piace la pizza", "Io piaccio la pizza", "Mi piacciono la pizza", "A me piace pizza"], correct: 0, explanation: "Piacere concuerda con el objeto (la pizza → singular → piace)." },
+        { q: "¿Qué auxiliar usa 'andare' en passato prossimo?", opts: ["avere", "essere", "ambos", "ninguno"], correct: 1, explanation: "Verbos de movimiento usan essere." },
+        { q: "¿Cuál es el verbo modal que expresa obligación?", opts: ["potere", "volere", "dovere", "sapere"], correct: 2, explanation: "Dovere = deber / tener que." },
+        { q: "Imperativo afirmativo de 'parlare' (tu):", opts: ["parla", "parli", "parlate", "parlare"], correct: 0, explanation: "Para -are, la forma tu es -a: parla!" },
+        { q: "Pronombre indirecto para 'a Maria' (le):", opts: ["lo", "la", "le", "gli"], correct: 2, explanation: "Le (a lei) / gli (a lui). Maria es femenino → le." },
+        { q: "¿Cómo se expresa futuro próximo con 'andare'?", opts: ["andrò", "vado a + inf", "starò per", "avrò"], correct: 1, explanation: "Vado a mangiare = voy a comer." },
+        { q: "Verbo 'saber' (conocimiento/habilidad) en italiano:", opts: ["conoscere", "sapere", "potere", "capire"], correct: 1, explanation: "Sapere + infinitivo (sé nadar). Conoscere = conocer personas/lugares." },
+        { q: "Presente de 'andare' (io):", opts: ["ando", "vado", "vai", "andiamo"], correct: 1, explanation: "Irregular: io vado." }
+    ];
+
+    let userAnswers = new Array(10).fill(null);
+    let correctCount = 0;
+    let answeredCount = 0;
+    const container = document.getElementById('quizContainer');
+    const progressFill = document.getElementById('quizProgressFill');
+    const counterSpan = document.getElementById('questionCounter');
+    const scoreSpan = document.getElementById('scoreDisplay');
+    const resultPanel = document.getElementById('quizResultPanel');
+    const resetBtn = document.getElementById('resetQuizBtn');
+
+    function renderQuiz() {
+        let html = '';
+        quizData.forEach((item, idx) => {
+            const qNum = idx+1;
+            html += `<div class="qcard" id="qcard${idx}"><p class="qnum">Pregunta ${qNum} / 10</p><p class="qtext">${item.q}</p><div class="qopts">`;
+            const letters = ['A', 'B', 'C', 'D'];
+            item.opts.forEach((opt, optIdx) => {
+                const isCorrect = (optIdx === item.correct);
+                html += `<button class="qbtn" data-q="${idx}" data-opt="${optIdx}" data-correct="${isCorrect}">${letters[optIdx]}) ${opt}</button>`;
+            });
+            html += `</div><div class="qfeedback" id="fb${idx}" style="display:none;"></div></div>`;
+        });
+        container.innerHTML = html;
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const percent = (answeredCount / 10) * 100;
+        progressFill.style.width = percent + '%';
+        counterSpan.textContent = `Pregunta ${answeredCount} de 10`;
+        scoreSpan.textContent = `Aciertos: ${correctCount}/10`;
+        if (answeredCount === 10) {
+            showFinalResult();
+        }
+    }
+
+    function showFinalResult() {
+        let message = '';
+        let bg = '#fef2f2';
+        if (correctCount >= 8) { message = '¡Excelente dominio del italiano A1! 🌟'; bg = '#dcfce7'; }
+        else if (correctCount >= 5) { message = '¡Buen avance! Sigue repasando los verbos irregulares. 📚'; bg = '#fef9c3'; }
+        else { message = 'Necesitas repasar el material. Vuelve al canvas. 🔁'; bg = '#fee2e2'; }
+        resultPanel.style.display = 'block';
+        resultPanel.style.background = bg;
+        resultPanel.innerHTML = `<strong>${correctCount}/10 correctas</strong> — ${message}`;
+        resetBtn.style.display = 'inline-block';
+    }
+
+    function handleOptionClick(e) {
+        const btn = e.target.closest('.qbtn');
+        if (!btn) return;
+        if (btn.disabled) return;
+        const qIdx = parseInt(btn.dataset.q);
+        const optIdx = parseInt(btn.dataset.opt);
+        const isCorrect = btn.dataset.correct === 'true';
+        const qcard = document.getElementById(`qcard${qIdx}`);
+        const allBtns = qcard.querySelectorAll('.qbtn');
+        const feedbackDiv = document.getElementById(`fb${qIdx}`);
+        const correctOptIndex = quizData[qIdx].correct;
+
+        // Marcar
+        allBtns.forEach((b, i) => {
+            b.disabled = true;
+            if (i === correctOptIndex) {
+                b.classList.add('correct-answer');
+                if (i === optIdx && isCorrect) b.textContent = '✅ ' + b.textContent;
+                else if (i === optIdx && !isCorrect) b.textContent = '❌ ' + b.textContent;
+            } else {
+                if (i === optIdx && !isCorrect) b.textContent = '❌ ' + b.textContent;
+            }
+        });
+        // Si el usuario acertó
+        if (isCorrect) {
+            correctCount++;
+            feedbackDiv.style.display = 'block';
+            feedbackDiv.style.background = '#f0fdf4';
+            feedbackDiv.style.borderLeft = '3px solid #16a34a';
+            feedbackDiv.innerHTML = `✅ ¡Correcto! ${quizData[qIdx].explanation}`;
+        } else {
+            feedbackDiv.style.display = 'block';
+            feedbackDiv.style.background = '#fef2f2';
+            feedbackDiv.style.borderLeft = '3px solid #dc2626';
+            const correctLetter = String.fromCharCode(65 + correctOptIndex);
+            feedbackDiv.innerHTML = `❌ Incorrecto. La respuesta correcta es ${correctLetter}. ${quizData[qIdx].explanation}`;
+        }
+        answeredCount++;
+        updateProgress();
+    }
+
+    function resetQuiz() {
+        userAnswers = new Array(10).fill(null);
+        correctCount = 0; answeredCount = 0;
+        renderQuiz();
+        resultPanel.style.display = 'none';
+        resetBtn.style.display = 'none';
+        progressFill.style.width = '0%';
+        counterSpan.textContent = 'Pregunta 0 de 10';
+        scoreSpan.textContent = 'Aciertos: 0/10';
+    }
+
+    container.addEventListener('click', handleOptionClick);
+    resetBtn.addEventListener('click', resetQuiz);
+    renderQuiz();
+})();
+</script>
+</body>
+</html>
