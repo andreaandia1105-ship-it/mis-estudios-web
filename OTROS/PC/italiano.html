@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italiano A1–A2 · Studio Interattivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f14;--bg2:#13161e;--bg3:#1a1e29;--bg4:#222840;
+  --green:#4ade80;--green2:#22c55e;--yellow:#fbbf24;--red:#f87171;
+  --blue:#60a5fa;--purple:#a78bfa;--pink:#f472b6;--teal:#2dd4bf;
+  --text:#f1f5f9;--muted:#94a3b8;--border:#2a3050;
+  --card:#161b2e;--card2:#1e2540;
+  --font:'DM Sans',sans-serif;--serif:'Playfair Display',serif;--mono:'DM Mono',monospace;
+  --r:14px;--r2:20px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,15,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;gap:8px}
+.nav-logo{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--green);margin-right:auto;cursor:pointer}
+.nav-logo span{color:var(--text)}
+.nav-btn{background:none;border:none;color:var(--muted);font-family:var(--font);font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;cursor:pointer;transition:.2s;white-space:nowrap}
+.nav-btn:hover{color:var(--text);background:var(--bg3)}
+.nav-btn.active{color:var(--green);background:rgba(74,222,128,.1)}
+
+/* SECTIONS */
+.section{display:none;padding:80px 24px 40px;max-width:1100px;margin:0 auto;min-height:100vh}
+.section.show{display:block}
+
+/* HOME */
+.hero{text-align:center;padding:60px 0 40px}
+.hero h1{font-family:var(--serif);font-size:clamp(38px,7vw,80px);font-weight:900;line-height:1.1;margin-bottom:16px}
+.hero h1 em{color:var(--green);font-style:normal}
+.hero p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto 36px;line-height:1.7}
+.badge-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.badge{background:var(--bg3);border:1px solid var(--border);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;color:var(--muted)}
+.badge.g{border-color:rgba(74,222,128,.4);color:var(--green);background:rgba(74,222,128,.07)}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.home-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:24px;cursor:pointer;transition:.25s;text-align:left}
+.home-card:hover{border-color:var(--green);transform:translateY(-3px);background:var(--card2)}
+.hc-icon{font-size:32px;margin-bottom:14px}
+.hc-title{font-family:var(--serif);font-size:18px;font-weight:700;margin-bottom:6px}
+.hc-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.hc-tag{display:inline-block;margin-top:12px;font-size:11px;font-weight:600;color:var(--green);background:rgba(74,222,128,.1);padding:3px 10px;border-radius:12px}
+
+/* HEADINGS */
+.sec-title{font-family:var(--serif);font-size:clamp(26px,5vw,40px);font-weight:700;margin-bottom:6px}
+.sec-sub{color:var(--muted);font-size:14px;margin-bottom:32px}
+
+/* TABS */
+.tab-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;background:var(--bg2);padding:6px;border-radius:12px;width:fit-content}
+.tab{background:none;border:none;color:var(--muted);font-family:var(--font);font-size:13px;font-weight:500;padding:7px 16px;border-radius:8px;cursor:pointer;transition:.2s}
+.tab.active{background:var(--card2);color:var(--text);border:1px solid var(--border)}
+
+/* PROGRESS BAR */
+.prog-outer{background:var(--bg3);border-radius:99px;height:8px;overflow:hidden;margin-bottom:6px}
+.prog-inner{height:100%;background:linear-gradient(90deg,var(--green),var(--teal));border-radius:99px;transition:.5s}
+.prog-label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:16px}
+
+/* FLASHCARDS */
+.fc-controls{display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-controls select{background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:var(--font);font-size:13px;padding:8px 12px;border-radius:10px;cursor:pointer}
+.fc-scene{perspective:1000px;width:100%;max-width:520px;margin:0 auto 24px;height:280px}
+.fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:.6s;cursor:pointer}
+.fc-card.flipped{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center}
+.fc-front{background:var(--card);border:2px solid var(--border)}
+.fc-back{background:var(--card2);border:2px solid var(--green);transform:rotateY(180deg)}
+.fc-lang{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.fc-word{font-family:var(--serif);font-size:clamp(26px,5vw,40px);font-weight:700;line-height:1.2;margin-bottom:8px}
+.fc-word.it{color:var(--green)}
+.fc-hint{font-size:13px;color:var(--muted);line-height:1.5}
+.fc-ex{font-size:13px;color:var(--yellow);font-style:italic;margin-top:8px}
+.fc-nav{display:flex;gap:12px;justify-content:center;align-items:center}
+.btn{background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:var(--font);font-size:14px;font-weight:500;padding:10px 22px;border-radius:10px;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--card2);border-color:var(--green)}
+.btn.primary{background:var(--green);color:#000;border-color:var(--green);font-weight:600}
+.btn.primary:hover{background:var(--green2)}
+.btn.danger{border-color:var(--red);color:var(--red)}
+.btn.danger:hover{background:rgba(248,113,113,.1)}
+.fc-counter{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.fc-tip{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
+
+/* GRAMMAR EXERCISES */
+.ex-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:24px 28px;margin-bottom:16px}
+.ex-num{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.ex-q{font-size:16px;line-height:1.6;margin-bottom:16px;color:var(--text)}
+.ex-q strong{color:var(--yellow);font-weight:600}
+.blank-input{background:var(--bg3);border:1.5px solid var(--border);color:var(--text);font-family:var(--mono);font-size:15px;padding:6px 12px;border-radius:8px;width:160px;text-align:center;transition:.2s;outline:none}
+.blank-input:focus{border-color:var(--blue)}
+.blank-input.ok{border-color:var(--green);background:rgba(74,222,128,.08);color:var(--green)}
+.blank-input.no{border-color:var(--red);background:rgba(248,113,113,.08);color:var(--red)}
+.mc-opts{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.mc-btn{background:var(--bg3);border:1.5px solid var(--border);color:var(--text);font-family:var(--font);font-size:14px;padding:10px 16px;border-radius:10px;cursor:pointer;text-align:left;transition:.2s}
+.mc-btn:hover:not([disabled]){border-color:var(--blue);background:var(--card2)}
+.mc-btn.ok{border-color:var(--green);background:rgba(74,222,128,.1);color:var(--green);font-weight:500}
+.mc-btn.no{border-color:var(--red);background:rgba(248,113,113,.1);color:var(--red)}
+.mc-btn[disabled]{cursor:not-allowed;opacity:.7}
+.ex-feedback{margin-top:12px;padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.6;display:none}
+.ex-feedback.ok{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:#86efac}
+.ex-feedback.no{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:#fca5a5}
+.ex-footer{display:flex;gap:12px;align-items:center;margin-top:28px;flex-wrap:wrap}
+.score-badge{background:var(--bg3);border:1px solid var(--border);padding:8px 18px;border-radius:10px;font-size:13px;font-weight:500}
+.score-badge span{color:var(--green);font-weight:700}
+
+/* SIMULATOR (Test A2) */
+.sim-header{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.sim-section-badge{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--purple)}
+.sim-timer{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--yellow);margin-left:auto}
+.sim-q{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:24px 28px;margin-bottom:16px}
+.sim-q-text{font-size:15px;line-height:1.7;margin-bottom:16px}
+.sim-opts{display:flex;flex-direction:column;gap:8px}
+.sim-opt{background:var(--bg3);border:1.5px solid var(--border);color:var(--text);font-family:var(--font);font-size:14px;padding:11px 16px;border-radius:10px;cursor:pointer;text-align:left;transition:.2s;display:flex;align-items:center;gap:10px}
+.sim-opt:hover:not([disabled]):not(.chosen){border-color:var(--blue)}
+.sim-opt.chosen{border-color:var(--purple);background:rgba(167,139,250,.1);color:var(--purple)}
+.sim-opt.ok{border-color:var(--green);background:rgba(74,222,128,.1);color:var(--green)}
+.sim-opt.no{border-color:var(--red);background:rgba(248,113,113,.08);color:var(--red)}
+.sim-opt[disabled]{cursor:default}
+.opt-letter{width:26px;height:26px;border-radius:50%;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.sim-text-box{width:100%;background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font);font-size:14px;padding:12px 16px;min-height:120px;resize:vertical;outline:none;line-height:1.7}
+.sim-text-box:focus{border-color:var(--purple)}
+.result-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:32px;text-align:center;display:none}
+.result-score{font-family:var(--serif);font-size:56px;font-weight:900;margin:16px 0 8px}
+.result-score.pass{color:var(--green)}
+.result-score.fail{color:var(--red)}
+.result-msg{font-size:16px;color:var(--muted);margin-bottom:24px}
+.result-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.rb-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.rb-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.rb-val{font-size:22px;font-weight:700;font-family:var(--mono)}
+
+/* GAME — match pairs */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.match-col{display:flex;flex-direction:column;gap:8px}
+.match-item{background:var(--bg3);border:2px solid var(--border);border-radius:12px;padding:12px 16px;cursor:pointer;transition:.2s;font-size:14px;font-weight:500;text-align:center;min-height:52px;display:flex;align-items:center;justify-content:center;line-height:1.4}
+.match-item:hover:not(.matched):not(.selected){border-color:var(--blue)}
+.match-item.selected{border-color:var(--yellow);background:rgba(251,191,36,.1);color:var(--yellow)}
+.match-item.matched{border-color:var(--green);background:rgba(74,222,128,.1);color:var(--green);cursor:default}
+.match-item.wrong{border-color:var(--red);background:rgba(248,113,113,.1);animation:shake .3s}
+.match-item.it-word{color:var(--teal)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* VF GAME */
+.vf-card{background:var(--card);border:2px solid var(--border);border-radius:var(--r2);padding:28px 32px;text-align:center;max-width:600px;margin:0 auto 20px}
+.vf-sentence{font-size:18px;line-height:1.6;margin-bottom:24px;font-family:var(--serif)}
+.vf-row{display:flex;gap:14px;justify-content:center}
+.vf-btn{padding:12px 36px;border-radius:12px;border:2px solid;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:.2s}
+.vf-btn.v{border-color:var(--green);color:var(--green);background:rgba(74,222,128,.08)}
+.vf-btn.v:hover:not([disabled]){background:rgba(74,222,128,.2)}
+.vf-btn.f{border-color:var(--red);color:var(--red);background:rgba(248,113,113,.08)}
+.vf-btn.f:hover:not([disabled]){background:rgba(248,113,113,.2)}
+.vf-btn[disabled]{opacity:.6;cursor:default}
+.vf-result{margin-top:16px;font-size:14px;border-radius:10px;padding:10px 16px;display:none}
+
+/* CLOZE GAME */
+.cloze-sentence{font-size:17px;line-height:2;margin-bottom:20px;font-family:var(--serif)}
+.cloze-blank{display:inline-block;border-bottom:2.5px solid var(--blue);min-width:80px;padding:0 6px;text-align:center;cursor:pointer;font-weight:600;color:var(--blue);transition:.2s}
+.cloze-blank.filled{color:var(--text);border-color:var(--border)}
+.cloze-blank.ok{color:var(--green);border-color:var(--green)}
+.cloze-blank.no{color:var(--red);border-color:var(--red)}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;padding:16px;background:var(--bg3);border-radius:12px;border:1px solid var(--border)}
+.word-chip{background:var(--card2);border:1.5px solid var(--border);color:var(--text);padding:6px 14px;border-radius:20px;cursor:pointer;font-size:14px;font-weight:500;transition:.2s;user-select:none}
+.word-chip:hover:not(.used){border-color:var(--blue);color:var(--blue)}
+.word-chip.used{opacity:.35;cursor:default}
+.word-chip.selected{border-color:var(--yellow);color:var(--yellow);background:rgba(251,191,36,.1)}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  nav{padding:0 12px;gap:4px}
+  .nav-btn{font-size:11px;padding:5px 8px}
+  .section{padding:72px 14px 32px}
+  .match-grid{grid-template-columns:1fr 1fr;gap:8px}
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade{animation:fadeIn .35s ease both}
+.section.show .home-card,.section.show .ex-card,.section.show .sim-q{animation:fadeIn .35s ease both}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:4px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="go('home')">🇮🇹 <span>Italiano</span></div>
+  <button class="nav-btn active" onclick="go('home')">Inicio</button>
+  <button class="nav-btn" onclick="go('flash')">Flashcards</button>
+  <button class="nav-btn" onclick="go('gram')">Gramática</button>
+  <button class="nav-btn" onclick="go('sim')">Test A2</button>
+  <button class="nav-btn" onclick="go('game')">Juegos</button>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div id="sec-home" class="section show">
+  <div class="hero fade">
+    <h1>Studio<br><em>Italiano</em><br>A1 · A2</h1>
+    <p>Aplicación interactiva basada en los cursos y el eserciziario oficial A2. Practica vocabulario, gramática, el test real y juegos de repaso.</p>
+    <div class="badge-row">
+      <span class="badge g">📖 500+ términos</span>
+      <span class="badge g">✏️ Gramática A1–A2</span>
+      <span class="badge g">📋 Simulador Test A2</span>
+      <span class="badge g">🎮 3 tipos de juego</span>
+      <span class="badge">Sin servidor · GitHub Pages</span>
+    </div>
+  </div>
+  <div class="home-grid">
+    <div class="home-card" onclick="go('flash')">
+      <div class="hc-icon">🃏</div>
+      <div class="hc-title">Flashcards</div>
+      <div class="hc-desc">Vocabulario por categorías: familia, trabajo, salud, burocracia, viajes, verbos y más. Voltea la tarjeta y practica.</div>
+      <span class="hc-tag">A1 + A2</span>
+    </div>
+    <div class="home-card" onclick="go('gram')">
+      <div class="hc-icon">✏️</div>
+      <div class="hc-title">Ejercicios de gramática</div>
+      <div class="hc-desc">Conjuga verbos, completa con el tiempo correcto, elige artículos y preposiciones. Con corrección inmediata.</div>
+      <span class="hc-tag">A1 + A2</span>
+    </div>
+    <div class="home-card" onclick="go('sim')">
+      <div class="hc-icon">📋</div>
+      <div class="hc-title">Simulador Test A2</div>
+      <div class="hc-desc">Formato exacto del examen oficial: comprensione scritta con V/F y opción múltiple, + interazione scritta.</div>
+      <span class="hc-tag">Test oficial A2</span>
+    </div>
+    <div class="home-card" onclick="go('game')">
+      <div class="hc-icon">🎮</div>
+      <div class="hc-title">Juegos de repaso</div>
+      <div class="hc-desc">Unir pares IT↔ES, Vero/Falso de cultura italiana, Cloze (completa el espacio). Rápido y adictivo.</div>
+      <span class="hc-tag">Interactivo</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FLASHCARDS ===== -->
+<div id="sec-flash" class="section">
+  <div class="sec-title">🃏 Flashcards</div>
+  <div class="sec-sub">Haz clic en la tarjeta para ver la traducción · Usa las flechas para avanzar</div>
+  <div class="fc-controls">
+    <label style="font-size:13px;color:var(--muted)">Categoría:</label>
+    <select id="fc-cat" onchange="initFlash()">
+      <option value="0">📚 Todo mezclado</option>
+      <option value="1">👨‍👩‍👧 Familia y personas</option>
+      <option value="2">🏠 Casa y objetos</option>
+      <option value="3">🍕 Comida y bebida</option>
+      <option value="4">💼 Trabajo y estudios</option>
+      <option value="5">🏥 Salud y cuerpo</option>
+      <option value="6">🚇 Transportes y ciudad</option>
+      <option value="7">📝 Burocracia e Italia</option>
+      <option value="8">🔤 Verbos esenciales</option>
+      <option value="9">🎭 Adjetivos y descripciones</option>
+    </select>
+    <button class="btn" onclick="shuffleFlash()">🔀 Mezclar</button>
+  </div>
+  <div class="prog-label"><span id="fc-prog-txt">Tarjeta 1 de 30</span><span id="fc-known">✅ 0 sabidas</span></div>
+  <div class="prog-outer"><div class="prog-inner" id="fc-prog-bar" style="width:3%"></div></div>
+  <div class="fc-scene">
+    <div class="fc-card" id="fc-card" onclick="flipCard()">
+      <div class="fc-front">
+        <div class="fc-lang">Italiano 🇮🇹</div>
+        <div class="fc-word it" id="fc-it"></div>
+        <div class="fc-hint" id="fc-cat-label"></div>
+      </div>
+      <div class="fc-back">
+        <div class="fc-lang">Español 🇪🇸</div>
+        <div class="fc-word" id="fc-es"></div>
+        <div class="fc-ex" id="fc-ex"></div>
+      </div>
+    </div>
+  </div>
+  <div class="fc-tip">👆 Toca la tarjeta para voltear</div>
+  <div class="fc-nav" style="margin-top:16px">
+    <button class="btn danger" onclick="markCard(false)" title="No la sabía">✗ No sabía</button>
+    <button class="btn" onclick="prevCard()">← Anterior</button>
+    <span class="fc-counter" id="fc-cnt">1 / 30</span>
+    <button class="btn" onclick="nextCard()">Siguiente →</button>
+    <button class="btn primary" onclick="markCard(true)" title="La sabía">✓ Sabía</button>
+  </div>
+</div>
+
+<!-- ===== GRAMÁTICA ===== -->
+<div id="sec-gram" class="section">
+  <div class="sec-title">✏️ Ejercicios de gramática</div>
+  <div class="sec-sub">Responde cada ejercicio · La corrección aparece al instante</div>
+  <div class="tab-row">
+    <button class="tab active" onclick="setGramTab('verb')">🔤 Verbos</button>
+    <button class="tab" onclick="setGramTab('art')">📌 Artículos</button>
+    <button class="tab" onclick="setGramTab('prep')">🔗 Preposiciones</button>
+    <button class="tab" onclick="setGramTab('mc')">🎯 Opción múltiple</button>
+  </div>
+  <div id="gram-container"></div>
+  <div class="ex-footer">
+    <div class="score-badge">Aciertos: <span id="gram-score">0</span> / <span id="gram-total">0</span></div>
+    <button class="btn primary" onclick="checkGram()">✔ Corregir todo</button>
+    <button class="btn" onclick="resetGram()">🔄 Nuevo ejercicio</button>
+  </div>
+</div>
+
+<!-- ===== SIMULADOR A2 ===== -->
+<div id="sec-sim" class="section">
+  <div class="sec-title">📋 Simulador Test A2</div>
+  <div class="sec-sub">Formato oficial: comprensione scritta (35 pts) + interazione scritta (35 pts) · Meta: 56/70 (80%)</div>
+  <div id="sim-start" style="text-align:center;padding:40px 0">
+    <div style="font-size:48px;margin-bottom:16px">📋</div>
+    <h2 style="font-family:var(--serif);font-size:28px;margin-bottom:10px">Simulazione Test A2</h2>
+    <p style="color:var(--muted);font-size:15px;max-width:480px;margin:0 auto 28px;line-height:1.7">El test tiene 2 secciones escritas. Necesitas <strong style="color:var(--green)">80%</strong> del puntaje para aprobar (igual que el examen oficial).</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:480px;margin:0 auto 28px">
+      <div class="rb-card"><div class="rb-label">Comprensione scritta</div><div class="rb-val" style="color:var(--blue)">35 pts</div></div>
+      <div class="rb-card"><div class="rb-label">Interazione scritta</div><div class="rb-val" style="color:var(--purple)">35 pts</div></div>
+      <div class="rb-card"><div class="rb-label">Total para aprobar</div><div class="rb-val" style="color:var(--green)">56/70</div></div>
+    </div>
+    <button class="btn primary" onclick="startSim()" style="font-size:15px;padding:14px 32px">▶ Iniciar simulación</button>
+  </div>
+  <div id="sim-body" style="display:none">
+    <div class="sim-header">
+      <div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px">Sección actual</div>
+        <div id="sim-sec-label" style="font-weight:600;font-size:15px">Comprensione scritta</div>
+      </div>
+      <div class="sim-section-badge" id="sim-sec-badge">Parte 1 / 2</div>
+      <div style="margin-left:auto;text-align:right">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px">Puntaje acumulado</div>
+        <div class="sim-timer" id="sim-score-disp">0 / 70</div>
+      </div>
+    </div>
+    <div id="sim-questions"></div>
+    <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap" id="sim-nav">
+      <button class="btn primary" onclick="advanceSim()" id="sim-next-btn">Siguiente sección →</button>
+      <div class="score-badge" id="sim-sec-score">Sección: 0 pts</div>
+    </div>
+  </div>
+  <div class="result-panel" id="sim-result">
+    <div style="font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Resultado final</div>
+    <div class="result-score" id="res-score">0/70</div>
+    <div class="result-msg" id="res-msg"></div>
+    <div class="result-breakdown">
+      <div class="rb-card"><div class="rb-label">Comprensione scritta</div><div class="rb-val" id="rb-l">0/35</div></div>
+      <div class="rb-card"><div class="rb-label">Interazione scritta</div><div class="rb-val" id="rb-i">0/35</div></div>
+      <div class="rb-card"><div class="rb-label">Porcentaje</div><div class="rb-val" id="rb-pct">0%</div></div>
+    </div>
+    <button class="btn primary" onclick="resetSim()">🔄 Nuevo simulacro</button>
+  </div>
+</div>
+
+<!-- ===== JUEGOS ===== -->
+<div id="sec-game" class="section">
+  <div class="sec-title">🎮 Juegos de repaso</div>
+  <div class="sec-sub">Aprende jugando · Tres modos diferentes</div>
+  <div class="tab-row">
+    <button class="tab active" onclick="setGameTab('match')">🔗 Unir pares</button>
+    <button class="tab" onclick="setGameTab('vf')">✅ Vero / Falso</button>
+    <button class="tab" onclick="setGameTab('cloze')">📝 Cloze</button>
+  </div>
+  <div id="game-container"></div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const VOCAB = {
+  1:[ // Familia y personas
+    {it:"la madre",es:"la madre",ex:"Mia madre si chiama Anna."},
+    {it:"il padre",es:"el padre",ex:"Mio padre lavora a Milano."},
+    {it:"il fratello",es:"el hermano",ex:"Ho un fratello più giovane."},
+    {it:"la sorella",es:"la hermana",ex:"Mia sorella abita a Roma."},
+    {it:"il figlio",es:"el hijo",ex:"Il figlio di Maria ha 5 anni."},
+    {it:"la figlia",es:"la hija",ex:"Hanno due figlie."},
+    {it:"il marito",es:"el marido",ex:"Suo marito è medico."},
+    {it:"la moglie",es:"la esposa",ex:"La moglie di Carlo lavora."},
+    {it:"i genitori",es:"los padres / los progenitores",ex:"I miei genitori abitano a Napoli."},
+    {it:"il nonno",es:"el abuelo",ex:"Il nonno ha 80 anni."},
+    {it:"la nonna",es:"la abuela",ex:"La nonna cucina bene."},
+    {it:"il bambino",es:"el niño",ex:"Il bambino gioca in giardino."},
+    {it:"il ragazzo",es:"el chico / el novio",ex:"Il ragazzo studia all'università."},
+    {it:"la ragazza",es:"la chica / la novia",ex:"La ragazza legge un libro."},
+    {it:"l'amico",es:"el amigo",ex:"Il mio amico si chiama Marco."},
+    {it:"il collega",es:"el colega",ex:"Il mio collega è molto simpatico."},
+    {it:"il vicino",es:"el vecino",ex:"Il vicino di casa è gentile."},
+    {it:"sposato/a",es:"casado/a",ex:"Sono sposato da due anni."},
+    {it:"single",es:"soltero/a",ex:"Lei è ancora single."},
+    {it:"vedovo/a",es:"viudo/a",ex:"È vedova da tre anni."},
+  ],
+  2:[ // Casa
+    {it:"la casa",es:"la casa",ex:"La mia casa è grande."},
+    {it:"l'appartamento",es:"el apartamento",ex:"Affitto un appartamento in centro."},
+    {it:"la cucina",es:"la cocina",ex:"La cucina è piccola ma funzionale."},
+    {it:"il bagno",es:"el baño",ex:"Il bagno è al primo piano."},
+    {it:"la camera da letto",es:"el dormitorio",ex:"La camera da letto ha due finestre."},
+    {it:"il salotto",es:"el salón",ex:"In salotto c'è un divano comodo."},
+    {it:"il frigorifero",es:"la nevera",ex:"Il frigorifero è vuoto."},
+    {it:"la lavatrice",es:"la lavadora",ex:"La lavatrice è rotta."},
+    {it:"il letto",es:"la cama",ex:"Il letto matrimoniale è comodo."},
+    {it:"la sedia",es:"la silla",ex:"Metti la sedia vicino al tavolo."},
+    {it:"il tavolo",es:"la mesa",ex:"Il tavolo è in cucina."},
+    {it:"la finestra",es:"la ventana",ex:"Apri la finestra, per favore."},
+    {it:"la porta",es:"la puerta",ex:"Chiudi la porta!"},
+    {it:"l'ascensore",es:"el ascensor",ex:"L'ascensore non funziona."},
+    {it:"il condominio",es:"el edificio de pisos",ex:"Il condominio ha 6 piani."},
+    {it:"l'affitto",es:"el alquiler",ex:"Pago 600 euro di affitto al mese."},
+    {it:"il proprietario",es:"el propietario / el dueño",ex:"Il proprietario abita al terzo piano."},
+    {it:"il deposito cauzionale",es:"la fianza",ex:"Ho dato due mesi di deposito."},
+  ],
+  3:[ // Comida
+    {it:"il pane",es:"el pan",ex:"Compro il pane ogni mattina."},
+    {it:"la pasta",es:"la pasta",ex:"La pasta è il piatto preferito degli italiani."},
+    {it:"la pizza",es:"la pizza",ex:"Stasera mangio la pizza."},
+    {it:"il riso",es:"el arroz",ex:"Preparo il riso con le verdure."},
+    {it:"la carne",es:"la carne",ex:"Non mangio carne."},
+    {it:"il pesce",es:"el pescado",ex:"Il pesce è fresco oggi."},
+    {it:"le verdure",es:"las verduras",ex:"Mangio tante verdure."},
+    {it:"la frutta",es:"la fruta",ex:"La frutta di stagione è buona."},
+    {it:"l'acqua",es:"el agua",ex:"Un litro d'acqua, per favore."},
+    {it:"il vino",es:"el vino",ex:"Un bicchiere di vino rosso."},
+    {it:"il caffè",es:"el café",ex:"Un caffè, per favore!"},
+    {it:"il latte",es:"la leche",ex:"Bevo il latte la mattina."},
+    {it:"il pranzo",es:"el almuerzo",ex:"Il pranzo è alle 13."},
+    {it:"la cena",es:"la cena",ex:"La cena è alle 20."},
+    {it:"la colazione",es:"el desayuno",ex:"Faccio colazione alle 7."},
+    {it:"il ristorante",es:"el restaurante",ex:"Andiamo al ristorante stasera?"},
+    {it:"il menu",es:"el menú",ex:"Il menu del giorno costa 12 euro."},
+    {it:"il conto",es:"la cuenta",ex:"Il conto, per favore!"},
+    {it:"la ricetta",es:"la receta",ex:"Hai la ricetta della carbonara?"},
+    {it:"cucinare",es:"cocinar",ex:"Mi piace cucinare."},
+  ],
+  4:[ // Trabajo
+    {it:"il lavoro",es:"el trabajo",ex:"Ho trovato un lavoro nuovo."},
+    {it:"l'azienda",es:"la empresa",ex:"Lavoro in un'azienda internazionale."},
+    {it:"il contratto",es:"el contrato",ex:"Ho un contratto a tempo determinato."},
+    {it:"lo stipendio",es:"el salario",ex:"Il mio stipendio è di 1200 euro."},
+    {it:"il datore di lavoro",es:"el empleador / el patrón",ex:"Il mio datore di lavoro è molto esigente."},
+    {it:"il/la collega",es:"el/la colega",ex:"I miei colleghi sono simpatici."},
+    {it:"l'ufficio",es:"la oficina",ex:"L'ufficio è al terzo piano."},
+    {it:"il turno",es:"el turno",ex:"Faccio il turno di notte."},
+    {it:"la disoccupazione",es:"el desempleo",ex:"La disoccupazione è aumentata."},
+    {it:"cercare lavoro",es:"buscar trabajo",ex:"Sto cercando lavoro da tre mesi."},
+    {it:"il curriculum",es:"el currículum",ex:"Manda il tuo curriculum vitae."},
+    {it:"il colloquio",es:"la entrevista",ex:"Ho un colloquio domani."},
+    {it:"il badante",es:"el/la cuidador/a",ex:"È badante per un anziano."},
+    {it:"l'orario di lavoro",es:"el horario de trabajo",ex:"Il mio orario è dalle 9 alle 17."},
+    {it:"la fabbrica",es:"la fábrica",ex:"Lavora in una fabbrica di scarpe."},
+    {it:"il medico",es:"el médico",ex:"Il medico visita i pazienti."},
+    {it:"l'infermiere/a",es:"el/la enfermero/a",ex:"L'infermiera è molto gentile."},
+    {it:"l'insegnante",es:"el/la maestro/a",ex:"Sono insegnante di italiano."},
+  ],
+  5:[ // Salud
+    {it:"la salute",es:"la salud",ex:"La salute è importante."},
+    {it:"il medico di base",es:"el médico de cabecera",ex:"Devo andare dal medico di base."},
+    {it:"il pronto soccorso",es:"la urgencias",ex:"Vai al pronto soccorso subito!"},
+    {it:"l'ospedale",es:"el hospital",ex:"L'ospedale è lontano da qui."},
+    {it:"la farmacia",es:"la farmacia",ex:"La farmacia è chiusa di domenica."},
+    {it:"la medicina / il farmaco",es:"el medicamento",ex:"Prendi questa medicina tre volte al giorno."},
+    {it:"la ricetta medica",es:"la receta médica",ex:"Ho bisogno della ricetta."},
+    {it:"la tessera sanitaria",es:"la tarjeta sanitaria",ex:"Porta la tessera sanitaria."},
+    {it:"l'ambulatorio",es:"el consultorio médico",ex:"L'ambulatorio apre alle 8."},
+    {it:"la visita medica",es:"la consulta médica",ex:"Ho una visita medica domani."},
+    {it:"il mal di testa",es:"el dolor de cabeza",ex:"Ho il mal di testa da stamattina."},
+    {it:"la febbre",es:"la fiebre",ex:"Ho la febbre a 38."},
+    {it:"il raffreddore",es:"el resfriado",ex:"Ho il raffreddore."},
+    {it:"l'antibiotico",es:"el antibiótico",ex:"Il dottore ha prescritto un antibiotico."},
+    {it:"la fasciatura",es:"el vendaje",ex:"Cambiare la fasciatura ogni giorno."},
+    {it:"stare male",es:"estar mal / encontrarse mal",ex:"Mi sento male."},
+    {it:"stare bene",es:"estar bien",ex:"Come stai? Sto bene, grazie."},
+    {it:"l'allergia",es:"la alergia",ex:"Sono allergico al pelo degli animali."},
+  ],
+  6:[ // Transportes
+    {it:"il treno",es:"el tren",ex:"Il treno è in ritardo."},
+    {it:"l'autobus",es:"el autobús",ex:"Prendo l'autobus ogni mattina."},
+    {it:"la metropolitana",es:"el metro",ex:"La metropolitana è più veloce."},
+    {it:"la stazione",es:"la estación",ex:"La stazione è in centro."},
+    {it:"il binario",es:"el andén / la vía",ex:"Il treno parte dal binario 3."},
+    {it:"il biglietto",es:"el billete / el ticket",ex:"Ho dimenticato il biglietto."},
+    {it:"il ritardo",es:"el retraso",ex:"Il treno ha 20 minuti di ritardo."},
+    {it:"la patente",es:"el carnet de conducir",ex:"Ho preso la patente l'anno scorso."},
+    {it:"la macchina / l'automobile",es:"el coche",ex:"La mia macchina è rotta."},
+    {it:"il semaforo",es:"el semáforo",ex:"Fermati al semaforo rosso."},
+    {it:"la fermata",es:"la parada",ex:"La prossima fermata è Duomo."},
+    {it:"l'aereo",es:"el avión",ex:"Il volo è alle 10."},
+    {it:"l'aeroporto",es:"el aeropuerto",ex:"L'aeroporto di Milano Malpensa."},
+    {it:"la valigia",es:"la maleta",ex:"La valigia è troppo pesante."},
+    {it:"il passaporto",es:"el pasaporte",ex:"Non trovò il passaporto."},
+    {it:"il porto",es:"el puerto",ex:"Il porto è vicino al centro."},
+  ],
+  7:[ // Burocracia
+    {it:"il permesso di soggiorno",es:"el permiso de residencia",ex:"Devo rinnovare il permesso di soggiorno."},
+    {it:"la questura",es:"la comisaría",ex:"Devo andare in questura."},
+    {it:"la prefettura",es:"la prefectura",ex:"La Prefettura ha convocato il candidato."},
+    {it:"l'anagrafe",es:"el registro civil",ex:"Devo iscrivere il bambino all'anagrafe."},
+    {it:"il comune",es:"el ayuntamiento",ex:"Il Comune di Milano."},
+    {it:"il codice fiscale",es:"el número de identificación fiscal",ex:"Ho bisogno del tuo codice fiscale."},
+    {it:"la carta d'identità",es:"el DNI",ex:"Porta la carta d'identità."},
+    {it:"l'autocertificazione",es:"la declaración jurada / la autodeclaración",ex:"Compila l'autocertificazione."},
+    {it:"il modulo",es:"el formulario",ex:"Compila il modulo, per favore."},
+    {it:"la firma",es:"la firma",ex:"Metti la firma in fondo."},
+    {it:"il documento",es:"el documento",ex:"Hai i documenti con te?"},
+    {it:"la residenza",es:"la residencia / el domicilio",ex:"La mia residenza è a Bologna."},
+    {it:"il ricongiungimento familiare",es:"la reagrupación familiar",ex:"Ha chiesto il ricongiungimento familiare."},
+    {it:"il nulla osta",es:"el visto bueno / la autorización",ex:"Lo Sportello rilascia il nulla osta."},
+    {it:"il patronato",es:"el patronato (asistencia gratuita)",ex:"Il patronato aiuta gratuitamente."},
+    {it:"l'INPS",es:"el INPS (seguridad social italiana)",ex:"Ho fatto domanda all'INPS."},
+    {it:"la delega",es:"el poder notarial / la delegación",ex:"Compila la delega al patronato."},
+    {it:"il certificato",es:"el certificado",ex:"Ho bisogno di un certificato medico."},
+  ],
+  8:[ // Verbos
+    {it:"essere",es:"ser / estar",ex:"Sono italiano. Sono a casa."},
+    {it:"avere",es:"tener",ex:"Ho due figli. Ho fame."},
+    {it:"fare",es:"hacer",ex:"Faccio colazione alle 7."},
+    {it:"andare",es:"ir",ex:"Vado al lavoro in autobus."},
+    {it:"venire",es:"venir",ex:"Vengo da Lima."},
+    {it:"stare",es:"estar (estado temporal)",ex:"Come stai? Sto bene."},
+    {it:"potere",es:"poder",ex:"Puoi aiutarmi?"},
+    {it:"volere",es:"querer",ex:"Voglio imparare l'italiano."},
+    {it:"dovere",es:"deber / tener que",ex:"Devo andare dal medico."},
+    {it:"sapere",es:"saber",ex:"So parlare italiano."},
+    {it:"capire",es:"entender / comprender",ex:"Non capisco questa parola."},
+    {it:"parlare",es:"hablar",ex:"Parli italiano?"},
+    {it:"scrivere",es:"escribir",ex:"Scrivi il tuo nome sul modulo."},
+    {it:"leggere",es:"leer",ex:"Leggo il giornale ogni mattina."},
+    {it:"abitare",es:"vivir / habitar",ex:"Abito a Milano da tre anni."},
+    {it:"lavorare",es:"trabajar",ex:"Lavoro in un ospedale."},
+    {it:"studiare",es:"estudiar",ex:"Studio italiano al CTP."},
+    {it:"comprare",es:"comprar",ex:"Compro il pane al supermercato."},
+    {it:"pagare",es:"pagar",ex:"Pago con la carta."},
+    {it:"prendere",es:"tomar / coger",ex:"Prendo l'autobus ogni mattina."},
+    {it:"cercare",es:"buscar",ex:"Cerco lavoro da due mesi."},
+    {it:"trovare",es:"encontrar",ex:"Ho trovato un appartamento."},
+    {it:"chiamarsi",es:"llamarse",ex:"Mi chiamo Marco."},
+    {it:"sentirsi",es:"sentirse",ex:"Non mi sento bene."},
+  ],
+  9:[ // Adjetivos
+    {it:"bello / bella",es:"bonito/a / hermoso/a",ex:"Che bella città!"},
+    {it:"brutto / brutta",es:"feo/a",ex:"Che tempo brutto oggi!"},
+    {it:"grande",es:"grande",ex:"Ho una casa grande."},
+    {it:"piccolo / piccola",es:"pequeño/a",ex:"Ho un appartamento piccolo."},
+    {it:"nuovo / nuova",es:"nuevo/a",ex:"Ho comprato una macchina nuova."},
+    {it:"vecchio / vecchia",es:"viejo/a",ex:"Questo palazzo è vecchio."},
+    {it:"simpatico / simpatica",es:"simpático/a",ex:"Il mio collega è molto simpatico."},
+    {it:"gentile",es:"amable / educado/a",ex:"La signora è molto gentile."},
+    {it:"difficile",es:"difícil",ex:"L'italiano non è difficile!"},
+    {it:"facile",es:"fácil",ex:"Questo esercizio è facile."},
+    {it:"caro / cara",es:"caro/a (precio) / querido/a",ex:"Questo ristorante è troppo caro."},
+    {it:"economico / economica",es:"barato/a / económico/a",ex:"Un pranzo economico."},
+    {it:"stanco / stanca",es:"cansado/a",ex:"Sono stanca dopo il lavoro."},
+    {it:"contento / contenta",es:"contento/a / satisfecho/a",ex:"Sono molto contento!"},
+    {it:"preoccupato/a",es:"preocupado/a",ex:"Sono preoccupata per l'esame."},
+    {it:"malato / malata",es:"enfermo/a",ex:"Non vengo, sono malata."},
+    {it:"aperto / aperta",es:"abierto/a",ex:"Il negozio è aperto."},
+    {it:"chiuso / chiusa",es:"cerrado/a",ex:"La farmacia è chiusa."},
+  ]
+};
+
+// Mezclar todas las categorías para "todo mezclado"
+function getAllVocab(){
+  let all=[];
+  for(let k in VOCAB) all=all.concat(VOCAB[k]);
+  return all;
+}
+
+// ============================================================
+// GRAMMAR EXERCISES DATA
+// ============================================================
+const GRAM_DATA = {
+  verb:[
+    {type:'fill',q:'Io __ (essere) italiano.',answers:['sono'],hint:'Presente di essere: io sono'},
+    {type:'fill',q:'Tu __ (avere) un fratello.',answers:['hai'],hint:'Presente di avere: tu hai'},
+    {type:'fill',q:'Marco __ (lavorare) in banca.',answers:['lavora'],hint:'-are: lui/lei lavora'},
+    {type:'fill',q:'Noi __ (abitare) a Milano.',answers:['abitiamo'],hint:'-are: noi abitiamo'},
+    {type:'fill',q:'Voi __ (studiare) italiano.',answers:['studiate'],hint:'-are: voi studiate'},
+    {type:'fill',q:'Loro __ (parlare) molto.',answers:['parlano'],hint:'-are: loro parlano'},
+    {type:'fill',q:'Io __ (andare) al lavoro in autobus.',answers:['vado'],hint:'Andare irregolare: io vado'},
+    {type:'fill',q:'Lei __ (venire) da Roma.',answers:['viene'],hint:'Venire irregolare: lui/lei viene'},
+    {type:'fill',q:'Noi __ (fare) colazione alle 7.',answers:['facciamo'],hint:'Fare irregolare: noi facciamo'},
+    {type:'fill',q:'Ieri io __ (lavorare) tutto il giorno.',answers:['ho lavorato'],hint:'Passato prossimo: ho + participio'},
+    {type:'fill',q:'Maria __ (arrivare) tardi ieri.',answers:['è arrivata'],hint:'Passato prossimo con essere: è arrivata'},
+    {type:'fill',q:'Domani __ (andare - io) in questura.',answers:['andrò'],hint:'Futuro: andrò'},
+    {type:'fill',q:'Quando ero bambino, __ (abitare - io) a Napoli.',answers:['abitavo'],hint:'Imperfetto: abitavo'},
+    {type:'fill',q:'Puoi aprire la finestra? No, non __ (potere - io).',answers:['posso'],hint:'Potere: io posso'},
+    {type:'fill',q:'__ (Dovere - io) andare dal medico oggi.',answers:['devo'],hint:'Dovere: io devo'},
+  ],
+  art:[
+    {type:'mc',q:'__ studente (maschile singolare)',opts:['lo','il','la','l\''],correct:3,explain:"Davanti a vocale si usa l'articolo l'"},
+    {type:'mc',q:'__ libro (maschile singolare)',opts:['lo','il','la','l\''],correct:1,explain:"Prima di consonante normale: il libro"},
+    {type:'mc',q:'__ zaino (maschile, inizia con z)',opts:['lo','il','la','l\''],correct:0,explain:"Davanti a z, s+consonante, gn → lo"},
+    {type:'mc',q:'__ amica (femminile, vocale)',opts:['lo','la','l\'','il'],correct:2,explain:"Femminile + vocale → l'amica"},
+    {type:'mc',q:'__ porta (femminile)',opts:['lo','il','la','l\''],correct:2,explain:"Femminile + consonante → la porta"},
+    {type:'mc',q:'__ amici (plurale maschile, vocale)',opts:['gli','i','le','l\''],correct:0,explain:"Plurale maschile davanti a vocale → gli"},
+    {type:'mc',q:'__ libri (plurale maschile)',opts:['gli','i','le','l\''],correct:1,explain:"Plurale maschile consonante → i"},
+    {type:'mc',q:'__ ragazze (plurale femminile)',opts:['gli','i','le','l\''],correct:2,explain:"Plurale femminile → le"},
+    {type:'mc',q:'Ho bisogno di __ medico.',opts:['un','una','uno','un\''],correct:0,explain:"Maschile + consonante normale → un medico"},
+    {type:'mc',q:'Cerco __ appartamento.',opts:['un','una','uno','un\''],correct:0,explain:"Maschile + vocale: un appartamento (no apóstrofo en masculino)"},
+    {type:'mc',q:'Ho __ amica italiana.',opts:['un','una','uno','un\''],correct:3,explain:"Femminile + vocale → un'amica (con apostrofo)"},
+    {type:'mc',q:'Voglio __ caffè.',opts:['un','una','uno','un\''],correct:0,explain:"Maschile → un caffè"},
+  ],
+  prep:[
+    {type:'mc',q:'Abito __ Milano.',opts:['a','in','di','da'],correct:0,explain:"Con le città si usa 'a': abito a Milano"},
+    {type:'mc',q:'Vengo __ Italia.',opts:['a','in','di','da'],correct:3,explain:"'Da' indica provenienza: vengo dall'Italia"},
+    {type:'mc',q:'Vado __ lavoro __ autobus.',opts:['al / in','a / in','in / con','nel / per'],correct:1,explain:"Vado a lavoro in autobus (mezzo di trasporto: in)"},
+    {type:'mc',q:'Il treno parte __ binario 3.',opts:['dal','nel','al','sul'],correct:2,explain:"Parte dal binario (dal = da+il) è corretto"},
+    {type:'mc',q:'Abito qui __ tre anni.',opts:['da','per','in','di'],correct:0,explain:"'Da' + tempo indica durata che continua: da tre anni"},
+    {type:'mc',q:'Ho bisogno __ aiuto.',opts:['di','a','in','da'],correct:0,explain:"Aver bisogno di: ho bisogno di aiuto"},
+    {type:'mc',q:'Vado __ farmacia.',opts:['alla','nella','della','dalla'],correct:0,explain:"Vado alla farmacia (moto a luogo)"},
+    {type:'mc',q:'Studio italiano __ due anni.',opts:['da','per','di','in'],correct:0,explain:"Studio da due anni = durata continuata fino ad oggi"},
+  ],
+  mc:[
+    {type:'mc',q:'Quale frase è corretta?',opts:['Ieri ho andato al mercato.','Ieri sono andato al mercato.','Ieri andavo al mercato (azione puntuale).','Ieri vado al mercato.'],correct:1,explain:"I verbi di moto usano 'essere' al passato prossimo: sono andato."},
+    {type:'mc',q:'"Quando ero bambino, __ la pizza ogni domenica." Quale verbo manca?',opts:['ho mangiato','mangio','mangiavo','mangerei'],correct:2,explain:"Azione abitual nel passato → imperfetto: mangiavo"},
+    {type:'mc',q:'Domani Maria __ a Roma per lavoro.',opts:['va','è andata','andava','andrà'],correct:3,explain:"'Domani' indica futuro → futuro semplice: andrà"},
+    {type:'mc',q:'Quale è il contrario di "caro"?',opts:['facile','economico','bello','aperto'],correct:1,explain:"Caro = costoso. Contrario = economico (barato)."},
+    {type:'mc',q:'Per prendere appunti all\'anagrafe devi portare:',opts:['Solo il passaporto','La tessera sanitaria e un documento d\'identità','Solo il permesso di soggiorno','Il curriculum vitae'],correct:1,explain:"Per le pratiche anagrafiche servono: documento d'identità + tessera sanitaria."},
+    {type:'mc',q:'Il "passato prossimo" si usa per:',opts:['Descrivere abitudini nel passato','Azioni finite in un momento preciso','Fare previsioni future','Esprimere desideri'],correct:1,explain:"Passato prossimo = azione conclusa. Imperfetto = abitudine o stato nel passato."},
+    {type:'mc',q:'Quale articolo va davanti a "studente"?',opts:['il','lo','la','un'],correct:1,explain:"Studente inizia con 'st' (s+consonante) → lo studente"},
+    {type:'mc',q:'"Non __ venire alla festa perché devo lavorare." Quale forma è corretta?',opts:['posso','puoi','poteva','potrò'],correct:0,explain:"Prima persona singolare presente di potere = posso."},
+  ]
+};
+
+// ============================================================
+// SIMULADOR DATA
+// ============================================================
+const SIM_TESTS = [
+  { // Test A — Comprensione scritta
+    type:'lettura',
+    title:'Comprensione scritta — Testo 1',
+    testo:`<strong>Avviso per i residenti</strong><br><br>
+Si informa che domani, martedì, è prevista la pulizia stradale in via Roma dalle ore 20:00 alle ore 6:00 del mattino successivo. Durante questo orario è vietato parcheggiare i veicoli lungo la strada. I trasgressori saranno multati di 50 euro e il veicolo potrà essere rimosso.<br><br>
+La farmacia di via Roma sarà chiusa per tutta la giornata di domani a causa di lavori di ristrutturazione. La farmacia più vicina aperta è in via Garibaldi 15.<br><br>
+Per informazioni: Comune di Monza, tel. 039-555-1234.`,
+    qs:[
+      {q:'Domani sera in via Roma:',opts:['Si può parcheggiare liberamente','È vietato parcheggiare dalle 20:00','È vietato parcheggiare tutto il giorno','I negozi sono chiusi'],correct:1},
+      {q:'Chi parcheggia in via Roma durante la pulizia:',opts:['Non riceve nessuna multa','Paga 50 euro di multa','Paga 100 euro di multa','Viene arrestato'],correct:1},
+      {q:'La farmacia di via Roma domani:',opts:['Apre solo al mattino','È aperta normalmente','È chiusa per lavori','Chiude alle 18'],correct:2},
+      {q:'Il numero di telefono del Comune è:',opts:['039-555-4321','039-555-1234','02-555-1234','039-123-5555'],correct:1},
+      {q:'La farmacia aperta più vicina si trova:',opts:['In via Roma 15','In via Garibaldi 15','In piazza del Comune','In via Milano'],correct:1},
+    ]
+  },
+  {
+    type:'interazione',
+    title:'Interazione scritta',
+    consegna:`Il tuo amico Giovanni ti ha invitato a cena per sabato, ma tu non puoi andare perché devi lavorare. Scrivili un messaggio (SMS o breve lettera) per:
+<ul style="margin-top:8px;padding-left:20px;line-height:2">
+  <li>Ringraziarlo per l'invito</li>
+  <li>Spiegare perché non puoi andare</li>
+  <li>Proporgli un altro giorno</li>
+  <li>Salutarlo</li>
+</ul>`,
+    checklist:[
+      'Ringraziamento per l\'invito',
+      'Spiegazione del motivo (lavoro)',
+      'Proposta di un altro giorno',
+      'Saluto finale',
+    ]
+  }
+];
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function go(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('show');
+  const navMap={home:0,flash:1,gram:2,sim:3,game:4};
+  document.querySelectorAll('.nav-btn')[navMap[id]||0].classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='flash')initFlash();
+  if(id==='gram')initGram('verb');
+  if(id==='game')initGame('match');
+}
+
+// ============================================================
+// FLASHCARDS
+// ============================================================
+let fcDeck=[],fcIdx=0,fcKnown=0,fcFlipped=false;
+function initFlash(){
+  const cat=parseInt(document.getElementById('fc-cat').value);
+  fcDeck=cat===0?getAllVocab():[...(VOCAB[cat]||[])];
+  fcIdx=0;fcKnown=0;fcFlipped=false;
+  renderCard();
+}
+function shuffleFlash(){
+  const cat=parseInt(document.getElementById('fc-cat').value);
+  fcDeck=cat===0?getAllVocab():[...(VOCAB[cat]||[])];
+  fcDeck.sort(()=>Math.random()-.5);
+  fcIdx=0;fcKnown=0;fcFlipped=false;
+  renderCard();
+}
+function renderCard(){
+  if(!fcDeck.length)return;
+  const c=fcDeck[fcIdx];
+  document.getElementById('fc-it').textContent=c.it;
+  document.getElementById('fc-es').textContent=c.es;
+  document.getElementById('fc-ex').textContent=c.ex||'';
+  // category label
+  const catSel=document.getElementById('fc-cat');
+  document.getElementById('fc-cat-label').textContent=catSel.options[catSel.selectedIndex].text;
+  // reset flip
+  fcFlipped=false;
+  document.getElementById('fc-card').classList.remove('flipped');
+  // progress
+  const pct=Math.round((fcIdx+1)/fcDeck.length*100);
+  document.getElementById('fc-prog-bar').style.width=pct+'%';
+  document.getElementById('fc-prog-txt').textContent='Tarjeta '+(fcIdx+1)+' de '+fcDeck.length;
+  document.getElementById('fc-cnt').textContent=(fcIdx+1)+' / '+fcDeck.length;
+  document.getElementById('fc-known').textContent='✅ '+fcKnown+' sabidas';
+}
+function flipCard(){
+  fcFlipped=!fcFlipped;
+  document.getElementById('fc-card').classList.toggle('flipped',fcFlipped);
+}
+function nextCard(){
+  if(fcIdx<fcDeck.length-1){fcIdx++;fcFlipped=false;renderCard();}
+}
+function prevCard(){
+  if(fcIdx>0){fcIdx--;fcFlipped=false;renderCard();}
+}
+function markCard(known){
+  if(known)fcKnown++;
+  nextCard();
+  if(fcIdx===fcDeck.length-1&&known)renderCard();
+}
+initFlash();
+
+// ============================================================
+// GRAMMAR
+// ============================================================
+let gramTab='verb',gramAnswers={},gramScore=0,gramTotal=0;
+function setGramTab(t){
+  gramTab=t;
+  document.querySelectorAll('#sec-gram .tab').forEach((b,i)=>{
+    b.classList.toggle('active',['verb','art','prep','mc'][i]===t);
+  });
+  initGram(t);
+}
+function initGram(t){
+  gramTab=t;
+  gramAnswers={};gramScore=0;
+  const data=GRAM_DATA[t];
+  gramTotal=data.length;
+  document.getElementById('gram-score').textContent='0';
+  document.getElementById('gram-total').textContent=gramTotal;
+  let html='';
+  data.forEach((ex,i)=>{
+    html+='<div class="ex-card fade" id="gram-ex-'+i+'">';
+    html+='<div class="ex-num">Ejercicio '+(i+1)+' de '+gramTotal+'</div>';
+    if(ex.type==='fill'){
+      const parts=ex.q.split('__');
+      html+='<div class="ex-q">'+parts[0]+'<input type="text" class="blank-input" id="gi-'+i+'" placeholder="..." autocomplete="off" spellcheck="false">'+parts[1]+'</div>';
+    } else {
+      html+='<div class="ex-q">'+ex.q+'</div>';
+      html+='<div class="mc-opts">';
+      ex.opts.forEach((o,j)=>{
+        html+='<button class="mc-btn" data-ex="'+i+'" data-opt="'+j+'" onclick="selectMC('+i+','+j+')">'+o+'</button>';
+      });
+      html+='</div>';
+    }
+    html+='<div class="ex-feedback" id="gf-'+i+'"></div>';
+    html+='</div>';
+  });
+  document.getElementById('gram-container').innerHTML=html;
+}
+function selectMC(exIdx,optIdx){
+  gramAnswers[exIdx]=optIdx;
+  const card=document.getElementById('gram-ex-'+exIdx);
+  card.querySelectorAll('.mc-btn').forEach((b,j)=>{
+    b.classList.toggle('chosen',j===optIdx);
+    // remove chosen class from others
+    if(j!==optIdx)b.classList.remove('chosen');
+  });
+  card.querySelectorAll('.mc-btn')[optIdx].classList.add('chosen');
+}
+function checkGram(){
+  const data=GRAM_DATA[gramTab];
+  gramScore=0;
+  data.forEach((ex,i)=>{
+    const fb=document.getElementById('gf-'+i);
+    fb.style.display='block';
+    if(ex.type==='fill'){
+      const inp=document.getElementById('gi-'+i);
+      if(!inp)return;
+      const val=inp.value.trim().toLowerCase();
+      const ok=ex.answers.some(a=>a.toLowerCase()===val);
+      inp.className='blank-input '+(ok?'ok':'no');
+      fb.className='ex-feedback '+(ok?'ok':'no');
+      fb.innerHTML=ok?'✅ Corretto! <em>'+ex.answers[0]+'</em> — '+ex.hint:'❌ La risposta corretta è: <strong>'+ex.answers[0]+'</strong> — '+ex.hint;
+      if(ok)gramScore++;
+    } else {
+      const chosen=gramAnswers[i];
+      if(chosen===undefined){fb.className='ex-feedback no';fb.innerHTML='❌ Non hai risposto. Risposta: <strong>'+ex.opts[ex.correct]+'</strong>';return;}
+      const ok=chosen===ex.correct;
+      const card=document.getElementById('gram-ex-'+i);
+      card.querySelectorAll('.mc-btn').forEach((b,j)=>{
+        b.disabled=true;
+        if(j===ex.correct)b.classList.add('ok');
+        else if(j===chosen&&!ok)b.classList.add('no');
+      });
+      fb.className='ex-feedback '+(ok?'ok':'no');
+      fb.innerHTML=ok?'✅ Esatto! '+ex.explain:'❌ Sbagliato. <strong>'+ex.opts[ex.correct]+'</strong> — '+ex.explain;
+      if(ok)gramScore++;
+    }
+  });
+  document.getElementById('gram-score').textContent=gramScore;
+}
+function resetGram(){initGram(gramTab);}
+
+// ============================================================
+// SIMULADOR
+// ============================================================
+let simStep=0,simScores={lettura:0,interazione:0},simChecklistChecked={};
+function startSim(){
+  simStep=0;simScores={lettura:0,interazione:0};simChecklistChecked={};
+  document.getElementById('sim-start').style.display='none';
+  document.getElementById('sim-body').style.display='block';
+  document.getElementById('sim-result').style.display='none';
+  renderSimStep();
+}
+function renderSimStep(){
+  const test=SIM_TESTS[simStep];
+  document.getElementById('sim-sec-label').textContent=simStep===0?'Comprensione scritta':'Interazione scritta';
+  document.getElementById('sim-sec-badge').textContent='Parte '+(simStep+1)+' / '+SIM_TESTS.length;
+  document.getElementById('sim-next-btn').textContent=simStep<SIM_TESTS.length-1?'Siguiente sección →':'Ver resultado ✓';
+  let html='';
+  if(test.type==='lettura'){
+    html+='<div class="sim-q fade"><div class="ex-num">Testo</div>';
+    html+='<div class="sim-q-text" style="background:var(--bg3);padding:16px;border-radius:12px;font-size:14px;line-height:1.8">'+test.testo+'</div></div>';
+    test.qs.forEach((q,i)=>{
+      html+='<div class="sim-q fade">';
+      html+='<div class="ex-num">Domanda '+(i+1)+'</div>';
+      html+='<div class="sim-q-text">'+q.q+'</div>';
+      html+='<div class="sim-opts">';
+      const letters=['A','B','C','D'];
+      q.opts.forEach((o,j)=>{
+        html+='<button class="sim-opt" id="sq-'+i+'-'+j+'" onclick="pickSimOpt('+i+','+j+')">';
+        html+='<span class="opt-letter">'+letters[j]+'</span>'+o+'</button>';
+      });
+      html+='</div><div class="ex-feedback" id="sqf-'+i+'"></div></div>';
+    });
+  } else {
+    html+='<div class="sim-q fade">';
+    html+='<div class="ex-num">Prova di Interazione Scritta</div>';
+    html+='<div class="sim-q-text" style="background:var(--bg3);padding:16px;border-radius:12px;margin-bottom:16px">'+test.consegna+'</div>';
+    html+='<textarea class="sim-text-box" id="sim-ta" placeholder="Scrivi qui il tuo messaggio..."></textarea>';
+    html+='</div>';
+    html+='<div class="sim-q fade" style="padding:16px 20px"><div class="ex-num">Lista di controllo — segna quello che hai incluso</div>';
+    test.checklist.forEach((item,i)=>{
+      html+='<label style="display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;font-size:14px">';
+      html+='<input type="checkbox" id="cl-'+i+'" style="width:18px;height:18px;cursor:pointer" onchange="calcInterazione()">'+item+'</label>';
+    });
+    html+='<div style="margin-top:12px;font-size:13px;color:var(--muted)">Puntaje estimado: <strong id="int-pts" style="color:var(--green)">0</strong> / 35 pts</div>';
+    html+='</div>';
+  }
+  document.getElementById('sim-questions').innerHTML=html;
+  updateSimScore();
+}
+let simOptPicks={};
+function pickSimOpt(qi,oi){
+  const test=SIM_TESTS[simStep];
+  if(test.type!=='lettura')return;
+  const q=test.qs[qi];
+  // deselect previous
+  if(simOptPicks[qi]!==undefined){
+    const prev=document.getElementById('sq-'+qi+'-'+simOptPicks[qi]);
+    if(prev)prev.classList.remove('chosen');
+  }
+  simOptPicks[qi]=oi;
+  document.getElementById('sq-'+qi+'-'+oi).classList.add('chosen');
+  updateSimScore();
+}
+function calcInterazione(){
+  const test=SIM_TESTS[simStep];
+  if(test.type!=='interazione')return 0;
+  let checked=0;
+  test.checklist.forEach((_,i)=>{if(document.getElementById('cl-'+i)?.checked)checked++;});
+  let pts=0;
+  if(checked>=4)pts=35;
+  else if(checked>=2)pts=28;
+  else if(checked>=1)pts=15;
+  const el=document.getElementById('int-pts');
+  if(el)el.textContent=pts;
+  simScores.interazione=pts;
+  updateSimScore();
+  return pts;
+}
+function updateSimScore(){
+  const total=(simScores.lettura||0)+(simScores.interazione||0);
+  document.getElementById('sim-score-disp').textContent=total+' / 70';
+}
+function advanceSim(){
+  const test=SIM_TESTS[simStep];
+  if(test.type==='lettura'){
+    let sc=0;
+    test.qs.forEach((q,i)=>{
+      const chosen=simOptPicks[i];
+      if(chosen===undefined){
+        const fb=document.getElementById('sqf-'+i);
+        if(fb){fb.style.display='block';fb.className='ex-feedback no';fb.textContent='❌ No respondida. Corretta: '+q.opts[q.correct];}
+        return;
+      }
+      const ok=chosen===q.correct;
+      test.qs[i].opts.forEach((_,j)=>{
+        const btn=document.getElementById('sq-'+i+'-'+j);
+        if(!btn)return;
+        btn.disabled=true;
+        if(j===q.correct)btn.classList.add('ok');
+        else if(j===chosen&&!ok)btn.classList.add('no');
+      });
+      const fb=document.getElementById('sqf-'+i);
+      if(fb){
+        fb.style.display='block';
+        fb.className='ex-feedback '+(ok?'ok':'no');
+        fb.textContent=ok?'✅ Corretto!':'❌ Sbagliato. Corretta: '+q.opts[q.correct];
+      }
+      if(ok)sc++;
+    });
+    simScores.lettura=sc*7; // 5 domande × 7 pts each = 35
+  } else {
+    calcInterazione();
+  }
+  simOptPicks={};
+  if(simStep<SIM_TESTS.length-1){
+    simStep++;
+    renderSimStep();
+  } else {
+    showSimResult();
+  }
+}
+function showSimResult(){
+  document.getElementById('sim-body').style.display='none';
+  const r=document.getElementById('sim-result');
+  r.style.display='block';
+  const total=simScores.lettura+simScores.interazione;
+  const pct=Math.round(total/70*100);
+  const pass=pct>=80;
+  document.getElementById('res-score').textContent=total+'/70';
+  document.getElementById('res-score').className='result-score '+(pass?'pass':'fail');
+  document.getElementById('res-msg').textContent=pass?
+    '🎉 ¡Superaste el test! Has alcanzado el 80% mínimo requerido para el permesso di soggiorno CE di lungo periodo.':
+    '📚 No has alcanzado el 80% mínimo. Sigue practicando — puedes repetir el test ilimitadas veces.';
+  document.getElementById('rb-l').textContent=simScores.lettura+'/35';
+  document.getElementById('rb-i').textContent=simScores.interazione+'/35';
+  document.getElementById('rb-pct').textContent=pct+'%';
+  document.getElementById('rb-pct').style.color=pass?'var(--green)':'var(--red)';
+}
+function resetSim(){
+  simStep=0;simScores={lettura:0,interazione:0};simOptPicks={};
+  document.getElementById('sim-start').style.display='block';
+  document.getElementById('sim-body').style.display='none';
+  document.getElementById('sim-result').style.display='none';
+}
+
+// ============================================================
+// GAMES
+// ============================================================
+let gameTab='match';
+function setGameTab(t){
+  gameTab=t;
+  document.querySelectorAll('#sec-game .tab').forEach((b,i)=>{
+    b.classList.toggle('active',['match','vf','cloze'][i]===t);
+  });
+  initGame(t);
+}
+function initGame(t){
+  gameTab=t;
+  if(t==='match')initMatch();
+  else if(t==='vf')initVF();
+  else initCloze();
+}
+
+// --- MATCH PAIRS ---
+const MATCH_POOLS = [
+  [{it:"ciao",es:"hola / adiós"},{it:"grazie",es:"gracias"},{it:"prego",es:"de nada"},{it:"scusa",es:"perdona"},{it:"per favore",es:"por favor"},{it:"buongiorno",es:"buenos días"}],
+  [{it:"il treno",es:"el tren"},{it:"l'autobus",es:"el autobús"},{it:"la stazione",es:"la estación"},{it:"il biglietto",es:"el billete"},{it:"il binario",es:"el andén"},{it:"il ritardo",es:"el retraso"}],
+  [{it:"il medico",es:"el médico"},{it:"la febbre",es:"la fiebre"},{it:"l'ospedale",es:"el hospital"},{it:"la farmacia",es:"la farmacia"},{it:"il pronto soccorso",es:"las urgencias"},{it:"stare male",es:"estar mal"}],
+  [{it:"lavorare",es:"trabajar"},{it:"studiare",es:"estudiar"},{it:"abitare",es:"vivir"},{it:"comprare",es:"comprar"},{it:"pagare",es:"pagar"},{it:"cercare",es:"buscar"}],
+  [{it:"la questura",es:"la comisaría"},{it:"il documento",es:"el documento"},{it:"la firma",es:"la firma"},{it:"il modulo",es:"el formulario"},{it:"il permesso",es:"el permiso"},{it:"l'anagrafe",es:"el registro civil"}],
+];
+let matchPairs=[],matchSel=null,matchMatched=0,matchScore=0;
+function initMatch(){
+  const pool=MATCH_POOLS[Math.floor(Math.random()*MATCH_POOLS.length)];
+  matchPairs=[...pool].sort(()=>Math.random()-.5).slice(0,6);
+  matchSel=null;matchMatched=0;matchScore=0;
+  renderMatch();
+}
+function renderMatch(){
+  const itWords=[...matchPairs].sort(()=>Math.random()-.5);
+  const esWords=[...matchPairs].sort(()=>Math.random()-.5);
+  let html=`<div style="display:flex;gap:10px;align-items:center;margin-bottom:14px">
+    <div style="font-size:13px;color:var(--muted)">Empareja cada palabra italiana con su traducción</div>
+    <div style="margin-left:auto;font-size:13px;color:var(--green);font-weight:600">✅ ${matchMatched}/${matchPairs.length}</div>
+  </div>
+  <div class="match-grid">
+    <div class="match-col">`;
+  itWords.forEach((p,i)=>{
+    html+=`<div class="match-item it-word" id="mit-${i}" data-word="${p.it}" onclick="clickMatch('it','${p.it}','mit-${i}')">${p.it}</div>`;
+  });
+  html+=`</div><div class="match-col">`;
+  esWords.forEach((p,i)=>{
+    html+=`<div class="match-item" id="mes-${i}" data-word="${p.it}" onclick="clickMatch('es','${p.it}','mes-${i}')">${p.es}</div>`;
+  });
+  html+=`</div></div>
+  <div style="display:flex;gap:10px;margin-top:16px;align-items:center;flex-wrap:wrap">
+    <button class="btn primary" onclick="initMatch()">🔀 Nuevo juego</button>
+    <span style="font-size:13px;color:var(--muted)">Haz clic en una palabra italiana, luego en su traducción</span>
+  </div>`;
+  document.getElementById('game-container').innerHTML=html;
+}
+let matchSelItem=null,matchSelType=null;
+function clickMatch(type,word,id){
+  const el=document.getElementById(id);
+  if(!el||el.classList.contains('matched'))return;
+  if(matchSelItem&&matchSelType===type){
+    document.getElementById(matchSelItem)?.classList.remove('selected');
+    matchSelItem=null;matchSelType=null;
+  }
+  if(matchSelItem&&matchSelType!==type){
+    const prevEl=document.getElementById(matchSelItem);
+    const prevWord=prevEl?.getAttribute('data-word');
+    const curWord=el.getAttribute('data-word');
+    if(prevWord===curWord){
+      el.classList.add('matched');prevEl?.classList.add('matched');
+      matchMatched++;
+      const total=matchPairs.length;
+      if(matchMatched>=total){
+        setTimeout(()=>{
+          document.getElementById('game-container').querySelector('.match-grid').insertAdjacentHTML('afterend',
+            `<div style="text-align:center;padding:20px;background:rgba(74,222,128,.1);border-radius:12px;border:1px solid rgba(74,222,128,.3);margin-top:12px">
+              <div style="font-size:24px;margin-bottom:8px">🎉</div>
+              <div style="font-size:16px;font-weight:600;color:var(--green)">Perfetto! Hai abbinato tutte le coppie!</div>
+              <button class="btn primary" onclick="initMatch()" style="margin-top:12px">🔀 Nuovo gioco</button>
+            </div>`);
+        },300);
+      }
+    } else {
+      el.classList.add('wrong');prevEl?.classList.add('wrong');
+      setTimeout(()=>{el.classList.remove('wrong');prevEl?.classList.remove('wrong');},600);
+    }
+    matchSelItem=null;matchSelType=null;
+  } else {
+    if(matchSelItem)document.getElementById(matchSelItem)?.classList.remove('selected');
+    el.classList.add('selected');
+    matchSelItem=id;matchSelType=type;
+  }
+}
+
+// --- VERO/FALSO ---
+const VF_DECK=[
+  {s:"In Italia, il livello A2 è chiamato 'pre-intermedio' o livello di sopravvivenza.",v:true,exp:"Sì, il QCER definisce il livello A2 come pre-intermedio o 'di sopravvivenza'."},
+  {s:"Per superare il test A2 bisogna ottenere almeno il 70% del punteggio.",v:false,exp:"No, serve l'80% del punteggio totale, secondo il DM 4/6/2010."},
+  {s:"Il test A2 ufficiale ha una durata totale di 90 minuti.",v:false,exp:"No, il test dura 60 minuti in totale (25+25+10)."},
+  {s:"I minori di 14 anni sono esonerati dal test di italiano.",v:true,exp:"Sì, i minori di 14 anni non devono sostenere il test."},
+  {s:"La sección de comprensione scritta vale 30 puntos.",v:false,exp:"No, la comprensione scritta vale 35 punti. La comprensione orale vale 30."},
+  {s:"Gli italiani che vivono in affitto sono circa il 20%.",v:true,exp:"Sì, circa il 20% degli italiani vive in affitto."},
+  {s:"Il primo bancomat italiano è stato installato a Roma nel 1983.",v:false,exp:"No, il primo bancomat italiano è stato installato a Ferrara nel 1983."},
+  {s:"La Festa della Donna in Italia si celebra l'8 di marzo.",v:true,exp:"Sì, la Festa della donna è ogni anno l'8 marzo."},
+  {s:"Per iscriversi al test A2 si va direttamente al CTP.",v:false,exp:"No, ci si iscrive online su http://testitaliano.interno.it e la Prefettura assegna il CTP."},
+  {s:"L'articolo determinativo 'gli' si usa davanti ai sostantivi maschili plurali che iniziano per vocale o z.",v:true,exp:"Sì, 'gli' va davanti a maschili plurali con vocale, z, s+consonante, gn, ps."},
+  {s:"Il verbo 'andare' al passato prossimo usa l'ausiliare 'avere'.",v:false,exp:"No, 'andare' usa 'essere': sono andato/a."},
+  {s:"Nel matrimonio misto in Italia, nella maggior parte dei casi è un italiano che sposa una straniera.",v:true,exp:"Sì, in 3 casi su 4 il matrimonio misto è italiano+straniera."},
+  {s:"Il codice colore 'rosso' al pronto soccorso indica un paziente non urgente.",v:false,exp:"No, il codice rosso è per chi è in pericolo di vita — massima urgenza."},
+  {s:"Il passato prossimo si usa per descrivere abitudini nel passato.",v:false,exp:"No, le abitudini nel passato usano l'imperfetto (es. 'mangiavo pizza ogni domenica')."},
+  {s:"In italiano, davanti a 'studente' si usa l'articolo 'lo'.",v:true,exp:"Sì, 'studente' inizia con 'st' (s+consonante) quindi vuole 'lo studente'."},
+];
+let vfDeck=[],vfIdx=0,vfScore=0;
+function initVF(){
+  vfDeck=[...VF_DECK].sort(()=>Math.random()-.5);
+  vfIdx=0;vfScore=0;
+  renderVF();
+}
+function renderVF(){
+  if(vfIdx>=vfDeck.length){
+    document.getElementById('game-container').innerHTML=`
+      <div class="vf-card fade" style="text-align:center;padding:40px">
+        <div style="font-size:48px;margin-bottom:12px">${vfScore>=vfDeck.length*.8?'🎉':'📚'}</div>
+        <div style="font-family:var(--serif);font-size:28px;font-weight:700;margin-bottom:8px">${vfScore}/${vfDeck.length}</div>
+        <div style="color:var(--muted);font-size:15px;margin-bottom:24px">${vfScore>=vfDeck.length*.8?'Ottimo risultato!':'Continua a studiare!'}</div>
+        <button class="btn primary" onclick="initVF()">🔄 Ripetere</button>
+      </div>`;
+    return;
+  }
+  const q=vfDeck[vfIdx];
+  document.getElementById('game-container').innerHTML=`
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px">
+      <span style="font-size:13px;color:var(--muted)">Domanda ${vfIdx+1} / ${vfDeck.length}</span>
+      <span style="margin-left:auto;font-size:13px;color:var(--green);font-weight:600">✅ ${vfScore} aciertos</span>
+    </div>
+    <div class="prog-outer" style="margin-bottom:16px"><div class="prog-inner" style="width:${Math.round(vfIdx/vfDeck.length*100)}%"></div></div>
+    <div class="vf-card fade">
+      <div class="vf-sentence">${q.s}</div>
+      <div class="vf-row">
+        <button class="vf-btn v" onclick="answerVF(true)">✓ Vero</button>
+        <button class="vf-btn f" onclick="answerVF(false)">✗ Falso</button>
+      </div>
+      <div class="vf-result" id="vf-res"></div>
+    </div>
+    <div style="text-align:center;margin-top:10px">
+      <button class="btn" onclick="initVF()">🔄 Reiniciar</button>
+    </div>`;
+}
+function answerVF(ans){
+  const q=vfDeck[vfIdx];
+  const ok=ans===q.v;
+  if(ok)vfScore++;
+  document.querySelectorAll('.vf-btn').forEach(b=>b.disabled=true);
+  const res=document.getElementById('vf-res');
+  res.style.display='block';
+  res.style.background=ok?'rgba(74,222,128,.1)':'rgba(248,113,113,.1)';
+  res.style.border=`1px solid ${ok?'rgba(74,222,128,.3)':'rgba(248,113,113,.3)'}`;
+  res.style.padding='10px 14px';
+  res.style.borderRadius='10px';
+  res.style.color=ok?'#86efac':'#fca5a5';
+  res.style.fontSize='13px';
+  res.style.lineHeight='1.6';
+  res.innerHTML=(ok?'✅ <strong>Corretto!</strong> ':'❌ <strong>Sbagliato.</strong> ')+q.exp;
+  setTimeout(()=>{vfIdx++;renderVF();},2000);
+}
+
+// --- CLOZE ---
+const CLOZE_EXERCISES=[
+  {
+    text:"Buongiorno! Mi ___ Marco e abito ___ Milano. Vengo ___ Perù e studio italiano ___ due anni.",
+    blanks:["chiamo","a","dal","da"],
+    sentence_parts:["Buongiorno! Mi "," Marco e abito "," Milano. Vengo "," Perù e studio italiano "," due anni."],
+    bank:["chiamo","a","dal","da","sono","in","di","per"],
+    explain:["chiamo: mi chiamo = me llamo (riflessivo)","a: con le città si usa 'a'","dal: da + il = dal (provenienza)","da: da + tempo = durata continuata"]
+  },
+  {
+    text:"Devo ___ dal medico perché non ___ bene. Ho la ___ a 38 e mal di ___.",
+    blanks:["andare","sto","febbre","testa"],
+    sentence_parts:["Devo "," dal medico perché non "," bene. Ho la "," a 38 e mal di ","."],
+    bank:["andare","sto","febbre","testa","venire","sono","farmacia","piedi"],
+    explain:["andare: dovere + infinito","sto: stare male/bene per salute","febbre: avere la febbre = tener fiebre","testa: mal di testa = dolor de cabeza"]
+  },
+  {
+    text:"Ieri ___ andato in questura ___ rinnovare il permesso di soggiorno. Ho portato il passaporto ___ un documento d'identità.",
+    blanks:["sono","per","e"],
+    sentence_parts:["Ieri "," andato in questura "," rinnovare il permesso di soggiorno. Ho portato il passaporto "," un documento d'identità."],
+    bank:["sono","per","e","ho","a","o","con","da"],
+    explain:["sono: andare → ausiliare essere al passato prossimo","per: per + infinito = para + infinitivo","e: e = y (congiunzione)"]
+  },
+  {
+    text:"Cerco un ___ in affitto vicino alla ___. L'affitto non deve ___ più di 700 euro al ___.",
+    blanks:["appartamento","stazione","costare","mese"],
+    sentence_parts:["Cerco un "," in affitto vicino alla ",". L'affitto non deve "," più di 700 euro al ","."],
+    bank:["appartamento","stazione","costare","mese","casa","scuola","pagare","anno"],
+    explain:["appartamento: maschile, cerca un appartamento","stazione: vicino alla stazione (moto di luogo)","costare: non deve costare = no debe costar","mese: al mese = al mes"]
+  },
+];
+let clozeIdx=0,clozeSelected=null,clozeFilled=[],clozeUsed=[];
+function initCloze(){
+  clozeIdx=Math.floor(Math.random()*CLOZE_EXERCISES.length);
+  clozeSelected=null;clozeFilled=[];clozeUsed=[];
+  renderCloze();
+}
+function renderCloze(){
+  const ex=CLOZE_EXERCISES[clozeIdx];
+  const n=ex.blanks.length;
+  clozeFilled=new Array(n).fill(null);
+  clozeUsed=new Array(ex.bank.length).fill(false);
+  let sentHtml='<div class="cloze-sentence">';
+  ex.sentence_parts.forEach((part,i)=>{
+    sentHtml+=part;
+    if(i<n){
+      sentHtml+=`<span class="cloze-blank" id="cb-${i}" onclick="clickBlank(${i})">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
+    }
+  });
+  sentHtml+='</div>';
+  let bankHtml='<div class="word-bank">';
+  ex.bank.forEach((w,i)=>{
+    bankHtml+=`<span class="word-chip" id="wc-${i}" onclick="clickWord(${i})">${w}</span>`;
+  });
+  bankHtml+='</div>';
+  let html=`
+    <div style="font-size:13px;color:var(--muted);margin-bottom:12px">Selecciona un espacio en blanco, luego una palabra del banco</div>
+    ${sentHtml}${bankHtml}
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <button class="btn primary" onclick="checkCloze()">✔ Verificar</button>
+      <button class="btn" onclick="initCloze()">🔀 Nuevo ejercicio</button>
+    </div>
+    <div id="cloze-fb" style="margin-top:16px"></div>`;
+  document.getElementById('game-container').innerHTML=html;
+}
+function clickBlank(idx){
+  // Deselect all blanks first
+  document.querySelectorAll('.cloze-blank').forEach(b=>{
+    if(!clozeFilled[parseInt(b.id.split('-')[1])])b.style.borderColor='var(--blue)';
+  });
+  clozeSelected=idx;
+  const el=document.getElementById('cb-'+idx);
+  if(el)el.style.borderColor='var(--yellow)';
+}
+function clickWord(wi){
+  if(clozeSelected===null)return;
+  if(clozeUsed[wi])return;
+  const ex=CLOZE_EXERCISES[clozeIdx];
+  const word=ex.bank[wi];
+  // If blank already had a word, un-use it
+  if(clozeFilled[clozeSelected]!==null){
+    const prevWi=ex.bank.indexOf(clozeFilled[clozeSelected]);
+    if(prevWi>=0){clozeUsed[prevWi]=false;document.getElementById('wc-'+prevWi)?.classList.remove('used');}
+  }
+  clozeFilled[clozeSelected]=word;
+  clozeUsed[wi]=true;
+  document.getElementById('wc-'+wi)?.classList.add('used');
+  const blank=document.getElementById('cb-'+clozeSelected);
+  if(blank){blank.textContent=word;blank.classList.add('filled');blank.style.borderColor='var(--border)';}
+  clozeSelected=null;
+}
+function checkCloze(){
+  const ex=CLOZE_EXERCISES[clozeIdx];
+  let correct=0;
+  ex.blanks.forEach((ans,i)=>{
+    const blank=document.getElementById('cb-'+i);
+    if(!blank)return;
+    const val=clozeFilled[i];
+    if(val===ans){blank.classList.add('ok');correct++;}
+    else{blank.classList.add('no');blank.textContent=val||'—';}
+  });
+  let fbHtml=`<div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px 18px">
+    <div style="font-size:14px;font-weight:600;margin-bottom:10px;color:${correct===ex.blanks.length?'var(--green)':'var(--yellow)'}">${correct===ex.blanks.length?'🎉 Perfetto! '+correct+'/'+ex.blanks.length:correct+' / '+ex.blanks.length+' corrette'}</div>`;
+  ex.blanks.forEach((ans,i)=>{
+    const ok=clozeFilled[i]===ans;
+    fbHtml+=`<div style="font-size:13px;padding:5px 0;color:${ok?'#86efac':'#fca5a5'}">${ok?'✅':'❌'} <strong>${ans}</strong>${ok?'':' (hai messo: '+(clozeFilled[i]||'niente')+')'} — ${ex.explain[i]}</div>`;
+  });
+  fbHtml+='</div>';
+  document.getElementById('cloze-fb').innerHTML=fbHtml;
+}
+
+// ============================================================
+// INIT
+// ============================================================
+initFlash();
+</script>
+</body>
+</html>
