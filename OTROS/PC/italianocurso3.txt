@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas de Resumen Universitario: El Verbo Italiano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f8fafc;
+      --color-background-tertiary: #e2e8f0;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-border-secondary: #cbd5e1;
+      --color-border-tertiary: #e2e8f0;
+    }
+    @media(prefers-color-scheme: dark) {
+      :root {
+        --color-background-primary: #0f172a;
+        --color-background-secondary: #1e293b;
+        --color-background-tertiary: #020617;
+        --color-text-primary: #f8fafc;
+        --color-text-secondary: #94a3b8;
+        --color-border-secondary: #334155;
+        --color-border-tertiary: #1e293b;
+      }
+    }
+    body { font-family: 'Source Sans 3', sans-serif; color: var(--color-text-primary); margin: 0; background: var(--color-background-primary); padding: 20px;}
+    
+    /* ESTRUCTURA GENERAL DEL CANVAS */
+    .cv {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 9px;
+      padding: 12px;
+      background: var(--color-background-tertiary);
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 12px;
+    }
+    
+    /* TÍTULO Y SECCIONES */
+    .title-bar {
+      grid-column: 1 / -1;
+      background: #0f1e3a;
+      color: white;
+      border-radius: 12px;
+      padding: 15px;
+    }
+    .title-bar h1 { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; margin: 0; }
+    .title-bar .sub { font-size: 11px; margin-top: 5px; color: #94a3b8; }
+    .title-bar .pill-container { margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap; }
+    
+    .sec-bar {
+      grid-column: 1 / -1;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-top: 5px;
+    }
+    
+    /* BLOQUES DE CONTENIDO */
+    .block {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 11px;
+      padding: 12px 13px;
+    }
+    .block.s2 { grid-column: span 2; }
+    .block.s3 { grid-column: span 3; }
+    
+    /* ELEMENTOS INTERNOS */
+    .bh {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .def {
+      border-radius: 0 7px 7px 0;
+      font-size: 12px;
+      padding: 7px 10px;
+      background: var(--color-background-secondary);
+      margin-bottom: 8px;
+    }
+    .item { display: flex; gap: 7px; font-size: 12px; line-height: 1.5; margin-bottom: 6px; }
+    .dot { min-width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; background: currentColor; }
+    
+    .rx {
+      background: #0f172a;
+      color: #7dd3fc;
+      font-family: monospace;
+      font-size: 11px;
+      padding: 7px 11px;
+      border-radius: 7px;
+      text-align: center;
+      line-height: 1.6;
+      margin: 8px 0;
+    }
+    
+    .warn {
+      background: #fff7ed;
+      border-left: 3px solid #f97316;
+      border-radius: 0 8px 8px 0;
+      font-size: 11.5px;
+      color: #7c2d12;
+      padding: 8px 10px;
+      margin: 8px 0;
+    }
+    
+    .exam {
+      background: #fefce8;
+      border: 1px solid #facc15;
+      border-radius: 8px;
+      font-size: 11.5px;
+      color: #713f12;
+      padding: 8px 10px;
+      margin-top: 10px;
+    }
+    
+    .mini { background: var(--color-background-secondary); border-radius: 8px; padding: 8px 10px; font-size: 11.5px; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin: 8px 0; }
+    .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin: 8px 0; }
+    
+    .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 8px 0; font-size: 11px;}
+    .fbox { background: var(--color-background-secondary); padding: 5px 8px; border-radius: 6px; border: 1px solid var(--color-border-tertiary);}
+    .farrow { color: var(--color-text-secondary); font-size: 15px; font-weight: bold; }
+    
+    .pill { font-size: 11px; padding: 3px 8px; border-radius: 20px; display: inline-block; margin: 2px; }
+    
+    .tbl { width: 100%; border-collapse: collapse; font-size: 11px; margin: 8px 0; }
+    .tbl th, .tbl td { padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); text-align: left; vertical-align: top; }
+    .tbl th { background: var(--color-background-secondary); font-weight: 600; }
+    
+    .divh { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 7px 0; }
+    
+    .footer {
+      grid-column: 1 / -1;
+      background: #0f1e3a;
+      color: white;
+      border-radius: 10px;
+      padding: 11px 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .ft { font-family: 'Oswald', sans-serif; font-size: 12px; color: #7dd3fc; font-weight: 700; }
+    .fc { font-size: 11px; color: #94a3b8; }
+
+    /* PALETA DE COLORES (Clases utilitarias) */
+    .bg-blue { background: #dbeafe; color: #1e3a8a; }
+    .border-blue { border-left: 3px solid #1e3a8a; }
+    .bg-purple { background: #ede9fe; color: #4c1d95; }
+    .border-purple { border-left: 3px solid #4c1d95; }
+    .bg-teal { background: #ccfbf1; color: #134e4a; }
+    .border-teal { border-top: 3px solid #134e4a; }
+    .bg-orange { background: #ffedd5; color: #7c2d12; }
+    .border-orange { border-left: 3px solid #7c2d12; }
+    .bg-green { background: #dcfce7; color: #14532d; }
+    .border-green { border-left: 3px solid #14532d; }
+    
+    @media(prefers-color-scheme: dark) {
+      .bg-blue { background: #1e3a5f; color: #93c5fd; }
+      .border-blue { border-color: #93c5fd; }
+      .bg-purple { background: #2e1065; color: #c4b5fd; }
+      .border-purple { border-color: #c4b5fd; }
+      .bg-teal { background: #042f2e; color: #5eead4; }
+      .border-teal { border-color: #5eead4; }
+      .bg-orange { background: #431407; color: #fed7aa; }
+      .border-orange { border-color: #fed7aa; }
+      .bg-green { background: #14532d; color: #86efac; }
+      .border-green { border-color: #86efac; }
+    }
+
+    /* ESTILOS DEL QUIZ */
+    #quiz-section {
+      grid-column: 1 / -1;
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .quiz-header { background: #0f1e3a; color: white; padding: 14px; border-radius: 10px; margin-bottom: 15px;}
+    .quiz-header h2 { font-family: 'Oswald', sans-serif; font-size: 15px; margin: 0; text-transform: uppercase;}
+    .quiz-header p { font-size: 11px; margin: 4px 0 0 0; color: #94a3b8; }
+    
+    .stat-bar-wrap { width: 100%; background: var(--color-background-secondary); border-radius: 20px; height: 11px; margin-bottom: 15px; overflow: hidden; border: 0.5px solid var(--color-border-tertiary);}
+    .stat-bar-fill { height: 100%; border-radius: 20px; background: #16a34a; width: 0%; transition: width 0.3s ease; }
+    .q-progress-text { font-size: 11px; font-weight: bold; margin-bottom: 5px; display: block; color: var(--color-text-secondary); }
+    
+    .qcard { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--color-border-tertiary); }
+    .qtext { font-size: 13px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+    
+    .qopts { display: flex; flex-direction: column; gap: 6px; }
+    .qbtn {
+      background: var(--color-background-secondary);
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-family: inherit;
+      color: var(--color-text-primary);
+      text-align: left;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+    .qbtn:hover:not(:disabled) { background: var(--color-border-tertiary); }
+    .qbtn.correct { background: #dcfce7; border-color: #16a34a; color: #14532d; font-weight: 600; }
+    .qbtn.incorrect { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+    .qbtn:disabled { opacity: 0.65; cursor: not-allowed; pointer-events: none; }
+    
+    .qfeedback {
+      border-radius: 0 8px 8px 0;
+      padding: 10px 12px;
+      font-size: 11.5px;
+      margin-top: 10px;
+      display: none;
+      line-height: 1.4;
+    }
+    .qfeedback.correct-fb { background: #f0fdf4; border-left: 3px solid #16a34a; color: #14532d; }
+    .qfeedback.incorrect-fb { background: #fef2f2; border-left: 3px solid #dc2626; color: #991b1b; }
+    
+    #quiz-results {
+      display: none; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center;
+      border: 1px solid var(--color-border-tertiary);
+    }
+    #quiz-results.low { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+    #quiz-results.mid { background: #fef9c3; color: #713f12; border-color: #fde047; }
+    #quiz-results.high { background: #dcfce7; color: #14532d; border-color: #86efac; }
+    #quiz-results h3 { margin: 0 0 10px 0; font-family: 'Oswald', sans-serif; font-size: 18px; }
+    
+    #reset-btn {
+      background: #0f1e3a; color: white; border: none; padding: 10px 18px; border-radius: 6px; 
+      cursor: pointer; font-size: 12px; font-weight: 600; margin-top: 15px; font-family: inherit;
+    }
+    #reset-btn:hover { background: #1e3a8a; }
+  </style>
+</head>
+<body>
+
+<div class="cv">
+  <div class="title-bar">
+    <h1>EL VERBO EN LA GRAMÁTICA ITALIANA</h1>
+    <div class="sub">Curso Académico de Lengua Italiana | Basado en: J. García Fernández | Análisis Morfosintáctico</div>
+    <div class="pill-container">
+      <span class="pill" style="background: #1e3a8a;">Sintagma Verbal</span>
+      <span class="pill" style="background: #1e3a8a;">Verbos Auxiliares</span>
+      <span class="pill" style="background: #1e3a8a;">Voz Pasiva</span>
+      <span class="pill" style="background: #1e3a8a;">Irregularidad Pronominal</span>
+    </div>
+  </div>
+
+  <div class="sec-bar bg-blue">🔵 CAP. 5: VERBOS AUXILIARES Y MODALES</div>
+
+  <div class="block">
+    <div class="bh bg-blue">Essere vs Avere (Cap. 5)</div>
+    <div class="def border-blue">
+      <strong>Los verbos de apoyo:</strong> "Essere" (ser/estar) y "Avere" (tener/haber) son el soporte sintáctico fundamental para formar tiempos compuestos y pasivas en italiano, perdiendo o modificando su valor semántico original.
+    </div>
+    <div class="item"><div class="dot"></div><span><strong>Essere:</strong> Se exige en verbos de movimiento, cambio de estado, permanencia y todos los verbos reflexivos/pronominales. Concuerda en género y número con el sujeto.</span></div>
+    <div class="item"><div class="dot"></div><span><strong>Avere:</strong> Se usa obligatoriamente para la gran mayoría de verbos transitivos (que tienen objeto directo) y algunos intransitivos activos. El participio permanece invariable en "-o" (salvo que haya pronombre directo previo).</span></div>
+    <div class="warn">
+      ⚠️ ERROR COMÚN: Los hispanohablantes suelen usar "avere" (haber) para todos los tiempos compuestos. En italiano, decir "Ho andato" es un error grave (debe ser "Sono andato/a").
+    </div>
+    <div class="exam">
+      <span class="exam-title">🎯 EXAMEN:</span> ¿Por qué el participio pasado se modifica en "Maria è andat<strong>a</strong>" pero no en "Maria ha mangiat<strong>o</strong>"? Analice la diferencia de sintaxis.
+    </div>
+  </div>
+
+  <div class="block s2">
+    <div class="bh bg-purple">Verbos Modales y su Dinámica (Cap. 5.2)</div>
+    <div class="def border-purple">
+      <strong>Verbos Serviles:</strong> <em>Dovere, Potere, Volere</em> (y a veces <em>Sapere</em>). Modifican la actitud del hablante hacia la acción del infinitivo que acompañan. Poseen una regla especial de selección de auxiliar en tiempos compuestos.
+    </div>
+    
+    <div class="two">
+      <div class="mini border-purple">
+        <strong>Regla General Auxiliar</strong><br>
+        Toman el auxiliar que exija el infinitivo principal. Ej: <em>andare</em> exige essere → "Sono dovuto andare" (Tuve que ir).
+      </div>
+      <div class="mini border-purple">
+        <strong>Excepción Pronominal</strong><br>
+        Si el pronombre va antes: auxiliar <em>essere</em> ("Mi sono dovuto alzare"). Si va pegado al infinitivo: auxiliar <em>avere</em> ("Ho dovuto alzarmi").
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="fbox">Verbo en Infinitivo (Ej. Partire)</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Exige Essere</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Modal toma Essere (Siamo voluti partire)</div>
+    </div>
+    
+    <div class="rx">
+      [Pron. Reflexivo Antepuesto] + [Essere] + [Modal Participio] + [Infinitivo]<br>
+      Ej: Ti sei potuto rilassare (Te has podido relajar)
+    </div>
+
+    <div class="exam">
+      <span class="exam-title">🎯 EXAMEN:</span> Traduzca y explique el fenómeno gramatical en: "No teníais que preocuparos tanto por mí" usando el verbo modal en tiempo compuesto y justificando el auxiliar.
+    </div>
+  </div>
+
+  <div class="sec-bar bg-teal">🩵 CAP. 6 y 7: VERBOS PRONOMINALES E IRREGULARES</div>
+
+  <div class="block">
+    <div class="bh bg-teal">Pronominales Idiomáticos (Cap. 6)</div>
+    <div class="def border-teal">
+      <strong>Verbi Pronominali:</strong> Verbos que incorporan uno o más pronombres clíticos que alteran drásticamente su significado original, sin función reflexiva real.
+    </div>
+    <div class="item"><div class="dot"></div><span><strong>Cavarsela:</strong> "Cavare" (extraer) + se + la = Apañárselas, salir airoso de una situación.</span></div>
+    <div class="item"><div class="dot"></div><span><strong>Avercela (con):</strong> Estar enfadado o resentido con alguien. Ej: <em>Ce l'aveva avuta con noi</em>.</span></div>
+    <div class="warn">
+      ⚠️ ERROR COMÚN: Olvidar que TODOS estos verbos exigen el auxiliar "essere" en los tiempos compuestos, y el participio debe concordar (ej. "Me la sono cavata").
+    </div>
+    <div class="exam">
+      <span class="exam-title">🎯 EXAMEN:</span> Explique el cambio semántico del verbo "battere" frente a "battersela (a gambe levate)" y desglose sus pronombres.
+    </div>
+  </div>
+
+  <div class="block s2">
+    <div class="bh bg-orange">Morfología de la Irregularidad (Cap. 7)</div>
+    <div class="def border-orange">
+      <strong>Variación en la Raíz:</strong> La irregularidad en italiano no es aleatoria. Se concentra fuertemente en el Presente de Indicativo y en el <em>Passato Remoto</em>, donde opera bajo el principio de "alternancia de raíz".
+    </div>
+    
+    <div class="three">
+      <div class="mini border-orange">
+        <strong>Opción 5 (Ej. Piacere)</strong><br>
+        Alternancia en 1ª sing, 1ª plur y 3ª plur: piaccio, piacciamo, piacciono.
+      </div>
+      <div class="mini border-orange">
+        <strong>Opción 6 (Ej. Dare/Stare)</strong><br>
+        Reduplicación de "-n-" en 3ª plur: danno, stanno. Y en 2ª sing (dai, stai).
+      </div>
+      <div class="mini border-orange">
+        <strong>Opción 7 (Generalizada)</strong><br>
+        Cambio derivado del latín en todo el paradigma (bere ← <em>bibere</em>, tradurre ← <em>traducere</em>).
+      </div>
+    </div>
+    
+    <div class="flow">
+      <div class="fbox">Passato Remoto de "-ere" (Prendere)</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Irregular: 1ª sing, 3ª sing, 3ª plur</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Presi, Prese, Presero</div>
+    </div>
+    <div class="flow" style="margin-top:0;">
+      <div style="visibility:hidden" class="fbox">Passato Remoto de "-ere" (Prendere)</div>
+      <div style="visibility:hidden" class="farrow">→</div>
+      <div class="fbox">Regular: 2ª sing, 1ª plur, 2ª plur</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Prendesti, Prendemmo, Prendeste</div>
+    </div>
+
+    <div class="exam">
+      <span class="exam-title">🎯 EXAMEN:</span> Desarrolle el paradigma cruzado de regularidad/irregularidad (Modelo 1-3-6 vs 2-4-5) en el Passato Remoto usando el verbo "spegnere".
+    </div>
+  </div>
+
+  <div class="sec-bar bg-green">🟢 CAP. 9: DINÁMICA DE LA VOZ PASIVA</div>
+
+  <div class="block s3">
+    <div class="bh bg-green">Construcción de la Voz Pasiva (Cap. 9)</div>
+    <div class="def border-green">
+      <strong>Inversión sintáctica:</strong> El objeto directo de la activa pasa a ser el sujeto paciente de la pasiva. Solo es posible con verbos transitivos directos.
+    </div>
+    
+    <div class="two">
+      <div>
+        <div class="item"><div class="dot"></div><span><strong>El Auxiliar Essere:</strong> Forma clásica. El participio siempre concuerda en género y número con el sujeto paciente. "Il libro è letto da Maria".</span></div>
+        <div class="item"><div class="dot"></div><span><strong>El Auxiliar Venire:</strong> Se usa <strong>solo en tiempos simples</strong> para aportar mayor dinamismo a la acción, diferenciando la acción pura del "estado". "La porta viene chiusa" (alguien la está cerrando) vs "La porta è chiusa" (estado: está cerrada).</span></div>
+      </div>
+      <div>
+        <div class="item"><div class="dot"></div><span><strong>El "Si" Passivante:</strong> Estructura muy usada en italiano formal y periodístico ("se" pasivo). El verbo se conjuga en 3ra persona (singular o plural) concordando con el objeto que sufre la acción. "Si vendono le case" (Se venden las casas).</span></div>
+        <div class="item"><div class="dot"></div><span><strong>Posición del "Si":</strong> Normalmente precede al verbo, pero con infinitivos, gerundios o participios va pegado al final (enclítico). Ej: "Vendendosi la casa...".</span></div>
+      </div>
+    </div>
+
+    <div class="warn">
+      ⚠️ ERROR COMÚN: Utilizar "venire" en tiempos compuestos pasivos es agramatical. No existe "è venuto letto", debe ser "è stato letto".
+    </div>
+
+    <div class="exam">
+      <span class="exam-title">🎯 EXAMEN:</span> Explique la diferencia semántica profunda entre "Il problema è stato risolto", "Il problema viene risolto" y "Il problema si risolve", detallando las restricciones morfológicas de cada una.
+    </div>
+  </div>
+
+  <div class="block s3">
+    <div class="bh" style="background:#f1f5f9; color:#334155;">Tabla Integradora: Comportamiento de Auxiliares y Concordancia</div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Estructura / Categoría</th>
+          <th>Auxiliar Principal</th>
+          <th>Regla de Concordancia del Participio</th>
+          <th>Ejemplo Crítico</th>
+          <th>Restricciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Transitivos Activos</strong></td>
+          <td>Avere</td>
+          <td>Invariable (en -o), SALVO si va precedido por pronombre directo (lo, la, li, le)</td>
+          <td>Ho letto i libri / <strong>Li</strong> ho lett<strong>i</strong></td>
+          <td>Avere + Participio NUNCA concuerda con el sujeto sintáctico.</td>
+        </tr>
+        <tr>
+          <td><strong>Intransitivos y Movimiento</strong></td>
+          <td>Essere</td>
+          <td>Obligatoria con el Sujeto (género y número)</td>
+          <td>Maria è andat<strong>a</strong> in Italia</td>
+          <td>Muchos falsos amigos respecto al español (ej: cadere → essere).</td>
+        </tr>
+        <tr>
+          <td><strong>Modales con Reflexivos</strong></td>
+          <td>Essere o Avere (varía)</td>
+          <td>Obligatoria si es Essere. Invariable si es Avere.</td>
+          <td><strong>Si</strong> è volut<strong>a</strong> svegliare / Ha voluto svegliar<strong>si</strong></td>
+          <td>Depende puramente de la posición del pronombre clítico.</td>
+        </tr>
+        <tr>
+          <td><strong>Voz Pasiva (Dinámica)</strong></td>
+          <td>Venire</td>
+          <td>Obligatoria con el Sujeto paciente</td>
+          <td>Le leggi vengono approvat<strong>e</strong></td>
+          <td>Prohibido terminantemente su uso en tiempos compuestos.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warn">
+      ⚠️ DATO INTEGRADOR CLAVE: La llave maestra de la sintaxis verbal italiana es comprender que la selección del auxiliar (essere/avere) dispara automáticamente reglas en cadena sobre la morfología del participio (concordancia vs invariabilidad).
+    </div>
+  </div>
+
+  <div id="quiz-section">
+    <div class="quiz-header">
+      <h2>📝 QUIZ DE REPASO ACADÉMICO — 10 PREGUNTAS</h2>
+      <p>Evalúa tu dominio sobre el comportamiento morfosintáctico del verbo italiano. Marca tu respuesta para validarla.</p>
+    </div>
+    
+    <span class="q-progress-text" id="q-progress-text">Progreso: 0 de 10 respondidas</span>
+    <div class="stat-bar-wrap">
+      <div class="stat-bar-fill" id="q-progress-bar"></div>
+    </div>
+
+    <div class="qcard" id="q1">
+      <p class="qtext">1. ¿Cuál es la regla fundamental sobre el uso del auxiliar "Avere" en relación a la concordancia del participio pasado?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) Siempre concuerda con el sujeto de la oración en género y número.</button>
+        <button class="qbtn" data-q="1" data-correct="true">B) Permanece invariable en "-o", excepto cuando hay un pronombre de objeto directo antepuesto.</button>
+        <button class="qbtn" data-q="1" data-correct="false">C) Concuerda obligatoriamente con el objeto indirecto de la acción.</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) Exige que el pronombre reflexivo se coloque siempre al final del infinitivo.</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <div class="qcard" id="q2">
+      <p class="qtext">2. Respecto a la voz pasiva en italiano, ¿en qué se diferencia el uso del auxiliar "venire" del auxiliar "essere"?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) "Venire" solo se utiliza con verbos intransitivos de movimiento.</button>
+        <button class="qbtn" data-q="2" data-correct="false">B) "Essere" se usa para expresar acción, mientras que "venire" solo denota estados permanentes.</button>
+        <button class="qbtn" data-q="2" data-correct="false">C) No hay ninguna diferencia, son totalmente intercambiables en todos los tiempos verbales.</button>
+        <button class="qbtn" data-q="2" data-correct="true">D) "Venire" enfatiza el desarrollo de la acción y está restringido únicamente a los tiempos simples (no compuestos).</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <div class="qcard" id="q3">
+      <p class="qtext">3. Si usted debe traducir "Ella ha tenido que levantarse temprano" utilizando un verbo modal, ¿cuál estructura es correcta según la regla de los clíticos?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="true">A) Lei si è dovuta alzare presto. (Pronombre antes -> Auxiliar essere -> Concordancia)</button>
+        <button class="qbtn" data-q="3" data-correct="false">B) Lei ha dovuta alzarsi presto. (Error de concordancia con avere)</button>
+        <button class="qbtn" data-q="3" data-correct="false">C) Lei si ha dovuto alzare presto. (Mezcla de auxiliar y pronombre)</button>
+        <button class="qbtn" data-q="3" data-correct="false">D) Lei è dovuto alzarsi presto. (Falta de concordancia de género y mal auxiliar por posición)</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <div class="qcard" id="q4">
+      <p class="qtext">4. Analizando el Passato Remoto de los verbos de la segunda conjugación (-ere) como "prendere" o "spegnere", ¿qué patrón de irregularidad siguen?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="false">A) Son irregulares en todo su paradigma.</button>
+        <button class="qbtn" data-q="4" data-correct="true">B) Presentan alternancia: la 1ª singular, 3ª singular y 3ª plural son irregulares, el resto son regulares.</button>
+        <button class="qbtn" data-q="4" data-correct="false">C) Solo la 1ª y 2ª persona del singular sufren mutaciones fonéticas derivadas del latín.</button>
+        <button class="qbtn" data-q="4" data-correct="false">D) Duplican la consonante final en las formas del plural exclusivamente.</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <div class="qcard" id="q5">
+      <p class="qtext">5. ¿Cuál es el significado del verbo pronominal idiomático "cavarsela"?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) Enfadarse o resentirse con una tercera persona.</button>
+        <button class="qbtn" data-q="5" data-correct="false">B) Extraer algo de un agujero o cavidad profunda.</button>
+        <button class="qbtn" data-q="5" data-correct="true">C) Apañárselas, salir airoso de una situación complicada o tener habilidad para algo.</button>
+        <button class="qbtn" data-q="5" data-correct="false">D) Huir corriendo a toda velocidad por miedo.</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <div class="qcard" id="q6">
+      <p class="qtext">6. De los siguientes participios irregulares mostrados en el material, ¿cuál es FALSO?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="false">A) Dire → Detto</button>
+        <button class="qbtn" data-q="6" data-correct="true">B) Spegnere → Spegnito</button>
+        <button class="qbtn" data-q="6" data-correct="false">C) Prendere → Preso</button>
+        <button class="qbtn" data-q="6" data-correct="false">D) Nascere → Nato</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <div class="qcard" id="q7">
+      <p class="qtext">7. En la estructura del "si passivante", si queremos traducir "Se venden los libros", la sintaxis correcta en italiano será:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="true">A) Si vendono i libri. (El verbo debe ir en plural porque concuerda con "i libri").</button>
+        <button class="qbtn" data-q="7" data-correct="false">B) Si vende i libri. (El "si" hace que el verbo siempre sea singular).</button>
+        <button class="qbtn" data-q="7" data-correct="false">C) Vengono si venduti i libri. (Uso erróneo de venire con si passivante).</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) I libri si hanno venduto. (Auxiliar incorrecto).</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <div class="qcard" id="q8">
+      <p class="qtext">8. Seleccione la forma correcta del presente de indicativo (primera persona del plural) del verbo "piacere".</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="false">A) Piacemo</button>
+        <button class="qbtn" data-q="8" data-correct="false">B) Piacciono</button>
+        <button class="qbtn" data-q="8" data-correct="true">C) Piacciamo</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) Piaccamo</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <div class="qcard" id="q9">
+      <p class="qtext">9. ¿Cuál de estos es un verbo intransitivo que, como verbo de movimiento/estado, exigirá el auxiliar ESSERE en los tiempos compuestos?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="false">A) Leggere (Leer)</button>
+        <button class="qbtn" data-q="9" data-correct="true">B) Cadere (Caer)</button>
+        <button class="qbtn" data-q="9" data-correct="false">C) Mangiare (Comer)</button>
+        <button class="qbtn" data-q="9" data-correct="false">D) Chiedere (Pedir)</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <div class="qcard" id="q10">
+      <p class="qtext">10. "Ce l'aveva avuta con noi perché non eravamo andati insieme a teatro". En esta oración, la frase "ce l'aveva avuta" proviene del verbo idiomático avercela (con). ¿Qué tiempo verbal representa?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) Passato prossimo (Pretérito perfecto compuesto)</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) Imperfetto (Pretérito imperfecto)</button>
+        <button class="qbtn" data-q="10" data-correct="true">C) Trapassato prossimo (Pretérito pluscuamperfecto)</button>
+        <button class="qbtn" data-q="10" data-correct="false">D) Condizionale passato (Condicional compuesto)</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div id="quiz-results">
+      <h3 id="res-title">Resultados</h3>
+      <p id="res-msg"></p>
+      <button id="reset-btn">🔄 Reiniciar Quiz</button>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="ft">REFERENCIAS Y BIBLIOGRAFÍA ACADÉMICA:</div>
+    <div class="fc">
+      1. García Fernández, J. (2019). El verbo en la gramática italiana: Guía práctica de formas y usos lingüísticos. Universidad de Oviedo (Ediuno). <br>
+      2. Marco Común Europeo de Referencia para las lenguas (Niveles A1-B2). 
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let respondidas = 0;
+    let correctas = 0;
+    const total = 10;
+    
+    const quizSection = document.getElementById('quiz-section');
+    const progText = document.getElementById('q-progress-text');
+    const progBar = document.getElementById('q-progress-bar');
+    const resPanel = document.getElementById('quiz-results');
+    const resTitle = document.getElementById('res-title');
+    const resMsg = document.getElementById('res-msg');
+    
+    // Retroalimentaciones explícitas por concepto
+    const feedbackTexts = {
+      1: { t: "El auxiliar Avere hace que el participio acabe invariablemente en -o, excepto en los pocos casos donde intervienen pronombres de OD (lo, la, li, le) previos, donde la concordancia se vuelve obligatoria.", f: "Recuerda que Avere + participio NO concuerda con el sujeto. El participio se queda en '-o' como norma general, salvo presencia de pronombre directo antepuesto." },
+      2: { t: "¡Correcto! Venire en pasiva se usa para hacer foco en la acción ('estado en curso') y está sintácticamente prohibido usarlo en tiempos compuestos (no se dice 'è venuto letto').", f: "No. 'Venire' no es para movimiento aquí, es un auxiliar pasivo. Su restricción principal es que solo se usa en tiempos simples (presente, imperfecto, futuro, passato remoto)." },
+      3: { t: "¡Exacto! Al colocar 'si' (reflexivo) antes del modal, la regla obliga a usar el auxiliar Essere y, por ende, a hacer concordancia de género y número en el participio ('dovuta').", f: "Recuerda la regla pronominal de los modales: si el pronombre va antes, se usa 'essere' y hay concordancia. Si va pegado al infinitivo, se usa 'avere' y no hay concordancia ('ha dovuto alzarsi')." },
+      4: { t: "¡Bien! Este es el patrón '1-3-6'. En el passato remoto de -ere, la 1ª sing, 3ª sing y 3ª plural sufren alteración (ej. presi, prese, presero), y el resto del paradigma permanece regular.", f: "Incorrecto. La irregularidad del Passato Remoto de la 2da conjugación no es aleatoria, sigue el patrón de intercalación: las formas regulares e irregulares se intercalan (1, 3, 6 son irregulares)." },
+      5: { t: "¡Muy bien! Cavarsela, compuesto de cavare + se + la, es un idiomático vital para expresar que uno ha logrado resolver o salir vivo de una situación.", f: "No confundas las formas. 'Avercela' es enfadarse; 'Battersela' es huir; 'Cavarsela' es salir airoso de una situación difícil." },
+      6: { t: "¡Excelente ojo! Spegnere es irregular, y su participio es 'Spento', no 'Spegnito'. Las demás opciones presentadas sí son correctas (detto, preso, nato).", f: "Revisa la morfología irregular del participio. Spegnere hace 'Spento'. Dire -> Detto y Prendere -> Preso son correctos." },
+      7: { t: "¡Correcto! En la estructura del 'si passivante', el objeto pasa a ser el sujeto gramatical. Al ser 'i libri' (plural), el verbo DEBE ir en plural (vendono).", f: "Cuidado. En el si passivante, lo que se vende es el sujeto gramatical. Si son varios libros, el verbo debe concordar en plural: Si vendono i libri." },
+      8: { t: "¡Bien! La primera persona plural irregular de piacere es 'piacciamo', manteniendo la doble 'c' y la 'i' diacrítica.", f: "Error de ortografía y morfología. Piacere hace 'piaccio', 'piacciamo' y 'piacciono' (Opción 5 de irregularidad)." },
+      9: { t: "¡Correcto! Cadere es un verbo intransitivo que indica cambio de estado/movimiento y requiere rigurosamente 'Essere' en tiempos compuestos (Sono caduto/a).", f: "Leggere, mangiare y chiedere son verbos transitivos (admiten objeto directo: leer algo, comer algo), por lo tanto exigen el auxiliar Avere." },
+      10: { t: "¡Perfecto! 'Ce l'aveva avuta' está formado por el imperfecto del auxiliar avere (aveva) + participio (avuta). Esto compone el Trapassato Prossimo.", f: "Fíjate en el auxiliar: 'aveva' es imperfecto. Un auxiliar en imperfecto + participio forma el Pretérito Pluscuamperfecto (Trapassato prossimo)." }
+    };
+
+    quizSection.addEventListener('click', (e) => {
+      const btn = e.target.closest('.qbtn');
+      if (!btn) return;
+
+      const qNum = btn.dataset.q;
+      const isCorrect = btn.dataset.correct === "true";
+      const container = document.getElementById(`q${qNum}`);
+      const buttons = container.querySelectorAll('.qbtn');
+      const fb = document.getElementById(`fb${qNum}`);
+
+      // Deshabilitar botones
+      buttons.forEach(b => {
+        b.disabled = true;
+        // Resaltar la correcta siempre
+        if(b.dataset.correct === "true") {
+          b.classList.add('correct');
+          b.innerHTML = "✅ " + b.innerHTML;
+        }
+      });
+
+      // Lógica de feedback y colores
+      if (isCorrect) {
+        correctas++;
+        fb.innerHTML = "<strong>✅ ¡Correcto!</strong> " + feedbackTexts[qNum].t;
+        fb.className = "qfeedback correct-fb";
+      } else {
+        btn.classList.add('incorrect');
+        btn.innerHTML = "❌ " + btn.innerHTML;
+        fb.innerHTML = "<strong>❌ Incorrecto.</strong> " + feedbackTexts[qNum].f;
+        fb.className = "qfeedback incorrect-fb";
+      }
+      
+      fb.style.display = "block";
+      respondidas++;
+      
+      // Actualizar barra
+      progText.textContent = `Progreso: ${respondidas} de 10 respondidas`;
+      progBar.style.width = `${(respondidas/total)*100}%`;
+
+      // Finalizar quiz
+      if(respondidas === total) {
+        resPanel.style.display = "block";
+        resPanel.className = "";
+        let msg = "";
+        if(correctas <= 4) {
+          resPanel.classList.add('low');
+          msg = `Obtuviste ${correctas}/10. Necesitas repasar el material sintáctico de los auxiliares.`;
+        } else if (correctas <= 7) {
+          resPanel.classList.add('mid');
+          msg = `Obtuviste ${correctas}/10. ¡Buen avance! Sigue repasando las excepciones pronominales.`;
+        } else {
+          resPanel.classList.add('high');
+          msg = `Obtuviste ${correctas}/10. ¡Excelente dominio de la gramática y el sintagma verbal italiano!`;
+        }
+        resMsg.textContent = msg;
+      }
+    });
+
+    // Resetear Quiz
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      respondidas = 0;
+      correctas = 0;
+      progText.textContent = `Progreso: 0 de 10 respondidas`;
+      progBar.style.width = `0%`;
+      resPanel.style.display = "none";
+      
+      document.querySelectorAll('.qbtn').forEach(b => {
+        b.disabled = false;
+        b.classList.remove('correct', 'incorrect');
+        b.innerHTML = b.innerHTML.replace("✅ ", "").replace("❌ ", "");
+      });
+      
+      document.querySelectorAll('.qfeedback').forEach(f => {
+        f.style.display = "none";
+        f.className = "qfeedback";
+        f.innerHTML = "";
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
