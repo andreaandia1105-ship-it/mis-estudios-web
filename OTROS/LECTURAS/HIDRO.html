@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Hidrología OMM · Guía de Prácticas Vol. I</title>
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--color-background-primary);
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f8fafc;
+      --color-background-tertiary: #f1f5f9;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #334155;
+      --color-border-tertiary: #e2e8f0;
+      --color-border-secondary: #cbd5e1;
+      color: var(--color-text-primary);
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        --color-background-primary: #0f172a;
+        --color-background-secondary: #1e293b;
+        --color-background-tertiary: #0b1120;
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #cbd5e1;
+        --color-border-tertiary: #334155;
+        --color-border-secondary: #475569;
+      }
+    }
+    .cv {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 9px;
+      padding: 12px;
+      background: var(--color-background-tertiary);
+      border-radius: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .block { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 11px; padding: 12px 13px; }
+    .block.s2 { grid-column: span 2; }
+    .block.s3 { grid-column: 1 / -1; }
+
+    .title-bar {
+      grid-column: 1 / -1;
+      background: #0f1e3a;
+      color: white;
+      border-radius: 12px;
+      padding: 16px 22px;
+    }
+    .title-bar h1 { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 3px; }
+    .title-bar .sub { font-size: 11px; opacity: 0.9; }
+    .tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+    .pill { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: rgba(255,255,255,0.15); display: inline-block; }
+
+    .sec-bar {
+      grid-column: 1 / -1;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 10px 3px 5px;
+      letter-spacing: 0.3px;
+    }
+
+    .bh {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .def {
+      border-left-width: 3px; border-left-style: solid;
+      padding: 7px 10px;
+      border-radius: 0 7px 7px 0;
+      font-size: 12px;
+      background: var(--color-background-secondary);
+      margin-bottom: 10px;
+    }
+    .item { display: flex; gap: 7px; font-size: 12px; line-height: 1.5; margin-bottom: 6px; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .rx {
+      background: #0f172a; color: #7dd3fc;
+      font-family: 'Source Sans 3', monospace;
+      font-size: 11px; padding: 7px 11px;
+      border-radius: 7px; text-align: center;
+      line-height: 1.6; margin: 8px 0;
+    }
+    .warn {
+      background: #fff7ed; border-left: 3px solid #f97316;
+      border-radius: 0 8px 8px 0; font-size: 11.5px;
+      color: #7c2d12; padding: 7px 10px; margin-top: 8px;
+    }
+    .exam {
+      background: #fefce8; border: 1px solid #facc15;
+      border-radius: 8px; font-size: 11.5px; color: #713f12;
+      padding: 8px 11px; margin-top: 10px;
+    }
+    .mini {
+      background: var(--color-background-secondary);
+      border-radius: 8px; padding: 8px 10px; font-size: 11.5px;
+    }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin: 8px 0; }
+    .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin: 8px 0; }
+    .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
+    .fbox { background: var(--color-background-secondary); padding: 5px 10px; border-radius: 20px; font-size: 11px; }
+    .farrow { color: var(--color-text-secondary); font-size: 15px; }
+    .num-badge { width: 20px; height: 20px; border-radius: 50%; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; background: #1e3a8a; color: white; }
+    .stat-bar-wrap { width: 100%; background: var(--color-background-secondary); border-radius: 20px; height: 11px; margin: 5px 0; }
+    .stat-bar-fill { height: 100%; border-radius: 20px; background: #16a34a; width: 0%; }
+    .tbl { width: 100%; border-collapse: collapse; font-size: 11px; margin: 8px 0; }
+    .tbl th { background: var(--color-background-secondary); padding: 5px 7px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+    .tbl td { padding: 5px 7px; border-bottom: 0.5px solid var(--color-border-tertiary); vertical-align: top; }
+    .divh { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 7px 0; }
+    .footer-bar {
+      grid-column: 1 / -1; background: #0f1e3a; color: white;
+      border-radius: 10px; padding: 11px 18px; display: flex;
+      flex-wrap: wrap; gap: 12px; align-items: center;
+    }
+    .ft { font-family: 'Oswald', sans-serif; font-size: 12px; color: #7dd3fc; }
+    .fc { font-size: 11px; color: #94a3b8; }
+
+    /* Quiz styles */
+    #quiz-section { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 14px; padding: 16px 18px; }
+    .quiz-header { background: #0f1e3a; color: white; border-radius: 12px; padding: 12px 18px; margin-bottom: 15px; }
+    .quiz-header h3 { font-family: 'Oswald', sans-serif; font-size: 14px; margin-bottom: 2px; }
+    .quiz-header p { font-size: 11px; opacity: 0.9; }
+    .quiz-progress { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
+    .qcard { background: var(--color-background-secondary); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; }
+    .qnum { font-weight: 600; font-size: 11px; color: var(--color-text-secondary); margin-bottom: 5px; }
+    .qtext { font-weight: 600; font-size: 13px; margin-bottom: 10px; }
+    .qopts { display: flex; flex-direction: column; gap: 6px; }
+    .qbtn {
+      background: var(--color-background-primary);
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 8px; padding: 8px 12px; font-size: 12px;
+      text-align: left; cursor: pointer; width: 100%;
+      transition: all 0.2s; color: var(--color-text-primary);
+    }
+    .qbtn:hover { background: var(--color-background-tertiary); }
+    .qbtn.correct-opt { background: #dcfce7; border-color: #16a34a; color: #14532d; }
+    .qbtn.wrong-opt { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+    .qbtn:disabled { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+    .qfeedback {
+      margin-top: 8px; border-radius: 0 8px 8px 0; padding: 8px 11px;
+      font-size: 11.5px; border-left-width: 3px; border-left-style: solid;
+    }
+    .fb-correct { background: #f0fdf4; border-left-color: #16a34a; color: #14532d; }
+    .fb-incorrect { background: #fef2f2; border-left-color: #dc2626; color: #991b1b; }
+    .result-panel { margin-top: 20px; padding: 14px; border-radius: 12px; text-align: center; }
+    .btn-reset { background: #0f1e3a; color: white; border: none; border-radius: 30px; padding: 8px 18px; font-size: 12px; cursor: pointer; margin-top: 10px; }
+  </style>
+</head>
+<body>
+<div class="cv" id="canvas-root">
+
+  <!-- TITLE BAR -->
+  <div class="title-bar">
+    <h1>🌍 GUÍA DE PRÁCTICAS HIDROLÓGICAS · VOLUMEN I</h1>
+    <div class="sub">OMM-Nº 168 (Ed. 2008, actualización 2020) · Hidrología: de la medición a la información</div>
+    <div class="tags">
+      <span class="pill">Ciclo hidrológico</span><span class="pill">Redes de observación</span><span class="pill">Precipitación</span><span class="pill">Evapotranspiración</span>
+      <span class="pill">Agua superficial</span><span class="pill">Agua subterránea</span><span class="pill">Calidad</span><span class="pill">Datos y difusión</span>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 1: CICLO HIDROLÓGICO Y REDES -->
+  <div class="sec-bar" style="color: #1e3a8a;">🔵 FUNDAMENTOS DEL CICLO HIDROLÓGICO Y REDES DE OBSERVACIÓN</div>
+
+  <div class="block">
+    <div class="bh" style="background: #dbeafe; color: #1e3a8a;">💧 Ciclo (Cap. 2)</div>
+    <div class="def" style="border-left-color: #2563eb;">
+      El ciclo hidrológico es el sistema de almacenamiento y flujo del agua en la Tierra (atmósfera, superficie, subsuelo). Se rige por las ecuaciones de continuidad de masa y energía.
+    </div>
+    <div class="flow">
+      <span class="fbox">🌧️ Precipitación</span><span class="farrow">→</span><span class="fbox">💨 Evapotranspiración</span><span class="farrow">→</span><span class="fbox">💧 Escorrentía</span><span class="farrow">→</span><span class="fbox">🌊 Almacenamiento</span>
+    </div>
+    <div class="rx">Q = A · V   (caudal = área × velocidad media)<br>P + I – O – E = ΔS  (balance en lago)</div>
+    <div class="exam"><span style="font-weight:600;">🎯 EXAMEN:</span> Explique cómo se aplica la ecuación de continuidad para estimar la evaporación en un lago y cuáles son sus limitaciones.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background: #dbeafe; color: #1e3a8a;">📡 Redes (Cap. 2)</div>
+    <div class="def" style="border-left-color: #2563eb;">Red hidrológica: conjunto de estaciones diseñadas para cumplir objetivos compatibles (evaluación, predicción, diseño).</div>
+    <div class="item"><div class="dot" style="background: #2563eb;"></div><strong>Red mínima:</strong> evita deficiencias graves en desarrollo y gestión hídrica.</div>
+    <div class="item"><div class="dot" style="background: #2563eb;"></div><strong>Estaciones de referencia:</strong> series largas en áreas poco alteradas.</div>
+    <div class="warn">⚠️ La densidad óptima depende de la variabilidad climática. En zonas montañosas se requiere 1 estación cada 250 km² para precipitación.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background: #fef9c3; color: #713f12;">📏 Exactitud y cifrado</div>
+    <div class="def" style="border-left-color: #eab308;">Incertidumbre al 95% recomendada: caudal ~5%, precipitación 3–7%, nivel de agua 10–20 mm.</div>
+    <div class="item"><div class="dot" style="background: #eab308;"></div>Errores sistemáticos: corregir (viento, mojadura).</div>
+    <div class="item"><div class="dot" style="background: #eab308;"></div>Clave CREX para intercambio de datos hidrometeorológicos.</div>
+    <div class="exam"><span style="font-weight:600;">🎯 EXAMEN:</span> ¿Por qué la exactitud de la medición de precipitación de nieve es mucho menor que la de lluvia? Mencione dos causas principales.</div>
+  </div>
+
+  <!-- SECCIÓN 2: PRECIPITACIÓN -->
+  <div class="sec-bar" style="color: #0d9488;">🩵 MEDICIÓN DE PRECIPITACIONES (Cap. 3)</div>
+
+  <div class="block s2">
+    <div class="bh" style="background: #ccfbf1; color: #134e4a;">🌧️ Pluviómetros y pluviógrafos</div>
+    <div class="two">
+      <div class="mini" style="border-top: 3px solid #0d9488;"><strong>Estándar (no registrador):</strong> lectura diaria, borde biselado, corrección por viento esencial.</div>
+      <div class="mini" style="border-top: 3px solid #0d9488;"><strong>De pesada:</strong> registra todo tipo (nieve), autovaciado, aceite reduce evaporación.</div>
+      <div class="mini" style="border-top: 3px solid #0d9488;"><strong>Cubeta basculante:</strong> impulsos electrónicos, error en lluvias intensas (pérdida durante basculación).</div>
+      <div class="mini" style="border-top: 3px solid #0d9488;"><strong>Distrómetro / acústico:</strong> espectro de gotas, útil en lagos.</div>
+    </div>
+    <div class="rx">k (factor corrección viento) = f(velocidad viento, estructura precipitación). Pérdida por mojadura: ΔP₁ = a·M</div>
+    <div class="warn">⚠️ En nieve y viento fuerte, la captación puede ser <50% de la real. Usar pantalla Tretyakov.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background: #ccfbf1; color: #134e4a;">📡 Radar meteorológico</div>
+    <div class="def" style="border-left-color: #0d9488;">Reflectividad Z → tasa de lluvia R. Banda C (atenuación) y banda S (menor atenuación).</div>
+    <div class="rx">Z = 200·R¹·⁶ (Marshall-Palmer)</div>
+    <div class="item"><div class="dot" style="background: #0d9488;"></div>Efecto banda brillante: fusión de nieve sobreestima lluvia.</div>
+    <div class="item"><div class="dot" style="background: #0d9488;"></div>Corrección de perfil vertical (VPR) reduce error típico a ~23%.</div>
+    <div class="exam"><span style="font-weight:600;">🎯 EXAMEN:</span> Describa dos fenómenos que limitan la exactitud del radar en la estimación cuantitativa de lluvia en terreno montañoso.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background: #ccfbf1; color: #134e4a;">🛰️ Satélite (TRMM, GPM)</div>
+    <div class="def" style="border-left-color: #0d9488;">Microondas pasivas (absorción/dispersión) y radar activo (PR). Producto GPCP mensual 2.5°.</div>
+    <div class="item"><div class="dot" style="background: #0d9488;"></div>Índice GPI (infrarrojo): T<235K → 3 mm/h en trópicos.</div>
+    <div class="item"><div class="dot" style="background: #0d9488;"></div>Nieve: microondas pasivas (SSMI) en praderas canadienses, error ±10 mm eq. agua.</div>
+    <div class="mini" style="border-left: 3px solid #0d9488;">En Perú, la teledetección de nieve en cordilleras es clave para pronóstico de caudales en costa.</div>
+  </div>
+
+  <!-- SECCIÓN 3: EVAPORACIÓN Y HUMEDAD DEL SUELO -->
+  <div class="sec-bar" style="color: #15803d;">🟢 EVAPORACIÓN, EVAPOTRANSPIRACIÓN Y HUMEDAD DEL SUELO (Cap. 4)</div>
+
+  <div class="block s2">
+    <div class="bh" style="background: #dcfce7; color: #14532d;">💨 Evaporación en superficies libres</div>
+    <div class="def" style="border-left-color: #16a34a;">Métodos: balance hídrico, balance energético, transferencia de masa, combinados (Penman).</div>
+    <div class="two">
+      <div class="rx" style="margin:0;">E = (Rn·Δ + Ea·γ) / (Δ+γ)   (Penman)</div>
+      <div class="rx" style="margin:0;">E = k·(eₛ – eₐ)   (Dalton)</div>
+    </div>
+    <div class="item"><div class="dot" style="background: #16a34a;"></div><strong>Tanque Clase A:</strong> coeficiente de 0.6–0.8 según advección. En zonas áridas subestima si no se corrige.</div>
+    <div class="warn">⚠️ No usar coeficiente fijo anual; varía estacionalmente y con viento/temperatura.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background: #dcfce7; color: #14532d;">🌱 Evapotranspiración</div>
+    <div class="def" style="border-left-color: #16a34a;">ET real = f(θ)·ET potencial. Método FAO-56 Penman-Monteith para cultivo de referencia.</div>
+    <div class="rx">λE = (Δ·Λ + ρ·cₚ·D/rₐ) / (Δ + γ·(1 + rₛ/rₐ))</div>
+    <div class="item"><div class="dot" style="background: #16a34a;"></div>Priestley-Taylor (α=1.26) para áreas húmedas extensas.</div>
+    <div class="exam"><span style="font-weight:600;">🎯 EXAMEN:</span> Diferencie entre evaporación potencial, real y de referencia, y mencione en qué condiciones son iguales.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background: #dcfce7; color: #14532d;">💧 Humedad del suelo</div>
+    <div class="def" style="border-left-color: #16a34a;">Métodos cuantitativos: gravimétrico (referencia), sonda de neutrones, TDR/FDR.</div>
+    <div class="item"><div class="dot" style="background: #16a34a;"></div><strong>TDR:</strong> mide constante dieléctrica (agua ~80, suelo seco 3–5).</div>
+    <div class="item"><div class="dot" style="background: #16a34a;"></div><strong>Tensiómetro:</strong> potencial de presión hasta -85 kPa.</div>
+    <div class="mini" style="border-top: 3px solid #16a34a;">Teledetección: microondas pasivas (SMOS, SMAP) para humedad superficial.</div>
+  </div>
+
+  <!-- SECCIÓN 4: AGUA SUPERFICIAL Y SEDIMENTOS -->
+  <div class="sec-bar" style="color: #0f766e;">🩵 MEDICIÓN CUANTITATIVA DE AGUA SUPERFICIAL (Cap. 5)</div>
+
+  <div class="block s3">
+    <div class="bh" style="background: #ccfbf1; color: #134e4a;">📊 Aforo de caudales y sedimentos</div>
+    <div class="three">
+      <div class="mini" style="border-left: 3px solid #0d9488;"><strong>Molinete (área-velocidad):</strong> verticales, método 0.2/0.8 o 0.6 prof. Error estándar ~5%.</div>
+      <div class="mini" style="border-left: 3px solid #0d9488;"><strong>ADCP (Doppler):</strong> perfilador acústico, mide caudal desde bote en movimiento. Requiere al menos 4 transectas.</div>
+      <div class="mini" style="border-left: 3px solid #0d9488;"><strong>Dilución:</strong> trazador (sal, rodamina) en corrientes turbulentas. Inyección constante o instantánea.</div>
+    </div>
+    <div class="flow"><span class="fbox">Nivel (limnígrafo)</span><span class="farrow">→</span><span class="fbox">Curva H-Q</span><span class="farrow">→</span><span class="fbox">Serie de caudal</span></div>
+    <div class="tbl">
+      <table><tr><th>Método</th><th>Aplicación típica</th><th>Incertidumbre</th></tr>
+      <tr><td>Área-pendiente</td><td>Crecidas (marcas)</td><td>±15-25%</td></tr>
+      <tr><td>Ultrasónico</td><td>Ríos grandes</td><td>±3-5%</td></tr>
+      <tr><td>Electromagnético</td><td>Canales con vegetación</td><td>±5%</td></tr></table>
+    </div>
+    <div class="warn">⚠️ Bajo hielo, usar profundidad efectiva (distancia a cara inferior del hielo). Coeficiente de corrección ~0.88.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background: #ccfbf1; color: #134e4a;">🪨 Sedimentos</div>
+    <div class="def" style="border-left-color: #0d9488;">Carga en suspensión: muestreador de integración (USDH-48). Carga de fondo: muestreador de cesta o presión diferencial.</div>
+    <div class="item"><div class="dot" style="background: #0d9488;"></div>Método de incrementos iguales de caudal (EDI) o igual velocidad (EVI).</div>
+    <div class="rx">Qₛ = c̄ₛ · Q   (caudal sólido en suspensión)</div>
+    <div class="exam"><span style="font-weight:600;">🎯 EXAMEN:</span> ¿Por qué la curva de gasto de sedimentos suele presentar histéresis (lazo) durante una crecida?</div>
+  </div>
+
+  <!-- SECCIÓN 5: AGUAS SUBTERRÁNEAS -->
+  <div class="sec-bar" style="color: #7e22ce;">🟣 AGUAS SUBTERRÁNEAS (Cap. 6)</div>
+
+  <div class="block">
+    <div class="bh" style="background: #ede9fe; color: #4c1d95;">🕳️ Acuíferos y pozos</div>
+    <div class="def" style="border-left-color: #7e22ce;">Acuífero: formación saturada que transmite agua económicamente. Confinado vs. no confinado.</div>
+    <div class="item"><div class="dot" style="background: #7e22ce;"></div><strong>Pozo de observación:</strong> entubado, filtro de grava, sello sanitario. Prueba de bombeo para T y S.</div>
+    <div class="mini" style="border-top: 3px solid #7e22ce;">Registros geofísicos: calibre, gamma natural, resistividad, flowmeter.</div>
+  </div>
+
+  <div class="block s2">
+    <div class="bh" style="background: #ede9fe; color: #4c1d95;">📈 Parámetros hidráulicos</div>
+    <div class="def" style="border-left-color: #7e22ce;">Transmisividad T = K·b ; Coeficiente almacenamiento S (confinado ~10⁻⁵–10⁻³, libre ~0.1).</div>
+    <div class="two">
+      <div class="rx">Theis (confinado): s = (Q/(4πT))·W(u), u = r²S/(4Tt)</div>
+      <div class="rx">Darcy: Q = K·A·(dh/dl)</div>
+    </div>
+    <div class="item"><div class="dot" style="background: #7e22ce;"></div>Ensayos de bombeo: curva tipo Theis, método de Jacob (u<0.01).</div>
+    <div class="exam"><span style="font-weight:600;">🎯 EXAMEN:</span> ¿Qué información adicional se obtiene de un ensayo de bombeo con pozo de observación respecto a uno sin él?</div>
+  </div>
+
+  <!-- SECCIÓN 6: CALIDAD DEL AGUA -->
+  <div class="sec-bar" style="color: #b45309;">🟠 CALIDAD DEL AGUA Y ECOSISTEMAS (Cap. 7)</div>
+
+  <div class="block s2">
+    <div class="bh" style="background: #ffedd5; color: #7c2d12;">🧪 Parámetros y muestreo</div>
+    <div class="def" style="border-left-color: #f97316;">Variables básicas: T, pH, CE, OD, turbidez, iones mayoritarios, nutrientes, coliformes.</div>
+    <div class="two">
+      <div class="mini" style="border-left: 3px solid #f97316;"><strong>Muestra puntual:</strong> instantánea, para variabilidad espacial.</div>
+      <div class="mini" style="border-left: 3px solid #f97316;"><strong>Compuesta:</strong> integrada en tiempo o proporcional al caudal.</div>
+    </div>
+    <div class="warn">⚠️ Medir in situ parámetros inestables (pH, OD, T) inmediatamente. Conservar muestras refrigeradas o con ácido.</div>
+    <div class="item"><div class="dot" style="background: #f97316;"></div>DBO₅: incubación 5 días a 20°C, oscuridad. Indica materia orgánica biodegradable.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background: #ffedd5; color: #7c2d12;">🛡️ Seguridad (Cap. 8)</div>
+    <div class="def" style="border-left-color: #f97316;">Vadeo: profundidad × velocidad ≤ 1 m²/s. Chaleco salvavidas siempre en bote o vadeo profundo.</div>
+    <div class="item"><div class="dot" style="background: #f97316;"></div>Hipotermia: síntomas, recalentar tronco gradualmente.</div>
+    <div class="exam"><span style="font-weight:600;">🎯 EXAMEN:</span> Mencione tres medidas de seguridad obligatorias al operar un teleférico hidrométrico.</div>
+  </div>
+
+  <!-- SECCIÓN 7: PROCESO DE DATOS Y DIFUSIÓN -->
+  <div class="sec-bar" style="color: #b45309;">⚙️ PROCESO, CONTROL DE CALIDAD Y DIFUSIÓN (Cap. 9-10)</div>
+
+  <div class="block s3">
+    <div class="bh" style="background: #f1f5f9; color: #334155;">📑 Gestión de datos hidrológicos</div>
+    <div class="three">
+      <div class="mini" style="border-left: 3px solid #64748b;"><strong>Tratamiento primario:</strong> captura, ajuste de errores conocidos, conversión de formato.</div>
+      <div class="mini" style="border-left: 3px solid #64748b;"><strong>Validación:</strong> gráficos, doble masa, límites físicos, coherencia espacial.</div>
+      <div class="mini" style="border-left: 3px solid #64748b;"><strong>Almacenamiento:</strong> bases de datos relacionales o sistemas especializados (HYDATA, TIDEDA).</div>
+    </div>
+    <div class="flow">
+      <span class="fbox">Dato bruto</span><span class="farrow">→</span><span class="fbox">Corrección</span><span class="farrow">→</span><span class="fbox">Validación</span><span class="farrow">→</span><span class="fbox">Archivo</span><span class="farrow">→</span><span class="fbox">Difusión (anuarios, web)</span>
+    </div>
+    <div class="tbl">
+      <table><tr><th>Criterio</th><th>ASCII simple</th><th>SGBD relacional</th><th>Sistema especializado</th></tr>
+      <tr><td>Seguridad</td><td>Baja</td><td>Alta</td><td>Alta</td></tr>
+      <tr><td>Costo</td><td>Mínimo</td><td>Medio</td><td>Alto</td></tr>
+      <tr><td>Facilidad análisis</td><td>Limitada</td><td>Media</td><td>Óptima</td></tr></table>
+    </div>
+    <div class="warn">⚠️ Conservar siempre el dato original sin modificar y documentar toda corrección (trazabilidad).</div>
+  </div>
+
+  <!-- TABLA INTEGRADORA FINAL -->
+  <div class="block s3">
+    <div class="bh" style="background: #f1f5f9; color: #334155;">📋 TABLA INTEGRADORA · CONCEPTOS CLAVE OMM</div>
+    <table class="tbl">
+      <thead><tr><th>Componente</th><th>Método principal</th><th>Error/Incertidumbre típico</th><th>Factor crítico</th></tr></thead>
+      <tbody>
+        <tr><td>Precipitación</td><td>Pluviómetro + corrección viento</td><td>3–7% (líquida); hasta 50% nieve</td><td>Exposición, pantalla</td></tr>
+        <tr><td>Evaporación</td><td>Tanque Clase A + balance energético</td><td>10–20% mensual</td><td>Coeficiente de tanque</td></tr>
+        <tr><td>Caudal (río)</td><td>Molinete / ADCP</td><td>±5% (condiciones buenas)</td><td>Estabilidad del control</td></tr>
+        <tr><td>Agua subterránea</td><td>Prueba de bombeo (Theis)</td><td>±10–20% en T</td><td>Geometría del acuífero</td></tr>
+        <tr><td>Calidad (DBO)</td><td>Incubación 5 días</td><td>±15–25%</td><td>Nitrificación</td></tr>
+      </tbody>
+    </table>
+    <div class="warn">🔑 Dato integrador clave: La calidad del dato hidrológico depende tanto de la técnica de medición como del control de calidad posterior (validación cruzada, trazabilidad).</div>
+  </div>
+
+  <!-- ========== QUIZ INTERACTIVO ========== -->
+  <div class="block s3" id="quiz-section">
+    <div class="quiz-header">
+      <h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3>
+      <p>Marca tu respuesta y descubre si es correcta · Basado en la Guía OMM-Nº 168 Vol. I</p>
+    </div>
+    <div class="quiz-progress">
+      <span id="progress-text">Pregunta 0 de 10</span>
+      <div style="flex:1;">
+        <div class="stat-bar-wrap"><div class="stat-bar-fill" id="progress-fill" style="width:0%"></div></div>
+      </div>
+      <span id="score-text">0/10 aciertos</span>
+    </div>
+    <div id="quiz-container"></div>
+    <div id="result-panel" class="result-panel" style="display:none;"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-bar">
+    <div class="ft">REFERENCIAS:</div>
+    <div class="fc">OMM-Nº 168, Guía de Prácticas Hidrológicas, Vol. I (2020). ISO 748, ISO 4363, WMO-No. 519, 680. FAO-56.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const quizData = [
+    { q: "¿Cuál es la incertidumbre típica (nivel 95%) de una medición de caudal con molinete en condiciones buenas?", 
+      opts: ["A) ±1%", "B) ±5%", "C) ±15%", "D) ±20%"], 
+      correct: 1, // B
+      explanation: "Según la norma ISO 748 y la Guía OMM, con 20–25 verticales y método de dos puntos el error estándar es aproximadamente 5%." },
+    { q: "¿Qué factor es el principal responsable de la subestimación de la precipitación de nieve en pluviómetros?", 
+      opts: ["A) Evaporación", "B) Efecto del viento", "C) Salpicaduras", "D) Error de lectura"], 
+      correct: 1,
+      explanation: "El viento deforma el campo de flujo sobre el orificio, reduciendo drásticamente la captación de nieve (hasta 50% menos)." },
+    { q: "El método combinado de Penman para evaporación requiere datos de:", 
+      opts: ["A) Solo temperatura", "B) Radiación neta, viento, déficit de presión de vapor", "C) Únicamente velocidad del viento", "D) Solo radiación solar"], 
+      correct: 1,
+      explanation: "Penman combina balance energético (radiación neta) y aerodinámico (viento, déficit de presión)." },
+    { q: "En una prueba de bombeo en acuífero confinado, ¿qué representa el parámetro 'u' en la función de pozo de Theis?", 
+      opts: ["A) Transmisividad", "B) Coeficiente de almacenamiento", "C) u = r²S/(4Tt)", "D) Caudal específico"], 
+      correct: 2,
+      explanation: "u es un argumento adimensional que relaciona distancia, almacenamiento, transmisividad y tiempo." },
+    { q: "¿Cuál de los siguientes NO es un método de aforo de caudales recomendado para corrientes con mucho sedimento en suspensión?", 
+      opts: ["A) Dilución con trazador", "B) ADCP", "C) Molinete de cazoletas", "D) Ultrasónico"], 
+      correct: 2,
+      explanation: "El molinete de cazoletas puede dañarse o dar lecturas erróneas con alta carga de sedimentos; se prefiere ADCP o dilución." },
+    { q: "La reflectividad radar (Z) está relacionada con la tasa de lluvia (R) mediante Z = a·Rᵇ. Valores típicos de a y b son:", 
+      opts: ["A) a=1, b=1", "B) a=200, b=1.6", "C) a=500, b=2", "D) a=50, b=0.5"], 
+      correct: 1,
+      explanation: "La relación Marshall-Palmer más usada es Z=200·R¹·⁶, aunque varía según tipo de lluvia." },
+    { q: "Para medir la evapotranspiración de referencia (ETo), el método estándar FAO-56 es:", 
+      opts: ["A) Tanque Clase A", "B) Thornthwaite", "C) Penman-Monteith", "D) Priestley-Taylor"], 
+      correct: 2,
+      explanation: "FAO-56 adoptó Penman-Monteith para un cultivo hipotético de referencia (pasto)." },
+    { q: "¿Qué parámetro de calidad del agua DEBE medirse in situ inmediatamente después del muestreo?", 
+      opts: ["A) Nitratos", "B) Oxígeno disuelto", "C) Sodio", "D) Sulfatos"], 
+      correct: 1,
+      explanation: "El oxígeno disuelto cambia rápidamente por actividad biológica e intercambio con la atmósfera; se fija o mide in situ." },
+    { q: "En una estación de aforo, la relación altura-caudal se determina mediante:", 
+      opts: ["A) Una sola medición de caudal", "B) Mediciones periódicas de caudal a diferentes alturas", "C) La geometría del puente", "D) La fórmula de Manning"], 
+      correct: 1,
+      explanation: "Se construye una curva de gasto empírica ajustando múltiples aforos a lo largo del rango de niveles." },
+    { q: "¿Qué tipo de archivo de base de datos hidrológica ofrece mayor integridad referencial y seguridad multiusuario?", 
+      opts: ["A) Archivos ASCII planos", "B) Hojas de cálculo", "C) SGBD relacional", "D) Archivos binarios propietarios"], 
+      correct: 2,
+      explanation: "Los sistemas de gestión de bases de datos relacionales (ej. PostgreSQL, Oracle) proporcionan control de concurrencia, permisos y respaldo estructurado." }
+  ];
+
+  let userAnswers = new Array(10).fill(null);
+  let answeredCount = 0;
+  let correctCount = 0;
+  const container = document.getElementById('quiz-container');
+  const progressText = document.getElementById('progress-text');
+  const progressFill = document.getElementById('progress-fill');
+  const scoreText = document.getElementById('score-text');
+  const resultPanel = document.getElementById('result-panel');
+
+  function renderQuiz() {
+    let html = '';
+    quizData.forEach((item, idx) => {
+      const qNum = idx + 1;
+      const answered = userAnswers[idx] !== null;
+      html += `<div class="qcard" id="qcard${qNum}">`;
+      html += `<p class="qnum">Pregunta ${qNum} / 10</p>`;
+      html += `<p class="qtext">${item.q}</p>`;
+      html += `<div class="qopts">`;
+      item.opts.forEach((opt, optIdx) => {
+        const isCorrect = (optIdx === item.correct);
+        const selected = (userAnswers[idx] === optIdx);
+        let btnClass = 'qbtn';
+        if (answered) {
+          if (isCorrect) btnClass += ' correct-opt';
+          else if (selected && !isCorrect) btnClass += ' wrong-opt';
+        }
+        html += `<button class="${btnClass}" data-q="${qNum}" data-opt="${optIdx}" data-correct="${isCorrect}" ${answered ? 'disabled' : ''}>${opt}</button>`;
+      });
+      html += `</div>`;
+      if (answered) {
+        const isCorrectAns = (userAnswers[idx] === item.correct);
+        const fbClass = isCorrectAns ? 'fb-correct' : 'fb-incorrect';
+        const correctLetter = String.fromCharCode(65 + item.correct);
+        const fbText = isCorrectAns ? `✅ ¡Correcto! ${item.explanation}` : `❌ Incorrecto. La respuesta correcta es ${correctLetter}. ${item.explanation}`;
+        html += `<div class="qfeedback ${fbClass}">${fbText}</div>`;
+      } else {
+        html += `<div class="qfeedback" style="display:none;"></div>`;
+      }
+      html += `</div>`;
+    });
+    container.innerHTML = html;
+    updateProgress();
+  }
+
+  function updateProgress() {
+    answeredCount = userAnswers.filter(a => a !== null).length;
+    correctCount = userAnswers.reduce((acc, val, idx) => acc + (val === quizData[idx].correct ? 1 : 0), 0);
+    const pct = (answeredCount / 10) * 100;
+    progressText.textContent = `Pregunta ${answeredCount} de 10`;
+    progressFill.style.width = pct + '%';
+    scoreText.textContent = `${correctCount}/10 aciertos`;
+    if (answeredCount === 10) {
+      showFinalResult();
+    } else {
+      resultPanel.style.display = 'none';
+    }
+  }
+
+  function showFinalResult() {
+    let message = '';
+    let bgColor = '#fefce8';
+    if (correctCount <= 4) { message = 'Necesitas repasar el material. ¡Vuelve al canvas!'; bgColor = '#fee2e2'; }
+    else if (correctCount <= 7) { message = '¡Buen avance! Sigue repasando los conceptos clave.'; bgColor = '#fef9c3'; }
+    else { message = '¡Excelente dominio del tema! Estás listo para el examen.'; bgColor = '#dcfce7'; }
+    resultPanel.style.display = 'block';
+    resultPanel.style.background = bgColor;
+    resultPanel.innerHTML = `
+      <div style="font-weight:700; font-size:14px;">Resultado: ${correctCount} / 10 correctas</div>
+      <p style="margin:5px 0;">${message}</p>
+      <button class="btn-reset" id="reset-quiz">🔄 Reiniciar Quiz</button>
+    `;
+    document.getElementById('reset-quiz').addEventListener('click', resetQuiz);
+  }
+
+  function resetQuiz() {
+    userAnswers = new Array(10).fill(null);
+    renderQuiz();
+    resultPanel.style.display = 'none';
+  }
+
+  container.addEventListener('click', (e) => {
+    const btn = e.target.closest('.qbtn');
+    if (!btn) return;
+    if (btn.disabled) return;
+    const qNum = parseInt(btn.dataset.q);
+    const optIdx = parseInt(btn.dataset.opt);
+    const isCorrect = btn.dataset.correct === 'true';
+    const idx = qNum - 1;
+    if (userAnswers[idx] !== null) return;
+    userAnswers[idx] = optIdx;
+    renderQuiz();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.id === 'reset-quiz') resetQuiz();
+  });
+
+  renderQuiz();
+})();
+</script>
+
+</body>
+</html>

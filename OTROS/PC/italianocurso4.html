@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas de Resumen: Gramática Italiana A1-A2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+:root {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f8fafc;
+  --color-background-tertiary: #e2e8f0;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-border-secondary: #cbd5e1;
+  --color-border-tertiary: #94a3b8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background-primary: #1e293b;
+    --color-background-secondary: #0f172a;
+    --color-background-tertiary: #020617;
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #94a3b8;
+    --color-border-secondary: #334155;
+    --color-border-tertiary: #475569;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0;
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--color-background-primary);
+  color: var(--color-text-primary);
+}
+.cv {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 9px; padding: 12px;
+  background: var(--color-background-tertiary);
+}
+.tbar {
+  grid-column: 1 / -1; background: #0f1e3a; color: white;
+  border-radius: 12px; padding: 16px;
+}
+.tbar h1 { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; margin: 0 0 4px 0; }
+.tbar p { font-size: 11px; margin: 0 0 10px 0; color: #cbd5e1; }
+.sbar {
+  grid-column: 1 / -1; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 7px 12px; border-radius: 8px; margin-top: 5px;
+}
+.block {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: 11px; padding: 12px 13px;
+  display: flex; flex-direction: column; gap: 9px;
+}
+.block.s2 { grid-column: span 2; }
+.block.s3 { grid-column: span 3; }
+.bh {
+  font-family: 'Oswald', sans-serif; font-size: 12px; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 6px; display: inline-block; margin-bottom: 4px; width: fit-content;
+}
+.def {
+  border-left: 3px solid; padding: 7px 10px; border-radius: 0 7px 7px 0;
+  font-size: 12px; background: var(--color-background-secondary); line-height: 1.4;
+}
+.item { display: flex; gap: 7px; font-size: 12px; line-height: 1.5; }
+.dot { min-width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; }
+.rx {
+  background: #0f172a; color: #7dd3fc; font-family: monospace; font-size: 11px;
+  padding: 7px 11px; border-radius: 7px; text-align: center; line-height: 1.6;
+}
+.warn {
+  background: #fff7ed; border-left: 3px solid #f97316; border-radius: 0 8px 8px 0;
+  font-size: 11.5px; color: #7c2d12; padding: 8px;
+}
+.exam {
+  background: #fefce8; border: 1px solid #facc15; border-radius: 8px; font-size: 11.5px;
+  color: #713f12; padding: 10px; margin-top: auto; font-weight: 600;
+}
+.mini {
+  background: var(--color-background-secondary); border-radius: 8px; padding: 8px 10px;
+  font-size: 11.5px; border-top: 3px solid;
+}
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; }
+.flow { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 4px 0; }
+.fbox {
+  background: var(--color-background-secondary); padding: 5px 8px; border-radius: 6px;
+  font-size: 11px; border: 1px solid var(--color-border-tertiary);
+}
+.farrow { color: var(--color-text-secondary); font-size: 15px; font-weight: bold; }
+.pill { font-size: 11px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin: 2px; }
+.stat-bar-wrap { width: 100%; background: var(--color-background-secondary); border-radius: 20px; height: 11px; overflow: hidden; }
+.stat-bar-fill { height: 100%; border-radius: 20px; transition: width 0.3s; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 5px; }
+.tbl th { background: var(--color-background-secondary); padding: 5px 7px; border-bottom: 0.5px solid var(--color-border-tertiary); text-align: left; }
+.tbl td { padding: 5px 7px; border-bottom: 0.5px solid var(--color-border-tertiary); vertical-align: top; }
+.ftr {
+  grid-column: 1 / -1; background: #0f1e3a; color: white; border-radius: 10px;
+  padding: 11px 18px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+}
+.ft { font-family: 'Oswald', sans-serif; font-size: 12px; color: #7dd3fc; }
+.fc { font-size: 11px; color: #94a3b8; }
+/* Colores Módulo 1 */
+.bg-blue { background: #dbeafe; color: #1e3a8a; } .bd-blue { border-color: #1e3a8a; }
+.bg-green { background: #dcfce7; color: #14532d; } .bd-green { border-color: #14532d; }
+.bg-red { background: #fee2e2; color: #991b1b; } .bd-red { border-color: #991b1b; }
+.bg-yellow { background: #fef9c3; color: #713f12; } .bd-yellow { border-color: #713f12; }
+.bg-teal { background: #ccfbf1; color: #134e4a; } .bd-teal { border-color: #134e4a; }
+.bg-gray { background: #f1f5f9; color: #334155; }
+@media(prefers-color-scheme:dark){
+  .bg-blue{ background:#1e3a5f; color:#93c5fd; } .bd-blue{ border-color:#93c5fd; }
+  .bg-green{ background:#14532d; color:#86efac; } .bd-green{ border-color:#86efac; }
+  .bg-red{ background:#450a0a; color:#fca5a5; } .bd-red{ border-color:#fca5a5; }
+  .bg-yellow{ background:#422006; color:#fef08a; } .bd-yellow{ border-color:#fef08a; }
+  .bg-teal{ background:#042f2e; color:#5eead4; } .bd-teal{ border-color:#5eead4; }
+  .bg-gray{ background:#1e293b; color:#94a3b8; }
+}
+/* Quiz Styles */
+#quiz-section {
+  grid-column: 1 / -1; background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary); border-radius: 14px; padding: 16px 18px;
+}
+.qhead { background: #0f1e3a; color: white; border-radius: 8px; padding: 12px; margin-bottom: 15px; }
+.qhead h2 { font-family: 'Oswald', sans-serif; font-size: 16px; margin: 0 0 4px 0; }
+.qhead p { font-size: 11px; margin: 0; color: #cbd5e1; }
+.qcard { margin-bottom: 18px; border-bottom: 1px dashed var(--color-border-tertiary); padding-bottom: 15px; }
+.qnum { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); margin: 0 0 6px 0; text-transform: uppercase; }
+.qtext { font-size: 13.5px; font-weight: 600; margin: 0 0 12px 0; }
+.qopts { display: flex; flex-direction: column; gap: 6px; }
+.qbtn {
+  background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary);
+  border-radius: 8px; padding: 8px 12px; font-size: 12px; text-align: left; cursor: pointer;
+  color: var(--color-text-primary); transition: background 0.2s; font-family: inherit;
+}
+.qbtn:hover:not(:disabled) { filter: brightness(0.95); }
+.qbtn.correct { background: #dcfce7 !important; border-color: #16a34a !important; color: #14532d !important; font-weight: 600; }
+.qbtn.incorrect { background: #fee2e2 !important; border-color: #dc2626 !important; color: #991b1b !important; }
+.qbtn:disabled { opacity: 0.7; cursor: not-allowed; }
+.qfeedback {
+  border-radius: 0 8px 8px 0; padding: 8px 11px; font-size: 11.5px; margin-top: 8px; display: none; line-height: 1.4;
+}
+.qfb-c { background: #f0fdf4; border-left: 3px solid #16a34a; color: #14532d; }
+.qfb-i { background: #fef2f2; border-left: 3px solid #dc2626; color: #991b1b; }
+#qresults { display: none; padding: 16px; border-radius: 10px; margin-top: 20px; text-align: center; }
+#qresults h3 { font-family: 'Oswald', sans-serif; font-size: 18px; margin: 0 0 8px 0; }
+.res-red { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+.res-yellow { background: #fef9c3; color: #713f12; border: 1px solid #fde047; }
+.res-green { background: #dcfce7; color: #14532d; border: 1px solid #86efac; }
+.btn-reset {
+  margin-top: 12px; background: white; border: 1px solid currentColor; padding: 6px 12px;
+  border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px; color: #0f1e3a;
+}
+</style>
+</head>
+<body>
+
+<div class='cv'>
+  <div class='tbar'>
+    <h1>🎓 CANVAS DE RESUMEN: GRAMÁTICA ITALIANA BASE (Clases 1-23)</h1>
+    <p>CURSO: Italiano A1-A2 | ENFOQUE: Gramática Descriptiva, Fonética Operativa y Tiempos Compuestos</p>
+    <div>
+      <span class='pill bg-blue'>Fonética</span>
+      <span class='pill bg-teal'>Sujetos</span>
+      <span class='pill bg-green'>Presente/Subjuntivo</span>
+      <span class='pill bg-yellow'>Passato Prossimo</span>
+    </div>
+  </div>
+
+  <div class='sbar bg-blue'>🗣️ MÓDULO I: SISTEMA FONÉTICO (Clase 1)</div>
+  <div class='block'>
+    <div class='bh bg-blue'>Reglas C/G y H (Diap. 2)</div>
+    <div class='def bd-blue'>El italiano es fonético, pero la interacción de las consonantes C y G con las vocales E/I altera su sonido drásticamente.</div>
+    <div class='item'><div class='dot bg-blue bd-blue'></div><div>Para que C o G suenen fuertes (como Ka o Ga) delante de E/I, se requiere interponer una H obligatoriamente.</div></div>
+    <div class='two mini bd-blue'>
+      <div><b>Sonido Suave</b><br>CE/CI suenan <i>che/chi</i> (Ej: Cinema)</div>
+      <div><b>Sonido Fuerte</b><br>CHE/CHI suenan <i>ke/ki</i> (Ej: Orecchio)</div>
+    </div>
+    <div class='exam'>🎯 EXAMEN: Si quisieras escribir fonéticamente 'Espagueti' en italiano, ¿por qué es incorrecto escribir 'Spageti'?</div>
+  </div>
+
+  <div class='block'>
+    <div class='bh bg-red'>Consonantes Dobles (Diap. 3)</div>
+    <div class='def bd-red'>La reduplicación consonántica exige alargar el sonido de la consonante y acortar la vocal previa. Cambian el significado.</div>
+    <div class='two mini bd-red'>
+      <div><b>TT</b><br>Note (notas) vs Notte (noche)</div>
+      <div><b>NN</b><br>Pena (pena) vs Penna (boli)</div>
+    </div>
+    <div class='warn'>⚠️ ERROR COMÚN: Pronunciar 'Nono' (Noveno) cuando leen 'Nonno' (Abuelo).</div>
+    <div class='exam'>🎯 EXAMEN: ¿En qué se diferencia articulatoriamente 'Fato' (Destino) y 'Fatto' (Hecho)?</div>
+  </div>
+
+  <div class='block'>
+    <div class='bh bg-teal'>Sujetos Tácitos (Diap. 4-7)</div>
+    <div class='def bd-teal'>Por su rica flexión verbal, el pronombre personal sujeto suele omitirse.</div>
+    <div class='item'><div class='dot bg-teal bd-teal'></div><div>Solo se explicita para dar énfasis ('Io non vado', 'Yo' soy el que no va).</div></div>
+    <div class='exam'>🎯 EXAMEN: ¿Por qué en 'Domani vado al cinema' se omite el pronombre sin perder el sentido?</div>
+  </div>
+
+  <div class='sbar bg-green'>⚙️ MÓDULO II: LA MAQUINARIA VERBAL (Clases 2-3)</div>
+  <div class='block s2'>
+    <div class='bh bg-green'>Presente de Indicativo (Diap. 5-6)</div>
+    <div class='def bd-green'>Describe acciones habituales o futuros planificados. Se clasifica en tres conjugaciones según el infinitivo (-are, -ere, -ire).</div>
+    <div class='three mini bd-green'>
+      <div><b>1ra (-ARE) Mangiare</b><br>io mangi-o<br>noi mang-iamo<br>voi mangi-ate</div>
+      <div><b>2da (-ERE) Leggere</b><br>io legg-o<br>noi legg-iamo<br>voi legg-ete</div>
+      <div><b>3ra (-IRE) Dormire</b><br>io dorm-o<br>noi dorm-iamo<br>voi dorm-ite</div>
+    </div>
+    <div class='warn'>⚠️ ATENCIÓN: Las primeras personas de plural (Noi) son IDÉNTICAS en las 3 conjugaciones (-iamo).</div>
+    <div class='exam'>🎯 EXAMEN: Si la raíz es 'viv-', elabora la conjugación y explica por qué la tercera plural es '-ono'.</div>
+  </div>
+
+  <div class='block'>
+    <div class='bh bg-blue'>Negación Simple (Diap. 6-7)</div>
+    <div class='def bd-blue'>La polaridad negativa posiciona el operador estrictamente antes de la flexión verbal.</div>
+    <div class='flow'>
+      <div class='fbox'>[Sujeto]</div><div class='farrow'>+</div><div class='fbox' style='color:#991b1b; font-weight:bold;'>NON</div><div class='farrow'>+</div><div class='fbox'>[Verbo]</div>
+    </div>
+    <div class='exam'>🎯 EXAMEN: Estructura la frase negativa: '¿Vosotros no bailáis?'.</div>
+  </div>
+
+  <div class='sbar bg-yellow'>📊 MÓDULO III: FLEXIÓN NOMINAL (Clases 17-21)</div>
+  <div class='block s3'>
+    <div class='bh bg-yellow'>Formación del Plural</div>
+    <div class='def bd-yellow'>El italiano marca el plural alterando la vocal final, no agregando '-s'.</div>
+    <div class='three mini bd-yellow'>
+      <div><b>Masc. ( -O → -I )</b><br>il ragazzo → i ragazzi</div>
+      <div><b>Fem. ( -A → -E )</b><br>la casa → le case</div>
+      <div><b>Neutros ( -E → -I )</b><br>il padre → i padri</div>
+    </div>
+    <div class='warn'>⚠️ EXCEPCIÓN: Palabras agudas acentuadas (virtù) y extranjerismos (sport) son INVARIABLES. El artículo marca el plural.</div>
+    <div class='exam'>🎯 EXAMEN: ¿Qué regla justifica que 'sport' no cambie al plural en 'gli sport'?</div>
+  </div>
+
+  <div class='sbar bg-teal'>📍 MÓDULO IV-V: PREPOSICIONES Y GERUNDIO (Clases 9-12)</div>
+  <div class='block s2'>
+    <div class='bh bg-teal'>Preposiciones IN vs A</div>
+    <div class='def bd-teal'><b>A</b> se usa para CIUDADES y tracción biológica (a piedi). <b>IN</b> para PAÍSES, REGIONES y vehículos cerrados (in treno).</div>
+    <div class='exam'>🎯 EXAMEN: Justifica por qué se dice 'Lavoro a Madrid' pero 'Lavoro in Spagna'.</div>
+  </div>
+  
+  <div class='block'>
+    <div class='bh bg-blue'>Presente Continuo</div>
+    <div class='def bd-blue'>Auxiliar STARE + Gerundio (-ando / -endo). Ej: Sto mangiando.</div>
+    <div class='exam'>🎯 EXAMEN: Construye 'Nosotros estamos bebiendo' (bere es irregular -> bevendo).</div>
+  </div>
+
+  <div class='sbar bg-yellow'>⏳ MÓDULO VI-VII: SUBJUNTIVO Y PASSATO PROSSIMO (Clases 14-23)</div>
+  <div class='block s2'>
+    <div class='bh bg-green'>Subjuntivo Presente</div>
+    <div class='def bd-green'>Para duda/deseo. Las 3 personas singulares (Io, Tu, Lui) comparten la misma terminación (-A).</div>
+    <div class='exam'>🎯 EXAMEN: ¿Cómo se evita la confusión de sujeto si las 3 primeras personas son iguales?</div>
+  </div>
+
+  <div class='block'>
+    <div class='bh bg-yellow'>Auxiliares en el Pasado</div>
+    <div class='def bd-yellow'><b>AVERE:</b> Verbos transitivos. Participio invariable (-o).<br><b>ESSERE:</b> Verbos movimiento/reflexivos. Participio concuerda en género/número.</div>
+    <div class='exam'>🎯 EXAMEN: ¿Por qué una mujer dice 'Sono andata' pero 'Ho mangiato'?</div>
+  </div>
+
+  <div id='quiz-section'>
+    <div class='qhead'>
+      <h2>📝 QUIZ DE REPASO INTEGRADOR — 10 PREGUNTAS</h2>
+      <p>Marca tu respuesta y descubre si es correcta. El feedback justificará la teoría.</p>
+      <div class='stat-bar-wrap' style='margin-top:10px; background: rgba(255,255,255,0.2);'><div class='stat-bar-fill bg-green' id='q-progress' style='width: 0%;'></div></div>
+      <p style='margin-top:5px; font-weight:600;' id='q-status'>Completado: 0 / 10</p>
+    </div>
+    
+    <div id='q-container'>
+      <div class='qcard'>
+        <p class='qnum'>Pregunta 1 / 10 (Fonética)</p>
+        <p class='qtext'>¿Qué indica una consonante doble como en 'notte'?</p>
+        <div class='qopts'>
+          <button class='qbtn' data-q='1' data-correct='false'>A) Un silenciamiento de la consonante.</button>
+          <button class='qbtn' data-q='1' data-correct='true'>B) Alargamiento consonántico y acortamiento de vocal previa.</button>
+          <button class='qbtn' data-q='1' data-correct='false'>C) Un acento gráfico obligatorio.</button>
+          <button class='qbtn' data-q='1' data-correct='false'>D) Cambio a vocal nasal.</button>
+        </div>
+        <div class='qfeedback'></div>
+      </div>
+
+      <div class='qcard'>
+        <p class='qnum'>Pregunta 2 / 10 (Ortografía)</p>
+        <p class='qtext'>Para mantener un sonido velar frente a 'E' (ej: Margherita):</p>
+        <div class='qopts'>
+          <button class='qbtn' data-q='2' data-correct='false'>A) Interponer una 'U' (Marguerita).</button>
+          <button class='qbtn' data-q='2' data-correct='true'>B) Interponer una 'H' entre G y E.</button>
+          <button class='qbtn' data-q='2' data-correct='false'>C) Usar diéresis.</button>
+          <button class='qbtn' data-q='2' data-correct='false'>D) Duplicar la G.</button>
+        </div>
+        <div class='qfeedback'></div>
+      </div>
+
+      <div class='qcard'>
+        <p class='qnum'>Pregunta 3 / 10 (Morfología Femenina)</p>
+        <p class='qtext'>El plural gramaticalmente correcto de 'bambina' (niña) es:</p>
+        <div class='qopts'>
+          <button class='qbtn' data-q='3' data-correct='false'>A) I bambini</button>
+          <button class='qbtn' data-q='3' data-correct='false'>B) La bambinas</button>
+          <button class='qbtn' data-q='3' data-correct='true'>C) Le bambine</button>
+          <button class='qbtn' data-q='3' data-correct='false'>D) Gli bambine</button>
+        </div>
+        <div class='qfeedback'></div>
+      </div>
+
+      <div class='qcard'>
+        <p class='qnum'>Pregunta 4 / 10 (Morfología Neutra)</p>
+        <p class='qtext'>Los plurales de palabras terminadas en '-E' (Ej: Madre, Padre):</p>
+        <div class='qopts'>
+          <button class='qbtn' data-q='4' data-correct='false'>A) Mantienen la '-E' invariable.</button>
+          <button class='qbtn' data-q='4' data-correct='true'>B) Cambian su terminación a '-I' sin importar el género.</button>
+          <button class='qbtn' data-q='4' data-correct='false'>C) Solo aplican para masculinos.</button>
+          <button class='qbtn' data-q='4' data-correct='false'>D) Agregan una '-S'.</button>
+        </div>
+        <div class='qfeedback'></div>
+      </div>
+
+      <div class='qcard'>
+        <p class='qnum'>Pregunta 5 / 10 (Verbos Regulares)</p>
+        <p class='qtext'>La desinencia universal compartida por las tres conjugaciones para 'Noi' (Nosotros) es:</p>
+        <div class='qopts'>
+          <button class='qbtn' data-q='5' data-correct='true'>A) -iamo</button>
+          <button class='qbtn' data-q='5' data-correct='false'>B) -ano</button>
+          <button class='qbtn' data-q='5' data-correct='false'>C) -ete</button>
+          <button class='qbtn' data-q='5' data-correct='false'>D) -ono</button>
+        </div>
+        <div class='qfeedback'></div>
+      </div>
+
+      <div class='qcard'>
+        <p class='qnum'>Pregunta 6 / 10 (Sintaxis Negativa)</p>
+        <p class='qtext'>La posición algorítmica de la negación 'non' es:</p>
+        <div class='qopts'>
+          <button class='qbtn' data-q='6' data-correct='false'>A) Al final de la oración.</button>
+          <button class='qbtn' data-q='6' data-correct='false'>B) Después del verbo conjugado.</button>
+          <button class='qbtn' data-q='6' data-correct='true'>C) Inmediatamente antes del verbo conjugado.</button>
+          <button class='qbtn' data-q='6' data-correct='false'>D) Duplicada en la oración.</button>
+        </div>
+        <div class='qfeedback'></div>
+      </div>
+
+      <div class='qcard'>
+        <p class='qnum'>Pregunta 7 / 10 (Preposiciones)</p>
+        <p class='qtext'>La traducción correcta para 'Voy a Italia' es:</p>
+        <div class='qopts'>
+          <button class='qbtn' data-q='7' data-correct='false'>A) Vado a Italia</button>
+          <button class='qbtn' data-q='7' data-correct='true'>B) Vado in Italia</button>
+          <button class='qbtn' data-q='7' data-correct='false'>C) Vado all'Italia</button>
+          <button class='qbtn' data-q='7' data-correct='false'>D) Vado da Italia</button>
+        </div>
+        <div class='qfeedback'></div>
+      </div>
+
+      <div class='qcard'>
+        <p class='qnum'>Pregunta 8 / 10 (Subjuntivo)</p>
+        <p class='qtext'>En el subjuntivo presente, las personas 'Io', 'Tu' y 'Lui/Lei':</p>
+        <div class='qopts'>
+          <button class='qbtn' data-q='8' data-correct='false'>A) Llevan acento agudo.</button>
+          <button class='qbtn' data-q='8' data-correct='true'>B) Comparten la misma terminación.</button>
+          <button class='qbtn' data-q='8' data-correct='false'>C) Son siempre regulares.</button>
+          <button class='qbtn' data-q='8' data-correct='false'>D) Se omiten siempre.</button>
+        </div>
+        <div class='qfeedback'></div>
+      </div>
+
+      <div class='qcard'>
+        <p class='qnum'>Pregunta 9 / 10 (Pasado Compuesto)</p>
+        <p class='qtext'>Si una mujer conjuga el verbo 'Andare' (Ir) en el Passato Prossimo dirá:</p>
+        <div class='qopts'>
+          <button class='qbtn' data-q='9' data-correct='false'>A) Ho andato</button>
+          <button class='qbtn' data-q='9' data-correct='false'>B) Sono andato</button>
+          <button class='qbtn' data-q='9' data-correct='true'>C) Sono andata</button>
+          <button class='qbtn' data-q='9' data-correct='false'>D) Ha andato</button>
+        </div>
+        <div class='qfeedback'></div>
+      </div>
+
+      <div class='qcard'>
+        <p class='qnum'>Pregunta 10 / 10 (Participios Irregulares)</p>
+        <p class='qtext'>La pareja correcta de Infinitivo → Participio Pasado es:</p>
+        <div class='qopts'>
+          <button class='qbtn' data-q='10' data-correct='false'>A) Leggere → Leggiuto</button>
+          <button class='qbtn' data-q='10' data-correct='false'>B) Aprire → Aprito</button>
+          <button class='qbtn' data-q='10' data-correct='true'>C) Scrivere → Scritto</button>
+          <button class='qbtn' data-q='10' data-correct='false'>D) Chiedere → Chieduto</button>
+        </div>
+        <div class='qfeedback'></div>
+      </div>
+    </div>
+    <div id='qresults'></div>
+  </div>
+
+  <div class='ftr'>
+    <div class='ft'>REFERENCIAS:</div>
+    <div class='fc'>1. Enciclopedia Mercab, 'Curso de Italiano' (Clases 1 a 23) | 2. Base teórica estructurada para preparación universitaria.</div>
+  </div>
+</div>
+
+<script>
+const explanations = {
+  1: 'En italiano, las consonantes dobles requieren alargar la oclusión. Ignorarlo cambia el significado.',
+  2: 'La combinación G+E/I suena suave (gi/ge). Para obligar el sonido fuerte velar, se interpone la H.',
+  3: 'La terminación -a femenina en singular hace su plural flexionando la vocal hacia -e (bambina → bambine).',
+  4: 'Las palabras terminadas en E no son invariables, cambian a I obligatoriamente (Madre → Madri).',
+  5: 'Sin importar si es -are, -ere o -ire, la flexión de Nosotros siempre es -iamo.',
+  6: 'El operador negativo se ensambla de forma estricta y adyacente antes de la raíz conjugada (Sujeto + non + Verbo).',
+  7: 'La regla general dicta que las preposiciones para países y grandes regiones usan IN, las ciudades usan A.',
+  8: 'En el subjuntivo presente, las formas singulares convergen y son idénticas (che io sia, che tu sia, che lui sia).',
+  9: 'Andare es de movimiento (usa ESSERE). Al usar Essere, el participio concuerda con el sujeto (femenino singular = andata).',
+  10: 'Scrivere es de la 2da conjugación y su participio es fuertemente irregular: Scritto.'
+};
+
+const qContainer = document.getElementById('q-container');
+const statusText = document.getElementById('q-status');
+const bar = document.getElementById('q-progress');
+const resultsBox = document.getElementById('qresults');
+let answered = 0;
+let score = 0;
+
+qContainer.addEventListener('click', (e) => {
+  if(e.target.classList.contains('qbtn')) {
+    const btn = e.target;
+    const qCard = btn.closest('.qcard');
+    const qNum = btn.getAttribute('data-q');
+    const isCorrect = btn.getAttribute('data-correct') === 'true';
+    
+    const buttons = qCard.querySelectorAll('.qbtn');
+    buttons.forEach(b => b.disabled = true);
+    
+    buttons.forEach(b => {
+      if(b.getAttribute('data-correct') === 'true') {
+        b.classList.add('correct');
+        b.innerHTML = '✅ ' + b.innerHTML;
+      }
+    });
+
+    const fb = qCard.querySelector('.qfeedback');
+    fb.style.display = 'block';
+
+    if(isCorrect) {
+      score++;
+      fb.className = 'qfeedback qfb-c';
+      fb.innerHTML = '✅ <b>¡Correcto!</b> ' + explanations[qNum];
+    } else {
+      btn.classList.add('incorrect');
+      btn.innerHTML = '❌ ' + btn.innerHTML;
+      fb.className = 'qfeedback qfb-i';
+      fb.innerHTML = '❌ <b>Incorrecto.</b> ' + explanations[qNum];
+    }
+
+    answered++;
+    bar.style.width = (answered * 10) + '%';
+    statusText.innerText = 'Completado: ' + answered + ' / 10 | Puntaje Actual: ' + score;
+
+    if(answered === 10) {
+      resultsBox.style.display = 'block';
+      let resHtml = '<h3>🏁 RESULTADOS FINALES: ' + score + ' / 10</h3>';
+      if(score <= 4) resHtml += '<div class="qfeedback res-red" style="display:block">Necesitas repasar el material teórico.</div>';
+      else if(score <= 7) resHtml += '<div class="qfeedback res-yellow" style="display:block">¡Buen avance, sigue repasando para dominar los detalles!</div>';
+      else resHtml += '<div class="qfeedback res-green" style="display:block">¡Excelente dominio! Listo para rendir sin problemas.</div>';
+      resHtml += '<button class="btn-reset" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>';
+      resultsBox.innerHTML = resHtml;
+    }
+  }
+});
+
+window.resetQuiz = function() {
+  answered = 0; score = 0;
+  bar.style.width = '0%';
+  statusText.innerText = 'Completado: 0 / 10';
+  resultsBox.style.display = 'none';
+  
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct', 'incorrect');
+    b.innerHTML = b.innerHTML.replace('✅ ', '').replace('❌ ', '');
+  });
+  
+  document.querySelectorAll('.qfeedback').forEach(fb => fb.style.display = 'none');
+};
+</script>
+</body>
+</html>
