@@ -1,0 +1,539 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-text-primary)}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.cv-title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.cv-title p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.cv-title .tags{display:flex;flex-wrap:wrap;gap:5px}
+.cv-title .tag{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.12);color:#cbd5e1}
+.sec{grid-column:1/-1;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;padding:7px 14px;border-radius:8px;color:#fff}
+.sec-blue{background:#1e3a8a}
+.sec-teal{background:#134e4a}
+.sec-yellow{background:#92400e}
+.sec-green{background:#14532d}
+.sec-purple{background:#4c1d95}
+.block{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:700}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-red{background:#fee2e2;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd}
+.bh-teal{background:#042f2e;color:#5eead4}
+.bh-yellow{background:#422006;color:#fef08a}
+.bh-green{background:#14532d;color:#86efac}
+.bh-purple{background:#2e1065;color:#c4b5fd}
+.bh-orange{background:#431407;color:#fed7aa}
+.bh-gray{background:#1e293b;color:#94a3b8}
+.bh-red{background:#450a0a;color:#fca5a5}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.def-blue{border-color:#3b82f6}
+.def-teal{border-color:#14b8a6}
+.def-yellow{border-color:#eab308}
+.def-green{border-color:#22c55e}
+.def-purple{border-color:#8b5cf6}
+.def-orange{border-color:#f97316}
+.def-gray{border-color:#94a3b8}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-teal{background:#14b8a6}
+.dot-yellow{background:#eab308}
+.dot-green{background:#22c55e}
+.dot-purple{background:#8b5cf6}
+.dot-orange{background:#f97316}
+.dot-gray{background:#94a3b8}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.8;margin:8px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#ca8a04}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:8px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 9px;border-radius:6px;font-size:11.5px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);font-family:'Oswald',sans-serif;text-align:left;font-weight:500}
+.tbl td{padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:.5px solid var(--color-border-tertiary);margin:7px 0}
+.cv-footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;font-weight:700;white-space:nowrap}
+.fc{font-size:11px;color:#94a3b8}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:4px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:14px;overflow:hidden}
+.quiz-header{background:#0f1e3a;color:#fff;padding:14px 18px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.quiz-body{padding:14px 16px}
+.prog-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.qcard{margin-bottom:18px;padding-bottom:14px;border-bottom:.5px solid var(--color-border-tertiary)}
+.qcard:last-of-type{border-bottom:none;margin-bottom:0}
+.qnum{font-family:'Oswald',sans-serif;font-size:11px;color:var(--color-text-secondary);margin-bottom:3px}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:9px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary)}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.6;cursor:not-allowed}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+#results-panel{border-radius:10px;padding:14px 16px;margin-top:14px;font-size:13px;text-align:center;display:none}
+#results-panel.low{background:#fee2e2;color:#991b1b}
+#results-panel.mid{background:#fef9c3;color:#713f12}
+#results-panel.high{background:#dcfce7;color:#14532d}
+#results-panel .score{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;display:block;margin-bottom:4px}
+#reset-btn{margin-top:10px;padding:8px 20px;border:.5px solid currentColor;border-radius:8px;background:transparent;font-size:12px;cursor:pointer;font-family:'Source Sans 3',sans-serif;color:inherit}
+@media(prefers-color-scheme:dark){
+.qfeedback.ok{background:#052e16;border-color:#16a34a;color:#86efac}
+.qfeedback.bad{background:#450a0a;border-color:#dc2626;color:#fca5a5}
+.qbtn.correct{background:#14532d;border-color:#16a34a;color:#86efac}
+.qbtn.wrong{background:#450a0a;border-color:#dc2626;color:#fca5a5}
+#results-panel.low{background:#450a0a;color:#fca5a5}
+#results-panel.mid{background:#422006;color:#fef08a}
+#results-panel.high{background:#14532d;color:#86efac}
+}
+</style>
+
+<div class="cv">
+
+<div class="cv-title">
+  <h1>☀️ Diseño Fotovoltaico Aislado (SFVA)</h1>
+  <p>Energías Renovables — Facultad de Ingeniería Agrícola · UNALM · Docente: Kenyi Cavalcanti Cárdenas, Mg Sc</p>
+  <div class="tags">
+    <span class="tag">Recurso Solar</span>
+    <span class="tag">HPS</span>
+    <span class="tag">Ángulos de orientación</span>
+    <span class="tag">Variables astronómicas</span>
+    <span class="tag">Irradiación global</span>
+    <span class="tag">Perfiles de carga</span>
+    <span class="tag">Dimensionamiento</span>
+  </div>
+</div>
+
+<div class="sec sec-blue">🔵 1. Consideraciones preliminares y estructura del diseño (Diap. 4–5)</div>
+
+<div class="block">
+  <span class="bh bh-blue">Diagrama de diseño SFVA (Diap. 4)</span>
+  <div class="def def-blue">Un sistema fotovoltaico aislado no está conectado a la red eléctrica pública. Su diseño sigue un ciclo de decisiones interconectadas: recurso solar → consumo → dimensionamiento → selección de componentes → análisis económico → instalación.</div>
+  <div class="flow">
+    <div class="fbox">Recurso solar</div><div class="farrow">→</div>
+    <div class="fbox">Perfil de consumo</div><div class="farrow">→</div>
+    <div class="fbox">Diseño y dimensionamiento</div><div class="farrow">→</div>
+    <div class="fbox">Selección de componentes</div><div class="farrow">→</div>
+    <div class="fbox">Operación y mantenimiento</div>
+  </div>
+  <div class="item"><div class="dot dot-blue"></div><div>El proceso de diseño no es lineal: el análisis de rentabilidad puede obligar a redimensionar el generador o ajustar la autonomía del acumulador.</div></div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-gray">Consideraciones preliminares (Diap. 5)</span>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Condiciones generales</strong><br>
+      Ubicación de paneles, equipos electrónicos y banco de baterías. La ubicación determina sombreados, cableado y seguridad física del sistema.
+    </div>
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <strong>Parámetros de instalación</strong><br>
+      Voltaje del sistema (12/24/48 V), días de autonomía, tipo de carga (DC o AC) y necesidad de generador auxiliar (p. ej. diésel o eólico).
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Definir el voltaje del sistema al final. Debe definirse al inicio porque condiciona el cableado, el regulador y el inversor.</div>
+</div>
+
+<div class="sec sec-teal">🩵 2. Caracterización del recurso solar (Diap. 6–20)</div>
+
+<div class="block">
+  <span class="bh bh-teal">Irradiancia vs. Irradiación (Diap. 8)</span>
+  <div class="def def-teal">La <strong>irradiancia (I)</strong> es la potencia instantánea de la radiación solar por unidad de área (W/m²). La <strong>irradiación (G)</strong> es la energía acumulada en un período (kWh/m²/día, mes o año). El diseño usa G, no I.</div>
+  <div class="rx">I [W/m²] → potencia instantánea<br>G [kWh/m²·día] = ∫ I dt → energía acumulada<br>Fuente de datos: https://power.larc.nasa.gov</div>
+  <div class="item"><div class="dot dot-teal"></div><div>Para Perú, el atlas solar del SENAMHI y la base NASA POWER muestran que la costa sur (Arequipa, Tacna) tiene irradiación anual de 6–7 kWh/m²/día, mientras Lima tiene ~5 kWh/m²/día.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia conceptual entre irradiancia e irradiación y cuál de las dos se utiliza para el dimensionamiento del generador fotovoltaico? Justifique con unidades.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Ángulos de orientación del panel (Diap. 11)</span>
+  <div class="def def-teal">La energía captada depende de la orientación del panel respecto al sol. Se definen dos ángulos: <strong>azimuth (α)</strong>, que indica la desviación respecto al Norte-Sur, e <strong>inclinación (β)</strong>, que indica el ángulo con la horizontal.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Azimuth α</strong><br>
+      Hemisferio norte → panel al sur (α=0). Hemisferio sur → panel al norte (α=0). En Perú (hemisferio sur), los paneles miran al norte verdadero.
+    </div>
+    <div class="mini" style="border-left:3px solid #0d9488">
+      <strong>Inclinación β</strong><br>
+      β=0° = panel horizontal. β=90° = panel vertical. La β óptima maximiza la captación anual. Se calcula suponiendo α=0 (orientación al ecuador).
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: En el hemisferio sur los paneles deben mirar al norte, no al sur. Invertir esto puede reducir la captación más de un 30%.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Variables astronómicas (Diap. 13–15)</span>
+  <div class="def def-yellow">El cálculo preciso de la radiación en superficie inclinada requiere variables geométricas entre el sol y la tierra: declinación solar, latitud, longitud, altitud solar y azimut solar.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #eab308">
+      <strong>Declinación solar δ</strong><br>
+      Ángulo entre la línea sol-tierra y el plano ecuatorial. Varía ±23.45°. δ=0 el 21 de marzo y 23 de septiembre (equinoccios).
+    </div>
+    <div class="mini" style="border-top:3px solid #ca8a04">
+      <strong>Latitud ϕ y longitud λ</strong><br>
+      ϕ: ángulo entre el punto y el ecuador. λ: ángulo respecto al meridiano de Greenwich. Lima: ϕ ≈ -12°, λ ≈ -77°.
+    </div>
+    <div class="mini" style="border-top:3px solid #a16207">
+      <strong>Altitud γs y azimut αs solar</strong><br>
+      γs: ángulo desde el plano horizontal hasta el centro del disco solar. αs: ángulo en el plano horizontal entre la vertical del sol y la dirección norte-sur.
+    </div>
+  </div>
+  <div class="item"><div class="dot dot-yellow"></div><div>El ángulo de salida del sol ws (que determina la duración del día = 2ws) depende de δ y ϕ: <code>ws = arccos(−tan(ϕ)·tan(δ))</code></div></div>
+  <div class="exam">🎯 EXAMEN: Explique cómo varía la declinación solar δ a lo largo del año y qué implicancia tiene en la duración del día en Lima (latitud −12°). ¿En qué meses el día es más largo?</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-yellow">Fórmulas de radiación (Diap. 16–18)</span>
+  <div class="def def-yellow">El cálculo de la irradiación global en un plano inclinado β parte de la irradiación global horizontal medida o satelital, y se descompone en componentes directa y difusa, luego se transforma mediante factores geométricos.</div>
+  <div class="two">
+    <div>
+      <div class="rx">Irradiación extraterrestre horizontal:<br>G_0d = (24/π)·I_sc·E_0·[ws·sen(δ)·sen(ϕ) + cos(δ)·cos(ϕ)·sen(ws)]<br><br>I_sc = 1367 W/m² (constante solar)<br>E_0 = 1 + 0.033·cos(2π·d_n/365) (excentricidad)<br>Γ = ángulo diario = 2π(d_n−1)/365</div>
+      <div class="rx">Irradiación difusa horizontal D_d:<br>D_d = G_d·[1.39 − 4.027K_d + 5.531K_d² − 3.108K_d³]<br>K_d = G_d / G_0d (índice transparencia)</div>
+    </div>
+    <div>
+      <div class="rx">Factor corrección geométrico R_b(β):<br>R_b = [ws'·sen(ϕ−β)·sen(δ) + cos(δ)·cos(ϕ−β)·sen(ws')] / [ws·sen(ϕ)·sen(δ) + cos(δ)·cos(ϕ)·sen(ws)]</div>
+      <div class="rx">Irradiación global en plano inclinado β:<br>G_d(β) = I_d(β) + D_d(β)<br>I_d(β) = I_d · R_b(β)  ← componente directa<br>D_d(β) = D_d·[(G_d−D_d)/G_d·R_b(β) + ½·(1+cosβ)·G_d/G_d]</div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir irradiación global horizontal G_d (dato medido en tierra) con la irradiación extraterrestre G_0d (calculada sobre atmósfera). K_d siempre ≤ 1; si supera 1 hay error en los datos de entrada.</div>
+  <div class="exam">🎯 EXAMEN: Un emplazamiento en Lima tiene G_d = 5.0 kWh/m²/día y G_0d = 9.2 kWh/m²/día. Calcule el índice de transparencia K_d e interprete su significado físico en relación con la nubosidad.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Hora Pico Solar – HPS (Diap. 20–23)</span>
+  <div class="def def-green">Las HPS es la duración (horas) de un día "equivalente" con irradiancia constante de <strong>1 kW/m²</strong> que produce la misma energía que el día real. Numéricamente: HPS = G_d [kWh/m²/día]. Es el parámetro clave para dimensionar el generador FV.</div>
+  <div class="rx">Si un día recibe G_d = 4.5 kWh/m²<br>→ HPS = 4.5 horas con 1 kW/m² constante<br>Potencia generada = Wp_panel × HPS × η_sistema</div>
+  <div class="item"><div class="dot dot-green"></div><div>Para Lima (β ≈ latitud+15° en invierno), las HPS mensuales mínimas suelen ocurrir en junio-julio (~3.0–3.5 h) y las máximas en noviembre-diciembre (~5.5–6.0 h).</div></div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #22c55e">
+      <strong>Estrategia peor mes</strong><br>
+      Diseña con la HPS más baja del año. Minimiza la acumulación (menos baterías), pero requiere más paneles. Sistema conservador y más confiable.
+    </div>
+    <div class="mini" style="border-left:3px solid #16a34a">
+      <strong>Estrategia media anual</strong><br>
+      Diseña con la HPS promedio anual. Reduce el número de paneles, pero necesita mayor capacidad de acumulación para cubrir los meses de menor radiación.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Compare las dos estrategias de diseño basadas en HPS (peor mes vs. media anual). ¿Cuál elegiría para una clínica rural en la sierra sur de Perú y por qué?</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Procedimiento: inclinación óptima por peor mes (Diap. 22)</span>
+  <div class="def def-green">Para seleccionar la inclinación β óptima con la estrategia del peor mes, se analiza qué inclinación maximiza la radiación en el mes más desfavorable (mayor relación consumo/radiación).</div>
+  <div class="flow">
+    <div class="fbox">1. Tabla G_d(β) mensual</div><div class="farrow">→</div>
+    <div class="fbox">2. Tabla consumo E_T mensual</div><div class="farrow">→</div>
+    <div class="fbox">3. Tabla E_T/G_d por mes y β</div><div class="farrow">→</div>
+    <div class="fbox">4. Identificar máx. E_T/G_d por β</div><div class="farrow">→</div>
+    <div class="fbox">5. Elegir β con menor valor</div><div class="farrow">→</div>
+    <div class="fbox">6. HPS del peor mes en mejor β</div>
+  </div>
+  <hr class="divh">
+  <span class="bh bh-teal">Regla práctica de inclinación (Diap. 19)</span>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #14b8a6"><strong>Uso en verano</strong><br>β = latitud − 15°. Panel más horizontal, capta más en días largos de verano.</div>
+    <div class="mini" style="border-top:3px solid #0f766e"><strong>Uso en invierno</strong><br>β = latitud + 15°. Panel más inclinado, capta más en días cortos de invierno con sol bajo.</div>
+    <div class="mini" style="border-top:3px solid #0d9488"><strong>Uso anual</strong><br>β = latitud. Compromiso que maximiza la captación promedio anual en el hemisferio respectivo.</div>
+  </div>
+  <div class="item"><div class="dot dot-teal"></div><div>Lima tiene latitud ≈ 12°S. Para uso anual: β ≈ 12°. Para invierno (estrategia peor mes): β ≈ 27°. La tabla por ángulos β confirma el óptimo numéricamente.</div></div>
+  <div class="warn">⚠️ DATO CLAVE: La inclinación óptima NO siempre es igual a la latitud del lugar. Depende del patrón de consumo (¿hay más demanda en verano o invierno?) y de la estrategia elegida.</div>
+</div>
+
+<div class="sec sec-purple">🟣 3. Caracterización del consumo — Perfiles de carga (Diap. 24)</div>
+
+<div class="block s2">
+  <span class="bh bh-purple">Perfiles de carga (Diap. 24)</span>
+  <div class="def def-purple">El perfil de carga describe cómo se distribuye el consumo energético a lo largo del día (kWh/hora). Es fundamental para dimensionar correctamente el banco de baterías y el inversor.</div>
+  <div class="two">
+    <div>
+      <div class="mini" style="border-left:3px solid #8b5cf6"><strong>Perfil doméstico</strong><br>Consumo concentrado en mañana (~7-9h) y noche (~18-22h). El período nocturno es crítico para el dimensionamiento de la acumulación.</div>
+      <div class="mini" style="border-left:3px solid #7c3aed"><strong>Perfil constante</strong><br>Consumo uniforme las 24h. Típico en telefonía, equipos de monitoreo, refrigeración de medicamentos. Requiere alta capacidad de acumulación.</div>
+    </div>
+    <div>
+      <div class="mini" style="border-left:3px solid #6d28d9"><strong>Perfil nocturno</strong><br>Consumo solo de noche (alumbrado público, vigilancia). El 100% de la energía debe almacenarse durante el día. Determina la capacidad mínima del acumulador.</div>
+      <div class="mini" style="border-left:3px solid #5b21b6"><strong>Perfil diurno</strong><br>Consumo solo durante el día (bombeo de agua, sistemas de riego). Permite reducir el tamaño del banco de baterías y simplifica el diseño.</div>
+    </div>
+  </div>
+  <div class="item"><div class="dot dot-purple"></div><div>La <strong>distribución diaria del consumo</strong> determina los días de autonomía necesarios: un perfil nocturno puro en zona con alta nubosidad en Lima puede requerir 3–5 días de autonomía.</div></div>
+  <div class="exam">🎯 EXAMEN: Una comunidad rural en Puno solo usa energía para alumbrado entre las 18:00 y 23:00. ¿Qué tipo de perfil de carga tiene y qué implicancias tiene esto para el dimensionamiento del acumulador frente a un perfil de consumo constante?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Contexto Perú</span>
+  <div class="def def-orange">Perú tiene más de 1,000 comunidades rurales sin acceso a la red eléctrica, concentradas en sierra y selva. Los SFVA son la solución técnica y económicamente más viable para electrificación rural en zonas remotas.</div>
+  <div class="item"><div class="dot dot-orange"></div><div>El Programa FONER y el Ministerio de Energía y Minas (MINEM) han instalado miles de SFVA domiciliarios de 50–200 Wp en comunidades andinas y amazónicas.</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div>En la costa sur (Arequipa, Moquegua, Tacna) el recurso solar es de los mejores del mundo, con irradiación anual superior a 6 kWh/m²/día.</div></div>
+</div>
+
+<div class="sec sec-blue">🔵 4. Tabla integradora: componentes del diseño SFVA</div>
+
+<div class="block s3">
+  <span class="bh bh-blue">Resumen integrador — Etapas y parámetros clave del diseño</span>
+  <table class="tbl">
+    <thead>
+      <tr><th>Etapa</th><th>Parámetro principal</th><th>Unidad</th><th>Fuente de datos</th><th>Impacto en el sistema</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Recurso solar</td><td>Irradiación global diaria G_d</td><td>kWh/m²/día</td><td>NASA POWER, SENAMHI, piranómetro</td><td>Determina la energía disponible por m² de panel</td></tr>
+      <tr><td>Orientación</td><td>Inclinación β y azimuth α</td><td>grados (°)</td><td>Cálculo por tabla G_d(β) mensual</td><td>Maximiza la captación en el peor mes o en el año</td></tr>
+      <tr><td>HPS</td><td>Horas Pico Solar</td><td>h/día</td><td>HPS = G_d en kWh/m²/día</td><td>Factor multiplicador para dimensionar el generador FV</td></tr>
+      <tr><td>Consumo</td><td>Energía diaria E_T</td><td>kWh/día</td><td>Inventario de cargas + perfil de uso</td><td>Define el tamaño mínimo del generador y acumulador</td></tr>
+      <tr><td>Generador FV</td><td>Potencia pico P_p</td><td>Wp</td><td>P_p = E_T / (HPS × η)</td><td>Número y tipo de módulos fotovoltaicos</td></tr>
+      <tr><td>Acumulador</td><td>Capacidad C_bat</td><td>Ah</td><td>C = E_T × N_aut / (V_sis × DoD)</td><td>Días de autonomía y profundidad de descarga</td></tr>
+      <tr><td>Controlador</td><td>Corriente máxima I_max</td><td>A</td><td>I_sc_panel × N_cadenas × 1.25</td><td>Protege el acumulador de sobrecargas y descargas profundas</td></tr>
+      <tr><td>Inversor</td><td>Potencia AC P_inv</td><td>W</td><td>Suma de potencias AC simultáneas × 1.25</td><td>Convierte DC del acumulador a AC para cargas domésticas</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: El dimensionamiento no es lineal. Si el análisis económico muestra costos prohibitivos, se revisa primero la eficiencia energética (reducir E_T) antes de modificar el generador. En Perú, el costo del kWh aislado puede ser 4–8 veces mayor al costo de la red eléctrica pública.</div>
+</div>
+
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="quiz-body">
+    <div class="prog-row">
+      <span id="prog-text">Pregunta 0 de 10 respondidas</span>
+      <span id="score-text">Aciertos: 0 / 10</span>
+    </div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#22c55e"></div></div>
+    <br>
+
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">¿Cuál de los siguientes valores representa correctamente la constante solar I_sc utilizada en el cálculo de irradiación extraterrestre?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) 1000 W/m²</button>
+        <button class="qbtn" data-q="1" data-correct="false">B) 1500 W/m²</button>
+        <button class="qbtn" data-q="1" data-correct="true">C) 1367 W/m²</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) 900 W/m²</button>
+      </div>
+      <div class="qfeedback" id="fb1" style="display:none"></div>
+    </div>
+
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">En el hemisferio sur (como Perú), ¿hacia dónde deben orientarse los paneles solares para maximizar la captación de energía solar?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) Hacia el sur</button>
+        <button class="qbtn" data-q="2" data-correct="true">B) Hacia el norte</button>
+        <button class="qbtn" data-q="2" data-correct="false">C) Hacia el este</button>
+        <button class="qbtn" data-q="2" data-correct="false">D) Hacia el oeste</button>
+      </div>
+      <div class="qfeedback" id="fb2" style="display:none"></div>
+    </div>
+
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">Un lugar en Lima recibe una irradiación diaria G_d = 5.0 kWh/m²/día. ¿Cuántas Horas Pico Solar (HPS) equivalentes tiene ese día?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="false">A) 3.0 horas</button>
+        <button class="qbtn" data-q="3" data-correct="false">B) 7.5 horas</button>
+        <button class="qbtn" data-q="3" data-correct="true">C) 5.0 horas</button>
+        <button class="qbtn" data-q="3" data-correct="false">D) 2.5 horas</button>
+      </div>
+      <div class="qfeedback" id="fb3" style="display:none"></div>
+    </div>
+
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">¿Cuál es la diferencia fundamental entre irradiancia e irradiación solar?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="false">A) Son sinónimos; ambas se miden en W/m²</button>
+        <button class="qbtn" data-q="4" data-correct="true">B) Irradiancia es potencia instantánea (W/m²); irradiación es energía acumulada en un período (kWh/m²)</button>
+        <button class="qbtn" data-q="4" data-correct="false">C) Irradiación es solo para superficies inclinadas; irradiancia para superficies horizontales</button>
+        <button class="qbtn" data-q="4" data-correct="false">D) Irradiancia se mide con piranómetro; irradiación solo con satélite</button>
+      </div>
+      <div class="qfeedback" id="fb4" style="display:none"></div>
+    </div>
+
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">La declinación solar δ es igual a 0° exactamente dos veces al año. ¿En qué fechas ocurre esto y qué evento astronómico representan?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) 21 de junio y 21 de diciembre (solsticios)</button>
+        <button class="qbtn" data-q="5" data-correct="true">B) 21 de marzo y 23 de septiembre (equinoccios)</button>
+        <button class="qbtn" data-q="5" data-correct="false">C) 1 de enero y 1 de julio (inicio de año y semestre)</button>
+        <button class="qbtn" data-q="5" data-correct="false">D) 15 de abril y 15 de octubre (promedio anual)</button>
+      </div>
+      <div class="qfeedback" id="fb5" style="display:none"></div>
+    </div>
+
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">Para un sistema fotovoltaico aislado en una comunidad cuyo consumo es principalmente nocturno (alumbrado), ¿cuál estrategia de diseño de HPS es más apropiada y por qué?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="false">A) HPS media anual, porque optimiza el costo total del sistema</button>
+        <button class="qbtn" data-q="6" data-correct="true">B) HPS del peor mes, porque garantiza suministro en los meses de menor radiación sin depender de un gran acumulador de respaldo</button>
+        <button class="qbtn" data-q="6" data-correct="false">C) HPS máxima del año, para aprovechar los meses más soleados</button>
+        <button class="qbtn" data-q="6" data-correct="false">D) Ambas estrategias son equivalentes para consumo nocturno</button>
+      </div>
+      <div class="qfeedback" id="fb6" style="display:none"></div>
+    </div>
+
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">¿Cuál afirmación sobre el índice de transparencia atmosférica K_d es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="false">A) K_d = G_d / G_0d</button>
+        <button class="qbtn" data-q="7" data-correct="false">B) Un K_d bajo indica alta nubosidad o contaminación atmosférica</button>
+        <button class="qbtn" data-q="7" data-correct="true">C) K_d puede ser mayor que 1 en días muy soleados con reflexión del suelo</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) Se utiliza para separar la componente difusa de la global en superficie horizontal</button>
+      </div>
+      <div class="qfeedback" id="fb7" style="display:none"></div>
+    </div>
+
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">Para un sistema en uso exclusivamente en invierno (por ejemplo, calefacción solar de agua en sierra peruana), ¿cuál inclinación de panel es la más recomendada según las reglas prácticas del curso?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="false">A) β = latitud − 15°</button>
+        <button class="qbtn" data-q="8" data-correct="false">B) β = latitud</button>
+        <button class="qbtn" data-q="8" data-correct="true">C) β = latitud + 15°</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) β = 90° (panel vertical)</button>
+      </div>
+      <div class="qfeedback" id="fb8" style="display:none"></div>
+    </div>
+
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">¿Cuál de los siguientes perfiles de carga requiere la MAYOR capacidad de acumulación (banco de baterías) relativa al consumo diario total?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="false">A) Perfil diurno (consumo solo de día)</button>
+        <button class="qbtn" data-q="9" data-correct="false">B) Perfil doméstico (mañana y noche)</button>
+        <button class="qbtn" data-q="9" data-correct="true">C) Perfil nocturno (consumo solo de noche)</button>
+        <button class="qbtn" data-q="9" data-correct="false">D) Perfil constante (24 horas uniformes)</button>
+      </div>
+      <div class="qfeedback" id="fb9" style="display:none"></div>
+    </div>
+
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">Durante el proceso de diseño de un SFVA, ¿en qué momento se define el voltaje del sistema (12V, 24V o 48V)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) Al final, una vez seleccionados los paneles y baterías</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) No es necesario definirlo; depende automáticamente de los paneles elegidos</button>
+        <button class="qbtn" data-q="10" data-correct="false">C) Solo si el sistema usa inversor AC</button>
+        <button class="qbtn" data-q="10" data-correct="true">D) Al inicio del diseño, como parte de las consideraciones preliminares, porque condiciona el cableado, regulador e inversor</button>
+      </div>
+      <div class="qfeedback" id="fb10" style="display:none"></div>
+    </div>
+
+    <div id="results-panel">
+      <span class="score" id="score-display"></span>
+      <span id="score-msg"></span>
+      <br>
+      <button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+</div>
+
+<div class="cv-footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Cavalcanti Cárdenas, K. — Diseño Fotovoltaico Aislado. UNALM, Facultad de Ingeniería Agrícola, 2020. · NASA POWER Data Access Viewer: https://power.larc.nasa.gov · SENAMHI — Atlas de Energía Solar del Perú · Lorenzo, E. — Electricidad Solar Fotovoltaica, PROGENSA · Duffie & Beckman — Solar Engineering of Thermal Processes, Wiley.</span>
+</div>
+
+</div>
+
+<script>
+const feedback = {
+  1: {ok:"✅ ¡Correcto! La constante solar I_sc = 1367 W/m² es la irradiancia solar media sobre la atmósfera terrestre (sin atenuación). Los 1000 W/m² corresponden a las Condiciones Estándar de Medición (STC) a nivel del suelo, que es un valor diferente y no se usa en estas fórmulas.", bad:"❌ Incorrecto. La respuesta correcta es C) 1367 W/m². Los 1000 W/m² son las condiciones STC de los paneles, no la constante solar extraterrestre. Es un error muy común confundir ambos valores."},
+  2: {ok:"✅ ¡Correcto! En el hemisferio sur, el sol se desplaza por el arco norte del cielo. Los paneles deben mirar al norte verdadero (azimuth α=0 hacia el ecuador) para maximizar la captación anual. Lo contrario (mirar al sur) reduciría la energía generada drásticamente.", bad:"❌ Incorrecto. La respuesta correcta es B) Hacia el norte. En el hemisferio sur el sol está siempre al norte; los paneles deben seguir el arco solar para maximizar captación."},
+  3: {ok:"✅ ¡Correcto! Las HPS son numéricamente iguales a la irradiación diaria G_d en kWh/m²/día. Si G_d = 5.0 kWh/m²/día, entonces HPS = 5.0 h, porque representan el tiempo equivalente con 1 kW/m² constante que genera la misma energía.", bad:"❌ Incorrecto. La respuesta correcta es C) 5.0 horas. La definición de HPS es: G_d [kWh/m²/día] = HPS [h] × 1 kW/m². Por lo tanto son numéricamente iguales."},
+  4: {ok:"✅ ¡Correcto! Irradiancia (I) es la potencia instantánea en W/m², análoga a los vatios de una bombilla en un instante. Irradiación (G) es la energía acumulada en un tiempo, en kWh/m²/día. El diseño fotovoltaico trabaja con irradiación porque necesita cuantificar la energía total disponible.", bad:"❌ Incorrecto. La respuesta correcta es B). La distinción potencia/energía (W vs kWh) es fundamental en ingeniería eléctrica y solar."},
+  5: {ok:"✅ ¡Correcto! Los equinoccios (21 marzo y 23 septiembre) son los días en que el sol cruza el plano ecuatorial, haciendo δ=0. En estos días la duración del día y la noche son iguales en todo el mundo (12h cada uno). Los solsticios son cuando δ alcanza su máximo (±23.45°).", bad:"❌ Incorrecto. La respuesta correcta es B) 21 de marzo y 23 de septiembre (equinoccios). En los solsticios δ alcanza su valor extremo de ±23.45°, no cero."},
+  6: {ok:"✅ ¡Correcto! Con consumo nocturno puro, toda la energía debe almacenarse durante el día. Si se diseña con HPS del peor mes, el sistema garantiza suficiente generación incluso en invierno sin necesitar un acumulador desproporcionado de respaldo. La estrategia de media anual dejaría sin energía en los meses críticos.", bad:"❌ Incorrecto. La respuesta correcta es B). El diseño por peor mes es más conservador y adecuado cuando el servicio (como alumbrado nocturno) no puede interrumpirse."},
+  7: {ok:"✅ ¡Correcto! La afirmación C es FALSA. K_d = G_d/G_0d siempre debe ser ≤ 1 porque la irradiación medida en tierra no puede superar la extraterrestre (la atmósfera solo atenúa, no amplifica). Si K_d > 1 hay un error en los datos de entrada. El albedo del suelo puede aumentar la radiación difusa local pero no el valor global horizontal.", bad:"❌ Incorrecto. La respuesta correcta es C). K_d es siempre ≤ 1 por definición física. La atmósfera atenúa la radiación solar, nunca la amplifica, por lo que G_d < G_0d siempre."},
+  8: {ok:"✅ ¡Correcto! La regla práctica indica β = latitud + 15° para uso en invierno. En invierno el sol tiene una trayectoria más baja en el cielo, y una mayor inclinación del panel lo enfrenta más perpendicularmente a los rayos solares, maximizando la captación.", bad:"❌ Incorrecto. La respuesta correcta es C) β = latitud + 15°. El +15° compensa el menor ángulo de elevación solar en invierno, mejorando la captación en esa estación."},
+  9: {ok:"✅ ¡Correcto! El perfil nocturno requiere la mayor capacidad de acumulación porque el 100% de la energía consumida debe haberse generado y almacenado durante el día. No hay generación simultánea al consumo, a diferencia del perfil diurno donde parte de la energía se consume directamente de los paneles.", bad:"❌ Incorrecto. La respuesta correcta es C) Perfil nocturno. El perfil diurno es el que menos acumulación requiere porque el consumo coincide con la generación solar."},
+  10: {ok:"✅ ¡Correcto! El voltaje del sistema es una decisión preliminar fundamental porque afecta directamente las especificaciones del cableado (sección de los conductores), el tipo de regulador de carga, el inversor y la forma en que se conectan los módulos y baterías. Definirlo al final generaría rediseños costosos.", bad:"❌ Incorrecto. La respuesta correcta es D). El voltaje del sistema (12/24/48V) es parte de las consideraciones preliminares porque condiciona todos los demás componentes del sistema."}
+};
+
+let answered = 0;
+let correct = 0;
+
+document.querySelector('.quiz-body').addEventListener('click', function(e) {
+  if(!e.target.classList.contains('qbtn')) return;
+  const btn = e.target;
+  const q = btn.getAttribute('data-q');
+  const isCorrect = btn.getAttribute('data-correct') === 'true';
+  const allBtns = document.querySelectorAll(`[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if(b.getAttribute('data-correct') === 'true') {
+      b.classList.add('correct');
+      if(b !== btn) b.textContent = '✅ ' + b.textContent;
+    }
+  });
+  if(isCorrect) {
+    btn.textContent = '✅ ' + btn.textContent;
+    correct++;
+  } else {
+    btn.classList.add('wrong');
+    btn.textContent = '❌ ' + btn.textContent;
+  }
+  const fb = document.getElementById('fb'+q);
+  fb.style.display = 'block';
+  fb.className = 'qfeedback ' + (isCorrect ? 'ok' : 'bad');
+  fb.innerHTML = isCorrect ? feedback[parseInt(q)].ok : feedback[parseInt(q)].bad;
+  answered++;
+  document.getElementById('prog-text').textContent = `Pregunta ${answered} de 10 respondidas`;
+  document.getElementById('score-text').textContent = `Aciertos: ${correct} / 10`;
+  document.getElementById('prog-bar').style.width = (answered*10) + '%';
+  if(answered === 10) showResults();
+});
+
+function showResults() {
+  const panel = document.getElementById('results-panel');
+  panel.style.display = 'block';
+  document.getElementById('score-display').textContent = correct + ' / 10';
+  let cls, msg;
+  if(correct <= 4) { cls='low'; msg='Necesitas repasar el material. Repasa las secciones de HPS, variables astronómicas y perfiles de carga.'; }
+  else if(correct <= 7) { cls='mid'; msg='¡Buen avance! Sigue repasando, especialmente las fórmulas de irradiación y estrategias de HPS.'; }
+  else { cls='high'; msg='¡Excelente dominio del tema! Estás listo/a para el examen.'; }
+  panel.className = cls;
+  document.getElementById('score-msg').textContent = msg;
+}
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('prog-text').textContent = 'Pregunta 0 de 10 respondidas';
+  document.getElementById('score-text').textContent = 'Aciertos: 0 / 10';
+  document.getElementById('prog-bar').style.width = '0%';
+  for(let i=1;i<=10;i++) {
+    const fb = document.getElementById('fb'+i);
+    fb.style.display = 'none';
+    fb.className = 'qfeedback';
+    document.querySelectorAll(`[data-q="${i}"]`).forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct','wrong');
+      b.textContent = b.textContent.replace('✅ ','').replace('❌ ','');
+    });
+  }
+  const panel = document.getElementById('results-panel');
+  panel.style.display = 'none';
+  panel.className = '';
+}
+</script>
