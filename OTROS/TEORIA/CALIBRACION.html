@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas de Calibración de Termohigrómetros – Quiz Interactivo</title>
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset básico y variables */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f6;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      font-family: 'Source Sans 3', sans-serif;
+    }
+
+    /* Contenedor canvas con variables CSS */
+    .cv {
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f8fafc;
+      --color-background-tertiary: #f1f5f9;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-border-tertiary: #cbd5e1;
+      --color-border-secondary: #94a3b8;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 9px;
+      padding: 12px;
+      background: var(--color-background-tertiary);
+      border-radius: 16px;
+      max-width: 1300px;
+      width: 100%;
+      font-family: 'Source Sans 3', sans-serif;
+      color: var(--color-text-primary);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    /* Modo oscuro */
+    @media (prefers-color-scheme: dark) {
+      .cv {
+        --color-background-primary: #1e293b;
+        --color-background-secondary: #0f172a;
+        --color-background-tertiary: #020617;
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #94a3b8;
+        --color-border-tertiary: #334155;
+        --color-border-secondary: #475569;
+      }
+      .cv .exam {
+        background: #3b2e00 !important;
+        color: #fde047 !important;
+      }
+      .cv .warn {
+        background: #4a1900 !important;
+        color: #fdba74 !important;
+      }
+      .cv .barra-titulo,
+      .cv .footer,
+      .cv .quiz-header {
+        background: #0b1622 !important;
+      }
+    }
+
+    /* --- BLOQUES GENERALES --- */
+    .cv .barra-titulo {
+      grid-column: 1 / -1;
+      background: #0f1e3a;
+      color: white;
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .cv .barra-titulo h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+    }
+    .cv .barra-titulo .subtitulo {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+    .cv .barra-titulo .pills {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .cv .pill {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: #1e3a5f;
+      color: #93c5fd;
+      display: inline-block;
+    }
+
+    /* Sección separadora */
+    .cv .section-bar {
+      grid-column: 1 / -1;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 0;
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cv .section-bar.azul { color: #1e3a8a; }
+    .cv .section-bar.verde { color: #14532d; }
+    .cv .section-bar.naranja { color: #7c2d12; }
+    .cv .section-bar.morado { color: #4c1d95; }
+    .cv .section-bar.amarillo { color: #854d0e; }
+    @media (prefers-color-scheme: dark) {
+      .cv .section-bar.azul { color: #93c5fd; }
+      .cv .section-bar.verde { color: #86efac; }
+      .cv .section-bar.naranja { color: #fed7aa; }
+      .cv .section-bar.morado { color: #c4b5fd; }
+      .cv .section-bar.amarillo { color: #fde047; }
+    }
+
+    /* Bloques de contenido */
+    .cv .block {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 11px;
+      padding: 12px 13px;
+    }
+    .cv .block.s2 { grid-column: span 2; }
+    .cv .block.s3 { grid-column: 1 / -1; }
+
+    /* Encabezado de bloque */
+    .cv .bh {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    /* Colores para encabezados */
+    .cv .bh.azul { background: #dbeafe; color: #1e3a8a; }
+    .cv .bh.verde { background: #dcfce7; color: #14532d; }
+    .cv .bh.rojo { background: #fee2e2; color: #991b1b; }
+    .cv .bh.amarillo { background: #fef9c3; color: #713f12; }
+    .cv .bh.morado { background: #ede9fe; color: #4c1d95; }
+    .cv .bh.teal { background: #ccfbf1; color: #134e4a; }
+    .cv .bh.naranja { background: #ffedd5; color: #7c2d12; }
+    @media (prefers-color-scheme: dark) {
+      .cv .bh.azul { background: #1e3a5f; color: #93c5fd; }
+      .cv .bh.verde { background: #14532d; color: #86efac; }
+      .cv .bh.rojo { background: #450a0a; color: #fca5a5; }
+      .cv .bh.amarillo { background: #422006; color: #fef08a; }
+      .cv .bh.morado { background: #2e1065; color: #c4b5fd; }
+      .cv .bh.teal { background: #042f2e; color: #5eead4; }
+      .cv .bh.naranja { background: #431407; color: #fed7aa; }
+    }
+
+    /* Caja de definición */
+    .cv .def {
+      border-left: 3px solid;
+      padding: 7px 10px;
+      border-radius: 0 7px 7px 0;
+      font-size: 12px;
+      background: var(--color-background-secondary);
+      margin-bottom: 10px;
+    }
+    .cv .def.azul { border-color: #3b82f6; }
+    .cv .def.verde { border-color: #22c55e; }
+    .cv .def.rojo { border-color: #ef4444; }
+    .cv .def.naranja { border-color: #f97316; }
+
+    /* Items con punto */
+    .cv .item {
+      display: flex;
+      gap: 7px;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }
+    .cv .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .cv .dot.azul { background: #3b82f6; }
+    .cv .dot.verde { background: #22c55e; }
+    .cv .dot.rojo { background: #ef4444; }
+    .cv .dot.naranja { background: #f97316; }
+    .cv .dot.morado { background: #8b5cf6; }
+
+    /* Fórmulas */
+    .cv .rx {
+      background: #0f172a;
+      color: #7dd3fc;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      padding: 7px 11px;
+      border-radius: 7px;
+      text-align: center;
+      line-height: 1.6;
+      margin: 8px 0;
+    }
+
+    /* Advertencia */
+    .cv .warn {
+      background: #fff7ed;
+      border-left: 3px solid #f97316;
+      border-radius: 0 8px 8px 0;
+      font-size: 11.5px;
+      color: #7c2d12;
+      padding: 7px 10px;
+      margin: 8px 0;
+    }
+
+    /* Pregunta examen */
+    .cv .exam {
+      background: #fefce8;
+      border: 1px solid #facc15;
+      border-radius: 8px;
+      font-size: 11.5px;
+      color: #713f12;
+      padding: 8px 10px;
+      margin-top: 10px;
+    }
+    .cv .exam strong { font-weight: 600; }
+
+    /* Mini tarjetas */
+    .cv .mini {
+      background: var(--color-background-secondary);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 11.5px;
+    }
+    .cv .mini.azul { border-top: 3px solid #3b82f6; }
+    .cv .mini.verde { border-top: 3px solid #22c55e; }
+    .cv .mini.rojo { border-top: 3px solid #ef4444; }
+    .cv .mini.naranja { border-top: 3px solid #f97316; }
+    .cv .mini.morado { border-top: 3px solid #8b5cf6; }
+    .cv .mini.teal { border-top: 3px solid #14b8a6; }
+
+    /* Grillas internas */
+    .cv .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      margin: 8px 0;
+    }
+    .cv .three {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 7px;
+      margin: 8px 0;
+    }
+
+    /* Flujo causal */
+    .cv .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 10px 0;
+      font-size: 12px;
+    }
+    .cv .fbox {
+      background: var(--color-background-secondary);
+      padding: 5px 10px;
+      border-radius: 20px;
+      border: 0.5px solid var(--color-border-tertiary);
+    }
+    .cv .farrow {
+      color: var(--color-text-secondary);
+      font-size: 15px;
+    }
+
+    /* Badges numéricos */
+    .cv .num-badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;
+    }
+    .cv .nb-b { background: #3b82f6; color: white; }
+    .cv .nb-g { background: #22c55e; color: white; }
+    .cv .nb-r { background: #ef4444; color: white; }
+    .cv .nb-o { background: #f97316; color: white; }
+
+    /* Barras de progreso */
+    .cv .stat-bar-wrap {
+      width: 100%;
+      background: var(--color-background-secondary);
+      border-radius: 20px;
+      height: 11px;
+      margin: 5px 0;
+    }
+    .cv .stat-bar-fill {
+      height: 100%;
+      border-radius: 20px;
+      background: #22c55e;
+      width: 0%;
+    }
+
+    /* Tablas */
+    .cv .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    .cv .tbl th {
+      background: var(--color-background-secondary);
+      padding: 5px 7px;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      text-align: left;
+    }
+    .cv .tbl td {
+      padding: 5px 7px;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      vertical-align: top;
+    }
+
+    /* Footer */
+    .cv .footer {
+      grid-column: 1 / -1;
+      background: #0f1e3a;
+      color: white;
+      border-radius: 10px;
+      padding: 11px 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cv .footer .ft {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      color: #7dd3fc;
+    }
+    .cv .footer .fc {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    /* ---------- QUIZ ---------- */
+    .cv .quiz-container {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-top: 10px;
+    }
+    .cv .quiz-header {
+      background: #0f1e3a;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .cv .qcard {
+      margin-bottom: 18px;
+      border-bottom: 1px dashed var(--color-border-tertiary);
+      padding-bottom: 12px;
+    }
+    .cv .qnum {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      margin-bottom: 4px;
+    }
+    .cv .qtext {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .cv .qopts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .cv .qbtn {
+      background: var(--color-background-secondary);
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      text-align: left;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+      color: var(--color-text-primary);
+    }
+    .cv .qbtn:hover {
+      background: var(--color-background-tertiary);
+    }
+    .cv .qbtn.correct {
+      background: #dcfce7;
+      border-color: #16a34a;
+      color: #14532d;
+    }
+    .cv .qbtn.incorrect {
+      background: #fee2e2;
+      border-color: #dc2626;
+      color: #991b1b;
+    }
+    .cv .qbtn.disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .cv .qfeedback {
+      border-radius: 0 8px 8px 0;
+      padding: 8px 11px;
+      font-size: 11.5px;
+      margin-top: 8px;
+    }
+    .cv .qfeedback.correct-fb {
+      background: #f0fdf4;
+      border-left: 3px solid #16a34a;
+      color: #14532d;
+    }
+    .cv .qfeedback.incorrect-fb {
+      background: #fef2f2;
+      border-left: 3px solid #dc2626;
+      color: #991b1b;
+    }
+    @media (prefers-color-scheme: dark) {
+      .cv .qfeedback.correct-fb {
+        background: #14532d;
+        color: #dcfce7;
+      }
+      .cv .qfeedback.incorrect-fb {
+        background: #450a0a;
+        color: #fca5a5;
+      }
+    }
+    .cv .quiz-results {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .cv .btn-reset {
+      background: #0f1e3a;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="cv">
+
+  <!-- BARRA DE TÍTULO -->
+  <div class="barra-titulo">
+    <h1>📊 CALIBRACIÓN DE TERMOHIGRÓMETROS AMBIENTALES</h1>
+    <div class="subtitulo">Curso: Metrología Aplicada a Calidad — Docente: Dr. Ing. R. Vargas — Ciclo 2026-1</div>
+    <div class="pills">
+      <span class="pill">📋 ISO/IEC 17025:2017</span>
+      <span class="pill">📐 PC-026:2019 (INACAL)</span>
+      <span class="pill">🇪🇸 TH-007 (CEM)</span>
+      <span class="pill">🔗 DA-acr-12D (Trazabilidad)</span>
+      <span class="pill">⚖️ OIML D10 (Intervalos)</span>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 1 -->
+  <div class="section-bar azul">🔷 SECCIÓN I — CONFIRMACIÓN METROLÓGICA Y PERIODOS DE RECALIBRACIÓN (Guía MetAs, OIML D10)</div>
+
+  <div class="block">
+    <div class="bh azul">Confirmación Metrológica (Diap. MetAs 1-2)</div>
+    <div class="def azul">
+      <strong>Definición ISO 10012-1:</strong> Conjunto de operaciones (calibración, ajuste, reparación, recalibración, sellado y etiquetado) para asegurar que un equipo de medición cumple con los requisitos para su uso previsto.
+    </div>
+    <div class="item"><span class="dot azul"></span> <strong>El usuario es responsable</strong> de determinar el intervalo de recalibración, NO el laboratorio de calibración (ISO 17025 5.10.4.4).</div>
+    <div class="item"><span class="dot azul"></span> La costumbre de "recalibración anual" proviene de las especificaciones de fabricantes (SAMA), pero no es una regla universal.</div>
+    <div class="warn">
+      ⚠️ <strong>ERROR COMÚN:</strong> Llamar "vigencia" al periodo de recalibración. La calibración no vence; el intervalo es un compromiso entre riesgo de salir de tolerancia y costo.
+    </div>
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> ¿Por qué un certificado de calibración bajo ISO/IEC 17025 no debe incluir una recomendación sobre el periodo de recalibración a menos que exista un acuerdo explícito con el cliente? Explique la base normativa de esta prohibición.
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bh teal">Factores que Influyen en el Intervalo (OIML D10)</div>
+    <div class="three">
+      <div class="mini teal"><strong>🔧 Tipo de equipo</strong><br>Complejidad, estabilidad inherente del sensor.</div>
+      <div class="mini teal"><strong>📈 Tendencia de deriva</strong><br>Historial de calibraciones previas.</div>
+      <div class="mini teal"><strong>⏱️ Severidad de uso</strong><br>Horas de operación, ciclos térmicos.</div>
+      <div class="mini teal"><strong>🌡️ Condiciones ambientales</strong><br>Humedad, vibración, contaminación.</div>
+      <div class="mini teal"><strong>🎯 Exactitud requerida</strong><br>Tolerancia del proceso a medir.</div>
+      <div class="mini teal"><strong>💰 Costo de calibración</strong><br>Impacto en el presupuesto de calidad.</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bh naranja">Métodos para Estimar el Intervalo (OIML D10)</div>
+    <div class="flow">
+      <span class="fbox">⏳ Tiempo Calendario</span> <span class="farrow">→</span> <span class="fbox">📊 Carta de Control</span> <span class="farrow">→</span> <span class="fbox">⚙️ Tiempo en Uso</span>
+    </div>
+    <div class="flow">
+      <span class="fbox">📦 Prueba de Caja Negra</span> <span class="farrow">→</span> <span class="fbox">📈 Aproximación Estadística</span> <span class="farrow">→</span> <span class="fbox">🪜 Ajuste en Escalera</span>
+    </div>
+    <div class="item"><span class="dot naranja"></span> <strong>Prueba de Caja Negra:</strong> Verificación periódica en servicio contra un patrón de referencia sin desmontar el instrumento de su ubicación.</div>
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Describa el método de "Carta de Control" para la determinación del intervalo de recalibración. ¿Qué tipo de datos históricos son indispensables para aplicarlo correctamente?
+    </div>
+  </div>
+
+  <!-- SECCIÓN 2 -->
+  <div class="section-bar verde">🟢 SECCIÓN II — MÉTODO DE CALIBRACIÓN POR COMPARACIÓN (PC-026:2019 & TH-007)</div>
+
+  <div class="block s2">
+    <div class="bh verde">Configuración del Sistema de Calibración (PC-026 Sec. 4-6)</div>
+    <div class="two">
+      <div>
+        <div class="mini verde"><strong>🌡️ Cámara Climática</strong><br>Debe estar caracterizada en estabilidad y uniformidad en el volumen de trabajo. Hermeticidad y recirculación de aire son críticas.</div>
+        <div class="mini verde" style="margin-top:7px;"><strong>📟 Higrómetro Patrón</strong><br>Resolución ≤0.1 %hr, Incertidumbre expandida ≤2.0 %hr (k=2). Sensor capacitivo/resistivo externo.</div>
+      </div>
+      <div>
+        <div class="mini verde"><strong>🌡️ Termómetro Patrón</strong><br>Resolución ≤0.1 °C, Incertidumbre expandida ≤0.2 °C (k=2). RTD, termistor o termopar.</div>
+        <div class="mini verde" style="margin-top:7px;"><strong>📊 Condiciones Ambientales Lab.</strong><br>23 °C ± 5 °C, 55 %hr ± 25 %hr. Libre de polvo y vapores corrosivos.</div>
+      </div>
+    </div>
+    <div class="flow" style="margin-top: 12px;">
+      <span class="fbox">💧 Secado previo (10%hr / 3h)</span> <span class="farrow">→</span> <span class="fbox">📈 Puntos Ascendentes (10-95%hr)</span> <span class="farrow">→</span> <span class="fbox">🔄 Repetir punto inicial</span>
+    </div>
+    <div class="warn">
+      ⚠️ <strong>PRECAUCIÓN CRÍTICA (TH-007 5.3):</strong> Evitar condensación en los sensores. No abrir la cámara a menos que esté cerca de 23 °C y 50 %hr. La histéresis del sensor es mayor en sentido decreciente de humedad.
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bh amarillo">Toma de Datos y Criterios de Aceptación</div>
+    <div class="item"><span class="dot amarillo"></span> <strong>10 lecturas simultáneas</strong> de patrón(es) e instrumento a calibrar, a intervalos de 1 minuto tras 30 min de estabilización.</div>
+    <div class="item"><span class="dot amarillo"></span> <strong>Criterio de Uniformidad (TH-007):</strong> La diferencia entre la media de dos patrones debe ser ≤ √(U² + E²) del generador.</div>
+    <div class="item"><span class="dot amarillo"></span> <strong>Criterio de Estabilidad:</strong> La diferencia entre lecturas inicial y final del mismo patrón debe estar dentro de la estabilidad declarada del generador.</div>
+    <div class="rx" style="font-size:10px;">
+      t<sub>ref</sub> = ½·[t<sub>1</sub> + t<sub>2</sub>] &nbsp;&nbsp;|&nbsp;&nbsp; h<sub>ref</sub> = ½·[h<sub>1</sub> + h<sub>2</sub>]
+    </div>
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Según TH-007, ¿qué acción se debe tomar si la diferencia entre la primera y segunda lectura del primer patrón excede la estabilidad asignada al generador? Justifique por qué este criterio es fundamental para la validez de la calibración.
+    </div>
+  </div>
+
+  <!-- SECCIÓN 3 -->
+  <div class="section-bar amarillo">🟡 SECCIÓN III — MODELO MATEMÁTICO E INCERTIDUMBRE (PC-026 Sec. 7)</div>
+
+  <div class="block s3">
+    <div class="bh amarillo">Ecuación de Corrección y Componentes de Incertidumbre para Humedad Relativa</div>
+    <div class="rx">
+      C<sub>H</sub> = H<sub>S</sub> - H<sub>X</sub> = (h̄<sub>S</sub> + δh<sub>C</sub> + δh<sub>IC</sub> + δh<sub>DS</sub> + δh<sub>RS</sub> + δh<sub>E</sub> + δh<sub>U</sub> + ...) - (h̄<sub>X</sub> + δh<sub>RX</sub> + δh<sub>Xrep</sub>)
+    </div>
+    <div class="three" style="margin-top: 5px;">
+      <div class="mini amarillo"><strong>📊 h̄<sub>S</sub> / h̄<sub>X</sub></strong><br>Media de 10 lecturas. Incertidumbre por desviación estándar de la media.</div>
+      <div class="mini amarillo"><strong>📜 δh<sub>C</sub></strong><br>Corrección por certificado del patrón. u = U<sub>cert</sub> / k.</div>
+      <div class="mini amarillo"><strong>📈 δh<sub>DS</sub></strong><br>Deriva del patrón entre calibraciones. u = Deriva<sub>máx</sub> / √3.</div>
+      <div class="mini amarillo"><strong>🎚️ δh<sub>RS</sub> / δh<sub>RX</sub></strong><br>Resolución. u = (Resolución/2) / √3.</div>
+      <div class="mini amarillo"><strong>📉 δh<sub>E</sub> / δh<sub>U</sub></strong><br>Estabilidad y Uniformidad de la cámara. u = Valor / √3.</div>
+      <div class="mini amarillo"><strong>🔄 δh<sub>Xrep</sub></strong><br>Reproducibilidad del instrumento (diferencia corrección inicial-final). u = |ΔC| / √3.</div>
+    </div>
+    <div class="warn" style="margin-top: 10px;">
+      ⚠️ <strong>NOTA IMPORTANTE (PC-026 Anexo 1):</strong> En el ejemplo numérico para 40 %hr, la mayor contribución a la incertidumbre proviene de la calibración del patrón (37.1%) y la uniformidad de la cámara (30.2%). La deriva del patrón también es significativa (23.3%).
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bh teal">Ejemplo Numérico (PC-026 Anexo 1 - 40 %hr)</div>
+    <table class="tbl">
+      <tr><th>Magnitud</th><th>Estimación x<sub>k</sub></th><th>u(x<sub>k</sub>)</th><th>% Aporte</th></tr>
+      <tr><td>h̄<sub>S</sub> (Patrón)</td><td>39.98 %hr</td><td>0.002 %hr</td><td>0.0%</td></tr>
+      <tr><td>δh<sub>C</sub> (Cal. Patrón)</td><td>1.17 %hr</td><td>0.255 %hr</td><td>37.1%</td></tr>
+      <tr><td>δh<sub>DS</sub> (Deriva)</td><td>0 %hr</td><td>0.202 %hr</td><td>23.3%</td></tr>
+      <tr><td>δh<sub>U</sub> (Uniformidad)</td><td>0 %hr</td><td>0.230 %hr</td><td>30.2%</td></tr>
+      <tr><td>h̄<sub>X</sub> (Instrumento)</td><td>40.1 %hr</td><td>0.010 %hr</td><td>0.1%</td></tr>
+    </table>
+    <div class="rx" style="margin-top: 8px;">
+      C<sub>H</sub> = 39.98 + 1.17 - 40.1 = 1.05 %hr &nbsp;&nbsp;|&nbsp;&nbsp; u(C<sub>H</sub>) = 0.419 %hr &nbsp;&nbsp;|&nbsp;&nbsp; U(C<sub>H</sub>) = 0.84 %hr (k=2)
+    </div>
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> En el cálculo de incertidumbre de PC-026, ¿por qué la contribución de la resolución del instrumento a calibrar (δh<sub>RX</sub>) suele ser pequeña en comparación con la incertidumbre de calibración del patrón (δh<sub>C</sub>)? Demuestre con el ejemplo de 40 %hr.
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bh rojo">Errores de Inmersión y Conducción (TH-007)</div>
+    <div class="def rojo">
+      <strong>Problema:</strong> Si el sensor no se introduce completamente en la cámara, la conducción térmica a través del vástago genera un gradiente que falsea la medición.
+    </div>
+    <div class="item"><span class="dot rojo"></span> Se debe determinar la profundidad de inmersión mínima sacando la sonda gradualmente hasta observar variación significativa.</div>
+    <div class="item"><span class="dot rojo"></span> Si aun con inmersión total la lectura varía fuera de la uniformidad del medio, el instrumento debe ser rechazado para calibración.</div>
+  </div>
+
+  <!-- SECCIÓN 4 -->
+  <div class="section-bar morado">🟣 SECCIÓN IV — POLÍTICA DE TRAZABILIDAD (DA-acr-12D)</div>
+
+  <div class="block s2">
+    <div class="bh morado">Jerarquía de Aceptación para Servicios de Calibración</div>
+    <div class="flow">
+      <span class="num-badge nb-b">1</span> <span class="fbox"><strong>INM cubierto por CIPM MRA</strong><br>BIPM KCDB</span>
+      <span class="farrow">→</span>
+      <span class="num-badge nb-g">2</span> <span class="fbox"><strong>Lab. Acreditado ILAC MRA</strong><br>Símbolo de acreditación</span>
+      <span class="farrow">→</span>
+      <span class="num-badge nb-o">3</span> <span class="fbox"><strong>INM no CIPM MRA</strong><br>Requiere evidencias adicionales</span>
+      <span class="farrow">→</span>
+      <span class="num-badge nb-r">4</span> <span class="fbox"><strong>Lab. no ILAC</strong><br>Auditoría del OEC</span>
+    </div>
+    <div class="warn" style="margin-top: 10px;">
+      ⚠️ Las opciones 3 y 4 solo son aceptables cuando 1 y 2 no están disponibles para una calibración específica. El OEC debe conservar registros de competencia técnica del laboratorio proveedor (ISO/IEC 17025 cláusulas 7.2.2, 7.6, 6.5, 7.7, 6.2, 6.3, 6.4).
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bh morado">Trazabilidad mediante MRC</div>
+    <div class="item"><span class="dot morado"></span> MRC producidos por INM en BIPM KCDB o PMR acreditado ISO 17034 bajo ILAC MRA.</div>
+    <div class="item"><span class="dot morado"></span> Si no es posible, el OEC debe demostrar competencia del PMR: valor e incertidumbre, trazabilidad, homogeneidad, estabilidad, fecha expiración, instrucciones de uso.</div>
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Un laboratorio en Perú necesita calibrar un higrómetro, pero no encuentra un laboratorio acreditado por INACAL-DA ni un INM en KCDB para el rango específico. Según DA-acr-12D, ¿qué pasos documentados debe seguir para que la calibración sea aceptable dentro de su sistema de calidad acreditado?
+    </div>
+  </div>
+
+  <!-- SECCIÓN 5 -->
+  <div class="section-bar naranja">🟠 SECCIÓN V — DIRECTRICES DE ACREDITACIÓN INACAL-DA (DA-acr-06D)</div>
+
+  <div class="block">
+    <div class="bh naranja">Personal y Competencia (6.2)</div>
+    <div class="item"><span class="dot naranja"></span> <strong>Supervisores:</strong> Mínimo 3 años de experiencia en ensayos/calibraciones.</div>
+    <div class="item"><span class="dot naranja"></span> <strong>Seguimiento de competencia:</strong> Cada 12 meses por subdisciplina.</div>
+    <div class="item"><span class="dot naranja"></span> <strong>Autorización:</strong> Basada en evidencias prácticas (entrenamiento, trabajo supervisado, evaluación estadística de resultados).</div>
+  </div>
+
+  <div class="block">
+    <div class="bh naranja">Validación y Métodos (7.2)</div>
+    <div class="item"><span class="dot naranja"></span> Métodos no vigentes requieren sustento técnico evaluado por INACAL-DA.</div>
+    <div class="item"><span class="dot naranja"></span> Actualización por nueva versión debe comunicarse en 30 días hábiles, implementación máxima 6 meses.</div>
+    <div class="item"><span class="dot naranja"></span> Si en 1 año no se usa el método acreditado, se debe ejecutar al menos un servicio completo.</div>
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Un laboratorio acreditado modifica un método normalizado de calibración de humedad cambiando el tipo de solución salina saturada. Según DA-acr-06D 7.2.1.6, ¿cómo debe declarar este método en su alcance de acreditación y qué documentación adicional debe conservar?
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bh naranja">Aseguramiento de la Validez (7.7)</div>
+    <div class="item"><span class="dot naranja"></span> Frecuencia de revisión de resultados >12 meses debe sustentarse con datos históricos.</div>
+    <div class="item"><span class="dot naranja"></span> La participación en ensayos de aptitud (EPT) es obligatoria por política INACAL-DA, pero no reemplaza los controles de calidad internos (7.7.1).</div>
+  </div>
+
+  <!-- TABLA INTEGRADORA -->
+  <div class="block s3">
+    <div class="bh" style="background:#e2e8f0; color:#334155;">🧩 TABLA INTEGRADORA — COMPARATIVA DE NORMAS DE CALIBRACIÓN DE TERMOHIGRÓMETROS</div>
+    <table class="tbl">
+      <tr><th>Aspecto</th><th>PC-026:2019 (INACAL, Perú)</th><th>TH-007 (CEM, España)</th><th>Observaciones Clave</th></tr>
+      <tr><td>Alcance Temperatura</td><td>10 °C a 40 °C</td><td>10 °C a 40 °C</td><td>Ambos cubren rango ambiental típico.</td></tr>
+      <tr><td>Alcance Humedad</td><td>10 %hr a 95 %hr</td><td>10 %hr a 90 %hr</td><td>PC-026 ligeramente más amplio.</td></tr>
+      <tr><td>Número de Patrones</td><td>1 Higrómetro + 1 Termómetro</td><td>2 Termohigrómetros</td><td>TH-007 usa 2 para evaluar uniformidad in-situ.</td></tr>
+      <tr><td>Resolución Patrón Típica</td><td>0.01 °C / 0.01 %hr</td><td>0.01 °C / 0.1 %hr</td><td>PC-026 exige 0.1 %hr para patrón.</td></tr>
+      <tr><td>Criterio Estabilidad</td><td>30 min tras estado estacionario</td><td>Control estadístico (20 min)</td><td>TH-007 más riguroso en verificación.</td></tr>
+      <tr><td>Incertidumbre por Interpolación</td><td>Máx(Δcert-interpol)/√3</td><td>Raíz de suma de diferencias al cuadrado</td><td>PC-026 simplifica, TH-007 más detallado.</td></tr>
+    </table>
+    <div class="warn" style="margin-top: 12px;">
+      💡 <strong>DATO INTEGRADOR CLAVE:</strong> Aunque PC-026 es la norma peruana obligatoria para laboratorios acreditados por INACAL, TH-007 del CEM proporciona un marco estadístico más robusto para la evaluación de la estabilidad y uniformidad del generador, que puede ser adoptado como mejora técnica siempre que se cumplan los requisitos mínimos de PC-026.
+    </div>
+  </div>
+
+  <!-- QUIZ INTERACTIVO -->
+  <div class="block s3 quiz-container" id="quiz-section">
+    <div class="quiz-header">
+      <div style="font-family: 'Oswald', sans-serif; font-size: 16px;">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+      <div style="font-size: 11px; opacity: 0.8;">Marca tu respuesta y descubre si es correcta</div>
+    </div>
+    
+    <div id="quiz-progress" style="margin-bottom: 20px;">
+      <div style="display: flex; justify-content: space-between; font-size: 12px;">
+        <span id="progress-text">Pregunta 0 de 10 respondidas</span>
+        <span id="score-text">Aciertos: 0/10</span>
+      </div>
+      <div class="stat-bar-wrap">
+        <div class="stat-bar-fill" id="quiz-progress-bar" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <div id="quiz-questions-area"></div>
+
+    <div id="quiz-final-results" style="display: none;" class="quiz-results">
+      <div id="results-message"></div>
+      <button class="btn-reset" id="reset-quiz">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span class="ft">REFERENCIAS:</span>
+    <span class="fc">PC-026:2019 INACAL | TH-007 CEM | DA-acr-12D | DA-acr-06D | ISO 10012-1 | OIML D10 | La Guía MetAs 2002</span>
+  </div>
+
+</div>
+
+<script>
+  (function() {
+    const quizData = [
+      { q: "¿Quién es el responsable de determinar el intervalo de recalibración de un instrumento de medición según ISO/IEC 17025?",
+        opts: ["El laboratorio de calibración que emite el certificado", "El fabricante del instrumento en su manual", "El usuario del instrumento, basado en análisis de riesgo y datos históricos", "La entidad reguladora nacional (INACAL, CEM) para todos los instrumentos"],
+        correct: 2,
+        feedback: "ISO 17025:1999 5.10.4.4 prohíbe que el certificado contenga recomendaciones sobre el periodo de calibración a menos que sea acordado con el cliente. El usuario conoce la severidad de uso, exactitud requerida y costo de recalibración." },
+      { q: "Según OIML D10, ¿cuál de los siguientes NO es un factor que influye directamente en la frecuencia de calibración?",
+        opts: ["Tendencia a la deriva del instrumento según registros históricos", "Costo anual del servicio de calibración", "La marca o prestigio del fabricante del instrumento", "Frecuencia de verificaciones internas cruzadas"],
+        correct: 2,
+        feedback: "OIML D10 lista: tipo de equipo, recomendación del fabricante, tendencia de datos, registros de mantenimiento, extensión y severidad de uso, deriva, frecuencia de revisiones cruzadas, condiciones ambientales, exactitud requerida y costo. La 'marca' no es un factor metrológico objetivo." },
+      { q: "En el procedimiento PC-026, ¿cuántas lecturas se toman en cada punto de calibración y con qué intervalo?",
+        opts: ["3 lecturas, intervalo de 5 minutos", "5 lecturas, intervalo de 2 minutos", "10 lecturas, intervalo de 1 minuto", "1 lectura después de 1 hora de estabilización"],
+        correct: 2,
+        feedback: "PC-026 6.1.9 y 6.1.10 establecen: registrar simultáneamente las lecturas del patrón y del instrumento, repitiendo cada minuto hasta obtener diez grupos de mediciones." },
+      { q: "¿Cuál es la ecuación correcta para la corrección de humedad relativa (C<sub>H</sub>) según PC-026?",
+        opts: ["C<sub>H</sub> = H<sub>X</sub> - H<sub>S</sub>", "C<sub>H</sub> = H<sub>S</sub> + H<sub>X</sub>", "C<sub>H</sub> = H<sub>S</sub> - H<sub>X</sub>", "C<sub>H</sub> = (H<sub>S</sub> + H<sub>X</sub>) / 2"],
+        correct: 2,
+        feedback: "Por definición (PC-026 Ec. 1), la corrección es el valor de referencia (H<sub>S</sub>) menos el valor medido por el instrumento a calibrar (H<sub>X</sub>)." },
+      { q: "En el ejemplo de cálculo de incertidumbre de PC-026 para 40 %hr, ¿cuál es la mayor fuente de incertidumbre?",
+        opts: ["La resolución del instrumento a calibrar", "La desviación estándar de las lecturas del patrón", "La incertidumbre de calibración del higrómetro patrón (δh<sub>C</sub>)", "La reproducibilidad del instrumento"],
+        correct: 2,
+        feedback: "Tabla 8 del PC-026 muestra que δh<sub>C</sub> aporta un 37.1% de la varianza total, seguido de la uniformidad de la cámara (δh<sub>U</sub>) con 30.2% y la deriva del patrón (δh<sub>DS</sub>) con 23.3%." },
+      { q: "¿Qué componente de incertidumbre en PC-026 se calcula como la diferencia entre la corrección inicial y final en el punto más bajo de humedad, dividida por √3?",
+        opts: ["Incertidumbre por deriva del patrón (δh<sub>DS</sub>)", "Incertidumbre por resolución (δh<sub>RX</sub>)", "Incertidumbre por reproducibilidad (δh<sub>Xrep</sub>)", "Incertidumbre por estabilidad de la cámara (δh<sub>E</sub>)"],
+        correct: 2,
+        feedback: "PC-026 7.1.2 Ec. 15 define u(δh<sub>Xrep</sub>) = |ΔC<sub>inicial-final</sub>| / √3. Esto captura la histéresis y repetibilidad a largo plazo del instrumento durante la calibración." },
+      { q: "Según DA-acr-12D, ¿cuál es la fuente de trazabilidad metrológica PREFERENTE para un laboratorio de calibración acreditado por INACAL-DA?",
+        opts: ["Un laboratorio de una universidad reconocida", "Un Instituto Nacional de Metrología (INM) cuyo servicio está cubierto por el CIPM MRA", "Un laboratorio de calibración acreditado por IAAC (no ILAC)", "Un proveedor de ensayos de aptitud ISO 17043"],
+        correct: 1,
+        feedback: "DA-acr-12D 5. Política 1. establece que el equipo debe ser calibrado por un INM cubierto por CIPM MRA (verificable en BIPM KCDB) o un laboratorio acreditado bajo acuerdo ILAC MRA. La opción 1 es la jerarquía primaria." },
+      { q: "¿Cuál es el propósito de la 'prueba de caja negra' mencionada en la Guía MetAs?",
+        opts: ["Calibrar un instrumento sin conocer su principio de funcionamiento", "Verificar el instrumento en servicio contra un patrón sin desmontarlo de su ubicación", "Enviar el instrumento a un laboratorio externo para su calibración anual", "Probar el software interno del instrumento"],
+        correct: 1,
+        feedback: "La prueba de 'caja negra' es un método de verificación en servicio donde el instrumento se compara con un patrón de referencia en su lugar de uso, sin necesidad de desinstalación. Es uno de los métodos de OIML D10 para ajustar intervalos." },
+      { q: "En TH-007, ¿qué acción se toma si la diferencia entre la primera y segunda lectura del primer patrón excede la estabilidad asignada al generador?",
+        opts: ["Se continúa la calibración y se aumenta la incertidumbre final", "Se rechaza el instrumento a calibrar", "Se repite la medida por falta de estabilidad", "Se recalibra el patrón inmediatamente"],
+        correct: 2,
+        feedback: "TH-007 5.3 establece: 'Si se observan diferencias mayores que la estabilidad asignada al generador, por falta de estabilidad, se repetirá la medida'. Esto asegura que los datos se toman con el generador bajo control estadístico." },
+      { q: "¿Qué requisito de DA-acr-06D se aplica si un laboratorio acreditado no ha recibido solicitudes para un método de calibración en su alcance durante un año?",
+        opts: ["El método se elimina automáticamente del alcance", "Se debe ejecutar al menos un servicio completo de calibración con emisión de certificado", "Se debe notificar a INACAL-DA y esperar una auditoría extraordinaria", "Se puede mantener el alcance sin acción si se participa en un ensayo de aptitud"],
+        correct: 1,
+        feedback: "DA-acr-06D 7.2.1.5: 'Si en el periodo de un año el laboratorio no recibió solicitudes para la ejecución del método... debe ejecutar por lo menos un (01) servicio completo... desde la recepción del ítem hasta la emisión del certificado'." }
+    ];
+
+    let userAnswers = new Array(10).fill(null);
+    let answeredCount = 0;
+    let correctCount = 0;
+
+    const container = document.getElementById('quiz-questions-area');
+    const progressText = document.getElementById('progress-text');
+    const scoreText = document.getElementById('score-text');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const finalResultsDiv = document.getElementById('quiz-final-results');
+    const resultsMessage = document.getElementById('results-message');
+
+    function renderQuiz() {
+      let html = '';
+      quizData.forEach((item, idx) => {
+        const qNum = idx + 1;
+        html += `<div class="qcard" id="q${qNum}">`;
+        html += `<div class="qnum">Pregunta ${qNum} / 10</div>`;
+        html += `<div class="qtext">${item.q}</div>`;
+        html += `<div class="qopts" id="opts-${qNum}">`;
+        item.opts.forEach((opt, optIdx) => {
+          const letter = String.fromCharCode(65 + optIdx);
+          const isCorrect = (optIdx === item.correct);
+          html += `<button class="qbtn" data-q="${qNum}" data-opt="${optIdx}" data-correct="${isCorrect}">${letter}) ${opt}</button>`;
+        });
+        html += `</div>`;
+        html += `<div class="qfeedback" id="fb${qNum}" style="display:none;"></div>`;
+        html += `</div>`;
+      });
+      container.innerHTML = html;
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const answered = userAnswers.filter(a => a !== null).length;
+      const correct = userAnswers.filter(a => a === true).length;
+      answeredCount = answered;
+      correctCount = correct;
+      const percent = (answered / 10) * 100;
+      progressText.textContent = `Pregunta ${answered} de 10 respondidas`;
+      scoreText.textContent = `Aciertos: ${correct}/10`;
+      progressBar.style.width = percent + '%';
+
+      if (answered === 10) {
+        showFinalResults();
+      }
+    }
+
+    function showFinalResults() {
+      let message = '';
+      let bgColor = '';
+      if (correctCount >= 8) {
+        message = `🎉 ¡Excelente! Has obtenido ${correctCount}/10. Dominas los conceptos de calibración de termohigrómetros, trazabilidad e incertidumbre.`;
+        bgColor = '#dcfce7';
+      } else if (correctCount >= 5) {
+        message = `📚 ¡Buen avance! Has obtenido ${correctCount}/10. Repasa las secciones de incertidumbre y la política de trazabilidad para consolidar.`;
+        bgColor = '#fef9c3';
+      } else {
+        message = `📖 Necesitas repasar el material. Has obtenido ${correctCount}/10. Vuelve a leer las secciones de PC-026 y DA-acr-12D con atención.`;
+        bgColor = '#fee2e2';
+      }
+      resultsMessage.textContent = message;
+      finalResultsDiv.style.backgroundColor = bgColor;
+      finalResultsDiv.style.display = 'block';
+    }
+
+    function handleOptionClick(e) {
+      const btn = e.target.closest('.qbtn');
+      if (!btn) return;
+      const qNum = parseInt(btn.dataset.q);
+      const optIdx = parseInt(btn.dataset.opt);
+      const isCorrect = btn.dataset.correct === 'true';
+      const optsDiv = document.getElementById(`opts-${qNum}`);
+      const feedbackDiv = document.getElementById(`fb${qNum}`);
+      const allBtns = optsDiv.querySelectorAll('.qbtn');
+      
+      if (userAnswers[qNum-1] !== null) return;
+      
+      userAnswers[qNum-1] = isCorrect;
+      
+      allBtns.forEach(b => {
+        const bOpt = parseInt(b.dataset.opt);
+        const bCorrect = b.dataset.correct === 'true';
+        b.classList.add('disabled');
+        if (bCorrect) {
+          b.classList.add('correct');
+          b.innerHTML = `✅ ${b.innerHTML.replace(/^[✅❌]\s*/, '')}`;
+        } else if (bOpt === optIdx && !bCorrect) {
+          b.classList.add('incorrect');
+          b.innerHTML = `❌ ${b.innerHTML.replace(/^[✅❌]\s*/, '')}`;
+        }
+      });
+      
+      const correctLetter = String.fromCharCode(65 + quizData[qNum-1].correct);
+      const correctOptText = quizData[qNum-1].opts[quizData[qNum-1].correct];
+      if (isCorrect) {
+        feedbackDiv.className = 'qfeedback correct-fb';
+        feedbackDiv.innerHTML = `<strong>✅ ¡Correcto!</strong> ${quizData[qNum-1].feedback}`;
+      } else {
+        feedbackDiv.className = 'qfeedback incorrect-fb';
+        feedbackDiv.innerHTML = `<strong>❌ Incorrecto.</strong> La respuesta correcta es ${correctLetter}) ${correctOptText}. ${quizData[qNum-1].feedback}`;
+      }
+      feedbackDiv.style.display = 'block';
+      
+      updateProgress();
+    }
+
+    function resetQuiz() {
+      userAnswers = new Array(10).fill(null);
+      answeredCount = 0;
+      correctCount = 0;
+      
+      document.querySelectorAll('.qbtn').forEach(btn => {
+        btn.classList.remove('correct', 'incorrect', 'disabled');
+        const originalText = btn.innerHTML.replace(/^[✅❌]\s*/, '');
+        btn.innerHTML = originalText;
+      });
+      document.querySelectorAll('.qfeedback').forEach(fb => {
+        fb.style.display = 'none';
+        fb.innerHTML = '';
+      });
+      
+      finalResultsDiv.style.display = 'none';
+      updateProgress();
+    }
+
+    container.addEventListener('click', handleOptionClick);
+    document.getElementById('reset-quiz').addEventListener('click', resetQuiz);
+    
+    renderQuiz();
+  })();
+</script>
+</body>
+</html>
