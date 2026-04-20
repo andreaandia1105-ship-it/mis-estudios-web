@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Visual · Climatología Sinóptica de Sudamérica</title>
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Variables del sistema de Claude (adaptadas) */
+        :root {
+            --color-background-primary: #ffffff;
+            --color-background-secondary: #f8fafc;
+            --color-background-tertiary: #eef2f6;
+            --color-text-primary: #0b1c2f;
+            --color-text-secondary: #334155;
+            --color-border-tertiary: #cbd5e1;
+            --color-border-secondary: #94a3b8;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background-primary: #0f172a;
+                --color-background-secondary: #1e293b;
+                --color-background-tertiary: #020617;
+                --color-text-primary: #f1f5f9;
+                --color-text-secondary: #cbd5e1;
+                --color-border-tertiary: #334155;
+                --color-border-secondary: #475569;
+            }
+        }
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--color-background-tertiary);
+            padding: 16px;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+        }
+        /* GRID CONTENEDOR PRINCIPAL */
+        .cv {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 9px;
+            padding: 12px;
+            background: var(--color-background-tertiary);
+            max-width: 1400px;
+            margin: 0 auto;
+            border-radius: 24px;
+        }
+        /* BLOQUES */
+        .block {
+            background: var(--color-background-primary);
+            border: 0.5px solid var(--color-border-tertiary);
+            border-radius: 11px;
+            padding: 12px 13px;
+            transition: all 0.1s ease;
+        }
+        .block.s2 { grid-column: span 2; }
+        .block.s3 { grid-column: 1 / -1; }
+        /* BARRAS DE TÍTULO Y SECCIÓN */
+        .title-bar, .section-bar, .quiz-header, .footer-bar {
+            grid-column: 1 / -1;
+            background: #0f1e3a;
+            color: white;
+            border-radius: 12px;
+            padding: 14px 20px;
+        }
+        .title-bar h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        .title-bar .sub {
+            font-size: 11px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+        .title-bar .tags {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .pill {
+            font-size: 11px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.12);
+            display: inline-block;
+            font-weight: 500;
+        }
+        .section-bar {
+            background: #1e2b4a;
+            padding: 8px 20px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bh {
+            font-family: 'Oswald', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+        /* COLORES POR TEMA */
+        .bh.azul, .def.azul { background: #dbeafe; color: #1e3a8a; border-left-color: #2563eb; }
+        .bh.verde, .def.verde { background: #dcfce7; color: #14532d; border-left-color: #16a34a; }
+        .bh.rojo, .def.rojo { background: #fee2e2; color: #991b1b; border-left-color: #dc2626; }
+        .bh.amarillo, .def.amarillo { background: #fef9c3; color: #713f12; border-left-color: #eab308; }
+        .bh.morado, .def.morado { background: #ede9fe; color: #4c1d95; border-left-color: #8b5cf6; }
+        .bh.teal, .def.teal { background: #ccfbf1; color: #134e4a; border-left-color: #14b8a6; }
+        .bh.naranja, .def.naranja { background: #ffedd5; color: #7c2d12; border-left-color: #f97316; }
+        .bh.gris, .def.gris { background: #f1f5f9; color: #334155; border-left-color: #64748b; }
+        .bh.rosa, .def.rosa { background: #fce7f3; color: #831843; border-left-color: #ec4899; }
+        @media (prefers-color-scheme: dark) {
+            .bh.azul, .def.azul { background: #1e3a5f; color: #93c5fd; }
+            .bh.verde, .def.verde { background: #14532d; color: #86efac; }
+            .bh.rojo, .def.rojo { background: #450a0a; color: #fca5a5; }
+            .bh.amarillo, .def.amarillo { background: #422006; color: #fef08a; }
+            .bh.morado, .def.morado { background: #2e1065; color: #c4b5fd; }
+            .bh.teal, .def.teal { background: #042f2e; color: #5eead4; }
+            .bh.naranja, .def.naranja { background: #431407; color: #fed7aa; }
+            .bh.gris, .def.gris { background: #1e293b; color: #94a3b8; }
+            .bh.rosa, .def.rosa { background: #4a044e; color: #f0abfc; }
+        }
+        .def {
+            border-left: 3px solid;
+            padding: 7px 10px;
+            border-radius: 0 7px 7px 0;
+            font-size: 12px;
+            background: var(--color-background-secondary);
+            margin: 10px 0;
+        }
+        .item {
+            display: flex;
+            gap: 7px;
+            font-size: 12px;
+            line-height: 1.5;
+            margin: 7px 0;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-top: 5px;
+            flex-shrink: 0;
+            background: currentColor;
+        }
+        .rx {
+            background: #0f172a;
+            color: #7dd3fc;
+            font-family: 'SF Mono', 'Menlo', monospace;
+            font-size: 11px;
+            padding: 7px 11px;
+            border-radius: 7px;
+            text-align: center;
+            line-height: 1.6;
+            margin: 8px 0;
+        }
+        .warn {
+            background: #fff7ed;
+            border-left: 3px solid #f97316;
+            border-radius: 0 8px 8px 0;
+            font-size: 11.5px;
+            color: #7c2d12;
+            padding: 7px 10px;
+            margin: 8px 0;
+        }
+        .exam {
+            background: #fefce8;
+            border: 1px solid #facc15;
+            border-radius: 8px;
+            font-size: 11.5px;
+            color: #713f12;
+            padding: 8px 11px;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+        .mini {
+            background: var(--color-background-secondary);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 11.5px;
+            border-left: 3px solid;
+        }
+        .two { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+        .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; }
+        .flow {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 8px 0;
+        }
+        .fbox {
+            background: var(--color-background-secondary);
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .farrow { font-size: 15px; color: var(--color-text-secondary); margin: 0 2px; }
+        .num-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 6px;
+        }
+        .nb-b { background: #dbeafe; color: #1e3a8a; }
+        .nb-g { background: #dcfce7; color: #14532d; }
+        .nb-r { background: #fee2e2; color: #991b1b; }
+        .stat-bar-wrap { background: var(--color-background-secondary); border-radius: 20px; height: 11px; width: 100%; margin: 8px 0; }
+        .stat-bar-fill { height: 100%; border-radius: 20px; background: #16a34a; width: 0%; }
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        .tbl th { background: var(--color-background-secondary); padding: 5px 7px; border-bottom: 0.5px solid var(--color-border-tertiary); text-align: left; }
+        .tbl td { padding: 5px 7px; border-bottom: 0.5px solid var(--color-border-tertiary); vertical-align: top; }
+        .divh { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 7px 0; }
+        /* Quiz */
+        .quiz-section { background: var(--color-background-primary); border-radius: 14px; padding: 16px 18px; border: 0.5px solid var(--color-border-tertiary); }
+        .quiz-header { background: #0f1e3a; color: white; padding: 12px 18px; border-radius: 12px; margin-bottom: 16px; }
+        .qcard { margin-bottom: 20px; border-bottom: 0.5px solid var(--color-border-tertiary); padding-bottom: 15px; }
+        .qnum { font-weight: 600; font-size: 12px; color: var(--color-text-secondary); }
+        .qtext { font-weight: 600; font-size: 13px; margin: 5px 0 10px; }
+        .qopts { display: flex; flex-direction: column; gap: 5px; }
+        .qbtn {
+            background: var(--color-background-secondary);
+            border: 1px solid var(--color-border-tertiary);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            color: var(--color-text-primary);
+        }
+        .qbtn:hover { background: var(--color-background-tertiary); }
+        .qbtn.correct-opt { background: #dcfce7; border-color: #16a34a; color: #14532d; }
+        .qbtn.wrong-opt { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+        .qbtn:disabled { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+        .qfeedback {
+            border-radius: 0 8px 8px 0;
+            padding: 8px 11px;
+            font-size: 11.5px;
+            margin-top: 8px;
+        }
+        .fb-correct { background: #f0fdf4; border-left: 3px solid #16a34a; }
+        .fb-wrong { background: #fef2f2; border-left: 3px solid #dc2626; }
+        .result-panel { margin-top: 20px; padding: 12px; border-radius: 12px; text-align: center; }
+        .btn-reset { background: #0f1e3a; color: white; border: none; padding: 8px 18px; border-radius: 30px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+        .footer-bar { background: #0f1e3a; color: white; padding: 11px 18px; display: flex; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+        .ft { font-family: 'Oswald', sans-serif; font-size: 12px; color: #7dd3fc; }
+        .fc { font-size: 11px; color: #94a3b8; }
+    </style>
+</head>
+<body>
+<div class="cv" id="canvasResumen">
+    <!-- TÍTULO -->
+    <div class="title-bar">
+        <h1>🌎 CLIMATOLOGÍA SINÓPTICA DE SUDAMÉRICA</h1>
+        <div class="sub">CURSO: PRONÓSTICO CLIMÁTICO ESTACIONAL · MÓDULO 1 · SENAMHI / NOAA</div>
+        <div class="tags">
+            <span class="pill">Celdas de Hadley/Walker</span>
+            <span class="pill">Anticiclones subtropicales</span>
+            <span class="pill">Alta de Bolivia</span>
+            <span class="pill">TUTT / VCAN</span>
+            <span class="pill">Corrientes en chorro</span>
+            <span class="pill">Frentes y ciclogénesis</span>
+            <span class="pill">ZCAS / SALLJ</span>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 1 -->
+    <div class="section-bar"><span style="background:#3b82f6; width:10px; height:10px; border-radius:2px;"></span> 1. CELDAS GLOBALES Y ANTICICLONES SUBTROPICALES</div>
+
+    <!-- Hadley + Walker -->
+    <div class="block s2">
+        <div class="bh azul">🌐 CELDA DE HADLEY (Diap. 2–16)</div>
+        <div class="def azul">Circulación meridional tropical-subtropical (~0°–30°) impulsada por calentamiento diferencial. Transporta calor hacia polos y define los alisios.</div>
+        <div class="two">
+            <div class="mini" style="border-left-color:#2563eb;">
+                <b>🔵 Ascenso ecuatorial</b><br>
+                ZCIT (convergencia de alisios) → convección profunda → liberación de calor latente → rama ascendente.
+            </div>
+            <div class="mini" style="border-left-color:#2563eb;">
+                <b>🔵 Descenso subtropical</b><br>
+                Aire seco desciende ~30° → subsidencia → inversión térmica → Anticiclones subtropicales (APS, AAS).
+            </div>
+        </div>
+        <div class="rx">Baroclinicidad ~ ∇p × ∇T  ·  Subsidencia = ω > 0 (coordenadas p)</div>
+        <div class="item"><span class="dot" style="background:#2563eb;"></span> <b>¿Por qué tres celdas?</b> La rotación terrestre (Coriolis) desvía el flujo meridional único, generando Hadley, Ferrel y Polar.</div>
+        <div class="exam">🎯 EXAMEN: Explique la relación entre la subsidencia del ramal descendente de Hadley y la presencia de estratocúmulos en la costa peruana. ¿Qué rol juega la inversión térmica?</div>
+    </div>
+    <div class="block">
+        <div class="bh teal">🔄 CIRCULACIÓN DE WALKER (Diap. 17–20)</div>
+        <div class="def teal">Circulación zonal ecuatorial. Ascenso sobre Amazonía/Continente Marítimo, descenso en Pacífico oriental. Modula la ZCIT y el ENSO.</div>
+        <div class="flow"><span class="fbox">Amazonía ascenso</span><span class="farrow">→</span><span class="fbox">vientos del este en altura</span><span class="farrow">→</span><span class="fbox">subsidencia Pacífico E</span></div>
+        <div class="warn">⚠️ ERROR COMÚN: Walker no es lo mismo que Hadley. Walker es ZONAL (este-oeste), Hadley es MERIDIONAL.</div>
+        <div class="exam">🎯 EXAMEN: ¿Cómo se altera la circulación de Walker durante un evento El Niño y qué consecuencias tiene sobre la precipitación en la costa norte del Perú?</div>
+    </div>
+
+    <!-- Anticiclones -->
+    <div class="block s3">
+        <div class="bh naranja">⛰️ ANTICICLONES SUBTROPICALES (Diap. 22–31)</div>
+        <div class="three">
+            <div class="mini" style="border-top:3px solid #f97316;">
+                <b>🔸 Pacífico Sur (APS)</b><br>Centro ~30°S 90°W. Migra estacionalmente. Intensifica vientos del sur, subsidencia, inversión y estratocúmulos. Corriente de Humboldt.
+            </div>
+            <div class="mini" style="border-top:3px solid #f97316;">
+                <b>🔸 Atlántico Sur (AAS)</b><br>Núcleo ~30°S, extiende dorsal hacia Brasil. En verano refuerza gradiente bárico sobre Paraguay/Argentina → vientos del norte.
+            </div>
+            <div class="mini" style="border-top:3px solid #f97316;">
+                <b>🔸 Variabilidad intraanual</b><br>Máximo de presión en primavera (~1026 hPa). Verano: núcleo más austral (~35°S). Invierno: debilitamiento y migración al norte.
+            </div>
+        </div>
+        <div class="exam">🎯 EXAMEN: Describa la evolución estacional del APS y su impacto en los vientos costeros frente a Perú durante el invierno vs. verano.</div>
+    </div>
+
+    <!-- SECCIÓN 2 -->
+    <div class="section-bar"><span style="background:#8b5cf6; width:10px; height:10px; border-radius:2px;"></span> 2. CIRCULACIONES DE LA ALTA TROPÓSFERA TROPICAL</div>
+
+    <div class="block">
+        <div class="bh morado">☀️ ALTA DE BOLIVIA (AB) (Diap. 50–64)</div>
+        <div class="def morado">Anticiclón de altura (~200 hPa) de núcleo cálido, generado por calor latente de convección amazónica y calentamiento del Altiplano. Esencial en verano.</div>
+        <div class="flow"><span class="fbox">Convección Amazonía</span><span class="farrow">→</span><span class="fbox">liberación calor latente</span><span class="farrow">→</span><span class="fbox">dorsal en 200 hPa</span><span class="farrow">→</span><span class="fbox">divergencia / precipitación Altiplano</span></div>
+        <div class="warn">⚠️ La AB se ubica sobre Bolivia/Paraguay en verano. Su posición anómala al sur intensifica lluvias en Altiplano peruano-boliviano.</div>
+        <div class="exam">🎯 EXAMEN: ¿Por qué la Alta de Bolivia es un sistema de núcleo cálido y cómo contribuye a la estación lluviosa en los Andes centrales?</div>
+    </div>
+    <div class="block">
+        <div class="bh morado">🌀 TUTT / VNEB (Diap. 69–82)</div>
+        <div class="def morado">Vaguada de la tropósfera alta tropical (TUTT) o Vaguada del Nordeste de Brasil (VNEB): núcleo frío, convergencia central, divergencia periférica.</div>
+        <div class="item"><span class="dot" style="background:#8b5cf6;"></span> <b>Profundidad:</b> Si alcanza 500 hPa, desestabiliza y genera convección cerca del centro.</div>
+        <div class="exam">🎯 EXAMEN: Compare los efectos en la precipitación de una TUTT poco profunda (solo sobre 300 hPa) versus una TUTT profunda que alcanza 500 hPa.</div>
+    </div>
+    <div class="block">
+        <div class="bh morado">⚡ VCAN / DANA (Diap. 83–97)</div>
+        <div class="def morado">Vórtice Ciclónico de Altos Niveles (VCAN) o Depresión Aislada (DANA): núcleo frío aislado, subsidencia central, ascensos laterales.</div>
+        <div class="rx">PV > 1.5 PVU → tropopausa dinámica</div>
+        <div class="item"><span class="dot" style="background:#8b5cf6;"></span> DANA en invierno sobre Perú: descenso de temperaturas mínimas, nevadas en sierra central/sur.</div>
+        <div class="exam">🎯 EXAMEN: ¿Qué papel juega la amplificación de una dorsal en el Pacífico suroriental en la formación de una DANA que afecta los Andes peruanos?</div>
+    </div>
+
+    <!-- SECCIÓN 3 -->
+    <div class="section-bar"><span style="background:#eab308; width:10px; height:10px; border-radius:2px;"></span> 3. CORRIENTES EN CHORRO DE ALTURA (JET STREAMS)</div>
+
+    <div class="block s2">
+        <div class="bh amarillo">✈️ CHORROS SUBTROPICAL Y POLAR (Diap. 136–145)</div>
+        <div class="def amarillo">Corrientes de viento fuerte (>60 kt) en alta tropósfera, asociadas a gradientes térmicos y tropopausa quebrada.</div>
+        <div class="two">
+            <div class="mini" style="border-left-color:#eab308;"><b>🟡 Chorro subtropical</b> ~200 hPa, θ~350K, fuente: gradiente termal alto + conservación momento angular.</div>
+            <div class="mini" style="border-left-color:#eab308;"><b>🟡 Chorro polar (PN/PS)</b> ~250-300 hPa, θ~320-340K, asociado a frentes y ciclogénesis.</div>
+        </div>
+        <div class="rx">Divergencia cruzada: Hemisferio Sur → entrada izquierda (div) y salida derecha (div).</div>
+        <div class="exam">🎯 EXAMEN: Dibuje el patrón de divergencia/convergencia alrededor de un núcleo de chorro recto en el Hemisferio Sur y explique cómo afecta la precipitación en el sur de Chile.</div>
+    </div>
+    <div class="block">
+        <div class="bh amarillo">🔗 ACOPLAMIENTO DE CHORROS (Diap. 158–161)</div>
+        <div class="def amarillo">Fase de regiones divergentes de dos chorros → intensificación de ascensos, ciclogénesis explosiva.</div>
+        <div class="flow"><span class="fbox">Salida derecha chorro norte</span><span class="farrow">+</span><span class="fbox">Entrada izquierda chorro sur</span><span class="farrow">→</span><span class="fbox">Ciclogénesis en Uruguay/Argentina</span></div>
+        <div class="warn">⚠️ Inclinación negativa de vaguada favorece acoplamiento divergente.</div>
+    </div>
+
+    <!-- SECCIÓN 4 -->
+    <div class="section-bar"><span style="background:#16a34a; width:10px; height:10px; border-radius:2px;"></span> 4. SISTEMAS EXTRATROPICALES, FRENTES Y CICLOGÉNESIS</div>
+
+    <div class="block">
+        <div class="bh verde">🌊 ONDA BAROCLÍNICA (Diap. 180–196)</div>
+        <div class="def verde">Perturbación migratoria en latitudes medias, se alimenta de baroclinicidad (∇p × ∇T). Convierte energía potencial en cinética.</div>
+        <div class="rx">Baroclinicidad ∝ |∇p × ∇ρ| ≈ |∇p × ∇T|</div>
+        <div class="exam">🎯 EXAMEN: Explique por qué la inclinación de las vaguadas con la altura es un indicador de baroclinicidad y cómo se relaciona con la advección térmica.</div>
+    </div>
+    <div class="block">
+        <div class="bh verde">🌧️ FRENTES Y CICLOGÉNESIS (Diap. 207–238)</div>
+        <div class="def verde">Frentes: fronteras entre masas de aire. Frío, cálido, estacionario, ocluido. Ciclogénesis: formación/intensificación de baja presión.</div>
+        <div class="three">
+            <div class="mini" style="border-top:2px solid #16a34a;"><b>Frente frío</b> advección fría, cumulonimbos.</div>
+            <div class="mini" style="border-top:2px solid #16a34a;"><b>Frente cálido</b> ascenso isentrópico, nimboestratos.</div>
+            <div class="mini" style="border-top:2px solid #16a34a;"><b>Oclusión</b> mezcla, vientos fuertes, nevadas en Patagonia.</div>
+        </div>
+        <div class="warn">⚠️ En Patagonia, la compresión adiabática al este de los Andes puede calentar el aire post-frontal, dificultando el análisis de frentes.</div>
+        <div class="exam">🎯 EXAMEN: Describa el ciclo de vida de un ciclón extratropical según el modelo noruego e identifique las etapas de frontogénesis y frontólisis.</div>
+    </div>
+    <div class="block s2">
+        <div class="bh teal">🌎 REGIONAL: SUR DE CHILE / PATAGONIA / CRP (Diap. 241–290)</div>
+        <div class="two">
+            <div class="mini" style="border-left-color:#14b8a6;"><b>🩵 Sur de Chile</b> Precipitación depende de ríos atmosféricos (conexión subtropical) y chorros. Vaguada al oeste + vientos del noroeste = lluvias intensas.</div>
+            <div class="mini" style="border-left-color:#14b8a6;"><b>🩵 Cuenca del Río de la Plata</b> Interacción humedad amazónica (SALLJ) + frentes = tiempo severo (líneas de inestabilidad, CCM).</div>
+        </div>
+        <div class="flow"><span class="fbox">SALLJ (chorro capas bajas)</span><span class="farrow">→</span><span class="fbox">convergencia en CRP</span><span class="farrow">+</span><span class="fbox">vaguada altura</span><span class="farrow">→</span><span class="fbox">precipitaciones intensas</span></div>
+        <div class="exam">🎯 EXAMEN: ¿Cómo influye la Zona de Convergencia del Atlántico Sur (ZCAS) en la distribución de precipitaciones entre el sureste de Brasil y la Cuenca del Río de la Plata?</div>
+    </div>
+
+    <!-- TABLA INTEGRADORA -->
+    <div class="block s3">
+        <div class="bh gris">📊 TABLA INTEGRADORA: SISTEMAS CLAVE Y EFECTOS CLIMÁTICOS</div>
+        <table class="tbl">
+            <tr><th>Sistema</th><th>Nivel</th><th>Región afectada</th><th>Impacto principal</th><th>Estacionalidad</th></tr>
+            <tr><td>Celda de Hadley</td><td>Meridional</td><td>0°–30°</td><td>Subsidencia / anticiclones</td><td>Todo el año</td></tr>
+            <tr><td>APS</td><td>Bajo</td><td>Pacífico SE</td><td>Inversión, sequía costera Perú/Chile</td><td>Intenso en verano</td></tr>
+            <tr><td>Alta de Bolivia</td><td>200 hPa</td><td>Bolivia/Perú</td><td>Lluvias en Altiplano y Amazonía</td><td>Verano austral</td></tr>
+            <tr><td>TUTT / VNEB</td><td>200–300 hPa</td><td>NE Brasil / Caribe</td><td>Convección periférica, cizalladura</td><td>Verano HN / todo año</td></tr>
+            <tr><td>Chorro subtropical</td><td>200 hPa</td><td>~30°S</td><td>Divergencia, ciclogénesis, lluvias Chile/Arg</td><td>Intensifica en El Niño</td></tr>
+            <tr><td>SALLJ</td><td>850 hPa</td><td>Bolivia–Río de la Plata</td><td>Transporte humedad, tiempo severo</td><td>Máximo en verano</td></tr>
+        </table>
+        <div class="warn" style="margin-top:10px;">💡 DATO INTEGRADOR: La interacción entre la Alta de Bolivia (divergencia en altura) y el SALLJ (humedad en capas bajas) explica gran parte de las precipitaciones estivales en Sudamérica subtropical.</div>
+    </div>
+
+    <!-- QUIZ INTERACTIVO -->
+    <div class="quiz-section s3" id="quiz-section">
+        <div class="quiz-header">
+            <span style="font-family:Oswald; font-size:15px;">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</span>
+            <div style="font-size:11px; opacity:0.9;">Marca tu respuesta y descubre si es correcta</div>
+        </div>
+        <div id="quiz-progress" style="margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; font-size:12px;"><span id="q-counter">Pregunta 0 de 10</span><span id="score-display">Aciertos: 0/10</span></div>
+            <div class="stat-bar-wrap"><div class="stat-bar-fill" id="progress-fill" style="width:0%"></div></div>
+        </div>
+        <div id="quiz-container"></div>
+        <div id="result-panel" class="result-panel" style="display:none;"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-bar">
+        <span class="ft">REFERENCIAS:</span>
+        <span class="fc">SENAMHI / NOAA · WPC International Desks · COMET-METED · NCEP/NCAR Reanalysis · Garreaud, Seluchi, Vuille, entre otros citados en el PDF.</span>
+    </div>
+</div>
+
+<script>
+    (function(){
+        const questions = [
+            { q: "¿Cuál es el mecanismo principal que genera la subsidencia en las costas occidentales de Sudamérica (ej. desierto de Atacama)?", 
+              opts: ["A) Ascenso de la celda de Walker", "B) Ramal descendente de la celda de Hadley", "C) Efecto Foehn de los Andes", "D) Corriente del Niño"], 
+              correct: 1, 
+              fb: "El ramal descendente de Hadley (~30°S) produce subsidencia, inversión térmica y estabilidad, reforzado por la corriente fría de Humboldt." },
+            { q: "La circulación de Walker se caracteriza por:", 
+              opts: ["A) Movimiento meridional entre el ecuador y los polos", "B) Ascenso sobre el Pacífico oriental y descenso en Indonesia", "C) Ascenso en Amazonía/Continente Marítimo y descenso en Pacífico oriental", "D) Vientos del oeste en la estratósfera"], 
+              correct: 2, 
+              fb: "Walker es una circulación zonal ecuatorial con rama ascendente sobre regiones cálidas (Amazonía, Indonesia) y descendente en el Pacífico oriental." },
+            { q: "¿Qué afirmación sobre el Anticiclón del Pacífico Sur (APS) es CORRECTA?", 
+              opts: ["A) Se ubica permanentemente en 40°S", "B) Es más intenso en invierno", "C) Migra hacia el sur en verano y refuerza vientos del sur frente a Chile/Perú", "D) No influye en la nubosidad costera"], 
+              correct: 2, 
+              fb: "El APS sigue el ciclo solar: en verano se desplaza al sur (~35°S) intensificando los vientos del sur y la inversión térmica." },
+            { q: "La Alta de Bolivia (AB) es un sistema de altura que:", 
+              opts: ["A) Tiene núcleo frío y subsidencia central", "B) Se forma por calor latente de convección amazónica y calentamiento del Altiplano", "C) Es más intensa en invierno", "D) Provoca sequía en el Altiplano"], 
+              correct: 1, 
+              fb: "AB es una dorsal cálida en 200 hPa generada por liberación de calor latente. Favorece divergencia y precipitaciones en verano." },
+            { q: "Una TUTT (Vaguada de la tropósfera alta tropical) se caracteriza por:", 
+              opts: ["A) Núcleo cálido y convergencia en altura", "B) Núcleo frío, convergencia central y divergencia periférica", "C) Ser un sistema exclusivo de superficie", "D) No tener efecto en la precipitación"], 
+              correct: 1, 
+              fb: "La TUTT posee núcleo frío, hundimiento de tropopausa, convergencia/descensos en el centro y ascensos/divergencia en la periferia." },
+            { q: "¿Cuál de los siguientes sistemas es un vórtice ciclónico aislado en altura, de núcleo frío, que puede provocar nevadas en los Andes peruanos?", 
+              opts: ["A) Alta de Bolivia", "B) DANA / COL", "C) Anticiclón del Pacífico Sur", "D) ZCAS"], 
+              correct: 1, 
+              fb: "La DANA (Depresión Aislada en Niveles Altos) es un vórtice frío segregado de una vaguada, genera descenso de temperaturas y precipitaciones." },
+            { q: "En el Hemisferio Sur, la región de divergencia en altura de un chorro recto se localiza en:", 
+              opts: ["A) Entrada derecha y salida izquierda", "B) Entrada izquierda y salida derecha", "C) Solo en el centro del núcleo", "D) En cualquier lado por igual"], 
+              correct: 1, 
+              fb: "Por el efecto de Coriolis, la divergencia se ubica en la entrada izquierda (hacia el trópico) y salida derecha (hacia el polo)." },
+            { q: "El acoplamiento de chorros en el lado divergente:", 
+              opts: ["A) Inhibe la formación de ciclones", "B) Intensifica ascensos y puede provocar ciclogénesis explosiva", "C) Solo ocurre en el Hemisferio Norte", "D) Es sinónimo de frente estacionario"], 
+              correct: 1, 
+              fb: "Cuando las regiones divergentes de dos chorros se superponen, se refuerzan los movimientos ascendentes y la ciclogénesis." },
+            { q: "¿Qué caracteriza a una onda baroclínica?", 
+              opts: ["A) Ejes verticales alineados sin advección térmica", "B) Inclinación de vaguadas con la altura y advección de temperatura", "C) Ausencia de gradientes de presión", "D) Solo ocurre en el trópico"], 
+              correct: 1, 
+              fb: "La baroclinicidad implica ∇p no paralelo a ∇T, lo que genera advección térmica e inclinación vertical de los sistemas." },
+            { q: "El SALLJ (chorro de capas bajas de Sudamérica) es importante porque:", 
+              opts: ["A) Transporta aire frío desde la Patagonia hacia el norte", "B) Transporta humedad amazónica hacia la Cuenca del Río de la Plata, favoreciendo precipitaciones", "C) Es un chorro de altura (>200 hPa)", "D) Solo se activa durante El Niño"], 
+              correct: 1, 
+              fb: "El SALLJ es una corriente en 850 hPa que advecta humedad tropical hacia el sur, clave para las lluvias en el centro-este de Sudamérica." }
+        ];
+
+        let userAnswers = new Array(10).fill(null);
+        let correctCount = 0;
+        let answeredCount = 0;
+
+        const container = document.getElementById('quiz-container');
+        const progressFill = document.getElementById('progress-fill');
+        const qCounter = document.getElementById('q-counter');
+        const scoreDisplay = document.getElementById('score-display');
+        const resultPanel = document.getElementById('result-panel');
+
+        function renderQuiz() {
+            let html = '';
+            questions.forEach((q, idx) => {
+                const qNum = idx + 1;
+                const opts = q.opts.map((opt, optIdx) => {
+                    const letter = String.fromCharCode(65 + optIdx); // A,B,C,D
+                    const isCorrect = (optIdx === q.correct);
+                    return `<button class="qbtn" data-q="${idx}" data-opt="${letter}" data-correct="${isCorrect}">${opt}</button>`;
+                }).join('');
+                html += `<div class="qcard" id="qcard-${idx}">
+                    <p class="qnum">Pregunta ${qNum} / 10</p>
+                    <p class="qtext">${q.q}</p>
+                    <div class="qopts" id="opts-${idx}">${opts}</div>
+                    <div class="qfeedback" id="fb-${idx}" style="display:none;"></div>
+                </div>`;
+            });
+            container.innerHTML = html;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            qCounter.textContent = `Pregunta ${answeredCount} de 10`;
+            scoreDisplay.textContent = `Aciertos: ${correctCount}/10`;
+            const percent = (answeredCount / 10) * 100;
+            progressFill.style.width = percent + '%';
+        }
+
+        function showFeedback(qIdx, selectedOpt, isCorrectSelected) {
+            const fbDiv = document.getElementById(`fb-${qIdx}`);
+            const qData = questions[qIdx];
+            const correctLetter = String.fromCharCode(65 + qData.correct);
+            const correctAnswerText = qData.opts[qData.correct];
+            let feedbackHtml = '';
+            if (isCorrectSelected) {
+                feedbackHtml = `<div class="fb-correct">✅ ¡Correcto! ${qData.fb}</div>`;
+            } else {
+                feedbackHtml = `<div class="fb-wrong">❌ Incorrecto. La respuesta correcta es ${correctLetter}) ${correctAnswerText}. ${qData.fb}</div>`;
+            }
+            fbDiv.innerHTML = feedbackHtml;
+            fbDiv.style.display = 'block';
+        }
+
+        function handleAnswer(qIdx, selectedBtn, allBtns, correctIdx) {
+            if (userAnswers[qIdx] !== null) return; // ya respondida
+
+            const selectedLetter = selectedBtn.getAttribute('data-opt');
+            const isCorrect = selectedBtn.getAttribute('data-correct') === 'true';
+            userAnswers[qIdx] = isCorrect;
+            if (isCorrect) correctCount++;
+            answeredCount++;
+
+            // Marcar botones
+            allBtns.forEach(btn => {
+                btn.disabled = true;
+                const optLetter = btn.getAttribute('data-opt');
+                const btnCorrect = btn.getAttribute('data-correct') === 'true';
+                if (btnCorrect) {
+                    btn.classList.add('correct-opt');
+                    // Añadir ✅ al inicio del texto si no lo tiene
+                    if (!btn.textContent.startsWith('✅')) {
+                        btn.textContent = '✅ ' + btn.textContent;
+                    }
+                } else if (optLetter === selectedLetter && !btnCorrect) {
+                    btn.classList.add('wrong-opt');
+                    if (!btn.textContent.startsWith('❌')) {
+                        btn.textContent = '❌ ' + btn.textContent;
+                    }
+                }
+            });
+
+            showFeedback(qIdx, selectedLetter, isCorrect);
+            updateProgress();
+
+            if (answeredCount === 10) {
+                showFinalResult();
+            }
+        }
+
+        function showFinalResult() {
+            let message = '';
+            let bgColor = '';
+            if (correctCount <= 4) { message = '🔴 Necesitas repasar el material.'; bgColor = '#fee2e2'; }
+            else if (correctCount <= 7) { message = '🟡 ¡Buen avance, sigue repasando!'; bgColor = '#fef9c3'; }
+            else { message = '🟢 ¡Excelente dominio del tema!'; bgColor = '#dcfce7'; }
+            resultPanel.style.display = 'block';
+            resultPanel.style.background = bgColor;
+            resultPanel.innerHTML = `<strong>Puntaje final: ${correctCount} / 10</strong><br>${message}
+                <br><button class="btn-reset" id="reset-quiz">🔄 Reiniciar Quiz</button>`;
+            document.getElementById('reset-quiz').addEventListener('click', resetQuiz);
+        }
+
+        function resetQuiz() {
+            userAnswers = new Array(10).fill(null);
+            correctCount = 0;
+            answeredCount = 0;
+            renderQuiz();
+            resultPanel.style.display = 'none';
+            updateProgress();
+        }
+
+        container.addEventListener('click', (e) => {
+            const btn = e.target.closest('.qbtn');
+            if (!btn) return;
+            const qIdx = parseInt(btn.getAttribute('data-q'));
+            if (userAnswers[qIdx] !== null) return; // ya contestada
+            const optsDiv = document.getElementById(`opts-${qIdx}`);
+            const allBtns = Array.from(optsDiv.querySelectorAll('.qbtn'));
+            const correctIdx = questions[qIdx].correct;
+            handleAnswer(qIdx, btn, allBtns, correctIdx);
+        });
+
+        renderQuiz();
+        // inicializar reset si existe
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'reset-quiz') resetQuiz();
+        });
+    })();
+</script>
+</body>
+</html>
