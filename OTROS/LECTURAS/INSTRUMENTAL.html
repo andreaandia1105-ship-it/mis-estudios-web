@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas · Instrumentación Hidrológica (PR-HWRSD-02)</title>
+  <!-- fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Variables de color (modo claro por defecto) */
+    :root {
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f8fafc;
+      --color-background-tertiary: #eef2ff;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #334155;
+      --color-border-tertiary: #cbd5e1;
+      --color-border-secondary: #94a3b8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-background-primary: #1e293b;
+        --color-background-secondary: #0f172a;
+        --color-background-tertiary: #020617;
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #cbd5e1;
+        --color-border-tertiary: #334155;
+        --color-border-secondary: #475569;
+      }
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--color-background-tertiary);
+      padding: 20px;
+      color: var(--color-text-primary);
+      line-height: 1.5;
+    }
+
+    /* canvas grid */
+    .cv {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 9px;
+      padding: 12px;
+      background: var(--color-background-tertiary);
+      border-radius: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* bloques */
+    .block {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 11px;
+      padding: 12px 13px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .block.s2 { grid-column: span 2; }
+    .block.s3 { grid-column: span 3; }
+
+    /* barra título */
+    .title-bar {
+      grid-column: 1/-1;
+      background: #0f1e3a;
+      color: white;
+      border-radius: 12px;
+      padding: 18px 24px;
+      margin-bottom: 4px;
+    }
+
+    .title-bar h1 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: -0.3px;
+    }
+
+    .title-bar .sub {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-top: 4px;
+    }
+
+    .tags {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 3px 12px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.15);
+      display: inline-block;
+      font-weight: 400;
+    }
+
+    /* barras de sección */
+    .sec-bar {
+      grid-column: 1/-1;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 10px 0 3px 0;
+      margin-top: 12px;
+      border-bottom: 2px solid var(--color-border-tertiary);
+      color: var(--color-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* encabezado de bloque */
+    .bh {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 10px;
+      letter-spacing: 0.2px;
+    }
+
+    /* definiciones */
+    .def {
+      border-left-width: 3px;
+      border-left-style: solid;
+      padding: 8px 12px;
+      border-radius: 0 8px 8px 0;
+      font-size: 12.5px;
+      background: var(--color-background-secondary);
+      margin-bottom: 10px;
+    }
+
+    /* items */
+    .item {
+      display: flex;
+      gap: 8px;
+      font-size: 12.5px;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    /* fórmulas */
+    .rx {
+      background: #0f172a;
+      color: #7dd3fc;
+      font-family: 'Courier New', monospace;
+      font-size: 11.5px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    /* warning */
+    .warn {
+      background: #fff7ed;
+      border-left: 3px solid #f97316;
+      border-radius: 0 8px 8px 0;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #7c2d12;
+      margin: 10px 0;
+    }
+    @media (prefers-color-scheme: dark) { .warn { background: #2d1a0e; color: #fed7aa; } }
+
+    /* pregunta examen */
+    .exam {
+      background: #fefce8;
+      border: 1px solid #facc15;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: #713f12;
+      margin-top: 12px;
+    }
+    @media (prefers-color-scheme: dark) { .exam { background: #2e2a0e; color: #fef08a; } }
+
+    /* mini tarjetas */
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      margin: 8px 0;
+    }
+
+    .three {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 7px;
+      margin: 8px 0;
+    }
+
+    .mini {
+      background: var(--color-background-secondary);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 11.5px;
+      border-top: 3px solid;
+    }
+
+    /* flow */
+    .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 12px 0;
+      font-size: 12px;
+    }
+    .fbox {
+      background: var(--color-background-secondary);
+      padding: 5px 8px;
+      border-radius: 16px;
+      font-weight: 500;
+    }
+    .farrow { color: var(--color-text-secondary); font-size: 16px; }
+
+    /* badges */
+    .num-badge {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      font-size: 11px; font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;
+    }
+
+    /* tabla */
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+    }
+    .tbl th {
+      background: var(--color-background-secondary);
+      padding: 6px 7px;
+      text-align: left;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+    }
+    .tbl td {
+      padding: 6px 7px;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      vertical-align: top;
+    }
+
+    .divh {
+      border: none;
+      border-top: 0.5px solid var(--color-border-tertiary);
+      margin: 10px 0;
+    }
+
+    /* footer */
+    .footer {
+      grid-column: 1/-1;
+      background: #0f1e3a;
+      color: white;
+      border-radius: 12px;
+      padding: 14px 20px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .ft { font-family: 'Oswald', sans-serif; color: #7dd3fc; }
+    .fc { color: #94a3b8; font-size: 11px; }
+
+    /* --- QUIZ --- */
+    .quiz-block {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 14px;
+      padding: 16px 18px;
+      grid-column: 1/-1;
+    }
+    .quiz-header {
+      background: #0f1e3a;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .quiz-progress {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 10px 0 18px;
+    }
+    .stat-bar-wrap {
+      flex:1;
+      background: var(--color-background-secondary);
+      border-radius: 20px;
+      height: 10px;
+    }
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 20px;
+      background: #16a34a;
+      width: 0%;
+    }
+    .qcard {
+      margin-bottom: 25px;
+      border-bottom: 1px dashed var(--color-border-tertiary);
+      padding-bottom: 15px;
+    }
+    .qnum { font-weight: 600; font-size: 13px; color: var(--color-text-secondary); margin-bottom: 5px; }
+    .qtext { font-weight: 500; margin-bottom: 12px; }
+    .qopts {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .qbtn {
+      background: var(--color-background-secondary);
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12.5px;
+      text-align: left;
+      cursor: pointer;
+      width: 100%;
+      color: var(--color-text-primary);
+      transition: all 0.2s;
+    }
+    .qbtn.correct-option {
+      background: #dcfce7;
+      border-color: #16a34a;
+      color: #14532d;
+    }
+    .qbtn.wrong-option {
+      background: #fee2e2;
+      border-color: #dc2626;
+      color: #991b1b;
+    }
+    .qbtn:disabled { opacity: 0.7; cursor: not-allowed; pointer-events: none; }
+    .qfeedback {
+      border-radius: 0 8px 8px 0;
+      padding: 8px 11px;
+      font-size: 12px;
+      margin-top: 10px;
+      display: none;
+    }
+    .fb-correct { background: #f0fdf4; border-left: 3px solid #16a34a; }
+    .fb-wrong { background: #fef2f2; border-left: 3px solid #dc2626; }
+    .result-panel {
+      margin-top: 25px;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .reset-btn {
+      background: #0f1e3a;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="cv" id="canvasResumen">
+  
+  <!-- TÍTULO -->
+  <div class="title-bar">
+    <h1>📘 HYDROLOGICAL INSTRUMENTATION · PR-HWRSD-02</h1>
+    <div class="sub">NCHM · National Centre for Hydrology and Meteorology (Bhutan) · Julio 2023</div>
+    <div class="sub">Curso: Hidrometría · Ingeniería Civil/Ambiental · Ciclo 2026-1</div>
+    <div class="tags">
+      <span class="pill">WMO-No.168</span>
+      <span class="pill">ISO 2537</span>
+      <span class="pill">Nivel · Caudal · Sedimentos</span>
+      <span class="pill">Cableway safety</span>
+      <span class="pill">ADCP & Radar</span>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 1 : DEFINICIONES CLAVE -->
+  <div class="sec-bar"><span style="font-size:22px;">📌</span> DEFINICIONES ESENCIALES · CONTROL & DATUM</div>
+
+  <div class="block">
+    <div class="bh" style="background:#dbeafe; color:#1e3a8a;">Gauge Datum (Diap. 11-12)</div>
+    <div class="def" style="border-left-color:#2563eb;">
+      <strong>🔵 Plano horizontal de referencia</strong> al que se refieren todas las alturas de nivel. Puede ser arbitrario (para evitar negativos) o ligado al nivel medio del mar. Debe mantenerse mediante benchmarks.
+    </div>
+    <div class="item"><div class="dot" style="background:#2563eb;"></div> <strong>¿Por qué importa?</strong> Un datum estable garantiza series de nivel consistentes. Si el cero varía, la relación nivel-caudal se altera.</div>
+    <div class="item"><div class="dot" style="background:#2563eb;"></div> <strong>Práctica NCHM:</strong> Verificar anualmente el gauge zero respecto a al menos dos benchmarks independientes.</div>
+    <div class="exam">🎯 EXAMEN: Explique por qué un datum arbitrario debe fijarse por debajo del nivel más bajo esperado y qué consecuencias tendría no correlacionarlo con un benchmark nacional.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background:#dbeafe; color:#1e3a8a;">Control (Diap. 11,19)</div>
+    <div class="def" style="border-left-color:#2563eb;">
+      <strong>🔵 Elemento físico que determina la relación nivel-caudal.</strong> Puede ser natural (rápidos, estrechamiento) o artificial (vertedero). Su estabilidad y sensibilidad son críticas.
+    </div>
+    <div class="item"><div class="dot" style="background:#2563eb;"></div> <strong>Control sensible:</strong> un cambio ≤2% en Q produce cambio de 1 unidad de nivel registrado.</div>
+    <div class="warn">⚠️ ERROR COMÚN: confundir "control" con "estación de aforo". El control es la condición aguas abajo que fija la curva de gasto; si el control migra (erosión/sedimentación), la curva se desplaza.</div>
+    <div class="exam">🎯 EXAMEN: ¿Qué atributos debe tener un control satisfactorio y cómo afecta un "shifting control" a la operación de la estación?</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background:#dbeafe; color:#1e3a8a;">Red de estaciones (Diap. 16-18)</div>
+    <div class="item"><div class="dot" style="background:#2563eb;"></div> <strong>Principales (primarias):</strong> operación permanente, estudios regionales de tendencias.</div>
+    <div class="item"><div class="dot" style="background:#2563eb;"></div> <strong>Secundarias:</strong> operación temporal, correlación con estación principal.</div>
+    <div class="item"><div class="dot" style="background:#2563eb;"></div> <strong>Especiales:</strong> proyectos, requerimientos legales, diseño.</div>
+    <div class="mini" style="border-top-color:#2563eb; margin-top:10px;"><strong>En Perú</strong> · SENAMHI opera ~400 estaciones hidrológicas; muchas en la vertiente del Pacífico con régimen irregular. La red de crest stage gauges (parcial) es clave para estimar caudales extremos.</div>
+  </div>
+
+  <!-- SECCIÓN 2: INSTRUMENTACIÓN NIVEL DE AGUA -->
+  <div class="sec-bar"><span style="font-size:22px;">📏</span> NIVEL DE AGUA · DIRECTOS E INDIRECTOS</div>
+
+  <div class="block s2">
+    <div class="bh" style="background:#fef9c3; color:#713f12;">Staff Gauge · Vertical/Inclinado (Diap. 20-22)</div>
+    <div class="two">
+      <div class="mini" style="border-top-color:#eab308;"><strong>🟡 Materiales</strong> · Concreto reforzado, acero T, madera bien curada. Bajo coeficiente de expansión.</div>
+      <div class="mini" style="border-top-color:#eab308;"><strong>🟡 Graduación</strong> · mínima 5 mm, precisión acumulada ≤0.5 mm o 0.1%. Números claros.</div>
+    </div>
+    <div class="item"><div class="dot" style="background:#ca8a04;"></div> Instalación cerca del banco, sin afectar flujo, accesible a la vista. Inclinada se calibra in situ con nivelación.</div>
+    <div class="rx">Error acumulado permitido ≤ 0.5 mm / 0.1%</div>
+    <div class="exam">🎯 EXAMEN: ¿Por qué una regla inclinada debe calibrarse mediante nivelación precisa y no asumiendo la distancia geométrica?</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background:#ccfbf1; color:#134e4a;">Bubble Gauge (Diap. 23-26)</div>
+    <div class="def" style="border-left-color:#0d9488;">
+      <strong>🩵 Sistema de purga de gas (N₂)</strong> que mide presión en un orificio sumergido. La presión equivale a la columna de agua.
+    </div>
+    <div class="flow"><span class="fbox">Orificio fijo</span> <span class="farrow">→</span> <span class="fbox">Tubo burbujeo</span> <span class="farrow">→</span> <span class="fbox">Transductor de presión</span> <span class="farrow">→</span> <span class="fbox">Datalogger</span></div>
+    <div class="warn">⚠️ Compensación: la densidad del agua varía con temperatura/sedimentos; se requiere ajuste manual o automático.</div>
+    <div class="exam">🎯 EXAMEN: ¿Cómo afecta una alta velocidad del flujo en la cercanía del orificio a la medición de burbuja y qué solución recomienda la USGS?</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background:#ccfbf1; color:#134e4a;">Radar (No contacto) (Diap. 27)</div>
+    <div class="def" style="border-left-color:#0d9488;">
+      <strong>🩵 Medición de distancia por microondas</strong>. Inmune a clima, rango típico hasta 35 m, exactitud ±3 mm.
+    </div>
+    <div class="item"><div class="dot" style="background:#0d9488;"></div> Montaje en brazo sobre el flujo, asegurando que el haz no golpee paredes.</div>
+    <div class="item"><div class="dot" style="background:#0d9488;"></div> No requiere pozo de aquietamiento.</div>
+    <div class="exam">🎯 EXAMEN: Compare las ventajas del radar frente al bubble gauge en ríos con alta carga de sedimentos y escombros flotantes.</div>
+  </div>
+
+  <div class="block s3">
+    <div class="bh" style="background:#e2e8f0; color:#334155;">Registradores · DCP y telemetría (Diap. 28-32)</div>
+    <div class="three">
+      <div class="mini" style="border-top-color:#64748b;"><strong>⚫ EDL</strong> · Almacena ≥4 dígitos por lectura. Programable, pero sin vista gráfica en campo.</div>
+      <div class="mini" style="border-top-color:#64748b;"><strong>⚫ Chart recorder</strong> · Trazo continuo, cambios dimensionales del papel afectan precisión.</div>
+      <div class="mini" style="border-top-color:#64748b;"><strong>⚫ DCP/Telemetría</strong> · GSM/GPRS, satélite. Refugio sobre nivel de inundación 200 años.</div>
+    </div>
+    <div class="item"><div class="dot" style="background:#475569;"></div> <strong>Timing digital:</strong> incertidumbre ≤150 s en 30 días. Analógico: ≤15 min.</div>
+    <div class="exam">🎯 EXAMEN: Diseñe los criterios de selección de sitio para una nueva estación AWLS, considerando control hidráulico, acceso y protección contra crecidas.</div>
+  </div>
+
+  <!-- SECCIÓN 3: CAUDAL (DISCHARGE) -->
+  <div class="sec-bar"><span style="font-size:22px;">🌊</span> MEDICIÓN DE CAUDAL · MOLINETES, ADCP, CABLEWAY</div>
+
+  <div class="block s2">
+    <div class="bh" style="background:#fef9c3; color:#713f12;">Molinete (Rotating element) (Diap. 33-41)</div>
+    <div class="def" style="border-left-color:#eab308;">
+      <strong>🟡 Principio:</strong> velocidad angular del rotor ∝ velocidad del agua. Se usa ecuación de calibración: v = a·n + b (si n < umbral) o v = a·n.
+    </div>
+    <div class="rx">Q = Σ aᵢ · vᵢ &nbsp;&nbsp; (método de la sección media)</div>
+    <div class="two">
+      <div class="mini" style="border-top-color:#eab308;"><strong>Price AA</strong> · 0.2–12 fps, cat‑whisker, penta gear. Baja velocidad con contacto óptico.</div>
+      <div class="mini" style="border-top-color:#eab308;"><strong>Pygmy</strong> · 0.2–4 fps, profundidad 0.3–1.5 ft. Para corrientes someras.</div>
+    </div>
+    <div class="warn">⚠️ Recalibración: individual cada año o 300 h de uso. Grupo: verificación periódica. Prueba de giro (spin test) obligatoria antes/después de cada aforo.</div>
+    <div class="exam">🎯 EXAMEN: Explique el efecto "Epper" en la calibración de molinetes y por qué debe evitarse en el rango de velocidades de calibración.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background:#dbeafe; color:#1e3a8a;">Medición de profundidad (Diap. 35, 54-58)</div>
+    <div class="item"><div class="dot" style="background:#2563eb;"></div> <strong>Wading rod:</strong> hasta 3 m, v≤2 m/s. Placa base antideslizante.</div>
+    <div class="item"><div class="dot" style="background:#2563eb;"></div> <strong>Sounding weight:</strong> m ≥ 5·v·d (kg). Forma hidrodinámica.</div>
+    <div class="rx">m = 5 · v · d &nbsp; (estimación empírica WMO)</div>
+    <div class="warn">⚠️ Si el ángulo del cable >4°, se requiere corrección de línea aérea y húmeda (WMO-519).</div>
+  </div>
+
+  <div class="block s3">
+    <div class="bh" style="background:#ede9fe; color:#4c1d95;">ADCP · Perfilador Doppler (Diap. 41-42)</div>
+    <div class="def" style="border-left-color:#8b5cf6;">
+      <strong>🟣 Mide velocidad 3D usando efecto Doppler</strong> sobre partículas en suspensión. El sistema de barco en movimiento (moving boat) obtiene perfil completo de velocidades y batimetría.
+    </div>
+    <div class="three">
+      <div class="mini" style="border-top-color:#8b5cf6;"><strong>Aqua Profiler</strong> · Montaje fijo o portátil, mide celdas múltiples. Fase piloto NCHM.</div>
+      <div class="mini" style="border-top-color:#8b5cf6;"><strong>Radar de velocidad superficial</strong> · No contacto, algoritmo convierte V<sub>sup</sub> a V<sub>media</sub> (~10% error).</div>
+      <div class="mini" style="border-top-color:#8b5cf6;"><strong>Ventaja</strong> · Mayor rapidez, perfil completo, no intrusivo.</div>
+    </div>
+    <div class="exam">🎯 EXAMEN: ¿Qué limitaciones presenta el ADCP en ríos con alta concentración de sedimentos finos o con fondo móvil?</div>
+  </div>
+
+  <div class="block s2">
+    <div class="bh" style="background:#fed7aa; color:#7c2d12;">Sistema de cableway (Diap. 42-53)</div>
+    <div class="def" style="border-left-color:#f97316;">
+      <strong>🟠 Transporte suspendido para aforos.</strong> Componentes: torres, cable principal (track), cable de remolque (tow), cable de suspensión, carro instrumental o de personal.
+    </div>
+    <div class="flow"><span class="fbox">Track cable FS=5 (pasajeros)</span> <span class="farrow">→</span> <span class="fbox">Suspension FS≥5</span> <span class="farrow">→</span> <span class="fbox">Tow cable FS≥1.25×BL susp.</span></div>
+    <div class="warn">⚠️ Inspección anual obligatoria: corrosión en poleas y amarres. Prueba estática con 2× peso máximo autorizado.</div>
+    <div class="exam">🎯 EXAMEN: Calcule la masa máxima de peso de sondeo permitida si el cable de suspensión tiene carga de rotura 25 kN y se aplica FS=5. Considere además el factor de seguridad del cable principal para sistema con carro de personal.</div>
+  </div>
+
+  <!-- SECCIÓN 4: SEDIMENTOS -->
+  <div class="sec-bar"><span style="font-size:22px;">🧪</span> MUESTREO DE SEDIMENTOS EN SUSPENSIÓN</div>
+
+  <div class="block">
+    <div class="bh" style="background:#fce7f3; color:#831843;">Muestreador de botella (Diap. 59-68)</div>
+    <div class="def" style="border-left-color:#ec4899;">
+      <strong>🩷 Botella de 1 L (±10 cc)</strong> con entrada isocinética. Se baja cerrada, se abre con palanca a profundidad deseada.
+    </div>
+    <div class="item"><div class="dot" style="background:#ec4899;"></div> Marco de bronce, resorte de acero inoxidable, tubo extensible (hasta 5 m, v<4.5 m/s).</div>
+    <div class="item"><div class="dot" style="background:#ec4899;"></div> Requisito: velocidad de entrada ≈ velocidad de la corriente, sin perturbación.</div>
+    <div class="rx">Tiempo de llenado < t<sub>lleno</sub> (evitar sobrellenado)</div>
+    <div class="exam">🎯 EXAMEN: Explique por qué el muestreador de botella debe permanecer vertical y cómo afecta la desviación por corriente a la concentración de sedimentos colectada.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh" style="background:#fce7f3; color:#831843;">Flotadores (Diap. 68-69)</div>
+    <div class="item"><div class="dot" style="background:#ec4899;"></div> Madera de sal (densidad ≥0.5) o metálicos. Pintura bandas alternas rojo/blanco.</div>
+    <div class="item"><div class="dot" style="background:#ec4899;"></div> Usados para estimar velocidad superficial en aforos de emergencia o flujo de escombros.</div>
+  </div>
+
+  <!-- TABLA INTEGRADORA -->
+  <div class="sec-bar"><span style="font-size:22px;">📋</span> TABLA INTEGRADORA · INSTRUMENTOS CLAVE</div>
+  <div class="block s3">
+    <table class="tbl">
+      <thead><tr><th>Instrumento</th><th>Principio</th><th>Rango / Precisión</th><th>Ventaja</th><th>Limitación / Mantenimiento</th></tr></thead>
+      <tbody>
+        <tr><td>Staff gauge</td><td>Lectura visual directa</td><td>Resolución 5 mm</td><td>Bajo costo, simple</td><td>Solo lectura manual, susceptible a daños</td></tr>
+        <tr><td>Bubble gauge</td><td>Presión hidrostática (purga N₂)</td><td>Compensación densidad requerida</td><td>Bueno en sedimentos</td><td>Orificio puede obstruirse; requiere gas</td></tr>
+        <tr><td>Radar</td><td>Microondas, tiempo de vuelo</td><td>±3 mm (15-30 m)</td><td>Sin contacto, inmune a escombros</td><td>Afectado por espuma intensa, costo</td></tr>
+        <tr><td>Molinete (Price AA)</td><td>Rotación mecánica</td><td>0.2–12 fps, error <5% en rango cal.</td><td>Robusto, larga data histórica</td><td>Recalibración anual, sensible a desgaste</td></tr>
+        <tr><td>ADCP</td><td>Doppler acústico</td><td>Perfil completo</td><td>Rápido, mide batimetría</td><td>Costo elevado, requiere agua con partículas</td></tr>
+        <tr><td>Cableway + winche</td><td>Suspensión aérea</td><td>FS=5 (personal)</td><td>Acceso en crecidas</td><td>Mantenimiento riguroso, prueba estática</td></tr>
+        <tr><td>Muestreador botella</td><td>Isocinético por llenado</td><td>Profundidad ≤5 m</td><td>Muestra integrada</td><td>Requiere calibración de tiempo de llenado</td></tr>
+      </tbody>
+    </table>
+    <div class="warn" style="margin-top:14px;"><strong>🔑 Dato integrador:</strong> La calidad de los datos hidrológicos depende tanto de la instrumentación como del mantenimiento del datum y el control hidráulico. NCHM opera 22 estaciones principales + 45 AWLS; la combinación de tecnologías (burbuja, radar, ADCP) mejora la resiliencia de la red.</div>
+  </div>
+
+  <!-- QUIZ INTERACTIVO -->
+  <div class="quiz-block" id="quiz-section">
+    <div class="quiz-header">
+      <div style="font-family:Oswald; font-size:18px;">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+      <div style="font-size:13px; opacity:0.9;">Marca tu respuesta y descubre si es correcta</div>
+    </div>
+    <div id="quiz-progress-container" class="quiz-progress">
+      <span id="q-counter">Pregunta 0 de 10</span>
+      <div class="stat-bar-wrap"><div id="progress-fill" class="stat-bar-fill" style="width:0%"></div></div>
+      <span id="score-indicator">0/10 aciertos</span>
+    </div>
+    <div id="quiz-questions-container"></div>
+    <div id="result-panel" class="result-panel" style="display:none;"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div><span class="ft">REFERENCIAS PRINCIPALES:</span></div>
+    <div class="fc">WMO-No.168 (Guide to Hydrological Practices) · WMO-No.1044 (Manual on Stream Gauging) · ISO 2537 · ISO 3454 · Bureau of Indian Standards IS 1192, IS 4080, IS 3910 · NCHM PR-HWRSD-02 Jul 2023</div>
+    <div class="fc" style="margin-left:auto;">Canvas interactivo · Adaptado al contexto peruano · SENAMHI · © 2026</div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    // Datos del quiz (10 preguntas basadas en el manual)
+    const quizData = [
+      { q: "¿Cuál es el propósito principal de un 'gauge datum' arbitrario?", 
+        opts: ["A) Referirse al nivel medio del mar", "B) Evitar lecturas negativas en el registro", "C) Medir la profundidad del río", "D) Calibrar el molinete"],
+        correct: 1, // índice 0 -> B
+        explanation: "✅ Correcto. Un datum arbitrario se fija por debajo del nivel mínimo esperado para que todas las alturas de mira sean positivas. Debe estar ligado a benchmarks." },
+      { q: "En un control hidráulico 'sensible', un cambio del 2% en el caudal produce un cambio de nivel de:", 
+        opts: ["A) 0.1 unidad", "B) 1 unidad", "C) 5 unidades", "D) Depende de la rugosidad"],
+        correct: 1,
+        explanation: "✅ Correcto. El manual define control sensible si ΔQ ≤2% causa Δstage = 1 unidad (p.ej. 1 cm)." },
+      { q: "¿Qué componente del sistema de burbuja (bubble gauge) compensa los cambios de presión atmosférica?", 
+        opts: ["A) El orificio sumergido", "B) El regulador de flujo", "C) El transductor de presión (venteado a la atmósfera)", "D) El cilindro de nitrógeno"],
+        correct: 2,
+        explanation: "✅ El transductor está venteado a la atmósfera para compensar variaciones barométricas. El gas solo transmite la presión hidrostática." },
+      { q: "De acuerdo con el manual, ¿cuál es la exactitud típica de un sensor de radar para medición de nivel?", 
+        opts: ["A) ±1 mm", "B) ±3 mm para rango 15-30 m", "C) ±1 cm independiente de la distancia", "D) ±5 mm solo en aguas tranquilas"],
+        correct: 1,
+        explanation: "✅ El documento indica exactitud absoluta ±3 mm para sensores de 15–30 m." },
+      { q: "¿Qué condición obliga a aplicar corrección de 'air line' y 'wet line' durante un aforo con molinete suspendido?", 
+        opts: ["A) Velocidad > 3 m/s", "B) Ángulo del cable > 4° respecto a la vertical", "C) Profundidad > 6 m", "D) Temperatura del agua < 5°C"],
+        correct: 1,
+        explanation: "✅ Si el cable se desvía más de 4° de la vertical, la profundidad indicada tiene error significativo y debe corregirse (WMO-519)." },
+      { q: "En un cableway con carro para personal, ¿qué factor de seguridad mínimo debe tener el cable principal (track) respecto a la carga de rotura del cable de suspensión?", 
+        opts: ["A) 1.25", "B) 2", "C) 5", "D) 10"],
+        correct: 2,
+        explanation: "✅ Para sistemas con carro de personal, el track cable debe tener FS=5 respecto a la carga de rotura del cable de suspensión." },
+      { q: "¿Cuál es la frecuencia recomendada de recalibración individual de un molinete según ISO 2537 / manual?", 
+        opts: ["A) Cada 5 años", "B) Cada año o 300 horas de uso, lo que ocurra primero", "C) Solo cuando se daña", "D) Cada 6 meses"],
+        correct: 1,
+        explanation: "✅ Los molinetes calibrados individualmente deben recalibrarse anualmente o tras 300 h de uso." },
+      { q: "El muestreador de sedimentos de botella debe operarse de manera que:", 
+        opts: ["A) La botella se llene completamente para asegurar muestra", "B) Se abra la entrada antes de sumergir", "C) El tiempo de apertura sea ligeramente menor que el necesario para llenado total", "D) Se use solo en flujo laminar"],
+        correct: 2,
+        explanation: "✅ Para evitar sobrellenado y errores en la concentración, el tiempo de apertura debe ser un poco menor que el tiempo de llenado completo." },
+      { q: "¿Qué tecnología mide el caudal utilizando el efecto Doppler sobre partículas en suspensión?", 
+        opts: ["A) Molinete Price", "B) Radar de velocidad superficial", "C) ADCP", "D) Bubble gauge"],
+        correct: 2,
+        explanation: "✅ El ADCP (Acoustic Doppler Current Profiler) emplea el desplazamiento Doppler de ondas acústicas reflejadas por sedimentos." },
+      { q: "Según el manual, ¿qué tipo de estación hidrológica se opera solo temporalmente para establecer correlación con una estación principal?", 
+        opts: ["A) Estación principal", "B) Estación secundaria", "C) Estación especial", "D) Estación de cresta"],
+        correct: 1,
+        explanation: "✅ Las estaciones secundarias se operan el tiempo suficiente para correlacionar sus caudales con una principal y luego pueden desactivarse." }
+    ];
+
+    let userAnswers = new Array(10).fill(null); // 'correct' o 'wrong'
+    let answeredCount = 0;
+    let score = 0;
+
+    const container = document.getElementById('quiz-questions-container');
+    const progressFill = document.getElementById('progress-fill');
+    const qCounterSpan = document.getElementById('q-counter');
+    const scoreSpan = document.getElementById('score-indicator');
+    const resultPanel = document.getElementById('result-panel');
+
+    function renderQuiz() {
+      let html = '';
+      quizData.forEach((item, idx) => {
+        const qNumber = idx + 1;
+        html += `<div class="qcard" id="qcard-${idx}">`;
+        html += `<p class="qnum">Pregunta ${qNumber} / 10</p>`;
+        html += `<p class="qtext">${item.q}</p>`;
+        html += `<div class="qopts">`;
+        item.opts.forEach((opt, optIdx) => {
+          const letter = String.fromCharCode(65 + optIdx); // A,B,C,D
+          const isCorrect = (optIdx === item.correct);
+          html += `<button class="qbtn" data-q="${idx}" data-opt="${optIdx}" data-correct="${isCorrect}">${letter}) ${opt}</button>`;
+        });
+        html += `</div>`;
+        html += `<div class="qfeedback" id="fb-${idx}"></div>`;
+        html += `</div>`;
+      });
+      container.innerHTML = html;
+      updateProgressDisplay();
+    }
+
+    function updateProgressDisplay() {
+      const percent = (answeredCount / 10) * 100;
+      progressFill.style.width = percent + '%';
+      qCounterSpan.innerText = `Pregunta ${answeredCount} de 10`;
+      scoreSpan.innerText = `${score}/10 aciertos`;
+    }
+
+    function showFeedback(qIdx, isCorrectAnswer, chosenOptIndex) {
+      const fbDiv = document.getElementById(`fb-${qIdx}`);
+      const question = quizData[qIdx];
+      const correctLetter = String.fromCharCode(65 + question.correct);
+      const chosenLetter = String.fromCharCode(65 + chosenOptIndex);
+      
+      let message = '';
+      let fbClass = '';
+      if (isCorrectAnswer) {
+        message = `✅ ¡Correcto! Has elegido ${chosenLetter}. ${question.explanation}`;
+        fbClass = 'fb-correct';
+      } else {
+        message = `❌ Incorrecto. Elegiste ${chosenLetter}. La respuesta correcta es ${correctLetter}. ${question.explanation}`;
+        fbClass = 'fb-wrong';
+      }
+      fbDiv.innerHTML = message;
+      fbDiv.className = `qfeedback ${fbClass}`;
+      fbDiv.style.display = 'block';
+    }
+
+    function handleAnswerClick(e) {
+      const btn = e.target.closest('.qbtn');
+      if (!btn) return;
+      if (btn.disabled) return;
+      
+      const qIdx = parseInt(btn.dataset.q);
+      const optIdx = parseInt(btn.dataset.opt);
+      const isCorrect = btn.dataset.correct === 'true';
+      
+      // Verificar si ya fue respondida
+      if (userAnswers[qIdx] !== null) return;
+      
+      // Marcar respuesta
+      userAnswers[qIdx] = isCorrect ? 'correct' : 'wrong';
+      answeredCount++;
+      if (isCorrect) score++;
+      
+      // Deshabilitar todos los botones de esta pregunta
+      const parentCard = document.getElementById(`qcard-${qIdx}`);
+      const allBtns = parentCard.querySelectorAll('.qbtn');
+      allBtns.forEach(b => { b.disabled = true; });
+      
+      // Resaltar visualmente la opción correcta y la incorrecta
+      allBtns.forEach(b => {
+        const correctFlag = b.dataset.correct === 'true';
+        const opt = parseInt(b.dataset.opt);
+        if (correctFlag) {
+          b.classList.add('correct-option');
+          if (!b.innerHTML.startsWith('✅')) {
+            b.innerHTML = '✅ ' + b.innerHTML;
+          }
+        } else if (opt === optIdx && !isCorrect) {
+          b.classList.add('wrong-option');
+          if (!b.innerHTML.startsWith('❌')) {
+            b.innerHTML = '❌ ' + b.innerHTML;
+          }
+        }
+      });
+      
+      showFeedback(qIdx, isCorrect, optIdx);
+      updateProgressDisplay();
+      
+      // Si todas respondidas mostrar panel resultado
+      if (answeredCount === 10) {
+        showFinalResult();
+      }
+    }
+
+    function showFinalResult() {
+      let message = '';
+      let bgColor = '';
+      if (score <= 4) { bgColor = '#fee2e2'; message = '🔴 Necesitas repasar el material. Revisa las definiciones de datum, control y factores de seguridad.'; }
+      else if (score <= 7) { bgColor = '#fef9c3'; message = '🟡 ¡Buen avance! Sigue repasando los detalles de calibración y cableway.'; }
+      else { bgColor = '#dcfce7'; message = '🟢 ¡Excelente dominio del tema! Estás listo para operar instrumentación hidrológica.'; }
+      
+      resultPanel.style.display = 'block';
+      resultPanel.style.background = bgColor;
+      resultPanel.innerHTML = `
+        <div style="font-weight:700; font-size:18px;">Resultado final: ${score} / 10</div>
+        <div style="margin:8px 0;">${message}</div>
+        <button class="reset-btn" id="resetQuizBtn">🔄 Reiniciar Quiz</button>
+      `;
+      document.getElementById('resetQuizBtn').addEventListener('click', resetQuiz);
+    }
+
+    function resetQuiz() {
+      userAnswers = new Array(10).fill(null);
+      answeredCount = 0;
+      score = 0;
+      resultPanel.style.display = 'none';
+      renderQuiz(); // regenera preguntas limpias
+      updateProgressDisplay();
+    }
+
+    function attachListeners() {
+      container.addEventListener('click', handleAnswerClick);
+    }
+
+    // Inicializar
+    renderQuiz();
+    attachListeners();
+    updateProgressDisplay();
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --color-background-tertiary: #f8fafc;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f1f5f9;
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-border-tertiary: #cbd5e1;
+  }
+  @media(prefers-color-scheme: dark) {
+    :root {
+      --color-background-tertiary: #0f172a;
+      --color-background-primary: #1e293b;
+      --color-background-secondary: #334155;
+      --color-text-primary: #f8fafc;
+      --color-text-secondary: #cbd5e1;
+      --color-border-tertiary: #475569;
+    }
+  }
+
+  .cv {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 9px;
+    padding: 12px;
+    background: var(--color-background-tertiary);
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--color-text-primary);
+  }
+
+  /* BARRA DE TÍTULO */
+  .title-bar {
+    grid-column: 1 / -1;
+    background: #0f1e3a;
+    color: white;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .title-bar h1 { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; margin: 0; }
+  .title-bar p { font-size: 11px; margin: 4px 0 8px 0; color: #94a3b8; }
+  
+  /* BARRAS DE SECCIÓN */
+  .sec-bar {
+    grid-column: 1 / -1;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* BLOQUES */
+  .block {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 11px;
+    padding: 12px 13px;
+  }
+  .block.s2 { grid-column: span 2; }
+  .block.s3 { grid-column: 1 / -1; }
+
+  /* ENCABEZADOS DE BLOQUE */
+  .bh {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  /* ELEMENTOS INTERNOS */
+  .def {
+    border-left: 3px solid;
+    padding: 7px 10px;
+    border-radius: 0 7px 7px 0;
+    font-size: 12px;
+    background: var(--color-background-secondary);
+    margin-bottom: 10px;
+  }
+  .item { display: flex; gap: 7px; font-size: 12px; line-height: 1.5; margin-bottom: 8px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  
+  .rx {
+    background: #0f172a;
+    color: #7dd3fc;
+    font-family: monospace;
+    font-size: 11px;
+    padding: 7px 11px;
+    border-radius: 7px;
+    text-align: center;
+    line-height: 1.6;
+    margin: 10px 0;
+    overflow-x: auto;
+  }
+
+  .warn {
+    background: #fff7ed;
+    border-left: 3px solid #f97316;
+    border-radius: 0 8px 8px 0;
+    font-size: 11.5px;
+    color: #7c2d12;
+    padding: 8px 10px;
+    margin: 10px 0;
+  }
+
+  .exam {
+    background: #fefce8;
+    border: 1px solid #facc15;
+    border-radius: 8px;
+    font-size: 11.5px;
+    color: #713f12;
+    padding: 10px;
+    margin-top: 12px;
+  }
+  .exam strong { font-weight: 600; }
+
+  .mini {
+    background: var(--color-background-secondary);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 11.5px;
+  }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 10px; }
+  .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-bottom: 10px; }
+
+  .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
+  .fbox { background: var(--color-background-secondary); padding: 6px 10px; border-radius: 6px; font-size: 11.5px; border: 1px solid var(--color-border-tertiary); }
+  .farrow { color: var(--color-text-secondary); font-size: 16px; font-weight: bold; }
+
+  .num-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 50%; font-size: 11px; font-weight: 700; color: white;
+  }
+  .pill { font-size: 11px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin: 2px; }
+
+  .stat-bar-wrap { width: 100%; background: var(--color-background-secondary); border-radius: 20px; height: 11px; overflow: hidden; margin: 6px 0; border: 1px solid var(--color-border-tertiary); }
+  .stat-bar-fill { height: 100%; border-radius: 20px; transition: width 0.3s; background: #16a34a; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: 11px; margin: 10px 0; }
+  .tbl th { background: var(--color-background-secondary); padding: 6px 8px; border-bottom: 1px solid var(--color-border-tertiary); text-align: left; font-weight: 600; }
+  .tbl td { padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); vertical-align: top; }
+
+  .divh { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 12px 0; }
+
+  /* COLORES ESPECÍFICOS POR BLOQUE */
+  .c-blue { background: #dbeafe; color: #1e3a8a; } .b-blue { border-color: #1e3a8a; } .bg-blue { background: #1e3a8a; }
+  .c-green { background: #dcfce7; color: #14532d; } .b-green { border-color: #14532d; } .bg-green { background: #14532d; }
+  .c-red { background: #fee2e2; color: #991b1b; } .b-red { border-color: #991b1b; } .bg-red { background: #991b1b; }
+  .c-yellow { background: #fef9c3; color: #713f12; } .b-yellow { border-color: #713f12; } .bg-yellow { background: #713f12; }
+  .c-purple { background: #ede9fe; color: #4c1d95; } .b-purple { border-color: #4c1d95; } .bg-purple { background: #4c1d95; }
+  .c-teal { background: #ccfbf1; color: #134e4a; } .b-teal { border-color: #134e4a; } .bg-teal { background: #134e4a; }
+  .c-orange { background: #ffedd5; color: #7c2d12; } .b-orange { border-color: #7c2d12; } .bg-orange { background: #7c2d12; }
+  .c-gray { background: #f1f5f9; color: #334155; } .b-gray { border-color: #334155; } .bg-gray { background: #334155; }
+
+  /* QUIZ STYLES */
+  #quiz-section { grid-column: 1 / -1; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 14px; padding: 16px 18px; margin-top: 10px; }
+  .qz-head { background: #0f1e3a; color: white; font-family: 'Oswald', sans-serif; font-size: 14px; padding: 12px; border-radius: 8px; margin-bottom: 12px; }
+  .qcard { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px dashed var(--color-border-tertiary); }
+  .qcard:last-child { border-bottom: none; }
+  .qnum { font-size: 11px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 4px; text-transform: uppercase; }
+  .qtext { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  .qopts { display: flex; flex-direction: column; gap: 5px; }
+  .qbtn { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 8px; padding: 8px 12px; font-size: 12px; text-align: left; cursor: pointer; width: 100%; transition: all 0.2s; color: var(--color-text-primary); font-family: inherit; }
+  .qbtn:hover:not(:disabled) { background: #e2e8f0; filter: brightness(0.95); }
+  .qbtn.correct { background: #dcfce7 !important; border-color: #16a34a !important; color: #14532d !important; font-weight: 600; }
+  .qbtn.incorrect { background: #fee2e2 !important; border-color: #dc2626 !important; color: #991b1b !important; }
+  .qbtn:disabled { opacity: 0.7; cursor: not-allowed; pointer-events: none; }
+  .qfeedback { border-radius: 0 8px 8px 0; padding: 8px 11px; font-size: 11.5px; margin-top: 8px; display: none; }
+  .qfb-correct { background: #f0fdf4; border-left: 3px solid #16a34a; color: #14532d; }
+  .qfb-incorrect { background: #fef2f2; border-left: 3px solid #dc2626; color: #991b1b; }
+  
+  #quiz-results { display: none; padding: 16px; border-radius: 8px; text-align: center; margin-top: 16px; font-weight: 600; border: 1px solid; }
+  .res-bad { background: #fee2e2; color: #991b1b; border-color: #dc2626; }
+  .res-ok { background: #fef9c3; color: #713f12; border-color: #facc15; }
+  .res-good { background: #dcfce7; color: #14532d; border-color: #16a34a; }
+  #btn-restart { margin-top: 12px; padding: 8px 16px; border-radius: 6px; border: none; background: #0f1e3a; color: white; cursor: pointer; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 12px; }
+
+  /* FOOTER */
+  .footer { grid-column: 1 / -1; background: #0f1e3a; color: white; border-radius: 10px; padding: 11px 18px; display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+  .ft { font-family: 'Oswald', sans-serif; font-size: 12px; color: #7dd3fc; font-weight: 700; }
+  .fc { font-size: 11px; color: #94a3b8; }
+</style>
+
+<div class="cv">
+
+  <div class="title-bar">
+    <h1>CANVAS ACADÉMICO: SISTEMAS FOTOVOLTAICOS Y ENERGÍA SOLAR</h1>
+    <p>Curso: Energía Renovable | Ingeniería Meteorológica - UNALM | Basado en Análisis Documental Integral</p>
+    <div>
+      <span class="pill bg-blue">Radiación y Geometría</span>
+      <span class="pill bg-purple">Efecto FV</span>
+      <span class="pill bg-red">Termodinámica de Módulos</span>
+      <span class="pill bg-orange">Caso Perú (UNALM)</span>
+      <span class="pill bg-green">Net Metering y Recibos</span>
+    </div>
+  </div>
+
+  <div class="sec-bar c-blue b-blue" style="border-left: 4px solid">
+    🌍 SECCIÓN 1: FUNDAMENTOS FÍSICOS DE LA RADIACIÓN Y GEOMETRÍA SOLAR
+  </div>
+
+  <div class="block s2">
+    <div class="bh c-blue b-blue">El Sol y Espectro Electromagnético</div>
+    <div class="def c-blue b-blue">
+      <strong>Reactor Nuclear Estelar:</strong> El sol no "quema" combustible, realiza una fusión nuclear masiva. Convierte hidrógeno en helio bajo presiones extremas, liberando energía electromagnética.
+    </div>
+    <div class="item">
+      <div class="dot bg-blue"></div>
+      <div><strong>Composición estelar:</strong> 90% Hidrógeno, 7% Helio, 3% otros gases. La energía nos llega equivalente a la radiación de un cuerpo negro a ~5762 K.</div>
+    </div>
+    <div class="flow">
+      <div class="fbox">Fusión Nuclear (Núcleo a 4×10⁷ K)</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Ondas Electromagnéticas (Superficie 6000 K)</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Incidencia en la Tierra (149.5×10⁶ km)</div>
+    </div>
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> ¿Qué diferencia de temperatura existe entre el núcleo donde ocurre la fusión y la superficie solar que emite la radiación como cuerpo negro? Explica brevemente el proceso de fusión.
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bh c-teal b-teal">Geometría Tierra-Sol</div>
+    <div class="def c-teal b-teal">
+      El diseño de un sistema fotovoltaico depende de rastrear la <strong>posición exacta del sol</strong> a lo largo del año mediante coordenadas solares (Latitud, Longitud, Azimut y Zenit).
+    </div>
+    <div class="two">
+      <div class="mini b-teal" style="border-top: 3px solid;">
+        <strong>Azimut Solar:</strong> Ángulo de desviación medido en el plano horizontal desde el Norte Geográfico.
+      </div>
+      <div class="mini b-teal" style="border-top: 3px solid;">
+        <strong>Ángulo Cenital:</strong> Distancia angular medida desde la vertical (el cenit) hacia el disco solar.
+      </div>
+    </div>
+    <div class="warn">
+      ⚠️ <strong>ERROR COMÚN:</strong> Confundir latitud con ángulo de inclinación del panel. Aunque están relacionados, la inclinación óptima varía según si se busca maximizar la captación en verano o en invierno.
+    </div>
+  </div>
+
+  <div class="sec-bar c-purple b-purple" style="border-left: 4px solid">
+    ⚡ SECCIÓN 2: PRINCIPIOS DE CONVERSIÓN FOTOVOLTAICA
+  </div>
+
+  <div class="block">
+    <div class="bh c-purple b-purple">El Efecto Fotovoltaico</div>
+    <div class="def c-purple b-purple">
+      Fenómeno cuántico donde los fotones incidentes transmiten energía a los electrones de valencia de un material semiconductor, liberándolos para generar una corriente eléctrica.
+    </div>
+    <div class="item">
+      <div class="dot bg-purple"></div>
+      <div><strong>Ruptura de Enlaces:</strong> La energía fotónica crea "Pares Electrón-Hueco".</div>
+    </div>
+    <div class="item">
+      <div class="dot bg-purple"></div>
+      <div><strong>Huecos (Cargas Positivas):</strong> Son espacios vacíos en los enlaces atómicos que se comportan como partículas que viajan en dirección opuesta a los electrones.</div>
+    </div>
+    <div class="flow">
+      <div class="fbox">Impacto de Fotón</div><div class="farrow">→</div>
+      <div class="fbox">Salto de Banda de Valencia</div><div class="farrow">→</div>
+      <div class="fbox">Electrón Libre + Hueco</div>
+    </div>
+  </div>
+
+  <div class="block s2">
+    <div class="bh c-yellow b-yellow">Curvas I-V y Coeficientes de Temperatura</div>
+    <div class="def c-yellow b-yellow">
+      El rendimiento eléctrico (Corriente vs. Voltaje) está condicionado por las Standard Test Conditions (STC: 1000 W/m², 25°C celular, AM 1.5).
+    </div>
+    <div class="two">
+      <div class="mini b-yellow" style="border-left: 3px solid;">
+        <strong>Efecto en Voltaje (Voc):</strong> Altamente negativo. El coeficiente de temperatura para el Voc suele ser de -0.33%/°C. A más calor, <em>cae</em> el voltaje.
+      </div>
+      <div class="mini b-yellow" style="border-left: 3px solid;">
+        <strong>Efecto en Corriente (Isc):</strong> Ligeramente positivo. Aumenta marginalmente (+0.05%/°C) con la temperatura, pero no compensa la caída de voltaje.
+      </div>
+    </div>
+    <div class="warn">
+      ⚠️ <strong>ERROR COMÚN:</strong> Pensar que los paneles solares rinden más en días extremadamente calurosos. Falso: La radiación genera energía, pero el exceso de temperatura destruye la eficiencia de conversión por la pérdida de voltaje.
+    </div>
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Si un panel fotovoltaico opera a 45°C en la selva en lugar de los 25°C STC, ¿qué parámetro eléctrico de la curva I-V será el principal responsable de la pérdida de potencia máxima (Pmax)?
+    </div>
+  </div>
+
+  <div class="sec-bar c-red b-red" style="border-left: 4px solid">
+    🌡️ SECCIÓN 3: FACTORES FÍSICOS Y RENDIMIENTO OPERATIVO (Contexto Perú)
+  </div>
+
+  <div class="block">
+    <div class="bh c-red b-red">Termodinámica del Panel</div>
+    <div class="def c-red b-red">
+      La eficiencia eléctrica es inversamente proporcional a la temperatura operativa. Factores físicos de las capas internas determinan cómo se disipa el calor absorbido.
+    </div>
+    <div class="item">
+      <div class="dot bg-red"></div>
+      <div><strong>Resistencia Térmica de Contacto:</strong> Variable críticamente ignorada. Las interfaces entre vidrio, EVA, células y tedlar actúan como barreras térmicas que atrapan el calor.</div>
+    </div>
+    <div class="item">
+      <div class="dot bg-red"></div>
+      <div><strong>Variables Clave:</strong> Capacidad calorífica, conductividad térmica e irradiancia incidente frente a velocidad del viento (refrigeración convectiva).</div>
+    </div>
+  </div>
+
+  <div class="block s2">
+    <div class="bh c-orange b-orange">Benchmarking FV: Casos Peruanos</div>
+    <div class="def c-orange b-orange">
+      Estudio de campo de módulos de 3.25 kWp distribuidos en distintas regiones para evaluar el Performance Ratio (PR) y el Costo Nivelado de Energía (LCOE) bajo microclimas reales.
+    </div>
+    <div class="three">
+      <div class="mini b-orange" style="border-top: 3px solid;">
+        <strong>Piura (Sede 3):</strong> Mayor irradiancia sostenida. Presentó el PR más alto y el LCOE más competitivo.
+      </div>
+      <div class="mini b-orange" style="border-top: 3px solid;">
+        <strong>Lima / UNALM (Sede 2):</strong> Alta nubosidad costera/neblina. Registró el rendimiento (PR) promedio más bajo anual.
+      </div>
+      <div class="mini b-orange" style="border-top: 3px solid;">
+        <strong>Brecha LCOE:</strong> El costo nivelado de la energía generada en la sede UNALM resultó ser un 78.5% más caro por kWh que en Piura.
+      </div>
+    </div>
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Explica, basándote en la meteorología local, por qué un sistema FV instalado en el campus de la UNALM en La Molina genera un LCOE significativamente mayor que un equipo idéntico en Piura.
+    </div>
+  </div>
+
+  <div class="sec-bar c-green b-green" style="border-left: 4px solid">
+    🔌 SECCIÓN 4: REGULACIÓN, NET METERING Y RECIBOS ELÉCTRICOS
+  </div>
+
+  <div class="block s2">
+    <div class="bh c-green b-green">Análisis Costo-Beneficio (Net Metering)</div>
+    <div class="def c-green b-green">
+      Esquema que permite a los usuarios residenciales o institucionales interconectar sus sistemas FV a la red pública, inyectando excedentes para "girar el medidor hacia atrás" o ganar créditos.
+    </div>
+    <div class="rx">
+      Periodo_Recuperación = (CAPEX + OPEX) / Ahorro_Anual_US$<br>
+      Ej. UNALM: Inversión $4,063 | Ahorro: $1,068/año | Payback: 4.3 años
+    </div>
+    <div class="item">
+      <div class="dot bg-green"></div>
+      <div><strong>Dinámica Estacional:</strong> El modelo financiero depende de cruzar la producción estacional FV (verano alto) frente a la demanda institucional del campus.</div>
+    </div>
+    <div class="warn">
+      ⚠️ <strong>ADVERTENCIA REGULATORIA:</strong> En Perú, el marco normativo para Generación Distribuida y Medición Neta requiere diseño de tarifas (Rate Design) preciso para que la empresa distribuidora no pierda ingresos fijos de mantenimiento de red.
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="bh c-gray b-gray">Facturación BT5B (Recibo)</div>
+    <div class="def c-gray b-gray">
+      Las tarifas reguladas (< 0.2 MW) como la BT5B residencial tienen cargos cruzados dictados por OSINERGMIN.
+    </div>
+    <div class="item">
+      <div class="dot bg-gray"></div>
+      <div><strong>FOSE:</strong> Fondo que aplica factores de reducción tarifaria a usuarios que consumen ≤ 100 kWh/mes.</div>
+    </div>
+    <div class="item">
+      <div class="dot bg-gray"></div>
+      <div><strong>FISE:</strong> Fondo de Inclusión Social Energético; subsidio cruzado cobrado en recibos altos para financiar balones de GLP a sectores vulnerables.</div>
+    </div>
+    <div class="exam">
+      <strong>🎯 EXAMEN:</strong> Diferencia el propósito social del cobro FOSE frente al cobro FISE en una factura residencial estándar en Lima Metropolitana.
+    </div>
+  </div>
+
+  <div class="block s3">
+    <div class="bh c-gray b-gray">📊 TABLA INTEGRADORA FINAL: DIAGNÓSTICO METEOROLÓGICO Y FOTOVOLTAICO</div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Región / Condición</th>
+          <th>Recurso Radiativo</th>
+          <th>T° Operativa del Módulo</th>
+          <th>Impacto en Curva I-V</th>
+          <th>Viabilidad LCOE / Net Metering</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Costa Norte (Piura)</strong></td>
+          <td>Muy Alto (Cielos despejados)</td>
+          <td>Alta (Disipación rápida si hay viento)</td>
+          <td>Caída leve de Voc, compensado por Isc alto</td>
+          <td>Excelente. LCOE muy competitivo, Payback menor a 4 años.</td>
+        </tr>
+        <tr>
+          <td><strong>Costa Central (Lima/UNALM)</strong></td>
+          <td>Moderado/Bajo (Cielo nuboso/estratos)</td>
+          <td>Media/Baja (Alta humedad)</td>
+          <td>Voc estable, pero Isc muy disminuida por falta de radiación</td>
+          <td>Moderada. LCOE 78% más alto. Requiere esquema Net Metering agresivo.</td>
+        </tr>
+        <tr>
+          <td><strong>Condición de Falla Térmica</strong></td>
+          <td>Alta Irradiancia directa</td>
+          <td>Extrema (Deficiente resistencia térmica de contacto)</td>
+          <td>Caída drástica del Voltaje de Circuito Abierto (Voc)</td>
+          <td>Pérdida financiera. El equipo envejece (degradación) sin producir Pmax.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warn" style="margin-top: 10px;">
+      ⚠️ <strong>DATO INTEGRADOR CLAVE:</strong> El diseño de un sistema fotovoltaico es un equilibrio termodinámico. Maximizar la insolación (captación de fotones) es inútil si el diseño estructural (capas, ventilación convectiva) no disipa el calor derivado, ya que la caída del Voc arruinará la conversión final y prolongará el Payback financiero.
+    </div>
+  </div>
+
+  <div id="quiz-section">
+    <div class="qz-head">
+      📝 QUIZ INTERACTIVO DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE<br>
+      <span style="font-size: 11px; font-weight: 400; color: #cbd5e1;">Demuestra tu dominio en física solar, meteorología FV y tarificación peruana.</span>
+    </div>
+    
+    <div class="stat-bar-wrap">
+      <div id="q-progress-fill" class="stat-bar-fill" style="width: 0%;"></div>
+    </div>
+    <div id="q-progress-text" style="font-size: 11px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 15px; text-align: right;">0 / 10 respondidas</div>
+
+    <div class="qcard">
+      <p class="qnum">Pregunta 1 / 10 • Conceptos Base</p>
+      <p class="qtext">¿Qué reacción nuclear ocurre fundamentalmente en el núcleo del sol, responsable de generar la energía electromagnética que nos llega a la Tierra?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) Combustión oxidativa de helio y oxígeno</button>
+        <button class="qbtn" data-q="1" data-correct="true">B) Fusión nuclear que convierte hidrógeno en helio</button>
+        <button class="qbtn" data-q="1" data-correct="false">C) Fisión de átomos pesados de uranio y carbono</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) Liberación directa de electrones de valencia</button>
+      </div>
+      <div class="qfeedback" data-exp="El Sol es un reactor nuclear joven donde, a 4x10⁷ K, los núcleos de hidrógeno se fusionan para crear helio, liberando inmensas cantidades de energía."></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qnum">Pregunta 2 / 10 • Aplicación Meteorológica</p>
+      <p class="qtext">Al analizar la curva I-V de un módulo fotovoltaico en operación de campo, ¿qué parámetro eléctrico se reduce drásticamente cuando la temperatura ambiental aumenta?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) La Corriente de Cortocircuito (Isc) cae a cero</button>
+        <button class="qbtn" data-q="2" data-correct="false">B) La Resistencia Térmica de contacto mejora su eficiencia</button>
+        <button class="qbtn" data-q="2" data-correct="true">C) El Voltaje de Circuito Abierto (Voc) disminuye</button>
+        <button class="qbtn" data-q="2" data-correct="false">D) Los pares electrón-hueco aumentan multiplicando la potencia</button>
+      </div>
+      <div class="qfeedback" data-exp="El voltaje (Voc) tiene un coeficiente de temperatura negativo (aprox -0.33%/°C). A mayor calor, menor voltaje y por tanto, menor potencia máxima entregada."></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qnum">Pregunta 3 / 10 • Geometría Solar</p>
+      <p class="qtext">En el diseño de sistemas solares, la desviación del punto solar medida en el plano horizontal desde el Norte Geográfico se denomina:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="true">A) Azimut Solar</button>
+        <button class="qbtn" data-q="3" data-correct="false">B) Ángulo Cenital</button>
+        <button class="qbtn" data-q="3" data-correct="false">C) Declinación Magnética</button>
+        <button class="qbtn" data-q="3" data-correct="false">D) Constante Solar Transversal</button>
+      </div>
+      <div class="qfeedback" data-exp="El Azimut marca la dirección en brújula (horizontal), mientras que el cenit o elevación marca la altura en el cielo. Ambos son vitales para ubicar los paneles."></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qnum">Pregunta 4 / 10 • Efecto Fotovoltaico</p>
+      <p class="qtext">Cuando un fotón con energía suficiente impacta un material semiconductor, transfiere energía a los electrones de valencia. La ausencia que deja el electrón al liberarse se conoce funcionalmente como:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="false">A) Un positrón estático</button>
+        <button class="qbtn" data-q="4" data-correct="true">B) Un hueco, que actúa como partícula de carga positiva</button>
+        <button class="qbtn" data-q="4" data-correct="false">C) Un defecto térmico irrecuperable</button>
+        <button class="qbtn" data-q="4" data-correct="false">D) Una barrera de potencial eléctrico</button>
+      </div>
+      <div class="qfeedback" data-exp="La física de semiconductores modela la corriente FV a través del flujo conjunto de 'electrones' libres (-) y 'huecos' (+) que se mueven en direcciones opuestas."></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qnum">Pregunta 5 / 10 • Contexto Perú (LCOE)</p>
+      <p class="qtext">Según el estudio de benchmarking comparativo de instalaciones de 3.25 kWp en Perú, ¿qué factor explica que el sistema instalado en la UNALM (Lima) tenga un LCOE 78.5% más caro que el de Piura?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) La UNALM utilizó inversores antiguos de muy baja eficiencia</button>
+        <button class="qbtn" data-q="5" data-correct="false">B) La falta de subvención estatal FISE para universidades</button>
+        <button class="qbtn" data-q="5" data-correct="false">C) La alta temperatura constante de Lima que destruyó los módulos</button>
+        <button class="qbtn" data-q="5" data-correct="true">D) El menor Performance Ratio (PR) debido a las condiciones de radiación nubosa típicas de Lima</button>
+      </div>
+      <div class="qfeedback" data-exp="Lima (La Molina) presenta nubosidad persistente y menor irradiancia acumulada respecto a Piura, lo que disminuye la energía generada en el año y encarece el costo nivelado de la energía (LCOE)."></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qnum">Pregunta 6 / 10 • Identificación de Error</p>
+      <p class="qtext">Respecto al análisis termodinámico y físico de los paneles, ¿qué parámetro estructural frecuentemente ignorado en modelos simples genera una perjudicial acumulación térmica entre las capas de EVA y el silicio?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="true">A) La Resistencia Térmica de Contacto en las interfaces</button>
+        <button class="qbtn" data-q="6" data-correct="false">B) La absorción infrarroja del marco de aluminio</button>
+        <button class="qbtn" data-q="6" data-correct="false">C) El efecto fotoeléctrico inverso durante la noche</button>
+        <button class="qbtn" data-q="6" data-correct="false">D) El exceso de densidad del vidrio templado frontal</button>
+      </div>
+      <div class="qfeedback" data-exp="El estudio de Aly et al. enfatiza que las interfaces entre distintas capas del módulo actúan como cuellos de botella térmicos (resistencia de contacto), aumentando la temperatura de la célula operante."></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qnum">Pregunta 7 / 10 • Economía Energética</p>
+      <p class="qtext">En el análisis de un campus universitario en Lima, la viabilidad financiera del modelo "Net Metering" radica principalmente en:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="false">A) Vender equipos solares a estudiantes de pregrado</button>
+        <button class="qbtn" data-q="7" data-correct="true">B) Inyectar la energía FV sobrante a la red distribuidora, generando ahorros en el costo de la electricidad demandada</button>
+        <button class="qbtn" data-q="7" data-correct="false">C) Desconectarse 100% de la red de Luz del Sur/Enel</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) Aumentar la tarifa BT5B intencionalmente para evadir impuestos</button>
+      </div>
+      <div class="qfeedback" data-exp="El Net Metering (Medición Neta) permite una relación bidireccional con la red pública, donde la inyección de excedentes solares descuenta el consumo total, permitiendo un retorno de inversión en aprox 4.3 años en este caso."></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qnum">Pregunta 8 / 10 • Regulación y Facturas</p>
+      <p class="qtext">Si analizamos un recibo de luz residencial peruano, ¿qué significa el cargo llamado FOSE y a quién beneficia?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="false">A) Fondo de Obras Sociales, que instala paneles solares gratuitos en zonas andinas</button>
+        <button class="qbtn" data-q="8" data-correct="false">B) Fondo Operativo de Subestaciones Eléctricas, que paga el mantenimiento de transformadores</button>
+        <button class="qbtn" data-q="8" data-correct="true">C) Es un sistema de reducción tarifaria para usuarios residenciales cuyos consumos son menores o iguales a 100 kWh/mes</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) Es un impuesto para penalizar el consumo de energía reactiva en viviendas pequeñas</button>
+      </div>
+      <div class="qfeedback" data-exp="El FOSE crea un subsidio cruzado de los usuarios de mayor consumo hacia los usuarios residenciales de muy bajo consumo (<100 kWh/mes) para aliviar su tarifa final."></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qnum">Pregunta 9 / 10 • Inclusión Energética</p>
+      <p class="qtext">Junto al FOSE, en el recibo de luz en Perú se incluye el aporte "FISE". El objetivo central de este fondo específico es:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="false">A) Promover masivamente el Net Metering en colegios</button>
+        <button class="qbtn" data-q="9" data-correct="true">B) Fomentar una compensación social para el acceso de balones de Gas Licuado de Petróleo (GLP) a sectores vulnerables</button>
+        <button class="qbtn" data-q="9" data-correct="false">C) Pagar directamente la electrificación en zonas rurales extremas</button>
+        <button class="qbtn" data-q="9" data-correct="false">D) Financiar el alumbrado de calles y avenidas principales</button>
+      </div>
+      <div class="qfeedback" data-exp="El FISE (Fondo de Inclusión Social Energético) es un recargo en el sector eléctrico nacional utilizado primariamente para entregar vales de descuento para GLP a hogares de bajos recursos."></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qnum">Pregunta 10 / 10 • Definición Analítica</p>
+      <p class="qtext">En el ecosistema eléctrico y fotovoltaico, ¿qué engloba el término "Tarifas Reguladas" bajo la supervisión de OSINERGMIN?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) Acuerdos de compra-venta de energía a grandes mineras que superan los 50 MW de potencia</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) Los precios variables según bolsa de valores de Nueva York aplicados a cualquier usuario final</button>
+        <button class="qbtn" data-q="10" data-correct="false">C) Las subvenciones estatales para importación de paneles solares chinos</button>
+        <button class="qbtn" data-q="10" data-correct="true">D) Los niveles de consumo con potencia contratada menor a 0.2 MW (como los residenciales), donde el Estado fija los precios fijos y activos</button>
+      </div>
+      <div class="qfeedback" data-exp="El mercado regulado protege a los usuarios pequeños (demanda < 0.2 MW). OSINERGMIN establece tarifas fijas estructuradas (ej. BT5B residencial), evitando abusos de monopolios de distribución local."></div>
+    </div>
+
+    <div id="quiz-results">
+      </div>
+  </div>
+
+  <div class="footer">
+    <div class="ft">REFERENCIAS DOCUMENTALES BASE:</div>
+    <div class="fc">
+      1. Aly, Ahzi & Barth (2019) <em>Effect of physical and environmental factors on PV performance.</em> | 
+      2. Camarena-Gamarra & Calle-Maravi <em>Assessment of Cost-Benefit Net Metering UNALM.</em> | 
+      3. Camarena-Gamarra et al. <em>Benchmarking Solar PV Peru.</em> | 
+      4. OSINERGMIN / PYEP - <em>Radiografía Energética / Cómo leer recibo de luz.</em> | 
+      5. CECADE <em>Energía solar FV & Radiación Solar.</em>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Variables globales del Quiz
+  window.quizScore = { answered: 0, correct: 0 };
+
+  document.getElementById('quiz-section').addEventListener('click', function(e) {
+    if (e.target.classList.contains('qbtn')) {
+      const btn = e.target;
+      const qNum = btn.getAttribute('data-q');
+      const isCorrect = btn.getAttribute('data-correct') === 'true';
+      const container = btn.closest('.qcard');
+      const buttons = container.querySelectorAll('.qbtn');
+      const feedback = container.querySelector('.qfeedback');
+      
+      // 1. Deshabilitar botones de esta pregunta
+      buttons.forEach(b => b.disabled = true);
+      
+      // 2. Lógica de Marcado y Corrección
+      if (isCorrect) {
+        btn.classList.add('correct');
+        btn.innerHTML = '✅ ' + btn.innerHTML;
+        feedback.classList.add('qfb-correct');
+        feedback.innerHTML = '✅ <strong>¡Correcto!</strong><br>' + feedback.getAttribute('data-exp');
+        window.quizScore.correct++;
+      } else {
+        btn.classList.add('incorrect');
+        btn.innerHTML = '❌ ' + btn.innerHTML;
+        feedback.classList.add('qfb-incorrect');
+        feedback.innerHTML = '❌ <strong>Respuesta Incorrecta.</strong><br>' + feedback.getAttribute('data-exp');
+        // Resaltar la respuesta obligatoria correcta
+        const correctBtn = container.querySelector('.qbtn[data-correct="true"]');
+        if (correctBtn) {
+          correctBtn.classList.add('correct');
+          correctBtn.innerHTML = '✅ ' + correctBtn.innerHTML;
+        }
+      }
+      
+      // 3. Mostrar el bloque feedback
+      feedback.style.display = 'block';
+      
+      // 4. Actualizar barra y contadores
+      window.quizScore.answered++;
+      const pct = (window.quizScore.answered * 10);
+      document.getElementById('q-progress-fill').style.width = pct + '%';
+      document.getElementById('q-progress-text').innerText = window.quizScore.answered + ' / 10 respondidas';
+      
+      // 5. Panel Final al terminar las 10
+      if (window.quizScore.answered === 10) {
+        const res = document.getElementById('quiz-results');
+        res.style.display = 'block';
+        let msg = '';
+        if (window.quizScore.correct <= 4) { 
+          res.className = 'res-bad'; 
+          msg = 'Necesitas repasar el material con mayor profundidad.'; 
+        } else if (window.quizScore.correct <= 7) { 
+          res.className = 'res-ok'; 
+          msg = '¡Buen avance, pero puedes consolidar los conceptos técnicos!'; 
+        } else { 
+          res.className = 'res-good'; 
+          msg = '¡Excelente dominio técnico y analítico del tema!'; 
+        }
+        res.innerHTML = '<h3 style="margin-top:0;font-family:\'Oswald\',sans-serif;font-size:22px;">Puntaje Final: ' + window.quizScore.correct + ' / 10</h3>' +
+                        '<p style="font-size:13px;margin-bottom:15px;">' + msg + '</p>' +
+                        '<button id="btn-restart">🔄 Reiniciar Quiz</button>';
+      }
+    }
+    
+    // Lógica para reiniciar el Quiz
+    if (e.target.id === 'btn-restart') {
+      window.quizScore = { answered: 0, correct: 0 };
+      
+      // Resetear Botones
+      document.querySelectorAll('.qbtn').forEach(b => {
+        b.disabled = false;
+        b.className = 'qbtn';
+        b.innerHTML = b.innerHTML.replace('✅ ', '').replace('❌ ', '');
+      });
+      
+      // Ocultar feedbacks
+      document.querySelectorAll('.qfeedback').forEach(f => {
+        f.style.display = 'none';
+        f.className = 'qfeedback';
+      });
+      
+      // Resetear panel y barra
+      document.getElementById('quiz-results').style.display = 'none';
+      document.getElementById('q-progress-fill').style.width = '0%';
+      document.getElementById('q-progress-text').innerText = '0 / 10 respondidas';
+      
+      // Hacer un pequeño scroll hacia arriba
+      document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>

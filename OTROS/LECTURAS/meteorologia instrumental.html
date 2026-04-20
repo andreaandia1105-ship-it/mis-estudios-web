@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSD-PR-02 · Canvas de instrumentación meteorológica</title>
+  <!-- Fuentes requeridas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--color-background-tertiary, #f5f7fc);
+      font-family: 'Source Sans 3', sans-serif;
+      line-height: 1.4;
+      padding: 20px;
+    }
+    :root {
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f8fafc;
+      --color-background-tertiary: #eef2f6;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #334155;
+      --color-border-tertiary: #cbd5e1;
+      --color-border-secondary: #94a3b8;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-background-primary: #0b1120;
+        --color-background-secondary: #1e293b;
+        --color-background-tertiary: #0a0f1c;
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #cbd5e1;
+        --color-border-tertiary: #334155;
+        --color-border-secondary: #475569;
+      }
+    }
+    .cv {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 9px;
+      padding: 12px;
+      background: var(--color-background-tertiary);
+      border-radius: 20px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    /* Bloques base */
+    .block {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 11px;
+      padding: 12px 13px;
+      color: var(--color-text-primary);
+    }
+    .block.s2 { grid-column: span 2; }
+    .block.s3 { grid-column: span 3; }
+    
+    /* Barra de título */
+    .title-bar {
+      grid-column: 1 / -1;
+      background: #0f1e3a;
+      color: white;
+      border-radius: 12px;
+      padding: 14px 20px;
+    }
+    .title-bar h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .title-bar .sub {
+      font-size: 11px;
+      opacity: 0.9;
+      margin-top: 4px;
+    }
+    .pills { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .pill {
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 20px;
+      background: #1e3a5f;
+      color: #bdd3ff;
+      display: inline-block;
+    }
+
+    /* Barra de sección */
+    .section-bar {
+      grid-column: 1 / -1;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 12px;
+      background: var(--color-background-primary);
+      border-left: 5px solid;
+      border-radius: 8px 0 8px 0;
+      margin-top: 5px;
+      color: var(--color-text-primary);
+      border-color: #2563eb;
+    }
+
+    .bh {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    /* definición */
+    .def {
+      border-left: 3px solid #2563eb;
+      padding: 7px 10px;
+      border-radius: 0 7px 7px 0;
+      font-size: 12px;
+      background: var(--color-background-secondary);
+      margin-bottom: 8px;
+    }
+    .item {
+      display: flex;
+      gap: 7px;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #2563eb;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+    .rx {
+      background: #0f172a;
+      color: #7dd3fc;
+      font-family: 'Source Sans 3', monospace;
+      font-size: 11px;
+      padding: 7px 11px;
+      border-radius: 7px;
+      text-align: center;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+    .warn {
+      background: #fff7ed;
+      border-left: 3px solid #f97316;
+      border-radius: 0 8px 8px 0;
+      font-size: 11.5px;
+      color: #7c2d12;
+      padding: 8px 10px;
+      margin: 8px 0;
+    }
+    .exam {
+      background: #fefce8;
+      border: 1px solid #facc15;
+      border-radius: 8px;
+      font-size: 11.5px;
+      color: #713f12;
+      padding: 9px 11px;
+      margin-top: 10px;
+    }
+    .mini {
+      background: var(--color-background-secondary);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 11.5px;
+      border-left: 3px solid;
+    }
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      margin: 5px 0;
+    }
+    .three {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 7px;
+    }
+    .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 10px 0;
+    }
+    .fbox {
+      background: var(--color-background-secondary);
+      padding: 5px 10px;
+      border-radius: 30px;
+      font-size: 11px;
+      border: 0.5px solid var(--color-border-tertiary);
+    }
+    .farrow {
+      color: var(--color-text-secondary);
+      font-size: 15px;
+      font-weight: 300;
+    }
+    .num-badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;
+    }
+    .nb-b { background: #dbeafe; color: #1e3a8a; }
+    .nb-g { background: #dcfce7; color: #14532d; }
+    .nb-r { background: #fee2e2; color: #991b1b; }
+    
+    .stat-bar-wrap {
+      width: 100%;
+      background: var(--color-background-secondary);
+      border-radius: 20px;
+      height: 11px;
+      margin: 8px 0;
+    }
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 20px;
+      background: #16a34a;
+      width: 0%;
+    }
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    .tbl th {
+      background: var(--color-background-secondary);
+      padding: 5px 7px;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      text-align: left;
+    }
+    .tbl td {
+      padding: 5px 7px;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      vertical-align: top;
+    }
+    .divh {
+      border: none;
+      border-top: 0.5px solid var(--color-border-tertiary);
+      margin: 7px 0;
+    }
+    .footer-bar {
+      grid-column: 1 / -1;
+      background: #0f1e3a;
+      color: white;
+      border-radius: 10px;
+      padding: 11px 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .ft {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      color: #7dd3fc;
+      font-weight: 500;
+    }
+    .fc {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    /* QUIZ */
+    #quiz-section {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .quiz-header {
+      background: #0f1e3a;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    .quiz-header h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+    }
+    .quiz-sub {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+    .qcard {
+      margin-bottom: 18px;
+      border-bottom: 0.5px dashed var(--color-border-tertiary);
+      padding-bottom: 12px;
+    }
+    .qnum {
+      font-weight: 600;
+      font-size: 11px;
+      color: var(--color-text-secondary);
+    }
+    .qtext {
+      font-weight: 600;
+      margin: 5px 0 8px;
+      font-size: 13px;
+    }
+    .qopts {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .qbtn {
+      background: var(--color-background-secondary);
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      text-align: left;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+      font-family: 'Source Sans 3', sans-serif;
+      color: var(--color-text-primary);
+    }
+    .qbtn:hover { background: var(--color-background-primary); }
+    .qbtn.correct-option {
+      background: #dcfce7;
+      border-color: #16a34a;
+      color: #14532d;
+    }
+    .qbtn.wrong-option {
+      background: #fee2e2;
+      border-color: #dc2626;
+      color: #991b1b;
+    }
+    .qbtn:disabled {
+      opacity: 0.8;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .qfeedback {
+      border-radius: 0 8px 8px 0;
+      padding: 8px 11px;
+      font-size: 11.5px;
+      margin-top: 8px;
+    }
+    .fb-correct {
+      background: #f0fdf4;
+      border-left: 3px solid #16a34a;
+    }
+    .fb-incorrect {
+      background: #fef2f2;
+      border-left: 3px solid #dc2626;
+    }
+    .score-panel {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .reset-btn {
+      background: #0f1e3a;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="cv">
+
+<!-- TITLE BAR -->
+<div class="title-bar">
+  <h1>⚙️ MANUAL DE INSTRUMENTACIÓN METEOROLÓGICA · MSD-PR-02</h1>
+  <div class="sub">NCHM · Curso: Meteorología Instrumental · Docente: TSRD Division · Ciclo 2025</div>
+  <div class="pills">
+    <span class="pill">📍 Siting WMO</span>
+    <span class="pill">📡 AWS hardware</span>
+    <span class="pill">🌡️ Temperatura / Viento</span>
+    <span class="pill">📏 Calibración</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1 : INTRODUCCIÓN Y CARACTERÍSTICAS -->
+<div class="section-bar" style="border-left-color: #2563eb;">📘 1 · FUNDAMENTOS Y CARACTERÍSTICAS DE INSTRUMENTOS</div>
+
+<div class="block">
+  <div class="bh" style="background: #dbeafe; color: #1e3a8a;">🔵 MSD-PR-02 · antecedentes</div>
+  <div class="def">La red meteorológica nacional de Bután incluye 20 estaciones Clase A, 62 Clase C y 85 AWS. La observación precisa es crítica para agricultura, aviación y reducción de desastres.</div>
+  <div class="item"><span class="dot"></span><strong>Objetivo del manual:</strong> guiar instalación, operación y mantenimiento de instrumentos siguiendo estándares WMO e ISO.</div>
+  <div class="item"><span class="dot"></span><strong>Clasificación NCHM:</strong> AWS (automáticas), Agrometeorológicas (Clase A, lecturas 09/15 h), Climatológicas (Clase C, Tmax/Tmin, precipitación).</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué las estaciones Clase C son fundamentales para el análisis climático a largo plazo y qué parámetros adicionales se miden en estaciones de alta montaña según el manual.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background: #fef9c3; color: #713f12;">🟡 Características deseables</div>
+  <div class="item"><span class="dot"></span><strong>Incertidumbre conocida:</strong> más importante que precisión inicial alta.</div>
+  <div class="item"><span class="dot"></span><strong>Confiabilidad, estabilidad, robustez, facilidad de calibración.</strong></div>
+  <div class="mini" style="border-left-color: #eab308;">Las correcciones deben permanecer con el instrumento en campo.</div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que un instrumento de alta precisión de fábrica mantiene esa incertidumbre sin recalibración periódica.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background: #ede9fe; color: #4c1d95;">🟣 Propiedades metrológicas (JCGM)</div>
+  <div class="two">
+    <div class="mini" style="border-left-color: #8b5cf6;"><strong>Sensibilidad:</strong> Δ indicación / Δ medida.</div>
+    <div class="mini" style="border-left-color: #8b5cf6;"><strong>Resolución:</strong> cambio mínimo perceptible.</div>
+    <div class="mini" style="border-left-color: #8b5cf6;"><strong>Histéresis / Deriva:</strong> dependencia de estímulos previos.</div>
+    <div class="mini" style="border-left-color: #8b5cf6;"><strong>Tiempo de respuesta:</strong> lag error.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Un termómetro muestra histéresis. ¿Cómo afecta esto a las lecturas en un ciclo diurno? Proponga un procedimiento para mitigar el error.</div>
+</div>
+
+<!-- SECCIÓN 2 : SITING Y EXPOSICIÓN -->
+<div class="section-bar" style="border-left-color: #15803d;">🌿 2 · SELECCIÓN DEL SITIO Y COORDENADAS (WMO-No.8)</div>
+
+<div class="block s2">
+  <div class="bh" style="background: #dcfce7; color: #14532d;">🟢 Enclosure y distancias mínimas</div>
+  <div class="def">Área ideal: 25 m × 25 m con pasto corto. Mínimo 10 m × 7 m si hay pocos sensores. La figura 1.1 muestra disposición en hemisferio norte.</div>
+  <div class="flow">
+    <span class="fbox">🌲 Obstáculo</span><span class="farrow">→</span><span class="fbox">distancia ≥ 2× altura (pluviómetro)</span><span class="farrow">→</span><span class="fbox">ideal 4× altura</span>
+  </div>
+  <div class="item"><span class="dot"></span>Evitar pendientes >19°, hondonadas. El sitio para viento puede ser distinto al recinto de temperatura.</div>
+  <div class="warn">⚠️ En sitios muy abiertos la captación de lluvia disminuye por viento; se necesita abrigo o pantalla.</div>
+</div>
+<div class="block">
+  <div class="bh" style="background: #ccfbf1; color: #134e4a;">🩵 Coordenadas WGS-84</div>
+  <div class="item"><span class="dot"></span>Lat/Lon en °, ', '' ; elevación (m) con 2 decimales.</div>
+  <div class="item"><span class="dot"></span>Elevación de la estación = suelo bajo pluviómetro o abrigo termométrico.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué es necesario especificar por separado la elevación del barómetro si la estación reporta presión?</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background: #ffedd5; color: #7c2d12;">🟠 Homogeneidad y comparación</div>
+  <div class="def">Antes de retirar un instrumento antiguo, comparar en paralelo al menos un año (WMO, 2011).</div>
+  <div class="item"><span class="dot"></span>Documentar metadatos: cambios de sitio, crecimiento de árboles, nuevas construcciones.</div>
+</div>
+
+<!-- SECCIÓN 3 : CRITERIOS DE EMPLAZAMIENTO POR VARIABLE -->
+<div class="section-bar" style="border-left-color: #b45309;">📏 3 · SITING ESPECÍFICO: TEMPERATURA, PRECIPITACIÓN, VIENTO, RADIACIÓN</div>
+
+<div class="block">
+  <div class="bh" style="background: #dbeafe; color: #1e3a8a;">🌡️ Temperatura y humedad</div>
+  <div class="def">Altura del sensor: 1.25–2 m (nunca <1.25 m). Gradiente pequeño por encima de 1.5 m (<0.2 °C).</div>
+  <div class="item"><span class="dot"></span><strong>Distancia a fuentes de calor/agua:</strong> >100 m si ocupan >10% del área en radio 100 m.</div>
+  <div class="item"><span class="dot"></span>Sin sombra proyectada cuando sol >5° de elevación.</div>
+  <div class="mini" style="border-left-color: #3b82f6;">Césped natural <10 cm.</div>
+  <div class="exam">🎯 EXAMEN: En una estación urbana, ¿cómo justificaría una desviación de los 100 m de distancia a edificios? Mencione un método de corrección.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background: #ccfbf1; color: #134e4a;">☔ Precipitación</div>
+  <div class="def">El viento es la mayor perturbación. Sitio ideal: claro en bosque con obstáculos uniformes (ángulo 14°–26°).</div>
+  <div class="rx">distancia = (2 a 4) × altura del obstáculo</div>
+  <div class="warn">⚠️ En nieve, la turbulencia por obstáculos no uniformes distorsiona más la captura.</div>
+  <div class="exam">🎯 EXAMEN: Describa cómo afecta la falta de uniformidad de los obstáculos a la medición de precipitación sólida y proponga una solución de diseño.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background: #fef9c3; color: #713f12;">💨 Viento superficial</div>
+  <div class="def">Referencia WMO: 10 m sobre terreno con longitud de rugosidad 0.03 m.</div>
+  <div class="flow"><span class="fbox">Anemómetro a 10 m</span><span class="farrow">→</span><span class="fbox">distancia ≥ 10× altura obstáculo</span></div>
+  <div class="item"><span class="dot"></span>Si hay muchos obstáculos >2 m, elevar sensor a 10 m sobre altura media de obstáculos.</div>
+  <div class="mini" style="border-left-color: #eab308;">Obstáculo delgado >8 m: distancia ≥15× ancho.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background: #fce7f3; color: #831843;">☀️ Radiación global</div>
+  <div class="def">Sin sombra para sol >5° (latitudes <60°). Obstáculos reflectantes (albedo >0.5) con ángulo >5° y ancho >10° prohibidos.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué se excluyen los obstáculos no reflectantes bajo el horizonte visible?</div>
+</div>
+
+<!-- SECCIÓN 4 : AWS HARDWARE -->
+<div class="section-bar" style="border-left-color: #7e22ce;">🖥️ 4 · ARQUITECTURA DE ESTACIÓN AUTOMÁTICA (AWS)</div>
+
+<div class="block s2">
+  <div class="bh" style="background: #ede9fe; color: #4c1d95;">🧠 CPU y adquisición</div>
+  <div class="def">CPU: adquisición, procesamiento, almacenamiento y transmisión. Reloj en tiempo real (batería) con estabilidad <1 s/día; sincronización GPS/NTP.</div>
+  <div class="two">
+    <div class="mini" style="border-left-color: #a855f7;"><strong>Interfaces:</strong> canales analógicos/digitales, acondicionamiento de señal.</div>
+    <div class="mini" style="border-left-color: #a855f7;"><strong>Cables blindados, par trenzado.</strong> Protección contra sobretensiones (rayos).</div>
+  </div>
+  <div class="flow"><span class="fbox">Sensor</span><span class="farrow">→</span><span class="fbox">Acondicionador</span><span class="farrow">→</span><span class="fbox">ADC</span><span class="farrow">→</span><span class="fbox">CPU</span></div>
+</div>
+<div class="block">
+  <div class="bh" style="background: #ffedd5; color: #7c2d12;">🔋 Alimentación</div>
+  <div class="def">12 V CC (baterías), flotadas con red o panel solar. Monitorizar voltaje y corriente de carga.</div>
+  <div class="item"><span class="dot"></span>La capacidad debe soportar interrupciones de red según autonomía deseada.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background: #fef9c3; color: #713f12;">📦 Enclosure y estructura</div>
+  <div class="def">Caja protectora: ventilada con rejillas antiinsectos o sellada con sales higroscópicas. Material anticorrosión.</div>
+  <div class="item"><span class="dot"></span>Puesta a tierra equipotencial; electrodo local.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué se recomienda que la caja metálica tenga una conexión a tierra de baja impedancia?</div>
+</div>
+
+<div class="block s3">
+  <div class="bh" style="background: #dbeafe; color: #1e3a8a;">📋 Inspección y mantenimiento (resumen)</div>
+  <div class="three">
+    <div class="mini" style="border-left-color: #2563eb;"><span class="num-badge nb-b">1</span> Inspección cada 2 años en estaciones sinópticas.</div>
+    <div class="mini" style="border-left-color: #2563eb;"><span class="num-badge nb-b">2</span> Verificar exposición, calibración, competencia del observador.</div>
+    <div class="mini" style="border-left-color: #2563eb;"><span class="num-badge nb-b">3</span> Mantenimiento preventivo: corte de pasto, limpieza de sensores.</div>
+  </div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="block s3">
+  <div class="bh" style="background: #f1f5f9; color: #334155;">📊 TABLA INTEGRADORA · CRITERIOS WMO PARA SENSORES</div>
+  <table class="tbl">
+    <thead><tr><th>Variable</th><th>Altura / distancia</th><th>Obstáculos</th><th>Observación clave</th></tr></thead>
+    <tbody>
+      <tr><td>Temperatura</td><td>1.25–2 m</td><td>>100 m de fuentes calor/agua</td><td>Sin sombra sol >5°</td></tr>
+      <tr><td>Precipitación</td><td>~1 m (boca)</td><td>2–4 × altura del obstáculo</td><td>Protección contra viento</td></tr>
+      <tr><td>Viento</td><td>10 m (std)</td><td>≥10× altura obstáculo</td><td>Rugosidad 0.03 m</td></tr>
+      <tr><td>Radiación</td><td>—</td><td>Sin reflejos >5°</td><td>Albedo >0.5 prohibido</td></tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top: 10px;">💡 DATO INTEGRADOR: La uniformidad del horizonte (ángulo 14°–26°) para precipitación es el requisito más restrictivo y a menudo incompatible con viento.</div>
+</div>
+
+<!-- SECCIÓN QUIZ INTERACTIVO -->
+<div class="block s3" id="quiz-section">
+  <div class="quiz-header">
+    <h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3>
+    <div class="quiz-sub">Marca tu respuesta y descubre si es correcta · Progreso: <span id="progress-text">0/10</span></div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="quiz-progress-bar" style="width:0%"></div></div>
+  </div>
+  <div id="quiz-container"></div>
+  <div id="score-panel" class="score-panel" style="display:none;"></div>
+  <button class="reset-btn" id="reset-quiz">🔄 Reiniciar Quiz</button>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-bar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">WMO-No.8 (2018, 2021) · WMO-No.49 · CIMO Guide · NCHM MSD-PR-02 v01 Jul 2025 · WGS-84</span>
+</div>
+
+</div>
+
+<script>
+(function(){
+  const quizData = [
+    { q: "¿Cuál es la altura recomendada para sensores de temperatura/humedad según WMO?",
+      opts: ["A) 0.5 – 1.0 m", "B) 1.25 – 2.0 m", "C) 2.5 – 3.0 m", "D) 5 m"],
+      correct: 1, // B
+      fb: "✅ Correcto: El rango es 1.25–2 m (nunca menor a 1.25 m). La diferencia entre 1.5 y 2 m es menor a 0.2 °C." },
+    { q: "Para un pluviómetro sin pantalla, la distancia a un obstáculo debe ser al menos:",
+      opts: ["A) igual a su altura", "B) 2 veces su altura", "C) 4 veces su altura", "D) 10 veces su altura"],
+      correct: 1, // B (2x mínimo, 4x preferible)
+      fb: "✅ Correcto: Distancia mínima = 2× altura del obstáculo; se recomienda 4×." },
+    { q: "¿Cuál es la referencia WMO para viento superficial en terreno abierto?",
+      opts: ["A) 5 m, rugosidad 0.01 m", "B) 10 m, rugosidad 0.03 m", "C) 15 m, rugosidad 0.1 m", "D) 2 m, rugosidad 0.5 m"],
+      correct: 1, // B
+      fb: "✅ Correcto: 10 m sobre el suelo con longitud de rugosidad de 0.03 m." },
+    { q: "¿Qué propiedad describe 'la mayor variación en la entrada que no produce cambio detectable en la salida'?",
+      opts: ["A) Resolución", "B) Umbral de discriminación", "C) Sensibilidad", "D) Histéresis"],
+      correct: 1, // B
+      fb: "✅ Correcto: Umbral de discriminación (discrimination threshold)." },
+    { q: "En una AWS, ¿qué elemento debe sincronizarse con GPS o NTP?",
+      opts: ["A) Módem", "B) Reloj de tiempo real", "C) Batería", "D) Panel solar"],
+      correct: 1, // B
+      fb: "✅ Correcto: El reloj en tiempo real (RTC) debe tener estabilidad <1 s/día y sincronizarse." },
+    { q: "¿Cuál es el error común sobre instrumentos meteorológicos?",
+      opts: ["A) La alta precisión inicial se mantiene siempre", "B) Necesitan calibración periódica", "C) Deben ser robustos", "D) La incertidumbre debe ser conocida"],
+      correct: 0, // A
+      fb: "✅ Correcto: Es un error pensar que la precisión de fábrica se conserva sin recalibración." },
+    { q: "¿Qué área mínima se recomienda para una estación con pocos sensores?",
+      opts: ["A) 50 m × 50 m", "B) 10 m × 7 m", "C) 5 m × 5 m", "D) 20 m × 20 m"],
+      correct: 1, // B
+      fb: "✅ Correcto: 10 m × 7 m es suficiente para instalaciones reducidas." },
+    { q: "¿Cuál es el principal factor de error en medición de precipitación?",
+      opts: ["A) Temperatura", "B) Viento", "C) Humedad", "D) Radiación solar"],
+      correct: 1, // B
+      fb: "✅ Correcto: El viento es la mayor fuente de error en pluviómetros." },
+    { q: "¿Cada cuánto tiempo deben inspeccionarse las estaciones sinópticas?",
+      opts: ["A) Cada 6 meses", "B) Cada año", "C) Cada 2 años", "D) Cada 5 años"],
+      correct: 2, // C
+      fb: "✅ Correcto: Inspección no menos de una vez cada dos años." },
+    { q: "En una AWS, ¿qué función NO corresponde a la CPU?",
+      opts: ["A) Adquisición de datos", "B) Procesamiento de algoritmos", "C) Generación de energía solar", "D) Almacenamiento temporal"],
+      correct: 2, // C
+      fb: "✅ Correcto: La generación de energía es externa (panel solar, batería)." }
+  ];
+
+  let userAnswers = new Array(10).fill(null);
+  let answeredCount = 0;
+  let correctCount = 0;
+  const container = document.getElementById('quiz-container');
+  const progressSpan = document.getElementById('progress-text');
+  const progressBar = document.getElementById('quiz-progress-bar');
+  const scorePanel = document.getElementById('score-panel');
+
+  function renderQuiz() {
+    let html = '';
+    quizData.forEach((item, idx) => {
+      const qnum = idx+1;
+      const disabled = userAnswers[idx] !== null ? 'disabled' : '';
+      let optsHtml = '';
+      const letters = ['A', 'B', 'C', 'D'];
+      item.opts.forEach((opt, optIdx) => {
+        let btnClass = 'qbtn';
+        if (userAnswers[idx] !== null) {
+          if (optIdx === item.correct) btnClass += ' correct-option';
+          else if (userAnswers[idx] === optIdx) btnClass += ' wrong-option';
+        }
+        optsHtml += `<button class="${btnClass}" data-q="${idx}" data-opt="${optIdx}" data-correct="${optIdx === item.correct}" ${disabled}>${opt}</button>`;
+      });
+      let fbHtml = '';
+      if (userAnswers[idx] !== null) {
+        const isCorrect = (userAnswers[idx] === item.correct);
+        const fbClass = isCorrect ? 'fb-correct' : 'fb-incorrect';
+        const correctLetter = letters[item.correct];
+        const msg = isCorrect ? `✅ ¡Correcto! ${item.fb}` : `❌ Incorrecto. La respuesta correcta es ${correctLetter}. ${item.fb}`;
+        fbHtml = `<div class="qfeedback ${fbClass}" id="fb${idx}">${msg}</div>`;
+      } else {
+        fbHtml = `<div class="qfeedback" id="fb${idx}" style="display:none;"></div>`;
+      }
+      html += `<div class="qcard" id="q${idx}">
+        <p class="qnum">Pregunta ${qnum} / 10</p>
+        <p class="qtext">${item.q}</p>
+        <div class="qopts">${optsHtml}</div>
+        ${fbHtml}
+      </div>`;
+    });
+    container.innerHTML = html;
+    updateProgress();
+  }
+
+  function updateProgress() {
+    progressSpan.textContent = `${answeredCount}/10`;
+    const percent = (answeredCount/10)*100;
+    progressBar.style.width = percent+'%';
+    if (answeredCount === 10) {
+      showFinalScore();
+    }
+  }
+
+  function showFinalScore() {
+    let message = '';
+    let bg = '';
+    if (correctCount <= 4) { bg = '#fee2e2'; message = 'Necesitas repasar el material.'; }
+    else if (correctCount <=7) { bg = '#fef9c3'; message = '¡Buen avance, sigue repasando!'; }
+    else { bg = '#dcfce7'; message = '¡Excelente dominio del tema!'; }
+    scorePanel.style.display = 'block';
+    scorePanel.style.background = bg;
+    scorePanel.innerHTML = `<strong>${correctCount} / 10 correctas</strong><br>${message}`;
+  }
+
+  function handleAnswer(qIdx, optIdx, isCorrect) {
+    if (userAnswers[qIdx] !== null) return;
+    const correctAnswerIndex = quizData[qIdx].correct;
+    userAnswers[qIdx] = optIdx;
+    answeredCount++;
+    if (isCorrect) correctCount++;
+    
+    // re-render solo esa pregunta para actualizar botones
+    const qCard = document.getElementById(`q${qIdx}`);
+    const letters = ['A','B','C','D'];
+    const item = quizData[qIdx];
+    const btns = qCard.querySelectorAll('.qbtn');
+    btns.forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === item.correct) btn.classList.add('correct-option');
+      else if (i === optIdx && i !== item.correct) btn.classList.add('wrong-option');
+    });
+    const fbDiv = qCard.querySelector('.qfeedback');
+    const isUserCorrect = (optIdx === item.correct);
+    fbDiv.className = `qfeedback ${isUserCorrect ? 'fb-correct' : 'fb-incorrect'}`;
+    const correctLetter = letters[item.correct];
+    fbDiv.innerHTML = isUserCorrect ? `✅ ¡Correcto! ${item.fb}` : `❌ Incorrecto. La respuesta correcta es ${correctLetter}. ${item.fb}`;
+    fbDiv.style.display = 'block';
+    
+    updateProgress();
+  }
+
+  container.addEventListener('click', (e) => {
+    const btn = e.target.closest('.qbtn');
+    if (!btn) return;
+    if (btn.disabled) return;
+    const q = parseInt(btn.dataset.q);
+    const opt = parseInt(btn.dataset.opt);
+    const correct = btn.dataset.correct === 'true';
+    handleAnswer(q, opt, correct);
+  });
+
+  document.getElementById('reset-quiz').addEventListener('click', () => {
+    userAnswers = new Array(10).fill(null);
+    answeredCount = 0;
+    correctCount = 0;
+    scorePanel.style.display = 'none';
+    renderQuiz();
+  });
+
+  renderQuiz();
+})();
+</script>
+
+</body>
+</html>

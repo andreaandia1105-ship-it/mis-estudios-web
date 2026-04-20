@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Canvas Climatología Sinóptica de Sudamérica | SENAMHI</title>
+    <!-- Fuentes y sistema base -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: var(--color-background-secondary);
+            font-family: 'Source Sans 3', sans-serif;
+            padding: 20px;
+        }
+        /* Variables del sistema Claude + adaptación modo oscuro */
+        :root {
+            --color-background-primary: #ffffff;
+            --color-background-secondary: #f8fafc;
+            --color-background-tertiary: #f1f5f9;
+            --color-text-primary: #0f172a;
+            --color-text-secondary: #334155;
+            --color-border-tertiary: #e2e8f0;
+            --color-border-secondary: #cbd5e1;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background-primary: #0f172a;
+                --color-background-secondary: #1e293b;
+                --color-background-tertiary: #0f172a;
+                --color-text-primary: #f1f5f9;
+                --color-text-secondary: #cbd5e6;
+                --color-border-tertiary: #334155;
+                --color-border-secondary: #475569;
+            }
+        }
+        /* WIDGET PRINCIPAL */
+        .cv {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 9px;
+            padding: 12px;
+            background: var(--color-background-tertiary);
+            border-radius: 20px;
+        }
+        /* BARRA TÍTULO */
+        .title-bar, .section-bar, .footer, .quiz-container {
+            grid-column: 1 / -1;
+        }
+        .title-bar {
+            background: #0f1e3a;
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title-left h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+        .title-left p {
+            font-size: 11px;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .pill {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 40px;
+            font-size: 11px;
+            font-weight: 500;
+            font-family: 'Oswald', sans-serif;
+        }
+        /* BARRAS DE SECCIÓN */
+        .section-bar {
+            background: #1e2b4f;
+            border-radius: 30px;
+            padding: 8px 16px;
+            margin-top: 6px;
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        /* BLOQUES */
+        .block {
+            background: var(--color-background-primary);
+            border: 0.5px solid var(--color-border-tertiary);
+            border-radius: 11px;
+            padding: 12px 13px;
+            transition: all 0.1s;
+        }
+        .block.s2 { grid-column: span 2; }
+        .block.s3 { grid-column: span 3; }
+        /* Encabezado bloque */
+        .bh {
+            font-family: 'Oswald', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 3px 9px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        /* definiciones */
+        .def {
+            border-left: 3px solid;
+            padding: 7px 10px;
+            border-radius: 0 7px 7px 0;
+            font-size: 12px;
+            background: var(--color-background-secondary);
+            margin-bottom: 12px;
+        }
+        .item {
+            display: flex;
+            gap: 7px;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+        .rx {
+            background: #0f172a;
+            color: #7dd3fc;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 7px 11px;
+            border-radius: 7px;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .warn {
+            background: #fff7ed;
+            border-left: 3px solid #f97316;
+            border-radius: 0 8px 8px 0;
+            font-size: 11.5px;
+            padding: 8px 10px;
+            margin: 10px 0;
+            color: #7c2d12;
+        }
+        .exam {
+            background: #fefce8;
+            border: 1px solid #facc15;
+            border-radius: 8px;
+            font-size: 11.5px;
+            color: #713f12;
+            padding: 8px 12px;
+            margin-top: 12px;
+        }
+        .mini {
+            background: var(--color-background-secondary);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 11.5px;
+            margin-bottom: 8px;
+        }
+        .two, .three {
+            display: grid;
+            gap: 7px;
+        }
+        .two { grid-template-columns: 1fr 1fr; }
+        .three { grid-template-columns: 1fr 1fr 1fr; }
+        .flow {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 8px 0;
+        }
+        .fbox {
+            background: var(--color-background-secondary);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+        }
+        .farrow {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+        }
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        .tbl th, .tbl td {
+            padding: 5px 7px;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+            text-align: left;
+            vertical-align: top;
+        }
+        .tbl th {
+            background: var(--color-background-secondary);
+            font-weight: 600;
+        }
+        .footer {
+            background: #0f1e3a;
+            border-radius: 10px;
+            padding: 11px 18px;
+            color: white;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 11px;
+        }
+        .ft { font-family: 'Oswald', sans-serif; color: #7dd3fc; font-weight: 600; margin-right: 5px; }
+        .fc { color: #94a3b8; }
+        /* QUIZ */
+        .quiz-container {
+            background: var(--color-background-primary);
+            border: 0.5px solid var(--color-border-tertiary);
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+        .quiz-header {
+            background: #0f1e3a;
+            border-radius: 12px;
+            padding: 12px 18px;
+            color: white;
+            margin-bottom: 18px;
+        }
+        .progress-wrap {
+            margin: 12px 0 10px;
+        }
+        .stat-bar-wrap {
+            background: var(--color-background-secondary);
+            border-radius: 20px;
+            height: 8px;
+            width: 100%;
+        }
+        .stat-bar-fill {
+            background: #10b981;
+            width: 0%;
+            height: 8px;
+            border-radius: 20px;
+        }
+        .qcard {
+            margin-bottom: 20px;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+            padding-bottom: 12px;
+        }
+        .qnum {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+        }
+        .qtext {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .qbtn {
+            background: var(--color-background-secondary);
+            border: 1px solid var(--color-border-tertiary);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            text-align: left;
+            width: 100%;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            color: var(--color-text-primary);
+        }
+        .qbtn.correct-highlight {
+            background: #dcfce7;
+            border-color: #16a34a;
+            color: #14532d;
+        }
+        .qbtn.incorrect-highlight {
+            background: #fee2e2;
+            border-color: #dc2626;
+            color: #991b1b;
+        }
+        .qbtn.disabled-btn {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .qfeedback {
+            border-radius: 0 8px 8px 0;
+            padding: 8px 11px;
+            font-size: 11.5px;
+            margin-top: 8px;
+        }
+        .results-panel {
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .reset-btn {
+            background: #0f1e3a;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="cv" id="canvasMaster">
+
+    <!-- BARRA TITULO -->
+    <div class="title-bar">
+        <div class="title-left">
+            <h1>🌎 CLIMATOLOGÍA SINÓPTICA DE SUDAMÉRICA</h1>
+            <p>Módulo 1 — SENAMHI / SRG-NOAA | Prof. Nelson Quispe, José Gálvez | Ciclo 2026</p>
+        </div>
+        <div class="tags">
+            <span class="pill">Bajas térmicas</span>
+            <span class="pill">Chorro de barrera</span>
+            <span class="pill">ZCAS</span>
+            <span class="pill">ZCIT-NET</span>
+            <span class="pill">MJO·ENSO</span>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 1: BAJAS DEL CHACO Y NOROESTE ARGENTINO -->
+    <div class="section-bar">🌀 1. BAJAS DEL CHACO Y NOROESTE ARGENTINO (BC y BNOA)</div>
+
+    <div class="block">
+        <div class="bh" style="background:#dbeafe; color:#1e3a8a;">DEFINICIÓN</div>
+        <div class="def" style="border-left-color:#2563eb;">Sistemas de núcleo cálido, barotrópicos, que se forman a sotavento de los Andes (centro de Sudamérica) en verano. Génesis: calentamiento sensible + compresión adiabática del flujo del oeste al cruzar los Andes. BNOA más estudiada, BC aún con procesos por investigar (compresión por LLJ del norte).</div>
+        <div class="item"><div class="dot" style="background:#2563eb;"></div><div><strong>Estructura vertical:</strong> corte en 63°W muestra núcleo cálido en bajo nivel, inclinación hacia el norte hasta la Alta de Bolivia. Humedad máxima al norte de BC.</div></div>
+        <div class="item"><div class="dot" style="background:#2563eb;"></div><div><strong>Rol en precipitaciones:</strong> estimulan LLJ del norte, transportan humedad del este/noreste al pie de los Andes (Chaco alto, norte Argentina, Paraguay, sur Bolivia). Eventos BC-LLJ (CJE) ocurren sólo 17% de días de verano pero generan ~55% de precipitación en noreste argentino.</div></div>
+        <div class="rx">📐 CJE: aceleración del viento en 850 hPa (≥12 m/s) + anomalía negativa de geopotencial en 1000 hPa. Producen >40% de lluvia en región del Río de la Plata.</div>
+        <div class="exam">🎯 EXAMEN: Explique por qué la Baja del Chaco se considera un sistema barotrópico y describa su conexión vertical con la Alta de Bolivia. ¿Qué implicancias tiene en la distribución de precipitación sobre el norte de Argentina?</div>
+    </div>
+
+    <div class="block">
+        <div class="bh" style="background:#ccfbf1; color:#134e4a;">CHORRO DE BARRERA (BARRIER JET)</div>
+        <div class="def" style="border-left-color:#0d9488;">Flujo sinóptico estable bloqueado por los Andes → apilamiento de masa y dorsal a lo largo de la barrera → gradiente de presión → aceleración geostrófica paralela a la cordillera (flujo sur-norte al este de los Andes).</div>
+        <div class="flow"><div class="fbox">Aire frío/estable</div><span class="farrow">→</span><div class="fbox">Bloqueo orográfico</div><span class="farrow">→</span><div class="fbox">Dorsal de presión</div><span class="farrow">→</span><div class="fbox">Jet de 850 hPa > 50 kt</div></div>
+        <div class="mini"><strong>⚡ Ejemplo (30 ene–2 feb 2016):</strong> desarrollo de ciclón extratropical, frente frío alcanza Bolivia, chorro de barrera desde Perú central hasta 7°S, precipitaciones extremas (>100 mm/12h) por convergencia de humedad.</div>
+        <div class="warn">⚠️ ERROR COMÚN: confundir chorro de barrera con el LLJ del norte. El barrera es inducido por bloqueo de aire estable y vientos del sur, mientras el LLJ se asocia a gradiente térmico y baja del Chaco.</div>
+        <div class="exam">🎯 EXAMEN: Describa el mecanismo de formación del chorro de barrera al este de los Andes. ¿Por qué puede generar precipitaciones intensas en la selva peruana y boliviana?</div>
+    </div>
+
+    <div class="block">
+        <div class="bh" style="background:#ede9fe; color:#4c1d95;">ZCAS (Zona de Convergencia del Atlántico Sur)</div>
+        <div class="def" style="border-left-color:#7c3aed;">Banda NW-SE de nubosidad, precipitación y convergencia de bajo nivel, desde Amazonía occidental hasta Atlántico sudoeste. Activa en verano austral (>3–4 días), asociada a vaguada de altura al suroeste y Alta de Bolivia.</div>
+        <div class="item"><div class="dot" style="background:#7c3aed;"></div><div>Relación con LLJ: mientras LLJ produce lluvias en cuenca del Plata, ZCAS favorece precipitación en sureste y centro de Brasil, pero bloquea transporte de humedad hacia el sur, generando déficit en La Plata.</div></div>
+        <div class="rx">🔎 Patrón compuesto: anomalías de 200 hPa muestran vaguada a sotavento de los Andes (onda de Rossby estacionaria, número 6) + subsidencia al SO.</div>
+        <div class="exam">🎯 EXAMEN: ¿Cuál es la interacción entre la ZCAS y el chorro de capas bajas? ¿Por qué la ZCAS puede inducir sequías en la cuenca del Río de la Plata?</div>
+    </div>
+
+    <!-- SECCIÓN 2: ESTABILIDAD Y CONVECCIÓN TROPICAL + ÍNDICES -->
+    <div class="section-bar">🔥 2. ESTABILIDAD ATMOSFÉRICA E ÍNDICES DE CONVECCIÓN TROPICAL</div>
+
+    <div class="block">
+        <div class="bh" style="background:#fef9c3; color:#713f12;">TEORÍA DE PARCELAS</div>
+        <div class="def" style="border-left-color:#eab308;">Compara temperatura de parcela ascendente (adiabática seca/saturada) con ambiente. Estable si T_parcela < T_ambiente; inestable si T_parcela > T_ambiente. Condicional cuando el perfil cae entre ambas adiabáticas.</div>
+        <div class="item"><div class="dot"></div><div><strong>CAPE</strong> (Convective Available Potential Energy): área entre curva de parcela y sondeo desde nivel de convección libre hasta equilibrio. Energía para tormentas.</div></div>
+        <div class="item"><div class="dot"></div><div><strong>CIN</strong> (Convective Inhibition): área donde parcela es más fría → requiere forzamiento externo (calentamiento diurno, frente) para vencer la inhibición.</div></div>
+        <div class="rx">CAPE = ∫_{LFC}^{EL} g * (Tv_parcela - Tv_ambiente) / Tv_ambiente dz   [J/kg]</div>
+        <div class="warn">⚠️ CAPE alto sin evaluar CIN puede inducir falsas alarmas: CIN fuerte impide que parcelas alcancen LFC.</div>
+    </div>
+
+    <div class="block">
+        <div class="bh" style="background:#fef9c3; color:#713f12;">ÍNDICES TRADICIONALES</div>
+        <div class="mini"><strong>Showalter (SSI):</strong> T_500 – T_parcela(elevada desde 850 hPa). Negativo → inestabilidad.</div>
+        <div class="mini"><strong>Lifted Index (LI):</strong> similar pero desde superficie, captura ciclo diurno.</div>
+        <div class="mini"><strong>Total-Totals (TT):</strong> (T850+Td850) – 2*T500. No considera elevación.</div>
+        <div class="mini"><strong>K-Index:</strong> (T850–T500) + Td850 – (T700–Td700). Mejor en trópicos por humedad en 700 hPa.</div>
+        <div class="def" style="border-left-color:#eab308;">El Gálvez-Davison Index (GDI) supera al K en regiones de alisios (Caribe, Brasil, Ecuador). Usa THETA-E y capas 950-700-500 hPa, valores >45 → alto potencial de tormenta eléctrica.</div>
+        <div class="exam">🎯 EXAMEN: Compare el Índice K y el GDI para el pronóstico de convección en la Amazonía. ¿Qué variables adicionales hacen al GDI más robusto en el trópico?</div>
+    </div>
+
+    <div class="block">
+        <div class="bh" style="background:#ffedd5; color:#7c2d12;">ZCIT-NET (Vaguada Ecuatorial)</div>
+        <div class="def" style="border-left-color:#f97316;">Cinturón discontinuo de convergencia y bajas presiones que conecta ambos hemisferios, asociado al ramal ascendente de Hadley. Sobre continente se desorganiza por fricción termal.</div>
+        <div class="flow"><div class="fbox">Migración anual</div><span class="farrow">→</span><div class="fbox">Verano austral: sobre Amazonía sur (lluvias)</div><span class="farrow">→</span><div class="fbox">Invierno austral: norte de Colombia/Venezuela (seca amazónica)</div></div>
+        <div class="item"><div class="dot"></div><div>Doble banda en Pacífico oriental durante marzo (aguas cálidas). Canícula (MSD) en Centroamérica (julio-agosto) por aceleración de alisios del Caribe.</div></div>
+        <div class="exam">🎯 EXAMEN: Describa el ciclo anual de la ZCIT-NET en el Pacífico oriental y su influencia en las precipitaciones de la costa norte de Perú y Ecuador.</div>
+    </div>
+
+    <!-- SECCIÓN 3: PROCESOS DEL OESTE AMAZÓNICO Y ANDES -->
+    <div class="section-bar">🌳 3. OESTE DE AMAZONÍA – ONDAS DEL ESTE, LÍNEAS DE INESTABILIDAD Y DANA</div>
+
+    <div class="block s2">
+        <div class="bh" style="background:#dcfce7; color:#14532d;">ONDAS DEL ESTE</div>
+        <div class="def" style="border-left-color:#16a34a;">Perturbaciones de mesoescala en los alisios (mayor definición en 850/700 hPa). Se propagan hacia el oeste (10–15 kt), longitud de onda 2000–4000 km, periodicidad 3–5 días.</div>
+        <div class="two">
+            <div class="mini"><strong>Inclinación positiva</strong> (común): eje rezagado con altura, convección detrás del eje. Mayor precipitación.</div>
+            <div class="mini"><strong>Inclinación negativa</strong>: eje se inclina hacia el este, convergencia a lo largo del eje, vientos fuertes en 850 hPa, asociada a tiempo severo y polvo del Sahara.</div>
+        </div>
+        <div class="item"><div class="dot"></div><div>Génesis africana: chorro del este africano (600-700 hPa) + convección en Sahel. Ondas tropicales originan ~85% de huracanes mayores en Atlántico.</div></div>
+        <div class="rx">📡 Hovmöller de OLR: seguimiento de ondas del este desde África hasta Caribe – herramienta operativa del NHC.</div>
+    </div>
+
+    <div class="block">
+        <div class="bh" style="background:#dcfce7; color:#14532d;">LÍNEAS DE INESTABILIDAD AMAZÓNICAS</div>
+        <div class="def" style="border-left-color:#16a34a;">Sistemas convectivos de mesoescala en forma lineal, activos 6–12 h, inician por brisa marítima o penetración de frentes. Se propagan continente adentro hasta 1000 km.</div>
+        <div class="mini"><strong>Velocidad:</strong> ~16 m/s (Amazonía) – recorren cuenca en 48h. Cizalladura vertical en niveles bajos organiza la línea.</div>
+        <div class="exam">🎯 EXAMEN: ¿Cuál es el rol de la brisa marítima y las perturbaciones en los alisios en la génesis de líneas de inestabilidad en la Amazonía oriental?</div>
+    </div>
+
+    <div class="block">
+        <div class="bh" style="background:#ede9fe; color:#4c1d95;">DANA (Cut-off low) sobre Pacífico</div>
+        <div class="def" style="border-left-color:#8b5cf6;">Sistema de núcleo frío, alta vorticidad potencial, segregado de la corriente en chorro. Afecta los Andes peruanos y chilenos con nevadas y lluvias intensas (caso abril 2012: 33 mm en 2h en Chosica).</div>
+        <div class="flow"><div class="fbox">Vaguada subtropical</div><span class="farrow">→</span><div class="fbox">Amplificación de dorsal</div><span class="farrow">→</span><div class="fbox">Aislamiento de baja fría</div><span class="farrow">→</span><div class="fbox">Precipitación orográfica + transporte de humedad desde Amazonía</div></div>
+        <div class="warn">⚠️ Las DANA se intensifican en invierno, generan friajes en selva peruana (surgencias de sur) si la dorsal polar se extiende.</div>
+    </div>
+
+    <!-- SECCIÓN 4: ECOSISTEMA CORRIENTE FRÍA DEL PACÍFICO -->
+    <div class="section-bar">❄️ 4. ECOSISTEMA DE CORRIENTE FRÍA – INVERSIÓN TÉRMICA Y NIEBLAS</div>
+
+    <div class="block s2">
+        <div class="bh" style="background:#ccfbf1; color:#134e4a;">INVERSIÓN TÉRMICA COSTERA</div>
+        <div class="def" style="border-left-color:#14b8a6;">Capa estable por TSM fría (Corriente de Humboldt) + subsidencia asociada a dorsal de 500 hPa. Limita mezcla vertical y atrapa humedad, generando estratocúmulos y lloviznas.</div>
+        <div class="two">
+            <div class="mini"><strong>Inversión intensa</strong> → capa límite saturada, nubosidad baja persistente (invierno).</div>
+            <div class="mini"><strong>Inversión débil</strong> → mezcla vertical, cielos más despejados, temperaturas diurnas altas.</div>
+        </div>
+        <div class="rx">🌊 Niebla de advección: flujo húmedo sobre afloramiento frío → saturación por enfriamiento → ingresa por brisa marina (cierre de aeropuertos, Lima).</div>
+    </div>
+
+    <div class="block">
+        <div class="bh" style="background:#ffedd5; color:#7c2d12;">CONVECCIÓN NORTE PERÚ Y ECUADOR</div>
+        <div class="def" style="border-left-color:#f97316;">Ocurre entre feb-abril cuando TSM >26°C (calentamiento estacional). Eventos extremos (TSM>28°C) producen lluvias >100 mm/12h, activación de banda sur de ZCIT-NET y trasvase de humedad desde Amazonía.</div>
+        <div class="item"><div class="dot"></div><div>El Niño costero (ej. 2017) no siempre asociado a ENSO canónico: calentamiento local desencadena precipitaciones catastróficas (PBI pérdida ~4–7%).</div></div>
+        <div class="exam">🎯 EXAMEN: Explique por qué el calentamiento de la región Niño 1+2 en febrero-marzo es más determinante para lluvias en Piura que las anomalías del Pacífico central. Mencione un caso histórico reciente.</div>
+    </div>
+
+    <!-- SECCIÓN 5: TELECONEXIONES Y ENSO -->
+    <div class="section-bar">📡 5. TELECONEXIONES, OSCILACIONES Y ENSO</div>
+
+    <div class="block">
+        <div class="bh" style="background:#f1f5f9; color:#334155;">MJO - Madden Julian</div>
+        <div class="def" style="border-left-color:#64748b;">Modo principal de variabilidad intraestacional (30–60 días). Dipolo de convección que se propaga al este. Fases 7-8-1 estimulan precipitaciones sobre América del Sur; fase 4 inhibe.</div>
+        <div class="item"><div class="dot"></div><div>Influye en ciclogénesis tropical, monzones y generación de ondas Kelvin oceánicas (precursoras de El Niño).</div></div>
+    </div>
+
+    <div class="block">
+        <div class="bh" style="background:#fce7f3; color:#831843;">ENSO: patrones E y C</div>
+        <div class="def" style="border-left-color:#ec489a;">EOF del Pacífico: patrón E (canónico, calentamiento costa a 150°W) y patrón C (Modoki, calentamiento central). Patrón E induce lluvias extremas en Perú; patrón C causa sequía en vertiente occidental.</div>
+        <div class="rx">ONI (región 3.4) vs MEI (multivariado) vs Niño costero (región 1+2). Para monitoreo de lluvias en Perú se prioriza Niño 1+2.</div>
+        <div class="warn">⚠️ El Niño 2015-16 fue muy intenso en Pacífico central pero no generó desastres en Perú porque el calentamiento costero fue moderado, a diferencia de 1983, 1998 y 2017.</div>
+    </div>
+
+    <div class="block">
+        <div class="bh" style="background:#f1f5f9; color:#334155;">OTRAS TELECONEXIONES</div>
+        <div class="mini"><strong>AAO (Antarctic Oscillation):</strong> fase positiva reduce frentes en Sudamérica, modula lluvias en Patagonia y Amazonía norte.</div>
+        <div class="mini"><strong>PDO/AMO:</strong> moduladores decádicos de temperatura y actividad ciclónica en Atlántico y Pacífico norte.</div>
+        <div class="mini"><strong>QBO:</strong> vientos estratosféricos; fase oeste en baja estratósfera favorece convección tropical.</div>
+    </div>
+
+    <!-- TABLA INTEGRADORA FINAL -->
+    <div class="block s3">
+        <div class="bh" style="background:#f1f5f9; color:#0f172a;">📊 TABLA INTEGRADORA – SISTEMAS SINÓPTICOS Y CLIMA DE SUDAMÉRICA</div>
+        <table class="tbl">
+            <thead>
+                <tr><th>Sistema</th><th>Escala</th><th>Estación de mayor actividad</th><th>Región de impacto principal</th><th>Efecto en precipitación</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Baja del Chaco / BNOA</td><td>Sinóptica</td><td>Verano (DJF)</td><td>Norte Argentina, Paraguay, Bolivia</td><td>Estimula LLJ → lluvias intensas en Río de la Plata</td></tr>
+                <tr><td>Chorro de barrera</td><td>Mesoescala</td><td>Invierno / todo año</td><td>Este de los Andes (Perú, Bolivia)</td><td>Precipitaciones orográficas extremas (>100mm/12h)</td></tr>
+                <tr><td>ZCAS</td><td>Sinóptica</td><td>Verano</td><td>Centro-sur Brasil, Atlántico</td><td>Lluvias en Brasil; inhibe transporte hacia Plata</td></tr>
+                <tr><td>ZCIT-NET</td><td>Planetaria</td><td>Verano austral (continental)</td><td>Amazonía, norte de Perú, Colombia</td><td>Bandas de convección profunda</td></tr>
+                <tr><td>ENSO (patrón E)</td><td>Planetaria</td><td>Verano austral</td><td>Costa oeste Sudamérica, Chile central</td><td>Excesos en Perú/Ecuador; déficit en Amazonía</td></tr>
+            </tbody>
+        </table>
+        <div class="warn" style="margin-top:10px;">💡 Dato integrador: la interacción entre los Andes y los flujos de bajo nivel genera una “fábrica de precipitación” en la vertiente oriental, modulada por teleconexiones como ENSO y MJO. Pronosticar requiere monitorear simultáneamente TSM costera, estructura de la inversión, y fase de la MJO.</div>
+    </div>
+
+    <!-- QUIZ INTERACTIVO -->
+    <div class="quiz-container" id="quiz-section">
+        <div class="quiz-header">
+            📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE
+            <div style="font-size: 11px; opacity:0.8;">Marca tu respuesta y descubre si es correcta</div>
+            <div class="progress-wrap"><div class="stat-bar-wrap"><div class="stat-bar-fill" id="quizProgressFill"></div></div></div>
+            <div id="quizCounter" style="font-size:12px; margin-top:6px;">0 / 10 respondidas</div>
+        </div>
+        <div id="questionsContainer"></div>
+        <div id="resultsPanel" class="results-panel" style="display:none;"></div>
+        <button id="resetQuizBtn" class="reset-btn">🔄 Reiniciar Quiz</button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div><span class="ft">REFERENCIAS:</span> <span class="fc">Seluchi & Saulo (2009) · Salio et al. (2002) · Liebmann et al. (2004) · Takahashi & Martínez (2017) · Wheeler & Hendon (2004) · Reanálisis NCEP/NCAR, WPC International Desks.</span></div>
+    </div>
+</div>
+
+<script>
+    // PREGUNTAS (10) cubriendo todo el material
+    const questions = [
+        { text: "¿Qué caracteriza a la Baja del Chaco (BC) y la Baja del Noroeste Argentino (BNOA)?", options: ["Son sistemas de núcleo frío de niveles altos", "Son bajas térmicas de núcleo cálido, se forman al este de los Andes en verano", "Se originan exclusivamente por frentes polares", "Ocurren sólo durante el invierno austral"], correct: 1, explanation: "BC y BNOA son bajas termales de núcleo cálido que se generan por calentamiento sensible y compresión adiabática al este de los Andes, principalmente en verano." },
+        { text: "¿Cuál es la función del chorro de barrera al este de los Andes?", options: ["Transporta humedad desde el Atlántico hacia el Pacífico", "Genera una dorsal de presión que acelera vientos del sur, produciendo lluvias intensas", "Inhibe completamente la convección", "Es un viento catabático nocturno"], correct: 1, explanation: "El bloqueo de flujo estable genera dorsal de presión y aceleración geostrófica del viento del sur (paralelo a los Andes), favoreciendo convergencia y precipitaciones extremas." },
+        { text: "Sobre la Zona de Convergencia del Atlántico Sur (ZCAS), es correcto afirmar:", options: ["Es un sistema de invierno asociado a bajas presiones en el Pacífico", "Se asocia a una banda NW-SE de convección, con vaguada de altura al suroeste, y puede bloquear el transporte de humedad hacia el sur", "Solo ocurre sobre el océano y nunca ingresa al continente", "Es idéntica a la ZCIT del Pacífico"], correct: 1, explanation: "ZCAS se extiende desde Amazonía hasta Atlántico, forzada por vaguada en altura y Alta de Bolivia. Su presencia reduce la humedad hacia la cuenca del Plata." },
+        { text: "Según la teoría de parcelas, ¿qué representa el CAPE?", options: ["La energía necesaria para vencer la inversión", "La energía potencial disponible para la convección, calculada desde el LFC hasta el nivel de equilibrio", "La temperatura potencial equivalente", "La cizalladura vertical del viento"], correct: 1, explanation: "CAPE es el área entre la curva de parcela y sondeo desde LFC hasta EL, indicando la energía para desarrollar tormentas profundas." },
+        { text: "¿Cuál es la principal ventaja del Índice Gálvez-Davison (GDI) sobre el índice K en el trópico?", options: ["Utiliza más niveles y distribución de THETA-E, capturando mejor la convección en regímenes de alisios", "Solo usa datos de superficie", "Es más sencillo de calcular", "No requiere datos de humedad"], correct: 0, explanation: "GDI incorpora información de 950, 700 y 500 hPa, THETA-E vertical, mostrando superior correlación con topes fríos en Brasil, Caribe y Ecuador." },
+        { text: "¿Qué fenómeno explica la canícula (Mid-Summer Drought) en Centroamérica?", options: ["Debilitamiento de la ZCIT en verano boreal", "Intensificación transitoria de los alisios del Caribe en julio-agosto, que aleja la ZCIT-NET de la costa Pacífica", "Influencia de frentes fríos", "Calentamiento extremo del mar Caribe"], correct: 1, explanation: "Canícula ocurre por fortalecimiento del anticiclón del Atlántico norte, acelerando alisios y desplazando la ZCIT-NET hacia el norte, reduciendo lluvias en el Pacífico centroamericano." },
+        { text: "¿Cuál es la relación entre la MJO (Madden-Julian Oscillation) y El Niño?", options: ["La MJO no influye en el ENSO", "Los pulsos de viento del oeste asociados a la MJO en fases 6-8 pueden generar ondas Kelvin oceánicas que favorecen el desarrollo de El Niño", "La MJO solo afecta al Atlántico", "La MJO inhibe siempre el ENSO cálido"], correct: 1, explanation: "La convección de la MJO genera anomalías de viento zonal que excitan ondas Kelvin cálidas, las cuales se propagan hacia el este y contribuyen al inicio de El Niño." },
+        { text: "¿Cómo se diferencia un El Niño costero (patrón E) de un El Niño Modoki (patrón C) en términos de impactos sobre Perú?", options: ["El patrón E causa sequía en la costa; el patrón C lluvias extremas", "El patrón E (calentamiento frente a Perú) genera lluvias intensas en la vertiente occidental; el patrón C (calentamiento central) induce déficit de precipitación en los Andes peruanos", "Ambos producen el mismo efecto", "Ninguno afecta a Perú"], correct: 1, explanation: "El patrón E (canónico) eleva la TSM costera y provoca lluvias torrenciales; el patrón C desplaza la convección hacia el Pacífico central, causando subsidencia y sequía en la costa peruana." },
+        { text: "¿Qué proceso explica la formación de nieblas de advección en la costa peruana?", options: ["Enfriamiento radiativo nocturno sin viento", "Flujo de aire húmedo sobre aguas frías de afloramiento costero → saturación por enfriamiento, con inversión que atrapa la niebla", "Ascenso orográfico intenso", "Convección profunda de verano"], correct: 1, explanation: "Nieblas de advección típicas de Lima: aire cálido/húmedo se desplaza sobre TSM fría, se enfría hasta saturación, y la inversión impide disipación, siendo ingresada a tierra por brisa marina." },
+        { text: "¿Cuál es el rol de las ondas del este africanas en la cuenca del Caribe?", options: ["Producen vientos del oeste destructivos", "Son responsables de la mayoría de los huracanes mayores del Atlántico y modulan las precipitaciones entre mayo y octubre", "Solo afectan a África", "Generan sequías extremas en Centroamérica"], correct: 1, explanation: "Las ondas tropicales africanas (Burpee, 1972) se propagan sobre el Atlántico, organizan convección y pueden intensificarse a ciclones tropicales; además estimulan lluvias en el Caribe y norte de Sudamérica." }
+    ];
+
+    let answered = new Array(10).fill(false);
+    let userChoices = new Array(10).fill(null);
+    let score = 0;
+
+    function buildQuiz() {
+        const container = document.getElementById('questionsContainer');
+        container.innerHTML = '';
+        questions.forEach((q, idx) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'qcard';
+            qDiv.id = `qcard_${idx}`;
+            qDiv.innerHTML = `
+                <div class="qnum">Pregunta ${idx+1} / 10</div>
+                <div class="qtext">${q.text}</div>
+                <div class="qopts" id="opts_${idx}"></div>
+                <div class="qfeedback" id="fb_${idx}" style="display:none;"></div>
+            `;
+            container.appendChild(qDiv);
+            const optsDiv = document.getElementById(`opts_${idx}`);
+            q.options.forEach((opt, optIdx) => {
+                const btn = document.createElement('button');
+                btn.className = 'qbtn';
+                btn.innerHTML = `${String.fromCharCode(65+optIdx)}) ${opt}`;
+                btn.dataset.q = idx;
+                btn.dataset.opt = optIdx;
+                btn.dataset.correct = (optIdx === q.correct) ? 'true' : 'false';
+                btn.addEventListener('click', (e) => handleAnswer(idx, optIdx, btn.dataset.correct === 'true'));
+                optsDiv.appendChild(btn);
+            });
+        });
+    }
+
+    function handleAnswer(qIdx, chosenOpt, isCorrect) {
+        if (answered[qIdx]) return;
+        answered[qIdx] = true;
+        userChoices[qIdx] = chosenOpt;
+        if (isCorrect) score++;
+        // resaltar correcta siempre en verde
+        const optsDiv = document.getElementById(`opts_${qIdx}`);
+        const btns = optsDiv.querySelectorAll('.qbtn');
+        btns.forEach((btn, idx) => {
+            btn.classList.add('disabled-btn');
+            const isCorrectBtn = (idx === questions[qIdx].correct);
+            if (isCorrectBtn) {
+                btn.classList.add('correct-highlight');
+                btn.innerHTML = `✅ ${btn.innerHTML.substring(2)}`;
+            } else if (idx === chosenOpt && !isCorrectBtn) {
+                btn.classList.add('incorrect-highlight');
+                btn.innerHTML = `❌ ${btn.innerHTML.substring(2)}`;
+            }
+        });
+        // mostrar feedback
+        const fbDiv = document.getElementById(`fb_${qIdx}`);
+        const q = questions[qIdx];
+        if (isCorrect) {
+            fbDiv.style.background = '#f0fdf4';
+            fbDiv.style.borderLeft = '3px solid #16a34a';
+            fbDiv.innerHTML = `✅ ¡Correcto! ${q.explanation}`;
+        } else {
+            const correctLetter = String.fromCharCode(65+q.correct);
+            fbDiv.style.background = '#fef2f2';
+            fbDiv.style.borderLeft = '3px solid #dc2626';
+            fbDiv.innerHTML = `❌ Incorrecto. La respuesta correcta es ${correctLetter}. ${q.explanation}`;
+        }
+        fbDiv.style.display = 'block';
+        updateProgressAndResults();
+    }
+
+    function updateProgressAndResults() {
+        const answeredCount = answered.filter(v => v === true).length;
+        document.getElementById('quizCounter').innerText = `${answeredCount} / 10 respondidas`;
+        const percent = (answeredCount / 10) * 100;
+        document.getElementById('quizProgressFill').style.width = `${percent}%`;
+        if (answeredCount === 10) {
+            showFinalResults();
+        }
+    }
+
+    function showFinalResults() {
+        const panel = document.getElementById('resultsPanel');
+        let msg = '';
+        let bg = '';
+        if (score <= 4) { msg = 'Necesitas repasar el material. Revisa los bloques y la tabla integradora.'; bg = '#fee2e2'; }
+        else if (score <= 7) { msg = '¡Buen avance, sigue repasando los mecanismos de teleconexión y sistemas de mesoescala!'; bg = '#fef9c3'; }
+        else { msg = '¡Excelente dominio del tema! Preparado para el examen sinóptico.'; bg = '#dcfce7'; }
+        panel.style.display = 'block';
+        panel.style.background = bg;
+        panel.innerHTML = `<div style="font-weight:bold;">📊 Puntaje final: ${score} / 10 correctas</div><div style="margin-top:6px;">${msg}</div>`;
+    }
+
+    function resetQuiz() {
+        answered = new Array(10).fill(false);
+        userChoices = new Array(10).fill(null);
+        score = 0;
+        // limpiar y reconstruir
+        const container = document.getElementById('questionsContainer');
+        container.innerHTML = '';
+        buildQuiz();
+        document.getElementById('quizProgressFill').style.width = '0%';
+        document.getElementById('quizCounter').innerText = '0 / 10 respondidas';
+        document.getElementById('resultsPanel').style.display = 'none';
+    }
+
+    document.getElementById('resetQuizBtn').addEventListener('click', resetQuiz);
+    buildQuiz();
+</script>
+</body>
+</html>
