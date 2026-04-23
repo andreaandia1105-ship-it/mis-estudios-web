@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zona de Juegos — Mecanización Agrícola</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Source+Sans+3:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0f1e;
+  --bg2: #111827;
+  --bg3: #1e2a3a;
+  --accent: #38bdf8;
+  --accent2: #818cf8;
+  --accent3: #34d399;
+  --warn: #fb923c;
+  --danger: #f87171;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --border: rgba(56,189,248,0.15);
+  --card: #141f2e;
+  --radius: 12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Source Sans 3',sans-serif;min-height:100vh}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#0a0f1e 0%,#0f1e3a 50%,#0a0f1e 100%);border-bottom:1px solid var(--border);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.header-left h1{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;color:#fff;letter-spacing:1px}
+.header-left h1 span{color:var(--accent)}
+.header-left p{font-size:13px;color:var(--text2);margin-top:4px}
+.score-display{display:flex;gap:16px;flex-wrap:wrap}
+.score-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 18px;text-align:center}
+.score-box .num{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--accent)}
+.score-box .lbl{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px}
+
+/* NAV DE JUEGOS */
+.game-nav{display:flex;gap:10px;padding:20px 32px;background:var(--bg2);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.gnav-btn{font-family:'Oswald',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all 0.2s;letter-spacing:0.5px}
+.gnav-btn:hover{border-color:var(--accent);color:var(--accent)}
+.gnav-btn.active{background:var(--accent);color:#0a0f1e;border-color:var(--accent);font-weight:700}
+
+/* CONTENEDOR PRINCIPAL */
+.main{padding:28px 32px;max-width:1200px;margin:0 auto}
+
+/* SECCIÓN DE DATOS */
+.data-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:28px}
+.data-section h2{font-family:'Oswald',sans-serif;font-size:15px;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.data-tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.dtab{font-size:12px;padding:5px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all 0.2s}
+.dtab.active{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+.term-count{font-size:12px;color:var(--text2);margin-top:8px}
+.term-count span{color:var(--accent);font-weight:600}
+
+/* PANEL DEL JUEGO */
+.game-panel{display:none}
+.game-panel.active{display:block}
+.game-title{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+.game-subtitle{font-size:13px;color:var(--text2);margin-bottom:20px}
+.game-controls{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.btn{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;padding:9px 20px;border-radius:8px;border:none;cursor:pointer;transition:all 0.2s}
+.btn-primary{background:var(--accent);color:#0a0f1e}
+.btn-primary:hover{background:#7dd3fc}
+.btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn-success{background:var(--accent3);color:#0a0f1e}
+.btn-warn{background:var(--warn);color:#0a0f1e}
+
+/* ===================== */
+/* JUEGO 1: FLASHCARDS   */
+/* ===================== */
+.flashcard-wrap{perspective:1000px;width:100%;max-width:600px;margin:0 auto 24px}
+.flashcard{width:100%;height:220px;position:relative;transform-style:preserve-3d;transition:transform 0.6s;cursor:pointer}
+.flashcard.flipped{transform:rotateY(180deg)}
+.card-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center}
+.card-front{background:linear-gradient(135deg,var(--bg3),#1a2a3a);border:2px solid var(--accent);box-shadow:0 0 30px rgba(56,189,248,0.1)}
+.card-back{background:linear-gradient(135deg,#1a2a1a,#1a2a3a);border:2px solid var(--accent3);transform:rotateY(180deg)}
+.card-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--text2);margin-bottom:12px;font-family:'Space Mono',monospace}
+.card-term{font-family:'Oswald',sans-serif;font-size:26px;font-weight:700;color:var(--accent);line-height:1.2}
+.card-def{font-size:14px;color:var(--text);line-height:1.6}
+.card-cat{font-size:11px;color:var(--accent2);margin-top:10px;font-style:italic}
+.flash-nav{display:flex;gap:12px;justify-content:center;align-items:center;margin-bottom:16px}
+.flash-counter{font-family:'Space Mono',monospace;font-size:14px;color:var(--text2);min-width:60px;text-align:center}
+.flash-hint{text-align:center;font-size:12px;color:var(--text2);margin-bottom:20px}
+.flash-rate{display:flex;gap:10px;justify-content:center}
+.rate-btn{font-size:13px;padding:8px 20px;border-radius:8px;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-weight:600;transition:all 0.2s}
+.rate-easy{background:#dcfce7;color:#14532d}
+.rate-easy:hover{background:#86efac}
+.rate-hard{background:#fee2e2;color:#991b1b}
+.rate-hard:hover{background:#fca5a5}
+.rate-ok{background:#fef9c3;color:#713f12}
+.rate-ok:hover{background:#fde047}
+
+/* ===================== */
+/* JUEGO 2: PAREJAS      */
+/* ===================== */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.match-col{display:flex;flex-direction:column;gap:8px}
+.match-col h3{font-family:'Oswald',sans-serif;font-size:13px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.match-item{padding:11px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);font-size:13px;cursor:pointer;transition:all 0.2s;line-height:1.4}
+.match-item:hover{border-color:var(--accent);color:var(--accent)}
+.match-item.selected{border-color:var(--accent2);background:rgba(129,140,248,0.15);color:var(--accent2)}
+.match-item.correct{border-color:var(--accent3);background:rgba(52,211,153,0.15);color:var(--accent3);pointer-events:none}
+.match-item.wrong{border-color:var(--danger);background:rgba(248,113,113,0.15);color:var(--danger)}
+.match-score-bar{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.match-dot{width:18px;height:18px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);transition:all 0.3s}
+.match-dot.ok{background:var(--accent3);border-color:var(--accent3)}
+
+/* ===================== */
+/* JUEGO 3: CRUCIGRAMA   */
+/* ===================== */
+.crossword-layout{display:grid;grid-template-columns:1fr 320px;gap:20px}
+.cross-grid-wrap{overflow:auto}
+.cross-grid{display:inline-grid;gap:2px;border:2px solid var(--border);border-radius:8px;padding:8px;background:var(--bg3)}
+.cross-cell{width:34px;height:34px;border:1px solid rgba(56,189,248,0.2);border-radius:4px;background:var(--bg2);display:flex;align-items:center;justify-content:center;position:relative;font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--accent);text-transform:uppercase}
+.cross-cell.black{background:#050a14;border-color:#050a14}
+.cross-cell.active{background:rgba(56,189,248,0.1);border-color:var(--accent)}
+.cross-cell.correct{background:rgba(52,211,153,0.15);color:var(--accent3)}
+.cross-cell.wrong{background:rgba(248,113,113,0.1);color:var(--danger)}
+.cross-num{position:absolute;top:2px;left:3px;font-size:8px;color:var(--text2);font-weight:400;line-height:1}
+.cross-input{position:absolute;width:100%;height:100%;opacity:0;cursor:pointer}
+.cross-clues{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;max-height:480px;overflow-y:auto}
+.cross-clues h3{font-family:'Oswald',sans-serif;font-size:14px;color:var(--accent);margin-bottom:10px}
+.clue-item{font-size:12px;padding:6px 0;border-bottom:1px solid var(--border);color:var(--text2);cursor:pointer;transition:color 0.2s;line-height:1.4}
+.clue-item:hover{color:var(--text)}
+.clue-item.active-clue{color:var(--accent)}
+.clue-item b{color:var(--accent2)}
+
+/* ===================== */
+/* JUEGO 4: SOPA LETRAS  */
+/* ===================== */
+.soup-layout{display:grid;grid-template-columns:1fr 260px;gap:20px}
+.soup-grid{display:inline-grid;gap:1px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px;user-select:none}
+.soup-cell{width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:var(--text);border-radius:4px;cursor:pointer;transition:all 0.15s}
+.soup-cell:hover{background:rgba(56,189,248,0.1);color:var(--accent)}
+.soup-cell.selecting{background:rgba(56,189,248,0.2);color:var(--accent)}
+.soup-cell.found{background:rgba(52,211,153,0.2);color:var(--accent3)}
+.soup-words{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px}
+.soup-words h3{font-family:'Oswald',sans-serif;font-size:14px;color:var(--accent);margin-bottom:10px}
+.word-chip{display:inline-block;font-size:12px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);margin:3px;font-family:'Space Mono',monospace;transition:all 0.3s}
+.word-chip.found{background:rgba(52,211,153,0.2);border-color:var(--accent3);color:var(--accent3);text-decoration:line-through}
+
+/* ===================== */
+/* JUEGO 5: ADIVINA      */
+/* ===================== */
+.guess-card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:28px;max-width:600px;margin:0 auto}
+.guess-pistas{margin-bottom:20px}
+.pista{background:var(--bg3);border-left:3px solid var(--accent2);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;margin-bottom:8px;color:var(--text2);display:none}
+.pista.shown{display:block;animation:fadeIn 0.4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.pista b{color:var(--accent2)}
+.guess-input-wrap{display:flex;gap:10px;margin-bottom:14px}
+.guess-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:14px;color:var(--text);font-family:'Source Sans 3',sans-serif;outline:none;transition:border-color 0.2s}
+.guess-input:focus{border-color:var(--accent)}
+.guess-attempts{display:flex;gap:6px;margin-bottom:16px}
+.attempt-dot{width:12px;height:12px;border-radius:50%;background:var(--bg3);border:1px solid var(--border)}
+.attempt-dot.used{background:var(--warn)}
+.attempt-dot.wrong{background:var(--danger)}
+.guess-result{padding:12px 16px;border-radius:8px;font-size:14px;font-weight:600;margin-top:10px;display:none}
+.guess-result.ok{background:rgba(52,211,153,0.15);border:1px solid var(--accent3);color:var(--accent3)}
+.guess-result.fail{background:rgba(248,113,113,0.1);border:1px solid var(--danger);color:var(--danger)}
+.pistas-left{font-family:'Space Mono',monospace;font-size:12px;color:var(--text2)}
+
+/* PROGRESO */
+.progress-wrap{background:var(--bg3);border-radius:20px;height:6px;width:100%;margin:4px 0}
+.progress-fill{height:100%;border-radius:20px;background:var(--accent);transition:width 0.4s}
+
+/* ESTADÍSTICAS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:20px}
+.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.stat-num{font-family:'Space Mono',monospace;font-size:24px;font-weight:700;color:var(--accent)}
+.stat-lbl{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
+/* MENSAJE */
+.msg{padding:12px 16px;border-radius:8px;font-size:13px;margin:10px 0;display:none}
+.msg.ok{background:rgba(52,211,153,0.15);border:1px solid var(--accent3);color:var(--accent3)}
+.msg.fail{background:rgba(248,113,113,0.1);border:1px solid var(--danger);color:var(--danger)}
+.msg.info{background:rgba(56,189,248,0.1);border:1px solid var(--accent);color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .main{padding:16px}
+  .header{padding:16px}
+  .game-nav{padding:12px 16px}
+  .crossword-layout,.soup-layout{grid-template-columns:1fr}
+  .match-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>ZONA DE <span>JUEGOS</span></h1>
+    <p>Mecanización Agrícola — Ing. Altamirano Chunga · UNALM</p>
+  </div>
+  <div class="score-display">
+    <div class="score-box">
+      <div class="num" id="total-score">0</div>
+      <div class="lbl">Puntos</div>
+    </div>
+    <div class="score-box">
+      <div class="num" id="total-correct">0</div>
+      <div class="lbl">Aciertos</div>
+    </div>
+    <div class="score-box">
+      <div class="num" id="streak">0</div>
+      <div class="lbl">Racha</div>
+    </div>
+  </div>
+</div>
+
+<div class="game-nav">
+  <button class="gnav-btn active" onclick="showGame('flashcards')">🃏 Flashcards</button>
+  <button class="gnav-btn" onclick="showGame('parejas')">🔗 Parejas</button>
+  <button class="gnav-btn" onclick="showGame('adivina')">🔍 Adivina el Término</button>
+  <button class="gnav-btn" onclick="showGame('sopa')">🔤 Sopa de Letras</button>
+  <button class="gnav-btn" onclick="showGame('crucigrama')">✏️ Crucigrama</button>
+</div>
+
+<div class="main">
+
+<!-- SELECTOR DE CATEGORÍAS -->
+<div class="data-section">
+  <h2>📚 Categorías de Términos</h2>
+  <div class="data-tabs" id="cat-tabs"></div>
+  <div class="progress-wrap"><div class="progress-fill" id="cat-prog" style="width:100%"></div></div>
+  <div class="term-count">Términos activos: <span id="term-count">0</span> | Selecciona categorías para filtrar los juegos</div>
+</div>
+
+<!-- ========== JUEGO 1: FLASHCARDS ========== -->
+<div class="game-panel active" id="panel-flashcards">
+  <div class="game-title">🃏 Flashcards</div>
+  <div class="game-subtitle">Haz clic en la tarjeta para ver la definición. Califica tu respuesta para llevar seguimiento.</div>
+  <div class="game-controls">
+    <button class="btn btn-primary" onclick="initFlash()">Nueva sesión</button>
+    <button class="btn btn-secondary" onclick="shuffleFlash()">🔀 Mezclar</button>
+    <span class="pistas-left" id="flash-remaining"></span>
+  </div>
+  <div class="flashcard-wrap">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="card-face card-front">
+        <div class="card-label">Término</div>
+        <div class="card-term" id="flash-term">Cargando...</div>
+        <div class="card-cat" id="flash-cat"></div>
+      </div>
+      <div class="card-face card-back">
+        <div class="card-label">Definición</div>
+        <div class="card-def" id="flash-def">Haz clic para ver</div>
+      </div>
+    </div>
+  </div>
+  <div class="flash-hint">👆 Haz clic en la tarjeta para voltearla</div>
+  <div class="flash-nav">
+    <button class="btn btn-secondary" onclick="prevCard()">← Anterior</button>
+    <span class="flash-counter" id="flash-counter">1 / 1</span>
+    <button class="btn btn-secondary" onclick="nextCard()">Siguiente →</button>
+  </div>
+  <div class="flash-rate" id="flash-rate" style="display:none">
+    <button class="rate-btn rate-hard" onclick="rateCard('hard')">❌ Difícil</button>
+    <button class="rate-btn rate-ok" onclick="rateCard('ok')">🤔 Regular</button>
+    <button class="rate-btn rate-easy" onclick="rateCard('easy')">✅ Fácil</button>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-num" id="f-easy">0</div><div class="stat-lbl">Fáciles</div></div>
+    <div class="stat-card"><div class="stat-num" id="f-ok">0</div><div class="stat-lbl">Regulares</div></div>
+    <div class="stat-card"><div class="stat-num" id="f-hard">0</div><div class="stat-lbl">Difíciles</div></div>
+  </div>
+</div>
+
+<!-- ========== JUEGO 2: PAREJAS ========== -->
+<div class="game-panel" id="panel-parejas">
+  <div class="game-title">🔗 Juego de Parejas</div>
+  <div class="game-subtitle">Conecta cada término con su definición correcta. Haz clic en un término y luego en su definición.</div>
+  <div class="game-controls">
+    <button class="btn btn-primary" onclick="initMatch()">Nuevo juego</button>
+    <span class="pistas-left" id="match-info"></span>
+  </div>
+  <div class="match-score-bar" id="match-dots"></div>
+  <div class="msg" id="match-msg"></div>
+  <div class="match-grid">
+    <div class="match-col">
+      <h3>Términos</h3>
+      <div id="match-terms"></div>
+    </div>
+    <div class="match-col">
+      <h3>Definiciones</h3>
+      <div id="match-defs"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== JUEGO 3: ADIVINA ========== -->
+<div class="game-panel" id="panel-adivina">
+  <div class="game-title">🔍 Adivina el Término</div>
+  <div class="game-subtitle">Se muestran pistas una por una. Tienes 5 intentos para adivinar el término.</div>
+  <div class="game-controls">
+    <button class="btn btn-primary" onclick="initGuess()">Nueva palabra</button>
+    <button class="btn btn-secondary" onclick="showNextPista()">💡 Mostrar pista</button>
+    <span class="pistas-left" id="guess-pistas-left"></span>
+  </div>
+  <div class="guess-card">
+    <div class="guess-pistas" id="guess-pistas"></div>
+    <div class="attempt-dots" style="display:flex;gap:6px;margin-bottom:14px" id="attempt-dots"></div>
+    <div class="guess-input-wrap">
+      <input class="guess-input" id="guess-input" type="text" placeholder="Escribe el término aquí..." onkeydown="if(event.key==='Enter')checkGuess()">
+      <button class="btn btn-primary" onclick="checkGuess()">Verificar</button>
+    </div>
+    <div class="guess-result" id="guess-result"></div>
+  </div>
+</div>
+
+<!-- ========== JUEGO 4: SOPA DE LETRAS ========== -->
+<div class="game-panel" id="panel-sopa">
+  <div class="game-title">🔤 Sopa de Letras</div>
+  <div class="game-subtitle">Encuentra todos los términos ocultos en la cuadrícula. Haz clic en la primera y última letra de la palabra.</div>
+  <div class="game-controls">
+    <button class="btn btn-primary" onclick="initSoup()">Nueva sopa</button>
+    <span class="pistas-left" id="soup-info"></span>
+  </div>
+  <div class="msg" id="soup-msg"></div>
+  <div class="soup-layout">
+    <div><div class="cross-grid-wrap"><div class="soup-grid" id="soup-grid"></div></div></div>
+    <div class="soup-words">
+      <h3>Palabras a encontrar</h3>
+      <div id="soup-word-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== JUEGO 5: CRUCIGRAMA ========== -->
+<div class="game-panel" id="panel-crucigrama">
+  <div class="game-title">✏️ Crucigrama</div>
+  <div class="game-subtitle">Completa el crucigrama usando las pistas. Haz clic en una celda para activarla.</div>
+  <div class="game-controls">
+    <button class="btn btn-primary" onclick="initCross()">Nuevo crucigrama</button>
+    <button class="btn btn-secondary" onclick="checkCross()">✔ Verificar</button>
+    <button class="btn btn-secondary" onclick="revealCross()">👁 Revelar todo</button>
+  </div>
+  <div class="msg" id="cross-msg"></div>
+  <div class="crossword-layout">
+    <div class="cross-grid-wrap"><div class="cross-grid" id="cross-grid"></div></div>
+    <div class="cross-clues">
+      <h3>Horizontales</h3>
+      <div id="cross-across"></div>
+      <h3 style="margin-top:14px">Verticales</h3>
+      <div id="cross-down"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ═══════════════════════════════════════════════════
+// BASE DE DATOS DE TÉRMINOS
+// ═══════════════════════════════════════════════════
+// Para agregar más términos: copia el formato y pega
+// en la categoría correcta o crea una nueva categoría
+// ═══════════════════════════════════════════════════
+
+const TERMINOS = {
+  "Taller y Seguridad": [
+    {term:"TALLER",def:"Espacio físico organizado donde se fabrican, reparan y mantienen piezas y maquinaria agrícola",pistas:["Tiene líneas amarillas en el piso","Puede tener puente grúa","Contiene tornos y fresadoras","Espacio de trabajo mecánico"]},
+    {term:"PUENTE GRUA",def:"Viga metálica suspendida en el techo que mueve piezas muy pesadas dentro del taller",pistas:["Está en el techo","Tiene un gancho","Mueve objetos pesados","No está en el piso"]},
+    {term:"BANCADA",def:"Cuerpo horizontal largo del torno que sirve de riel y base para todas las partes móviles",pistas:["Es parte del torno","Es el cuerpo principal","Las partes se deslizan sobre ella","Debe estar perfectamente recta"]},
+    {term:"VIRUTA",def:"Pedacitos de metal arrancados durante el mecanizado en torno o fresadora",pistas:["Sale durante el corte","Es residuo del mecanizado","Puede ser peligrosa al tocar","Se forma en el torno y fresadora"]},
+  ],
+  "Herramientas": [
+    {term:"TRINQUETE",def:"Mango con mecanismo de matraca que gira libre en un sentido y bloquea en el otro para apretar pernos sin sacar la herramienta",pistas:["También se llama ratchet","Tiene un mecanismo especial","Se usa con dados","Permite girar sin reposicionar"]},
+    {term:"DADO",def:"Punta hexagonal intercambiable que se acopla al trinquete y encaja en la cabeza del perno",pistas:["Es intercambiable","Tiene forma hexagonal","Va con el trinquete","Toca directamente el perno"]},
+    {term:"TORQUIMETRO",def:"Herramienta que mide la fuerza de giro aplicada a un perno para asegurar el apriete correcto según el manual",pistas:["Mide una fuerza","Se usa en pernos","Existe tipo clic y tipo aguja","Evita apretar de más o de menos"]},
+    {term:"TORQUE",def:"Fuerza de giro o rotación. Se calcula multiplicando la fuerza por la distancia al punto de pivote",pistas:["Es una fuerza rotatoria","Se mide en Newton-metro","Una llave más larga da más de esto","No es velocidad sino fuerza"]},
+    {term:"PIE DE REY",def:"Instrumento de medición de precisión que mide exteriores, interiores y profundidades con exactitud de 0.02 mm",pistas:["Es un instrumento de medición","Tiene mordazas","Mide décimas de milímetro","Tiene una parte llamada nonio"]},
+    {term:"NONIO",def:"Escala secundaria del calibre pie de rey que permite leer fracciones de milímetro por coincidencia de marcas",pistas:["Es parte del pie de rey","Está en el cursor","Lee fracciones de milímetro","Coincide con la escala principal"]},
+    {term:"MAZO",def:"Martillo con cabeza de goma o plástico que golpea sin dañar la superficie de la pieza",pistas:["Es un tipo de martillo","Su cabeza no es de metal","No raya las piezas","Se usa en aluminio y piezas terminadas"]},
+    {term:"EXTRACTOR",def:"Herramienta con garras que permite desmontrar rodamientos, poleas o engranajes de un eje sin dañarlos",pistas:["Tiene garras","Se usa para sacar piezas","Incluye un tornillo central","Evita dañar la pieza al desmontar"]},
+    {term:"ALICATE",def:"Herramienta de agarre con dos brazos articulados. El de presión se traba solo sobre la pieza",pistas:["Tiene dos brazos","Es una herramienta de agarre","El de presión se traba solo","Vise-Grip es una marca conocida"]},
+  ],
+  "Tornillos": [
+    {term:"PHILLIPS",def:"Tipo de cabeza de tornillo con cruz estándar de cuatro brazos en ángulo, el más común en el mundo",pistas:["Tiene forma de cruz","Es muy común","Puede resbalar con fuerza excesiva","Su punta tiene ángulo de salida"]},
+    {term:"TORX",def:"Cabeza de tornillo con estrella de 6 puntas que transmite más torque sin resbalar que el Phillips",pistas:["Tiene 6 puntas","No resbala fácilmente","Común en vehículos modernos","Su forma es una estrella"]},
+    {term:"TAMPER PROOF",def:"Tornillo de seguridad con pin central que impide su apertura con herramientas estándar",pistas:["Tiene un pin en el centro","Requiere herramienta especial","Es un tornillo de seguridad","El bit normal no entra"]},
+    {term:"CHAVETERO",def:"Ranura rectangular que se hace en un eje para alojar la chaveta que une el eje con la pieza giratoria",pistas:["Es una ranura","Va en un eje","Aloja una pieza pequeña","La fresadora lo hace con fresa especial"]},
+    {term:"CHAVETA",def:"Pequeña pieza rectangular de acero que se inserta en el chavetero para unir un eje con una polea o engranaje e impedir giro relativo",pistas:["Es una pieza pequeña","Va en una ranura","Impide que una pieza gire libre","Une eje con polea o engranaje"]},
+  ],
+  "Fresadora": [
+    {term:"FRESADORA",def:"Máquina herramienta donde la fresa gira y la pieza está fija, usada para mecanizar superficies planas, ranuras y escalones",pistas:["Es una máquina de taller","La herramienta gira","La pieza está fija","Hace ranuras y superficies planas"]},
+    {term:"FRESA",def:"Herramienta rotativa de varios filos de corte que se monta en el cabezal de la fresadora para arrancar viruta",pistas:["Va en la fresadora","Tiene varios filos","Gira a alta velocidad","Hay muchos tipos: cilíndrica, de disco, etc"]},
+    {term:"CABEZAL",def:"Parte de la fresadora que sostiene y hace girar la fresa, conectada directamente al motor",pistas:["Es parte de la fresadora","Sostiene la herramienta","Está conectado al motor","Hace girar la fresa"]},
+    {term:"MECANIZAR",def:"Proceso de dar forma a una pieza de metal quitándole material mediante herramientas de corte",pistas:["Es un proceso industrial","Se quita material","Se trabaja metal","Produce virutas como residuo"]},
+    {term:"INSERTO",def:"Pequeña pieza de carburo de tungsteno intercambiable que se monta en portacuchillas. Al gastarse se reemplaza sin cambiar toda la herramienta",pistas:["Es una pieza pequeña","Es intercambiable","Va en un portacuchillas","De carburo de tungsteno"]},
+    {term:"CILINDRADO",def:"Operación del torno que reduce el diámetro exterior de una pieza moviendo la cuchilla paralela al eje Z",pistas:["Es operación del torno","Reduce el diámetro","La cuchilla va paralela al eje","Hace piezas más delgadas"]},
+    {term:"REFRENTADO",def:"Operación del torno que aplana los extremos de una pieza moviendo la cuchilla perpendicular al eje de rotación",pistas:["Es operación del torno","Aplana extremos","La cuchilla va perpendicular","Deja superficies planas en los lados"]},
+    {term:"ROSCADO",def:"Operación del torno que produce la espiral helicoidal de un tornillo sincronizando el avance de la cuchilla con la rotación",pistas:["Hace la espiral del tornillo","Es operación del torno","Necesita sincronización","Produce la rosca"]},
+    {term:"TRONZADO",def:"Operación del torno que corta la pieza en dos partes usando una cuchilla muy delgada que penetra hasta el centro",pistas:["Separa la pieza en dos","Es operación del torno","Usa cuchilla delgada","La cuchilla llega al centro"]},
+    {term:"MOLETEADO",def:"Operación del torno que imprime textura en relieve sobre la superficie para mejorar el agarre manual",pistas:["Hace textura","Es operación del torno","No quita material lo desplaza","Mejora el agarre de la mano"]},
+  ],
+  "Torno": [
+    {term:"TORNO",def:"Máquina herramienta donde la pieza gira y la cuchilla está fija, usada para fabricar piezas cilíndricas",pistas:["Es una máquina de taller","La pieza gira","La herramienta está fija","Hace piezas redondas"]},
+    {term:"CONTRAPUNTO",def:"Parte móvil del torno en el extremo derecho que apoya el extremo libre de piezas largas para evitar vibración",pistas:["Es parte del torno","Está en el extremo","Apoya piezas largas","Evita que la pieza vibre"]},
+    {term:"CHUCK",def:"Plato con garras del torno que sujeta y hace girar la pieza. Hay de 3 garras para piezas redondas y de 4 para cuadradas",pistas:["Es parte del torno","Tiene garras","Sujeta la pieza","Hace girar la pieza junto con ella"]},
+    {term:"CNC",def:"Control Numérico Computarizado — sistema donde una computadora controla los movimientos de la máquina con precisión automática",pistas:["Usa computadora","Es un sistema de control","Hace movimientos precisos automáticamente","Puede controlar varios ejes a la vez"]},
+    {term:"HSS",def:"High Speed Steel — Acero de Alta Velocidad. Material de las cuchillas de torno que mantiene su dureza al calentarse en el corte",pistas:["Es un tipo de acero","Se usa para cuchillas","Resiste el calor del corte","Sus siglas son en inglés"]},
+  ],
+  "Soldadura": [
+    {term:"SOLDADURA",def:"Proceso de unir dos piezas metálicas de forma permanente aplicando calor hasta que el metal se funde y forma una unión continua",pistas:["Une piezas de metal","Es permanente","Usa calor","El metal se funde en el proceso"]},
+    {term:"ARCO ELECTRICO",def:"Electricidad que salta por el aire ionizado entre el electrodo y la pieza generando temperaturas de 3000 a 6000°C",pistas:["Es electricidad en el aire","Necesita ionización","Genera muchísimo calor","Es el principio de varios tipos de soldadura"]},
+    {term:"ELECTRODO",def:"Varilla metálica revestida que conduce electricidad hasta el punto de soldadura y se funde como material de aporte",pistas:["Es una varilla","Conduce electricidad","Se funde durante el proceso","Tiene revestimiento exterior"]},
+    {term:"TIG",def:"Soldadura con electrodo de tungsteno no consumible y gas inerte protector. Alta calidad, para metales especiales",pistas:["Usa tungsteno","El electrodo no se consume","Usa gas protector","Es muy precisa y lenta"]},
+    {term:"MIG",def:"Soldadura con alambre metálico consumible que se alimenta automáticamente y gas inerte protector. Rápida y versátil",pistas:["Usa alambre","El alambre sí se consume","El alambre se alimenta solo","Es más rápida que TIG"]},
+    {term:"TUNGSTENO",def:"Metal con el punto de fusión más alto de todos (3422°C). Se usa como electrodo en soldadura TIG porque no se funde",pistas:["Es un metal","Tiene altísimo punto de fusión","No se funde en la soldadura TIG","Se usa como electrodo"]},
+    {term:"BAÑO DE FUSION",def:"Charco de metal líquido que se forma en el punto de soldadura. Al enfriarse forma la unión permanente",pistas:["Es metal líquido","Se forma en el punto de soldadura","Al enfriarse se vuelve sólido","Es donde ocurre la unión"]},
+    {term:"GAS INERTE",def:"Gas que no reacciona con el metal fundido (argón o helio). Protege el baño de fusión del oxígeno del aire",pistas:["No reacciona con el metal","Puede ser argón o helio","Protege la soldadura","Evita la oxidación del baño de fusión"]},
+    {term:"POLARIDAD",def:"Forma en que se conectan el electrodo y la pieza a los terminales positivo y negativo de la máquina de soldar, determinando dónde se concentra el calor",pistas:["Define la conexión eléctrica","Hay directa e invertida","Afecta dónde va el calor","Positivo y negativo importan"]},
+    {term:"OXICORTE",def:"Uso del equipo oxiacetilénico con máximo flujo de oxígeno para cortar metal en lugar de soldarlo",pistas:["Usa el mismo equipo que la oxiacetilénica","Corta en lugar de soldar","Usa mucho oxígeno","La llama quema el metal en una línea"]},
+    {term:"ANTIRRETROCESO",def:"Válvula de seguridad en soldadura oxiacetilénica que solo permite flujo del cilindro hacia el soplete, evitando que la llama retroceda",pistas:["Es una válvula de seguridad","Solo permite flujo en un sentido","Evita explosiones","Es obligatorio en instalaciones de gas"]},
+    {term:"MANORREDUCTOR",def:"Dispositivo que reduce la alta presión del cilindro de gas (150-200 bar) a presión de trabajo controlable (2-5 bar)",pistas:["Reduce presión","Va en el cilindro de gas","Tiene un manómetro","Sin él el gas sería peligroso"]},
+  ],
+  "Materiales": [
+    {term:"FERROSO",def:"Material cuyo componente principal es el hierro. Del latín ferrum. Incluye hierro dulce, aceros y fundiciones",pistas:["Contiene hierro","Del latín ferrum","Se puede oxidar","Incluye el acero y la fundición"]},
+    {term:"ACERO",def:"Aleación de hierro y carbono (0.008% a 2.1% de carbono). Excelentes propiedades mecánicas y bajo coste",pistas:["Es hierro con carbono","El carbono es menor al 2.1%","Tiene excelentes propiedades mecánicas","Es el material estructural más usado"]},
+    {term:"FUNDICION",def:"Aleación de hierro con más de 2.1% de carbono. Muy fluida al fundirse, llena moldes complejos, pero frágil al impacto",pistas:["Tiene mucho carbono","Es frágil al impacto","Llena bien los moldes","Los bloques de motor son de esto"]},
+    {term:"ALEACION",def:"Mezcla de dos o más metales para obtener propiedades mejores que cada metal por separado",pistas:["Es una mezcla de metales","Mejora las propiedades","El acero es un ejemplo","El bronce es otro ejemplo"]},
+    {term:"DUCTIL",def:"Propiedad de un material que permite estirarlo en forma de alambre sin que se rompa",pistas:["Es una propiedad del material","Se puede estirar","El hierro dulce lo es","Lo opuesto es frágil"]},
+    {term:"MALEABLE",def:"Propiedad de un material que permite golpearlo y darle forma sin que se quiebre",pistas:["Es una propiedad del material","Se puede golpear sin romperse","El hierro dulce lo es","El herrero aprovecha esta propiedad"]},
+    {term:"RODAMIENTO",def:"Componente mecánico con bolitas de acero entre dos anillos que permite que una pieza gire sobre otra con mínima fricción",pistas:["Tiene bolitas de acero","Reduce la fricción","Está en ejes y ruedas","Permite el giro suave"]},
+    {term:"OXIDACION",def:"Reacción del hierro con el oxígeno y la humedad que forma óxido de hierro (herrumbre), deteriorando el material",pistas:["Afecta al hierro","Necesita oxígeno y humedad","Produce color rojizo","La pintura la previene"]},
+    {term:"CROMO",def:"Elemento químico que forma en el acero una capa de óxido autorreparable que lo hace resistente a la corrosión (inoxidable)",pistas:["Es un elemento químico","Se agrega al acero","Previene la oxidación","El acero inoxidable lo tiene en más del 10%"]},
+    {term:"GALVANIZADO",def:"Proceso de recubrir el acero con una capa de zinc para protegerlo de la corrosión. Los techos de calamina son un ejemplo",pistas:["Es un recubrimiento","Usa zinc","Protege el acero","Los techos de calamina son así"]},
+    {term:"TERMOPLASTICO",def:"Plástico que se ablanda con calor y endurece al enfriarse de forma reversible. Se puede fundir y reciclar",pistas:["Es un tipo de plástico","El calor lo ablanda","Al enfriar se endurece","Es reversible — se puede reciclar"]},
+    {term:"TERMOESTABLE",def:"Plástico con reacción química irreversible. Una vez endurecido el calor lo quema, no lo ablanda. La resina epoxi es un ejemplo",pistas:["Es un tipo de plástico","Su reacción es irreversible","El calor lo destruye no lo ablanda","La resina epoxi es un ejemplo"]},
+    {term:"PVC",def:"Policloruro de Vinilo. Plástico versátil, rígido o flexible según aditivos. Usado en tuberías de riego y cables eléctricos",pistas:["Es un plástico","Se usa en tuberías","Puede ser rígido o flexible","Al quemarse libera gases tóxicos"]},
+    {term:"CAUCHO",def:"Material elástico natural o sintético que puede elongarse hasta 600% y recuperar su forma. Base de neumáticos y mangueras",pistas:["Es elástico","Se estira mucho y vuelve","Los neumáticos son de esto","También se llama hule o goma"]},
+    {term:"LUBRICANTE",def:"Material que se coloca entre superficies móviles para reducir la fricción, el calor y el desgaste. Puede ser aceite, grasa o sólido",pistas:["Reduce la fricción","Va entre piezas móviles","Puede ser líquido o semisólido","El aceite de motor es un ejemplo"]},
+  ]
+};
+
+// ═══════════════════════════════════════════════════
+// ESTADO GLOBAL
+// ═══════════════════════════════════════════════════
+let activeCategories = new Set(Object.keys(TERMINOS));
+let totalScore = 0, totalCorrect = 0, streak = 0;
+
+function getActiveTerms(){
+  let t=[];
+  activeCategories.forEach(c=>{if(TERMINOS[c])t=t.concat(TERMINOS[c])});
+  return t;
+}
+
+function shuffle(arr){let a=[...arr];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function addScore(pts){totalScore+=pts;totalCorrect++;streak++;document.getElementById('total-score').textContent=totalScore;document.getElementById('total-correct').textContent=totalCorrect;document.getElementById('streak').textContent=streak}
+
+function resetStreak(){streak=0;document.getElementById('streak').textContent=0}
+
+// CATEGORÍAS
+function buildCatTabs(){
+  const wrap=document.getElementById('cat-tabs');
+  wrap.innerHTML='';
+  Object.keys(TERMINOS).forEach(cat=>{
+    const btn=document.createElement('button');
+    btn.className='dtab active';
+    btn.textContent=cat+' ('+TERMINOS[cat].length+')';
+    btn.onclick=function(){
+      if(activeCategories.has(cat)&&activeCategories.size>1){activeCategories.delete(cat);btn.classList.remove('active')}
+      else{activeCategories.add(cat);btn.classList.add('active')}
+      document.getElementById('term-count').textContent=getActiveTerms().length;
+    };
+    wrap.appendChild(btn);
+  });
+  document.getElementById('term-count').textContent=getActiveTerms().length;
+}
+
+function showGame(id){
+  document.querySelectorAll('.game-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.gnav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  event.target.classList.add('active');
+  if(id==='flashcards')initFlash();
+  if(id==='parejas')initMatch();
+  if(id==='adivina')initGuess();
+  if(id==='sopa')initSoup();
+  if(id==='crucigrama')initCross();
+}
+
+// ═══════════════════════════════════════════════════
+// JUEGO 1: FLASHCARDS
+// ═══════════════════════════════════════════════════
+let flashDeck=[], flashIdx=0, flashFlipped=false;
+let fStats={easy:0,ok:0,hard:0};
+
+function initFlash(){
+  flashDeck=shuffle(getActiveTerms());
+  flashIdx=0; flashFlipped=false; fStats={easy:0,ok:0,hard:0};
+  renderFlash();
+  document.getElementById('flash-rate').style.display='none';
+  updateFStats();
+}
+
+function renderFlash(){
+  if(!flashDeck.length)return;
+  const c=flashDeck[flashIdx];
+  document.getElementById('flash-term').textContent=c.term;
+  document.getElementById('flash-def').textContent=c.def;
+  document.getElementById('flash-cat').textContent=getCat(c.term);
+  document.getElementById('flash-counter').textContent=(flashIdx+1)+' / '+flashDeck.length;
+  document.getElementById('flash-remaining').textContent='Quedan: '+(flashDeck.length-flashIdx-1)+' tarjetas';
+  const fc=document.getElementById('flashcard');
+  fc.classList.remove('flipped');
+  flashFlipped=false;
+  document.getElementById('flash-rate').style.display='none';
+}
+
+function getCat(term){
+  for(let cat in TERMINOS){let found=TERMINOS[cat].find(t=>t.term===term);if(found)return cat}return ''
+}
+
+function flipCard(){
+  const fc=document.getElementById('flashcard');
+  flashFlipped=!flashFlipped;
+  fc.classList.toggle('flipped',flashFlipped);
+  if(flashFlipped) document.getElementById('flash-rate').style.display='flex';
+}
+
+function shuffleFlash(){flashDeck=shuffle(flashDeck);flashIdx=0;renderFlash()}
+
+function prevCard(){if(flashIdx>0){flashIdx--;renderFlash()}}
+
+function nextCard(){if(flashIdx<flashDeck.length-1){flashIdx++;renderFlash()}}
+
+function rateCard(r){
+  fStats[r]++;
+  updateFStats();
+  if(r==='easy')addScore(10);
+  if(r==='ok')addScore(5);
+  if(r==='hard')resetStreak();
+  nextCard();
+}
+
+function updateFStats(){
+  document.getElementById('f-easy').textContent=fStats.easy;
+  document.getElementById('f-ok').textContent=fStats.ok;
+  document.getElementById('f-hard').textContent=fStats.hard;
+}
+
+// ═══════════════════════════════════════════════════
+// JUEGO 2: PAREJAS
+// ═══════════════════════════════════════════════════
+let matchPairs=[], matchSel=null, matchCorrect=0, matchTotal=0;
+
+function initMatch(){
+  const terms=shuffle(getActiveTerms()).slice(0,6);
+  matchPairs=terms; matchSel=null; matchCorrect=0; matchTotal=terms.length;
+  const shuffledDefs=shuffle(terms.map(t=>({term:t.term,def:t.def})));
+  const tWrap=document.getElementById('match-terms');
+  const dWrap=document.getElementById('match-defs');
+  tWrap.innerHTML=''; dWrap.innerHTML='';
+  const dots=document.getElementById('match-dots');
+  dots.innerHTML='';
+  for(let i=0;i<matchTotal;i++){const d=document.createElement('div');d.className='match-dot';d.id='mdot'+i;dots.appendChild(d)}
+  terms.forEach(t=>{
+    const el=document.createElement('div');
+    el.className='match-item';
+    el.textContent=t.term;
+    el.dataset.term=t.term;
+    el.dataset.type='term';
+    el.onclick=()=>selectMatch(el);
+    tWrap.appendChild(el);
+  });
+  shuffledDefs.forEach(t=>{
+    const el=document.createElement('div');
+    el.className='match-item';
+    el.textContent=t.def;
+    el.dataset.term=t.term;
+    el.dataset.type='def';
+    el.onclick=()=>selectMatch(el);
+    dWrap.appendChild(el);
+  });
+  document.getElementById('match-info').textContent='Empareja '+matchTotal+' términos';
+  showMsg('match-msg','','');
+}
+
+function selectMatch(el){
+  if(el.classList.contains('correct'))return;
+  if(matchSel===null){
+    matchSel=el;
+    el.classList.add('selected');
+  } else {
+    if(matchSel===el){matchSel.classList.remove('selected');matchSel=null;return}
+    const a=matchSel, b=el;
+    a.classList.remove('selected');
+    if(a.dataset.term===b.dataset.term){
+      a.classList.add('correct'); b.classList.add('correct');
+      document.getElementById('mdot'+matchCorrect).classList.add('ok');
+      matchCorrect++;
+      addScore(15);
+      showMsg('match-msg','¡Correcto! +15 puntos','ok');
+      if(matchCorrect===matchTotal)setTimeout(()=>showMsg('match-msg','¡Completaste todas las parejas! 🎉','ok'),300);
+    } else {
+      a.classList.add('wrong'); b.classList.add('wrong');
+      resetStreak();
+      showMsg('match-msg','Incorrecto, intenta de nuevo','fail');
+      setTimeout(()=>{a.classList.remove('wrong');b.classList.remove('wrong')},800);
+    }
+    matchSel=null;
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// JUEGO 3: ADIVINA EL TÉRMINO
+// ═══════════════════════════════════════════════════
+let guessTerm=null, guessAttempts=0, guessPistaIdx=0;
+
+function initGuess(){
+  const terms=getActiveTerms().filter(t=>t.pistas&&t.pistas.length>0);
+  if(!terms.length)return;
+  guessTerm=shuffle(terms)[0];
+  guessAttempts=0; guessPistaIdx=0;
+  document.getElementById('guess-input').value='';
+  const res=document.getElementById('guess-result');
+  res.style.display='none';
+  renderPistas();
+  renderAttemptDots();
+  document.getElementById('guess-pistas-left').textContent='Pistas disponibles: '+guessTerm.pistas.length;
+}
+
+function renderPistas(){
+  const wrap=document.getElementById('guess-pistas');
+  wrap.innerHTML='';
+  guessTerm.pistas.forEach((p,i)=>{
+    const el=document.createElement('div');
+    el.className='pista'+(i<guessPistaIdx?' shown':'');
+    el.innerHTML='<b>Pista '+(i+1)+':</b> '+p;
+    wrap.appendChild(el);
+  });
+  if(guessPistaIdx===0){
+    const first=wrap.querySelector('.pista');
+    if(first){first.classList.add('shown')}
+    guessPistaIdx=1;
+  }
+}
+
+function showNextPista(){
+  if(guessTerm&&guessPistaIdx<guessTerm.pistas.length){
+    const pistas=document.querySelectorAll('.pista');
+    if(pistas[guessPistaIdx]) pistas[guessPistaIdx].classList.add('shown');
+    guessPistaIdx++;
+  }
+}
+
+function renderAttemptDots(){
+  const wrap=document.getElementById('attempt-dots');
+  wrap.innerHTML='';
+  for(let i=0;i<5;i++){
+    const d=document.createElement('div');
+    d.className='attempt-dot'+(i<guessAttempts?' used':'');
+    wrap.appendChild(d);
+  }
+}
+
+function checkGuess(){
+  if(!guessTerm)return;
+  const input=document.getElementById('guess-input');
+  const val=input.value.trim().toUpperCase();
+  const correct=guessTerm.term.toUpperCase();
+  const res=document.getElementById('guess-result');
+  if(val===correct||correct.includes(val)&&val.length>3){
+    res.className='guess-result ok';
+    res.style.display='block';
+    res.innerHTML='✅ ¡Correcto! La respuesta es: <b>'+guessTerm.term+'</b><br><small>'+guessTerm.def+'</small>';
+    addScore(20-guessAttempts*3);
+    setTimeout(initGuess,3000);
+  } else {
+    guessAttempts++;
+    resetStreak();
+    renderAttemptDots();
+    if(guessAttempts>=5){
+      res.className='guess-result fail';
+      res.style.display='block';
+      res.innerHTML='❌ La respuesta era: <b>'+guessTerm.term+'</b><br><small>'+guessTerm.def+'</small>';
+      setTimeout(initGuess,3000);
+    } else {
+      res.className='guess-result fail';
+      res.style.display='block';
+      res.textContent='❌ Incorrecto. Te quedan '+(5-guessAttempts)+' intentos.';
+    }
+  }
+  input.value='';
+}
+
+// ═══════════════════════════════════════════════════
+// JUEGO 4: SOPA DE LETRAS
+// ═══════════════════════════════════════════════════
+let soupGrid=[], soupWords=[], soupFound=[], soupSel=null;
+const COLS=14, ROWS=12;
+const LETTERS='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+function initSoup(){
+  const terms=shuffle(getActiveTerms()).slice(0,8).map(t=>t.term.replace(/\s/g,'').substring(0,10));
+  soupWords=terms; soupFound=[];
+  soupGrid=[];
+  for(let r=0;r<ROWS;r++){soupGrid.push(Array(COLS).fill(''))}
+  const dirs=[[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0]];
+  terms.forEach(word=>{
+    let placed=false, tries=0;
+    while(!placed&&tries<200){
+      tries++;
+      const dir=dirs[Math.floor(Math.random()*dirs.length)];
+      const maxR=dir[0]>0?ROWS-word.length:dir[0]<0?word.length-1:ROWS-1;
+      const maxC=dir[1]>0?COLS-word.length:dir[1]<0?word.length-1:COLS-1;
+      const r=Math.floor(Math.random()*(maxR+1));
+      const c=Math.floor(Math.random()*(maxC+1));
+      let ok=true;
+      for(let i=0;i<word.length;i++){
+        const nr=r+dir[0]*i, nc=c+dir[1]*i;
+        if(soupGrid[nr][nc]!==''&&soupGrid[nr][nc]!==word[i]){ok=false;break}
+      }
+      if(ok){
+        for(let i=0;i<word.length;i++) soupGrid[r+dir[0]*i][c+dir[1]*i]=word[i];
+        placed=true;
+      }
+    }
+  });
+  for(let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++) if(soupGrid[r][c]==='') soupGrid[r][c]=LETTERS[Math.floor(Math.random()*26)];
+  renderSoup();
+  document.getElementById('soup-info').textContent='Encuentra '+terms.length+' términos';
+}
+
+let soupStart=null, soupSelCells=[];
+
+function renderSoup(){
+  const grid=document.getElementById('soup-grid');
+  grid.innerHTML='';
+  grid.style.gridTemplateColumns='repeat('+COLS+',30px)';
+  for(let r=0;r<ROWS;r++){
+    for(let c=0;c<COLS;c++){
+      const cell=document.createElement('div');
+      cell.className='soup-cell';
+      cell.textContent=soupGrid[r][c];
+      cell.dataset.r=r; cell.dataset.c=c;
+      cell.onclick=()=>clickSoup(cell,r,c);
+      grid.appendChild(cell);
+    }
+  }
+  const wlist=document.getElementById('soup-word-list');
+  wlist.innerHTML='';
+  soupWords.forEach(w=>{
+    const chip=document.createElement('span');
+    chip.className='word-chip'+(soupFound.includes(w)?' found':'');
+    chip.textContent=w;
+    chip.id='chip-'+w;
+    wlist.appendChild(chip);
+  });
+}
+
+function clickSoup(cell,r,c){
+  if(soupStart===null){
+    soupStart={r,c,cell};
+    cell.classList.add('selecting');
+    soupSelCells=[cell];
+  } else {
+    soupSelCells.forEach(sc=>sc.classList.remove('selecting'));
+    const word=getWordBetween(soupStart.r,soupStart.c,r,c);
+    const rev=word.split('').reverse().join('');
+    const match=soupWords.find(w=>w===word||w===rev);
+    if(match&&!soupFound.includes(match)){
+      soupFound.push(match);
+      markFound(soupStart.r,soupStart.c,r,c);
+      document.getElementById('chip-'+match).classList.add('found');
+      addScore(20);
+      showMsg('soup-msg','¡Encontraste: '+match+'! +20 puntos','ok');
+      if(soupFound.length===soupWords.length) showMsg('soup-msg','¡Sopa completada! 🎉','ok');
+    } else {
+      showMsg('soup-msg','No hay palabra en esa dirección','fail');
+    }
+    soupStart=null; soupSelCells=[];
+  }
+}
+
+function getWordBetween(r1,c1,r2,c2){
+  const dr=Math.sign(r2-r1), dc=Math.sign(c2-c1);
+  if(dr===0&&dc===0)return soupGrid[r1][c1];
+  let word='', r=r1, c=c1;
+  const maxLen=Math.max(Math.abs(r2-r1),Math.abs(c2-c1))+1;
+  for(let i=0;i<maxLen;i++){
+    if(r<0||r>=ROWS||c<0||c>=COLS)break;
+    word+=soupGrid[r][c]; r+=dr; c+=dc;
+  }
+  return word;
+}
+
+function markFound(r1,c1,r2,c2){
+  const dr=Math.sign(r2-r1), dc=Math.sign(c2-c1);
+  const cells=document.querySelectorAll('.soup-cell');
+  let r=r1, c=c1;
+  const maxLen=Math.max(Math.abs(r2-r1),Math.abs(c2-c1))+1;
+  for(let i=0;i<maxLen;i++){
+    const idx=r*COLS+c;
+    if(cells[idx]) cells[idx].classList.add('found');
+    r+=dr; c+=dc;
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// JUEGO 5: CRUCIGRAMA SIMPLE
+// ═══════════════════════════════════════════════════
+let crossData=[];
+
+function initCross(){
+  const terms=shuffle(getActiveTerms()).slice(0,6);
+  crossData=[];
+  const GR=15, GC=15;
+  let grid=[];
+  for(let r=0;r<GR;r++) grid.push(Array(GC).fill(null));
+  let clueNum=1;
+  const placed=[];
+  terms.forEach((t,i)=>{
+    const word=t.term.replace(/\s/g,'').substring(0,12);
+    if(i===0){
+      const r=7, c=2;
+      let ok=true;
+      for(let j=0;j<word.length;j++){if(grid[r][c+j]!==null&&grid[r][c+j]!==word[j]){ok=false;break}}
+      if(ok){
+        for(let j=0;j<word.length;j++) grid[r][c+j]=word[j];
+        placed.push({word,r,c,dir:'across',clue:t.def,num:clueNum++});
+      }
+    } else if(placed.length>0){
+      const ref=placed[Math.floor(Math.random()*placed.length)];
+      const shared=word.split('').find(ch=>ref.word.includes(ch));
+      if(!shared)return;
+      const wi=word.indexOf(shared), ri=ref.word.indexOf(shared);
+      if(ref.dir==='across'){
+        const r=ref.r-wi, c=ref.c+ri;
+        if(r<0||r+word.length>GR)return;
+        let ok=true;
+        for(let j=0;j<word.length;j++){if(grid[r+j][c]!==null&&grid[r+j][c]!==word[j]){ok=false;break}}
+        if(ok){
+          for(let j=0;j<word.length;j++) grid[r+j][c]=word[j];
+          placed.push({word,r,c,dir:'down',clue:t.def,num:clueNum++});
+        }
+      } else {
+        const r=ref.r+ri, c=ref.c-wi;
+        if(c<0||c+word.length>GC)return;
+        let ok=true;
+        for(let j=0;j<word.length;j++){if(grid[r][c+j]!==null&&grid[r][c+j]!==word[j]){ok=false;break}}
+        if(ok){
+          for(let j=0;j<word.length;j++) grid[r][c+j]=word[j];
+          placed.push({word,r,c,dir:'across',clue:t.def,num:clueNum++});
+        }
+      }
+    }
+  });
+  crossData=placed;
+  renderCross(grid,GR,GC);
+  showMsg('cross-msg','','');
+}
+
+let crossActive=null;
+
+function renderCross(grid,GR,GC){
+  const gEl=document.getElementById('cross-grid');
+  gEl.innerHTML='';
+  gEl.style.gridTemplateColumns='repeat('+GC+',34px)';
+  gEl.style.gridTemplateRows='repeat('+GR+',34px)';
+  const numMap={};
+  crossData.forEach(e=>{numMap[e.r+'_'+e.c]=e.num});
+  for(let r=0;r<GR;r++){
+    for(let c=0;c<GC;c++){
+      const cell=document.createElement('div');
+      if(grid[r][c]===null){
+        cell.className='cross-cell black';
+      } else {
+        cell.className='cross-cell';
+        cell.dataset.r=r; cell.dataset.c=c; cell.dataset.ans=grid[r][c];
+        if(numMap[r+'_'+c]){
+          const num=document.createElement('span');
+          num.className='cross-num'; num.textContent=numMap[r+'_'+c];
+          cell.appendChild(num);
+        }
+        cell.onclick=()=>{
+          document.querySelectorAll('.cross-cell.active').forEach(x=>x.classList.remove('active'));
+          cell.classList.add('active'); crossActive=cell;
+        };
+        const inp=document.createElement('input');
+        inp.className='cross-input'; inp.maxLength=1; inp.type='text';
+        inp.oninput=function(){
+          const v=this.value.toUpperCase();
+          cell.dataset.val=v;
+          const txt=cell.childNodes;
+          [...txt].forEach(n=>{if(n.nodeType===3) n.remove()});
+          cell.appendChild(document.createTextNode(v));
+          this.value='';
+          const cells=document.querySelectorAll('.cross-cell:not(.black)');
+          const arr=[...cells]; const idx=arr.indexOf(cell);
+          if(idx<arr.length-1) arr[idx+1].querySelector('.cross-input').focus();
+        };
+        cell.appendChild(inp);
+      }
+      gEl.appendChild(cell);
+    }
+  }
+  const across=document.getElementById('cross-across');
+  const down=document.getElementById('cross-down');
+  across.innerHTML=''; down.innerHTML='';
+  crossData.forEach(e=>{
+    const el=document.createElement('div');
+    el.className='clue-item';
+    el.innerHTML='<b>'+e.num+'.</b> '+e.clue;
+    if(e.dir==='across') across.appendChild(el);
+    else down.appendChild(el);
+  });
+}
+
+function checkCross(){
+  const cells=document.querySelectorAll('.cross-cell:not(.black)');
+  let right=0, total=0;
+  cells.forEach(c=>{
+    if(!c.dataset.ans)return;
+    total++;
+    const val=(c.dataset.val||'').toUpperCase();
+    if(val===c.dataset.ans){c.classList.add('correct');c.classList.remove('wrong');right++}
+    else if(val){c.classList.add('wrong');c.classList.remove('correct')}
+  });
+  showMsg('cross-msg',right+' / '+total+' letras correctas',(right===total?'ok':'info'));
+  if(right===total){addScore(50);showMsg('cross-msg','¡Crucigrama completado! +50 puntos 🎉','ok')}
+}
+
+function revealCross(){
+  document.querySelectorAll('.cross-cell:not(.black)').forEach(c=>{
+    if(!c.dataset.ans)return;
+    c.dataset.val=c.dataset.ans;
+    const inp=c.querySelector('.cross-input');
+    const txts=[...c.childNodes].filter(n=>n.nodeType===3);
+    txts.forEach(t=>t.remove());
+    c.appendChild(document.createTextNode(c.dataset.ans));
+    c.classList.add('correct');
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// UTILIDADES
+// ═══════════════════════════════════════════════════
+function showMsg(id,text,type){
+  const el=document.getElementById(id);
+  if(!el)return;
+  if(!text){el.style.display='none';return}
+  el.className='msg '+type;
+  el.textContent=text;
+  el.style.display='block';
+  if(type!=='ok'||text.includes('Completado')||text.includes('completada')||text.includes('completaste'))return;
+  setTimeout(()=>{el.style.display='none'},2000);
+}
+
+// INICIO
+buildCatTabs();
+initFlash();
+</script>
+</body>
+</html>
