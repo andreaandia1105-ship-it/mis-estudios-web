@@ -1,0 +1,700 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.titbar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titbar h1{font-size:18px;font-weight:700;letter-spacing:.5px;margin-bottom:4px}
+.titbar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pill{display:inline-block;font-size:10px;padding:2px 9px;border-radius:20px;margin:2px;background:#1e3a5f;color:#93c5fd}
+.secbar{grid-column:1/-1;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:700;letter-spacing:.3px}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;margin-bottom:9px;letter-spacing:.4px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-amber{background:#fef9c3;color:#713f12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.def{border-left:3px solid #3b82f6;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.6;color:var(--color-text-primary)}
+.def.green{border-left-color:#16a34a}
+.def.red{border-left-color:#dc2626}
+.def.amber{border-left-color:#d97706}
+.def.purple{border-left-color:#7c3aed}
+.def.teal{border-left-color:#0d9488}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:6px;color:var(--color-text-primary)}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#16a34a}
+.dot-red{background:#dc2626}
+.dot-amber{background:#d97706}
+.dot-purple{background:#7c3aed}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:8px 12px;border-radius:7px;text-align:center;line-height:1.7;margin:8px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;line-height:1.5}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:9px 11px;margin-top:9px;line-height:1.6}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:9px 11px;font-size:11.5px;color:var(--color-text-primary);line-height:1.5}
+.mini strong{display:block;margin-bottom:3px;font-size:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:8px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:6px;font-size:11px;color:var(--color-text-primary)}
+.farrow{color:var(--color-text-secondary);font-size:14px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:6px 8px;border-bottom:0.5px solid var(--color-border-tertiary);font-weight:500;color:var(--color-text-primary);text-align:left}
+.tbl td{padding:5px 8px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;color:var(--color-text-primary)}
+.tbl tr:last-child td{border-bottom:none}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-size:12px;color:#7dd3fc;font-weight:700;flex-shrink:0}
+.fc{font-size:11px;color:#94a3b8;line-height:1.6}
+.quiz-wrap{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;overflow:hidden}
+.quiz-head{background:#0f1e3a;color:#fff;padding:13px 18px}
+.quiz-head h2{font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-head p{font-size:11px;color:#94a3b8}
+.quiz-body{padding:14px 18px}
+.prog-wrap{background:var(--color-background-secondary);border-radius:20px;height:8px;margin:10px 0 4px;overflow:hidden}
+.prog-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .3s}
+.prog-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:12px}
+.qcard{margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qcard:last-of-type{border-bottom:none}
+.qnum{font-size:10px;font-weight:700;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.qtext{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:10px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;color:var(--color-text-primary);transition:all .15s;font-family:inherit}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary);border-color:var(--color-border-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.6;display:none}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.result-panel{display:none;border-radius:10px;padding:14px 16px;margin-top:12px;text-align:center}
+.result-panel h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.result-panel p{font-size:12px;margin-bottom:10px}
+.reset-btn{background:#0f1e3a;color:#fff;border:none;padding:8px 18px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit}
+.reset-btn:hover{opacity:.85}
+.stab-demo{margin:8px 0}
+.stab-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11.5px}
+.stab-bar{height:10px;border-radius:20px;flex-shrink:0}
+.calc-box{background:var(--color-background-secondary);border-radius:10px;padding:12px;margin-top:8px}
+.calc-box label{font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px}
+.calc-box input{width:100%;padding:5px 8px;border-radius:6px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:12px;font-family:inherit;margin-bottom:8px}
+.calc-box button{background:#0f1e3a;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;margin-right:6px}
+.calc-result{font-size:12px;margin-top:8px;padding:8px;border-radius:6px;line-height:1.6;font-weight:500}
+</style>
+
+<div class="cv">
+
+<div class="titbar">
+  <h1>Contaminacion Atmosferica — Perfil de Temperatura y Calidad del Aire</h1>
+  <p>Ingenieria Ambiental / Meteorologia | UNALM | Canvas de Estudio</p>
+  <span class="pill">Perfil de temperatura</span>
+  <span class="pill">Gradiente adiabatico</span>
+  <span class="pill">Estabilidad atmosferica</span>
+  <span class="pill">Penacho</span>
+  <span class="pill">Conversion de unidades</span>
+  <span class="pill">ECA Peru</span>
+</div>
+
+<div class="secbar" style="background:#dbeafe;color:#1e3a8a">BLOQUE 1 — Perfil de temperatura y la ecuacion T = a + bz</div>
+
+<div class="block s2">
+  <span class="bh bh-blue">Que es el perfil de temperatura</span>
+  <div class="def">La atmosfera no tiene la misma temperatura en todos los niveles de altura. El "perfil de temperatura" es simplemente el mapa de como cambia la temperatura T a medida que subes en altura z. Se modela con una linea recta por cada capa: <strong>T = a + bz</strong>, donde "a" es la temperatura al inicio de esa capa y "b" es la tasa de cambio (cuantos grados cambia por metro que subes).</div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Variable z:</strong> altura en metros sobre el nivel del suelo. No es la elevacion del terreno, sino la distancia vertical desde el punto de referencia.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Variable T:</strong> temperatura del aire ambiente en ese nivel, en grados Celsius.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Parametro a:</strong> la temperatura al inicio del tramo (cuando z coincide con el punto de partida de esa capa). Se despeja sustituyendo cualquier punto conocido.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Parametro b:</strong> la pendiente, es decir, el gradiente termico vertical real de esa capa. Se calcula como (T2-T1)/(z2-z1). Si b es negativo, la temperatura baja al subir (normal). Si b es positivo, la temperatura sube al subir (inversion termica).</span></div>
+  <div class="rx">b = (T2 - T1) / (z2 - z1)  [°C/m]<br>Ejemplo: b = (18.2 - 20.0) / (200 - 0) = -1.8 / 200 = -0.009 °C/m</div>
+  <div class="warn">ERROR COMUN: Muchos confunden "a" con la temperatura del suelo del planeta. "a" es la temperatura al inicio de ESA capa especifica. Si la capa empieza en z=200m, entonces "a" se calcula con ese punto, no con z=0.</div>
+  <div class="exam">EXAMEN: Dado que en z=0m la temperatura es 22°C y en z=150m es 20.5°C, determine la ecuacion T=a+bz para esa capa y calcule la temperatura ambiental a z=90m.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Calculadora interactiva — Ecuacion por capa</span>
+  <div class="calc-box">
+    <label>Punto 1: z1 (m)</label>
+    <input id="z1" type="number" value="0" step="1">
+    <label>Punto 1: T1 (°C)</label>
+    <input id="t1" type="number" value="20" step="0.1">
+    <label>Punto 2: z2 (m)</label>
+    <input id="z2" type="number" value="200" step="1">
+    <label>Punto 2: T2 (°C)</label>
+    <input id="t2" type="number" value="18.2" step="0.1">
+    <label>Altura a evaluar: z* (m)</label>
+    <input id="zeval" type="number" value="130" step="1">
+    <button onclick="calcCapa()">Calcular</button>
+    <div class="calc-result" id="capa-result" style="display:none"></div>
+  </div>
+  <div class="exam" style="margin-top:10px">EXAMEN: Si b resulta positivo al hacer el calculo, que tipo de condicion atmosferica existe en esa capa y por que representa una barrera para los contaminantes?</div>
+</div>
+
+<div class="secbar" style="background:#dcfce7;color:#14532d">BLOQUE 2 — Gradiente adiabatico vs gradiente real: la clave de la estabilidad</div>
+
+<div class="block">
+  <span class="bh bh-green">Gradiente adiabatico (gamma mayuscula)</span>
+  <div class="def green">El gradiente adiabatico (Γ = -0.01 °C/m) es la tasa a la que se enfria una burbuja de aire que sube sin intercambiar calor con el entorno. Es una constante fisica universal. Siempre vale -0.01 °C/m para aire seco. Es tu referencia de comparacion: el "cero de velocidad" con el que mides si la atmosfera ayuda o frena el movimiento vertical.</div>
+  <div class="rx">Γ = -0.01 °C/m  (constante, siempre fija)<br>Una burbuja que sube 100m se enfria exactamente 1°C</div>
+  <div class="item"><span class="dot dot-green"></span><span>Se llama "adiabatico" porque el proceso ocurre sin intercambio de calor: la burbuja se expande sola al subir porque la presion baja, y esa expansion la enfria.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span>Este valor es independiente de la temperatura inicial, la humedad (en aire seco), la altura del lugar o el tipo de contaminante. Es siempre -0.01 °C/m.</span></div>
+  <div class="warn">No confundir Γ (gamma mayuscula, el adiabatico, constante) con γ (gamma minuscula, el gradiente real de la atmosfera, que calculas con datos). Son simbolos distintos que representan cosas distintas.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Los tres casos de estabilidad — comparacion γ vs Γ</span>
+  <div class="def green">La estabilidad atmosferica describe si la atmosfera por si sola frena o favorece los movimientos verticales del aire. Se determina comparando el gradiente real medido (γ = b calculado) contra el gradiente adiabatico de referencia (Γ = -0.01 °C/m).</div>
+
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #16a34a">
+      <strong style="color:#14532d">Condicion ESTABLE</strong>
+      γ &gt; Γ algebraicamente<br>Ej: -0.009 &gt; -0.01<br><br>
+      La atmosfera cae menos que lo adiabatico. Una burbuja que sube se enfria mas rapido que el ambiente, se vuelve mas densa y cae de regreso. Frena los movimientos verticales. Contaminantes atrapados en capas horizontales.
+    </div>
+    <div class="mini" style="border-top:3px solid #d97706">
+      <strong style="color:#92400e">Condicion NEUTRA</strong>
+      γ = Γ<br>Ej: -0.010 = -0.010<br><br>
+      La atmosfera cae exactamente igual que lo adiabatico. Una burbuja no tiene fuerza neta hacia arriba ni hacia abajo. Dispersion moderada y predecible. Ni se acumulan ni se dispersan agresivamente.
+    </div>
+    <div class="mini" style="border-top:3px solid #dc2626">
+      <strong style="color:#991b1b">Condicion INESTABLE</strong>
+      γ &lt; Γ algebraicamente<br>Ej: -0.015 &lt; -0.01<br><br>
+      La atmosfera cae mas rapido que lo adiabatico. Una burbuja que sube sigue siendo mas caliente que el ambiente, continua subiendo sola. Favorece la dispersion vertical. Los contaminantes se elevan.
+    </div>
+  </div>
+
+  <div class="stab-demo" style="margin-top:12px">
+    <div class="stab-row">
+      <span style="width:160px;color:var(--color-text-secondary);font-size:11px">Inversion termica (+0.028)</span>
+      <div class="stab-bar" style="width:100%;background:#fee2e2"><div class="stab-bar" style="width:100%;background:#dc2626"></div></div>
+      <span style="font-size:11px;color:#991b1b;width:70px">Muy estable</span>
+    </div>
+    <div class="stab-row">
+      <span style="width:160px;color:var(--color-text-secondary);font-size:11px">Casi neutra (-0.009)</span>
+      <div class="stab-bar" style="width:100%;background:#fef9c3"><div class="stab-bar" style="width:55%;background:#d97706"></div></div>
+      <span style="font-size:11px;color:#92400e;width:70px">Estable</span>
+    </div>
+    <div class="stab-row">
+      <span style="width:160px;color:var(--color-text-secondary);font-size:11px">Neutra exacta (-0.010)</span>
+      <div class="stab-bar" style="width:100%;background:#e0f2fe"><div class="stab-bar" style="width:50%;background:#0284c7"></div></div>
+      <span style="font-size:11px;color:#075985;width:70px">Neutra</span>
+    </div>
+    <div class="stab-row">
+      <span style="width:160px;color:var(--color-text-secondary);font-size:11px">Inestable (-0.015)</span>
+      <div class="stab-bar" style="width:100%;background:#dcfce7"><div class="stab-bar" style="width:25%;background:#16a34a"></div></div>
+      <span style="font-size:11px;color:#14532d;width:70px">Inestable</span>
+    </div>
+  </div>
+
+  <div class="calc-box" style="margin-top:10px">
+    <label>Ingresa el gradiente real γ (b calculado, en °C/m):</label>
+    <input id="gamma-input" type="number" value="-0.009" step="0.001">
+    <button onclick="calcEstab()">Determinar estabilidad</button>
+    <div class="calc-result" id="estab-result" style="display:none"></div>
+  </div>
+  <div class="exam">EXAMEN: Explica por que una inversion termica (b positivo) representa la condicion mas estable posible y describe que le ocurre fisicamente a una burbuja de gas contaminante que intenta ascender a traves de una capa con inversion.</div>
+</div>
+
+<div class="secbar" style="background:#ffedd5;color:#7c2d12">BLOQUE 3 — Comportamiento del penacho: ascenso, descenso y altura de estabilizacion</div>
+
+<div class="block">
+  <span class="bh bh-orange">Que es el penacho</span>
+  <div class="def amber">El penacho es la masa de gas contaminante que sale de la chimenea. Al salir, tiene una temperatura propia (la de emision) que generalmente es mayor que la del aire ambiente circundante. Esa diferencia de temperatura determina si flota hacia arriba o cae hacia abajo.</div>
+  <div class="flow">
+    <div class="fbox">Chimenea emite a T_em</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Comparar T_em vs T_amb(z)</div>
+    <span class="farrow">→</span>
+    <div class="fbox">T_em &gt; T_amb → sube</div>
+    <span class="farrow">→</span>
+    <div class="fbox">T_em &lt; T_amb → baja</div>
+  </div>
+  <div class="item"><span class="dot dot-amber"></span><span>Mientras sube, el penacho se enfria siguiendo el gradiente adiabatico: pierde 0.01°C por cada metro que asciende.</span></div>
+  <div class="item"><span class="dot dot-amber"></span><span>Se estabiliza (deja de subir) cuando su temperatura iguala la del ambiente circundante. En ese punto ya no hay diferencia de densidad.</span></div>
+  <div class="rx">T_penacho(z) = T_emision - 0.01 × (z - z_chimenea)<br>Igualar con T_ambiente(z) de la capa correspondiente para hallar z de equilibrio</div>
+  <div class="warn">ERROR COMUN: La estabilidad de las capas NO determina si el penacho inicial sube o baja. Eso lo determina la diferencia de temperatura entre emision y ambiente. La estabilidad determina hasta donde puede llegar y si puede escapar de esa capa.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-orange">Calculadora completa del penacho</span>
+  <div style="font-size:11.5px;color:var(--color-text-secondary);margin-bottom:10px">Ingresa los datos del ejercicio y calcula todo automaticamente paso a paso</div>
+
+  <div class="two">
+    <div class="calc-box">
+      <label>Temperatura emision chimenea (°C)</label>
+      <input id="p-tem" type="number" value="23" step="0.1">
+      <label>Altura chimenea z_ch (m)</label>
+      <input id="p-zch" type="number" value="130" step="1">
+      <label>— Capa 1 —</label>
+      <label>z inicio capa 1 (m)</label>
+      <input id="p-z1a" type="number" value="0" step="1">
+      <label>T inicio capa 1 (°C)</label>
+      <input id="p-t1a" type="number" value="20" step="0.1">
+      <label>z fin capa 1 (m)</label>
+      <input id="p-z1b" type="number" value="200" step="1">
+      <label>T fin capa 1 (°C)</label>
+      <input id="p-t1b" type="number" value="18.2" step="0.1">
+    </div>
+    <div class="calc-box">
+      <label>— Capa 2 —</label>
+      <label>z inicio capa 2 (m)</label>
+      <input id="p-z2a" type="number" value="200" step="1">
+      <label>T inicio capa 2 (°C)</label>
+      <input id="p-t2a" type="number" value="18.2" step="0.1">
+      <label>z fin capa 2 (m)</label>
+      <input id="p-z2b" type="number" value="300" step="1">
+      <label>T fin capa 2 (°C)</label>
+      <input id="p-t2b" type="number" value="21" step="0.1">
+      <label>&nbsp;</label>
+      <button onclick="calcPenacho()" style="margin-top:14px;width:100%">Resolver todo</button>
+    </div>
+  </div>
+  <div class="calc-result" id="penacho-result" style="display:none;margin-top:10px"></div>
+  <div class="exam">EXAMEN: Una chimenea en z=150m emite a 25°C. La Capa 1 va de 0 a 200m con b=-0.010 °C/m y T_0=22°C. La Capa 2 va de 200 a 300m con b=+0.028 °C/m. Determine si el penacho asciende y hasta que altura se estabiliza.</div>
+</div>
+
+<div class="secbar" style="background:#ede9fe;color:#4c1d95">BLOQUE 4 — Conversion de unidades: ppmv ↔ μg/m³</div>
+
+<div class="block">
+  <span class="bh bh-purple">Por que existen dos sistemas de unidades</span>
+  <div class="def purple">Los equipos de medicion en campo dan resultados en ppmv (partes por millon en volumen), que es una razon adimensional facil de medir. Pero las normas de calidad del aire (ECA en Peru) expresan los limites en μg/m³ (microgramos por metro cubico), que es una medida de masa. Para comparar una medicion con un limite legal, necesitas convertir al mismo sistema.</div>
+  <div class="rx">ppmv → μg/m³: C(μg/m³) = ppmv × (PM × 1000) / VM<br>μg/m³ → ppmv: C(ppmv) = μg/m³ × VM / (PM × 1000)<br><br>VM a 25°C y 1 atm = R×T/P = 0.08206 × 298 / 1 = 24.45 L/mol</div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>PM:</strong> Peso molecular del contaminante en g/mol. SO₂ = 64, CO = 28, NO₂ = 46, O₃ = 48, PM2.5 ≈ 100 (aproximacion).</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>VM:</strong> Volumen molar a condiciones estandar (CE = 25°C, 1 atm). Siempre 24.45 L/mol bajo estas condiciones.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>El factor 1000</strong> convierte gramos a microgramos y litros a metros cubicos simultaneamente, haciendo que el resultado salga directamente en μg/m³.</span></div>
+  <div class="warn">El PM 2.5 NO es un gas, sino material particulado. Tecnicamente no tiene peso molecular definido. La conversion a ppmv es una aproximacion usando PM≈100 g/mol y debe declararse como estimacion, no como valor exacto.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-purple">Calculadora de conversion + verificacion ECA Peru</span>
+
+  <div class="two">
+    <div class="calc-box">
+      <label>Contaminante</label>
+      <select id="conv-gas" style="width:100%;padding:5px 8px;border-radius:6px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:12px;margin-bottom:8px;font-family:inherit">
+        <option value="64,SO2,250,24h">SO₂ — PM=64 g/mol</option>
+        <option value="28,CO,10000,8h">CO — PM=28 g/mol</option>
+        <option value="46,NO2,200,1h">NO₂ — PM=46 g/mol</option>
+        <option value="48,O3,100,8h">O₃ — PM=48 g/mol</option>
+        <option value="100,PM25,25,anual">PM2.5 — PM≈100 (aprox)</option>
+      </select>
+      <label>Valor a convertir</label>
+      <input id="conv-val" type="number" value="20.4" step="0.01">
+      <label>Unidad de entrada</label>
+      <select id="conv-dir" style="width:100%;padding:5px 8px;border-radius:6px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:12px;margin-bottom:8px;font-family:inherit">
+        <option value="ppmv">ppmv → μg/m³</option>
+        <option value="ugm3">μg/m³ → ppmv</option>
+      </select>
+      <button onclick="calcConv()">Convertir y verificar ECA</button>
+    </div>
+    <div class="calc-result" id="conv-result" style="display:none;padding:10px;border-radius:8px;background:var(--color-background-secondary);font-size:12px;line-height:1.8"></div>
+  </div>
+
+  <div class="divh"></div>
+  <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Tabla ECA Peru — D.S. 003-2017-MINAM</div>
+  <table class="tbl" style="margin-top:6px">
+    <tr><th>Contaminante</th><th>Limite ECA</th><th>Periodo</th><th>PM (g/mol)</th></tr>
+    <tr><td>SO₂</td><td>250 μg/m³</td><td>24 horas</td><td>64</td></tr>
+    <tr><td>CO</td><td>10,000 μg/m³</td><td>8 horas</td><td>28</td></tr>
+    <tr><td>NO₂</td><td>200 μg/m³</td><td>1 hora</td><td>46</td></tr>
+    <tr><td>O₃</td><td>100 μg/m³</td><td>8 horas</td><td>48</td></tr>
+    <tr><td>PM 2.5</td><td>25 μg/m³</td><td>anual</td><td>~100</td></tr>
+  </table>
+  <div class="exam">EXAMEN: Un monitor registra 0.35 ppmv de NO₂. Asumiendo condiciones estandar (25°C, 1 atm), convierta a μg/m³ y determine si supera el ECA peruano vigente. Justifique cada paso.</div>
+</div>
+
+<div class="secbar" style="background:#f1f5f9;color:#334155">TABLA INTEGRADORA — Resumen de todo el tema</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#f1f5f9;color:#334155">Tabla maestra de conceptos</span>
+  <table class="tbl">
+    <tr>
+      <th>Concepto</th>
+      <th>Formula / Valor</th>
+      <th>Como se interpreta</th>
+      <th>Condicion atmosferica</th>
+      <th>Efecto sobre contaminantes</th>
+    </tr>
+    <tr>
+      <td><strong>Gradiente real (γ)</strong></td>
+      <td>b = (T2-T1)/(z2-z1)</td>
+      <td>Cuanto cambia T por metro en la atmosfera real</td>
+      <td>Depende del valor</td>
+      <td>Depende del valor</td>
+    </tr>
+    <tr>
+      <td><strong>Gradiente adiabatico (Γ)</strong></td>
+      <td>-0.01 °C/m (constante)</td>
+      <td>Enfriamiento de una burbuja que sube sin intercambio de calor</td>
+      <td>Referencia neutra</td>
+      <td>Dispersion moderada</td>
+    </tr>
+    <tr>
+      <td><strong>γ &gt; Γ (ej: -0.009)</strong></td>
+      <td>-0.009 &gt; -0.010</td>
+      <td>Atmosfera cae menos que la burbuja adiabatica</td>
+      <td>ESTABLE</td>
+      <td>Contaminantes atrapados horizontalmente</td>
+    </tr>
+    <tr>
+      <td><strong>γ = Γ (ej: -0.010)</strong></td>
+      <td>-0.010 = -0.010</td>
+      <td>Atmosfera cae igual que la burbuja adiabatica</td>
+      <td>NEUTRA</td>
+      <td>Dispersion predecible y moderada</td>
+    </tr>
+    <tr>
+      <td><strong>γ &lt; Γ (ej: -0.015)</strong></td>
+      <td>-0.015 &lt; -0.010</td>
+      <td>Atmosfera cae mas que la burbuja adiabatica</td>
+      <td>INESTABLE</td>
+      <td>Contaminantes dispersados verticalmente</td>
+    </tr>
+    <tr>
+      <td><strong>Inversion termica (b&gt;0)</strong></td>
+      <td>ej: +0.028 °C/m</td>
+      <td>T aumenta con la altura: techo impenetrable</td>
+      <td>MUY ESTABLE</td>
+      <td>Barrera absoluta, maxima acumulacion</td>
+    </tr>
+    <tr>
+      <td><strong>Penacho sube si</strong></td>
+      <td>T_emision &gt; T_amb(z_ch)</td>
+      <td>Gas mas caliente = menos denso = flota</td>
+      <td>—</td>
+      <td>Sube hasta que T_penacho = T_amb</td>
+    </tr>
+    <tr>
+      <td><strong>Conversion ppmv→μg/m³</strong></td>
+      <td>ppmv × (PM×1000)/24.45</td>
+      <td>Masa del contaminante en un m³ de aire</td>
+      <td>—</td>
+      <td>Permite comparar con ECA Peru</td>
+    </tr>
+  </table>
+  <div class="warn" style="margin-top:8px">DATO INTEGRADOR CLAVE: Una inversion termica (Capa 2 de tu ejercicio con b=+0.028) combinada con una Capa 1 estable (b=-0.009) significa que el penacho puede subir inicialmente por diferencia de temperatura, pero quedara atrapado debajo de la inversion. Si la chimenea emite de forma continua, los contaminantes se acumulan en esa franja creando concentraciones que pueden superar el ECA aunque cada emision individual parezca pequeña.</div>
+</div>
+
+<div class="quiz-wrap">
+  <div class="quiz-head">
+    <h2>Quiz de repaso — 10 preguntas de opcion multiple</h2>
+    <p>Marca tu respuesta y descubre si es correcta con explicacion</p>
+  </div>
+  <div class="quiz-body">
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="prog-label" id="prog-label">0 de 10 respondidas — 0 correctas</div>
+
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">En la ecuacion T = a + bz para una capa atmosferica, que representa el parametro "b"?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) La temperatura a nivel del suelo del planeta</button>
+        <button class="qbtn" data-q="1" data-correct="false">B) La presion atmosferica en la base de la capa</button>
+        <button class="qbtn" data-q="1" data-correct="true">C) La tasa de cambio de temperatura por metro de altura en esa capa especifica</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) La temperatura promedio de toda la columna atmosferica</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">El gradiente adiabatico Γ = -0.01 °C/m es una constante porque...</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) El sol siempre calienta la atmosfera a la misma tasa en todos los paises</button>
+        <button class="qbtn" data-q="2" data-correct="true">B) Depende solo de la expansion del gas al subir, sin intercambio de calor con el entorno, lo cual es un proceso fisico fijo</button>
+        <button class="qbtn" data-q="2" data-correct="false">C) Los instrumentos meteorologicos estan calibrados para ese valor</button>
+        <button class="qbtn" data-q="2" data-correct="false">D) Es un promedio estadistico de mediciones globales desde 1950</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">Una capa atmosferica tiene un gradiente real γ = -0.015 °C/m. Cual es su condicion de estabilidad y por que?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="false">A) Estable, porque -0.015 esta mas lejos de cero que -0.010</button>
+        <button class="qbtn" data-q="3" data-correct="false">B) Neutra, porque el valor es cercano al gradiente adiabatico</button>
+        <button class="qbtn" data-q="3" data-correct="true">C) Inestable, porque γ = -0.015 es algebraicamente menor que Γ = -0.010, lo que significa que la atmosfera cae mas rapido que una burbuja adiabatica</button>
+        <button class="qbtn" data-q="3" data-correct="false">D) Estable, porque todos los gradientes negativos generan estabilidad</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">Una chimenea ubicada en z=130m emite gases a 23°C. El perfil atmosferica indica T_amb(130) = 18.83°C. Que ocurre con el penacho?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="true">A) Asciende, porque el gas emitido (23°C) es mas caliente y menos denso que el aire ambiente (18.83°C)</button>
+        <button class="qbtn" data-q="4" data-correct="false">B) Desciende, porque la diferencia de temperatura es mayor a 4°C</button>
+        <button class="qbtn" data-q="4" data-correct="false">C) Se mantiene horizontal, porque la capa es estable</button>
+        <button class="qbtn" data-q="4" data-correct="false">D) Desciende, porque el gradiente de la Capa 1 es negativo</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">Que representa fisicamente una inversion termica (b positivo) en una capa atmosferica?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) Que la temperatura del suelo es mayor que la normal</button>
+        <button class="qbtn" data-q="5" data-correct="false">B) Que hay mayor concentracion de vapor de agua en esa capa</button>
+        <button class="qbtn" data-q="5" data-correct="false">C) Que la temperatura baja con la altura a una tasa mayor al gradiente adiabatico</button>
+        <button class="qbtn" data-q="5" data-correct="true">D) Que la temperatura aumenta con la altura, creando una barrera que impide el ascenso de masas de aire desde abajo</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">Para convertir 20.4 ppmv de SO₂ a μg/m³ a condiciones estandar (25°C, 1atm), que formula se aplica?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="false">A) 20.4 × 24.45 / (64 × 1000)</button>
+        <button class="qbtn" data-q="6" data-correct="true">B) 20.4 × (64 × 1000) / 24.45</button>
+        <button class="qbtn" data-q="6" data-correct="false">C) 20.4 × 64 / 24.45</button>
+        <button class="qbtn" data-q="6" data-correct="false">D) 20.4 / (64 × 24.45)</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">Segun el ECA Peru (D.S. 003-2017-MINAM), una medicion de 53,419 μg/m³ de SO₂ en 24 horas:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="false">A) Cumple el ECA porque el limite es 500,000 μg/m³</button>
+        <button class="qbtn" data-q="7" data-correct="false">B) Cumple el ECA porque la conversion fue de ppmv</button>
+        <button class="qbtn" data-q="7" data-correct="true">C) Supera ampliamente el ECA de 250 μg/m³, representando una situacion de contaminacion severa</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) No puede compararse con el ECA porque el SO₂ no tiene limite en Peru</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">El penacho sale a 23°C desde z=130m y sube enfriandose a 0.01°C/m. La ecuacion del ambiente en la Capa 2 es T=12.6+0.028z. A que altura se estabiliza el penacho?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="false">A) z = 200m, en el limite entre las dos capas</button>
+        <button class="qbtn" data-q="8" data-correct="false">B) z = 4300m, muy por encima de la Capa 2</button>
+        <button class="qbtn" data-q="8" data-correct="true">C) z ≈ 308m, dentro de la Capa 2, igualando T_penacho con T_ambiente</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) z = 130m, el penacho no puede subir por la estabilidad de la Capa 1</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">Por que NO es tecnicamente correcto convertir PM2.5 a ppmv de la misma forma que un gas como el SO₂?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="false">A) Porque el PM2.5 no tiene unidades en el ECA peruano</button>
+        <button class="qbtn" data-q="9" data-correct="false">B) Porque los instrumentos no pueden medir PM2.5 en ppmv</button>
+        <button class="qbtn" data-q="9" data-correct="true">C) Porque el PM2.5 es material particulado (mezcla de solidos y liquidos), no un gas, y no tiene un peso molecular definido unico como las moleculas gaseosas</button>
+        <button class="qbtn" data-q="9" data-correct="false">D) Porque el PM2.5 solo se mide en condiciones no estandar</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">En un escenario con Capa 1 estable (b=-0.009) y Capa 2 con inversion termica (b=+0.028), una chimenea emite de forma CONTINUA. Cual es la consecuencia para la calidad del aire?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) Los contaminantes se dispersan eficientemente porque la Capa 1 es casi neutra</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) No hay riesgo porque el penacho logra superar la Capa 2</button>
+        <button class="qbtn" data-q="10" data-correct="false">C) La inversion dispersa los contaminantes horizontalmente hacia zonas no pobladas</button>
+        <button class="qbtn" data-q="10" data-correct="true">D) Los contaminantes quedan atrapados entre la chimenea y la inversion termica, acumulandose progresivamente y aumentando la concentracion aunque cada emision individual sea pequena</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div class="result-panel" id="result-panel">
+      <h3 id="result-score"></h3>
+      <p id="result-msg"></p>
+      <button class="reset-btn" onclick="resetQuiz()">Reiniciar quiz</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Wark, Warner & Davis — Air Pollution: Its Origin and Control (3ra ed.) | Seinfeld & Pandis — Atmospheric Chemistry and Physics | D.S. 003-2017-MINAM — ECA Aire Peru | Apuntes de clase — Contaminacion Atmosferica, UNALM</span>
+</div>
+
+</div>
+
+<script>
+function calcCapa(){
+  var z1=+document.getElementById('z1').value;
+  var t1=+document.getElementById('t1').value;
+  var z2=+document.getElementById('z2').value;
+  var t2=+document.getElementById('t2').value;
+  var ze=+document.getElementById('zeval').value;
+  var b=(t2-t1)/(z2-z1);
+  var a=t1-b*z1;
+  var teval=a+b*ze;
+  var r=document.getElementById('capa-result');
+  r.style.display='block';
+  r.style.background='var(--color-background-secondary)';
+  r.innerHTML='<strong>Paso 1 — Calcular b:</strong><br>b = ('+t2+' - '+t1+') / ('+z2+' - '+z1+') = '+(t2-t1).toFixed(2)+' / '+(z2-z1)+' = <strong>'+b.toFixed(4)+' °C/m</strong><br><br><strong>Paso 2 — Calcular a:</strong><br>a = '+t1+' - ('+b.toFixed(4)+'×'+z1+') = <strong>'+a.toFixed(2)+'°C</strong><br><br><strong>Ecuacion de la capa:</strong><br>T = '+a.toFixed(2)+' + ('+b.toFixed(4)+')z<br><br><strong>Temperatura a z='+ze+'m:</strong><br>T = '+a.toFixed(2)+' + ('+b.toFixed(4)+'×'+ze+') = <strong>'+teval.toFixed(2)+'°C</strong>';
+}
+
+function calcEstab(){
+  var g=+document.getElementById('gamma-input').value;
+  var gamma=-0.01;
+  var r=document.getElementById('estab-result');
+  r.style.display='block';
+  var cond,color,exp;
+  if(g>gamma){cond='ESTABLE';color='#dcfce7';exp='γ = '+g+' > Γ = -0.01. La atmosfera cae menos rapido que una burbuja adiabatica. Cualquier burbuja que suba se volvera mas fria que el ambiente y caera de regreso. Los contaminantes quedan atrapados en capas horizontales.';}
+  else if(Math.abs(g-gamma)<0.0001){cond='NEUTRA';color='#fef9c3';exp='γ = Γ = -0.01. No hay fuerza neta que empuje el aire hacia arriba ni hacia abajo. Dispersion moderada y predecible.';}
+  else{cond='INESTABLE';color='#fee2e2';exp='γ = '+g+' < Γ = -0.01. La atmosfera cae mas rapido que una burbuja adiabatica. Las burbujas de aire caliente siguen subiendo sin freno. Buena dispersion vertical de contaminantes.';}
+  if(g>0){cond='INVERSION TERMICA (muy estable)';color='#fee2e2';exp='b = '+g+' es positivo: la temperatura AUMENTA con la altura. Esta es la condicion mas estable posible. Funciona como un techo fisico impenetrable para los contaminantes.';}
+  r.style.background=color;
+  r.innerHTML='<strong>Condicion: '+cond+'</strong><br>'+exp;
+}
+
+function calcPenacho(){
+  var tem=+document.getElementById('p-tem').value;
+  var zch=+document.getElementById('p-zch').value;
+  var z1a=+document.getElementById('p-z1a').value;
+  var t1a=+document.getElementById('p-t1a').value;
+  var z1b=+document.getElementById('p-z1b').value;
+  var t1b=+document.getElementById('p-t1b').value;
+  var z2a=+document.getElementById('p-z2a').value;
+  var t2a=+document.getElementById('p-t2a').value;
+  var z2b=+document.getElementById('p-z2b').value;
+  var t2b=+document.getElementById('p-t2b').value;
+  var b1=(t1b-t1a)/(z1b-z1a);
+  var a1=t1a-b1*z1a;
+  var b2=(t2b-t2a)/(z2b-z2a);
+  var a2=t2a-b2*z2a;
+  var tambCh=a1+b1*zch;
+  var sube=tem>tambCh;
+  var txt='<strong>PASO 1 — Ecuacion Capa 1:</strong><br>b1 = ('+t1b+'-'+t1a+')/('+z1b+'-'+z1a+') = <strong>'+b1.toFixed(4)+' °C/m</strong><br>a1 = '+a1.toFixed(2)+'°C<br>T_capa1 = '+a1.toFixed(2)+' + ('+b1.toFixed(4)+')z<br><br>';
+  txt+='<strong>PASO 2 — Ecuacion Capa 2:</strong><br>b2 = ('+t2b+'-'+t2a+')/('+z2b+'-'+z2a+') = <strong>'+b2.toFixed(4)+' °C/m</strong><br>a2 = '+a2.toFixed(2)+'°C<br>T_capa2 = '+a2.toFixed(2)+' + ('+b2.toFixed(4)+')z<br><br>';
+  txt+='<strong>PASO 3 — T ambiente en z='+zch+'m (Capa 1):</strong><br>T_amb = '+a1.toFixed(2)+' + ('+b1.toFixed(4)+'×'+zch+') = <strong>'+tambCh.toFixed(2)+'°C</strong><br><br>';
+  txt+='<strong>PASO 4 — Comparar con emision ('+tem+'°C):</strong><br>'+tem+' '+(sube?'>':'<')+' '+tambCh.toFixed(2)+' → Penacho '+(sube?'ASCIENDE ↑':'DESCIENDE ↓')+'<br><br>';
+  var tpen_eq=''+tem+' - 0.01(z - '+zch+')'+'= '+(tem+0.01*zch).toFixed(2)+' - 0.01z';
+  txt+='<strong>PASO 5 — Ecuacion del penacho:</strong><br>T_pen(z) = '+tem+' - 0.01×(z - '+zch+') = <strong>'+(tem+0.01*zch).toFixed(2)+' - 0.01z</strong><br><br>';
+  var A=tem+0.01*zch;
+  var z_c1=(A-a1)/(b1+0.01);
+  txt+='<strong>PASO 6 — Igualar penacho con Capa 1:</strong><br>'+A.toFixed(2)+' - 0.01z = '+a1.toFixed(2)+' + '+b1.toFixed(4)+'z<br>z = '+(A-a1).toFixed(2)+' / '+(b1+0.01).toFixed(4)+' = <strong>'+z_c1.toFixed(0)+'m</strong><br>';
+  if(z_c1>=z1a && z_c1<=z1b){
+    txt+='→ Interseccion en Capa 1: el penacho se estabiliza a <strong>z ≈ '+z_c1.toFixed(0)+'m</strong>';
+  } else {
+    txt+='→ No intersecta en Capa 1 (rango '+z1a+'-'+z1b+'m). El penacho atraviesa la Capa 1.<br><br>';
+    var z_c2=(A-a2)/(b2+0.01);
+    txt+='<strong>PASO 7 — Igualar penacho con Capa 2:</strong><br>'+A.toFixed(2)+' - 0.01z = '+a2.toFixed(2)+' + '+b2.toFixed(4)+'z<br>z = '+(A-a2).toFixed(2)+' / '+(b2+0.01).toFixed(4)+' = <strong>'+z_c2.toFixed(0)+'m</strong><br>';
+    if(z_c2>=z2a && z_c2<=z2b){
+      txt+='→ El penacho se estabiliza a <strong>z ≈ '+z_c2.toFixed(0)+'m</strong> dentro de la Capa 2.';
+    } else {
+      txt+='→ No intersecta en Capa 2 tampoco. El penacho supera las dos capas.';
+    }
+  }
+  var r=document.getElementById('penacho-result');
+  r.style.display='block';
+  r.style.background='var(--color-background-secondary)';
+  r.innerHTML=txt;
+}
+
+function calcConv(){
+  var sel=document.getElementById('conv-gas').value.split(',');
+  var pm=+sel[0];
+  var name=sel[1];
+  var eca=+sel[2];
+  var periodo=sel[3];
+  var val=+document.getElementById('conv-val').value;
+  var dir=document.getElementById('conv-dir').value;
+  var vm=24.45;
+  var r=document.getElementById('conv-result');
+  r.style.display='block';
+  var res,txt;
+  if(dir==='ppmv'){
+    res=val*(pm*1000)/vm;
+    txt='<strong>'+val+' ppmv '+name+' → μg/m³</strong><br>';
+    txt+='= '+val+' × ('+pm+' × 1000) / '+vm+'<br>';
+    txt+='= '+val+' × '+pm*1000+' / '+vm+'<br>';
+    txt+='= <strong>'+res.toFixed(1)+' μg/m³</strong><br><br>';
+    if(name==='PM25') txt+='(Aproximacion con PM≈100, valor referencial)<br><br>';
+    var supera=res>eca;
+    txt+='ECA Peru para '+name+' ('+periodo+'): '+eca+' μg/m³<br>';
+    txt+='<strong style="color:'+(supera?'#991b1b':'#14532d')+'">'+(supera?'SUPERA el ECA — situacion de alerta':'CUMPLE el ECA — calidad aceptable')+'</strong>';
+    r.style.background=supera?'#fee2e2':'#dcfce7';
+  } else {
+    res=val*vm/(pm*1000);
+    txt='<strong>'+val+' μg/m³ '+name+' → ppmv</strong><br>';
+    txt+='= '+val+' × '+vm+' / ('+pm+' × 1000)<br>';
+    txt+='= '+val+' × '+vm+' / '+pm*1000+'<br>';
+    txt+='= <strong>'+res.toFixed(4)+' ppmv</strong><br>';
+    txt+='= <strong>'+(res*1000).toFixed(2)+' ppbv</strong><br><br>';
+    r.style.background='var(--color-background-secondary)';
+  }
+  r.innerHTML=txt;
+}
+
+var answered=0,correct=0;
+var feedbacks={
+  1:{ok:'Correcto. "b" es la pendiente de la recta T=a+bz, que matematicamente es el cambio de temperatura dividido entre el cambio de altura: b=(T2-T1)/(z2-z1). Un b negativo significa que T baja al subir, un b positivo significa inversion termica.',fail:'Incorrecto. La respuesta correcta es C. "b" es la tasa de cambio de temperatura por metro, calculada como (T2-T1)/(z2-z1). "a" es quien representa la temperatura en el punto de inicio de la capa.'},
+  2:{ok:'Correcto. El proceso adiabatico significa exactamente "sin intercambio de calor con el entorno". La burbuja sube, se expande por menor presion y se enfria. Esta expansion sigue leyes termodinamicas fijas que dan exactamente -0.01 °C/m para aire seco.',fail:'Incorrecto. La respuesta correcta es B. El gradiente adiabatico es constante porque depende de la expansion del gas al subir (proceso termodinamico), no de factores externos como el sol o los instrumentos.'},
+  3:{ok:'Correcto. La comparacion es algebraica: -0.015 es numericamente menor que -0.010. Esto significa que la atmosfera real se enfria MAS rapido que una burbuja adiabatica, entonces cualquier burbuja que suba siempre sera mas caliente que el ambiente y continuara subiendo: condicion inestable.',fail:'Incorrecto. La respuesta correcta es C. -0.015 < -0.010 algebraicamente. No te confundas por los valores absolutos: en la recta numerica, -0.015 esta mas a la izquierda (es menor) que -0.010.'},
+  4:{ok:'Correcto. La regla es simple: si T_emision > T_ambiente en la misma altura, el gas es mas caliente, menos denso, y flota hacia arriba igual que el aceite en el agua. La estabilidad de la capa no impide este ascenso inicial; lo que determina es hasta donde llega.',fail:'Incorrecto. La respuesta correcta es A. El criterio para subir o bajar es puramente la diferencia de temperatura: gas mas caliente que el ambiente = sube. La estabilidad de la capa determina hasta donde sube, no si sube.'},
+  5:{ok:'Correcto. En condicion normal la temperatura baja con la altura. La inversion es exactamente lo opuesto: T aumenta con la altura. Esto significa que cualquier masa de aire que intente subir desde abajo encontrara aire mas caliente (y potencialmente menos denso) arriba, siendo rebotada hacia abajo.',fail:'Incorrecto. La respuesta correcta es D. La inversion termica es cuando b es positivo, es decir, T sube con la altura. Esta condicion crea una barrera fisica: el aire de arriba es mas caliente que el de abajo, impidiendo el ascenso de masas de aire contaminado.'},
+  6:{ok:'Correcto. Para pasar de ppmv a μg/m³ multiplicas por (PM×1000)/VM. El PM del SO₂ es 64 g/mol (S=32, O×2=32). El VM a 25°C y 1 atm es 24.45 L/mol. El factor 1000 convierte g a μg y L a m³ simultaneamente.',fail:'Incorrecto. La respuesta correcta es B. La formula ppmv→μg/m³ es: ppmv × (PM × 1000) / VM. La opcion A seria la formula inversa (μg/m³→ppmv). Memoriza: si vas a μg/m³, multiplicas por PM y divides por VM.'},
+  7:{ok:'Correcto. El ECA peruano para SO₂ en 24 horas es 250 μg/m³ (D.S. 003-2017-MINAM). 53,419 μg/m³ supera ese limite en mas de 200 veces, lo que constituye una emergencia ambiental severa que requiere accion inmediata.',fail:'Incorrecto. La respuesta correcta es C. El ECA Peru para SO₂ (24h) es 250 μg/m³. La concentracion de 53,419 lo supera mas de 200 veces. Recuerda siempre verificar contra el ECA despues de cualquier conversion.'},
+  8:{ok:'Correcto. Se iguala T_penacho = 24.3 - 0.01z con T_capa2 = 12.6 + 0.028z. Despejando: 24.3 - 12.6 = (0.028+0.01)z → 11.7 = 0.038z → z = 307.9 ≈ 308m. Este valor cae dentro del rango de la Capa 2 (200-300m), lo que confirma que el penacho se estabiliza ahi.',fail:'Incorrecto. La respuesta correcta es C. Se igualan las ecuaciones del penacho y del ambiente en Capa 2: (24.3 - 12.6) / (0.028 + 0.01) = 11.7 / 0.038 ≈ 308m. Los 4300m corresponden a la Capa 1, donde no hay interseccion.'},
+  9:{ok:'Correcto. El PM2.5 es una mezcla heterogenea de particulas solidas y liquidas de diversas composiciones quimicas (sulfatos, nitratos, metales, organicos). No existe un "peso molecular" unico para esta mezcla como si existe para una molecula de SO₂ o CO. La conversion es una aproximacion ingenieria, no un resultado exacto.',fail:'Incorrecto. La respuesta correcta es C. La razon fundamental es que el PM2.5 no es un gas con moleculas identicas: es una mezcla de particulas de diferentes composiciones. Sin un PM definido, la formula de conversion pierde su validez rigurosa.'},
+  10:{ok:'Correcto. Este es el escenario mas peligroso en contaminacion atmosferica: la inversion termica actua como tapa, y la Capa 1 estable no dispersa bien. El penacho logra subir hasta ≈308m pero queda atrapado. Con emision continua, la concentracion acumulada puede superar el ECA aunque cada emision individual sea baja.',fail:'Incorrecto. La respuesta correcta es D. La inversion termica no dispersa, sino que atrapa. La Capa 1 estable tampoco ayuda a la dispersion. El resultado es acumulacion progresiva de contaminantes en la franja entre la chimenea y la inversion. Este escenario ocurre frecuentemente en Lima en invierno.'}
+};
+
+document.querySelector('.quiz-body').addEventListener('click',function(e){
+  if(!e.target.classList.contains('qbtn')) return;
+  var btn=e.target;
+  var q=btn.dataset.q;
+  var isCorrect=btn.dataset.correct==='true';
+  var card=document.getElementById('q'+q);
+  var btns=card.querySelectorAll('.qbtn');
+  btns.forEach(function(b){
+    b.disabled=true;
+    if(b.dataset.correct==='true') b.classList.add('correct');
+  });
+  if(!isCorrect) btn.classList.add('wrong');
+  var fb=document.getElementById('fb'+q);
+  fb.style.display='block';
+  fb.className='qfeedback '+(isCorrect?'ok':'fail');
+  fb.innerHTML=(isCorrect?'Correcto. ':'Incorrecto. La respuesta correcta es la resaltada en verde. ')+(isCorrect?feedbacks[q].ok:feedbacks[q].fail);
+  answered++;
+  if(isCorrect) correct++;
+  var pct=Math.round(answered/10*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-label').textContent=answered+' de 10 respondidas — '+correct+' correctas';
+  if(answered===10){
+    var panel=document.getElementById('result-panel');
+    panel.style.display='block';
+    document.getElementById('result-score').textContent=correct+' / 10 correctas';
+    var msg,bg;
+    if(correct<=4){msg='Necesitas repasar el material con mas detalle. Vuelve a los bloques de contenido y trabaja los ejercicios interactivos.';bg='#fee2e2';}
+    else if(correct<=7){msg='Buen avance. Tienes la base, pero hay conceptos que necesitan mas practica. Revisa las preguntas que fallaste.';bg='#fef9c3';}
+    else{msg='Excelente dominio del tema. Estas listo para el examen. Repasa la tabla integradora como repaso final.';bg='#dcfce7';}
+    document.getElementById('result-msg').textContent=msg;
+    panel.style.background=bg;
+    panel.style.border='none';
+    panel.style.borderRadius='10px';
+  }
+});
+
+function resetQuiz(){
+  answered=0;correct=0;
+  document.getElementById('prog-fill').style.width='0%';
+  document.getElementById('prog-label').textContent='0 de 10 respondidas — 0 correctas';
+  for(var i=1;i<=10;i++){
+    var card=document.getElementById('q'+i);
+    card.querySelectorAll('.qbtn').forEach(function(b){
+      b.disabled=false;
+      b.classList.remove('correct','wrong');
+    });
+    var fb=document.getElementById('fb'+i);
+    fb.style.display='none';
+    fb.className='qfeedback';
+    fb.innerHTML='';
+  }
+  document.getElementById('result-panel').style.display='none';
+}
+</script>
