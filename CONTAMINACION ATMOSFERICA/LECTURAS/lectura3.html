@@ -1,0 +1,692 @@
+
+<style>
+h2.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+:root{
+  --cvb-bg:#dbeafe;--cvb-tx:#1e3a8a;
+  --cvg-bg:#dcfce7;--cvg-tx:#14532d;
+  --cvr-bg:#fee2e2;--cvr-tx:#991b1b;
+  --cvy-bg:#fef9c3;--cvy-tx:#713f12;
+  --cvp-bg:#ede9fe;--cvp-tx:#4c1d95;
+  --cvt-bg:#ccfbf1;--cvt-tx:#134e4a;
+  --cvo-bg:#ffedd5;--cvo-tx:#7c2d12;
+  --cvpk-bg:#fce7f3;--cvpk-tx:#831843;
+}
+@media(prefers-color-scheme:dark){:root{
+  --cvb-bg:#1e3a5f;--cvb-tx:#93c5fd;
+  --cvg-bg:#14532d;--cvg-tx:#86efac;
+  --cvr-bg:#450a0a;--cvr-tx:#fca5a5;
+  --cvy-bg:#422006;--cvy-tx:#fef08a;
+  --cvp-bg:#2e1065;--cvp-tx:#c4b5fd;
+  --cvt-bg:#042f2e;--cvt-tx:#5eead4;
+  --cvo-bg:#431407;--cvo-tx:#fed7aa;
+  --cvpk-bg:#4a044e;--cvpk-tx:#f0abfc;
+}}
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.tb{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.tb-title{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:19px;color:#fff;margin-bottom:4px}
+.tb-sub{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pill{font-size:10px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:rgba(255,255,255,.12);color:#e2e8f0}
+.sb{grid-column:1/-1;padding:7px 12px;border-radius:8px;font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:12px;display:flex;align-items:center;gap:8px}
+.sb-b{background:var(--cvb-bg);color:var(--cvb-tx)}
+.sb-p{background:var(--cvp-bg);color:var(--cvp-tx)}
+.sb-r{background:var(--cvr-bg);color:var(--cvr-tx)}
+.sb-g{background:var(--cvg-bg);color:var(--cvg-tx)}
+.sb-o{background:var(--cvo-bg);color:var(--cvo-tx)}
+.sb-t{background:var(--cvt-bg);color:var(--cvt-tx)}
+.blk{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.blk.s2{grid-column:span 2}
+.blk.s3{grid-column:1/-1}
+.bh{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:11px;letter-spacing:.4px;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-b{background:var(--cvb-bg);color:var(--cvb-tx)}
+.bh-g{background:var(--cvg-bg);color:var(--cvg-tx)}
+.bh-r{background:var(--cvr-bg);color:var(--cvr-tx)}
+.bh-y{background:var(--cvy-bg);color:var(--cvy-tx)}
+.bh-p{background:var(--cvp-bg);color:var(--cvp-tx)}
+.bh-t{background:var(--cvt-bg);color:var(--cvt-tx)}
+.bh-o{background:var(--cvo-bg);color:var(--cvo-tx)}
+.bh-pk{background:var(--cvpk-bg);color:var(--cvpk-tx)}
+.def{border-left:3px solid;padding:6px 10px;border-radius:0 7px 7px 0;font-size:11.5px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.45;color:var(--color-text-primary)}
+.def-b{border-color:var(--cvb-tx)}
+.def-g{border-color:var(--cvg-tx)}
+.def-r{border-color:var(--cvr-tx)}
+.def-y{border-color:var(--cvy-tx)}
+.def-p{border-color:var(--cvp-tx)}
+.def-t{border-color:var(--cvt-tx)}
+.def-o{border-color:var(--cvo-tx)}
+.def-pk{border-color:var(--cvpk-tx)}
+.item{display:flex;gap:7px;font-size:11.5px;line-height:1.45;margin-bottom:5px;color:var(--color-text-primary)}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.dot-b{background:var(--cvb-tx)}
+.dot-g{background:var(--cvg-tx)}
+.dot-r{background:var(--cvr-tx)}
+.dot-y{background:var(--cvy-tx)}
+.dot-p{background:var(--cvp-tx)}
+.dot-t{background:var(--cvt-tx)}
+.dot-o{background:var(--cvo-tx)}
+.dot-pk{background:var(--cvpk-tx)}
+.rx{background:#0f172a;color:#7dd3fc;font-family:var(--font-mono),monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.65;margin:7px 0;white-space:pre-wrap}
+.warn{background:var(--cvo-bg);border-left:3px solid var(--cvo-tx);border-radius:0 8px 8px 0;font-size:11px;color:var(--cvo-tx);padding:6px 10px;margin:8px 0;line-height:1.4}
+.exam{background:var(--cvy-bg);border:1px solid var(--cvy-tx);border-radius:8px;font-size:11px;color:var(--cvy-tx);padding:8px 10px;margin-top:8px;line-height:1.4}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--color-text-secondary);line-height:1.4}
+.mini b{color:var(--color-text-primary);font-weight:500}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;color:var(--color-text-primary)}
+.farrow{color:var(--color-text-secondary);font-size:14px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.sbw{width:100%;background:var(--color-background-secondary);border-radius:20px;height:10px;margin:3px 0}
+.sbf{height:100%;border-radius:20px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:500;color:var(--color-text-primary)}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;color:var(--color-text-primary);line-height:1.35}
+.tbl tr:last-child td{border-bottom:none}
+.ftbar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft-lbl{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:12px;color:#7dd3fc;flex-shrink:0;margin-top:1px}
+.ft-txt{font-size:11px;color:#94a3b8;flex:1;line-height:1.45}
+#qs{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;overflow:hidden}
+.qh{background:#0f1e3a;color:#fff;padding:12px 18px}
+.qh-title{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-size:14px;color:#fff}
+.qh-sub{font-size:11px;color:#94a3b8;margin-top:2px}
+.qbody{padding:14px 18px}
+#qprog-txt{font-size:12px;color:var(--color-text-secondary);margin-bottom:5px}
+.qcard{margin-bottom:18px;padding-bottom:14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qcard:last-of-type{border-bottom:none;margin-bottom:0}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:3px}
+.qtxt{font-size:12.5px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:11.5px;text-align:left;cursor:pointer;width:100%;transition:background .15s,border-color .15s;color:var(--color-text-primary);line-height:1.35}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary);border-color:var(--color-border-secondary)}
+.qbtn.ok{background:#dcfce7;border-color:#16a34a;color:#14532d;font-weight:500}
+.qbtn.bad{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.7;cursor:not-allowed;pointer-events:none}
+.qfb{display:none;padding:8px 11px;border-radius:0 8px 8px 0;font-size:11px;margin-top:7px;line-height:1.4}
+.qfb.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfb.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+  .qbtn.ok{background:#14532d;border-color:#16a34a;color:#86efac}
+  .qbtn.bad{background:#450a0a;border-color:#dc2626;color:#fca5a5}
+  .qfb.ok{background:#14532d;color:#86efac}
+  .qfb.bad{background:#450a0a;color:#fca5a5}
+}
+#rp{display:none;padding:12px 14px;border-radius:8px;margin-top:12px;text-align:center;font-size:13px;line-height:1.5}
+#rp.low{background:#fee2e2;color:#991b1b}
+#rp.mid{background:#fef9c3;color:#713f12}
+#rp.high{background:#dcfce7;color:#14532d}
+@media(prefers-color-scheme:dark){
+  #rp.low{background:#450a0a;color:#fca5a5}
+  #rp.mid{background:#422006;color:#fef08a}
+  #rp.high{background:#14532d;color:#86efac}
+}
+#rst-btn{margin-top:8px;padding:6px 16px;border-radius:8px;border:1px solid currentColor;background:transparent;cursor:pointer;font-size:12px;color:inherit}
+</style>
+
+<h2 class="sr-only">Canvas de resumen académico: impacto de la contaminación del aire en enfermedades respiratorias bajo el cambio climático (Tran et al., 2023)</h2>
+
+<div class="cv">
+
+<!-- ░░ TÍTULO ░░ -->
+<div class="tb">
+  <div class="tb-title">Contaminación del aire y enfermedades respiratorias en la era del cambio climático</div>
+  <div class="tb-sub">Tran HM et al. (2023) · Science of the Total Environment 898:166340 · Revisión bibliográfica 2020–2023 (PubMed, WoS, Google Scholar)</div>
+  <span class="pill">PM2.5 / PM10</span><span class="pill">Ozono troposférico</span><span class="pill">Asma · EPOC</span><span class="pill">Rinitis alérgica</span><span class="pill">Cáncer de pulmón</span><span class="pill">Mecanismos biológicos</span><span class="pill">Poblaciones vulnerables</span><span class="pill">Cambio climático</span>
+</div>
+
+<!-- ░░ SECCIÓN 1 ░░ -->
+<div class="sb sb-b">🌍 Fuentes de contaminación del aire e interacción con el cambio climático (§3)</div>
+
+<!-- Bloque 1: Fuentes -->
+<div class="blk">
+  <span class="bh bh-b">Fuentes de contaminación del aire (§3.1)</span>
+  <div class="def def-b">La US EPA define la contaminación del aire como cualquier sustancia o agente físico que degrada la calidad del aire. Sus fuentes se dividen en antropogénicas (dominantes) y naturales, con contaminantes primarios y secundarios.</div>
+  <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px;font-weight:500">Distribución de fuentes antropogénicas globales</div>
+  <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:1px">Energía + Agricultura (25% c/u)</div>
+  <div class="sbw"><div class="sbf" style="width:50%;background:var(--cvb-tx)"></div></div>
+  <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:1px">Industria (21%)</div>
+  <div class="sbw"><div class="sbf" style="width:42%;background:var(--cvp-tx)"></div></div>
+  <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:1px">Transporte (14%)</div>
+  <div class="sbw"><div class="sbf" style="width:28%;background:var(--cvo-tx)"></div></div>
+  <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:1px">Otras fuentes (16%)</div>
+  <div class="sbw"><div class="sbf" style="width:32%;background:var(--cvt-tx)"></div></div>
+  <hr class="divh">
+  <div class="item"><div class="dot dot-b"></div><div><b>Fuentes naturales:</b> Incendios forestales, erupciones volcánicas y tormentas de polvo emiten PM y SO₂, con capacidad de transporte a larga distancia.</div></div>
+  <div class="warn">⚠️ <b>Error común:</b> El transporte vehicular no es la mayor fuente global: energía y agricultura (25% c/u) e industria (21%) lo superan. El transporte domina en entornos urbanos, pero no a escala global.</div>
+  <div class="exam">🎯 <b>Examen:</b> Explique la diferencia entre contaminantes primarios y secundarios, usando como ejemplo el ozono troposférico, y analice por qué el transporte urbano es más relevante que su porcentaje global sugiere.</div>
+</div>
+
+<!-- Bloque 2: Contaminantes clave -->
+<div class="blk s2">
+  <span class="bh bh-t">Contaminantes clave y su formación (§3.1)</span>
+  <div class="def def-t">Cada contaminante tiene origen, química y mecanismo de daño específicos. Entender cómo se forman —especialmente los secundarios— es clave para diseñar políticas de control efectivas.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid var(--cvb-tx)">
+      <b>PM2.5 y PM10</b><br>Partículas sólidas/líquidas. PM2.5 (&lt;2.5 μm) penetra hasta alvéolos (vías bajas); PM10 queda en vías superiores. PM2.5 incluye iones solubles, carbono orgánico, elementos traza y microorganismos. Fuentes: combustión de combustibles, polvo vial.
+    </div>
+    <div class="mini" style="border-top:3px solid var(--cvp-tx)">
+      <b>Ozono troposférico (O₃)</b><br>Contaminante secundario: no se emite directamente. Se forma por reacción fotoquímica entre NO₂ y COVs bajo luz solar y calor. A nivel del suelo es dañino, a diferencia del O₃ estratosférico (protector UV).
+    </div>
+    <div class="mini" style="border-top:3px solid var(--cvo-tx)">
+      <b>NO₂, SO₂ y COVs</b><br>NO₂: combustión fósil (transporte, energía). SO₂: combustibles sulfurosos + volcanes. COVs: vehículos + industria → precursores de O₃ y aerosoles orgánicos secundarios (SOA) que afectan la calidad del aire urbano.
+    </div>
+  </div>
+  <div class="flow">
+    <div class="fbox">NO₂ + COVs</div><div class="farrow">+</div>
+    <div class="fbox">Luz solar + calor</div><div class="farrow">→</div>
+    <div class="fbox">Reacción fotoquímica</div><div class="farrow">→</div>
+    <div class="fbox" style="background:var(--cvp-bg);color:var(--cvp-tx);font-weight:500">O₃ troposférico ⚠️</div>
+  </div>
+  <div class="warn">⚠️ <b>Error común:</b> No confundir O₃ troposférico (contaminante irritante a nivel del suelo) con O₃ estratosférico (escudo protector UV). Son el mismo compuesto en capas distintas con efectos opuestos en salud humana.</div>
+  <div class="exam">🎯 <b>Examen:</b> ¿Por qué un aumento de temperatura favorece la formación de ozono troposférico? Describa la reacción fotoquímica, identifique los precursores y explique las implicancias sobre la salud respiratoria de la población urbana.</div>
+</div>
+
+<!-- ░░ SECCIÓN 2 ░░ -->
+<div class="sb sb-p">🔄 Interconexión entre cambio climático y contaminación del aire (§3.2)</div>
+
+<!-- Bloque 3: Bucles retroalimentación -->
+<div class="blk s2">
+  <span class="bh bh-p">Bucles de retroalimentación clima-contaminación (§3.2)</span>
+  <div class="def def-p">El cambio climático y la contaminación se amplifican mutuamente mediante bucles de retroalimentación. Las condiciones meteorológicas modifican la formación, transporte y dispersión de contaminantes, y estos a su vez aceleran el calentamiento.</div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot dot-p"></div><div><b>GEI y calentamiento:</b> CO₂, CH₄ y N₂O (de combustión fósil, deforestación y agricultura) calientan la atmósfera, aumentando reacciones fotoquímicas y la formación de O₃ troposférico.</div></div>
+      <div class="item"><div class="dot dot-p"></div><div><b>Inversiones térmicas:</b> Aire caliente sobre frío atrapa contaminantes cerca del suelo. Incrementan O₃ un <b>14%</b>; las olas de calor lo elevan un <b>28%</b> adicional (Joshi et al., 2020).</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="dot dot-p"></div><div><b>Incendios forestales:</b> Emiten grandes cantidades de PM y carbono negro. Este carbono absorbe luz solar, acelera el derretimiento de hielo y agudiza el calentamiento, cerrando el bucle.</div></div>
+      <div class="item"><div class="dot dot-p"></div><div><b>SOA y aerosoles:</b> Los aerosoles orgánicos secundarios reflejan luz solar (enfrían la superficie), pero este efecto no compensa el calentamiento por GEI.</div></div>
+    </div>
+  </div>
+  <div class="rx">En China: +10 μg/m³ en O₃ → +0.55% en mortalidad por enfermedades respiratorias (Zhang et al., 2021)
+Temperatura global proyectada: +1.5 °C a +4.8 °C para finales del siglo XXI (IPCC, 2021)</div>
+  <div class="warn">⚠️ <b>Error común:</b> Tratar la contaminación y el cambio climático como problemas separados. Son sistemas acoplados: el calor genera más O₃, los incendios más PM, y el PM altera el albedo terrestre acelerando el calentamiento.</div>
+  <div class="exam">🎯 <b>Examen:</b> Describa el bucle de retroalimentación que se genera entre los incendios forestales inducidos por el cambio climático y la calidad del aire. ¿Qué papel juega el carbono negro en este proceso?</div>
+</div>
+
+<!-- Bloque 4: Eventos extremos -->
+<div class="blk">
+  <span class="bh bh-r">Eventos climáticos extremos y salud (§3.2, §5.2)</span>
+  <div class="def def-r">Las tormentas, olas de calor e incendios inducidos por el cambio climático amplifican los niveles de contaminación, elevando el riesgo de complicaciones respiratorias y hospitalizaciones de emergencia.</div>
+  <div class="item"><div class="dot dot-r"></div><div><b>Olas de calor:</b> Intensifican reacciones fotoquímicas → más O₃ troposférico → irritación respiratoria aguda. En niños europeos, la relación PM–asma se vuelve más pronunciada durante olas de calor.</div></div>
+  <div class="item"><div class="dot dot-r"></div><div><b>Asma por tormenta:</b> Multiplica por 10 los ingresos hospitalarios por asma. Más del 90% de afectados muestran sensibilización a alérgenos desencadenantes; el riesgo aumentará con el cambio climático.</div></div>
+  <div class="item"><div class="dot dot-r"></div><div><b>Incendios forestales:</b> Liberan PM y carbono negro que pueden viajar miles de kilómetros, afectando regiones lejanas a las zonas de combustión.</div></div>
+  <div class="exam">🎯 <b>Examen:</b> ¿Qué es el "asma por tormenta" (thunderstorm asthma) y por qué las personas con rinitis alérgica presentan riesgo elevado? Mencione el porcentaje de afectados con sensibilización documentada.</div>
+</div>
+
+<!-- ░░ SECCIÓN 3 ░░ -->
+<div class="sb sb-r">🫁 Carga de enfermedades respiratorias vinculadas a la contaminación del aire (§4.1)</div>
+
+<!-- Bloque 5: Asma -->
+<div class="blk">
+  <span class="bh bh-r">Asma (§4.1)</span>
+  <div class="def def-r">Enfermedad inflamatoria crónica de vías aéreas, responsable de ~400,000 muertes anuales. La contaminación contribuye tanto al desarrollo de asma como a la severidad de sus crisis agudas.</div>
+  <div class="rx">+10 μg/m³ PM2.5 → OR 1.14 (IC95%: 1.03–1.26) asma infantil
++10 μg/m³ PM10 → OR 1.11 (IC95%: 1.02–1.20) asma infantil
++1 μg/m³ PM2.5 ambiental → ↑ incidencia asma en jóvenes (Han et al., 2021)</div>
+  <div class="item"><div class="dot dot-r"></div><div>Durante olas de calor, la relación PM–asma se intensifica, sugiriendo que los eventos climáticos extremos potencian el efecto dañino de los contaminantes sobre las vías aéreas.</div></div>
+  <div class="warn">⚠️ <b>Error común:</b> Pensar que el asma solo se desencadena por alérgenos biológicos. Los contaminantes (PM, O₃) también inducen y exacerban el asma mediante inflamación directa, independientemente de la sensibilización alérgica previa.</div>
+  <div class="exam">🎯 <b>Examen:</b> Con los datos cuantitativos del artículo, calcule la probabilidad adicional de asma infantil ante un aumento de 10 μg/m³ en PM2.5. Explique el mecanismo por el que las olas de calor intensifican este riesgo.</div>
+</div>
+
+<!-- Bloque 6: EPOC -->
+<div class="blk">
+  <span class="bh bh-o">EPOC (§4.1)</span>
+  <div class="def def-o">La Enfermedad Pulmonar Obstructiva Crónica (EPOC) causa más de 3 millones de muertes anuales. La contaminación es factor causal independiente del tabaquismo, especialmente el PM2.5 y el NO₂.</div>
+  <div class="rx">+10 μg/m³ PM2.5 → mortalidad EPOC ×1.12 (Chung et al., 2022)
++10 μg/m³ NO₂ → RR 1.016 EPOC (IC95%: 1.012–1.120) (Chen et al., 2022)
+Exposición prolongada a PM → mayor riesgo hospitalización (Yuan et al., 2023)</div>
+  <div class="item"><div class="dot dot-o"></div><div>El cambio climático exacerba el <b>enfisema</b> en pacientes con EPOC mediante la contaminación inducida por eventos climáticos extremos.</div></div>
+  <div class="warn">⚠️ <b>Error común:</b> Creer que la EPOC es exclusiva de fumadores. La contaminación del aire es un factor causal independiente y cada vez más relevante en zonas con alto tráfico vehicular e industria.</div>
+  <div class="exam">🎯 <b>Examen:</b> Compare el impacto del PM2.5 vs. NO₂ sobre la mortalidad por EPOC en términos cuantitativos. ¿Qué fuentes generan principalmente cada contaminante y qué implicancias tiene esto para la política de transporte urbano?</div>
+</div>
+
+<!-- Bloque 7: Rinitis -->
+<div class="blk">
+  <span class="bh bh-y">Rinitis alérgica (§4.1)</span>
+  <div class="def def-y">Enfermedad alérgica globalmente prevalente, con fuerte asociación a la exposición a contaminantes. Un metaanálisis incluyó 35 estudios, 12 países y 453,470 participantes, confirmando la asociación con PM10, PM2.5, NO₂, SO₂ y O₃.</div>
+  <div class="item"><div class="dot dot-y"></div><div>El impacto es <b>mayor en niños y adolescentes</b> que en adultos, y más severo en países en desarrollo, evidenciando disparidades económicas.</div></div>
+  <div class="item"><div class="dot dot-y"></div><div>En adultos mayores, el PM2.5 induce sobreexpresión de <b>interferón-gamma</b> e <b>interleucina-3</b>, promoviendo inflamación crónica de las mucosas.</div></div>
+  <div class="exam">🎯 <b>Examen:</b> ¿Por qué los países en desarrollo presentan mayor impacto de la contaminación sobre la rinitis alérgica? Relacione con desigualdades socioeconómicas, calidad de la regulación ambiental y acceso a atención sanitaria.</div>
+</div>
+
+<!-- Bloque 8: Infecciones -->
+<div class="blk">
+  <span class="bh bh-t">Infecciones respiratorias (§4.1)</span>
+  <div class="def def-t">La contaminación compromete las defensas inmunitarias pulmonares, aumentando la susceptibilidad a infecciones. La interacción con variables climáticas (temperatura, humedad relativa) modula la transmisibilidad de los patógenos.</div>
+  <div class="rx">PM2.5 → RR 1.010 (IC95%: 1.007–1.014) hospitalizaciones por IVRS en niños
+PM10 → RR 1.016 (IC95%: 1.011–1.021) por unidad de aumento (Ziou et al., 2022)</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid var(--cvt-tx)">
+      <b>Humedad baja (HR ↓)</b><br>Mayor transmisión de influenza y brotes de COVID-19. El aire seco reduce la depuración mucociliar y favorece la supervivencia de aerosoles virales.
+    </div>
+    <div class="mini" style="border-left:3px solid var(--cvo-tx)">
+      <b>Humedad alta (HR ↑)</b><br>Reduce el riesgo de TB pulmonar. Pero puede aumentar la concentración de contaminantes al limitar su dispersión → riesgo aumentado por contaminación.
+    </div>
+  </div>
+  <div class="warn">⚠️ <b>Error común:</b> Asumir que HR alta siempre es beneficiosa para la salud respiratoria. Su efecto es multidireccional: protector para TB, pero potencialmente perjudicial al concentrar contaminantes. La relación es enfermedad-específica.</div>
+  <div class="exam">🎯 <b>Examen:</b> Explique por qué la tuberculosis y la influenza tienen respuestas opuestas a la humedad relativa. ¿Qué implicancias tiene esto para la gestión de brotes respiratorios en climas tropicales como el de Lima?</div>
+</div>
+
+<!-- Bloque 9: Cáncer -->
+<div class="blk">
+  <span class="bh bh-pk">Cáncer de pulmón (§4.1)</span>
+  <div class="def def-pk">La IARC (Agencia Internacional para la Investigación del Cáncer) clasificó el PM2.5 y PM10 como carcinógenos humanos del <b>Grupo 1</b>, elevando la calidad del aire a un asunto oncológico de primera línea en salud pública.</div>
+  <div class="item"><div class="dot dot-pk"></div><div>Estudios en China encontraron asociaciones positivas entre PM2.5, PM10 y SO₂ con la mortalidad por cáncer de pulmón en múltiples ciudades (Boogaard et al., 2022).</div></div>
+  <div class="item"><div class="dot dot-pk"></div><div>Pacientes oncológicos deben adoptar medidas protectoras adicionales durante estaciones con mayor concentración de contaminantes.</div></div>
+  <div class="exam">🎯 <b>Examen:</b> ¿Cuál es la significancia de salud pública de que la IARC clasifique el PM2.5 como carcinógeno Grupo 1? ¿Cómo debería influir esta clasificación en los estándares normativos de calidad del aire vigentes?</div>
+</div>
+
+<!-- ░░ SECCIÓN 4 ░░ -->
+<div class="sb sb-o">👥 Poblaciones vulnerables a enfermedades respiratorias por contaminación (§4.2)</div>
+
+<!-- Bloque 10: Niños -->
+<div class="blk">
+  <span class="bh bh-b">Niños (§4.2)</span>
+  <div class="def def-b">El sistema respiratorio e inmune en desarrollo hace a los niños especialmente susceptibles. La exposición temprana a contaminantes incrementa el riesgo de asma y EPOC de por vida, estableciendo patrones inflamatorios crónicos desde la infancia.</div>
+  <div class="rx">Incremento en riesgo de rinitis alérgica (metaanálisis, niños chinos):
+SO₂: +3% · NO₂: +11% · PM10: +2% · PM2.5: +15% (Zhang et al., 2022)</div>
+  <div class="item"><div class="dot dot-b"></div><div>El asma es la enfermedad respiratoria más prevalente en niños relacionada con contaminación, por la mayor susceptibilidad inmunológica en etapa de desarrollo (Dominski et al., 2021).</div></div>
+  <div class="warn">⚠️ <b>Error común:</b> Creer que los niños se recuperan fácilmente. La exposición en la infancia puede programar respuestas inflamatorias crónicas que persisten y se agravan durante toda la vida adulta.</div>
+  <div class="exam">🎯 <b>Examen:</b> ¿Por qué el PM2.5 tiene un efecto proporcionalmente mayor sobre la rinitis alérgica en niños (+15%) comparado con el SO₂ (+3%)? Explique los mecanismos inmunológicos subyacentes al sistema inmune en desarrollo.</div>
+</div>
+
+<!-- Bloque 11: Adultos mayores -->
+<div class="blk">
+  <span class="bh bh-o">Adultos mayores (§4.2)</span>
+  <div class="def def-o">El declive fisiológico de la función pulmonar con la edad amplifica el impacto de la contaminación. El daño acumulado por exposición crónica a PM2.5 es clínicamente significativo incluso ajustando por tabaquismo e IMC.</div>
+  <div class="item"><div class="dot dot-o"></div><div><b>Estudio danés:</b> Cada 5 μg/m³ adicional en PM2.5 se asoció con un aumento significativo en mortalidad por enfermedades respiratorias en personas ≥30 años (So et al., 2022).</div></div>
+  <div class="item"><div class="dot dot-o"></div><div>El PM2.5 induce sobreexpresión de <b>interferón-gamma</b> e <b>interleucina-3</b>, citocinas que promueven la inflamación crónica característica de la rinitis en adultos mayores.</div></div>
+  <div class="item"><div class="dot dot-o"></div><div>Los efectos del PM2.5 se acumulan en el tiempo: reducir la contaminación podría disminuir el impacto de la rinitis crónica en esta población.</div></div>
+  <div class="exam">🎯 <b>Examen:</b> Explique la relación entre exposición crónica a PM2.5, desregulación de citocinas (interferón-gamma, interleucina-3) y desarrollo de rinitis crónica en adultos mayores. ¿Qué estrategias terapéuticas y preventivas son relevantes?</div>
+</div>
+
+<!-- Bloque 12: Condiciones crónicas -->
+<div class="blk">
+  <span class="bh bh-y">Pacientes con condiciones crónicas (§4.2)</span>
+  <div class="def def-y">Los pacientes con asma o EPOC preexistentes son vulnerables en segundo grado: la contaminación exacerba su condición de base, acelerando el deterioro de la función pulmonar y aumentando las hospitalizaciones.</div>
+  <div class="item"><div class="dot dot-y"></div><div>Pacientes asmáticos experimentaron un <b>declive acelerado de la capacidad pulmonar</b> ante mayor exposición a contaminación (Edginton et al., 2021).</div></div>
+  <div class="item"><div class="dot dot-y"></div><div>La contaminación relacionada con el tráfico amplifica el riesgo y la severidad de los desenlaces de EPOC (Hsu et al., 2021).</div></div>
+  <div class="warn">⚠️ <b>Error común:</b> Creer que estas personas solo necesitan mayor dosis de medicación. El control de la exposición ambiental es tan crítico como el tratamiento farmacológico para frenar la progresión de la enfermedad.</div>
+  <div class="exam">🎯 <b>Examen:</b> ¿Por qué un paciente con EPOC que vive cerca de una zona de alto tráfico vehicular tiene peor pronóstico funcional que otro en zona de baja contaminación? Integre los conceptos de inflamación crónica, estrés oxidativo y deterioro funcional acumulado.</div>
+</div>
+
+<!-- ░░ SECCIÓN 5 ░░ -->
+<div class="sb sb-t">🔬 Mecanismos biológicos que vinculan la contaminación con enfermedades respiratorias (§5)</div>
+
+<!-- Bloque 13: Vías directas -->
+<div class="blk s2">
+  <span class="bh bh-p">Vías biológicas directas por contaminación del aire (§5.1)</span>
+  <div class="def def-p">La contaminación afecta el sistema respiratorio mediante tres vías principales interconectadas: estrés oxidativo, inflamación y alteración inmune. Se retroalimentan para amplificar el daño pulmonar progresivamente.</div>
+  <div class="flow">
+    <div class="fbox">PM2.5 inhalado</div><div class="farrow">→</div>
+    <div class="fbox">Depósito en vías aéreas bajas</div><div class="farrow">→</div>
+    <div class="fbox">Generación de ROS</div><div class="farrow">→</div>
+    <div class="fbox">Estrés oxidativo</div><div class="farrow">→</div>
+    <div class="fbox">Activación pro-inflamatoria</div><div class="farrow">→</div>
+    <div class="fbox" style="background:var(--cvr-bg);color:var(--cvr-tx);font-weight:500">Daño pulmonar crónico</div>
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot dot-p"></div><div><b>ROS y estrés oxidativo:</b> Al acumularse en el pulmón, el PM2.5 genera especies reactivas de oxígeno (ROS) que dañan el tejido pulmonar. El estrés oxidativo deteriora la función pulmonar e impide la eliminación de contaminantes, creando un ciclo vicioso.</div></div>
+      <div class="item"><div class="dot dot-p"></div><div><b>Barrera epitelial:</b> PM2.5 compromete la función de barrera del epitelio de las vías aéreas, sensibilizando el pulmón a alérgenos e iniciando respuestas inflamatorias crónicas (Zhao et al., 2020).</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="dot dot-p"></div><div><b>Inflamación:</b> Las vías pro-inflamatorias activadas por ROS inducen producción de citocinas inflamatorias. El PM10 estimula la expresión de CCR6 en células T CD4+ y producción de citocinas Th17 polarizantes.</div></div>
+      <div class="item"><div class="dot dot-p"></div><div><b>Sistema inmune:</b> La exposición crónica altera el tipo y respuesta de células inmunes frente a patógenos y alérgenos, aumentando susceptibilidad a infecciones respiratorias y reacciones alérgicas (Glencross et al., 2020).</div></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ <b>Error crucial:</b> No confundir el sitio de depósito: PM10 → vías aéreas superiores; PM2.5 → vías aéreas inferiores (alvéolos). La mayor profundidad de penetración del PM2.5 explica su mayor daño sistémico y su clasificación como carcinógeno.</div>
+  <div class="exam">🎯 <b>Examen:</b> Describa la cascada biológica desde la inhalación de PM2.5 hasta el desarrollo de inflamación crónica pulmonar, mencionando el papel de las ROS, las citocinas pro-inflamatorias, la disfunción epitelial y la alteración inmune.</div>
+</div>
+
+<!-- Bloque 14: Vías por cambio climático -->
+<div class="blk">
+  <span class="bh bh-t">Vías biológicas bajo cambio climático (§5.2)</span>
+  <div class="def def-t">El cambio climático actúa sobre la salud respiratoria mediante mecanismos propios (independientes de la contaminación directa), aunque frecuentemente actúa de forma sinérgica con los contaminantes.</div>
+  <div class="item"><div class="dot dot-t"></div><div><b>Temperatura → ROS:</b> El calor interrumpe la homeostasis celular y desacopla procesos metabólicos, generando daño oxidativo en células y tejidos respiratorios.</div></div>
+  <div class="item"><div class="dot dot-t"></div><div><b>Citocinas pro-inflamatorias:</b> Los cambios de temperatura estimulan su liberación, exacerbando condiciones respiratorias existentes.</div></div>
+  <div class="item"><div class="dot dot-t"></div><div><b>Alérgenos y polinización:</b> El cambio climático altera la distribución de plantas alergénicas, extiende las temporadas de polinización y aumenta la concentración de polen.</div></div>
+  <div class="item"><div class="dot dot-t"></div><div><b>Asma por tormenta:</b> Fenómeno climático que multiplica x10 los ingresos hospitalarios. Se proyecta mayor frecuencia con el cambio climático. Más del 90% de afectados muestran sensibilización a alérgenos.</div></div>
+  <div class="exam">🎯 <b>Examen:</b> ¿Cómo el cambio climático puede modificar la distribución geográfica de las alergias respiratorias? Integre temperatura, distribución de plantas alergénicas y modificaciones en la respuesta inmune.</div>
+</div>
+
+<!-- Bloque 15: Efectos sinérgicos -->
+<div class="blk s3">
+  <span class="bh bh-g">Efectos sinérgicos del cambio climático sobre el impacto de la contaminación (§5.3)</span>
+  <div class="def def-g">Los factores climáticos no solo actúan independientemente sino que amplifican los efectos de los contaminantes. La sinergia hace que el efecto combinado sea mayor que la suma de sus partes individuales.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid var(--cvg-tx)">
+      <b>Temperatura elevada</b><br>Aumenta la formación de O₃ troposférico → irritación respiratoria aguda. Amplifica los efectos del PM al incrementar su reactividad química y su capacidad de penetrar tejido pulmonar más profundo.
+    </div>
+    <div class="mini" style="border-top:3px solid var(--cvb-tx)">
+      <b>Humedad relativa alta</b><br>Reduce la dispersión de contaminantes y promueve su absorción por las plantas → mayor exposición local. También puede favorecer el crecimiento de microorganismos dañinos. Su efecto es multidireccional y dependiente del contexto.
+    </div>
+    <div class="mini" style="border-top:3px solid var(--cvy-tx)">
+      <b>Alérgenos y polen</b><br>El calentamiento y los cambios en precipitaciones alteran la distribución y abundancia de plantas alergénicas → mayor exposición al polen → síntomas más severos de asma y rinitis, especialmente en combinación con contaminantes.
+    </div>
+  </div>
+  <div class="warn" style="margin-top:10px">⚠️ <b>Dato integrador clave:</b> La combinación de temperatura elevada + humedad relativa alta + PM2.5 elevado puede crear condiciones de riesgo extremo, especialmente para niños, adultos mayores y pacientes con condiciones crónicas. Ningún factor actúa en aislamiento en el mundo real.</div>
+  <div class="exam">🎯 <b>Examen:</b> Un paciente asmático vive en Lima (ciudad con alta contaminación vehicular, temperatura en alza e inversiones térmicas frecuentes). Explique por qué su riesgo es potencialmente mayor que el de alguien en una ciudad con igual contaminación pero clima templado sin inversiones térmicas.</div>
+</div>
+
+<!-- ░░ SECCIÓN 6 ░░ -->
+<div class="sb sb-g">🌎 Diferencias geográficas y desafíos futuros para la salud respiratoria (§6 y §7)</div>
+
+<!-- Bloque 16: Diferencias geográficas -->
+<div class="blk">
+  <span class="bh bh-b">Diferencias geográficas (§6)</span>
+  <div class="def def-b">La exposición a contaminación y sus efectos sobre la salud varían significativamente según la geografía, el clima regional, los patrones de uso del suelo y las políticas locales vigentes.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid var(--cvb-tx)">
+      <b>Zonas urbanas</b><br>Mayor contaminación (transporte, industria, urbanización). Efecto de isla de calor → más vulnerables a olas de calor. Lima combina alto tráfico, industria y cuencas geográficas que dificultan la dispersión de contaminantes.
+    </div>
+    <div class="mini" style="border-left:3px solid var(--cvg-tx)">
+      <b>Zonas rurales</b><br>Más susceptibles a eventos extremos (tormentas, sequías) por su aislamiento. Quema de biomasa para cocinar/calefacción genera contaminación interior relevante en países en desarrollo.
+    </div>
+  </div>
+  <div class="item" style="margin-top:8px"><div class="dot dot-b"></div><div>Las políticas locales de transporte, uso del suelo y energía determinan los niveles de contaminación y emisiones de GEI, con impactos diferenciales sobre la salud respiratoria.</div></div>
+  <div class="exam">🎯 <b>Examen:</b> ¿Por qué las ciudades de países en vías de desarrollo como Lima presentan mayor vulnerabilidad a los efectos combinados de contaminación y cambio climático? Considere factores geográficos, socioeconómicos y de política ambiental.</div>
+</div>
+
+<!-- Bloque 17: Desafíos futuros -->
+<div class="blk s2">
+  <span class="bh bh-r">Desafíos futuros (§7)</span>
+  <div class="def def-r">Las proyecciones para las próximas décadas son preocupantes. Sin intervenciones urgentes, la combinación de cambio climático, urbanización y contaminación generará una carga creciente de enfermedades respiratorias.</div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot dot-r"></div><div><b>+15% muertes por O₃:</b> Proyección de incremento en muertes relacionadas con ozono para el año 2100 (Fawzy et al., 2020), impulsadas por el aumento de temperaturas.</div></div>
+      <div class="item"><div class="dot dot-r"></div><div><b>+230–272% alérgenos:</b> El CO₂ elevado y el calentamiento global podrían disparar las concentraciones de alérgenos ambientales y alargar las temporadas de polinización en 0.9 días/año.</div></div>
+      <div class="item"><div class="dot dot-r"></div><div><b>Enfermedad del legionario:</b> La bacteria Legionella prospera en agua cálida (torres de enfriamiento, plomería). El cambio climático favorecerá su proliferación, aumentando el riesgo de neumonías severas.</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="dot dot-r"></div><div><b>Urbanización acelerada:</b> Mayor tráfico, industria y consumo energético en ciudades elevarán la contaminación urbana, haciendo crítica la gestión activa de la calidad del aire.</div></div>
+      <div class="item"><div class="dot dot-r"></div><div><b>Estrategias clave:</b> Reducción de GEI, monitoreo de calidad del aire, energías limpias, sistemas de alerta temprana para eventos extremos y formación de personal sanitario.</div></div>
+      <div class="item"><div class="dot dot-r"></div><div><b>Equidad en salud:</b> Los grupos vulnerables cargan desproporcionadamente con el impacto. Son necesarias políticas de acceso a salud y reducción de exposición dirigidas específicamente a niños, adultos mayores y enfermos crónicos.</div></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ <b>Error común:</b> Considerar el cambio climático como una amenaza abstracta y futura. Sus efectos sobre la salud respiratoria ya son medibles en la actualidad y se acelerarán sin intervenciones urgentes en los próximos 10–30 años.</div>
+  <div class="exam">🎯 <b>Examen:</b> Diseñe un plan de respuesta integral a los desafíos futuros de salud respiratoria por cambio climático en una ciudad latinoamericana, integrando estrategias de mitigación de la contaminación, adaptación climática y equidad en salud.</div>
+</div>
+
+<!-- ░░ TABLA INTEGRADORA ░░ -->
+<div class="blk s3">
+  <span class="bh bh-p">Tabla integradora: contaminantes, enfermedades, mecanismos, poblaciones y datos clave</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Contaminante</th>
+        <th>Fuente principal</th>
+        <th>Enfermedades asociadas</th>
+        <th>Mecanismo biológico clave</th>
+        <th>Población más afectada</th>
+        <th>Dato cuantitativo de referencia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>PM2.5</b></td>
+        <td>Combustión (vehículos, industria), quema de biomasa</td>
+        <td>Asma, EPOC, rinitis, cáncer de pulmón, infecciones</td>
+        <td>Genera ROS → estrés oxidativo → inflamación → daño epitelial en vías bajas</td>
+        <td>Niños, adultos mayores, pacientes crónicos</td>
+        <td>+10 μg/m³ → OR asma infantil 1.14; mortalidad EPOC ×1.12; rinitis niños +15%</td>
+      </tr>
+      <tr>
+        <td><b>PM10</b></td>
+        <td>Polvo vial, construcción, agricultura</td>
+        <td>Asma, rinitis, infecciones de vías superiores</td>
+        <td>Depósito en vías superiores → activa CCR6 en CD4+ T y citocinas Th17</td>
+        <td>Niños, trabajadores expuestos</td>
+        <td>+10 μg/m³ → OR asma infantil 1.11; RR infecciones VRS 1.016; rinitis niños +2%</td>
+      </tr>
+      <tr>
+        <td><b>O₃ troposférico</b></td>
+        <td>Secundario: NO₂ + COVs + luz solar/calor</td>
+        <td>Asma, EPOC, muerte prematura</td>
+        <td>Oxidación directa del tejido pulmonar → irritación aguda de vías aéreas</td>
+        <td>Todos; especialmente niños y asmáticos durante olas de calor</td>
+        <td>+10 μg/m³ → +0.55% mortalidad resp. (China); +15% muertes proyectadas al 2100</td>
+      </tr>
+      <tr>
+        <td><b>NO₂</b></td>
+        <td>Combustión fósil (transporte, plantas de energía)</td>
+        <td>EPOC, asma, rinitis alérgica</td>
+        <td>Estrés oxidativo + inflamación de las vías aéreas medianas</td>
+        <td>Residentes urbanos, niños en zonas de tráfico</td>
+        <td>+10 μg/m³ → RR EPOC 1.016; riesgo rinitis niños +11%; riesgo TB ↑ por unidad</td>
+      </tr>
+      <tr>
+        <td><b>SO₂</b></td>
+        <td>Combustibles sulfurosos (industria minera, volcanes)</td>
+        <td>Asma, rinitis alérgica</td>
+        <td>Irritación directa de mucosa respiratoria → broncoespasmo reflejo</td>
+        <td>Zonas industriales; niños</td>
+        <td>Riesgo rinitis en niños chinos: +3% (menor que PM2.5 y NO₂)</td>
+      </tr>
+      <tr>
+        <td><b>COVs / SOA</b></td>
+        <td>Vehículos, industria, productos de consumo doméstico</td>
+        <td>Asma, enfermedades alérgicas</td>
+        <td>Precursores de O₃ troposférico y aerosoles orgánicos secundarios (SOA)</td>
+        <td>Todos; dominante en áreas urbanas</td>
+        <td>SOA contribuye significativamente a la contaminación fina urbana (Niu et al., 2022)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ <b>Dato integrador clave:</b> La contaminación del aire causa 6.7 millones de muertes prematuras al año (11.8% de todas las muertes globales, OMS 2022). No se ha demostrado ningún umbral seguro de exposición a PM2.5. El efecto combinado con el cambio climático solo puede empeorar este panorama sin medidas urgentes y multisectoriales.</div>
+</div>
+
+<!-- ░░ QUIZ INTERACTIVO ░░ -->
+<div id="qs">
+  <div class="qh">
+    <div class="qh-title">📝 Quiz de repaso — 10 preguntas de opción múltiple</div>
+    <div class="qh-sub">Marca tu respuesta y descubre si es correcta al instante · Cubre todo el contenido del artículo</div>
+  </div>
+  <div class="qbody">
+    <div id="qprog-txt">Respondidas: 0 / 10 · Aciertos: 0</div>
+    <div class="sbw" style="margin-bottom:14px"><div class="sbf" id="qbar" style="width:0%;background:#16a34a;transition:width .3s"></div></div>
+
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtxt">Según la OMS (2022), ¿cuántas muertes prematuras al año se atribuyen a la contaminación del aire ambiental?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) Aproximadamente 3.5 millones de muertes al año, principalmente en Asia</button>
+        <button class="qbtn" data-q="1" data-correct="true">B) Aproximadamente 6.7 millones de muertes al año, representando el 11.8% de todas las muertes globales</button>
+        <button class="qbtn" data-q="1" data-correct="false">C) Aproximadamente 10.2 millones de muertes, siendo la mayor causa de mortalidad global</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) Aproximadamente 2.1 millones, restringido a países con baja regulación ambiental</button>
+      </div>
+      <div class="qfb" id="fb1"></div>
+    </div>
+
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtxt">Según el metaanálisis de Chung et al. (2022) sobre 8 estudios, ¿en cuánto aumenta la mortalidad por EPOC por cada incremento de 10 μg/m³ en la concentración de PM2.5?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) Un incremento de 1.56 veces (56%), siendo el principal factor ambiental de mortalidad por EPOC</button>
+        <button class="qbtn" data-q="2" data-correct="false">B) Un incremento de 2.30 veces, especialmente en pacientes con EPOC severa estadio IV</button>
+        <button class="qbtn" data-q="2" data-correct="false">C) Una reducción del 12% si el paciente abandona simultáneamente el tabaquismo</button>
+        <button class="qbtn" data-q="2" data-correct="true">D) Un incremento de 1.12 veces (12%) en la mortalidad por EPOC</button>
+      </div>
+      <div class="qfb" id="fb2"></div>
+    </div>
+
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtxt">¿Por qué el PM2.5 es considerado más peligroso para la salud respiratoria profunda que el PM10?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="true">A) Su diámetro menor a 2.5 μm le permite depositar en las vías aéreas inferiores (alvéolos), generando mayor daño oxidativo sistémico</button>
+        <button class="qbtn" data-q="3" data-correct="false">B) Porque tiene mayor carga eléctrica negativa que facilita su adhesión al tejido alveolar</button>
+        <button class="qbtn" data-q="3" data-correct="false">C) Porque es completamente soluble en fluidos bronquiales, liberando toxinas al torrente sanguíneo</button>
+        <button class="qbtn" data-q="3" data-correct="false">D) Porque el PM10 es completamente neutralizado por los cilios nasales antes de llegar a los bronquios</button>
+      </div>
+      <div class="qfb" id="fb3"></div>
+    </div>
+
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtxt">Según Dominski et al. (2021), ¿cuál es la enfermedad respiratoria más prevalente vinculada a la contaminación del aire en la población infantil?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="false">A) EPOC, por la destrucción alveolar acumulada desde la infancia</button>
+        <button class="qbtn" data-q="4" data-correct="false">B) Tuberculosis, porque el sistema inmune infantil es incapaz de contener la infección</button>
+        <button class="qbtn" data-q="4" data-correct="true">C) Asma, debido a la mayor susceptibilidad del sistema inmune en desarrollo ante los efectos pro-inflamatorios de los contaminantes</button>
+        <button class="qbtn" data-q="4" data-correct="false">D) Neumonía bacteriana recurrente, por la pérdida de la barrera mucociliar desde temprana edad</button>
+      </div>
+      <div class="qfb" id="fb4"></div>
+    </div>
+
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtxt">¿Cuál de los siguientes mecanismos explica correctamente cómo las olas de calor contribuyen al aumento de la contaminación del aire?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) Reducen el uso de calefacción en hogares, disminuyendo las emisiones de NOx en un 14%</button>
+        <button class="qbtn" data-q="5" data-correct="false">B) Aumentan la precipitación ácida, la cual paradójicamente concentra contaminantes en el suelo</button>
+        <button class="qbtn" data-q="5" data-correct="false">C) Reducen la formación de aerosoles secundarios al evaporar sus precursores líquidos</button>
+        <button class="qbtn" data-q="5" data-correct="true">D) Intensifican las reacciones fotoquímicas entre NOx y COVs, aumentando el O₃ troposférico en un 28%; las inversiones térmicas concomitantes atrapan contaminantes cerca del suelo (+14%)</button>
+      </div>
+      <div class="qfb" id="fb5"></div>
+    </div>
+
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtxt">¿Cuál es el principal mecanismo biológico por el que el PM2.5 daña progresivamente el tejido pulmonar?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="false">A) Bloqueo mecánico de los alvéolos, impidiendo el intercambio gaseoso de forma gradual</button>
+        <button class="qbtn" data-q="6" data-correct="true">B) Generación de especies reactivas de oxígeno (ROS) que inducen estrés oxidativo, activan vías pro-inflamatorias y dañan la barrera epitelial de las vías aéreas</button>
+        <button class="qbtn" data-q="6" data-correct="false">C) Neutralización directa del surfactante pulmonar, reduciendo la tensión superficial alveolar</button>
+        <button class="qbtn" data-q="6" data-correct="false">D) Inhibición competitiva de la hemoglobina, reduciendo el transporte de oxígeno desde el pulmón</button>
+      </div>
+      <div class="qfb" id="fb6"></div>
+    </div>
+
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtxt">¿Cuál de las siguientes afirmaciones sobre la humedad relativa (HR) y las enfermedades respiratorias es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="false">A) La HR baja se asocia con mayor transmisión de influenza y brotes de COVID-19</button>
+        <button class="qbtn" data-q="7" data-correct="false">B) La HR alta se vincula con menor riesgo de tuberculosis pulmonar</button>
+        <button class="qbtn" data-q="7" data-correct="true">C) La HR alta siempre reduce los riesgos respiratorios relacionados con la contaminación del aire, al diluir y dispersar los contaminantes en la atmósfera</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) El efecto de la HR es multifacético, enfermedad-específico y dependiente del contexto ambiental</button>
+      </div>
+      <div class="qfb" id="fb7"></div>
+    </div>
+
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtxt">¿Por qué las áreas urbanas presentan mayor riesgo respiratorio relacionado con la contaminación del aire respecto a las zonas rurales?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="true">A) La combinación del efecto de isla de calor urbana con mayores fuentes de contaminación (transporte, industria, urbanización), que se potencian mutuamente generando riesgos mayores a la suma individual</button>
+        <button class="qbtn" data-q="8" data-correct="false">B) Exclusivamente por la ausencia total de regulación ambiental en las ciudades modernas</button>
+        <button class="qbtn" data-q="8" data-correct="false">C) Porque las ciudades tienen mayor proporción de adultos mayores y niños en su estructura demográfica</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) Por la mayor altitud promedio de las ciudades, que reduce la dispersión vertical de contaminantes</button>
+      </div>
+      <div class="qfb" id="fb8"></div>
+    </div>
+
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtxt">Las proyecciones científicas para finales del siglo XXI indican que las concentraciones de alérgenos ambientales (como el polen) podrían aumentar en:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="true">A) 230–272%, y las temporadas de polinización se extenderán 0.9 días por año (Oh, 2022)</button>
+        <button class="qbtn" data-q="9" data-correct="false">B) 50–100%, con variaciones regionales pero sin cambios significativos en las temporadas de polinización</button>
+        <button class="qbtn" data-q="9" data-correct="false">C) Las temporadas de polinización se acortarán por el aumento de precipitaciones en zonas templadas</button>
+        <button class="qbtn" data-q="9" data-correct="false">D) Solo habrá cambios significativos en latitudes templadas; los trópicos no experimentarán variación importante</button>
+      </div>
+      <div class="qfb" id="fb9"></div>
+    </div>
+
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtxt">¿Qué organismo internacional clasificó el PM2.5 y PM10 como carcinógenos humanos (Grupo 1) por su vínculo con el cáncer de pulmón?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) OMS (Organización Mundial de la Salud), en su reporte de directrices de calidad del aire 2021</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) US EPA (Agencia de Protección Ambiental de EE.UU.), mediante clasificación de riesgo cancerígeno</button>
+        <button class="qbtn" data-q="10" data-correct="false">C) IPCC (Panel Intergubernamental sobre Cambio Climático), en su 6° informe de evaluación</button>
+        <button class="qbtn" data-q="10" data-correct="true">D) IARC (Agencia Internacional para la Investigación del Cáncer), clasificando la contaminación exterior como cancerígeno Grupo 1</button>
+      </div>
+      <div class="qfb" id="fb10"></div>
+    </div>
+
+    <div id="rp"></div>
+  </div>
+</div>
+
+<!-- ░░ FOOTER ░░ -->
+<div class="ftbar">
+  <span class="ft-lbl">REFERENCIAS:</span>
+  <span class="ft-txt">Tran HM et al. (2023). Science of the Total Environment 898:166340. · WHO (2022). Ambient (Outdoor) Air Pollution. · IPCC (2021). Climate Change 2021: The Physical Science Basis. · IARC (Grupo 1, PM2.5/PM10). · Chung et al. (2022). Environ. Impact Assess. Rev. 97:106865. · Wu et al. (2022). JAMA Netw. Open 5:e2236003. · Joshi et al. (2020). Curr. Opin. Pulm. Med. 26:119–127. · Zhang et al. (2022). Allergy Asthma Proc. 43:e47–e57. · Oh (2022). Allergy Asthma Immunol. Res. 14:168. · Ziou et al. (2022). Environ. Res. 210:112969.</span>
+</div>
+
+</div>
+
+<script>
+const exps = {
+  1:"La OMS reporta que la contaminación del aire ambiental causa 6.7 millones de muertes prematuras al año, equivalente al 11.8% de todas las muertes globales. Esta cifra convierte la contaminación del aire en uno de los mayores factores de riesgo ambiental para la salud humana.",
+  2:"Un metaanálisis de 8 estudios (Chung et al., 2022) encontró un aumento de 1.12 veces (12%) en la mortalidad por EPOC por cada incremento de 10 μg/m³ en PM2.5. Aunque parece modesto individualmente, a escala poblacional representa cientos de miles de muertes adicionales cada año.",
+  3:"El tamaño es el factor determinante: el PM2.5 (diámetro <2.5 μm) es suficientemente pequeño para depositarse en las vías aéreas inferiores (bronquiolos y alvéolos), donde genera ROS e inflamación más severa. El PM10 queda principalmente en las vías superiores (nariz, faringe, tráquea).",
+  4:"El asma es la enfermedad respiratoria más prevalente en niños asociada a contaminación del aire (Dominski et al., 2021). El sistema inmune en desarrollo de los niños es más susceptible a los efectos pro-inflamatorios de los contaminantes, y la exposición temprana programa patrones inflamatorios crónicos.",
+  5:"Las olas de calor intensifican las reacciones fotoquímicas (NOx + COVs + calor = O₃ troposférico). Estudios reportaron incrementos de O₃ del 28% durante olas de calor y del 14% en inversiones térmicas (Joshi et al., 2020). El calor también aumenta la reactividad química del PM y su penetración pulmonar.",
+  6:"El PM2.5 genera especies reactivas de oxígeno (ROS) al acumularse en el pulmón. Estas ROS activan vías pro-inflamatorias, dañan la barrera epitelial de las vías aéreas y alteran el sistema inmune, creando una cascada de daño que predispone a enfermedades respiratorias crónicas.",
+  7:"Una HR alta puede AUMENTAR los riesgos respiratorios por contaminación al reducir la dispersión de contaminantes y promover su absorción por las plantas, resultando en mayor exposición. Aunque protege contra la TB pulmonar, en el contexto de contaminación puede ser contraproducente. La relación HR–salud es multifacética y enfermedad-específica.",
+  8:"Las zonas urbanas combinan el efecto de isla de calor urbana (temperaturas localmente más altas que intensifican O₃ y el riesgo de olas de calor) con múltiples fuentes locales de contaminación (transporte, industria, construcción). Esta sinergia genera riesgos superiores a la suma de cada factor por separado.",
+  9:"Las proyecciones indican que el CO₂ elevado y el calentamiento global podrían contribuir a un aumento del 230–272% en concentraciones de alérgenos ambientales y alargar las temporadas de polinización en 0.9 días/año (Oh, 2022). Esto exacerbará las alergias respiratorias y el asma a nivel global.",
+  10:"La IARC (Agencia Internacional para la Investigación del Cáncer) clasificó la contaminación del aire exterior como cancerígeno del Grupo 1 (cancerígeno humano confirmado), con el PM2.5 y PM10 específicamente vinculados al cáncer de pulmón. Estudios en China confirmaron asociaciones positivas con la mortalidad oncológica pulmonar."
+};
+
+let answered=0,correct=0;
+
+document.getElementById('qs').addEventListener('click',function(e){
+  if(!e.target.classList.contains('qbtn')||e.target.disabled)return;
+  const btn=e.target;
+  const q=parseInt(btn.dataset.q);
+  const isOk=btn.dataset.correct==='true';
+  const card=document.getElementById('q'+q);
+  const btns=card.querySelectorAll('.qbtn');
+  const fb=document.getElementById('fb'+q);
+  if(fb.style.display==='block')return;
+
+  btns.forEach(function(b){
+    b.disabled=true;
+    if(b.dataset.correct==='true')b.classList.add('ok');
+    else if(b===btn&&!isOk)b.classList.add('bad');
+  });
+
+  const letters=['A','B','C','D'];
+  const cidx=Array.from(btns).findIndex(function(b){return b.dataset.correct==='true';});
+  const cl=letters[cidx];
+
+  if(isOk){
+    correct++;
+    fb.className='qfb ok';
+    fb.innerHTML='<b>✅ ¡Correcto!</b> '+exps[q];
+  }else{
+    fb.className='qfb bad';
+    fb.innerHTML='<b>❌ Incorrecto.</b> La respuesta correcta es <b>'+cl+'</b>. '+exps[q];
+  }
+  fb.style.display='block';
+
+  answered++;
+  var pct=answered>0?Math.round(correct/answered*100):0;
+  document.getElementById('qprog-txt').textContent='Respondidas: '+answered+' / 10 · Aciertos: '+correct+' ('+pct+'%)';
+  document.getElementById('qbar').style.width=Math.round(answered/10*100)+'%';
+
+  if(answered===10){
+    var rp=document.getElementById('rp');
+    var cls,msg;
+    if(correct<=4){cls='low';msg='📚 Puntaje: '+correct+'/10 — Necesitas repasar el material con más detalle';}
+    else if(correct<=7){cls='mid';msg='📈 Puntaje: '+correct+'/10 — ¡Buen avance! Sigue repasando los conceptos clave';}
+    else{cls='high';msg='🎓 Puntaje: '+correct+'/10 — ¡Excelente dominio del tema! Estás listo para el examen';}
+    rp.className=cls;
+    rp.style.display='block';
+    rp.innerHTML=msg+'<br><button id="rst-btn" onclick="resetQuiz()">🔄 Reiniciar quiz</button>';
+  }
+});
+
+function resetQuiz(){
+  answered=0;correct=0;
+  document.getElementById('qprog-txt').textContent='Respondidas: 0 / 10 · Aciertos: 0';
+  document.getElementById('qbar').style.width='0%';
+  document.getElementById('rp').style.display='none';
+  document.querySelectorAll('.qbtn').forEach(function(b){b.disabled=false;b.className='qbtn';});
+  document.querySelectorAll('.qfb').forEach(function(f){f.style.display='none';});
+}
+</script>

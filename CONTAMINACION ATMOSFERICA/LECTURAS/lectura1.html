@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--color-background-tertiary);color:var(--color-text-primary)}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:500}
+.bh.azul{background:#dbeafe;color:#1e3a8a}
+.bh.verde{background:#dcfce7;color:#14532d}
+.bh.rojo{background:#fee2e2;color:#991b1b}
+.bh.amarillo{background:#fef9c3;color:#713f12}
+.bh.morado{background:#ede9fe;color:#4c1d95}
+.bh.teal{background:#ccfbf1;color:#134e4a}
+.bh.naranja{background:#ffedd5;color:#7c2d12}
+.bh.gris{background:#f1f5f9;color:#334155}
+.bh.rosa{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+  .bh.azul{background:#1e3a5f;color:#93c5fd}
+  .bh.verde{background:#14532d;color:#86efac}
+  .bh.rojo{background:#450a0a;color:#fca5a5}
+  .bh.amarillo{background:#422006;color:#fef08a}
+  .bh.morado{background:#2e1065;color:#c4b5fd}
+  .bh.teal{background:#042f2e;color:#5eead4}
+  .bh.naranja{background:#431407;color:#fed7aa}
+  .bh.gris{background:#1e293b;color:#94a3b8}
+  .bh.rosa{background:#4a044e;color:#f0abfc}
+}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;letter-spacing:.5px}
+.titlebar p{font-size:11px;color:#94a3b8;margin-top:3px}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;border:1px solid rgba(255,255,255,.15);color:#cbd5e1}
+.sectionbar{grid-column:1/-1;border-radius:8px;padding:6px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.3px}
+.sectionbar.azul{background:#dbeafe;color:#1e3a8a}
+.sectionbar.morado{background:#ede9fe;color:#4c1d95}
+.sectionbar.teal{background:#ccfbf1;color:#134e4a}
+.sectionbar.naranja{background:#ffedd5;color:#7c2d12}
+.sectionbar.rosa{background:#fce7f3;color:#831843}
+.sectionbar.gris{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){
+  .sectionbar.azul{background:#1e3a5f;color:#93c5fd}
+  .sectionbar.morado{background:#2e1065;color:#c4b5fd}
+  .sectionbar.teal{background:#042f2e;color:#5eead4}
+  .sectionbar.naranja{background:#431407;color:#fed7aa}
+  .sectionbar.rosa{background:#4a044e;color:#f0abfc}
+  .sectionbar.gris{background:#1e293b;color:#94a3b8}
+}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def.azul{border-left:3px solid #3b82f6}
+.def.verde{border-left:3px solid #22c55e}
+.def.morado{border-left:3px solid #8b5cf6}
+.def.teal{border-left:3px solid #14b8a6}
+.def.naranja{border-left:3px solid #f97316}
+.def.rojo{border-left:3px solid #ef4444}
+.def.amarillo{border-left:3px solid #eab308}
+.def.rosa{border-left:3px solid #ec4899}
+.def.gris{border-left:3px solid #64748b}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dot.azul{background:#3b82f6}
+.dot.verde{background:#22c55e}
+.dot.morado{background:#8b5cf6}
+.dot.teal{background:#14b8a6}
+.dot.naranja{background:#f97316}
+.dot.rojo{background:#ef4444}
+.dot.amarillo{background:#eab308}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:7px 0}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#713f12}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:7px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:7px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;flex-shrink:0;padding-top:1px}
+.fc{font-size:11px;color:#94a3b8}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:3px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+/* QUIZ */
+#quiz-section{grid-column:1/-1}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px 10px 0 0;padding:10px 16px;margin:-12px -13px 12px}
+.quiz-header h3{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;letter-spacing:.3px}
+.quiz-header p{font-size:11px;color:#94a3b8;margin-top:2px}
+.qcard{margin-bottom:14px;padding-bottom:14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qcard:last-of-type{border-bottom:none}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary)}
+.qbtn:hover{background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.quiz-progress{margin-bottom:12px}
+.quiz-progress p{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;display:flex;justify-content:space-between}
+#results-panel{display:none;border-radius:10px;padding:14px 16px;margin-top:10px;text-align:center}
+#results-panel h4{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:4px}
+#results-panel p{font-size:12px}
+#reset-btn{margin-top:10px;padding:7px 18px;border-radius:8px;border:1px solid var(--color-border-tertiary);background:var(--color-background-secondary);cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-text-primary)}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="titlebar">
+  <h1>☁️ AEROSOLES ATMOSFÉRICOS: NUBES, QUÍMICA Y CLIMA</h1>
+  <p>Contaminación Atmosférica · V. Faye McNeill, Columbia University · Annual Review of Chemical & Biomolecular Engineering, 2017</p>
+  <div class="pills">
+    <span class="pill">Materia Particulada</span>
+    <span class="pill">Aerosoles Primarios/Secundarios</span>
+    <span class="pill">Carbono Negro y Pardo</span>
+    <span class="pill">Nucleación de Nubes</span>
+    <span class="pill">Geoingenería Solar</span>
+    <span class="pill">Transformaciones Químicas</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1 -->
+<div class="sectionbar azul">🔵 BLOQUE I — FUNDAMENTOS: DEFINICIÓN, TAMAÑO Y FUENTES</div>
+
+<!-- Bloque 1 -->
+<div class="block">
+  <span class="bh azul">¿Qué es un aerosol atmosférico?</span>
+  <div class="def azul">Los aerosoles atmosféricos (también llamados <b>materia particulada, PM</b>) son partículas de tamaño 2 nm–10 µm suspendidas en la atmósfera. Son invisibles al ojo humano pero tienen impactos masivos sobre la salud, la calidad del aire y el clima global.</div>
+  <div class="item"><div class="dot azul"></div><div>No son solo sólidas: pueden ser líquidas, sólidas, geles con núcleo sólido, partículas líquidas bifásicas, o vidrios orgánicos.</div></div>
+  <div class="item"><div class="dot azul"></div><div>Su pequeño tamaño implica poca inercia → permanecen en el aire <b>varios días</b>, viajando largas distancias y participando en reacciones químicas.</div></div>
+  <div class="item"><div class="dot azul"></div><div>PM₂.₅ (diámetro &lt; 2.5 µm) es la fracción más peligrosa: penetra profundo en los pulmones al inhalar; las partículas más grandes quedan atrapadas en el tracto respiratorio superior.</div></div>
+  <div class="exam">🎯 EXAMEN: Explica por qué los aerosoles atmosféricos con diámetro menor a 2.5 µm representan el mayor riesgo para la salud comparado con partículas más grandes. ¿Qué propiedad física determina dónde se depositan en el sistema respiratorio?</div>
+</div>
+
+<!-- Bloque 2 -->
+<div class="block">
+  <span class="bh verde">Fuentes primarias vs. secundarias</span>
+  <div class="def verde">Las partículas <b>primarias</b> se emiten directamente a la atmósfera; las <b>secundarias</b> se forman dentro de ella por reacciones químicas y físicas de precursores gaseosos. Esta distinción es clave porque las secundarias son más difíciles de controlar.</div>
+  <div class="flow">
+    <div class="fbox">Emisión gaseosa (SO₂, VOCs)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Oxidación/condensación</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Partícula secundaria (PM₂.₅)</div>
+  </div>
+  <div class="item"><div class="dot verde"></div><div><b>Sulfato inorgánico secundario:</b> SO₂ se oxida → sulfato aerosol, neutralizado por NH₃. Fuente principal de PM₂.₅ antropogénica.</div></div>
+  <div class="item"><div class="dot verde"></div><div><b>SOA condensacional:</b> VOCs oxidados (menor volatilidad) se condensan sobre partículas existentes.</div></div>
+  <div class="item"><div class="dot verde"></div><div><b>SOA acuosa:</b> VOCs hidrosolubles son absorbidos por gotitas de agua → química acuosa → material orgánico de menor volatilidad.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir la dominancia en masa con la dominancia en número. Las fuentes naturales (sal marina, polvo mineral) dominan la <i>masa</i> de aerosoles pero están en la fracción gruesa (&gt;2.5 µm). Las partículas &lt;2.5 µm son principalmente secundarias.</div>
+</div>
+
+<!-- Bloque 3: Tabla fuentes -->
+<div class="block">
+  <span class="bh gris">Magnitudes de fuentes (Tabla 1, McNeill 2017)</span>
+  <table class="tbl">
+    <tr><th>Fuente</th><th>Magnitud (Tg/año)</th><th>Tipo</th></tr>
+    <tr><td>Sal marina</td><td>10,000–30,000</td><td>Natural/Primaria</td></tr>
+    <tr><td>Polvo mineral</td><td>1,000</td><td>Natural/Primaria</td></tr>
+    <tr><td>SOA</td><td>140 (50–380)</td><td>Secundaria</td></tr>
+    <tr><td>Sulfatos inorgánicos</td><td>69.9</td><td>Antrópica/Secundaria</td></tr>
+    <tr><td>POA primario orgánico</td><td>33.9 (17–77)</td><td>Primaria</td></tr>
+    <tr><td>Carbono negro (BC)</td><td>7.5 (2–29)</td><td>Primaria/Combustión</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO CLAVE: Aunque sal marina y polvo dominan la MASA total, están en la fracción gruesa. La fracción PM₂.₅ (más dañina y climáticamente activa) está dominada por sulfatos secundarios, SOA y BC.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la formación de nuevas partículas en la atmósfera preindustrial es relevante para estimar el forzamiento radiativo actual de los aerosoles? ¿Qué hallazgo reciente cambió el paradigma sobre la necesidad de H₂SO₄ para la nucleación?</div>
+</div>
+
+<!-- SECCIÓN 2 -->
+<div class="sectionbar morado">🟣 BLOQUE II — COMPOSICIÓN QUÍMICA Y PROPIEDADES ÓPTICAS</div>
+
+<!-- Bloque 4 -->
+<div class="block">
+  <span class="bh azul">Composición química de aerosoles</span>
+  <div class="def azul">La composición varía enormemente según la fuente. Los aerosoles marinos tienen sal y orgánicos; los continentales combinan polvo, sales inorgánicas secundarias y materia orgánica biogénica/antrópica. Casi siempre contienen agua líquida significativa y son ácidos.</div>
+  <div class="item"><div class="dot azul"></div><div>Aerosoles <b>ácidos</b>: especialmente sobre regiones continentales. La acidez se mantiene alta incluso con reducciones en SO₂ (Weber et al., 2016).</div></div>
+  <div class="item"><div class="dot azul"></div><div><b>Alta concentración iónica:</b> la cristalización de sal se suprime en aerosoles por su pequeño tamaño (efecto Kelvin).</div></div>
+  <div class="item"><div class="dot azul"></div><div>Avances tecnológicos permitieron identificar <b>miles de especies orgánicas</b> en aerosoles mediante espectrometría de masas de alta resolución.</div></div>
+  <div class="item"><div class="dot azul"></div><div>La mayor parte de la masa orgánica sigue sin identificarse (sin especiación).</div></div>
+</div>
+
+<!-- Bloque 5 -->
+<div class="block">
+  <span class="bh rojo">Carbono Negro (BC — Black Carbon)</span>
+  <div class="def rojo">El <b>carbono negro (hollín)</b> se genera por combustión incompleta de biomasa y combustibles fósiles. Absorbe fuertemente en todo el espectro visible, más de lo que dispersa → <b>forzamiento radiativo POSITIVO</b> (efecto calentador), el segundo mayor después del CO₂.</div>
+  <div class="rx">SSA = Q_scat / (Q_scat + Q_abs)
+BC: SSA ≈ 0.38 (absorbe mucho más de lo que dispersa)
+SSA crítico ≈ 0.85–0.9 (por encima: efecto enfriador; abajo: calentador)</div>
+  <div class="item"><div class="dot rojo"></div><div>BC como <b>forzador climático de vida corta:</b> vida atmosférica de días vs. décadas del CO₂. Sus concentraciones responden rápido a cambios en emisiones → oportunidad de mitigación a corto plazo.</div></div>
+  <div class="item"><div class="dot rojo"></div><div>Complicación política: BC se co-emite frecuentemente con aerosoles dispersores (que enfrían el clima), dificultando predecir el efecto neto de reducir emisiones de BC.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir carbono negro (BC) con carbono orgánico (OC). BC absorbe fuertemente en todo el visible; OC típicamente dispersa (efecto enfriador). El carbono pardo (BrC) es OC que absorbe, especialmente en UV.</div>
+</div>
+
+<!-- Bloque 6 -->
+<div class="block">
+  <span class="bh morado">Carbono Pardo (BrC — Brown Carbon)</span>
+  <div class="def morado">El <b>carbono pardo</b> es material orgánico en aerosoles que absorbe luz, asociado a quema de biomasa y contaminación. A diferencia del BC, su absorción aumenta fuertemente con la disminución de la longitud de onda (espectro UV, &lt;400 nm).</div>
+  <div class="rx">MAE ∝ λ^(-α)
+donde α = exponente de Ångström (2–7 para BrC)
+MAE = eficiencia de absorción de masa (m² g⁻¹)</div>
+  <div class="item"><div class="dot morado"></div><div>Se observa como esferas amorfas ("tar balls") o como HULIS (sustancias húmicas atmosféricas) solubles en agua.</div></div>
+  <div class="item"><div class="dot morado"></div><div><b>Blanqueamiento foto-oxidativo:</b> la oxidación puede destruir los cromóforos del BrC, reduciendo su absorción (fotobleaching). El impacto climático depende de la competencia entre formación y blanqueamiento.</div></div>
+  <div class="item"><div class="dot morado"></div><div>BrC contribuye 6–40% de la absorción aerosólica global a 440 nm y hasta 20% a 550 nm. Incluirlo cambia el efecto neto del OC de dispersor a casi neutro.</div></div>
+  <div class="exam">🎯 EXAMEN: Describe en qué se diferencia el espectro de absorción del carbono pardo (BrC) del carbono negro (BC) y explica la implicancia del "fotobleaching" para la estimación del forzamiento radiativo del BrC.</div>
+</div>
+
+<!-- SECCIÓN 3 -->
+<div class="sectionbar teal">🩵 BLOQUE III — AEROSOLES Y FORMACIÓN DE NUBES (CCN, Núcleos de Hielo)</div>
+
+<!-- Bloque 7 -->
+<div class="block s2">
+  <span class="bh teal">Aerosoles como Núcleos de Condensación de Nubes (CCN)</span>
+  <div class="def teal">Sin aerosoles, la formación de nubes sería termodinámicamente imposible (nucleación homogénea requeriría supersaturaciones extremas por la alta tensión superficial del agua). Los aerosoles actúan como <b>núcleos de condensación (CCN)</b> reduciendo la energía de activación de la gota.</div>
+  <div class="two">
+    <div>
+      <b style="font-size:12px">Ecuación de Köhler</b>
+      <div class="rx">ln(p_w(D_p)/p⁰) = A/D_p − B/D_p³
+A = 4M_w·σ/(RT·ρ_w)  [efecto Kelvin]
+B = 6n_s·M_w/(π·ρ_w) [efecto Raoult]
+D_p: diámetro de gota; σ: tensión superficial
+n_s: moles de soluto; T: temperatura</div>
+    </div>
+    <div>
+      <b style="font-size:12px">Efectos competitivos</b>
+      <div class="item" style="margin-top:6px"><div class="dot teal"></div><div><b>Kelvin (curvatura):</b> aumenta la presión de vapor sobre superficies curvas → dificulta activación de gotas pequeñas.</div></div>
+      <div class="item"><div class="dot teal"></div><div><b>Raoult (soluto):</b> el soluto disuelto reduce la presión de vapor → facilita activación. Más soluto = CCN más activo.</div></div>
+    </div>
+  </div>
+  <div class="item"><div class="dot teal"></div><div>El aumento de aerosoles antrópicos → más gotas por nube pero más pequeñas → nubes más reflectivas (mayor albedo) y de mayor tiempo de vida. Este es el <b>efecto indirecto</b> de los aerosoles sobre el clima.</div></div>
+  <div class="item"><div class="dot teal"></div><div>La composición química del aerosol impacta su <b>higroscopicidad</b> (capacidad de absorber agua). Materia orgánica puede deprimir la tensión superficial σ, facilitando la activación como CCN.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Asumir que el tamaño es el único factor en la activación de CCN. Si bien el tamaño (D_p y n_s) es dominante (Dusek et al., 2006), la composición química modifica significativamente la higroscopicidad y puede alterar los números de gotas en un 20%.</div>
+  <div class="exam">🎯 EXAMEN: Explica los dos efectos físicos que compiten en la ecuación de Köhler para la activación de CCN. ¿Qué ocurre con la supersaturación crítica cuando se añade surfactante orgánico a la superficie de la gota?</div>
+</div>
+
+<!-- Bloque 8 -->
+<div class="block">
+  <span class="bh azul">Aerosoles como Núcleos de Hielo (IN)</span>
+  <div class="def azul">Para que se formen partículas de hielo en nubes por encima de -40°C se requiere un <b>núcleo de hielo (IN)</b>. La nucleación de hielo afecta las precipitaciones y propiedades radiativas de las nubes.</div>
+  <div class="item"><div class="dot azul"></div><div><b>3 mecanismos de nucleación:</b></div></div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #3b82f6"><b>Congelamiento por inmersión:</b> gota supercooled con partícula aerosol dentro se congela.</div>
+    <div class="mini" style="border-top:3px solid #8b5cf6"><b>Deposición:</b> vapor de agua se adsorbe sobre partícula a T &lt; 0°C formando hielo directamente.</div>
+    <div class="mini" style="border-top:3px solid #14b8a6"><b>Contacto:</b> gota supercooled colisiona con partícula aerosol externa.</div>
+  </div>
+  <div class="item"><div class="dot azul"></div><div>La definición de "buen IN" se expandió: además de partículas insolubles grandes (polvo mineral, óxidos metálicos), incluye ahora sulfato de amonio, orgánicos amorfos, hollín, partículas biológicas, aerosol marino y partículas mixtas.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la nucleación de hielo conduce al crecimiento de hidrometeoros a expensas de las gotas líquidas supercooled circundantes? Nombra al menos 3 tipos de aerosoles que actúan como buenos núcleos de hielo y explica qué propiedad los hace eficientes.</div>
+</div>
+
+<!-- SECCIÓN 4 -->
+<div class="sectionbar naranja">🟠 BLOQUE IV — FORZAMIENTO CLIMÁTICO DIRECTO E INDIRECTO</div>
+
+<!-- Bloque 9 -->
+<div class="block">
+  <span class="bh amarillo">Efectos directos de aerosoles sobre el clima</span>
+  <div class="def amarillo">Los aerosoles dispersan y/o absorben la radiación solar directamente, alterando el albedo terrestre. Son <b>"forzadores climáticos de vida corta"</b>: vida atmosférica de días vs. décadas del CO₂, por lo que responden rápido a cambios en emisiones.</div>
+  <div class="item"><div class="dot amarillo"></div><div><b>Dispersión:</b> la mayoría de aerosoles son similares en tamaño a las longitudes de onda solar → dispersión de Mie. Aumentan el albedo → forzamiento negativo (enfriamiento).</div></div>
+  <div class="item"><div class="dot amarillo"></div><div><b>Absorción:</b> BC y BrC absorben radiación → forzamiento positivo (calentamiento). El BC tiene el segundo mayor forzamiento positivo después del CO₂.</div></div>
+  <div class="item"><div class="dot amarillo"></div><div><b>Paradoja del Clean Air Act (EE.UU. 1970):</b> reducir aerosoles dispersores salvó vidas y dinero pero "desenmascaró" el forzamiento del CO₂ acumulado → efecto no intencional de calentamiento.</div></div>
+  <div class="rx">SSA = Q_scat / (Q_scat + Q_abs)
+SSA = 1 → partícula puramente dispersora (enfría)
+SSA &lt; 0.85–0.9 → forzamiento neto POSITIVO (calienta)
+BC: SSA ≈ 0.38 (altamente absorbedor)</div>
+</div>
+
+<!-- Bloque 10 -->
+<div class="block">
+  <span class="bh teal">Incertidumbres en el forzamiento aerosólico</span>
+  <div class="def teal">El forzamiento climático se define como la diferencia entre los forzadores actuales y los de 1750 (era preindustrial). La principal fuente de incertidumbre en el forzamiento de aerosoles es la falta de información sobre las cargas de aerosoles preindustriales.</div>
+  <div class="item"><div class="dot teal"></div><div>Los aerosoles, a diferencia de los GHGs, tienen <b>vida corta</b> → no están bien mezclados ni uniformemente distribuidos. Difícil inferir cargas lejanas a los pocos registros paleoclimáticos.</div></div>
+  <div class="item"><div class="dot teal"></div><div>La línea base debe estimarse con <b>modelos de fuentes en 1750</b>: aerosoles marinos, polvo, quema de biomasa, volcanes, nucleación de VOCs biogénicos.</div></div>
+  <div class="item"><div class="dot teal"></div><div>Hallazgo clave: productos altamente oxidados de VOCs biogénicos pueden nuclearse para formar nuevas partículas <i>sin necesitar H₂SO₄</i> → implicancias para modelos preindustriales (Tröstl et al., 2016).</div></div>
+  <div class="item"><div class="dot teal"></div><div>Los efectos aerosol-nube tienen forzamiento <b>neto negativo comparable al CO₂</b>, pero con incertidumbres enormes (IPCC AR5).</div></div>
+  <div class="exam">🎯 EXAMEN: Explica por qué la corta vida atmosférica de los aerosoles complica la estimación de su forzamiento radiativo en comparación con gases de efecto invernadero como el CO₂. ¿Qué es la línea base de 1750 y por qué es crítica?</div>
+</div>
+
+<!-- Bloque 11 -->
+<div class="block">
+  <span class="bh rosa">Salud y aerosoles (PM₂.₅)</span>
+  <div class="def rosa">La contaminación del aire contribuye a <b>5.5 millones de muertes prematuras globalmente</b> y 130,000 en EE.UU. cada año. Los aerosoles están asociados a una amplia gama de enfermedades agudas y crónicas.</div>
+  <div class="item"><div class="dot rosa"></div><div>PM₂.₅ penetra profundo en los pulmones; partículas más grandes se depositan en el tracto respiratorio superior.</div></div>
+  <div class="item"><div class="dot rosa"></div><div>Enfermedades asociadas: cardiovasculares, respiratorias, salud mental, dermatológicas y reproductivas.</div></div>
+  <div class="item"><div class="dot rosa"></div><div>Mecanismos: los aerosoles son vehículo de sustancias citotóxicas/carcinógenas (plomo, HAPs, metales de transición) y generan estrés oxidativo en los pulmones.</div></div>
+  <div class="item"><div class="dot rosa"></div><div>La toxicidad se asocia con actividad redox en partículas de escape de combustión y <i>aumenta</i> con el envejecimiento de las partículas.</div></div>
+</div>
+
+<!-- SECCIÓN 5 -->
+<div class="sectionbar naranja">🟠 BLOQUE V — GEOINGENIERÍA SOLAR Y TRANSFORMACIONES QUÍMICAS</div>
+
+<!-- Bloque 12 -->
+<div class="block s2">
+  <span class="bh naranja">Geoingeniería solar basada en aerosoles</span>
+  <div class="def naranja">La <b>gestión de radiación solar (SRM / geoingeniería solar)</b> propone aumentar el albedo terrestre inyectando aerosoles en la estratosfera inferior para contrarrestar el calentamiento global. El enfoque más estudiado imita la formación de aerosoles de sulfato tras erupciones volcánicas.</div>
+  <div class="two">
+    <div>
+      <b style="font-size:12px">Ventajas propuestas</b>
+      <div class="item" style="margin-top:5px"><div class="dot naranja"></div><div>Mayor impacto, menor costo y despliegue más rápido comparado con otras intervenciones climáticas.</div></div>
+      <div class="item"><div class="dot naranja"></div><div>El efecto de enfriamiento de erupciones volcánicas está bien documentado (ej. Monte Pinatubo 1991).</div></div>
+    </div>
+    <div>
+      <b style="font-size:12px">Riesgos y efectos secundarios</b>
+      <div class="item" style="margin-top:5px"><div class="dot rojo"></div><div>Intensificación del agotamiento del ozono estratosférico por activación heterogénea de cloro.</div></div>
+      <div class="item"><div class="dot rojo"></div><div>Calentamiento estratosférico; cambios en dinámica atmosférica (vórtice polar).</div></div>
+      <div class="item"><div class="dot rojo"></div><div>NO contrarresta la acidificación oceánica por altos niveles de CO₂.</div></div>
+      <div class="item"><div class="dot rojo"></div><div>En 2010, más de 190 naciones adoptaron una prohibición de geoingeniería bajo la Convención de Diversidad Biológica de la ONU.</div></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ADVERTENCIA: La geoingeniería solar es solo una solución de corto plazo. No aborda las causas del cambio climático (emisiones de GHGs) y podría desviar esfuerzos de soluciones sostenibles a largo plazo. Sus efectos ambientales exceden las fronteras de cualquier nación → problema político internacional.</div>
+  <div class="exam">🎯 EXAMEN: Describe el mecanismo por el cual la inyección de aerosoles de sulfato en la estratosfera podría mitigar el calentamiento global, mencionando dos efectos secundarios negativos importantes y una limitación fundamental de este enfoque.</div>
+</div>
+
+<!-- Bloque 13 -->
+<div class="block">
+  <span class="bh morado">Transformaciones químicas y físicas de aerosoles</span>
+  <div class="def morado">El tiempo de vida de un aerosol troposférico es ~1 semana. Durante ese tiempo es transformado por luz solar, procesamiento en nubes y reacciones con gases atmosféricos. La atmósfera es un ambiente oxidante: la materia orgánica se vuelve más oxidada y menos volátil con el tiempo.</div>
+  <div class="flow">
+    <div class="fbox">Emisión</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Oxidación/UV</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Absorción en nube</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Secado + nueva química</div>
+  </div>
+  <div class="item"><div class="dot morado"></div><div><b>Interacciones orgánico-inorgánicas:</b> formación de sales orgánicas puede reducir volatilidad sin oxidación adicional.</div></div>
+  <div class="item"><div class="dot morado"></div><div><b>Depósito de gases ácidos</b> sobre hollín y polvo → mayor higroscopicidad y cambios en propiedades ópticas.</div></div>
+  <div class="item"><div class="dot morado"></div><div>Una partícula típica puede absorber agua, formar una gota de nube, y secarse <b>varias veces en un día</b>, acumulando la "firma" química de ambos modos (nube y aerosol).</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la materia orgánica en aerosoles se vuelve más oxidada y menos volátil con el tiempo en la atmósfera? Menciona dos mecanismos distintos por los cuales puede decrecer la volatilidad de un aerosol orgánico.</div>
+</div>
+
+<!-- SECCIÓN 6 -->
+<div class="sectionbar gris">⚫ TABLA INTEGRADORA — RESUMEN COMPARATIVO DE TODOS LOS TIPOS DE AEROSOLES</div>
+
+<!-- Tabla integradora -->
+<div class="block s3">
+  <span class="bh gris">Comparación integral: tipos, propiedades y efectos climáticos</span>
+  <table class="tbl">
+    <tr>
+      <th>Tipo de aerosol</th>
+      <th>Fuente principal</th>
+      <th>Tamaño típico</th>
+      <th>Propiedad óptica clave</th>
+      <th>Efecto climático</th>
+      <th>Forzamiento</th>
+      <th>Impacto en nubes</th>
+    </tr>
+    <tr>
+      <td><b>Sal marina</b></td>
+      <td>Superficie oceánica (natural)</td>
+      <td>&gt;2.5 µm (grueso)</td>
+      <td>Dispersora (SSA ≈ 1)</td>
+      <td>Negativo (enfría)</td>
+      <td>Baja (masa domina, #N no)</td>
+      <td>CCN eficaz; también IN marino</td>
+    </tr>
+    <tr>
+      <td><b>Polvo mineral</b></td>
+      <td>Desiertos, suelo árido</td>
+      <td>&gt;2.5 µm</td>
+      <td>Mixta (absorbe y dispersa)</td>
+      <td>Variable según composición</td>
+      <td>Media, incierto</td>
+      <td>Excelente IN (estructura cristalina)</td>
+    </tr>
+    <tr>
+      <td><b>Sulfatos secundarios</b></td>
+      <td>SO₂ antrópico → oxidación</td>
+      <td>&lt;2.5 µm (fino)</td>
+      <td>Dispersor puro (SSA ≈ 1)</td>
+      <td>Negativo (enfría)</td>
+      <td>Alto negativo</td>
+      <td>CCN muy activo (higroscópico)</td>
+    </tr>
+    <tr>
+      <td><b>Carbono Negro (BC)</b></td>
+      <td>Combustión fósil/biomasa</td>
+      <td>&lt;1 µm</td>
+      <td>Absorbedor fuerte (SSA ≈ 0.38)</td>
+      <td>Positivo (calienta)</td>
+      <td>2° mayor forzamiento positivo</td>
+      <td>Puede actuar como IN</td>
+    </tr>
+    <tr>
+      <td><b>Carbono Pardo (BrC)</b></td>
+      <td>Quema biomasa, contaminación</td>
+      <td>&lt;2.5 µm</td>
+      <td>Absorbedor UV (α = 2–7)</td>
+      <td>Positivo (principalmente)</td>
+      <td>6–40% absorción a 440 nm</td>
+      <td>Moderado, poco estudiado</td>
+    </tr>
+    <tr>
+      <td><b>SOA (orgánico secundario)</b></td>
+      <td>VOCs oxidados (biogénico/antrópico)</td>
+      <td>&lt;2.5 µm</td>
+      <td>Dispersor (generalmente)</td>
+      <td>Negativo (enfría)</td>
+      <td>Alta incertidumbre (50–380 Tg/año)</td>
+      <td>CCN; BrC si absorbe luz</td>
+    </tr>
+    <tr>
+      <td><b>Aerosoles biológicos</b></td>
+      <td>Polen, esporas, bacterias, océano</td>
+      <td>Variable</td>
+      <td>Mixta</td>
+      <td>Indirecto (nubes/hielo)</td>
+      <td>Emergente, incierto</td>
+      <td>Excelentes IN biológicos</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: El forzamiento aerosólico total es <b>neto negativo</b> (comparable en magnitud al positivo del CO₂), pero la incertidumbre es enorme. Reducir esta incertidumbre requiere conocer las cargas de aerosoles preindustriales (1750) y los mecanismos de interacción aerosol-nube a múltiples escalas.</div>
+</div>
+
+<!-- QUIZ -->
+<div class="block s3" id="quiz-section">
+  <div class="quiz-header">
+    <h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3>
+    <p>Marca tu respuesta y descubre si es correcta · Retroalimentación inmediata incluida</p>
+  </div>
+
+  <div class="quiz-progress">
+    <p><span>Progreso: <b id="prog-text">0 / 10 respondidas</b></span><span>Aciertos: <b id="score-text">0 / 10</b></span></p>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#22c55e;transition:width .3s"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es el rango de tamaño típico de los aerosoles atmosféricos y por qué el PM₂.₅ es considerado la fracción más peligrosa para la salud?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) 0.01–100 nm; porque son demasiado pequeños para depositarse en los pulmones</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) 2 nm–10 µm; porque partículas &lt;2.5 µm penetran profundo en los pulmones y el tracto respiratorio no las filtra</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) 1–50 µm; porque son grandes y se depositan en los alvéolos pulmonares</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) 2–10 nm; porque su composición química es más tóxica que las partículas gruesas</button>
+    </div>
+    <div class="qfeedback" id="fb1">
+      <span id="fb1-icon"></span> <span id="fb1-text"></span>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">En la formación de aerosol orgánico secundario (SOA), ¿cuáles son las DOS vías principales de formación y en qué se diferencian?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Condensación gas-sólido y sublimación sólido-gas; difieren en temperatura de reacción</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) Fotólisis UV y oxidación nocturna; difieren en el oxidante utilizado (OH vs. NO₃)</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="true">C) Condensacional (VOCs oxidados de menor volatilidad se condensan sobre partículas) y acuosa (VOCs hidrosolubles absorbidos por agua de aerosol/nube generan química que produce SOA)</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Nucleación homogénea y heterogénea; difieren en si requieren un núcleo preexistente</button>
+    </div>
+    <div class="qfeedback" id="fb2"><span id="fb2-icon"></span> <span id="fb2-text"></span></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">El carbono negro (BC) tiene un SSA (Single Scatter Albedo) de aproximadamente 0.38. ¿Qué implica este valor para su efecto climático?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) El BC es un aerosol casi puramente dispersor y contribuye a un forzamiento negativo significativo</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) El BC tiene un efecto neutro sobre el clima porque su SSA está cerca del valor crítico de 0.40</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) El BC dispersa más luz de la que absorbe, similar a los sulfatos secundarios</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) El BC está muy por debajo del SSA crítico (0.85–0.9), indicando que absorbe mucho más de lo que dispersa → forzamiento positivo neto (calentamiento), el segundo mayor después del CO₂</button>
+    </div>
+    <div class="qfeedback" id="fb3"><span id="fb3-icon"></span> <span id="fb3-text"></span></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">En la ecuación de Köhler para la activación de CCN, ¿qué representan el término A/Dp (efecto Kelvin) y el término B/Dp³ (efecto Raoult) y cómo afectan la supersaturación crítica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="true">A) Kelvin (A/Dp): la curvatura de la gota aumenta la presión de vapor, dificultando la activación; Raoult (B/Dp³): el soluto disuelto reduce la presión de vapor, facilitando la activación. Compiten entre sí.</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Kelvin: favorece la activación reduciendo la tensión superficial; Raoult: dificulta la activación aumentando la concentración iónica</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Ambos términos facilitan la activación de CCN: Kelvin para partículas pequeñas y Raoult para partículas grandes</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Kelvin depende de la temperatura del aerosol; Raoult depende de la presión atmosférica local</button>
+    </div>
+    <div class="qfeedback" id="fb4"><span id="fb4-icon"></span> <span id="fb4-text"></span></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el carbono pardo (BrC) es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) El BrC muestra absorción creciente hacia longitudes de onda más cortas (UV), descrita por MAE ∝ λ^(-α)</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) El BrC puede experimentar "fotobleaching": la oxidación atmosférica puede destruir sus cromóforos, reduciendo su absorción</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) El BrC absorbe igual de fuerte que el carbono negro (BC) en longitudes de onda largas (550 nm+), por lo que contribuyen en partes iguales a la absorción total aerosólica</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) La composición química del BrC (especies carbonílicas, compuestos N-sustituidos) determina sus propiedades ópticas y estas pueden evolucionar con el envejecimiento fotoquímico</button>
+    </div>
+    <div class="qfeedback" id="fb5"><span id="fb5-icon"></span> <span id="fb5-text"></span></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Por qué la reducción de aerosoles dispersores en EE.UU. tras el Clean Air Act de 1970 tuvo una consecuencia climática no deseada?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Porque al reducir sulfatos se incrementaron las emisiones de carbono negro, que tiene mayor forzamiento positivo</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Porque los aerosoles dispersores eran necesarios para la formación de ozono estratosférico protector</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) Porque los aerosoles dispersores enmascaraban el forzamiento positivo del CO₂ acumulado. Al reducirlos se "desenmascaró" ese calentamiento, acelerando el cambio climático en esa región</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Porque la limpieza del aire redujo la reflectividad de las nubes, aumentando la radiación solar que llegaba a la superficie</button>
+    </div>
+    <div class="qfeedback" id="fb6"><span id="fb6-icon"></span> <span id="fb6-text"></span></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">En la geoingeniería solar por inyección de aerosoles de sulfato, ¿cuál de los siguientes NO es un efecto secundario identificado por científicos atmosféricos?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Intensificación del agotamiento del ozono estratosférico por activación heterogénea de cloro</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Calentamiento estratosférico y cambios en la dinámica del vórtice polar</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) Reducción significativa de la acidificación oceánica al bloquear la absorción de CO₂ atmosférico por los océanos</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Impactos ambientales transfronterizos que generan problemas políticos internacionales</button>
+    </div>
+    <div class="qfeedback" id="fb7"><span id="fb7-icon"></span> <span id="fb7-text"></span></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Cuál de los tres mecanismos de nucleación de hielo en nubes corresponde correctamente a su descripción?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Deposición: una gota supercooled que contiene una partícula aerosol se congela de adentro hacia afuera</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) Congelamiento por inmersión: la partícula aerosol sumergida dentro de la gota actúa como plantilla para la cristalización del hielo al enfriarse la gota</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Modo contacto: el vapor de agua se deposita directamente sobre la superficie del aerosol a temperaturas subfreezing formando hielo</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Congelamiento por inmersión: una gota supercooled externa colisiona con una partícula aerosol que actúa como IN desde afuera</button>
+    </div>
+    <div class="qfeedback" id="fb8"><span id="fb8-icon"></span> <span id="fb8-text"></span></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">El aumento de aerosoles antrópicos produce más y más pequeñas gotas de nube. ¿Qué efectos climáticos indirectos tiene esto, según Twomey (1977) y Albrecht (1989)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Las nubes se vuelven menos reflectivas y tienen mayor tiempo de precipitación, contribuyendo a un forzamiento positivo neto</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Las gotas más pequeñas se evaporan más rápido, reduciendo la cobertura de nubes y aumentando el calentamiento superficial</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Las nubes se vuelven más reflectivas (mayor albedo, efecto Twomey) y tienen mayor tiempo de vida al suprimirse la precipitación (efecto Albrecht) → ambos efectos contribuyen a un forzamiento negativo (enfriamiento)</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Las nubes absorben más radiación infrarroja y liberan más calor latente, intensificando el ciclo hidrológico sin efecto en el forzamiento</button>
+    </div>
+    <div class="qfeedback" id="fb9"><span id="fb9-icon"></span> <span id="fb9-text"></span></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Por qué la principal fuente de incertidumbre en la estimación del forzamiento climático de los aerosoles se relaciona con el año 1750, y qué hallazgo reciente podría ayudar a reducirla?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Porque los instrumentos de medición actuales no pueden detectar aerosoles menores de 0.1 µm, que eran más abundantes en 1750</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) Porque el forzamiento se define como la diferencia respecto a 1750 (era preindustrial). La falta de datos de carga de aerosoles preindustriales obliga a usar modelos. El hallazgo de que VOCs biogénicos pueden nuclearse sin H₂SO₄ mejora los modelos de aerosoles en 1750.</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Porque en 1750 la actividad volcánica era mucho mayor, generando aerosoles estratosféricos que dominaban el balance radiativo y cuya magnitud es incierta</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Porque el carbono negro (BC) fue el aerosol dominante en 1750 y sus fuentes de combustión histórica no están bien documentadas</button>
+    </div>
+    <div class="qfeedback" id="fb10"><span id="fb10-icon"></span> <span id="fb10-text"></span></div>
+  </div>
+
+  <div id="results-panel">
+    <h4 id="res-title"></h4>
+    <p id="res-msg"></p>
+    <button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">McNeill, V.F. (2017). Atmospheric Aerosols: Clouds, Chemistry, and Climate. Annu. Rev. Chem. Biomol. Eng. 8:427–44 · Köhler H. (1936). Trans. Faraday Soc. 32:1152–61 · Bond et al. (2013). J. Geophys. Res. Atmos. 118:5380–552 (BC) · Twomey S. (1977). J. Atmos. Sci. 34:1149–52 · Albrecht B.A. (1989). Science 245:1227–30 · Tröstl et al. (2016). Nature 533:527–31 · IPCC AR5, Myhre et al. (2013)</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {correct: 'b', ok: '✅ ¡Correcto! Los aerosoles atmosféricos miden 2 nm–10 µm. PM₂.₅ penetra profundo en los alvéolos pulmonares porque el tracto respiratorio superior no puede filtrar partículas tan pequeñas. Las partículas más grandes quedan atrapadas en nariz, garganta y bronquios.', fail: '❌ Incorrecto. La respuesta correcta es B. Los aerosoles miden 2 nm–10 µm y PM₂.₅ (&lt;2.5 µm) es peligroso precisamente porque su pequeño tamaño le permite evadir los mecanismos de filtrado del tracto respiratorio superior y llegar a los alvéolos.'},
+  2: {correct: 'c', ok: '✅ ¡Correcto! SOA condensacional: especies orgánicas de menor volatilidad (productos de oxidación de VOCs) se condensan sobre partículas existentes. SOA acuosa: VOCs hidrosolubles se absorben en agua de aerosoles/nubes/niebla y sufren química acuosa para generar material de menor volatilidad.', fail: '❌ Incorrecto. La respuesta correcta es C. Las dos vías son condensacional (partición termodinámica de gases oxidados sobre partículas) y acuosa (absorción de VOCs hidrosolubles en agua de aerosol/nube seguida de química acuosa).'},
+  3: {correct: 'd', ok: '✅ ¡Correcto! Un SSA de 0.38 significa que el BC absorbe enormemente más de lo que dispersa. El valor crítico es ~0.85–0.9: por debajo de ese umbral, el aerosol tiene forzamiento neto POSITIVO. BC es el segundo mayor forzante positivo del clima después del CO₂.', fail: '❌ Incorrecto. La respuesta correcta es D. SSA = Qscat/(Qscat+Qabs). Con SSA ≈ 0.38, el BC absorbe muchísimo más de lo que dispersa (cerca del 62% de la extinción óptica es por absorción), resultando en forzamiento positivo (calentamiento).'},
+  4: {correct: 'a', ok: '✅ ¡Correcto! En la ecuación de Köhler compiten: el efecto Kelvin (curvatura de la gota → mayor presión de vapor → dificulta crecimiento de gotas pequeñas) y el efecto Raoult (soluto disuelto → menor presión de vapor → facilita la activación). La supersaturación crítica ocurre donde la curva de Köhler llega al máximo.', fail: '❌ Incorrecto. La respuesta correcta es A. El término A/Dp (Kelvin) incrementa la presión de vapor por la curvatura, haciendo más difícil la activación de gotas pequeñas. El término B/Dp³ (Raoult) reduce la presión de vapor por el soluto, facilitando la activación. Ambos compiten y determinan la supersaturación crítica de activación.'},
+  5: {correct: 'c', ok: '✅ ¡Correcto! La afirmación FALSA es la C. A diferencia del BC que absorbe fuertemente en todo el espectro visible, el BrC absorbe principalmente en el UV (&lt;400 nm) y su contribución a la absorción total en longitudes de onda largas (≥550 nm) es relativamente MENOR que la del BC.', fail: '❌ Incorrecto. La respuesta correcta es C. El BrC NO absorbe igual que el BC en longitudes de onda largas. El BrC tiene absorción creciente hacia el UV (λ &lt; 400 nm) pero en el visible (550+ nm) su contribución es menor que la del BC, que absorbe fuertemente en todo el espectro visible.'},
+  6: {correct: 'c', ok: '✅ ¡Correcto! Los aerosoles dispersores (principalmente sulfatos) contrarrestaban parte del calentamiento del CO₂. Al reducirlos mediante regulaciones de calidad del aire, se "desenmascaró" el forzamiento positivo acumulado del CO₂, evidenciando su magnitud real. Es una de las grandes lecciones sobre interacciones no lineales entre contaminantes.', fail: '❌ Incorrecto. La respuesta correcta es C. Los aerosoles dispersores enmascaraban el forzamiento positivo del CO₂. Al reducirlos (por beneficio de salud pública), se reveló el calentamiento subyacente que estaban compensando parcialmente.'},
+  7: {correct: 'c', ok: '✅ ¡Correcto! La afirmación que NO es un efecto identificado es la C. La geoingeniería solar por aerosoles NO reduce la acidificación oceánica porque esta es causada directamente por la absorción de CO₂ por los océanos, proceso que continúa independientemente de cuánta radiación solar se refleje.', fail: '❌ Incorrecto. La respuesta correcta es C. La geoingeniería solar NUNCA podría contrarrestar la acidificación oceánica porque ese proceso es causado directamente por el CO₂ disuelto en el agua, no por la temperatura o la radiación solar.'},
+  8: {correct: 'b', ok: '✅ ¡Correcto! El congelamiento por inmersión ocurre cuando la partícula aerosol está sumergida dentro de la gota supercooled y actúa como plantilla (template) para la nucleación de hielo conforme la gota se enfría. El modo deposición (vapor→hielo en superficie aerosol) y el modo contacto (gota colisiona con partícula externa) son los otros dos.', fail: '❌ Incorrecto. La respuesta correcta es B. Los tres mecanismos son: (1) Inmersión: partícula dentro de la gota induce congelamiento; (2) Deposición: vapor de agua se deposita como hielo sobre la superficie del aerosol; (3) Contacto: gota supercooled colisiona con partícula externa.'},
+  9: {correct: 'c', ok: '✅ ¡Correcto! El "primer efecto indirecto" (Twomey 1977): más aerosoles → más gotas pero más pequeñas → mayor albedo de nube (más reflectiva). El "segundo efecto indirecto" (Albrecht 1989): gotas más pequeñas precipitan menos → nubes más duraderas. Ambos generan forzamiento negativo (enfriamiento).', fail: '❌ Incorrecto. La respuesta correcta es C. Más aerosoles → gotas más pequeñas y más numerosas → nubes más reflectivas (efecto Twomey, forzamiento negativo) y de mayor tiempo de vida al suprimirse la precipitación (efecto Albrecht, también forzamiento negativo).'},
+  10: {correct: 'b', ok: '✅ ¡Correcto! El forzamiento climático se define como la diferencia entre el estado actual y el de 1750. Sin datos confiables de las cargas de aerosoles en 1750, la línea base es incierta. El descubrimiento de que productos oxidados de VOCs biogénicos pueden nuclearse sin H₂SO₄ antropogénico mejora los modelos preindustriales y reduce la incertidumbre del forzamiento.', fail: '❌ Incorrecto. La respuesta correcta es B. El forzamiento = diferencia entre hoy y 1750 (era preindustrial). La incertidumbre viene de no conocer bien las cargas de aerosoles en 1750. El hallazgo de nucleación de VOCs biogénicos sin H₂SO₄ mejora los modelos de 1750 y por tanto reduce la incertidumbre del forzamiento actual.'}
+};
+
+let answered = 0, correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const fb = feedbacks[q];
+  
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') {
+      b.className = 'qbtn correct';
+      b.textContent = '✅ ' + b.textContent;
+    } else if (b === btn && !isCorrect) {
+      b.className = 'qbtn incorrect';
+      b.textContent = '❌ ' + b.textContent;
+    }
+  });
+
+  const fbEl = document.getElementById('fb' + q);
+  if (isCorrect) {
+    fbEl.className = 'qfeedback ok';
+    fbEl.innerHTML = fb.ok;
+    correct++;
+  } else {
+    fbEl.className = 'qfeedback fail';
+    fbEl.innerHTML = fb.fail;
+  }
+  fbEl.style.display = 'block';
+  answered++;
+
+  document.getElementById('prog-text').textContent = answered + ' / 10 respondidas';
+  document.getElementById('score-text').textContent = correct + ' / 10';
+  document.getElementById('prog-bar').style.width = (answered * 10) + '%';
+
+  if (answered === 10) {
+    const panel = document.getElementById('results-panel');
+    panel.style.display = 'block';
+    const t = document.getElementById('res-title');
+    const m = document.getElementById('res-msg');
+    if (correct <= 4) {
+      panel.style.background = '#fee2e2'; panel.style.color = '#991b1b';
+      t.textContent = correct + ' / 10 — Necesitas repasar el material';
+      m.textContent = 'Revisa los bloques de Composición Química, SSA, Köhler y Forzamiento Radiativo.';
+    } else if (correct <= 7) {
+      panel.style.background = '#fef9c3'; panel.style.color = '#713f12';
+      t.textContent = correct + ' / 10 — ¡Buen avance, sigue repasando!';
+      m.textContent = 'Dominas los conceptos básicos. Refuerza CCN/IN y transformaciones químicas.';
+    } else {
+      panel.style.background = '#dcfce7'; panel.style.color = '#14532d';
+      t.textContent = correct + ' / 10 — ¡Excelente dominio del tema!';
+      m.textContent = 'Estás listo para el examen de aerosoles atmosféricos.';
+    }
+  }
+});
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('prog-text').textContent = '0 / 10 respondidas';
+  document.getElementById('score-text').textContent = '0 / 10';
+  document.getElementById('prog-bar').style.width = '0%';
+  for (let q = 1; q <= 10; q++) {
+    const allBtns = document.querySelectorAll('.qbtn[data-q="' + q + '"]');
+    allBtns.forEach(b => {
+      b.disabled = false;
+      b.className = 'qbtn';
+      const txt = b.textContent.replace(/^[✅❌] /, '');
+      b.textContent = txt;
+    });
+    document.getElementById('fb' + q).style.display = 'none';
+  }
+  document.getElementById('results-panel').style.display = 'none';
+}
+</script>
+</body>
+</html>
