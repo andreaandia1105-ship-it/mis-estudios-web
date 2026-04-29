@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Examen Práctica — Contaminación Atmosférica</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --card: #1a2235;
+    --border: #2a3650;
+    --accent: #38bdf8;
+    --accent2: #a78bfa;
+    --accent3: #34d399;
+    --danger: #f87171;
+    --warn: #fbbf24;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --correct: #34d399;
+    --wrong: #f87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 80px;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: -20%;
+    left: -10%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, #1e3a5f44 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .header {
+    max-width: 860px;
+    margin: 0 auto 32px;
+    text-align: center;
+    position: relative;
+  }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  /* FILTROS */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .filter-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: #0ea5e915;
+  }
+  .filter-btn[data-prof="carhuancho"].active { border-color: var(--accent2); color: var(--accent2); background: #a78bfa15; }
+  .filter-btn[data-prof="sanabria"].active { border-color: var(--accent); color: var(--accent); background: #38bdf815; }
+
+  /* SCOREBOARD */
+  .scoreboard {
+    max-width: 860px;
+    margin: 0 auto 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .score-item { display: flex; flex-direction: column; align-items: center; }
+  .score-val { font-family: 'IBM Plex Mono', monospace; font-size: 28px; font-weight: 600; }
+  .score-label { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .progress-wrap { flex: 1; min-width: 160px; }
+  .progress-bar { height: 6px; background: var(--border); border-radius: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 10px; transition: width 0.5s; }
+  .btn-reset {
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-reset:hover { border-color: var(--danger); color: var(--danger); }
+
+  /* SECCIÓN */
+  .section-header {
+    max-width: 860px;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+  .tag-sanabria { background: #0ea5e920; color: var(--accent); border: 1px solid #0ea5e940; }
+  .tag-carhuancho { background: #a78bfa20; color: var(--accent2); border: 1px solid #a78bfa40; }
+  .section-title { font-size: 14px; color: var(--text); font-weight: 500; }
+
+  /* CARD */
+  .q-card {
+    max-width: 860px;
+    margin: 0 auto 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .q-card.answered-correct { border-color: #34d39940; }
+  .q-card.answered-wrong { border-color: #f8717140; }
+  .q-card.hidden { display: none; }
+
+  .q-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .q-text {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .q-text code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: #0ea5e915;
+    color: var(--accent);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  /* OPCIONES */
+  .opts { display: flex; flex-direction: column; gap: 7px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 10px 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: left;
+    color: var(--text);
+    width: 100%;
+  }
+  .opt:hover:not(:disabled) { border-color: var(--accent); background: #0ea5e908; }
+  .opt:disabled { cursor: not-allowed; }
+  .opt.correct { border-color: var(--correct); background: #34d39912; color: var(--correct); }
+  .opt.wrong { border-color: var(--wrong); background: #f8717112; color: var(--wrong); }
+  .opt-letter {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 18px;
+    margin-top: 1px;
+    color: var(--muted);
+  }
+  .opt.correct .opt-letter { color: var(--correct); }
+  .opt.wrong .opt-letter { color: var(--wrong); }
+
+  /* FEEDBACK */
+  .feedback {
+    display: none;
+    margin-top: 12px;
+    padding: 11px 14px;
+    border-radius: 9px;
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  .feedback.ok { background: #34d39910; border: 1px solid #34d39930; color: #86efac; display: block; }
+  .feedback.fail { background: #f8717110; border: 1px solid #f8717130; color: #fca5a5; display: block; }
+  .feedback strong { color: #fff; }
+
+  /* TIPO abierta */
+  .open-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 7px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--accent2);
+    background: transparent;
+    color: var(--accent2);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+  .open-btn:hover { background: #a78bfa15; }
+  .open-answer {
+    display: none;
+    margin-top: 12px;
+    padding: 13px 15px;
+    background: #a78bfa0d;
+    border: 1px solid #a78bfa30;
+    border-radius: 10px;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #c4b5fd;
+  }
+  .open-answer.shown { display: block; }
+  .open-answer strong { color: #fff; }
+
+  /* TIPO cálculo */
+  .calc-hint {
+    margin-top: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--warn);
+    padding: 7px 12px;
+    background: #fbbf2410;
+    border: 1px solid #fbbf2425;
+    border-radius: 7px;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">🌫 EXAMEN SIMULACRO</div>
+  <h1>Contaminación Atmosférica</h1>
+  <p class="subtitle">20 preguntas · Sanabria + Carhuancho · Basado en exámenes anteriores y PPTs del curso</p>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" data-filter="all" onclick="filterCards('all',this)">Todas (20)</button>
+  <button class="filter-btn" data-filter="sanabria" data-prof="sanabria" onclick="filterCards('sanabria',this)">🔵 Sanabria (10)</button>
+  <button class="filter-btn" data-filter="carhuancho" data-prof="carhuancho" onclick="filterCards('carhuancho',this)">🟣 Carhuancho (10)</button>
+  <button class="filter-btn" data-filter="calculo" onclick="filterCards('calculo',this)">📐 Cálculo (4)</button>
+  <button class="filter-btn" data-filter="concepto" onclick="filterCards('concepto',this)">📖 Conceptual (16)</button>
+</div>
+
+<div class="scoreboard">
+  <div class="score-item"><span class="score-val" id="sc-correct" style="color:var(--correct)">0</span><span class="score-label">Correctas</span></div>
+  <div class="score-item"><span class="score-val" id="sc-wrong" style="color:var(--danger)">0</span><span class="score-label">Incorrectas</span></div>
+  <div class="score-item"><span class="score-val" id="sc-pct" style="color:var(--accent)">—</span><span class="score-label">Puntaje</span></div>
+  <div class="progress-wrap">
+    <div style="font-size:11px;color:var(--muted);margin-bottom:5px" id="sc-prog">0 / 0 respondidas</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+  <button class="btn-reset" onclick="resetAll()">↺ Reiniciar</button>
+</div>
+
+<!-- ======================== BLOQUE SANABRIA ======================== -->
+<div class="section-header" data-section="sanabria">
+  <span class="section-tag tag-sanabria">SANABRIA</span>
+  <span class="section-title">Micrometeorología · Normativa · Principios de contaminación</span>
+</div>
+
+<!-- P1 -->
+<div class="q-card" data-prof="sanabria" data-type="concepto" id="q1">
+  <div class="q-num">PREGUNTA 01 — Sanabria · Capa Límite Planetaria</div>
+  <div class="q-text">¿Cuál de las siguientes afirmaciones sobre la Capa Límite Planetaria (PBL) es CORRECTA?</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q1',false)"><span class="opt-letter">A</span> La PBL ocupa aproximadamente el 50% de la troposfera y responde a forzamientos en escalas de días.</button>
+    <button class="opt" onclick="answer(this,'q1',true)"><span class="opt-letter">B</span> La PBL es la capa más baja de la troposfera (1–3 km), directamente influenciada por la superficie terrestre, y responde a forzamientos en escalas ≤ 1 hora.</button>
+    <button class="opt" onclick="answer(this,'q1',false)"><span class="opt-letter">C</span> La capa superficial representa el 50% de la PBL y es donde ocurre la capa Ekman.</button>
+    <button class="opt" onclick="answer(this,'q1',false)"><span class="opt-letter">D</span> La PBL es independiente de la rugosidad superficial y la temperatura.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P2 -->
+<div class="q-card" data-prof="sanabria" data-type="concepto" id="q2">
+  <div class="q-num">PREGUNTA 02 — Sanabria · Estabilidad Atmosférica</div>
+  <div class="q-text">Si el Gradiente Adiabático Ambiental (ELR) es de 8 °C/km, el DALR es 9.8 °C/km y el SALR es 5 °C/km, la atmósfera es:</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q2',false)"><span class="opt-letter">A</span> Absolutamente inestable, porque ELR &gt; DALR.</button>
+    <button class="opt" onclick="answer(this,'q2',false)"><span class="opt-letter">B</span> Absolutamente estable, porque ELR &lt; SALR.</button>
+    <button class="opt" onclick="answer(this,'q2',true)"><span class="opt-letter">C</span> Condicionalmente inestable, porque DALR &gt; ELR &gt; SALR. Estable para aire seco, inestable si se condensa.</button>
+    <button class="opt" onclick="answer(this,'q2',false)"><span class="opt-letter">D</span> Neutra, porque ELR ≈ DALR.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P3 -->
+<div class="q-card" data-prof="sanabria" data-type="concepto" id="q3">
+  <div class="q-num">PREGUNTA 03 — Sanabria · Número de Richardson</div>
+  <div class="q-text">El número de Richardson (Ri) relaciona fuerzas boyantes y cizalladura mecánica. Marque la afirmación CORRECTA:</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q3',false)"><span class="opt-letter">A</span> Cuando Ri &gt; 0.25 hay turbulencia intensa y la dispersión es máxima.</button>
+    <button class="opt" onclick="answer(this,'q3',false)"><span class="opt-letter">B</span> Cuando Ri = 0 domina la convección térmica sobre la mecánica.</button>
+    <button class="opt" onclick="answer(this,'q3',true)"><span class="opt-letter">C</span> Cuando Ri &gt; 0.25 la turbulencia cesa, la mezcla vertical desaparece y los contaminantes se acumulan.</button>
+    <button class="opt" onclick="answer(this,'q3',false)"><span class="opt-letter">D</span> El número de Richardson no depende del gradiente de temperatura potencial.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P4 -->
+<div class="q-card" data-prof="sanabria" data-type="concepto" id="q4">
+  <div class="q-num">PREGUNTA 04 — Sanabria · Inversión Térmica / Smog de Londres</div>
+  <div class="q-text">¿Cuáles fueron las dos condiciones meteorológicas clave que causaron el gran smog tóxico de Londres en 1952?</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q4',false)"><span class="opt-letter">A</span> Fuertes vientos y alta presión atmosférica.</button>
+    <button class="opt" onclick="answer(this,'q4',true)"><span class="opt-letter">B</span> Inversión térmica (capa de aire más caliente sobre más frío) e inestabilidad atmosférica que impedía el ascenso de contaminantes.</button>
+    <button class="opt" onclick="answer(this,'q4',false)"><span class="opt-letter">C</span> Alta temperatura superficial y ausencia de nubes.</button>
+    <button class="opt" onclick="answer(this,'q4',false)"><span class="opt-letter">D</span> Precipitaciones intensas y vientos del sur que trajeron contaminantes.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P5 -->
+<div class="q-card" data-prof="sanabria" data-type="concepto" id="q5">
+  <div class="q-num">PREGUNTA 05 — Sanabria · Temperatura Potencial</div>
+  <div class="q-text">La temperatura potencial (θ) es útil para evaluar estabilidad porque:</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q5',false)"><span class="opt-letter">A</span> Siempre es igual a la temperatura real del aire.</button>
+    <button class="opt" onclick="answer(this,'q5',true)"><span class="opt-letter">B</span> Elimina el efecto de la compresión adiabática con la altitud, permitiendo comparar masas de aire a diferentes alturas. Si θ aumenta con z → estable; si disminuye → inestable.</button>
+    <button class="opt" onclick="answer(this,'q5',false)"><span class="opt-letter">C</span> Mide directamente la concentración de contaminantes en la PBL.</button>
+    <button class="opt" onclick="answer(this,'q5',false)"><span class="opt-letter">D</span> Solo se aplica en condiciones saturadas del aire.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P6 -->
+<div class="q-card" data-prof="sanabria" data-type="concepto" id="q6">
+  <div class="q-num">PREGUNTA 06 — Sanabria · ECA vs. LMP</div>
+  <div class="q-text">Diferencia fundamental entre el ECA (Estándar de Calidad Ambiental) y el LMP (Límite Máximo Permisible) en Perú:</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q6',false)"><span class="opt-letter">A</span> El ECA regula las emisiones en chimeneas y el LMP el aire que respira la población.</button>
+    <button class="opt" onclick="answer(this,'q6',true)"><span class="opt-letter">B</span> El ECA mide la concentración en el aire ambiente (lo que respira la población) y no es de exigencia directa. El LMP regula las emisiones en la fuente (chimenea, escape) y es de obligatorio cumplimiento legal.</button>
+    <button class="opt" onclick="answer(this,'q6',false)"><span class="opt-letter">C</span> Ambos son equivalentes y regulan lo mismo.</button>
+    <button class="opt" onclick="answer(this,'q6',false)"><span class="opt-letter">D</span> El ECA aplica solo a vehículos y el LMP solo a industrias.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P7 -->
+<div class="q-card" data-prof="sanabria" data-type="concepto" id="q7">
+  <div class="q-num">PREGUNTA 07 — Sanabria · Contaminantes Criterio / ECA Perú</div>
+  <div class="q-text">Según el D.S. 003-2017-MINAM (ECA para aire Perú), el estándar para PM₂.₅ en 24 horas es:</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q7',false)"><span class="opt-letter">A</span> 15 µg/m³ (igual a la OMS 2021)</button>
+    <button class="opt" onclick="answer(this,'q7',false)"><span class="opt-letter">B</span> 25 µg/m³ (media aritmética anual)</button>
+    <button class="opt" onclick="answer(this,'q7',true)"><span class="opt-letter">C</span> 50 µg/m³ (no exceder más de 7 veces al año)</button>
+    <button class="opt" onclick="answer(this,'q7',false)"><span class="opt-letter">D</span> 100 µg/m³ (no exceder más de 24 veces al año)</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P8 -->
+<div class="q-card" data-prof="sanabria" data-type="concepto" id="q8">
+  <div class="q-num">PREGUNTA 08 — Sanabria · Comportamiento de Penachos</div>
+  <div class="q-text">Un gráfico de perfil de temperatura vs. altura muestra una inversión térmica por encima de la altura efectiva de la chimenea y condiciones inestables por debajo. ¿Qué tipo de comportamiento de penacho se produce?</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q8',false)"><span class="opt-letter">A</span> Penacho ondulado (coning)</button>
+    <button class="opt" onclick="answer(this,'q8',true)"><span class="opt-letter">B</span> Fumigación (fumigation): el penacho queda atrapado bajo la inversión y se mezcla hacia abajo, generando altas concentraciones al nivel del suelo.</button>
+    <button class="opt" onclick="answer(this,'q8',false)"><span class="opt-letter">C</span> Penacho abanico (fanning): el penacho se extiende horizontalmente sin mezcla vertical.</button>
+    <button class="opt" onclick="answer(this,'q8',false)"><span class="opt-letter">D</span> Atrapamiento (trapping): inversión por encima y por debajo de la chimenea.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P9 — cálculo -->
+<div class="q-card" data-prof="sanabria" data-type="calculo" id="q9">
+  <div class="q-num">PREGUNTA 09 — Sanabria · Cálculo · Viento Geostrófico</div>
+  <div class="q-text">
+    En un sitio a 35°N, las isobaras superficiales corren de este a oeste indicando ∂P/∂y = −4 mb / 100 km. La presión es 1020 mb, T = 30°C (303 K), masa molar aire M = 28.9 g/mol, R* = 8.314×10⁻³ bar·m³·mol⁻¹, Ω = 2π/86400 s⁻¹.<br><br>
+    La densidad del aire (ρ) y el parámetro de Coriolis (f) calculados por el alumno fueron: ρ ≈ 1.17 kg/m³ y f ≈ 8.34×10⁻⁵ s⁻¹.<br>
+    Usando Uₛ = −(1/ρf) · ∂P/∂y, el viento geostrófico resultante es:
+  </div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q9',false)"><span class="opt-letter">A</span> ≈ 10 m/s</button>
+    <button class="opt" onclick="answer(this,'q9',false)"><span class="opt-letter">B</span> ≈ 25 m/s</button>
+    <button class="opt" onclick="answer(this,'q9',true)"><span class="opt-letter">C</span> ≈ 45 m/s (≈ 44.99 m²/s, coincide con la solución del examen 2023)</button>
+    <button class="opt" onclick="answer(this,'q9',false)"><span class="opt-letter">D</span> ≈ 100 m/s</button>
+  </div>
+  <div class="calc-hint">📐 Recordar: ∂P/∂y = −400 Pa / 10⁵ m → convertir a Pa/m antes de aplicar la fórmula. 1 mb = 100 Pa.</div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P10 — cálculo -->
+<div class="q-card" data-prof="sanabria" data-type="calculo" id="q10">
+  <div class="q-num">PREGUNTA 10 — Sanabria · Cálculo · Balance Energético Océano</div>
+  <div class="q-text">
+    En océano tropical: Rn = 600 W/m², β = 0.2 (razón de Bowen), ρ agua = 1000 kg/m³, Ce = 4.18×10³ J/(kg·K), h = 50 m, ∂T/∂t = 0.08 °C/día. Calor latente de evaporación L = 2.45×10⁶ J/kg.<br><br>
+    El flujo de calor latente (Qₗ) y la evaporación (E en mm/día) son aproximadamente:
+  </div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q10',false)"><span class="opt-letter">A</span> Qₗ ≈ 100 W/m², E ≈ 3 mm/día</button>
+    <button class="opt" onclick="answer(this,'q10',true)"><span class="opt-letter">B</span> Qₗ ≈ 338 W/m², E ≈ 12 mm/día (solución del examen 2023-I)</button>
+    <button class="opt" onclick="answer(this,'q10',false)"><span class="opt-letter">C</span> Qₗ ≈ 500 W/m², E ≈ 20 mm/día</button>
+    <button class="opt" onclick="answer(this,'q10',false)"><span class="opt-letter">D</span> Qₗ ≈ 200 W/m², E ≈ 7 mm/día</button>
+  </div>
+  <div class="calc-hint">📐 Pasos: ΔQs = ρ·Ce·h·(∂T/∂t) ≈ 194 W/m² → Rn − ΔQs = QH + Qₗ → usando β=QH/Qₗ → 1.2·Qₗ = 406 W/m²</div>
+  <div class="feedback"></div>
+</div>
+
+<!-- ======================== BLOQUE CARHUANCHO ======================== -->
+<div class="section-header" style="margin-top:32px" data-section="carhuancho">
+  <span class="section-tag tag-carhuancho">CARHUANCHO</span>
+  <span class="section-title">Fuentes de emisión · Contaminantes · Efectos en salud · Modelos</span>
+</div>
+
+<!-- P11 -->
+<div class="q-card" data-prof="carhuancho" data-type="concepto" id="q11">
+  <div class="q-num">PREGUNTA 11 — Carhuancho · Tipos de Fuentes de Emisión</div>
+  <div class="q-text">¿A qué tipo de fuente de emisión pertenece el parque automotor de Lima y por qué es importante distinguirlo en un inventario?</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q11',false)"><span class="opt-letter">A</span> Fuente puntual. Se inventaría individualmente por su gran impacto.</button>
+    <button class="opt" onclick="answer(this,'q11',true)"><span class="opt-letter">B</span> Fuente móvil en carretera. Se estima por categoría (tipo de vehículo, combustible, estado de mantenimiento) porque no es una fuente fija y localizable.</button>
+    <button class="opt" onclick="answer(this,'q11',false)"><span class="opt-letter">C</span> Fuente de área. Se estima individualmente por ser de alta magnitud.</button>
+    <button class="opt" onclick="answer(this,'q11',false)"><span class="opt-letter">D</span> Fuente biogénica. Porque los motores producen COV naturales.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P12 -->
+<div class="q-card" data-prof="carhuancho" data-type="concepto" id="q12">
+  <div class="q-num">PREGUNTA 12 — Carhuancho · Formación de Ozono Troposférico</div>
+  <div class="q-text">¿Por qué en zonas urbanas con alta concentración de NOₓ el pico de ozono troposférico (O₃) NO ocurre en el centro de la ciudad sino en zonas alejadas?</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q12',false)"><span class="opt-letter">A</span> Porque el ozono se forma más rápido a bajas temperaturas.</button>
+    <button class="opt" onclick="answer(this,'q12',true)"><span class="opt-letter">B</span> Porque el exceso de NOₓ consume el O₃ cerca de la fuente (NO + O₃ → NO₂ + O₂). El O₃ se acumula cuando el NOₓ disminuye al alejarse de la fuente y los COV reaccionan con la luz.</button>
+    <button class="opt" onclick="answer(this,'q12',false)"><span class="opt-letter">C</span> Porque los vientos siempre soplan del centro hacia afuera en ciudades.</button>
+    <button class="opt" onclick="answer(this,'q12',false)"><span class="opt-letter">D</span> Porque la radiación UV es mayor en zonas periféricas.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P13 -->
+<div class="q-card" data-prof="carhuancho" data-type="concepto" id="q13">
+  <div class="q-num">PREGUNTA 13 — Carhuancho · CO y Carboxihemoglobina</div>
+  <div class="q-text">El monóxido de carbono (CO) es peligroso principalmente porque:</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q13',false)"><span class="opt-letter">A</span> Es un gas irritante con olor fuerte que activa los reflejos de tos inmediatamente.</button>
+    <button class="opt" onclick="answer(this,'q13',true)"><span class="opt-letter">B</span> Es inodoro e incoloro y tiene 200–250 veces más afinidad por la hemoglobina que el O₂, formando carboxihemoglobina (COHb) que impide el transporte de oxígeno a los tejidos.</button>
+    <button class="opt" onclick="answer(this,'q13',false)"><span class="opt-letter">C</span> Reacciona con el agua formando ácido carbónico que daña los pulmones.</button>
+    <button class="opt" onclick="answer(this,'q13',false)"><span class="opt-letter">D</span> Destruye la capa de ozono estratosférico en ciclos catalíticos.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P14 -->
+<div class="q-card" data-prof="carhuancho" data-type="concepto" id="q14">
+  <div class="q-num">PREGUNTA 14 — Carhuancho · Deposición Seca vs. Húmeda del SO₂</div>
+  <div class="q-text">¿Por qué el SO₂ puede depositarse tanto por vía seca como húmeda? (Propiedad física determinante en cada caso)</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q14',false)"><span class="opt-letter">A</span> Deposición seca: porque es soluble en agua. Húmeda: porque es no polar.</button>
+    <button class="opt" onclick="answer(this,'q14',true)"><span class="opt-letter">B</span> Deposición seca: porque es una molécula no polar que puede adsorberse directamente a superficies sólidas. Húmeda: porque es altamente soluble en agua, disolviéndose en las gotas de lluvia.</button>
+    <button class="opt" onclick="answer(this,'q14',false)"><span class="opt-letter">C</span> Ambas vías dependen solo de la concentración del SO₂ en el aire.</button>
+    <button class="opt" onclick="answer(this,'q14',false)"><span class="opt-letter">D</span> El SO₂ solo se deposita por vía húmeda porque es un gas soluble.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P15 -->
+<div class="q-card" data-prof="carhuancho" data-type="concepto" id="q15">
+  <div class="q-num">PREGUNTA 15 — Carhuancho · Smog Industrial vs. Fotoquímico</div>
+  <div class="q-text">¿Qué diferencia el smog industrial (tipo Londres) del smog fotoquímico (tipo Los Ángeles)?</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q15',true)"><span class="opt-letter">A</span> El smog industrial se basa en SO₂ + partículas + humedad, predomina en invierno con clima frío y húmedo. El fotoquímico resulta de NOₓ + COV + luz solar, predomina en verano con clima cálido y soleado.</button>
+    <button class="opt" onclick="answer(this,'q15',false)"><span class="opt-letter">B</span> El smog industrial produce O₃ troposférico; el fotoquímico produce lluvia ácida.</button>
+    <button class="opt" onclick="answer(this,'q15',false)"><span class="opt-letter">C</span> El smog fotoquímico ocurre en ciudades industriales en invierno y produce H₂SO₄.</button>
+    <button class="opt" onclick="answer(this,'q15',false)"><span class="opt-letter">D</span> No hay diferencia significativa entre ambos tipos de smog.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P16 -->
+<div class="q-card" data-prof="carhuancho" data-type="concepto" id="q16">
+  <div class="q-num">PREGUNTA 16 — Carhuancho · Contaminantes Primarios y Secundarios</div>
+  <div class="q-text">¿Cuáles son los contaminantes criterio según la Ley de Aire Limpio del Perú? Señale la lista CORRECTA:</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q16',false)"><span class="opt-letter">A</span> CO₂, CH₄, N₂O, HFCs, PFCs, SF₆</button>
+    <button class="opt" onclick="answer(this,'q16',true)"><span class="opt-letter">B</span> CO, SO₂, NOₓ, O₃ troposférico, PM₁₀, PM₂.₅, Plomo (Pb)</button>
+    <button class="opt" onclick="answer(this,'q16',false)"><span class="opt-letter">C</span> CO₂, SO₂, NO₂, PM₁₀, benceno, H₂S</button>
+    <button class="opt" onclick="answer(this,'q16',false)"><span class="opt-letter">D</span> HC totales, COV, O₃, SO₃, NH₃, HNO₃</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P17 -->
+<div class="q-card" data-prof="carhuancho" data-type="concepto" id="q17">
+  <div class="q-num">PREGUNTA 17 — Carhuancho · Modelos de Dispersión</div>
+  <div class="q-text">¿Cuál de las siguientes afirmaciones sobre los modelos gaussianos es FALSA?</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q17',false)"><span class="opt-letter">A</span> Asumen velocidad y dirección del viento constantes.</button>
+    <button class="opt" onclick="answer(this,'q17',false)"><span class="opt-letter">B</span> Asumen que las tasas de emisión son constantes.</button>
+    <button class="opt" onclick="answer(this,'q17',true)"><span class="opt-letter">C</span> Consideran que el terreno es accidentado y tienen en cuenta el transporte por viento Y turbulencia atmosférica.</button>
+    <button class="opt" onclick="answer(this,'q17',false)"><span class="opt-letter">D</span> Asumen que la deposición es insignificante y la forma del penacho es cónica.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P18 -->
+<div class="q-card" data-prof="carhuancho" data-type="concepto" id="q18">
+  <div class="q-num">PREGUNTA 18 — Carhuancho · Efectos en Salud · PM₂.₅</div>
+  <div class="q-text">¿Por qué el PM₂.₅ es más peligroso que el PM₁₀ para la salud humana?</div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q18',false)"><span class="opt-letter">A</span> Porque el PM₂.₅ es más pesado y cae más rápido al suelo acumulándose.</button>
+    <button class="opt" onclick="answer(this,'q18',true)"><span class="opt-letter">B</span> Porque el PM₂.₅ (&lt;2.5 µm) penetra hasta los alvéolos pulmonares y puede pasar a la sangre, mientras que el PM₁₀ queda en vías respiratorias superiores. Además permanece días en suspensión viajando largas distancias.</button>
+    <button class="opt" onclick="answer(this,'q18',false)"><span class="opt-letter">C</span> Porque el PM₂.₅ tiene mayor concentración en el aire siempre.</button>
+    <button class="opt" onclick="answer(this,'q18',false)"><span class="opt-letter">D</span> Porque el PM₂.₅ solo se forma en zonas industriales y es fácil de evitar.</button>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P19 — cálculo -->
+<div class="q-card" data-prof="carhuancho" data-type="calculo" id="q19">
+  <div class="q-num">PREGUNTA 19 — Carhuancho · Cálculo · Nivel de Potencia Sonora</div>
+  <div class="q-text">
+    Una segadora emite una potencia acústica de 0.02 W. El receptor X está a 15 m.<br>
+    Potencia de referencia W₀ = 10⁻¹² W, I₀ = 10⁻¹² W/m², P₀ = 2×10⁻⁵ Pa.<br><br>
+    a) Lw = 10·log(W/W₀) = ?<br>
+    b) I = W/(2π·r²) = ? → Lᵢ = 10·log(I/I₀) = ?
+  </div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q19',false)"><span class="opt-letter">A</span> Lw = 90.1 dB, Lᵢ = 65.2 dB</button>
+    <button class="opt" onclick="answer(this,'q19',true)"><span class="opt-letter">B</span> Lw ≈ 103 dB, I ≈ 1.415×10⁻⁵ W/m², Lᵢ ≈ 71.5 dB</button>
+    <button class="opt" onclick="answer(this,'q19',false)"><span class="opt-letter">C</span> Lw = 50 dB, Lᵢ = 40 dB</button>
+    <button class="opt" onclick="answer(this,'q19',false)"><span class="opt-letter">D</span> Lw ≈ 103 dB, Lᵢ ≈ 95 dB</button>
+  </div>
+  <div class="calc-hint">📐 Lw = 10·log(0.02/10⁻¹²) = 103.01 dB | I = 0.02/(2π×15²) = 1.415×10⁻⁵ → Lᵢ = 10·log(1.415×10⁻⁵/10⁻¹²) = 71.51 dB</div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P20 -->
+<div class="q-card" data-prof="carhuancho" data-type="calculo" id="q20">
+  <div class="q-num">PREGUNTA 20 — Carhuancho · Cálculo · Combinación de Fuentes Sonoras</div>
+  <div class="q-text">
+    Tres equipos en el punto Q: bomba de agua (L₁), generador (L₂), segadora (L₃).<br>
+    Se sabe: L₁+L₂+L₃ = 91.51 dB, L₂+L₃ = 91.19 dB, L₁+L₂ = 90.41 dB.<br><br>
+    ¿Cuál es el nivel sonoro del generador (L₂) solo?
+  </div>
+  <div class="opts">
+    <button class="opt" onclick="answer(this,'q20',false)"><span class="opt-letter">A</span> L₂ ≈ 75 dB</button>
+    <button class="opt" onclick="answer(this,'q20',false)"><span class="opt-letter">B</span> L₂ ≈ 83 dB</button>
+    <button class="opt" onclick="answer(this,'q20',true)"><span class="opt-letter">C</span> L₂ ≈ 89.99 dB (usando L₂ = 10·log(10^(9.041/10) − 10^(8.0025/10)) ≈ 90 dB)</button>
+    <button class="opt" onclick="answer(this,'q20',false)"><span class="opt-letter">D</span> L₂ ≈ 91 dB</button>
+  </div>
+  <div class="calc-hint">📐 L₁ = 10·log(10^(9.151/10) − 10^(9.119/10)) ≈ 80.02 dB | L₃ = 10·log(10^(9.151/10) − 10^(9.041/10)) ≈ 85 dB | L₂ = 10·log(10^(9.041/10) − 10^(8.002/10)) ≈ 89.99 dB</div>
+  <div class="feedback"></div>
+</div>
+
+<footer>
+  <p>Examen simulacro generado con base en PPTs del curso, lecturas y exámenes anteriores (2023-I, 2023-II, Oct-2024, Dic-2024).</p>
+  <p style="margin-top:6px">Contaminación Atmosférica · UNALM · Dr. Sanabria + Dra. Carhuancho</p>
+</footer>
+
+<script>
+const state = { correct: 0, wrong: 0, answered: new Set() };
+const TOTAL_VISIBLE = () => document.querySelectorAll('.q-card:not(.hidden)').length;
+
+const EXPLANATIONS = {
+  q1: { ok: "✓ Correcto. La PBL (Planetary Boundary Layer) se extiende 1–3 km sobre la superficie, responde a forzamientos en ≤1h y es donde ocurren todos los intercambios energéticos relevantes para la contaminación.", fail: "✗ La PBL ocupa solo la parte más baja de la troposfera (~10%), responde en escala ≤1 hora (no días), y la capa superficial = ~10% de la PBL (no 50%)." },
+  q2: { ok: "✓ Correcto. DALR (9.8) > ELR (8) > SALR (5): inestabilidad condicional. El aire seco que asciende se enfría 9.8°C/km pero el ambiente solo 8°C/km → estable en seco. Si condensa, el SALR (5) es menor que el ELR → inestable.", fail: "✗ Recuerda la regla: ELR < SALR = absolutamente estable | SALR < ELR < DALR = condicionalmente inestable | ELR > DALR = absolutamente inestable." },
+  q3: { ok: "✓ Correcto. Ri > 0.25–0.5 → la estratificación estable domina, la turbulencia mecánica se amortigua y cesa. Contaminantes sin mezcla vertical = acumulación.", fail: "✗ Es al revés: Ri > 0.25 → atmósfera estable, cesa turbulencia. Ri < 0 → convección dominante, dispersión máxima. Ri ≈ 0 → turbulencia mecánica." },
+  q4: { ok: "✓ Correcto. En 1952 un invierno muy frío con cielos despejados generó inversión térmica (capa de aire caliente sobre frío), el aire frío en superficie era más denso y no ascendía, atrapando la contaminación del carbón bajo la capa de inversión.", fail: "✗ El smog de Londres se produjo por inversión térmica + tiempo calmo (sin viento que dispersara). No fue por lluvias ni fuertes vientos." },
+  q5: { ok: "✓ Correcto. θ = T·(1000/P)^(R/cp). Al ser 'conservativa' respecto al movimiento adiabático, permite comparar parcelas a distintas alturas sin el efecto de la presión. Es el indicador correcto de estabilidad.", fail: "✗ La temperatura real disminuye con la altura por expansión adiabática (eso no indica inestabilidad). La temperatura potencial elimina ese efecto y sí es el indicador de estabilidad." },
+  q6: { ok: "✓ Correcto. ECA = aire ambiente = lo que respiras = no es de exigencia directa. LMP = chimenea/escape = fuente = obligatorio por ley. Son complementarios: uno mide el resultado, el otro regula la causa.", fail: "✗ Es exactamente al revés de la opción A. ECA no regula chimeneas, mide el aire ambiente." },
+  q7: { ok: "✓ Correcto. D.S. 003-2017-MINAM: PM₂.₅ en 24h = 50 µg/m³ (NE > 7 veces/año). El estándar anual es 25 µg/m³. La OMS 2021 exige solo 15 µg/m³ en 24h — ¡el Perú permite 3.3 veces más!", fail: "✗ Revisa la tabla del ECA: PM₂.₅ 24h = 50 µg/m³ | PM₂.₅ anual = 25 µg/m³ | PM₁₀ 24h = 100 µg/m³ | PM₁₀ anual = 50 µg/m³." },
+  q8: { ok: "✓ Correcto. Fumigación ocurre cuando hay inversión arriba y condiciones inestables abajo de la chimenea. El penacho no puede ascender (inversión) pero sí baja mezclado por turbulencia → alta concentración en superficie. Es el escenario más peligroso.", fail: "✗ Atrapamiento = inversión arriba Y abajo. Fanning = inversión térmica solo (penacho plano, sin mezcla vertical). Fumigación = inversión sobre chimenea + inestable bajo chimenea." },
+  q9: { ok: "✓ Correcto. El examen 2023-I muestra este resultado. ρ = PM/RT = 1.17 kg/m³ | f = 2Ω·sen(35°) = 8.34×10⁻⁵ s⁻¹ | Uₛ = −(−400 Pa/100,000 m) / (1.17 × 8.34×10⁻⁵) ≈ 41–45 m/s.", fail: "✗ Revisa las unidades: ∂P/∂y debe convertirse a Pa/m (4 mb/100 km = 400 Pa / 100,000 m = 4×10⁻³ Pa/m). Luego Uₛ = 4×10⁻³ / (1.17 × 8.34×10⁻⁵) ≈ 41–45 m/s." },
+  q10: { ok: "✓ Correcto. ΔQs = ρ·Ce·h·(∂T/∂t) = 1000×4180×50×(0.08/86400) ≈ 193 W/m². Rn − ΔQs = QH + Qₗ → 407 W/m² = 1.2·Qₗ → Qₗ ≈ 338 W/m². E = Qₗ/L·(1/ρ) → en mm/día ≈ 12.", fail: "✗ Recuerda que ∂T/∂t debe convertirse a °C/s: 0.08°C/día ÷ 86400 s/día. La razón de Bowen β = QH/Qₗ = 0.2 → QH = 0.2·Qₗ → total = 1.2·Qₗ." },
+  q11: { ok: "✓ Correcto. Fuente móvil en carretera. Se inventaría por categoría porque cada vehículo es una fuente pequeña que se mueve. En Lima, los ómnibus representan ~42% de PM₂.₅ del parque automotor.", fail: "✗ Fuente puntual = chimenea fija identificable. Fuente de área = muchas fuentes pequeñas estacionarias agrupadas. El parque automotor = fuente móvil." },
+  q12: { ok: "✓ Correcto. Es el ciclo fotoestacionario: en zonas con alta [NOₓ], el NO consume el O₃ por titulación (NO + O₃ → NO₂ + O₂). Solo cuando el NOₓ disminuye (lejos de la fuente, en la tarde) el O₃ se acumula.", fail: "✗ El O₃ se destruye cerca de las fuentes de NOₓ por la reacción NO + O₃ → NO₂ + O₂. No tiene que ver con temperatura ni vientos radiales." },
+  q13: { ok: "✓ Correcto. El CO es el 'asesino silencioso': inodoro, incoloro, con afinidad 200–250× mayor por Hb que O₂. COHb al 50–60% = muerte. Fuente principal: combustión incompleta en vehículos.", fail: "✗ El CO no tiene olor. No forma ácido. No destruye ozono. Su peligro es bloquear la hemoglobina sin que la víctima lo perciba." },
+  q14: { ok: "✓ Correcto. SO₂ es molécula no polar → puede adsorberse a superficies por deposición seca. También es soluble en agua → se disuelve en gotas de lluvia (deposición húmeda) formando H₂SO₃ y luego H₂SO₄.", fail: "✗ La propiedad determinante para deposición seca es la no-polaridad (adsorción superficial). Para húmeda, la solubilidad en agua. El SO₂ tiene ambas propiedades." },
+  q15: { ok: "✓ Correcto. Smog industrial (Londres): SO₂ + partículas + niebla + inversión térmica + invierno frío y húmedo. 4,000–12,000 muertes en 1952 → Clean Air Act 1956. Smog fotoquímico (LA): NOₓ + COV + sol + calor → O₃.", fail: "✗ Es al revés: el industrial produce H₂SO₄ (lluvia ácida), el fotoquímico produce O₃ troposférico. El industrial predomina en invierno, el fotoquímico en verano." },
+  q16: { ok: "✓ Correcto. Los contaminantes criterio de la Ley de Aire Limpio Perú son: CO, SO₂, NOₓ, O₃ troposférico, PM₁₀, PM₂.₅, Pb. Son los más relevantes para la salud pública y tienen ECA establecidos.", fail: "✗ Los GEI (CO₂, CH₄, N₂O, HFCs) no son contaminantes criterio bajo la Ley de Aire Limpio. H₂S y Hg tienen ECAs pero no son 'criterio' en el sentido clásico." },
+  q17: { ok: "✓ Correcto. Los modelos gaussianos ASUMEN terreno llano (no accidentado) y solo consideran el transporte por advección del viento (no la turbulencia atmosférica como causa del transporte, aunque σy y σz la parametrizan).", fail: "✗ Las opciones A, B y D son verdaderas supuestos del modelo gaussiano. La falsa es la C: el gaussiano asume terreno llano y no considera explícitamente el transporte por turbulencia." },
+  q18: { ok: "✓ Correcto. PM₂.₅ < 2.5 µm penetra hasta los alvéolos y puede pasar a la sangre → efectos cardiovasculares, neurológicos y sistémicos. PM₁₀ queda en vías superiores. PM₀.₁ incluso pasa a sangre y tejidos.", fail: "✗ Las partículas más pequeñas son más peligrosas por penetrar más profundo. El PM₂.₅ de Lima proviene 58% del parque automotor." },
+  q19: { ok: "✓ Correcto. Lw = 10·log(0.02/10⁻¹²) = 10·log(2×10¹⁰) = 10·(10+log2) = 103.01 dB. I = 0.02/(2π×225) = 1.415×10⁻⁵ W/m². Lᵢ = 10·log(1.415×10⁻⁵/10⁻¹²) = 71.51 dB.", fail: "✗ Revisa la fórmula de intensidad: I = W/(2π·r²) para fuente hemisférica. r = 15 m. Luego Lᵢ = 10·log(I/10⁻¹²)." },
+  q20: { ok: "✓ Correcto. L₁ = 10·log(10^9.151 − 10^9.119) = 80.02 dB | L₃ = 10·log(10^9.151 − 10^9.041) = 85.01 dB | L₂ = 10·log(10^9.041 − 10^8.002) = 89.99 ≈ 90 dB.", fail: "✗ Para sustraer niveles sonoros: L_combinado = 10·log(10^(LA/10) + 10^(LB/10)). Para encontrar uno, resta: LB = 10·log(10^(A+B)/10 − 10^(A)/10)." }
+};
+
+function answer(btn, qid, isCorrect) {
+  if (state.answered.has(qid)) return;
+  state.answered.add(qid);
+  const card = document.getElementById(qid);
+  const opts = card.querySelectorAll('.opt');
+  const feedback = card.querySelector('.feedback');
+  opts.forEach(o => o.disabled = true);
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  if (!isCorrect) {
+    opts.forEach(o => {
+      if (o.getAttribute('onclick').includes(',true)')) o.classList.add('correct');
+    });
+  }
+  card.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+  feedback.classList.add(isCorrect ? 'ok' : 'fail');
+  feedback.innerHTML = (isCorrect ? EXPLANATIONS[qid].ok : EXPLANATIONS[qid].fail)
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  if (isCorrect) state.correct++; else state.wrong++;
+  updateScore();
+}
+
+function updateScore() {
+  document.getElementById('sc-correct').textContent = state.correct;
+  document.getElementById('sc-wrong').textContent = state.wrong;
+  const total = state.answered.size;
+  const vis = TOTAL_VISIBLE();
+  const pct = total > 0 ? Math.round((state.correct / total) * 100) : '—';
+  document.getElementById('sc-pct').textContent = total > 0 ? pct + '%' : '—';
+  document.getElementById('sc-prog').textContent = `${total} / ${vis} respondidas`;
+  document.getElementById('progress-fill').style.width = (total / vis * 100) + '%';
+  document.getElementById('sc-pct').style.color = 
+    typeof pct === 'number' ? (pct >= 70 ? 'var(--correct)' : pct >= 50 ? 'var(--warn)' : 'var(--danger)') : 'var(--accent)';
+}
+
+function filterCards(filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.q-card').forEach(card => {
+    if (filter === 'all') {
+      card.classList.remove('hidden');
+    } else if (filter === 'sanabria' || filter === 'carhuancho') {
+      card.classList.toggle('hidden', card.dataset.prof !== filter);
+    } else {
+      card.classList.toggle('hidden', card.dataset.type !== filter);
+    }
+  });
+  updateScore();
+}
+
+function resetAll() {
+  if (!confirm('¿Reiniciar todas las respuestas?')) return;
+  state.correct = 0; state.wrong = 0; state.answered.clear();
+  document.querySelectorAll('.q-card').forEach(card => {
+    card.classList.remove('answered-correct', 'answered-wrong');
+    card.querySelectorAll('.opt').forEach(o => {
+      o.disabled = false;
+      o.classList.remove('correct', 'wrong');
+    });
+    const fb = card.querySelector('.feedback');
+    fb.className = 'feedback';
+    fb.innerHTML = '';
+    const oa = card.querySelector('.open-answer');
+    if (oa) { oa.className = 'open-answer'; }
+  });
+  updateScore();
+}
+
+updateScore();
+</script>
+</body>
+</html>
