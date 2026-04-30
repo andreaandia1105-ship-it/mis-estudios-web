@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario — Contaminación Atmosférica</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f1f5f9;font-family:'Source Sans 3',sans-serif;color:#1e293b;font-size:13px}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px}
+.block{background:#fff;border:0.5px solid #e2e8f0;border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}.bh-green{background:#dcfce7;color:#14532d}.bh-red{background:#fee2e2;color:#991b1b}
+.bh-yellow{background:#fef9c3;color:#713f12}.bh-purple{background:#ede9fe;color:#4c1d95}.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}.bh-gray{background:#f1f5f9;color:#334155}.bh-pink{background:#fce7f3;color:#831843}
+.sec{grid-column:1/-1;background:#0f1e3a;border-radius:9px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:#f8fafc;margin-bottom:8px}
+.def-blue{border-left:3px solid #3b82f6}.def-green{border-left:3px solid #16a34a}.def-red{border-left:3px solid #dc2626}
+.def-yellow{border-left:3px solid #ca8a04}.def-purple{border-left:3px solid #7c3aed}.def-teal{border-left:3px solid #0d9488}
+.def-orange{border-left:3px solid #ea580c}.def-pink{border-left:3px solid #db2777}.def-gray{border-left:3px solid #94a3b8}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}.dot-green{background:#16a34a}.dot-red{background:#dc2626}
+.dot-yellow{background:#ca8a04}.dot-purple{background:#7c3aed}.dot-teal{background:#0d9488}
+.dot-orange{background:#ea580c}.dot-pink{background:#db2777}.dot-gray{background:#94a3b8}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0}
+.mini{background:#f8fafc;border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:#f8fafc;padding:4px 8px;border-radius:6px;font-size:11px;border:0.5px solid #e2e8f0}
+.farrow{color:#94a3b8;font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:#f1f5f9;padding:5px 7px;border-bottom:0.5px solid #e2e8f0;text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid #e2e8f0;vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.divh{border:none;border-top:0.5px solid #e2e8f0;margin:7px 0}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.pill-b{background:#dbeafe;color:#1e3a8a}.pill-g{background:#dcfce7;color:#14532d}.pill-r{background:#fee2e2;color:#991b1b}
+.pill-t{background:#ccfbf1;color:#134e4a}.pill-o{background:#ffedd5;color:#7c2d12}.pill-y{background:#fef9c3;color:#713f12}
+.hdr{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.hdr h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.hdr p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.num-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;margin-right:5px;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}.nb-g{background:#dcfce7;color:#14532d}.nb-r{background:#fee2e2;color:#991b1b}
+.nb-y{background:#fef9c3;color:#713f12}.nb-p{background:#ede9fe;color:#4c1d95}.nb-t{background:#ccfbf1;color:#134e4a}
+.nb-o{background:#ffedd5;color:#7c2d12}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+b{font-weight:600}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- HEADER -->
+<div class="hdr">
+  <h1>🌫 FORMULARIO COMPLETO — CONTAMINACIÓN ATMOSFÉRICA</h1>
+  <p>Sanabria (Unidades 1–3: Principios · Normativa · Micrometeorología) + Carhuancho (Fuentes · Contaminantes · Efectos en Salud) · UNALM 2026-I</p>
+  <div>
+    <span class="pill pill-b">Definición</span><span class="pill pill-g">Fuentes</span><span class="pill pill-t">PBL</span>
+    <span class="pill pill-y">Fórmulas</span><span class="pill pill-r">Contaminantes</span><span class="pill" style="background:#ede9fe;color:#4c1d95">ECA/LMP</span>
+    <span class="pill pill-o">Lima/Perú</span><span class="pill" style="background:#fce7f3;color:#831843">Salud</span>
+    <span class="pill" style="background:#0f172a;color:#7dd3fc">Reacciones</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ SECCIÓN 1 ═══════════════════════════════ -->
+<div class="sec">⚗️ 1. PRINCIPIOS Y DEFINICIONES BASE (Sanabria U1)</div>
+
+<!-- Definición + Sistema -->
+<div class="block">
+  <div class="bh bh-blue">Definición Formal</div>
+  <div class="def def-blue"><b>Contaminación atmosférica:</b> presencia de sustancias (gases o aerosoles) en el aire en concentraciones suficientemente elevadas como para interferir con la salud humana o el medioambiente. La clave es la <b>concentración</b>, no el tipo de sustancia.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Gases contaminantes:</b> O₃, VOCs, NO₂, NO, SO₂, CO, Benceno, Pb, TOMPS</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><b>Aerosoles (PM):</b> PM₁, PM₂.₅, PM₁₀, sulfatos, nitratos, BC, carbono orgánico</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Eliminación:</b> gases → oxidación química; aerosoles → deposición seca/húmeda</span></div>
+  <div class="divh"></div>
+  <div class="bh bh-teal">Sistema Fuente → Receptor</div>
+  <div class="flow">
+    <div class="fbox">Fuentes</div><div class="farrow">→</div>
+    <div class="fbox">Emisiones</div><div class="farrow">→</div>
+    <div class="fbox">Dispersión</div><div class="farrow">→</div>
+    <div class="fbox">Transformación</div><div class="farrow">→</div>
+    <div class="fbox">Deposición</div><div class="farrow">→</div>
+    <div class="fbox">Receptores</div>
+  </div>
+  <div class="warn">⚠️ Emisión ≠ Concentración. Alta emisión + viento fuerte = baja concentración. Alta emisión + inversión térmica = alta concentración.</div>
+</div>
+
+<!-- Fuentes -->
+<div class="block">
+  <div class="bh bh-orange">Fuentes de Emisión</div>
+  <div class="two">
+    <div class="mini"><b>🌿 Naturales Biogénicas</b><br>Vegetación: COV (isopreno, terpenos)<br>Suelos: N₂O, NOₓ bacterias<br>Océanos: DMS → SO₂<br>Ganado: CH₄ fermentación</div>
+    <div class="mini"><b>🌋 Naturales Geogénicas</b><br>Volcanes: SO₂, HCl, CO₂, PM, metales<br>Incendios: PM, CO, NOₓ, BC<br>Erosión suelo: PM₁₀<br>Humedales: CH₄</div>
+  </div>
+  <div class="three" style="margin-top:6px">
+    <div class="mini" style="border-top:3px solid #ea580c"><b>📍 Puntual</b><br>Chimenea fija identificable. Inventario individual.<br><i>Ej: fundición Ilo</i></div>
+    <div class="mini" style="border-top:3px solid #3b82f6"><b>🗺 Área</b><br>Muchas pequeñas fuentes. Inventario por densidad/sector.<br><i>Ej: panaderías, talleres</i></div>
+    <div class="mini" style="border-top:3px solid #16a34a"><b>🚗 Móvil</b><br>En carretera y fuera de carretera. Por tipo, combustible, mantenimiento.<br><i>Ej: buses Lima 42% PM₂.₅</i></div>
+  </div>
+  <div class="warn">⚠️ Lima: 58% PM₂.₅ = parque automotor. 65% de emisiones móviles = vehículos >15 años. 42% dentro de móviles = ómnibus.</div>
+</div>
+
+<!-- Composición atmósfera + GWP -->
+<div class="block">
+  <div class="bh bh-green">Composición Atmosférica</div>
+  <div class="item"><span class="dot dot-blue"></span><span>N₂ 78.1% · O₂ 20.9% · Ar 0.93% · Gases traza 0.07%</span></div>
+  <div class="item"><span class="dot dot-red"></span><span>CO₂: ~420 ppm actual (preindustrial 278 ppm, +50%)</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span>CH₄: 1.823 ppm · GWP₁₀₀ = 25 · vida media 12 años</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>N₂O: 0.324 ppm · GWP₁₀₀ = 298 · vida media 114 años</span></div>
+  <div class="divh"></div>
+  <div class="bh bh-yellow">GWP₁₀₀ — Potencial Calentamiento Global</div>
+  <table class="tbl">
+    <tr><th>Gas</th><th>GWP₁₀₀</th><th>Vida media</th></tr>
+    <tr><td>CO₂</td><td>1 (referencia)</td><td>30,000–35,000 a</td></tr>
+    <tr><td>CH₄</td><td>25</td><td>12 años</td></tr>
+    <tr><td>N₂O</td><td>298</td><td>114 años</td></tr>
+    <tr><td>HFCs</td><td>124–14,800</td><td>~15 años</td></tr>
+    <tr><td>SF₆</td><td>22,800</td><td>Muy larga</td></tr>
+    <tr><td>CFCs</td><td>Variable</td><td>Décadas–100 a</td></tr>
+    <tr><td>BC (hollín)</td><td>—</td><td>Días (local)</td></tr>
+    <tr><td>O₃ troposf.</td><td>—</td><td>Semanas</td></tr>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════ SECCIÓN 2 ═══════════════════════════════ -->
+<div class="sec">⚖️ 2. NORMATIVA — ECA · LMP · ICA (Sanabria U2)</div>
+
+<!-- ECA vs LMP -->
+<div class="block">
+  <div class="bh bh-blue">ECA vs LMP — Diferencia Clave</div>
+  <div class="two">
+    <div class="def def-blue"><b>ECA</b> (D.S. 003-2017-MINAM)<br>Mide concentración en el <b>aire ambiente</b> (lo que respira la población).<br>• No es exigencia legal directa<br>• Aplica a la sociedad en su conjunto<br>• Mide en el receptor, no en la chimenea</div>
+    <div class="def def-red"><b>LMP</b> (D.S. sectoriales)<br>Mide concentración en la <b>emisión directa</b> (chimenea, escape).<br>• <b>Exigencia legal obligatoria</b><br>• Aplica a industrias y vehículos<br>• Mide en la fuente emisora</div>
+  </div>
+  <div class="flow" style="font-size:11px">
+    <div class="fbox">Fuente industrial</div><div class="farrow">→</div>
+    <div class="fbox" style="background:#fee2e2">LMP aquí</div><div class="farrow">→</div>
+    <div class="fbox">Dispersión</div><div class="farrow">→</div>
+    <div class="fbox" style="background:#dbeafe">ECA aquí</div>
+  </div>
+  <div class="warn">⚠️ Cumplir el ECA ≠ cumplir el LMP. Son instrumentos distintos. Empresa puede cumplir su LMP pero el aire de la ciudad superar el ECA (por suma de muchas fuentes).</div>
+</div>
+
+<!-- Tabla ECA Perú -->
+<div class="block s2">
+  <div class="bh bh-orange">ECA para Aire Perú — D.S. 003-2017-MINAM</div>
+  <table class="tbl">
+    <tr><th>Parámetro</th><th>Período</th><th>Valor (µg/m³)</th><th>Criterio</th><th>OMS 2021</th></tr>
+    <tr><td>PM₂.₅</td><td>24 horas</td><td style="color:#dc2626;font-weight:700">50</td><td>NE > 7 veces/año</td><td>15 µg/m³</td></tr>
+    <tr><td>PM₂.₅</td><td>Anual</td><td style="color:#dc2626;font-weight:700">25</td><td>Media aritmética</td><td>5 µg/m³</td></tr>
+    <tr><td>PM₁₀</td><td>24 horas</td><td>100</td><td>NE > 7 veces/año</td><td>45 µg/m³</td></tr>
+    <tr><td>PM₁₀</td><td>Anual</td><td>50</td><td>Media aritmética</td><td>15 µg/m³</td></tr>
+    <tr><td>NO₂</td><td>1 hora</td><td>200</td><td>NE > 24 veces/año</td><td>—</td></tr>
+    <tr><td>NO₂</td><td>Anual</td><td>100</td><td>Media aritmética</td><td>10 µg/m³</td></tr>
+    <tr><td>SO₂</td><td>24 horas</td><td>250</td><td>NE > 7 veces/año</td><td>40 µg/m³</td></tr>
+    <tr><td>CO</td><td>1 hora</td><td style="font-weight:700">30,000</td><td>NE > 1 vez/año</td><td>—</td></tr>
+    <tr><td>CO</td><td>8 horas</td><td style="font-weight:700">10,000</td><td>Media aritmética móvil</td><td>4,000 (24h)</td></tr>
+    <tr><td>O₃</td><td>8 horas</td><td style="font-weight:700">100</td><td>Máx. media diaria</td><td>100 µg/m³</td></tr>
+    <tr><td>Benceno</td><td>Anual</td><td>2</td><td>Media aritmética</td><td>—</td></tr>
+    <tr><td>Hg gaseoso</td><td>24 horas</td><td>2</td><td>No exceder</td><td>—</td></tr>
+    <tr><td>H₂S</td><td>24 horas</td><td>150</td><td>Media aritmética</td><td>—</td></tr>
+    <tr><td>Pb en PM₁₀</td><td>Mensual</td><td>1.5</td><td>NE > 4 veces/año</td><td>—</td></tr>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ Lima tiene 27 µg/m³ de PM₂.₅ anual promedio = <b>5.4 × el límite OMS 2021</b> (5 µg/m³). El ECA peruano de 24h (50) es 3.3 veces el de OMS 2021 (15).</div>
+</div>
+
+<!-- ICA -->
+<div class="block">
+  <div class="bh bh-yellow">ICA / AQI — Fórmula e Interpretación</div>
+  <div class="rx">Ip = [(IHi − ILo) / (BPHi − BPLo)] × (Cp − BPLo) + ILo
+donde:
+Cp = concentración truncada del contaminante
+BPHi/BPLo = puntos de quiebre superior/inferior (Tabla 6)
+IHi/ILo = índice AQI correspondiente a esos puntos</div>
+  <div class="def def-yellow"><b>Reglas de truncamiento ANTES de calcular:</b><br>O₃ (ppm): 3 decimales → 0.078<br>PM₂.₅ (µg/m³): 1 decimal → 35.9<br>PM₁₀, SO₂, NO₂ (µg/m³): entero<br>CO (ppm): 1 decimal</div>
+  <table class="tbl" style="margin-top:6px">
+    <tr><th>ICA</th><th>Categoría</th><th>Color</th></tr>
+    <tr><td>0–50</td><td>Buena</td><td style="color:#16a34a">🟢 Verde</td></tr>
+    <tr><td>51–100</td><td>Moderada</td><td style="color:#ca8a04">🟡 Amarillo</td></tr>
+    <tr><td>101–150</td><td>Dañino grupos sensibles</td><td style="color:#ea580c">🟠 Naranja</td></tr>
+    <tr><td>151–200</td><td>Dañino</td><td style="color:#dc2626">🔴 Rojo</td></tr>
+    <tr><td>201–300</td><td>Muy dañino</td><td style="color:#7c3aed">🟣 Morado</td></tr>
+    <tr><td>301+</td><td>Peligroso</td><td>⬛ Marrón oscuro</td></tr>
+  </table>
+  <div class="warn">⚠️ El ICA reportado = el valor MÁS ALTO entre todos los contaminantes medidos. El contaminante que da ese valor es el "contaminante principal".</div>
+</div>
+
+<!-- LMP cemento -->
+<div class="block">
+  <div class="bh bh-red">LMP Cemento/Cal — D.S. 001-2020-MINAM</div>
+  <table class="tbl">
+    <tr><th>Parámetro</th><th>Fuente Nueva</th><th>Existente</th><th>Unidad</th></tr>
+    <tr><td>PM</td><td>80</td><td style="font-weight:700">120</td><td>mg/m³</td></tr>
+    <tr><td>SO₂</td><td>500 / 1800*</td><td>500 / 1800*</td><td>mg/m³</td></tr>
+    <tr><td>NOₓ</td><td>1,400</td><td>1,400</td><td>mg/m³</td></tr>
+    <tr><td>Hg</td><td>0.1</td><td>0.1</td><td>mg/m³</td></tr>
+  </table>
+  <div class="divh"></div>
+  <div class="bh bh-purple">5 Criterios para Establecer Normas</div>
+  <div class="item"><span class="num-badge nb-b">1</span><span><b>Salud humana:</b> efectos a corto y largo plazo</span></div>
+  <div class="item"><span class="num-badge nb-g">2</span><span><b>Medio ambiente:</b> lluvia ácida, ecosistemas</span></div>
+  <div class="item"><span class="num-badge nb-y">3</span><span><b>Factores económicos y tecnológicos:</b> alcanzables</span></div>
+  <div class="item"><span class="num-badge nb-t">4</span><span><b>Normas internacionales:</b> OMS, EPA como referencia</span></div>
+  <div class="item"><span class="num-badge nb-o">5</span><span><b>Consideraciones sociales y políticas:</b> compromiso</span></div>
+</div>
+
+<!-- Fórmulas concentración -->
+<div class="block">
+  <div class="bh bh-yellow">Fórmulas de Concentración y Emisión</div>
+  <div class="rx">Concentración = masa / volumen   [µg/m³ ó mg/m³]
+Emisión (tasa) = masa / tiempo   [g/h, kg/año, t/año]
+E = A × EF × (1 − ER/100)
+  A = tasa de actividad | EF = factor de emisión
+  ER = eficiencia de reducción (%) → 0 si no hay control</div>
+  <div class="def def-yellow"><b>Ejemplo factor de emisión:</b> Caldero quema 90,000 L/día de aceite. EF = 0.6 kg CO/1,000 L. Sin control:<br>E = 90,000 × (0.6/1,000) = <b>54 kg CO/día</b><br>Con ER=80%: E = 54 × 0.2 = <b>10.8 kg CO/día</b></div>
+  <div class="divh"></div>
+  <div class="bh bh-teal">Conversión ppm ↔ µg/m³</div>
+  <div class="rx">µg/m³ = ppm × PM × 10³ / Vmolar
+Vmolar: 22.4 L/mol a 0°C y 1 atm
+Vmolar: 24.4 L/mol a 25°C y 1 atm
+Ej (25°C): 22 ppm CO → µg/m³ = 22 × 28 × 10³/24.4 = 25,246 µg/m³</div>
+  <div class="divh"></div>
+  <div class="bh bh-gray">Concentración Promedio en Chimenea</div>
+  <div class="rx">c_prom = Σ(V·A·c) / Σ(V·A)
+Si áreas iguales: c_prom = Σ(V·c) / ΣV
+V=velocidad [m/s], c=concentración [µg/m³]</div>
+  <div class="warn">⚠️ No promediar concentraciones sin ponderar por velocidad de flujo. Se obtiene un valor incorrecto.</div>
+</div>
+
+<!-- NAAQS EPA -->
+<div class="block">
+  <div class="bh bh-blue">NAAQS-EPA (EE.UU.) — 6 Contaminantes Criterio</div>
+  <table class="tbl">
+    <tr><th>Contaminante</th><th>Estándar primario</th><th>Período</th></tr>
+    <tr><td>CO</td><td>9 ppm (10 mg/m³)</td><td>8 horas</td></tr>
+    <tr><td>CO</td><td>35 ppm (40 mg/m³)</td><td>1 hora</td></tr>
+    <tr><td>Pb</td><td>0.15 µg/m³</td><td>Prom. 3 meses</td></tr>
+    <tr><td>NO₂</td><td>53 ppb</td><td>Anual</td></tr>
+    <tr><td>PM₁₀</td><td>150 µg/m³</td><td>24 horas</td></tr>
+    <tr><td>PM₂.₅</td><td style="font-weight:700">35 µg/m³</td><td>24 horas</td></tr>
+    <tr><td>O₃</td><td>0.075 ppm</td><td>8 horas</td></tr>
+    <tr><td>SO₂</td><td>75 ppb</td><td>1 hora</td></tr>
+  </table>
+  <div class="divh"></div>
+  <div class="bh bh-green">Tiers de Estimación de Emisiones</div>
+  <div class="item"><span class="num-badge nb-y">T1</span><span><b>Tier 1:</b> Factores IPCC promedio global. Para fuentes no clave.</span></div>
+  <div class="item"><span class="num-badge nb-b">T2</span><span><b>Tier 2:</b> Factores específicos del país. Para categorías clave.</span></div>
+  <div class="item"><span class="num-badge nb-g">T3</span><span><b>Tier 3:</b> Modelos avanzados por instalación (MOVES, etc.). Máxima precisión.</span></div>
+  <div class="warn">⚠️ Parque automotor Lima = categoría clave → mínimo Tier 2. Tier 1 da estimaciones muy imprecisas para planificar políticas.</div>
+</div>
+
+<!-- ═══════════════════════════════ SECCIÓN 3 ═══════════════════════════════ -->
+<div class="sec">🌀 3. MICROMETEOROLOGÍA — PBL · TURBULENCIA · ESTABILIDAD (Sanabria U3)</div>
+
+<!-- PBL -->
+<div class="block">
+  <div class="bh bh-teal">Capa Límite Planetaria (PBL/ABL)</div>
+  <div class="def def-teal">Parte más baja de la troposfera (1–3 km). Directamente influenciada por la superficie. Responde a forzamientos en escalas <b>≤ 1 hora</b>. Donde se emiten, mezclan y eliminan los contaminantes.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #0d9488"><b>Capa Superficial (~10%)</b><br>Donde viven humanos, animales, vegetación. Intercambios energéticos. Altamente turbulenta.</div>
+    <div class="mini" style="border-top:3px solid #0d9488"><b>Capa de Rugosidad</b><br>Adyacente a edificios/vegetación. 2–5× altura de elementos. Flujo tridimensional.</div>
+    <div class="mini" style="border-top:3px solid #0d9488"><b>Capa Ekman</b><br>Transición con troposfera libre. Efectos de Coriolis. Viento rota con la altura.</div>
+  </div>
+  <div class="divh"></div>
+  <b>Forzamientos principales:</b>
+  <div class="item"><span class="dot dot-teal"></span><span>Transferencia de calor suelo↔atmósfera</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Evapotranspiración superficial</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Arrastre por fricción</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Emisiones contaminantes + efectos topográficos</span></div>
+  <div class="warn">⚠️ No confundir la altura de la PBL con la base de inversión. La inversión puede estar dentro de la PBL.</div>
+</div>
+
+<!-- Turbulencia -->
+<div class="block">
+  <div class="bh bh-purple">Turbulencia — Tipos y Fórmulas</div>
+  <div class="two">
+    <div class="def def-purple"><b>Turbulencia Térmica</b><br>Calentamiento solar desigual → convección → burbujas térmicas. Domina en condiciones diurnas inestables. Mezcla vertical eficiente.</div>
+    <div class="def def-gray"><b>Turbulencia Mecánica</b><br>Fricción suelo-aire (rugosidad, edificios) → remolinos. Depende de velocidad de viento, rugosidad y estabilidad.</div>
+  </div>
+  <div class="rx">Descomposición de Reynolds: u = ū + u'
+Varianza: σ²ᵤ = (1/N) Σ(uᵢ − ū)²
+Intensidad de Turbulencia: TI = σᵤ / ū  [adimensional]</div>
+  <div class="def def-blue"><b>Interpretación TI:</b> TI alta en noche estable → turbulencia mecánica. TI alta en día inestable → turbulencia térmica. La TI sola no distingue el tipo; se necesita el Ri o longitud de Monin-Obukhov.</div>
+  <div class="flow" style="margin-top:6px">
+    <div class="fbox">↑ Turbulencia</div><div class="farrow">→</div>
+    <div class="fbox">↑ Mezcla vertical</div><div class="farrow">→</div>
+    <div class="fbox">↓ Concentración</div>
+  </div>
+</div>
+
+<!-- Temperatura Potencial -->
+<div class="block">
+  <div class="bh bh-yellow">Temperatura Potencial θ y Balance Energético</div>
+  <div class="rx">θ = T × (1000/P)^(R/cp)
+R ≈ 287 J/kg·K  |  cp ≈ 1005 J/kg·K  |  P en hPa  |  T en Kelvin
+R/cp ≈ 0.286</div>
+  <div class="def def-yellow"><b>Indicador de estabilidad:</b><br>∂θ/∂z &gt; 0 → Estable<br>∂θ/∂z = 0 → Neutro<br>∂θ/∂z &lt; 0 → Inestable</div>
+  <div class="divh"></div>
+  <b>Evolución diurna θ:</b>
+  <div class="item"><span class="num-badge nb-t">🌅</span><span><b>Amanecer:</b> θ crece con z (inversión nocturna)</span></div>
+  <div class="item"><span class="num-badge nb-y">☀</span><span><b>Mañana:</b> capa mixta erosiona inversión desde abajo</span></div>
+  <div class="item"><span class="num-badge nb-o">🌞</span><span><b>Mediodía:</b> θ ≈ constante (capa mixta bien mezclada)</span></div>
+  <div class="item"><span class="num-badge nb-b">🌙</span><span><b>Noche:</b> θ crece con z → SBL estable, turbulencia débil</span></div>
+  <div class="divh"></div>
+  <div class="bh bh-teal">Balance Energético Superficie</div>
+  <div class="rx">F* = FHs + FEs + FGs
+F* = radiación neta | FHs = calor sensible
+FEs = calor latente | FGs = flujo al suelo</div>
+  <div class="def def-teal"><b>Razón de Bowen:</b> β = FHs/FEs<br>Superficie seca (ciudad pavimentada): FEs ≈ 0, FHs domina → Isla de Calor Urbana (UHI)<br>Superficie húmeda/vegetada: FEs domina, β &lt; 1</div>
+  <div class="warn">⚠️ Para examen balance océano: Rn − ΔQs = QH + QL; ΔQs = ρ·Ce·h·(∂T/∂t); QL = L·E; β = QH/QL</div>
+</div>
+
+<!-- Estabilidad y Richardson -->
+<div class="block">
+  <div class="bh bh-red">Estabilidad Atmosférica — Gradientes Adiabáticos</div>
+  <div class="three">
+    <div class="def def-green"><b>DALR (Seco)</b><br>Constante: <b>9.8 °C/km</b><br>Enfriamiento adiabático seco. No depende de T ni humedad.</div>
+    <div class="def def-blue"><b>SALR (Saturado)</b><br>Variable: <b>4–9 °C/km</b><br>Media ≈ 5 °C/km. Menor por calor latente liberado en condensación.</div>
+    <div class="def def-orange"><b>ELR (Ambiental)</b><br>Variable: media <b>6.5 °C/km</b><br>Tasa real de disminución de T con la altura. Es la que se mide.</div>
+  </div>
+  <table class="tbl" style="margin-top:6px">
+    <tr><th>Condición</th><th>Criterio</th><th>Efecto en dispersión</th></tr>
+    <tr><td style="color:#dc2626"><b>Absolutamente estable</b></td><td>ELR &lt; SALR</td><td>Mínima dispersión</td></tr>
+    <tr><td><b>Condicionalmente inestable</b></td><td>SALR &lt; ELR &lt; DALR</td><td>Depende de humedad</td></tr>
+    <tr><td style="color:#16a34a"><b>Absolutamente inestable</b></td><td>ELR &gt; DALR</td><td>Máxima dispersión</td></tr>
+    <tr><td><b>Neutra</b></td><td>ELR = DALR</td><td>Dispersión moderada</td></tr>
+  </table>
+  <div class="divh"></div>
+  <div class="bh bh-purple">Número de Richardson (Ri)</div>
+  <div class="rx">Ri = (g/T) × (∂θ/∂z) / (∂ū/∂z)²
+g = gravedad | T = temperatura media (K)
+∂θ/∂z = gradiente θ potencial | ∂ū/∂z = cizalladura del viento</div>
+  <table class="tbl" style="margin-top:6px">
+    <tr><th>Ri</th><th>Condición</th><th>Turbulencia</th><th>Dispersión</th></tr>
+    <tr><td style="color:#16a34a"><b>Ri &lt; 0</b></td><td>Muy inestable</td><td>Convección domina</td><td>Máxima</td></tr>
+    <tr><td><b>Ri ≈ 0</b></td><td>Neutro</td><td>Mecánica domina</td><td>Moderada</td></tr>
+    <tr><td style="color:#dc2626"><b>Ri &gt; 0.25–0.5</b></td><td>Estable</td><td>CESA turbulencia</td><td>Mínima</td></tr>
+  </table>
+</div>
+
+<!-- Perfil de viento -->
+<div class="block">
+  <div class="bh bh-gray">Perfil de Viento — Ley de Potencia</div>
+  <div class="rx">u₁ = u₀ × (h/h₀)ⁿ
+u₀ = velocidad medida a h₀ (usualmente 10 m)
+u₁ = velocidad a altura h
+n = parámetro de estabilidad (empírico)
+Si se tienen 2 niveles: n = ln(u₀/u₁) / ln(h₀/h)</div>
+  <table class="tbl">
+    <tr><th>Estabilidad</th><th>n</th><th>Perfil</th></tr>
+    <tr><td>Inestable (día)</td><td>n pequeño</td><td>Uniforme, buena mezcla</td></tr>
+    <tr><td>Neutro</td><td>n ≈ 1/7 ≈ 0.143</td><td>Referencia</td></tr>
+    <tr><td>Estable (noche)</td><td>n mayor</td><td>Gradiente fuerte, viento lento en superficie</td></tr>
+  </table>
+  <div class="divh"></div>
+  <div class="bh bh-blue">Viento Geostrófico</div>
+  <div class="rx">ρ = PM/(R·T) = P×M/(R*·T)   [kg/m³]
+f = 2Ω·sen(φ)   Ω = 2π/86400 s⁻¹
+Uₛ = −(1/ρ·f) × ∂P/∂y
+Vₛ = (1/ρ·f) × ∂P/∂x
+∂P/∂y en Pa/m (1 mb = 100 Pa; 1 mb/100 km = 10⁻³ Pa/m)</div>
+  <div class="warn">⚠️ Convertir siempre ∂P de mb a Pa antes de calcular. 4 mb/100 km = 4×10⁻³ Pa/m. Masa molar aire M = 28.9 g/mol. R* = 8.314×10⁻³ bar·m³/mol = 8.314 J/(mol·K).</div>
+</div>
+
+<!-- Pasquill + Penachos -->
+<div class="block s2">
+  <div class="bh bh-orange">Clases de Estabilidad de Pasquill-Gifford</div>
+  <table class="tbl">
+    <tr><th>Clase</th><th>Estabilidad</th><th>Condición típica</th><th>σy, σz</th><th>Dispersión</th></tr>
+    <tr><td style="color:#16a34a"><b>A</b></td><td>Muy inestable</td><td>Mediodía verano, viento &lt;2 m/s, alta insolación</td><td>Grandes</td><td>Máxima</td></tr>
+    <tr><td style="color:#16a34a"><b>B</b></td><td>Moderadamente inestable</td><td>Mañana soleada, viento 2–3 m/s</td><td>Moderadas-grandes</td><td>Alta</td></tr>
+    <tr><td style="color:#ca8a04"><b>C</b></td><td>Ligeramente inestable</td><td>Día parcialmente nublado</td><td>Moderadas</td><td>Moderada-alta</td></tr>
+    <tr><td><b>D</b></td><td>Neutro</td><td>Muy ventoso o muy nublado cualquier hora</td><td>Moderadas</td><td>Moderada</td></tr>
+    <tr><td style="color:#dc2626"><b>E</b></td><td>Ligeramente estable</td><td>Tarde con viento moderado</td><td>Pequeñas</td><td>Baja</td></tr>
+    <tr><td style="color:#dc2626"><b>F</b></td><td>Estable</td><td>Noche despejada y tranquila</td><td>Muy pequeñas</td><td>Mínima</td></tr>
+  </table>
+  <div class="divh"></div>
+  <div class="bh bh-red">Comportamiento de Penachos — 6 Tipos</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #16a34a"><b>🌀 Bucle (Looping)</b><br>Atmósfera inestable (A/B). Penacho sube y baja. Alta dispersión general pero concentraciones intermitentes en suelo.</div>
+    <div class="mini" style="border-top:3px solid #ca8a04"><b>〰 Cónico (Coning)</b><br>Neutro/ligeramente inestable (C/D). Expansión simétrica moderada en todas direcciones.</div>
+    <div class="mini" style="border-top:3px solid #dc2626"><b>➡ Abanico (Fanning)</b><br>Muy estable (E/F). Se extiende horizontalmente plano. Sin mezcla vertical. Transporte a larga distancia.</div>
+    <div class="mini" style="border-top:3px solid #3b82f6"><b>↗ Ascendente (Lofting)</b><br>Inversión abajo, inestable arriba. Contaminantes sobre inversión se dispersan eficientemente hacia arriba.</div>
+    <div class="mini" style="border-top:3px solid #7c3aed"><b>⬇ Fumigación</b><br>Inversión nocturna erosionada al amanecer. <b>MÁS PELIGROSO.</b> Contaminantes descienden en masa al suelo. Concentraciones máximas súbitas.</div>
+    <div class="mini" style="border-top:3px solid #0d9488"><b>📦 Atrapante (Trapping)</b><br>Inversión a nivel suelo E inversión de subsidencia en altura. Penacho confinado entre dos capas. Concentraciones muy altas.</div>
+  </div>
+  <div class="flow" style="margin-top:8px">
+    <div class="fbox">Noche despejada</div><div class="farrow">→</div>
+    <div class="fbox" style="background:#fee2e2">Inversión superficial fuerte</div><div class="farrow">→</div>
+    <div class="fbox">Amanecer + sol</div><div class="farrow">→</div>
+    <div class="fbox" style="background:#ede9fe">Capa mixta erosiona</div><div class="farrow">→</div>
+    <div class="fbox" style="background:#fee2e2"><b>FUMIGACIÓN</b></div>
+  </div>
+  <div class="warn">⚠️ Inversión de subsidencia Lima: Corriente de Humboldt enfría la base + anticiclón del Pacífico genera subsidencia sobre los Andes → "tapa" sobre Lima → smog crónico de invierno.</div>
+</div>
+
+<!-- ═══════════════════════════════ SECCIÓN 4 ═══════════════════════════════ -->
+<div class="sec">🧪 4. CONTAMINANTES PRIMARIOS Y SECUNDARIOS (Carhuancho)</div>
+
+<!-- CO, SO2, NOx primarios -->
+<div class="block">
+  <div class="bh bh-red">Contaminantes Primarios — Mecanismos Clave</div>
+  <div class="def def-red"><b>CO — Monóxido de Carbono</b><br>Incoloro, inodoro, insípido. Afinidad Hb por CO: <b>200–250× mayor</b> que por O₂.<br>CO + Hb → COHb (carboxihemoglobina) → hipoxia tisular<br>10% COHb: cefalea | 20–30%: mareos | 50–60%: muerte<br>Fuente principal: combustión incompleta (vehículos)</div>
+  <div class="rx">C + O₂ → CO (combustión incompleta)
+2C + O₂ → 2CO  |  2CO + O₂ → 2CO₂
+CO + OH· → CO₂ + H· (sumidero atmosférico)</div>
+  <div class="def def-orange"><b>SO₂ — Dióxido de Azufre</b><br>Incoloro, olor acre. No polar (deposición seca) + soluble en agua (deposición húmeda).<br>3 mecanismos daño: (1) H₂SO₃ → quema tejido bronquial (2) broncoconstricción (3) reflejos nerviosos vagales<br>Escala dosis: 3 ppm = detectable olfato | 400–500 ppm = muerte</div>
+  <div class="rx">SO₂ + H₂O → H₂SO₃ (ácido sulfuroso - daño directo)
+SO₂ + ½O₂ → SO₃ → SO₃ + H₂O → H₂SO₄
+SO₂ + OH· → H₂SO₄ (vía fotoquímica)</div>
+  <div class="def def-purple"><b>NO₂ — Dióxido de Nitrógeno</b><br>Gas pardo-rojizo, olor picante. Llega a alvéolos. 3 mecanismos: (1) daño celular directo (2) estrés oxidativo/ROS (3) respuesta inflamatoria. Se forma más a bajas temperaturas (equilibrio NO⇌NO₂).</div>
+  <div class="rx">NO₂ + H₂O → HNO₃ + HNO₂ (lluvia ácida)
+NO₂ + NH₃ → NH₄NO₃ (partícula secundaria)
+NO₂ + hν → NO + O· → O· + O₂ → O₃ (¡forma ozono!)</div>
+</div>
+
+<!-- COV, NOx mecanismos, PM -->
+<div class="block">
+  <div class="bh bh-purple">NOₓ — 3 Mecanismos Formación de NO</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #7c3aed"><b>NO Térmico</b><br>T &gt; 1300°C. Mecanismo Zeldovich:<br>N₂ + O· → NO + N·<br>Motores y termoeléctricas.</div>
+    <div class="mini" style="border-top:3px solid #7c3aed"><b>Prompt NO</b><br>Zonas ricas en combustible. Radicales CH a bajas temperaturas. Formación rápida.</div>
+    <div class="mini" style="border-top:3px solid #7c3aed"><b>NO Combustible / N₂O</b><br>N en el combustible se oxida. Vía intermedia N₂→N₂O→NO.</div>
+  </div>
+  <div class="divh"></div>
+  <div class="bh bh-green">COV — Compuestos Orgánicos Volátiles</div>
+  <div class="def def-green">Alta presión de vapor → fácil volatilización. Precursores del O₃ troposférico y smog fotoquímico. Fuentes: industria, vehículos, pinturas (antrop.) + vegetación/bosques (biogénica = mayoría global).</div>
+  <div class="divh"></div>
+  <div class="bh bh-gray">PM — Material Particulado</div>
+  <table class="tbl">
+    <tr><th>Fracción</th><th>Diámetro</th><th>Penetración</th><th>Daño</th></tr>
+    <tr><td><b>PM₁₀</b></td><td>&lt;10 µm</td><td>Vías respiratorias altas</td><td>Irritación moderada</td></tr>
+    <tr><td><b>PM₂.₅</b></td><td>&lt;2.5 µm</td><td>Alvéolos pulmonares</td><td>Cardiovascular, cognitivo</td></tr>
+    <tr><td><b>PM₀.₁</b></td><td>&lt;0.1 µm</td><td>Sangre y tejidos</td><td>Sistémico, neurológico</td></tr>
+  </table>
+  <div class="def def-red"><b>3 mecanismos PM₂.₅:</b> (1) Estrés oxidativo → ROS dañan ADN, proteínas (2) Mutagenicidad/Genotoxicidad (HAPs, metales) (3) Inflamación sistémica → citoquinas → no solo pulmón</div>
+  <div class="warn">⚠️ Lima: 58% PM₂.₅ = automotor (primario). Partículas secundarias se forman de SO₂, NOₓ, NH₃ → sulfatos (SO₄²⁻) y nitratos (NO₃⁻).</div>
+</div>
+
+<!-- Secundarios -->
+<div class="block">
+  <div class="bh bh-purple">Contaminantes Secundarios</div>
+  <div class="def def-purple"><b>OH· — Radical Hidroxilo ("Detergente atmósfera")</b><br>Especie más reactiva de la troposfera. Vida media: microsegundos. Destruye CO, CH₄, COV, SO₂, NO₂. Sin él la atmósfera acumularía contaminantes indefinidamente.</div>
+  <div class="rx">O₃ + hν → O(¹D) + O₂
+O(¹D) + H₂O → 2 OH·  (formación del radical OH·)</div>
+  <div class="def def-purple"><b>O₃ Troposférico</b><br>Contaminante secundario NO emitido directamente. Precursores: NOₓ + COV + CO + luz solar. Oxidante más tóxico ambiental. Pico en la tarde (cuando NOₓ baja).</div>
+  <div class="rx">NO₂ + hν → NO + O·
+O· + O₂ → O₃  (formación)
+O₃ + NO → NO₂ + O₂  (consumo / ciclo fotoestacionario)</div>
+  <div class="warn">⚠️ Alta [NOₓ] urbana → destruye O₃ cerca de la fuente (titulación). Pico de O₃ ocurre LEJOS del centro. Baja [NOₓ] rural → O₃ se acumula.</div>
+  <div class="divh"></div>
+  <div class="bh bh-teal">Lluvia Ácida / Deposición Ácida</div>
+  <div class="rx">SO₂ → SO₃ → H₂SO₄ (precursor sulfúrico)
+NO₂ + H₂O → HNO₃ + HNO₂ (precursor nítrico)
+Lluvia normal: pH ≈ 5.6 | Lluvia ácida: pH &lt; 4.5</div>
+  <div class="def def-teal">Efectos: acidificación de lagos (pH&lt;5 → eliminación de especies), lixiviación de nutrientes del suelo, corrosión de metales, deterioro del mármol (CaCO₃ + H₂SO₄ → CaSO₄ + CO₂ + H₂O).</div>
+  <div class="divh"></div>
+  <div class="bh bh-blue">Ozono Estratosférico — Destrucción por CFCs</div>
+  <div class="rx">CF₂Cl₂ + hν → CF₂Cl· + Cl·
+Cl· + O₃ → ClO· + O₂  (1 Cl destruye 100,000 moléculas O₃)
+ClO· + O· → Cl· + O₂  (ciclo catalítico)</div>
+  <div class="warn">⚠️ O₃ ESTRATOSFÉRICO (5–30 km) = protector, absorbe UV-B/C. O₃ TROPOSFÉRICO = contaminante. Mismo gas, efectos OPUESTOS según altitud.</div>
+</div>
+
+<!-- Smog + Reacciones clave -->
+<div class="block">
+  <div class="bh bh-red">Smog: Industrial vs. Fotoquímico</div>
+  <div class="two">
+    <div class="def def-gray"><b>Smog Industrial (Londres 1952)</b><br>SO₂ + partículas + hollín + niebla<br>Condiciones: invierno, frío y húmedo, inversión térmica<br><b>4,000–12,000 muertes en 4 días</b><br>→ Clean Air Act 1956</div>
+    <div class="def def-orange"><b>Smog Fotoquímico (LA)</b><br>NOₓ + COV + luz solar → O₃<br>Condiciones: verano, calor y sol, baja humedad<br>Ciudades: Los Ángeles, Lima (tardes soleadas)<br>Pico: horas de la tarde</div>
+  </div>
+  <div class="divh"></div>
+  <div class="bh bh-teal">Reacciones Químicas Clave — Resumen</div>
+  <div class="rx">COMBUSTIÓN:
+C + O₂ → CO₂ (completa)  |  2C + O₂ → 2CO (incompleta)
+
+LLUVIA ÁCIDA:
+SO₂ + O₂ → SO₃  |  SO₃ + H₂O → H₂SO₄
+NO + ½O₂ → NO₂  |  3NO₂ + H₂O → 2HNO₃ + NO
+
+SMOG FOTOQUÍMICO:
+NO₂ + hν → NO + O·  |  O· + O₂ → O₃
+
+CFCS (destrucción O₃ estratosf.):
+Cl· + O₃ → ClO· + O₂  |  ClO· + O· → Cl· + O₂
+
+DEPOSICIÓN:
+SO₂ seca: adsorción (no polar)  |  SO₂ húmeda: soluble en H₂O</div>
+</div>
+
+<!-- Deposición seca vs húmeda -->
+<div class="block">
+  <div class="bh bh-teal">Deposición Seca vs. Húmeda</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #0d9488"><b>☀ Deposición SECA</b><br>Sin lluvia. Mecanismos: difusión (browniana, finas), adsorción (gases no polares a superficies), absorción (gases en suelos húmedos/hojas), impactación (partículas grandes), sedimentación gravitacional.<br>Medida: mg/m²·día</div>
+    <div class="mini" style="border-top:3px solid #3b82f6"><b>🌧 Deposición HÚMEDA</b><br>Con precipitación. Mecanismos:<br>• Rainout: contaminante = núcleo de condensación (dentro de nube)<br>• Washout: lluvia barre contaminantes al caer<br>Medida: mg/m²·día</div>
+  </div>
+  <div class="def def-teal"><b>SO₂ tiene AMBAS:</b> no polar → seca (adsorción) / soluble en agua → húmeda (→ H₂SO₃ → lluvia ácida)</div>
+  <div class="divh"></div>
+  <div class="bh bh-purple">Dinámica de Contaminantes — 3 Procesos</div>
+  <div class="item"><span class="num-badge nb-b">1</span><span><b>Transporte:</b> movimiento horizontal a gran escala por el viento. Escala regional/global. Lluvia ácida = problema transfronterizo.</span></div>
+  <div class="item"><span class="num-badge nb-g">2</span><span><b>Dispersión:</b> propagación local por turbulencia. ↑turbulencia → ↓concentración. Escala local.</span></div>
+  <div class="item"><span class="num-badge nb-o">3</span><span><b>Deposición:</b> eliminación final hacia la superficie (seca o húmeda).</span></div>
+</div>
+
+<!-- ═══════════════════════════════ SECCIÓN 5 ═══════════════════════════════ -->
+<div class="sec">🫁 5. EFECTOS EN SALUD Y MEDIO AMBIENTE (Carhuancho)</div>
+
+<!-- Efectos salud -->
+<div class="block s2">
+  <div class="bh bh-pink">Efectos en Salud — 13 Órganos + Datos OMS</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-pink"></span><span>🫁 <b>Pulmones:</b> EPOC, cáncer, asma, ↓función pulmonar (PM₂.₅)</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>🫀 <b>Corazón:</b> 31% cardiopatía isquémica atribuible. Infarto, arritmia</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>🧠 <b>Cerebro:</b> 25% muertes por ACV. Deterioro cognitivo niños</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>🎗️ <b>Cáncer:</b> 20% cáncer de pulmón atribuible a contaminación</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>👶 <b>Peso nacer:</b> bajo peso, parto prematuro</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>🩸 <b>Diabetes:</b> PM₂.₅ → resistencia a insulina → DM tipo 2</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>🦴 <b>Huesos:</b> ↓densidad ósea (plomo, cadmio en PM)</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-pink"></span><span>👁 <b>Ojos:</b> irritación, conjuntivitis (O₃, NOₓ, SO₂)</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>🧫 <b>Hígado:</b> NO₂ impacta hígado/bazo/sangre. Cáncer hepático (HAPs)</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>🫄 <b>Reproductivo:</b> ↓calidad esperma, preeclampsia</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>🦠 <b>Inmune:</b> inmunopatología, enfermedades alérgicas</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>🧬 <b>Intestinos:</b> inflamación microbiota, cáncer digestivo</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>😔 <b>Bienestar:</b> ansiedad, depresión, ↓rendimiento cognitivo</span></div>
+      <div class="item"><span class="dot dot-pink"></span><span>🌍 <b>Global OMS:</b> 7 millones muertes/año (exterior + doméstica)</span></div>
+    </div>
+  </div>
+  <div class="divh"></div>
+  <div class="bh bh-red">Factores que Determinan el Daño</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #dc2626"><b>1. Tipo de contaminante</b><br>SO₂ (soluble) → vías altas. O₃ (oxidante) → alvéolos. CO → hemoglobina. PM₂.₅ → sistémico.</div>
+    <div class="mini" style="border-top:3px solid #ca8a04"><b>2. Dosis absorbida</b><br>= Concentración × Duración × Actividad física<br>Ejercicio → frecuencia respiratoria ×10–20 → mayor dosis inhalada</div>
+    <div class="mini" style="border-top:3px solid #7c3aed"><b>3. Susceptibilidad individual</b><br><b>Susceptibles</b> (interno): niños, adultos mayores, embarazadas, enfermos crónicos.<br><b>Vulnerables</b> (externo): socioeconómico bajo, viven cerca de fuentes.</div>
+  </div>
+</div>
+
+<!-- Mecanismo PM + ecosistemas -->
+<div class="block">
+  <div class="bh bh-red">Mecanismo PM₂.₅ → Cardiovascular</div>
+  <div class="def def-red"><b>Vía directa (translocación):</b> PM₂.₅ pasa a sangre → disfunción endotelial → aterosclerosis → infarto.<br><b>Vía indirecta:</b> Activa SN autónomo, eje HPA, inflamación sistémica → vías protrombóticas → trombosis.</div>
+  <div class="divh"></div>
+  <div class="bh bh-green">Efectos en Vegetación y Materiales</div>
+  <div class="def def-green"><b>Plantas:</b> contaminantes gaseosos (O₃, SO₂, NOₓ) penetran por estomas → reaccionan en el agua celular → dañan cloroplastos → ↓fotosíntesis. O₃ más dañino. PM queda en superficie (deposición).</div>
+  <div class="def def-gray"><b>Materiales:</b> (1) Abrasión física (PM grandes), (2) Deposición/remoción, (3) Ataque químico directo: H₂SO₄ disuelve mármol CaCO₃ + H₂SO₄ → CaSO₄ + CO₂ + H₂O, (4) Ataque indirecto, (5) Corrosión electroquímica.</div>
+  <div class="divh"></div>
+  <div class="bh bh-orange">Aerosoles — Efectos Climáticos</div>
+  <div class="two">
+    <div class="mini"><b>Efecto Directo</b><br>Dispersión (sulfatos, sal) → enfrían superficie = Global Dimming.<br>Absorción (Black Carbon) → calienta el aire. SSA crítico ≈ 0.85–0.9 (arriba = enfría, abajo = calienta)</div>
+    <div class="mini"><b>Efecto Indirecto (nubes)</b><br>1er (Twomey): ↑aerosoles → ↑gotas pequeñas → ↑albedo → enfría.<br>2do: gotas pequeñas → lluvia difícil → nubes más duraderas → más enfriamiento.</div>
+  </div>
+  <div class="warn">⚠️ Carbono Negro (Black Carbon/hollín): SSA ≈ 0.38 (absorbe mucho más de lo que dispersa). 2do forzador climático positivo después del CO₂. Vida media: días → acción climática rápida al reducirlo.</div>
+</div>
+
+<!-- ═══════════════════════════════ TABLA MAESTRA ═══════════════════════════════ -->
+<div class="sec">📊 6. TABLA MAESTRA INTEGRADORA — TODO EL CURSO</div>
+
+<div class="block s3">
+  <div class="bh bh-blue">Síntesis Global: Contaminante → Fuente → Mecanismo → Efecto → ECA Perú</div>
+  <table class="tbl">
+    <tr>
+      <th>Contaminante</th>
+      <th>Tipo</th>
+      <th>Fuente principal</th>
+      <th>Mecanismo daño salud</th>
+      <th>Efectos ecosistemas</th>
+      <th>ECA Perú</th>
+      <th>OMS 2021</th>
+    </tr>
+    <tr>
+      <td><b>CO</b></td>
+      <td><span class="pill-r pill">1°</span></td>
+      <td>Combustión incompleta, vehículos</td>
+      <td>COHb → hipoxia. Afinidad Hb 200–250×</td>
+      <td>Mínimo directo</td>
+      <td>1h: 30,000 µg/m³<br>8h: 10,000 µg/m³</td>
+      <td>4 mg/m³ (24h)</td>
+    </tr>
+    <tr>
+      <td><b>SO₂</b></td>
+      <td><span class="pill-r pill">1°</span></td>
+      <td>Combustibles con S, fundiciones (La Oroya)</td>
+      <td>H₂SO₃ en vías altas, broncoconstricción</td>
+      <td>Lluvia ácida, necrosis foliar</td>
+      <td>24h: 250 µg/m³</td>
+      <td>40 µg/m³</td>
+    </tr>
+    <tr>
+      <td><b>NO₂</b></td>
+      <td><span class="pill" style="background:#ede9fe;color:#4c1d95">1° y 2°</span></td>
+      <td>Combustión alta T, oxidación de NO</td>
+      <td>ROS, daño celular, inflamación (alvéolos)</td>
+      <td>Lluvia ácida, ↓visibilidad</td>
+      <td>1h: 200 µg/m³<br>Anual: 100 µg/m³</td>
+      <td>10 µg/m³ (anual)</td>
+    </tr>
+    <tr>
+      <td><b>O₃ troposf.</b></td>
+      <td><span class="pill-b pill">2°</span></td>
+      <td>NOₓ + COV + luz solar</td>
+      <td>Oxidación directa membranas celulares</td>
+      <td>Daño severo plantas, cultivos</td>
+      <td>8h: 100 µg/m³</td>
+      <td>100 µg/m³</td>
+    </tr>
+    <tr>
+      <td><b>PM₂.₅</b></td>
+      <td><span class="pill" style="background:#ede9fe;color:#4c1d95">1° y 2°</span></td>
+      <td>Vehículos (58% Lima), quema, industria</td>
+      <td>Estrés oxidativo, inflamación sistémica, translocación a sangre</td>
+      <td>Daño foliar (depósito)</td>
+      <td>24h: 50 µg/m³<br>Anual: 25 µg/m³</td>
+      <td>15 µg/m³ (24h)<br>5 µg/m³ (anual)</td>
+    </tr>
+    <tr>
+      <td><b>PM₁₀</b></td>
+      <td><span class="pill" style="background:#ede9fe;color:#4c1d95">1° y 2°</span></td>
+      <td>Polvo, industria, tráfico</td>
+      <td>Vías respiratorias altas</td>
+      <td>Deposición superficial</td>
+      <td>24h: 100 µg/m³<br>Anual: 50 µg/m³</td>
+      <td>45 µg/m³ (24h)</td>
+    </tr>
+    <tr>
+      <td><b>COV</b></td>
+      <td><span class="pill-r pill">1°</span></td>
+      <td>Vehículos, industria, vegetación</td>
+      <td>Precursor O₃; algunos tóxicos/carcinogénicos</td>
+      <td>Forman O₃ → daño plantas</td>
+      <td>Benceno: 2 µg/m³ (anual)</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><b>Black Carbon</b></td>
+      <td><span class="pill-r pill">1°</span></td>
+      <td>Combustión incompleta, diésel</td>
+      <td>PM₂.₅, deterioro cognitivo, CVD</td>
+      <td>↓Albedo glaciares andinos</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><b>CO₂</b></td>
+      <td><span class="pill-r pill">1°</span></td>
+      <td>Combustión fósiles, deforestación</td>
+      <td>GEI, calentamiento global</td>
+      <td>Acidificación oceánica</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><b>CFCs</b></td>
+      <td><span class="pill-r pill">1°</span></td>
+      <td>Refrigerantes, A/C (prohibidos)</td>
+      <td>Indirecto (↑UV-B)</td>
+      <td>Destrucción O₃ estratosférico</td>
+      <td>Prohibidos (Protocolo Montreal)</td>
+      <td>—</td>
+    </tr>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ DATO INTEGRADOR: Lima exposición PM₂.₅ promedio = 27 µg/m³ anual = 5.4× guía OMS 2021 (5 µg/m³) = 1.08× el propio ECA Perú (25 µg/m³). Sinergia SO₂ + PM = daño mayor que la suma individual de cada uno.</div>
+</div>
+
+<!-- ═══════════════════════════════ SECCIÓN 7 ═══════════════════════════════ -->
+<div class="sec">🔢 7. FÓRMULAS Y CÁLCULOS DE EXAMEN — HOJA RÁPIDA</div>
+
+<div class="block">
+  <div class="bh bh-yellow">Balance Energético Océano / Superficie</div>
+  <div class="rx">Rn = QH + QL + QG + ΔQS  (balance completo)
+β = QH/QL  (razón de Bowen)
+Si β conocido: QH = β·QL  → Rn − ΔQS = QL(1+β)
+ΔQS = ρ·Ce·h·(∂T/∂t)  [W/m²]
+  ρ_agua = 1000 kg/m³ | Ce = 4180 J/(kg·K)
+  h = prof. capa mixta [m] | ∂T/∂t en °C/s
+QL = L·E·ρ_agua  → E = QL/(L·ρ_agua)  [m/s]
+L = 2.45×10⁶ J/kg (calor latente evaporación)
+Para convertir E a mm/día: E[m/s] × 86,400 × 1000</div>
+  <div class="def def-yellow"><b>Ejemplo tipo examen:</b> Rn=600 W/m², β=0.2, ΔQS=194 W/m² → QH+QL=406 → QL(1.2)=406 → QL≈338 W/m², QH≈68 W/m². E=338/(2.45×10⁶×1000)=1.38×10⁻⁷ m/s → ×86400×1000≈12 mm/día</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-blue">Viento Geostrófico — Pasos</div>
+  <div class="rx">1. ρ = P×M / (R*×T)   M=28.9 g/mol, R*=8.314×10⁻³ bar·m³/mol
+   Convertir P a bar (1 mb = 10⁻³ bar)
+2. f = 2·Ω·sen(φ)   Ω = 2π/86400 s⁻¹ = 7.27×10⁻⁵ rad/s
+3. ∂P/∂y en Pa/m: si ∂P=4 mb/100 km → 400 Pa / 10⁵ m = 4×10⁻³ Pa/m
+4. Uₛ = −(∂P/∂y) / (ρ·f)   [m/s]
+   Vₛ = (∂P/∂x) / (ρ·f)   [m/s]</div>
+  <div class="warn">⚠️ Unidades críticas: P en Pa, no en mb. 1 mb = 100 Pa. 1 N/m² = 1 Pa. ρ en kg/m³. f en s⁻¹. Resultado en m/s.</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-gray">Acústica — Niveles Sonoros</div>
+  <div class="rx">Lw = 10·log(W/W₀)   W₀ = 10⁻¹² W
+Li = 10·log(I/I₀)   I₀ = 10⁻¹² W/m²
+Lp = 20·log(p/p₀)   p₀ = 2×10⁻⁵ Pa
+I = W / (2π·r²)   [fuente hemisférica sobre suelo]
+Combinación de fuentes (suma energética):
+L_total = 10·log(10^(L1/10) + 10^(L2/10) + ...)
+Extracción de una fuente:
+LB = 10·log(10^(LA+B/10) − 10^(LA/10))</div>
+  <div class="def def-gray"><b>Ejemplo tipo examen:</b> W=0.02 W, r=15 m<br>Lw=10·log(0.02/10⁻¹²)=103 dB<br>I=0.02/(2π×225)=1.415×10⁻⁵ W/m²<br>Li=10·log(1.415×10⁻⁵/10⁻¹²)=71.5 dB</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-purple">Temperatura Potencial θ — Cálculo</div>
+  <div class="rx">θ = T × (1000/P)^(R/cp)   T en K, P en hPa
+R/cp ≈ 0.286
+Ej: T=283 K, P=800 hPa → θ=283×(1000/800)^0.286≈310.5 K
+Si P &lt; 1000 hPa → θ &gt; T (al bajar a 1000 hPa se comprimiría y calentaría)</div>
+  <div class="divh"></div>
+  <div class="bh bh-teal">Ley de Potencia del Viento</div>
+  <div class="rx">u₁ = u₀ × (h/h₀)^n
+n = ln(u₀/u₁) / ln(h₀/h)
+Ej: u₀=5 m/s @ 10 m, n=0.25, h=100 m
+u₁ = 5 × (100/10)^0.25 = 5 × 10^0.25 = 5 × 1.778 ≈ 8.9 m/s</div>
+  <div class="divh"></div>
+  <div class="bh bh-yellow">Número de Richardson</div>
+  <div class="rx">Ri = (g/T) × (∂θ/∂z) / (∂ū/∂z)²
+Ri &lt; 0: inestable/convección | Ri≈0: neutro | Ri&gt;0.25: turbulencia cesa</div>
+  <div class="divh"></div>
+  <div class="bh bh-orange">Intensidad de Turbulencia</div>
+  <div class="rx">TI = σᵤ / ū
+σᵤ = √[(1/N) × Σ(uᵢ − ū)²]
+Ej: σ=1.5, ū=10 → TI = 0.15 (moderada)</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-yellow">Factor de Emisión y Emisión Anual</div>
+  <div class="rx">E = A × EF × (1 − ER/100)
+E en [kg/h] ó [t/año]
+A = tasa de actividad [L/día, t/año, km/año]
+EF = factor de emisión [kg/unidad] (AP-42 EPA)
+ER = eficiencia reducción [%]
+
+Emisión anual: E_anual = E_h × horas_operación
+horas = días_operación × 24 h/día</div>
+  <div class="def def-yellow"><b>Ejemplo resuelto:</b> Planta quema 50,000 L/día aceite. EF=1.2 kg SO₂/1,000 L. Lavador ER=70%.<br>E = 50,000 × (1.2/1,000) × (1−0.70) = 60 × 0.30 = <b>18 kg SO₂/día</b></div>
+  <div class="divh"></div>
+  <div class="bh bh-teal">Inventario de Emisiones</div>
+  <div class="rx">Emisiones = AD × EF
+AD = Datos de Actividad | EF = Factor de Emisión
+Categoría Clave: gran contribución total, tendencia creciente, O alta incertidumbre</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-blue">ICA — Cálculo Paso a Paso</div>
+  <div class="rx">Ip = [(IHi − ILo) / (BPHi − BPLo)] × (Cp − BPLo) + ILo
+
+Ejemplo O₃: C=0.07853 ppm → truncar a 0.078
+Tabla: BPLo=0.071 (ILo=101), BPHi=0.085 (IHi=150)
+Ip = [(150−101)/(0.085−0.071)] × (0.078−0.071) + 101
+   = [49/0.014] × 0.007 + 101
+   = 3500 × 0.007 + 101 = 24.5 + 101 = 125.5 → ICA=126
+
+Reportar: el MÁS ALTO entre todos los contaminantes</div>
+  <div class="warn">⚠️ Truncar antes de calcular (NO redondear). El ICA se redondea al final al entero más próximo.</div>
+</div>
+
+<!-- ═══════════════════════════════ DATOS CLAVE PERU ═══════════════════════════════ -->
+<div class="sec">🇵🇪 8. DATOS CLAVE PERÚ / LIMA — Lo que suele preguntar el examen</div>
+
+<div class="block s3">
+  <div class="bh bh-orange">Datos de Memoria — Perú y Lima</div>
+  <div class="three">
+    <div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Lima PM₂.₅:</b> 27 µg/m³ promedio anual = 5.4× OMS 2021</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Mortalidad Perú:</b> 230 muertes/millón por PM₂.₅ (The Lancet, 2023)</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>2019:</b> 39 muertes/100,000 hab. (≈13,000 total) por PM₂.₅</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Parque automotor:</b> 58% PM₂.₅ de Lima. Ómnibus = 42% del total móvil. Vehículos >15 años = 65% emisiones móviles.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Inversión térmica Lima:</b> Corriente Humboldt enfría base + subsidencia anticiclónica = tapa sobre la ciudad. Peor: mayo-noviembre (invierno austral).</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Glaciares andinos:</b> Black Carbon de Lima transportado en verano (dic-mar) por vientos valle-arriba → deposición en invierno → ↓albedo → aceleración deshielo (Lapere et al., 2023)</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Smog de Londres 1952:</b> SO₂ + partículas + niebla + inversión térmica + invierno frío y húmedo. 4,000–12,000 muertes en 4 días → Clean Air Act 1956</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>La Oroya:</b> fundición minera en valle → SO₂ y metales pesados atrapados por orografía</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>LMP cemento nuevo:</b> PM=80 mg/m³. LMP cemento existente: PM=120 mg/m³</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Norma Primaria:</b> protege salud humana. Norma Secundaria: protege ecosistemas y bienestar.</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Inventario MINAM:</b> categoría clave = gran contribución, tendencia creciente, o alta incertidumbre. Tier mínimo recomendado = 2 para parque automotor Lima.</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>OMS global:</b> 7 millones muertes/año por contaminación aire. Asia/Pacífico = +4M. Américas = +300K.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="block s3" style="background:#0f1e3a;border-radius:11px;padding:14px 18px">
+  <div class="flow" style="gap:16px">
+    <span class="ft">SANABRIA (U1–U3):</span>
+    <span class="fc">Arya (2001) · Stull (1988) · Foken (2017) · Oke (1987) · Wark &amp; Warner (1986) · D.S. 003-2017-MINAM · D.S. 001-2020-MINAM</span>
+    <span class="ft">CARHUANCHO (U3):</span>
+    <span class="fc">Davis &amp; Masten (2013) · Cooper (2014) · Tan (2014) · Rajagopalan et al. (2018) · Valdez &amp; Rojo (2022) · McNeill Columbia (2017) · Tran et al. Sci Total Environ (2023) · AP-42 EPA · IPCC</span>
+  </div>
+</div>
+
+</div><!-- /cv -->
+</body>
+</html>
