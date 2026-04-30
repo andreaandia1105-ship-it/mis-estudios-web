@@ -417,31 +417,54 @@ function renderCursosView(data) {
     cursosGrid.className = 'cursos-grid';
     
     data.forEach(curso => {
-        // Agrupar lecturas por tipo (según la palabra en "numero" o según la carpeta en "archivo")
-        const grupos = {
-            TEORIA: [],
-            PC: [],
-            EXAMENES: [],
-            LECTURAS: []
+        // ── NUEVO: si el curso tiene categorías personalizadas, las usa.
+        // Si no, usa las 4 fijas de siempre.
+        const categoriasFijas = ['TEORIA', 'PC', 'EXAMENES', 'LECTURAS'];
+        const categoriasIconos = {
+            TEORIA: '📘', PC: '✍️', EXAMENES: '📝', LECTURAS: '📖',
+            ITALIANO: '🇮🇹', LEYES: '⚖️', NORMATIVAS: '📋',
+            'METEOROLOGIA': '🌤️', PYTHON: '🐍', IA: '🤖'
+            // Puedes agregar más iconos aquí para futuras categorías
         };
-        
+        const listaCategorias = curso.categorias || categoriasFijas;
+
+        // Agrupar lecturas según la primera palabra de su "numero"
+        const grupos = {};
+        listaCategorias.forEach(cat => grupos[cat] = []);
+
         curso.lecturas.forEach(lectura => {
-            const archivo = lectura.archivo;
-            // Detectar tipo por la ruta (carpeta) o por el campo "numero"
-            if (archivo.includes('/TEORIA/') || lectura.numero.toUpperCase().includes('TEORÍA')) {
-                grupos.TEORIA.push(lectura);
-            } else if (archivo.includes('/PC/') || lectura.numero.toUpperCase().includes('PC')) {
-                grupos.PC.push(lectura);
-            } else if (archivo.includes('/EXAMENES/') || lectura.numero.toUpperCase().includes('EXAMEN')) {
-                grupos.EXAMENES.push(lectura);
-            } else if (archivo.includes('/LECTURAS/') || lectura.numero.toUpperCase().includes('LECTURA')) {
-                grupos.LECTURAS.push(lectura);
+            // La primera palabra del campo "numero" es la clave de categoría
+            const primeraPalabra = lectura.numero.split(' ')[0].toUpperCase();
+            
+            if (grupos[primeraPalabra] !== undefined) {
+                grupos[primeraPalabra].push(lectura);
             } else {
-                // Fallback: si no coincide, lo guardamos en LECTURAS
-                grupos.LECTURAS.push(lectura);
+                // Fallback: si no coincide con ninguna categoría del curso,
+                // lo ponemos en la última categoría disponible
+                const ultima = listaCategorias[listaCategorias.length - 1];
+                grupos[ultima].push(lectura);
             }
         });
-        
+
+        // Construir los cuadros de categorías dinámicamente
+        const cuadrosHTML = listaCategorias.map(cat => {
+            const icono = categoriasIconos[cat] || '📁';
+            return `
+                <div class="categoria-item" 
+                     data-curso="${curso.curso}" 
+                     data-tipo="${cat}"
+                     style="background: #0f172a;">
+                    <span class="categoria-icono">${icono}</span>
+                    <div class="categoria-nombre">${cat}</div>
+                    <div class="categoria-cantidad">${grupos[cat].length} archivos</div>
+                </div>
+            `;
+        }).join('');
+
+        // Ajustar el grid de categorías según cuántas haya
+        const numCats = listaCategorias.length;
+        const gridCols = numCats <= 4 ? `repeat(${numCats}, 1fr)` : 'repeat(3, 1fr)';
+
         const cursoCard = document.createElement('div');
         cursoCard.className = 'curso-card';
         cursoCard.innerHTML = `
@@ -450,51 +473,23 @@ function renderCursosView(data) {
                 <span class="curso-title">${curso.curso}</span>
                 <span class="curso-count">${curso.lecturas.length} archivos</span>
             </div>
-            <div class="categorias">
-                <div class="categoria-item categoria-teoria" data-curso="${curso.curso}" data-tipo="TEORIA">
-                    <span class="categoria-icono">📘</span>
-                    <div class="categoria-nombre">TEORÍA</div>
-                    <div class="categoria-cantidad">${grupos.TEORIA.length} archivos</div>
-                </div>
-                <div class="categoria-item categoria-pc" data-curso="${curso.curso}" data-tipo="PC">
-                    <span class="categoria-icono">✍️</span>
-                    <div class="categoria-nombre">PC</div>
-                    <div class="categoria-cantidad">${grupos.PC.length} archivos</div>
-                </div>
-                <div class="categoria-item categoria-examenes" data-curso="${curso.curso}" data-tipo="EXAMENES">
-                    <span class="categoria-icono">📝</span>
-                    <div class="categoria-nombre">EXÁMENES</div>
-                    <div class="categoria-cantidad">${grupos.EXAMENES.length} archivos</div>
-                </div>
-                <div class="categoria-item categoria-lecturas" data-curso="${curso.curso}" data-tipo="LECTURAS">
-                    <span class="categoria-icono">📖</span>
-                    <div class="categoria-nombre">LECTURAS</div>
-                    <div class="categoria-cantidad">${grupos.LECTURAS.length} archivos</div>
-                </div>
+            <div class="categorias" style="grid-template-columns: ${gridCols};">
+                ${cuadrosHTML}
             </div>
         `;
-        
-        // Añadir eventos a los 4 cuadros
+
         cursoCard.querySelectorAll('.categoria-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const cursoNombre = item.dataset.curso;
-                const tipo = item.dataset.tipo;
-                showDetailView(cursoNombre, tipo);
+                showDetailView(item.dataset.curso, item.dataset.tipo);
             });
         });
-        
+
         cursosGrid.appendChild(cursoCard);
     });
     
     main.appendChild(cursosGrid);
-    
-    // Ocultar búsqueda? La dejamos visible, pero filtraremos en la vista detalle.
-    // Para la vista cursos, la búsqueda no aplica; pero al cambiar a detalle sí.
-    const searchInput = document.getElementById('searchInput');
-    searchInput.value = '';
-    searchInput.disabled = false;
-    searchInput.placeholder = "🔍 Buscar dentro de la vista actual...";
+    document.getElementById('searchInput').value = '';
 }
 
 // ===================== VISTA DE DETALLE (ARCHIVOS DE UNA CATEGORÍA) =====================
@@ -503,18 +498,13 @@ function showDetailView(cursoNombre, tipo) {
     currentFilter = '';
     document.getElementById('searchInput').value = '';
     
-    // Obtener los archivos de ese curso y tipo
     const curso = allCoursesData.find(c => c.curso === cursoNombre);
     if (!curso) return;
     
-    // Filtrar lecturas por tipo (misma lógica que en agrupación)
+    // Filtrar por la primera palabra del campo "numero"
     const archivos = curso.lecturas.filter(lectura => {
-        const archivo = lectura.archivo;
-        if (tipo === 'TEORIA') return archivo.includes('/TEORIA/') || lectura.numero.toUpperCase().includes('TEORÍA');
-        if (tipo === 'PC') return archivo.includes('/PC/') || lectura.numero.toUpperCase().includes('PC');
-        if (tipo === 'EXAMENES') return archivo.includes('/EXAMENES/') || lectura.numero.toUpperCase().includes('EXAMEN');
-        if (tipo === 'LECTURAS') return archivo.includes('/LECTURAS/') || lectura.numero.toUpperCase().includes('LECTURA');
-        return false;
+        const primeraPalabra = lectura.numero.split(' ')[0].toUpperCase();
+        return primeraPalabra === tipo.toUpperCase();
     });
     
     renderDetailView(cursoNombre, tipo, archivos);
