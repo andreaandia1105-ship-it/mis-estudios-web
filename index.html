@@ -1,434 +1,69 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>📚 Mis Estudios — Repositorio UNALM</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+Claude terminó la respuesta
+Dijiste: cuando le doy correr no se actualizan algunos html por ejemplo en contaminacion atmosferica examen parcial no se actualiza, a que se debe ?
+
+[ { "curso": "Energía Renovable", "icono": "🌱", "color": "green", "lecturas": [ { "numero": "TEORIA 1.1", "titulo": "Introducción a las Energías Renovables", "archivo": "ENERGIA RENOVABLE/TEORIA/1.1 ENERGIAS RENOVABLES TEORIA.html" },
+
+pasted
+
+
+<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"> <title>📚 Mis Estudios — Repositorio UNALM</title> <style> @import url('https://fonts.googleapis.com/css2?family=Oswald:w
+
+pasted
+
+cuando le doy correr no se actualizan algunos html por ejemplo en contaminacion atmosferica examen parcial no se actualiza, a que se debe ? o hay agun error?
+
+6:41 p. m.
+Claude respondió: Mirando tu código, el problema está en cómo se clasifica cada lectura.
+Mirando tu código, el problema está en cómo se clasifica cada lectura. La lógica toma la primera palabra del campo numero:
+
+js
+const primeraPalabra = lectura.numero.split(' ')[0].toUpperCase();
+El problema es que para "EXAMEN PARCIAL", split(' ')[0] devuelve "EXAMEN", pero la categoría que defines en el array fijo es "EXAMENES" — no coinciden nunca.
+
+Lo mismo pasa con:
+
+"EXAMEN PARCIAL" → extrae "EXAMEN" ≠ "EXAMENES"
+"EXAMEN FINAL" → extrae "EXAMEN" ≠ "EXAMENES"
+"EXAMEN PARCIAL FORMULARIO" → extrae "EXAMEN" ≠ "EXAMENES"
+Esos archivos caen en el fallback (última categoría del array = "LECTURAS"), así que aparecen ahí mezclados.
+
+Fix — cambia el mapeo para que normalice variantes de "EXAMEN":
+
+js
+// Reemplaza esta línea:
+const primeraPalabra = lectura.numero.split(' ')[0].toUpperCase();
+
+// Por esto:
+const raw = lectura.numero.split(' ')[0].toUpperCase();
+const primeraPalabra = raw === 'EXAMEN' ? 'EXAMENES' : raw;
+O si quieres algo más robusto que soporte cualquier variante futura:
+
+js
+const raw = lectura.numero.toUpperCase();
+let primeraPalabra;
+if (raw.startsWith('EXAMEN')) primeraPalabra = 'EXAMENES';
+else if (raw.startsWith('TEORIA')) primeraPalabra = 'TEORIA';
+else if (raw.startsWith('PC')) primeraPalabra = 'PC';
+else if (raw.startsWith('LECTURA')) primeraPalabra = 'LECTURAS';
+else primeraPalabra = raw.split(' ')[0];
+Esto aplica tanto en renderCursosView (para contar archivos por categoría) como en showDetailView (para filtrar al hacer clic) — ambos usan la misma lógica, así que corrígela en los dos lugares o extráela a una función:
+
+js
+function getCategoriaKey(numero) {
+    const raw = numero.toUpperCase();
+    if (raw.startsWith('EXAMEN')) return 'EXAMENES';
+    if (raw.startsWith('TEORIA')) return 'TEORIA';
+    if (raw.startsWith('PC')) return 'PC';
+    if (raw.startsWith('LECTURA')) return 'LECTURAS';
+    return raw.split(' ')[0];
 }
+Y reemplazas todas las ocurrencias de lectura.numero.split(' ')[0].toUpperCase() por getCategoriaKey(lectura.numero).
 
-body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #0a0f1a;
-    color: #e2e8f0;
-    min-height: 100vh;
-}
+Dijiste: EN QUE PARTE DEL CODIGO CAMBIO O PEGO ESO?
+EN QUE PARTE DEL CODIGO CAMBIO O PEGO ESO? AQUI ? 
 
-header {
-    background: linear-gradient(135deg, #0f1e3a 0%, #1a2332 100%);
-    padding: 20px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.hinner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-header h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(20px, 5vw, 24px);
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.4px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-header p {
-    font-size: 11px;
-    color: #64748b;
-    margin-top: 2px;
-}
-
-#total-badge {
-    font-size: 11px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: rgba(59, 130, 246, 0.15);
-    color: #93c5fd;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-.search-wrap {
-    background: #0d1525;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    padding: 12px 16px;
-    position: sticky;
-    top: 72px;
-    z-index: 99;
-    transition: all 0.2s;
-}
-
-.search-wrap input {
-    width: 100%;
-    max-width: 1200px;
-    display: block;
-    margin: 0 auto;
-    background: #1a2332;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 12px 18px;
-    color: #e2e8f0;
-    font-size: 15px;
-    font-family: 'Source Sans 3', sans-serif;
-    outline: none;
-    transition: all 0.2s;
-}
-
-.search-wrap input:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.search-wrap input::placeholder {
-    color: #475569;
-}
-
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 16px 80px;
-}
-
-/* ========= NUEVA VISTA: CUADROS POR CURSO ========= */
-.cursos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-}
-
-.curso-card {
-    background: #111827;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.curso-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0,0,0,0.3);
-}
-
-.curso-header {
-    background: rgba(0,0,0,0.3);
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.curso-icon {
-    font-size: 32px;
-}
-
-.curso-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    flex: 1;
-}
-
-.curso-count {
-    font-size: 11px;
-    background: #1e293b;
-    padding: 4px 10px;
-    border-radius: 20px;
-}
-
-/* Los 4 bloques (categorías) */
-.categorias {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: rgba(255,255,255,0.05);
-}
-
-.categoria-item {
-    background: #0f172a;
-    padding: 20px 12px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: none;
-    color: #e2e8f0;
-    font-family: inherit;
-}
-
-.categoria-item:hover {
-    filter: brightness(1.2);
-    transform: scale(0.98);
-}
-
-.categoria-icono {
-    font-size: 28px;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.categoria-nombre {
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.categoria-cantidad {
-    font-size: 11px;
-    opacity: 0.7;
-    margin-top: 4px;
-}
-
-/* Colores específicos para cada categoría (al hacer hover o fondo) */
-.categoria-teoria:hover { background: #1e3a8a; }
-.categoria-pc:hover { background: #065f46; }
-.categoria-examenes:hover { background: #9a3412; }
-.categoria-lecturas:hover { background: #6b21a5; }
-
-/* ========= VISTA DE DETALLE (ARCHIVOS) ========= */
-.detail-view {
-    display: none;
-}
-
-.detail-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-}
-
-.back-btn {
-    background: #1e293b;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 30px;
-    color: #e2e8f0;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: 0.2s;
-}
-
-.back-btn:hover {
-    background: #334155;
-}
-
-.detail-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 22px;
-}
-
-.detail-subtitle {
-    font-size: 14px;
-    color: #94a3b8;
-}
-
-.grid-archivos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
-}
-
-.card-archivo {
-    background: #111827;
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 14px;
-    padding: 18px;
-    text-decoration: none;
-    display: block;
-    transition: all 0.2s;
-}
-
-.card-archivo:hover {
-    transform: translateY(-3px);
-    background: #1a2332;
-    border-color: #3b82f6;
-}
-
-.card-num {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    color: #60a5fa;
-}
-
-.card-archivo h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.card-archivo p {
-    font-size: 12px;
-    color: #64748b;
-    line-height: 1.4;
-}
-
-.empty-state {
-    background: #0d1525;
-    border: 1px dashed rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 40px;
-    text-align: center;
-    color: #64748b;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.fab-add {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: #3b82f6;
-    border: none;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-}
-
-.fab-add:hover {
-    transform: scale(1.05);
-    background: #2563eb;
-}
-
-.loading {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(59,130,246,0.2);
-    border-top-color: #3b82f6;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 16px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-@media (max-width: 600px) {
-    .categorias {
-        grid-template-columns: 1fr;
-    }
-    .categoria-item {
-        padding: 14px;
-    }
-    .fab-add {
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-    }
-}
-</style>
-</head>
-<body>
-
-<header>
-    <div class="hinner">
-        <div>
-            <h1><span>📚</span> Mis Estudios</h1>
-            <p>Repositorio de resúmenes UNALM</p>
-        </div>
-        <span id="total-badge">📊 Cargando...</span>
-    </div>
-</header>
-
-<div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="🔍 Buscar por tema, concepto, curso..." oninput="filterArchivos()">
-</div>
-
-<main id="main">
-    <div class="loading">
-        <div class="loading-spinner"></div>
-        <p>Cargando materiales de estudio...</p>
-    </div>
-</main>
-
-<button class="fab-add" onclick="scrollToTop()">↑</button>
-
-<script>
-// Datos globales
-let allCoursesData = [];     // guarda el JSON original
-let currentView = 'cursos';  // 'cursos' o 'detalle'
-let currentCategory = null;   // { cursoNombre, tipo }  tipo: 'TEORIA', 'PC', 'EXAMENES', 'LECTURAS'
-let currentFilter = '';       // filtro de búsqueda en vista detalle
-
-// Cargar JSON
-fetch('lecturas.json')
-    .then(r => {
-        if (!r.ok) throw new Error('No se pudo cargar lecturas.json');
-        return r.json();
-    })
-    .then(data => {
-        allCoursesData = data;
-        renderCursosView(data);
-        updateTotalBadge(data);
-    })
-    .catch(err => {
-        document.getElementById('main').innerHTML = `<div class="empty-state">⚠️ Error: ${err.message}<br>Asegúrate de que lecturas.json existe.</div>`;
-    });
-
-// ===================== VISTA PRINCIPAL (CUADROS POR CURSO) =====================
-function renderCursosView(data) {
-    const main = document.getElementById('main');
-    main.innerHTML = '';
-    currentView = 'cursos';
-    
-    const cursosGrid = document.createElement('div');
-    cursosGrid.className = 'cursos-grid';
-    
-    data.forEach(curso => {
-        // ── NUEVO: si el curso tiene categorías personalizadas, las usa.
-        // Si no, usa las 4 fijas de siempre.
-        const categoriasFijas = ['TEORIA', 'PC', 'EXAMENES', 'LECTURAS'];
-        const categoriasIconos = {
-            TEORIA: '📘', PC: '✍️', EXAMENES: '📝', LECTURAS: '📖',
-            ITALIANO: '🇮🇹', LEYES: '⚖️', NORMATIVAS: '📋',
-            'METEOROLOGIA': '🌤️', PYTHON: '🐍', IA: '🤖'
-            // Puedes agregar más iconos aquí para futuras categorías
-        };
-        const listaCategorias = curso.categorias || categoriasFijas;
-
-        // Agrupar lecturas según la primera palabra de su "numero"
+     // Agrupar lecturas según la primera palabra de su "numero"
         const grupos = {};
         listaCategorias.forEach(cat => grupos[cat] = []);
 
@@ -462,9 +97,623 @@ function renderCursosView(data) {
         }).join('');
 
         // Ajustar el grid de categorías según cuántas haya
+Mostrar más
+6:54 p. m.
+Claude respondió: Sí, exacto.
+Sí, exacto. Hay dos lugares donde debes hacer el cambio. Te doy el código completo de ambos:
+
+Lugar 1 — dentro de renderCursosView, donde agrupas para contar:
+
+js
+// Agrupar lecturas según la primera palabra de su "numero"
+const grupos = {};
+listaCategorias.forEach(cat => grupos[cat] = []);
+
+curso.lecturas.forEach(lectura => {
+    const primeraPalabra = getCategoriaKey(lectura.numero);  // ← CAMBIO
+    
+    if (grupos[primeraPalabra] !== undefined) {
+        grupos[primeraPalabra].push(lectura);
+    } else {
+        const ultima = listaCategorias[listaCategorias.length - 1];
+        grupos[ultima].push(lectura);
+    }
+});
+Lugar 2 — dentro de showDetailView, donde filtras al hacer clic:
+
+js
+const archivos = curso.lecturas.filter(lectura => {
+    const primeraPalabra = getCategoriaKey(lectura.numero);  // ← CAMBIO
+    return primeraPalabra === tipo.toUpperCase();
+});
+Y antes de todo el código JS (por ejemplo, justo después de let currentFilter = '';), pega la función helper:
+
+js
+function getCategoriaKey(numero) {
+    const raw = numero.toUpperCase();
+    if (raw.startsWith('EXAMEN')) return 'EXAMENES';
+    if (raw.startsWith('TEORIA')) return 'TEORIA';
+    if (raw.startsWith('PC'))     return 'PC';
+    if (raw.startsWith('LECTURA')) return 'LECTURAS';
+    // para OTROS: ITALIANO, LEYES, NORMATIVAS, etc.
+    return raw.split(' ')[0];
+}
+Con eso queda cubierto para todos los cursos, incluyendo el OTROS con sus categorías personalizadas.
+
+Dijiste: PERO TENGO VARIOS, DONDE SERIA
+1777852517855_image.png
+1777852528247_image.png
+PERO TENGO VARIOS, DONDE SERIA
+
+6:55 p. m.
+Claude respondió: Por las imágenes veo que estás en VS Code.
+Por las imágenes veo que estás en VS Code. Son 3 ocurrencias de renderCursosView (te lo dice el "3 of 3" en el buscador).
+
+Los cambios van así:
+
+1. Pega la función helper — justo antes de la línea function renderCursosView(data) { (línea 411):
+
+js
+function getCategoriaKey(numero) {
+    const raw = numero.toUpperCase();
+    if (raw.startsWith('EXAMEN')) return 'EXAMENES';
+    if (raw.startsWith('TEORIA')) return 'TEORIA';
+    if (raw.startsWith('PC'))     return 'PC';
+    if (raw.startsWith('LECTURA')) return 'LECTURAS';
+    return raw.split(' ')[0];
+}
+2. Dentro de renderCursosView — busca esta línea:
+
+js
+const primeraPalabra = lectura.numero.split(' ')[0].toUpperCase();
+Cámbiala por:
+
+js
+const primeraPalabra = getCategoriaKey(lectura.numero);
+3. Dentro de showDetailView — busca esta línea:
+
+js
+const primeraPalabra = lectura.numero.split(' ')[0].toUpperCase();
+Cámbiala por:
+
+js
+const primeraPalabra = getCategoriaKey(lectura.numero);
+En VS Code puedes usar Ctrl+H (buscar y reemplazar) para los pasos 2 y 3 de golpe — busca lectura.numero.split(' ')[0].toUpperCase() y reemplaza por getCategoriaKey(lectura.numero). Te cambia ambas ocurrencias a la vez.
+
+Dijiste: ASI ?
+1777852638113_image.png
+ASI ? PERO NO SE VERIA MAL? O NORMAL?
+
+6:57 p. m.
+Claude respondió: Sí, está perfecto así.
+Sí, está perfecto así. La función getCategoriaKey en la línea 411, justo antes de renderCursosView en la 419 — exactamente donde debe ir.
+
+No se ve mal, es código normal. Ahora solo falta el paso 2: usar Ctrl+H en VS Code y reemplazar:
+
+Buscar: lectura.numero.split(' ')[0].toUpperCase()
+Reemplazar: getCategoriaKey(lectura.numero)
+Dale "Reemplazar todo" y listo. Guarda y prueba en el navegador.
+
+Dijiste: este es el codigo, damelo corregido porque al parecer no lo lee.
+
+<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"> <title>📚 Mis Estudios — Repositorio UNALM</title> <style> @import url('https://fonts.googleapis.com/css2?family=Oswald:w
+
+pasted
+
+
+[ { "curso": "Energía Renovable", "icono": "🌱", "color": "green", "lecturas": [ { "numero": "TEORIA 1.1", "titulo": "Introducción a las Energías Renovables", "archivo": "ENERGIA RENOVABLE/TEORIA/1.1 ENERGIAS RENOVABLES TEORIA.html" },
+
+pasted
+
+este es el codigo, damelo corregido porque al parecer no lo lee.  y luego me explicas como es que se maneja eso que hice mal
+
+7:08 p. m.
+Claude respondió: Hay un problema adicional que no habíamos visto: en Mecanización Agrícola el examen tiene "numero": "EXAMEN" (sin "PARCIAL"), y getCategoriaKey sí lo captura c…
+Hay un problema adicional que no habíamos visto: en Mecanización Agrícola el examen tiene "numero": "EXAMEN" (sin "PARCIAL"), y getCategoriaKey sí lo captura con startsWith('EXAMEN') → devuelve 'EXAMENES', pero la categoría fija es 'EXAMENES' ✓ — eso está bien.
+
+El verdadero problema es que el código que pegaste ya está correcto. Si no funciona, probablemente es caché del navegador. Pero te doy el archivo completo limpio para que lo reemplaces entero:
+
+
+Creó un archivo, archivo leído
+Creó un archivo, archivo leído
+Reemplaza tu index.html completo con ese archivo.
+
+¿Por qué fallaba? — explicación del bug
+
+El sistema clasificaba cada lectura tomando la primera palabra del campo numero:
+
+"EXAMEN PARCIAL"  →  split(' ')[0]  →  "EXAMEN"
+Pero la categoría en el array es "EXAMENES" (con S). Como "EXAMEN" !== "EXAMENES", nunca encontraba su grupo y caía en el fallback (se metía en la última categoría, que era LECTURAS).
+
+Lo mismo pasaba con lecturas:
+
+"LECTURA 1"  →  split(' ')[0]  →  "LECTURA"  ≠  "LECTURAS"
+La solución fue reemplazar ese split por getCategoriaKey(), que usa startsWith y mapea manualmente los casos donde el prefijo difiere del nombre de la categoría:
+
+js
+if (raw.startsWith('EXAMEN'))  return 'EXAMENES';  // EXAMEN → EXAMENES
+if (raw.startsWith('LECTURA')) return 'LECTURAS';  // LECTURA → LECTURAS
+Para los demás (TEORIA, PC, ITALIANO, METEOROLOGIA…) la primera palabra ya coincide exactamente con la clave, así que el split al final del else sigue funcionando para esos casos.
+
+
+Index
+Código · HTML 
+
+Has usado 75% de tu límite semanal
+Obtener más uso
+a que te refieres con cache de navegador ? 
+
+Claude es IA y puede cometer errores. Por favor, verifica nuevamente las respuestas.
+Index · HTML
+Copiar
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>📚 Mis Estudios — Repositorio UNALM</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+ 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+ 
+body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #0a0f1a;
+    color: #e2e8f0;
+    min-height: 100vh;
+}
+ 
+header {
+    background: linear-gradient(135deg, #0f1e3a 0%, #1a2332 100%);
+    padding: 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+ 
+.hinner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+ 
+header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(20px, 5vw, 24px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+ 
+header p {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 2px;
+}
+ 
+#total-badge {
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+ 
+.search-wrap {
+    background: #0d1525;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 12px 16px;
+    position: sticky;
+    top: 72px;
+    z-index: 99;
+    transition: all 0.2s;
+}
+ 
+.search-wrap input {
+    width: 100%;
+    max-width: 1200px;
+    display: block;
+    margin: 0 auto;
+    background: #1a2332;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px 18px;
+    color: #e2e8f0;
+    font-size: 15px;
+    font-family: 'Source Sans 3', sans-serif;
+    outline: none;
+    transition: all 0.2s;
+}
+ 
+.search-wrap input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+ 
+.search-wrap input::placeholder {
+    color: #475569;
+}
+ 
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 16px 80px;
+}
+ 
+.cursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+ 
+.curso-card {
+    background: #111827;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+ 
+.curso-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+}
+ 
+.curso-header {
+    background: rgba(0,0,0,0.3);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+ 
+.curso-icon { font-size: 32px; }
+ 
+.curso-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    flex: 1;
+}
+ 
+.curso-count {
+    font-size: 11px;
+    background: #1e293b;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+ 
+.categorias {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.05);
+}
+ 
+.categoria-item {
+    background: #0f172a;
+    padding: 20px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    color: #e2e8f0;
+    font-family: inherit;
+}
+ 
+.categoria-item:hover {
+    filter: brightness(1.2);
+    transform: scale(0.98);
+}
+ 
+.categoria-icono {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 8px;
+}
+ 
+.categoria-nombre {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+ 
+.categoria-cantidad {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+ 
+.detail-view { display: none; }
+ 
+.detail-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+ 
+.back-btn {
+    background: #1e293b;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    color: #e2e8f0;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+ 
+.back-btn:hover { background: #334155; }
+ 
+.detail-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+}
+ 
+.detail-subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+}
+ 
+.grid-archivos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+ 
+.card-archivo {
+    background: #111827;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 18px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s;
+    color: #e2e8f0;
+}
+ 
+.card-archivo:hover {
+    transform: translateY(-3px);
+    background: #1a2332;
+    border-color: #3b82f6;
+}
+ 
+.card-num {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: #60a5fa;
+}
+ 
+.card-archivo h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+ 
+.card-archivo p {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+}
+ 
+.empty-state {
+    background: #0d1525;
+    border: 1px dashed rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 40px;
+    text-align: center;
+    color: #64748b;
+}
+ 
+.hidden { display: none !important; }
+ 
+.fab-add {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #3b82f6;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+ 
+.fab-add:hover {
+    transform: scale(1.05);
+    background: #2563eb;
+}
+ 
+.loading {
+    text-align: center;
+    padding: 60px 20px;
+}
+ 
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(59,130,246,0.2);
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+}
+ 
+@keyframes spin { to { transform: rotate(360deg); } }
+ 
+@media (max-width: 600px) {
+    .categorias { grid-template-columns: 1fr; }
+    .categoria-item { padding: 14px; }
+    .fab-add { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 24px; }
+}
+</style>
+</head>
+<body>
+ 
+<header>
+    <div class="hinner">
+        <div>
+            <h1><span>📚</span> Mis Estudios</h1>
+            <p>Repositorio de resúmenes UNALM</p>
+        </div>
+        <span id="total-badge">📊 Cargando...</span>
+    </div>
+</header>
+ 
+<div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="🔍 Buscar por tema, concepto, curso..." oninput="filterArchivos()">
+</div>
+ 
+<main id="main">
+    <div class="loading">
+        <div class="loading-spinner"></div>
+        <p>Cargando materiales de estudio...</p>
+    </div>
+</main>
+ 
+<button class="fab-add" onclick="scrollToTop()">↑</button>
+ 
+<script>
+// ─── Estado global ────────────────────────────────────────────
+let allCoursesData = [];
+let currentView    = 'cursos';
+let currentCategory = null;
+let currentFilter  = '';
+ 
+// ─── Categorías fijas e iconos ────────────────────────────────
+const CATEGORIAS_FIJAS = ['TEORIA', 'PC', 'EXAMENES', 'LECTURAS'];
+ 
+const ICONOS = {
+    TEORIA:      '📘',
+    PC:          '✍️',
+    EXAMENES:    '📝',
+    LECTURAS:    '📖',
+    ITALIANO:    '🇮🇹',
+    LEYES:       '⚖️',
+    NORMATIVAS:  '📋',
+    METEOROLOGIA:'🌤️',
+    PYTHON:      '🐍',
+    IA:          '🤖'
+};
+ 
+// ─── Función clave: convierte el campo "numero" en clave de categoría ─
+//
+//   "TEORIA 1.2"            → "TEORIA"
+//   "PC 3"                  → "PC"
+//   "EXAMEN PARCIAL"        → "EXAMENES"   ← aquí estaba el bug original
+//   "EXAMEN FINAL"          → "EXAMENES"
+//   "EXAMEN PARCIAL FORM.." → "EXAMENES"
+//   "LECTURA 1"             → "LECTURAS"   ← otro caso que fallaba
+//   "ITALIANO 3"            → "ITALIANO"
+//   "METEOROLOGIA 2"        → "METEOROLOGIA"
+//
+//   El bug: split(' ')[0] de "EXAMEN PARCIAL" devuelve "EXAMEN",
+//   que no coincide con la categoría "EXAMENES" → caía en el fallback.
+//   Igual "LECTURA" ≠ "LECTURAS".
+//
+function getCategoriaKey(numero) {
+    const raw = numero.trim().toUpperCase();
+    if (raw.startsWith('EXAMEN'))   return 'EXAMENES';
+    if (raw.startsWith('LECTURA'))  return 'LECTURAS';
+    if (raw.startsWith('TEORIA'))   return 'TEORIA';
+    if (raw.startsWith('PC'))       return 'PC';
+    // Para OTROS (ITALIANO, LEYES, NORMATIVAS, METEOROLOGIA, PYTHON, IA…)
+    // la primera palabra ya coincide exactamente con la clave de categoría.
+    return raw.split(' ')[0];
+}
+ 
+// ─── Carga del JSON ───────────────────────────────────────────
+fetch('lecturas.json')
+    .then(r => {
+        if (!r.ok) throw new Error('No se pudo cargar lecturas.json');
+        return r.json();
+    })
+    .then(data => {
+        allCoursesData = data;
+        renderCursosView(data);
+        updateTotalBadge(data);
+    })
+    .catch(err => {
+        document.getElementById('main').innerHTML =
+            `<div class="empty-state">⚠️ Error: ${err.message}<br>Asegúrate de que lecturas.json existe.</div>`;
+    });
+ 
+// ─── Vista principal: cuadros por curso ──────────────────────
+function renderCursosView(data) {
+    const main = document.getElementById('main');
+    main.innerHTML = '';
+    currentView = 'cursos';
+ 
+    const cursosGrid = document.createElement('div');
+    cursosGrid.className = 'cursos-grid';
+ 
+    data.forEach(curso => {
+        const listaCategorias = curso.categorias || CATEGORIAS_FIJAS;
+ 
+        // Agrupar lecturas en su categoría usando getCategoriaKey
+        const grupos = {};
+        listaCategorias.forEach(cat => grupos[cat] = []);
+ 
+        curso.lecturas.forEach(lectura => {
+            const clave = getCategoriaKey(lectura.numero);
+            if (grupos[clave] !== undefined) {
+                grupos[clave].push(lectura);
+            } else {
+                // Fallback: última categoría de la lista
+                grupos[listaCategorias[listaCategorias.length - 1]].push(lectura);
+            }
+        });
+ 
+        // Construir cuadros de categorías
+        const cuadrosHTML = listaCategorias.map(cat => {
+            const icono = ICONOS[cat] || '📁';
+            return `
+                <div class="categoria-item"
+                     data-curso="${curso.curso}"
+                     data-tipo="${cat}"
+                     style="background:#0f172a;">
+                    <span class="categoria-icono">${icono}</span>
+                    <div class="categoria-nombre">${cat}</div>
+                    <div class="categoria-cantidad">${grupos[cat].length} archivos</div>
+                </div>`;
+        }).join('');
+ 
         const numCats = listaCategorias.length;
         const gridCols = numCats <= 4 ? `repeat(${numCats}, 1fr)` : 'repeat(3, 1fr)';
-
+ 
         const cursoCard = document.createElement('div');
         cursoCard.className = 'curso-card';
         cursoCard.innerHTML = `
@@ -473,138 +722,119 @@ function renderCursosView(data) {
                 <span class="curso-title">${curso.curso}</span>
                 <span class="curso-count">${curso.lecturas.length} archivos</span>
             </div>
-            <div class="categorias" style="grid-template-columns: ${gridCols};">
+            <div class="categorias" style="grid-template-columns:${gridCols};">
                 ${cuadrosHTML}
-            </div>
-        `;
-
+            </div>`;
+ 
         cursoCard.querySelectorAll('.categoria-item').forEach(item => {
-            item.addEventListener('click', (e) => {
+            item.addEventListener('click', e => {
                 e.stopPropagation();
                 showDetailView(item.dataset.curso, item.dataset.tipo);
             });
         });
-
+ 
         cursosGrid.appendChild(cursoCard);
     });
-    
+ 
     main.appendChild(cursosGrid);
     document.getElementById('searchInput').value = '';
 }
-
-// ===================== VISTA DE DETALLE (ARCHIVOS DE UNA CATEGORÍA) =====================
+ 
+// ─── Vista de detalle ─────────────────────────────────────────
 function showDetailView(cursoNombre, tipo) {
     currentCategory = { cursoNombre, tipo };
     currentFilter = '';
     document.getElementById('searchInput').value = '';
-    
+ 
     const curso = allCoursesData.find(c => c.curso === cursoNombre);
     if (!curso) return;
-    
-    // Filtrar por la primera palabra del campo "numero"
-    const archivos = curso.lecturas.filter(lectura => {
-        const primeraPalabra = lectura.numero.split(' ')[0].toUpperCase();
-        return primeraPalabra === tipo.toUpperCase();
-    });
-    
+ 
+    const archivos = curso.lecturas.filter(l =>
+        getCategoriaKey(l.numero) === tipo.toUpperCase()
+    );
+ 
     renderDetailView(cursoNombre, tipo, archivos);
 }
-
+ 
 function renderDetailView(cursoNombre, tipo, archivos, filteredArchivos = null) {
     const main = document.getElementById('main');
     currentView = 'detalle';
-    
-    const itemsToShow = filteredArchivos !== null ? filteredArchivos : archivos;
-    
+ 
+    const items = filteredArchivos !== null ? filteredArchivos : archivos;
+ 
     let html = `
-        <div class="detail-view" style="display: block;">
+        <div class="detail-view" style="display:block;">
             <div class="detail-header">
                 <button class="back-btn" id="backToCursosBtn">← Volver a cursos</button>
                 <div>
                     <div class="detail-title">${cursoNombre}</div>
-                    <div class="detail-subtitle">${tipo} · ${itemsToShow.length} archivos</div>
+                    <div class="detail-subtitle">${tipo} · ${items.length} archivos</div>
                 </div>
             </div>
-            <div class="grid-archivos" id="archivosGrid">
-    `;
-    
-    if (itemsToShow.length === 0) {
-        html += `<div class="empty-state">📭 No hay archivos en esta categoría aún.<br>Agrega tus PDFs o HTML en la carpeta correspondiente.</div>`;
+            <div class="grid-archivos" id="archivosGrid">`;
+ 
+    if (items.length === 0) {
+        html += `<div class="empty-state">📭 No hay archivos en esta categoría aún.</div>`;
     } else {
-        itemsToShow.forEach(arch => {
+        items.forEach(arch => {
             html += `
                 <a class="card-archivo" href="${arch.archivo}">
                     <div class="card-num">${arch.numero}</div>
                     <h3>${arch.titulo}</h3>
                     <p>${arch.descripcion || 'Sin descripción'}</p>
-                </a>
-            `;
+                </a>`;
         });
     }
-    
+ 
     html += `</div></div>`;
     main.innerHTML = html;
-    
-    // Evento del botón volver
+ 
     document.getElementById('backToCursosBtn').addEventListener('click', () => {
         renderCursosView(allCoursesData);
         updateTotalBadge(allCoursesData);
         document.getElementById('searchInput').value = '';
         currentView = 'cursos';
     });
-    
-    // Guardar referencia a los archivos originales para el filtro
+ 
     window.currentDetailArchivos = archivos;
-    window.currentDetailCurso = cursoNombre;
-    window.currentDetailTipo = tipo;
+    window.currentDetailCurso    = cursoNombre;
+    window.currentDetailTipo     = tipo;
 }
-
-// ===================== BÚSQUEDA EN VISTA DETALLE =====================
+ 
+// ─── Búsqueda en vista detalle ────────────────────────────────
 function filterArchivos() {
-    const query = document.getElementById('searchInput').value.toLowerCase().trim();
-    
-    if (currentView !== 'detalle') {
-        // Si estamos en vista cursos, la búsqueda podría no tener efecto, o podríamos implementar filtrado de cursos
-        // Por simplicidad, no hacemos nada en vista cursos.
-        return;
-    }
-    
+    if (currentView !== 'detalle') return;
     if (!window.currentDetailArchivos) return;
-    
-    if (query.length < 2 && query !== '') {
-        // Si el usuario escribe una letra, no filtramos hasta 2 caracteres (mejor experiencia)
-        if (query.length === 1) return;
-    }
-    
+ 
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    if (query.length === 1) return;
+ 
     let filtered = window.currentDetailArchivos;
     if (query.length >= 2) {
         filtered = window.currentDetailArchivos.filter(arch => {
-            const texto = `${arch.numero} ${arch.titulo} ${arch.descripcion} ${arch.keywords || ''}`.toLowerCase();
+            const texto = `${arch.numero} ${arch.titulo} ${arch.descripcion || ''} ${arch.keywords || ''}`.toLowerCase();
             return texto.includes(query);
         });
     }
-    
-    // Re-renderizar la vista detalle con los archivos filtrados
+ 
     renderDetailView(window.currentDetailCurso, window.currentDetailTipo, window.currentDetailArchivos, filtered);
 }
-
-// ===================== UTILIDADES =====================
+ 
+// ─── Utilidades ───────────────────────────────────────────────
 function updateTotalBadge(data) {
-    const totalLecturas = data.reduce((acc, curso) => acc + curso.lecturas.length, 0);
-    document.getElementById('total-badge').textContent = `📊 ${data.length} cursos · ${totalLecturas} archivos`;
+    const total = data.reduce((acc, c) => acc + c.lecturas.length, 0);
+    document.getElementById('total-badge').textContent = `📊 ${data.length} cursos · ${total} archivos`;
 }
-
+ 
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-// Ajustar FAB al hacer scroll
+ 
 window.addEventListener('scroll', () => {
-    const fab = document.querySelector('.fab-add');
-    if (window.scrollY > 300) fab.style.opacity = '1';
-    else fab.style.opacity = '0.7';
+    document.querySelector('.fab-add').style.opacity = window.scrollY > 300 ? '1' : '0.7';
 });
 </script>
-
+ 
 </body>
 </html>
+ 
