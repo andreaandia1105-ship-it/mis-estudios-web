@@ -1,0 +1,639 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-text-primary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.titbar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titbar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;letter-spacing:.5px;margin-bottom:4px}
+.titbar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-size:11px;padding:2px 9px;border-radius:20px;display:inline-block;font-family:'Oswald',sans-serif;font-weight:500}
+.secbar{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:7px}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.3px}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;align-items:flex-start}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:8px 11px;border-radius:7px;text-align:center;line-height:1.7;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;line-height:1.5}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:9px 11px;margin-top:8px;line-height:1.5}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 9px;border-radius:6px;font-size:11px;line-height:1.4;text-align:center}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);font-family:'Oswald',sans-serif;font-size:11px;font-weight:500;text-align:left}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;line-height:1.4}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:10px;margin:3px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;font-weight:500}
+.fc{font-size:11px;color:#94a3b8;line-height:1.6}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:16px;flex-wrap:wrap}
+.nb{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.nb-b{background:#1e40af;color:#bfdbfe}
+.nb-g{background:#14532d;color:#86efac}
+.nb-r{background:#7f1d1d;color:#fca5a5}
+.nb-o{background:#7c2d12;color:#fed7aa}
+.nb-t{background:#134e4a;color:#99f6e4}
+.qcard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:13px 15px;margin-bottom:10px}
+.qnum{font-family:'Oswald',sans-serif;font-size:11px;color:#7dd3fc;background:#0f1e3a;display:inline-block;padding:2px 8px;border-radius:5px;margin-bottom:7px;font-weight:500}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:9px;line-height:1.5;color:var(--color-text-primary)}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif;line-height:1.4}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.ko{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.prog-bar{width:100%;background:var(--color-background-secondary);border-radius:20px;height:12px;margin:8px 0}
+.prog-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .4s}
+#result-panel{display:none;border-radius:10px;padding:14px 16px;margin-top:12px;font-size:13px;text-align:center}
+#quiz-wrap{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+#quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 15px;margin-bottom:14px}
+#quiz-header h3{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px}
+#quiz-header p{font-size:11px;color:#94a3b8}
+#score-text{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.reset-btn{margin-top:10px;background:#0f1e3a;color:#7dd3fc;border:none;border-radius:8px;padding:8px 18px;font-size:12px;cursor:pointer;font-family:'Oswald',sans-serif;font-weight:500}
+@media(prefers-color-scheme:dark){
+.warn{background:#431407;color:#fed7aa;border-color:#f97316}
+.exam{background:#422006;border-color:#ca8a04;color:#fef08a}
+}
+</style>
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden">Canvas de resumen universitario: Recursos Naturales del Perú - Tema 1: Recursos Renovables y No Renovables</h2>
+<div class="cv">
+
+<div class="titbar">
+  <h1>RECURSOS NATURALES DEL PERÚ — TEMA 1</h1>
+  <p>Curso: Recursos Naturales del Perú · Universidad Nacional Agraria La Molina · 2026</p>
+  <div class="pills">
+    <span class="pill" style="background:#1e3a5f;color:#93c5fd">Naturaleza</span>
+    <span class="pill" style="background:#14532d;color:#86efac">Megadiversidad</span>
+    <span class="pill" style="background:#422006;color:#fef08a">Renovables</span>
+    <span class="pill" style="background:#450a0a;color:#fca5a5">No Renovables</span>
+    <span class="pill" style="background:#1e293b;color:#94a3b8">Marco Legal</span>
+    <span class="pill" style="background:#042f2e;color:#99f6e4">Endemismo</span>
+  </div>
+</div>
+
+<div class="secbar" style="background:#1e3a8a;color:#bfdbfe">🌿 SECCIÓN 1: NATURALEZA Y SUS COMPONENTES</div>
+
+<div class="block">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a">NATURALEZA (Diap. 3)</span>
+  <div class="def" style="border-color:#3b82f6">
+    Según Brack (2010), la naturaleza es <strong>todo lo que rodea a un ser viviente y determina su existencia</strong>. Esto implica que no es solo el "entorno verde" — incluye fenómenos físicos, químicos, celestes y geográficos que hacen posible la vida.
+  </div>
+  <div class="item"><span class="dot" style="background:#3b82f6"></span><span>La naturaleza no es solo paisaje: es el conjunto de condiciones que hacen posible o imposible la vida de cada organismo.</span></div>
+  <div class="item"><span class="dot" style="background:#3b82f6"></span><span>Un cambio en un solo factor (temperatura, pH, altitud) puede modificar radicalmente qué organismos sobreviven en ese ambiente.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explica por qué la definición de naturaleza de Brack (2010) va más allá del concepto popular de "mundo verde" y cómo sus componentes determinan la distribución de los seres vivos.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a">COMPONENTES: BIÓTICO vs ABIÓTICO (Diap. 4–5)</span>
+  <div class="def" style="border-color:#3b82f6">
+    La naturaleza se divide en componentes <strong>bióticos</strong> (seres vivos: flora, fauna, microorganismos) y <strong>abióticos</strong> (elementos inorgánicos que condicionan la vida sin ser vivos ellos mismos).
+  </div>
+  <div class="two" style="margin-top:6px">
+    <div class="mini" style="border-top:3px solid #16a34a">
+      <strong>Bióticos</strong><br>Todos los organismos vivos. Se interrelacionan entre sí y con el medio abiótico. Incluyen desde bacterias hasta mamíferos. Son el componente "orgánico" del ecosistema.
+    </div>
+    <div class="mini" style="border-top:3px solid #2563eb">
+      <strong>Abióticos</strong><br>Pertenecen al grupo inorgánico. Se subdividen en tres grupos de factores: sidéricos, ecogeográficos y físico-químicos. Determinan qué organismos pueden habitar cada ambiente.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "abiótico" con "no importante". Los factores abióticos son los que delimitan los biomas — sin un pH adecuado o la temperatura correcta, ningún ser vivo puede establecerse.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a">FACTORES ABIÓTICOS (Diap. 5–8)</span>
+  <div class="def" style="border-color:#3b82f6">
+    Los tres grupos de factores abióticos (según Brack, 2010) actúan a escalas muy diferentes: los sidéricos a escala astronómica, los ecogeográficos a escala regional/local, y los físico-químicos a escala microambiental.
+  </div>
+  <div class="three" style="margin-top:6px">
+    <div class="mini" style="border-left:3px solid #6366f1">
+      <strong>Sidéricos</strong><br>Características de cuerpos celestes que permiten la vida: distancia al Sol, masa de la Tierra, campo magnético, inclinación axial (estaciones). Sin ellos no habría condiciones para la vida.
+    </div>
+    <div class="mini" style="border-left:3px solid #0891b2">
+      <strong>Ecogeográficos</strong><br>Disposición de los elementos del entorno: geografía (altitud, latitud), montañas (crean barreras y microclimas), clima, aguas y suelos. En Perú, los Andes crean 84 zonas de vida.
+    </div>
+    <div class="mini" style="border-left:3px solid #d97706">
+      <strong>Físico-químicos</strong><br>Características del medio: temperatura, humedad, pH, nutrientes del suelo, vientos, corrientes marinas. En Perú, la Corriente de Humboldt define el ecosistema marino costero.
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Diferencia los tres tipos de factores abióticos y da un ejemplo concreto de cómo cada uno influye en la biodiversidad del Perú.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ccfbf1;color:#134e4a">PAISAJE (Diap. 9–10)</span>
+  <div class="def" style="border-color:#14b8a6">
+    Según Spedding (2003), el paisaje es el <strong>conjunto de objetos que conforman una sección específica de la corteza terrestre</strong>. Para Guhl (2010), su importancia radica en ser el espacio donde <strong>lo biofísico interactúa con lo social</strong>.
+  </div>
+  <div class="flow">
+    <div class="fbox">Elementos naturales<br>(relieve, vegetación, agua)</div>
+    <span class="farrow">+</span>
+    <div class="fbox">Elementos humanos<br>(cultivos, ciudades, vías)</div>
+    <span class="farrow">→</span>
+    <div class="fbox"><strong>PAISAJE</strong><br>Espacio biofísico-social</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Recurso aprovechable<br>(Ley 26821)</div>
+  </div>
+  <div class="two" style="margin-top:6px">
+    <div class="item"><span class="dot" style="background:#14b8a6"></span><span><strong>Dimensión biofísica:</strong> relieve, cobertura vegetal, cuencas hidrográficas, biodiversidad. Todo lo que la naturaleza aporta al espacio.</span></div>
+    <div class="item"><span class="dot" style="background:#14b8a6"></span><span><strong>Dimensión social:</strong> actividades humanas que transforman el paisaje — agricultura, ganadería, urbanización, minería. Clave para entender los conflictos por recursos en Perú.</span></div>
+  </div>
+  <div class="item"><span class="dot" style="background:#0d9488"></span><span>En el Perú, el paisaje natural puede ser un <strong>recurso natural en sí mismo</strong> (Ley 26821), por ejemplo en ecoturismo en Amazonía o en las terrazas agrícolas andinas (andenería).</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué el paisaje es considerado un recurso natural según la Ley Orgánica 26821? ¿Qué condición debe cumplir para ser clasificado como tal?</div>
+</div>
+
+<div class="secbar" style="background:#14532d;color:#86efac">🦜 SECCIÓN 2: PERÚ — PAÍS MEGADIVERSO Y ENDEMISMO</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#dcfce7;color:#14532d">MEGADIVERSIDAD DEL PERÚ (Diap. 11–13)</span>
+  <div class="def" style="border-color:#16a34a">
+    El Perú es uno de los <strong>diez países megadiversos del mundo</strong>, albergando 84 de las 117 zonas de vida del planeta. Esta megadiversidad se explica por la interacción de factores abióticos únicos: la Cordillera de los Andes, la Corriente de Humboldt, la proximidad al ecuador y la Amazonía.
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="nb nb-g">1</span><span><strong>Peces:</strong> ~2,000 sp. (10% del total mundial) — incluye marinas y continentales</span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:100%;background:#16a34a"></div></div>
+      <div class="item"><span class="nb nb-g">1</span><span><strong>Mariposas:</strong> 3,532 sp. — mayor diversidad del planeta</span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:100%;background:#16a34a"></div></div>
+      <div class="item"><span class="nb nb-b">2</span><span><strong>Aves:</strong> 1,816 sp. — incluye 128 IBAs (Áreas Importantes para Aves)</span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:90%;background:#3b82f6"></div></div>
+      <div class="item"><span class="nb nb-o">4</span><span><strong>Anfibios:</strong> 449 sp. — alta diversidad en selva alta y ceja de montaña</span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:60%;background:#f97316"></div></div>
+    </div>
+    <div>
+      <div class="item"><span class="nb nb-o">5</span><span><strong>Mamíferos:</strong> 515 sp. — desde marsupiales hasta cetáceos</span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:55%;background:#f97316"></div></div>
+      <div class="item"><span class="nb nb-o">5</span><span><strong>Reptiles:</strong> 418 sp. — especialmente serpientes y lagartos tropicales</span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:55%;background:#f97316"></div></div>
+      <div class="item"><span class="nb nb-t">8</span><span><strong>Plantas con flor:</strong> 25,000 sp. descritas — mayor reserva genética vegetal</span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:40%;background:#0d9488"></div></div>
+      <div class="item"><span class="dot" style="background:#a855f7;margin-top:5px"></span><span><strong>Orquídeas:</strong> ~10% del total mundial; hábitats en bosques nublados andinos</span></div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:70%;background:#a855f7"></div></div>
+    </div>
+  </div>
+  <div class="rx">ZONAS DE VIDA EN PERÚ: 84 / 117 totales en el planeta → 71.8% de la diversidad ecológica mundial</div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que la megadiversidad se debe solo a la Amazonía. La Cordillera de los Andes, al crear gradientes altitudinales extremos (0–6,768 msnm), genera microsistemas únicos que multiplican la diversidad de hábitats.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explica por qué el Perú concentra el 71.8% de las zonas de vida del planeta a pesar de ocupar solo el 0.87% de la superficie terrestre. ¿Qué factores abióticos explican este fenómeno?</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d">ENDEMISMO (Diap. 14–16)</span>
+  <div class="def" style="border-color:#16a34a">
+    <strong>Endemismo:</strong> hecho de tener una especie de planta o animal un <strong>área de distribución única y limitada</strong>. Las especies endémicas solo existen en ese territorio y en ningún otro lugar del mundo — su pérdida es irreversible.
+  </div>
+  <div class="item"><span class="dot" style="background:#16a34a"></span><span><strong>Anfibios:</strong> 185 sp. endémicas — el 48.5% del total de anfibios peruanos. La mayor tasa de endemismo. Altamente vulnerables a cambios climáticos.</span></div>
+  <div class="item"><span class="dot" style="background:#16a34a"></span><span><strong>Mamíferos:</strong> 87 sp. (15.18%) — primates amazónicos y marsupiales andinos con distribución muy restringida.</span></div>
+  <div class="item"><span class="dot" style="background:#16a34a"></span><span><strong>Aves:</strong> 115 sp. (6%) — muchas en la ceja de selva, zona de transición andino-amazónica.</span></div>
+  <div class="item"><span class="dot" style="background:#16a34a"></span><span><strong>Mariposas:</strong> 58 sp. (12.5%) · <strong>Orquídeas:</strong> 300–350 sp. (1% del total mundial).</span></div>
+  <div class="mini" style="border-left:3px solid #15803d;margin-top:7px">
+    <strong>Caso reciente:</strong> Botánicos registraron en Perú dos plantas del género <em>Senecio</em> (<em>S. behnii</em> y <em>S. ctenophyllus</em>) que hasta ese momento eran consideradas endémicas de Chile — lo que muestra que los límites del endemismo son dinámicos y el conocimiento de la flora peruana aún se está construyendo (investigación liderada por Vanezza Morales, Herbario USM - UNMSM).
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué los anfibios tienen el mayor porcentaje de endemismo en el Perú (48.5%)? Relaciona con los factores abióticos que generan aislamiento geográfico en el territorio peruano.</div>
+</div>
+
+<div class="secbar" style="background:#92400e;color:#fde68a">🪨 SECCIÓN 3: RECURSOS NATURALES — DEFINICIÓN Y CLASIFICACIÓN</div>
+
+<div class="block">
+  <span class="bh" style="background:#fef9c3;color:#713f12">DEFINICIÓN DE RR.NN. (Diap. 17–18)</span>
+  <div class="def" style="border-color:#ca8a04">
+    Según ONERN (1985): son <strong>todos los elementos o bienes en estado natural</strong> que el hombre puede utilizar para satisfacer sus necesidades. Son valiosos en su estado natural y, mediante la tecnología, pueden ser transformados y utilizados.
+  </div>
+  <div class="item"><span class="dot" style="background:#ca8a04"></span><span><strong>Patrimonio natural:</strong> su condición de "patrimonio" implica un deber de custodia — no pueden ser explotados arbitrariamente ni privatizados en su fuente.</span></div>
+  <div class="item"><span class="dot" style="background:#ca8a04"></span><span><strong>Función ecosistémica:</strong> antes de ser "materia prima", los RRNN cumplen funciones ecológicas (ciclo del agua, fijación de CO₂, formación de suelo) que sustentan la vida.</span></div>
+  <div class="item"><span class="dot" style="background:#ca8a04"></span><span><strong>Materias primas:</strong> son la base de todas las actividades económicas — agricultura, minería, pesca, forestal, energía. En Perú, representan más del 60% de las exportaciones.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que un recurso es "natural" solo si no ha sido tocado. Un recurso puede haber sido manejado (bosque de producción, acuicultura) y seguir siendo un recurso natural — lo que define su naturaleza es su origen, no su estado de intervención.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#fef9c3;color:#713f12">RENOVABLES vs NO RENOVABLES (Diap. 19–21)</span>
+  <div class="def" style="border-color:#ca8a04">
+    La distinción clave es la <strong>tasa de regeneración frente a la tasa de consumo</strong>. Si un recurso se regenera más rápido de lo que se consume, es renovable. Si se consume más rápido de lo que se forma (o no se regenera en escala humana), es no renovable.
+  </div>
+  <div class="two">
+    <div>
+      <div class="mini" style="border-top:3px solid #16a34a;margin-bottom:7px">
+        <strong>Renovables</strong><br>
+        Se restauran por procesos naturales a velocidad superior al consumo. Incluyen: radiación solar, mareas, viento (perpetuos), madera, cuero, papel (si cosechados sosteniblemente), flora y fauna.<br><br>
+        <em style="font-size:11px">⚠️ Atención:</em> recursos como agua dulce, madera y biomasa son renovables pero deben manejarse para no superar la capacidad regeneradora.
+      </div>
+      <div class="flow">
+        <div class="fbox">Uso controlado</div>
+        <span class="farrow">→</span>
+        <div class="fbox">Regeneración natural</div>
+        <span class="farrow">→</span>
+        <div class="fbox">Stock permanente</div>
+        <span class="farrow">→</span>
+        <div class="fbox" style="background:#dcfce7;color:#14532d">Renta perenne</div>
+      </div>
+    </div>
+    <div>
+      <div class="mini" style="border-top:3px solid #dc2626;margin-bottom:7px">
+        <strong>No Renovables</strong><br>
+        No pueden ser producidos, cultivados o regenerados a escala de consumo. Existen en cantidades fijas o se consumen mucho más rápido de lo que la naturaleza los recrea.<br>
+        Ejemplos: petróleo (formación: millones de años), carbón, gas natural, metales, acuíferos confinados sin recarga.
+      </div>
+      <div class="flow">
+        <div class="fbox">Extracción masiva</div>
+        <span class="farrow">→</span>
+        <div class="fbox">Sin regeneración</div>
+        <span class="farrow">→</span>
+        <div class="fbox" style="background:#fee2e2;color:#991b1b">Agotamiento</div>
+      </div>
+    </div>
+  </div>
+  <div class="rx">Recurso Renovable: Tasa de Regeneración > Tasa de Extracción → Stock estable o creciente
+Recurso No Renovable: Stock Total = Stock Inicial − Extracciones acumuladas</div>
+  <div class="warn">⚠️ ERROR CLAVE: El agua subterránea puede ser renovable (acuífero libre con recarga) o NO renovable (acuífero confinado fósil, sin recarga). No todos los tipos de agua son automáticamente renovables.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Un bosque puede clasificarse tanto como recurso renovable como no renovable según la forma en que se gestione. Explica esta aparente contradicción utilizando el concepto de tasa de extracción versus capacidad regeneradora.</div>
+</div>
+
+<div class="secbar" style="background:#1e293b;color:#94a3b8">⚖️ SECCIÓN 4: MARCO LEGAL DE LOS RR.NN. EN EL PERÚ</div>
+
+<div class="block">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95">CONSTITUCIÓN 1993 (Diap. 23)</span>
+  <div class="def" style="border-color:#7c3aed">
+    La Constitución Política del Perú (1993, actualizada 1997) establece en el Capítulo II el marco soberano sobre los recursos naturales. Define el rol del Estado como custodio y regulador del aprovechamiento.
+  </div>
+  <div class="three" style="margin-top:6px">
+    <div class="mini" style="border-left:3px solid #7c3aed">
+      <strong>Art. 66°</strong><br>Los RRNN renovables y no renovables son <em>patrimonio de la Nación</em>. El Estado es soberano en su aprovechamiento. La concesión otorga un derecho real al titular, sujeto a norma legal.
+    </div>
+    <div class="mini" style="border-left:3px solid #7c3aed">
+      <strong>Art. 67° y 68°</strong><br>El Estado determina la política nacional del ambiente y promueve el <em>uso sostenible</em> de RRNN. Está obligado a conservar la diversidad biológica y las áreas naturales protegidas.
+    </div>
+    <div class="mini" style="border-left:3px solid #7c3aed">
+      <strong>Art. 69°</strong><br>El Estado promueve el <em>desarrollo sostenible de la Amazonía</em> con legislación adecuada — reconociendo la riqueza estratégica de la selva peruana para el país y el planeta.
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Analiza la diferencia entre "patrimonio de la Nación" (Art. 66°) y "dominio de los titulares de derechos" (Ley 26821, Art. 4°). ¿Se contradicen? ¿Cómo los concilia el ordenamiento jurídico peruano?</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95">LEY 26821 — APROVECHAMIENTO SOSTENIBLE (Diap. 24–26)</span>
+  <div class="def" style="border-color:#7c3aed">
+    La Ley Orgánica N° 26821 es el instrumento legal que operacionaliza el Art. 66° de la Constitución. Fija qué son los RRNN, quién los posee y bajo qué condiciones pueden aprovecharse.
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot" style="background:#7c3aed"></span><span><strong>Art. 3° - Definición:</strong> todo componente de la naturaleza susceptible de ser aprovechado para satisfacer necesidades humanas y con valor actual o potencial en el mercado.</span></div>
+      <div class="item"><span class="dot" style="background:#7c3aed"></span><span><strong>Categorías:</strong> aguas superficiales y subterráneas; suelo, subsuelo y tierras; diversidad biológica; recursos hidrocarburíferos, eólicos, solares, geotérmicos; atmósfera y espectro radioeléctrico; minerales.</span></div>
+      <div class="item"><span class="dot" style="background:#7c3aed"></span><span><strong>El paisaje natural</strong> también es RRNN cuando es objeto de aprovechamiento económico (ecoturismo, turismo vivencial).</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot" style="background:#7c3aed"></span><span><strong>Art. 4° - Dominio:</strong> los RRNN en su fuente (renovables y no renovables) son Patrimonio de la Nación. Pero los <em>frutos y productos</em> obtenidos conforme a ley son de dominio del titular concesionario.</span></div>
+      <div class="item"><span class="dot" style="background:#7c3aed"></span><span><strong>Desarrollo Sostenible:</strong> satisfacer necesidades del presente sin comprometer la capacidad de las futuras generaciones, garantizando equilibrio entre crecimiento económico, medio ambiente y bienestar social.</span></div>
+    </div>
+  </div>
+  <div class="rx">FÓRMULA DEL DESARROLLO SOSTENIBLE:
+Equidad Social + Eficiencia Económica + Sostenibilidad Ambiental
+→ Satisfacción presente sin comprometer capacidad futura</div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir que el Estado es "dueño" de los RRNN con que puede disponerlos libremente. Su rol es de <em>soberanía y custodia</em>, no de propiedad privada — los RRNN pertenecen a la Nación (todos los peruanos), no al gobierno de turno.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Un concesionario minero afirma que, al tener una concesión, puede explotar los minerales como le parezca. Usando los Art. 3° y 4° de la Ley 26821 y el Art. 66° de la Constitución, argumenta si esta afirmación es correcta o incorrecta.</div>
+</div>
+
+<div class="secbar" style="background:#134e4a;color:#99f6e4">♻️ SECCIÓN 5: ALTERNATIVAS DE USO Y DESARROLLO SOSTENIBLE</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#ccfbf1;color:#134e4a">ALTERNATIVAS DE USO DE LOS RRNN (Diap. 27)</span>
+  <div class="def" style="border-color:#14b8a6">
+    El esquema del Ing. Wilfredo Ojeda (1996) sintetiza que la decisión de uso de los RRNN tiene consecuencias que van desde la renta económica hasta el equilibrio ambiental, dependiendo de si el aprovechamiento es racional o irracional.
+  </div>
+  <div class="two">
+    <div>
+      <strong style="font-size:12px">NO RENOVABLES → Aprovechamiento Finito</strong>
+      <div class="flow" style="margin-top:6px">
+        <div class="fbox">Cuotas grandes anuales</div><span class="farrow">→</span><div class="fbox">Mayor renta a corto plazo</div>
+      </div>
+      <div class="flow">
+        <div class="fbox">Cuotas racionales</div><span class="farrow">→</span><div class="fbox">Menor renta, mayor duración</div>
+      </div>
+      <div class="item" style="margin-top:6px"><span class="dot" style="background:#0d9488"></span><span>Tecnología "buena" → contaminación soportable o decreciente → renta empresarial equilibrada.</span></div>
+      <div class="item"><span class="dot" style="background:#dc2626"></span><span>Tecnología "mala" → contaminación creciente → mayor renta empresarial pero deterioro ambiental que afecta el equilibrio del ecosistema (externalidades negativas).</span></div>
+    </div>
+    <div>
+      <strong style="font-size:12px">RENOVABLES → Aprovechamiento</strong>
+      <div class="flow" style="margin-top:6px">
+        <div class="fbox" style="background:#fee2e2;color:#991b1b">Explotación irracional (finita)</div><span class="farrow">→</span><div class="fbox" style="background:#fee2e2;color:#991b1b">Extinción del recurso</div><span class="farrow">→</span><div class="fbox" style="background:#fee2e2;color:#991b1b">Beneficio efímero</div>
+      </div>
+      <div class="flow">
+        <div class="fbox" style="background:#dcfce7;color:#14532d">Uso racional perenne</div><span class="farrow">→</span><div class="fbox" style="background:#dcfce7;color:#14532d">Se estimula regeneración</div><span class="farrow">→</span><div class="fbox" style="background:#dcfce7;color:#14532d">Stock permanente</div><span class="farrow">→</span><div class="fbox" style="background:#dcfce7;color:#14532d">Renta perenne</div>
+      </div>
+      <div class="item" style="margin-top:6px"><span class="dot" style="background:#16a34a"></span><span>El rol de los RRNN como sustento del desarrollo solo se cumple cuando el aprovechamiento es <em>perenne y racional</em>.</span></div>
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Aplicando el esquema de Ojeda (1996), explica qué consecuencias tiene la explotación irracional de la anchoveta peruana para la industria pesquera y para el ecosistema marino. ¿Cuál sería la alternativa de uso racional?</div>
+</div>
+
+<div class="secbar" style="background:#1e3a8a;color:#bfdbfe">📊 TABLA INTEGRADORA GENERAL</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a">RESUMEN COMPARATIVO: Recursos Naturales del Perú — Tema 1</span>
+  <table class="tbl">
+    <tr>
+      <th>Concepto</th>
+      <th>Definición clave</th>
+      <th>Autor / Fuente</th>
+      <th>Clasificación</th>
+      <th>Dato Perú</th>
+      <th>Marco legal</th>
+    </tr>
+    <tr>
+      <td><strong>Naturaleza</strong></td>
+      <td>Todo lo que rodea a un ser viviente y determina su existencia</td>
+      <td>Brack, 2010</td>
+      <td>Bióticos + Abióticos (sidéricos, ecogeográficos, físico-químicos)</td>
+      <td>84/117 zonas de vida; Andes como barrera generadora de biodiversidad</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>Paisaje</strong></td>
+      <td>Sección de la corteza terrestre; espacio donde biofísico interactúa con social</td>
+      <td>Spedding, 2003; Guhl, 2010</td>
+      <td>Natural / Cultural / Urbano</td>
+      <td>Andenería, cocha, pampas costeras → recursos aprovechables</td>
+      <td>Ley 26821, Art. 3° (si hay valor económico)</td>
+    </tr>
+    <tr>
+      <td><strong>Megadiversidad</strong></td>
+      <td>País con excepcional número de especies y ecosistemas a nivel mundial</td>
+      <td>CONAM / CNDB</td>
+      <td>10 países megadiversos en el mundo</td>
+      <td>1° peces (2,000 sp.), 1° mariposas (3,532 sp.), 2° aves (1,816 sp.)</td>
+      <td>Art. 68° Constitución (conservar biodiversidad)</td>
+    </tr>
+    <tr>
+      <td><strong>Endemismo</strong></td>
+      <td>Especie con área de distribución única y limitada</td>
+      <td>CNDB</td>
+      <td>Por grupo taxonómico</td>
+      <td>48.5% de anfibios son endémicos; 15.18% de mamíferos</td>
+      <td>Art. 68° Const.; Libro Rojo de Plantas Endémicas</td>
+    </tr>
+    <tr>
+      <td><strong>RR.NN. Renovables</strong></td>
+      <td>Se restauran a velocidad superior al consumo humano</td>
+      <td>ONERN, 1985</td>
+      <td>Perpetuos (sol, viento) / Manejables (madera, agua dulce, flora/fauna)</td>
+      <td>Flora, fauna, recursos hídricos, energía geotérmica (Boiling River)</td>
+      <td>Ley 26821, Art. 3° y 4°; Art. 67° Const.</td>
+    </tr>
+    <tr>
+      <td><strong>RR.NN. No Renovables</strong></td>
+      <td>No pueden regenerarse a escala de consumo humano; stock finito</td>
+      <td>ONERN, 1985</td>
+      <td>Combustibles fósiles / Minerales / Acuíferos confinados</td>
+      <td>Petróleo (Loreto, Ucayali), cobre (Junín, Arequipa), oro (Madre de Dios)</td>
+      <td>Ley 26821, Art. 3°; Art. 66° Const.; Concesiones</td>
+    </tr>
+    <tr>
+      <td><strong>Desarrollo Sostenible</strong></td>
+      <td>Satisfacer necesidades presentes sin comprometer las de generaciones futuras</td>
+      <td>ONU (Brundtland, 1987)</td>
+      <td>3 pilares: económico + ambiental + social</td>
+      <td>Eje de toda la legislación peruana de RRNN; base de la Agenda 21</td>
+      <td>Art. 67°, 68°, 69° Const.; Ley 26821, Art. 4°</td>
+    </tr>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: La distinción renovable/no renovable no es absoluta — depende de la tasa de uso. Un recurso renovable (bosque, pesquería) se convierte en no renovable si la tasa de extracción supera la tasa de regeneración. En Perú, la pesca de arrastre y la tala ilegal son ejemplos de cómo se "convierte" un RRNN renovable en recurso agotable. La Ley 26821 y la Constitución obligan al Estado a evitar este escenario mediante el aprovechamiento sostenible.</div>
+</div>
+
+<div class="block s3" id="quiz-wrap">
+  <div id="quiz-header">
+    <h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3>
+    <p>Marca tu respuesta y descubre si es correcta. La respuesta correcta siempre se resaltará en verde.</p>
+  </div>
+  <div id="score-text">Preguntas respondidas: <strong id="answered-count">0</strong> / 10 &nbsp;|&nbsp; Aciertos: <strong id="correct-count">0</strong></div>
+  <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">Según Brack (2010), la naturaleza se define como:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) El conjunto de seres vivos que coexisten en un ecosistema determinado</button>
+      <button class="qbtn" data-q="1" data-correct="true">B) Todo lo que rodea a un ser viviente y determina su existencia</button>
+      <button class="qbtn" data-q="1" data-correct="false">C) Los recursos bióticos y abióticos que el hombre puede aprovechar económicamente</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) El paisaje natural de una región geográfica específica</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">¿Cuál de los siguientes es un factor ABIÓTICO de tipo ecogeográfico?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) La temperatura del suelo y el pH del agua</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) La masa de la Tierra y la distancia al Sol</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) La altitud, la latitud y la disposición de las montañas</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) La presencia de microorganismos descomponedores en el suelo</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Cuántas zonas de vida del planeta se encuentran en el territorio peruano, y qué porcentaje del total esto representa?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) 117 zonas de vida, el 100% del total mundial</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) 72 zonas de vida, el 61.5% del total mundial</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) 84 zonas de vida, el 71.8% del total mundial</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) 96 zonas de vida, el 82% del total mundial</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">El Perú ocupa el PRIMER lugar mundial en diversidad de especies de:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Aves y mamíferos</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) Reptiles y anfibios</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) Plantas con flor y orquídeas</button>
+      <button class="qbtn" data-q="4" data-correct="true">D) Peces y mariposas</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">El endemismo se define como el hecho de que una especie tenga:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Un gran número de individuos concentrados en un solo territorio</button>
+      <button class="qbtn" data-q="5" data-correct="true">B) Un área de distribución única y limitada, sin presencia en otro lugar del mundo</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) La capacidad de adaptarse a múltiples tipos de ecosistemas</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) Una baja tasa de reproducción que la pone en peligro de extinción</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Cuál afirmación sobre los recursos naturales NO renovables es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) El petróleo y el gas natural son ejemplos de recursos no renovables</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) Existen en cantidades fijas o se consumen mucho más rápido de lo que se forman</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) Todos los depósitos de agua subterránea son recursos no renovables</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Los metales y minerales son considerados recursos no renovables</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Según el Artículo 66° de la Constitución Política del Perú (1993), los recursos naturales renovables y no renovables son:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Propiedad del Estado peruano y sus instituciones</button>
+      <button class="qbtn" data-q="7" data-correct="true">B) Patrimonio de la Nación, con el Estado como soberano en su aprovechamiento</button>
+      <button class="qbtn" data-q="7" data-correct="false">C) De libre disposición por cualquier ciudadano peruano con domicilio en el territorio</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Propiedad privada de quien los descubra y pueda demostrar su existencia</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Según la Ley 26821, ¿cuál de los siguientes NO está incluido en la definición de recursos naturales?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) El espectro radioeléctrico y la atmósfera</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Las aguas superficiales y subterráneas</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Las obras de infraestructura construidas por el Estado sobre territorio nacional</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Los recursos genéticos y los ecosistemas que dan soporte a la vida</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">En el esquema de Ojeda (1996), cuando un recurso renovable es sometido a explotación irracional, la cadena de consecuencias es:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Uso irracional → mayor stock permanente → renta perenne elevada</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) Uso irracional → estimulación de regeneración → beneficio sostenido</button>
+      <button class="qbtn" data-q="9" data-correct="true">C) Explotación irracional → afecta capacidad natural de regeneración → extinción del recurso → beneficio económico efímero</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Explotación irracional → contaminación soportable → equilibrio ambiental a largo plazo</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia principal entre un factor SIDÉRICO y un factor FÍSICO-QUÍMICO abiótico, en el contexto del estudio de la naturaleza?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) Los factores sidéricos son bióticos y los físico-químicos son abióticos</button>
+      <button class="qbtn" data-q="10" data-correct="true">B) Los factores sidéricos son características de cuerpos celestes (escala astronómica), mientras los físico-químicos son características del medio local (temperatura, pH, humedad)</button>
+      <button class="qbtn" data-q="10" data-correct="false">C) Los factores sidéricos incluyen el clima y la altitud, mientras los físico-químicos incluyen la posición del Sol</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) Ambos son factores de escala regional y se diferencian solo por la disciplina científica que los estudia</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="result-panel"></div>
+</div>
+
+<div class="footer">
+  <div><span class="ft">REFERENCIAS:</span></div>
+  <div class="fc">
+    Brack, A. y Mendiola, C. (2010). <em>Ecología del Perú</em>. peruecologico.com.pe<br>
+    Comisión Nacional de Diversidad Biológica (CNDB). biodiv@conam.gob.pe<br>
+    Constitución Política del Perú (1993, actualiz. 1997). Arts. 66°–69°<br>
+    Guhl, A. (2010). <em>El mito prístino; Introducción Paisaje</em> [diapositivas]. Alianza Andes Tropicales.<br>
+    Ojeda, W. (1996). <em>Alternativas de uso de los recursos naturales</em> [esquema].<br>
+    ONERN (1985). <em>Los Recursos Naturales del Perú</em>. Lima: ONERN.<br>
+    Ley Orgánica N° 26821 — Aprovechamiento Sostenible de los Recursos Naturales.<br>
+    Spedding, A. (2003). Citado en definición de paisaje. · Quispe, M. (2006). historiaperuana.blogspot.com<br>
+    Libro Rojo de Plantas Endémicas del Perú. sisbib.unmsm.edu.pe
+  </div>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1:{correct:"La definición de Brack (2010) es amplia e integral: incluye los factores bióticos y abióticos que determinan la existencia de cualquier ser vivo, no solo los elementos verdes o vivos.",incorrect:"La definición de Brack no se limita a los seres vivos ni a los recursos aprovechables. La respuesta correcta es B: 'Todo lo que rodea a un ser viviente y determina su existencia', abarcando factores sidéricos, ecogeográficos y físico-químicos."},
+  2:{correct:"Los factores ecogeográficos se refieren a la disposición de los elementos del entorno a escala regional: geografía (altitud, latitud), montañas, clima, aguas y suelos. Son los que crean los distintos biomas.",incorrect:"Los factores ecogeográficos (C) son la disposición territorial: altitud, latitud, montañas. Los físico-químicos son temperatura/pH. Los sidéricos son características de cuerpos celestes. Los microorganismos son componentes bióticos."},
+  3:{correct:"El Perú alberga 84 de las 117 zonas de vida reconocidas en el planeta (71.8%). Esta cifra lo convierte en uno de los países con mayor diversidad de ecosistemas del mundo, resultado de los gradientes altitudinales andinos.",incorrect:"La cifra correcta (C) es 84 zonas de vida de 117 en total, lo que equivale al 71.8% de la diversidad de zonas de vida del planeta. Perú no tiene todas las zonas (no es 117), pero sí la mayoría."},
+  4:{correct:"El Perú es primer lugar mundial en peces (~2,000 sp. marinas y continentales, 10% del total mundial) y en mariposas (3,532 sp.). Son los dos grupos donde lidera globalmente.",incorrect:"La respuesta correcta es D: peces y mariposas. En aves es 2° lugar (1,816 sp.), en mamíferos es 5°, en reptiles 5°, en anfibios 4°. Solo en peces y mariposas el Perú ocupa el primer lugar mundial."},
+  5:{correct:"El endemismo es la condición de una especie que tiene un área de distribución única y limitada — solo existe en ese territorio específico. En Perú, el 48.5% de los anfibios son endémicos.",incorrect:"El endemismo (B) no tiene que ver con el número de individuos ni con la capacidad adaptativa. Una especie endémica puede tener muchos individuos pero todos confinados a una sola área geográfica restringida."},
+  6:{correct:"La afirmación falsa es C. No todos los acuíferos subterráneos son no renovables. Solo los acuíferos confinados sin recarga lo son. Los acuíferos libres con recarga pluvial son recursos renovables.",incorrect:"La respuesta correcta es C. Los acuíferos subterráneos pueden ser renovables (acuíferos libres con recarga natural) o no renovables (acuíferos confinados fósiles sin recarga). La Ley 26821 también hace esta distinción."},
+  7:{correct:"El Art. 66° establece que los RRNN son 'patrimonio de la Nación' y que el Estado es 'soberano en su aprovechamiento'. Esto no es igual a propiedad estatal — la nación es la titular, el Estado el administrador soberano.",incorrect:"La respuesta correcta es B. 'Patrimonio de la Nación' significa que pertenecen a todos los peruanos colectivamente. El Estado no es propietario sino soberano administrador. No son de libre disposición individual ni propiedad privada por descubrimiento."},
+  8:{correct:"La Ley 26821 lista como RRNN los elementos naturales (aguas, suelo, biodiversidad, minerales, atmósfera, etc.). Las obras de infraestructura son construcciones humanas, no componentes naturales, por lo que no califican como RRNN.",incorrect:"La respuesta correcta es C. Las obras de infraestructura (carreteras, presas, edificios) son creaciones humanas — no son 'componentes de la naturaleza' susceptibles de ser catalogados como recursos naturales bajo la Ley 26821, Art. 3°."},
+  9:{correct:"El esquema de Ojeda (1996) muestra claramente que la explotación irracional de un renovable afecta la capacidad de regeneración, lleva a la extinción del recurso y genera solo un beneficio económico efímero — opuesto al uso racional que genera renta perenne.",incorrect:"La respuesta correcta es C. El esquema de Ojeda distingue dos vías para los renovables: explotación irracional (→ extinción + beneficio efímero) y uso racional perenne (→ regeneración estimulada → stock permanente → renta perenne)."},
+  10:{correct:"Los factores sidéricos operan a escala astronómica (distancia Tierra-Sol, masa planetaria, inclinación axial) y son las condiciones macro que hacen posible la vida en la Tierra. Los físico-químicos son las características locales medibles del medio.",incorrect:"La respuesta correcta es B. Los factores sidéricos son características de cuerpos celestes a escala astronómica. Los físico-químicos son parámetros locales del medio (temperatura, humedad, pH). Los ecogeográficos incluyen altitud, latitud y montañas — no los sidéricos."}
+};
+
+let answered=0,correct=0;
+const answered_q=new Set();
+
+document.getElementById('quiz-wrap').addEventListener('click',function(e){
+  if(!e.target.classList.contains('qbtn'))return;
+  const btn=e.target;
+  const q=btn.getAttribute('data-q');
+  if(answered_q.has(q))return;
+  answered_q.add(q);
+  const isCorrect=btn.getAttribute('data-correct')==='true';
+  const allBtns=btn.closest('.qopts').querySelectorAll('.qbtn');
+  allBtns.forEach(b=>{
+    b.disabled=true;
+    if(b.getAttribute('data-correct')==='true'){
+      b.classList.add('correct');
+      b.textContent='✅ '+b.textContent;
+    }
+  });
+  if(!isCorrect){
+    btn.classList.add('incorrect');
+    btn.textContent='❌ '+btn.textContent;
+  }
+  const fb=document.getElementById('fb'+q);
+  if(isCorrect){
+    fb.className='qfeedback ok';
+    fb.innerHTML='<strong>✅ ¡Correcto!</strong> '+feedbacks[parseInt(q)].correct;
+    correct++;
+  }else{
+    fb.className='qfeedback ko';
+    fb.innerHTML='<strong>❌ Incorrecto.</strong> '+feedbacks[parseInt(q)].incorrect;
+  }
+  fb.style.display='block';
+  answered++;
+  document.getElementById('answered-count').textContent=answered;
+  document.getElementById('correct-count').textContent=correct;
+  document.getElementById('prog-fill').style.width=(answered*10)+'%';
+  if(answered===10){
+    const panel=document.getElementById('result-panel');
+    panel.style.display='block';
+    let bg,msg;
+    if(correct<=4){bg='#fee2e2';msg='Necesitas repasar el material. Revisa las secciones con errores y vuelve a intentarlo.';}
+    else if(correct<=7){bg='#fefce8';msg='¡Buen avance! Sigue repasando las secciones donde tuviste dificultades.';}
+    else{bg='#dcfce7';msg='¡Excelente dominio del tema! Estás bien preparado para el examen.';}
+    panel.style.background=bg;
+    panel.style.borderRadius='10px';
+    panel.style.padding='14px 16px';
+    panel.style.color='#1f2937';
+    panel.innerHTML='<strong style="font-size:15px">Resultado final: '+correct+' / 10 correctas</strong><br><span style="font-size:12px">'+msg+'</span><br><button class="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>';
+  }
+});
+
+function resetQuiz(){
+  answered=0;correct=0;answered_q.clear();
+  document.getElementById('answered-count').textContent='0';
+  document.getElementById('correct-count').textContent='0';
+  document.getElementById('prog-fill').style.width='0%';
+  document.getElementById('result-panel').style.display='none';
+  for(let i=1;i<=10;i++){
+    const fb=document.getElementById('fb'+i);
+    fb.style.display='none';fb.className='qfeedback';fb.innerHTML='';
+    const btns=document.getElementById('q'+i).querySelectorAll('.qbtn');
+    btns.forEach(b=>{
+      b.disabled=false;
+      b.classList.remove('correct','incorrect');
+      let txt=b.textContent;
+      b.textContent=txt.replace('✅ ','').replace('❌ ','');
+    });
+  }
+}
+</script>

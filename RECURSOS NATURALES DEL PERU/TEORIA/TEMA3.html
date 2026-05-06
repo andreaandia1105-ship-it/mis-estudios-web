@@ -1,0 +1,675 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-text-primary);}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px;}
+.cv-title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.cv-title p{font-size:11px;color:#94a3b8;margin-bottom:8px;}
+.cv-title .pills{display:flex;flex-wrap:wrap;gap:5px;}
+.pill{font-size:10px;padding:2px 9px;border-radius:20px;display:inline-block;margin:2px;background:#1e3a5f;color:#93c5fd;}
+.sec{grid-column:1/-1;border-radius:9px;padding:7px 13px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.bh-blue{background:#dbeafe;color:#1e3a8a;}
+.bh-green{background:#dcfce7;color:#14532d;}
+.bh-teal{background:#ccfbf1;color:#134e4a;}
+.bh-yellow{background:#fef9c3;color:#713f12;}
+.bh-orange{background:#ffedd5;color:#7c2d12;}
+.bh-purple{background:#ede9fe;color:#4c1d95;}
+.bh-red{background:#fee2e2;color:#991b1b;}
+.bh-gray{background:#f1f5f9;color:#334155;}
+.bh-pink{background:#fce7f3;color:#831843;}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd;}
+.bh-green{background:#14532d;color:#86efac;}
+.bh-teal{background:#042f2e;color:#5eead4;}
+.bh-yellow{background:#422006;color:#fef08a;}
+.bh-orange{background:#431407;color:#fed7aa;}
+.bh-purple{background:#2e1065;color:#c4b5fd;}
+.bh-red{background:#450a0a;color:#fca5a5;}
+.bh-gray{background:#1e293b;color:#94a3b8;}
+.bh-pink{background:#4a044e;color:#f0abfc;}
+}
+.def{border-left:3px solid #3b82f6;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.55;}
+.def.green{border-color:#16a34a;}
+.def.teal{border-color:#0d9488;}
+.def.orange{border-color:#f97316;}
+.def.purple{border-color:#7c3aed;}
+.def.yellow{border-color:#ca8a04;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.dot-blue{background:#3b82f6;}
+.dot-green{background:#16a34a;}
+.dot-teal{background:#0d9488;}
+.dot-orange{background:#f97316;}
+.dot-purple{background:#7c3aed;}
+.dot-yellow{background:#ca8a04;}
+.dot-red{background:#dc2626;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin-bottom:8px;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;line-height:1.5;}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa;}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.5;}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#854d0e;}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px;line-height:1.5;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0;}
+.fbox{background:var(--color-background-secondary);padding:4px 9px;border-radius:6px;font-size:11px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-family:'Oswald',sans-serif;font-size:11px;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:4px 0;}
+.stat-bar-fill{height:100%;border-radius:20px;}
+.cv-footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;font-size:11px;}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;}
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px;}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px;}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;margin-bottom:3px;}
+.quiz-header p{font-size:11px;color:#94a3b8;}
+.qcard{margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid var(--color-border-tertiary);}
+.qcard:last-child{border-bottom:none;margin-bottom:0;}
+.qnum{font-size:10px;color:var(--color-text-secondary);font-family:'Oswald',sans-serif;margin-bottom:4px;}
+.qtext{font-size:12.5px;font-weight:500;margin-bottom:8px;line-height:1.5;}
+.qopts{display:flex;flex-direction:column;gap:5px;}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;line-height:1.4;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif;}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary);}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn:disabled{opacity:0.65;cursor:not-allowed;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;display:none;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;}
+#quiz-progress{margin-bottom:12px;}
+#quiz-progress p{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;}
+#result-panel{display:none;border-radius:10px;padding:14px;margin-top:14px;font-size:13px;}
+#result-panel.good{background:#f0fdf4;border:1px solid #16a34a;color:#14532d;}
+#result-panel.mid{background:#fefce8;border:1px solid #facc15;color:#713f12;}
+#result-panel.low{background:#fef2f2;border:1px solid #dc2626;color:#991b1b;}
+#restart-btn{margin-top:10px;background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;cursor:pointer;font-family:'Source Sans 3',sans-serif;}
+</style>
+
+<div class="cv">
+
+<div class="cv-title">
+  <h1>🌿 ECOLOGÍA Y BIODIVERSIDAD — TEMA N°3</h1>
+  <p>Recursos Naturales del Perú · Teoría · UNALM · 2026</p>
+  <div class="pills">
+    <span class="pill">Ecología Forestal</span>
+    <span class="pill">Ecosistemas</span>
+    <span class="pill">Factores Abióticos</span>
+    <span class="pill">Biocenosis</span>
+    <span class="pill">Ciclos Biogeoquímicos</span>
+    <span class="pill">Clasificación Ecológica</span>
+    <span class="pill">Zonas de Vida — Holdridge</span>
+    <span class="pill">Perú Biodiverso</span>
+  </div>
+</div>
+
+<!-- SECCIÓN I -->
+<div class="sec" style="background:#1e3a8a;">🔬 I. ECOLOGÍA: CONCEPTOS Y FUNDAMENTOS</div>
+
+<div class="block">
+  <span class="bh bh-blue">Ecología (Diap. 4)</span>
+  <div class="def">Ciencia que estudia las relaciones de los seres vivos entre sí y con su medio ambiente, incluyendo abundancia y distribución en un área determinada.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Ecología Forestal</b> (Spurr y Barnes, 1982): analiza los ecosistemas de bosques considerando el medio físico y la comunidad como componentes operativamente inseparables. Estudia estructura, composición y función de los terrenos forestales.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Especie</b>: conjunto de individuos con características morfológicas comunes que se interfecundan con descendencia fértil. Ej: <i>Cedrela odorata</i>.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Población</b>: individuos de la misma especie que ocupan un lugar y tiempo determinado con descendencia fértil. Ej: vicuñas en Pampa Galeras.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique la diferencia conceptual entre especie y población desde el punto de vista ecológico, e indique qué factores afectan la dinámica de una población en ecosistemas andinos.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-blue">Niveles de Organización Ecológica (Diap. 29)</span>
+  <div class="def">Según Begon, Harper y Townsend (1999) y Molles (2006), la ecología se estudia a múltiples escalas, cada una con sus propias dinámicas e interacciones.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #3b82f6;">
+      <b>Organismo</b><br>Interacciones de un ser vivo con las condiciones abióticas directas que lo rodean. Es el nivel más básico de análisis.
+    </div>
+    <div class="mini" style="border-top:3px solid #16a34a;">
+      <b>Población → Comunidad</b><br>Interacciones con individuos de la misma especie (población), luego con otras especies (comunidad).
+    </div>
+    <div class="mini" style="border-top:3px solid #7c3aed;">
+      <b>Ecosistema → Biosfera</b><br>Biocenosis + flujos de materia y energía (ecosistema). La biosfera es el conjunto de todos los seres vivos conocidos.
+    </div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Organismo</div><span class="farrow">→</span>
+    <div class="fbox">Población</div><span class="farrow">→</span>
+    <div class="fbox">Comunidad</div><span class="farrow">→</span>
+    <div class="fbox">Ecosistema</div><span class="farrow">→</span>
+    <div class="fbox">Biosfera</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "comunidad" con "ecosistema". La comunidad es solo el conjunto de seres vivos (biocenosis), mientras que el ecosistema incluye TAMBIÉN los flujos de materia y energía del biotopo. El ecosistema es siempre mayor que la comunidad.</div>
+</div>
+
+<!-- SECCIÓN II -->
+<div class="sec" style="background:#0f6e56;">🌳 II. ECOSISTEMA: ESTRUCTURA Y DINÁMICA</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Definición y Componentes del Ecosistema (Diap. 6)</span>
+  <div class="def green">Sistema biológico abierto formado por una comunidad de organismos vivos (biocenosis) y el medio físico (biotopo) donde se relacionan, con continua corriente de captación y pérdida de sustancias, energía y organismos.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-green"></span><span><b>Componente Abiótico (Biotopo)</b>: sustancias inorgánicas. Incluye: materiales (O₂, CO₂, H₂O, C, N, P, K, sales), energía solar, y estructura espacial (cuevas, lagos, playas).</span></div>
+      <div class="item"><span class="dot dot-green"></span><span><b>Factores abióticos clave</b>: roca madre, suelo, fisiografía, agua, aire, clima (temperatura, exposición, vientos).</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-teal"></span><span><b>Componente Biótico (Biocenosis)</b>: todos los seres vivos ligados por cadenas tróficas. Se divide en Productores, Consumidores y Descomponedores.</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span>En un ecosistema hay competencia por: <b>Luz, Agua y Nutrientes</b>. También hay flujos de energía, cadenas tróficas y ciclos biogeoquímicos.</span></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Describa los dos componentes principales de un ecosistema, diferencie biotopo de biocenosis, e indique qué tipo de sistema es el ecosistema (abierto/cerrado) y por qué.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Componente Biótico: Biocenosis (Diap. 23)</span>
+  <div class="mini" style="border-left:3px solid #16a34a;">
+    <b>Productores primarios (Autótrofos)</b><br>Producen sustancias orgánicas a partir de inorgánicas. En ecosistemas terrestres: plantas. En acuáticos: fitoplancton.
+  </div>
+  <div class="mini" style="border-left:3px solid #f97316;">
+    <b>Consumidores (Heterótrofos)</b><br>Viven directa o indirectamente de los productores. Incluyen animales, bacterias y hongos que ingieren materia orgánica viva.
+  </div>
+  <div class="mini" style="border-left:3px solid #7c3aed;">
+    <b>Descomponedores</b><br>Heterótrofos que consumen materia orgánica MUERTA y la convierten en componentes inorgánicos. Son bacterias y hongos esenciales para el ciclo de nutrientes.
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Los hongos y bacterias pueden actuar como consumidores O descomponedores. Lo que los distingue es si consumen materia viva o muerta, no el tipo de organismo en sí.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-teal">Niveles Tróficos y Flujo de Energía (Diap. 31)</span>
+  <div class="two">
+    <div>
+      <div class="flow">
+        <div class="fbox" style="background:#dcfce7;color:#14532d;">Sol → Energía</div><span class="farrow">→</span>
+        <div class="fbox" style="background:#dcfce7;color:#14532d;">Productores (N1)</div><span class="farrow">→</span>
+        <div class="fbox" style="background:#fef9c3;color:#713f12;">Herbívoros (N2)</div><span class="farrow">→</span>
+        <div class="fbox" style="background:#ffedd5;color:#7c2d12;">Carnívoros (N3)</div><span class="farrow">→</span>
+        <div class="fbox" style="background:#fee2e2;color:#991b1b;">Superdepredadores (N4)</div><span class="farrow">→</span>
+        <div class="fbox" style="background:#ede9fe;color:#4c1d95;">Descomp.</div>
+      </div>
+      <div class="item"><span class="dot dot-green"></span><span><b>N1 - Productores</b>: vegetales y algunas bacterias. Transforman materia inorgánica usando energía solar (fotosíntesis) o reacciones de oxidación (quimiosíntesis).</span></div>
+      <div class="item"><span class="dot dot-yellow"></span><span><b>N2 - Consumidores primarios</b>: herbívoros. Se alimentan directamente de los productores. Ej: vacas, ciervos, insectos fitófagos.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>N3 - Consumidores secundarios</b>: carnívoros que se alimentan de herbívoros. Ej: serpientes, zorros, peces depredadores.</span></div>
+      <div class="item"><span class="dot dot-red"></span><span><b>N4 - Superdepredadores</b>: carnívoros finales que se alimentan de otros carnívoros. A mayor nivel trófico, menor número de organismos pero de mayor tamaño, fiereza y agilidad.</span></div>
+      <div class="warn">⚠️ La energía se pierde (~90%) en cada nivel trófico como calor. Solo ~10% pasa al siguiente nivel. Por eso las cadenas tróficas raramente superan 4-5 eslabones.</div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué los ecosistemas tienen pocas cadenas tróficas de más de 5 niveles? Explique el principio de pérdida de energía entre niveles tróficos y su implicancia para la biomasa disponible en cada nivel.</div>
+</div>
+
+<!-- SECCIÓN: FACTORES ABIÓTICOS -->
+<div class="sec" style="background:#0e7490;">💧 FACTORES ABIÓTICOS: SUELO, AGUA, ENERGÍA SOLAR</div>
+
+<div class="block">
+  <span class="bh bh-teal">Suelo: Perfil y Función (Diap. 9–12)</span>
+  <div class="def teal">Capa superior de la corteza terrestre compuesta por partículas minerales, materia orgánica, agua, aire y organismos vivos. Es el producto de la interacción del clima, topografía, organismos y materiales parentales a lo largo del tiempo.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Factores de calidad</b>: pH y humedad son los más importantes para determinar la aptitud del suelo para sostener vida.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Horizontes del suelo</b>: O (residuos orgánicos/humus), A (humus y lavado), B (acumulación, arena), C (material no consolidado/grava), R (roca madre). La meteorización aumenta hacia arriba.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Suelos y bosques</b>: los bosques capturan 650,000 millones de toneladas de carbono (~1/3 de ecosistemas terrestres). Suelos forestales y biomasa almacenan ~45% cada uno; el 10% restante está en madera muerta y hojarasca.</span></div>
+  <div class="rx">Carbono en bosques: 45% suelo + 45% biomasa + 10% madera muerta/hojarasca = Total ≈ CO₂ atmosférico</div>
+  <div class="exam">🎯 EXAMEN: Describa los horizontes del suelo y explique por qué los suelos forestales son cruciales en el balance global de carbono, indicando los porcentajes de almacenamiento en cada compartimiento.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Agua como Factor Ecológico (Diap. 13–18)</span>
+  <div class="def">El agua (H₂O) es indispensable para toda forma de vida. Actúa como termorregulador del clima, participa en procesos metabólicos (fotosíntesis), y determina la presencia de organismos en un ecosistema.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Ciclo hidrológico</b>: precipitación → infiltración/escorrentía → evaporación/evapotranspiración → condensación → precipitación. Los bosques interceptan la lluvia y regulan los flujos superficiales y subterráneos.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Amazonia como "Bomba hidráulica"</b>: extrae agua del suelo y la expulsa por estomas de millones de árboles, regulando el clima global. Las esporas y partículas orgánicas del aire amazónico actúan como aglutinadores que condensan el agua y generan lluvia.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Perú - Bosques Montanos</b>: producen el 60% del agua de los ríos amazónicos. Ciudades como Quito (1.3 M hab.) y Ciudad de México (20 M hab.) dependen del agua de bosques de montaña.</span></div>
+  <div class="warn">⚠️ La deforestación amazónica no solo pierde carbono: elimina la "bomba hidráulica" que genera lluvia para toda Sudamérica, afectando patrones climáticos incluso en zonas alejadas como el altiplano peruano.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Energía Solar y Albedo (Diap. 19–22)</span>
+  <div class="def yellow">La energía solar es la fuente primaria de energía para los ecosistemas. La fotosíntesis convierte energía lumínica en energía química. El albedo mide la fracción de radiación solar devuelta a la atmósfera.</div>
+  <div class="item"><span class="dot dot-yellow"></span><span><b>Fotoperíodo</b>: cantidad de luz en relación a un período de tiempo. Regula ritmos biológicos de la mayoría de especies (floración, migración, reproducción).</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><b>Albedo</b>: bosque = 5–15% (muy bajo, absorbe calor). Nieve = 80%, nube densa = 75%. La deforestación en zonas boreales y tropicales eleva el albedo de la superficie.</span></div>
+  <table class="tbl" style="margin-top:6px;">
+    <tr><th>Superficie</th><th>Albedo %</th><th>Superficie</th><th>Albedo %</th></tr>
+    <tr><td>Agua</td><td>5–70</td><td>Hielo</td><td>20–40</td></tr>
+    <tr><td>Arena</td><td>20–45</td><td>Nieve</td><td>80</td></tr>
+    <tr><td>Bosque</td><td>5–15</td><td>Nube densa</td><td>75</td></tr>
+    <tr><td>Cultivos</td><td>10–25</td><td>Cemento</td><td>20</td></tr>
+  </table>
+  <div class="exam">🎯 EXAMEN: Explique el concepto de albedo y analice cómo la deforestación modifica el balance energético superficial en las regiones tropicales y boreales. ¿Cuál superficie tiene el albedo más bajo y qué implica esto para el calentamiento local?</div>
+</div>
+
+<!-- CICLOS BIOGEOQUÍMICOS -->
+<div class="sec" style="background:#4c1d95;">♻️ CICLOS BIOGEOQUÍMICOS</div>
+
+<div class="block s2">
+  <span class="bh bh-purple">Ciclos del Carbono y Nitrógeno (Diap. 32–33)</span>
+  <div class="def purple">Los ciclos biogeoquímicos son los procesos por los cuales los elementos esenciales (C, N, P, S) circulan entre los compartimientos abióticos y bióticos del ecosistema, siendo reciclados una y otra vez.</div>
+  <div class="two">
+    <div>
+      <div class="mini" style="border-top:3px solid #7c3aed;">
+        <b>Ciclo del Carbono</b><br>
+        Atmósfera (CO₂) → Fotosíntesis → Plantas → Respiración/Consumo → Descomposición → Suelo. La quema de combustibles fósiles introduce carbono "extra" rompiendo el equilibrio natural del ciclo.
+      </div>
+      <div class="flow">
+        <div class="fbox">CO₂ atm.</div><span class="farrow">→</span>
+        <div class="fbox">Fotosíntesis</div><span class="farrow">→</span>
+        <div class="fbox">Biomasa</div><span class="farrow">→</span>
+        <div class="fbox">Respiración</div><span class="farrow">→</span>
+        <div class="fbox">CO₂</div>
+      </div>
+    </div>
+    <div>
+      <div class="mini" style="border-top:3px solid #7c3aed;">
+        <b>Ciclo del Nitrógeno</b><br>
+        N₂ atmosférico → Fijación (bacterias en raíces de leguminosas) → Amonificación → Nitrificación (nitritos → nitratos) → Asimilación por plantas → Desnitrificación → N₂.
+      </div>
+      <div class="flow">
+        <div class="fbox">N₂ atm.</div><span class="farrow">→</span>
+        <div class="fbox">Fijación</div><span class="farrow">→</span>
+        <div class="fbox">NH₃</div><span class="farrow">→</span>
+        <div class="fbox">NO₂⁻→NO₃⁻</div><span class="farrow">→</span>
+        <div class="fbox">Plantas</div>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: El nitrógeno atmosférico (N₂) NO puede ser utilizado directamente por las plantas. Solo bacterias fijadoras específicas (Rhizobium en leguminosas, o bacterias de vida libre como Azotobacter) pueden convertirlo a formas asimilables como NH₃.</div>
+  <div class="exam">🎯 EXAMEN: Compare el ciclo del carbono con el del nitrógeno. ¿En qué se parecen y en qué difieren? ¿Qué grupo de microorganismos es imprescindible en cada uno y por qué?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Fisiografía como Factor Abiótico (Diap. 8)</span>
+  <div class="def purple">La fisiografía (forma del terreno) determina la distribución de la vegetación y fauna al influir sobre microclimas, drenaje, exposición solar y acumulación de suelo.</div>
+  <div class="mini" style="border-left:3px solid #7c3aed;"><b>Planicie</b>: mayor acumulación de agua y nutrientes, suelos más profundos. Favorece ecosistemas con alta productividad primaria.</div>
+  <div class="mini" style="border-left:3px solid #7c3aed;"><b>Colina</b>: pendientes moderadas con drenaje lateral. Transición entre planicies y montañas, diversidad de microhábitats.</div>
+  <div class="mini" style="border-left:3px solid #7c3aed;"><b>Montaña</b>: gradientes altitudinales extremos, cambio rápido de temperatura, flora y fauna. En Perú: hasta 6768 msnm (Cordillera de los Andes).</div>
+</div>
+
+<!-- SECCIÓN III -->
+<div class="sec" style="background:#7c2d12;">🏔️ III & IV. CLASIFICACIÓN DE ECOSISTEMAS</div>
+
+<div class="block s3">
+  <span class="bh bh-orange">Tipos de Ecosistemas: Naturales, Artificiales y Mixtos (Diap. 38–41)</span>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #16a34a;">
+      <b>Ecosistemas Naturales</b><br>Sin intervención humana significativa. Mantienen sus propios mecanismos de regulación, sucesión y equilibrio ecológico. Ej: bosques, pastos naturales, lomas, manglares, arrecifes, humedales, dunas, islas.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316;">
+      <b>Ecosistemas Artificiales</b><br>Creados o mantenidos por el ser humano. Menor biodiversidad y mayor dependencia de insumos externos. Ej: plantaciones forestales, sistemas agroforestales, invernaderos, acuarios.
+    </div>
+    <div class="mini" style="border-top:3px solid #ca8a04;">
+      <b>Ecosistemas Mixtos</b><br>Iniciados por el ser humano pero que evolucionan hacia características naturales con el tiempo, o viceversa. Ej: andenería abandonada que se recoloniza naturalmente, represas colmatadas.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Las plantaciones forestales (ej: pinos o eucaliptos en la sierra peruana) son ecosistemas ARTIFICIALES aunque parezcan bosques. Tienen baja diversidad biológica y dependen del manejo humano. No deben confundirse con bosques naturales que tienen alta heterogeneidad estructural.</div>
+  <div class="exam">🎯 EXAMEN: Clasifique los siguientes elementos en el tipo de ecosistema correspondiente (natural, artificial o mixto) y justifique su respuesta: a) Manglar de Tumbes, b) Sistema agroforestal en San Martín, c) Represa de Poechos colmatada con vegetación establecida.</div>
+</div>
+
+<!-- SECCIÓN V: BIODIVERSIDAD -->
+<div class="sec" style="background:#831843;">🦜 BIODIVERSIDAD DEL PERÚ</div>
+
+<div class="block">
+  <span class="bh bh-pink">Origen de la Biodiversidad del Perú (Diap. 45)</span>
+  <div class="def" style="border-color:#db2777;">La extraordinaria biodiversidad del Perú es resultado de su posición geográfica tropical combinada con la barrera/gradiente altitudinal de los Andes, generando una multiplicidad de microclimas, ecosistemas y nichos ecológicos únicos.</div>
+  <div class="item"><span class="dot" style="background:#db2777;"></span><span><b>Ubicación tropical</b>: 0°0'48" – 18°20'50" latitud sur. Poca variación en duración del día → mayor estabilidad energética → mayor diversidad.</span></div>
+  <div class="item"><span class="dot" style="background:#db2777;"></span><span><b>Cordillera de los Andes</b>: alturas entre 0–6768 msnm. Actúa como barrera climática creando vertiente seca (costa) y húmeda (selva), generando decenas de ecosistemas únicos.</span></div>
+  <div class="item"><span class="dot" style="background:#db2777;"></span><span><b>Corrientes marinas</b>: Corriente Peruana (fría) genera el desierto costero y la riqueza marina; Corriente del Niño (cálida) influye en episodios ENSO con impactos en toda la biota.</span></div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-pink">Perú País Biodiverso — Ranking Mundial (Diap. 46)</span>
+  <div class="def" style="border-color:#db2777;">El Art. 68° de la Constitución Política del Perú establece que "El Estado está obligado a promover la conservación de la diversidad biológica y de las áreas naturales protegidas". Perú es el 5° país con mayor biodiversidad biológica en el mundo.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot" style="background:#db2777;"></span><span><b>#1 en plantas con propiedades conocidas</b>: 4,400 especies (30% endémicas). #1 en plantas nativas domesticadas: 128 especies.</span></div>
+      <div class="item"><span class="dot" style="background:#db2777;"></span><span><b>#2 en diversidad de mamíferos y aves</b> a nivel mundial.</span></div>
+      <div class="item"><span class="dot" style="background:#db2777;"></span><span><b>#3 en diversidad de mariposas</b> a nivel mundial.</span></div>
+    </div>
+    <div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:100%;background:#db2777;"></div></div>
+      <p style="font-size:10px;color:var(--color-text-secondary);">Plantas propiedades conocidas (#1 mundial)</p>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:85%;background:#9333ea;"></div></div>
+      <p style="font-size:10px;color:var(--color-text-secondary);">Diversidad mamíferos/aves (#2 mundial)</p>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:70%;background:#7c3aed;"></div></div>
+      <p style="font-size:10px;color:var(--color-text-secondary);">Diversidad mariposas (#3 mundial)</p>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:55%;background:#6d28d9;"></div></div>
+      <p style="font-size:10px;color:var(--color-text-secondary);">Ranking biodiversidad global (#5 mundial)</p>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Cuáles son los principales factores geográficos y climáticos que explican la megadiversidad del Perú? Mencione al menos tres rankings mundiales concretos de biodiversidad del Perú y el sustento normativo constitucional para su conservación.</div>
+</div>
+
+<!-- SECCIÓN V: SISTEMAS DE CLASIFICACIÓN -->
+<div class="sec" style="background:#0f172a;">🗺️ V. SISTEMAS DE CLASIFICACIÓN ECOLÓGICA DEL PERÚ</div>
+
+<div class="block">
+  <span class="bh bh-gray">3 Regiones Naturales (Diap. 49–50)</span>
+  <div class="def">Clasificación general basada en criterios fisiográficos y florísticos. Divide el territorio peruano en tres grandes unidades con condiciones muy contrastantes.</div>
+  <div class="mini" style="border-left:3px solid #f97316;"><b>Costa (Chala)</b>: franja árida occidental. Influenciada por la Corriente Peruana. Ecosistemas: desiertos, lomas, manglares, valles costeros.</div>
+  <div class="mini" style="border-left:3px solid #6b7280;"><b>Sierra</b>: región andina. Gradiente altitudinal extremo. Ecosistemas: puna, jalca, valles interandinos, bosques altoandinos.</div>
+  <div class="mini" style="border-left:3px solid #16a34a;"><b>Selva</b>: región amazónica. Mayor biodiversidad. Se divide en Selva Alta (nubosa, rica en agua) y Selva Baja (planicie inundable).</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-gray">8 Regiones Naturales — Pulgar Vidal (1941) (Diap. 51–53)</span>
+  <div class="def">Javier Pulgar Vidal propone una clasificación más detallada basada en criterios geográficos, climáticos, florísticos y faunísticos, recogiendo el conocimiento tradicional de los habitantes. Es un sistema altitudinal en pasos discretos.</div>
+  <table class="tbl">
+    <tr><th>Región</th><th>Altitud (msnm)</th><th>Clima</th><th>Ecosistemas representativos</th></tr>
+    <tr><td>Chala/Costa</td><td>0 – 500</td><td>Templado-cálido árido</td><td>Desiertos, lomas costeras, valles</td></tr>
+    <tr><td>Yunga Marítima/Fluvial</td><td>500 – 2500</td><td>Templado-cálido</td><td>Caña brava, frutales tropicales</td></tr>
+    <tr><td>Quechua</td><td>2500 – 3500</td><td>Templado</td><td>Andenes, cultivos de maíz/papa</td></tr>
+    <tr><td>Suni</td><td>3500 – 4000</td><td>Templado-frío</td><td>Quinua, kiwicha, cereales</td></tr>
+    <tr><td>Puna/Jalca</td><td>4000 – 4800</td><td>Frío</td><td>Ichu, vicuñas, alpacas, bofedales</td></tr>
+    <tr><td>Janca/Cordillera</td><td>4800 – 6768</td><td>Glacial</td><td>Glaciares, pajonales altos</td></tr>
+    <tr><td>Selva Alta (Rupa rupa)</td><td>400 – 2000</td><td>Cálido húmedo</td><td>Bosque nublado, orquídeas</td></tr>
+    <tr><td>Selva Baja (Omagua)</td><td>50 – 400</td><td>Muy cálido húmedo</td><td>Várzea, aguaje, mayor biodiversidad</td></tr>
+  </table>
+  <div class="exam">🎯 EXAMEN: Compare las 8 Regiones Naturales de Pulgar Vidal con el sistema de 3 regiones. ¿Cuál es la ventaja del sistema de Pulgar Vidal para la planificación del uso de recursos naturales? Ubique altitudinalmente la Puna e indique sus características ecológicas clave.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">11 Ecorregiones — Antonio Brack (1990) (Diap. 54–55)</span>
+  <div class="def green">Una ecorregión es un área geográfica con condiciones homogéneas de clima, suelos, hidrología, flora y fauna, donde los factores actúan en estrecha interdependencia. Es delimitable y distinguible de otras con bastante claridad.</div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Criterios</b>: clima, relieve, suelo, flora, hidrología y fauna. Es un enfoque integrador que supera la simple clasificación altitudinal.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Las 11 ecorregiones</b>: Mar Frío (Corriente Peruana), Mar Tropical, Desierto del Pacífico, Bosque Seco Ecuatorial, Bosque Tropical del Pacífico, Serranía Esteparia, Páramo, Puna, Selva Baja, Selva Alta, Sabanas de Palmeras.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "Puna" y "Jalca". En el sistema de Brack ambas están en la ecorregión Puna, pero en el sistema de Pulgar Vidal son regiones distintas. En el contexto de Brack, la Jalca se refiere a la Puna del norte del Perú con mayor humedad.</div>
+</div>
+
+<!-- ZONAS DE VIDA -->
+<div class="sec" style="background:#0c4a6e;">📐 SISTEMA DE HOLDRIDGE: ZONAS DE VIDA</div>
+
+<div class="block s3">
+  <span class="bh bh-blue">Sistema de Clasificación Holdridge y Diagrama Bioclimático (Diap. 56–64)</span>
+  <div class="def">Sistema ecológico basado en aspectos climáticos y biológicos. Usa un modelo matemático tridimensional que relaciona Biotemperatura, Precipitación y Relación de Evapotranspiración (RET) para clasificar zonas de vida. Perú: 84 zonas de vida. Mundo: 114 zonas de vida.</div>
+  <div class="two">
+    <div>
+      <p style="font-size:12px;font-weight:600;margin-bottom:6px;">Variables del Sistema:</p>
+      <div class="item"><span class="dot dot-blue"></span><span><b>Biotemperatura (BioT)</b>: temperatura del aire entre 0°–30°C que determina los procesos fisiológicos de las plantas (fotosíntesis, respiración, transpiración) y la evaporación del suelo.</span></div>
+      <div class="item"><span class="dot dot-blue"></span><span><b>Precipitación (pp)</b>: lluvia anual registrada en la estación.</span></div>
+      <div class="item"><span class="dot dot-blue"></span><span><b>Evapotranspiración (ET)</b>: agua transpirada por plantas + evaporada del suelo. ET = E (evaporación) + T (transpiración). Se expresa en mm/año.</span></div>
+      <div class="item"><span class="dot dot-blue"></span><span><b>RET</b>: relación entre ETo y precipitación. Indica si la zona es húmeda o seca. Determina las "Provincias de Humedad".</span></div>
+    </div>
+    <div>
+      <p style="font-size:12px;font-weight:600;margin-bottom:6px;">Fórmulas Clave:</p>
+      <div class="rx">Si 6°C &lt; T°media &lt; 24°C → BioT = T°media</div>
+      <div class="rx">Si T°media &gt; 24°C → BioT = T°media − [3Lat/100 × (T°media − 24°)²]</div>
+      <div class="rx">Si T°media &lt; 6°C → BioT = [T°max / (T°max − T°min)] × (T°max/2)</div>
+      <div class="rx">ET₀ mensual (31 días) = BioT mensual × 5<br>ET₀ mensual (30 días) = BioT mensual × 4.84<br>ET₀ anual = BioT anual × 58.93</div>
+      <div class="rx">RET = ETo / pp<br>RET=1 → Equilibrio | RET&gt;1 → Seco | RET&lt;1 → Húmedo</div>
+    </div>
+  </div>
+  <div class="two" style="margin-top:8px;">
+    <div class="mini" style="border-left:3px solid #3b82f6;">
+      <b>Ejemplo: RET = 20</b><br>Corresponde a "Provincia de Humedad SUPERÁRIDO". La zona potencialmente evapora 20 veces más de lo que llueve.
+    </div>
+    <div class="mini" style="border-left:3px solid #3b82f6;">
+      <b>Pasos para determinar Zona de Vida:</b><br>1° T°media → BioT°<br>2° BioT° → ETo<br>3° ETo + pp → RET<br>4° BioT + RET → Zona de Vida en diagrama
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: La biotemperatura NO es igual a la temperatura media. Se calcula diferente según el rango de temperatura: solo si está entre 6°–24°C ambas coinciden. Para lugares muy cálidos (T&gt;24°C) o muy fríos (T&lt;6°C) se aplican fórmulas de corrección que reducen la biotemperatura efectiva.</div>
+  <div class="exam">🎯 EXAMEN: Dada una estación meteorológica con T°media = 18°C, T°max = 25°C, T°min = 10°C y precipitación anual = 800 mm: calcule la Biotemperatura, la ETo anual (BioT × 58.93) y la RET. Interprete el tipo de provincia de humedad resultante según Holdridge.</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="sec" style="background:#1e293b;">📊 TABLA INTEGRADORA FINAL — RESUMEN DE SISTEMAS DE CLASIFICACIÓN</div>
+
+<div class="block s3">
+  <span class="bh bh-gray">Comparación de los 4 Sistemas de Clasificación Ecológica del Perú</span>
+  <table class="tbl">
+    <tr>
+      <th>Sistema</th>
+      <th>Autor / Año</th>
+      <th>Criterios base</th>
+      <th>Unidades en Perú</th>
+      <th>Ventaja principal</th>
+      <th>Limitación</th>
+    </tr>
+    <tr>
+      <td><b>3 Regiones Naturales</b></td>
+      <td>Tradicional</td>
+      <td>Fisiografía + florística</td>
+      <td>3 (Costa, Sierra, Selva)</td>
+      <td>Simple, comprensible para políticas</td>
+      <td>Muy general, oculta heterogeneidad interna</td>
+    </tr>
+    <tr>
+      <td><b>8 Regiones Naturales</b></td>
+      <td>Pulgar Vidal, 1941</td>
+      <td>Altitud + clima + flora + fauna + conocimiento local</td>
+      <td>8 regiones altitudinales</td>
+      <td>Incluye saber tradicional; útil en agricultura</td>
+      <td>Solo latitudinal; no considera variación horizontal</td>
+    </tr>
+    <tr>
+      <td><b>11 Ecorregiones</b></td>
+      <td>Brack Egg, 1990</td>
+      <td>Clima + relieve + suelo + flora + hidrología + fauna</td>
+      <td>11 ecorregiones</td>
+      <td>Enfoque integrador y delimitable con precisión</td>
+      <td>Menos detalle cuantitativo que Holdridge</td>
+    </tr>
+    <tr>
+      <td><b>Zonas de Vida Holdridge</b></td>
+      <td>Holdridge / ONERN, 1976</td>
+      <td>BioT + Precipitación + RET (cuantitativo)</td>
+      <td>84 zonas de vida</td>
+      <td>Matemático, reproducible, comparable mundialmente</td>
+      <td>Requiere datos climáticos detallados; complejo</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: Los 4 sistemas no son excluyentes sino complementarios. En la práctica forestal peruana se usan simultáneamente: las 3 regiones para planificación política, las 8 para comunicación con comunidades, las 11 ecorregiones para conservación, y las Zonas de Vida para zonificación forestal técnica y estudios de impacto ambiental.</div>
+</div>
+
+<!-- QUIZ INTERACTIVO -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta. Cubre todo el material del Tema 3.</p>
+  </div>
+  <div id="quiz-progress">
+    <p id="prog-text">Respondidas: 0 / 10 &nbsp;|&nbsp; Aciertos: 0</p>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a;transition:width 0.3s;"></div></div>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">PREGUNTA 1 / 10</p>
+    <p class="qtext">Según Spurr y Barnes (1982), ¿qué afirmación describe mejor a la Ecología Forestal?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Es la rama de la botánica que estudia únicamente la morfología de árboles en el bosque.</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Estudia los ecosistemas forestales considerando solo los factores climáticos externos al bosque.</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Analiza ecosistemas forestales considerando el medio ambiente físico y la comunidad como componentes operativamente inseparables.</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Se limita a cuantificar el volumen de madera aprovechable en rodales naturales.</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">PREGUNTA 2 / 10</p>
+    <p class="qtext">Un ecosistema es un sistema abierto. ¿Cuál de las siguientes opciones describe correctamente un sistema ABIERTO?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) No intercambia materia con el exterior, solo energía.</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Presenta continua captación y pérdida de sustancias, energía y organismos con su entorno.</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Solo intercambia organismos con ecosistemas vecinos, no materia ni energía.</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Mantiene constante la cantidad de materia y energía en su interior sin intercambio alguno.</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">PREGUNTA 3 / 10</p>
+    <p class="qtext">¿Cuál es la distribución aproximada del carbono almacenado en los bosques mundiales según el material del curso?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) 80% en suelos y 20% en biomasa; la madera muerta es despreciable.</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) 70% en biomasa, 20% en suelo y 10% en la atmósfera del bosque.</button>
+      <button class="qbtn" data-opt="c" data-correct="true" data-q="3">C) ~45% en suelos, ~45% en biomasa y ~10% en madera muerta y hojarasca.</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) 100% en la biomasa viva (troncos, hojas, raíces) sin considerar el suelo.</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">PREGUNTA 4 / 10</p>
+    <p class="qtext">La Amazonia peruana funciona como una "bomba hidráulica". ¿Qué proceso hace posible esta función?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Las lluvias que caen en la Amazonia se evaporan inmediatamente por el calor, reciclando el agua localmente.</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) Los árboles extraen agua del suelo y la transpiran por millones de estomas; partículas orgánicas del aire actúan como núcleos de condensación generando lluvia.</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Los ríos amazónicos bombean agua hacia la atmósfera mediante corrientes ascendentes de gran velocidad.</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) El sol calienta directamente la superficie del río Amazonas, generando suficiente vapor para formar nubes de lluvia.</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">PREGUNTA 5 / 10</p>
+    <p class="qtext">Una plantación de pinos en la sierra de Cajamarca, ¿en qué categoría de ecosistema se clasifica y por qué?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Natural, porque los pinos son árboles que crecen en el suelo como cualquier otro organismo forestal.</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Mixto, porque combina especies introducidas con suelo natural de la sierra.</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Natural con manejo, ya que la intervención humana es mínima una vez establecida la plantación.</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="true">D) Artificial, porque fue creada y es mantenida por el ser humano con baja biodiversidad y dependencia de insumos externos.</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">PREGUNTA 6 / 10</p>
+    <p class="qtext">Según el sistema de Javier Pulgar Vidal, ¿en qué región altitudinal se encuentra la ciudad de Lima (aproximadamente a 150 msnm)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Yunga Marítima (500–2500 msnm)</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) Chala o Costa (0–500 msnm)</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Quechua (2500–3500 msnm)</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Suni (3500–4000 msnm)</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">PREGUNTA 7 / 10</p>
+    <p class="qtext">¿Cuál afirmación sobre el Perú como país biodiverso es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Es el 1° país en plantas nativas domesticadas con 128 especies.</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) Es el 1° país en diversidad de mamíferos y aves a nivel mundial.</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) Es el 3° país en diversidad de mariposas a nivel mundial.</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Es el 5° país con mayor biodiversidad biológica en el mundo.</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">PREGUNTA 8 / 10</p>
+    <p class="qtext">En el sistema de Holdridge, si la Temperatura media de una estación es de 20°C, ¿cuál es la Biotemperatura correcta?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Se aplica la fórmula de corrección para T°&gt;24°C porque hay que ajustar la latitud tropical.</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) La Biotemperatura es igual a 20°C, porque la T°media está entre 6°C y 24°C.</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Se aplica la fórmula con T°max y T°min porque la temperatura es menor que 24°C.</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) La Biotemperatura siempre es 2°C menor que la temperatura media por definición de Holdridge.</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">PREGUNTA 9 / 10</p>
+    <p class="qtext">Una estación presenta ETo anual = 1200 mm y precipitación anual = 400 mm. ¿Qué indica la RET resultante?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) RET = 0.33 → Clima húmedo, la precipitación supera a la evapotranspiración.</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) RET = 1.0 → Equilibrio hídrico perfecto entre evapotranspiración y lluvia.</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) RET = 3.0 → Clima seco, la zona potencialmente evapotranspira 3 veces más de lo que llueve.</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) RET = 800 → Superhumedad extrema que indica selva lluviosa de alta biodiversidad.</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">PREGUNTA 10 / 10</p>
+    <p class="qtext">¿En qué se diferencia fundamentalmente el sistema de 11 Ecorregiones de Brack (1990) del sistema de Zonas de Vida de Holdridge?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Brack usa solo datos de temperatura mientras Holdridge incorpora también datos de lluvia y fauna.</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) El sistema de Holdridge identifica más zonas (84) pero es cualitativo; Brack es cuantitativo y matemático.</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) Brack integra criterios cualitativos (clima, relieve, flora, fauna) en unidades delimitables; Holdridge usa un modelo matemático cuantitativo con BioT, pp y RET para generar zonas reproducibles globalmente.</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Brack clasifica solo ecosistemas marinos mientras Holdridge se enfoca en los terrestres.</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="result-panel"></div>
+</div>
+
+<div class="cv-footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Spurr & Barnes (1982) — Ecología Forestal · Begon, Harper & Townsend (1999); Molles (2006) — Ecología niveles · Holdridge (Sistema Zonas de Vida) · ONERN (1976) — Mapa Ecológico del Perú (84 zonas) · Pulgar Vidal, J. (1941) — 8 Regiones Naturales del Perú · Brack Egg, A. (1990) — 11 Ecorregiones · FAO (Datos bosques y carbono) · Constitución Política del Perú, Art. 68°</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: { correct: 'c', text: { c: '✅ ¡Correcto! Spurr y Barnes (1982) definen la Ecología Forestal como el análisis de ecosistemas donde el medio físico y la comunidad son inseparables operativamente. No es solo botánica ni solo manejo forestal.', a: '❌ Incorrecto. La respuesta correcta es C. La Ecología Forestal no se limita a morfología de árboles; estudia todo el ecosistema integrado.', b: '❌ Incorrecto. La respuesta correcta es C. No considera solo factores externos: integra la comunidad biótica y el medio físico como un sistema inseparable.', d: '❌ Incorrecto. La respuesta correcta es C. La cuantificación de madera corresponde a la Dasometría, no a la Ecología Forestal.' }},
+  2: { correct: 'b', text: { b: '✅ ¡Correcto! Un sistema abierto intercambia materia, energía y organismos con el exterior de forma continua. Es exactamente cómo funciona cualquier ecosistema real.', a: '❌ Incorrecto. La respuesta correcta es B. Un sistema cerrado es el que no intercambia materia pero sí energía. El ecosistema intercambia ambas.', c: '❌ Incorrecto. La respuesta correcta es B. Los ecosistemas intercambian materia, energía y organismos con el exterior, no solo organismos.', d: '❌ Incorrecto. La respuesta correcta es B. Eso describe un sistema aislado (que en la naturaleza no existe). El ecosistema siempre intercambia con su entorno.' }},
+  3: { correct: 'c', text: { c: '✅ ¡Correcto! Según el material, los bosques mundiales almacenan ~45% del carbono en suelos, ~45% en biomasa viva y ~10% en madera muerta y hojarasca. En total equivalen al carbono de la atmósfera.', a: '❌ Incorrecto. La respuesta correcta es C. El 80% en suelos subestimaría la biomasa viva, que tiene igual importancia que los suelos.', b: '❌ Incorrecto. La respuesta correcta es C. La biomasa no domina con 70%; suelos y biomasa se reparten partes iguales del carbono forestal.', d: '❌ Incorrecto. La respuesta correcta es C. El suelo forestal almacena tanto carbono como la biomasa viva, cifra que suele sorprender.' }},
+  4: { correct: 'b', text: { b: '✅ ¡Correcto! La "bomba hidráulica" amazónica funciona gracias a la evapotranspiración de millones de árboles (extraen agua del suelo y la expulsan por estomas) y las partículas orgánicas del aire que actúan como núcleos de condensación para generar lluvia.', a: '❌ Incorrecto. La respuesta correcta es B. La evaporación directa es un proceso físico pasivo; la clave está en la TRANSPIRACIÓN activa de los árboles más la condensación por partículas orgánicas.', c: '❌ Incorrecto. La respuesta correcta es B. Los ríos no "bombean" agua a la atmósfera por corrientes. El mecanismo es biológico: la transpiración vegetal masiva.', d: '❌ Incorrecto. La respuesta correcta es B. El sol calienta el agua pero no explica el volumen extraordinario de vapor que genera la Amazonia; ese rol lo cumplen los árboles.' }},
+  5: { correct: 'd', text: { d: '✅ ¡Correcto! Una plantación de pinos es un ecosistema ARTIFICIAL porque fue diseñada, establecida y mantenida por el ser humano, tiene baja biodiversidad nativa y depende de intervención continua (podas, raleos, control de plagas).', a: '❌ Incorrecto. La respuesta correcta es D. El hecho de que los árboles crezcan en el suelo no los hace naturales; el criterio es si hubo diseño humano intencional y dependencia de manejo.', b: '❌ Incorrecto. La respuesta correcta es D. Los ecosistemas mixtos son los que se originan por intervención humana pero evolucionan hacia patrones naturales (ej: andenería abandonada), no las plantaciones activas.', c: '❌ Incorrecto. La respuesta correcta es D. No existe categoría "natural con manejo" en la clasificación del curso; la intervención humana deliberada que determina especies y densidades define la categoría artificial.' }},
+  6: { correct: 'b', text: { b: '✅ ¡Correcto! Lima se ubica a unos 150 msnm, dentro de la Región Chala o Costa (0–500 msnm) según Pulgar Vidal. Es una zona costera de clima templado-cálido árido.', a: '❌ Incorrecto. La respuesta correcta es B. La Yunga Marítima comienza a los 500 msnm. Lima a 150 msnm aún está en la Chala.', c: '❌ Incorrecto. La respuesta correcta es B. La Quechua empieza a los 2500 msnm. Lima está por debajo de 500 msnm.', d: '❌ Incorrecto. La respuesta correcta es B. El Suni está entre 3500–4000 msnm, mucho más elevado que Lima.' }},
+  7: { correct: 'b', text: { b: '✅ ¡Correcto! La afirmación FALSA es B. Perú es el 2° país (no el 1°) en diversidad de mamíferos y aves. El 1° en plantas con propiedades conocidas y en nativas domesticadas, y el 3° en mariposas.', a: '❌ Incorrecto. Esta afirmación SÍ es verdadera (el Perú es #1 en plantas nativas domesticadas). La opción B es la FALSA.', c: '❌ Incorrecto. Esta afirmación SÍ es verdadera (Perú es 3° en mariposas). La opción B es la FALSA.', d: '❌ Incorrecto. Esta afirmación SÍ es verdadera (Perú es 5° en biodiversidad global). La opción B es la FALSA.' }},
+  8: { correct: 'b', text: { b: '✅ ¡Correcto! Según Holdridge, cuando 6°C &lt; T°media &lt; 24°C, la Biotemperatura es igual a la Temperatura media. Con T°media = 20°C (dentro del rango), BioT = 20°C directamente, sin corrección.', a: '❌ Incorrecto. La respuesta correcta es B. La fórmula de corrección para T&gt;24°C solo aplica cuando la temperatura media SUPERA 24°C. 20°C está dentro del rango estándar.', c: '❌ Incorrecto. La respuesta correcta es B. La fórmula con T°max y T°min solo se usa cuando T°media &lt; 6°C (zonas muy frías). 20°C no requiere esa corrección.', d: '❌ Incorrecto. La respuesta correcta es B. No existe una diferencia fija de 2°C; Holdridge define tres casos exactos según el rango de temperatura media.' }},
+  9: { correct: 'c', text: { c: '✅ ¡Correcto! RET = ETo/pp = 1200/400 = 3.0. Como RET &gt; 1, el clima es SECO. Significa que la zona potencialmente evapotranspira 3 veces más de lo que llueve, lo que indica déficit hídrico significativo.', a: '❌ Incorrecto. La respuesta correcta es C. RET = ETo/pp = 1200/400 = 3.0 (no 0.33). RET = 0.33 significaría que llueve 3x más que la evapotranspiración (clima húmedo), lo opuesto al caso planteado.', b: '❌ Incorrecto. La respuesta correcta es C. RET = 1200/400 = 3.0, no 1.0. El equilibrio hídrico se da solo cuando ETo = pp, es decir, 400=400.', d: '❌ Incorrecto. La respuesta correcta es C. RET = 800 no tiene sentido dimensional; RET es una razón adimensional, no una resta.' }},
+  10: { correct: 'c', text: { c: '✅ ¡Correcto! Brack integra criterios cualitativos múltiples (clima, relieve, flora, fauna, suelo, hidrología) para delimitar unidades geográficas concretas. Holdridge es un modelo matemático que usa BioT, precipitación y RET para generar zonas reproducibles y comparables en todo el mundo.', a: '❌ Incorrecto. La respuesta correcta es C. Brack usa múltiples criterios, no solo temperatura. Holdridge también incorpora precipitación y temperatura, no solo lluvia.', b: '❌ Incorrecto. La respuesta correcta es C. Es al revés: Holdridge (84 zonas en Perú) es el sistema cuantitativo matemático; Brack (11 ecorregiones) es más cualitativo e integrador.', d: '❌ Incorrecto. La respuesta correcta es C. Ambos sistemas clasifican ecosistemas terrestres y marinos del Perú en su conjunto; no hay especialización por tipo de ecosistema.' }}
+};
+
+let answered = 0, correct = 0;
+const quizContainer = document.getElementById('quiz-section');
+
+quizContainer.addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const opt = btn.dataset.opt;
+  const fb = document.getElementById('fb' + q);
+  const allBtns = quizContainer.querySelectorAll('.qbtn[data-q="' + q + '"]');
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('correct');
+  });
+  if (!isCorrect) btn.classList.add('incorrect');
+  if (isCorrect) correct++;
+  answered++;
+  const feedbackData = feedbacks[parseInt(q)];
+  const msg = feedbackData.text[opt] || (isCorrect ? '✅ ¡Correcto!' : '❌ Incorrecto. La respuesta correcta es ' + feedbackData.correct.toUpperCase() + '.');
+  fb.className = 'qfeedback ' + (isCorrect ? 'ok' : 'fail');
+  fb.style.display = 'block';
+  fb.textContent = msg;
+  document.getElementById('prog-text').textContent = 'Respondidas: ' + answered + ' / 10 | Aciertos: ' + correct;
+  document.getElementById('prog-bar').style.width = (answered * 10) + '%';
+  if (answered === 10) showResults();
+});
+
+function showResults() {
+  const panel = document.getElementById('result-panel');
+  panel.style.display = 'block';
+  let cls, msg;
+  if (correct >= 8) { cls = 'good'; msg = '🎉 ¡Excelente dominio del tema! Obtuviste ' + correct + '/10. Estás muy bien preparado para el examen.'; }
+  else if (correct >= 5) { cls = 'mid'; msg = '👍 ¡Buen avance, sigue repasando! Obtuviste ' + correct + '/10. Revisa los temas donde fallaste.'; }
+  else { cls = 'low'; msg = '📚 Necesitas repasar el material. Obtuviste ' + correct + '/10. Vuelve a estudiar el canvas con atención.'; }
+  panel.className = 'result-panel ' + cls;
+  panel.innerHTML = '<b>' + msg + '</b><br><button id="restart-btn">🔄 Reiniciar Quiz</button>';
+  document.getElementById('restart-btn').onclick = resetQuiz;
+}
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('prog-text').textContent = 'Respondidas: 0 / 10 | Aciertos: 0';
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('result-panel').style.display = 'none';
+  document.getElementById('result-panel').className = 'result-panel';
+  quizContainer.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct','incorrect');
+  });
+  quizContainer.querySelectorAll('.qfeedback').forEach(f => {
+    f.style.display = 'none';
+    f.textContent = '';
+  });
+}
+</script>
