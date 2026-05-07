@@ -1,0 +1,608 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+  .cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+  .block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+  .block.s2{grid-column:span 2}
+  .block.s3{grid-column:1/-1}
+  .bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+  .bh.azul{background:#dbeafe;color:#1e3a8a}
+  .bh.verde{background:#dcfce7;color:#14532d}
+  .bh.rojo{background:#fee2e2;color:#991b1b}
+  .bh.amarillo{background:#fef9c3;color:#713f12}
+  .bh.morado{background:#ede9fe;color:#4c1d95}
+  .bh.teal{background:#ccfbf1;color:#134e4a}
+  .bh.naranja{background:#ffedd5;color:#7c2d12}
+  .bh.gris{background:#f1f5f9;color:#334155}
+  .bh.rosa{background:#fce7f3;color:#831843}
+  @media(prefers-color-scheme:dark){
+    .bh.azul{background:#1e3a5f;color:#93c5fd}
+    .bh.verde{background:#14532d;color:#86efac}
+    .bh.rojo{background:#450a0a;color:#fca5a5}
+    .bh.amarillo{background:#422006;color:#fef08a}
+    .bh.morado{background:#2e1065;color:#c4b5fd}
+    .bh.teal{background:#042f2e;color:#5eead4}
+    .bh.naranja{background:#431407;color:#fed7aa}
+    .bh.gris{background:#1e293b;color:#94a3b8}
+    .bh.rosa{background:#4a044e;color:#f0abfc}
+  }
+  .def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+  .def.azul{border-left:3px solid #3b82f6}
+  .def.verde{border-left:3px solid #22c55e}
+  .def.rojo{border-left:3px solid #ef4444}
+  .def.amarillo{border-left:3px solid #eab308}
+  .def.morado{border-left:3px solid #8b5cf6}
+  .def.teal{border-left:3px solid #14b8a6}
+  .def.naranja{border-left:3px solid #f97316}
+  .def.gris{border-left:3px solid #94a3b8}
+  .def.rosa{border-left:3px solid #ec4899}
+  .item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+  .dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+  .dot.azul{background:#3b82f6}
+  .dot.verde{background:#22c55e}
+  .dot.rojo{background:#ef4444}
+  .dot.amarillo{background:#eab308}
+  .dot.morado{background:#8b5cf6}
+  .dot.teal{background:#14b8a6}
+  .dot.naranja{background:#f97316}
+  .dot.rosa{background:#ec4899}
+  .rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+  .warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:6px}
+  @media(prefers-color-scheme:dark){.warn{background:#1c1007;color:#fed7aa}}
+  .exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+  @media(prefers-color-scheme:dark){.exam{background:#1c1200;color:#fef08a}}
+  .mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:6px}
+  .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:6px}
+  .flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+  .fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+  .farrow{color:var(--color-text-secondary);font-size:15px}
+  .divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+  .sbar{grid-column:1/-1;background:#0f1e3a;color:white;border-radius:9px;padding:8px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;margin-top:4px}
+  .tbl{width:100%;border-collapse:collapse;font-size:11px}
+  .tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);text-align:left;font-family:'Oswald',sans-serif;font-size:11px}
+  .tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+  .stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:3px 0}
+  .stat-bar-fill{height:100%;border-radius:20px}
+  .pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+  #quiz-section{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+  .qcard{margin-bottom:18px;padding-bottom:14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+  .qnum{font-size:11px;color:var(--color-text-secondary);margin:0 0 3px 0;font-family:'Oswald',sans-serif}
+  .qtext{font-size:13px;font-weight:600;margin:0 0 8px 0}
+  .qopts{display:flex;flex-direction:column;gap:5px}
+  .qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;font-family:'Source Sans 3',sans-serif}
+  .qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+  .qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+  .qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+  .qbtn:disabled{opacity:0.6;cursor:not-allowed;pointer-events:none}
+  .qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none}
+  .qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a}
+  .qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626}
+  #quiz-progress{margin:10px 0}
+  #prog-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:8px;margin-top:5px}
+  #prog-bar-fill{height:100%;border-radius:20px;background:#22c55e;transition:width 0.3s;width:0%}
+  #result-panel{display:none;border-radius:10px;padding:14px;margin-top:14px;text-align:center}
+</style>
+<div class="cv">
+
+  <!-- TÍTULO -->
+  <div style="grid-column:1/-1;background:#0f1e3a;color:white;border-radius:12px;padding:12px 18px">
+    <div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:700">💧 TEMA N°6: RECURSOS HÍDRICOS DEL PERÚ</div>
+    <div style="font-size:11px;color:#94a3b8;margin-top:3px">Curso: Recursos Naturales del Perú · Universidad Nacional Agraria La Molina · 2025</div>
+    <div style="margin-top:6px">
+      <span class="pill" style="background:#1e3a5f;color:#93c5fd">Cuencas hidrográficas</span>
+      <span class="pill" style="background:#042f2e;color:#5eead4">Regiones hidrográficas</span>
+      <span class="pill" style="background:#14532d;color:#86efac">Glaciares</span>
+      <span class="pill" style="background:#431407;color:#fed7aa">Usos del agua</span>
+      <span class="pill" style="background:#2e1065;color:#c4b5fd">Agua subterránea</span>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 1: ESTADÍSTICAS -->
+  <div class="sbar">📊 ESTADÍSTICAS GENERALES — RECURSOS HÍDRICOS (ANA)</div>
+
+  <div class="block">
+    <div class="bh azul">Inventario nacional (ANA)</div>
+    <div class="def azul">El Perú es uno de los países con mayor riqueza hídrica del mundo. Según la Autoridad Nacional del Agua (ANA), el territorio nacional cuenta con 159 cuencas hidrográficas distribuidas en tres grandes regiones, lo que refleja la extraordinaria complejidad orográfica generada por los Andes.</div>
+    <div class="item"><div class="dot azul"></div><div><b>159 cuencas hidrográficas</b> en total: 62 en el Pacífico, 84 en el Amazonas y 13 en el Titicaca</div></div>
+    <div class="item"><div class="dot azul"></div><div><b>1,007 ríos</b> inventariados a nivel nacional</div></div>
+    <div class="item"><div class="dot azul"></div><div><b>11,601 lagunas</b> en total: 8,355 inventariadas + 3,246 no inventariadas</div></div>
+    <div class="item"><div class="dot rojo"></div><div><b>2,679 glaciares</b> distribuidos en 19 cordilleras (inventario ANA 2014)</div></div>
+    <div class="item"><div class="dot verde"></div><div><b>743 presas</b> de regulación hídrica</div></div>
+    <div class="exam">🎯 EXAMEN: ¿Cuántas cuencas hidrográficas reconoce el Perú según la ANA y cómo se distribuyen entre sus tres regiones hidrográficas?</div>
+  </div>
+
+  <div class="block s2">
+    <div class="bh naranja">Distribución del agua en el planeta</div>
+    <div class="def naranja">Aunque el 71% de la superficie terrestre está cubierta de agua, solo el 3% es agua dulce y de ese porcentaje, el 70% está atrapado en glaciares, el 29% en acuíferos subterráneos y únicamente el 1% corresponde a aguas superficiales (ríos, lagos, lagunas). Esta escasez relativa explica por qué la gestión de cuencas es una prioridad estratégica nacional.</div>
+    <div class="three">
+      <div class="mini" style="border-top:3px solid #ef4444">
+        <b>Océanos: 97%</b><br>Agua salada, no apta para consumo directo ni riego
+      </div>
+      <div class="mini" style="border-top:3px solid #3b82f6">
+        <b>Agua dulce: 3%</b><br>70% glaciares · 29% acuíferos · 1% aguas superficiales
+      </div>
+      <div class="mini" style="border-top:3px solid #14b8a6">
+        <b>Uso humano: fracción del 1%</b><br>Solo una pequeña parte de las aguas superficiales está disponible para consumo y ecosistemas
+      </div>
+    </div>
+    <div class="warn">⚠️ ERROR COMÚN: Creer que el agua es un recurso ilimitado porque el 71% del planeta está cubierto de agua. En realidad, el agua accesible para consumo humano y riego representa menos del 1% del total global.</div>
+  </div>
+
+  <!-- SECCIÓN 2: CUENCA HIDROGRÁFICA -->
+  <div class="sbar">🏔️ CUENCA HIDROGRÁFICA — DEFINICIÓN Y COMPONENTES</div>
+
+  <div class="block">
+    <div class="bh azul">Definición de cuenca</div>
+    <div class="def azul">Una cuenca hidrográfica es la unidad territorial básica de gestión del agua: un área con un sistema de drenaje unificado donde todas las aguas precipitadas convergen hacia un único punto de cierre (desembocadura). Es la unidad natural que permite entender el ciclo hidrológico a escala local.</div>
+    <div class="item"><div class="dot azul"></div><div>Delimitada por la <b>Divisoria de Aguas (Divortium Aquarum)</b>: línea imaginaria que une los puntos más altos del relieve y separa dos cuencas limítrofes</div></div>
+    <div class="item"><div class="dot azul"></div><div>La línea divisoria sigue cumbres, corta perpendicularmente las curvas de nivel y nunca debe interceptar ningún cauce</div></div>
+    <div class="item"><div class="dot verde"></div><div>Se puede delimitar con <b>Cartas Nacionales</b> (ICM-Perú) o con software especializado (GIS, ArcMap, etc.)</div></div>
+    <div class="rx">Área cuenca = ∫∫ dA (área dentro de la divisoria de aguas)</div>
+    <div class="exam">🎯 EXAMEN: Defina cuenca hidrográfica y explique el proceso metodológico para delimitarla utilizando una carta nacional topográfica.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh teal">Partes de la cuenca</div>
+    <div class="def teal">La cuenca se divide verticalmente en tres zonas con características geomorfológicas e hidrológicas distintas. Cada zona tiene usos, problemas y actores diferentes, lo que hace indispensable el manejo integral de toda la cuenca y no por partes aisladas.</div>
+    <div class="three">
+      <div class="mini" style="border-left:3px solid #8b5cf6">
+        <b>Cuenca Alta</b><br>Grandes pendientes, ríos profundos y estrechos. Zona de minería, glaciares, trucha. Cualquier contaminación aquí afecta toda la cuenca aguas abajo.
+      </div>
+      <div class="mini" style="border-left:3px solid #22c55e">
+        <b>Cuenca Media</b><br>Pendiente moderada, formación de valles. Zona agrícola de riego. Contaminación por pesticidas afecta acuíferos. Problema de basura urbana en ríos.
+      </div>
+      <div class="mini" style="border-left:3px solid #f97316">
+        <b>Cuenca Baja</b><br>Río amplio y de caudal variable, grande irrigaciones costeras. Afectada por industria y pesca. Zonas ribereñas deben mantenerse libres de construcción.
+      </div>
+    </div>
+    <div class="warn">⚠️ ERROR COMÚN: Pensar que los problemas de la cuenca alta no afectan a la cuenca baja. La unidad hidrológica significa que la contaminación minera en nacientes puede llegar hasta la desembocadura, afectando poblaciones y ecosistemas a cientos de kilómetros de distancia.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh gris">Manejo y gestión de cuenca</div>
+    <div class="def gris">La gestión integrada de cuencas reconoce que el agua no es propiedad de quien vive en la cabecera: es un recurso compartido que debe gestionarse para beneficio de todos los habitantes, con criterios de sostenibilidad, equidad y el principio "quien contamina, paga".</div>
+    <div class="item"><div class="dot azul"></div><div>En cuencas multinacionales deben respetarse los intereses de todos los países involucrados</div></div>
+    <div class="item"><div class="dot rojo"></div><div>Las empresas mineras, industria, agricultura y municipios deben considerar tanto el volumen consumido como la calidad del agua devuelta</div></div>
+    <div class="item"><div class="dot naranja"></div><div>Aplicar el principio de responsabilidad extendida: quien contamina la napa freática debe asumir el costo de su remediación</div></div>
+    <div class="exam">🎯 EXAMEN: ¿Por qué es fundamental aplicar el principio "quien contamina paga" en la gestión de cuencas? Explique con un ejemplo de la cuenca alta peruana.</div>
+  </div>
+
+  <!-- SECCIÓN 3: REGIONES HIDROGRÁFICAS -->
+  <div class="sbar">🌊 LAS 3 REGIONES HIDROGRÁFICAS DEL PERÚ</div>
+
+  <div class="block">
+    <div class="bh azul">R.H. del Pacífico (62 cuencas)</div>
+    <div class="def azul">La vertiente del Pacífico abarca el 21.7% del territorio nacional (278,482 km²) y contiene 62 ríos que nacen en la Cordillera Occidental entre 4,000 y 6,000 msnm y fluyen de noreste a suroeste hacia el Océano Pacífico. Su característica más crítica es el régimen torrencial e irregular.</div>
+    <div class="item"><div class="dot azul"></div><div>Ríos de corta longitud (~150 km) y fuerte pendiente; el 75% se seca en época de estiaje</div></div>
+    <div class="item"><div class="dot rojo"></div><div>Entre el 60–70% del escurrimiento anual ocurre en solo 3–4 meses (diciembre–marzo)</div></div>
+    <div class="item"><div class="dot verde"></div><div>Desde la cuenca del Santa hacia el sur, los glaciares son fuente hídrica de importancia. La cuenca del Santa tiene 616 km² de nevados</div></div>
+    <div class="item"><div class="dot naranja"></div><div>Cuencas importantes: Chira, Piura, Chancay, Lambayeque, Jequetepeque, Huarmey, Rímac, Chillón, Cañete, Ica, Camaná, Ilo, Tambo</div></div>
+    <div class="rx">Área: 278,482 km² = 21.7% del territorio nacional
+62 ríos · Flujo: NE → SO · Excepciones: Rímac, Santa</div>
+    <div class="exam">🎯 EXAMEN: Explique por qué el 75% de los ríos de la vertiente del Pacífico se seca durante el estiaje y cuáles son las consecuencias para la agricultura costera.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh verde">R.H. del Amazonas (84 cuencas)</div>
+    <div class="def verde">La vertiente atlántica es la más extensa: 957,822 km² que representan el 74.5% del país. Sus aguas vierten al río Amazonas y finalmente al Atlántico. Contiene los 21 ríos más largos del Perú, con el Amazonas a la cabeza (1,771 km). El régimen hídrico es más regular que el Pacífico pero con marcadas variaciones estacionales.</div>
+    <div class="item"><div class="dot verde"></div><div>Período de crecidas: octubre–marzo (máximo caudal en enero–febrero)</div></div>
+    <div class="item"><div class="dot azul"></div><div>Período de estiaje: abril–septiembre (mínimo en julio–agosto)</div></div>
+    <div class="item"><div class="dot morado"></div><div>Ríos de tipo meándrico (Ucayali) o anastomoso (Amazonas), con baja pendiente en la selva baja</div></div>
+    <div class="item"><div class="dot naranja"></div><div>Ríos principales: Amazonas, Marañón, Huallaga, Ucayali, Urubamba, Mantaro, Madre de Dios, Napo, Putumayo, Inambari</div></div>
+    <div class="rx">Área: 957,822 km² = 74.5% del territorio
+84 cuencas · R. Amazonas: 1,771 km (más largo del Perú)</div>
+  </div>
+
+  <div class="block">
+    <div class="bh morado">R.H. del Titicaca (13 cuencas)</div>
+    <div class="def morado">La vertiente del Titicaca es una cuenca cerrada o endorreica ubicada en el sector suroriental del Perú (Puno). Con 48,910 km² representa el 3.8% del territorio. Sus 13 ríos drenan en forma radial hacia el Lago Titicaca, el lago navegable más alto del mundo (~3,810 msnm). Cuenca compartida con Bolivia.</div>
+    <div class="item"><div class="dot morado"></div><div>Nacientes entre 4,000 y 6,000 msnm; excepción: río Desaguadero, que drena el lago hacia Bolivia (Lago Poopó)</div></div>
+    <div class="item"><div class="dot amarillo"></div><div>Régimen muy estacional: precipitaciones concentradas en diciembre–abril; sequías extremas el resto del año</div></div>
+    <div class="item"><div class="dot teal"></div><div>Gran importancia para el turismo receptivo (Lago Titicaca, Islas Uros, comunidades aimaras)</div></div>
+    <div class="rx">Área: 48,910 km² = 3.8% del territorio
+13 cuencas · Endorreica · Cuenca binacional Perú-Bolivia</div>
+    <div class="exam">🎯 EXAMEN: ¿Por qué la Región Hidrográfica del Titicaca se denomina cuenca "endorreica"? ¿Cuál es la única excepción y hacia dónde drena?</div>
+  </div>
+
+  <!-- TABLA COMPARATIVA REGIONES -->
+  <div class="block s3">
+    <div class="bh gris">Tabla comparativa — Las 3 Regiones Hidrográficas del Perú</div>
+    <table class="tbl">
+      <tr>
+        <th>Región</th><th>% Territorio</th><th>Área (km²)</th><th>N° Cuencas</th><th>Destino</th><th>Régimen hídrico</th><th>Fuentes de agua</th><th>Tipo de cuenca</th>
+      </tr>
+      <tr>
+        <td><b>Pacífico</b></td><td>21.7%</td><td>278,482</td><td>62</td><td>Océano Pacífico</td><td>Muy irregular, torrencial; 60–70% del caudal en 3–4 meses</td><td>Precipitación estacional, deshielo glaciar (desde río Santa hacia sur)</td><td>Exorreica → Pacífico</td>
+      </tr>
+      <tr style="background:var(--color-background-secondary)">
+        <td><b>Amazonas</b></td><td>74.5%</td><td>957,822</td><td>84</td><td>Océano Atlántico</td><td>Irregular pero más estable; crecidas oct–mar, estiaje abr–sep</td><td>Precipitaciones amazónicas, deshielo de glaciares andinos</td><td>Exorreica → Atlántico</td>
+      </tr>
+      <tr>
+        <td><b>Titicaca</b></td><td>3.8%</td><td>48,910</td><td>13</td><td>Lago Titicaca / Bolivia</td><td>Estacional marcado; lluvias dic–abr, sequías extremas</td><td>Precipitación, deshielo andino</td><td>Endorreica (excepción: Desaguadero)</td>
+      </tr>
+    </table>
+    <div class="warn">⚠️ DATO INTEGRADOR CLAVE: Aunque la vertiente del Pacífico concentra la mayor población y actividad económica del Perú (Lima, ciudades costeras), solo dispone del 21.7% del territorio y sus ríos son intermitentes. Esta paradoja —alta demanda, baja disponibilidad— convierte la gestión hídrica costera en una prioridad nacional urgente frente al cambio climático.</div>
+  </div>
+
+  <!-- SECCIÓN 4: USOS DEL AGUA -->
+  <div class="sbar">🚰 USOS DEL AGUA EN EL PERÚ</div>
+
+  <div class="block s2">
+    <div class="bh naranja">Usos del agua: sectorial y espacial</div>
+    <div class="def naranja">El agua en el Perú sirve a múltiples sectores productivos y de consumo. La agricultura es, con diferencia, el mayor usuario consuntivo, pero la minería, aunque solo consume el 2%, genera impactos desproporcionados por ubicarse en zonas de naciente de cuencas donde el acceso de otras comunidades ya es restringido.</div>
+    <div class="two">
+      <div>
+        <div class="item"><div class="dot naranja"></div><div><b>Agrícola:</b> ~84% de tierras costeras bajo riego. Sierra: 50.6%. Selva: 7.4%. Mayor uso consuntivo nacional.</div></div>
+        <div class="item"><div class="dot rojo"></div><div><b>Minero:</b> Solo 2% del consumo total, pero ubicado en cabeceras de cuenca; alta conflictividad hídrica (agua subterránea no contabilizada)</div></div>
+        <div class="item"><div class="dot azul"></div><div><b>Industrial:</b> Bebidas, harina de pescado (Callao, Chimbote), textil (algodón, lana), petróleo, siderurgia (Chimbote)</div></div>
+      </div>
+      <div>
+        <div class="item"><div class="dot verde"></div><div><b>Pecuario:</b> Mayor consumo en vertiente atlántica (vacunos, ovinos, camélidos); vertiente Pacífico concentra aves</div></div>
+        <div class="item"><div class="dot morado"></div><div><b>Poblacional:</b> San Isidro: 444 L/hab/día vs. Lurigancho: 15 L/hab/día — brecha de inequidad enorme en Lima</div></div>
+        <div class="item"><div class="dot teal"></div><div><b>Energético:</b> 65% de la potencia eléctrica proyectada al 2027 provendría de hidroeléctricas (ej. Central del Mantaro)</div></div>
+      </div>
+    </div>
+    <div class="rx">Lima (2011): Mayor consumo: San Isidro 444.47 L/hab/día | Menor: Lurigancho 15.24 L/hab/día</div>
+    <div class="warn">⚠️ CONFLICTO HÍDRICO MINERO: Aunque la minería consume solo el 2% del agua consuntiva, su ubicación en cabeceras de cuenca (zonas secas, nacientes) puede privar a comunidades aguas abajo. Además, el agua subterránea utilizada por la minería no está incluida en este registro oficial, lo que subestima el impacto real.</div>
+    <div class="exam">🎯 EXAMEN: Explique la paradoja del uso minero del agua en el Perú: siendo solo el 2% del consumo total, ¿por qué genera conflictos hídricos de escala regional? Relacione con el concepto de cabecera de cuenca.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh teal">Uso energético del agua</div>
+    <div class="def teal">La hidroelectricidad es un uso no consuntivo pero exclusivo: ocupa un tramo completo del cauce fluvial, en ocasiones desviando el caudal principal y dejando tramos secos. La gestión de embalses debe coordinarse con las necesidades de cuenca para no afectar a usuarios aguas abajo.</div>
+    <div class="flow">
+      <div class="fbox">Caída de agua</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Turbina</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Generador</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Electricidad</div>
+    </div>
+    <div class="item"><div class="dot teal"></div><div>La Central Hidroeléctrica del Mantaro es el principal complejo hidroeléctrico del Perú</div></div>
+    <div class="item"><div class="dot amarillo"></div><div>Se proyecta que al 2027 el 65% de la potencia eléctrica efectiva provenga de centrales hidroeléctricas</div></div>
+    <div class="exam">🎯 EXAMEN: ¿Por qué se dice que el uso hidroeléctrico del agua es "no consuntivo" pero sí puede generar impactos negativos en la cuenca? ¿Qué medidas deben adoptarse?</div>
+  </div>
+
+  <!-- SECCIÓN 5: GLACIARES -->
+  <div class="sbar">🧊 GLACIARES — RESERVAS SÓLIDAS Y DEGLACIACIÓN</div>
+
+  <div class="block">
+    <div class="bh azul">Glaciares: definición e importancia</div>
+    <div class="def azul">Los glaciares son masas de hielo acumuladas que funcionan como reservorios sólidos de agua dulce de liberación continua. Son indicadores climáticos de primera importancia y sustentan múltiples actividades productivas. El Perú concentra el 71% de los glaciares tropicales de América del Sur.</div>
+    <div class="item"><div class="dot azul"></div><div><b>71% glaciares tropicales andinos</b> están en Perú · Bolivia 22% · Ecuador 4% · Colombia 3%</div></div>
+    <div class="item"><div class="dot verde"></div><div>Alimentan ríos que proveen agua para beber, riego, hidroelectricidad, minería y agropastoreo (alpacas, llamas)</div></div>
+    <div class="item"><div class="dot rojo"></div><div>El glaciar Quelccaya (Cusco-Puno) es el casquete glaciar tropical más grande del mundo y está en peligro crítico</div></div>
+    <div class="exam">🎯 EXAMEN: ¿Por qué el Perú tiene especial responsabilidad en la conservación de glaciares a nivel mundial? Incluya datos estadísticos de la distribución de glaciares tropicales andinos.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh rojo">Retroceso glaciar: datos históricos</div>
+    <div class="def rojo">La pérdida de glaciares en el Perú es alarmante y acelerada. De 2,041 km² en 1970 a 1,106 km² en 2018, representando una pérdida superior al 45% en menos de 50 años. Este proceso amenaza directamente la disponibilidad de agua en la costa y sierra peruana.</div>
+    <div class="item"><div class="dot rojo"></div><div><b>1970:</b> 2,041 km² (18 grandes áreas glaciares)</div></div>
+    <div class="item"><div class="dot rojo"></div><div><b>1997:</b> 1,595 km² → pérdida de 21.8% en 27 años (CONAM)</div></div>
+    <div class="item"><div class="dot rojo"></div><div><b>2003:</b> 527.62 km² solo en Cordillera Blanca (ANA, imágenes satelitales)</div></div>
+    <div class="item"><div class="dot rojo"></div><div><b>2014:</b> 1,298.59 km² (2,679 glaciares en 19 cordilleras — inventario ANA)</div></div>
+    <div class="item"><div class="dot rojo"></div><div><b>2018:</b> ~1,106 km² — reducción acumulada superior al 45% desde 1970</div></div>
+    <div class="rx">Cordillera Blanca (más extensa): 755 glaciares · 527.62 km²
+Cordillera Vilcanota: 374 glaciares · 279.40 km²</div>
+    <div class="warn">⚠️ CONSECUENCIA CRÍTICA: La pérdida glaciar afecta primero a los glaciares pequeños (desaparecen totalmente) y luego a los medianos. En la Cordillera Blanca la reducción fue del 15.5% entre 1970 y 1997 (111.89 km²). La deglaciación amenaza el suministro de agua en la costa peruana a mediano plazo.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh gris">Glaciares en 19 cordilleras (2014)</div>
+    <div class="def gris">Los 2,679 glaciares se distribuyen en 19 cordilleras a lo largo del territorio andino peruano. Las tres más importantes por extensión son la Blanca, Vilcanota y Vilcabamba, todas en la sierra sur-central.</div>
+    <div style="font-size:11px">
+      <div class="item"><div class="dot azul"></div><div><b>Blanca:</b> 755 glaciares · 527.62 km² · alt. máx. 6,701 msnm</div></div>
+      <div class="item"><div class="dot morado"></div><div><b>Vilcanota:</b> 374 glaciares · 279.40 km² · alt. máx. 6,364 msnm</div></div>
+      <div class="item"><div class="dot verde"></div><div><b>Vilcabamba:</b> 355 glaciares · 129.15 km² · alt. máx. 6,200 msnm</div></div>
+      <div class="item"><div class="dot amarillo"></div><div><b>Huayhuash:</b> 144 glaciares · 55.27 km² · alt. máx. 6,617 msnm</div></div>
+      <div class="item"><div class="dot teal"></div><div><b>Ampato:</b> 65 glaciares · 60.96 km² · alt. máx. 6,374 msnm</div></div>
+    </div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Fuente: ANA — Inventario Nacional de Glaciares y Lagunas 2014</div>
+    <div class="exam">🎯 EXAMEN: ¿Qué consecuencias tendría para la Costa peruana la desaparición total de los glaciares de la Cordillera Blanca? Relacione con el uso agrícola y el régimen de ríos costeros.</div>
+  </div>
+
+  <!-- SECCIÓN 6: AGUA SUBTERRÁNEA -->
+  <div class="sbar">💧 AGUA SUBTERRÁNEA — ACUÍFEROS, NAPAS Y MANANTIALES</div>
+
+  <div class="block s2">
+    <div class="bh morado">Ciclo del agua subterránea</div>
+    <div class="def morado">El agua subterránea se origina cuando la precipitación o nieve se infiltra en el suelo y percola hacia capas permeables del subsuelo. Dependiendo de la permeabilidad (facilidad de movimiento) y porosidad (espacio disponible) de la roca, el agua puede moverse rápidamente (días) o muy lentamente (milenios), constituyendo acuíferos que sustentan ríos, manantiales y pozos.</div>
+    <div class="flow">
+      <div class="fbox">Precipitación</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Infiltración</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Zona no saturada</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Napa freática</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Acuífero</div>
+      <div class="farrow">→</div>
+      <div class="fbox">Descarga (manantial/pozo)</div>
+    </div>
+    <div class="two">
+      <div>
+        <div class="item"><div class="dot morado"></div><div><b>Permeabilidad:</b> facilidad con que el agua atraviesa la roca. Alta permeabilidad = movimiento rápido (días)</div></div>
+        <div class="item"><div class="dot morado"></div><div><b>Porosidad:</b> fracción de espacio vacío en el material subsuperficial. Determina la capacidad de almacenamiento</div></div>
+      </div>
+      <div>
+        <div class="item"><div class="dot azul"></div><div><b>Acuífero confinado:</b> encerrado entre capas impermeables; el agua puede tardar siglos en circular</div></div>
+        <div class="item"><div class="dot azul"></div><div><b>Acuífero libre (napa freática):</b> nivel superior del agua subterránea; puede recargarse en años o décadas</div></div>
+      </div>
+    </div>
+    <div class="warn">⚠️ ERROR COMÚN: Confundir napa freática con acuífero profundo. La napa freática es la superficie superior de la zona saturada (cercana), mientras que los acuíferos confinados son mucho más profundos. La explotación excesiva de la napa freática en Lima (por la industria y agricultura) ha generado subsidencia del suelo en algunos distritos.</div>
+    <div class="exam">🎯 EXAMEN: Explique cómo la contaminación por agroquímicos en la cuenca media puede afectar la napa freática y los pozos de la cuenca baja costera. ¿Qué principio de gestión hídrica aplica aquí?</div>
+  </div>
+
+  <div class="block">
+    <div class="bh teal">Manantiales</div>
+    <div class="def teal">Un manantial es el punto natural donde el agua subterránea emerge a la superficie, generalmente cuando un acuífero se llena hasta desbordar o cuando el flujo horizontal alcanza la superficie topográfica. Pueden ser termales (calentados por actividad geotérmica) o fríos.</div>
+    <div class="item"><div class="dot teal"></div><div>Frecuentes en <b>calizas y dolomitas</b>: el agua ácida disuelve la roca, crea canales y fluye horizontalmente hasta aflorar</div></div>
+    <div class="item"><div class="dot teal"></div><div>Varían en caudal: desde pequeños manantiales estacionales hasta grandes piscinas permanentes (varios m³/s)</div></div>
+    <div class="item"><div class="dot amarillo"></div><div><b>Manantiales termales</b>: el agua se calienta por contacto con rocas ígneas o actividad volcánica antes de aflorar</div></div>
+    <div class="exam">🎯 EXAMEN: ¿En qué tipo de roca son más frecuentes los manantiales y por qué? Explique el mecanismo geológico que permite su formación.</div>
+  </div>
+
+  <!-- TABLA INTEGRADORA FINAL -->
+  <div class="sbar">📋 TABLA INTEGRADORA — SÍNTESIS DEL TEMA</div>
+
+  <div class="block s3">
+    <div class="bh gris">Resumen integrador: conceptos clave del Tema 6</div>
+    <table class="tbl">
+      <tr>
+        <th>Concepto</th><th>Definición esencial</th><th>Dato cuantitativo clave</th><th>Impacto en Perú</th><th>Amenaza principal</th>
+      </tr>
+      <tr>
+        <td><b>Cuenca hidrográfica</b></td><td>Unidad territorial de drenaje delimitada por la divisoria de aguas</td><td>159 cuencas en Perú (ANA)</td><td>Base de la planificación hídrica y territorial</td><td>Contaminación, deforestación, minería irresponsable</td>
+      </tr>
+      <tr style="background:var(--color-background-secondary)">
+        <td><b>R.H. Pacífico</b></td><td>62 cuencas, ríos cortos e irregulares que drenan al Pacífico</td><td>21.7% del territorio (278,482 km²)</td><td>Concentra la mayor demanda hídrica del país</td><td>Escasez estacional, pérdida glaciar</td>
+      </tr>
+      <tr>
+        <td><b>R.H. Amazonas</b></td><td>84 cuencas, ríos más largos del Perú, drenan al Atlántico</td><td>74.5% del territorio (957,822 km²)</td><td>Mayor potencial hidroeléctrico y agrícola</td><td>Deforestación, contaminación minera</td>
+      </tr>
+      <tr style="background:var(--color-background-secondary)">
+        <td><b>R.H. Titicaca</b></td><td>13 cuencas endorreicas, drenan al Lago Titicaca</td><td>3.8% del territorio (48,910 km²)</td><td>Turismo, pesca artesanal, biodiversidad andina</td><td>Contaminación agropecuaria, eutrofización</td>
+      </tr>
+      <tr>
+        <td><b>Glaciares</b></td><td>Reservorios sólidos de agua dulce, indicadores climáticos</td><td>71% glaciares tropicales andinos en Perú; reducción &gt;45% desde 1970</td><td>Fuente de agua para ríos costeros y energía</td><td>Deglaciación acelerada por cambio climático</td>
+      </tr>
+      <tr style="background:var(--color-background-secondary)">
+        <td><b>Agua subterránea</b></td><td>Agua almacenada en acuíferos subsuperficiales</td><td>29% del agua dulce mundial está en acuíferos</td><td>Abastecimiento de Lima y ciudades costeras</td><td>Sobreexplotación, contaminación agroindustrial</td>
+      </tr>
+      <tr>
+        <td><b>Uso agrícola</b></td><td>Mayor consumidor hídrico del país, especialmente en la costa</td><td>84% tierras costeras bajo riego; 50.6% en sierra</td><td>Seguridad alimentaria y agroexportación</td><td>Pérdida de glaciares, ineficiencia de riego</td>
+      </tr>
+    </table>
+    <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La paradoja hídrica del Perú: el país tiene la mayor densidad de glaciares tropicales del mundo y una de las mayores redes fluviales, pero la mayor parte de su población vive en la costa desértica, donde el agua es escasa e irregular. El cambio climático agravará esta asimetría, haciendo imprescindible la gestión integrada de cuencas.</div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-section" class="block s3">
+    <div style="background:#0f1e3a;color:white;border-radius:10px;padding:10px 16px;margin-bottom:14px">
+      <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:700">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+      <div style="font-size:11px;color:#94a3b8;margin-top:2px">Marca tu respuesta y descubre si es correcta</div>
+    </div>
+    <div id="quiz-progress">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--color-text-secondary)">
+        <span id="prog-text">Pregunta 0 de 10 respondidas</span>
+        <span id="score-text">Aciertos: 0/10</span>
+      </div>
+      <div id="prog-bar-wrap"><div id="prog-bar-fill"></div></div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">Según la ANA, ¿cuántas cuencas hidrográficas posee el Perú y cuál es la región con mayor número de ellas?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) 125 cuencas; la región del Pacífico con 80</button>
+        <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) 200 cuencas; la región del Amazonas con 120</button>
+        <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) 159 cuencas; la región del Amazonas con 84</button>
+        <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) 159 cuencas; la región del Pacífico con 62</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">¿Qué porcentaje del territorio nacional abarca la Región Hidrográfica del Pacífico y cuál es su característica hídrica más crítica?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) 74.5%; ríos con caudal constante durante todo el año</button>
+        <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) 21.7%; el 75% de sus ríos se seca en época de estiaje</button>
+        <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) 3.8%; ríos muy cortos que solo fluyen en verano</button>
+        <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) 21.7%; todos sus ríos tienen caudal perenne gracias a los glaciares</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">La Región Hidrográfica del Titicaca se clasifica como cuenca "endorreica". ¿Qué significa esto?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Sus aguas fluyen hacia el Océano Pacífico a través del río Desaguadero</button>
+        <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Tiene ríos que nacen en Bolivia y drenan al Perú</button>
+        <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Sus ríos desembocan en el Océano Atlántico mediante afluentes del Amazonas</button>
+        <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) Sus aguas no llegan al océano; drenan hacia un lago interior (Titicaca), salvo el río Desaguadero que va hacia Bolivia</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">¿Cuál es la "línea divisoria de aguas" (Divortium Aquarum) y qué norma debe cumplir al trazar una cuenca?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Es el eje principal del río; debe seguir el cauce de mayor caudal</button>
+        <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) Es la línea imaginaria que une los puntos más altos y separa cuencas limítrofes; nunca debe cortar ningún cauce de drenaje</button>
+        <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Es el límite administrativo entre departamentos que comparten un río</button>
+        <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Es una línea que sigue las curvas de nivel de menor altitud hacia la desembocadura</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">Según los inventarios de la ANA, ¿qué porcentaje aproximado de superficie glaciar ha perdido el Perú desde 1970 hasta 2018?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Menos del 10% — la pérdida ha sido moderada y controlada</button>
+        <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Aproximadamente el 21.8% — solo entre 1970 y 1997</button>
+        <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Exactamente el 30% — cifra oficial del CONAM para 2020</button>
+        <button class="qbtn" data-q="5" data-opt="d" data-correct="true">D) Más del 45% — de 2,041 km² en 1970 a aproximadamente 1,106 km² en 2018</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">¿Por qué la actividad minera genera conflictos hídricos desproporcionados si solo consume el 2% del agua consuntiva nacional?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Porque utiliza equipos que consumen más energía que agua y ese consumo no se contabiliza</button>
+        <button class="qbtn" data-opt="b" data-correct="true" data-q="6">B) Porque se ubica en cabeceras de cuenca y zonas secas donde el agua es escasa, y el uso de agua subterránea no está incluido en el registro oficial</button>
+        <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Porque las mineras desvían ríos amazónicos hacia la costa, afectando a varios países</button>
+        <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Porque la minería usa agua salada importada que altera la química de los acuíferos</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">¿Cuál es la diferencia fundamental entre permeabilidad y porosidad en el contexto del agua subterránea?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Son sinónimos: ambas miden la cantidad de agua almacenada en un acuífero</button>
+        <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) La permeabilidad es la cantidad de agua y la porosidad es la velocidad de movimiento</button>
+        <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) La permeabilidad mide la facilidad de movimiento del agua; la porosidad mide la cantidad de espacio abierto disponible para almacenar agua</button>
+        <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) La permeabilidad aplica solo a rocas volcánicas; la porosidad solo a rocas sedimentarias</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">En Lima (2011), el distrito de San Isidro consumía 444.47 L/hab/día mientras Lurigancho consumía 15.24 L/hab/día. ¿Qué refleja esta disparidad?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Que San Isidro tiene mayor industria agrícola y necesita más agua de riego</button>
+        <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Que Lurigancho es un distrito rural con acceso natural a ríos y no necesita agua de red</button>
+        <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Una severa inequidad en el acceso al agua potable entre distritos ricos y pobres de Lima, donde los más vulnerables tienen acceso muy limitado</button>
+        <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Diferencias climatológicas internas de Lima que generan mayor necesidad de agua en San Isidro</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">¿Cuál afirmación sobre la Región Hidrográfica del Amazonas es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Abarca el 74.5% del territorio peruano con 84 cuencas</button>
+        <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Sus ríos tienen crecidas de octubre a marzo y estiaje de abril a septiembre</button>
+        <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) El río Amazonas fluye de sur a norte en todo su recorrido dentro del Perú, con pendiente muy pronunciada</button>
+        <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Los 21 ríos más largos del Perú pertenecen a esta vertiente</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">¿Cuál de los siguientes describe correctamente la paradoja hídrica del Perú en el contexto del desarrollo nacional?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) El Perú tiene poca agua a nivel global, por eso el 97% de la población se concentra en la sierra donde llueve más</button>
+        <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) La mayor disponibilidad de agua está en la costa desértica, pero la mayoría de la población vive en la selva amazónica</button>
+        <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) El Perú exporta agua virtual al mundo a través de la minería y la agroexportación, lo que no genera ningún impacto interno</button>
+        <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) La mayor demanda de agua (costa desértica, ciudades como Lima) coincide con la zona de menor disponibilidad natural, mientras la mayor oferta hídrica está en la selva, poco poblada</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <!-- Panel de resultados -->
+    <div id="result-panel"></div>
+
+    <button id="reset-btn" onclick="resetQuiz()" style="display:none;margin-top:10px;padding:8px 18px;background:#0f1e3a;color:white;border:none;border-radius:8px;cursor:pointer;font-family:'Oswald',sans-serif;font-size:13px">🔄 Reiniciar Quiz</button>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="grid-column:1/-1;background:#0f1e3a;color:white;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start">
+    <span style="font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;flex-shrink:0">REFERENCIAS:</span>
+    <span style="font-size:11px;color:#94a3b8">Autoridad Nacional del Agua — ANA (2014). Inventario Nacional de Glaciares y Lagunas. · De Souza, J. (2011). Futuro del Agua en Lima y Callao. 1ra Mesa Redonda. SEDAPAL. · Glaciares y Cambio Climático en la Comunidad Andina (2007). CAN. · CONAM (1997). Inventario de glaciares del Perú. · ICM-Perú. Cartas Nacionales. · USGS — Water Resources Education. The Water Cycle. · theconversation.com — El glaciar peruano Quelccaya está en peligro (2019).</span>
+  </div>
+
+</div>
+
+<script>
+var answered=0,correct=0;
+var feedbacks={
+  1:{ok:"✅ ¡Correcto! El Perú posee 159 cuencas según la ANA: 62 en el Pacífico, 84 en el Amazonas y 13 en el Titicaca. La del Amazonas es la más numerosa porque representa el 74.5% del territorio andino-amazónico.",fail:"❌ Incorrecto. La respuesta correcta es C. El Perú tiene 159 cuencas (ANA); la región Amazónica tiene 84, siendo la más numerosa. La opción D confunde correctamente los 159 pero asigna la mayoría al Pacífico (62), no al Amazonas."},
+  2:{ok:"✅ ¡Correcto! La R.H. del Pacífico abarca el 21.7% del territorio. Su rasgo más crítico es que el 75% de sus ríos se seca durante el estiaje, lo que contrasta dramáticamente con la alta demanda de agua de la costa desértica.",fail:"❌ Incorrecto. La respuesta correcta es B. El 74.5% corresponde al Amazonas; el 3.8% al Titicaca. El Pacífico es el 21.7% y su característica clave es la irregularidad extrema: 60-70% del caudal anual en solo 3-4 meses."},
+  3:{ok:"✅ ¡Correcto! 'Endorreica' significa que las aguas no llegan al océano sino a un lago interior (Titicaca). La única excepción es el río Desaguadero, que drena desde el Titicaca hacia el Lago Poopó en Bolivia.",fail:"❌ Incorrecto. La respuesta correcta es D. Endorreica = cuenca cerrada cuyas aguas no desembocan en el mar. El Desaguadero es la excepción: nace en el Titicaca y fluye hacia Bolivia."},
+  4:{ok:"✅ ¡Correcto! La Divisoria de Aguas (Divortium Aquarum) une los puntos más altos del relieve. La regla fundamental es que NUNCA debe cortar un cauce de drenaje; debe seguir cumbres y cortar perpendicularmente las curvas de nivel.",fail:"❌ Incorrecto. La respuesta correcta es B. La divisoria no sigue cauces sino crestas. Es una línea topo-hidrológica que jamás debe interceptar ríos ni quebradas, ya que eso invalidaría la delimitación de la cuenca."},
+  5:{ok:"✅ ¡Correcto! Los glaciares del Perú han perdido más del 45% de su superficie: de 2,041 km² en 1970 a ~1,106 km² en 2018, según los inventarios del ANA. Esta pérdida amenaza directamente el suministro de agua costera.",fail:"❌ Incorrecto. La respuesta correcta es D. El 21.8% era solo la pérdida entre 1970-1997 (CONAM). La pérdida acumulada hasta 2018 supera el 45%. Los glaciares peruanos están en grave retroceso."},
+  6:{ok:"✅ ¡Correcto! Aunque el volumen es bajo (2%), la minería opera en cabeceras de cuenca donde toda perturbación afecta a usuarios aguas abajo. Además, el agua subterránea usada por la minería no está incluida en el registro consuntivo oficial.",fail:"❌ Incorrecto. La respuesta correcta es B. El conflicto minero-hídrico es de escala, no de volumen: pocas personas controlan el agua en nacientes, bloqueando el acceso de comunidades enteras aguas abajo. El agua subterránea exacerba el problema."},
+  7:{ok:"✅ ¡Correcto! Permeabilidad = facilidad de movimiento (depende de la conectividad entre poros). Porosidad = espacio disponible (fracción de vacíos). Una roca puede ser muy porosa pero poco permeable (arcilla) si los poros no están bien conectados.",fail:"❌ Incorrecto. La respuesta correcta es C. Son conceptos distintos: la permeabilidad determina si el agua puede MOVERSE; la porosidad determina cuánta agua puede ALMACENARSE. Una roca puede tener alta porosidad pero baja permeabilidad (como la arcilla)."},
+  8:{ok:"✅ ¡Correcto! La diferencia entre 444 y 15 L/hab/día en la misma ciudad refleja una inequidad estructural en el acceso al agua potable. Los distritos periféricos de Lima tienen acceso muy limitado a la red pública, lo que evidencia la desigualdad en la gestión del recurso hídrico.",fail:"❌ Incorrecto. La respuesta correcta es C. Esta disparidad refleja inequidad social, no clima ni uso agrícola. Los distritos pobres periféricos de Lima (Lurigancho, Pachacámac) tienen acceso mínimo a la red de agua, mientras los residenciales tienen consumo muy elevado."},
+  9:{ok:"✅ ¡Correcto! La afirmación falsa es C. El Amazonas peruano no fluye de sur a norte en todo su recorrido; tiene orientación principalmente este-oeste con tramos de tipo anastomoso y meándrico, y una pendiente muy baja en la selva baja.",fail:"❌ Incorrecto. La respuesta correcta es C. El Amazonas y sus afluentes no tienen pendiente pronunciada en la selva baja (al contrario, son meandrosos y de baja pendiente). El flujo no es estrictamente sur-norte sino principalmente andino-hacia el Atlántico."},
+  10:{ok:"✅ ¡Correcto! Esta es la paradoja hídrica del Perú: la costa árida concentra la mayor población y actividad económica (Lima, ciudades costeras), pero es la zona con menor disponibilidad natural de agua. El 74.5% del recurso hídrico está en la selva, que tiene baja densidad poblacional.",fail:"❌ Incorrecto. La respuesta correcta es D. La paradoja central es: mayor demanda donde hay menos agua (costa) y mayor oferta donde hay menos población (selva). Esta asimetría es el reto hídrico estratégico del Perú."}
+};
+
+document.getElementById('quiz-section').addEventListener('click',function(e){
+  var btn=e.target.closest('.qbtn');
+  if(!btn||btn.disabled)return;
+  var q=btn.getAttribute('data-q');
+  var isCorrect=btn.getAttribute('data-correct')==='true';
+  var btns=document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  btns.forEach(function(b){
+    b.disabled=true;
+    if(b.getAttribute('data-correct')==='true'){b.classList.add('correct');b.textContent='✅ '+b.textContent;}
+  });
+  if(!isCorrect){btn.classList.add('incorrect');btn.textContent='❌ '+btn.textContent;}
+  var fb=document.getElementById('fb'+q);
+  fb.style.display='block';
+  if(isCorrect){fb.className='qfeedback ok';fb.textContent=feedbacks[q].ok;correct++;}
+  else{fb.className='qfeedback fail';fb.textContent=feedbacks[q].fail;}
+  answered++;
+  document.getElementById('prog-text').textContent='Pregunta '+answered+' de 10 respondidas';
+  document.getElementById('score-text').textContent='Aciertos: '+correct+'/10';
+  document.getElementById('prog-bar-fill').style.width=(answered*10)+'%';
+  if(answered===10){showResults();}
+});
+
+function showResults(){
+  var panel=document.getElementById('result-panel');
+  panel.style.display='block';
+  var msg='',bg='';
+  if(correct<=4){msg='Necesitas repasar el material. ¡Vuelve a leer el canvas con calma!';bg='#fee2e2';}
+  else if(correct<=7){msg='¡Buen avance! Sigue repasando los temas donde fallaste.';bg='#fef9c3';}
+  else{msg='¡Excelente dominio del tema! Estás listo para el examen.';bg='#dcfce7';}
+  panel.style.background=bg;panel.style.padding='12px';panel.style.borderRadius='8px';
+  panel.innerHTML='<b style="font-size:15px">Resultado final: '+correct+' / 10 correctas</b><br><span style="font-size:12px">'+msg+'</span>';
+  document.getElementById('reset-btn').style.display='inline-block';
+}
+
+function resetQuiz(){
+  answered=0;correct=0;
+  document.getElementById('prog-text').textContent='Pregunta 0 de 10 respondidas';
+  document.getElementById('score-text').textContent='Aciertos: 0/10';
+  document.getElementById('prog-bar-fill').style.width='0%';
+  document.getElementById('result-panel').style.display='none';
+  document.getElementById('reset-btn').style.display='none';
+  for(var i=1;i<=10;i++){
+    var fb=document.getElementById('fb'+i);
+    fb.style.display='none';fb.className='qfeedback';fb.textContent='';
+    var btns=document.querySelectorAll('.qbtn[data-q="'+i+'"]');
+    btns.forEach(function(b){
+      b.disabled=false;
+      b.className='qbtn';
+      b.textContent=b.textContent.replace('✅ ','').replace('❌ ','');
+    });
+  }
+}
+</script>

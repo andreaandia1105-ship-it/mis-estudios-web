@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas — Cambio Climático | RRNN del Perú 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f1f5f9;
+    --color-background-tertiary: #e2e8f0;
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-border-tertiary: #cbd5e1;
+    --color-border-secondary: #94a3b8;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --color-background-primary:#1e293b;
+      --color-background-secondary:#0f172a;
+      --color-background-tertiary:#020617;
+      --color-text-primary:#f1f5f9;
+      --color-text-secondary:#94a3b8;
+      --color-border-tertiary:#334155;
+      --color-border-secondary:#475569;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Source Sans 3',sans-serif;font-size:13px;color:var(--color-text-primary);background:var(--color-background-tertiary);}
+  .cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);}
+
+  /* BARRA TÍTULO */
+  .title-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px;}
+  .title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+  .title-bar p{font-size:11px;color:#94a3b8;margin-bottom:8px;}
+  .title-bar .tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .title-bar .tag{font-size:10px;background:rgba(125,211,252,0.15);color:#7dd3fc;border:1px solid rgba(125,211,252,0.3);border-radius:20px;padding:2px 9px;}
+
+  /* BARRA SECCIÓN */
+  .sec{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;color:#fff;}
+  .sec.azul{background:#1e3a8a;}
+  .sec.verde{background:#14532d;}
+  .sec.rojo{background:#7f1d1d;}
+  .sec.naranja{background:#7c2d12;}
+  .sec.morado{background:#4c1d95;}
+  .sec.teal{background:#134e4a;}
+  .sec.rosa{background:#831843;}
+  .sec.gris{background:#334155;}
+
+  /* BLOQUES */
+  .block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+  .block.s2{grid-column:span 2;}
+  .block.s3{grid-column:1/-1;}
+
+  /* ENCABEZADOS */
+  .bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+  .bh.az{background:#dbeafe;color:#1e3a8a;}
+  .bh.vd{background:#dcfce7;color:#14532d;}
+  .bh.rd{background:#fee2e2;color:#991b1b;}
+  .bh.am{background:#fef9c3;color:#713f12;}
+  .bh.mo{background:#ede9fe;color:#4c1d95;}
+  .bh.tl{background:#ccfbf1;color:#134e4a;}
+  .bh.na{background:#ffedd5;color:#7c2d12;}
+  .bh.gr{background:#f1f5f9;color:#334155;}
+  .bh.rs{background:#fce7f3;color:#831843;}
+
+  @media(prefers-color-scheme:dark){
+    .bh.az{background:#1e3a5f;color:#93c5fd;}
+    .bh.vd{background:#14532d;color:#86efac;}
+    .bh.rd{background:#450a0a;color:#fca5a5;}
+    .bh.am{background:#422006;color:#fef08a;}
+    .bh.mo{background:#2e1065;color:#c4b5fd;}
+    .bh.tl{background:#042f2e;color:#5eead4;}
+    .bh.na{background:#431407;color:#fed7aa;}
+    .bh.gr{background:#1e293b;color:#94a3b8;}
+    .bh.rs{background:#4a044e;color:#f0abfc;}
+  }
+
+  /* DEFINICIÓN */
+  .def{border-left:3px solid #3b82f6;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5;}
+  .def.vd{border-color:#16a34a;}
+  .def.rd{border-color:#dc2626;}
+  .def.am{border-color:#ca8a04;}
+  .def.mo{border-color:#7c3aed;}
+  .def.tl{border-color:#0d9488;}
+  .def.na{border-color:#ea580c;}
+  .def.rs{border-color:#db2777;}
+  .def.gr{border-color:#64748b;}
+
+  /* ITEMS */
+  .item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+  .dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+  .dot.az{background:#3b82f6;}
+  .dot.vd{background:#16a34a;}
+  .dot.rd{background:#dc2626;}
+  .dot.am{background:#ca8a04;}
+  .dot.mo{background:#7c3aed;}
+  .dot.tl{background:#0d9488;}
+  .dot.na{background:#ea580c;}
+  .dot.rs{background:#db2777;}
+  .dot.gr{background:#64748b;}
+
+  /* FÓRMULA */
+  .rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0;}
+
+  /* ADVERTENCIA */
+  .warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:7px 0;line-height:1.5;}
+  @media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa;}}
+
+  /* EXAMEN */
+  .exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;line-height:1.5;}
+  @media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#854d0e;}}
+
+  /* MINI TARJETAS */
+  .mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5;}
+  .mini b{display:block;margin-bottom:3px;}
+
+  /* GRILLAS */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:7px 0;}
+  .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:7px 0;}
+
+  /* FLUJO */
+  .flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0;}
+  .fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;text-align:center;}
+  .farrow{color:var(--color-text-secondary);font-size:15px;}
+
+  /* BADGES */
+  .num-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0;margin-right:4px;}
+  .nb-b{background:#dbeafe;color:#1e3a8a;}
+  .nb-g{background:#dcfce7;color:#14532d;}
+  .nb-r{background:#fee2e2;color:#991b1b;}
+  .nb-a{background:#fef9c3;color:#713f12;}
+
+  /* PILLS */
+  .pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;}
+  .pill.az{background:#dbeafe;color:#1e3a8a;}
+  .pill.vd{background:#dcfce7;color:#14532d;}
+  .pill.rd{background:#fee2e2;color:#991b1b;}
+  .pill.am{background:#fef9c3;color:#713f12;}
+
+  /* BARRA ESTADÍSTICA */
+  .stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:3px 0;}
+  .stat-bar-fill{height:100%;border-radius:20px;}
+
+  /* TABLA */
+  .tbl{width:100%;border-collapse:collapse;font-size:11px;}
+  .tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);font-family:'Oswald',sans-serif;font-weight:500;text-align:left;}
+  .tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+  .tbl tr:last-child td{border-bottom:none;}
+
+  /* DIVIDER */
+  .divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+
+  /* FOOTER */
+  .footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;}
+  .ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;flex-shrink:0;}
+  .fc{font-size:11px;color:#94a3b8;line-height:1.6;}
+
+  /* ===== QUIZ ===== */
+  #quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px;}
+  .quiz-header{background:#0f1e3a;color:#fff;border-radius:8px;padding:10px 14px;margin-bottom:12px;}
+  .quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;}
+  .quiz-header p{font-size:11px;color:#94a3b8;margin-top:3px;}
+  .quiz-progress{margin-bottom:12px;}
+  .quiz-progress-text{font-size:11.5px;color:var(--color-text-secondary);margin-bottom:4px;}
+  .qcard{margin-bottom:14px;border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px;}
+  .qnum{font-size:10.5px;color:var(--color-text-secondary);margin-bottom:5px;font-family:'Oswald',sans-serif;text-transform:uppercase;}
+  .qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;line-height:1.5;}
+  .qopts{display:flex;flex-direction:column;gap:5px;}
+  .qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary);}
+  .qbtn:hover:not(:disabled){background:var(--color-background-tertiary);}
+  .qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+  .qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+  .qbtn:disabled{opacity:0.6;cursor:not-allowed;pointer-events:none;}
+  .qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;}
+  .qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+  .qfeedback.ko{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+  @media(prefers-color-scheme:dark){
+    .qfeedback.ok{background:#052e16;color:#86efac;}
+    .qfeedback.ko{background:#450a0a;color:#fca5a5;}
+  }
+  #results-panel{display:none;border-radius:10px;padding:14px;margin-top:10px;text-align:center;}
+  #results-panel h3{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:6px;}
+  #results-panel p{font-size:12.5px;margin-bottom:10px;}
+  #btn-reset{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;cursor:pointer;font-family:'Oswald',sans-serif;}
+  #btn-reset:hover{background:#1e3a5f;}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- ═══ BARRA TÍTULO ═══ -->
+<div class="title-bar">
+  <h1>🌍 CAMBIO CLIMÁTICO — TEMA N°6</h1>
+  <p>Curso: Recursos Naturales del Perú · Universidad Nacional Agraria La Molina · 2026</p>
+  <div class="tags">
+    <span class="tag">Efecto Invernadero</span>
+    <span class="tag">GEI & PCM</span>
+    <span class="tag">Calentamiento Global</span>
+    <span class="tag">Impactos en Perú</span>
+    <span class="tag">Protocolo de Kioto</span>
+    <span class="tag">IPCC</span>
+    <span class="tag">Mitigación</span>
+    <span class="tag">ENOA / El Niño</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- SECCIÓN 1: EFECTO INVERNADERO         -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec azul">🔵 SECCIÓN 1: EFECTO INVERNADERO Y BALANCE ENERGÉTICO</div>
+
+<!-- BLOQUE 1.1 -->
+<div class="block">
+  <span class="bh az">¿Qué es el Efecto Invernadero? (Diap. 3–6)</span>
+  <div class="def">El efecto invernadero es el proceso natural por el cual ciertos gases en la atmósfera <b>retienen parte de la radiación térmica</b> emitida por la Tierra, impidiendo que escape al espacio. Sin este fenómeno, la temperatura media sería –19 °C en lugar de los +14 °C actuales.</div>
+  <div class="item"><span class="dot az"></span><span>La Tierra absorbe ~50% de la radiación solar entrante; la otra mitad se refleja o es absorbida por la atmósfera, nubes y superficies como nieve o desiertos.</span></div>
+  <div class="item"><span class="dot az"></span><span>La superficie reemite calor como <b>radiación infrarroja</b>; los GEI y las nubes absorben parte de ese calor y lo re-emiten hacia la superficie — el efecto invernadero.</span></div>
+  <div class="item"><span class="dot az"></span><span>La analogía con un invernadero es imprecisa: un invernadero físico retiene calor bloqueando la convección, mientras que el EI opera por absorción/re-emisión radiativa.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que el efecto invernadero es intrínsecamente dañino. En realidad es un fenómeno <b>natural e indispensable</b> para la vida. El problema es su intensificación antropogénica.</div>
+  <div class="exam">🎯 EXAMEN: Explica el mecanismo por el cual los Gases de Efecto Invernadero (GEI) elevan la temperatura media de la Tierra, diferenciando la radiación solar entrante de la radiación térmica terrestre saliente.</div>
+</div>
+
+<!-- BLOQUE 1.2 -->
+<div class="block">
+  <span class="bh az">Balance Energético y Forzamiento Radiativo (Diap. 6–7)</span>
+  <div class="def">El <b>Forzamiento Radiativo (FR)</b> cuantifica el cambio en el flujo neto de energía en la troposfera causado por un agente externo. FR positivo → calentamiento; FR negativo → enfriamiento.</div>
+  <div class="flow">
+    <div class="fbox">Energía solar entrante</div><span class="farrow">→</span>
+    <div class="fbox">Absorción superficie + atmósfera</div><span class="farrow">→</span>
+    <div class="fbox">Re-emisión IR</div><span class="farrow">→</span>
+    <div class="fbox">GEI retienen parte</div><span class="farrow">→</span>
+    <div class="fbox">T° aumenta</div>
+  </div>
+  <div class="item"><span class="dot am"></span><span>Los <b>forzamientos climáticos</b> son factores que impulsan cambios en el balance energético: volcanes, variaciones orbitales, cambios en GEI antropogénicos.</span></div>
+  <div class="item"><span class="dot am"></span><span>No confundir <b>forzamientos</b> (cambios dirigidos) con <b>oscilaciones naturales</b> como ENOA, que son fluctuaciones internas sin impulsor externo constante.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Qué diferencia existe entre un forzamiento climático y una fluctuación natural del clima? Ilustra tu respuesta con el fenómeno ENOA.</div>
+</div>
+
+<!-- BLOQUE 1.3 -->
+<div class="block">
+  <span class="bh tl">ENOA: El Niño y La Niña (Diap. 7–8)</span>
+  <div class="def">El ENOA (El Niño-Oscilación Austral) es un patrón de variabilidad climática natural que ocurre en el Pacífico tropical con ciclos de ~5 años, sin ser causa sino consecuencia de fluctuaciones del sistema climático.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #ef4444;">
+      <b>🔴 El Niño</b>
+      Calentamiento anómalo de la superficie oceánica en el Pacífico ecuatorial central y oriental. Dura 3–4 estaciones. Provoca lluvias intensas en la costa peruana, sequías en el Altiplano.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6;">
+      <b>🔵 La Niña</b>
+      Enfriamiento por debajo de lo normal en la misma región. Asociada a mayor disponibilidad hídrica en la sierra peruana y mayor frecuencia de heladas en zonas altoandinas.
+    </div>
+  </div>
+  <div class="warn">⚠️ CONTEXTO PERÚ: El Niño tiene impactos devastadores en la agricultura costeña (inundaciones de campos en Piura, La Libertad) y en la pesca de anchoveta. Es un ejemplo de variabilidad natural que se <b>intensifica</b> con el cambio climático.</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- SECCIÓN 2: GASES DE EFECTO INVERNADERO -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec morado">🟣 SECCIÓN 2: GASES DE EFECTO INVERNADERO (GEI) Y POTENCIAL DE CALENTAMIENTO MUNDIAL</div>
+
+<!-- BLOQUE 2.1 -->
+<div class="block">
+  <span class="bh mo">Gases Principales y Composición (Diap. 5, 11–13)</span>
+  <div class="def">Los GEI son moléculas poliatómicas que absorben y re-emiten radiación infrarroja. Los gases más abundantes del aire (N₂ al 78%, O₂ al 21%) <b>no</b> son GEI significativos porque son diatómicos homopolaresales.</div>
+  <div class="item"><span class="dot mo"></span><span><b>Vapor de agua (H₂O):</b> GEI más importante en términos de abundancia; opera como amplificador de otros forzamientos pero no es directamente controlable por el hombre.</span></div>
+  <div class="item"><span class="dot mo"></span><span><b>CO₂:</b> segundo en importancia, pero el más relevante por ser de fuente antropogénica masiva y persistir cientos de miles de años.</span></div>
+  <div class="item"><span class="dot mo"></span><span><b>CH₄, N₂O, HFC, PFC, SF₆, NF₃:</b> menores en concentración pero con altísimos PCM, incluso miles de veces mayor que el CO₂.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "el GEI más importante" con "el más abundante". El vapor de agua domina en abundancia, pero el CO₂ es el más <i>controlable</i> y relevante para la política climática.</div>
+</div>
+
+<!-- BLOQUE 2.2 PCM -->
+<div class="block">
+  <span class="bh am">Potencial de Calentamiento Mundial — PCM (Diap. 11–12)</span>
+  <div class="def">El PCM (GWP en inglés) es una medida relativa que expresa cuánto calor captura un gas en un período determinado (normalmente 100 años) <b>comparado con la misma masa de CO₂</b>, al cual se le asigna PCM = 1.</div>
+  <div class="rx">PCM (gas X, 100 años) = Calor retenido por masa X / Calor retenido por igual masa CO₂ en 100 años</div>
+  <div class="item"><span class="dot am"></span><span>El metano tiene PCM₁₀₀ = <b>25</b>: 1 kg de CH₄ = 25 kg de CO₂ en términos de calentamiento a 100 años.</span></div>
+  <div class="item"><span class="dot am"></span><span>El período importa: el CH₄ tiene PCM₂₀ ≈ 86 (mucho más potente a corto plazo) porque se degrada en ~12 años.</span></div>
+  <div class="item"><span class="dot am"></span><span>El SF₆ tiene PCM = 22,800: aislante en equipos eléctricos, extraordinariamente peligroso si se libera.</span></div>
+  <div class="exam">🎯 EXAMEN: Si se emiten simultáneamente 10 toneladas de CH₄ y 10 toneladas de CO₂, ¿cuántas toneladas de CO₂ equivalente representan las emisiones de metano en un horizonte de 100 años? Justifica usando el PCM.</div>
+</div>
+
+<!-- BLOQUE 2.3 TABLA GEI -->
+<div class="block s3">
+  <span class="bh gr">Sinopsis GEI regulados por el Protocolo de Kioto (IPCC 2007 / PNUMA 2012)</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Gas (fórmula)</th>
+        <th>PCM a 100 años</th>
+        <th>% emisiones GEI antropog. (2010)</th>
+        <th>Vida útil en atmósfera</th>
+        <th>Fuentes antropogénicas principales</th>
+        <th>Observaciones clave</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>CO₂</b></td>
+        <td>1 (referencia)</td>
+        <td><span style="color:#dc2626;font-weight:700;">76%</span></td>
+        <td>Cientos a miles de años</td>
+        <td>Combustibles fósiles, deforestación, cemento</td>
+        <td>GEI antropogénico más importante; sumideros: océanos y bosques</td>
+      </tr>
+      <tr>
+        <td><b>CH₄</b></td>
+        <td>25</td>
+        <td><span style="color:#ea580c;font-weight:700;">16%</span></td>
+        <td>~12 años</td>
+        <td>Rumiantes, arroz, combustibles fósiles, vertederos</td>
+        <td>60% de origen antropogénico; efecto corto pero intenso</td>
+      </tr>
+      <tr>
+        <td><b>N₂O</b></td>
+        <td>298</td>
+        <td><span style="color:#ca8a04;font-weight:700;">6%</span></td>
+        <td>~114 años</td>
+        <td>Fertilizantes agrícolas, procesos industriales</td>
+        <td>También destruye la capa de ozono estratosférica</td>
+      </tr>
+      <tr>
+        <td><b>HFC</b></td>
+        <td>124–14,800</td>
+        <td>&lt;2%</td>
+        <td>Variable</td>
+        <td>Refrigerantes, aires acondicionados</td>
+        <td>Sustitutos de CFC pero igualmente potentes como GEI</td>
+      </tr>
+      <tr>
+        <td><b>PFC</b></td>
+        <td>7,390–12,200</td>
+        <td>&lt;2%</td>
+        <td>Milenios</td>
+        <td>Industria electrónica, aluminio</td>
+        <td>Extremadamente persistentes</td>
+      </tr>
+      <tr>
+        <td><b>SF₆</b></td>
+        <td>22,800</td>
+        <td>&lt;2%</td>
+        <td>&gt;3,000 años</td>
+        <td>Aislante en equipos eléctricos, magnesio</td>
+        <td>PCM más alto entre los GEI regulados</td>
+      </tr>
+      <tr>
+        <td><b>NF₃</b></td>
+        <td>17,200</td>
+        <td>&lt;2%</td>
+        <td>~500 años</td>
+        <td>Equipos electrónicos, fotovoltaica</td>
+        <td>Regulado desde el Protocolo de Kioto (2ª enmienda)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:8px;">⚠️ DATO INTEGRADOR: El CO₂ representa el 76% de las emisiones pero tiene PCM=1; el N₂O solo aporta 6% de la masa pero cada molécula equivale a 298 veces el CO₂. Por eso en política climática se trabaja con <b>toneladas de CO₂ equivalente (CO₂eq)</b> para comparar gases de forma homogénea.</div>
+</div>
+
+<!-- BLOQUE 2.4 CO2 -->
+<div class="block">
+  <span class="bh rd">CO₂: El GEI Clave (Diap. 14–16)</span>
+  <div class="def">El CO₂ aporta el <b>~64% del forzamiento radiativo total</b> causado por GEI de larga duración. A diferencia del metano, no tiene un ciclo de vida definido: circula continuamente entre atmósfera, océanos y biosfera.</div>
+  <div class="item"><span class="dot rd"></span><span>La mitad del CO₂ emitido por actividades humanas es absorbido por la biosfera y los océanos (sumideros de carbono); la otra mitad permanece en la atmósfera durante cientos o miles de años.</span></div>
+  <div class="item"><span class="dot rd"></span><span>Concentración actual (2020): <b>413.2 ppm</b> = 149% de los niveles preindustriales. En 2012 se superó el umbral simbólico de 400 ppm.</span></div>
+  <div class="item"><span class="dot rd"></span><span>Ha aumentado ~100 ppm desde la Revolución Industrial. La concentración actual es la más alta en los últimos <b>800,000 años</b> (datos de núcleos de hielo antártico).</span></div>
+  <div class="exam">🎯 EXAMEN: El CO₂ no tiene un "ciclo de vida específico" como el metano. Explica qué significa esto en términos de su comportamiento en el sistema climático y por qué implica que las reducciones de emisiones actuales tardarán décadas en reflejarse en la temperatura.</div>
+</div>
+
+<!-- BLOQUE 2.5 CH4 N2O -->
+<div class="block">
+  <span class="bh mo">Metano y Óxido Nitroso (Diap. 17–20)</span>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #7c3aed;">
+      <b>CH₄ — Metano</b>
+      2° GEI en forzamiento radiativo (~18%). 60% de fuentes antropogénicas (rumiantes, arroz, combustibles, vertederos). Vida: ~12 años → efecto intenso pero breve. Se elimina por reacciones con radicales •OH en la troposfera.
+    </div>
+    <div class="mini" style="border-left:3px solid #dc2626;">
+      <b>N₂O — Óxido Nitroso</b>
+      3° GEI (~6%). PCM = 298. Vida: ~114 años. 60% fuentes naturales / 40% antropogénicas (fertilizantes). Además destruye el ozono estratosférico que nos protege de la radiación UV.
+    </div>
+  </div>
+  <div class="warn">⚠️ PERÚ AGRÍCOLA: El cultivo de arroz en la costa y selva, y la ganadería en la sierra, son fuentes significativas de CH₄ y N₂O respectivamente. Las prácticas agropecuarias peruanas tienen huella de GEI no solo en CO₂.</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- SECCIÓN 3: CALENTAMIENTO GLOBAL Y CC  -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec rojo">🔴 SECCIÓN 3: CALENTAMIENTO GLOBAL Y CAMBIO CLIMÁTICO</div>
+
+<!-- BLOQUE 3.1 -->
+<div class="block s2">
+  <span class="bh rd">Calentamiento Global: Definición y Evidencias (Diap. 23–25)</span>
+  <div class="def">El <b>Calentamiento Global</b> (CG) es el incremento observado de la temperatura media de la atmósfera terrestre y los océanos, acelerado desde la Revolución Industrial por el aumento antrópico de GEI, principalmente CO₂ producto de la quema de combustibles fósiles.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot rd"></span><span><b>Sentido observacional:</b> muestra cómo los promedios de temperatura han aumentado en las últimas décadas. Fuente: NOAA — anomalía relativa al promedio 1961-1990.</span></div>
+      <div class="item"><span class="dot rd"></span><span><b>Sentido predictivo:</b> proyección futura de temperaturas basada en modelos de simulación climática (IPCC). Ambos sentidos llevan implícita la influencia humana.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot am"></span><span>Temperatura actual: <b>+1.1°C</b> respecto a finales del siglo XIX.</span></div>
+      <div class="item"><span class="dot am"></span><span>Período 2011–2020: la década más cálida registrada.</span></div>
+      <div class="item"><span class="dot am"></span><span>Aumento 1880–2012: <b>+0.85°C</b> según IPCC 2013.</span></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR CONCEPTUAL CRÍTICO: "Calentamiento Global" ≠ "Cambio Climático". El CG es el <b>fenómeno termométrico</b> (aumento de temperatura), mientras que el CC es el conjunto de transformaciones en los patrones climáticos <i>producidas como consecuencia</i> del CG y de otros factores. El CG es una causa generadora, el CC es el efecto sistémico.</div>
+  <div class="exam">🎯 EXAMEN: Explica la distinción conceptual entre Calentamiento Global y Cambio Climático. ¿Por qué sería incorrecto usar ambos términos como sinónimos en un informe técnico?</div>
+</div>
+
+<!-- BLOQUE 3.2 Diferencia EI vs CG -->
+<div class="block">
+  <span class="bh gr">Diferencia: E. Invernadero vs Calentamiento Global</span>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6;">
+      <b>🌿 Efecto Invernadero</b>
+      Proceso <b>natural</b>. Los GEI presentes en la atmósfera retienen parte del calor solar. Mantiene T° apta para la vida (+14°C). Sin él: –19°C.
+    </div>
+    <div class="mini" style="border-top:3px solid #dc2626;">
+      <b>🔥 Calentamiento Global</b>
+      Proceso <b>antropogénico</b>. Quema de comb. fósiles, deforestación y ganadería incrementan GEI. La atmósfera modificada retiene más calor, rompiendo el equilibrio natural.
+    </div>
+  </div>
+  <div class="flow" style="margin-top:7px;">
+    <div class="fbox">Actividad humana</div><span class="farrow">→</span>
+    <div class="fbox">+ GEI en atmósfera</div><span class="farrow">→</span>
+    <div class="fbox">+ Retención calorífica</div><span class="farrow">→</span>
+    <div class="fbox">Calentamiento Global</div><span class="farrow">→</span>
+    <div class="fbox">Cambio Climático</div>
+  </div>
+</div>
+
+<!-- BLOQUE 3.3 CAMBIO CLIMÁTICO definición -->
+<div class="block">
+  <span class="bh rd">¿Qué es el Cambio Climático? (Diap. 27–28)</span>
+  <div class="def">El <b>cambio climático</b> hace referencia a alteraciones a <i>largo plazo</i> de las temperaturas y los patrones climáticos. Desde el siglo XIX, las actividades humanas son su principal motor mediante la quema de combustibles fósiles.</div>
+  <div class="item"><span class="dot rd"></span><span>Puede tener causas naturales (variaciones del ciclo solar, erupciones volcánicas), pero la velocidad del cambio actual es <b>incompatible</b> con cualquier ciclo natural conocido.</span></div>
+  <div class="item"><span class="dot rd"></span><span>La quema de carbón, petróleo y gas produce GEI que actúan como una "manta" alrededor de la Tierra, atrapando calor. (ONU, 2020)</span></div>
+  <div class="item"><span class="dot rd"></span><span>El consenso científico del IPCC establece: (1) el calentamiento del sistema climático es un hecho inequívoco; (2) la influencia humana es su principal causa desde mediados del siglo XX.</span></div>
+  <div class="exam">🎯 EXAMEN: Según el IPCC, ¿cuáles son los dos puntos del consenso científico general sobre el cambio climático? ¿Por qué es importante distinguir este consenso del debate político-económico sobre medidas de acción?</div>
+</div>
+
+<!-- BLOQUE 3.4 Escenarios RCP -->
+<div class="block s2">
+  <span class="bh am">Proyecciones y Escenarios RCP (Diap. 33–34)</span>
+  <div class="def">Las <b>Trayectorias Representativas de Concentración (RCP)</b> son escenarios de emisiones futuras usados por el IPCC para modelar el cambio de temperatura hasta finales del siglo XXI (2081–2100 vs. 1986–2005).</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #16a34a;">
+      <b>🟢 RCP 2.6 — Optimista</b>
+      Emisiones limitadas, fuerte acción climática. Proyecta un aumento de <b>+0.3 a +1.7°C</b> adicionales respecto a la era preindustrial. Compatible con el objetivo de 1.5°C del Acuerdo de París.
+    </div>
+    <div class="mini" style="border-left:3px solid #dc2626;">
+      <b>🔴 RCP 8.5 — Tendencia actual</b>
+      Emisiones muy altas sin acción significativa. Proyecta un aumento de <b>+2.6 a +4.8°C</b> para 2081–2100. Provocaría desestabilización irreversible del sistema climático global.
+    </div>
+  </div>
+  <div class="item" style="margin-top:8px;"><span class="dot am"></span><span>Según planes nacionales actuales, el calentamiento llegará a <b>+2.7°C</b> para fin de siglo — muy por encima del límite de 1.5°C acordado en París.</span></div>
+  <div class="item"><span class="dot am"></span><span>Las emisiones que generan el CC afectan a todos, pero los 10 países más emisores aportan el <b>68%</b> del total; los 100 menos emisores solo el 3%.</span></div>
+</div>
+
+<!-- BLOQUE 3.5 Historia ciencia CC -->
+<div class="block">
+  <span class="bh gr">Hitos Históricos del Conocimiento Climático (Diap. 36–37)</span>
+  <div class="item"><span class="num-badge nb-b">1</span><span><b>1896 — Arrhenius:</b> establece la relación matemática entre CO₂ atmosférico y temperatura. Primer científico en cuantificar el efecto del CO₂.</span></div>
+  <div class="item"><span class="num-badge nb-b">2</span><span><b>1940 — Espectroscopía IR:</b> demuestra experimentalmente que el CO₂ absorbe radiación infrarroja.</span></div>
+  <div class="item"><span class="num-badge nb-b">3</span><span><b>1960 — Keeling:</b> curvas de concentración de CO₂ en Mauna Loa y Antártica — evidencia directa del aumento.</span></div>
+  <div class="item"><span class="num-badge nb-b">4</span><span><b>1979 — 1ª Conferencia Mundial del Clima (OMM):</b> reconoce que actividades humanas pueden causar cambios climáticos.</span></div>
+  <div class="item"><span class="num-badge nb-g">5</span><span><b>1988 — Creación del IPCC</b> (Panel Intergubernamental sobre Cambio Climático).</span></div>
+  <div class="item"><span class="num-badge nb-g">6</span><span><b>1992 — Río de Janeiro (UNCED):</b> Agenda 21 + Convención Marco sobre CC + Conv. Diversidad Biológica.</span></div>
+  <div class="item"><span class="num-badge nb-g">7</span><span><b>1997 — Protocolo de Kioto:</b> metas obligatorias para países desarrollados, 6 GEI regulados.</span></div>
+  <div class="item"><span class="num-badge nb-g">8</span><span><b>2014 — COP20 en Lima:</b> 195 países, 14,000 representantes. Espacio "Voces por el Clima" abrió la CC a la sociedad civil.</span></div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- SECCIÓN 4: IMPACTOS                   -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec rojo">🔴 SECCIÓN 4: IMPACTOS DEL CAMBIO CLIMÁTICO — GLOBAL Y PERÚ</div>
+
+<!-- BLOQUE 4.1 impactos globales -->
+<div class="block">
+  <span class="bh rs">Impactos Globales del CC (Diap. 30, 41–43)</span>
+  <div class="def">El cambio climático no se limita al aumento de temperatura: altera <b>todo el sistema climático</b>, con consecuencias en cadena sobre ecosistemas, economías y sociedades humanas.</div>
+  <div class="item"><span class="dot rs"></span><span><b>Criosfera:</b> deshielo de polos y glaciares → aumento del nivel del mar (~4 mm/año) → inundación de zonas costeras, extinción de islas bajas.</span></div>
+  <div class="item"><span class="dot rs"></span><span><b>Eventos extremos:</b> sequías, huracanes, incendios forestales, tormentas catastróficas se vuelven más frecuentes e intensos.</span></div>
+  <div class="item"><span class="dot rs"></span><span><b>Biodiversidad:</b> extinción de especies incapaces de adaptarse a la velocidad del cambio; desplazamiento de rangos de distribución.</span></div>
+  <div class="item"><span class="dot rs"></span><span><b>Seguridad humana:</b> refugiados climáticos, escasez de agua, hambre, aumento de enfermedades tropicales en nuevos territorios.</span></div>
+  <div class="exam">🎯 EXAMEN: Explica por qué los países con menores emisiones de GEI (como los pequeños Estados insulares) son paradójicamente los más vulnerables a los impactos del cambio climático. ¿Qué principio de equidad climática plantea esta situación?</div>
+</div>
+
+<!-- BLOQUE 4.2 Estado clima 2021 -->
+<div class="block">
+  <span class="bh rd">Estado del Clima en 2021 — Fenómenos Extremos (Diap. 38–40)</span>
+  <div class="def">El informe provisional de la OMM (2021) documenta que <b>"los fenómenos extremos son la nueva normalidad"</b>, con evidencia creciente del sello del cambio climático antropogénico en eventos específicos.</div>
+  <div class="item"><span class="dot rd"></span><span>Primera vez en registros modernos que <b>llovió en la cima del manto de hielo de Groenlandia</b> en lugar de nevar.</span></div>
+  <div class="item"><span class="dot rd"></span><span>Canadá: temperaturas cercanas a <b>50°C</b>; Valle de la Muerte: <b>54.4°C</b>.</span></div>
+  <div class="item"><span class="dot rd"></span><span>China: meses de lluvia en pocas horas. Europa Central: inundaciones con decenas de víctimas y pérdidas de miles de millones.</span></div>
+  <div class="item"><span class="dot rd"></span><span>Si el ritmo actual continúa, el incremento a fin de siglo <b>superará con creces</b> las metas de 1.5–2°C del Acuerdo de París.</span></div>
+  <div class="warn">⚠️ La COP26 (Glasgow, 2021) fue señalada como "punto de inflexión decisivo". Los datos científicos son contundentes; la brecha está en la voluntad política de los estados con mayores emisiones.</div>
+</div>
+
+<!-- BLOQUE 4.3 impactos Perú -->
+<div class="block">
+  <span class="bh na">Impactos Específicos en el Perú (Diap. 44–45)</span>
+  <div class="def">El Perú es un país de alta vulnerabilidad climática por su diversidad de pisos ecológicos, dependencia de glaciares, economía agroexportadora y alta dependencia hidroeléctrica.</div>
+  <div class="item"><span class="dot na"></span><span><b>Agropecuario:</b> agricultura, pesquería y ganadería son altamente dependientes del clima. Alteraciones en la distribución de lluvias destruyen ciclos agrícolas establecidos milenariamente en zonas andinas.</span></div>
+  <div class="item"><span class="dot na"></span><span><b>Energía:</b> más del 70% de la energía eléctrica del Perú proviene de fuentes hidroeléctricas. La reducción glaciar y la variabilidad hídrica amenazan directamente este sistema (ej: Central Mantaro).</span></div>
+  <div class="item"><span class="dot na"></span><span><b>Salud:</b> vectores de enfermedades como el dengue y la malaria aparecen en nuevos territorios (antes fríos como valles interandinos) al subir la temperatura.</span></div>
+  <div class="item"><span class="dot na"></span><span><b>Social:</b> migraciones forzadas del campo a la ciudad, intensificación de la pobreza rural, conflictividad por recursos hídricos (agua de riego).</span></div>
+  <div class="exam">🎯 EXAMEN: Considerando que Perú produce menos del 0.4% de las emisiones mundiales de GEI, ¿por qué el país figura entre los más vulnerables al cambio climático? Relaciona al menos tres sectores económicos con sus riesgos climáticos específicos.</div>
+</div>
+
+<!-- BLOQUE 4.4 Africa OMM -->
+<div class="block s2">
+  <span class="bh rs">OMM: Estado del Clima en África 2020 — Caso de Vulnerabilidad (Diap. 46–49)</span>
+  <div class="def">El caso africano ilustra cómo el cambio climático actúa como <b>multiplicador de vulnerabilidades</b> preexistentes: pobreza, conflictos, inseguridad alimentaria y débil institucionalidad se amplifican ante eventos climáticos extremos.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #dc2626;">
+      <b>🌊 Inundaciones & Sequías</b>
+      Precipitaciones anómalas en Sahel, valle del Rift, cuenca del Nilo. Sequía en Madagascar → crisis humanitaria. Lagos y ríos alcanzaron máximos históricos (lago Victoria, río Nilo Azul).
+    </div>
+    <div class="mini" style="border-top:3px solid #ca8a04;">
+      <b>🌾 Inseguridad Alimentaria</b>
+      En 2020, la población con inseguridad alimentaria aumentó un <b>40%</b> respecto al año anterior. La inseguridad sube 5–20 puntos porcentuales con cada inundación o sequía en el África Subsahariana.
+    </div>
+    <div class="mini" style="border-top:3px solid #7c3aed;">
+      <b>🚶 Desplazamientos</b>
+      El 12% de los desplazamientos mundiales ocurrieron en África Oriental y el Cuerno de África: >1.2 millones por desastres y ~500,000 por conflictos. Las inundaciones son el principal factor.
+    </div>
+  </div>
+  <div class="item" style="margin-top:8px;"><span class="dot rs"></span><span>Proyección para 2030: hasta <b>118 millones</b> de personas en extrema pobreza expuestas a sequías, inundaciones y calor extremo. Sin medidas, el PIB africano podría reducirse hasta <b>3% en 2050</b>.</span></div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- SECCIÓN 5: ACCIONES Y MITIGACIÓN     -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec verde">🟢 SECCIÓN 5: ACCIONES FRENTE AL CAMBIO CLIMÁTICO — GOBERNANZA Y MITIGACIÓN</div>
+
+<!-- BLOQUE 5.1 IPCC -->
+<div class="block">
+  <span class="bh vd">El IPCC y la Gobernanza Climática (Diap. 51)</span>
+  <div class="def">El <b>IPCC</b> (Panel Intergubernamental sobre Cambio Climático), creado en 1988 por la OMM y PNUMA, es el principal órgano científico de asesoramiento climático. Reúne ~3,000 expertos de 150 países.</div>
+  <div class="item"><span class="dot vd"></span><span>No produce ciencia original sino que <b>evalúa, sintetiza y difunde</b> la evidencia existente de miles de publicaciones científicas arbitradas.</span></div>
+  <div class="item"><span class="dot vd"></span><span>Sus informes de evaluación (AR) — el más reciente es el AR6 (2021–2022) — son la base de las negociaciones en las COP de la UNFCCC.</span></div>
+  <div class="item"><span class="dot vd"></span><span><b>Conferencia de Río 1992 (UNCED):</b> punto de partida de la arquitectura ambiental global: Agenda 21 + Convención sobre CC + Convenio Diversidad Biológica.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la función del IPCC dentro del sistema de gobernanza climática global? ¿Por qué no realiza investigación científica propia y qué ventaja tiene ese modelo?</div>
+</div>
+
+<!-- BLOQUE 5.2 Protocolo Kioto y COP20 -->
+<div class="block">
+  <span class="bh vd">Protocolo de Kioto y COP20 Lima (Diap. 52)</span>
+  <div class="def">El <b>Protocolo de Kioto</b> (1997) fue el primer acuerdo vinculante para reducir emisiones de GEI en países industrializados (Anexo I). Reguló 6 GEI con metas específicas por país.</div>
+  <div class="item"><span class="dot vd"></span><span>GEI regulados: CO₂, CH₄, N₂O, HFC, PFC, SF₆.</span></div>
+  <div class="item"><span class="dot vd"></span><span>Crítica principal: las grandes economías emergentes (China, India) no tenían metas vinculantes en la primera fase; EEUU nunca lo ratificó.</span></div>
+  <div class="item"><span class="dot vd"></span><span>En 2013, el CO₂ superó las <b>400 ppm</b>. Si se consume el 20% de las reservas de combustibles fósiles conocidas, el descontrol del CC sería irreversible.</span></div>
+  <hr class="divh">
+  <div class="item"><span class="dot vd"></span><span><b>COP20 Lima (2014):</b> 195 países, 14,000 representantes. Preparó el terreno para el Acuerdo de París (2015). Espacio civil "Voces por el Clima": +80,000 visitantes.</span></div>
+</div>
+
+<!-- BLOQUE 5.3 Mitigación sectores -->
+<div class="block s3">
+  <span class="bh vd">Opciones de Mitigación por Sector (Diap. 54–58)</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Sector</th>
+        <th>Opciones de Mitigación Principales</th>
+        <th>GEI objetivo</th>
+        <th>Ejemplo peruano relevante</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pill vd">⚡ Energía</span></td>
+        <td>Energías renovables (hidro, solar, eólica, geotérmica, bioenergía); mayor eficiencia en suministro; captura y almacenamiento de carbono (CAC)</td>
+        <td>CO₂</td>
+        <td>Expansión de centrales hidroeléctricas (Mantaro, Cerro del Águila); proyectos solares en Moquegua</td>
+      </tr>
+      <tr>
+        <td><span class="pill tl">🚌 Transporte</span></td>
+        <td>Vehículos eficientes; biocombustibles; transporte público; movilidad activa (bicicleta, caminar); planificación urbana</td>
+        <td>CO₂</td>
+        <td>Metropolitano de Lima; GNV en transporte público; electromovilidad emergente</td>
+      </tr>
+      <tr>
+        <td><span class="pill am">🏭 Industria</span></td>
+        <td>Tecnologías específicas por proceso; reciclaje y sustitución de materiales; cogeneración de calor/energía; control de emisiones GEI</td>
+        <td>CO₂, HFC, SF₆</td>
+        <td>Industria minera (principal emisora): adopción de mejores prácticas operacionales</td>
+      </tr>
+      <tr>
+        <td><span class="pill rd">🗑️ Desechos</span></td>
+        <td>Recuperación de metano en vertederos; compostaje; incineración con recuperación energética; reciclaje; tratamiento de aguas residuales</td>
+        <td>CH₄</td>
+        <td>Relleno sanitario de Zapallal (Lima): proyecto de recuperación de biogás</td>
+      </tr>
+      <tr>
+        <td><span class="pill vd">🌲 Silvicultura</span></td>
+        <td>Reducción de deforestación (REDD+); reforestación; gestión forestal; mejora de especies para aumentar captura de carbono</td>
+        <td>CO₂</td>
+        <td>REDD+ Tambopata-Bahuaja (AIDER): >1 millón de árboles plantados en Madre de Dios</td>
+      </tr>
+      <tr>
+        <td><span class="pill na">🌾 Agricultura</span></td>
+        <td>Gestión de ganadería y estiércol para reducir CH₄; mejores técnicas de fertilización para reducir N₂O; agroforestería; restauración de suelos turbosos</td>
+        <td>CH₄, N₂O, CO₂</td>
+        <td>Sistemas agroforestales en la Amazonía peruana (AIDER, ProNaturaleza); agricultura climáticamente inteligente</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR: El sector forestal y el agrícola son simultáneamente fuentes y sumideros de GEI en el Perú. La conversión de bosques amazónicos en pastizales o cultivos convierte un sumidero neto de carbono en fuente emisora, siendo la <b>deforestación</b> el principal driver de emisiones nacionales.</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- TABLA INTEGRADORA FINAL               -->
+<!-- ══════════════════════════════════════ -->
+<div class="sec gris">⚫ TABLA INTEGRADORA — SÍNTESIS CONCEPTUAL COMPLETA</div>
+
+<div class="block s3">
+  <span class="bh gr">Resumen Integrador: Cambio Climático — Conceptos, Cifras y Conexiones</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Concepto</th>
+        <th>Definición esencial</th>
+        <th>Cifra clave</th>
+        <th>Mecanismo / causa principal</th>
+        <th>Impacto en Perú</th>
+        <th>Instrumento de respuesta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Efecto Invernadero</b></td>
+        <td>Retención de radiación IR por GEI en la atmósfera</td>
+        <td>T° natural: +14°C vs –19°C sin EI</td>
+        <td>Absorción/re-emisión por moléculas poliatómicas</td>
+        <td>Fenómeno natural que regula el clima andino y costero</td>
+        <td>Reducción de GEI; eficiencia energética</td>
+      </tr>
+      <tr>
+        <td><b>CO₂ (GEI)</b></td>
+        <td>GEI más importante; referencia PCM=1</td>
+        <td>413.2 ppm (2020); 149% nivel preindustrial</td>
+        <td>Combustión fósil (76% emisiones GEI)</td>
+        <td>Acidificación costera; derretimiento glaciares (Pastoruri)</td>
+        <td>Protocolo de Kioto; Acuerdo de París</td>
+      </tr>
+      <tr>
+        <td><b>Metano (CH₄)</b></td>
+        <td>2° GEI en forzamiento; PCM=25; vida ~12 años</td>
+        <td>262% del nivel de 1750 (2020)</td>
+        <td>Ganadería, arroz, vertederos (60% antropogénico)</td>
+        <td>Ganadería altoandina y cultivo de arroz costeño</td>
+        <td>Gestión ganadera; biogás de vertederos</td>
+      </tr>
+      <tr>
+        <td><b>N₂O</b></td>
+        <td>3° GEI; PCM=298; vida ~114 años</td>
+        <td>6% forzamiento radiativo GEI larga duración</td>
+        <td>Fertilizantes agrícolas (40% fuentes antropogénicas)</td>
+        <td>Agricultura intensiva en costa y valles interandinos</td>
+        <td>Técnicas eficientes de fertilización; precision farming</td>
+      </tr>
+      <tr>
+        <td><b>Calentamiento Global</b></td>
+        <td>Aumento observado de T° media global</td>
+        <td>+1.1°C desde finales S. XIX; +0.85°C en 1880–2012</td>
+        <td>Incremento de GEI desde Revolución Industrial</td>
+        <td>Retroceso glaciar; cambios en régimen hídrico</td>
+        <td>IPCC; compromisos nacionales (NDC)</td>
+      </tr>
+      <tr>
+        <td><b>Cambio Climático</b></td>
+        <td>Alteración a L/P de temperaturas y patrones climáticos</td>
+        <td>Proyección actual: +2.7°C a fin de siglo</td>
+        <td>Calentamiento Global + retroalimentaciones sistémicas</td>
+        <td>El Niño más intenso; pérdida de cultivos; vectores de enfermedades</td>
+        <td>Mitigación + Adaptación; UNFCCC/COP</td>
+      </tr>
+      <tr>
+        <td><b>Forzamiento Radiativo</b></td>
+        <td>Cambio en flujo de energía causado por un agente externo</td>
+        <td>FR CO₂: el más alto entre GEI de larga duración</td>
+        <td>Cambios en composición atmosférica, albedo, orbital</td>
+        <td>Forzamiento positivo → más energía en el sistema hídrico andino</td>
+        <td>Monitoreo OMM; modelamiento IPCC</td>
+      </tr>
+      <tr>
+        <td><b>ENOA (El Niño/La Niña)</b></td>
+        <td>Oscilación natural en T° superficial Pacífico tropical, ~5 años</td>
+        <td>El Niño: anomalías T° +4°C en Pacífico ecuatorial</td>
+        <td>Interacción océano-atmósfera; retroalimentación</td>
+        <td>Inundaciones en costa norte; heladas en altiplano</td>
+        <td>SENAMHI; sistemas de alerta temprana</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:8px;">⚠️ DATO INTEGRADOR CLAVE: La cadena causal central del tema es: <b>Actividad humana → ↑GEI → ↑Forzamiento Radiativo → Calentamiento Global → Cambio Climático → Impactos sistémicos</b>. Cada eslabón tiene sus propios indicadores, escales temporales y actores responsables. El PCM permite comparar los GEI entre sí usando CO₂ como unidad de referencia, siendo la herramienta técnica fundamental para el diseño de políticas de mitigación.</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- QUIZ INTERACTIVO                      -->
+<!-- ══════════════════════════════════════ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta · Cambio Climático | RRNN del Perú 2026</p>
+  </div>
+
+  <div class="quiz-progress">
+    <div class="quiz-progress-text" id="progress-text">Respondidas: 0 / 10 &nbsp;|&nbsp; Aciertos: 0</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="progress-bar" style="width:0%;background:#16a34a;"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">Sin el efecto invernadero natural, ¿cuál sería la temperatura media aproximada de la superficie terrestre?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) 0°C, equivalente al punto de congelación del agua</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) +5°C, suficiente para mantener formas básicas de vida</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) –19°C, muy por debajo del umbral de habitabilidad</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) –5°C, similar a las condiciones polares actuales</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">El Potencial de Calentamiento Mundial (PCM) del metano a 100 años es 25. ¿Qué significa esto en términos prácticos?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) El metano es 25 veces más abundante en la atmósfera que el CO₂</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Una tonelada de CH₄ retiene 25 veces más calor que una tonelada de CO₂ en 100 años</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) El metano permanece 25 años en la atmósfera antes de degradarse</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) El metano genera 25% más emisiones totales que el CO₂ a nivel mundial</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el CO₂ en la atmósfera es FALSA según los datos del material del curso?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) La concentración de CO₂ en 2020 fue de 413.2 ppm, equivalente al 149% del nivel preindustrial</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Aporta aproximadamente el 64% del forzamiento radiativo total de los GEI de larga duración</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) El CO₂ se elimina completamente de la atmósfera en un ciclo de vida de aproximadamente 50 años</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Los océanos y los bosques actúan como los principales sumideros naturales de carbono</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿En qué se diferencia fundamentalmente el "Calentamiento Global" del "Cambio Climático"?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) El calentamiento global es un fenómeno natural, mientras que el cambio climático es exclusivamente antropogénico</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Son sinónimos; ambos términos describen exactamente el mismo proceso climático</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) El cambio climático se refiere solo al aumento de temperatura, mientras que el calentamiento global incluye todos los patrones climáticos</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="true">D) El calentamiento global es el fenómeno de aumento de temperatura; el cambio climático es el conjunto de alteraciones sistémicas que ese aumento genera</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">El escenario RCP 8.5 del IPCC proyecta para el período 2081–2100 un aumento de temperatura de:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) +0.3 a +1.7°C respecto a la era preindustrial</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) +1.5 a +2.0°C, en línea con el Acuerdo de París</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) +2.6 a +4.8°C, correspondiente a un escenario de emisiones muy altas</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) +1.0 a +2.0°C, en el rango del escenario optimista</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Por qué el N₂O (óxido nitroso) es particularmente preocupante desde el punto de vista ambiental, más allá de su contribución al calentamiento global?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Porque es el GEI con mayor concentración porcentual en la atmósfera después del CO₂</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Porque proviene exclusivamente de fuentes industriales que son fáciles de regular</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) Porque además de ser un GEI potente (PCM=298), contribuye significativamente a la destrucción de la capa de ozono estratosférico</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Porque se acumula preferentemente en la troposfera baja, afectando directamente la calidad del aire</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">En el contexto peruano, ¿cuál de los siguientes sectores es más vulnerable al cambio climático debido a la dependencia directa de los recursos hídricos glaciares?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) La industria manufacturera en Lima, que depende principalmente de energía térmica</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) La generación eléctrica, que depende en más del 70% de fuentes hidroeléctricas alimentadas por deshielo glaciar y precipitaciones</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) El sector minero a cielo abierto, que no depende directamente del ciclo hidrológico</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Las exportaciones de productos del mar, que no se ven afectadas por cambios en glaciares</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">El Protocolo de Kioto (1997) fue un hito en la gobernanza climática. ¿Cuántos GEI reguló directamente en su primera fase?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Tres gases: CO₂, CH₄ y N₂O, los más abundantes de origen antropogénico</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Cuatro gases: CO₂, CH₄, N₂O y vapor de agua como GEI principal</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Seis gases: CO₂, CH₄, N₂O, HFC, PFC y SF₆</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Siete gases: incluyendo también el NF₃ desde su firma original en 1997</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">Según la OMM (Informe Estado del Clima en África 2020), ¿en cuánto aumentó la población afectada por inseguridad alimentaria en 2020 respecto al año anterior?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Aproximadamente un 15%, una cifra preocupante pero manejable</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Aproximadamente un 25%, concentrado principalmente en el norte de África</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Aproximadamente un 55%, impulsado principalmente por conflictos armados</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="true">D) Aproximadamente un 40%, producto de la combinación de variabilidad climática, conflictos, plagas y la pandemia de COVID-19</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">En opciones de mitigación del cambio climático para el sector agrícola, ¿qué práctica reduce simultáneamente las emisiones de CH₄ y almacena carbono en el suelo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Incineración controlada de residuos de cosecha para liberar nutrientes rápidamente</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Incremento del uso de fertilizantes nitrogenados para aumentar productividad y reducir área cultivada</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) Gestión del ganado y el estiércol combinada con mejor gestión de cultivos y tierras de pastoreo para aumentar el almacenamiento de carbono en el suelo</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Cambio de cultivos de arroz a cultivos de exportación sin modificar las prácticas de ganadería</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <!-- PANEL DE RESULTADOS -->
+  <div id="results-panel">
+    <h3 id="results-title"></h3>
+    <p id="results-msg"></p>
+    <button id="btn-reset">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">
+    IPCC (2007). Fourth Assessment Report, Technical Summary. · OMM (2013). Boletín sobre los GEI. · OMM (2021). Estado del clima mundial — Informe provisional. · OMM (2020). Estado del clima en África. · PNUMA (2012). Protocolo de Kioto. · ONU (2020). ¿Qué es el Cambio Climático? UN CC:Learn. · NOAA. Anomalías de temperatura global. · IPCC (2013), AR5. Cambio en temperatura superficial 1901–2012. · AIDER. Proyecto REDD+ Tambopata-Bahuaja. · MINAM Perú (2012). Diálogos ambientales. · Svante Arrhenius (1896). Über den Einfluss der Kohlensäure. · Keeling (1960). Curvas CO₂ Mauna Loa.
+  </span>
+</div>
+
+</div><!-- fin .cv -->
+
+<script>
+(function(){
+  let answered = 0;
+  let correct = 0;
+
+  const feedbacks = {
+    1: {ok:"✅ ¡Correcto! Sin el efecto invernadero natural, la temperatura media de la Tierra sería de –19°C, completamente inhabitable para la vida compleja. Los GEI elevan esa temperatura hasta los actuales +14°C actuando como una 'manta' que retiene la radiación infrarroja.", ko:"❌ Incorrecto. La respuesta correcta es C. Sin efecto invernadero, la temperatura media sería –19°C. Los GEI son indispensables para la vida al elevarla hasta +14°C."},
+    2: {ok:"✅ ¡Correcto! El PCM es una medida relativa de capacidad calorífica por unidad de masa. CH₄ con PCM=25 significa que 1 kg de metano retiene 25 veces más calor que 1 kg de CO₂ en 100 años. Esto justifica que las emisiones de todos los GEI se expresen en CO₂ equivalente.", ko:"❌ Incorrecto. La respuesta correcta es B. El PCM compara la capacidad de retención de calor por masa igual del gas respecto al CO₂. No se refiere a abundancia ni a vida útil directamente."},
+    3: {ok:"✅ ¡Correcto! La afirmación FALSA es C. El CO₂ NO tiene un ciclo de vida específico — circula continuamente entre atmósfera, océanos y biosfera y puede permanecer durante cientos o miles de años. Esta persistencia es lo que lo hace tan problemático.", ko:"❌ Incorrecto. La respuesta correcta es C. El CO₂ no tiene un ciclo de vida fijo de 50 años; a diferencia del metano (12 años), el CO₂ puede persistir en la atmósfera durante siglos o milenios."},
+    4: {ok:"✅ ¡Correcto! El calentamiento global es el fenómeno termométrico específico (aumento de T°), mientras que el cambio climático es el conjunto sistémico de alteraciones que incluye patrones de precipitación, eventos extremos, nivel del mar, y biodiversidad. El CG es la causa; el CC es el efecto amplio.", ko:"❌ Incorrecto. La respuesta correcta es D. No son sinónimos: el CG es el aumento de temperatura; el CC es la respuesta sistémica del clima a ese calentamiento, abarcando mucho más que la temperatura."},
+    5: {ok:"✅ ¡Correcto! RCP 8.5 es el escenario 'business as usual' con emisiones muy altas y proyecta +2.6 a +4.8°C para 2081–2100. RCP 2.6 (acción climática fuerte) proyecta solo +0.3 a +1.7°C. Los planes nacionales actuales llevarían a +2.7°C.", ko:"❌ Incorrecto. La respuesta correcta es C. RCP 8.5 es el escenario de emisiones altas que proyecta +2.6 a +4.8°C. Los valores de +0.3 a +1.7°C corresponden al RCP 2.6 optimista."},
+    6: {ok:"✅ ¡Correcto! El N₂O tiene un doble efecto ambiental: es el 3° GEI con PCM=298 (298 veces más potente que el CO₂) Y además contribuye significativamente a la destrucción del ozono estratosférico, que nos protege de la radiación UV dañina del sol.", ko:"❌ Incorrecto. La respuesta correcta es C. El N₂O es preocupante no solo por su PCM=298, sino también porque destruye la capa de ozono estratosférica, siendo el principal agente destructor de ozono del siglo XXI."},
+    7: {ok:"✅ ¡Correcto! Más del 70% de la electricidad peruana proviene de fuentes hidroeléctricas. El retroceso glaciar y la variabilidad hídrica por el CC amenazan directamente esta capacidad generadora (ej: Central del Mantaro). Esta dependencia hace al Perú altamente vulnerable.", ko:"❌ Incorrecto. La respuesta correcta es B. La generación eléctrica depende en >70% de hidroeléctricas, que a su vez dependen de la disponibilidad hídrica ligada al deshielo glaciar y las precipitaciones, ambas alteradas por el CC."},
+    8: {ok:"✅ ¡Correcto! El Protocolo de Kioto (1997) reguló seis GEI: CO₂, CH₄, N₂O, HFC, PFC y SF₆. El NF₃ fue añadido posteriormente en enmiendas. La ausencia de China e India como países con metas obligatorias fue una de sus principales limitaciones.", ko:"❌ Incorrecto. La respuesta correcta es C. Kioto reguló exactamente 6 GEI: CO₂, CH₄, N₂O, hidrofluorocarbonos (HFC), perfluorocarbonos (PFC) y hexafluoruro de azufre (SF₆)."},
+    9: {ok:"✅ ¡Correcto! Según el informe OMM 2020, la población afectada por inseguridad alimentaria en África aumentó casi un 40% respecto al año anterior. Este aumento fue producto de la sinergia entre variabilidad climática, conflictos, plaga de langostas y la pandemia de COVID-19.", ko:"❌ Incorrecto. La respuesta correcta es D. Según la OMM, la inseguridad alimentaria en África aumentó casi un 40% en 2020, impulsada por la combinación de factores climáticos, conflictos, plagas y COVID-19."},
+    10: {ok:"✅ ¡Correcto! La gestión integrada del ganado y pastoreo, combinada con mejoras en el manejo de cultivos, reduce directamente las emisiones de CH₄ (fermentación entérica del ganado) y aumenta el almacenamiento de carbono orgánico en el suelo mediante mejores prácticas. Las prácticas agroforestales potencian ambos efectos.", ko:"❌ Incorrecto. La respuesta correcta es C. La gestión del ganado reduce CH₄ por fermentación entérica, y la mejor gestión de cultivos/pastoreo aumenta el almacenamiento de carbono en suelo. La incineración y los fertilizantes extra incrementan los GEI."}
+  };
+
+  const container = document.getElementById('quiz-section');
+  container.addEventListener('click', function(e){
+    const btn = e.target.closest('.qbtn');
+    if(!btn) return;
+    const q = parseInt(btn.getAttribute('data-q'));
+    const isCorrect = btn.getAttribute('data-correct') === 'true';
+    
+    // Disable all buttons in this question
+    const card = document.getElementById('q'+q);
+    const allBtns = card.querySelectorAll('.qbtn');
+    allBtns.forEach(b => {
+      b.disabled = true;
+      if(b.getAttribute('data-correct') === 'true'){
+        b.classList.add('correct');
+        b.textContent = '✅ ' + b.textContent;
+      }
+    });
+    if(!isCorrect){
+      btn.classList.add('incorrect');
+    }
+
+    // Show feedback
+    const fb = document.getElementById('fb'+q);
+    fb.style.display = 'block';
+    if(isCorrect){
+      fb.className = 'qfeedback ok';
+      fb.innerHTML = feedbacks[q].ok;
+      correct++;
+    } else {
+      fb.className = 'qfeedback ko';
+      fb.innerHTML = feedbacks[q].ko;
+    }
+
+    answered++;
+    updateProgress();
+    if(answered === 10) showResults();
+  });
+
+  function updateProgress(){
+    document.getElementById('progress-text').textContent = 'Respondidas: '+answered+' / 10 | Aciertos: '+correct;
+    document.getElementById('progress-bar').style.width = (answered*10)+'%';
+  }
+
+  function showResults(){
+    const panel = document.getElementById('results-panel');
+    const title = document.getElementById('results-title');
+    const msg = document.getElementById('results-msg');
+    panel.style.display = 'block';
+    title.textContent = '📊 Resultado: '+correct+' / 10 correctas';
+    if(correct <= 4){
+      panel.style.background='#fee2e2'; panel.style.borderRadius='10px'; panel.style.color='#991b1b';
+      msg.textContent = '📚 Necesitas repasar el material. Repasa especialmente GEI, PCM y la diferencia entre EI, CG y CC.';
+    } else if(correct <= 7){
+      panel.style.background='#fef9c3'; panel.style.borderRadius='10px'; panel.style.color='#713f12';
+      msg.textContent = '📖 ¡Buen avance, sigue repasando! Refuerza los temas de impactos en Perú y acciones de mitigación.';
+    } else {
+      panel.style.background='#dcfce7'; panel.style.borderRadius='10px'; panel.style.color='#14532d';
+      msg.textContent = '🎉 ¡Excelente dominio del tema! Estás bien preparado para el examen de Cambio Climático.';
+    }
+  }
+
+  document.getElementById('btn-reset').addEventListener('click', function(){
+    answered = 0; correct = 0;
+    updateProgress();
+    // Reset all cards
+    for(let i=1;i<=10;i++){
+      const card = document.getElementById('q'+i);
+      const btns = card.querySelectorAll('.qbtn');
+      btns.forEach(b => {
+        b.disabled = false;
+        b.classList.remove('correct','incorrect');
+        // restore original text (remove ✅ or ❌ prefix)
+        b.textContent = b.textContent.replace(/^[✅❌]\s*/,'');
+      });
+      const fb = document.getElementById('fb'+i);
+      fb.style.display = 'none';
+      fb.className = 'qfeedback';
+    }
+    const panel = document.getElementById('results-panel');
+    panel.style.display = 'none';
+    panel.style.background = '';
+    panel.style.color = '';
+  });
+})();
+</script>
+</body>
+</html>

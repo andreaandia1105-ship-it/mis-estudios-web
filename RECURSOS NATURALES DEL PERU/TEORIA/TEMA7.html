@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas — Recurso Suelo | UNALM 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-size:13px;background:#f0f2f5;padding:14px}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:#e8eaf0;border-radius:14px}
+/* title bar */
+.title-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;letter-spacing:.5px;margin-bottom:4px}
+.title-bar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.title-bar .tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:10px;padding:2px 9px;border-radius:20px;background:#1e3a5f;color:#93c5fd;font-family:'Oswald',sans-serif}
+/* section bar */
+.sec{grid-column:1/-1;padding:7px 14px;border-radius:9px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.4px;display:flex;align-items:center;gap:7px}
+.sec-blue{background:#dbeafe;color:#1e3a8a}
+.sec-green{background:#dcfce7;color:#14532d}
+.sec-red{background:#fee2e2;color:#991b1b}
+.sec-yellow{background:#fef9c3;color:#713f12}
+.sec-purple{background:#ede9fe;color:#4c1d95}
+.sec-teal{background:#ccfbf1;color:#134e4a}
+.sec-orange{background:#ffedd5;color:#7c2d12}
+.sec-gray{background:#f1f5f9;color:#334155}
+.sec-pink{background:#fce7f3;color:#831843}
+/* blocks */
+.block{background:#fff;border:0.5px solid #d1d5db;border-radius:11px;padding:12px 13px}
+.s2{grid-column:span 2}
+.s3{grid-column:1/-1}
+/* block header */
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.3px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-pink{background:#fce7f3;color:#831843}
+/* def box */
+.def{border-left:3px solid #6366f1;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:#f8f9ff;margin-bottom:7px;line-height:1.5}
+.def-blue{border-color:#3b82f6;background:#eff6ff}
+.def-green{border-color:#22c55e;background:#f0fdf4}
+.def-red{border-color:#ef4444;background:#fff5f5}
+.def-yellow{border-color:#eab308;background:#fefce8}
+.def-purple{border-color:#a855f7;background:#faf5ff}
+.def-teal{border-color:#14b8a6;background:#f0fdfa}
+.def-orange{border-color:#f97316;background:#fff7ed}
+.def-gray{border-color:#94a3b8;background:#f8fafc}
+/* items */
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-red{background:#ef4444}
+.dot-yellow{background:#eab308}
+.dot-purple{background:#a855f7}
+.dot-teal{background:#14b8a6}
+.dot-orange{background:#f97316}
+.dot-gray{background:#94a3b8}
+/* formula box */
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+/* warn */
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0;line-height:1.5}
+/* exam */
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;line-height:1.5}
+/* mini cards */
+.mini{background:#f8fafc;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.mini-blue{border-top:3px solid #3b82f6}
+.mini-green{border-top:3px solid #22c55e}
+.mini-red{border-top:3px solid #ef4444}
+.mini-yellow{border-top:3px solid #eab308}
+.mini-purple{border-top:3px solid #a855f7}
+.mini-teal{border-top:3px solid #14b8a6}
+.mini-orange{border-top:3px solid #f97316}
+.mini-pink{border-top:3px solid #ec4899}
+/* grids */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+/* flow */
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:#f8fafc;padding:4px 9px;border-radius:6px;font-size:11px;border:0.5px solid #e2e8f0;font-weight:600}
+.farrow{font-size:15px;color:#94a3b8}
+/* stat bar */
+.stat-bar-wrap{width:100%;background:#e2e8f0;border-radius:20px;height:11px;margin:3px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:#f1f5f9;padding:5px 7px;border-bottom:0.5px solid #d1d5db;text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid #f1f5f9;vertical-align:top}
+.tbl tr:nth-child(even) td{background:#fafafa}
+/* divider */
+.divh{border:none;border-top:0.5px solid #e2e8f0;margin:7px 0}
+/* pills */
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.pill-blue{background:#dbeafe;color:#1e3a8a}
+.pill-green{background:#dcfce7;color:#14532d}
+.pill-red{background:#fee2e2;color:#991b1b}
+.pill-yellow{background:#fef9c3;color:#713f12}
+.pill-orange{background:#ffedd5;color:#7c2d12}
+/* num badge */
+.num-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-r{background:#fee2e2;color:#991b1b}
+.nb-o{background:#ffedd5;color:#7c2d12}
+.nb-p{background:#ede9fe;color:#4c1d95}
+/* footer */
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;font-size:11px}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{color:#94a3b8}
+/* quiz */
+#quiz-section{grid-column:1/-1;background:#fff;border:0.5px solid #d1d5db;border-radius:14px;padding:0;overflow:hidden}
+.quiz-header{background:#0f1e3a;color:#fff;padding:13px 18px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.quiz-body{padding:16px 18px}
+.progress-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:12px}
+.qcard{margin-bottom:16px;border:0.5px solid #e2e8f0;border-radius:10px;padding:12px 14px}
+.qnum{font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.qtext{font-size:13px;font-weight:600;color:#1e293b;margin-bottom:8px;line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;font-family:inherit}
+.qbtn:hover{background:#eff6ff;border-color:#93c5fd}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.reveal{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{background:#f0fdf4;border-left:3px solid #16a34a;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;display:none}
+.qfeedback.wrong{background:#fef2f2;border-color:#dc2626}
+.result-panel{display:none;background:#f0fdf4;border:1px solid #16a34a;border-radius:10px;padding:14px 16px;text-align:center;margin-top:12px}
+.result-panel.bad{background:#fef2f2;border-color:#dc2626}
+.result-panel.mid{background:#fefce8;border-color:#eab308}
+.result-score{font-size:28px;font-weight:700;color:#14532d}
+.result-panel.bad .result-score{color:#991b1b}
+.result-panel.mid .result-score{color:#713f12}
+.result-msg{font-size:13px;margin-top:4px;color:#166534}
+.result-panel.bad .result-msg{color:#991b1b}
+.result-panel.mid .result-msg{color:#713f12}
+.reset-btn{margin-top:10px;background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;cursor:pointer;font-family:inherit}
+.reset-btn:hover{background:#1e3a5f}
+
+/* dark mode */
+@media(prefers-color-scheme:dark){
+  body{background:#1a1d23}
+  .cv{background:#22252c}
+  .block{background:#1e2128;border-color:#374151}
+  .def-blue{background:#1e3a5f;color:#bfdbfe}
+  .def-green{background:#14532d;color:#bbf7d0}
+  .def-red{background:#450a0a;color:#fca5a5}
+  .def-yellow{background:#422006;color:#fef08a}
+  .def-purple{background:#2e1065;color:#c4b5fd}
+  .def-teal{background:#042f2e;color:#99f6e4}
+  .def-orange{background:#431407;color:#fed7aa}
+  .def-gray{background:#1e293b;color:#94a3b8}
+  .mini{background:#262b33}
+  .fbox{background:#1e2736;border-color:#374151}
+  .tbl th{background:#1e2736}
+  .tbl td{color:#d1d5db}
+  .tbl tr:nth-child(even) td{background:#1a1d23}
+  .qcard{background:#1e2128;border-color:#374151}
+  .qtext{color:#e2e8f0}
+  .qbtn{background:#1e2736;border-color:#374151;color:#d1d5db}
+  .qbtn:hover{background:#2a3855;border-color:#60a5fa}
+  .result-panel{background:#0d2d1a}
+  .result-panel.bad{background:#1f0505}
+  .result-panel.mid{background:#1a1500}
+  .warn{background:#1f1000;color:#fed7aa}
+  .exam{background:#1f1500;border-color:#854d0e;color:#fef9c3}
+  .sec-blue{background:#1e3a5f;color:#93c5fd}
+  .sec-green{background:#14532d;color:#86efac}
+  .sec-red{background:#450a0a;color:#fca5a5}
+  .sec-yellow{background:#422006;color:#fef08a}
+  .sec-purple{background:#2e1065;color:#c4b5fd}
+  .sec-teal{background:#042f2e;color:#5eead4}
+  .sec-orange{background:#431407;color:#fed7aa}
+  .sec-gray{background:#1e293b;color:#94a3b8}
+  .sec-pink{background:#4a044e;color:#f0abfc}
+  .bh-blue{background:#1e3a5f;color:#93c5fd}
+  .bh-green{background:#14532d;color:#86efac}
+  .bh-red{background:#450a0a;color:#fca5a5}
+  .bh-yellow{background:#422006;color:#fef08a}
+  .bh-purple{background:#2e1065;color:#c4b5fd}
+  .bh-teal{background:#042f2e;color:#5eead4}
+  .bh-orange{background:#431407;color:#fed7aa}
+  .bh-gray{background:#1e293b;color:#94a3b8}
+  .bh-pink{background:#4a044e;color:#f0abfc}
+  .pill-blue{background:#1e3a5f;color:#93c5fd}
+  .pill-green{background:#14532d;color:#86efac}
+  .pill-red{background:#450a0a;color:#fca5a5}
+  .pill-yellow{background:#422006;color:#fef08a}
+  .pill-orange{background:#431407;color:#fed7aa}
+  .nb-b{background:#1e3a5f;color:#93c5fd}
+  .nb-g{background:#14532d;color:#86efac}
+  .nb-r{background:#450a0a;color:#fca5a5}
+  .nb-o{background:#431407;color:#fed7aa}
+  .nb-p{background:#2e1065;color:#c4b5fd}
+  .stat-bar-wrap{background:#374151}
+  #quiz-section{background:#1e2128;border-color:#374151}
+}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- ═══════════ TÍTULO ═══════════ -->
+<div class="title-bar">
+  <h1>🌱 TEMA N°5: RECURSO SUELO</h1>
+  <p>Curso: Recursos Naturales del Perú · Universidad Nacional Agraria La Molina · 2025</p>
+  <div class="tags">
+    <span class="tag">Formación del suelo</span>
+    <span class="tag">Horizontes</span>
+    <span class="tag">Propiedades físicas y químicas</span>
+    <span class="tag">Regiones geoedáficas del Perú</span>
+    <span class="tag">Erosión</span>
+    <span class="tag">Agroforestería</span>
+    <span class="tag">Capacidad de Uso Mayor</span>
+  </div>
+</div>
+
+<!-- ═══════════ SECCIÓN 1: CONCEPTO E IMPORTANCIA ═══════════ -->
+<div class="sec sec-blue">🔵 CONCEPTO E IMPORTANCIA DEL SUELO</div>
+
+<!-- Bloque: Concepto -->
+<div class="block">
+  <span class="bh bh-blue">Concepto de Suelo (Diap. 3)</span>
+  <div class="def def-blue">El <strong>suelo</strong> es la capa superior de la corteza terrestre formada por partículas minerales, materia orgánica, agua, aire y organismos vivos. Constituye un sistema tridimensional abierto, dinámico y de gran complejidad, que actúa como interfaz entre la litosfera, la hidrosfera, la atmósfera y la biosfera.</div>
+  <div class="item"><span class="dot dot-blue"></span><span>No es solo "tierra": es un ecosistema completo donde ocurren miles de reacciones físicas, químicas y biológicas simultáneas.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>El suelo es considerado un <strong>recurso no renovable</strong> a escala humana: 1 cm³ tarda entre 100 y 1 000 años en formarse.</span></div>
+  <div class="exam">🎯 EXAMEN: Define el concepto de suelo y explica por qué se le considera un sistema complejo. ¿En qué se diferencia del concepto de "tierra" o "roca"?</div>
+</div>
+
+<!-- Bloque: Importancia -->
+<div class="block">
+  <span class="bh bh-blue">Importancia del Suelo (Diap. 4)</span>
+  <div class="two">
+    <div class="mini mini-blue"><strong>Producción de biomasa</strong><br>Base para la agricultura, silvicultura y ganadería. Sin suelo fértil no hay producción de alimentos.</div>
+    <div class="mini mini-green"><strong>Regulación medioambiental</strong><br>Filtra agua, captura carbono y regula el ciclo de nutrientes a nivel global.</div>
+    <div class="mini mini-teal"><strong>Hábitat biológico</strong><br>Alberga más del 25% de la biodiversidad del planeta: bacterias, hongos, artrópodos.</div>
+    <div class="mini mini-yellow"><strong>Reserva geográfica</strong><br>Soporte físico para infraestructura: ciudades, carreteras, edificios.</div>
+    <div class="mini mini-orange"><strong>Regulación del clima</strong><br>Almacena más carbono que toda la atmósfera y la vegetación combinadas.</div>
+    <div class="mini mini-pink"><strong>Soporte para plantas</strong><br>Ancla físico, fuente de agua y nutrientes esenciales para el crecimiento vegetal.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Menciona y explica tres funciones del suelo como recurso natural, destacando su relevancia para el contexto agrario peruano.</div>
+</div>
+
+<!-- Bloque: Composición -->
+<div class="block">
+  <span class="bh bh-blue">Composición del Suelo (Diap. 15)</span>
+  <div class="def def-blue">Un suelo ideal en condiciones óptimas para la agricultura tiene una composición <strong>FIJA</strong> en dos fases sólidas y dos fases fluidas. La fracción sólida define la arquitectura permanente; las fluidas varían según el clima y el manejo.</div>
+  <div style="margin:8px 0">
+    <div style="font-size:11.5px;margin-bottom:3px;font-weight:600">Fracción mineral (45%)</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:45%;background:#3b82f6"></div></div>
+    <div style="font-size:11.5px;margin:4px 0 3px;font-weight:600">Agua (25%)</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:25%;background:#38bdf8"></div></div>
+    <div style="font-size:11.5px;margin:4px 0 3px;font-weight:600">Aire (25%)</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:25%;background:#a3a3a3"></div></div>
+    <div style="font-size:11.5px;margin:4px 0 3px;font-weight:600">Materia orgánica (5%)</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:5%;background:#86efac"></div></div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Asumir que la materia orgánica es el componente mayoritario. Es solo el 5%, pero su impacto en fertilidad, estructura y biología es desproporcionadamente grande. Un suelo con 3% de materia orgánica es incomparablemente más fértil que uno con 1%.</div>
+  <div class="exam">🎯 EXAMEN: Dibuja y describe la composición porcentual de un suelo agrícola ideal. ¿Qué ocurre con la productividad cuando el componente "aire" es reemplazado por agua (suelo compactado)?</div>
+</div>
+
+<!-- ═══════════ SECCIÓN 2: FACTORES DE FORMACIÓN ═══════════ -->
+<div class="sec sec-green">🟢 FACTORES DE FORMACIÓN DEL SUELO</div>
+
+<!-- Bloque: Factores pasivos y activos -->
+<div class="block s2">
+  <span class="bh bh-green">Factores Formadores del Suelo (Diap. 5)</span>
+  <div class="def def-green">Los factores edafogenéticos son las fuerzas y condiciones que actúan sobre el material parental para transformarlo gradualmente en suelo. Se dividen en <strong>pasivos</strong> (son el escenario, no actúan directamente) y <strong>activos</strong> (son los agentes que transforman).</div>
+  <div class="two">
+    <div>
+      <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:#14532d">FACTORES PASIVOS</div>
+      <div class="mini mini-green" style="margin-bottom:5px">
+        <strong>Roca Madre</strong><br>Sustrato original del que se deriva la fracción mineral. Determina textura, pH y composición química inicial. Una roca granítica produce suelos arenosos; una caliza, suelos alcalinos.
+      </div>
+      <div class="mini mini-green" style="margin-bottom:5px">
+        <strong>Topografía / Relieve</strong><br>Controla la escorrentía y la infiltración. Las laderas escarpadas favorecen la erosión; los valles y planicies favorecen la acumulación de sedimentos y la formación de suelos profundos.
+      </div>
+      <div class="mini mini-green">
+        <strong>Tiempo Cronológico</strong><br>El factor integrador. A mayor tiempo, mayor desarrollo de horizontes. Forma 1 cm en 100–1 000 años. Por eso la destrucción del suelo es un proceso irreversible a escala humana.
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:#1e3a8a">FACTORES ACTIVOS</div>
+      <div class="mini mini-blue" style="margin-bottom:5px">
+        <strong>Clima</strong><br>La temperatura acelera reacciones químicas y la descomposición orgánica; la precipitación disuelve minerales y transporta elementos. En la selva amazónica, el clima activa la meteorización química intensamente, produciendo suelos lateríticos muy oxidados.
+      </div>
+      <div class="mini mini-blue" style="margin-bottom:5px">
+        <strong>Actividad Biológica</strong><br>Plantas, animales, bacterias y hongos aportan materia orgánica, mezclan horizontes y liberan ácidos que aceleran la meteorización. Las lombrices de tierra mueven hasta 10 Ton/ha/año de suelo.
+      </div>
+      <div class="mini mini-orange">
+        <strong>Ser Humano (factor antrópico)</strong><br>Actúa como agente acelerador de cambios: deforestación, labranza, riego, urbanización. Puede destruir en décadas lo que la naturaleza tardó milenios en construir.
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: El "tiempo" no es un agente activo que transforma; es simplemente la duración durante la cual actúan los factores activos. Sin clima ni biología, el tiempo solo no forma suelo.</div>
+  <div class="exam">🎯 EXAMEN: Diferencia los factores pasivos de los activos en la formación del suelo. Explica por qué el clima es el factor activo más influyente en la diferenciación entre los suelos de la costa, sierra y selva peruana.</div>
+</div>
+
+<!-- Bloque: Proceso de formación -->
+<div class="block">
+  <span class="bh bh-green">Proceso de Formación (Diap. 12–13)</span>
+  <div class="def def-green">La pedogénesis sigue una secuencia lógica: los factores formadores actúan sobre la roca madre y la someten a meteorización, desintegrando el material y generando constituyentes, que luego evolucionan in situ o son transportados.</div>
+  <div class="flow">
+    <span class="fbox">Roca Madre</span><span class="farrow">→</span>
+    <span class="fbox">Meteorización Física y Química</span><span class="farrow">→</span>
+    <span class="fbox">Constituyentes: minerales, agua, humus</span><span class="farrow">→</span>
+    <span class="fbox">Evolución in situ → SUELO</span>
+  </div>
+  <div class="flow">
+    <span class="fbox">Erosión + Transporte</span><span class="farrow">→</span>
+    <span class="fbox">Deposición</span><span class="farrow">→</span>
+    <span class="fbox">SEDIMENTO</span>
+  </div>
+  <div class="item"><span class="dot dot-green"></span><span>Las <strong>4 etapas de formación</strong>: I) lecho rocoso se desintegra; II) materia orgánica facilita disgregación; III) se forman horizontes A y C; IV) suelo maduro sostiene vegetación densa.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span>En el Perú: <span class="pill pill-yellow">Costa → suelo joven (arena)</span> <span class="pill pill-green">Sierra → suelo maduro (arena+arcilla)</span> <span class="pill pill-red">Selva → suelo senil (arcilla)</span></span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué los suelos de la selva amazónica peruana se consideran "seniles" si están cubiertos de una vegetación exuberante? Explica la paradoja de la fertilidad aparente vs. real.</div>
+</div>
+
+<!-- ═══════════ SECCIÓN 3: PERFIL DEL SUELO ═══════════ -->
+<div class="sec sec-teal">🩵 PERFIL Y HORIZONTES DEL SUELO</div>
+
+<!-- Bloque: Perfil -->
+<div class="block s2">
+  <span class="bh bh-teal">Perfil del Suelo y sus Horizontes (Diap. 16–18)</span>
+  <div class="def def-teal">El <strong>perfil del suelo</strong> es la sección vertical que muestra la secuencia de capas u horizontes desde la superficie hasta la roca madre. Cada horizonte es producto de procesos pedogenéticos distintos y tiene propiedades únicas. Es la "biografía" del suelo.</div>
+  <table class="tbl">
+    <tr><th>Horizonte</th><th>Nombre</th><th>Características clave</th><th>Importancia agrícola</th></tr>
+    <tr><td><strong>O</strong></td><td>Orgánico / Humus</td><td>Hojas en descomposición, materia orgánica. Delgado o ausente en suelos áridos.</td><td>Fuente primaria de nutrientes disponibles</td></tr>
+    <tr><td><strong>A</strong></td><td>Capa superficial (topsoil)</td><td>Color oscuro, rico en humus, alta actividad biológica. El más valioso para la agricultura.</td><td>Zona principal de raíces y absorción de nutrientes</td></tr>
+    <tr><td><strong>E</strong></td><td>Eluviación (lixiviado)</td><td>Pérdida de arcillas, minerales y materia orgánica. Color grisáceo. Frecuente en bosques.</td><td>Indica suelos muy lixiviados; baja fertilidad</td></tr>
+    <tr><td><strong>B</strong></td><td>Subsuelo (illuviación)</td><td>Acumulación de arcillas y minerales lavados del horizonte A. Más claro. Las raíces penetran aquí.</td><td>Reserva de minerales; soporte radicular</td></tr>
+    <tr><td><strong>C</strong></td><td>Material parental</td><td>Fragmentos de roca desintegrada, sin nutrientes disponibles. Roca madre en proceso de alteración.</td><td>Sin actividad biológica significativa</td></tr>
+    <tr><td><strong>R</strong></td><td>Roca madre</td><td>Roca sólida no meteorizada: granito, caliza, basalto. No es suelo propiamente.</td><td>Material de origen; condiciona química del suelo</td></tr>
+  </table>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir el horizonte A con el O. El O es la capa superficial de hojarasca sin mineralizar; el A ya es suelo mineral mezclado con materia orgánica. En la mayoría de suelos agrícolas peruanos, el O es escaso o inexistente por la labranza.</div>
+  <div class="exam">🎯 EXAMEN: Describe el perfil del suelo de la capa A a la C. ¿Qué procesos explican las diferencias de color entre el horizonte A (oscuro) y el horizonte B (más claro)?</div>
+</div>
+
+<!-- Bloque: Propiedades físicas -->
+<div class="block">
+  <span class="bh bh-teal">Propiedades Físicas del Suelo (Diap. 19–20)</span>
+  <div class="def def-teal">Las propiedades físicas determinan la arquitectura del suelo: cómo retiene agua, cómo se airea, cuán resistente es a la labranza y la erosión. Son la base para decisiones de manejo agrícola.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Textura:</strong> Proporción relativa de arena (0.05–2 mm), limo (0.002–0.05 mm) y arcilla (&lt;0.002 mm). Se determina con el triángulo textural. Un suelo <em>franco</em> (equilibrio de los tres) es el óptimo para agricultura.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Estructura:</strong> Forma en que las partículas se agrupan en agregados. Una estructura granular o migajosa favorece la aireación y retención de agua.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Consistencia:</strong> Resistencia del suelo a la deformación; varía con la humedad. Importante para determinar el momento óptimo de labranza.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Densidad:</strong> La densidad aparente (Da) refleja compactación. Da alta (&gt;1.6 g/cm³) indica suelo compactado con poca porosidad.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Temperatura y Color:</strong> El color negro/oscuro indica materia orgánica y mejor fertilidad; el rojo, óxidos de hierro; el gris, mal drenaje (gley).</span></div>
+  <div class="rx">Triángulo textural: % Arcilla + % Limo + % Arena = 100%
+Clase textural = f(% de cada fracción)
+Franco: ~20% arcilla, ~40% limo, ~40% arena</div>
+  <div class="exam">🎯 EXAMEN: Un suelo tiene 40% de arcilla, 30% de limo y 30% de arena. Usando el triángulo textural, ¿a qué clase textural pertenece? ¿Qué ventajas y limitaciones tiene para el cultivo?</div>
+</div>
+
+<!-- ═══════════ SECCIÓN 4: PROPIEDADES QUÍMICAS ═══════════ -->
+<div class="sec sec-purple">🟣 PROPIEDADES QUÍMICAS Y FERTILIDAD</div>
+
+<!-- Bloque: Propiedades químicas -->
+<div class="block s2">
+  <span class="bh bh-purple">Propiedades Químicas del Suelo (Diap. 22–23)</span>
+  <div class="def def-purple">Las propiedades químicas determinan la disponibilidad de nutrientes para las plantas y la salud del suelo a largo plazo. Las tres propiedades fundamentales son la CIC, el pH y la conductividad eléctrica.</div>
+  <div class="three">
+    <div class="mini mini-blue">
+      <strong>CIC — Capacidad de Intercambio Catiónico</strong><br>
+      Habilidad del suelo para retener cationes (Ca²⁺, Mg²⁺, K⁺, Na⁺, H⁺) a través de cargas negativas de arcillas y materia orgánica. Alta CIC = mayor reserva de nutrientes. Se mide en cmol(+)/kg. Un suelo arcilloso con alta MO puede tener CIC de 40–60 cmol/kg; un arenoso &lt;5 cmol/kg.
+    </div>
+    <div class="mini mini-purple">
+      <strong>pH del Suelo</strong><br>
+      Determina el grado de acidez/alcalinidad y controla la disponibilidad de nutrientes. Rango óptimo para la mayoría de cultivos: 6.0–7.0. pH &lt;5.5: toxicidad por Al³⁺ y Mn²⁺ (problema en selva). pH &gt;7.5: insolubilización de Fe, Mn, Zn (problema en costa por salinidad).
+    </div>
+    <div class="mini mini-teal">
+      <strong>Conductividad Eléctrica (CE)</strong><br>
+      Mide la concentración de sales solubles. CE &lt; 2 dS/m: normal. CE 4–8 dS/m: afecta cultivos sensibles. CE &gt; 8 dS/m: solo resisten plantas halófilas. Un problema crítico en la costa peruana donde el riego sin drenaje acumula sales.
+    </div>
+  </div>
+  <div class="divh"></div>
+  <div style="font-size:12px;font-weight:600;margin-bottom:5px">Otros procesos químicos críticos en el Perú:</div>
+  <div class="two">
+    <div class="mini mini-orange">
+      <strong>Salinización</strong><br>
+      Acumulación de sales solubles por ascenso capilar desde napas freáticas salinas o riego deficiente. Las sales ascienden al evaporarse el agua, depositándose en la superficie. Afecta gravemente a la Costa peruana: más de 300 000 ha salinizadas en valles costeros.
+    </div>
+    <div class="mini mini-red">
+      <strong>Alcalinización (Sodicidad)</strong><br>
+      Exceso de sodio intercambiable que desplaza Ca²⁺ y Mg²⁺. El sodio dispersa las arcillas, destruyendo la estructura del suelo y volviéndolo impermeable. El yeso (CaSO₄·2H₂O) se usa como enmienda para reemplazar Na⁺ por Ca²⁺.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué un suelo con pH 8.5 y alta conductividad eléctrica puede ser improductivo incluso si tiene abundantes macronutrientes totales? Explica los mecanismos involucrados.</div>
+</div>
+
+<!-- Bloque: Fertilidad y Nutrientes -->
+<div class="block">
+  <span class="bh bh-purple">Fertilidad y Nutrientes del Suelo (Diap. 24–25)</span>
+  <div class="def def-purple">La <strong>fertilidad del suelo</strong> es su capacidad para proporcionar a las plantas los nutrientes en las formas, cantidades y proporciones adecuadas para su crecimiento óptimo. Es el resultado integrado de todas las propiedades físicas, químicas y biológicas del suelo.</div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Factores de fertilidad:</strong> disponibilidad de agua, espesor del suelo, cantidad de MO, organismos vivos, CIC y pH.</span></div>
+  <div class="divh"></div>
+  <div style="font-size:11.5px;font-weight:600;margin:5px 0">De los 60 elementos en las plantas, solo 16 son esenciales:</div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Macronutrientes primarios (N, P, K):</strong> requeridos en mayor cantidad. El N es básico para proteínas y clorofila; P para energía (ATP) y raíces; K para regulación hídrica y calidad de frutos.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Macronutrientes secundarios (Ca, S, Mg):</strong> el Mg es el átomo central de la clorofila; el Ca cementa las paredes celulares; el S es componente de aminoácidos.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Micronutrientes (B, Cu, Cl, Fe, Mn, Mo, Zn):</strong> en pequeñas cantidades pero imprescindibles. La deficiencia de Fe produce clorosis en suelos calcáreos de la Sierra peruana.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: "Si es micro, es menos importante". El B (boro) es micronutriente, pero su deficiencia destruye los puntos de crecimiento de la planta, arruinando toda la cosecha. La dosis tóxica del B es muy cercana a la dosis óptima — es el nutriente con el margen de seguridad más estrecho.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué es la Ley del Mínimo de Liebig y cómo se aplica al concepto de fertilidad del suelo? Ejemplifica con un caso concreto de cultivos en la Sierra peruana.</div>
+</div>
+
+<!-- ═══════════ SECCIÓN 5: TIPOS Y REGIONES ═══════════ -->
+<div class="sec sec-orange">🟠 TIPOS DE SUELOS DEL PERÚ — REGIONES GEOEDÁFICAS (FAO)</div>
+
+<!-- Tabla de regiones -->
+<div class="block s3">
+  <span class="bh bh-orange">Clasificación Geoedáfica FAO para el Perú (Diap. 26–33)</span>
+  <div class="def def-orange">En el Perú se aplica la clasificación de regiones geoedáficas de la FAO, que agrupa suelos por su génesis, características dominantes y ubicación geográfica. Son 7 regiones principales que reflejan la megadiversidad de ecosistemas peruanos.</div>
+  <table class="tbl">
+    <tr><th>#</th><th>Región</th><th>Ubicación / Altitud</th><th>Suelo dominante</th><th>Paisaje</th><th>Uso agrícola</th></tr>
+    <tr><td><span class="num-badge nb-b">1</span></td><td><strong>Yermosólica</strong></td><td>Costa — desierto costero, tierras bajas</td><td>Yermosoles (áridos), <strong>Fluvisoles</strong> en valles irrigados</td><td>Desértico: dunas, planicies, terrazas marinas</td><td>Agricultura de alto valor con riego; valles irrigados por 53 ríos</td></tr>
+    <tr><td><span class="num-badge nb-b">2</span></td><td><strong>Litosólica</strong></td><td>Vertientes occidentales Andes, 1 000–5 000 msnm</td><td>Litosoles: suelos superficiales sobre roca, roca expuesta</td><td>Gran pendiente, muy agreste</td><td>Muy limitado; erosión intensa</td></tr>
+    <tr><td><span class="num-badge nb-g">3</span></td><td><strong>Paramosólica / Andosólica</strong></td><td>Zona alto-andina, 4 000–5 000 msnm</td><td>Paramosoles (ácidos, ricos en MO), Histosoles (turberas)</td><td>Suave, glacial; lagunas, bofedales</td><td>Ganadería de camélidos y ovinos; Maca</td></tr>
+    <tr><td><span class="num-badge nb-g">4</span></td><td><strong>Kastanosólica</strong></td><td>Valles interandinos, 2 200–4 000 msnm</td><td>Kastanozems cálcicos; Planosoles (Titicaca); Gleisoles</td><td>Accidentado con valles amplios</td><td>Agricultura tradicional: tubérculos, cereales, leguminosas</td></tr>
+    <tr><td><span class="num-badge nb-p">5</span></td><td><strong>Lito-Cambisólica</strong></td><td>Selva alta, 2 200–3 600 msnm</td><td>Litosoles + Cambisoles (pobres, erosionables)</td><td>Muy disectado, pendiente escarpada</td><td>Muy limitado; expuesto a erosión hídrica intensa</td></tr>
+    <tr><td><span class="num-badge nb-o">6</span></td><td><strong>Acrisólica</strong></td><td>Selva alta, 500–2 200 msnm</td><td>Acrisoles "rojo-amarillo podsólicos"; Nitosoles profundos</td><td>Escarpado con valles; reacción ácida</td><td>Cacao, café, cocales; fuerte meteorización</td></tr>
+    <tr><td><span class="num-badge nb-o">7</span></td><td><strong>Acrisólica Ondulada</strong></td><td>Selva baja, &lt;500 msnm — LA MÁS EXTENSA</td><td>Acrisoles ácidos con baja fertilidad; Fluvisoles/Gleisoles</td><td>Colinas suaves y planicies amazónicas</td><td>Sistemas agroforestales; agricultura con limitaciones</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO CLAVE PARA EXAMEN: Los Fluvisoles de los valles costeros (Región Yermosólica) son los suelos de mayor productividad agrícola del Perú, fertiles por los sedimentos depositados por los 53 ríos costeros. Sin embargo, representan una fracción mínima del territorio.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la Región Acrisólica Ondulada, siendo la más extensa del Perú, tiene suelos de baja fertilidad? Contrasta esto con la Región Kastanosólica en cuanto a potencial agrícola e historia de uso.</div>
+</div>
+
+<!-- ═══════════ SECCIÓN 6: CONDICIONES LIMITANTES Y EROSIÓN ═══════════ -->
+<div class="sec sec-red">🔴 CONDICIONES LIMITANTES Y EROSIÓN DEL SUELO EN EL PERÚ</div>
+
+<!-- Bloque: Condiciones limitantes -->
+<div class="block">
+  <span class="bh bh-red">Limitaciones de los Suelos Peruanos (Diap. 34–35)</span>
+  <div class="def def-red">Solo el <strong>5.92%</strong> de la superficie nacional (7.6 millones de ha de 128.5 millones totales) tiene aptitud agrícola. El 94% restante tiene serias limitaciones, aunque posee potencial para usos alternativos.</div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Erosionabilidad:</strong> 8 millones de ha severamente erosionadas y 31 millones de moderadamente erosionadas (MINAGRI, 2019).</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Salinización:</strong> problema crítico en la costa; mal manejo del riego acumula sales y destruye suelos fértiles de valles costeros.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Aridez:</strong> gran parte de la costa y algunas zonas altoandinas con precipitación insuficiente.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Mal drenaje:</strong> en la Selva y algunas mesetas andinas; suelos hidromórficos (gleisoles) con problemas de aireación.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Climas fríos y nevados:</strong> zonas por encima de los 4 500 msnm con heladas que imposibilitan la agricultura convencional.</span></div>
+  <div class="exam">🎯 EXAMEN: En el contexto peruano, ¿cuál es la condición limitante más grave para los suelos de la Costa, la Sierra y la Selva respectivamente? Justifica con datos cuantitativos cuando sea posible.</div>
+</div>
+
+<!-- Bloque: Erosión -->
+<div class="block">
+  <span class="bh bh-red">Erosión del Suelo — Concepto y Factores (Diap. 36–39)</span>
+  <div class="def def-red">La <strong>erosión</strong> es el desgaste, remoción y transporte de partículas de suelo por agentes externos (agua, viento, gravedad). Se diferencia de la meteorización en que implica <em>movimiento</em>: desagregación → transporte → sedimentación. En la Sierra peruana, más del 60% de suelos agropecuarios están afectados de mediana a extrema gravedad.</div>
+  <div class="flow">
+    <span class="fbox">Agente erosivo (agua/viento)</span><span class="farrow">→</span>
+    <span class="fbox">Desagregación de partículas</span><span class="farrow">→</span>
+    <span class="fbox">Transporte del material</span><span class="farrow">→</span>
+    <span class="fbox">Sedimentación en otro sitio</span>
+  </div>
+  <div class="two">
+    <div class="mini mini-blue"><strong>Factores Naturales</strong><br>Precipitación intensa, pendiente, tipo de suelo (textura y estructura), cubierta vegetal natural. En la Sierra peruana, las lluvias estacionales intensas son el principal agente natural erosivo.</div>
+    <div class="mini mini-orange"><strong>Factores Antrópicos</strong><br>Tala, quema, siembra a favor de la pendiente (sin curvas de nivel), sobrepastoreo, monocultivo sin rotación. El hombre es el mayor causante de erosión acelerada en el Perú andino.</div>
+  </div>
+  <div class="warn">⚠️ DATO CRÍTICO: En la Sierra, la subcuenca del Pacífico 6 pierde hasta 80.85 Ton/ha/año de suelo por erosión (SENAMHI, 1981–2014). Comparar: en la Selva baja (Atlántico 8), solo 0.01 Ton/ha/año. La vegetación amazónica protege el suelo de manera extraordinaria.</div>
+  <div class="exam">🎯 EXAMEN: Explica la diferencia entre erosión y meteorización. ¿Por qué la erosión en la región alto-andina peruana es considerada un problema crítico para la seguridad alimentaria del país?</div>
+</div>
+
+<!-- Bloque: Consecuencias de la erosión -->
+<div class="block">
+  <span class="bh bh-red">Consecuencias de la Erosión (Diap. 40–41)</span>
+  <div class="def def-red">La erosión no solo afecta al suelo: desencadena una cascada de impactos que van desde la desertificación local hasta la afectación de ecosistemas marinos distantes.</div>
+  <div class="three">
+    <div class="mini mini-red"><strong>🏜️ Desertificación</strong><br>El exceso de cultivos agota el suelo, el sobrepastoreo elimina la cobertura vegetal, la deforestación elimina la protección, y el riego deficiente saliniza tierras agrícolas.</div>
+    <div class="mini mini-red"><strong>💧 Degradación hídrica</strong><br>Ríos y quebradas se llenan de sedimentos, se turbia el agua, se reduce la capacidad de embalses y aumenta la frecuencia de inundaciones. Los sedimentos arrastran agroquímicos.</div>
+    <div class="mini mini-red"><strong>🌊 Impacto marino</strong><br>Las partículas en suspensión limitan la luz solar que llega a los arrecifes de coral, causando su muerte. El arrastre de contaminantes también afecta la biodiversidad marina.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Describe la cadena de consecuencias que se desencadena cuando la erosión hídrica elimina el horizonte A de un suelo agrícola en las laderas andinas peruanas, incluyendo impactos tanto terrestres como acuáticos.</div>
+</div>
+
+<!-- Bloque: Control de erosión -->
+<div class="block">
+  <span class="bh bh-green">Medidas de Control de la Erosión (Diap. 42–43)</span>
+  <div class="def def-green">El control de la erosión combina estrategias de cobertura (reducir el impacto del agua o viento sobre el suelo) y barreras físicas (reducir la velocidad de escurrimiento). La bioingeniería integra vegetación con estructuras de ingeniería.</div>
+  <div class="two">
+    <div>
+      <div class="mini mini-green" style="margin-bottom:5px">
+        <strong>1. Métodos de Cobertura</strong><br>
+        • Siembra de gramíneas/grama<br>• Siembra al contorno (perpendicular a la pendiente)<br>• Residuos de cosecha como mulch<br>• Zanjas de infiltración al contorno<br>• Reforestación con árboles
+      </div>
+    </div>
+    <div>
+      <div class="mini mini-teal">
+        <strong>2. Métodos de Barrera</strong><br>
+        • Troncos transversales para retención<br>• Gaviones en quebradas<br>• Enrocados y muros de piedra<br>• Barreras vivas de plantas leñosas<br>• Terrazas de formación lenta (andenes)
+      </div>
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Bioingeniería:</strong> combina vegetación (pastos, arbustos, árboles) con diseño de ingeniería para proteger laderas y taludes. Las raíces anclan el suelo, reducen la velocidad del agua y aumentan la infiltración. Sistema de bajo costo y autorreparable con el tiempo.</span></div>
+  <div class="exam">🎯 EXAMEN: Compara los métodos de cobertura y los métodos de barrera para el control de erosión. ¿Cuál es la ventaja de la bioingeniería respecto a las obras civiles convencionales en zonas alto-andinas del Perú?</div>
+</div>
+
+<!-- ═══════════ SECCIÓN 7: AGROFORESTERÍA ═══════════ -->
+<div class="sec sec-green">🟢 AGROFORESTERÍA Y SISTEMAS AGROFORESTALES</div>
+
+<!-- Bloque: Concepto -->
+<div class="block s2">
+  <span class="bh bh-green">Agroforestería — Concepto y Clasificación (Diap. 44–46)</span>
+  <div class="def def-green">La <strong>agroforestería</strong> es la combinación intencional de árboles y arbustos con cultivos o ganadería en el mismo espacio, con el objetivo de obtener beneficios ambientales, económicos y sociales de forma ecológicamente sustentable (Fuente: López, G.).</div>
+  <div class="two">
+    <div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:5px">Beneficios clave:</div>
+      <div class="item"><span class="dot dot-green"></span><span>Mejora la salud del suelo: raíces profundas movilizan nutrientes del subsuelo; hojarasca aporta MO.</span></div>
+      <div class="item"><span class="dot dot-green"></span><span>Control de erosión: cobertura de suelo, cortinas rompevientos y fijación del suelo con raíces.</span></div>
+      <div class="item"><span class="dot dot-green"></span><span>Diversificación de ingresos: madera, frutos, leña y productos agropecuarios simultáneamente.</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span>Captura de carbono: los árboles secuestran CO₂ y mitigan el cambio climático.</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span>Biodiversidad: el dosel arbóreo crea microhábitats para fauna silvestre.</span></div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:5px">Clasificación por componentes:</div>
+      <div class="mini mini-green" style="margin-bottom:5px"><strong>Sistemas Silvoagrícolas</strong><br>Árboles + cultivos agrícolas. Ej: cacao + cedro + Inga. La Alianza Cacao Perú implementa 1 111 plantas de cacao + 135 árboles maderables/ha en San Martín, Huánuco y Ucayali.</div>
+      <div class="mini mini-teal" style="margin-bottom:5px"><strong>Sistemas Silvopastoriles</strong><br>Árboles + pasturas + ganadería. Más eficiente que el pastizal extensivo: producir 10 000 ton de carne requiere solo 12 200 ha en sistema silvopastoril vs. 148 000 ha en pastizal extensivo.</div>
+      <div class="mini mini-blue"><strong>Sistemas Agrosilvopastoriles</strong><br>Cultivos + bosque + pasturas + animales. La combinación más completa. Produce beneficio mutuo entre todos los componentes vegetales y animales del sistema.</div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR CONCEPTUAL: La agroforestería no es simplemente "poner árboles en un campo". El diseño es fundamental: las especies deben complementarse en requerimientos de luz, profundidad de raíces y ciclos fenológicos para evitar competencia y maximizar sinergias.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué es un sistema silvopastoril y en qué se diferencia de un sistema agrosilvopastoril? Usando el ejemplo del sistema Leucaena-pastos mejorados, explica cómo estos sistemas reducen la presión sobre el suelo en la selva peruana.</div>
+</div>
+
+<!-- Bloque: SAF y bancos forrajeros -->
+<div class="block">
+  <span class="bh bh-teal">Sistemas Agroforestales Específicos (Diap. 48–56)</span>
+  <div class="def def-teal">Los sistemas agroforestales concretos combinan especies con diferentes alturas, funciones y ciclos de producción. Su diseño requiere cálculo de densidades y distanciamientos óptimos.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>SAF N°1 — Silvoagrícola:</strong> Arroz+maíz / plátano+papaya / cacao+caoba+cedro+Schizolobium+Inga+shiringa / naranja+pomelo+tamarindo. El cacao se siembra a 5×5 m (densidad 324 plantas/ha) como el cultivo rentable principal; los árboles maderables (cedro/caoba) a 20×20 m (25 árboles/ha) como inversión a largo plazo.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Bancos forrajeros o de proteína:</strong> Áreas compactas sembradas con leguminosas (Kudzu, Centrosema, Leucaena) para pastoreo directo de rumiantes. Las leguminosas fijan N atmosférico, mejorando la fertilidad del suelo para los pastos circundantes.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Sistema SSPi (Silvopastoril Intensivo):</strong> Mínimo 1 ha con 16 000–20 000 arbustos de Leucaena leucocephala en doble surco cada 5 m, intercalados con árboles forestales cada 10 m. Los animales pastorean y ramonean libremente.</span></div>
+  <div class="exam">🎯 EXAMEN: En el contexto de la Selva peruana, ¿por qué un banco de proteínas con Leucaena leucocephala mejora simultáneamente la alimentación del ganado y la fertilidad del suelo? Explica el mecanismo de fijación biológica de nitrógeno involucrado.</div>
+</div>
+
+<!-- ═══════════ SECCIÓN 8: USOS Y CAPACIDAD DE USO MAYOR ═══════════ -->
+<div class="sec sec-yellow">🟡 USOS DEL SUELO Y CAPACIDAD DE USO MAYOR</div>
+
+<!-- Bloque: Usos del suelo -->
+<div class="block">
+  <span class="bh bh-yellow">Usos del Suelo en el Perú (Diap. 58–59)</span>
+  <div class="def def-yellow">El suelo se utiliza con fines muy diversos: forestal, agropecuario, minero e industrial. El Perú tiene 128.5 millones de ha, pero solo 7.6 millones (5.92%) tienen capacidad para cultivos agrícolas. El recurso es escaso y está bajo creciente presión.</div>
+  <div class="two">
+    <div class="mini mini-green"><strong>🌲 Forestal</strong><br>La mayor parte de la Amazonia. Madera, no maderable, servicios ecosistémicos.</div>
+    <div class="mini mini-yellow"><strong>🌾 Agricultura y Ganadería</strong><br>Valles costeros, sierra interandina y zonas de selva alta. Producción de alimentos nacionales.</div>
+    <div class="mini mini-orange"><strong>⛏️ Minería</strong><br>Sierra y selva. Genera ingresos pero contamina suelos con metales pesados. Pasivos ambientales.</div>
+    <div class="mini mini-blue"><strong>🏭 Industria / Urbanización</strong><br>Costa principalmente. Expansión urbana sobre suelos agrícolas de primer orden es una pérdida irreversible.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Analiza el problema de la expansión urbana sobre suelos agrícolas en la costa peruana. ¿Por qué esta pérdida es considerada irreversible y qué implicancias tiene para la seguridad alimentaria?</div>
+</div>
+
+<!-- Bloque: Capacidad de Uso Mayor -->
+<div class="block s2">
+  <span class="bh bh-yellow">Capacidad de Uso Mayor — D.S. 017-2009-AG (Diap. 60–64)</span>
+  <div class="def def-yellow">El <strong>D.S. 017-2009-AG</strong> establece el Reglamento de Clasificación de Tierras por Capacidad de Uso Mayor del Perú. Actualiza el D.S. 0062/75-AG del Gral. Velasco Alvarado. Usa el Sistema de Clasificación de Zonas de Vida de L.R. Holdridge como base ecológica.</div>
+  <table class="tbl">
+    <tr><th>Símbolo</th><th>Grupo</th><th>Descripción</th><th>% del territorio (ONERN)</th></tr>
+    <tr><td><strong>A</strong></td><td>Tierras Aptas para Cultivo en Limpio</td><td>Suelos con características adecuadas para cultivos anuales con preparación periódica del terreno.</td><td>~4%</td></tr>
+    <tr><td><strong>C</strong></td><td>Tierras Aptas para Cultivo Permanente</td><td>Para cultivos perennes (frutales, cacao, café). No requieren labranza profunda.</td><td>~2%</td></tr>
+    <tr><td><strong>P</strong></td><td>Tierras Aptas para Pastoreo</td><td>No permiten cultivos pero sí ganadería extensiva con manejo adecuado de pasturas.</td><td>~14%</td></tr>
+    <tr><td><strong>F</strong></td><td>Tierras Aptas para Producción Forestal</td><td>Para extracción forestal sostenible. Principalmente selva.</td><td>~38%</td></tr>
+    <tr><td><strong>X</strong></td><td>Tierras de Protección</td><td>Sin aptitud productiva directa. Conservación de cuencas, protección de biodiversidad, áreas nevadas.</td><td>~42%</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: El 42% del territorio peruano son Tierras de Protección (X) — no apta para ningún uso productivo. Solo un 6% (A+C) es agrícola. Este contexto explica por qué la conservación del suelo agrícola existente es una prioridad nacional de seguridad alimentaria. La Costa tiene ~75% de protección; la Sierra ~65%; la Selva tiene ~61% forestal.</div>
+  <div class="exam">🎯 EXAMEN: Explica el sistema de clasificación por Capacidad de Uso Mayor establecido en el D.S. 017-2009-AG. ¿Cuál es la diferencia entre las tierras tipo A y tipo C? ¿Qué sucede cuando se usa un suelo tipo F para agricultura?</div>
+</div>
+
+<!-- ═══════════ TABLA INTEGRADORA FINAL ═══════════ -->
+<div class="sec sec-gray">⚫ TABLA INTEGRADORA — SÍNTESIS COMPARATIVA DE SUELOS PERUANOS</div>
+
+<div class="block s3">
+  <span class="bh bh-gray">Resumen Integrador: Costa vs. Sierra vs. Selva (Diap. 21)</span>
+  <table class="tbl">
+    <tr>
+      <th>Característica</th>
+      <th>COSTA</th>
+      <th>SIERRA</th>
+      <th>SELVA</th>
+    </tr>
+    <tr>
+      <td><strong>Desarrollo morfológico</strong></td>
+      <td>Muy escaso (suelo joven)</td>
+      <td>Bueno (suelo maduro)</td>
+      <td>Muy desarrollado (suelo senil)</td>
+    </tr>
+    <tr>
+      <td><strong>Textura dominante</strong></td>
+      <td>Arena (por meteorización física)</td>
+      <td>Arena + arcilla (MYE balanceada)</td>
+      <td>Arcilla (meteorización química intensa)</td>
+    </tr>
+    <tr>
+      <td><strong>Deficiencias principales</strong></td>
+      <td>MO, microorganismos, agua, arcilla</td>
+      <td>Pocas (los más balanceados)</td>
+      <td>Fertilidad y productividad agropecuaria</td>
+    </tr>
+    <tr>
+      <td><strong>Excesos</strong></td>
+      <td>Arenas y minerales primarios</td>
+      <td>MO, minerales y microorganismos</td>
+      <td>Arcilla, agua, MO</td>
+    </tr>
+    <tr>
+      <td><strong>Problema limitante mayor</strong></td>
+      <td>Salinización por riego deficiente</td>
+      <td>Erosión hídrica (60% afectados)</td>
+      <td>Pérdida de fertilidad al deforestar</td>
+    </tr>
+    <tr>
+      <td><strong>Región geoedáfica FAO</strong></td>
+      <td>Yermosólica (Fluvisoles en valles)</td>
+      <td>Kastanosólica, Paramosólica, Litosólica</td>
+      <td>Acrisólica / Acrisólica Ondulada</td>
+    </tr>
+    <tr>
+      <td><strong>Capacidad de uso mayor dominante</strong></td>
+      <td>X (75% protección) + A en valles</td>
+      <td>X (65%) + P (pastoreo sierra)</td>
+      <td>F (61% forestal) + X</td>
+    </tr>
+    <tr>
+      <td><strong>Tareas prioritarias (MINAGRI)</strong></td>
+      <td>Formar suelos agrícolas, irrigación, control del riego</td>
+      <td>Conservación, andenes, sistemas agroforestales</td>
+      <td>Rehacimiento de suelos, agroforestería, técnicas de cultivo adecuadas</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR: La paradoja del suelo peruano: los suelos de la Costa (áridos y jóvenes) son los más productivos por hectárea cultivada gracias al riego y los aportes sedimentarios de los ríos (Fluvisoles). Los suelos de la Selva, aparentemente fértiles por la exuberante vegetación, son en realidad "suelos prestados": toda la fertilidad está en la biomasa viva, no en el suelo mineral. Al deforestar, la fertilidad se pierde en pocas cosechas.</div>
+</div>
+
+<!-- ═══════════ QUIZ INTERACTIVO ═══════════ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta con retroalimentación explicativa</p>
+  </div>
+  <div class="quiz-body">
+    <!-- Progreso -->
+    <div class="progress-row">
+      <span id="prog-text" style="font-weight:600">Pregunta 0 / 10 respondidas</span>
+      <div class="stat-bar-wrap" style="flex:1">
+        <div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a;transition:width 0.3s"></div>
+      </div>
+      <span id="score-text" style="font-weight:600;color:#16a34a">0 correctas</span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">¿Cuál es la composición porcentual correcta de un suelo agrícola ideal en sus cuatro fases principales?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) 25% minerales, 50% agua, 20% aire, 5% MO</button>
+        <button class="qbtn" data-q="1" data-correct="true">B) 45% minerales, 25% agua, 25% aire, 5% MO</button>
+        <button class="qbtn" data-q="1" data-correct="false">C) 60% minerales, 15% agua, 20% aire, 5% MO</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) 40% minerales, 30% agua, 25% aire, 5% MO</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">¿Por qué el tiempo cronológico es clasificado como un factor PASIVO en la formación del suelo y no como un factor activo?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) Porque el tiempo no tiene influencia real en la formación del suelo</button>
+        <button class="qbtn" data-q="2" data-correct="false">B) Porque solo afecta al horizonte B del suelo</button>
+        <button class="qbtn" data-q="2" data-correct="true">C) Porque no actúa como agente transformador; solo es el escenario durante el cual los factores activos (clima, biología) operan</button>
+        <button class="qbtn" data-q="2" data-correct="false">D) Porque es el menos importante de todos los factores edafogenéticos</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">En el perfil del suelo, ¿cuál horizonte acumula arcillas y minerales lixiviados provenientes de los horizontes superiores?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="false">A) Horizonte O — orgánico superficial</button>
+        <button class="qbtn" data-q="3" data-correct="false">B) Horizonte A — capa superficial mineral</button>
+        <button class="qbtn" data-q="3" data-correct="false">C) Horizonte E — zona de eluviación</button>
+        <button class="qbtn" data-q="3" data-correct="true">D) Horizonte B — subsuelo por illuviación</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">¿Cuál de las siguientes afirmaciones sobre las regiones geoedáficas del Perú es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="false">A) La Región Acrisólica Ondulada es la más extensa del Perú, abarcando la selva baja por debajo de 500 msnm</button>
+        <button class="qbtn" data-q="4" data-correct="false">B) La Región Yermosólica incluye Fluvisoles fértiles en los valles irrigados por 53 ríos costeros</button>
+        <button class="qbtn" data-q="4" data-correct="true">C) Los suelos de la Región Paramosólica (Andosólica) son los más productivos del Perú por su alta fertilidad química</button>
+        <button class="qbtn" data-q="4" data-correct="false">D) La Región Kastanosólica abarca valles interandinos entre 2 200 y 4 000 msnm con historia de uso agrícola milenario</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">Un agricultor de la costa peruana observa que su suelo desarrolla una costra blanca en la superficie después del riego. ¿Qué proceso está ocurriendo y cuál es su causa principal?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) Alcalinización; exceso de sodio intercambiable que destruye la estructura del suelo</button>
+        <button class="qbtn" data-q="5" data-correct="true">B) Salinización; sales disueltas ascienden por capilaridad y se depositan al evaporarse el agua</button>
+        <button class="qbtn" data-q="5" data-correct="false">C) Gleización; acumulación de hierro ferroso por condiciones anaeróbicas</button>
+        <button class="qbtn" data-q="5" data-correct="false">D) Carbonatación; precipitación de CaCO₃ por exceso de cal en el suelo</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">Según la Capacidad de Uso Mayor (D.S. 017-2009-AG), ¿qué porcentaje aproximado del territorio peruano corresponde a Tierras de Protección (símbolo X) según ONERN (1985)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="false">A) 14% — la misma proporción que los pastos</button>
+        <button class="qbtn" data-q="6" data-correct="false">B) 6% — la suma de tierras agrícolas (A+C)</button>
+        <button class="qbtn" data-q="6" data-correct="false">C) 38% — igual que las tierras forestales</button>
+        <button class="qbtn" data-q="6" data-correct="true">D) 42% — la categoría más extensa del país</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">¿En qué se diferencia fundamentalmente la EROSIÓN del proceso de METEORIZACIÓN?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="true">A) La erosión implica movimiento y transporte del material; la meteorización solo altera y disgrega la roca in situ</button>
+        <button class="qbtn" data-q="7" data-correct="false">B) La meteorización es causada por el hombre; la erosión es un proceso natural únicamente</button>
+        <button class="qbtn" data-q="7" data-correct="false">C) La erosión es exclusivamente acuática; la meteorización es exclusivamente eólica</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) Son términos sinónimos que describen el mismo proceso de degradación del suelo</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">¿Cuál es la principal ventaja ecológica del sistema silvopastoril sobre el pastizal extensivo en la selva peruana, según los datos de eficiencia presentados en el curso?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="false">A) El sistema silvopastoril elimina completamente la necesidad de fertilizantes sintéticos</button>
+        <button class="qbtn" data-q="8" data-correct="true">B) Requiere 12 veces menos superficie que el pastizal extensivo para producir la misma cantidad de carne (12 200 ha vs. 148 000 ha para 10 000 ton)</button>
+        <button class="qbtn" data-q="8" data-correct="false">C) Los árboles del sistema silvopastoril fijan más CO₂ que los de la selva primaria</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) El sistema silvopastoril permite cultivar dos cosechas anuales de pastos mejorados</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">La Capacidad de Intercambio Catiónico (CIC) del suelo es mayor en un suelo arcilloso con alta materia orgánica que en uno arenoso. ¿Qué propiedad química explica directamente esta diferencia?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="false">A) El mayor pH alcalino de los suelos arcillosos que favorece la retención catiónica</button>
+        <button class="qbtn" data-q="9" data-correct="false">B) La menor conductividad eléctrica de los suelos arcillosos que reduce la pérdida de iones</button>
+        <button class="qbtn" data-q="9" data-correct="true">C) Las arcillas y la materia orgánica presentan cargas negativas en su superficie que retienen cationes cargados positivamente</button>
+        <button class="qbtn" data-q="9" data-correct="false">D) La densidad aparente menor de los suelos arcillosos que aumenta el volumen de poros disponibles</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">En el contexto de la Sierra peruana, según MINAGRI (2019), ¿qué porcentaje mínimo de los suelos agropecuarios está afectado por procesos de erosión de mediana a extrema gravedad?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) 30% — menos de un tercio de los suelos andinos</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) 45% — casi la mitad del territorio agropecuario</button>
+        <button class="qbtn" data-q="10" data-correct="true">C) 60% — la mayoría de suelos agropecuarios de la Sierra</button>
+        <button class="qbtn" data-q="10" data-correct="false">D) 80% — prácticamente todo el suelo serrano está erosionado</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <!-- Panel de resultados -->
+    <div class="result-panel" id="result-panel">
+      <div class="result-score" id="result-score">0 / 10</div>
+      <div class="result-msg" id="result-msg"></div>
+      <button class="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Diapositivas del curso Recursos Naturales del Perú — UNALM 2025 · MINAGRI (2019) Atlas de Erosión de Suelos del Perú · SENAMHI (1981–2014) Mapa de Erosión de Suelo del Perú · ONERN (1985) Capacidad de Uso Mayor · D.S. 017-2009-AG Reglamento de Clasificación de Tierras · López, G. "Sistemas Agroforestales" · Alianza Cacao Perú / USAID</span>
+</div>
+
+</div><!-- end .cv -->
+
+<script>
+const feedbacks = {
+  1: {
+    correct: "✅ ¡Correcto! La composición ideal del suelo es 45% fracción mineral (arcillas, limos, arenas), 25% agua, 25% aire y 5% materia orgánica. Aunque la MO es el componente menor, su impacto en la fertilidad, estructura y vida biológica es desproporcionadamente grande.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es B. Un suelo agrícola ideal tiene 45% de fracción mineral (inorgánica), 25% agua, 25% aire y solo 5% de materia orgánica. Este equilibrio garantiza aireación para raíces y microorganismos, y capacidad de retención hídrica adecuada."
+  },
+  2: {
+    correct: "✅ ¡Correcto! El tiempo es el 'escenario' de la pedogénesis, no el 'actor'. Por sí solo no transforma la roca; solo permite que el clima, la biología y los demás factores activos operen durante períodos suficientes. Sin clima ni biología, el tiempo no forma suelo.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es C. El tiempo es pasivo porque no ejerce ninguna acción directa sobre el material parental. Es la duración durante la cual actúan los agentes activos (temperatura, precipitación, seres vivos). Esto explica por qué suelos bajo el mismo clima pero de diferentes edades geológicas son muy distintos."
+  },
+  3: {
+    correct: "✅ ¡Correcto! El Horizonte B es la zona de illuviación (acumulación): recibe arcillas, óxidos de hierro y aluminio, materia orgánica y otros materiales lixiviados del horizonte A y del E. Por eso suele ser más arcilloso y de color más rojizo o pardo que el A.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es D — el Horizonte B. El horizonte E es lo contrario: la zona de ELuviación (pérdida); los materiales se van de E hacia B. El horizonte A es rico en MO pero los materiales finos que pierde van al B."
+  },
+  4: {
+    correct: "✅ ¡Correcto! La afirmación falsa es C. La Región Paramosólica/Andosólica (4 000–5 000 msnm) tiene suelos ácidos (paramosoles) con baja fertilidad química para cultivos convencionales. La agricultura es muy limitada por las bajas temperaturas; solo especies como la Maca se adaptan. Su potencial es para ganadería de camélidos y ovinos.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es C. Los suelos Paramosólicos son ácidos y fríos, no los más productivos. Los más productivos por hectárea son los Fluvisoles de los valles costeros (Región Yermosólica), fertilizados por los sedimentos de los ríos."
+  },
+  5: {
+    correct: "✅ ¡Correcto! La costra blanca es el síntoma clásico de salinización. Las sales disueltas en el agua de riego o en la napa freática ascienden por capilaridad; cuando el agua se evapora en superficie, las sales quedan precipitadas. Este proceso destruye progresivamente la productividad de los valles costeros peruanos.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es B — salinización. La alcalinización (A) no produce costra blanca sino suelo disperso e impermeable. La gleización ocurre en suelos con mal drenaje permanente y produce tonos grises/azulados, no costras blancas."
+  },
+  6: {
+    correct: "✅ ¡Correcto! Según ONERN (1985), las Tierras de Protección (X) representan el 42% del territorio peruano, siendo la categoría más extensa. Esto refleja la gran proporción de glaciares, picos nevados, cañones, desiertos y otras áreas sin aptitud productiva directa en el territorio nacional.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es D — 42%. La distribución es: X=42%, F=38%, P=14%, A=4%, C=2%. Sumando solo las tierras con aptitud agrícola directa (A+C) se obtiene apenas el 6% del territorio, lo que explica la crítica escasez de suelos cultivables en el Perú."
+  },
+  7: {
+    correct: "✅ ¡Correcto! La diferencia esencial es el movimiento. La meteorización (física o química) altera, fragmenta y descompone la roca en su lugar original sin desplazarla. La erosión, en cambio, implica necesariamente el transporte del material ya disgregado hacia otro lugar, donde finalmente se deposita como sedimento.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es A. Ambos procesos pueden ser naturales o acelerados por el hombre; ambos pueden ser hídricos o eólicos. La diferencia fundamental es que la meteorización no implica transporte — el material se queda in situ — mientras que la erosión lo mueve."
+  },
+  8: {
+    correct: "✅ ¡Correcto! Esta es una de las cifras más contundentes del tema. Para producir 10 000 toneladas de carne al año se necesitan: 12 200 ha en sistema silvopastoril, 54 800 ha con pasto de corte, o 148 000 ha de pastizal extensivo. El sistema silvopastoril es 12 veces más eficiente en uso de suelo que el pastizal extensivo tradicional.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es B. La eficiencia en uso del suelo es el principal argumento económico y ambiental del sistema silvopastoril: produce la misma cantidad de carne en una fracción del área, liberando superficie para conservación o agricultura."
+  },
+  9: {
+    correct: "✅ ¡Correcto! La CIC es directamente proporcional a la cantidad de cargas negativas disponibles. Las arcillas (especialmente montmorillonita) tienen enormes superficies específicas cargadas negativamente; la materia orgánica humificada también presenta grupos carboxilos y fenólicos cargados negativamente que retienen cationes Ca²⁺, Mg²⁺, K⁺, Na⁺ y H⁺.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es C. La CIC no depende del pH ni de la conductividad eléctrica directamente. Depende de la abundancia de sitios de carga negativa, que son aportados principalmente por las arcillas (por su estructura laminar) y la materia orgánica humificada."
+  },
+  10: {
+    correct: "✅ ¡Correcto! Según MINAGRI (2019), al menos el 60% de los suelos agropecuarios de la Sierra están afectados por erosión de mediana a extrema gravedad. Esto se debe a la combinación de altas pendientes, lluvias estacionales intensas, pérdida de cobertura vegetal y técnicas de labranza inadecuadas.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es C — 60%. Este dato de MINAGRI (2019) es fundamental: más de la mitad de los suelos agrícolas de la Sierra peruana están erosionados. No es una situación marginal sino la condición predominante, lo que la convierte en la limitante agrícola más grave de esa región."
+  }
+};
+
+let answered = 0;
+let correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const card = document.getElementById('q' + q);
+  const buttons = card.querySelectorAll('.qbtn');
+  const already = card.dataset.answered;
+  if (already) return;
+  card.dataset.answered = '1';
+
+  buttons.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('reveal');
+  });
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correct++;
+  } else {
+    btn.classList.add('incorrect');
+  }
+
+  const fb = document.getElementById('fb' + q);
+  fb.style.display = 'block';
+  if (!isCorrect) fb.classList.add('wrong');
+  fb.innerHTML = isCorrect ? feedbacks[q].correct : feedbacks[q].incorrect;
+
+  answered++;
+  document.getElementById('prog-text').textContent = 'Pregunta ' + answered + ' / 10 respondidas';
+  document.getElementById('score-text').textContent = correct + ' correctas';
+  document.getElementById('score-text').style.color = correct >= answered * 0.7 ? '#16a34a' : '#dc2626';
+  document.getElementById('prog-bar').style.width = (answered * 10) + '%';
+
+  if (answered === 10) showResult();
+});
+
+function showResult() {
+  const panel = document.getElementById('result-panel');
+  const score = document.getElementById('result-score');
+  const msg = document.getElementById('result-msg');
+  score.textContent = correct + ' / 10 correctas';
+  panel.style.display = 'block';
+  panel.classList.remove('bad','mid');
+  if (correct <= 4) {
+    panel.classList.add('bad');
+    msg.textContent = '📚 Necesitas repasar el material. Revisa especialmente los horizontes del suelo, las regiones geoedáficas FAO y la erosión en el Perú.';
+    score.style.color = '#991b1b';
+  } else if (correct <= 7) {
+    panel.classList.add('mid');
+    msg.textContent = '👍 ¡Buen avance! Repasa las propiedades químicas del suelo y los datos cuantitativos (porcentajes de composición, erosión, capacidad de uso mayor).';
+    score.style.color = '#713f12';
+  } else {
+    msg.textContent = '🎉 ¡Excelente dominio del tema! Estás listo para el examen de Recurso Suelo.';
+    score.style.color = '#14532d';
+  }
+}
+
+function resetQuiz() {
+  answered = 0;
+  correct = 0;
+  document.getElementById('prog-text').textContent = 'Pregunta 0 / 10 respondidas';
+  document.getElementById('score-text').textContent = '0 correctas';
+  document.getElementById('score-text').style.color = '#16a34a';
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('result-panel').style.display = 'none';
+  for (let i = 1; i <= 10; i++) {
+    const card = document.getElementById('q' + i);
+    delete card.dataset.answered;
+    card.querySelectorAll('.qbtn').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct','incorrect','reveal');
+    });
+    const fb = document.getElementById('fb' + i);
+    fb.style.display = 'none';
+    fb.classList.remove('wrong');
+    fb.innerHTML = '';
+  }
+}
+</script>
+</body>
+</html>
