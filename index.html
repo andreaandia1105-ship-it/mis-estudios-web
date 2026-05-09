@@ -370,34 +370,41 @@ let allCoursesData  = [];
 let currentView     = 'cursos';
 let currentCategory = null;
 
-const CATEGORIAS_FIJAS = ['TEORIA', 'PC', 'EXAMENES', 'LECTURAS'];
+// Estos iconos sirven para las subcarpetas (cuadros dentro de cada curso)
 
 const ICONOS = {
-    TEORIA:       '📘',
-    PC:           '✍️',
-    EXAMENES:     '📝',
-    LECTURAS:     '📖',
-    ITALIANO:     '🇮🇹',
-    LEYES:        '⚖️',
-    NORMATIVAS:   '📋',
-    METEOROLOGIA: '🌤️',
-    PYTHON:       '🐍',
-    OCEANOGRAFIA: '🌊',
-    POLITICA:     '🏛️',
-    FISICA:       '🔭',
-    AMBIENTE:     '♻️',
-    'CULTURA GENERAL':       '🤔',
-    IA:           '🤖'
+    // Académico / General
+    TEORIA: '📘', PC: '✍️', EXAMENES: '📝', LECTURAS: '📖',
+    // Idiomas
+    ITALIANO: '🇮🇹', INGLES: '🇬🇧', FONETICA: '🗣️', GRAMATICA: '📖', INMERSION: '🎧', PRACTICA: '✍️',
+    // Ciencias y Derecho
+    METEOROLOGIA: '🌤️', OCEANOGRAFIA: '🌊', FISICA: '🔭', DERECHO: '⚖️', POLITICA: '🏛️', LEYES: '📜', 
+    NORMATIVAS: '📋', AMBIENTE: '♻️', 'CIENCIAS DE LA ATMOSFERA': '🌍',
+    // Tecnología
+    TECNOLOGIA: '🤖', PYTHON: '🐍', DATOS: '📊', GEO: '🗺️', IA: '🧠', VIZ: '📈',
+    // Salud y Cultura
+    SALUD: '💪', NUTRICION: '🍎', BIOMECANICA: '🦴', POTENCIA: '⚡', REPARACION: '🧘',
+    'CULTURA GENERAL': '📚', LIBROS: '📖', ARTES: '🎨', MUSICA: '🎵', CINE: '🎬', HISTORIA: '⏳', IDEAS: '💡', SOCIEDAD: '👥', MUNDO: '🌐',
+    // Otros
+    INVESTIGACION: '🔬', OTROS: '📂'
 };
 
-// ── Mapea "numero" a clave de categoría ────────────────────────
+// Esta función analiza el "numero" del JSON para decidir qué icono ponerle al cuadro
 function getCategoriaKey(numero) {
+    if (!numero) return 'OTROS';
     const raw = numero.trim().toUpperCase();
+    
+    // Si el texto empieza con alguna de las palabras clave de arriba, usa ese icono
+    for (let key in ICONOS) {
+        if (raw.startsWith(key)) return key;
+    }
+    
+    // Compatibilidad con archivos que no siguen el nuevo formato
     if (raw.startsWith('EXAMEN'))  return 'EXAMENES';
-    if (raw.startsWith('LECTURA')) return 'LECTURAS';
-    if (raw.startsWith('TEORIA'))  return 'TEORIA';
     if (raw.startsWith('PC'))      return 'PC';
-    return raw.split(' ')[0];
+    if (raw.startsWith('TEORIA'))  return 'TEORIA';
+    
+    return raw.split(' ')[0]; 
 }
 
 // ── Carga JSON ────────────────────────────────────────────────
