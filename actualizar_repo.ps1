@@ -1,37 +1,57 @@
-# ============================================================
-#  actualizar_repo.ps1  —  Generador de lecturas.json
+﻿# ============================================================
+#  actualizar_repo.ps1  —  Versión Ultra-Robusta
 # ============================================================
 
-$basePath  = Get-Location
-$exclude   = @(".git", "index.html", "lecturas.json", "actualizar_repo.ps1", "OTROS")
+$basePath = Get-Location
+$exclude  = @(".git", "index.html", "lecturas.json", "actualizar_repo.ps1", "OTROS")
 
-# 1. Orden y clasificación de los grupos
+# 1. Definición de Cursos e Iconos (Una línea por cada uno para evitar errores)
 $ordenCursos = @(
-    "CONTAMINACION ATMOSFERICA", "ENERGIA RENOVABLE", "MECANIZACION AGRICOLA", "RECURSOS NATURALES DEL PERU",
-    "ITALIANO", "INGLES",
-    "TECNOLOGIA", "DERECHO", "INVESTIGACION", "SALUD",
-    "CIENCIAS DE LA ATMOSFERA", "CULTURA GENERAL"
+    "CONTAMINACION ATMOSFERICA"
+    "ENERGIA RENOVABLE"
+    "MECANIZACION AGRICOLA"
+    "RECURSOS NATURALES DEL PERU"
+    "ITALIANO"
+    "INGLES"
+    "TECNOLOGIA"
+    "DERECHO"
+    "INVESTIGACION"
+    "SALUD"
+    "CIENCIAS DE LA ATMOSFERA"
+    "CULTURA GENERAL"
 )
 
 $iconos = @{
-    "CONTAMINACION ATMOSFERICA"   = "☁️"; "ENERGIA RENOVABLE"           = "🌱"
-    "MECANIZACION AGRICOLA"       = "🚜"; "RECURSOS NATURALES DEL PERU" = "🇵🇪"
-    "ITALIANO"                    = "🇮🇹"; "INGLES"                     = "🇬🇧"
-    "TECNOLOGIA"                  = "🤖"; "DERECHO"                    = "⚖️"
-    "INVESTIGACION"               = "🔬"; "SALUD"                      = "💪"
-    "CIENCIAS DE LA ATMOSFERA"    = "🌍"; "CULTURA GENERAL"            = "🤔"
+    "CONTAMINACION ATMOSFERICA"   = "☁️"
+    "ENERGIA RENOVABLE"           = "🌱"
+    "MECANIZACION AGRICOLA"       = "🚜"
+    "RECURSOS NATURALES DEL PERU" = "🇵🇪"
+    "ITALIANO"                    = "🇮🇹"
+    "INGLES"                     = "🇬🇧"
+    "TECNOLOGIA"                  = "🤖"
+    "DERECHO"                    = "⚖️"
+    "INVESTIGACION"               = "🔬"
+    "SALUD"                      = "💪"
+    "CIENCIAS DE LA ATMOSFERA"    = "🌍"
+    "CULTURA GENERAL"            = "🤔"
 }
 
 $gruposMap = @{
-    "CONTAMINACION ATMOSFERICA"   = "UNALM"; "ENERGIA RENOVABLE"           = "UNALM"
-    "MECANIZACION AGRICOLA"       = "UNALM"; "RECURSOS NATURALES DEL PERU" = "UNALM"
-    "ITALIANO"                    = "IDIOMAS"; "INGLES"                    = "IDIOMAS"
-    "TECNOLOGIA"                  = "PERSONAL"; "DERECHO"                  = "PERSONAL"
-    "INVESTIGACION"               = "PERSONAL"; "SALUD"                    = "PERSONAL"
-    "CIENCIAS DE LA ATMOSFERA"    = "CIENCIAS"; "CULTURA GENERAL"          = "GENERAL"
+    "CONTAMINACION ATMOSFERICA"   = "UNALM"
+    "ENERGIA RENOVABLE"           = "UNALM"
+    "MECANIZACION AGRICOLA"       = "UNALM"
+    "RECURSOS NATURALES DEL PERU" = "UNALM"
+    "ITALIANO"                    = "IDIOMAS"
+    "INGLES"                     = "IDIOMAS"
+    "TECNOLOGIA"                  = "PERSONAL"
+    "DERECHO"                    = "PERSONAL"
+    "INVESTIGACION"               = "PERSONAL"
+    "SALUD"                      = "PERSONAL"
+    "CIENCIAS DE LA ATMOSFERA"    = "CIENCIAS"
+    "CULTURA GENERAL"            = "GENERAL"
 }
 
-# 2. Escaneo
+# 2. Lógica de Escaneo
 $cursosDisco = Get-ChildItem -Directory | Where-Object { $exclude -notcontains $_.Name }
 $cursoIndex = @{}
 foreach ($d in $cursosDisco) { $cursoIndex[$d.Name.ToUpper()] = $d }
@@ -66,8 +86,8 @@ foreach ($nombre in $ordenCursos) {
     }
 }
 
-# 3. Guardar con codificación correcta
-$utf8NoBOM = New-Object System.Text.UTF8Encoding $false
-[System.IO.File]::WriteAllText((Join-Path $basePath "lecturas.json"), ($jsonFinal | ConvertTo-Json -Depth 10), $utf8NoBOM)
+# 3. Guardar (Usando método de sistema para forzar UTF8 limpio)
+$jsonTexto = $jsonFinal | ConvertTo-Json -Depth 10
+[System.IO.File]::WriteAllText((Join-Path $basePath "lecturas.json"), $jsonTexto, [System.Text.Encoding]::UTF8)
 
-Write-Host "✅ lecturas.json actualizado con grupos." -ForegroundColor Cyan
+Write-Host "--- Escaneo completado: lecturas.json actualizado ---" -ForegroundColor Cyan
