@@ -1,0 +1,392 @@
+
+<h2 class="sr-only">Guía interactiva de variables meteorológicas para la cuenca del Rímac</h2>
+
+<style>
+  .var-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:1.5rem; padding-top:1rem; }
+  .tab-btn { padding:6px 14px; border-radius:20px; border:0.5px solid var(--color-border-secondary); background:var(--color-background-secondary); color:var(--color-text-secondary); font-size:13px; cursor:pointer; transition:all .15s; }
+  .tab-btn.active { background:var(--color-background-info); color:var(--color-text-info); border-color:var(--color-border-info); font-weight:500; }
+  .var-card { background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-lg); padding:1.25rem; margin-bottom:1rem; }
+  .var-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:.75rem; }
+  .var-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px; }
+  .var-title { font-size:15px; font-weight:500; color:var(--color-text-primary); margin:0 0 2px; }
+  .var-sub { font-size:12px; color:var(--color-text-secondary); margin:0; }
+  .section-label { font-size:11px; font-weight:500; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:.05em; margin:1rem 0 .4rem; }
+  .var-body { font-size:14px; color:var(--color-text-secondary); line-height:1.65; margin-bottom:.85rem; }
+  .link-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:.5rem; }
+  .link-chip { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:20px; border:0.5px solid var(--color-border-secondary); font-size:12px; color:var(--color-text-info); text-decoration:none; background:var(--color-background-secondary); cursor:pointer; }
+  .link-chip:hover { background:var(--color-background-info); }
+  .badge { display:inline-block; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:500; }
+  .badge-ocean { background:var(--color-background-info); color:var(--color-text-info); }
+  .badge-atm { background:var(--color-background-success); color:var(--color-text-success); }
+  .badge-hyd { background:#e1f5ee; color:#0f6e56; }
+  .badge-model { background:var(--color-background-warning); color:var(--color-text-warning); }
+  .impact-bar { display:flex; align-items:center; gap:8px; margin-top:.5rem; }
+  .impact-label { font-size:12px; color:var(--color-text-tertiary); width:90px; flex-shrink:0; }
+  .impact-dots { display:flex; gap:4px; }
+  .dot { width:10px; height:10px; border-radius:50%; }
+  .dot-fill { background:var(--color-text-info); }
+  .dot-empty { background:var(--color-border-tertiary); }
+  .paper-row { display:flex; flex-direction:column; gap:6px; }
+  .paper-item { font-size:13px; color:var(--color-text-secondary); padding:8px 10px; border-left:2px solid var(--color-border-info); background:var(--color-background-secondary); border-radius:0 6px 6px 0; }
+  .paper-item a { color:var(--color-text-info); text-decoration:none; }
+  .paper-item a:hover { text-decoration:underline; }
+  .paper-journal { font-size:11px; color:var(--color-text-tertiary); margin-top:2px; }
+  #no-results { display:none; padding:2rem; text-align:center; color:var(--color-text-secondary); font-size:14px; }
+  .search-wrap { position:relative; margin-bottom:1rem; }
+  .search-wrap i { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--color-text-tertiary); font-size:16px; }
+  .search-wrap input { padding-left:34px; width:100%; box-sizing:border-box; }
+  .tool-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:12px; background:var(--color-background-secondary); border:0.5px solid var(--color-border-tertiary); font-size:11px; color:var(--color-text-secondary); margin-right:4px; margin-top:4px; }
+</style>
+
+<div style="padding:1rem 0 0;">
+  <div class="search-wrap">
+    <i class="ti ti-search" aria-hidden="true"></i>
+    <input type="text" id="search" placeholder="Buscar variable..." oninput="filterAll()">
+  </div>
+
+  <div class="var-tabs" id="tabs">
+    <button class="tab-btn active" onclick="setTab('all',this)">Todas</button>
+    <button class="tab-btn" onclick="setTab('ocean',this)">🌊 Oceánicas</button>
+    <button class="tab-btn" onclick="setTab('atm',this)">💨 Atmosféricas</button>
+    <button class="tab-btn" onclick="setTab('hyd',this)">💧 Hidrológicas</button>
+    <button class="tab-btn" onclick="setTab('model',this)">🗺️ Modelos</button>
+  </div>
+
+  <div id="cards-container"></div>
+  <div id="no-results">No se encontraron variables. Prueba con otro término.</div>
+</div>
+
+<script>
+const DATA = [
+  {
+    id:"tsm", cat:"ocean", icon:"🌡️",
+    title:"TSM / ATSM",
+    sub:"Temperatura Superficial del Mar / Anomalía",
+    badge:"badge-ocean", badgeLabel:"Oceánica",
+    impact:5,
+    body:"La TSM frente a la costa peruana controla la disponibilidad de humedad que asciende hacia los Andes. Cuando hay calentamiento anómalo (ATSM positiva) en la región Niño 1+2 (costa norte–centro del Perú), se genera mayor evaporación e inestabilidad que favorece lluvias anómalas en la cuenca alta del Rímac durante la temporada lluviosa (dic–mar). En estiaje (jun–ago), la TSM fría de La Corriente de Humboldt inhibe la convección: menos lluvia y menor caudal en el Rímac.",
+    tool:"SENAMHI–OSTIA, Copernicus Marine",
+    sources:[
+      {label:"NOAA Coral Reef Watch – SST", url:"https://coralreefwatch.noaa.gov/product/"},
+      {label:"SENAMHI – Monitoreo TSM", url:"https://www.senamhi.gob.pe"},
+      {label:"Copernicus Marine SST diaria", url:"https://marine.copernicus.eu"},
+    ],
+    papers:[
+      {title:"El Niño y las precipitaciones en la cuenca del Rímac (Lavado et al., 2012)", journal:"Atmosfera – UNAM", url:"https://doi.org/10.20937/ATM.2012.25.03.04"},
+      {title:"ENSO influence on Peruvian Andes rainfall (Garreaud et al., 2009)", journal:"Journal of Climate", url:"https://doi.org/10.1175/2008JCLI2656.1"},
+    ]
+  },
+  {
+    id:"oni", cat:"ocean", icon:"📊",
+    title:"ONI – Índice Oceánico Niño",
+    sub:"Niño 3.4 (90°O–150°O / 5°N–5°S)",
+    badge:"badge-ocean", badgeLabel:"Oceánica",
+    impact:5,
+    body:"Es el índice estándar de NOAA para clasificar eventos ENSO. Umbral ≥+0.5°C por ≥5 trimestres = El Niño; ≤−0.5°C = La Niña. En años Niño fuerte, la cuenca alta del Rímac (>3000 m) tiende a registrar precipitaciones por encima de lo normal en verano austral. En La Niña, el defecto de lluvia puede comprometer la recarga de embalses y el caudal base del estiaje.",
+    tool:"NOAA CPC",
+    sources:[
+      {label:"NOAA CPC – ONI tabla", url:"https://origin.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php"},
+      {label:"IRI ENSO monitor", url:"https://iri.columbia.edu/our-expertise/climate/enso/"},
+    ],
+    papers:[
+      {title:"ENSO and Peru precipitation teleconnections (Vuille et al., 2000)", journal:"J. Geophysical Research – Atmospheres", url:"https://doi.org/10.1029/1999JD901113"},
+    ]
+  },
+  {
+    id:"icen", cat:"ocean", icon:"🌊",
+    title:"ICEN – Índice Costero El Niño",
+    sub:"Niño 1+2 costero, definición peruana",
+    badge:"badge-ocean", badgeLabel:"Oceánica",
+    impact:5,
+    body:"El ICEN, definido por el ENFEN/IMARPE, mide la anomalía de TSM en la Región Niño 1+2 frente a la costa peruana. Es más relevante que el ONI para el Niño Costero (como 2017), que puede generar lluvias intensas en la vertiente occidental de los Andes sin que el ONI supere el umbral. Es el índice que debe aparecer en todo briefing orientado a disponibilidad hídrica de Lima.",
+    tool:"SENAMHI – ENFEN",
+    sources:[
+      {label:"ENFEN – Boletines mensuales", url:"https://www.senamhi.gob.pe/?p=enfen"},
+      {label:"IMARPE – ICEN tiempo real", url:"https://www.imarpe.gob.pe"},
+    ],
+    papers:[
+      {title:"Coastal El Niño 2017 and its impacts on Peru (Garreaud, 2018)", journal:"Climate Dynamics", url:"https://doi.org/10.1007/s00382-018-4100-z"},
+    ]
+  },
+  {
+    id:"kelvin", cat:"ocean", icon:"〰️",
+    title:"Ondas Kelvin oceánicas",
+    sub:"Propagación de calor subsuperficial E→O",
+    badge:"badge-ocean", badgeLabel:"Oceánica",
+    impact:4,
+    body:"Las ondas Kelvin oceánicas se originan en el Pacífico Occidental y viajan al este en el subsuelo (~100–200 m). Cuando llegan a la costa peruana elevan la termoclina y calientan la TSM superficial, siendo precursoras de El Niño Costero 1–3 meses antes. Su seguimiento permite anticipar anomalías de lluvia en la cuenca alta del Rímac con mayor antelación que la TSM superficial sola.",
+    tool:"SENAMHI – IMARPE / NOAA TAO",
+    sources:[
+      {label:"NOAA TAO/TRITON – Temperaturas subsuperficiales", url:"https://www.pmel.noaa.gov/tao/"},
+      {label:"IRI – Sección ecuatorial Kelvin", url:"https://iridl.ldeo.columbia.edu"},
+    ],
+    papers:[
+      {title:"Oceanic Kelvin waves and El Niño prediction (Boulanger & Menkes, 1999)", journal:"J. Geophysical Research – Oceans", url:"https://doi.org/10.1029/1999JC900005"},
+    ]
+  },
+  {
+    id:"mjo", cat:"atm", icon:"🔄",
+    title:"MJO – Oscilación Madden-Julian",
+    sub:"Fases 1–8 / amplitud RMM1–RMM2",
+    badge:"badge-atm", badgeLabel:"Atmosférica",
+    impact:4,
+    body:"La MJO es una onda de convección que recorre el trópico en ~30–60 días. Las fases 1–3 (Hemisferio occidental/África) tienden a suprimir la convección en América del Sur tropical → menos lluvia en cuenca alta Rímac. Las fases 6–8 (Pacífico occidental/continental marítimo) favorecen convección activa → mayor precipitación. Su influencia es crítica para el pronóstico de 2–4 semanas, especialmente durante diciembre–marzo.",
+    tool:"BoM Australia, NOAA CPC, ECMWF, CFSv2",
+    sources:[
+      {label:"BoM Australia – RMM diagrams", url:"http://www.bom.gov.au/climate/mjo/"},
+      {label:"NOAA CPC – MJO monitoring", url:"https://www.cpc.ncep.noaa.gov/products/precip/CWlink/MJO/mjo.shtml"},
+      {label:"NCICS – CHI200 CFS forecasts (Schreck)", url:"https://ncics.org/mjo/"},
+    ],
+    papers:[
+      {title:"MJO impacts on South American precipitation (Alvarez et al., 2016)", journal:"Climate Dynamics", url:"https://doi.org/10.1007/s00382-016-3158-x"},
+      {title:"MJO teleconnections to Andean rainfall (Garreaud & Wallace, 1997)", journal:"Monthly Weather Review", url:"https://doi.org/10.1175/1520-0493(1997)125<1920:TRGVOT>2.0.CO;2"},
+    ]
+  },
+  {
+    id:"olr", cat:"atm", icon:"☀️",
+    title:"OLR – Radiación Onda Larga Saliente",
+    sub:"Proxy de convección activa/suprimida",
+    badge:"badge-atm", badgeLabel:"Atmosférica",
+    impact:3,
+    body:"El OLR mide la energía infrarroja que emite la atmósfera hacia el espacio. Valores bajos de OLR (anomalía negativa) indican nubosidad convectiva profunda → más lluvia. Valores altos → subsidencia, cielos despejados → déficit de lluvia. Es el indicador más directo para detectar en tiempo casi real si la convección sobre la Amazonía occidental (alimentadora de la cuenca Rímac) está activa o suprimida.",
+    tool:"NOAA CDR OLR, NCEP/NCAR Reanalysis",
+    sources:[
+      {label:"NOAA Interpolated OLR daily", url:"https://psl.noaa.gov/data/gridded/data.olr.html"},
+      {label:"IRI Map Room – OLR anomalies", url:"https://iridl.ldeo.columbia.edu/maproom/Global/Atm_Circulation/OLR.html"},
+    ],
+    papers:[
+      {title:"OLR and precipitation over South America (Liebmann & Smith, 1996)", journal:"Bulletin of the AMS", url:"https://doi.org/10.1175/1520-0477(1996)077<1275:DOILRA>2.0.CO;2"},
+    ]
+  },
+  {
+    id:"alta_bolivia", cat:"atm", icon:"🌀",
+    title:"Alta de Bolivia",
+    sub:"Anticiclón 200 hPa / Vórtice de Bolivar",
+    badge:"badge-atm", badgeLabel:"Atmosférica",
+    impact:4,
+    body:"La Alta de Bolivia es el anticiclón que se forma en la alta troposfera (200 hPa) sobre los Andes centrales durante el verano austral como respuesta al calentamiento de la superficie continental. Su posición determina la divergencia del viento en altura: cuando está bien desarrollada y centrada sobre Bolivia–sur del Perú, favorece convección en la cuenca alta del Rímac. Si se debilita o desplaza, la lluvia disminuye. InterPGrADS/GFS puede graficarla con la línea de corriente a 200 hPa.",
+    tool:"GFS vía InterPGrADS, Tropicaltidbits",
+    sources:[
+      {label:"NCEP Reanalysis – 200 hPa stream", url:"https://psl.noaa.gov/cgi-bin/data/composites/printpage.pl"},
+      {label:"Tropicaltidbits – GFS 200 hPa", url:"https://www.tropicaltidbits.com/analysis/models/"},
+    ],
+    papers:[
+      {title:"Bolivian High variability and Andean precipitation (Lenters & Cook, 1997)", journal:"Journal of the Atmospheric Sciences", url:"https://doi.org/10.1175/1520-0469(1997)054<0656:ONTBHI>2.0.CO;2"},
+    ]
+  },
+  {
+    id:"jet", cat:"atm", icon:"🌬️",
+    title:"Jet subtropical (200 hPa)",
+    sub:"Control de subsidencia sobre los Andes",
+    badge:"badge-atm", badgeLabel:"Atmosférica",
+    impact:3,
+    body:"La corriente en chorro subtropical de nivel alto controla la subsidencia sobre la vertiente occidental andina. Cuando se intensifica o desplaza ecuatorialmente, aumenta la subsidencia sobre Lima–Andes centrales → supresión de lluvia. Su seguimiento es clave para el estiaje: un jet más al norte puede extender la temporada seca en la cuenca Rímac.",
+    tool:"GFS vía InterPGrADS / NOAA",
+    sources:[
+      {label:"NCEP/NCAR Reanalysis – jet stream", url:"https://psl.noaa.gov/data/composites/"},
+      {label:"Windy – viento 200 hPa", url:"https://www.windy.com/?200h"},
+    ],
+    papers:[
+      {title:"Subtropical jet and precipitation in the Andes (Vuille & Keimig, 2004)", journal:"Journal of Climate", url:"https://doi.org/10.1175/1520-0442(2004)017<3834:ISOAPS>2.0.CO;2"},
+    ]
+  },
+  {
+    id:"sallj", cat:"atm", icon:"💨",
+    title:"SALLJ / CHBL – Corriente de bajo nivel",
+    sub:"Transporte de humedad Amazónica → Andes",
+    badge:"badge-atm", badgeLabel:"Atmosférica",
+    impact:4,
+    body:"El South American Low-Level Jet (SALLJ) es un flujo de viento en 850 hPa que canaliza la humedad desde el Amazonas hacia los Andes centrales y el altiplano. Cuando se intensifica (generalmente de noche y en verano), actúa como 'río aéreo' de vapor de agua que alimenta la convección en la cuenca alta del Rímac. InterPGrADS puede generar mapas de viento en 850 hPa + humedad relativa para seguirlo semanalmente.",
+    tool:"GFS 850 hPa vía InterPGrADS",
+    sources:[
+      {label:"ERA5 – viento 850 hPa (Copernicus)", url:"https://cds.climate.copernicus.eu"},
+      {label:"NCEP/NCAR 850 hPa wind composites", url:"https://psl.noaa.gov/data/composites/"},
+    ],
+    papers:[
+      {title:"The South American Low-Level Jet (Vera et al., 2006)", journal:"Journal of Climate", url:"https://doi.org/10.1175/JCLI3745.1"},
+      {title:"SALLJ and Andean precipitation (Garreaud, 1999)", journal:"Monthly Weather Review", url:"https://doi.org/10.1175/1520-0493(1999)127<0676:MSOTSA>2.0.CO;2"},
+    ]
+  },
+  {
+    id:"agua_prec", cat:"atm", icon:"💧",
+    title:"Agua precipitable (TPW)",
+    sub:"Columna integrada de vapor de agua (mm)",
+    badge:"badge-atm", badgeLabel:"Atmosférica",
+    impact:3,
+    body:"El agua precipitable es la cantidad total de vapor de agua en una columna de aire. Valores altos (>45–50 mm sobre Lima/Ancash) indican que la atmósfera es muy húmeda y cualquier mecanismo de disparo convectivo puede generar lluvias intensas. InterPGrADS/GFS ya lo genera por departamento. Su monitoreo respecto al punto crítico (línea roja) es una herramienta eficaz de alerta temprana para la cuenca alta del Rímac.",
+    tool:"InterPGrADS / GFS (ya disponible)",
+    sources:[
+      {label:"NOAA – Total Precipitable Water", url:"https://www.ospo.noaa.gov/Products/atmosphere/tpw/"},
+      {label:"CIMSS – TPW satélite Amvur", url:"https://cimss.ssec.wisc.edu/goes/realtime/"},
+    ],
+    papers:[
+      {title:"Precipitable water and convection in the Andes (Zentralanstalt 2015)", journal:"Atmospheric Research", url:"https://doi.org/10.1016/j.atmosres.2014.09.013"},
+    ]
+  },
+  {
+    id:"chirps", cat:"model", icon:"🗺️",
+    title:"CHIRPS / PISCO",
+    sub:"Precipitación observada alta resolución (~5 km)",
+    badge:"badge-model", badgeLabel:"Modelo/Datos",
+    impact:4,
+    body:"CHIRPS (Climate Hazards Group InfraRed Precipitation with Station data) y PISCO (Peruvian Interpolated data of SENAMHI's Climatological and hydrological Observations) son productos de precipitación observada con alta resolución espacial (~5 km). Son los más adecuados para calcular anomalías de precipitación mensual en la cuenca del Rímac con precisión, superando al GFS en la representación de gradientes altitudinales andinos.",
+    tool:"SENAMHI–PISCO, UCSB–CHIRPS",
+    sources:[
+      {label:"CHIRPS – UCSB Climate Hazards Group", url:"https://www.chc.ucsb.edu/data/chirps"},
+      {label:"SENAMHI – PISCO dataset", url:"https://iridl.ldeo.columbia.edu/SOURCES/.SENAMHI/.HSR/.PISCO/"},
+      {label:"IRI Data Library – CHIRPS", url:"https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/"},
+    ],
+    papers:[
+      {title:"CHIRPS: quasi-global rainfall 1981–present (Funk et al., 2015)", journal:"Scientific Data – Nature", url:"https://doi.org/10.1038/sdata.2015.66"},
+      {title:"PISCO: A High-Resolution gridded dataset over Peru (Aybar et al., 2020)", journal:"Earth System Science Data", url:"https://doi.org/10.5194/essd-12-2031-2020"},
+    ]
+  },
+  {
+    id:"ecmwf", cat:"model", icon:"🌐",
+    title:"ECMWF – IFS",
+    sub:"Modelo europeo de pronóstico global",
+    badge:"badge-model", badgeLabel:"Modelo/Datos",
+    impact:4,
+    body:"El modelo IFS del ECMWF es generalmente superior al GFS en la representación de la precipitación en zonas montañosas tropicales. Usarlo en comparación con el GFS reduce la incertidumbre del pronóstico. Para el briefing, mostrar ambos modelos juntos (o sus diferencias) permite identificar zonas de mayor acuerdo → mayor confianza en el pronóstico para la cuenca Rímac.",
+    tool:"ECMWF Open Charts, Copernicus, Windy",
+    sources:[
+      {label:"ECMWF Open Charts", url:"https://charts.ecmwf.int/"},
+      {label:"Windy – capa ECMWF", url:"https://www.windy.com/?ecmwf,rain"},
+      {label:"Copernicus C3S – pronósticos", url:"https://climate.copernicus.eu/"},
+    ],
+    papers:[
+      {title:"GFS vs ECMWF skill in tropical precipitation (Hamill et al., 2012)", journal:"Weather and Forecasting", url:"https://doi.org/10.1175/WAF-D-11-00049.1"},
+    ]
+  },
+  {
+    id:"caudal", cat:"hyd", icon:"📈",
+    title:"Caudal del río Rímac",
+    sub:"Est. Chosica / Sheque / Matucana – SENAMHI",
+    badge:"badge-hyd", badgeLabel:"Hidrológica",
+    impact:5,
+    body:"El caudal es la variable de cierre del briefing: integra toda la precipitación que cae en la cuenca alta. Las estaciones hidrométricas de Chosica (cuenca baja), Sheque y Matucana (cuenca media-alta) permiten monitorear la disponibilidad de agua para SEDAPAL. Durante el estiaje (jun–sep), el caudal puede caer a 5–8 m³/s, comprometiendo la producción de agua potable si los embalses no están bien cargados. Su comparación con la climatología y pronóstico GFS cierra el análisis.",
+    tool:"SENAMHI – AHO (Administración Hidrometeorológica Operativa)",
+    sources:[
+      {label:"SENAMHI – Datos hidrometeorológicos", url:"https://www.senamhi.gob.pe/?p=estaciones"},
+      {label:"ANA – SNIRH (caudales)", url:"https://snirh.ana.gob.pe/"},
+    ],
+    papers:[
+      {title:"Streamflow variability and ENSO in the Rimac basin (Lavado et al., 2013)", journal:"Hydrological Sciences Journal", url:"https://doi.org/10.1080/02626667.2013.804183"},
+      {title:"Water availability Lima and climate variability (Baraer et al., 2012)", journal:"Global and Planetary Change", url:"https://doi.org/10.1016/j.gloplacha.2011.09.008"},
+    ]
+  },
+  {
+    id:"embalses", cat:"hyd", icon:"🏗️",
+    title:"Nivel de embalses (Marca I–IV / Antacoto)",
+    sub:"Volumen almacenado – SEDAPAL / ANA",
+    badge:"badge-hyd", badgeLabel:"Hidrológica",
+    impact:5,
+    body:"Los embalses de la cuenca Rímac–Mantaro son el único buffer hídrico para Lima durante el estiaje. El Sistema Marca (I, II, III, IV) y el embalse de Antacoto regulan el suministro de agua potable de ~11 millones de limeños. Su nivel a inicios de junio (final de la temporada lluviosa) determina la capacidad de SEDAPAL para enfrentar el estiaje. Un año Niño débil puede adelantar el llenado; un año Niño fuerte puede generar turbidez que interrumpa la captación.",
+    tool:"SEDAPAL – ANA (datos institucionales)",
+    sources:[
+      {label:"ANA – SNIRH infraestructura hidráulica", url:"https://snirh.ana.gob.pe/"},
+      {label:"SEDAPAL – reportes operativos", url:"https://www.sedapal.com.pe"},
+    ],
+    papers:[
+      {title:"Lima's water supply vulnerability to climate (Vergara et al., 2007)", journal:"Climatic Change", url:"https://doi.org/10.1007/s10584-007-9378-8"},
+    ]
+  },
+  {
+    id:"nieve", cat:"hyd", icon:"❄️",
+    title:"Cobertura nival / glaciares",
+    sub:"MODIS / Sentinel-2 – reserva sólida",
+    badge:"badge-hyd", badgeLabel:"Hidrológica",
+    impact:3,
+    body:"Los glaciares y campos de nieve en la cabecera del Rímac (>5000 m: Cordillera Occidental) actúan como reserva sólida que se derrite durante el estiaje, sosteniendo el caudal base cuando no llueve. Sin embargo, la retracción glaciar acelerada (>60% de volumen perdido desde 1970) está reduciendo este aporte. MODIS permite monitorear la cobertura de nieve semanalmente de forma gratuita.",
+    tool:"NASA Worldview – MODIS Terra/Aqua, Sentinel-2 EO Browser",
+    sources:[
+      {label:"NASA Worldview – MODIS nieve", url:"https://worldview.earthdata.nasa.gov/"},
+      {label:"Copernicus EO Browser – Sentinel-2", url:"https://browser.eos.com/"},
+      {label:"ANA – Inventario glaciares Perú", url:"https://www.ana.gob.pe/"},
+    ],
+    papers:[
+      {title:"Glacier retreat in the tropical Andes (Rabatel et al., 2013)", journal:"The Cryosphere", url:"https://doi.org/10.5194/tc-7-81-2013"},
+      {title:"Shrinking glaciers and water security in Peru (Bury et al., 2011)", journal:"Annals of the Association of American Geographers", url:"https://doi.org/10.1080/00045608.2010.523511"},
+    ]
+  },
+];
+
+let currentTab = 'all';
+let currentSearch = '';
+
+function setTab(cat, el) {
+  currentTab = cat;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderCards();
+}
+
+function filterAll() {
+  currentSearch = document.getElementById('search').value.toLowerCase();
+  renderCards();
+}
+
+function impactDots(n) {
+  let h = '<div class="impact-dots">';
+  for(let i=1;i<=5;i++) h += `<div class="dot ${i<=n?'dot-fill':'dot-empty'}"></div>`;
+  return h + '</div>';
+}
+
+function openLink(url) {
+  window.open(url, '_blank');
+}
+
+function renderCards() {
+  const container = document.getElementById('cards-container');
+  let filtered = DATA.filter(d => {
+    const matchCat = currentTab === 'all' || d.cat === currentTab;
+    const matchSearch = !currentSearch ||
+      d.title.toLowerCase().includes(currentSearch) ||
+      d.body.toLowerCase().includes(currentSearch) ||
+      d.sub.toLowerCase().includes(currentSearch);
+    return matchCat && matchSearch;
+  });
+
+  document.getElementById('no-results').style.display = filtered.length ? 'none' : 'block';
+
+  container.innerHTML = filtered.map(d => `
+    <div class="var-card">
+      <div class="var-header">
+        <div class="var-icon" style="background:var(--color-background-secondary); font-size:20px;">${d.icon}</div>
+        <div style="flex:1;">
+          <p class="var-title">${d.title} <span class="badge ${d.badge}" style="margin-left:6px;">${d.badgeLabel}</span></p>
+          <p class="var-sub">${d.sub}</p>
+        </div>
+      </div>
+
+      <div class="impact-bar">
+        <span class="impact-label" style="font-size:12px; color:var(--color-text-tertiary);">Impacto en Rímac</span>
+        ${impactDots(d.impact)}
+      </div>
+
+      <p class="var-body" style="margin-top:.75rem;">${d.body}</p>
+
+      <div class="section-label">Herramienta / fuente de datos</div>
+      <div style="margin-bottom:.75rem;">
+        <span class="tool-badge"><i class="ti ti-tool" aria-hidden="true" style="font-size:13px;"></i> ${d.tool}</span>
+      </div>
+
+      <div class="section-label">Páginas de consulta</div>
+      <div class="link-row" style="margin-bottom:.75rem;">
+        ${d.sources.map(s => `<span class="link-chip" onclick="openLink('${s.url}')"><i class="ti ti-external-link" aria-hidden="true"></i>${s.label}</span>`).join('')}
+      </div>
+
+      <div class="section-label">Artículos de referencia</div>
+      <div class="paper-row">
+        ${d.papers.map(p => `
+          <div class="paper-item">
+            <a onclick="openLink('${p.url}')" style="cursor:pointer;">${p.title}</a>
+            <div class="paper-journal"><i class="ti ti-book" aria-hidden="true" style="font-size:12px;"></i> ${p.journal}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+renderCards();
+</script>
