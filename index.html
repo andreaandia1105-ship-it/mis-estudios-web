@@ -7,11 +7,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
 
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     font-family: 'Source Sans 3', sans-serif;
@@ -20,6 +16,7 @@ body {
     min-height: 100vh;
 }
 
+/* ── HEADER ── */
 header {
     background: linear-gradient(135deg, #0f1e3a 0%, #1a2332 100%);
     padding: 20px 16px;
@@ -28,7 +25,6 @@ header {
     top: 0;
     z-index: 100;
 }
-
 .hinner {
     max-width: 1200px;
     margin: 0 auto;
@@ -38,7 +34,6 @@ header {
     flex-wrap: wrap;
     gap: 12px;
 }
-
 header h1 {
     font-family: 'Oswald', sans-serif;
     font-size: clamp(20px, 5vw, 24px);
@@ -49,13 +44,7 @@ header h1 {
     align-items: center;
     gap: 8px;
 }
-
-header p {
-    font-size: 11px;
-    color: #64748b;
-    margin-top: 2px;
-}
-
+header p { font-size: 11px; color: #64748b; margin-top: 2px; }
 #total-badge {
     font-size: 11px;
     padding: 6px 14px;
@@ -65,6 +54,7 @@ header p {
     border: 1px solid rgba(59,130,246,0.2);
 }
 
+/* ── BUSCADOR ── */
 .search-wrap {
     background: #0d1525;
     border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -73,7 +63,6 @@ header p {
     top: 72px;
     z-index: 99;
 }
-
 .search-wrap input {
     width: 100%;
     max-width: 1200px;
@@ -89,25 +78,69 @@ header p {
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
-
 .search-wrap input:focus {
     border-color: #3b82f6;
     box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
 }
-
 .search-wrap input::placeholder { color: #475569; }
 
+/* ── MAIN ── */
 main {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 16px 80px;
+    padding: 24px 16px 80px;
 }
+
+/* ── SEPARADORES DE GRUPO ── */
+.grupo-separador {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 16px;
+}
+.grupo-separador:first-child { margin-top: 0; }
+.grupo-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+.grupo-linea {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+}
+
+/* Colores por grupo */
+.grupo-UNALM    .grupo-label { background: rgba(16,185,129,0.12); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.2); }
+.grupo-IDIOMAS  .grupo-label { background: rgba(245,158,11,0.12);  color: #fcd34d; border: 1px solid rgba(245,158,11,0.2);  }
+.grupo-PERSONAL .grupo-label { background: rgba(139,92,246,0.12);  color: #c4b5fd; border: 1px solid rgba(139,92,246,0.2);  }
+.grupo-CIENCIAS .grupo-label { background: rgba(59,130,246,0.12);  color: #93c5fd; border: 1px solid rgba(59,130,246,0.2);  }
+.grupo-GENERAL  .grupo-label { background: rgba(236,72,153,0.12);  color: #f9a8d4; border: 1px solid rgba(236,72,153,0.2);  }
+
+/* Líneas por grupo */
+.grupo-UNALM    .grupo-linea { background: rgba(16,185,129,0.15); }
+.grupo-IDIOMAS  .grupo-linea { background: rgba(245,158,11,0.15); }
+.grupo-PERSONAL .grupo-linea { background: rgba(139,92,246,0.15); }
+.grupo-CIENCIAS .grupo-linea { background: rgba(59,130,246,0.15); }
+.grupo-GENERAL  .grupo-linea { background: rgba(236,72,153,0.15); }
+
+/* Borde izquierdo de la card según grupo */
+.grupo-UNALM    .curso-card { border-left: 3px solid rgba(16,185,129,0.4); }
+.grupo-IDIOMAS  .curso-card { border-left: 3px solid rgba(245,158,11,0.4); }
+.grupo-PERSONAL .curso-card { border-left: 3px solid rgba(139,92,246,0.4); }
+.grupo-CIENCIAS .curso-card { border-left: 3px solid rgba(59,130,246,0.4); }
+.grupo-GENERAL  .curso-card { border-left: 3px solid rgba(236,72,153,0.4); }
 
 /* ── GRID CURSOS ── */
 .cursos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
+    gap: 20px;
 }
 
 .curso-card {
@@ -117,12 +150,10 @@ main {
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .curso-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0,0,0,0.4);
 }
-
 .curso-header {
     background: rgba(0,0,0,0.35);
     padding: 16px 18px;
@@ -131,9 +162,7 @@ main {
     gap: 12px;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-
 .curso-icon { font-size: 30px; flex-shrink: 0; }
-
 .curso-title {
     font-family: 'Oswald', sans-serif;
     font-size: 17px;
@@ -141,7 +170,6 @@ main {
     flex: 1;
     line-height: 1.2;
 }
-
 .curso-count {
     font-size: 11px;
     background: #1e293b;
@@ -151,13 +179,12 @@ main {
     flex-shrink: 0;
 }
 
-/* ── CATEGORÍAS (cuadros) ── */
+/* ── CATEGORÍAS ── */
 .categorias {
     display: grid;
     gap: 1px;
     background: rgba(255,255,255,0.05);
 }
-
 .categoria-item {
     background: #0f172a;
     padding: 20px 10px;
@@ -168,33 +195,10 @@ main {
     color: #e2e8f0;
     font-family: 'Source Sans 3', sans-serif;
 }
-
-.categoria-item:hover {
-    background: #1e293b;
-    transform: scale(0.97);
-}
-
-.categoria-icono {
-    font-size: 26px;
-    display: block;
-    margin-bottom: 6px;
-    line-height: 1;
-}
-
-.categoria-nombre {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    display: block;
-}
-
-.categoria-cantidad {
-    font-size: 11px;
-    opacity: 0.55;
-    margin-top: 3px;
-    display: block;
-}
+.categoria-item:hover { background: #1e293b; transform: scale(0.97); }
+.categoria-icono { font-size: 26px; display: block; margin-bottom: 6px; line-height: 1; }
+.categoria-nombre { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; display: block; }
+.categoria-cantidad { font-size: 11px; opacity: 0.55; margin-top: 3px; display: block; }
 
 /* ── DETALLE ── */
 .detail-header {
@@ -204,7 +208,6 @@ main {
     margin-bottom: 24px;
     flex-wrap: wrap;
 }
-
 .back-btn {
     background: #1e293b;
     border: none;
@@ -219,20 +222,9 @@ main {
     transition: background 0.2s;
     font-family: 'Source Sans 3', sans-serif;
 }
-
 .back-btn:hover { background: #334155; }
-
-.detail-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.detail-subtitle {
-    font-size: 13px;
-    color: #94a3b8;
-    margin-top: 2px;
-}
+.detail-title { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 700; }
+.detail-subtitle { font-size: 13px; color: #94a3b8; margin-top: 2px; }
 
 /* ── GRID ARCHIVOS ── */
 .grid-archivos {
@@ -240,7 +232,6 @@ main {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 16px;
 }
-
 .card-archivo {
     background: #111827;
     border: 1px solid rgba(255,255,255,0.07);
@@ -251,35 +242,10 @@ main {
     display: block;
     transition: transform 0.2s, background 0.2s, border-color 0.2s;
 }
-
-.card-archivo:hover {
-    transform: translateY(-3px);
-    background: #1a2332;
-    border-color: #3b82f6;
-}
-
-.card-num {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    color: #60a5fa;
-}
-
-.card-archivo h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    line-height: 1.3;
-}
-
-.card-archivo p {
-    font-size: 12px;
-    color: #64748b;
-    line-height: 1.4;
-}
+.card-archivo:hover { transform: translateY(-3px); background: #1a2332; border-color: #3b82f6; }
+.card-num { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; color: #60a5fa; }
+.card-archivo h3 { font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+.card-archivo p { font-size: 12px; color: #64748b; line-height: 1.4; }
 
 /* ── ESTADOS ── */
 .empty-state {
@@ -292,31 +258,22 @@ main {
     font-size: 14px;
     line-height: 1.6;
 }
-
-.loading {
-    text-align: center;
-    padding: 60px 20px;
-}
-
+.loading { text-align: center; padding: 60px 20px; }
 .loading-spinner {
-    width: 40px;
-    height: 40px;
+    width: 40px; height: 40px;
     border: 3px solid rgba(59,130,246,0.2);
     border-top-color: #3b82f6;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
     margin: 0 auto 16px;
 }
-
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ── FAB ── */
 .fab-add {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 52px;
-    height: 52px;
+    bottom: 24px; right: 24px;
+    width: 52px; height: 52px;
     border-radius: 50%;
     background: #3b82f6;
     border: none;
@@ -330,7 +287,6 @@ main {
     transition: transform 0.2s, background 0.2s;
     opacity: 0.7;
 }
-
 .fab-add:hover { transform: scale(1.08); background: #2563eb; opacity: 1; }
 
 @media (max-width: 600px) {
@@ -370,46 +326,44 @@ let allCoursesData  = [];
 let currentView     = 'cursos';
 let currentCategory = null;
 
-// AÑADE ESTA LÍNEA AQUÍ:
 const CATEGORIAS_FIJAS = ['GENERAL'];
-// Estos iconos sirven para las subcarpetas (cuadros dentro de cada curso)
 
 const ICONOS = {
-    // Académico / General
     TEORIA: '📘', PC: '✍️', EXAMENES: '📝', LECTURAS: '📖',
-    // Idiomas
     ITALIANO: '🇮🇹', INGLES: '🇬🇧', FONETICA: '🗣️', GRAMATICA: '📖', INMERSION: '🎧', PRACTICA: '✍️',
-    // Ciencias y Derecho
-    METEOROLOGIA: '🌤️', OCEANOGRAFIA: '🌊', FISICA: '🔭', DERECHO: '⚖️', POLITICA: '🏛️', LEYES: '📜', 
+    METEOROLOGIA: '🌤️', OCEANOGRAFIA: '🌊', FISICA: '🔭', DERECHO: '⚖️', POLITICA: '🏛️', LEYES: '📜',
     NORMATIVAS: '📋', AMBIENTE: '♻️', 'CIENCIAS DE LA ATMOSFERA': '🌍',
-    // Tecnología
+    CLIMATOLOGIA: '🌡️', HIDROMETEOROLOGIA: '🌧️', MICROMETEOROLOGIA: '🔬', MODELAMIENTO: '💻',
+    'SENSORES REMOTOS': '📡',
     TECNOLOGIA: '🤖', PYTHON: '🐍', DATOS: '📊', GEO: '🗺️', IA: '🧠', VIZ: '📈',
-    // Salud y Cultura
     SALUD: '💪', NUTRICION: '🍎', BIOMECANICA: '🦴', POTENCIA: '⚡', REPARACION: '🧘',
-    'CULTURA GENERAL': '📚', LIBROS: '📖', ARTES: '🎨', MUSICA: '🎵', CINE: '🎬', HISTORIA: '⏳', IDEAS: '💡', SOCIEDAD: '👥', MUNDO: '🌐',
-    // Otros
+    'CULTURA GENERAL': '📚', LIBROS: '📖', ARTES: '🎨', MUSICA: '🎵', CINE: '🎬',
+    HISTORIA: '⏳', IDEAS: '💡', SOCIEDAD: '👥', MUNDO: '🌐',
     INVESTIGACION: '🔬', OTROS: '📂'
 };
 
-// Esta función analiza el "numero" del JSON para decidir qué icono ponerle al cuadro
+// Etiquetas de grupo
+const GRUPOS_LABEL = {
+    UNALM:    '🎓 UNALM',
+    IDIOMAS:  '🌐 Idiomas',
+    PERSONAL: '💡 Personal',
+    CIENCIAS: '🔭 Ciencias',
+    GENERAL:  '🧩 General'
+};
+
 function getCategoriaKey(numero) {
     if (!numero) return 'OTROS';
     const raw = numero.trim().toUpperCase();
-    
-    // Si el texto empieza con alguna de las palabras clave de arriba, usa ese icono
     for (let key in ICONOS) {
         if (raw.startsWith(key)) return key;
     }
-    
-    // Compatibilidad con archivos que no siguen el nuevo formato
     if (raw.startsWith('EXAMEN'))  return 'EXAMENES';
     if (raw.startsWith('PC'))      return 'PC';
     if (raw.startsWith('TEORIA'))  return 'TEORIA';
-    
-    return raw.split(' ')[0]; 
+    return raw.split(' ')[0];
 }
 
-// ── Carga JSON ────────────────────────────────────────────────
+// ── Carga JSON ─────────────────────────────────────────────────
 fetch('lecturas.json')
     .then(r => {
         if (!r.ok) throw new Error('No se pudo cargar lecturas.json');
@@ -425,71 +379,97 @@ fetch('lecturas.json')
             `<div class="empty-state">⚠️ Error: ${err.message}<br>Asegúrate de que lecturas.json existe junto a index.html.</div>`;
     });
 
-// ── Vista principal ───────────────────────────────────────────
+// ── Vista principal ────────────────────────────────────────────
 function renderCursosView(data) {
     const main = document.getElementById('main');
     main.innerHTML = '';
     currentView = 'cursos';
 
-    const grid = document.createElement('div');
-    grid.className = 'cursos-grid';
+    // Agrupar cursos por campo "grupo"
+    const grupos = {};
+    const grupoOrden = [];
 
     data.forEach(curso => {
-    // Cambia la línea de listaCategorias por esto:
-        let listaCategorias = curso.categorias || CATEGORIAS_FIJAS;
-        if (!Array.isArray(listaCategorias)) {
-            listaCategorias = [listaCategorias];
+        const g = curso.grupo || 'OTROS';
+        if (!grupos[g]) {
+            grupos[g] = [];
+            grupoOrden.push(g);
         }
-        const grupos = {};
-        listaCategorias.forEach(cat => grupos[cat] = []);
-
-        curso.lecturas.forEach(lectura => {
-            const clave = getCategoriaKey(lectura.numero);
-            if (grupos[clave] !== undefined) {
-                grupos[clave].push(lectura);
-            } else {
-                grupos[listaCategorias[listaCategorias.length - 1]].push(lectura);
-            }
-        });
-
-        const numCats  = listaCategorias.length;
-        const gridCols = numCats <= 4 ? `repeat(${numCats}, 1fr)` : 'repeat(3, 1fr)';
-
-        const cuadrosHTML = listaCategorias.map(cat => `
-            <div class="categoria-item" data-curso="${curso.curso}" data-tipo="${cat}">
-                <span class="categoria-icono">${ICONOS[cat] || '📁'}</span>
-                <span class="categoria-nombre">${cat}</span>
-                <span class="categoria-cantidad">${grupos[cat].length} archivos</span>
-            </div>`
-        ).join('');
-
-        const card = document.createElement('div');
-        card.className = 'curso-card';
-        card.innerHTML = `
-            <div class="curso-header">
-                <span class="curso-icon">${curso.icono}</span>
-                <span class="curso-title">${curso.curso}</span>
-                <span class="curso-count">${curso.lecturas.length} archivos</span>
-            </div>
-            <div class="categorias" style="grid-template-columns:${gridCols};">
-                ${cuadrosHTML}
-            </div>`;
-
-        card.querySelectorAll('.categoria-item').forEach(item => {
-            item.addEventListener('click', e => {
-                e.stopPropagation();
-                showDetailView(item.dataset.curso, item.dataset.tipo);
-            });
-        });
-
-        grid.appendChild(card);
+        grupos[g].push(curso);
     });
 
-    main.appendChild(grid);
+    grupoOrden.forEach(grupoKey => {
+        // Separador de grupo
+        const sep = document.createElement('div');
+        sep.className = `grupo-separador grupo-${grupoKey}`;
+        sep.innerHTML = `
+            <div class="grupo-linea"></div>
+            <span class="grupo-label">${GRUPOS_LABEL[grupoKey] || grupoKey}</span>
+            <div class="grupo-linea"></div>`;
+        main.appendChild(sep);
+
+        // Grid de cursos del grupo
+        const grid = document.createElement('div');
+        grid.className = `cursos-grid grupo-${grupoKey}`;
+
+        grupos[grupoKey].forEach(curso => {
+            let listaCategorias = curso.categorias || CATEGORIAS_FIJAS;
+            if (!Array.isArray(listaCategorias) || listaCategorias.length === 0) {
+                listaCategorias = CATEGORIAS_FIJAS;
+            }
+
+            const gruposMap = {};
+            listaCategorias.forEach(cat => gruposMap[cat] = []);
+
+            curso.lecturas.forEach(lectura => {
+                const clave = getCategoriaKey(lectura.numero);
+                if (gruposMap[clave] !== undefined) {
+                    gruposMap[clave].push(lectura);
+                } else {
+                    gruposMap[listaCategorias[listaCategorias.length - 1]].push(lectura);
+                }
+            });
+
+            const numCats  = listaCategorias.length;
+            const gridCols = numCats <= 4 ? `repeat(${numCats}, 1fr)` : 'repeat(3, 1fr)';
+
+            const cuadrosHTML = listaCategorias.map(cat => `
+                <div class="categoria-item" data-curso="${curso.curso}" data-tipo="${cat}">
+                    <span class="categoria-icono">${ICONOS[cat] || '📁'}</span>
+                    <span class="categoria-nombre">${cat}</span>
+                    <span class="categoria-cantidad">${gruposMap[cat].length} archivos</span>
+                </div>`
+            ).join('');
+
+            const card = document.createElement('div');
+            card.className = 'curso-card';
+            card.innerHTML = `
+                <div class="curso-header">
+                    <span class="curso-icon">${curso.icono}</span>
+                    <span class="curso-title">${curso.curso}</span>
+                    <span class="curso-count">${curso.lecturas.length} archivos</span>
+                </div>
+                <div class="categorias" style="grid-template-columns:${gridCols};">
+                    ${cuadrosHTML}
+                </div>`;
+
+            card.querySelectorAll('.categoria-item').forEach(item => {
+                item.addEventListener('click', e => {
+                    e.stopPropagation();
+                    showDetailView(item.dataset.curso, item.dataset.tipo);
+                });
+            });
+
+            grid.appendChild(card);
+        });
+
+        main.appendChild(grid);
+    });
+
     document.getElementById('searchInput').value = '';
 }
 
-// ── Vista detalle ─────────────────────────────────────────────
+// ── Vista detalle ──────────────────────────────────────────────
 function showDetailView(cursoNombre, tipo) {
     currentCategory = { cursoNombre, tipo };
     document.getElementById('searchInput').value = '';
@@ -547,7 +527,7 @@ function renderDetailView(cursoNombre, tipo, archivos, filteredArchivos = null) 
     window.currentDetailTipo     = tipo;
 }
 
-// ── Búsqueda ──────────────────────────────────────────────────
+// ── Búsqueda ───────────────────────────────────────────────────
 function filterArchivos() {
     if (currentView !== 'detalle' || !window.currentDetailArchivos) return;
 
@@ -564,7 +544,7 @@ function filterArchivos() {
     renderDetailView(window.currentDetailCurso, window.currentDetailTipo, window.currentDetailArchivos, filtered);
 }
 
-// ── Utilidades ────────────────────────────────────────────────
+// ── Utilidades ─────────────────────────────────────────────────
 function updateTotalBadge(data) {
     const total = data.reduce((acc, c) => acc + c.lecturas.length, 0);
     document.getElementById('total-badge').textContent = `📊 ${data.length} cursos · ${total} archivos`;
