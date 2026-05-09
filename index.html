@@ -370,6 +370,8 @@ let allCoursesData  = [];
 let currentView     = 'cursos';
 let currentCategory = null;
 
+// AÑADE ESTA LÍNEA AQUÍ:
+const CATEGORIAS_FIJAS = ['GENERAL'];
 // Estos iconos sirven para las subcarpetas (cuadros dentro de cada curso)
 
 const ICONOS = {
@@ -433,8 +435,11 @@ function renderCursosView(data) {
     grid.className = 'cursos-grid';
 
     data.forEach(curso => {
-        const listaCategorias = curso.categorias || CATEGORIAS_FIJAS;
-
+    // Cambia la línea de listaCategorias por esto:
+        let listaCategorias = curso.categorias || CATEGORIAS_FIJAS;
+        if (!Array.isArray(listaCategorias)) {
+            listaCategorias = [listaCategorias];
+        }
         const grupos = {};
         listaCategorias.forEach(cat => grupos[cat] = []);
 
