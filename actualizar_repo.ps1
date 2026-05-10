@@ -68,17 +68,18 @@ foreach ($nombre in $ordenCursos) {
         $lecturas = @()
 
         foreach ($catDir in $subDirs) {
-            $archivos = Get-ChildItem -Path $catDir.FullName -Filter "*.html"
-            foreach ($file in $archivos) {
-                $partes = $file.BaseName -split " - ", 2
-                $lecturas += [ordered]@{
-                    numero  = if ($partes.Count -gt 1) { $partes[0].Trim() } else { $catDir.Name }
-                    titulo  = if ($partes.Count -gt 1) { $partes[1].Trim() } else { $file.BaseName }
-                    archivo = "$($cursoDir.Name)/$($catDir.Name)/$($file.Name)"
-                }
+        $archivos = Get-ChildItem -Path $catDir.FullName -Filter "*.html" |
+            Sort-Object {
+                if ($_.BaseName -match '^[A-Z]+\s+(\d+)') { [int]$Matches[1] } else { 9999 }
+            }
+        foreach ($file in $archivos) {
+            $partes = $file.BaseName -split " - ", 2
+            $lecturas += [ordered]@{
+                numero  = if ($partes.Count -gt 1) { $partes[0].Trim() } else { $catDir.Name }
+                titulo  = if ($partes.Count -gt 1) { $partes[1].Trim() } else { $file.BaseName }
+                archivo = "$($cursoDir.Name)/$($catDir.Name)/$($file.Name)"
             }
         }
-
         # Guardamos el curso con su grupo y categorías
         $jsonFinal += [ordered]@{
             curso      = $cursoDir.Name
