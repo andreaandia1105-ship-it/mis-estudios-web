@@ -2,50 +2,149 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📚 Mis Estudios — Repositorio UNALM</title>
     <style>
-        /* [Tus estilos se mantienen igual, solo asegúrate de tener estos colores de grupo] */
-        .grupo-separador { display: flex; align-items: center; gap: 14px; margin: 40px 0 20px; }
-        .grupo-label { font-family: 'Oswald', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; padding: 5px 15px; border-radius: 20px; background: rgba(59,130,246,0.1); color: #93c5fd; }
-        .grupo-linea { flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
-        /* Colores específicos */
-        .grupo-UNALM .grupo-label { color: #6ee7b7; background: rgba(16,185,129,0.1); }
-        .grupo-IDIOMAS .grupo-label { color: #fcd34d; background: rgba(245,158,11,0.1); }
-        
-        /* [Aquí va el resto de tu CSS anterior] */
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
-        body { font-family: 'Source Sans 3', sans-serif; background: #0a0f1a; color: #e2e8f0; margin: 0; padding: 0; }
-        main { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: #0a0f1a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f1e3a 0%, #1a2332 100%);
+            padding: 20px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        .hinner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        header h1 { font-family: 'Oswald', sans-serif; font-size: 24px; color: #fff; }
+
+        #total-badge {
+            font-size: 11px; padding: 6px 14px; border-radius: 20px;
+            background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.2);
+        }
+
+        .search-wrap {
+            background: #0d1525; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.06);
+            position: sticky; top: 72px; z-index: 99;
+        }
+
+        .search-wrap input {
+            width: 100%; max-width: 1200px; display: block; margin: 0 auto;
+            background: #1a2332; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 12px 18px; color: #e2e8f0; outline: none;
+        }
+
+        main { max-width: 1200px; margin: 0 auto; padding: 24px 16px 80px; }
+
+        /* ── GRUPOS ── */
+        .grupo-separador { display: flex; align-items: center; gap: 14px; margin: 40px 0 20px; }
+        .grupo-label {
+            font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
+        }
+        .grupo-linea { flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
+
+        .grupo-UNALM .grupo-label { background: rgba(16,185,129,0.12); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.2); }
+        .grupo-IDIOMAS .grupo-label { background: rgba(245,158,11,0.12); color: #fcd34d; border: 1px solid rgba(245,158,11,0.2); }
+        .grupo-PERSONAL .grupo-label { background: rgba(139,92,246,0.12); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.2); }
+        .grupo-CIENCIAS .grupo-label { background: rgba(59,130,246,0.12); color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+        .grupo-GENERAL .grupo-label { background: rgba(236,72,153,0.12); color: #f9a8d4; border: 1px solid rgba(236,72,153,0.2); }
+
         .cursos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .curso-card { background: #111827; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; }
-        .curso-header { background: rgba(0,0,0,0.3); padding: 15px; display: flex; align-items: center; gap: 10px; }
+        .curso-header { background: rgba(0,0,0,0.3); padding: 16px; display: flex; align-items: center; gap: 12px; }
+        .curso-icon { font-size: 24px; }
+        .curso-title { font-family: 'Oswald', sans-serif; font-weight: 700; flex: 1; }
+
         .categorias { display: grid; gap: 1px; background: rgba(255,255,255,0.05); }
-        .categoria-item { background: #0f172a; padding: 15px; text-align: center; cursor: pointer; }
+        .categoria-item { background: #0f172a; padding: 15px 10px; text-align: center; cursor: pointer; transition: 0.2s; }
+        .categoria-item:hover { background: #1e293b; }
+        .categoria-icono { font-size: 22px; display: block; margin-bottom: 4px; }
+        .categoria-nombre { font-size: 11px; font-weight: 700; text-transform: uppercase; display: block; }
+        .categoria-cantidad { font-size: 10px; opacity: 0.5; display: block; }
+
+        /* ── DETALLE ARCHIVOS ── */
+        .grid-archivos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .card-archivo {
+            background: #111827; border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 12px; padding: 16px; text-decoration: none; color: inherit; display: block;
+        }
+        .card-archivo:hover { border-color: #3b82f6; transform: translateY(-2px); }
+        .card-num { font-size: 10px; color: #3b82f6; font-weight: 700; margin-bottom: 4px; }
+        .card-archivo h3 { font-family: 'Oswald', sans-serif; font-size: 16px; margin-bottom: 4px; }
+        .back-btn { background: #1e293b; color: #fff; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
+<header>
+    <div class="hinner">
+        <div>
+            <h1>📚 Mis Estudios</h1>
+        </div>
+        <span id="total-badge">Cargando...</span>
+    </div>
+</header>
+
+<div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="🔍 Buscar archivos..." oninput="filterArchivos()">
+</div>
+
 <main id="main">
-    <div class="loading">Cargando repositorio estratégico...</div>
+    <div style="text-align:center; padding: 50px;">Cargando repositorio...</div>
 </main>
 
 <script>
 let allCoursesData = [];
+let currentView = 'cursos';
+let currentCategory = null;
+
 const CATEGORIAS_FIJAS = ['GENERAL'];
+
+const ICONOS = {
+    TEORIA: '📘', PC: '✍️', EXAMENES: '📝', LECTURAS: '📖',
+    ITALIANO: '🇮🇹', INGLES: '🇬🇧', FONETICA: '🗣️', GRAMATICA: '📖', PRACTICA: '✍️',
+    METEOROLOGIA: '🌤️', OCEANOGRAFIA: '🌊', DERECHO: '⚖️', LEYES: '📜',
+    AMBIENTE: '♻️', 'CIENCIAS DE LA ATMOSFERA': '🌍', TECNOLOGIA: '🤖', SALUD: '💪',
+    INVESTIGACION: '🔬', OTROS: '📂'
+};
+
 const GRUPOS_LABEL = { UNALM: '🎓 UNALM', IDIOMAS: '🌐 Idiomas', PERSONAL: '💡 Personal', CIENCIAS: '🔭 Ciencias', GENERAL: '🧩 General' };
+
+function getCategoriaKey(numero) {
+    if (!numero) return 'OTROS';
+    const raw = numero.trim().toUpperCase();
+    for (let key in ICONOS) {
+        if (raw.startsWith(key)) return key;
+    }
+    return 'OTROS';
+}
 
 fetch('lecturas.json')
     .then(r => r.json())
     .then(data => {
         allCoursesData = data;
         renderCursosView(data);
+        updateTotalBadge(data);
     });
 
 function renderCursosView(data) {
     const main = document.getElementById('main');
     main.innerHTML = '';
+    currentView = 'cursos';
 
-    // 1. Agrupar cursos por su etiqueta de grupo (UNALM, Idiomas, etc.)
     const grupos = {};
     data.forEach(curso => {
         const g = curso.grupo || 'OTROS';
@@ -53,11 +152,9 @@ function renderCursosView(data) {
         grupos[g].push(curso);
     });
 
-    // 2. Dibujar cada grupo
     Object.keys(grupos).forEach(grupoKey => {
         const section = document.createElement('section');
         section.className = `grupo-container grupo-${grupoKey}`;
-        
         section.innerHTML = `
             <div class="grupo-separador">
                 <div class="grupo-linea"></div>
@@ -68,12 +165,8 @@ function renderCursosView(data) {
         `;
 
         const grid = section.querySelector('.cursos-grid');
-        
         grupos[grupoKey].forEach(curso => {
-            // Preparar las categorías y contar archivos
             let listaCategorias = (curso.categorias && curso.categorias.length > 0) ? curso.categorias : CATEGORIAS_FIJAS;
-            
-            // Contamos cuántos archivos hay por cada categoría para mostrar el número en el cuadrito
             const conteoPorCat = {};
             listaCategorias.forEach(cat => {
                 conteoPorCat[cat] = curso.lecturas.filter(l => getCategoriaKey(l.numero) === cat.toUpperCase()).length;
@@ -85,7 +178,6 @@ function renderCursosView(data) {
                 <div class="curso-header">
                     <span class="curso-icon">${curso.icono}</span>
                     <span class="curso-title">${curso.curso}</span>
-                    <span class="curso-count">${curso.lecturas.length} total</span>
                 </div>
                 <div class="categorias" style="grid-template-columns: repeat(auto-fit, minmax(90px, 1fr))">
                     ${listaCategorias.map(cat => `
@@ -97,18 +189,53 @@ function renderCursosView(data) {
                     `).join('')}
                 </div>
             `;
-
-            // Hacer que cada cuadrito sea clickeable
             card.querySelectorAll('.categoria-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    showDetailView(item.dataset.curso, item.dataset.tipo);
-                });
+                item.addEventListener('click', () => showDetailView(item.dataset.curso, item.dataset.tipo));
             });
-
             grid.appendChild(card);
         });
         main.appendChild(section);
     });
+}
+
+function showDetailView(cursoNombre, tipo) {
+    currentView = 'detalle';
+    currentCategory = { cursoNombre, tipo };
+    const curso = allCoursesData.find(c => c.curso === cursoNombre);
+    const archivos = curso.lecturas.filter(l => getCategoriaKey(l.numero) === tipo.toUpperCase());
+    renderDetailView(cursoNombre, tipo, archivos);
+}
+
+function renderDetailView(cursoNombre, tipo, archivos) {
+    const main = document.getElementById('main');
+    main.innerHTML = `
+        <button class="back-btn" onclick="renderCursosView(allCoursesData)">← Volver a Cursos</button>
+        <h2 style="font-family:Oswald; margin-bottom:20px;">${cursoNombre} > ${tipo}</h2>
+        <div class="grid-archivos">
+            ${archivos.map(arch => `
+                <a class="card-archivo" href="${arch.archivo}">
+                    <div class="card-num">${arch.numero}</div>
+                    <h3>${arch.titulo}</h3>
+                </a>
+            `).join('')}
+        </div>
+    `;
+}
+
+function filterArchivos() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    if (q.length < 2) { renderCursosView(allCoursesData); return; }
+    // Filtro básico (puedes ampliarlo)
+    const filtered = allCoursesData.map(c => ({
+        ...c,
+        lecturas: c.lecturas.filter(l => l.titulo.toLowerCase().includes(q) || c.curso.toLowerCase().includes(q))
+    })).filter(c => c.lecturas.length > 0);
+    renderCursosView(filtered);
+}
+
+function updateTotalBadge(data) {
+    const total = data.reduce((acc, c) => acc + c.lecturas.length, 0);
+    document.getElementById('total-badge').textContent = `📊 ${data.length} cursos · ${total} archivos`;
 }
 </script>
 </body>
