@@ -87,7 +87,7 @@ foreach ($nombre in $ordenCursos) {
             curso      = $cursoDir.Name
             icono      = if ($iconos.ContainsKey($nombreUpper)) { $iconos[$nombreUpper] } else { "📂" }
             grupo      = if ($gruposMap.ContainsKey($nombreUpper)) { $gruposMap[$nombreUpper] } else { "OTROS" }
-            categorias = if ($subDirs) { @($subDirs.Name) } else { @() }
+            categorias = if ($subDirs) { @(,$subDirs.Name) } else { @() }
             lecturas   = $lecturas
         }
     }  # ← cierra if ($cursoIndex)
