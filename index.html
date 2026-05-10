@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -111,15 +111,13 @@ let allCoursesData = [];
 let currentView = 'cursos';
 let currentCategory = null;
 
-const CATEGORIAS_FIJAS = ['GENERAL'];
-
 const ICONOS = {
     // Académico / General
     TEORIA: '📘', PC: '✍️', EXAMENES: '📝', LECTURAS: '📖',
     // Idiomas
     ITALIANO: '🇮🇹', INGLES: '🇬🇧', FONETICA: '🗣️', GRAMATICA: '📖', INMERSION: '🎧', PRACTICA: '✍️',
     // Ciencias
-    METEOROLOGIA: '🌤️', OCEANOGRAFIA: '🌊', FISICA: '🔭', DERECHO: '⚖️', POLITICA: '🏛️', LEYES: '📜', 
+    METEOROLOGIA: '🌤️', OCEANOGRAFIA: '🌊', FISICA: '🔭', DERECHO: '⚖️', POLITICA: '🏛️', LEYES: '📜',
     NORMATIVAS: '📋', AMBIENTE: '♻️', 'CIENCIAS DE LA ATMOSFERA': '🌍',
     CLIMATOLOGIA: '🌡️', HIDROMETEOROLOGIA: '🌧️', MICROMETEOROLOGIA: '🔬', MODELAMIENTO: '💻',
     'SENSORES REMOTOS': '📡',
@@ -128,20 +126,18 @@ const ICONOS = {
     // Salud
     SALUD: '💪', NUTRICION: '🍎', BIOMECANICA: '🦴', POTENCIA: '⚡', REPARACION: '🧘',
     // General
-    'CULTURA GENERAL': '📚', LIBROS: '📖', ARTES: '🎨', MUSICA: '🎵', CINE: '🎬', HISTORIA: '⏳', 
+    'CULTURA GENERAL': '📚', LIBROS: '📖', ARTES: '🎨', MUSICA: '🎵', CINE: '🎬', HISTORIA: '⏳',
     IDEAS: '💡', SOCIEDAD: '👥', MUNDO: '🌐',
-    INVESTIGACION: '🔬', OTROS: '📂'
+    INVESTIGACION: '🔬', GUIA: '📋', OTROS: '📂'
 };
 
 const GRUPOS_LABEL = { UNALM: '🎓 UNALM', IDIOMAS: '🌐 Idiomas', CIENCIAS: '🔭 Ciencias', GENERAL: '🧩 General', PERSONAL: '💡 Personal'};
 
-function getCategoriaKey(numero) {
-    if (!numero) return 'OTROS';
-    const raw = numero.trim().toUpperCase();
-    for (let key in ICONOS) {
-        if (raw.startsWith(key)) return key;
-    }
-    return 'OTROS';
+// Extrae la categoría desde la ruta del archivo: "CURSO/CATEGORIA/archivo.html" → "CATEGORIA"
+function getCategoriaKey(archivo) {
+    if (!archivo) return 'OTROS';
+    const partes = archivo.split('/');
+    return partes.length >= 2 ? partes[1].trim().toUpperCase() : 'OTROS';
 }
 
 fetch('lecturas.json')
@@ -178,10 +174,10 @@ function renderCursosView(data) {
 
         const grid = section.querySelector('.cursos-grid');
         grupos[grupoKey].forEach(curso => {
-            let listaCategorias = (curso.categorias && curso.categorias.length > 0) ? curso.categorias : CATEGORIAS_FIJAS;
+            let listaCategorias = (curso.categorias && curso.categorias.length > 0) ? curso.categorias : ['GENERAL'];
             const conteoPorCat = {};
             listaCategorias.forEach(cat => {
-                conteoPorCat[cat] = curso.lecturas.filter(l => getCategoriaKey(l.numero) === cat.toUpperCase()).length;
+                conteoPorCat[cat] = curso.lecturas.filter(l => getCategoriaKey(l.archivo) === cat.toUpperCase()).length;
             });
 
             const card = document.createElement('div');
@@ -214,7 +210,7 @@ function showDetailView(cursoNombre, tipo) {
     currentView = 'detalle';
     currentCategory = { cursoNombre, tipo };
     const curso = allCoursesData.find(c => c.curso === cursoNombre);
-    const archivos = curso.lecturas.filter(l => getCategoriaKey(l.numero) === tipo.toUpperCase());
+    const archivos = curso.lecturas.filter(l => getCategoriaKey(l.archivo) === tipo.toUpperCase());
     renderDetailView(cursoNombre, tipo, archivos);
 }
 
@@ -237,7 +233,6 @@ function renderDetailView(cursoNombre, tipo, archivos) {
 function filterArchivos() {
     const q = document.getElementById('searchInput').value.toLowerCase();
     if (q.length < 2) { renderCursosView(allCoursesData); return; }
-    // Filtro básico (puedes ampliarlo)
     const filtered = allCoursesData.map(c => ({
         ...c,
         lecturas: c.lecturas.filter(l => l.titulo.toLowerCase().includes(q) || c.curso.toLowerCase().includes(q))
