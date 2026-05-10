@@ -28,13 +28,13 @@ $iconos = @{
     "MECANIZACION AGRICOLA"       = "🚜"
     "RECURSOS NATURALES DEL PERU" = "🇵🇪"
     "ITALIANO"                    = "🇮🇹"
-    "INGLES"                     = "🇬🇧"
+    "INGLES"                      = "🇬🇧"
     "TECNOLOGIA"                  = "🤖"
-    "DERECHO"                    = "⚖️"
+    "DERECHO"                     = "⚖️"
     "INVESTIGACION"               = "🔬"
-    "SALUD"                      = "💪"
+    "SALUD"                       = "💪"
     "CIENCIAS DE LA ATMOSFERA"    = "🌍"
-    "CULTURA GENERAL"            = "🤔"
+    "CULTURA GENERAL"             = "🤔"
 }
 
 $gruposMap = @{
@@ -43,13 +43,13 @@ $gruposMap = @{
     "MECANIZACION AGRICOLA"       = "UNALM"
     "RECURSOS NATURALES DEL PERU" = "UNALM"
     "ITALIANO"                    = "IDIOMAS"
-    "INGLES"                     = "IDIOMAS"
+    "INGLES"                      = "IDIOMAS"
     "TECNOLOGIA"                  = "PERSONAL"
-    "DERECHO"                    = "PERSONAL"
+    "DERECHO"                     = "PERSONAL"
     "INVESTIGACION"               = "PERSONAL"
-    "SALUD"                      = "PERSONAL"
+    "SALUD"                       = "PERSONAL"
     "CIENCIAS DE LA ATMOSFERA"    = "CIENCIAS"
-    "CULTURA GENERAL"            = "GENERAL"
+    "CULTURA GENERAL"             = "GENERAL"
 }
 
 # 3. Lógica de Escaneo
@@ -61,26 +61,27 @@ $jsonFinal = @()
 
 foreach ($nombre in $ordenCursos) {
     $nombreUpper = $nombre.ToUpper()
-    
+
     if ($cursoIndex.ContainsKey($nombreUpper)) {
         $cursoDir = $cursoIndex[$nombreUpper]
         $subDirs  = Get-ChildItem -Path $cursoDir.FullName -Directory
         $lecturas = @()
 
         foreach ($catDir in $subDirs) {
-        $archivos = Get-ChildItem -Path $catDir.FullName -Filter "*.html" |
-            Sort-Object {
-                if ($_.BaseName -match '^[A-Z]+\s+(\d+)') { [int]$Matches[1] } else { 9999 }
+            $archivos = Get-ChildItem -Path $catDir.FullName -Filter "*.html" |
+                Sort-Object {
+                    if ($_.BaseName -match '^[A-Z]+\s+(\d+)') { [int]$Matches[1] } else { 9999 }
+                }
+            foreach ($file in $archivos) {
+                $partes = $file.BaseName -split " - ", 2
+                $lecturas += [ordered]@{
+                    numero  = if ($partes.Count -gt 1) { $partes[0].Trim() } else { $catDir.Name }
+                    titulo  = if ($partes.Count -gt 1) { $partes[1].Trim() } else { $file.BaseName }
+                    archivo = "$($cursoDir.Name)/$($catDir.Name)/$($file.Name)"
+                }
             }
-        foreach ($file in $archivos) {
-            $partes = $file.BaseName -split " - ", 2
-            $lecturas += [ordered]@{
-                numero  = if ($partes.Count -gt 1) { $partes[0].Trim() } else { $catDir.Name }
-                titulo  = if ($partes.Count -gt 1) { $partes[1].Trim() } else { $file.BaseName }
-                archivo = "$($cursoDir.Name)/$($catDir.Name)/$($file.Name)"
-            }
-          }
-        }
+        }  # ← cierra foreach ($catDir)
+
         # Guardamos el curso con su grupo y categorías
         $jsonFinal += [ordered]@{
             curso      = $cursoDir.Name
@@ -89,8 +90,8 @@ foreach ($nombre in $ordenCursos) {
             categorias = if ($subDirs) { @($subDirs.Name) } else { @() }
             lecturas   = $lecturas
         }
-    }
-}
+    }  # ← cierra if ($cursoIndex)
+}  # ← cierra foreach ($nombre)
 
 # 4. Guardar archivo
 $jsonTexto = $jsonFinal | ConvertTo-Json -Depth 10
