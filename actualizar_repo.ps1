@@ -80,11 +80,10 @@ foreach ($nombre in $ordenCursos) {
             curso      = $cursoDir.Name
             icono      = if ($iconos.ContainsKey($nombreUpper)) { $iconos[$nombreUpper] } else { "📂" }
             grupo      = if ($gruposMap.ContainsKey($nombreUpper)) { $gruposMap[$nombreUpper] } else { "OTROS" }
-            categorias = @($subDirs.Name)
+            # Cambio aquí: si no hay subcarpetas, ponemos una lista vacía en lugar de nada
+            categorias = if ($subDirs) { @($subDirs.Name) } else { @() }
             lecturas   = $lecturas
         }
-    }
-}
 
 # 3. Guardar (Usando método de sistema para forzar UTF8 limpio)
 $jsonTexto = $jsonFinal | ConvertTo-Json -Depth 10
