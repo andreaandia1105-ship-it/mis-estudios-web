@@ -79,6 +79,7 @@ foreach ($nombre in $ordenCursos) {
                 titulo  = if ($partes.Count -gt 1) { $partes[1].Trim() } else { $file.BaseName }
                 archivo = "$($cursoDir.Name)/$($catDir.Name)/$($file.Name)"
             }
+          }
         }
         # Guardamos el curso con su grupo y categorías
         $jsonFinal += [ordered]@{
