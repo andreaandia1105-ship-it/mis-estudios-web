@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unidad V — Calidad del Aire en Interiores</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f1f5f9;
+    --color-background-tertiary: #e8edf4;
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-border-tertiary: #cbd5e1;
+    --color-border-secondary: #94a3b8;
+  }
+  @media(prefers-color-scheme:dark){
+    :root {
+      --color-background-primary: #1e293b;
+      --color-background-secondary: #0f172a;
+      --color-background-tertiary: #0a1120;
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-border-tertiary: #334155;
+      --color-border-secondary: #475569;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--color-background-tertiary); font-family: 'Source Sans 3', sans-serif; color: var(--color-text-primary); font-size: 13px; }
+
+  .cv {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 9px;
+    padding: 12px;
+    background: var(--color-background-tertiary);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* TÍTULO */
+  .title-bar {
+    grid-column: 1/-1;
+    background: #0f1e3a;
+    color: white;
+    border-radius: 12px;
+    padding: 16px 22px;
+  }
+  .title-bar h1 { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+  .title-bar p { font-size: 11px; color: #94a3b8; margin-top: 3px; }
+  .title-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag { font-size: 10px; padding: 2px 9px; border-radius: 20px; background: rgba(125,211,252,0.15); color: #7dd3fc; border: 1px solid rgba(125,211,252,0.3); font-family: 'Oswald', sans-serif; }
+
+  /* BARRAS DE SECCIÓN */
+  .sec-bar {
+    grid-column: 1/-1;
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* BLOQUES */
+  .block { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 11px; padding: 12px 13px; }
+  .block.s2 { grid-column: span 2; }
+  .block.s3 { grid-column: 1/-1; }
+
+  /* ENCABEZADO DE BLOQUE */
+  .bh { font-family: 'Oswald', sans-serif; font-size: 12px; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; display: inline-block; margin-bottom: 8px; letter-spacing: 0.4px; }
+
+  /* DEFINICIÓN */
+  .def { border-radius: 0 7px 7px 0; padding: 7px 10px; font-size: 12px; line-height: 1.55; margin-bottom: 8px; }
+
+  /* ITEMS */
+  .item { display: flex; gap: 7px; font-size: 12px; line-height: 1.5; margin-bottom: 4px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+
+  /* FÓRMULAS */
+  .rx { background: #0f172a; color: #7dd3fc; font-family: monospace; font-size: 11px; padding: 7px 11px; border-radius: 7px; text-align: center; line-height: 1.6; margin: 7px 0; }
+
+  /* ADVERTENCIAS */
+  .warn { background: #fff7ed; border-left: 3px solid #f97316; border-radius: 0 8px 8px 0; font-size: 11.5px; color: #7c2d12; padding: 7px 10px; margin: 7px 0; line-height: 1.5; }
+  @media(prefers-color-scheme:dark){ .warn { background: #431407; color: #fed7aa; } }
+
+  /* EXAMEN */
+  .exam { background: #fefce8; border: 1px solid #facc15; border-radius: 8px; font-size: 11.5px; color: #713f12; padding: 8px 11px; margin-top: 8px; line-height: 1.5; }
+  @media(prefers-color-scheme:dark){ .exam { background: #422006; color: #fef08a; border-color: #92400e; } }
+
+  /* MINI TARJETAS */
+  .mini { background: var(--color-background-secondary); border-radius: 8px; padding: 8px 10px; font-size: 11.5px; line-height: 1.5; }
+
+  /* GRILLAS INTERNAS */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin: 7px 0; }
+  .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin: 7px 0; }
+
+  /* FLUJOS */
+  .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 7px 0; }
+  .fbox { background: var(--color-background-secondary); padding: 4px 9px; border-radius: 6px; font-size: 11px; }
+  .farrow { color: var(--color-text-secondary); font-size: 15px; }
+
+  /* BADGES */
+  .num-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .nb-b { background: #dbeafe; color: #1e3a8a; }
+  .nb-g { background: #dcfce7; color: #14532d; }
+  .nb-r { background: #fee2e2; color: #991b1b; }
+  .nb-o { background: #ffedd5; color: #7c2d12; }
+
+  /* PILLS */
+  .pill { font-size: 11px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin: 2px; }
+
+  /* BARRAS ESTADÍSTICA */
+  .stat-bar-wrap { width: 100%; background: var(--color-background-secondary); border-radius: 20px; height: 11px; overflow: hidden; margin: 3px 0; }
+  .stat-bar-fill { height: 100%; border-radius: 20px; }
+
+  /* TABLA */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .tbl th { background: var(--color-background-secondary); padding: 5px 7px; border-bottom: 0.5px solid var(--color-border-tertiary); text-align: left; font-family: 'Oswald', sans-serif; font-size: 11px; }
+  .tbl td { padding: 5px 7px; border-bottom: 0.5px solid var(--color-border-tertiary); vertical-align: top; }
+
+  /* DIVIDER */
+  .divh { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 7px 0; }
+
+  /* FOOTER */
+  .footer-bar {
+    grid-column: 1/-1;
+    background: #0f1e3a;
+    color: white;
+    border-radius: 10px;
+    padding: 11px 18px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .ft { font-family: 'Oswald', sans-serif; font-size: 12px; color: #7dd3fc; white-space: nowrap; }
+  .fc { font-size: 11px; color: #94a3b8; line-height: 1.7; }
+
+  /* PALETA AZUL */
+  .bh-b { background: #dbeafe; color: #1e3a8a; }
+  .def-b { border-left: 3px solid #3b82f6; background: #eff6ff; }
+  .dot-b { background: #3b82f6; }
+  @media(prefers-color-scheme:dark){ .bh-b{background:#1e3a5f;color:#93c5fd;} .def-b{background:#1e3a5f;} }
+
+  /* PALETA VERDE */
+  .bh-g { background: #dcfce7; color: #14532d; }
+  .def-g { border-left: 3px solid #16a34a; background: #f0fdf4; }
+  .dot-g { background: #16a34a; }
+  @media(prefers-color-scheme:dark){ .bh-g{background:#14532d;color:#86efac;} .def-g{background:#052e16;} }
+
+  /* PALETA ROJA */
+  .bh-r { background: #fee2e2; color: #991b1b; }
+  .def-r { border-left: 3px solid #dc2626; background: #fef2f2; }
+  .dot-r { background: #dc2626; }
+  @media(prefers-color-scheme:dark){ .bh-r{background:#450a0a;color:#fca5a5;} .def-r{background:#3b0000;} }
+
+  /* PALETA AMARILLA */
+  .bh-y { background: #fef9c3; color: #713f12; }
+  .def-y { border-left: 3px solid #eab308; background: #fefce8; }
+  .dot-y { background: #eab308; }
+  @media(prefers-color-scheme:dark){ .bh-y{background:#422006;color:#fef08a;} .def-y{background:#1c1000;} }
+
+  /* PALETA MORADA */
+  .bh-p { background: #ede9fe; color: #4c1d95; }
+  .def-p { border-left: 3px solid #7c3aed; background: #f5f3ff; }
+  .dot-p { background: #7c3aed; }
+  @media(prefers-color-scheme:dark){ .bh-p{background:#2e1065;color:#c4b5fd;} .def-p{background:#1a0a40;} }
+
+  /* PALETA TEAL */
+  .bh-t { background: #ccfbf1; color: #134e4a; }
+  .def-t { border-left: 3px solid #0d9488; background: #f0fdfa; }
+  .dot-t { background: #0d9488; }
+  @media(prefers-color-scheme:dark){ .bh-t{background:#042f2e;color:#5eead4;} .def-t{background:#011f1e;} }
+
+  /* PALETA NARANJA */
+  .bh-o { background: #ffedd5; color: #7c2d12; }
+  .def-o { border-left: 3px solid #f97316; background: #fff7ed; }
+  .dot-o { background: #f97316; }
+  @media(prefers-color-scheme:dark){ .bh-o{background:#431407;color:#fed7aa;} .def-o{background:#1c0800;} }
+
+  /* PALETA GRIS */
+  .bh-s { background: #f1f5f9; color: #334155; }
+  .def-s { border-left: 3px solid #64748b; background: #f8fafc; }
+  .dot-s { background: #64748b; }
+  @media(prefers-color-scheme:dark){ .bh-s{background:#1e293b;color:#94a3b8;} .def-s{background:#0a0f1a;} }
+
+  /* PALETA ROSA */
+  .bh-pk { background: #fce7f3; color: #831843; }
+  .def-pk { border-left: 3px solid #ec4899; background: #fdf2f8; }
+  .dot-pk { background: #ec4899; }
+  @media(prefers-color-scheme:dark){ .bh-pk{background:#4a044e;color:#f0abfc;} .def-pk{background:#1a0020;} }
+
+  /* SECCIONES */
+  .sec-b { background: #dbeafe; color: #1e3a8a; }
+  .sec-r { background: #fee2e2; color: #991b1b; }
+  .sec-g { background: #dcfce7; color: #14532d; }
+  .sec-p { background: #ede9fe; color: #4c1d95; }
+  .sec-o { background: #ffedd5; color: #7c2d12; }
+  .sec-y { background: #fef9c3; color: #713f12; }
+  .sec-t { background: #ccfbf1; color: #134e4a; }
+  .sec-pk { background: #fce7f3; color: #831843; }
+  @media(prefers-color-scheme:dark){
+    .sec-b{background:#1e3a5f;color:#93c5fd;}
+    .sec-r{background:#450a0a;color:#fca5a5;}
+    .sec-g{background:#14532d;color:#86efac;}
+    .sec-p{background:#2e1065;color:#c4b5fd;}
+    .sec-o{background:#431407;color:#fed7aa;}
+    .sec-y{background:#422006;color:#fef08a;}
+    .sec-t{background:#042f2e;color:#5eead4;}
+    .sec-pk{background:#4a044e;color:#f0abfc;}
+  }
+
+  /* QUIZ */
+  #quiz-section { grid-column: 1/-1; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 14px; overflow: hidden; }
+  .quiz-header { background: #0f1e3a; color: white; padding: 14px 18px; }
+  .quiz-header h2 { font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700; }
+  .quiz-header p { font-size: 11px; color: #94a3b8; margin-top: 3px; }
+  .quiz-body { padding: 16px 18px; }
+  .quiz-progress { margin-bottom: 12px; }
+  .quiz-progress-text { font-size: 11.5px; color: var(--color-text-secondary); margin-bottom: 4px; display: flex; justify-content: space-between; }
+  .qcard { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .qcard:last-of-type { border-bottom: none; }
+  .qnum { font-family: 'Oswald', sans-serif; font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .qtext { font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--color-text-primary); line-height: 1.5; }
+  .qopts { display: flex; flex-direction: column; gap: 5px; }
+  .qbtn { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 8px; padding: 8px 12px; font-size: 12px; text-align: left; cursor: pointer; width: 100%; transition: all 0.2s; color: var(--color-text-primary); font-family: 'Source Sans 3', sans-serif; }
+  .qbtn:hover:not(:disabled) { background: var(--color-background-tertiary); }
+  .qbtn.correct { background: #dcfce7 !important; border-color: #16a34a !important; color: #14532d !important; }
+  .qbtn.incorrect { background: #fee2e2 !important; border-color: #dc2626 !important; color: #991b1b !important; }
+  .qbtn:disabled { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+  .qfeedback { display: none; border-radius: 0 8px 8px 0; padding: 8px 11px; font-size: 11.5px; margin-top: 8px; line-height: 1.55; }
+  .qfeedback.ok { background: #f0fdf4; border-left: 3px solid #16a34a; color: #14532d; display: block; }
+  .qfeedback.fail { background: #fef2f2; border-left: 3px solid #dc2626; color: #991b1b; display: block; }
+  @media(prefers-color-scheme:dark){
+    .qfeedback.ok{background:#052e16;color:#86efac;}
+    .qfeedback.fail{background:#3b0000;color:#fca5a5;}
+    .qbtn.correct{background:#052e16!important;color:#86efac!important;}
+    .qbtn.incorrect{background:#3b0000!important;color:#fca5a5!important;}
+  }
+  #results-panel { display: none; border-radius: 10px; padding: 16px; text-align: center; margin-top: 10px; }
+  #results-panel h3 { font-family: 'Oswald', sans-serif; font-size: 18px; margin-bottom: 6px; }
+  #results-panel p { font-size: 13px; margin-bottom: 12px; }
+  #reset-btn { background: #0f1e3a; color: white; border: none; border-radius: 8px; padding: 9px 20px; font-size: 12px; cursor: pointer; font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; }
+  #reset-btn:hover { background: #1e3a8a; }
+
+  strong { font-weight: 600; }
+  p { margin-bottom: 5px; font-size: 12px; line-height: 1.55; }
+</style>
+</head>
+<body>
+<div class="cv">
+
+  <!-- TÍTULO -->
+  <div class="title-bar">
+    <h1>🏠 UNIDAD V — CALIDAD DEL AIRE EN INTERIORES</h1>
+    <p>Ingeniería Ambiental · Dra. Mabel Carhuancho León · UNALM · Ciclo 2026</p>
+    <div class="title-tags">
+      <span class="tag">Contaminantes Interiores</span>
+      <span class="tag">ETS · Asbesto · Radón</span>
+      <span class="tag">CO · PM · VOCs</span>
+      <span class="tag">Formaldehído</span>
+      <span class="tag">Contaminantes Biológicos</span>
+      <span class="tag">Síndrome Edificio Enfermo</span>
+      <span class="tag">Contaminación Doméstica</span>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 1 -->
+  <div class="sec-bar sec-b">🏢 SECCIÓN 1: FUNDAMENTOS DE LA CALIDAD DEL AIRE EN INTERIORES</div>
+
+  <!-- BLOQUE 1: Definición general -->
+  <div class="block s2">
+    <span class="bh bh-b">Contaminación de Interiores — Concepto Base (Diap. 1–5)</span>
+    <div class="def def-b">
+      La <strong>contaminación del aire en interiores (CAI)</strong> es la presencia de sustancias nocivas —gases, partículas y compuestos orgánicos volátiles— dentro de edificaciones cerradas. Es particularmente relevante porque los seres humanos pasamos entre el 80–90% del tiempo en espacios interiores, lo que convierte la calidad del aire interior en un determinante crítico de la salud ocupacional y residencial.
+    </div>
+    <div class="item"><span class="dot dot-b"></span><span><strong>¿Por qué importa más que el exterior?</strong> Las concentraciones de contaminantes en interiores pueden ser 2 a 5 veces —y en algunos casos hasta 100 veces— más altas que en el exterior, debido al confinamiento del espacio y la acumulación sin dilución suficiente.</span></div>
+    <div class="item"><span class="dot dot-b"></span><span><strong>Efectos en salud:</strong> Problemas respiratorios, alergias, dolores de cabeza, fatiga crónica, irritación de mucosas. En exposiciones prolongadas: daño orgánico severo, enfermedades crónicas no transmisibles y cáncer.</span></div>
+    <hr class="divh">
+    <p><strong>Factores que determinan la CAI:</strong></p>
+    <div class="two">
+      <div class="mini" style="border-left:3px solid #3b82f6">
+        <strong>Factores físicos</strong><br>
+        Temperatura, humedad relativa (ideal 30–60%), y ventilación. Un exceso de humedad favorece el crecimiento de moho y ácaros; temperatura alta acelera la emisión de VOCs de muebles y materiales.
+      </div>
+      <div class="mini" style="border-left:3px solid #7c3aed">
+        <strong>Factores de fuente</strong><br>
+        Tipo de actividades humanas (cocinar, fumar, usar productos de limpieza), materiales de construcción, y presencia de sistemas HVAC (calefacción, ventilación, A/C) en mal estado.
+      </div>
+    </div>
+    <div class="exam">🎯 EXAMEN: Explique por qué la contaminación del aire en interiores puede ser más peligrosa que la contaminación del aire exterior, considerando los factores de exposición y los tipos de contaminantes involucrados.</div>
+  </div>
+
+  <!-- BLOQUE 2: Fuentes -->
+  <div class="block">
+    <span class="bh bh-o">Fuentes de Contaminación Interior (Diap. 4–5)</span>
+    <div class="def def-o">
+      Las fuentes de CAI son clasificables en dos grandes grupos: <strong>antropogénicas</strong> (generadas por las actividades humanas dentro del espacio) y <strong>naturales/infiltradas</strong> (provenientes del entorno exterior o del suelo). Entender la fuente es clave para el control.
+    </div>
+    <div class="three">
+      <div class="mini" style="border-top:3px solid #f97316">
+        <strong>🚬 Humo de tabaco</strong><br>Mezcla compleja de más de 4,000 químicos tóxicos. Fuente directa de CO, carcinógenos y partículas finas.
+      </div>
+      <div class="mini" style="border-top:3px solid #16a34a">
+        <strong>🧹 Productos de limpieza</strong><br>Emiten VOCs como amoníaco, cloro y solventes. Reaccionan con el ozono interior para generar subproductos secundarios.
+      </div>
+      <div class="mini" style="border-top:3px solid #3b82f6">
+        <strong>🏗️ Materiales de construcción</strong><br>Madera aglomerada, adhesivos y alfombras emiten formaldehído y VOCs durante años tras su instalación.
+      </div>
+    </div>
+    <div class="item"><span class="dot dot-o"></span><span><strong>Sistemas de calefacción/refrigeración (HVAC):</strong> Si no reciben mantenimiento, pueden convertirse en criaderos de moho, bacterias y alérgenos que se distribuyen por toda la edificación.</span></div>
+    <div class="item"><span class="dot dot-o"></span><span><strong>Contaminantes biológicos:</strong> Polen, ácaros, moho y endotoxinas bacterianas. Su presencia depende críticamente de la humedad y temperatura interior.</span></div>
+  </div>
+
+  <!-- SECCIÓN 2 -->
+  <div class="sec-bar sec-r">☣️ SECCIÓN 2: CONTAMINANTES FÍSICO-QUÍMICOS ESPECÍFICOS</div>
+
+  <!-- BLOQUE 3: ETS -->
+  <div class="block">
+    <span class="bh bh-r">Humo de Tabaco Ambiental — ETS (Diap. 6–10)</span>
+    <div class="def def-r">
+      El <strong>ETS (Environmental Tobacco Smoke)</strong> o humo de segunda mano es una mezcla compleja del humo liberado por la combustión del tabaco más el humo exhalado por el fumador. Es una de las fuentes de CAI más estudiadas y peligrosas por la diversidad y toxicidad de sus componentes.
+    </div>
+    <div class="flow">
+      <div class="fbox">Combustión del tabaco</div><span class="farrow">→</span>
+      <div class="fbox">Corriente lateral (más tóxica)</div><span class="farrow">+</span>
+      <div class="fbox">Corriente exhalada</div><span class="farrow">→</span>
+      <div class="fbox">ETS en el ambiente</div><span class="farrow">→</span>
+      <div class="fbox">Inhalación pasiva</div>
+    </div>
+    <div class="item"><span class="dot dot-r"></span><span><strong>Componentes clave:</strong> Alquitrán (cancerígeno), monóxido de carbono (desplaza O₂), cianuro de hidrógeno (tóxico neurológico), amoníaco, nitrosaminas y benceno.</span></div>
+    <div class="item"><span class="dot dot-r"></span><span><strong>La corriente lateral</strong> (humo que emana directamente del cigarrillo sin combustión completa) contiene concentraciones <em>más altas</em> de muchos tóxicos que la corriente principal inhalada por el fumador.</span></div>
+    <div class="warn">⚠️ ERROR COMÚN: No confundir "tabaquismo pasivo" con una exposición inofensiva. La OMS clasifica el ETS como carcinógeno del Grupo 1, confirmando que no existe un nivel seguro de exposición para no fumadores.</div>
+    <div class="exam">🎯 EXAMEN: Compare la corriente lateral y la corriente principal del humo de tabaco en términos de composición y toxicidad. ¿Por qué el tabaquismo pasivo es considerado un riesgo de salud pública?</div>
+  </div>
+
+  <!-- BLOQUE 4: Asbesto -->
+  <div class="block">
+    <span class="bh bh-s">Asbesto / Amianto (Diap. 11–14)</span>
+    <div class="def def-s">
+      El <strong>asbesto (amianto)</strong> es un mineral fibroso de origen natural compuesto de silicatos de magnesio. Sus fibras microscópicas, cuando se liberan al aire por daño o perturbación del material, son inhaladas y se depositan permanentemente en el tejido pulmonar, ya que el cuerpo no puede degradarlas.
+    </div>
+    <div class="item"><span class="dot dot-s"></span><span><strong>¿Por qué fue tan usado?</strong> Resistencia al fuego, durabilidad, bajo costo y excelentes propiedades aislantes. Se utilizó ampliamente en construcción hasta los años 1980–1990.</span></div>
+    <div class="item"><span class="dot dot-s"></span><span><strong>Estándar de exposición:</strong> 0,2 fibras/mL para fibras de más de 5 µm de longitud (valor límite de referencia internacional).</span></div>
+    <div class="three">
+      <div class="mini" style="border-top:3px solid #dc2626">
+        <strong>Cáncer de pulmón</strong><br>La fibra actúa como irritante crónico que induce mutaciones en las células del epitelio bronquial. El riesgo se multiplica con el tabaquismo.
+      </div>
+      <div class="mini" style="border-top:3px solid #7c3aed">
+        <strong>Mesotelioma</strong><br>Cáncer raro y agresivo del mesotelio (revestimiento de pulmón, pecho, abdomen y corazón). Período de latencia: 20–50 años.
+      </div>
+      <div class="mini" style="border-top:3px solid #64748b">
+        <strong>Asbestosis</strong><br>Fibrosis pulmonar progresiva, crónica e irreversible por acumulación de fibras. No es cancerosa pero incapacitante.
+      </div>
+    </div>
+    <div class="warn">⚠️ IMPORTANTE: El asbesto intacto y no perturbado NO libera fibras. El peligro surge al cortar, taladrar, demoler o deteriorar materiales que lo contienen. La mayoría de sus usos NO están prohibidos en Perú.</div>
+    <div class="exam">🎯 EXAMEN: Explique el mecanismo por el cual las fibras de asbesto causan mesotelioma, diferenciándolo de la asbestosis. Mencione el estándar de exposición aceptado internacionalmente.</div>
+  </div>
+
+  <!-- BLOQUE 5: Radón -->
+  <div class="block s2">
+    <span class="bh bh-p">Gas Radón — Rn-222 (Diap. 15–23)</span>
+    <div class="def def-p">
+      El <strong>radón (Rn-222)</strong> es un gas noble radiactivo, incoloro e inodoro, producido por la descomposición radiactiva natural del uranio-238 presente en el suelo y las rocas. Es inerte por sí mismo, pero sus productos de descomposición sólidos (polonio-218, plomo-214, bismuto-214 y polonio-214) se adhieren a las partículas del aire y, al ser inhalados, emiten radiación alfa que daña el ADN del epitelio pulmonar.
+    </div>
+    <div class="two">
+      <div>
+        <div class="flow">
+          <div class="fbox" style="font-size:10px">U-238 en suelo</div><span class="farrow">→</span>
+          <div class="fbox" style="font-size:10px">Ra-226</div><span class="farrow">→</span>
+          <div class="fbox" style="font-size:10px">Rn-222 (gas)</div><span class="farrow">→</span>
+          <div class="fbox" style="font-size:10px">Po, Pb, Bi (sólidos radiactivos)</div>
+        </div>
+        <div class="rx">Nivel de acción EPA: 4 pCi/L de aire<br>Nivel promedio exterior: ~0.4 pCi/L<br>Nivel promedio interior USA: ~1.3 pCi/L</div>
+        <div class="item"><span class="dot dot-p"></span><span><strong>Vías de infiltración:</strong> Grietas en cimientos, juntas de construcción, tuberías de drenaje, bloques de hormigón poroso, pozos de agua subterránea.</span></div>
+        <div class="item"><span class="dot dot-p"></span><span><strong>Efecto latente:</strong> Los síntomas y el cáncer de pulmón se manifiestan después de <em>largos períodos</em> de exposición (10–30 años), lo que dificulta la asociación causa-efecto.</span></div>
+      </div>
+      <div>
+        <div class="mini" style="border-left:3px solid #7c3aed; margin-bottom:7px">
+          <strong>🇵🇪 Presencia en Lima</strong><br>
+          La cuenca de Lima presenta suelos de origen volcánico y sedimentario que pueden contener uranio en concentraciones variables. Las zonas de mayor altitud y en contacto con roca granítica (Andina) tienen mayor potencial de emanación de radón.
+        </div>
+        <div class="mini" style="border-left:3px solid #dc2626">
+          <strong>2ª causa de cáncer de pulmón</strong><br>
+          El radón es la segunda causa de cáncer de pulmón en EE.UU. después del tabaco, provocando ~21,000 muertes/año. En fumadores expuestos a radón, el riesgo se multiplica sinérgicamente.
+        </div>
+        <div class="mini" style="border-left:3px solid #16a34a; margin-top:7px">
+          <strong>Control y mitigación</strong><br>
+          Sellado de grietas, despresurización subsuperficial (extracción del gas antes de entrar), ventilación mejorada y barreras de vapor en el suelo.
+        </div>
+      </div>
+    </div>
+    <div class="warn">⚠️ ERROR COMÚN: Confundir radón (Rn-222, gas inerte) con sus productos de descomposición sólidos. El daño pulmonar lo causan los <strong>hijos del radón</strong> (especialmente polonio-218 y polonio-214), no el radón directamente.</div>
+    <div class="exam">🎯 EXAMEN: Describa la cadena de desintegración radiactiva del uranio-238 hasta el radón-222 y explique por qué los productos de descomposición del radón son más peligrosos que el gas en sí. ¿Cuál es el nivel de acción establecido por la EPA?</div>
+  </div>
+
+  <!-- BLOQUE 6: CO -->
+  <div class="block">
+    <span class="bh bh-r">Monóxido de Carbono — CO (Diap. 24–26)</span>
+    <div class="def def-r">
+      El <strong>monóxido de carbono (CO)</strong> es el "asesino silencioso" de los contaminantes interiores: gas incoloro, inodoro y tóxico que no activa los sentidos humanos de alerta. Se produce por la combustión incompleta de cualquier combustible carbonado (gas, madera, kerosene, gasolina).
+    </div>
+    <div class="rx">
+      Hb + O₂ → OxiHemoglobina (normal)<br>
+      Hb + CO → CarboxiHemoglobina (COHb) ← irreversible a corto plazo<br>
+      Afinidad del CO por Hb: 240× mayor que el O₂
+    </div>
+    <p><strong>Efectos según concentración de COHb:</strong></p>
+    <div class="item"><span class="dot dot-r" style="background:#fca5a5"></span><span><strong>Bajas (&lt;10% COHb):</strong> Fatiga, dolor de pecho en cardiópatas. Síntomas silenciosos.</span></div>
+    <div class="item"><span class="dot dot-r" style="background:#f87171"></span><span><strong>Moderadas (10–30% COHb):</strong> Angina, reducción de visión y función cerebral.</span></div>
+    <div class="item"><span class="dot dot-r" style="background:#ef4444"></span><span><strong>Altas (30–50% COHb):</strong> Cefalea intensa, mareos, confusión, náuseas. "Gripe sin fiebre".</span></div>
+    <div class="item"><span class="dot dot-r" style="background:#dc2626"></span><span><strong>Muy altas (&gt;50% COHb):</strong> Pérdida de conciencia, convulsiones, muerte por hipoxia celular.</span></div>
+    <div class="warn">⚠️ ALERTA PERUANA: En Lima, el uso de calentadores de agua a gas sin ventilación adecuada en baños pequeños es una causa frecuente de intoxicación por CO. Los calentadores instantáneos de paso son la fuente número uno de muertes por CO en interiores domésticos peruanos.</div>
+    <div class="exam">🎯 EXAMEN: Explique el mecanismo bioquímico por el cual el monóxido de carbono produce hipoxia celular, considerando la diferencia de afinidad con la hemoglobina respecto al oxígeno.</div>
+  </div>
+
+  <!-- BLOQUE 7: Material Particulado -->
+  <div class="block">
+    <span class="bh bh-y">Material Particulado en Interiores — PM (Diap. 27–29)</span>
+    <div class="def def-y">
+      El <strong>material particulado (PM)</strong> en interiores es una mezcla heterogénea de partículas sólidas y líquidas suspendidas en el aire. Su peligrosidad depende del tamaño: las partículas ≤10 µm (PM₁₀) son inhalables; las ≤2.5 µm (PM₂.₅) penetran hasta los alvéolos pulmonares; y las ultrafinas (&lt;0.1 µm) pueden incluso pasar al torrente sanguíneo.
+    </div>
+    <div class="two">
+      <div>
+        <p><strong>Clasificación por tamaño y riesgo:</strong></p>
+        <div style="margin:5px 0">
+          <p style="font-size:11px;margin-bottom:2px">PM₁₀ — Nariz/Garganta</p>
+          <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:60%;background:#eab308"></div></div>
+          <p style="font-size:11px;margin-bottom:2px">PM₂.₅ — Alvéolos</p>
+          <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:85%;background:#f97316"></div></div>
+          <p style="font-size:11px;margin-bottom:2px">PM₀.₁ — Sangre</p>
+          <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:100%;background:#dc2626"></div></div>
+        </div>
+      </div>
+      <div>
+        <p><strong>Fuentes interiores principales:</strong></p>
+        <div class="item"><span class="dot dot-y"></span><span>Cocinar (especialmente fritura y grillado): genera PM₂.₅ de combustión orgánica.</span></div>
+        <div class="item"><span class="dot dot-y"></span><span>Velas y quema de incienso: partículas de carbono y compuestos orgánicos.</span></div>
+        <div class="item"><span class="dot dot-y"></span><span>Fumar: partículas sólidas y líquidas de alquitrán.</span></div>
+        <div class="item"><span class="dot dot-y"></span><span>Infiltración exterior: tráfico vehicular (Lima tiene concentraciones de PM₂.₅ que superan la norma OMS).</span></div>
+      </div>
+    </div>
+    <div class="exam">🎯 EXAMEN: Explique por qué las partículas PM₂.₅ son más peligrosas que las PM₁₀, y mencione tres fuentes interiores típicas que generan material particulado en un hogar peruano urbano.</div>
+  </div>
+
+  <!-- BLOQUE 8: VOCs -->
+  <div class="block s2">
+    <span class="bh bh-p">Compuestos Orgánicos Volátiles — VOCs (Diap. 30–34)</span>
+    <div class="def def-p">
+      Los <strong>VOCs (Volatile Organic Compounds)</strong> son miles de compuestos químicos orgánicos que se evaporan a temperatura ambiente desde productos sólidos o líquidos. Su riesgo radica en que las concentraciones interiores pueden ser <strong>hasta 10 veces mayores</strong> que en exteriores, y la exposición crónica a mezclas complejas de VOCs tiene efectos sinérgicos difíciles de evaluar individualmente.
+    </div>
+    <div class="two">
+      <div>
+        <p><strong>Fuentes de VOCs en interiores:</strong></p>
+        <div class="item"><span class="dot dot-p"></span><span><strong>Pinturas y barnices:</strong> Liberan solventes como tolueno, xileno y acetona durante el secado y semanas después.</span></div>
+        <div class="item"><span class="dot dot-p"></span><span><strong>Mobiliario y madera aglomerada:</strong> Emiten formaldehído por años tras su fabricación.</span></div>
+        <div class="item"><span class="dot dot-p"></span><span><strong>Productos de limpieza:</strong> Aerosoles, desengrasantes y ambientadores liberan mezclas de VOCs.</span></div>
+        <div class="item"><span class="dot dot-p"></span><span><strong>Ropa de tintorería:</strong> El percloroetileno (PCE) es un VOC carcinógeno que persiste en tejidos por días.</span></div>
+      </div>
+      <div>
+        <p><strong>Efectos a corto y largo plazo:</strong></p>
+        <div class="mini" style="border-left:3px solid #7c3aed; margin-bottom:7px">
+          <strong>Inmediatos</strong><br>
+          Irritación de ojos, nariz y garganta. Dolores de cabeza, mareos, náuseas y fatiga. Aparecen a concentraciones relativamente bajas (ppb).
+        </div>
+        <div class="mini" style="border-left:3px solid #dc2626">
+          <strong>Crónicos / Largo plazo</strong><br>
+          Daño hepático, renal y del SNC. <strong>Carcinógenos confirmados:</strong> benceno (leucemia), cloruro de metileno (cáncer), percloroetileno (vejiga, riñón).
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:8px"><strong>Medidas de reducción de VOCs:</strong></p>
+    <div class="three">
+      <div class="mini" style="border-top:3px solid #16a34a"><strong>Control de fuente</strong><br>Elegir productos de bajo contenido en VOCs (etiqueta "low-VOC"), almacenar en lugares ventilados y desechar correctamente.</div>
+      <div class="mini" style="border-top:3px solid #3b82f6"><strong>Ventilación</strong><br>Abrir ventanas al usar pinturas o productos de limpieza. Usar extractores durante y después de actividades que emitan VOCs.</div>
+      <div class="mini" style="border-top:3px solid #f97316"><strong>Uso seguro</strong><br>Nunca mezclar productos de limpieza (riesgo de reacciones químicas), comprar solo la cantidad necesaria y seguir instrucciones de etiqueta.</div>
+    </div>
+    <div class="exam">🎯 EXAMEN: ¿Por qué las concentraciones de VOCs en interiores pueden ser significativamente más altas que en exteriores? Mencione dos VOCs carcinógenos confirmados y sus fuentes domésticas más comunes.</div>
+  </div>
+
+  <!-- BLOQUE 9: Formaldehído -->
+  <div class="block">
+    <span class="bh bh-y">Formaldehído — HCHO (Diap. 35)</span>
+    <div class="def def-y">
+      El <strong>formaldehído (HCHO)</strong> es un VOC especial que merece tratamiento separado: es el más prevalente en interiores y uno de los pocos clasificados inequívocamente como carcinógeno humano (Grupo 1 de la IARC). Gas incoloro con olor acre, presente virtualmente en toda construcción moderna.
+    </div>
+    <div class="rx">HCHO proviene de: resinas urea-formaldehído (UF) en madera aglomerada<br>Emisión decrece con el tiempo pero persiste por años<br>Concentración típica interior: 0.03 – 0.5 ppm</div>
+    <div class="item"><span class="dot dot-y"></span><span><strong>Fuentes principales:</strong> Tableros de madera aglomerada (MDF, aglomerado), pegamentos y adhesivos, alfombras, textiles tratados, productos de cuidado personal (alisantes de cabello), y reacciones de fotoxidación de otros VOCs.</span></div>
+    <div class="item"><span class="dot dot-y"></span><span><strong>Efectos a corto plazo:</strong> Irritación de ojos y vías respiratorias altas desde 0.1 ppm. Sensación de ardor, lagrimeo y tos.</span></div>
+    <div class="item"><span class="dot dot-y"></span><span><strong>Efectos crónicos:</strong> Cáncer nasofaríngeo y leucemia. La IARC lo reclasificó al Grupo 1 (carcinógeno humano confirmado) en 2004.</span></div>
+    <div class="warn">⚠️ CONTEXTO PERUANO: Las viviendas de autoconstrucción frecuente en Lima suelen usar tableros de MDF y aglomerado de baja calidad importados sin certificación de emisiones. Esto genera exposiciones crónicas a formaldehído sin que los ocupantes sean conscientes del riesgo.</div>
+  </div>
+
+  <!-- SECCIÓN 3 -->
+  <div class="sec-bar sec-g">🦠 SECCIÓN 3: CONTAMINANTES BIOLÓGICOS</div>
+
+  <!-- BLOQUE 10: Bio contaminantes -->
+  <div class="block s2">
+    <span class="bh bh-g">Contaminantes Biológicos en Interiores (Diap. 36–40)</span>
+    <div class="def def-g">
+      Los <strong>contaminantes biológicos</strong> son microorganismos vivos (o sus productos) capaces de causar enfermedades infecciosas, alérgicas o tóxicas al ser inhalados. Se denominan <em>bioaerosoles</em> cuando están suspendidos en el aire: bacterias, hongos, virus, esporas, endotoxinas, alérgenos de animales y polen. Su característica diferencial es que, a diferencia de los químicos, pueden multiplicarse si las condiciones ambientales (humedad, temperatura, nutrientes) son favorables.
+    </div>
+    <div class="two">
+      <div>
+        <p><strong>Fuentes de bioaerosoles:</strong></p>
+        <div class="item"><span class="dot dot-g"></span><span><strong>Humanos y animales:</strong> Virus respiratorios (gripe, COVID-19), bacterias (Mycobacterium tuberculosis), caspa de mascotas (proteínas alérgenas de gatos — Fel d 1).</span></div>
+        <div class="item"><span class="dot dot-g"></span><span><strong>Humedad y agua estancada:</strong> Moho (Aspergillus, Cladosporium, Stachybotrys), bacterias como Legionella pneumophila en sistemas HVAC.</span></div>
+        <div class="item"><span class="dot dot-g"></span><span><strong>Polvo y suciedad:</strong> Ácaros del polvo (Dermatophagoides pteronyssinus), sus heces y fragmentos son los alérgenos más comunes en interiores.</span></div>
+        <div class="item"><span class="dot dot-g"></span><span><strong>Plagas urbanas:</strong> Excrementos y partes del cuerpo de cucarachas son potentes alérgenos. Proteína de orina de roedores se seca y aerosoliza.</span></div>
+      </div>
+      <div>
+        <p><strong>Tipos de efectos sobre la salud:</strong></p>
+        <div class="mini" style="border-left:3px solid #16a34a; margin-bottom:7px">
+          <strong>Alérgicas</strong><br>
+          Rinitis alérgica, asma bronquial, neumonitis por hipersensibilidad. Requieren sensibilización previa. La exposición repetida aumenta la severidad.
+        </div>
+        <div class="mini" style="border-left:3px solid #dc2626; margin-bottom:7px">
+          <strong>Infecciosas</strong><br>
+          Gripe, sarampión, varicela, tuberculosis. Transmisión por vía aérea en espacios confinados mal ventilados.
+        </div>
+        <div class="mini" style="border-left:3px solid #7c3aed">
+          <strong>Tóxicas</strong><br>
+          Micotoxinas de mohos (Stachybotrys → tricotecenos). "Fiebre por humidificador" por endotoxinas bacterianas. Síntomas: fiebre, mialgias, dificultad respiratoria.
+        </div>
+      </div>
+    </div>
+    <div class="exam">🎯 EXAMEN: Diferencie las tres categorías de enfermedades causadas por contaminantes biológicos interiores (alérgicas, infecciosas y tóxicas), proporcionando un agente causal y un efecto en salud para cada una.</div>
+  </div>
+
+  <!-- BLOQUE 11: Control biológico -->
+  <div class="block">
+    <span class="bh bh-t">Reducción de Contaminantes Biológicos (Diap. 41)</span>
+    <div class="def def-t">
+      El control de bioaerosoles se basa en un principio fundamental: <strong>eliminar las condiciones que permiten su crecimiento</strong> (principalmente humedad y alimento), en lugar de intentar eliminar los microorganismos ya establecidos. Es una estrategia de prevención sobre tratamiento.
+    </div>
+    <div class="item"><span class="dot dot-t"></span><span><strong>Control de humedad (rango ideal 30–60% HR):</strong> Secar materiales mojados en menos de 24 horas, reparar goteras inmediatamente, ventilar ático y espacio de arrastre. La humedad &gt;60% favorece exponencialmente el crecimiento de moho.</span></div>
+    <div class="item"><span class="dot dot-t"></span><span><strong>Ventilación efectiva:</strong> Extractores en cocina y baño, ventilar secadoras al exterior (no al interior), sistemas HVAC con filtros HEPA y mantenimiento regular.</span></div>
+    <div class="item"><span class="dot dot-t"></span><span><strong>Para alérgicos:</strong> Fundas antiácaros en colchones y almohadas, lavado de ropa de cama en agua caliente (&gt;55°C), aspiradoras con filtro HEPA, evitar alfombras en dormitorios.</span></div>
+    <div class="warn">⚠️ DATO CLAVE: El moho negro (Stachybotrys chartarum) produce micotoxinas muy peligrosas. Aunque es visible, su remoción sin equipo de protección adecuado puede liberar millones de esporas al aire, agravando el problema.</div>
+  </div>
+
+  <!-- SECCIÓN 4 -->
+  <div class="sec-bar sec-pk">🏥 SECCIÓN 4: SÍNDROME DEL EDIFICIO ENFERMO Y CONTAMINACIÓN DOMÉSTICA</div>
+
+  <!-- BLOQUE 12: SEE -->
+  <div class="block s2">
+    <span class="bh bh-pk">Síndrome del Edificio Enfermo — SEE (Diap. 42–45)</span>
+    <div class="def def-pk">
+      El <strong>Síndrome del Edificio Enfermo (SEE)</strong> es una condición en la que al menos el 20% de los ocupantes de un edificio presentan síntomas crónicos de salud que mejoran al salir del edificio, sin que se pueda identificar una causa específica única. Es un diagnóstico de exclusión que señala problemas sistémicos del edificio.
+    </div>
+    <div class="two">
+      <div>
+        <p><strong>Síntomas característicos del SEE:</strong></p>
+        <div class="item"><span class="dot dot-pk"></span><span>Dolor de cabeza persistente y fatiga crónica (los más frecuentes)</span></div>
+        <div class="item"><span class="dot dot-pk"></span><span>Sequedad y dolor de garganta, irritación de ojos</span></div>
+        <div class="item"><span class="dot dot-pk"></span><span>Picazón de piel, náuseas, mareos</span></div>
+        <div class="item"><span class="dot dot-pk"></span><span>Dificultad para respirar y sensación de opresión</span></div>
+        <p style="margin-top:6px; font-size:11.5px; color:#831843; font-weight:600">🔑 Criterio diagnóstico: síntomas desaparecen o mejoran al abandonar el edificio.</p>
+      </div>
+      <div>
+        <p><strong>Causas del SEE:</strong></p>
+        <div class="mini" style="border-left:3px solid #ec4899; margin-bottom:6px">
+          <strong>Contaminación del aire interior</strong><br>
+          VOCs de mobiliario, vapores de limpieza, gases de combustión y PM en suspensión crean un "cóctel" de contaminantes de baja concentración individual pero efecto combinado severo.
+        </div>
+        <div class="mini" style="border-left:3px solid #f97316; margin-bottom:6px">
+          <strong>Ventilación deficiente</strong><br>
+          Edificios modernos sellados para eficiencia energética pueden reciclar aire contaminado. La norma ASHRAE 62.1 establece caudales mínimos de renovación de aire exterior.
+        </div>
+        <div class="mini" style="border-left:3px solid #64748b">
+          <strong>Condiciones ambientales</strong><br>
+          Temperatura inadecuada (&lt;18°C o &gt;25°C), humedad extrema e iluminación deficiente contribuyen al malestar general y amplifican la percepción de los síntomas.
+        </div>
+      </div>
+    </div>
+    <div class="warn">⚠️ NO CONFUNDIR: El SEE es diferente de la "Enfermedad relacionada con el edificio" (Building Related Illness, BRI), que tiene una causa específica identificable (ej. Legionelosis). En el SEE no hay un agente causal único definido.</div>
+    <div class="exam">🎯 EXAMEN: Defina el Síndrome del Edificio Enfermo, establezca sus criterios de diagnóstico y explique por qué los edificios modernos de alta eficiencia energética pueden ser más propensos a generar este síndrome.</div>
+  </div>
+
+  <!-- BLOQUE 13: Estrategias de mejora -->
+  <div class="block">
+    <span class="bh bh-t">Estrategias para Mejorar la CAI (Diap. 46)</span>
+    <div class="def def-t">
+      La mejora de la calidad del aire interior sigue una jerarquía de control de tres niveles, ordenados de mayor a menor eficacia: primero eliminar la fuente, luego diluir con ventilación, y finalmente filtrar lo que queda. Esta jerarquía es análoga a la usada en salud ocupacional (eliminación &gt; sustitución &gt; controles de ingeniería &gt; controles administrativos &gt; EPP).
+    </div>
+    <div class="flow">
+      <div class="fbox" style="border:1px solid #16a34a; color:#14532d; font-weight:600">Control de fuente</div>
+      <span class="farrow">→</span>
+      <div class="fbox" style="border:1px solid #3b82f6; color:#1e3a8a; font-weight:600">Ventilación mejorada</div>
+      <span class="farrow">→</span>
+      <div class="fbox" style="border:1px solid #7c3aed; color:#4c1d95; font-weight:600">Purificación/Filtración</div>
+    </div>
+    <div class="item"><span class="dot dot-t"></span><span><strong>Control de fuente:</strong> La estrategia más efectiva. Eliminar o sustituir el material contaminante (ej. reemplazar tableros de MDF por madera maciza, no fumar en interiores).</span></div>
+    <div class="item"><span class="dot dot-t"></span><span><strong>Ventilación mejorada:</strong> Aumentar la tasa de intercambio de aire (ACH) con aire exterior limpio. Fundamental en cocinas, baños y garajes.</span></div>
+    <div class="item"><span class="dot dot-t"></span><span><strong>Purificación del aire:</strong> Filtros HEPA capturan partículas ≥0.3 µm con 99.97% de eficiencia. Carbón activado adsorbe VOCs y gases. UV-C inactiva microorganismos.</span></div>
+  </div>
+
+  <!-- BLOQUE 14: Contaminación doméstica global -->
+  <div class="block s3">
+    <span class="bh bh-o">Contaminación de Aire Doméstico — Biomasa y Cocinas Mejoradas (Diap. 47–59)</span>
+    <div class="two">
+      <div>
+        <div class="def def-o">
+          La <strong>contaminación del aire doméstico (CAD)</strong> por combustión de biomasa (leña, carbón, kerosene, bosta) en cocinas abiertas o mal ventiladas es uno de los problemas de salud ambiental más graves del mundo en desarrollo. Afecta predominantemente a mujeres y niños en zonas rurales pobres.
+        </div>
+        <div class="rx">
+          2,300 millones de personas cocinan con biomasa o combustibles contaminantes<br>
+          En 2020: 3.2 millones de muertes atribuibles a CAD<br>
+          237,000 de esas muertes: niños menores de 5 años
+        </div>
+        <div class="item"><span class="dot dot-o"></span><span><strong>Enfermedades asociadas a CAD:</strong> ACV (accidentes cerebrovasculares), cardiopatía isquémica, EPOC (enfermedad pulmonar obstructiva crónica) y cáncer de pulmón. Todas clasificadas como enfermedades no transmisibles (ENT) de etiología ambiental.</span></div>
+        <div class="item"><span class="dot dot-o"></span><span><strong>¿Por qué afecta más a mujeres?</strong> Por roles de género en cocina, pasan hasta 7 horas/día frente a fogones abiertos, inhalando concentraciones de PM₂.₅ equivalentes a fumar 400 cigarrillos por año.</span></div>
+        <div class="item"><span class="dot dot-o"></span><span><strong>Contexto peruano:</strong> Zonas altoandinas (Puno, Cusco, Huancavelica) usan mayoritariamente leña y bosta de vaca como combustible. La altitud reduce la eficiencia de combustión, aumentando la emisión de CO y PM.</span></div>
+      </div>
+      <div>
+        <p><strong>Cocinas Mejoradas a Leña (CML) — Solución de Ingeniería:</strong></p>
+        <div class="mini" style="border-left:3px solid #f97316; margin-bottom:7px">
+          <strong>¿Qué son las CML?</strong><br>
+          Dispositivos de combustión eficiente diseñados para reducir el consumo de leña (hasta 50–70%), mejorar la combustión, reducir emisiones de CO y PM, y canalizar los humos al exterior mediante chimenea. Son una intervención de bajo costo y alto impacto en zonas rurales.
+        </div>
+        <div class="mini" style="border-left:3px solid #dc2626; margin-bottom:7px">
+          <strong>Barreras de implementación</strong><br>
+          Calidad ambigua de materiales, difícil logística de transporte a zonas remotas, falta de servicio postventa, poca estandarización en instalación, oferta deficiente y empresas rurales con capacidades limitadas de producción y mantenimiento.
+        </div>
+        <div class="mini" style="border-left:3px solid #16a34a">
+          <strong>Laboratorio de Certificación UNALM</strong><br>
+          La UNALM cuenta con laboratorio especializado en evaluación y certificación de cocinas mejoradas a biomasa, usando protocolos estandarizados para medir eficiencia de combustión, emisiones de CO y PM, y seguridad de uso.
+        </div>
+        <div class="exam">🎯 EXAMEN: Analice la contaminación del aire doméstico por biomasa en zonas rurales peruanas: identifique los contaminantes generados, los grupos de población más afectados, las enfermedades asociadas y las estrategias de intervención disponibles.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLA INTEGRADORA -->
+  <div class="sec-bar sec-s" style="background:#f1f5f9;color:#334155">📊 TABLA INTEGRADORA — SÍNTESIS DE CONTAMINANTES INTERIORES</div>
+
+  <div class="block s3">
+    <span class="bh bh-s">Comparación General de Contaminantes Interiores</span>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Contaminante</th>
+          <th>Naturaleza</th>
+          <th>Fuente Principal (Interior)</th>
+          <th>Nivel de Referencia</th>
+          <th>Enfermedad / Efecto Principal</th>
+          <th>Control Prioritario</th>
+          <th>Contexto Perú</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ETS (Humo tabaco)</strong></td>
+          <td>Mezcla química compleja</td>
+          <td>Fumadores en interiores</td>
+          <td>Nivel seguro = 0 (carcinógeno G1)</td>
+          <td>Cáncer pulmón, ECV, enferm. respiratorias</td>
+          <td>Prohibición de fumar en interiores</td>
+          <td>Ley 28705 prohíbe fumar en espacios públicos cerrados</td>
+        </tr>
+        <tr style="background:var(--color-background-secondary)">
+          <td><strong>Asbesto</strong></td>
+          <td>Fibra mineral</td>
+          <td>Materiales de construcción antiguos</td>
+          <td>0.2 fibras/mL (&gt;5µm)</td>
+          <td>Asbestosis, mesotelioma, cáncer pulmón</td>
+          <td>No disturbar materiales; remoción profesional</td>
+          <td>Presente en edificios pre-1990; no prohibido totalmente</td>
+        </tr>
+        <tr>
+          <td><strong>Radón (Rn-222)</strong></td>
+          <td>Gas radiactivo</td>
+          <td>Suelo y roca (infiltración)</td>
+          <td>Acción EPA: 4 pCi/L</td>
+          <td>Cáncer de pulmón (2ª causa EE.UU.)</td>
+          <td>Sellado grietas; despresurización subsuperficial</td>
+          <td>Monitoreo incipiente; Lima tiene suelos variables</td>
+        </tr>
+        <tr style="background:var(--color-background-secondary)">
+          <td><strong>CO</strong></td>
+          <td>Gas inorgánico</td>
+          <td>Calentadores gas sin ventilación</td>
+          <td>OMS: 10 mg/m³ (8h)</td>
+          <td>Hipoxia, muerte (asesino silencioso)</td>
+          <td>Detectores de CO; ventilación de aparatos de combustión</td>
+          <td>Alta mortalidad por calentadores domésticos de gas</td>
+        </tr>
+        <tr>
+          <td><strong>PM₂.₅</strong></td>
+          <td>Partículas sólidas/líquidas</td>
+          <td>Cocinar, velas, fumar, infiltración</td>
+          <td>OMS 24h: 15 µg/m³</td>
+          <td>ECV, cáncer pulmón, muerte prematura</td>
+          <td>Ventilación, extractores, filtros HEPA</td>
+          <td>Lima supera norma OMS con frecuencia</td>
+        </tr>
+        <tr style="background:var(--color-background-secondary)">
+          <td><strong>VOCs (benceno, etc.)</strong></td>
+          <td>Compuestos orgánicos gaseosos</td>
+          <td>Pinturas, muebles, limpieza</td>
+          <td>Interior puede ser 10× &gt; exterior</td>
+          <td>Cáncer (benceno→leucemia), daño hepático/renal</td>
+          <td>Ventilación, productos low-VOC</td>
+          <td>Construcciones con materiales de baja calidad</td>
+        </tr>
+        <tr>
+          <td><strong>Formaldehído (HCHO)</strong></td>
+          <td>VOC específico</td>
+          <td>MDF, aglomerado, adhesivos</td>
+          <td>OMS: 0.1 ppm (30 min)</td>
+          <td>Cáncer nasofaríngeo, leucemia (IARC G1)</td>
+          <td>Materiales certificados; ventilación</td>
+          <td>MDF sin certificación en viviendas autoconstruidas</td>
+        </tr>
+        <tr style="background:var(--color-background-secondary)">
+          <td><strong>Bioaerosoles</strong></td>
+          <td>Biológico (vivo)</td>
+          <td>Humedad, HVAC, mascotas, plagas</td>
+          <td>HR &gt;60% = riesgo crítico</td>
+          <td>Alergias, asma, infecciones, micotoxinas</td>
+          <td>Control humedad (30–60%), limpieza HVAC</td>
+          <td>Alta prevalencia de moho en viviendas húmedas</td>
+        </tr>
+        <tr>
+          <td><strong>Biomasa (CAD)</strong></td>
+          <td>Partículas + CO + HC</td>
+          <td>Cocinas abiertas con leña/carbón</td>
+          <td>3.2M muertes/año (global, 2020)</td>
+          <td>EPOC, ACV, cardiopatía, cáncer pulmón</td>
+          <td>Cocinas mejoradas, GLP, electrificación</td>
+          <td>Crítico en Puno, Cusco, Huancavelica</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: La calidad del aire en interiores es un sistema multifactorial. Los contaminantes NO actúan de forma aislada — sus efectos son aditivos y frecuentemente sinérgicos. Por ejemplo, el radón + tabaco multiplica (no suma) el riesgo de cáncer de pulmón. El CO + VOCs puede producir efectos neurológicos combinados más severos que cada uno por separado. La intervención efectiva requiere diagnóstico integral del espacio.</div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-section">
+    <div class="quiz-header">
+      <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+      <p>Marca tu respuesta y descubre si es correcta</p>
+    </div>
+    <div class="quiz-body">
+      <div class="quiz-progress">
+        <div class="quiz-progress-text">
+          <span id="progress-text">Pregunta 0 de 10 respondidas</span>
+          <span id="score-text">Aciertos: 0 / 10</span>
+        </div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar-fill" id="progress-bar" style="width:0%;background:#16a34a;transition:width 0.4s"></div>
+        </div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="qcard" id="q1">
+        <p class="qnum">Pregunta 1 / 10</p>
+        <p class="qtext">¿Cuál es la característica que hace al monóxido de carbono (CO) particularmente peligroso en interiores respecto a otros contaminantes gaseosos?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="1" data-correct="false">A) Es el gas más pesado del aire y se acumula en el suelo</button>
+          <button class="qbtn" data-q="1" data-correct="false">B) Tiene un olor muy fuerte que alerta a los ocupantes</button>
+          <button class="qbtn" data-q="1" data-correct="true">C) Es inodoro e incoloro, por lo que no puede ser detectado sensorialmente, y forma carboxihemoglobina con una afinidad 240 veces mayor que el O₂</button>
+          <button class="qbtn" data-q="1" data-correct="false">D) Solo es peligroso a concentraciones superiores a 50% en el aire</button>
+        </div>
+        <div class="qfeedback" id="fb1">✅ ¡Correcto! El CO es inodoro e incoloro, por lo que no activa ningún mecanismo de alerta sensorial humano. Además, tiene una afinidad por la hemoglobina 240 veces mayor que el oxígeno, formando carboxihemoglobina y privando a las células de oxígeno incluso en concentraciones muy bajas en el aire.</div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="qcard" id="q2">
+        <p class="qnum">Pregunta 2 / 10</p>
+        <p class="qtext">El asbesto presente en materiales de construcción es inofensivo cuando está intacto. ¿En qué momento se convierte en un riesgo real para la salud?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="2" data-correct="false">A) Cuando entra en contacto con agua o humedad interior</button>
+          <button class="qbtn" data-q="2" data-correct="true">B) Cuando el material es perturbado, cortado, demolido o dañado, liberando fibras microscópicas al aire</button>
+          <button class="qbtn" data-q="2" data-correct="false">C) Siempre es peligroso, independientemente de su estado, incluso si está intacto</button>
+          <button class="qbtn" data-q="2" data-correct="false">D) Cuando se combina con vapores de VOCs de pinturas y barnices</button>
+        </div>
+        <div class="qfeedback" id="fb2">✅ ¡Correcto! El asbesto intacto y no perturbado no libera fibras al aire. El peligro surge exclusivamente al cortar, taladrar, demoler, lijar o deteriorar los materiales que lo contienen. La perturbación libera fibras microscópicas que, al ser inhaladas, quedan atrapadas permanentemente en el tejido pulmonar.</div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="qcard" id="q3">
+        <p class="qnum">Pregunta 3 / 10</p>
+        <p class="qtext">¿Cuál es el nivel de acción establecido por la EPA para el radón en interiores, y qué productos de la descomposición del radón son los verdaderos causantes del daño pulmonar?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="3" data-correct="false">A) 2 pCi/L; el radón mismo en su forma gaseosa daña directamente el tejido pulmonar</button>
+          <button class="qbtn" data-q="3" data-correct="false">B) 10 pCi/L; el bismuto-214 es el único radioisótopo peligroso</button>
+          <button class="qbtn" data-q="3" data-correct="true">C) 4 pCi/L; los productos de descomposición sólidos como polonio-218 y polonio-214, que emiten radiación alfa al depositarse en los pulmones</button>
+          <button class="qbtn" data-q="3" data-correct="false">D) 4 pCi/L; el plomo-214 en forma gaseosa penetra los alvéolos y emite rayos gamma</button>
+        </div>
+        <div class="qfeedback" id="fb3">✅ ¡Correcto! La EPA estableció 4 pCi/L como nivel de acción. El radón en sí es un gas noble químicamente inerte, pero sus productos de descomposición sólidos —especialmente polonio-218 y polonio-214— se adhieren a partículas del aire, son inhalados y se depositan en el epitelio pulmonar donde emiten partículas alfa que dañan el ADN celular.</div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="qcard" id="q4">
+        <p class="qnum">Pregunta 4 / 10</p>
+        <p class="qtext">¿Cuál de las siguientes afirmaciones sobre los VOCs (Compuestos Orgánicos Volátiles) en interiores es FALSA?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="4" data-correct="false">A) Las concentraciones de VOCs en interiores pueden ser hasta 10 veces mayores que en el exterior</button>
+          <button class="qbtn" data-q="4" data-correct="false">B) El benceno es un VOC carcinógeno asociado al desarrollo de leucemia</button>
+          <button class="qbtn" data-q="4" data-correct="true">C) Los VOCs solo provienen de actividades industriales exteriores y se infiltran al interior por la ventilación</button>
+          <button class="qbtn" data-q="4" data-correct="false">D) Los daños a largo plazo incluyen afectación del hígado, riñones y sistema nervioso central</button>
+        </div>
+        <div class="qfeedback" id="fb4">✅ ¡Correcto! La afirmación C es FALSA. Los VOCs tienen múltiples fuentes interiores directas: pinturas, barnices, muebles de madera aglomerada, productos de limpieza, adhesivos, alfombras y tintorería, entre otros. No provienen exclusivamente del exterior; de hecho, las fuentes interiores son las principales responsables de las altas concentraciones en espacios cerrados.</div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="qcard" id="q5">
+        <p class="qnum">Pregunta 5 / 10</p>
+        <p class="qtext">En el contexto de la contaminación del aire doméstico en zonas rurales peruanas, ¿cuál es la cifra global estimada de muertes anuales atribuibles a la combustión de biomasa en cocinas abiertas, según datos de 2020?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="5" data-correct="false">A) 500,000 muertes anuales a nivel mundial</button>
+          <button class="qbtn" data-q="5" data-correct="false">B) 1.5 millones de muertes, principalmente adultos mayores</button>
+          <button class="qbtn" data-q="5" data-correct="true">C) 3.2 millones de muertes, incluyendo 237,000 niños menores de 5 años</button>
+          <button class="qbtn" data-q="5" data-correct="false">D) 5 millones de muertes, distribuidas equitativamente por edad y género</button>
+        </div>
+        <div class="qfeedback" id="fb5">✅ ¡Correcto! Según los datos presentados en el curso (OMS 2020), la contaminación del aire doméstico por biomasa causó 3.2 millones de muertes, de las cuales 237,000 correspondieron a niños menores de 5 años. Esta realidad es especialmente relevante para Perú, donde zonas como Puno, Cusco y Huancavelica dependen masivamente de leña y bosta como combustible.</div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="qcard" id="q6">
+        <p class="qnum">Pregunta 6 / 10</p>
+        <p class="qtext">¿Qué diferencia fundamental existe entre el Síndrome del Edificio Enfermo (SEE) y una enfermedad relacionada con el edificio (BRI)?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="6" data-correct="true">A) En el SEE no se puede identificar una causa única específica, mientras que en la BRI existe un agente causal identificable (ej. Legionella). Además, en el SEE los síntomas mejoran al salir del edificio.</button>
+          <button class="qbtn" data-q="6" data-correct="false">B) El SEE afecta a todos los ocupantes del edificio, mientras que la BRI afecta solo al 20%</button>
+          <button class="qbtn" data-q="6" data-correct="false">C) La BRI es causada por factores psicológicos, mientras que el SEE tiene una causa química comprobable</button>
+          <button class="qbtn" data-q="6" data-correct="false">D) No existe diferencia; SEE y BRI son sinónimos de la misma condición</button>
+        </div>
+        <div class="qfeedback" id="fb6">✅ ¡Correcto! El SEE se diagnostica cuando al menos el 20% de los ocupantes tienen síntomas que mejoran al salir del edificio sin una causa específica identificable. La BRI (Building Related Illness) tiene un agente causal concreto, como ocurre con la Legionelosis causada por Legionella pneumophila en sistemas HVAC contaminados.</div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="qcard" id="q7">
+        <p class="qnum">Pregunta 7 / 10</p>
+        <p class="qtext">El formaldehído (HCHO) ha sido clasificado como carcinógeno del Grupo 1 por la IARC. ¿Cuál es la fuente doméstica más común y cuáles son los tipos de cáncer más asociados a su exposición crónica?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="7" data-correct="false">A) Productos de limpieza domésticos; causa principalmente leucemia mieloide y cáncer de colon</button>
+          <button class="qbtn" data-q="7" data-correct="false">B) Pintura al óleo y barnices; causa cáncer de piel y melanoma</button>
+          <button class="qbtn" data-q="7" data-correct="true">C) Tableros de madera aglomerada (MDF) y adhesivos con resinas urea-formaldehído; causa cáncer nasofaríngeo y leucemia</button>
+          <button class="qbtn" data-q="7" data-correct="false">D) Sistemas de aire acondicionado; causa cáncer de vejiga y renal exclusivamente</button>
+        </div>
+        <div class="qfeedback" id="fb7">✅ ¡Correcto! El formaldehído se libera principalmente de las resinas urea-formaldehído (UF) presentes en tableros de MDF, aglomerado y contrachapado, así como adhesivos y textiles tratados. Los cánceres más asociados son el nasofaríngeo (por contacto directo con las vías respiratorias altas) y la leucemia (por exposición sistémica crónica).</div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="qcard" id="q8">
+        <p class="qnum">Pregunta 8 / 10</p>
+        <p class="qtext">Para controlar los contaminantes biológicos en interiores, ¿cuál es el rango de humedad relativa recomendado y por qué es crítico mantenerlo?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="8" data-correct="false">A) 10–20% HR; la baja humedad elimina todos los microorganismos por desecación</button>
+          <button class="qbtn" data-q="8" data-correct="false">B) 60–80% HR; la alta humedad crea un ambiente estéril que impide la reproducción microbiana</button>
+          <button class="qbtn" data-q="8" data-correct="true">C) 30–60% HR; por debajo favorece la irritación de mucosas y ácaros resistentes a la sequedad; por encima favorece el crecimiento de moho, bacterias y proliferación de ácaros del polvo</button>
+          <button class="qbtn" data-q="8" data-correct="false">D) 70–90% HR; solo a esta humedad los filtros HEPA funcionan correctamente</button>
+        </div>
+        <div class="qfeedback" id="fb8">✅ ¡Correcto! El rango óptimo es 30–60% HR. Por debajo del 30%, las mucosas se resecan y se vuelven más vulnerables a infecciones. Por encima del 60%, el moho puede colonizar materiales en 24–48 horas, los ácaros del polvo se reproducen masivamente y las bacterias prospera. El control de humedad es la intervención más costo-efectiva contra bioaerosoles.</div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="qcard" id="q9">
+        <p class="qnum">Pregunta 9 / 10</p>
+        <p class="qtext">¿Cuál es la enfermedad causada por asbesto que NO es de naturaleza cancerosa pero sí es grave, progresiva e irreversible?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="9" data-correct="false">A) Mesotelioma pleural</button>
+          <button class="qbtn" data-q="9" data-correct="false">B) Carcinoma broncogénico</button>
+          <button class="qbtn" data-q="9" data-correct="false">C) Pleuresía maligna</button>
+          <button class="qbtn" data-q="9" data-correct="true">D) Asbestosis</button>
+        </div>
+        <div class="qfeedback" id="fb9">✅ ¡Correcto! La asbestosis es una fibrosis pulmonar progresiva y crónica causada por la acumulación de fibras de asbesto en el tejido pulmonar. No es una neoplasia (cáncer), pero es irreversible e incapacitante: cicatriza el pulmón reduciendo su capacidad de intercambio gaseoso. Se diferencia del mesotelioma y del carcinoma broncogénico, que sí son cánceres malignos.</div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="qcard" id="q10">
+        <p class="qnum">Pregunta 10 / 10</p>
+        <p class="qtext">En la jerarquía de control de la calidad del aire interior, ¿cuál estrategia es considerada la más efectiva y por qué se prioriza sobre las demás?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="10" data-correct="false">A) Purificación del aire con filtros HEPA, porque captura el 99.97% de partículas ≥0.3 µm</button>
+          <button class="qbtn" data-q="10" data-correct="true">B) Control de fuente, porque elimina el problema en su origen antes de que el contaminante se libere al aire, evitando la necesidad de dilución o filtración</button>
+          <button class="qbtn" data-q="10" data-correct="false">C) Ventilación mejorada, porque diluye todos los contaminantes simultáneamente sin importar su tipo</button>
+          <button class="qbtn" data-q="10" data-correct="false">D) Uso de equipos de protección personal (mascarillas), porque protege directamente a cada ocupante</button>
+        </div>
+        <div class="qfeedback" id="fb10">✅ ¡Correcto! El control de fuente es la estrategia más efectiva porque actúa sobre la causa raíz del problema: eliminar o sustituir el material o actividad contaminante antes de que libere el contaminante al ambiente. La ventilación y la filtración son controles secundarios que actúan sobre el contaminante ya presente en el aire, lo que siempre implica algún nivel residual de exposición.</div>
+      </div>
+
+      <!-- PANEL DE RESULTADOS -->
+      <div id="results-panel">
+        <h3 id="result-score"></h3>
+        <p id="result-message"></p>
+        <button id="reset-btn">🔄 Reiniciar Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-bar">
+    <span class="ft">REFERENCIAS:</span>
+    <span class="fc">
+      · Dra. Mabel Carhuancho León — Diapositivas Unidad V: Calidad del Aire en Interiores, UNALM 2026<br>
+      · EPA (U.S. Environmental Protection Agency) — Indoor Air Quality (IAQ) Guidelines<br>
+      · IARC (International Agency for Research on Cancer) — Monographs on the Identification of Carcinogenic Hazards to Humans<br>
+      · OMS/WHO — Household air pollution and health. Fact Sheet 2022<br>
+      · ASHRAE Standard 62.1 — Ventilation for Acceptable Indoor Air Quality<br>
+      · NIOSH — Occupational Exposure to Asbestos. Current Intelligence Bulletin<br>
+      · Ministerio de Salud del Perú (MINSA) — Normas de Salud Ambiental en Interiores
+    </span>
+  </div>
+
+</div><!-- .cv -->
+
+<script>
+(function(){
+  var answered = 0;
+  var correct = 0;
+  var total = 10;
+
+  var feedbacks = {
+    1: { ok: "✅ ¡Correcto! El CO es inodoro e incoloro, por lo que no activa ningún mecanismo de alerta sensorial. Tiene una afinidad por la hemoglobina 240× mayor que el O₂, formando carboxihemoglobina y privando a las células de oxígeno.", fail: "❌ Incorrecto. La respuesta correcta es C. El CO es peligroso precisamente porque NO puede detectarse por los sentidos (es inodoro e incoloro) y forma carboxihemoglobina con una afinidad 240 veces mayor que el O₂." },
+    2: { ok: "✅ ¡Correcto! El asbesto intacto no libera fibras. El peligro surge al cortar, taladrar, demoler o deteriorar los materiales que lo contienen, liberando fibras microscópicas inhalables.", fail: "❌ Incorrecto. La respuesta correcta es B. El asbesto intacto y no perturbado NO es peligroso. Las fibras se liberan solo cuando el material es perturbado físicamente." },
+    3: { ok: "✅ ¡Correcto! La EPA establece 4 pCi/L como nivel de acción. El daño lo causan los productos de descomposición sólidos del radón —especialmente polonio-218 y 214— que emiten radiación alfa al depositarse en el epitelio pulmonar.", fail: "❌ Incorrecto. La respuesta correcta es C. El nivel de acción EPA es 4 pCi/L. Los causantes del daño son los hijos sólidos del radón (polonio, plomo, bismuto), no el gas en sí." },
+    4: { ok: "✅ ¡Correcto! La afirmación C es FALSA. Los VOCs tienen fuentes interiores directas muy importantes: pinturas, muebles de MDF, productos de limpieza, adhesivos y ropa de tintorería. Las fuentes interiores son frecuentemente las principales.", fail: "❌ Incorrecto. La respuesta correcta es C. Los VOCs NO provienen solo del exterior. Tienen múltiples fuentes interiores: muebles, pinturas, productos de limpieza, adhesivos y ropa de tintorería." },
+    5: { ok: "✅ ¡Correcto! La OMS estima 3.2 millones de muertes en 2020 por contaminación del aire doméstico, incluyendo 237,000 niños menores de 5 años. Cifra crítica para países como Perú.", fail: "❌ Incorrecto. La respuesta correcta es C. Según la OMS (2020), la contaminación del aire doméstico causó 3.2 millones de muertes, incluyendo 237,000 niños menores de 5 años." },
+    6: { ok: "✅ ¡Correcto! En el SEE no hay causa única identificable y los síntomas mejoran al salir del edificio. En la BRI existe un agente causal concreto (como Legionella en Legionelosis).", fail: "❌ Incorrecto. La respuesta correcta es A. El SEE se distingue por la ausencia de causa única identificable y por la mejoría de síntomas al salir del edificio. La BRI tiene agente causal definido." },
+    7: { ok: "✅ ¡Correcto! El formaldehído se libera principalmente de resinas UF en MDF y aglomerado. Causa cáncer nasofaríngeo y leucemia según la IARC (Grupo 1).", fail: "❌ Incorrecto. La respuesta correcta es C. La principal fuente doméstica son los tableros de madera aglomerada (MDF) con resinas urea-formaldehído, y los cánceres más asociados son nasofaríngeo y leucemia." },
+    8: { ok: "✅ ¡Correcto! El rango 30–60% HR es óptimo. Fuera de este rango aumentan los riesgos: por debajo, irritación de mucosas; por encima, proliferación de moho, ácaros y bacterias.", fail: "❌ Incorrecto. La respuesta correcta es C. El rango óptimo es 30–60% HR. Por encima del 60% proliferan moho y ácaros; por debajo del 30% las mucosas se resecan y aumenta la vulnerabilidad a infecciones." },
+    9: { ok: "✅ ¡Correcto! La asbestosis es fibrosis pulmonar progresiva, crónica e irreversible, pero NO es cáncer. Se diferencia del mesotelioma y del carcinoma broncogénico, que sí son neoplasias malignas.", fail: "❌ Incorrecto. La respuesta correcta es D. La asbestosis es la única enfermedad por asbesto que NO es cancerosa. Es una fibrosis pulmonar progresiva e irreversible que cicatriza el tejido pulmonar." },
+    10: { ok: "✅ ¡Correcto! El control de fuente actúa sobre la causa raíz, eliminando el contaminante antes de que se libere al ambiente. Es siempre más efectivo que las estrategias de dilución o filtración que actúan sobre el contaminante ya liberado.", fail: "❌ Incorrecto. La respuesta correcta es B. El control de fuente es la estrategia prioritaria porque elimina el problema en su origen. La ventilación y la filtración actúan sobre el contaminante ya liberado, dejando siempre alguna exposición residual." }
+  };
+
+  document.getElementById('quiz-section').addEventListener('click', function(e){
+    var btn = e.target.closest('.qbtn');
+    if(!btn) return;
+    var q = parseInt(btn.getAttribute('data-q'));
+    var isCorrect = btn.getAttribute('data-correct') === 'true';
+    var card = document.getElementById('q'+q);
+    var btns = card.querySelectorAll('.qbtn');
+    var fb = document.getElementById('fb'+q);
+
+    // Disable all buttons
+    btns.forEach(function(b){
+      b.disabled = true;
+      if(b.getAttribute('data-correct') === 'true'){
+        b.classList.add('correct');
+        b.textContent = '✅ ' + b.textContent;
+      }
+    });
+
+    if(!isCorrect){
+      btn.classList.add('incorrect');
+    }
+
+    // Show feedback
+    fb.textContent = isCorrect ? feedbacks[q].ok : feedbacks[q].fail;
+    fb.className = 'qfeedback ' + (isCorrect ? 'ok' : 'fail');
+
+    answered++;
+    if(isCorrect) correct++;
+
+    // Update progress
+    document.getElementById('progress-text').textContent = 'Pregunta ' + answered + ' de ' + total + ' respondidas';
+    document.getElementById('score-text').textContent = 'Aciertos: ' + correct + ' / ' + total;
+    document.getElementById('progress-bar').style.width = (answered/total*100) + '%';
+
+    // Show results if done
+    if(answered === total){
+      var panel = document.getElementById('results-panel');
+      var scoreEl = document.getElementById('result-score');
+      var msgEl = document.getElementById('result-message');
+      scoreEl.textContent = '📊 Resultado: ' + correct + ' / 10 correctas';
+      if(correct <= 4){
+        panel.style.background = '#fef2f2';
+        panel.style.color = '#991b1b';
+        msgEl.textContent = '❌ Necesitas repasar el material con más detalle. Revisa las secciones donde fallaste.';
+      } else if(correct <= 7){
+        panel.style.background = '#fefce8';
+        panel.style.color = '#713f12';
+        msgEl.textContent = '⚠️ ¡Buen avance! Sigue repasando los conceptos que no quedaron claros.';
+      } else {
+        panel.style.background = '#f0fdf4';
+        panel.style.color = '#14532d';
+        msgEl.textContent = '🏆 ¡Excelente dominio del tema! Estás bien preparado para el examen.';
+      }
+      panel.style.display = 'block';
+      panel.style.border = '1px solid ' + (correct<=4 ? '#dc2626' : correct<=7 ? '#facc15' : '#16a34a');
+      panel.style.borderRadius = '10px';
+    }
+  });
+
+  document.getElementById('reset-btn').addEventListener('click', function(){
+    // Reset all buttons
+    document.querySelectorAll('.qbtn').forEach(function(b){
+      b.disabled = false;
+      b.classList.remove('correct','incorrect');
+      // Remove ✅ or ❌ prefix
+      b.textContent = b.textContent.replace(/^[✅❌]\s/, '');
+    });
+    // Hide feedbacks
+    document.querySelectorAll('.qfeedback').forEach(function(f){
+      f.className = 'qfeedback';
+      f.textContent = '';
+    });
+    // Reset results
+    document.getElementById('results-panel').style.display = 'none';
+    answered = 0;
+    correct = 0;
+    document.getElementById('progress-text').textContent = 'Pregunta 0 de 10 respondidas';
+    document.getElementById('score-text').textContent = 'Aciertos: 0 / 10';
+    document.getElementById('progress-bar').style.width = '0%';
+  });
+})();
+</script>
+</body>
+</html>
