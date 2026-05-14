@@ -97,6 +97,88 @@ body{font-family:var(--font-sans)}
   <span class="pill">Penacho</span>
   <span class="pill">Conversion de unidades</span>
   <span class="pill">ECA Peru</span>
+  <span class="pill">Perfil de viento</span>
+  <span class="pill">Ley de potencia</span>
+  <span class="pill">Regresion lineal</span>
+</div>
+
+<div class="secbar" style="background:#ccfbf1;color:#134e4a">BLOQUE 5 — Perfil de Viento: Ley de Potencia y Regresion Lineal</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Que es el perfil de viento</span>
+  <div class="def teal">El viento no sopla igual a ras del suelo que a 200 metros de altura. Cerca del suelo hay friccion con edificios, arboles y rugosidad del terreno, lo que frena el viento. A mayor altura, menos friccion y mayor velocidad. El perfil de viento describe esa variacion de velocidad con la altura mediante la Ley de Potencia.</div>
+  <div class="item"><span class="dot" style="background:#0d9488"></span><span><strong>U_z:</strong> velocidad del viento a la altura z que quieres calcular (m/s).</span></div>
+  <div class="item"><span class="dot" style="background:#0d9488"></span><span><strong>U_0:</strong> velocidad conocida a la altura de referencia, generalmente la estacion meteorologica a z_0 = 10 m (o el primer dato disponible).</span></div>
+  <div class="item"><span class="dot" style="background:#0d9488"></span><span><strong>z_0:</strong> altura de referencia donde se midio U_0. En tu ejercicio fue z_0 = 0.5 m (primer dato de la tabla).</span></div>
+  <div class="item"><span class="dot" style="background:#0d9488"></span><span><strong>m:</strong> exponente del perfil. Depende del tipo de terreno y la estabilidad atmosferica. Se obtiene por regresion lineal con datos de campo.</span></div>
+  <div class="rx">Vz = V0 × (z / z0)^m<br><br>Ejemplo del ejercicio:<br>V0 = 0.212 m/s | z0 = 0.5 m | m = 0.992<br>→ Vz = 0.212 × (z / 0.5)^0.992</div>
+  <div class="warn">ERROR COMUN: Confundir z (altura donde quieres calcular la velocidad) con z_0 (altura donde se midio la velocidad de referencia). Si usas z_0 = 10 m de la estacion meteorologica estandar, todos los calculos deben usar ese mismo z_0.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Tabla de exponentes m tipicos</span>
+  <table class="tbl">
+    <tr><th>Tipo de terreno</th><th>Estabilidad</th><th>Exponente m</th></tr>
+    <tr><td>Terreno abierto / mar</td><td>Neutra</td><td>1/7 ≈ 0.14</td></tr>
+    <tr><td>Terreno suburbano</td><td>Neutra</td><td>0.22 – 0.28</td></tr>
+    <tr><td>Terreno urbano</td><td>Neutra</td><td>0.33 – 0.40</td></tr>
+    <tr><td>Terreno muy rugoso</td><td>Estable</td><td>0.40 – 0.60</td></tr>
+  </table>
+  <div class="exam">EXAMEN: Un m cercano a 1 (como el 0.992 del ejercicio) indica que la velocidad crece casi proporcionalmente con la altura. Un m pequeño (0.14) indica perfil casi plano. ¿Que tipo de terreno corresponde a cada caso?</div>
+</div>
+
+<div class="secbar" style="background:#ccfbf1;color:#134e4a">BLOQUE 5B — Linealizacion y Regresion Lineal Minimos Cuadrados</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Por que se aplica logaritmo — Linealizacion</span>
+  <div class="def teal">La Ley de Potencia NO es lineal, entonces no puedes hacer regresion directamente con los datos de campo. Al aplicar logaritmo natural a ambos lados, la conviertes en una ecuacion de recta. Luego aplicas regresion lineal, obtienes pendiente e intercepto, y finalmente reviertes la transformacion con e^a para recuperar los parametros reales.</div>
+  <div class="rx">Ley de potencia original:<br>Vz = V0 × (z/z0)^m<br><br>Aplicando ln a ambos lados:<br>ln(Vz) = ln(V0) + m × ln(z/z0)<br><br>Forma lineal  y = a + m·x  donde:<br>y = ln(Vz)     x = ln(z/z0)     a = ln(V0)     m = pendiente</div>
+  <div class="item"><span class="dot" style="background:#0d9488"></span><span>Una vez que tienes los pares (x, y) en escala logaritmica, graficas y deberian alinearse en una recta. La pendiente de esa recta es <strong>m</strong> y el intercepto es <strong>ln(V0)</strong>.</span></div>
+  <div class="item"><span class="dot" style="background:#0d9488"></span><span>Para recuperar V0 desde el intercepto: <strong>V0 = e^a</strong>. En el ejercicio: a = -1.155 → V0 = e^(-1.155) = 0.212 m/s.</span></div>
+  <div class="warn">El logaritmo no cambia los datos, solo cambia la escala en la que los ves. Es una transformacion matematica para poder aplicar herramientas de regresion lineal a una relacion que originalmente es curva.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Como construir la tabla de regresion</span>
+  <div class="def teal">Para cada par de datos medidos (V, z) del campo, calculas dos columnas: y = ln(V) y x = ln(z/z0). Luego construyes columnas adicionales x² y x·y para poder aplicar las formulas.</div>
+  <div class="rx">Tabla del ejercicio (z0 = 0.5):<br><br>V=0.3 z=0.5 → y=ln(0.3)=-1.204   x=ln(0.5/0.5)=0<br>V=0.8 z=1.1 → y=ln(0.8)=-0.223   x=ln(1.1/0.5)=0.788<br>V=1.1 z=2.1 → y=ln(1.1)=0.095    x=ln(2.1/0.5)=1.435<br>V=2.3 z=3.4 → y=ln(2.3)=0.833    x=ln(3.4/0.5)=1.917<br>V=3.1 z=5.1 → y=ln(3.1)=1.131    x=ln(5.1/0.5)=2.322</div>
+  <div class="exam">EXAMEN: ¿Por que el primer valor de x (columna ln(z/z0)) siempre es cero? Porque z0 es el primer dato, entonces ln(z0/z0) = ln(1) = 0. Eso es exactamente lo que define z0: el punto de referencia.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-teal">Las formulas de minimos cuadrados — paso a paso</span>
+  <div class="def teal">Minimos cuadrados encuentra la recta que minimiza la suma de los errores al cuadrado entre cada punto real y la recta predicha. Se elevan al cuadrado para que errores positivos y negativos no se cancelen y para penalizar mas los errores grandes. Las formulas son el resultado matematico ya resuelto de ese proceso de minimizacion.</div>
+
+  <div class="two">
+    <div>
+      <div class="rx">PENDIENTE m:<br>m = (n·Σxy − Σx·Σy) / (n·Σx² − (Σx)²)<br><br>INTERCEPTO a:<br>a = (Σy − m·Σx) / n<br><br>n = numero de datos (5 en el ejercicio)</div>
+      <div class="item" style="margin-top:10px"><span class="dot" style="background:#0d9488"></span><span><strong>Σx</strong> = suma de todos los x = 0 + 0.788 + 1.435 + 1.917 + 2.322 = <strong>6.462</strong></span></div>
+      <div class="item"><span class="dot" style="background:#0d9488"></span><span><strong>Σy</strong> = suma de todos los y = -1.204 + (-0.223) + 0.095 + 0.833 + 1.131 = <strong>0.632</strong></span></div>
+      <div class="item"><span class="dot" style="background:#0d9488"></span><span><strong>Σx²</strong> = 0² + 0.788² + 1.435² + 1.917² + 2.322² = 0 + 0.621 + 2.059 + 3.675 + 5.392 = <strong>11.747</strong></span></div>
+      <div class="item"><span class="dot" style="background:#0d9488"></span><span><strong>Σxy</strong> = (0×-1.204) + (0.788×-0.223) + (1.435×0.095) + (1.917×0.833) + (2.322×1.131) = 0 + (-0.176) + 0.136 + 1.597 + 2.626 = <strong>4.183</strong></span></div>
+    </div>
+    <div>
+      <div class="rx">Calculo de m:<br>Numerador = 5×4.183 − 6.462×0.632<br>= 20.915 − 4.084 = 16.831<br><br>Denominador = 5×11.747 − 6.462²<br>= 58.735 − 41.757 = 16.978<br><br>m = 16.831 / 16.978 = 0.992 ✓<br><br>Calculo de a:<br>a = (0.632 − 0.992×6.462) / 5<br>= (0.632 − 6.410) / 5<br>= -5.778 / 5 = -1.155 ✓<br><br>V0 = e^(-1.155) = 0.212 m/s ✓</div>
+      <div class="warn" style="margin-top:8px">La pendiente m = 0.992 es el exponente del perfil de viento. El intercepto a = -1.155 es ln(V0). Para obtener V0 siempre aplicas e^a, nunca usas "a" directamente como velocidad.</div>
+    </div>
+  </div>
+  <div class="exam">EXAMEN: Con la ecuacion Vz = 0.212 × (z/0.5)^0.992, calcular la velocidad del viento a la altura de la chimenea z = 115 m. Respuesta: Vz = 0.212 × (115/0.5)^0.992 = 0.212 × (230)^0.992 ≈ 46.68 m/s</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Calculadora — Perfil de Viento</span>
+  <div class="calc-box">
+    <label>V0 — velocidad de referencia (m/s)</label>
+    <input id="pv-v0" type="number" value="0.212" step="0.001">
+    <label>z0 — altura de referencia (m)</label>
+    <input id="pv-z0" type="number" value="0.5" step="0.1">
+    <label>m — exponente del perfil</label>
+    <input id="pv-m" type="number" value="0.992" step="0.001">
+    <label>z — altura de interes (m)</label>
+    <input id="pv-z" type="number" value="115" step="1">
+    <button onclick="calcPerfilViento()">Calcular Vz</button>
+    <div class="calc-result" id="pv-result" style="display:none"></div>
+  </div>
 </div>
 
 <div class="secbar" style="background:#dbeafe;color:#1e3a8a">BLOQUE 1 — Perfil de temperatura y la ecuacion T = a + bz</div>
@@ -642,6 +724,9 @@ var feedbacks={
   8:{ok:'Correcto. Se iguala T_penacho = 24.3 - 0.01z con T_capa2 = 12.6 + 0.028z. Despejando: 24.3 - 12.6 = (0.028+0.01)z → 11.7 = 0.038z → z = 307.9 ≈ 308m. Este valor cae dentro del rango de la Capa 2 (200-300m), lo que confirma que el penacho se estabiliza ahi.',fail:'Incorrecto. La respuesta correcta es C. Se igualan las ecuaciones del penacho y del ambiente en Capa 2: (24.3 - 12.6) / (0.028 + 0.01) = 11.7 / 0.038 ≈ 308m. Los 4300m corresponden a la Capa 1, donde no hay interseccion.'},
   9:{ok:'Correcto. El PM2.5 es una mezcla heterogenea de particulas solidas y liquidas de diversas composiciones quimicas (sulfatos, nitratos, metales, organicos). No existe un "peso molecular" unico para esta mezcla como si existe para una molecula de SO₂ o CO. La conversion es una aproximacion ingenieria, no un resultado exacto.',fail:'Incorrecto. La respuesta correcta es C. La razon fundamental es que el PM2.5 no es un gas con moleculas identicas: es una mezcla de particulas de diferentes composiciones. Sin un PM definido, la formula de conversion pierde su validez rigurosa.'},
   10:{ok:'Correcto. Este es el escenario mas peligroso en contaminacion atmosferica: la inversion termica actua como tapa, y la Capa 1 estable no dispersa bien. El penacho logra subir hasta ≈308m pero queda atrapado. Con emision continua, la concentracion acumulada puede superar el ECA aunque cada emision individual sea baja.',fail:'Incorrecto. La respuesta correcta es D. La inversion termica no dispersa, sino que atrapa. La Capa 1 estable tampoco ayuda a la dispersion. El resultado es acumulacion progresiva de contaminantes en la franja entre la chimenea y la inversion. Este escenario ocurre frecuentemente en Lima en invierno.'}
+  11:{ok:'Correcto. La Ley de Potencia Vz = V0(z/z0)^m describe como la velocidad aumenta con la altura. El exponente m depende del tipo de terreno: terrenos rugosos tienen m mayor, terrenos abiertos tienen m menor (aprox 1/7 = 0.14).',fail:'Incorrecto. La respuesta correcta es B. La Ley de Potencia es Vz = V0 × (z/z0)^m. La forma logaritmica ln(Vz) = ln(V0) + m·ln(z/z0) es la version linealizada para hacer regresion, no la ley original.'},
+  12:{ok:'Correcto. Se aplica logaritmo para convertir la ecuacion potencial (curva) en una ecuacion lineal y = a + mx. Esto permite usar regresion lineal de minimos cuadrados con los datos de campo para encontrar m y V0.',fail:'Incorrecto. La respuesta correcta es C. El logaritmo no cambia los datos ni los hace mas precisos. Su funcion es transformar la relacion curva en lineal para poder aplicar regresion lineal y obtener los parametros m y V0.'},
+  13:{ok:'Correcto. V0 = e^a porque al linealizar, a = ln(V0). Para recuperar V0 se aplica la funcion inversa del logaritmo natural: e^a = e^(ln V0) = V0. En el ejercicio: e^(-1.155) = 0.212 m/s.',fail:'Incorrecto. La respuesta correcta es A. El intercepto a de la regresion es ln(V0), no V0 directamente. Para recuperar la velocidad real de referencia debes aplicar exponencial: V0 = e^a.'}
 };
 
 document.querySelector('.quiz-body').addEventListener('click',function(e){
@@ -697,4 +782,25 @@ function resetQuiz(){
   }
   document.getElementById('result-panel').style.display='none';
 }
+
+function calcPerfilViento(){
+  var v0=parseFloat(document.getElementById('pv-v0').value);
+  var z0=parseFloat(document.getElementById('pv-z0').value);
+  var m=parseFloat(document.getElementById('pv-m').value);
+  var z=parseFloat(document.getElementById('pv-z').value);
+  var r=document.getElementById('pv-result');
+  if(isNaN(v0)||isNaN(z0)||isNaN(m)||isNaN(z)||z0<=0){
+    r.style.display='block';r.style.background='#fee2e2';
+    r.innerHTML='Ingresa valores validos. z0 debe ser mayor a 0.';return;
+  }
+  var vz=v0*Math.pow(z/z0,m);
+  r.style.display='block';r.style.background='#f0fdf4';
+  r.innerHTML='<strong>Vz = V0 × (z/z0)^m</strong><br>'
+    +'= '+v0+' × ('+z+'/'+z0+')^'+m+'<br>'
+    +'= '+v0+' × ('+((z/z0).toFixed(3))+')^'+m+'<br>'
+    +'= <strong>'+vz.toFixed(3)+' m/s</strong><br><br>'
+    +'Interpretacion: a '+z+' m de altura, el viento sopla a '+vz.toFixed(2)+' m/s, '
+    +(vz>v0?'mayor':'menor')+' que la velocidad de referencia de '+v0+' m/s a '+z0+' m.';
+}
+
 </script>
