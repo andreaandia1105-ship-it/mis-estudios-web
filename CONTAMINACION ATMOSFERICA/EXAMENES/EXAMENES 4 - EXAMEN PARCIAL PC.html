@@ -1,0 +1,419 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .wrap { padding: 0.5rem 0 2rem; }
+  .header { background: #0f1e3a; border-radius: var(--border-radius-lg); padding: 14px 18px; margin-bottom: 1rem; }
+  .header h1 { color: #fff; font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .header p { color: #7dd3fc; font-size: 12px; }
+  .alert { background: #fef9c3; border-left: 3px solid #ca8a04; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 10px 14px; margin-bottom: 1rem; font-size: 12.5px; color: #713f12; }
+  .alert strong { font-weight: 500; }
+  .prob { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); margin-bottom: 1rem; overflow: hidden; }
+  .prob-header { padding: 12px 16px; display: flex; align-items: flex-start; gap: 12px; cursor: pointer; user-select: none; }
+  .prob-header:hover { background: var(--color-background-secondary); }
+  .num { min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; margin-top: 1px; }
+  .n1 { background: #dbeafe; color: #1e3a8a; }
+  .n2 { background: #dcfce7; color: #14532d; }
+  .n3 { background: #fef9c3; color: #713f12; }
+  .n4 { background: #ede9fe; color: #4c1d95; }
+  .n5 { background: #ccfbf1; color: #134e4a; }
+  .n6 { background: #ffedd5; color: #7c2d12; }
+  .prob-title { flex: 1; }
+  .prob-title h3 { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+  .prob-title p { font-size: 11.5px; color: var(--color-text-secondary); }
+  .arrow { font-size: 16px; color: var(--color-text-secondary); transition: transform 0.2s; flex-shrink: 0; margin-top: 2px; }
+  .arrow.open { transform: rotate(90deg); }
+  .prob-body { display: none; border-top: 0.5px solid var(--color-border-tertiary); padding: 14px 16px; }
+  .prob-body.visible { display: block; }
+  .enunciado { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; margin-bottom: 12px; font-size: 12.5px; color: var(--color-text-primary); line-height: 1.6; }
+  .enunciado strong { font-weight: 500; }
+  .rx { background: #0f172a; color: #7dd3fc; font-family: var(--font-mono); font-size: 11.5px; padding: 8px 12px; border-radius: var(--border-radius-md); margin: 8px 0; text-align: center; line-height: 1.7; }
+  .step { display: flex; gap: 10px; margin-bottom: 8px; font-size: 12.5px; line-height: 1.6; }
+  .step-num { min-width: 20px; height: 20px; border-radius: 50%; background: var(--color-background-info); color: var(--color-text-info); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
+  .sol-btn { background: transparent; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 7px 14px; font-size: 12px; color: var(--color-text-secondary); cursor: pointer; margin-top: 8px; }
+  .sol-btn:hover { background: var(--color-background-secondary); }
+  .sol { display: none; margin-top: 12px; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 12px; }
+  .sol.visible { display: block; }
+  .sol-title { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .result { background: #f0fdf4; border: 0.5px solid #16a34a; border-radius: var(--border-radius-md); padding: 8px 12px; font-size: 12.5px; color: #14532d; margin-top: 8px; font-weight: 500; }
+  .warn-note { background: #fff7ed; border-left: 3px solid #f97316; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 8px 12px; font-size: 11.5px; color: #7c2d12; margin-top: 8px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0; }
+  .mini { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 8px 10px; font-size: 11.5px; }
+  .mini strong { font-weight: 500; display: block; margin-bottom: 3px; }
+  .tag { display: inline-block; font-size: 10.5px; padding: 2px 8px; border-radius: 20px; margin-right: 4px; margin-bottom: 4px; }
+  .t-blue { background: #dbeafe; color: #1e3a8a; }
+  .t-green { background: #dcfce7; color: #14532d; }
+  .t-yellow { background: #fef9c3; color: #713f12; }
+  .t-red { background: #fee2e2; color: #991b1b; }
+  .sep { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 10px 0; }
+  .sub-q { font-size: 12.5px; font-weight: 500; color: var(--color-text-primary); margin: 10px 0 6px; }
+  table.data { width: 100%; border-collapse: collapse; font-size: 11.5px; margin: 8px 0; }
+  table.data th { background: var(--color-background-secondary); padding: 5px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); font-weight: 500; text-align: center; }
+  table.data td { padding: 5px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); text-align: center; color: var(--color-text-primary); }
+  .key-note { background: #0f1e3a; color: #e2e8f0; border-radius: var(--border-radius-md); padding: 10px 14px; font-size: 12px; margin-bottom: 1rem; }
+  .key-note h4 { color: #7dd3fc; font-size: 12px; font-weight: 500; margin-bottom: 6px; }
+  .key-note .rx2 { background: #1e293b; color: #86efac; font-family: var(--font-mono); font-size: 11px; padding: 6px 10px; border-radius: 6px; margin: 4px 0; }
+</style>
+<div class="wrap">
+  <div class="header">
+    <h1>Contaminación Atmosférica — Ejercicios tipo examen</h1>
+    <p>Basado en los temas de tus PCs y apuntes · Haz clic en cada problema para expandirlo</p>
+  </div>
+
+  <div class="key-note">
+    <h4>Punto clave que dijo el profesor: fracción molar vs ppm</h4>
+    <div class="rx2">y_i (fracción molar) = Vi/Vt = ppmv / 10⁶  ✓ (para gas ideal, SÍ son iguales)</div>
+    <div class="rx2">y_i ≠ ppmm / 10⁶  ✗ (ppmm es en MASA, no en volumen)</div>
+    <div style="font-size:11.5px; color:#94a3b8; margin-top:6px;">Cuando el profesor dijo "no son iguales", se refería a que la fracción molar no equivale a ppm en MASA (ppmm). Sí equivale a ppm volumétrico (ppmv). La conversión entre ambas es: <span style="color:#7dd3fc; font-family:var(--font-mono);">ppmm = ppmv × (PM_cont / PM_aire)</span></div>
+  </div>
+
+  <!-- PROBLEMA 1 -->
+  <div class="prob" id="p1">
+    <div class="prob-header" onclick="toggle('p1')">
+      <div class="num n1">1</div>
+      <div class="prob-title">
+        <h3>Conversión de unidades — Plomo (Pb) en escape</h3>
+        <p>ppmm → µg/m³ a otras condiciones · ppmv</p>
+      </div>
+      <span class="arrow" id="arr1">›</span>
+    </div>
+    <div class="prob-body" id="body1">
+      <div class="enunciado">
+        El humo que emite el tubo de escape de un automóvil tiene una concentración de plomo de <strong>0.016 ppmm</strong>. Hallar:<br>
+        a) Concentración de Pb en µg/m³ a condiciones estándar (CE: 25 °C, 1 atm)<br>
+        b) Concentración de Pb en µg/m³ si el gas está a <strong>175 °C y 1.3 atm</strong><br>
+        c) Concentración en <strong>ppmv</strong> a CE<br>
+        <span class="tag t-blue">PM_Pb = 207 g/mol</span><span class="tag t-yellow">PM_aire = 29 g/mol</span>
+      </div>
+      <button class="sol-btn" onclick="toggleSol('s1')">Mostrar solución paso a paso ↓</button>
+      <div class="sol" id="s1">
+        <div class="sol-title">Solución</div>
+        <div class="sub-q">a) µg/m³ a CE (25°C, 1 atm)</div>
+        <div class="step"><div class="step-num">1</div><div>0.016 ppmm = 0.016 g Pb / 10⁶ g aire → ratio masa/masa. Necesitamos volumen de aire a CE.</div></div>
+        <div class="rx">PV = nRTu → 1 atm · V = 0.082 atm·L/mol·K × 298 K × (10⁶ g / 29 g/mol)<br>V = 842,621 L = 842.62 m³ (volumen de 10⁶ g de aire a CE)</div>
+        <div class="step"><div class="step-num">2</div><div>Concentración = 0.016 g Pb / 842.62 m³ × 10⁶ µg/g</div></div>
+        <div class="result">a) [Pb] = 0.016 / 842.62 × 10⁶ = 18.99 ≈ <strong>19.0 µg/m³</strong></div>
+
+        <hr class="sep">
+        <div class="sub-q">b) µg/m³ a 175°C y 1.3 atm</div>
+        <div class="step"><div class="step-num">1</div><div>El ratio ppmm (masa/masa) no cambia con T y P. Solo cambia el volumen del aire.</div></div>
+        <div class="rx">1.3 atm · V = 0.082 × (175+273) K × (10⁶ g / 29 g/mol)<br>V = 972,193 L = 972.19 m³</div>
+        <div class="result">b) [Pb] = 0.016 / 972.19 × 10⁶ = <strong>16.46 µg/m³</strong></div>
+        <div class="warn-note">La concentración DISMINUYE porque el gas se expande a mayor T (aunque sube la presión, el efecto T domina aquí).</div>
+
+        <hr class="sep">
+        <div class="sub-q">c) ppmv a CE</div>
+        <div class="step"><div class="step-num">1</div><div>ppmm es masa/masa, ppmv es volumen/volumen. Para convertir:</div></div>
+        <div class="rx">ppmv = ppmm × (PM_aire / PM_Pb) = 0.016 × (29 / 207)</div>
+        <div class="result">c) ppmv = 0.016 × 0.1401 = <strong>2.24 × 10⁻³ ppmv</strong></div>
+        <div class="warn-note">ppmv ≪ ppmm porque el Pb es mucho más pesado que el aire. El plomo "ocupa menos volumen" para la misma masa.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMA 2 -->
+  <div class="prob" id="p2">
+    <div class="prob-header" onclick="toggle('p2')">
+      <div class="num n2">2</div>
+      <div class="prob-title">
+        <h3>Perfil de temperatura — 3 capas, chimenea en borde de capa</h3>
+        <p>Demostración, altura de detención, temperatura de detención</p>
+      </div>
+      <span class="arrow" id="arr2">›</span>
+    </div>
+    <div class="prob-body" id="body2">
+      <div class="enunciado">
+        Una chimenea de <strong>130 m</strong> emite un penacho a <strong>24 °C</strong>. Los datos de temperatura del perfil atmosférico son:<br><br>
+        <table class="data">
+          <tr><th>z (m)</th><th>T (°C)</th></tr>
+          <tr><td>0</td><td>26.0</td></tr>
+          <tr><td>130</td><td>21.7</td></tr>
+          <tr><td>260</td><td>24.5</td></tr>
+          <tr><td>400</td><td>22.1</td></tr>
+        </table><br>
+        <span class="tag t-yellow">Γ (adiabático seco) = −0.01 °C/m</span><br><br>
+        a) Demuestre matemáticamente si el penacho <strong>asciende o desciende</strong> al salir de la chimenea<br>
+        b) Determine la <strong>altura a la que el penacho se detiene</strong><br>
+        c) Determine la <strong>temperatura</strong> a la que se detiene el penacho<br>
+        d) Analice la estabilidad de cada capa
+      </div>
+      <button class="sol-btn" onclick="toggleSol('s2')">Mostrar solución paso a paso ↓</button>
+      <div class="sol" id="s2">
+        <div class="sol-title">Solución</div>
+
+        <div class="sub-q">Paso previo: ecuaciones de cada capa (regresión lineal T = a + b·z)</div>
+        <div class="step"><div class="step-num">1</div><div><strong>Capa 1 (0–130 m):</strong> con z=0→T=26 y z=130→T=21.7</div></div>
+        <div class="rx">b₁ = (21.7−26)/(130−0) = −4.3/130 = −0.03308 °C/m<br>a₁ = 26 → T_cap1(z) = 26 − 0.03308·z</div>
+        <div class="step"><div class="step-num">2</div><div><strong>Capa 2 (130–260 m):</strong> con z=130→T=21.7 y z=260→T=24.5</div></div>
+        <div class="rx">b₂ = (24.5−21.7)/(260−130) = 2.8/130 = +0.02154 °C/m (INVERSIÓN)<br>a₂ = 21.7 − 0.02154×130 = 18.9 → T_cap2(z) = 18.9 + 0.02154·z</div>
+        <div class="step"><div class="step-num">3</div><div><strong>Capa 3 (260–400 m):</strong> con z=260→T=24.5 y z=400→T=22.1</div></div>
+        <div class="rx">b₃ = (22.1−24.5)/(400−260) = −2.4/140 = −0.01714 °C/m<br>T_cap3(z) = 24.5 − 0.01714·(z−260)</div>
+
+        <hr class="sep">
+        <div class="sub-q">a) ¿El penacho asciende o desciende al salir de la chimenea? (z = 130 m)</div>
+        <div class="step"><div class="step-num">1</div><div>T_penacho(130) = 24 °C · T_ambiente(130) = 21.7 °C</div></div>
+        <div class="rx">T_penacho = 24 °C > T_ambiente = 21.7 °C → el penacho es MÁS CALIENTE que el aire</div>
+        <div class="result">Como el penacho es más caliente (y por tanto menos denso), <strong>asciende</strong>. La diferencia es ΔT = +2.3 °C.</div>
+
+        <hr class="sep">
+        <div class="sub-q">b) Altura a la que el penacho se detiene</div>
+        <div class="step"><div class="step-num">1</div><div>El penacho sale de z=130 m a 24 °C y se enfría a −0.01 °C/m (adiabático seco). Entra a la capa 2 (inversión), donde el ambiente se CALIENTA con la altura.</div></div>
+        <div class="rx">T_penacho(z) = 24 − 0.01·(z − 130)<br>T_ambiente_cap2(z) = 18.9 + 0.02154·z</div>
+        <div class="step"><div class="step-num">2</div><div>El penacho se detiene cuando T_penacho = T_ambiente:</div></div>
+        <div class="rx">24 − 0.01·(z−130) = 18.9 + 0.02154·z<br>24 − 0.01z + 1.3 = 18.9 + 0.02154z<br>6.4 = 0.03154z<br>z = 6.4 / 0.03154 = 202.9 m</div>
+        <div class="result">El penacho se detiene a <strong>z ≈ 202.9 m</strong> (dentro de la capa 2, que va de 130 a 260 m — correcto).</div>
+
+        <hr class="sep">
+        <div class="sub-q">c) Temperatura a la que se detiene</div>
+        <div class="rx">T_det = 24 − 0.01·(202.9 − 130) = 24 − 0.01·72.9 = 24 − 0.729</div>
+        <div class="result">T de detención = <strong>23.27 °C</strong></div>
+        <div class="warn-note">Verificación: T_amb(202.9) = 18.9 + 0.02154×202.9 = 18.9 + 4.37 = 23.27 °C ✓</div>
+
+        <hr class="sep">
+        <div class="sub-q">d) Estabilidad de cada capa (comparar β hallado con Γ = −0.01 °C/m)</div>
+        <div class="grid2">
+          <div class="mini"><strong>Capa 1: β₁ = −0.033 °C/m</strong>β₁ < Γ (más negativo) → INESTABLE (superadiabática)</div>
+          <div class="mini"><strong>Capa 2: β₂ = +0.022 °C/m</strong>β₂ > Γ (positivo = inversión) → ESTABLE (inversión)</div>
+          <div class="mini"><strong>Capa 3: β₃ = −0.017 °C/m</strong>β₃ < Γ → INESTABLE (superadiabática)</div>
+          <div class="mini"><strong>Regla:</strong>β < Γ → inestable · β > Γ → estable · β = Γ → neutro</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMA 3 -->
+  <div class="prob" id="p3">
+    <div class="prob-header" onclick="toggle('p3')">
+      <div class="num n3">3</div>
+      <div class="prob-title">
+        <h3>Polvo Atmosférico Sedimentable (PAS) — Placa Petri</h3>
+        <p>Área de la placa · Concentración · Comparación OMS</p>
+      </div>
+      <span class="arrow" id="arr3">›</span>
+    </div>
+    <div class="prob-body" id="body3">
+      <div class="enunciado">
+        En la azotea del pabellón de Ing. Ambiental se ubica una estación PAS (método Bergerhoff). Los datos obtenidos son:<br><br>
+        <table class="data">
+          <tr><th>Descripción</th><th>Peso (g)</th></tr>
+          <tr><td>Placa Petri sola (inicial)</td><td>35.412</td></tr>
+          <tr><td>Placa + PAS después de estufa (105°C, 24h) + desecador</td><td>36.285</td></tr>
+        </table><br>
+        Periodo de medición: <strong>22 días</strong><br><br>
+        a) Determine el <strong>área de la placa</strong> si el diámetro es de <strong>12.5 cm</strong><br>
+        b) Determine la concentración de PAS en <strong>mg/(cm²·30días)</strong><br>
+        c) ¿Supera la guía internacional de la OMS (5 Tu/km²·30días)?<br>
+        <span class="tag t-yellow">1 Tu = 10⁶ g</span>
+      </div>
+      <button class="sol-btn" onclick="toggleSol('s3')">Mostrar solución paso a paso ↓</button>
+      <div class="sol" id="s3">
+        <div class="sol-title">Solución</div>
+        <div class="sub-q">a) Área de la placa</div>
+        <div class="rx">A = π × D² / 4 = π × (12.5)² / 4 = π × 156.25 / 4</div>
+        <div class="result">A = <strong>122.72 cm²</strong></div>
+
+        <hr class="sep">
+        <div class="sub-q">b) Concentración de PAS</div>
+        <div class="step"><div class="step-num">1</div><div>Masa de PAS recolectada = masa final − masa inicial:</div></div>
+        <div class="rx">m_PAS = (36.285 − 35.412) g = 0.873 g = 873 mg</div>
+        <div class="step"><div class="step-num">2</div><div>Fórmula Bergerhoff: [PAS] = m_PAS / (A × t)</div></div>
+        <div class="rx">[PAS] = 873 mg / (122.72 cm² × 22 días) = 0.3236 mg/(cm²·22días)</div>
+        <div class="step"><div class="step-num">3</div><div>Normalizar a 30 días:</div></div>
+        <div class="rx">[PAS]₃₀ = 0.3236 × (30/22) = 0.4413 mg/(cm²·30días)</div>
+        <div class="result">[PAS] = <strong>0.441 mg/(cm²·30días)</strong></div>
+
+        <hr class="sep">
+        <div class="sub-q">c) ¿Supera la OMS?</div>
+        <div class="step"><div class="step-num">1</div><div>Convertir límite OMS: 5 Tu/km²·30días → mg/(cm²·30días)</div></div>
+        <div class="rx">5 Tu/km² = 5×10⁶ g / 10⁶ m² = 5 g/m² = 5×10³ mg/m²<br>1 m² = 10⁴ cm² → 5×10³ mg / 10⁴ cm² = 0.50 mg/(cm²·30días)</div>
+        <div class="result">0.441 mg/(cm²·30días) < 0.50 mg/(cm²·30días) → <strong>NO supera</strong> el límite OMS.</div>
+        <div class="warn-note">La conversión de Tu/km²·30días a mg/cm²·30días es el paso crítico donde muchos cometen errores. Recuerda: 1 Tu = 10⁶ g = 10⁹ mg.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMA 4 -->
+  <div class="prob" id="p4">
+    <div class="prob-header" onclick="toggle('p4')">
+      <div class="num n4">4</div>
+      <div class="prob-title">
+        <h3>Perfil potencial de viento + Gradiente Vertical Térmico</h3>
+        <p>Regresión lineal en ln-ln · GVT · Completar tablas</p>
+      </div>
+      <span class="arrow" id="arr4">›</span>
+    </div>
+    <div class="prob-body" id="body4">
+      <div class="enunciado">
+        Los siguientes datos fueron obtenidos a las 10 am:<br><br>
+        <div class="grid2">
+          <div>
+            <table class="data">
+              <tr><th colspan="2">Tabla 1 – Viento</th></tr>
+              <tr><th>z (m)</th><th>U (m/s)</th></tr>
+              <tr><td>0.5</td><td>0.22</td></tr>
+              <tr><td>1.2</td><td>1.53</td></tr>
+              <tr><td>2.0</td><td>2.94</td></tr>
+              <tr><td>4.5</td><td>4.21</td></tr>
+            </table>
+          </div>
+          <div>
+            <table class="data">
+              <tr><th colspan="2">Tabla 2 – Temperatura</th></tr>
+              <tr><th>H (m)</th><th>T (°C)</th></tr>
+              <tr><td>0.2</td><td>28.4</td></tr>
+              <tr><td>0.9</td><td>25.7</td></tr>
+              <tr><td>1.8</td><td>22.1</td></tr>
+              <tr><td>2.6</td><td>24.3</td></tr>
+            </table>
+          </div>
+        </div><br>
+        a) Ecuación de perfil potencial de viento (h_ref = 1.2 m)<br>
+        b) GVT para las mediciones dadas; ¿condiciones estables o inestables?<br>
+        c) Completar las tablas: T a z = 3.0 m y U a z = 3.5 m
+      </div>
+      <button class="sol-btn" onclick="toggleSol('s4')">Mostrar solución paso a paso ↓</button>
+      <div class="sol" id="s4">
+        <div class="sol-title">Solución</div>
+        <div class="sub-q">a) Perfil potencial: U_z = U₀·(z/h)^m</div>
+        <div class="step"><div class="step-num">1</div><div>Linealizar: ln(U_z) = ln(U₀) + m·ln(z/h). Con h=1.2 m, calcular ln(z/h) y ln(U) para cada punto:</div></div>
+        <div class="rx">z=0.5: ln(0.5/1.2)=ln(0.417)=−0.875  |  ln(0.22)=−1.514<br>z=1.2: ln(1.0)=0  |  ln(1.53)=0.425<br>z=2.0: ln(1.67)=0.511  |  ln(2.94)=1.079<br>z=4.5: ln(3.75)=1.322  |  ln(4.21)=1.437</div>
+        <div class="step"><div class="step-num">2</div><div>Regresión lineal (calculadora): y = a + b·x → a = ln(U₀), b = m</div></div>
+        <div class="rx">Usando los 4 pares: a ≈ 0.427 | b ≈ 0.742<br>ln(U₀) = 0.427 → U₀ = e^0.427 = 1.533 m/s  (U a h=1.2m)<br>m = 0.742</div>
+        <div class="result">Ecuación: <strong>U_z = 1.533 · (z/1.2)^0.742</strong></div>
+
+        <hr class="sep">
+        <div class="sub-q">b) GVT — Gradiente Vertical Térmico</div>
+        <div class="step"><div class="step-num">1</div><div>T = A + B·z. Regresión lineal con los datos de temperatura:</div></div>
+        <div class="rx">H: 0.2 | 0.9 | 1.8 | 2.6<br>T:28.4 |25.7 |22.1 |24.3<br>Regresión: T = 30.14 − 3.86·z  →  β = −3.86 °C/m</div>
+        <div class="warn-note">Ojo: la temperatura sube entre H=1.8 y H=2.6, lo que hace que la regresión "suavice" la inversión local. El GVT hallado es un promedio de la capa.</div>
+        <div class="step"><div class="step-num">2</div><div>Comparar β hallado con Γ = −0.01 °C/m:</div></div>
+        <div class="rx">β = −3.86 °C/m ≪ Γ = −0.01 °C/m<br>β < Γ → condiciones INESTABLES</div>
+        <div class="result">GVT = −3.86 °C/m → condición <strong>inestable (superadiabática)</strong></div>
+
+        <hr class="sep">
+        <div class="sub-q">c) Completar tablas</div>
+        <div class="rx">T(z=3.0) = 30.14 − 3.86×3.0 = 30.14 − 11.58 = <strong>18.56 °C</strong><br>U(z=3.5) = 1.533 × (3.5/1.2)^0.742 = 1.533 × (2.917)^0.742 = 1.533 × 2.316 = <strong>3.55 m/s</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMA 5 -->
+  <div class="prob" id="p5">
+    <div class="prob-header" onclick="toggle('p5')">
+      <div class="num n5">5</div>
+      <div class="prob-title">
+        <h3>CO a 1200 msnm — fracción molar → ppmv, ppmm, µg/m³</h3>
+        <p>El punto del profesor: fracción molar ≠ ppmm/10⁶</p>
+      </div>
+      <span class="arrow" id="arr5">›</span>
+    </div>
+    <div class="prob-body" id="body5">
+      <div class="enunciado">
+        En un monitoreo a <strong>1200 msnm</strong> se extrae una muestra de CO. La fracción molar del CO en la mezcla es <strong>y_CO = 6.2 × 10⁻⁵ mol CO / mol mezcla</strong>. Considere condiciones estándar para la mezcla total (CE: 25 °C, 1 atm).<br><br>
+        a) Determine la concentración en <strong>ppmv</strong><br>
+        b) Determine la concentración en <strong>ppmm</strong><br>
+        c) Determine la concentración en <strong>µg/m³</strong> a CE<br>
+        d) ¿Supera el ECA para CO de 10,000 µg/m³ (8 horas)?<br>
+        <span class="tag t-blue">PM_CO = 28 g/mol</span><span class="tag t-yellow">PM_aire = 29 g/mol</span>
+      </div>
+      <button class="sol-btn" onclick="toggleSol('s5')">Mostrar solución paso a paso ↓</button>
+      <div class="sol" id="s5">
+        <div class="sol-title">Solución</div>
+        <div class="sub-q">a) ppmv</div>
+        <div class="step"><div class="step-num">1</div><div>Para gas ideal: fracción molar = fracción volumétrica. Por lo tanto:</div></div>
+        <div class="rx">ppmv = y_CO × 10⁶ = 6.2 × 10⁻⁵ × 10⁶</div>
+        <div class="result">a) ppmv = <strong>62 ppmv</strong> (aquí SÍ, y × 10⁶ = ppmv)</div>
+
+        <hr class="sep">
+        <div class="sub-q">b) ppmm (aquí el punto del profesor: y ≠ ppmm/10⁶)</div>
+        <div class="step"><div class="step-num">1</div><div>ppmm es masa/masa. Para convertir de ppmv a ppmm:</div></div>
+        <div class="rx">ppmm = ppmv × (PM_CO / PM_aire) = 62 × (28 / 29)</div>
+        <div class="result">b) ppmm = 62 × 0.9655 = <strong>59.86 ppmm</strong></div>
+        <div class="warn-note">Si el profesor pregunta: ¿y_CO = ppmm/10⁶? Respuesta: NO. y_CO = 6.2×10⁻⁵ pero ppmm/10⁶ = 59.86/10⁶ = 5.986×10⁻⁵ ≠ y_CO. Solo ppmv/10⁶ = y_CO.</div>
+
+        <hr class="sep">
+        <div class="sub-q">c) µg/m³ a CE (método PV=nRTu)</div>
+        <div class="step"><div class="step-num">1</div><div>Volumen de 10⁶ g de aire a CE:</div></div>
+        <div class="rx">1 atm · V = 0.082 × 298 K × (10⁶ g / 29 g/mol) → V = 842,621 L = 842.62 m³</div>
+        <div class="step"><div class="step-num">2</div><div>Masa de CO en 10⁶ g de mezcla (usando ppmm):</div></div>
+        <div class="rx">m_CO = 59.86 × 10⁻⁶ × 10⁶ g = 59.86 g de CO<br>[CO] = 59.86 g / 842.62 m³ × 10⁶ µg/g</div>
+        <div class="result">c) [CO] = <strong>71,040 µg/m³</strong></div>
+        <div class="warn-note">Alternativa rápida con fórmula del libro: µg/m³ = (PM×1000/24.5)×ppmv = (28000/24.5)×62 = 70,857 µg/m³ ≈ igual (diferencia por decimales).</div>
+
+        <hr class="sep">
+        <div class="sub-q">d) Comparación con ECA</div>
+        <div class="rx">71,040 µg/m³ >> 10,000 µg/m³ (ECA 8h)</div>
+        <div class="result">Sí <strong>supera ampliamente</strong> el ECA. Concentración 7× mayor al límite.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMA 6 -->
+  <div class="prob" id="p6">
+    <div class="prob-header" onclick="toggle('p6')">
+      <div class="num n6">6</div>
+      <div class="prob-title">
+        <h3>Tren de muestreo — estandarización de flujo y concentración</h3>
+        <p>Equipos de referencia/equivalencia · PV=nRT entre condiciones</p>
+      </div>
+      <span class="arrow" id="arr6">›</span>
+    </div>
+    <div class="prob-body" id="body6">
+      <div class="enunciado">
+        Usando un tren de muestreo (equipo equivalente) para medir SO₂, se determinó que la masa de este gas durante 1 hora de medición fue de <strong>0.3142 mg</strong>. El tren operó con un flujo de <strong>18.5 L/min</strong>, a una temperatura de <strong>23.4 °C</strong> y una presión de <strong>1.05 atm</strong>.<br><br>
+        a) Obtenga la concentración de SO₂ estandarizada a CE (25 °C, 1 atm) en µg/m³<br>
+        b) ¿Supera el ECA para SO₂ de 20 µg/m³ (24 horas)?<br>
+        c) Indique a qué categoría de equipo pertenece el tren de muestreo y sus características<br>
+        <span class="tag t-blue">PM_SO₂ = 64 g/mol</span>
+      </div>
+      <button class="sol-btn" onclick="toggleSol('s6')">Mostrar solución paso a paso ↓</button>
+      <div class="sol" id="s6">
+        <div class="sol-title">Solución</div>
+        <div class="sub-q">a) Concentración a CE</div>
+        <div class="step"><div class="step-num">1</div><div>Volumen real muestreado en 1 hora:</div></div>
+        <div class="rx">V₁ = Q × t = 18.5 L/min × 1h × 60 min/h = 1,110 L</div>
+        <div class="step"><div class="step-num">2</div><div>Estandarizar a CE (P₂=1 atm, T₂=298 K) con ley gas ideal:</div></div>
+        <div class="rx">P₁·V₁/T₁ = P₂·V₂/T₂<br>(1.05 atm × 1110 L) / (23.4+273) K = (1 atm × V₂) / 298 K<br>V₂ = (1.05 × 1110 × 298) / 296.4 = 1,172.4 L = 1.1724 m³</div>
+        <div class="step"><div class="step-num">3</div><div>Concentración estandarizada:</div></div>
+        <div class="rx">[SO₂] = m / V_est = 0.3142 mg × 10³ µg/mg / 1.1724 m³</div>
+        <div class="result">a) [SO₂] = <strong>268.0 µg/m³</strong></div>
+
+        <hr class="sep">
+        <div class="sub-q">b) Comparación con ECA</div>
+        <div class="rx">268.0 µg/m³ >> 20 µg/m³ (ECA SO₂, 24h)</div>
+        <div class="result">Sí <strong>supera el ECA</strong>. La concentración medida es más de 13× el límite.</div>
+
+        <hr class="sep">
+        <div class="sub-q">c) Clasificación del tren de muestreo</div>
+        <div class="grid2">
+          <div class="mini"><strong>Equipos de Referencia</strong>Autorizados por normativa vigente. Mayor precisión. Ejemplos: analizadores automáticos (CO, SO₂, NOx), muestreadores de alto y bajo volumen.</div>
+          <div class="mini" style="border-left: 3px solid #f97316;"><strong>Equipos Equivalentes ← AQUÍ</strong>El tren de muestreo es equipo EQUIVALENTE. Puede reemplazar a los de referencia. Precisión media. También: equipos automáticos PM10, PM2.5, PM1.</div>
+          <div class="mini"><strong>Equipos Alternativos</strong>No recomendados para uso público. Deben contrastarse con equipos de referencia. Ejemplos: modelos de dispersión, equipos de bajo costo, sensores remotos.</div>
+          <div class="mini"><strong>¿Cómo funciona el tren?</strong>Bombea el gas a través de una solución absorbente o filtro a flujo conocido. Luego se analiza la masa capturada. Requiere estandarización P, T a CE.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; font-size: 11.5px; color: var(--color-text-secondary); margin-top: 0.5rem;">
+    <strong style="color: var(--color-text-primary); font-weight: 500;">Fórmulas clave del curso:</strong><br>
+    ppmv = y × 10⁶ &nbsp;|&nbsp; ppmm = ppmv × PM_cont/PM_aire &nbsp;|&nbsp; µg/m³ = PM×1000/24.5 × ppmv (CE) &nbsp;|&nbsp; P₁V₁/T₁ = P₂V₂/T₂ &nbsp;|&nbsp; [PAS] = Δm/(A×t) &nbsp;|&nbsp; E = FE × A × (1−CE)
+  </div>
+</div>
+
+<script>
+function toggle(id) {
+  const body = document.getElementById('body' + id.replace('p',''));
+  const arr = document.getElementById('arr' + id.replace('p',''));
+  const isOpen = body.classList.contains('visible');
+  body.classList.toggle('visible', !isOpen);
+  arr.classList.toggle('open', !isOpen);
+}
+function toggleSol(id) {
+  const sol = document.getElementById(id);
+  const isOpen = sol.classList.contains('visible');
+  sol.classList.toggle('visible', !isOpen);
+  const btn = sol.previousElementSibling;
+  btn.textContent = isOpen ? 'Mostrar solución paso a paso ↓' : 'Ocultar solución ↑';
+}
+</script>
