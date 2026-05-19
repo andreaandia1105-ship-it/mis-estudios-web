@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas — Energía Solar Fotovoltaica</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f1f5f9;font-family:'Source Sans 3',sans-serif;font-size:12px;padding:12px}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px}
+.cv-title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:3px}
+.cv-title p{font-size:11px;color:#94a3b8;margin-bottom:7px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(125,211,252,.12);color:#7dd3fc;border:0.5px solid #7dd3fc55}
+.sec{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.s-bl{background:#1e3a5f;color:#93c5fd}.s-gr{background:#14532d;color:#86efac}.s-am{background:#422006;color:#fef08a}.s-pu{background:#2e1065;color:#c4b5fd}.s-te{background:#042f2e;color:#5eead4}.s-re{background:#450a0a;color:#fca5a5}
+.blk{background:#fff;border:0.5px solid #cbd5e1;border-radius:11px;padding:12px 13px;min-width:0}
+.s2{grid-column:span 2}.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;padding:2px 8px;border-radius:6px;display:inline-block;margin-bottom:7px}
+.bh-bl{background:#1e3a5f;color:#93c5fd}.bh-gr{background:#14532d;color:#86efac}.bh-am{background:#422006;color:#fef08a}.bh-pu{background:#2e1065;color:#c4b5fd}.bh-te{background:#042f2e;color:#5eead4}.bh-gy{background:#1e293b;color:#94a3b8}.bh-or{background:#431407;color:#fed7aa}.bh-re{background:#450a0a;color:#fca5a5}
+.def{border-left:3px solid;padding:6px 10px;border-radius:0 7px 7px 0;font-size:11.5px;background:#f8fafc;margin-bottom:7px;line-height:1.5}
+.def-bl{border-color:#3b82f6}.def-gr{border-color:#22c55e}.def-am{border-color:#f59e0b}.def-pu{border-color:#a855f7}.def-te{border-color:#14b8a6}.def-re{border-color:#ef4444}
+.it{display:flex;gap:6px;font-size:11.5px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.d-bl{background:#3b82f6}.d-gr{background:#22c55e}.d-am{background:#f59e0b}.d-pu{background:#a855f7}.d-te{background:#14b8a6}.d-re{background:#ef4444}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:6px 10px;border-radius:7px;text-align:center;line-height:1.6;margin:5px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11px;color:#7c2d12;padding:6px 9px;margin-top:7px;line-height:1.4}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11px;color:#713f12;padding:7px 9px;margin-top:7px;line-height:1.4}
+.mn{background:#f8fafc;border-radius:8px;padding:7px 9px;font-size:11px;line-height:1.4}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:5px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:5px}
+.five{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:5px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin:5px 0}
+.fb-f{background:#f8fafc;padding:4px 8px;border-radius:6px;font-size:10.5px;line-height:1.4}
+.fa-f{color:#64748b;font-size:14px}
+.dh{border:none;border-top:0.5px solid #e2e8f0;margin:6px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:#f8fafc;padding:5px 7px;border-bottom:0.5px solid #e2e8f0;text-align:left;font-family:'Oswald',sans-serif;font-size:11px}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid #e2e8f0;vertical-align:top;line-height:1.4}
+.nb{width:19px;height:19px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin:0 auto 4px}
+.nb-b{background:#1e3a5f;color:#93c5fd}.nb-g{background:#14532d;color:#86efac}.nb-a{background:#422006;color:#fef08a}
+.cv-foot{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 16px;display:flex;gap:10px;flex-wrap:wrap;font-size:11px}
+.qcard{margin-bottom:16px;padding-bottom:14px;border-bottom:0.5px solid #e2e8f0}
+.qnum{font-size:10.5px;color:#64748b;margin-bottom:3px;font-family:'Oswald',sans-serif}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;line-height:1.5;color:#0f172a}
+.qopts{display:flex;flex-direction:column;gap:4px}
+.qbtn{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:7px 11px;font-size:11.5px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:#1e293b;font-family:'Source Sans 3',sans-serif;line-height:1.4}
+.qbtn:hover:not(:disabled){background:#f1f5f9}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed}
+.qfb{display:none;border-radius:0 8px 8px 0;padding:7px 10px;font-size:11px;margin-top:7px;line-height:1.5}
+.qfb.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfb.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.qpw{width:100%;background:#e2e8f0;border-radius:20px;height:10px;margin:8px 0}
+.qpf{height:100%;border-radius:20px;background:#16a34a;transition:width .3s}
+.res-panel{border-radius:10px;padding:12px 16px;margin-top:12px;font-size:12.5px;line-height:1.5;display:none}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<div class="cv-title">
+  <h1>⚡ Energía Solar Fotovoltaica — Canvas de Resumen Universitario</h1>
+  <p>Compendio de Innovaciones Tecnológicas de Energías Renovables · Cap. 3 | PhD. José Luis Calle &amp; Jean Marco Gozme</p>
+  <div class="tags">
+    <span class="tag">Radiación Solar</span><span class="tag">Efecto Fotovoltaico</span><span class="tag">Células &amp; Paneles</span><span class="tag">Curva V-I</span><span class="tag">Baterías &amp; Reguladores</span><span class="tag">Método Mes Peor</span><span class="tag">Dimensionamiento</span><span class="tag">Innovaciones Emergentes</span><span class="tag">Latinoamérica &amp; Perú</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1 -->
+<div class="sec s-bl">☀️ SECCIÓN 1 — RADIACIÓN SOLAR Y FUNDAMENTOS</div>
+
+<div class="blk">
+  <span class="bh bh-bl">El Sol y la Constante Solar</span>
+  <div class="def def-bl">El Sol es un reactor nuclear de hidrógeno (masa 330,000× Tierra, diámetro 1.4 M km) donde la fusión 2H→He libera ~3.89×10²⁶ W. La <strong>constante solar</strong> (1,353 W/m²) es la energía recibida en el límite exterior de la atmósfera. Tras la atenuación atmosférica llegan ~900 W/m² a la superficie.</div>
+  <div class="it"><span class="dot d-bl"></span><span>La energía que llega es 10,000× mayor que todas las fuentes energéticas humanas combinadas.</span></div>
+  <div class="it"><span class="dot d-bl"></span><span>La radiación varía con hora, estación, latitud y condiciones climáticas — la principal dificultad de explotación.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir constante solar (1,353 W/m² fuera de la atmósfera) con irradiación en superficie (~900 W/m²) o condición STC (1,000 W/m² para medir paneles). Son tres valores distintos.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la constante solar no es la irradiación efectiva que recibe un panel en Lima, Perú, e indique qué factores la reducen.</div>
+</div>
+
+<div class="blk">
+  <span class="bh bh-bl">Tipos de Energía Solar</span>
+  <div class="three">
+    <div class="mn" style="border-top:3px solid #3b82f6"><strong>Fotovoltaica</strong><br><span style="color:#64748b">Luz → electricidad mediante células semiconductoras</span></div>
+    <div class="mn" style="border-top:3px solid #f59e0b"><strong>Térmica</strong><br><span style="color:#64748b">Radiación → calor (colectores) o vapor → electricidad</span></div>
+    <div class="mn" style="border-top:3px solid #22c55e"><strong>Pasiva</strong><br><span style="color:#64748b">Diseño arquitectónico bioclimático para confort térmico</span></div>
+  </div>
+  <div class="dh"></div>
+  <span class="bh bh-gr">Potencial Solar en Perú</span>
+  <div class="def def-gr">Perú tiene 1,000–4,000 h/sol al año. La sierra sur y altiplano (Arequipa, Puno) alcanzan 3,000–4,000 h/año — el mayor potencial. Lima tiene baja irradiación por la garúa costera. La selva tiene alta nubosidad.</div>
+  <div class="it"><span class="dot d-gr"></span><span><strong>1,000–2,000 h/año:</strong> Selva amazónica y costa central (Lima)</span></div>
+  <div class="it"><span class="dot d-gr"></span><span><strong>2,000–3,000 h/año:</strong> Costa norte (Piura, Tumbes) y sierra central</span></div>
+  <div class="it"><span class="dot d-gr"></span><span><strong>3,000–4,000 h/año:</strong> Sierra sur y altiplano → mayor potencial FV del país</span></div>
+</div>
+
+<div class="blk">
+  <span class="bh bh-am">Variabilidad y Aprovechamiento</span>
+  <div class="def def-am">La variabilidad temporal y espacial de la radiación es el reto principal. El diseño debe contemplar el peor caso para garantizar suministro continuo.</div>
+  <div class="flow">
+    <div class="fb-f">Latitud/estación</div><div class="fa-f">→</div><div class="fb-f">Ángulo incidencia</div><div class="fa-f">→</div><div class="fb-f">W/m² disponibles</div><div class="fa-f">→</div><div class="fb-f">kWh generados</div>
+  </div>
+  <div class="it"><span class="dot d-am"></span><span>Mediodía solar despejado ≈ <strong>1,000 W/m²</strong></span></div>
+  <div class="it"><span class="dot d-am"></span><span>Cielo cubierto ≈ solo <strong>100 W/m²</strong> (10 veces menos)</span></div>
+  <div class="it"><span class="dot d-am"></span><span>Evitar aparatos calefactores resistivos (planchas, cafeteras) en sistemas autónomos.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la energía solar es difícil de aprovechar pese a superar 10,000× la energía que genera la humanidad? Mencione dos obstáculos estructurales.</div>
+</div>
+
+<!-- SECCIÓN 2 -->
+<div class="sec s-gr">⚡ SECCIÓN 2 — EFECTO FOTOVOLTAICO Y CÉLULAS SOLARES</div>
+
+<div class="blk s2">
+  <span class="bh bh-gr">Efecto Fotovoltaico y Célula Solar</span>
+  <div class="def def-gr">La conversión fotovoltaica transforma energía lumínica en eléctrica: los fotones liberan electrones en el semiconductor, generando corriente entre las dos caras de la célula. Material base: silicio (monocristalino, policristalino o amorfo).</div>
+  <div class="two">
+    <div>
+      <div class="it"><span class="dot d-gr"></span><span><strong>Historia:</strong> Desarrollado en los 50 para programas espaciales. El descenso de costos lo expandió a aplicaciones terrestres.</span></div>
+      <div class="it"><span class="dot d-gr"></span><span><strong>Principio clave:</strong> Al variar la iluminación, la <em>corriente varía proporcionalmente</em> pero la <em>tensión permanece casi constante</em>.</span></div>
+      <div class="it"><span class="dot d-gr"></span><span><strong>Vatios-pico (Wp):</strong> Potencia bajo Condiciones Estándar: 1,000 W/m² + 25°C + AM 1.5.</span></div>
+      <div class="it"><span class="dot d-gr"></span><span><strong>Ventajas FV:</strong> Sencillez, modularidad, fiabilidad. Ideal para zonas alejadas de la red.</span></div>
+    </div>
+    <div>
+      <span class="bh bh-am" style="margin-bottom:5px;display:inline-block">Tipos de Silicio</span>
+      <div class="mn" style="border-left:3px solid #3b82f6;margin-bottom:4px"><strong>Monocristalino</strong> — Mayor eficiencia (20–22%), mayor costo. Estructura cristalina perfecta.</div>
+      <div class="mn" style="border-left:3px solid #22c55e;margin-bottom:4px"><strong>Policristalino</strong> — Eficiencia intermedia (15–18%), más económico. Múltiples cristales.</div>
+      <div class="mn" style="border-left:3px solid #94a3b8"><strong>Amorfo</strong> — Menor eficiencia (6–10%), muy flexible. Sin cristales: calculadoras, relojes.</div>
+      <div class="warn" style="margin-top:6px">⚠️ La temperatura REDUCE la eficiencia (~-0.4%/°C sobre 25°C). Más temperatura ≠ más potencia. La refrigeración (canales de agua, microesferas de sílice) mejora el rendimiento.</div>
+    </div>
+  </div>
+</div>
+
+<div class="blk">
+  <span class="bh bh-pu">Curva V-I y Parámetros del Panel</span>
+  <div class="def def-pu">La curva tensión-intensidad (V-I) describe el comportamiento eléctrico completo del panel y define los parámetros de selección. Se mide bajo condiciones STC.</div>
+  <div class="it"><span class="dot d-pu"></span><span><strong>Isc</strong> (V=0): corriente máxima. Sube con la radiación.</span></div>
+  <div class="it"><span class="dot d-pu"></span><span><strong>Voc</strong> (I=0): tensión máxima. Relativamente estable ante cambios de radiación.</span></div>
+  <div class="it"><span class="dot d-pu"></span><span><strong>Pmax (Wp):</strong> punto de máxima potencia en (Vpmax, Ipmax).</span></div>
+  <div class="rx">Pmax = Vpmax × Ipmax [W]<br>STC: 1 kW/m² | 25°C | AM 1.5<br>36 células serie → 18 V → carga baterías 12V</div>
+  <div class="exam">🎯 EXAMEN: Explique qué ocurre con Isc y Voc cuando la irradiación disminuye a la mitad, y qué implica para el punto de máxima potencia del panel.</div>
+</div>
+
+<!-- SECCIÓN 3 -->
+<div class="sec s-am">🔧 SECCIÓN 3 — ELEMENTOS DEL SISTEMA FOTOVOLTAICO</div>
+
+<div class="blk">
+  <span class="bh bh-am">Orientación e Inclinación</span>
+  <div class="def def-am">La posición del panel se define por orientación e inclinación. Maximizar la captación anual depende de la latitud y el perfil de consumo.</div>
+  <div class="it"><span class="dot d-am"></span><span><strong>Hemisferio sur (Perú):</strong> orientar al NORTE (hemisferio norte: al Sur).</span></div>
+  <div class="it"><span class="dot d-am"></span><span><strong>Consumo uniforme:</strong> inclinación = latitud del lugar (~12° para Lima).</span></div>
+  <div class="it"><span class="dot d-am"></span><span><strong>Consumo estival (riego):</strong> dos posiciones: verano 12°, invierno 30°.</span></div>
+  <div class="it"><span class="dot d-am"></span><span><strong>Seguimiento solar:</strong> sistema que rota el panel → máxima captación anual.</span></div>
+  <div class="warn">⚠️ En Perú (hemisferio sur), los paneles van al NORTE. Un error de orientación puede reducir la producción hasta un 30–40% anual.</div>
+</div>
+
+<div class="blk">
+  <span class="bh bh-te">Subsistemas del Sistema FV</span>
+  <div class="flow">
+    <div class="fb-f" style="border-top:2px solid #14b8a6">Paneles<br>Generación</div><div class="fa-f">→</div>
+    <div class="fb-f" style="border-top:2px solid #f59e0b">Regulador<br>Control</div><div class="fa-f">→</div>
+    <div class="fb-f" style="border-top:2px solid #3b82f6">Baterías<br>Acumulación</div><div class="fa-f">→</div>
+    <div class="fb-f" style="border-top:2px solid #a855f7">Inversor<br>CC→CA</div><div class="fa-f">→</div>
+    <div class="fb-f" style="border-top:2px solid #22c55e">Cargas<br>DC y AC</div>
+  </div>
+  <div class="dh"></div>
+  <div class="it"><span class="dot d-te"></span><span><strong>Regulador:</strong> Impide sobrecarga y sobredescarga de baterías. Definido por tensión nominal e intensidad máxima.</span></div>
+  <div class="it"><span class="dot d-pu"></span><span><strong>Inversor:</strong> Convierte CC en CA. Eficiencia ≈85%. No incluido en instalaciones conectadas a red.</span></div>
+  <div class="it"><span class="dot d-bl"></span><span><strong>Cableado:</strong> Bajo Reglamento de Baja Tensión. Incluir interruptores, fusibles, puesta a tierra.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué las instalaciones FV conectadas a la red NO incluyen baterías ni reguladores, y qué ocurre con el excedente de energía generada?</div>
+</div>
+
+<div class="blk">
+  <span class="bh bh-bl">Baterías — Parámetros Clave</span>
+  <div class="def def-bl">Las baterías son el componente más crítico en sistemas autónomos. Su mal manejo es la principal causa de fallas en electrificación rural FV.</div>
+  <div class="it"><span class="dot d-bl"></span><span><strong>Capacidad (Ah):</strong> 130 Ah → entrega 13 A durante 10 h. Para FV se referencia a 100 h de descarga.</span></div>
+  <div class="it"><span class="dot d-bl"></span><span><strong>Profundidad de descarga (Pf):</strong> % extraído. Rural: máximo 70%. Sobredescarga daña la batería permanentemente.</span></div>
+  <div class="it"><span class="dot d-bl"></span><span><strong>Autodescarga:</strong> La batería se descarga sola sin estar en uso.</span></div>
+  <div class="it"><span class="dot d-bl"></span><span><strong>Tensiones nominales:</strong> 2, 6, 12 ó 24 V. Instalaciones rurales: 12 o 24 V.</span></div>
+  <div class="warn">⚠️ SOBREDESCARGA: Extraer más del 70–80% repetidamente destruye la batería. El regulador existe principalmente para prevenir esto.</div>
+</div>
+
+<!-- SECCIÓN 4 -->
+<div class="sec s-pu">📐 SECCIÓN 4 — DIMENSIONAMIENTO: MÉTODO DEL MES PEOR</div>
+
+<div class="blk s3">
+  <span class="bh bh-pu">Flujo de Cálculo Completo — Método del Mes Peor</span>
+  <div class="def def-pu">El método del mes peor selecciona el período más desfavorable (mínima radiación + máximo consumo). Si el sistema funciona ese mes, funcionará todo el año. Incluye días de autonomía para cubrir períodos sin sol.</div>
+  <div class="five">
+    <div class="mn" style="border-top:3px solid #a855f7;text-align:center">
+      <span class="nb nb-b">1</span>
+      <strong style="font-size:11px;display:block">Consumo CC</strong>
+      <div class="rx" style="font-size:10px;margin-top:4px">Ccc = Σ(P·N·H)<br>W·h/día</div>
+    </div>
+    <div class="mn" style="border-top:3px solid #a855f7;text-align:center">
+      <span class="nb nb-b">2</span>
+      <strong style="font-size:11px;display:block">Consumo CA</strong>
+      <div class="rx" style="font-size:10px;margin-top:4px">Cca = Σ(P·N·H)<br>W·h/día</div>
+    </div>
+    <div class="mn" style="border-top:3px solid #3b82f6;text-align:center">
+      <span class="nb nb-b">3</span>
+      <strong style="font-size:11px;display:block">Consumo Total</strong>
+      <div class="rx" style="font-size:10px;margin-top:4px">Cc=(100+Eb)·Ccc/100<br>Ca=(100+Eb)·Cca/100<br>CT = Cc + Ca</div>
+      <span style="font-size:10px;color:#64748b">Eb=15% | ηinv≈85%</span>
+    </div>
+    <div class="mn" style="border-top:3px solid #f59e0b;text-align:center">
+      <span class="nb nb-a">4</span>
+      <strong style="font-size:11px;display:block">Nº Paneles</strong>
+      <div class="rx" style="font-size:10px;margin-top:4px">Pmax=CT/Iim<br>Np=1.1·(Pmax/Ppanel)</div>
+      <span style="font-size:10px;color:#64748b">Entero superior</span>
+    </div>
+    <div class="mn" style="border-top:3px solid #22c55e;text-align:center">
+      <span class="nb nb-g">5</span>
+      <strong style="font-size:11px;display:block">Nº Baterías</strong>
+      <div class="rx" style="font-size:10px;margin-top:4px">CB=110·CT·D/(V·Pf)<br>NB=CB/CBi</div>
+      <span style="font-size:10px;color:#64748b">D=días autonomía</span>
+    </div>
+  </div>
+  <div class="two" style="margin-top:10px">
+    <div>
+      <span class="bh bh-am" style="display:inline-block;margin-bottom:5px">Ejemplo resuelto — Vivienda unifamiliar</span>
+      <div class="it"><span class="dot d-am"></span><span>Ccc=840 W·h/día | Cca=635 W·h/día</span></div>
+      <div class="it"><span class="dot d-am"></span><span>Cc = 115/100 × 840 = <strong>966 W·h/día</strong></span></div>
+      <div class="it"><span class="dot d-am"></span><span>Ca = 115/100 × 635 = <strong>730.25 W·h/día</strong></span></div>
+      <div class="it"><span class="dot d-am"></span><span>CT = 966 + 730.25 = <strong>1,696.25 W·h/día</strong></span></div>
+      <div class="it"><span class="dot d-am"></span><span>Mes peor: Noviembre Prov.C → Iim=3.12 kWh/m²·día</span></div>
+      <div class="it"><span class="dot d-am"></span><span>Pmax = 1696.25/3.12 = <strong>543.35 Wp</strong></span></div>
+      <div class="it"><span class="dot d-am"></span><span>Np = 1.1×(543.35/90) = 6.6 → <strong>7 paneles de 90 Wp</strong></span></div>
+    </div>
+    <div>
+      <span class="bh bh-gr" style="display:inline-block;margin-bottom:5px">Baterías y Costo Total</span>
+      <div class="it"><span class="dot d-gr"></span><span>CB = (110×1696.25×3)/(12×70) = <strong>665.99 Ah</strong></span></div>
+      <div class="it"><span class="dot d-gr"></span><span>NB = 665.99/90 = 7.4 → <strong>8 baterías de 90 Ah</strong></span></div>
+      <div class="it"><span class="dot d-gr"></span><span>Inversor recomendado: <strong>500 W</strong></span></div>
+      <div class="dh"></div>
+      <div class="it"><span class="dot d-gr"></span><span>Paneles: 7×90×6 = 3,780 €</span></div>
+      <div class="it"><span class="dot d-gr"></span><span>Inversor: 500×1 = 500 €</span></div>
+      <div class="it"><span class="dot d-gr"></span><span>Baterías: 8×90×1.5 = 1,080 €</span></div>
+      <div class="it"><span class="dot d-gr"></span><span><strong>TOTAL ≈ 5,360 € + IGV + estructura</strong></span></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ FACTOR 1.1: El número de paneles siempre se multiplica por 1.1 para compensar pérdidas reales. Np y NB siempre se redondean al entero superior.</div>
+  <div class="exam">🎯 EXAMEN: Con CT=2,000 W·h/día e Iim=4.0 kWh/m²·día para el mes peor, calcule Np con paneles de 100 Wp y justifique el uso del factor 1.1.</div>
+</div>
+
+<!-- SECCIÓN 5 -->
+<div class="sec s-te">🚀 SECCIÓN 5 — INNOVACIONES TECNOLÓGICAS</div>
+
+<div class="blk">
+  <span class="bh bh-te">Récords de Eficiencia</span>
+  <div class="it"><span class="dot d-te"></span><span><strong>NREL 2020:</strong> 6 uniones III-V → <strong>47.1%</strong> concentrada, 39.2% sol normal. Usada en satélites.</span></div>
+  <div class="it"><span class="dot d-te"></span><span><strong>LONGi Solar:</strong> Módulo monocristalino comercial → <strong>22.38%</strong> récord mundial.</span></div>
+  <div class="it"><span class="dot d-te"></span><span><strong>Fraunhofer ISE:</strong> Si + III-V → <strong>22.3%</strong>. Capas III-V cultivadas sobre silicio.</span></div>
+  <div class="it"><span class="dot d-te"></span><span><strong>Perovskita:</strong> >22% en lab. Imprimible, capa fina, potencialmente barata. Reto: durabilidad.</span></div>
+  <div class="it"><span class="dot d-te"></span><span><strong>Óxido de titanio lt-DSSC:</strong> 8.75% — récord de la tecnología (U. Rioja + U. Alicante).</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la célula de 47.1% del NREL no se usa en plantas terrestres? Explique la relación costo-eficiencia por aplicación.</div>
+</div>
+
+<div class="blk">
+  <span class="bh bh-te">Innovaciones de Materiales y Sistema</span>
+  <div class="three">
+    <div class="mn" style="border-left:3px solid #14b8a6"><strong>Células orgánicas</strong><br><span style="color:#64748b">Flexibles, imprimibles, bajo costo. +10% eficiencia (U. Málaga). Reto: resistencia al O₂/agua.</span></div>
+    <div class="mn" style="border-left:3px solid #a855f7"><strong>Puntos cuánticos</strong><br><span style="color:#64748b">Nanoestructuras: +25% eficiencia vs anteriores. Flexibles e imprimibles (U. Queensland).</span></div>
+    <div class="mn" style="border-left:3px solid #3b82f6"><strong>Grafeno</strong><br><span style="color:#64748b">Material más resistente conocido. Electrodo frontal transparente. Potencial sustituto del silicio.</span></div>
+  </div>
+  <div class="dh"></div>
+  <div class="it"><span class="dot d-pu"></span><span><strong>Microesferas sílice (8μm):</strong> Enfriamiento radiativo hasta 350 W/m² sin consumo energético → <strong>+8% eficiencia FV</strong>.</span></div>
+  <div class="it"><span class="dot d-pu"></span><span><strong>Módulos bifaciales + seguidor:</strong> Luz frontal + reflejada del suelo → <strong>hasta +30%</strong> producción respecto a fijo convencional.</span></div>
+  <div class="it"><span class="dot d-pu"></span><span><strong>IA Huawei Smart PV:</strong> Inversores string inteligentes que recopilan datos de cada elemento → gestión óptima en tiempo real.</span></div>
+  <div class="it"><span class="dot d-pu"></span><span><strong>Redes neuronales:</strong> Predicción de irradiancia solar global a corto plazo con error &lt;20% (UPM + Ineter, ~900 variables).</span></div>
+</div>
+
+<div class="blk">
+  <span class="bh bh-or">Aplicaciones Singulares Destacadas</span>
+  <div class="it"><span class="dot d-am"></span><span><strong>Paneles en canales (UNED):</strong> Agua enfría paneles (+eficiencia) y paneles reducen evaporación del canal (sinergia doble).</span></div>
+  <div class="it"><span class="dot d-am"></span><span><strong>Plantas flotantes:</strong> Islas de Holanda (73,500 paneles, 140 m diámetro) giran como girasoles. WRM protege ante tormentas.</span></div>
+  <div class="it"><span class="dot d-am"></span><span><strong>Tejas solares ZEP:</strong> Células integradas en tejas cerámicas. Invisibles estéticamente, aptas para edificios protegidos.</span></div>
+  <div class="it"><span class="dot d-am"></span><span><strong>Dron solar Heliodron:</strong> Vigilancia aérea, 200 m altura, 20 m/s, cámaras IR. Sin riesgo humano en catástrofes.</span></div>
+  <div class="it"><span class="dot d-am"></span><span><strong>Tela solar (U. Florida):</strong> Filamentos Cu con célula solar + almacenamiento → ropa = batería portátil.</span></div>
+  <div class="it"><span class="dot d-am"></span><span><strong>Célula HEPV (Berkeley):</strong> Genera electricidad e hidrógeno simultáneamente mediante fotosíntesis artificial.</span></div>
+  <div class="warn">⚠️ Degradación prematura: El ácido acético (subproducto del EVA encapsulante) ataca la poliamida del backsheet → grietas → entrada O₂/humedad → falla eléctrica. Garantía mínima: 25 años.</div>
+</div>
+
+<!-- SECCIÓN 6 -->
+<div class="sec s-re">🌎 SECCIÓN 6 — LATINOAMÉRICA Y PERÚ</div>
+
+<div class="blk s2">
+  <span class="bh bh-re">Grandes Proyectos en América Latina</span>
+  <table class="tbl">
+    <tr><th>País / Proyecto</th><th>Capacidad</th><th>Innovación clave</th><th>Impacto</th></tr>
+    <tr><td><strong>México</strong> — Villanueva</td><td>754 MW</td><td>Mayor parque de América; GPS para instalación 8× más rápido; 2.3M paneles</td><td>1,700 GWh/año · $650M</td></tr>
+    <tr><td><strong>Brasil</strong> — São Gonçalo</td><td>608 MW</td><td>1ª planta bifacial Enel Brasil; +18% generación vs convencional</td><td>>1,500 GWh/año · evita 860k t CO₂</td></tr>
+    <tr><td><strong>Chile</strong> — El Romero Solar</td><td>246 MWp</td><td>Centro innovación bifacial, CdTe, célula partida — mayor de Chile</td><td>Atacama; máx. irradiación global</td></tr>
+    <tr><td><strong>Chile</strong> — Almeyda (Atacama)</td><td>62 MWp</td><td>187,620 módulos con seguimiento horizontal</td><td>167.5 GWh/año ≈ 80k hogares</td></tr>
+    <tr><td><strong>Argentina</strong> — Altiplano 200</td><td>208 MWp</td><td>A 4,000 m altitud en desierto del altiplano (RenovAr 1+2)</td><td>Financiación multilateral europea</td></tr>
+    <tr><td><strong>Rep. Dominicana</strong> — Girasol</td><td>120 MW pico</td><td>Primer parque con seguidores solares del país; 300k módulos en 220 ha</td><td>240 GWh/año; evita 150k t CO₂</td></tr>
+    <tr><td><strong>Samoa</strong> — Isla Ta'u</td><td>1.4 MW + 6 MWh</td><td>1ª isla 100% solar (Tesla + SolarCity). Micro red completa.</td><td>Evita 340,000 L diésel/año</td></tr>
+    <tr><td><strong>India</strong> — SECI Flotante</td><td>10,000 MW</td><td>Primer programa mundial de FV flotante a gran escala</td><td>Meta India: 100 GW para 2022</td></tr>
+  </table>
+</div>
+
+<div class="blk">
+  <span class="bh bh-re">Aplicaciones en Perú</span>
+  <div class="def def-re">Perú tiene alto potencial solar, especialmente en sierra sur y altiplano, con desafíos únicos: geografía fragmentada, comunidades aisladas, variabilidad climática extrema entre regiones.</div>
+  <div class="it"><span class="dot d-re"></span><span><strong>Electrificación rural:</strong> Principal aplicación en sierra y selva sin red — comunidades, postas médicas.</span></div>
+  <div class="it"><span class="dot d-re"></span><span><strong>Riego agrícola FV:</strong> Sistema IES ahorra 30% agua y 60–80% energía en bombeo solar. Relevante para Piura e Ica.</span></div>
+  <div class="it"><span class="dot d-re"></span><span><strong>Soltec en Perú:</strong> La empresa española ya suministra seguidores bifaciales SF7 en Perú — mercado activo y en crecimiento.</span></div>
+  <div class="it"><span class="dot d-re"></span><span><strong>Boya solar Zanetti (Argentina/Perú):</strong> Panel FV + 3 bombas sumergidas oxigenan ríos contaminados por materia orgánica, problema común en ríos peruanos.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué Lima, pese a estar en zona tropical, tiene menor potencial solar que la sierra sur peruana? Relacione con la garúa costera y la masa de aire atmosférico.</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="blk s3">
+  <span class="bh bh-gy">Tabla Integradora Final — Resumen de Todo el Contenido</span>
+  <table class="tbl">
+    <tr><th>Concepto</th><th>Valor / Fórmula</th><th>Unidad</th><th>Importancia para examen</th></tr>
+    <tr><td>Constante solar</td><td>1,353</td><td>W/m²</td><td>Muy alta: referencia de toda la radiación solar</td></tr>
+    <tr><td>Irradiación en superficie</td><td>~900</td><td>W/m²</td><td>Alta: valor real disponible en día despejado</td></tr>
+    <tr><td>Condición STC (medición Wp)</td><td>1,000 W/m² + 25°C + AM 1.5</td><td>—</td><td>Muy alta: base de comparación de paneles</td></tr>
+    <tr><td>Consumo diario CC y CA</td><td>C = Σ(P·N·H)</td><td>W·h/día</td><td>Muy alta: primer paso del dimensionamiento</td></tr>
+    <tr><td>Margen seguridad Eb</td><td>15%</td><td>%</td><td>Alta: multiplicar consumo × 1.15</td></tr>
+    <tr><td>Eficiencia inversor ηinv</td><td>≈85%</td><td>%</td><td>Media: considera consumo propio del inversor</td></tr>
+    <tr><td>Factor corrección paneles</td><td>1.1</td><td>—</td><td>Muy alta: compensar pérdidas reales de instalación</td></tr>
+    <tr><td>Días autonomía D (rural)</td><td>4–6</td><td>días</td><td>Alta: determina tamaño del banco de baterías</td></tr>
+    <tr><td>Prof. descarga máx Pf (rural)</td><td>70</td><td>%</td><td>Alta: denominador del cálculo de CB</td></tr>
+    <tr><td>Capacidad baterías CB</td><td>CB = 110·CT·D / (V·Pf)</td><td>Ah</td><td>Muy alta: cálculo central de acumulación</td></tr>
+    <tr><td>Nº paneles Np</td><td>Np = 1.1·(Pmax/Ppanel)</td><td>uds</td><td>Muy alta: redondear al entero superior siempre</td></tr>
+    <tr><td>Costo referencial paneles</td><td>6 €/Wp</td><td>€/Wp</td><td>Media: estimación presupuestaria rápida</td></tr>
+    <tr><td>Costo baterías</td><td>1.5 €/Ah</td><td>€/Ah</td><td>Media: estimación presupuestaria rápida</td></tr>
+    <tr><td>Eficiencia bifacial (módulos)</td><td>+5% a +30%</td><td>%</td><td>Media: depende albedo, altura y sombras</td></tr>
+    <tr><td>Récord eficiencia NREL</td><td>47.1% (6 uniones III-V concentrada)</td><td>%</td><td>Media: solo para satélites por costo elevado</td></tr>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ DATO INTEGRADOR CLAVE: El dimensionamiento FV siempre parte del MES PEOR. Los tres factores más críticos son: (1) consumo real con margen Eb=15%, (2) irradiación del mes de menor radiación Iim, y (3) días de autonomía D que determina todo el banco de baterías. Un error en cualquiera sobredimensiona o subdimensiona fatalmente el sistema.</div>
+</div>
+
+<!-- QUIZ -->
+<div class="blk s3" id="quiz-section">
+  <div style="background:#0f1e3a;color:#fff;border-radius:10px 10px 0 0;padding:11px 16px;margin:-12px -13px 12px -13px">
+    <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:700">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+    <div style="font-size:11px;color:#94a3b8;margin-top:2px">Marca tu respuesta y descubre si es correcta de inmediato</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+    <span id="prog-txt" style="font-size:11.5px;color:#64748b;white-space:nowrap">0/10 respondidas · Aciertos: 0</span>
+    <div class="qpw" style="flex:1"><div class="qpf" id="prog-bar" style="width:0%"></div></div>
+    <span id="pct-txt" style="font-size:11.5px;color:#64748b;min-width:28px">0%</span>
+  </div>
+
+  <div class="qcard" id="q1"><p class="qnum">Pregunta 1 / 10</p><p class="qtext">¿Cuál es el valor de la constante solar y qué representa exactamente?</p><div class="qopts"><button class="qbtn" data-q="1" data-correct="false">A) 900 W/m² — irradiación que llega a la superficie terrestre en día despejado</button><button class="qbtn" data-q="1" data-correct="false">B) 1,000 W/m² — irradiación estándar usada en las condiciones STC</button><button class="qbtn" data-q="1" data-correct="true">C) 1,353 W/m² — energía por unidad de superficie en el límite exterior de la atmósfera terrestre</button><button class="qbtn" data-q="1" data-correct="false">D) 389×10²⁶ W — potencia total emitida por el Sol en todas las direcciones</button></div><div class="qfb" id="fb1"></div></div>
+
+  <div class="qcard" id="q2"><p class="qnum">Pregunta 2 / 10</p><p class="qtext">Al incrementar la irradiación solar sobre un panel (temperatura constante), ¿qué ocurre con Isc y Voc?</p><div class="qopts"><button class="qbtn" data-q="2" data-correct="false">A) Isc sube y Voc sube en igual proporción</button><button class="qbtn" data-q="2" data-correct="true">B) Isc sube proporcionalmente, Voc permanece casi constante</button><button class="qbtn" data-q="2" data-correct="false">C) Isc permanece constante, Voc sube proporcionalmente</button><button class="qbtn" data-q="2" data-correct="false">D) Ambas disminuyen porque la temperatura del panel aumenta con más radiación</button></div><div class="qfb" id="fb2"></div></div>
+
+  <div class="qcard" id="q3"><p class="qnum">Pregunta 3 / 10</p><p class="qtext">Una vivienda tiene Ccc=800 W·h/día. Con margen de seguridad Eb=15%, ¿cuál es el consumo CC ajustado (Cc)?</p><div class="qopts"><button class="qbtn" data-q="3" data-correct="false">A) 800 W·h/día (el margen solo aplica a corriente alterna)</button><button class="qbtn" data-q="3" data-correct="false">B) 815 W·h/día</button><button class="qbtn" data-q="3" data-correct="true">C) 920 W·h/día</button><button class="qbtn" data-q="3" data-correct="false">D) 680 W·h/día</button></div><div class="qfb" id="fb3"></div></div>
+
+  <div class="qcard" id="q4"><p class="qnum">Pregunta 4 / 10</p><p class="qtext">¿Cuál de las siguientes afirmaciones sobre los módulos bifaciales es FALSA?</p><div class="qopts"><button class="qbtn" data-q="4" data-correct="false">A) Capturan luz solar en la cara frontal y en la trasera</button><button class="qbtn" data-q="4" data-correct="false">B) La ganancia bifacial puede llegar al 30% en condiciones óptimas</button><button class="qbtn" data-q="4" data-correct="true">C) Son idénticos a los módulos monofaciales, solo cambia el color del backsheet</button><button class="qbtn" data-q="4" data-correct="false">D) El albedo del suelo influye en su rendimiento total</button></div><div class="qfb" id="fb4"></div></div>
+
+  <div class="qcard" id="q5"><p class="qnum">Pregunta 5 / 10</p><p class="qtext">En la fórmula Np = 1.1 × (Pmax/Ppanel), ¿cuál es la función del factor 1.1?</p><div class="qopts"><button class="qbtn" data-q="5" data-correct="false">A) Representa la eficiencia del inversor (1/1.1 ≈ 90.9%)</button><button class="qbtn" data-q="5" data-correct="false">B) Es un margen legal obligatorio por normativa de instalación</button><button class="qbtn" data-q="5" data-correct="true">C) Compensa pérdidas reales por errores de orientación, suciedad, conexiones y variaciones climáticas</button><button class="qbtn" data-q="5" data-correct="false">D) Convierte vatios-pico (Wp) a vatios reales considerando temperatura de operación</button></div><div class="qfb" id="fb5"></div></div>
+
+  <div class="qcard" id="q6"><p class="qnum">Pregunta 6 / 10</p><p class="qtext">¿Cuál región del Perú tiene el mayor potencial solar fotovoltaico?</p><div class="qopts"><button class="qbtn" data-q="6" data-correct="false">A) Lima Metropolitana, por ser la capital y tener mayor demanda eléctrica</button><button class="qbtn" data-q="6" data-correct="false">B) La selva amazónica, por estar en zona ecuatorial con sol todo el año</button><button class="qbtn" data-q="6" data-correct="true">C) La sierra sur y el altiplano (Arequipa, Puno, Apurímac), con 3,000–4,000 horas de sol anuales</button><button class="qbtn" data-q="6" data-correct="false">D) La costa norte (Piura, Tumbes), por tener el clima más cálido del país</button></div><div class="qfb" id="fb6"></div></div>
+
+  <div class="qcard" id="q7"><p class="qnum">Pregunta 7 / 10</p><p class="qtext">¿Qué récord de eficiencia fotovoltaica alcanzó el NREL en 2020 y con qué tipo de célula?</p><div class="qopts"><button class="qbtn" data-q="7" data-correct="false">A) 22.38% con módulo monocristalino comercial (LONGi Solar)</button><button class="qbtn" data-q="7" data-correct="false">B) 29.4% con célula de silicio de unión única — límite teórico</button><button class="qbtn" data-q="7" data-correct="false">C) 39.2% con célula de perovskita bajo luz difusa</button><button class="qbtn" data-q="7" data-correct="true">D) 47.1% con célula de 6 uniones de materiales III-V bajo luz solar concentrada</button></div><div class="qfb" id="fb7"></div></div>
+
+  <div class="qcard" id="q8"><p class="qnum">Pregunta 8 / 10</p><p class="qtext">Aplicando CB = 110·CT·D / (V·Pf), con CT=1,500 W·h/día, D=4 días, V=12V, Pf=70, ¿cuál es CB?</p><div class="qopts"><button class="qbtn" data-q="8" data-correct="false">A) 357.1 Ah</button><button class="qbtn" data-q="8" data-correct="true">B) 785.7 Ah</button><button class="qbtn" data-q="8" data-correct="false">C) 500.0 Ah</button><button class="qbtn" data-q="8" data-correct="false">D) 1,100 Ah</button></div><div class="qfb" id="fb8"></div></div>
+
+  <div class="qcard" id="q9"><p class="qnum">Pregunta 9 / 10</p><p class="qtext">La instalación de paneles sobre canales hidráulicos (UNED) genera una sinergia doble. ¿En qué consiste?</p><div class="qopts"><button class="qbtn" data-q="9" data-correct="false">A) El agua genera electricidad por efecto Peltier que alimenta a los paneles solares</button><button class="qbtn" data-q="9" data-correct="true">B) El agua del canal enfría los paneles (mejora eficiencia FV) y los paneles reducen la evaporación del agua</button><button class="qbtn" data-q="9" data-correct="false">C) Los paneles bombean el agua del canal usando la electricidad solar generada</button><button class="qbtn" data-q="9" data-correct="false">D) El canal dirige agua de lluvia hacia un sistema de limpieza automática de los paneles</button></div><div class="qfb" id="fb9"></div></div>
+
+  <div class="qcard" id="q10" style="border-bottom:none"><p class="qnum">Pregunta 10 / 10</p><p class="qtext">La isla Ta'u (Samoa Americana) fue la primera isla 100% solar del mundo. ¿Quién la implementó y cuál fue el impacto ambiental principal?</p><div class="qopts"><button class="qbtn" data-q="10" data-correct="false">A) El gobierno indio (SECI), evitando la importación de 10,000 MW de carbón</button><button class="qbtn" data-q="10" data-correct="false">B) Acciona y Soltec, con módulos bifaciales que generan 1,700 GWh anuales</button><button class="qbtn" data-q="10" data-correct="false">C) La UNED con paneles en canal, reduciendo la evaporación del embalse insular</button><button class="qbtn" data-q="10" data-correct="true">D) Tesla y SolarCity (1.4 MW + 6 MWh baterías), evitando importar más de 340,000 litros de diésel al año</button></div><div class="qfb" id="fb10"></div></div>
+
+  <div class="res-panel" id="res-panel"></div>
+</div>
+
+<div class="cv-foot">
+  <span style="font-family:'Oswald',sans-serif;font-size:11px;color:#7dd3fc">FUENTES:</span>
+  <span style="font-size:10.5px;color:#94a3b8">PDF 1: Energía Solar Fotovoltaica v1 — Radiación solar, células, paneles, elementos del sistema FV, dimensionamiento método mes peor, costos unitarios.</span>
+  <span style="font-size:10.5px;color:#94a3b8">PDF 2: Compendio Innovaciones Tecnológicas Energías Renovables Cap. 3 — PhD. José Luis Calle &amp; Jean Marco Gozme — Innovaciones emergentes, proyectos en Latinoamérica y Perú.</span>
+</div>
+
+</div>
+
+<script>
+const FB={
+  1:{c:'✅ ¡Correcto! La constante solar (1,353 W/m²) se mide fuera de la atmósfera. En superficie disponemos de ~900 W/m² y las condiciones STC usan 1,000 W/m² para estandarizar mediciones de paneles. Son tres valores distintos.',f:'❌ Incorrecto. Respuesta correcta: C. La constante solar es 1,353 W/m² y se mide FUERA de la atmósfera. Los ~900 W/m² son lo que llega a la superficie; 1,000 W/m² es la condición STC para catálogos de paneles.'},
+  2:{c:'✅ ¡Correcto! La corriente (Isc) varía proporcionalmente con la irradiación (más fotones = más corriente), mientras la tensión (Voc) permanece casi constante. Por eso la potencia máxima cambia principalmente por la variación de corriente.',f:'❌ Incorrecto. Respuesta correcta: B. Isc sube con la irradiación (proporcional), Voc ≈ constante. A mediodía (1,000 W/m²) un panel produce 10× más que con cielo cubierto (100 W/m²): la corriente cambia 10×, la tensión casi no.'},
+  3:{c:'✅ ¡Correcto! Cc = (100+15)/100 × 800 = 1.15 × 800 = 920 W·h/día. El margen Eb=15% se aplica a AMBOS tipos de consumo (CC y CA).',f:'❌ Incorrecto. Respuesta correcta: C — 920 W·h/día. Fórmula: Cc = (100+Eb)/100 × Ccc = (115/100) × 800 = 920. El margen del 15% aplica tanto a CC como a CA.'},
+  4:{c:'✅ ¡Correcto! Los módulos bifaciales tienen backsheet transparente (o encapsulado en ambas caras) para capturar la luz solar reflejada en el suelo (albedo) en su cara posterior. Esto incrementa la producción entre 5% y 30%.',f:'❌ Incorrecto. Respuesta correcta: C. Los módulos bifaciales NO son iguales a los monofaciales. Requieren diseño especial para que la luz trasera penetre. El albedo del suelo es un factor clave de su rendimiento.'},
+  5:{c:'✅ ¡Correcto! El factor 1.1 compensa pérdidas prácticas: orientación imperfecta, suciedad progresiva, resistencia en empalmes y conectores, y variaciones climáticas. Es obligatorio incluirlo en el cálculo.',f:'❌ Incorrecto. Respuesta correcta: C. El 1.1 no representa la eficiencia del inversor (que se considera separadamente). Es un factor de sobredimensionamiento para cubrir pérdidas reales de instalación.'},
+  6:{c:'✅ ¡Correcto! La sierra sur peruana y el altiplano alcanzan 3,000–4,000 horas de sol anuales. La altitud reduce la masa de aire, disminuyendo la atenuación atmosférica y aumentando la irradiación directa.',f:'❌ Incorrecto. Respuesta correcta: C. Lima tiene bajo potencial por la garúa costera. La selva tiene alta nubosidad. La costa norte es buena pero no supera al altiplano. La sierra sur es la zona óptima de todo el Perú.'},
+  7:{c:'✅ ¡Correcto! En 2020, el NREL alcanzó 47.1% bajo luz concentrada con una célula de 6 uniones III-V. La misma célula logró 39.2% bajo sol normal. Dado su costo elevado, se usan principalmente en satélites artificiales.',f:'❌ Incorrecto. Respuesta correcta: D. El 22.38% es el récord de LONGi Solar con módulo monocristalino comercial. El límite teórico del silicio de unión única es 29.4%. El récord mundial NREL es 47.1% con 6 uniones III-V.'},
+  8:{c:'✅ ¡Correcto! CB = (110 × 1,500 × 4) / (12 × 70) = 660,000 / 840 = 785.71 Ah. Recuerda: Pf=70 (no 0.70), y el factor 110 ya incorpora un margen de seguridad del 10% adicional.',f:'❌ Incorrecto. Respuesta correcta: B — 785.7 Ah. Operación: (110×1500×4)/(12×70) = 660,000/840 = 785.71 Ah. Error frecuente: usar Pf=0.70 en vez de 70 como número entero.'},
+  9:{c:'✅ ¡Correcto! La sinergia es doble: (1) el agua enfría los paneles — que pierden eficiencia sobre 25°C (~-0.4%/°C) —, y (2) los paneles actúan como cubierta reduciendo la evaporación del agua del canal, vital en zonas áridas.',f:'❌ Incorrecto. Respuesta correcta: B. La doble sinergia es: agua enfría paneles (mejora eficiencia FV) y paneles cubren canal (reduce evaporación). El resultado en el trasvase Tajo-Segura es una instalación totalmente autónoma eléctricamente.'},
+  10:{c:'✅ ¡Correcto! Tesla y SolarCity instalaron en Ta\'u más de 5,000 paneles + 60 sistemas Tesla Powerpack (1.4 MW + 6 MWh). La micro red evita importar más de 340,000 litros de diésel al año, equivalente a ~25.5 millones kg de CO₂.',f:'❌ Incorrecto. Respuesta correcta: D. Ta\'u es obra de Tesla + SolarCity. Los datos clave son: 1.4 MW de capacidad, 6 MWh de almacenamiento en baterías, y eliminación de 340,000 L de diésel/año.'}
+};
+let ans=0,cor=0;
+document.getElementById('quiz-section').addEventListener('click',function(e){
+  const btn=e.target.closest('.qbtn');
+  if(!btn||btn.disabled)return;
+  const q=btn.dataset.q;
+  const ok=btn.dataset.correct==='true';
+  document.querySelectorAll('.qbtn[data-q="'+q+'"]').forEach(function(b){
+    b.disabled=true;
+    if(b.dataset.correct==='true')b.classList.add('correct');
+  });
+  if(!ok)btn.classList.add('incorrect');
+  const fb=document.getElementById('fb'+q);
+  fb.style.display='block';
+  fb.className='qfb '+(ok?'ok':'fail');
+  fb.textContent=(ok?FB[+q].c:FB[+q].f);
+  ans++;if(ok)cor++;
+  var pct=Math.round((cor/10)*100);
+  document.getElementById('prog-txt').textContent=ans+'/10 respondidas · Aciertos: '+cor;
+  document.getElementById('pct-txt').textContent=pct+'%';
+  document.getElementById('prog-bar').style.width=pct+'%';
+  if(ans===10){
+    var rp=document.getElementById('res-panel');
+    rp.style.display='block';
+    var bg,msg;
+    if(cor<=4){bg='background:#fee2e2;color:#991b1b;border:1px solid #dc2626';msg='Necesitas repasar el material con más detenimiento.'}
+    else if(cor<=7){bg='background:#fefce8;color:#713f12;border:1px solid #facc15';msg='¡Buen avance! Sigue repasando los temas donde fallaste.'}
+    else{bg='background:#dcfce7;color:#14532d;border:1px solid #16a34a';msg='¡Excelente dominio del tema! Muy bien preparado.'}
+    rp.setAttribute('style',bg+';border-radius:10px;padding:12px 16px;margin-top:12px;font-size:12.5px;line-height:1.5');
+    rp.innerHTML='<strong style="font-size:15px">'+cor+'/10 respuestas correctas</strong><br>'+msg+'<br><br><button onclick="resetQ()" style="margin-top:6px;cursor:pointer;padding:7px 16px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;color:#1e293b;font-family:inherit;font-size:12px">🔄 Reiniciar Quiz</button>';
+  }
+});
+function resetQ(){
+  ans=0;cor=0;
+  document.getElementById('prog-txt').textContent='0/10 respondidas · Aciertos: 0';
+  document.getElementById('pct-txt').textContent='0%';
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('res-panel').style.display='none';
+  document.querySelectorAll('.qbtn').forEach(function(b){b.disabled=false;b.classList.remove('correct','incorrect')});
+  document.querySelectorAll('.qfb').forEach(function(f){f.style.display='none'});
+}
+</script>
+</body>
+</html>

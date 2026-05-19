@@ -1,0 +1,835 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--color-background-tertiary,#f1f0eb);padding:12px}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary,#f1f0eb)}
+.title-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.title-bar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{font-size:11px;padding:2px 9px;border-radius:20px;display:inline-block;margin:2px}
+.pill-b{background:#1e3a5f;color:#93c5fd}
+.pill-g{background:#14532d;color:#86efac}
+.pill-y{background:#422006;color:#fef08a}
+.pill-p{background:#2e1065;color:#c4b5fd}
+.pill-t{background:#042f2e;color:#5eead4}
+.pill-o{background:#431407;color:#fed7aa}
+.section-bar{grid-column:1/-1;padding:7px 14px;border-radius:8px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px}
+.sb-blue{background:#dbeafe;color:#1e3a8a}
+.sb-green{background:#dcfce7;color:#14532d}
+.sb-yellow{background:#fef9c3;color:#713f12}
+.sb-purple{background:#ede9fe;color:#4c1d95}
+.sb-teal{background:#ccfbf1;color:#134e4a}
+.sb-orange{background:#ffedd5;color:#7c2d12}
+.sb-gray{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){
+.sb-blue{background:#1e3a5f;color:#93c5fd}
+.sb-green{background:#14532d;color:#86efac}
+.sb-yellow{background:#422006;color:#fef08a}
+.sb-purple{background:#2e1065;color:#c4b5fd}
+.sb-teal{background:#042f2e;color:#5eead4}
+.sb-orange{background:#431407;color:#fed7aa}
+.sb-gray{background:#1e293b;color:#94a3b8}
+}
+.block{background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15));border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:700}
+.bh-b{background:#dbeafe;color:#1e3a8a}.bh-g{background:#dcfce7;color:#14532d}
+.bh-y{background:#fef9c3;color:#713f12}.bh-p{background:#ede9fe;color:#4c1d95}
+.bh-t{background:#ccfbf1;color:#134e4a}.bh-o{background:#ffedd5;color:#7c2d12}
+.bh-r{background:#fee2e2;color:#991b1b}.bh-gr{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){
+.bh-b{background:#1e3a5f;color:#93c5fd}.bh-g{background:#14532d;color:#86efac}
+.bh-y{background:#422006;color:#fef08a}.bh-p{background:#2e1065;color:#c4b5fd}
+.bh-t{background:#042f2e;color:#5eead4}.bh-o{background:#431407;color:#fed7aa}
+.bh-r{background:#450a0a;color:#fca5a5}.bh-gr{background:#1e293b;color:#94a3b8}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary,#f8f8f6);margin-bottom:8px;line-height:1.5}
+.def-b{border-color:#3b82f6}.def-g{border-color:#22c55e}.def-y{border-color:#eab308}
+.def-p{border-color:#8b5cf6}.def-t{border-color:#14b8a6}.def-o{border-color:#f97316}
+.def-r{border-color:#ef4444}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;color:var(--color-text-primary,#1a1a1a)}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-b{background:#3b82f6}.dot-g{background:#22c55e}.dot-y{background:#eab308}
+.dot-p{background:#8b5cf6}.dot-t{background:#14b8a6}.dot-o{background:#f97316}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.7;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:6px}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#eab308}}
+.mini{background:var(--color-background-secondary,#f8f8f6);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.mini h4{font-size:12px;font-weight:600;margin-bottom:3px;color:var(--color-text-primary,#1a1a1a)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:6px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:6px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary,#f8f8f6);padding:4px 8px;border-radius:6px;font-size:11px;line-height:1.4;color:var(--color-text-primary,#1a1a1a)}
+.farrow{color:var(--color-text-secondary,#666);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary,#f8f8f6);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15));text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15));vertical-align:top;color:var(--color-text-primary,#1a1a1a)}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15));margin:7px 0}
+.ft-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;font-size:11px}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{color:#94a3b8}
+/* QUIZ */
+#quiz-section{grid-column:1/-1}
+.quiz-wrap{background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15));border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.progress-wrap{margin-bottom:14px}
+.progress-label{font-size:12px;color:var(--color-text-secondary,#666);margin-bottom:4px}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary,#f8f8f6);border-radius:20px;height:11px}
+.stat-bar-fill{height:100%;border-radius:20px;background:#22c55e;transition:width .4s}
+.qcard{margin-bottom:16px;padding-bottom:14px;border-bottom:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15))}
+.qcard:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.qnum{font-size:11px;color:var(--color-text-secondary,#666);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:13px;font-weight:500;color:var(--color-text-primary,#1a1a1a);margin-bottom:8px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary,#f8f8f6);border:1px solid var(--color-border-tertiary,rgba(0,0,0,.15));border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary,#1a1a1a);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary,#f1f0eb)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.qfeedback.ok{background:#14532d;color:#86efac}
+.qfeedback.bad{background:#450a0a;color:#fca5a5}
+}
+.results-panel{display:none;margin-top:14px;padding:14px;border-radius:10px;text-align:center}
+.results-panel h3{font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px}
+.results-panel p{font-size:13px;margin-bottom:12px}
+.results-panel button{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:9px 18px;cursor:pointer;font-size:13px;font-family:'Source Sans 3',sans-serif}
+.num-badge{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-right:4px}
+.nb-b{background:#dbeafe;color:#1e3a8a}.nb-g{background:#dcfce7;color:#14532d}
+.nb-y{background:#fef9c3;color:#713f12}.nb-r{background:#fee2e2;color:#991b1b}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="title-bar">
+  <h1>⚡ ENERGÍA SOLAR FOTOVOLTAICA — CANVAS INTEGRADO</h1>
+  <p>Curso: Energías Renovables | Temas: Célula Solar · Agrovoltaicos · Perovskita · Sector Eléctrico Perú</p>
+  <div class="pills">
+    <span class="pill pill-b">Efecto Fotovoltaico</span>
+    <span class="pill pill-g">Agrovoltaicos</span>
+    <span class="pill pill-y">Semiconductores</span>
+    <span class="pill pill-p">Perovskita / OPV</span>
+    <span class="pill pill-t">Célula Solar Si</span>
+    <span class="pill pill-o">Sector Eléctrico Perú</span>
+  </div>
+</div>
+
+<!-- ========= SECCIÓN 1: FUNDAMENTOS ========= -->
+<div class="section-bar sb-blue">🔵 BLOQUE I — FUNDAMENTOS: ÁTOMO, BANDAS DE ENERGÍA Y EFECTO FOTOVOLTAICO</div>
+
+<!-- Átomo y capa de valencia -->
+<div class="block">
+  <span class="bh bh-b">Átomo y capa de valencia</span>
+  <div class="def def-b">El átomo tiene protones (+) en el núcleo y electrones (−) en órbitas llamadas envolutas. La órbita más externa (capa de valencia) determina la reactividad química. Los electrones en ella son los más débilmente ligados y los primeros en participar en enlaces.</div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Capacidad por nivel:</strong> max electrones = 2n², donde n = número de órbita. Ej: nivel 1→2 electrones, nivel 2→8, nivel 3→18.</span></div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Catión (positivo):</strong> pierde electrones de valencia → más protones que electrones.</span></div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Anión (negativo):</strong> gana electrones → más electrones que protones.</span></div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Átomo estable:</strong> tiene 8 electrones en su última capa (regla del octeto) o la capa completa. Helio (2e) y Neón (8e en valencia) son ejemplos naturales.</span></div>
+  <div class="rx">2n² → capacidad máxima por nivel<br>n=1: 2 | n=2: 8 | n=3: 18</div>
+  <div class="exam">🎯 EXAMEN: Explica por qué el silicio (Si, Z=14) tiene 4 electrones de valencia y qué consecuencias tiene esto para su uso en celdas solares.</div>
+</div>
+
+<!-- Bandas de energía -->
+<div class="block">
+  <span class="bh bh-p">Bandas de energía</span>
+  <div class="def def-p">En un cristal, los niveles discretos de energía de los átomos aislados se fusionan en bandas continuas de energía por efecto del campo eléctrico de los átomos vecinos (principio de exclusión de Pauli). Esto explica por qué los sólidos conducen, aíslan o semiconductan.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <h4>⚡ Conductor</h4>
+      Banda de valencia (BV) y conducción (BC) se solapan. E<sub>g</sub>≈0 eV. Los electrones se mueven libremente. Ej: cobre (Cu).
+    </div>
+    <div class="mini" style="border-top:3px solid #8b5cf6">
+      <h4>🔵 Semiconductor</h4>
+      BV y BC separadas por banda prohibida (BP) estrecha: E<sub>g</sub> ≈ 0.1–1 eV. El Si tiene E<sub>g</sub>=1.12 eV; el Ge, 0.66 eV. Con energía térmica o fotónica se cruza.
+    </div>
+    <div class="mini" style="border-top:3px solid #ef4444">
+      <h4>🚫 Aislante</h4>
+      BP muy amplia (≫10 eV). Los electrones no pueden saltar a la BC sin destruir la estructura. Ej: diamante.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: "Semiconductor = mal conductor". Falso. Un semiconductor puede volverse conductor al elevar temperatura o aplicar luz. La diferencia con un aislante es cuantitativa (tamaño de la banda prohibida), no cualitativa.</div>
+</div>
+
+<!-- Efecto fotovoltaico -->
+<div class="block">
+  <span class="bh bh-y">El efecto fotovoltaico</span>
+  <div class="def def-y">Descubierto por Becquerel en 1839. Un fotón con energía ≥ E<sub>g</sub> del semiconductor golpea un electrón de valencia y lo promueve a la banda de conducción, creando un par electrón-hueco. La unión PN separa estas cargas y las dirige a un circuito externo generando corriente.</div>
+  <div class="flow">
+    <div class="fbox">☀️ Fotón incide</div><span class="farrow">→</span>
+    <div class="fbox">Par e⁻-hueco generado</div><span class="farrow">→</span>
+    <div class="fbox">Campo E (unión PN) separa cargas</div><span class="farrow">→</span>
+    <div class="fbox">e⁻ → contacto N (frontal)</div><span class="farrow">→</span>
+    <div class="fbox">hueco → contacto P (posterior)</div><span class="farrow">→</span>
+    <div class="fbox">Corriente en circuito externo ⚡</div>
+  </div>
+  <div class="item"><span class="dot dot-y"></span><span><strong>Condición 1:</strong> Existencia de campo eléctrico interno (unión PN o heterounión).</span></div>
+  <div class="item"><span class="dot dot-y"></span><span><strong>Condición 2:</strong> Energía del fotón ≥ E<sub>g</sub> del semiconductor.</span></div>
+  <div class="item"><span class="dot dot-y"></span><span>Fotones con E &lt; E<sub>g</sub> pasan sin interactuar. Fotones con E &gt; E<sub>g</sub> generan el par pero el exceso de energía se pierde como calor.</span></div>
+  <div class="rx">hν ≥ E_g → generación de par e⁻-hueco<br>hν &lt; E_g → fotón pasa sin generar corriente</div>
+  <div class="exam">🎯 EXAMEN: Describa las dos condiciones indispensables para que se produzca el efecto fotovoltaico y explique qué sucede con los fotones cuya energía es inferior al band-gap del semiconductor.</div>
+</div>
+
+<!-- ========= SECCIÓN 2: SEMICONDUCTORES Y UNIÓN PN ========= -->
+<div class="section-bar sb-purple">🟣 BLOQUE II — SEMICONDUCTORES: DOPADO, UNIÓN PN Y GENERACIÓN-RECOMBINACIÓN</div>
+
+<!-- Dopado -->
+<div class="block">
+  <span class="bh bh-p">Semiconductores dopados</span>
+  <div class="def def-p">Un semiconductor intrínseco (puro) tiene conductividad limitada. Al añadir impurezas (dopado) se crean portadores mayoritarios libres. El dopado es el corazón tecnológico de toda celda solar.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #3b82f6">
+      <h4>Tipo N (donante)</h4>
+      Se añade impureza con 5 electrones de valencia: Fósforo (P), Antimonio (Sb), Arsénico (As). El 5° electrón queda libre como portador de corriente. Portadores mayoritarios: <em>electrones</em>.
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316">
+      <h4>Tipo P (aceptor)</h4>
+      Se añade impureza con 3 electrones de valencia: Boro (B), Galio (Ga), Indio (In). Falta un electrón → queda un "hueco" que actúa como carga positiva. Portadores mayoritarios: <em>huecos</em>.
+    </div>
+  </div>
+  <div class="item" style="margin-top:8px"><span class="dot dot-p"></span><span>La unión PN se forma al poner región P y N en contacto continuo en la red cristalina. No es pegar dos piezas; la red cristalina no debe interrumpirse.</span></div>
+  <div class="item"><span class="dot dot-p"></span><span>Al unirlas, electrones de N difunden hacia P → región de deplexión con campo eléctrico interno (de N→P) que actúa como la "válvula" que separa las cargas fotogeneradas.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: "El boro o el fósforo son impurezas contaminantes". En realidad, son dopantes controlados a escala de partes por billón. La pureza del Si solar debe ser 1 impureza/10⁶ átomos (grado solar), vs 0.2 ppb para grado electrónico.</div>
+</div>
+
+<!-- Generación y recombinación -->
+<div class="block">
+  <span class="bh bh-r">Generación y Recombinación</span>
+  <div class="def def-r">La generación (G) crea pares e⁻-hueco por absorción de fotones. La recombinación (R) destruye pares cuando un electrón libre cae en un hueco. Ambos procesos compiten continuamente. La diferencia G−R determina cuántos electrones llegan al circuito externo.</div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>En equilibrio:</strong> G = R. La concentración de portadores es constante a nivel macroscópico.</span></div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Bajo iluminación:</strong> G &gt; R → exceso de portadores → corriente útil.</span></div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Pérdidas por recombinación:</strong> Superficial (bordes de la célula), en volumen (impurezas, defectos de red), Auger (alta intensidad), radiativa. La pasivación superficial con óxido (SiO₂) reduce la recombinación superficial.</span></div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>BSF (Back Surface Field):</strong> capa muy dopada en la cara posterior que repele a los electrones hacia el circuito exterior, reduciendo recombinación trasera.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la recombinación representa una pérdida para la célula solar? Mencione al menos tres mecanismos de recombinación y una técnica para reducir cada uno.</div>
+</div>
+
+<!-- Respuesta espectral -->
+<div class="block">
+  <span class="bh bh-t">Respuesta espectral y eficiencia cuántica</span>
+  <div class="def def-t">No todos los fotones del espectro solar son igualmente aprovechables. Depende del band-gap del material. La eficiencia cuántica QE(λ) mide qué fracción de fotones incidentes de longitud de onda λ genera un electrón en el circuito exterior.</div>
+  <div class="item"><span class="dot dot-t"></span><span>Silicio monocristalino: rango útil 350–1100 nm; máximo ≈ 800 nm (infrarrojo cercano).</span></div>
+  <div class="item"><span class="dot dot-t"></span><span>La luz solar exterior atmósfera = espectro AM0 (1367 W/m²). En superficie terrestre varía según el ángulo solar: AMX, X=sec(θ). AM1.5 (θ≈48°) es el estándar de medición de celdas (1000 W/m²).</span></div>
+  <div class="item"><span class="dot dot-t"></span><span>Fotones con E &gt; E<sub>g</sub> → se generan pares, el exceso = calor. Por eso la temperatura sube y la eficiencia baja.</span></div>
+  <div class="warn">⚠️ No confundir eficiencia cuántica (por longitud de onda) con eficiencia energética total (η). La QE es la herramienta diagnóstica para identificar en qué rango espectral la célula pierde portadores.</div>
+</div>
+
+<!-- ========= SECCIÓN 3: CÉLULA SOLAR ESTRUCTURA Y FABRICACIÓN ========= -->
+<div class="section-bar sb-yellow">🟡 BLOQUE III — ESTRUCTURA, FABRICACIÓN Y PARÁMETROS DE LA CÉLULA SOLAR DE SILICIO</div>
+
+<!-- Estructura y malla de metalización -->
+<div class="block s2">
+  <span class="bh bh-y">Estructura de la célula y malla de metalización</span>
+  <div class="def def-y">La célula solar no es simplemente un semiconductor iluminado. Requiere: (1) unión PN para crear campo eléctrico; (2) contactos metálicos para extraer la corriente; (3) malla de metalización frontal diseñada para dejar pasar la luz y a la vez extraer la corriente con baja resistencia.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-y"></span><span><strong>Cara frontal (N):</strong> rejilla metálica (malla). El factor de sombra F<sub>s</sub> indica el % de superficie cubierto por metal. Si F<sub>s</sub> muy bajo → menos sombra pero R<sub>serie</sub> muy alta → eficiencia cae. Si F<sub>s</sub> muy alto → más sombra → menos fotones → eficiencia cae. Hay un compromiso óptimo.</span></div>
+      <div class="item"><span class="dot dot-y"></span><span><strong>Cara posterior (P):</strong> contacto metálico continuo de aluminio (Al). Refleja fotones no absorbidos de vuelta a la celda.</span></div>
+      <div class="item"><span class="dot dot-y"></span><span><strong>Capa antirreflexiva (CAR):</strong> TiO₂ o SiN. Reduce reflexión superficial de ≈30% a ≈10%. Condición: n≈2, nd=λ/4.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-y"></span><span><strong>Texturizado:</strong> ataque químico crea pirámides microscópicas en superficie (solo monocristalino). Atrapa la luz y reduce reflexión (light trapping).</span></div>
+      <div class="item"><span class="dot dot-y"></span><span><strong>Célula típica 75 cm²:</strong> tensión ≈ 0.4 V, potencia ≈ 1 W a plena iluminación.</span></div>
+      <div class="item"><span class="dot dot-y"></span><span><strong>Eficiencia celda:</strong> Si monocristalino 16–25%; policristalino 12–13%; Si amorfo 6–8%.</span></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Explique el compromiso de diseño del factor de recubrimiento (F<sub>s</sub>) en la malla de metalización frontal de una célula solar de silicio, relacionándolo con la resistencia serie y las pérdidas ópticas.</div>
+</div>
+
+<!-- Proceso de fabricación -->
+<div class="block">
+  <span class="bh bh-y">Proceso de fabricación (Si cristalino)</span>
+  <div class="flow">
+    <div class="fbox">1. SiO₂ + 2C → Si + 2CO<br><em>Si metalúrgico 98%</em></div>
+    <span class="farrow">→</span>
+    <div class="fbox">2. Purificación química<br><em>Si electrónico &lt;0.2 ppb</em></div>
+    <span class="farrow">→</span>
+    <div class="fbox">3. Cristalización Czochralsky<br><em>Lingote mono/poli</em></div>
+    <span class="farrow">→</span>
+    <div class="fbox">4. Corte sierra multihilo<br><em>Obleas 0.3 mm (50% pérdida!)</em></div>
+    <span class="farrow">→</span>
+    <div class="fbox">5. Decapado + texturizado<br><em>NaOH 85°C</em></div>
+    <span class="farrow">→</span>
+    <div class="fbox">6. Difusión fósforo (tipo N)<br><em>900°C, 30 min, POCl₃</em></div>
+    <span class="farrow">→</span>
+    <div class="fbox">7. Contactos serigráficos<br><em>Pasta Ag + quemado</em></div>
+    <span class="farrow">→</span>
+    <div class="fbox">8. CAR + encapsulado EVA<br><em>100°C→150°C laminado</em></div>
+  </div>
+  <div class="rx">SiO₂ + 2C → Si + 2CO (horno arco, 98% pureza metalúrgica)<br>3HCl + Si(gm) → HCl₂Si + H₂ (→ triclorosilano ultrapuro → Si electrónico)</div>
+  <div class="warn">⚠️ El corte de obleas desperdicia hasta 50% del lingote (kerf loss). El espesor de la sierra ≈ 0.3 mm ≈ espesor de la oblea misma. Esto encarece significativamente el costo final del módulo.</div>
+</div>
+
+<!-- ========= SECCIÓN 4: PARÁMETROS ELÉCTRICOS ========= -->
+<div class="section-bar sb-teal">🩵 BLOQUE IV — PARÁMETROS ELÉCTRICOS: CURVA I-V, EFICIENCIA Y CIRCUITO EQUIVALENTE</div>
+
+<!-- Curva IV y parámetros -->
+<div class="block">
+  <span class="bh bh-t">Curva I-V y parámetros clave</span>
+  <div class="def def-t">La célula solar es eléctricamente un diodo iluminado. La curva I-V en oscuridad es la de un diodo ordinario; bajo iluminación, se desplaza hacia abajo por la corriente fotogenerada I<sub>SC</sub>. La celda trabaja en el 4° cuadrante (genera potencia).</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-t"></span><span><strong>I<sub>SC</sub> (corriente cortocircuito):</strong> máxima corriente, V=0. Proporcional a la irradiancia y al área de la célula.</span></div>
+      <div class="item"><span class="dot dot-t"></span><span><strong>V<sub>OC</sub> (tensión circuito abierto):</strong> máxima tensión, I=0. Depende del material y del band-gap. Muy sensible a temperatura.</span></div>
+      <div class="item"><span class="dot dot-t"></span><span><strong>P<sub>MPP</sub> = V<sub>MP</sub> × I<sub>MP</sub>:</strong> punto de máxima potencia. Es la potencia nominal del panel.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-t"></span><span><strong>FF (Factor de Forma):</strong> FF = P<sub>MPP</sub>/(V<sub>OC</sub>×I<sub>SC</sub>). Mide "rectangularidad" de la curva. FF ideal ≈ 1. En práctica 0.7–0.85. Reducido por R<sub>s</sub> alta o R<sub>p</sub> baja.</span></div>
+      <div class="item"><span class="dot dot-t"></span><span><strong>η (eficiencia):</strong> η = FF × V<sub>OC</sub> × I<sub>SC</sub> / P<sub>luz</sub>. Para Si mono 16–25%.</span></div>
+    </div>
+  </div>
+  <div class="rx">I = I_SC · (1 − e^(e·[V_OC−V] / m·k·T))<br>η = FF · V_OC · I_SC / P_L<br>FF = (V_MP · I_MP) / (V_OC · I_SC)</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la resistencia serie (R<sub>s</sub>) degrada el factor de forma de una célula solar? Describa su origen físico y cómo afecta la eficiencia.</div>
+</div>
+
+<!-- Resistencias y temperatura -->
+<div class="block">
+  <span class="bh bh-t">Resistencias parásitas y efecto temperatura</span>
+  <div class="def def-t">El modelo real de la célula incluye: R<sub>s</sub> (resistencia serie, interna) y R<sub>p</sub> (resistencia paralelo, fugas). Ambas reducen el FF y la eficiencia. La temperatura también degrada el rendimiento al disminuir V<sub>OC</sub>.</div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>R<sub>s</sub> origen:</strong> resistencia de contactos metálicos, de las capas semiconductor, y de los dedos de la malla. R<sub>s</sub> alta → el FF cae. Relación: cuando F<sub>s</sub>→0 (poca malla), R<sub>s</sub>→∞.</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>R<sub>p</sub> origen:</strong> fugas en la unión PN (imperfecciones), cortocircuitos metálicos, difusión por dislocaciones. R<sub>p</sub> baja → corriente se fuga internamente → FF cae a bajas tensiones.</span></div>
+  <div class="divh"></div>
+  <div class="item"><span class="dot dot-r"></span><span><strong>Efecto temperatura:</strong> por cada °C de aumento: V<sub>OC</sub> cae ~0.4%, FF cae ~0.04%, η cae ~0.5%. I<sub>SC</sub> casi no cambia (incremento leve). Para Si: dV<sub>OC</sub>/dT ≈ −2.3 mV/°C.</span></div>
+  <div class="warn">⚠️ En instalaciones en climas cálidos (como la costa peruana), los paneles pueden superar 60–70°C bajo irradiancia fuerte, perdiendo hasta 20–25% de su potencia nominal frente a la medida en condiciones estándar (25°C, 1000 W/m²).</span></div>
+  <div class="rx">I = I_L − I_SC·(1−e^(e·[V_OC−V]/m·kT)) − (V+R_S·I)/R_P<br>η decrece ~0.5%/°C por encima de 25°C</div>
+</div>
+
+<!-- Sistemas fotovoltaicos -->
+<div class="block">
+  <span class="bh bh-b">Sistemas y arreglos fotovoltaicos</span>
+  <div class="def def-b">Un sistema FV es el conjunto de módulos + acumuladores + reguladores + inversores que convierte energía solar en electricidad útil. Los módulos se conectan en serie (↑ voltaje) o paralelo (↑ corriente) para obtener la potencia requerida.</div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Serie:</strong> V<sub>S</sub> = V₁+V₂+… (suma tensiones, corriente igual). Riesgo: celda sombreada actúa como resistencia en serie → punto caliente.</span></div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Paralelo:</strong> I<sub>S</sub> = I₁+I₂+… (suma corrientes, tensión igual). Riesgo: celda sombreada genera tensión menor → actúa como receptor.</span></div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Diodos de paso:</strong> derivan la corriente alrededor de módulos sombreados. <strong>Diodos de bloqueo:</strong> evitan flujo inverso nocturno de la batería hacia el panel.</span></div>
+  <div class="three" style="margin-top:6px">
+    <div class="mini" style="border-top:3px solid #3b82f6"><h4>Autónomo</h4>Sin red. Necesita batería + regulador. Para zonas rurales aisladas.</div>
+    <div class="mini" style="border-top:3px solid #22c55e"><h4>Híbrido</h4>FV + generador auxiliar (eólico, diesel). Mayor fiabilidad, menor batería.</div>
+    <div class="mini" style="border-top:3px solid #8b5cf6"><h4>Conectado a red</h4>Sin batería. Inversor sincronizado. Excedente → red. El más común hoy.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la potencia máxima de un generador fotovoltaico es siempre inferior a la suma de las potencias máximas individuales de sus células. Nombre los dos tipos de pérdidas involucradas.</div>
+</div>
+
+<!-- ========= SECCIÓN 5: TECNOLOGÍAS EMERGENTES ========= -->
+<div class="section-bar sb-purple">🟣 BLOQUE V — TECNOLOGÍAS EMERGENTES: PEROVSKITA, OPV Y CÉLULAS DE TERCERA GENERACIÓN</div>
+
+<!-- Perovskita -->
+<div class="block s2">
+  <span class="bh bh-p">Celdas de Perovskita</span>
+  <div class="def def-p">Las celdas de perovskita usan materiales con estructura cristalina ABX₃ (ej: CH₃NH₃PbI₃). Desde 2009 (3% eficiencia) hasta hoy superan el 26% en celdas pequeñas y 33–34% en tándem con silicio (Longi, certificado NREL 2023). Son la tecnología fotovoltaica de más rápido avance histórico.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-p"></span><span><strong>Récords de eficiencia (2023–2025):</strong><br>— Celda 0.1 cm²: &gt;26%<br>— Celda 1 cm² (Singapur): 24.35%<br>— Tándem perosvkita+Si: 33.9% (Longi NREL)<br>— Flexible tándem (abr. 2025): 29.88%<br>— Interior (1000 lux): 37.6%, retención 92% tras 100 días</span></div>
+      <div class="item"><span class="dot dot-p"></span><span><strong>Ventajas clave:</strong> bajo costo de fabricación (solución líquida, impresión), semitransparencia ajustable, absorción en múltiples espectros, fabricación a baja temperatura.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-p"></span><span><strong>Limitaciones críticas:</strong><br>— Estabilidad ante humedad, calor y oxígeno (degradación)<br>— Uso de plomo (Pb) en muchas formulaciones → toxicidad y regulación<br>— Escalado industrial aún en desarrollo<br>— Encapsulado protector costoso</span></div>
+      <div class="item"><span class="dot dot-p"></span><span><strong>Avances en estabilidad:</strong> recubrimientos de amidinio → 26.3% + mayor durabilidad térmica; polímeros ultrafinos → 26.39% con estabilidad &gt;1100 h; solventes ecológicos → 26.3% con 80% retención tras pruebas.</span></div>
+    </div>
+  </div>
+  <div class="three" style="margin-top:8px">
+    <div class="mini" style="border-left:3px solid #8b5cf6"><h4>Tándem perosvkita+Si</h4>Combina dos bandas prohibidas distintas. La capa superior de perovskita captura fotones de alta energía y transmite los de baja al Si. Supera el límite Shockley-Queisser de celda simple.</div>
+    <div class="mini" style="border-left:3px solid #8b5cf6"><h4>Ventanas solares inteligentes</h4>Semitransparentes. Permiten paso de luz visible y generan electricidad con el IR y UV. Aplicación en fachadas de edificios (BIPV) y techos de invernaderos agrovoltaicos.</div>
+    <div class="mini" style="border-left:3px solid #8b5cf6"><h4>IoT y dispositivos interior</h4>Altísima eficiencia bajo luz difusa (37.6% a 1000 lux). Ideal para alimentar sensores, wearables y gadgets sin baterías dentro de hogares u oficinas.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Compare las ventajas de las celdas tándem perovskita+silicio frente a las celdas de silicio monocristalino convencionales, mencionando eficiencias récord actuales y los principales obstáculos para su comercialización masiva.</div>
+</div>
+
+<!-- OPV -->
+<div class="block">
+  <span class="bh bh-p">Celdas Orgánicas (OPV)</span>
+  <div class="def def-p">Las OPV usan polímeros orgánicos semiconductores como material absorbente. Son flexibles, ligeras, semitransparentes y fabricables en láminas por impresión tipo roll-to-roll (potencial muy bajo costo). Su talón de Aquiles es la durabilidad y la eficiencia relativamente baja.</div>
+  <div class="item"><span class="dot dot-p"></span><span><strong>Eficiencia:</strong> 10–15% en laboratorio; menor en aplicaciones comerciales. Mucho menor que Si o perovskita.</span></div>
+  <div class="item"><span class="dot dot-p"></span><span><strong>Fortaleza especial:</strong> buen desempeño bajo luz difusa y baja irradiancia. Útiles en interior y en condiciones nubladas.</span></div>
+  <div class="item"><span class="dot dot-p"></span><span><strong>Durabilidad:</strong> sensibles al oxígeno, humedad y UV. Requieren encapsulado protector. Vida útil aún limitada vs. Si cristalino (25+ años).</span></div>
+  <div class="item"><span class="dot dot-p"></span><span><strong>Aplicaciones agrovoltaicas:</strong> en invernaderos, filtran longitudes de onda no usadas por las plantas (verde) y dejan pasar el azul y rojo útiles para la fotosíntesis.</span></div>
+  <div class="warn">⚠️ No confundir OPV (celdas orgánicas fotovoltaicas) con células de arseniuro de galio (GaAs), que son inorgánicas de alta eficiencia para aplicaciones espaciales, ni con células de silicio amorfo (Si-a), que también son película delgada pero inorgánicas.</div>
+</div>
+
+<!-- Células 3ra generación -->
+<div class="block">
+  <span class="bh bh-p">Células de 3ra Generación</span>
+  <div class="def def-p">Las células de 1ra generación (Si cristalino) y 2da (película delgada) tienen un límite teórico de eficiencia de ~33% (límite Shockley-Queisser). La 3ra generación busca superarlo aprovechando más del espectro solar.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #8b5cf6">
+      <h4>Células Tándem / Multiunión</h4>
+      Apilan múltiples uniones PN con distintos E<sub>g</sub> en orden decreciente. La superior absorbe fotones de alta energía, las inferiores capturan los de menor energía. Con 3 uniones (GaInP/GaAs/Ge): η=32.2%. Límite teórico: η=86.3% (número infinito de uniones).
+    </div>
+    <div class="mini" style="border-top:3px solid #8b5cf6">
+      <h4>Células de Banda Intermedia</h4>
+      Introduce una banda de energía intermedia (IB) dentro del band-gap mediante quantum dots (InGaAs). Permite absorber fotones de dos pasos de energía que normalmente no aprovechan. Límite teórico η=63.3%. Tecnología Stransky-Krastanow/Volmer-Weber. Aún experimental.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Explique por qué las células de una sola juntura están limitadas en eficiencia según el modelo Shockley-Queisser y cómo las células tándem superan dicho límite conceptualmente.</div>
+</div>
+
+<!-- ========= SECCIÓN 6: AGROVOLTAICOS ========= -->
+<div class="section-bar sb-green">🟢 BLOQUE VI — AGROVOLTAICOS: TECNOLOGÍAS, TIPOS DE PANELES Y APLICACIONES</div>
+
+<!-- Agrovoltaicos concepto -->
+<div class="block">
+  <span class="bh bh-g">¿Qué son los agrovoltaicos?</span>
+  <div class="def def-g">Los sistemas agrovoltaicos (también agrivoltaicos o agrofotovoltaicos) combinan producción agrícola y generación solar fotovoltaica en el mismo terreno. El uso dual del suelo incrementa la productividad agrícola hasta un 20% y la eficiencia energética simultáneamente.</div>
+  <div class="item"><span class="dot dot-g"></span><span><strong>Principio fundamental:</strong> los paneles se instalan a altura suficiente para permitir el paso de maquinaria y el crecimiento de cultivos, generando un microclima favorable (menor estrés térmico, menor evaporación).</span></div>
+  <div class="item"><span class="dot dot-g"></span><span><strong>Cultivos ideales:</strong> vegetales de hoja (lechuga, espinaca), fresas, frambuesas, uvas, café, flores. Todos prefieren sombra parcial y se benefician de reducción de golpes de calor.</span></div>
+  <div class="item"><span class="dot dot-g"></span><span><strong>Países líderes:</strong> Japón, Alemania, Francia, China y EE.UU. con aplicaciones en viñedos, arrozales y hortalizas.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique el concepto de "uso dual del suelo" en sistemas agrovoltaicos e identifique dos cultivos que se beneficien especialmente de este tipo de instalación, justificando su selección.</div>
+</div>
+
+<!-- Paneles semitransparentes -->
+<div class="block">
+  <span class="bh bh-g">Paneles semitransparentes</span>
+  <div class="def def-g">Permiten el paso parcial de luz solar para favorecer la fotosíntesis y a la vez generar electricidad. Son la tecnología central para invernaderos agrovoltaicos. Su transparencia es ajustable según el cultivo.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e"><h4>Si cristalino semitransparente</h4>Celdas espaciadas en vidrio templado. Huecos entre celdas dejan pasar luz. Eficiencia moderada. Los más usados en invernaderos.</div>
+    <div class="mini" style="border-top:3px solid #22c55e"><h4>Película delgada (CIGS/CdTe)</h4>Capas muy finas de material semiconductor sobre vidrio. Transparencia ajustable cambiando el espesor. Aplicación BIPV en ventanas.</div>
+    <div class="mini" style="border-top:3px solid #22c55e"><h4>Vidrio solar BIPV</h4>Capas fotovoltaicas integradas en vidrio arquitectónico normal. No parecen paneles. Para fachadas de edificios y tragaluces.</div>
+  </div>
+  <div class="warn">⚠️ No todos los espectros de luz son igualmente útiles para las plantas. Las OPV y perovskitas pueden diseñarse para filtrar el verde (no útil para fotosíntesis) y transmitir azul y rojo (máxima absorción por clorofila), maximizando tanto la electricidad como el crecimiento vegetal.</div>
+</div>
+
+<!-- Bifaciales y otros -->
+<div class="block">
+  <span class="bh bh-g">Paneles bifaciales, louvered y sistemas avanzados</span>
+  <div class="def def-g">Los paneles bifaciales capturan radiación en ambas caras, aprovechando la luz reflejada (albedo) del suelo o vegetación. Los paneles louvered (microespaciado) funcionan como "persianas solares", dejando pasar franjas de luz directa al cultivo.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-g"></span><span><strong>Bifaciales:</strong> ganancia adicional 5–30% según albedo del entorno. Construcción vidrio-vidrio (más durable). Funcionan mejor sobre suelos claros, agua o nieve. Instalación elevada (&gt;2 m) maximiza albedo. Eficiencia nominal puede superar 22%.</span></div>
+      <div class="item"><span class="dot dot-g"></span><span><strong>Flotavoltaicos:</strong> paneles bifaciales sobre estanques. El agua actúa como superficie reflectante Y reduce su evaporación hasta 30%.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-g"></span><span><strong>Louvered PV / microespaciado:</strong> celdas con separación o inclinación tipo persiana. Menor producción eléctrica/m² pero protegen cultivos de radiación excesiva. Combinables con tracking solar para ajustar sombra.</span></div>
+      <div class="item"><span class="dot dot-g"></span><span><strong>Sistemas híbridos agua-energía-cultivo:</strong> integran paneles + recolección de agua lluvia + riego goteo. Algunos usan paneles refrigerados por agua que luego se usa para irrigación.</span></div>
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-g"></span><span><strong>Agrovoltaicos IA + IoT:</strong> sensores analizan radiación, humedad y necesidades del cultivo; ajustan en tiempo real la inclinación de paneles (tracking), ventilación y riego. Máxima eficiencia dual.</span></div>
+</div>
+
+<!-- ========= SECCIÓN 7: SECTOR ELÉCTRICO PERÚ ========= -->
+<div class="section-bar sb-orange">🟠 BLOQUE VII — SECTOR ELÉCTRICO PERÚ: INDICADORES DIC. 2024 (MINEM-DGE)</div>
+
+<!-- Producción nacional -->
+<div class="block">
+  <span class="bh bh-o">Producción eléctrica dic. 2024</span>
+  <div class="def def-o">Al cierre de diciembre 2024, la producción nacional total (incluyendo sistemas aislados) fue de 5 497 GWh, un 2.5% más que dic. 2023. El 97% fue al mercado eléctrico y solo 3% a uso propio industrial.</div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Hidráulica:</strong> 3 367 GWh (61% del total). +2.9% vs. dic. 2023. Principal fuente del país.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Térmica:</strong> 1 621 GWh (30%). −6.2% (Gas natural redujo 10%). Menor dependencia del gas.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Eólica:</strong> 374 GWh (7%). <strong>+48%</strong> vs. dic. 2023 — el mayor salto.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Solar:</strong> 135 GWh (2%). <strong>+20%</strong> vs. dic. 2023.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Renovables no convencionales (solar+eólica+bagazo+biogás):</strong> 572 GWh en dic. 2024 = 10.4% del total nacional. Era 7.9% en dic. 2023 → crecimiento acelerado.</span></div>
+  <div class="rx">Producción acumulada ene-dic 2024: 63 565 GWh (+2.4% vs. 2023)<br>Solar acum.: 1 263 GWh (+32%) | Eólica acum.: 3 915 GWh (+66%)</div>
+  <div class="exam">🎯 EXAMEN: Con base en los datos del MINEM para diciembre 2024, evalúe la participación de las energías renovables no convencionales en la matriz eléctrica peruana y compare la tasa de crecimiento de la solar y la eólica.</div>
+</div>
+
+<!-- Zona y proyectos -->
+<div class="block">
+  <span class="bh bh-o">Distribución geográfica y proyectos en desarrollo</span>
+  <div class="def def-o">La zona Centro concentra el 77% de la generación nacional (Lima, Huancavelica, Junín, Huánuco). El Sur es la zona de mayor crecimiento (+19% dic. 2024) gracias a la energía solar de Ica y eólica de Arequipa.</div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Proyectos solares en desarrollo (dic. 2024):</strong> más del 40% de la capacidad en construcción/estudios corresponde a centrales fotovoltaicas. Inversión total proyectos solares: USD 1 921 millones.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>C.S. Illa:</strong> 385 MW, USD 313.8M. La más grande en estudios. Ubicación: Ica/sur (alta irradiación).</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>C.S. Hanaqpampa:</strong> 300 MW | C.S. Continua Misti: 300 MW | C.S. Solimana: 250 MW | C.S. San Martín Solar: 252 MW.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Concesiones recientes (nov. 2024):</strong> C.S.F. Pampa Salinas I y II, 243 MW cada una, en Moquegua.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Ica</strong> fue la región con mayor crecimiento anual 2024: +62% (2293→3719 GWh), impulsada por eólica y solar.</span></div>
+  <div class="warn">⚠️ El potencial solar de la costa sur peruana (Ica, Arequipa, Moquegua, Tacna) es de los más altos del mundo por la irradiación del desierto de Atacama. Esto hace viable sistemas agrovoltaicos a gran escala combinando agricultura de exportación con generación solar.</warn>
+</div>
+
+<!-- ========= TABLA INTEGRADORA ========= -->
+<div class="section-bar sb-gray">⚫ TABLA INTEGRADORA — COMPARATIVA DE TECNOLOGÍAS FOTOVOLTAICAS</div>
+
+<div class="block s3">
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Tecnología</th>
+        <th>Eficiencia actual</th>
+        <th>Costo relativo</th>
+        <th>Durabilidad</th>
+        <th>Transparencia</th>
+        <th>Aplicación agrovoltaica</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Si monocristalino</strong></td>
+        <td>16–25%</td>
+        <td>Medio-alto</td>
+        <td>25+ años</td>
+        <td>No (opaco)</td>
+        <td>Bifacial elevado, louvered</td>
+        <td>Maduro</td>
+      </tr>
+      <tr>
+        <td><strong>Si policristalino</strong></td>
+        <td>12–13%</td>
+        <td>Medio</td>
+        <td>25+ años</td>
+        <td>No</td>
+        <td>Estructuras estándar</td>
+        <td>Maduro</td>
+      </tr>
+      <tr>
+        <td><strong>Si amorfo</strong></td>
+        <td>6–8%</td>
+        <td>Bajo</td>
+        <td>Limitada</td>
+        <td>Sí (módulos BIPV)</td>
+        <td>Módulos semitransparentes</td>
+        <td>Maduro</td>
+      </tr>
+      <tr>
+        <td><strong>CIGS / CdTe</strong></td>
+        <td>12–18%</td>
+        <td>Medio</td>
+        <td>15–20 años</td>
+        <td>Ajustable</td>
+        <td>Invernaderos BIPV</td>
+        <td>Comercial</td>
+      </tr>
+      <tr>
+        <td><strong>OPV (orgánica)</strong></td>
+        <td>10–15% lab</td>
+        <td>Potencialmente muy bajo</td>
+        <td>Reducida</td>
+        <td>Alta y ajustable</td>
+        <td>Invernaderos espectrales</td>
+        <td>Emergente</td>
+      </tr>
+      <tr>
+        <td><strong>Perovskita</strong></td>
+        <td>&gt;26% (celda); 33.9% tándem+Si</td>
+        <td>Bajo materia prima</td>
+        <td>En desarrollo</td>
+        <td>Sí (semitransparente)</td>
+        <td>Ventanas solares, invernaderos</td>
+        <td>Investigación→escala</td>
+      </tr>
+      <tr>
+        <td><strong>Tándem multiunión</strong></td>
+        <td>32.2% (3 uniones); teórico 86.3%</td>
+        <td>Muy alto</td>
+        <td>Alta (espacio)</td>
+        <td>No</td>
+        <td>Concentradores (CPV)</td>
+        <td>Comercial (espacial)</td>
+      </tr>
+      <tr>
+        <td><strong>Banda intermedia</strong></td>
+        <td>Teórico 63.3%</td>
+        <td>Muy alto</td>
+        <td>N/D</td>
+        <td>No</td>
+        <td>Experimental</td>
+        <td>Lab/Investigación</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: La eficiencia de una celda en laboratorio siempre es mayor que la del módulo comercial, y este mayor que la del sistema instalado. Las pérdidas acumuladas por temperatura, dispersión de celdas, cableado, sombreados parciales e inversores reducen la eficiencia del sistema a 60–80% de la eficiencia nominal de la celda. En Perú, con el potencial solar de la costa sur, incluso tecnologías de 15–18% de eficiencia son altamente rentables por las altas horas de sol (HSP &gt; 6 h/día en Ica-Arequipa).</div>
+</div>
+
+<!-- ========= QUIZ ========= -->
+<div id="quiz-section">
+  <div class="quiz-wrap">
+    <div class="quiz-header">
+      <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+      <p>Marca tu respuesta y descubre si es correcta inmediatamente</p>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label" id="prog-label">Respondidas: 0/10 | Aciertos: 0</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10 — Semiconductores</p>
+      <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el silicio (Si) como semiconductor es INCORRECTA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) El Si tiene 4 electrones de valencia que forman enlaces covalentes con átomos vecinos.</button>
+        <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Al dopar Si con fósforo se obtiene un semiconductor tipo N con electrones como portadores mayoritarios.</button>
+        <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Un semiconductor tipo P conduce principalmente mediante electrones libres donados por el boro.</button>
+        <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) La banda prohibida del Si es de aproximadamente 1.12 eV a 300 K.</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10 — Efecto fotovoltaico</p>
+      <p class="qtext">Un fotón incide sobre una celda solar de silicio. ¿Qué sucede si la energía del fotón es MENOR que el band-gap del Si (1.12 eV)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Genera un par electrón-hueco pero sin suficiente energía para llegar al circuito externo.</button>
+        <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) Es absorbido completamente y el exceso de energía se convierte en calor.</button>
+        <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Genera múltiples pares electrón-hueco de menor energía mediante efecto Auger.</button>
+        <button class="qbtn" data-q="2" data-opt="d" data-correct="true">D) Pasa directamente a través de la célula sin generar portadores, siendo inaprovechado.</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10 — Parámetros eléctricos</p>
+      <p class="qtext">Si la temperatura de una célula solar de silicio aumenta de 25°C a 55°C, ¿cuál de los siguientes parámetros experimenta la disminución más significativa?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) La corriente de cortocircuito (I<sub>SC</sub>), que cae aproximadamente un 15%.</button>
+        <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) La tensión de circuito abierto (V<sub>OC</sub>), que disminuye ~0.4% por cada °C de incremento.</button>
+        <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) La eficiencia cuántica en longitudes de onda mayores a 800 nm.</button>
+        <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) La resistencia paralela (R<sub>p</sub>), que se reduce a cero a alta temperatura.</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10 — Fabricación</p>
+      <p class="qtext">Durante el corte de obleas de silicio a partir del lingote monocristalino, se pierde aproximadamente el ____% del material, lo que representa uno de los principales factores de costo en la fabricación de células solares.</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) 10–15%, principalmente en el proceso de decapado químico.</button>
+        <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) 20–25%, por errores de alineación de la sierra multihilo.</button>
+        <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Aproximadamente el 50%, dado que el ancho del corte (kerf) es similar al espesor de la oblea.</button>
+        <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Menos del 5%, gracias a la precisión de los equipos modernos de corte láser.</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10 — Agrovoltaicos</p>
+      <p class="qtext">¿Cuál es la principal ventaja de los paneles fotovoltaicos bifaciales instalados en sistemas agrovoltaicos elevados, en comparación con paneles estándar monofaciales?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Son completamente transparentes, permitiendo paso total de luz solar al cultivo debajo.</button>
+        <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Eliminan la necesidad de sistemas de seguimiento solar (tracking) al capturar luz en todas direcciones.</button>
+        <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) Capturan radiación reflejada (albedo) del suelo o vegetación en su cara posterior, incrementando la producción entre 5% y 30% sin ocupar área adicional.</button>
+        <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Funcionan exclusivamente en condiciones de baja irradiancia difusa, siendo ineficientes bajo irradiación directa.</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10 — Perovskita</p>
+      <p class="qtext">En cuanto a la eficiencia de las celdas de perovskita en 2023–2025, ¿cuál de las siguientes afirmaciones es CORRECTA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Las celdas individuales de perovskita ya alcanzan eficiencias superiores al 40% en condiciones de laboratorio estándar.</button>
+        <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) La configuración tándem perovskita+silicio logró eficiencias de ~33.9% certificadas por NREL, superando ampliamente al silicio convencional.</button>
+        <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Las celdas de perovskita tienen peor eficiencia que el silicio policristalino en todas las condiciones de medición.</button>
+        <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Las celdas de perovskita flexibles tándem no han superado el 20% de eficiencia, siendo aún inferiores al silicio rígido.</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10 — Sector Eléctrico Perú</p>
+      <p class="qtext">Según los indicadores del MINEM para diciembre 2024, ¿cuál fue la fuente renovable no convencional con mayor crecimiento porcentual en la producción eléctrica peruana respecto a diciembre 2023?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Solar fotovoltaica, con un incremento de +66% gracias a los proyectos en Ica y Arequipa.</button>
+        <button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) Eólica, con un incremento de +48% en diciembre 2024 respecto al mismo mes de 2023.</button>
+        <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) Bagazo/biogás, que duplicó su producción por la expansión de ingenios azucareros en La Libertad.</button>
+        <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Hidráulica, con +48% por el inicio de operaciones de la central San Gabán III en Puno.</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10 — OPV y Perovskita (comparación)</p>
+      <p class="qtext">¿Cuál es la principal diferencia entre las celdas OPV (orgánicas) y las de perovskita en términos de aplicabilidad para agrovoltaicos interiores (invernaderos)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Las OPV son más eficientes que la perovskita bajo irradiancia directa pero peores bajo luz difusa.</button>
+        <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Solo las OPV pueden ser semitransparentes; la perovskita siempre es opaca.</button>
+        <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Las OPV tienen mayor eficiencia en laboratorio (>26%) mientras que la perovskita alcanza solo 10-15%.</button>
+        <button class="qbtn" data-q="8" data-opt="d" data-correct="true">D) Las OPV tienen buen desempeño bajo luz difusa y son flexibles, ideales para recubrir superficies curvas de invernaderos; la perovskita ofrece mayor eficiencia pero con problemas de estabilidad aún por resolver.</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10 — Sistemas fotovoltaicos</p>
+      <p class="qtext">En un sistema fotovoltaico doméstico con régimen nocturno, ¿cuál componente cumple la función DUAL de garantizar la carga adecuada de las baterías Y evitar que estas se descarguen a través de los paneles durante la noche?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) El diodo de bloqueo instalado en la caja de conexiones del arreglo fotovoltaico.</button>
+        <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) El inversor CC/CA, que interrumpe el flujo de corriente inverso durante la noche.</button>
+        <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) El regulador/controlador de carga, análogo al sistema de carga de batería de un automóvil.</button>
+        <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) El fusible de protección del banco de baterías, que limita la corriente máxima en ambos sentidos.</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10 — Integración: Perú + Fotovoltaica</p>
+      <p class="qtext">Considerando el contexto peruano (costa sur: irradiación &gt;6 HSP/día en Ica-Arequipa), ¿cuál combinación tecnológica sería más adecuada para un proyecto que busca generar energía eléctrica Y mantener productividad agrícola de exportación (espárragos, uvas)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Paneles de Si amorfo a nivel del suelo, ya que son los más baratos y permiten cultivo entre filas.</button>
+        <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Celdas de banda intermedia (quantum dots), pues tienen el mayor límite teórico de eficiencia (63.3%).</button>
+        <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) Sistema agrovoltaico con paneles bifaciales monocristalinos elevados a 3–5 m, con microespaciado o louvered PV y seguimiento solar, integrado con riego por goteo y sensores IoT.</button>
+        <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Paneles de perovskita semitransparente a nivel de suelo sin estructura elevada, aprovechando su alta eficiencia y transparencia para no bloquear los cultivos.</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div class="results-panel" id="results">
+      <h3 id="res-score"></h3>
+      <p id="res-msg"></p>
+      <button onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="ft-bar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">1. Celula_Solar.pdf — Fenómeno fotovoltaico, estructuras, fabricación Si cristalino, parámetros I-V, sistemas FV</span>
+  <span class="fc">2. Celdas_perovskita.pdf — Eficiencias récord 2023–2025, tándem, dispositivos flexibles, IoT</span>
+  <span class="fc">3. AGROVOLTAICOS.pdf — Tecnologías agrovoltaicas, paneles semitransparentes, bifaciales, OPV, louvered PV</span>
+  <span class="fc">4. Sector_Electrico_del_Peru_2025.pdf — MINEM-DGE, indicadores dic. 2024, producción por fuente, zona, región y proyectos en desarrollo</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1:{correct:'c',explanation:{
+    a:'Correcto: el Si tiene 4 electrones de valencia (grupo IVA de la tabla periódica), clave para sus enlaces covalentes.',
+    b:'Correcto: el fósforo (5 electrones de valencia) dona el 5° electrón libre → semiconductor tipo N.',
+    c:'INCORRECTO. El boro es un aceptor, no donante. Al tener 3 electrones de valencia, crea un "hueco" (ausencia de electrón) que actúa como portador positivo. El semiconductor tipo P conduce mediante huecos, NO mediante electrones libres.',
+    d:'Correcto: E_g(Si)=1.12 eV a 300 K. Esta es la brecha que un fotón debe superar para generar un par e⁻-hueco.'
+  }},
+  2:{correct:'d',explanation:{
+    a:'Incorrecto. Para generar un par e⁻-hueco se necesita E_fotón ≥ E_g. Si E_fotón < E_g, el electrón no puede cruzar la banda prohibida, por lo que no se genera ningún par.',
+    b:'Incorrecto. Esta situación describe lo que pasa cuando E_fotón > E_g (exceso de energía → calor). Cuando E_fotón < E_g, el fotón simplemente no interactúa.',
+    c:'Incorrecto. El efecto Auger es un mecanismo de recombinación, no de generación múltiple. No aplica aquí.',
+    d:'CORRECTO. Un fotón con energía menor que el band-gap es transparente para el semiconductor: pasa a través sin ser absorbido ni generar portadores. Es una pérdida inevitable de la célula de una sola juntura.'
+  }},
+  3:{correct:'b',explanation:{
+    a:'Incorrecto. La I_SC es casi insensible a la temperatura (aumenta ligeramente, ~0.06%/°C). No cae un 15%.',
+    b:'CORRECTO. V_OC disminuye ~0.4%/°C (para Si: ~2.3 mV/°C). En 30°C de incremento (25→55°C), V_OC cae ~12%, siendo el parámetro más afectado. También el FF cae ~0.04%/°C y la eficiencia η ~0.5%/°C.',
+    c:'Incorrecto. La eficiencia cuántica espectral varía con temperatura, pero no de forma tan pronunciada en ese rango.',
+    d:'Incorrecto. La R_p (resistencia paralelo) tiene un comportamiento diferente y no se reduce a cero con temperatura en condiciones normales de operación.'
+  }},
+  4:{correct:'c',explanation:{
+    a:'Incorrecto. El decapado (NaOH) elimina contaminantes superficiales pero no implica pérdida de material significativa del lingote.',
+    b:'Incorrecto. No se trata de errores de alineación sino de una limitación física del proceso de corte.',
+    c:'CORRECTO. La sierra multihilo tiene un ancho de corte (kerf) de ~0.3 mm, similar al espesor final de la oblea (~0.3 mm). Por tanto, por cada oblea obtenida se pierde una cantidad equivalente de material. La pérdida llega al 50%, encareciendo significativamente el producto final.',
+    d:'Incorrecto. El corte láser de precisión en fabricación de obleas de Si cristalino está en desarrollo pero no es la tecnología predominante actual, y la pérdida no es &lt;5%.'
+  }},
+  5:{correct:'c',explanation:{
+    a:'Incorrecto. Los paneles bifaciales no son transparentes; tienen vidrio en ambas caras pero las celdas siguen siendo opacas. Son distintos de los paneles semitransparentes.',
+    b:'Incorrecto. Los bifaciales aún se benefician del seguimiento solar (tracking) para maximizar la captación de luz directa en la cara frontal.',
+    c:'CORRECTO. La ganancia por albedo (luz reflejada por suelo, vegetación o agua que incide en la cara posterior) puede incrementar la producción entre 5% y 30% sin costo adicional en terreno. En agrovoltaicos, la instalación elevada maximiza esta ganancia y permite el paso de maquinaria.',
+    d:'Incorrecto. Los bifaciales funcionan excelentemente bajo irradiación directa en la cara frontal. Su ventaja adicional es el albedo; no están limitados a luz difusa.'
+  }},
+  6:{correct:'b',explanation:{
+    a:'Incorrecto. Las celdas individuales de perovskita superan el 26% en área pequeña (0.1 cm²), pero aún no alcanzan el 40% en condiciones estándar.',
+    b:'CORRECTO. La configuración tándem perovskita+silicio logró 33.9% certificado por NREL (Longi, 2023). Un avance de abril 2025 logró 29.88% en celdas tándem flexibles. Son resultados que superan ampliamente al Si convencional (máx. ~25%).',
+    c:'Incorrecto. La perovskita ya supera al policristalino (12-13%) incluso en celdas individuales, y muchísimo en configuración tándem.',
+    d:'Incorrecto. Las celdas de perovskita flexibles tándem ya superaron el 29.88% (abril 2025), superando significativamente al silicio rígido convencional.'
+  }},
+  7:{correct:'b',explanation:{
+    a:'Incorrecto. La solar creció +20% en diciembre 2024 (no +66%). El +66% corresponde a la eólica acumulada enero-diciembre 2024, no al mes de diciembre.',
+    b:'CORRECTO. La energía eólica creció +48% en diciembre 2024 vs. diciembre 2023 (de 253 a 374 GWh), siendo el mayor incremento porcentual entre todas las fuentes ese mes.',
+    c:'Incorrecto. El bagazo/biogás creció +13% en diciembre 2024, mucho menos que la eólica. No hubo duplicación.',
+    d:'Incorrecto. La hidráulica creció solo +3% en diciembre 2024. San Gabán III estaba al 79% de avance en construcción, no en operación completa.'
+  }},
+  8:{correct:'d',explanation:{
+    a:'Incorrecto. Es al revés: las OPV tienen buen desempeño bajo luz difusa y baja irradiancia, mientras la perovskita es más eficiente bajo irradiación directa intensa.',
+    b:'Incorrecto. Tanto OPV como perovskita pueden ser semitransparentes. La perovskita semitransparente es precisamente una de sus aplicaciones clave en ventanas y agrovoltaicos.',
+    c:'Incorrecto. La eficiencia es exactamente al revés: perovskita supera 26% en laboratorio; OPV alcanza 10–15%. Las OPV son más flexibles y baratas, pero menos eficientes.',
+    d:'CORRECTO. Las OPV son flexibles, livianas, fabricables en rollo, con buen desempeño bajo luz difusa → ideales para superficies curvas de invernaderos. La perovskita ofrece mayor eficiencia pero su estabilidad ante humedad, calor y oxígeno sigue siendo el principal obstáculo para aplicaciones de largo plazo en exteriores.'
+  }},
+  9:{correct:'c',explanation:{
+    a:'Incorrecto. El diodo de bloqueo evita el flujo nocturno de corriente de la batería hacia los paneles, pero no regula el régimen de carga (no controla carga excesiva).',
+    b:'Incorrecto. El inversor convierte CC a CA para cargas domésticas, pero no tiene la función de proteger la batería contra sobrecarga ni descarga nocturna.',
+    c:'CORRECTO. El controlador/regulador de carga cumple dos funciones críticas: (1) evita sobrecarga de la batería durante el día, y (2) bloquea el flujo inverso nocturno de corriente hacia los paneles. Sin él, la batería puede sobrecargarse (reduciendo vida útil) o descargarse por los paneles en la noche.',
+    d:'Incorrecto. El fusible es un elemento de seguridad pasivo que protege contra cortocircuitos, pero no regula el régimen de carga ni bloquea la descarga nocturna activamente.'
+  }},
+  10:{correct:'c',explanation:{
+    a:'Incorrecto. Si amorfo solo tiene 6-8% de eficiencia. A nivel del suelo imposibilita el cultivo debajo. No es la combinación óptima para un proyecto de exportación.',
+    b:'Incorrecto. Las celdas de banda intermedia (quantum dots) aún están en fase de laboratorio/investigación, sin escala comercial. Su límite teórico de 63.3% no se ha demostrado en práctica.',
+    c:'CORRECTO. Esta combinación maximiza todos los beneficios: bifaciales monocristalinos aprovechan la alta irradiación de la costa sur (+albedo del suelo); la elevación a 3-5 m permite paso de maquinaria y cultivos altos; el microespaciado/louvered controla la sombra según necesidad del cultivo; el tracking optimiza la captación; el riego por goteo + IoT completa el sistema agrovoltaico inteligente. Es la solución comercialmente viable HOY para Ica o Arequipa.',
+    d:'Incorrecto. La perovskita aún tiene problemas de estabilidad en condiciones de alta temperatura y humedad (problemas graves en la costa desértica peruana), y no existe comercialmente a escala de proyecto agrícola. La instalación a nivel de suelo sin elevación no permitiría el paso de maquinaria.'
+  }}
+};
+
+let answered=0, correct=0;
+
+document.querySelector('.quiz-wrap').addEventListener('click',function(e){
+  const btn=e.target.closest('.qbtn');
+  if(!btn||btn.disabled)return;
+  const q=btn.dataset.q;
+  const isCorrect=btn.dataset.correct==='true';
+  const fb=document.getElementById('fb'+q);
+  const correctKey=feedbacks[q].correct;
+  
+  document.querySelectorAll('.qbtn[data-q="'+q+'"]').forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.correct==='true') b.classList.add('correct');
+    else if(b===btn) b.classList.add('incorrect');
+  });
+
+  const exp=feedbacks[q].explanation;
+  const chosenKey=btn.dataset.opt;
+  const chosenExp=exp[chosenKey];
+  
+  if(isCorrect){
+    fb.className='qfeedback ok';
+    fb.innerHTML='✅ ¡Correcto! '+chosenExp;
+    correct++;
+  } else {
+    fb.className='qfeedback bad';
+    const correctBtn=document.querySelector('.qbtn[data-q="'+q+'"][data-correct="true"]');
+    const correctLetter=correctBtn?correctBtn.dataset.opt.toUpperCase():'?';
+    fb.innerHTML='❌ Incorrecto. La respuesta correcta es la opción '+correctLetter+'. '+exp[correctKey];
+  }
+  fb.style.display='block';
+  answered++;
+  
+  const pct=Math.round((correct/answered)*100);
+  document.getElementById('prog-label').textContent='Respondidas: '+answered+'/10 | Aciertos: '+correct+' ('+pct+'%)';
+  document.getElementById('prog-bar').style.width=(answered/10*100)+'%';
+  
+  if(answered===10){
+    const panel=document.getElementById('results');
+    panel.style.display='block';
+    document.getElementById('res-score').textContent=correct+' / 10 correctas';
+    if(correct<=4){
+      panel.style.background='#fee2e2';panel.style.color='#991b1b';
+      document.getElementById('res-msg').textContent='Necesitas repasar el material — revisa los bloques temáticos y vuelve a intentarlo.';
+    }else if(correct<=7){
+      panel.style.background='#fef9c3';panel.style.color='#713f12';
+      document.getElementById('res-msg').textContent='¡Buen avance, sigue repasando! Enfócate en los bloques donde fallaste.';
+    }else{
+      panel.style.background='#dcfce7';panel.style.color='#14532d';
+      document.getElementById('res-msg').textContent='¡Excelente dominio del tema! Estás listo para el examen.';
+    }
+  }
+});
+
+function resetQuiz(){
+  answered=0;correct=0;
+  document.getElementById('prog-label').textContent='Respondidas: 0/10 | Aciertos: 0';
+  document.getElementById('prog-bar').style.width='0%';
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.disabled=false;
+    b.classList.remove('correct','incorrect');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f=>f.style.display='none');
+  document.getElementById('results').style.display='none';
+}
+</script>
+</body>
+</html>

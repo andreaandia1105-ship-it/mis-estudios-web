@@ -1,0 +1,658 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.sec{grid-column:1/-1;background:#0f1e3a;color:#e2e8f0;border-radius:9px;padding:8px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px}
+.titbar{grid-column:1/-1;background:#0f1e3a;border-radius:12px;padding:14px 18px}
+.titbar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:3px}
+.titbar p{font-size:11px;color:#94a3b8;margin-bottom:7px}
+.pill-row{display:flex;flex-wrap:wrap;gap:5px}
+.pill{font-size:11px;padding:2px 9px;border-radius:20px;display:inline-block;background:#1e3a5f;color:#93c5fd;border:0.5px solid #2563eb}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-pink{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd}
+.bh-green{background:#14532d;color:#86efac}
+.bh-red{background:#450a0a;color:#fca5a5}
+.bh-yellow{background:#422006;color:#fef08a}
+.bh-purple{background:#2e1065;color:#c4b5fd}
+.bh-teal{background:#042f2e;color:#5eead4}
+.bh-orange{background:#431407;color:#fed7aa}
+.bh-gray{background:#1e293b;color:#94a3b8}
+.bh-pink{background:#4a044e;color:#f0abfc}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.55}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#22c55e}
+.def-red{border-color:#ef4444}
+.def-yellow{border-color:#eab308}
+.def-purple{border-color:#a855f7}
+.def-teal{border-color:#14b8a6}
+.def-orange{border-color:#f97316}
+.def-pink{border-color:#ec4899}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-red{background:#ef4444}
+.dot-yellow{background:#eab308}
+.dot-teal{background:#14b8a6}
+.dot-orange{background:#f97316}
+.dot-purple{background:#a855f7}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin-bottom:8px}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-bottom:8px}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:9px 11px;margin-top:8px}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#ca8a04}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.fbox{background:var(--color-background-secondary);padding:4px 9px;border-radius:6px;font-size:11px;border:0.5px solid var(--color-border-tertiary)}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);font-weight:600;text-align:left}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;line-height:1.4}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;margin-bottom:4px}
+.stat-bar-fill{height:100%;border-radius:20px}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;margin-right:4px}
+.fc{font-size:11px;color:#94a3b8}
+.nb{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.nb-b{background:#1e3a5f;color:#93c5fd}
+.nb-r{background:#450a0a;color:#fca5a5}
+.nb-g{background:#14532d;color:#86efac}
+.nb-y{background:#422006;color:#fef08a}
+.qcard{margin-bottom:14px;padding:12px;background:var(--color-background-secondary);border-radius:10px;border:0.5px solid var(--color-border-tertiary)}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:3px;font-family:'Oswald',sans-serif}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;color:var(--color-text-primary);line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:7px 11px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){.qfeedback.ok{background:#14532d;color:#86efac}.qfeedback.fail{background:#450a0a;color:#fca5a5}}
+#quiz-progress{font-size:12px;color:var(--color-text-secondary);margin:8px 0 4px}
+#result-panel{display:none;padding:14px;border-radius:10px;margin-top:12px;font-size:13px;text-align:center}
+#reset-btn{margin-top:10px;padding:7px 18px;border-radius:8px;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);cursor:pointer;font-size:12px;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+#reset-btn:hover{background:var(--color-background-tertiary)}
+</style>
+
+<div class="cv">
+
+<div class="titbar">
+  <h1>🔊 UNIDAD VII — ASPECTOS GENERALES DE RUIDO AMBIENTAL</h1>
+  <p>Contaminación Atmosférica · Dra. Mabel Carhuancho · Universidad Nacional Agraria La Molina · Ciclo 2026</p>
+  <div class="pill-row">
+    <span class="pill">Sonido y Física Acústica</span>
+    <span class="pill">Nivel de Presión Sonora</span>
+    <span class="pill">Fisiología del Oído</span>
+    <span class="pill">Contaminación Acústica</span>
+    <span class="pill">Sonómetros</span>
+    <span class="pill">Efectos en Salud</span>
+    <span class="pill">Propagación</span>
+    <span class="pill">Mitigación</span>
+  </div>
+</div>
+
+<div class="sec">🎵 SECCIÓN 1 — NATURALEZA FÍSICA DEL SONIDO (Diap. 3–9)</div>
+
+<div class="block">
+  <span class="bh bh-blue">Sonido: Definición Física (Diap. 3)</span>
+  <div class="def def-blue">El sonido es un fenómeno físico producido cuando un objeto en vibración altera las partículas de un medio elástico (aire, líquido o sólido), generando cambios de presión que el oído puede percibir. Sin medio, no hay sonido — un árbol que cae sin nadie alrededor no produce "ruido" en sentido subjetivo.</div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>Medio elástico:</b> imprescindible. En el vacío las moléculas no tienen con qué transmitir la perturbación, por eso no hay sonido en el espacio exterior.</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>Ondas longitudinales:</b> las partículas se comprimen y expanden en la misma dirección de propagación, alternando zonas de compresión y rarefacción.</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>Velocidad en el aire:</b> ~343 m/s a 20°C; varía con temperatura y densidad del medio (mayor en sólidos que en gases).</div></div>
+  <div class="exam">🎯 EXAMEN: Explique qué condiciones físicas son necesarias para que exista sonido y por qué en el vacío no se propaga ninguna onda sonora.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Propiedades Físicas (Diap. 5–7)</span>
+  <div class="def def-teal">El sonido se caracteriza por cuatro propiedades físicas medibles: presión, frecuencia, longitud de onda y velocidad. Comprender cada propiedad es clave para interpretar cualquier medición acústica.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <b>Presión Sonora (p)</b><br>
+      Variación de la presión atmosférica generada por la onda. El oído humano la percibe en el rango de 20×10⁻⁶ Pa a 20 Pa. Es la magnitud medida por el sonómetro.
+    </div>
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <b>Frecuencia (f) — Hz</b><br>
+      N° de oscilaciones de presión por segundo. Determina el "tono" percibido: bajas frecuencias = sonido grave; altas = sonido agudo. Rango audible: 20–20,000 Hz.
+    </div>
+    <div class="mini" style="border-top:3px solid #a855f7">
+      <b>Longitud de onda (λ)</b><br>
+      Distancia entre dos picos de onda sucesivos. Relación inversa con la frecuencia: λ = v/f. Frecuencias bajas tienen λ largas; altas frecuencias, λ cortas.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <b>Velocidad (v)</b><br>
+      Tasa a la que se propaga la onda. En aire a 20°C: ~343 m/s. Aumenta con temperatura (v ≈ 331 + 0.6·T °C m/s) y es mayor en líquidos y sólidos.
+    </div>
+  </div>
+  <div class="rx">λ = v / f &nbsp;|&nbsp; v(aire) ≈ 331 + 0.6·T(°C) m/s</div>
+  <div class="exam">🎯 EXAMEN: Si una fuente emite un tono a 500 Hz y la velocidad del sonido es 343 m/s, ¿cuál es su longitud de onda? Explique qué representa físicamente ese valor.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Infrasonidos y Ultrasonidos (Diap. 8)</span>
+  <div class="def def-purple">El oído humano sólo percibe sonidos entre 20 Hz y 20,000 Hz. Fuera de ese rango existen dos categorías imperceptibles que, sin embargo, tienen efectos físicos reales y aplicaciones tecnológicas.</div>
+  <div class="item"><div class="dot dot-purple"></div><div><b>Infrasonidos (&lt;20 Hz):</b> generados por terremotos, motores diesel, ventilación industrial. No se oyen pero pueden producir fatiga, desorientación y resonancia en estructuras.</div></div>
+  <div class="item"><div class="dot dot-purple"></div><div><b>Ultrasonidos (&gt;20,000 Hz):</b> usados en ecografías médicas, control de plagas, limpieza industrial y sonar submarino. Algunas especies (murciélagos, delfines) los usan para ecolocalización.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "inaudible" con "inexistente". Los infrasonidos y ultrasonidos tienen energía y pueden generar daños materiales (erosión por cavitación ultrasónica) aunque el ser humano no los perciba.</div>
+  <div class="exam">🎯 EXAMEN: ¿En qué se diferencian los infrasonidos de los ultrasonidos? Mencione una fuente de cada uno en el contexto industrial peruano.</div>
+</div>
+
+<div class="sec">👂 SECCIÓN 2 — FISIOLOGÍA DEL OÍDO Y PERCEPCIÓN AUDITIVA (Diap. 10–13)</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Anatomía y Fisiología del Oído (Diap. 10)</span>
+  <div class="def def-green">El oído humano convierte la energía mecánica de las ondas sonoras en señales eléctricas que el cerebro interpreta. Se estructura en tres secciones funcionales que amplifican y transducen la señal progresivamente.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #22c55e">
+      <b>Oído externo</b><br>
+      Pabellón auditivo capta y dirige el sonido. El canal auditivo actúa como resonador (máxima sensibilidad ~3,500 Hz). El tímpano convierte la presión sonora en vibración mecánica.
+    </div>
+    <div class="mini" style="border-left:3px solid #3b82f6">
+      <b>Oído medio (huesecillos)</b><br>
+      Martillo, yunque y estribo amplifican 22–30 veces la vibración. La trompa de Eustaquio equilibra la presión entre el medio y la faringe. Primer filtro ante sonidos intensos.
+    </div>
+    <div class="mini" style="border-left:3px solid #a855f7">
+      <b>Oído interno</b><br>
+      Cóclea (caracol): fluido endolinfático convierte vibración en impulso eléctrico vía células ciliadas del órgano de Corti. Nervio auditivo transporta la señal al córtex cerebral.
+    </div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Onda sonora</div><div class="farrow">→</div>
+    <div class="fbox">Pabellón → Canal</div><div class="farrow">→</div>
+    <div class="fbox">Tímpano vibra</div><div class="farrow">→</div>
+    <div class="fbox">Huesecillos amplifican</div><div class="farrow">→</div>
+    <div class="fbox">Cóclea transducción</div><div class="farrow">→</div>
+    <div class="fbox">Nervio auditivo</div><div class="farrow">→</div>
+    <div class="fbox">Cerebro</div>
+  </div>
+  <div class="warn">⚠️ DATO CRÍTICO-OMS: Más del 5% de la población mundial padece pérdida de audición discapacitante. Para 2050 se proyectan más de 700 millones de afectados. El 80% vive en países de ingresos bajos y medianos como Perú.</div>
+  <div class="exam">🎯 EXAMEN: Explique paso a paso cómo un sonido de 80 dBA generado por tráfico vehicular en Lima se transforma en una señal nerviosa que llega al cerebro, identificando las estructuras anatómicas en cada etapa.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Campo Auditivo y Sensaciones (Diap. 12–13)</span>
+  <div class="def def-yellow">El campo auditivo no es uniforme: la sensibilidad varía significativamente con la frecuencia. Esta variabilidad obliga a usar escalas de ponderación (dBA) en lugar de medir presión pura.</div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Rango conversacional (500–5,000 Hz):</b> zona de mayor agudeza auditiva — ahí se concentran los sonidos del habla humana. Pérdidas en este rango causan aislamiento social.</div></div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Sonoridad:</b> percepción subjetiva de intensidad; depende de amplitud y frecuencia simultáneamente. No es lineal: duplicar la intensidad física no duplica la sensación percibida.</div></div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Tono (altura):</b> percepción de grave/agudo, directamente ligada a la frecuencia. El oído es más sensible entre 500 Hz y 5 kHz.</div></div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Timbre:</b> cualidad compleja que diferencia instrumentos a igual frecuencia; depende de los armónicos o sobretonos presentes en la señal.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la ponderación A (dBA) se aplica en mediciones de ruido laboral y ambiental en lugar de medir simplemente la presión sonora en Pa?</div>
+</div>
+
+<div class="sec">📐 SECCIÓN 3 — MAGNITUDES Y FÓRMULAS ACÚSTICAS (Diap. 15–24)</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Intensidad y Presión Sonora (Diap. 15)</span>
+  <div class="def def-yellow">La intensidad sonora (I) mide la energía transportada por segundo a través de una unidad de área. La presión sonora (p) es la variación de presión generada por la onda. Ambas están relacionadas por las propiedades del medio.</div>
+  <div class="rx">I = W / (4π·r²) &nbsp;[W/m²]<br>
+I = p² / (ρ·c)<br>
+ρ=densidad (kg/m³) | c=vel. sonido | r=distancia (m)</div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Ley del cuadrado inverso:</b> al duplicar la distancia de la fuente, la intensidad se reduce a 1/4. En términos dB: cae ~6 dB por cada duplicación de distancia en campo libre.</div></div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Ejemplo — segadora (W=0.2 W) a r=5 m:</b> I = 0.2/(4π·25) = 6.37×10⁻⁴ W/m²; equivale a NPS ≈ 88 dB.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir potencia sonora (W — característica de la fuente, invariable) con intensidad sonora (W/m² — depende de la distancia al receptor).</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Decibelio y Escala Logarítmica (Diap. 16–18)</span>
+  <div class="def def-yellow">El decibelio (dB) es una razón logarítmica que compara cualquier magnitud acústica con un valor de referencia. Se usa porque el oído responde logarítmicamente — un incremento de 10 dB se percibe como el doble de fuerte.</div>
+  <div class="rx">Nivel de Potencia Sonora (fuente):<br>
+Lw = 10·log(W / W₀) &nbsp;[dB] | W₀ = 10⁻¹² W<br><br>
+Nivel de Intensidad (medio):<br>
+Lᵢ = 10·log(I / I₀) &nbsp;[dB] | I₀ = 10⁻¹² W/m²<br><br>
+Nivel de Presión Sonora (receptor):<br>
+Lp = 10·log(p² / p₀²) &nbsp;[dB] | p₀ = 2×10⁻⁵ Pa<br><br>
+En campo libre: Lᵢ = Lp</div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Por qué base logarítmica:</b> el rango audible abarca 13 órdenes de magnitud (10⁻¹² a 10 W/m²). La escala log comprime ese rango a 0–130 dB manejables.</div></div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Referencia p₀ = 2×10⁻⁵ Pa:</b> umbral de audición del oído joven sano a 1,000 Hz — el menor cambio de presión detectable.</div></div>
+  <div class="exam">🎯 EXAMEN: Un altoparlante irradia W=0.5 W. Calcule su nivel de potencia sonora Lw y explique qué significa ese valor en términos de la escala de referencia acústica.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-gray">NPS y Suma de Fuentes (Diap. 20–22)</span>
+  <div class="def def-gray">Cuando varias fuentes sonoras operan simultáneamente, el NPS total NO es la suma aritmética sino la suma logarítmica de intensidades. Este principio se usa para identificar la contribución individual de cada fuente.</div>
+  <div class="rx">Suma de n fuentes:<br>
+NPS_total = 10·log(Σ 10^(NPSᵢ/10)) [dB]<br><br>
+Para aislar una fuente (método sustracción):<br>
+NPS_fuente = 10·log(10^(L_total/10) − 10^(L_sin_fuente/10))</div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>Ejercicio típico (Diap. 22):</b> Total=88.7 dB; sin bomba=86.5 dB; sin segadora=85.8 dB. La bomba aporta 10·log(10^8.87–10^8.65)≈84.5 dB; el generador≈85.8 dB; la segadora≈84.7 dB.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Sumar directamente los niveles dB aritméticamente. Dos fuentes de 85 dB juntas no dan 170 dB sino 88 dB (10·log(2×10^8.5)).</div>
+  <div class="exam">🎯 EXAMEN: Dos maquinarias emiten 90 dB y 87 dB respectivamente. Calcule el NPS combinado y explique por qué el resultado no es 177 dB.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Nivel Continuo Equivalente LAeq (Diap. 23–24)</span>
+  <div class="def def-teal">El LAeq,T es el nivel de ruido continuo y constante que contendría la misma energía sonora que el ruido fluctuante real durante el mismo período T. Es el indicador fundamental en normativas de ruido ambiental y laboral.</div>
+  <div class="rx">LAeq,T = 10·log[ (1/T) · Σ tᵢ · 10^(Lᵢ/10) ] [dBA]<br><br>
+Ejemplo (Diap. 24): 56.7 dBA (30s) + 58.4 dBA (10s) + 60.2 dBA (60s)<br>
+T = 100 s<br>
+= 10·log[(30·10^5.67 + 10·10^5.84 + 60·10^6.02)/100]<br>
+≈ 59.3 dBA</div>
+  <div class="item"><div class="dot dot-teal"></div><div><b>Utilidad normativa:</b> el D.S. 085-2003-PCM del Perú fija estándares en LAeq: zona residencial 60 dBA diurno / 50 dBA nocturno; zona industrial 80 dBA diurno / 70 dBA nocturno.</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div><b>Ponderación A:</b> el subíndice "A" indica que la medición ya incorporó la curva de ponderación A que simula la respuesta del oído humano, dando menos peso a bajas y muy altas frecuencias.</div></div>
+  <div class="exam">🎯 EXAMEN: Explique qué representa el LAeq,T y por qué es más útil que simplemente reportar el nivel de ruido máximo medido en un punto.</div>
+</div>
+
+<div class="sec">🌬️ SECCIÓN 4 — PROPAGACIÓN Y FACTORES AMBIENTALES (Diap. 25–29)</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Propagación: Temperatura, Viento y Obstáculos (Diap. 25–29)</span>
+  <div class="def def-teal">El sonido no viaja en línea recta perfecta en la atmósfera real. La temperatura, el viento y los obstáculos físicos doblan, reflejan o absorben la energía sonora, creando zonas de mayor o menor exposición al ruido.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <b>Efecto temperatura (Diap. 25)</b><br>
+      Si la temperatura decrece con la altura (perfil normal), el sonido se curva hacia arriba → zonas de sombra a nivel del suelo. Si aumenta con la altura (inversión térmica), el sonido se curva hacia abajo → mayor alcance del ruido a nivel del suelo. En Lima, las inversiones térmicas costeras intensifican el ruido urbano nocturno.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <b>Efecto viento (Diap. 26)</b><br>
+      El viento crea gradientes de velocidad: a favor del viento el sonido se curva hacia el suelo (mayor exposición); contra el viento, se curva hacia arriba (zona de sombra acústica). Por ello, la misma fuente genera niveles distintos según la dirección del viento respecto al receptor.
+    </div>
+    <div class="mini" style="border-top:3px solid #a855f7">
+      <b>Efecto de obstáculos (Diap. 27)</b><br>
+      Barreras sólidas (muros, taludes, edificios) generan difracción: el sonido rodea los bordes de la barrera, pero la zona directamente detrás queda protegida. La eficacia de una barrera acústica depende de su altura y del ángulo de difracción.
+    </div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Fuente de ruido</div><div class="farrow">→</div>
+    <div class="fbox">Gradiente T°/viento</div><div class="farrow">→</div>
+    <div class="fbox">Refracción de ondas</div><div class="farrow">→</div>
+    <div class="fbox">Barrera física</div><div class="farrow">→</div>
+    <div class="fbox">Difracción</div><div class="farrow">→</div>
+    <div class="fbox">Zona de sombra acústica</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Asumir que construir una barrera siempre resuelve el problema. Si la fuente es de baja frecuencia (λ grande), la difracción bordea la barrera y la protección es mínima.</div>
+  <div class="exam">🎯 EXAMEN: En una ciudad costera como Lima, durante la noche se registra mayor nivel de ruido que durante el día proveniente de la misma fuente. Explique este fenómeno en términos de refracción acústica y gradiente térmico.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Contaminación Acústica (Diap. 28)</span>
+  <div class="def def-orange">La contaminación acústica es toda alteración de las propiedades físicas del ambiente sonoro causada por combinaciones de sonidos que afectan directa o indirectamente la salud, seguridad y bienestar de los seres vivos, especialmente humanos.</div>
+  <div class="item"><div class="dot dot-orange"></div><div><b>Factores determinantes:</b> nivel sonoro, duración de la exposición, frecuencias predominantes, impulsividad del ruido (explosiones vs. continuo) y vulnerabilidad del receptor (niños, ancianos, enfermos).</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div><b>Diferencia ruido-sonido:</b> el ruido es definido por su componente subjetiva (indeseable, molesto) más su componente física. Un mismo sonido puede ser ruido para una persona y música para otra.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuáles son los factores que determinan si un sonido se convierte en contaminación acústica? ¿Por qué la definición incluye componentes tanto físicas como subjetivas?</div>
+</div>
+
+<div class="sec">🏭 SECCIÓN 5 — FUENTES DE RUIDO AMBIENTAL (Diap. 30–31)</div>
+
+<div class="block s3">
+  <span class="bh bh-orange">Fuentes Antropogénicas de Ruido (Diap. 30–31)</span>
+  <div class="def def-orange">Las principales fuentes de contaminación acústica en ambientes urbanos son de origen humano y se pueden clasificar por el tipo de actividad que las genera, lo que permite diseñar estrategias de control específicas.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #f97316">
+      <b>Tráfico vehicular y ferroviario</b><br>
+      Primera causa de exposición crónica al ruido en ciudades. En Lima, el Cercado y el Callao superan los 75 dBA en hora punta. Los semis y buses diésel son las fuentes más intensas. El ruido de rodamiento (contacto neumático-asfalto) predomina a más de 70 km/h sobre el ruido del motor.
+    </div>
+    <div class="mini" style="border-left:3px solid #eab308">
+      <b>Aviación</b><br>
+      El ruido de aeronaves tiene doble impacto: el despegue puede superar 100 dBA cerca de la pista. El aeropuerto Jorge Chávez en el Callao genera afectación acústica en distritos completos. La regulación peruana exige estudios de impacto acústico en zonas aledañas a aeropuertos.
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <b>Industria y construcción</b><br>
+      Compresoras, martillos neumáticos y explosivos en minería pueden superar los 110 dBA. La actividad minera en La Oroya, Cerro de Pasco e Ilo combina ruido con otros contaminantes. Las obras de construcción en zonas residenciales deben operar solo en horario diurno según normativa peruana.
+    </div>
+    <div class="mini" style="border-left:3px solid #a855f7">
+      <b>Ocio ruidoso</b><br>
+      Discotecas, conciertos y locales de entretenimiento nocturnos. El uso de auriculares a alto volumen es una causa emergente de pérdida auditiva en jóvenes (OMS advierte que 1.1 mil millones de jóvenes están en riesgo). Los conciertos de rock alcanzan 110–120 dBA.
+    </div>
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <b>Actividades domésticas</b><br>
+      Electrodomésticos (lavadoras, licuadoras, televisores a alto volumen), vecinos. Aunque individual parecen menores (60–80 dBA), en edificios multifamiliares la transmisión estructural amplifica el problema. Son las quejas vecinales más frecuentes en municipalidades limeñas.
+    </div>
+    <div class="mini" style="border-left:3px solid #3b82f6">
+      <b>Auriculares personales</b><br>
+      Fuente interna directamente en el canal auditivo. Con el volumen máximo pueden superar 100 dBA dentro del oído. La OMS recomienda no superar 85 dBA y limitar la exposición a 1 hora diaria con auriculares. Es un riesgo subvalorado en población joven universitaria.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Clasifique las fuentes de ruido ambiental por categoría y explique cuál representa el mayor riesgo de exposición crónica para la población urbana en el Perú, sustentando con datos cuantitativos.</div>
+</div>
+
+<div class="sec">🩺 SECCIÓN 6 — INSTRUMENTOS DE MEDICIÓN (Diap. 32–34)</div>
+
+<div class="block">
+  <span class="bh bh-blue">El Sonómetro (Diap. 32)</span>
+  <div class="def def-blue">El sonómetro es el instrumento estándar para medir el nivel de presión sonora. Convierte las variaciones de presión en señales eléctricas, aplica filtros de frecuencia y tiempo, y muestra el resultado en dB o dBA.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #1e3a8a">
+      <b>Clase 1 — Precisión</b><br>
+      Tolerancia ±0.7 dB. Para laboratorio, calibraciones de referencia y estudios epidemiológicos. Mayor sensibilidad en rangos de temperatura y humedad extremos.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <b>Clase 2 — Inspección</b><br>
+      Tolerancia ±1.5 dB. Para mediciones de campo, inspecciones municipales y monitoreo ambiental rutinario. Suficiente para cumplimiento normativo en Perú.
+    </div>
+  </div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>Sonómetro integrador:</b> calcula automáticamente el Leq y percentiles estadísticos (L10, L50, L90). Transmite datos a computadora. Esencial para estudios de exposición laboral y mapas de ruido urbano.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia funcional entre un sonómetro general y un sonómetro integrador? ¿Cuándo se requiere un instrumento de Clase 1 vs. Clase 2?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-gray">Ponderaciones Temporal y de Frecuencia (Diap. 34)</span>
+  <div class="def def-gray">El sonómetro aplica dos tipos de ponderación simultáneamente: una temporal (velocidad de respuesta al cambio) y una en frecuencia (ajuste a la sensibilidad del oído). La combinación determina qué tipo de ruido se caracteriza mejor.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #888780">
+      <b>Ponderación Temporal</b><br>
+      <b>Lento (S — Slow):</b> promedia 1 segundo. Para ruido estable o lentamente variable.<br>
+      <b>Rápido (F — Fast):</b> promedia 0.125 s. Para ruido fluctuante (tráfico).<br>
+      <b>Impulso (I):</b> sube en 35 ms, decae en 1.5 s. Para explosiones, disparos, golpes.
+    </div>
+    <div class="mini" style="border-left:3px solid #334155">
+      <b>Ponderación de Frecuencia</b><br>
+      <b>Ponderación A (dBA):</b> simula la curva de igual sonoridad del oído a 40 phons. Atenúa bajas y muy altas frecuencias. Estándar mundial para ruido ambiental y laboral.<br>
+      <b>Ponderación C (dBC):</b> más sensible a bajas frecuencias. Se usa para ruido de impacto y evaluación de EPP (protectores auditivos).
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Usar ponderación S (Slow) para medir ruido impulsivo. La respuesta lenta "suaviza" los picos de presión y subestima el nivel real del impulso sonoro.</div>
+  <div class="exam">🎯 EXAMEN: Un inspector mide el ruido de un martillo neumático en una obra. ¿Qué combinación de ponderación temporal y de frecuencia debe seleccionar en el sonómetro y por qué?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-red">Efectos del Ruido en la Salud (Diap. 35–37)</span>
+  <div class="def def-red">La exposición sostenida al ruido desencadena una cascada de efectos fisiológicos que van desde la molestia hasta la pérdida auditiva permanente, pasando por efectos sistémicos cardiovasculares y cognitivos.</div>
+  <div class="item"><div class="dot dot-red"></div><div><b>Desórdenes cardiovasculares:</b> el ruido activa el eje hipotalámico-hipofisario, elevando cortisol y adrenalina. Exposición crónica &gt;65 dBA se asocia con mayor riesgo de hipertensión e infarto.</div></div>
+  <div class="item"><div class="dot dot-red"></div><div><b>Deterioro cognitivo:</b> especialmente en niños. Estudios muestran que escuelas cerca de aeropuertos presentan menor rendimiento en lectura y memoria. La carga cognitiva de filtrar el ruido agota recursos mentales.</div></div>
+  <div class="item"><div class="dot dot-red"></div><div><b>Perturbación del sueño:</b> a partir de 30 dBA en el dormitorio se altera el sueño REM. Lima tiene zonas residenciales que superan los 50 dBA nocturnos, generando deuda de sueño crónica.</div></div>
+  <div class="item"><div class="dot dot-red"></div><div><b>Pérdida auditiva inducida por ruido (PAIR):</b> daño irreversible en las células ciliadas de la cóclea. Primero afecta frecuencias de 4,000 Hz (muesca de 4k en audiograma). Umbral de daño: &gt;85 dBA durante 8 horas/día sostenido.</div></div>
+  <div class="mini" style="border-top:3px solid #ef4444">
+    <b>Escala de efectos por nivel (dBA):</b><br>
+    0–30: sin efectos negativos · 30–50: dificultad para conciliar el sueño · 60–70: molestia y trastorno del habla · 80–90: riesgo auditivo con exposición prolongada · 90–110: daño auditivo seguro · &gt;130: rotura timpánica, lesiones físicas inmediatas
+  </div>
+  <div class="exam">🎯 EXAMEN: Explique la cadena fisiológica mediante la cual la exposición crónica al ruido del tráfico vehicular en Lima puede contribuir al desarrollo de hipertensión arterial en la población residente.</div>
+</div>
+
+<div class="sec">🌿 SECCIÓN 7 — NORMATIVA Y MITIGACIÓN (Diap. 38–45)</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Técnicas de Mitigación y Normativa Peruana (Diap. 43–45)</span>
+  <div class="def def-green">La gestión del ruido ambiental integra tres niveles de intervención: control en la fuente, control en la vía de transmisión y protección del receptor. El marco normativo peruano establece los estándares que definen cuándo se requiere intervención.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <b>Control en la fuente</b><br>
+      Motores más silenciosos, silenciadores de escape, aislamiento de maquinaria vibratoria, mantenimiento preventivo. Es la estrategia más efectiva: elimina el problema de origen sin depender de protección individual.
+    </div>
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <b>Control en la transmisión</b><br>
+      Barreras acústicas (muros, taludes), pantallas vegetales, distancias de retiro. Los espacios verdes son soluciones basadas en la naturaleza: árboles y arbustos absorben, reflejan y dispersan el ruido, mejorando el paisaje sonoro urbano (OMS recomienda "soundscapes" saludables).
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <b>Protección del receptor</b><br>
+      EPP auditivos (tapones, orejeras), diseño acústico de edificios (ventanas de doble vidrio, aislamiento de muros). Es el último recurso y el menos deseable en salud pública, pues no elimina el problema de la comunidad.
+    </div>
+  </div>
+  <div class="def def-green" style="margin-top:8px"><b>Normativa peruana clave — D.S. 085-2003-PCM (ECA Ruido):</b> define estándares de calidad ambiental para ruido según zonificación: Especial (hospitales/colegios): 50/40 dBA día/noche · Residencial: 60/50 · Comercial: 70/60 · Industrial: 80/70. Todas en LAeq medido con sonómetro integrador, ponderación A, modo Fast.</div>
+  <div class="warn">⚠️ CONTEXTO PERÚ: Lima es una de las ciudades más ruidosas de Latinoamérica. El uso indiscriminado del claxon, el transporte público informal y la falta de fiscalización municipal generan niveles sistemáticamente superiores a los ECA en zonas residenciales centrales.</div>
+  <div class="exam">🎯 EXAMEN: Un proyecto de ampliación de una avenida en Lima atraviesa una zona residencial. Proponga un plan de mitigación del ruido que considere los tres niveles de control, indicando la normativa aplicable y las medidas concretas para cada nivel.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-pink">Ruido y Ecosistemas (Diap. 40)</span>
+  <div class="def def-pink">La contaminación acústica no afecta solo a humanos. Los ecosistemas marinos y terrestres también se ven impactados, alterando comportamientos vitales de especies que dependen del sonido para comunicarse, orientarse y reproducirse.</div>
+  <div class="item"><div class="dot dot-purple"></div><div><b>Ballenas y cetáceos:</b> la contaminación acústica submarina (motores de barcos, sonar militar, perforaciones petroleras) interfiere con su comunicación a largas distancias, altera rutas migratorias y puede causar varamientos por desorientación (WWF documenta este impacto).</div></div>
+  <div class="item"><div class="dot dot-purple"></div><div><b>Fauna terrestre:</b> las aves de zonas urbanas han modificado su canto a frecuencias más altas para diferenciarlo del ruido de baja frecuencia del tráfico — un ejemplo de adaptación evolutiva acelerada por contaminación.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Cómo afecta la contaminación acústica submarina a los cetáceos como las ballenas? Explique el mecanismo de daño y las implicancias para la conservación marina en el Perú.</div>
+</div>
+
+<div class="block s3" style="margin-top:4px">
+  <span class="bh bh-gray">TABLA INTEGRADORA — Conceptos Clave de Ruido Ambiental</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Concepto</th>
+        <th>Definición Clave</th>
+        <th>Fórmula / Valor de Referencia</th>
+        <th>Instrumento / Método</th>
+        <th>Contexto Peruano / Normativa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Sonido</b></td><td>Onda mecánica longitudinal en medio elástico</td><td>v = 331 + 0.6·T(°C) m/s</td><td>Sonómetro (medición indirecta via presión)</td><td>Rango audible: 20–20,000 Hz</td></tr>
+      <tr><td><b>NPS (Lp)</b></td><td>Nivel logarítmico de presión sonora vs. referencia p₀</td><td>Lp = 10·log(p²/p₀²); p₀=2×10⁻⁵ Pa</td><td>Sonómetro clase 1 o 2; ponderación A o C</td><td>ECA Perú: 60 dBA residencial diurno (DS 085-2003)</td></tr>
+      <tr><td><b>LAeq,T</b></td><td>Nivel equivalente continuo; misma energía que ruido fluctuante en T</td><td>10·log[(1/T)·Σtᵢ·10^(Lᵢ/10)]</td><td>Sonómetro integrador; ponderación A + Fast</td><td>Indicador base para fiscalización OEFA en Perú</td></tr>
+      <tr><td><b>Ponderación A</b></td><td>Curva que simula sensibilidad del oído humano a 40 phons</td><td>Atenúa &lt;500 Hz y &gt;10,000 Hz</td><td>Filtro electrónico integrado en sonómetro</td><td>Obligatoria en ECA-Ruido y normas laborales peruanas</td></tr>
+      <tr><td><b>Infrasonido / Ultrasonido</b></td><td>Frecuencias fuera del rango audible humano</td><td>&lt;20 Hz / &gt;20,000 Hz</td><td>Equipos especializados (no sonómetro estándar)</td><td>Relevante en minería (voladuras) y puertos del Perú</td></tr>
+      <tr><td><b>Contaminación acústica</b></td><td>Alteración ambiental sonora que afecta salud y bienestar</td><td>Componentes física + subjetiva</td><td>Mapas de ruido; medición in situ</td><td>Lima: una de las ciudades más ruidosas de LATAM</td></tr>
+      <tr><td><b>Fuentes de ruido</b></td><td>Tráfico, aviación, industria, construcción, ocio, domésticas</td><td>Tráfico: 65–80 dBA típico | Industria: 90–110 dBA</td><td>Medición directa + inventario de fuentes</td><td>Claxon y transporte informal: principales fuentes en Lima</td></tr>
+      <tr><td><b>PAIR (pérdida auditiva)</b></td><td>Daño irreversible en cóclea por sobreexposición</td><td>Umbral: &gt;85 dBA × 8 h/día crónico</td><td>Audiometría; evaluación ocupacional</td><td>Mineros de Cerro de Pasco e Ilo: alta prevalencia</td></tr>
+      <tr><td><b>Barreras acústicas</b></td><td>Obstáculos que generan zona de sombra por difracción</td><td>Eficacia depende de altura y frecuencia</td><td>Software de modelado acústico (CADNA-A, SoundPlan)</td><td>Bermas vegetales en vías expresas de Lima Metropolitana</td></tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: El LAeq,T medido con sonómetro integrador clase 2, ponderación A y constante temporal F (Fast), comparado con los ECA del DS 085-2003-PCM, es el flujo metodológico completo que conecta física acústica → instrumentación → normativa → gestión del ruido ambiental en Perú.</div>
+</div>
+
+<div class="block s3" id="quiz-section">
+  <div style="background:#0f1e3a;border-radius:10px;padding:12px 16px;margin-bottom:14px">
+    <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:2px">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+    <div style="font-size:11px;color:#94a3b8">Marca tu respuesta y descubre si es correcta · Ruido Ambiental · UNALM 2026</div>
+  </div>
+  <div id="quiz-progress">Pregunta 0 de 10 respondidas · Aciertos: 0 / 0</div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#22c55e;transition:width .4s"></div></div>
+  <br>
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10 — Física del Sonido</p>
+    <p class="qtext">¿Cuál es la condición física indispensable para que exista propagación del sonido?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Que la fuente vibre a más de 20 Hz de frecuencia</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) Que exista campo electromagnético en el medio</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) Que exista un medio material elástico (sólido, líquido o gaseoso)</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Que la temperatura del medio sea superior a 0°C</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10 — Propiedades Físicas</p>
+    <p class="qtext">Una fuente emite sonido a 250 Hz y la velocidad en el aire es 340 m/s. ¿Cuál es la longitud de onda?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) 85,000 m</button>
+      <button class="qbtn" data-q="2" data-correct="true">B) 1.36 m</button>
+      <button class="qbtn" data-q="2" data-correct="false">C) 0.74 m</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) 590 m</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10 — Escala Logarítmica</p>
+    <p class="qtext">Dos maquinarias operan simultáneamente: una emite 85 dB y otra también 85 dB. ¿Cuál es el NPS combinado?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) 170 dB</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) 85 dB (no cambia)</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) 88 dB</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) 90 dB</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10 — Fisiología del Oído</p>
+    <p class="qtext">¿Cuál es la función principal de los huesecillos (martillo, yunque, estribo) en el oído medio?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Convertir la señal eléctrica en ondas mecánicas</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) Filtrar las frecuencias no audibles mediante resonancia</button>
+      <button class="qbtn" data-q="4" data-correct="true">C) Amplificar y transmitir la vibración del tímpano hacia el oído interno</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Producir la endolinfa necesaria para la transducción en la cóclea</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10 — Nivel Equivalente</p>
+    <p class="qtext">¿Qué representa el LAeq,T en una medición de ruido ambiental?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) El nivel máximo instantáneo registrado durante el período T</button>
+      <button class="qbtn" data-q="5" data-correct="true">B) El nivel constante hipotético que contendría la misma energía sonora que el ruido fluctuante real durante T</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) El promedio aritmético de todos los valores medidos en T</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) El nivel mínimo de ruido de fondo registrado en el período T</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10 — Propagación</p>
+    <p class="qtext">Durante la noche en Lima, la inversión térmica costera hace que la temperatura aumente con la altura. ¿Cómo afecta esto al ruido urbano a nivel del suelo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) Lo reduce porque el calor absorbe energía sonora</button>
+      <button class="qbtn" data-q="6" data-correct="true">B) Lo aumenta porque las ondas sonoras se refractan hacia abajo, alcanzando mayor distancia</button>
+      <button class="qbtn" data-q="6" data-correct="false">C) No tiene efecto; la propagación del sonido no depende de la temperatura</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Lo reduce porque la humedad nocturna amortigua las frecuencias altas</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10 — Instrumentación</p>
+    <p class="qtext">Un inspector ambiental debe verificar el cumplimiento del ECA-Ruido en un distrito residencial de Lima. ¿Qué configuración del sonómetro es la correcta según la normativa peruana (DS 085-2003)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Clase 1, ponderación C, respuesta Lento (Slow)</button>
+      <button class="qbtn" data-q="7" data-correct="true">B) Clase 2 (mínimo), ponderación A, modo integrador para obtener LAeq</button>
+      <button class="qbtn" data-q="7" data-correct="false">C) Clase 1, ponderación A, respuesta Impulso</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Cualquier clase, ponderación C, respuesta Rápido (Fast)</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10 — Efectos en Salud</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la pérdida auditiva inducida por ruido (PAIR) es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Afecta primero las frecuencias alrededor de los 4,000 Hz</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Se produce por daño irreversible en las células ciliadas de la cóclea</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Es reversible si se retira al trabajador de la exposición antes de los 5 años</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) El umbral de riesgo es exposición a más de 85 dBA durante 8 horas diarias de manera sostenida</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10 — Fuentes y Normativa</p>
+    <p class="qtext">Según el D.S. 085-2003-PCM, ¿cuál es el ECA de ruido para una zona comercial durante el horario diurno?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) 50 dBA</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) 80 dBA</button>
+      <button class="qbtn" data-q="9" data-correct="true">C) 70 dBA</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) 60 dBA</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10 — Mitigación</p>
+    <p class="qtext">¿Por qué una barrera acústica es menos efectiva para controlar ruido de baja frecuencia (p. ej. 63 Hz de maquinaria minera) que para ruido de alta frecuencia?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) Porque las bajas frecuencias tienen mayor presión sonora y destruyen la barrera</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) Porque las bajas frecuencias se absorben más en el suelo antes de llegar a la barrera</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) Porque las ondas de baja frecuencia tienen longitudes de onda largas que difractan fácilmente alrededor y sobre la barrera</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) Porque las bajas frecuencias viajan más rápido y rodean la barrera antes de ser bloqueadas</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="result-panel"></div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Carhuancho, M. (2026). Unidad VII: Aspectos Generales de Ruido Ambiental. UNALM. · OMS (2019). Directrices de ruido ambiental para la región europea. · D.S. 085-2003-PCM. Reglamento de Estándares Nacionales de Calidad Ambiental para Ruido. Perú. · Basner, M. et al. (2024). Road traffic noise exposure and its impact on health. Env. Sci. & Pollution Research, 31: 46820–46839. · WWF. ¿Cómo afecta la contaminación acústica a las ballenas?</span>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var answered = 0, correct = 0;
+  var feedbacks = {
+    1:{ok:"Correcto. El sonido es una onda mecánica que requiere un medio material con propiedades elásticas para transmitir la perturbación de presión. En el vacío no existen moléculas que vibren, por lo que el sonido no se propaga.", fail:"Incorrecto. La respuesta correcta es C. La condición esencial es la existencia de un medio material elástico. La frecuencia y la temperatura son parámetros secundarios; sin medio, no hay sonido independientemente de ellos."},
+    2:{ok:"Correcto. λ = v/f = 340/250 = 1.36 m. La longitud de onda representa la distancia que recorre la onda durante un ciclo completo de oscilación.", fail:"Incorrecto. La respuesta correcta es B. Aplica λ = v/f = 340 m/s ÷ 250 Hz = 1.36 m. No multipliques v×f, sino que debes dividir."},
+    3:{ok:"Correcto. La suma logarítmica de dos fuentes iguales: 10·log(10^8.5 + 10^8.5) = 10·log(2×10^8.5) = 85 + 10·log(2) ≈ 85 + 3 = 88 dB. La suma de dos fuentes iguales siempre agrega exactamente 3 dB.", fail:"Incorrecto. La respuesta correcta es C (88 dB). Los decibeles se suman logarítmicamente: dos fuentes iguales de 85 dB dan 88 dB, no 170 dB. Nunca se suman aritméticamente."},
+    4:{ok:"Correcto. Los tres huesecillos forman un sistema de palancas que amplifica la vibración del tímpano unas 22–30 veces antes de transmitirla al oído interno (ventana oval), compensando la diferencia de impedancia entre aire y líquido coclear.", fail:"Incorrecto. La respuesta correcta es C. Los huesecillos son una cadena mecánica amplificadora. La transducción eléctrica ocurre en la cóclea (oído interno), no en el oído medio."},
+    5:{ok:"Correcto. El LAeq,T es el nivel energéticamente equivalente: un sonido constante hipotético que entregaría la misma dosis de energía sonora que el ruido variable real en el mismo tiempo T. Es el indicador central de la normativa ambiental y laboral.", fail:"Incorrecto. La respuesta correcta es B. El LAeq NO es el máximo ni el promedio aritmético. Es el nivel de igual energía total, calculado integrando los cuadrados de las presiones en el tiempo."},
+    6:{ok:"Correcto. Con inversión térmica (T aumenta con la altura), la velocidad del sonido es mayor en las capas superiores, lo que curva las ondas hacia abajo (refracción descendente). Esto extiende el alcance del ruido a nivel del suelo e intensifica la contaminación acústica nocturna en Lima.", fail:"Incorrecto. La respuesta correcta es B. La inversión térmica causa refracción descendente: las ondas se curvan hacia el suelo, aumentando el ruido a nivel urbano, no reduciéndolo."},
+    7:{ok:"Correcto. El DS 085-2003-PCM requiere sonómetro integrador (para calcular LAeq), ponderación A (que simula la sensibilidad del oído), clase 2 como mínimo. La respuesta temporal Fast es la convención estándar para ruido ambiental.", fail:"Incorrecto. La respuesta correcta es B. La normativa peruana exige ponderación A (dBA) y medición del nivel equivalente (LAeq), lo que requiere un sonómetro integrador. La ponderación C y la clase 1 no son los requisitos mínimos establecidos."},
+    8:{ok:"Correcto, esa afirmación es FALSA. La PAIR es una lesión permanente e irreversible de las células ciliadas externas de la cóclea. No existe regeneración en mamíferos. Retirar al trabajador solo evita que el daño progrese, pero no lo revierte.", fail:"Incorrecto. La afirmación FALSA es C. La PAIR es irreversible porque las células ciliadas de la cóclea en humanos no se regeneran. El daño neurológico coclear es permanente desde el primer episodio significativo."},
+    9:{ok:"Correcto. Según el DS 085-2003-PCM, la zona comercial tiene un ECA de 70 dBA en horario diurno (07:01–22:00 h) y 60 dBA en nocturno (22:01–07:00 h).", fail:"Incorrecto. La respuesta correcta es C (70 dBA). Recuerde la escala: Especial=50/40, Residencial=60/50, Comercial=70/60, Industrial=80/70 dBA (diurno/nocturno)."},
+    10:{ok:"Correcto. La eficacia de una barrera acústica depende de la relación entre la longitud de onda y las dimensiones de la barrera. Las bajas frecuencias (63 Hz → λ≈5.4 m) difractan fácilmente sobre y alrededor de barreras que no superan esa longitud de onda, reduciendo drásticamente su eficacia.", fail:"Incorrecto. La respuesta correcta es C. La clave es la difracción: ondas con λ larga (baja frecuencia) rodean obstáculos de dimensiones similares o menores a λ. No es cuestión de velocidad ni de absorción en el suelo."}
+  };
+  var container = document.getElementById('quiz-section');
+  container.addEventListener('click', function(e){
+    var btn = e.target.closest('.qbtn');
+    if(!btn) return;
+    var q = btn.getAttribute('data-q');
+    var isCorrect = btn.getAttribute('data-correct') === 'true';
+    var allBtns = container.querySelectorAll('.qbtn[data-q="'+q+'"]');
+    var alreadyAnswered = allBtns[0].disabled;
+    if(alreadyAnswered) return;
+    allBtns.forEach(function(b){
+      b.disabled = true;
+      if(b.getAttribute('data-correct')==='true'){
+        b.classList.add('correct');
+        b.textContent = '✅ ' + b.textContent;
+      }
+    });
+    if(!isCorrect){
+      btn.classList.add('incorrect');
+      btn.textContent = '❌ ' + btn.textContent.replace('✅ ','');
+    }
+    var fb = document.getElementById('fb'+q);
+    fb.style.display = 'block';
+    if(isCorrect){
+      fb.className = 'qfeedback ok';
+      fb.innerHTML = '<strong>✅ ¡Correcto!</strong> ' + feedbacks[parseInt(q)].ok;
+      correct++;
+    } else {
+      fb.className = 'qfeedback fail';
+      fb.innerHTML = '<strong>❌ Incorrecto.</strong> ' + feedbacks[parseInt(q)].fail;
+    }
+    answered++;
+    var pct = Math.round((answered/10)*100);
+    document.getElementById('prog-bar').style.width = pct + '%';
+    document.getElementById('quiz-progress').textContent = 'Pregunta ' + answered + ' de 10 respondidas · Aciertos: ' + correct + ' / ' + answered;
+    if(answered === 10){
+      var panel = document.getElementById('result-panel');
+      panel.style.display = 'block';
+      var msg, bg;
+      if(correct <= 4){ bg='#fee2e2'; msg='📚 Necesitas repasar el material. Vuelve a los bloques de fórmulas y efectos en salud.'; }
+      else if(correct <= 7){ bg='#fef9c3'; msg='👍 ¡Buen avance! Repasa propagación, instrumentación y normativa peruana.'; }
+      else { bg='#dcfce7'; msg='🏆 ¡Excelente dominio del tema! Estás listo para el examen de Ruido Ambiental.'; }
+      panel.style.background = bg;
+      panel.style.borderRadius = '10px';
+      panel.style.padding = '14px';
+      panel.innerHTML = '<div style="font-size:20px;font-weight:700;margin-bottom:6px">'+correct+' / 10 correctas</div><div style="font-size:13px">'+msg+'</div><button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>';
+    }
+  });
+  window.resetQuiz = function(){
+    answered = 0; correct = 0;
+    document.getElementById('prog-bar').style.width = '0%';
+    document.getElementById('quiz-progress').textContent = 'Pregunta 0 de 10 respondidas · Aciertos: 0 / 0';
+    document.getElementById('result-panel').style.display = 'none';
+    for(var i=1;i<=10;i++){
+      var btns = container.querySelectorAll('.qbtn[data-q="'+i+'"]');
+      btns.forEach(function(b){
+        b.disabled = false;
+        b.classList.remove('correct','incorrect');
+        b.textContent = b.textContent.replace('✅ ','').replace('❌ ','');
+      });
+      var fb = document.getElementById('fb'+i);
+      fb.style.display = 'none';
+      fb.className = 'qfeedback';
+    }
+  };
+})();
+</script>

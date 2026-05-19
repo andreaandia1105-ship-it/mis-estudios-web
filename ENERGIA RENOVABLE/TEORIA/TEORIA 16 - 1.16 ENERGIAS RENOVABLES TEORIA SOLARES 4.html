@@ -1,0 +1,777 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titlebar p{font-size:11px;color:#94a3b8}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;background:#1e3a5f;color:#93c5fd}
+.secbar{grid-column:1/-1;border-radius:9px;padding:7px 13px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.3px}
+.sec-blue{background:#dbeafe;color:#1e3a8a}
+.sec-green{background:#dcfce7;color:#14532d}
+.sec-yellow{background:#fef9c3;color:#713f12}
+.sec-purple{background:#ede9fe;color:#4c1d95}
+.sec-orange{background:#ffedd5;color:#7c2d12}
+.sec-teal{background:#ccfbf1;color:#134e4a}
+.sec-pink{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+.sec-blue{background:#1e3a5f;color:#93c5fd}
+.sec-green{background:#14532d;color:#86efac}
+.sec-yellow{background:#422006;color:#fef08a}
+.sec-purple{background:#2e1065;color:#c4b5fd}
+.sec-orange{background:#431407;color:#fed7aa}
+.sec-teal{background:#042f2e;color:#5eead4}
+.sec-pink{background:#4a044e;color:#f0abfc}
+}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-pink{background:#fce7f3;color:#831843}
+.bh-red{background:#fee2e2;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd}
+.bh-green{background:#14532d;color:#86efac}
+.bh-yellow{background:#422006;color:#fef08a}
+.bh-purple{background:#2e1065;color:#c4b5fd}
+.bh-orange{background:#431407;color:#fed7aa}
+.bh-teal{background:#042f2e;color:#5eead4}
+.bh-pink{background:#4a044e;color:#f0abfc}
+.bh-red{background:#450a0a;color:#fca5a5}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#22c55e}
+.def-yellow{border-color:#eab308}
+.def-purple{border-color:#8b5cf6}
+.def-orange{border-color:#f97316}
+.def-teal{border-color:#14b8a6}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-yellow{background:#eab308}
+.dot-purple{background:#8b5cf6}
+.dot-orange{background:#f97316}
+.dot-teal{background:#14b8a6}
+.dot-red{background:#ef4444}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 11px;margin-top:7px}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#a16207}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.mini strong{display:block;margin-bottom:3px;font-weight:600}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-top:7px}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.nb{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-right:4px;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-y{background:#fef9c3;color:#713f12}
+.nb-r{background:#fee2e2;color:#991b1b}
+.nb-p{background:#ede9fe;color:#4c1d95}
+@media(prefers-color-scheme:dark){
+.nb-b{background:#1e3a5f;color:#93c5fd}
+.nb-g{background:#14532d;color:#86efac}
+.nb-y{background:#422006;color:#fef08a}
+.nb-r{background:#450a0a;color:#fca5a5}
+.nb-p{background:#2e1065;color:#c4b5fd}
+}
+.ftbar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;font-size:11px}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:14px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.progress-wrap{margin-bottom:12px}
+.progress-txt{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px;display:flex;justify-content:space-between}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px}
+.stat-bar-fill{height:100%;border-radius:20px;background:#22c55e;transition:width .3s}
+.qcard{margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qcard:last-of-type{border-bottom:none}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:13px;font-weight:500;margin-bottom:8px;line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.qfeedback.ok{background:#052e16;color:#86efac}
+.qfeedback.fail{background:#450a0a;color:#fca5a5}
+.qbtn.correct{background:#14532d;border-color:#16a34a;color:#86efac}
+.qbtn.incorrect{background:#450a0a;border-color:#dc2626;color:#fca5a5}
+}
+#results-panel{border-radius:10px;padding:14px;text-align:center;margin-top:12px;display:none;font-size:14px;font-weight:500}
+#results-panel.low{background:#fee2e2;color:#991b1b}
+#results-panel.mid{background:#fef9c3;color:#713f12}
+#results-panel.high{background:#dcfce7;color:#14532d}
+#reset-btn{margin-top:10px;background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;cursor:pointer;font-size:13px;font-family:'Source Sans 3',sans-serif}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+
+<h2 class="sr-only">Canvas visual de resumen: Energía Solar Fotovoltaica — Fundamentos, tecnologías, componentes y aplicaciones. Laboratorio de Energías Renovables, UNALM, Dr. José L. Calle.</h2>
+
+<div class="cv">
+
+<div class="titlebar">
+  <h1>☀ ENERGÍA SOLAR FOTOVOLTAICA</h1>
+  <p>Laboratorio de Energías Renovables (LER) · FIA UNALM · Dr. José L. Calle, Ph.D. · Ciclo 2024</p>
+  <div class="pills">
+    <span class="pill">El Sol como reactor nuclear</span>
+    <span class="pill">Radiación e irradiación</span>
+    <span class="pill">Efecto fotovoltaico</span>
+    <span class="pill">Generaciones de celdas</span>
+    <span class="pill">Componentes del sistema</span>
+    <span class="pill">Perú solar</span>
+    <span class="pill">HSP y curvas I-V</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: EL SOL -->
+<div class="secbar sec-yellow">☀ 1. EL SOL — FUENTE Y MAGNITUDES</div>
+
+<div class="block">
+  <span class="bh bh-yellow">El Sol (Diap. 2–4)</span>
+  <div class="def def-yellow">El Sol es un reactor de fusión nuclear natural: fusiona deuterio con tritio (isótopos de H₂) produciendo helio-4, un neutrón y <strong>17.59 MeV</strong> de energía por reacción, que se transforma en radiación electromagnética según E = mc².</div>
+  <div class="item"><div class="dot dot-yellow"></div><span><strong>Composición:</strong> 75% hidrógeno, 24% helio, 1% otros. Densidad = 1.4 × 10³ kg/m³.</span></div>
+  <div class="item"><div class="dot dot-yellow"></div><span>El Sol pierde <strong>4.2 millones de toneladas</strong> de materia por segundo, toda convertida en energía radiante.</span></div>
+  <div class="item"><div class="dot dot-yellow"></div><span><strong>Espectro solar:</strong> UV 7%, Luz visible 47%, Infrarrojo 46%. Solo la fracción visible (~400–700 nm) es aprovechable con mayor eficiencia por el silicio.</span></div>
+  <div class="rx">D + T → ⁴He + n + 17.59 MeV<br>E = mc² → energía liberada por pérdida de masa</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Cuál es el proceso físico por el que el Sol genera energía y qué tipo de reacción nuclear involucra? Explique la ecuación de Einstein aplicada a este contexto.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">El Sol como fuente energética (Diap. 4)</span>
+  <div class="def def-yellow">La magnitud de la energía solar que llega a la Tierra supera por órdenes de magnitud cualquier fuente energética convencional. Su aprovechamiento eficiente haría obsoletas todas las reservas fósiles.</div>
+  <div class="item"><div class="dot dot-yellow"></div><span>El Sol radia <strong>3.8 × 10²³ kW</strong> en forma continua; la Tierra intercepta <strong>1.7 × 10¹⁴ kW</strong>.</span></div>
+  <div class="item"><div class="dot dot-yellow"></div><span>En <strong>un solo día</strong>, la Tierra recibe energía solar equivalente a <strong>40 veces el consumo energético mundial anual</strong>.</span></div>
+  <div class="item"><div class="dot dot-yellow"></div><span>En <strong>10 días</strong> la energía solar equivale a todas las reservas de combustibles fósiles conocidas.</span></div>
+  <div class="item"><div class="dot dot-yellow"></div><span>Aprovechando apenas el <strong>3% de los desiertos terrestres</strong> con tecnología solar, se cubriría toda la demanda energética mundial.</span></div>
+  <div class="warn">⚠ ERROR COMÚN: No confundir la energía que irradia el Sol (3.8 × 10²³ kW) con la que recibe la Tierra (1.7 × 10¹⁴ kW). La diferencia es el factor de la distancia y el área interceptada.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Constante Solar (Diap. 10–11)</span>
+  <div class="def def-blue">La Constante Solar (Iₛ) es la densidad de potencia radiante que llega a la Tierra <em>por encima de la atmósfera</em>. Representa el valor de referencia estándar para todo cálculo fotovoltaico.</div>
+  <div class="rx">Iₛ = Pₛ / Sₒ = 3.87×10²⁶ W / 2.83×10²³ m²<br>Iₛ ≈ 1,353 – 1,369 W/m²<br>Pₛ = σ · ε · Sₛ · Tₛ⁴ (Stefan-Boltzmann)</div>
+  <div class="item"><div class="dot dot-blue"></div><span><strong>σ</strong> = 5.67 × 10⁻⁸ W/m²K⁴; <strong>Tₛ</strong> = 5,900 K; <strong>ε</strong> ≈ 1 para el Sol.</span></div>
+  <div class="item"><div class="dot dot-blue"></div><span>Al pasar por la atmósfera, la radiación se reduce a ~<strong>1,000 W/m²</strong> en superficie (cielo despejado), la diferencia se pierde por absorción y difusión atmosférica.</span></div>
+  <div class="warn">⚠ La constante solar NO es la irradiación en superficie. Es la referencia extraterrestre; en tierra es siempre menor según las condiciones atmosféricas.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Utilizando la ley de Stefan-Boltzmann y la distancia Tierra–Sol, calcule conceptualmente la Constante Solar e identifique qué variables físicas determinan su valor.</div>
+</div>
+
+<!-- SECCIÓN 2: RADIACIÓN SOLAR Y ATMÓSFERA -->
+<div class="secbar sec-teal">🌍 2. RADIACIÓN SOLAR Y ATMÓSFERA</div>
+
+<div class="block">
+  <span class="bh bh-teal">Flujo de radiación espacio → superficie (Diap. 12)</span>
+  <div class="def def-teal">Al atravesar la atmósfera, la radiación solar sufre tres procesos que reducen su intensidad: reflexión (back-scatter), absorción por gases (O₃, O₂, H₂O, CO₂) y difusión (scattering). El resultado final es ~1,000 W/m² en cielo despejado.</div>
+  <div class="flow">
+    <div class="fbox">Espacio<br>~1,400 W/m²</div><div class="farrow">→</div>
+    <div class="fbox">Reflexión<br>−100 W/m²</div><div class="farrow">→</div>
+    <div class="fbox">Difusión<br>−300 W/m²</div><div class="farrow">→</div>
+    <div class="fbox">Absorción<br>−100 W/m²</div><div class="farrow">→</div>
+    <div class="fbox">Superficie<br>~1,000 W/m²</div>
+  </div>
+  <div class="divh"></div>
+  <div class="item"><div class="dot dot-teal"></div><span><strong>Radiación directa:</strong> llega en línea recta desde el Sol. Predomina en cielo claro.</span></div>
+  <div class="item"><div class="dot dot-teal"></div><span><strong>Radiación difusa:</strong> dispersada por nubes y partículas. Puede ser 100% del total en días muy nublados.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique los tres procesos de atenuación atmosférica de la radiación solar e indique cuál de ellos es aprovechable por los paneles FV incluso en días nublados.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Efecto de la nubosidad (Diap. 13)</span>
+  <div class="def def-teal">La cobertura de nubes reduce drásticamente la irradiación global y altera la proporción de radiación difusa. Lima, con su característica neblina costera, opera frecuentemente entre 300–500 W/m², lo que impacta el diseño de sistemas FV urbanos.</div>
+  <table class="tbl" style="margin-top:7px">
+    <tr><th>Condición</th><th>Global (W/m²)</th><th>Difuso (%)</th></tr>
+    <tr><td>Cielo azul</td><td>1,000</td><td>10%</td></tr>
+    <tr><td>Neblina</td><td>800</td><td>50%</td></tr>
+    <tr><td>Sol atraviesa</td><td>500</td><td>30%</td></tr>
+    <tr><td>Disco amarillo</td><td>450</td><td>50%</td></tr>
+    <tr><td>Disco blanco</td><td>300</td><td>70%</td></tr>
+    <tr><td>Sol apenas perceptible</td><td>200</td><td>100%</td></tr>
+    <tr><td>No se distingue</td><td>100</td><td>100%</td></tr>
+  </table>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Potencial solar en Perú (Diap. 47)</span>
+  <div class="def def-orange">Perú posee uno de los recursos solares más privilegiados del planeta. La Sierra por encima de los 2,500 msnm recibe irradiación equiparable a los mejores desiertos del mundo, y el sur del país forma parte del llamado "cinturón solar" con Chile y Bolivia.</div>
+  <div class="two" style="margin-top:7px">
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>Costa Sur</strong>
+      6.0 – 6.5 kWh/m²/día. Máximo recurso. Plantas en Arequipa, Tacna, Moquegua.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>Costa Norte</strong>
+      5.5 – 6.0 kWh/m²/día. Bueno para proyectos medianos.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <strong>Sierra (≥2,500 msnm)</strong>
+      6.0 – 8.0 kWh/m²/día. Excepcional. Lago Titicaca llega a 6.0.
+    </div>
+    <div class="mini" style="border-top:3px solid #94a3b8">
+      <strong>Norte Chile/Sur Perú</strong>
+      Hasta 9 kWh/m²/día. Máximo mundial. Atacama es referencia global.
+    </div>
+  </div>
+  <div class="item" style="margin-top:7px"><div class="dot dot-orange"></div><span>Capacidad instalada (2024): Solar 476 MW, Eólica 1,020 MW; en construcción 2,321 MW adicionales.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué la Sierra peruana ≥2,500 msnm posee mayor irradiación que la costa, y qué implicancias tiene esto para el diseño de proyectos FV rurales en zonas como Puno o Cusco?</div>
+</div>
+
+<!-- SECCIÓN 3: EFECTO FOTOVOLTAICO -->
+<div class="secbar sec-purple">⚡ 3. EFECTO FOTOVOLTAICO Y SEMICONDUCTORES</div>
+
+<div class="block s2">
+  <span class="bh bh-purple">Principio físico del efecto FV (Diap. 17–23)</span>
+  <div class="def def-purple">El efecto fotovoltaico consiste en la generación de corriente eléctrica continua al incidir fotones de luz sobre un semiconductor dopado. El silicio, con 4 electrones de valencia, necesita "impurezas" controladas para crear un campo eléctrico interno permanente.</div>
+  <div class="flow">
+    <div class="fbox">Fotón solar golpea átomo Si</div><div class="farrow">→</div>
+    <div class="fbox">Se libera electrón (carga -) y hueco (carga +)</div><div class="farrow">→</div>
+    <div class="fbox">Unión NP separa cargas</div><div class="farrow">→</div>
+    <div class="fbox">Campo eléctrico impulsa e⁻</div><div class="farrow">→</div>
+    <div class="fbox">Corriente DC en circuito externo</div>
+  </div>
+  <div class="divh"></div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #8b5cf6">
+      <strong>Silicio puro (Si⁴)</strong>
+      4 electrones de valencia. Semiconductor intrínseco. Solo aprovecha ~65% del espectro solar. Espesor de celda: 0.3 mm.
+    </div>
+    <div class="mini" style="border-left:3px solid #3b82f6">
+      <strong>Semiconductor Tipo N (P⁵)</strong>
+      Dopado con Fósforo (5 valencia). Electrón libre sobrante → exceso de cargas negativas (donadores). Capa superior de la celda.
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316">
+      <strong>Semiconductor Tipo P (B³)</strong>
+      Dopado con Boro (3 valencia). Genera un "hueco vacío" → exceso de cargas positivas (aceptores). Capa inferior de la celda.
+    </div>
+  </div>
+  <div class="divh"></div>
+  <div class="item"><div class="dot dot-purple"></div><span><strong>Unión NP:</strong> Al unir ambos materiales, electrones del N migran al P creando una zona de deplexión con campo eléctrico interno (~550 mV en silicio). Cuando la luz rompe el equilibrio, los pares electrón-hueco generados son separados por este campo.</span></div>
+  <div class="rx">Radiación Solar (fotones) → Si dopado NP → corriente DC<br>Voc ≈ 550 mV por celda de silicio</div>
+  <div class="warn">⚠ ERROR COMÚN: El efecto fotovoltaico NO es lo mismo que el efecto fotoeléctrico (Hertz/Einstein). En FV los electrones NO escapan del material; circulan dentro del semiconductor generando corriente. El efecto fotoeléctrico involucra emisión al vacío.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Describa el mecanismo de la unión NP en una celda de silicio: ¿cómo se forma el campo eléctrico interno y qué ocurre cuando incide radiación solar sobre ella?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Bandas de energía (Diap. 23)</span>
+  <div class="def def-blue">La teoría cuántica de bandas explica por qué solo ciertos materiales son semiconductores: su "gap" o banda prohibida tiene el ancho justo para que fotones visibles puedan excitar electrones desde la banda de valencia a la de conducción.</div>
+  <div class="item"><div class="dot dot-blue"></div><span><strong>Banda de valencia:</strong> electrones ligados al átomo, niveles energéticos inferiores.</span></div>
+  <div class="item"><div class="dot dot-blue"></div><span><strong>Banda prohibida (gap):</strong> rango de energía donde no existen estados permitidos. En Si ≈ 1.12 eV.</span></div>
+  <div class="item"><div class="dot dot-blue"></div><span><strong>Banda de conducción:</strong> electrones libres que pueden fluir → generan corriente.</span></div>
+  <div class="item"><div class="dot dot-blue"></div><span>Los semiconductores tienen gap estrecho; los fotones con E ≥ gap los excitan. Fotones con E &lt; gap se pierden como calor.</span></div>
+</div>
+
+<!-- SECCIÓN 4: TECNOLOGÍAS DE CELDAS -->
+<div class="secbar sec-green">🔬 4. GENERACIONES DE CELDAS FOTOVOLTAICAS</div>
+
+<div class="block s3">
+  <span class="bh bh-green">Historia y evolución (Diap. 16)</span>
+  <div class="two">
+    <div>
+      <div class="item"><div class="nb nb-b">1</div><span>1839 – Becquerel descubre el efecto fotovoltaico en electrolitos</span></div>
+      <div class="item"><div class="nb nb-b">2</div><span>1873 – Smith observa efecto fotoeléctrico en selenio</span></div>
+      <div class="item"><div class="nb nb-b">3</div><span>1883 – Fritts construye la primera celda solar funcional (selenio)</span></div>
+      <div class="item"><div class="nb nb-b">4</div><span>1905 – Einstein explica el efecto fotoeléctrico (Premio Nobel 1921)</span></div>
+    </div>
+    <div>
+      <div class="item"><div class="nb nb-g">5</div><span>1954 – Bell Labs crea la célula solar moderna de Si con 6% eficiencia</span></div>
+      <div class="item"><div class="nb nb-g">6</div><span>1958 – Primer uso espacial en satélite Vanguard I</span></div>
+      <div class="item"><div class="nb nb-g">7</div><span>Desde 2010 – precio cae >90%; China lidera producción global</span></div>
+      <div class="item"><div class="nb nb-g">8</div><span>2020s – Solar como energía clave; perovskitas, bifaciales, tándem</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-green">1ª y 2ª Generación — Silicio cristalino y película delgada (Diap. 24–26)</span>
+  <table class="tbl">
+    <tr><th>Tipo</th><th>Material</th><th>Eficiencia</th><th>Ventaja</th><th>Desventaja</th></tr>
+    <tr><td><strong>Mono-Si</strong></td><td>Silicio monocristalino</td><td>18–24%</td><td>Mayor eficiencia; compacto</td><td>Caro; mayor desperdicio de fabricación</td></tr>
+    <tr><td><strong>Poly-Si</strong></td><td>Silicio policristalino</td><td>15–18%</td><td>Más económico que mono</td><td>Menor eficiencia; más área requerida</td></tr>
+    <tr><td><strong>CIGS</strong></td><td>Cu-In-Ga-Se</td><td>13–20%</td><td>Flexible; buena eficiencia thin-film</td><td>Fabricación compleja y cara</td></tr>
+    <tr><td><strong>CdTe</strong></td><td>Telururo de Cadmio</td><td>10–18%</td><td>Bajo costo producción</td><td>Cadmio tóxico; menor eficiencia</td></tr>
+    <tr><td><strong>a-Si</strong></td><td>Silicio amorfo</td><td>6–10%</td><td>Muy flexible; portátil</td><td>Baja eficiencia; degrada rápido</td></tr>
+  </table>
+  <div class="warn">⚠ Sharp logró celdas policristalinas de Galio e Indio (InGaAs bottom) alcanzando hasta 36% de eficiencia al reemplazar la capa de Germanio, mejorando la cristalización de cada capa absorbente.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">3ª y 4ª Generación — Materiales emergentes (Diap. 26–31)</span>
+  <div class="item"><div class="dot dot-purple"></div><span><strong>Perovskita:</strong> 20–25% eficiencia en lab (algunos reportes >25%); bajo costo potencial. Problema: estabilidad y uso de plomo en algunas versiones.</span></div>
+  <div class="item"><div class="dot dot-purple"></div><span><strong>Orgánicas (OPV):</strong> polímeros orgánicos; 5–12%; muy ligeras y flexibles; baja durabilidad.</span></div>
+  <div class="item"><div class="dot dot-purple"></div><span><strong>Tándem (Si+Perovskita):</strong> record mundial 33.24%; hasta 30% en producción. Capta más del espectro solar usando dos absorbentes.</span></div>
+  <div class="item"><div class="dot dot-purple"></div><span><strong>HJT (Heterounión):</strong> Si cristalino + Si amorfo; 20–24%; excelente desempeño a alta temperatura.</span></div>
+  <div class="item"><div class="dot dot-purple"></div><span><strong>Bifaciales:</strong> capturan luz por ambas caras (+10–20% energía extra por reflexión del suelo albedo).</span></div>
+  <div class="item"><div class="dot dot-purple"></div><span><strong>4ª Gen híbrida:</strong> nanoestructuras + materiales orgánicos/inorgánicos + almacenamiento integrado. TRL bajo; investigación avanzada.</span></div>
+  <div class="rx">Máximo eficiencia 2024: III-V Multi-Junction Concentrador = 46%<br>Mono-Si laboratorio: 26.7% | Tándem perovskita/Si: 33.24%</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Compare las ventajas y limitaciones de las celdas de perovskita frente al silicio monocristalino para su implementación comercial masiva en el Perú.</div>
+</div>
+
+<!-- SECCIÓN 5: MÓDULOS Y PARÁMETROS -->
+<div class="secbar sec-blue">📊 5. MÓDULOS FV — PARÁMETROS Y CURVAS I-V</div>
+
+<div class="block">
+  <span class="bh bh-blue">El panel solar FV y sus parámetros (Diap. 39–40)</span>
+  <div class="def def-blue">Un módulo fotovoltaico es una agrupación de celdas en serie (aumenta voltaje) y en paralelo (aumenta corriente), encapsuladas en vidrio y marco de aluminio. Un panel típico de 12V tiene 32–36 celdas en serie (×550 mV/celda ≈ 18–20V bajo carga).</div>
+  <div class="two" style="margin-top:7px">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Pmax — Potencia máxima</strong>
+      Punto óptimo de operación; define el modelo. Medida en Wp (watt-pico) bajo STC.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Voc — Voltaje circuito abierto</strong>
+      Voltaje sin carga conectada. Mayor que Vmp; no entrega corriente en ese punto.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Isc — Corriente cortocircuito</strong>
+      Amperaje máximo con terminales cortocircuitados. Mayor que Imp; sin diferencia de potencial útil.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <strong>Vmp / Imp — Punto de máx. potencia</strong>
+      Voltaje y corriente en operación óptima. Pmax = Vmp × Imp. Rastreado por el MPPT.
+    </div>
+  </div>
+  <div class="item" style="margin-top:7px"><div class="dot dot-blue"></div><span><strong>STC (Standard Test Conditions):</strong> Irradiancia 1,000 W/m², temperatura de celda 25°C, masa de aire AM 1.5. Es la referencia universal de especificaciones técnicas.</span></div>
+  <div class="warn">⚠ La eficiencia del módulo BAJA con el aumento de temperatura. Por cada grado Celsius extra, el silicio pierde ~0.4–0.5% de potencia. En la Sierra, la alta irradiación compensa el frío; en la costa desértica hay que prever ventilación.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> En una hoja de especificaciones técnicas de un panel FV de 100W, explique la diferencia entre Voc y Vmp, y por qué Voc no representa la condición óptima de operación del sistema.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">HSP — Horas Solares Pico (Diap. 41–48)</span>
+  <div class="def def-yellow">Las Horas Solares Pico (HSP) es el número equivalente de horas al día en que el sol brilla con una intensidad constante de 1,000 W/m². Permite calcular la energía diaria esperada de un sistema FV independientemente de la variación horaria de la irradiación.</div>
+  <div class="rx">Energía diaria (Wh/día) = Pmax (Wp) × HSP<br>Ejemplo: Panel 200 Wp × 5 HSP = 1,000 Wh/día = 1 kWh/día</div>
+  <div class="item"><div class="dot dot-yellow"></div><span>Lima ciudad tiene en promedio <strong>3.0–4.0 HSP/día</strong> por la neblina costera. La Sierra puede alcanzar <strong>5.5–7.0 HSP/día</strong>.</span></div>
+  <div class="item"><div class="dot dot-yellow"></div><span>El sistema UNALM de 3.2 kW genera estimados <strong>4,000 kWh/año</strong> (~11 kWh/día), equivalente a prevenir <strong>5.8 toneladas de CO₂/año</strong> y un ahorro de S/ 1,400 anuales.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Un hospital rural en Puno (5 HSP/día) necesita 8,000 Wh/día. ¿Cuántos paneles de 300 Wp necesita? Calcule paso a paso considerando un factor de eficiencia del sistema del 80%.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Producción de módulos de silicio (Diap. 38)</span>
+  <div class="def def-green">El proceso de fabricación parte de arena (SiO₂), que se reduce, purifica, cristaliza en lingotes, se corta en obleas, se dopa y se monta para crear el módulo. Es un proceso energéticamente intensivo, con un período de retorno energético de 2–4 años.</div>
+  <div class="flow">
+    <div class="fbox">Arena (SiO₂)</div><div class="farrow">→</div>
+    <div class="fbox">Reducción + purificación</div><div class="farrow">→</div>
+    <div class="fbox">Lingote monocristal</div><div class="farrow">→</div>
+    <div class="fbox">Obleas (0.3 mm)</div><div class="farrow">→</div>
+    <div class="fbox">Dopado NP</div><div class="farrow">→</div>
+    <div class="fbox">Antireflexión + metalización</div><div class="farrow">→</div>
+    <div class="fbox">Encapsulado → Módulo FV</div>
+  </div>
+</div>
+
+<!-- SECCIÓN 6: SISTEMAS FV -->
+<div class="secbar sec-orange">🔧 6. COMPONENTES Y SISTEMAS FV</div>
+
+<div class="block s2">
+  <span class="bh bh-orange">Componentes básicos de un sistema FV doméstico (Diap. 28–34)</span>
+  <div class="def def-orange">Un sistema FV completo tiene cuatro subsistemas: generación (paneles), almacenamiento (baterías), regulación (controlador de carga) y acondicionamiento de potencia (inversor/conversor). Cada uno cumple una función crítica y su dimensionamiento incorrecto compromete todo el sistema.</div>
+  <div class="two">
+    <div>
+      <div class="mini" style="border-left:3px solid #f97316;margin-bottom:7px">
+        <strong>Regulador (controlador de carga)</strong>
+        Bloquea exceso de energía evitando sobrecargas; corta suministro al llegar a nivel crítico de batería; protege contra cortocircuitos. Esencial para prolongar vida útil de baterías.
+      </div>
+      <div class="mini" style="border-left:3px solid #f97316">
+        <strong>Inversor (DC → AC)</strong>
+        Convierte corriente continua en alterna para equipos convencionales. Rendimiento &lt;90%. Tipos: senoidal puro (costoso, necesario para electrónica sensible) y senoidal modificada (económico, no apto para todos los equipos).
+      </div>
+    </div>
+    <div>
+      <div class="mini" style="border-left:3px solid #22c55e;margin-bottom:7px">
+        <strong>Baterías — tipos para FV</strong>
+        • Plomo-ácido: económicas, bajo mantenimiento.<br>
+        • Gelificadas: selladas, sin derrame, posición libre.<br>
+        • AGM: electrolito en fibra de vidrio, descargas moderadas.<br>
+        • Ni-Cd: 100% descarga, muy caras.<br>
+        Capacidad: batería 120 Ah → da 12A por 10h.
+      </div>
+      <div class="mini" style="border-left:3px solid #22c55e">
+        <strong>Baterías Ion-Litio (gran escala)</strong>
+        Soluciones industriales (BESS): peak shaving, respaldo ante falla, mejora calidad de energía. Almacenamiento de decenas de GWh en instalaciones de servicio público (ej: sistema australiano ASEAN de 30 GWh).
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠ ERROR COMÚN: No dimensionar el inversor considerando la potencia de arranque (pico) de equipos con motores (bombas, refrigeradoras). La potencia de arranque puede ser 3–7× la potencia nominal, lo que puede quemar un inversor subdimensionado.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique la función del regulador de carga en un sistema FV aislado y describa qué ocurriría con las baterías si se omite este componente.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Tipos de sistemas FV (Diap. 15)</span>
+  <div class="def def-teal">Los sistemas FV se clasifican por su conexión a la red eléctrica. Esta distinción define su diseño, costo, componentes y modalidad de operación.</div>
+  <div class="two" style="margin-top:7px">
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <strong>Interconectado (On-grid)</strong>
+      Conectado al SEIN. Inyecta excedentes a la red (Net Metering). Sin baterías propias → más económico. Para escala doméstica, 30–500 kW, y grandes plantas (>500 kW). El sistema UNALM es de este tipo (3.2 kW).
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Aislado (Off-grid / SFD)</strong>
+      Independiente de la red. Requiere baterías para autonomía nocturna. Ideal para comunidades rurales dispersas. Históricamente: ~10,000 SFD instalados en Perú hasta 2005 (65% telecomunicaciones, 29% vivienda). Proyecto Isla Taquile-Puno, 1986.
+    </div>
+  </div>
+  <div class="item" style="margin-top:7px"><div class="dot dot-teal"></div><span><strong>Net Metering:</strong> usuarios con sistema FV pueden vender excedentes a distribuidoras. Regulación habilitante necesaria en Perú (aún en desarrollo).</span></div>
+  <div class="item"><div class="dot dot-teal"></div><span><strong>Curva Pato (Duck Curve):</strong> fenómeno de alta penetración solar que genera sobreproducción al mediodía y rampa pronunciada de demanda al atardecer; requiere almacenamiento o gestión flexible.</span></div>
+</div>
+
+<!-- SECCIÓN 7: APLICACIONES Y PERÚ -->
+<div class="secbar sec-pink">🇵🇪 7. APLICACIONES, PERÚ Y TENDENCIAS</div>
+
+<div class="block">
+  <span class="bh bh-pink">Aplicaciones de la energía solar (Diap. 15–17, 43)</span>
+  <div class="def def-teal">La energía solar tiene aplicaciones activas (conversión en electricidad o calor útil con equipos) y pasivas (aprovechamiento directo sin conversión mecánica, como arquitectura bioclimática).</div>
+  <div class="item"><div class="dot dot-pink" style="background:#d946ef"></div><span><strong>Residencial/comercial:</strong> techos solares, bombeo solar de agua para riego, iluminación rural, carga de vehículos eléctricos.</span></div>
+  <div class="item"><div class="dot dot-pink" style="background:#d946ef"></div><span><strong>BIPV:</strong> integración en edificios (fachadas, ventanas transparentes, tejas solares). Reduce impacto paisajístico.</span></div>
+  <div class="item"><div class="dot dot-pink" style="background:#d946ef"></div><span><strong>Agrovoltaica:</strong> paneles elevados sobre cultivos o ganado — produce energía y reduce estrés hídrico de las plantas por sombra parcial.</span></div>
+  <div class="item"><div class="dot dot-pink" style="background:#d946ef"></div><span><strong>Fotocatálisis:</strong> luz solar + TiO₂/CuO como catalizador → radicales hidroxilo → descontaminación de agua y desactivación de virus/bacterias (aplicación en COVID-19).</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Describa el principio de la fotocatálisis solar y explique cómo puede aplicarse al tratamiento de agua contaminada en comunidades rurales del Perú.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-pink">Plantas solares FV en Perú (Diap. 6)</span>
+  <div class="def def-orange">Las primeras plantas de gran escala en Perú se instalaron en el sur, aprovechando el excepcional recurso solar. Su modelo es concesión pública por subasta a 20 años, con tarifas garantizadas conectadas al SEIN.</div>
+  <div class="item"><div class="dot dot-orange"></div><span><strong>Arequipa–La Joya:</strong> 121 ha, 40 MW, 151,305 paneles, evita 130,000 t CO₂/año.</span></div>
+  <div class="item"><div class="dot dot-orange"></div><span><strong>Tacna:</strong> 141 ha, 47.2 MW · <strong>Moquegua:</strong> 123 ha, 50.6 MW.</span></div>
+  <div class="item"><div class="dot dot-orange"></div><span>Inversión combinada: S/ 410 MM (~US$97 MM). Empresas: Solar Pack y Gestamp (españolas).</span></div>
+  <div class="item"><div class="dot dot-orange"></div><span>Solar representa el <strong>2.1%</strong> de la electricidad generada en Perú (2024), concentrada en el Sur (12.5%).</span></div>
+  <div class="item"><div class="dot dot-orange"></div><span><strong>Proyecto Australia–ASEAN:</strong> 10 GW, 12,141 ha, 9 millones de paneles, 30 GWh de almacenamiento, cable subterráneo de 3,700 km a Singapur. Inversión US$16,000 MM.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Nueva era solar y tendencias (Diap. 14, 35)</span>
+  <div class="def def-green">El costo de los paneles solares ha caído de US$76.67/Wp (1977) a US$0.36/Wp (2014), una reducción >99%. Esta "curva de aprendizaje" o Ley de Swanson hace que la solar sea la fuente de energía más barata en gran parte del mundo.</div>
+  <div class="item"><div class="dot dot-green"></div><span><strong>Tendencia:</strong> meta en LCOE de US$85/MWh (actualmente US$95–130/MWh). Brasil ya logra US$55/MWh en eólica.</span></div>
+  <div class="item"><div class="dot dot-green"></div><span><strong>Investigación:</strong> tándem perovskita/Si (record 33.24%), celdas flexibles para ventanas (30%), quantum dots, uso de IA para optimización de estructuras e interfaces.</span></div>
+  <div class="item"><div class="dot dot-green"></div><span><strong>BIPV + agrovoltaica + offshore:</strong> nuevos frontiers de despliegue. Los edificios europeos representan 49% de la demanda energética y 36% de emisiones CO₂.</span></div>
+  <div class="item"><div class="dot dot-green"></div><span><strong>Perú 2024:</strong> renovables no convencionales crecieron 26% en un año. Eólica +25%, FV +10%.</span></div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="secbar sec-blue">📋 TABLA INTEGRADORA — VISIÓN GLOBAL</div>
+
+<div class="block s3">
+  <span class="bh bh-blue">Comparativo integral de tecnologías y aplicaciones</span>
+  <table class="tbl">
+    <tr>
+      <th>Concepto</th>
+      <th>Valor/Rango clave</th>
+      <th>Principio físico</th>
+      <th>Aplicación en Perú</th>
+      <th>Dato crítico de examen</th>
+    </tr>
+    <tr>
+      <td>Constante Solar (Iₛ)</td>
+      <td>1,353–1,369 W/m²</td>
+      <td>Ley Stefan-Boltzmann + geometría orbital</td>
+      <td>Base de todo cálculo FV</td>
+      <td>Es extraterrestre; en superficie ≈1,000 W/m²</td>
+    </tr>
+    <tr>
+      <td>Efecto FV</td>
+      <td>~550 mV/celda Si</td>
+      <td>Unión NP + fotones → par e⁻-hueco</td>
+      <td>Toda celda solar comercial</td>
+      <td>Distinto al efecto fotoeléctrico; no hay emisión al vacío</td>
+    </tr>
+    <tr>
+      <td>Si monocristalino</td>
+      <td>18–24% eficiencia</td>
+      <td>Cristal de alta pureza</td>
+      <td>Plantas Arequipa, Tacna</td>
+      <td>Domina >90% mercado mundial</td>
+    </tr>
+    <tr>
+      <td>Tándem Si+Perovskita</td>
+      <td>Record 33.24%</td>
+      <td>Dos absorbentes del espectro</td>
+      <td>Aún en escalado comercial</td>
+      <td>Problema: estabilidad y durabilidad</td>
+    </tr>
+    <tr>
+      <td>HSP Lima</td>
+      <td>3.0–4.0 h/día</td>
+      <td>Equivalente a 1,000 W/m² constantes</td>
+      <td>Diseño sistemas urbanos en Lima</td>
+      <td>Sierra Puno: 5.5–7.0 HSP/día</td>
+    </tr>
+    <tr>
+      <td>Regulador de carga</td>
+      <td>Protege batería</td>
+      <td>Control electrónico umbral carga/descarga</td>
+      <td>Sistemas rurales SFD, SEIN</td>
+      <td>Sin regulador, batería falla en semanas</td>
+    </tr>
+    <tr>
+      <td>Potencia solar Perú (2024)</td>
+      <td>476 MW instalados</td>
+      <td>Generación FV conectada a SEIN</td>
+      <td>Sur: Arequipa, Tacna, Moquegua</td>
+      <td>En construcción: 2,321 MW adicionales</td>
+    </tr>
+    <tr>
+      <td>Caída de precios</td>
+      <td>$76.67 → $0.36/Wp</td>
+      <td>Economías de escala + Curva de aprendizaje</td>
+      <td>Viabiliza proyectos residenciales</td>
+      <td>China lidera producción global</td>
+    </tr>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠ DATO INTEGRADOR CLAVE: El éxito de un sistema FV depende de tres factores simultáneos: (1) el recurso solar del lugar (HSP), (2) la eficiencia de conversión de las celdas (tecnología elegida) y (3) el correcto dimensionamiento de todos los componentes (regulador, baterías, inversor). Fallar en uno de ellos compromete rentabilidad y vida útil de todo el sistema.</div>
+</div>
+
+<!-- QUIZ INTERACTIVO -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-txt">
+      <span id="prog-txt">Pregunta 0 de 10 respondidas</span>
+      <span id="score-txt">Aciertos: 0 / 10</span>
+    </div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es el valor aproximado de la Constante Solar (Iₛ) medida fuera de la atmósfera terrestre?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) 500 W/m²</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) 3,800 W/m²</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) 1,353–1,369 W/m²</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) 1,000 W/m²</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">¿Cuál es la principal diferencia entre el efecto fotovoltaico y el efecto fotoeléctrico?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Son el mismo fenómeno físico; solo difieren en el material utilizado</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) En el FV los electrones circulan dentro del semiconductor; en el fotoeléctrico son emitidos al vacío</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) El efecto FV requiere temperaturas altas; el fotoeléctrico ocurre a temperatura ambiente</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) El efecto fotoeléctrico genera corriente alterna; el FV genera corriente continua</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">En un semiconductor tipo N dopado con Fósforo (5 electrones de valencia), ¿qué ocurre en la red cristalina de silicio?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Aparece un hueco vacío (carga positiva) porque el P tiene menos electrones que el Si</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) El silicio se vuelve conductor metálico perdiendo sus propiedades semiconductoras</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Se forman enlaces covalentes incompletos que atraen electrones de átomos vecinos</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) Queda un electrón libre sobrante por cada átomo de P, generando exceso de cargas negativas</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre las generaciones de celdas solares es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Las celdas de silicio monocristalino dominan más del 90% del mercado solar mundial</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) Las celdas de perovskita son ya la tecnología más comercializada por su alta estabilidad y bajo costo</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Las celdas tándem Si+Perovskita han alcanzado un record de eficiencia de 33.24%</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Las celdas bifaciales capturan luz por ambas caras aumentando la producción energética un 10–20%</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Un agricultor en Puno desea instalar un sistema FV aislado para riego. La zona tiene 6 HSP/día. Si instala 4 paneles de 250 Wp, ¿cuánta energía generará diariamente (sin pérdidas)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) 1,000 Wh/día</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) 1,500 Wh/día</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) 6,000 Wh/día</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) 4,000 Wh/día</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Cuál es la función del regulador de carga (controlador) en un sistema FV doméstico aislado?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Convertir la corriente continua (DC) de los paneles en corriente alterna (AC) para los electrodomésticos</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Aumentar el voltaje del panel cuando la irradiación es baja para mantener la potencia estable</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) Proteger la batería de sobrecargas y descargas profundas, monitoreando el estado del sistema</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Rastrear el punto de máxima potencia (MPPT) del panel en tiempo real</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Según el atlas solar del Perú, ¿qué región del país presenta la mayor irradiación solar diaria promedio?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) La Costa Norte (Piura, Tumbes), por su cercanía a la línea ecuatorial</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) La Selva Alta (Ucayali, Loreto), por sus altas temperaturas</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) La Costa de Lima, por ser la capital y mayor demanda energética</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="true">D) La Sierra (≥2,500 msnm) con 6.0–8.0 kWh/m²/día, especialmente el sur andino</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">En la curva I-V de un módulo fotovoltaico, ¿cuál de los siguientes parámetros representa el punto de operación óptima donde la potencia entregada es máxima?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="true">A) El punto Vmp × Imp (punto de máxima potencia)</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) El voltaje de circuito abierto (Voc), porque es el mayor voltaje disponible</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) La corriente de cortocircuito (Isc), porque es la mayor corriente disponible</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) El punto medio entre Voc e Isc en la curva I-V</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">La tendencia histórica de precios de los paneles solares muestra que desde 1977 hasta 2014 el precio cayó de US$76.67 a US$0.36 por Wp. ¿Qué nombre recibe esta ley empírica y qué factor ha sido clave en este fenómeno?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Ley de Moore; miniaturización de transistores aplicada a semiconductores solares</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Ley de Ohm; reducción de la resistencia interna de los módulos por mejoras en contactos</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Curva de aprendizaje (Ley de Swanson); economías de escala y mejoras de proceso, impulsadas en gran parte por la producción masiva de China</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Ley de Faraday; mayor eficiencia electroquímica de las celdas al aumentar la producción</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">En el contexto del sistema FV de 3.2 kW de la UNALM (Lima), un día de semana soleado produjo 12.47 kWh. De ese total, 10.70 kWh fueron autoconsumo del edificio y 1.77 kWh se inyectaron a la red. ¿Qué concepto es "Net Metering" y cuál es su implicancia para usuarios residenciales en Perú?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Es el porcentaje de eficiencia neta del panel; indica que el 85% de la energía solar se convierte en electricidad útil</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Es el balance entre la energía consumida de la red y la producida por el sistema FV, sin posibilidad de venta</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Es un tipo de batería de flujo que almacena los excedentes solares en la red para uso nocturno gratuito</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) Es el mecanismo por el cual usuarios con sistemas FV pueden inyectar excedentes a la red eléctrica y recibir crédito o pago por esa energía de las distribuidoras</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="results-panel"></div>
+</div>
+
+<div class="ftbar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Calle, J.L. — LER, FIA UNALM · erenovables@lamolina.edu.pe</span>
+  <span class="fc">Fraunhofer ISE — Solar Cell Efficiency Charts</span>
+  <span class="fc">MEM Perú — Principales Indicadores del Sector Eléctrico 2021–2024</span>
+  <span class="fc">Bloomberg New Energy Finance / pv.energytrend.com</span>
+  <span class="fc">Solarex / CONCYTEC · elperiodicodelaenergia.com</span>
+</div>
+
+</div>
+
+<script>
+var answers = {
+  "1":{correct:"c", fb:{ok:"✅ ¡Correcto! La Constante Solar es ~1,353–1,369 W/m², medida por encima de la atmósfera. Los 1,000 W/m² son la irradiación en superficie bajo condiciones estándar (STC). La distancia Tierra-Sol (149×10⁶ km) determina este valor.", fail:"❌ Incorrecto. La respuesta correcta es C. La Constante Solar (Iₛ) es 1,353–1,369 W/m², medida fuera de la atmósfera. En superficie es ~1,000 W/m² por absorción y dispersión atmosférica."}},
+  "2":{correct:"b", fb:{ok:"✅ ¡Correcto! En el efecto FV, los electrones permanecen dentro del material semiconductor y generan una corriente de circuito. En el efecto fotoeléctrico (Hertz/Einstein), los electrones son expulsados al vacío desde la superficie metálica.", fail:"❌ Incorrecto. La respuesta correcta es B. La distinción clave es que en FV los e⁻ circulan internamente; en el fotoeléctrico son emitidos al exterior del material. Einstein explicó el efecto fotoeléctrico (Nobel 1921), no el FV."}},
+  "3":{correct:"d", fb:{ok:"✅ ¡Correcto! El Fósforo tiene 5 electrones de valencia; al ocupar un lugar del silicio (4 valencia), uno de sus electrones queda libre. Esto crea portadores de carga negativos adicionales → semiconductor tipo N (Negativo).", fail:"❌ Incorrecto. La respuesta correcta es D. Con P (5 valencia) en la red de Si (4 valencia), sobra 1 electrón libre. El hueco aparece con Boro (3 valencia) → tipo P. Esta distinción es fundamental para comprender la unión NP."}},
+  "4":{correct:"b", fb:{ok:"✅ ¡Correcto! Las perovskitas son aún tecnología emergente con serios problemas de estabilidad, durabilidad y en algunos casos toxicidad (plomo). El mercado sigue dominado por el silicio cristalino (>90%). Las perovskitas son prometedoras, pero no dominantes comercialmente.", fail:"❌ Incorrecto. La respuesta correcta es B. Las perovskitas tienen eficiencias excelentes en laboratorio pero presentan problemas críticos de estabilidad ambiental (humedad, calor, oxidación) que impiden su comercialización masiva hasta la fecha."}},
+  "5":{correct:"c", fb:{ok:"✅ ¡Correcto! E = Potencia total × HSP = (4 × 250 Wp) × 6 h = 1,000 Wp × 6 = 6,000 Wh/día = 6 kWh/día. Esta es la energía teórica sin pérdidas del sistema. Con eficiencia real ~80%, sería ~4,800 Wh/día.", fail:"❌ Incorrecto. La respuesta correcta es C. E = 4 paneles × 250 Wp = 1,000 Wp total. Luego: 1,000 Wp × 6 HSP = 6,000 Wh/día. La fórmula clave es: Energía (Wh) = Potencia pico (Wp) × HSP del lugar."}},
+  "6":{correct:"c", fb:{ok:"✅ ¡Correcto! El regulador protege la batería de dos riesgos críticos: la sobrecarga (cuando los paneles generan más energía de la que puede almacenarse) y la descarga profunda (que reduce dramáticamente la vida útil de la batería). Sin él, una batería se arruinaría en semanas.", fail:"❌ Incorrecto. La respuesta correcta es C. El conversor DC-DC o inversor hace la conversión de corriente; el MPPT rastrea la potencia máxima. El regulador se encarga específicamente de proteger el banco de baterías."}},
+  "7":{correct:"d", fb:{ok:"✅ ¡Correcto! La Sierra andina ≥2,500 msnm recibe 6.0–8.0 kWh/m²/día por la menor masa de aire atmosférico que atraviesa la radiación (menor absorción), la alta altitud y la menor cobertura de nubes en ciertas épocas. Puno/Titicaca es un ejemplo de zona privilegiada.", fail:"❌ Incorrecto. La respuesta correcta es D. Lima tiene neblina costera que reduce su recurso a 3–4 HSP/día. La Costa Norte recibe más que Lima, pero la Sierra supera ambas por la menor atmósfera que atraviesa la radiación."}},
+  "8":{correct:"a", fb:{ok:"✅ ¡Correcto! El Punto de Máxima Potencia (MPP) es donde Pmax = Vmp × Imp. Voc tiene máximo voltaje pero corriente cero; Isc tiene máxima corriente pero voltaje casi nulo. El MPP es el 'sweet spot' donde el producto V×I es máximo, rastreado por el MPPT del inversor.", fail:"❌ Incorrecto. La respuesta correcta es A. Ni Voc ni Isc son puntos de potencia máxima — cada uno maximiza solo una variable. La potencia máxima se obtiene en el punto donde el producto I×V es máximo, llamado MPP."}},
+  "9":{correct:"c", fb:{ok:"✅ ¡Correcto! La Curva de Aprendizaje Solar (o Ley de Swanson) describe la caída del 20% en precio por cada duplicación de la capacidad instalada acumulada. China, al escalar masivamente la producción, fue el principal motor de esta reducción. El precio cayó >99% en ~40 años.", fail:"❌ Incorrecto. La respuesta correcta es C. La Ley de Moore aplica a transistores de microprocesadores. El fenómeno solar se llama Curva de Aprendizaje o Ley de Swanson, ligado a economías de escala en manufactura de silicio y mejoras de proceso."}},
+  "10":{correct:"d", fb:{ok:"✅ ¡Correcto! Net Metering (o medición neta) permite que el medidor 'gire hacia atrás' cuando el sistema FV genera más de lo consumido, acreditando esa energía al usuario. Es fundamental para la viabilidad económica de instalaciones residenciales. Perú tiene regulación aún en desarrollo para habilitarlo masivamente.", fail:"❌ Incorrecto. La respuesta correcta es D. Net Metering es el mecanismo de inyección de excedentes a la red con compensación. No es eficiencia, no es almacenamiento físico — es un sistema de créditos o pagos por energía vertida a la red eléctrica."}}
+};
+
+var responded=0,correct=0;
+
+function updateProgress(){
+  document.getElementById('prog-txt').textContent='Pregunta '+responded+' de 10 respondidas';
+  document.getElementById('score-txt').textContent='Aciertos: '+correct+' / 10';
+  document.getElementById('prog-bar').style.width=Math.round(responded/10*100)+'%';
+  if(responded===10) showResults();
+}
+
+function showResults(){
+  var panel=document.getElementById('results-panel');
+  panel.style.display='block';
+  var cls='low',msg='Necesitas repasar el material. ¡Vuelve al canvas y repasa los conceptos clave!';
+  if(correct>=5&&correct<=7){cls='mid';msg='¡Buen avance! Tienes bases sólidas. Repasa las preguntas fallidas.';}
+  if(correct>=8){cls='high';msg='¡Excelente dominio del tema! Estás muy bien preparado para el examen.';}
+  panel.className='';
+  panel.classList.add(cls);
+  panel.innerHTML='<div style="font-size:22px;font-weight:500;margin-bottom:6px">'+correct+' / 10 correctas</div><div style="font-size:14px;margin-bottom:10px">'+msg+'</div><button id="reset-btn">🔄 Reiniciar Quiz</button>';
+  document.getElementById('reset-btn').onclick=resetQuiz;
+}
+
+function resetQuiz(){
+  responded=0;correct=0;
+  document.getElementById('results-panel').style.display='none';
+  updateProgress();
+  document.querySelectorAll('.qbtn').forEach(function(b){
+    b.classList.remove('correct','incorrect');
+    b.disabled=false;
+    b.style.pointerEvents='';
+    b.textContent=b.textContent.replace(/^[✅❌] /,'');
+  });
+  document.querySelectorAll('.qfeedback').forEach(function(f){
+    f.style.display='none';
+    f.className='qfeedback';
+  });
+}
+
+document.getElementById('quiz-section').addEventListener('click',function(e){
+  var btn=e.target.closest('.qbtn');
+  if(!btn||btn.disabled)return;
+  var q=btn.getAttribute('data-q');
+  var isCorrect=btn.getAttribute('data-correct')==='true';
+  var ans=answers[q];
+  var fbEl=document.getElementById('fb'+q);
+  var allBtns=document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  
+  allBtns.forEach(function(b){
+    b.disabled=true;
+    if(b.getAttribute('data-correct')==='true'){
+      b.classList.add('correct');
+      b.textContent='✅ '+b.textContent;
+    }
+  });
+  
+  if(!isCorrect){
+    btn.classList.add('incorrect');
+    btn.textContent=btn.textContent.replace('✅ ','❌ ');
+  }
+  
+  responded++;
+  if(isCorrect){
+    correct++;
+    fbEl.className='qfeedback ok';
+    fbEl.textContent=ans.fb.ok;
+  } else {
+    fbEl.className='qfeedback fail';
+    fbEl.textContent=ans.fb.fail;
+  }
+  fbEl.style.display='block';
+  updateProgress();
+});
+</script>
