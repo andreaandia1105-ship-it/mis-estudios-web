@@ -1,0 +1,657 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.titlebar{grid-column:1/-1;background:#0f1e3a;border-radius:12px;padding:14px 18px;color:#fff}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titlebar .sub{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.secbar{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-family:'Oswald',sans-serif;font-weight:500}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;flex-shrink:0}
+.fc{font-size:11px;color:#94a3b8}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:4px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+#quiz-section{grid-column:1/-1}
+.quiz-header{background:#0f1e3a;border-radius:10px 10px 0 0;padding:12px 16px;color:#fff}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.quiz-body{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-top:none;border-radius:0 0 10px 10px;padding:16px}
+.qcard{margin-bottom:20px;padding-bottom:16px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qcard:last-of-type{border-bottom:none;margin-bottom:0}
+.qnum{font-size:11px;color:#94a3b8;font-family:'Oswald',sans-serif;font-weight:500;margin-bottom:4px}
+.qtext{font-size:13px;font-weight:600;color:var(--color-text-primary);margin-bottom:8px;line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none}
+.qfeedback.correct-fb{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.wrong-fb{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.progress-bar-wrap{background:rgba(255,255,255,.15);border-radius:20px;height:8px;margin:8px 0}
+.progress-bar-fill{height:100%;border-radius:20px;background:#22c55e;transition:width .3s}
+#quiz-results{display:none;margin-top:16px;padding:14px;border-radius:10px;font-size:13px;text-align:center}
+#reset-btn{margin-top:10px;background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;cursor:pointer;font-size:12px;font-family:'Source Sans 3',sans-serif}
+@media(prefers-color-scheme:dark){
+  .warn{background:#431407;color:#fed7aa}
+  .exam{background:#422006;color:#fef08a;border-color:#b45309}
+}
+</style>
+
+<div class="cv">
+
+<div class="titlebar">
+  <h1>⚡ Energía Solar Fotovoltaica + Paneles Bifaciales</h1>
+  <div class="sub">Manual BUN-CA 2002 · Ooshaksaraei et al., International Journal of Photoenergy 2013 · Canvas de repaso universitario</div>
+  <span class="pill" style="background:#1e3a5f;color:#93c5fd">Sistemas FV</span>
+  <span class="pill" style="background:#14532d;color:#86efac">Componentes</span>
+  <span class="pill" style="background:#422006;color:#fef08a">Aplicaciones</span>
+  <span class="pill" style="background:#2e1065;color:#c4b5fd">Paneles Bifaciales</span>
+  <span class="pill" style="background:#042f2e;color:#5eead4">Reflectores</span>
+  <span class="pill" style="background:#450a0a;color:#fca5a5">Costos/Ambiental</span>
+</div>
+
+<div class="secbar" style="background:#dbeafe;color:#1e3a8a">🔵 FUNDAMENTOS DE LA ENERGÍA SOLAR FOTOVOLTAICA</div>
+
+<div class="block">
+  <div class="bh" style="background:#dbeafe;color:#1e3a8a">Efecto Fotovoltaico</div>
+  <div class="def" style="border-color:#3b82f6;color:var(--color-text-primary)">El efecto fotovoltaico es la generación directa de corriente eléctrica cuando fotones de luz inciden sobre materiales semiconductores (principalmente silicio). Es la base física de TODA la tecnología fotovoltaica.</div>
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div>La energía solar puede aprovecharse de dos formas: <strong>solar térmica</strong> (calor mediante colectores) o <strong>solar fotovoltaica</strong> (electricidad mediante módulos). Son procesos distintos del espectro electromagnético.</div></div>
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div>El silicio es el semiconductor más usado: abundante en la arena, pero requiere pureza extrema para el efecto FV, lo que encarece la producción.</div></div>
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div>Una celda FV mide 10×10 cm y produce ~1 W a plena luz. La mayoría de paneles usa 36 celdas conectadas en serie.</div></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique por qué el silicio debe ser de alta pureza para el efecto fotovoltaico y cómo esto impacta en el costo de producción de celdas solares.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#dbeafe;color:#1e3a8a">Tipos de Módulos FV</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #1e3a8a">
+      <div style="font-weight:600;font-size:11.5px;margin-bottom:4px">Monocristalino</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Mayor eficiencia y vida útil. Precio ligeramente mayor. El más confiable del mercado.</div>
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <div style="font-weight:600;font-size:11.5px;margin-bottom:4px">Policristalino</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Ligeramente más barato, eficiencia menor. Buena relación costo-beneficio para uso masivo.</div>
+    </div>
+    <div class="mini" style="border-top:3px solid #93c5fd">
+      <div style="font-weight:600;font-size:11.5px;margin-bottom:4px">Amorfo</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Menor eficiencia, menor precio. Flexible y delgado; se integra como parte de techos o paredes.</div>
+    </div>
+  </div>
+  <hr class="divh">
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div><strong>Vatios-pico (Wp):</strong> capacidad nominal bajo condiciones estándar: 1000 W/m² de irradiancia y temperatura de celda de 25°C. En condiciones reales, la potencia es menor.</div></div>
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div><strong>Vida útil:</strong> hasta 30 años; garantías de 20+ años. Rango comercial: 5 Wp (pequeño) hasta 160 Wp (alta potencia). Electrificación rural: 50–100 Wp.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir vatios-pico (Wp) con vatios reales de operación. Un panel de 55 Wp no entrega 55 W en condiciones normales — la potencia real depende de la irradiancia y temperatura del sitio específico.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Un panel de 75 Wp tiene una tolerancia del ±10%. ¿Cuál es el rango de potencia nominal posible? ¿En qué condiciones se obtiene exactamente 75 W?</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#dbeafe;color:#1e3a8a">Marco y Protección</div>
+  <div class="def" style="border-color:#3b82f6;color:var(--color-text-primary)">El marco de vidrio y aluminio anodizado tiene dos funciones: soporte mecánico de las celdas y protección contra la intemperie (humedad, polvo, impactos).</div>
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div>Cubierta frontal: <strong>vidrio antireflejante de alta resistencia</strong> que optimiza la captación de radiación.</div></div>
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div>Cubierta posterior: <strong>plástico EVA</strong> (acetato de vinil etileno). Aislamiento completo del exterior.</div></div>
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div>Marco de aluminio: facilita la fijación a estructuras de soporte mediante orificios estratégicos.</div></div>
+  <div class="flow">
+    <div class="fbox">Luz solar</div><div class="farrow">→</div>
+    <div class="fbox">Vidrio antireflejante</div><div class="farrow">→</div>
+    <div class="fbox">Celdas FV (36)</div><div class="farrow">→</div>
+    <div class="fbox">Corriente CD</div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué el vidrio frontal es antireflejante? Explique cómo esta característica influye en la eficiencia del panel.</div>
+</div>
+
+<div class="secbar" style="background:#dcfce7;color:#14532d">🟢 COMPONENTES DEL SISTEMA FOTOVOLTAICO</div>
+
+<div class="block s2">
+  <div class="bh" style="background:#dcfce7;color:#14532d">Baterías — Almacenamiento de Energía</div>
+  <div class="def" style="border-color:#16a34a;color:var(--color-text-primary)">Las baterías FV son de <strong>ciclo profundo</strong>: proveen corriente moderada durante muchas horas, al contrario de las baterías de automóvil que proveen corrientes breves e intensas. Esta diferencia de diseño es fundamental para el correcto funcionamiento del sistema.</div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot" style="background:#16a34a"></div><div><strong>Almacenan</strong> energía en periodos de excedente solar (día, baja demanda).</div></div>
+      <div class="item"><div class="dot" style="background:#16a34a"></div><div><strong>Proveen</strong> energía en periodos sin sol (noche, días nublados).</div></div>
+      <div class="item"><div class="dot" style="background:#16a34a"></div><div><strong>Estabilizan</strong> el voltaje para proteger los aparatos; permiten picos de corriente (arranque de motores).</div></div>
+      <div class="rx">Capacidad (Ah) = Consumo diario (Ah) × Días de reserva / Factor de descarga<br>Ejemplo: 27.3 Ah × 3 días / 0.8 = 102.4 Ah → usar batería de 120 Ah</div>
+    </div>
+    <div>
+      <div class="mini" style="border-left:3px solid #16a34a;margin-bottom:7px">
+        <strong style="font-size:11.5px">Batería FV vs Auto</strong>
+        <div style="font-size:11px;margin-top:4px;color:var(--color-text-secondary)">FV: 2 A × 100 h (corriente moderada, largo plazo)<br>Auto: 100 A × 2 s (corriente alta, instantánea)</div>
+      </div>
+      <div class="mini" style="border-left:3px solid #86efac">
+        <strong style="font-size:11.5px">Vida útil: 3–5 años</strong>
+        <div style="font-size:11px;margin-top:4px;color:var(--color-text-secondary)">Costo: 15–30% del sistema total. Reemplazarla 3–4 veces en la vida del sistema.</div>
+      </div>
+      <div class="warn" style="margin-top:7px">⚠️ PELIGRO AMBIENTAL: Las baterías contienen ácido sulfúrico. Al terminar su vida útil, deben llevarse a centros de reciclaje. Nunca desecharlas en campo abierto; el derrame daña suelo, personas y animales.</div>
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué se desaconseja usar baterías de automóvil en sistemas fotovoltaicos aunque su costo inicial sea menor? Explique las consecuencias técnicas y económicas.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#dcfce7;color:#14532d">Regulador de Carga</div>
+  <div class="def" style="border-color:#16a34a;color:var(--color-text-primary)">Dispositivo electrónico que protege la batería controlando tanto la corriente de carga (desde módulos → batería) como la de descarga (batería → cargas). Sin él, la sobredescarga o sobrecarga acortan drásticamente la vida de la batería.</div>
+  <div class="flow">
+    <div class="fbox">Módulos FV</div><div class="farrow">→</div>
+    <div class="fbox" style="background:#dcfce7;color:#14532d;font-weight:600">Regulador</div><div class="farrow">→</div>
+    <div class="fbox">Batería</div><div class="farrow">→</div>
+    <div class="fbox">Cargas</div>
+  </div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><div>Si batería llena: <strong>corta flujo de módulos → batería</strong> (evita sobrecarga).</div></div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><div>Si batería en mínimo: <strong>corta flujo batería → cargas</strong> (evita sobredescarga). Función LVD (Low Voltage Disconnect).</div></div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><div>Recomendado: tipo serie con desconexión automática y <strong>indicadores luminosos de estado de carga</strong>.</div></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Qué le ocurriría a la batería de un sistema FV si el regulador de carga fallara y se dejara conectado durante una semana soleada sin consumo?</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#dcfce7;color:#14532d">Inversor y Cargas</div>
+  <div class="def" style="border-color:#16a34a;color:var(--color-text-primary)">El inversor transforma la corriente directa (CD) a 12–24 V de la batería en corriente alterna (CA) a 120 V, necesaria para la mayoría de electrodomésticos en América Central.</div>
+  <div class="two">
+    <div>
+      <div class="rx">CD 12V → INVERSOR → CA 120V<br>60 Hz (América Central)<br>P_máx = Σ potencias individuales × 1.2–1.3</div>
+      <div class="item" style="margin-top:6px"><div class="dot" style="background:#16a34a"></div><div>Sobredimensionar 20–30% para expansiones futuras.</div></div>
+      <div class="item"><div class="dot" style="background:#16a34a"></div><div>Ej: Inversor 300 W puede alimentar 20 lámparas de 15 W, o TV 75 W + 15 lámparas de 15 W.</div></div>
+    </div>
+    <div>
+      <div class="mini" style="border-top:3px solid #16a34a;margin-bottom:6px">
+        <strong style="font-size:11px">Sistema SIN inversor (CD)</strong>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">Solo cargas a 12V. Más barato. Uso doméstico básico: luz, radio, TV B/N.</div>
+      </div>
+      <div class="mini" style="border-top:3px solid #22c55e">
+        <strong style="font-size:11px">Sistema CON inversor (CA)</strong>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">Cargas a 12V y 120V. Mayor flexibilidad. Electrodomésticos estándar más baratos y accesibles.</div>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que el inversor convierte energía "gratis". Todo inversor tiene pérdidas (~10–15%). Un sistema CD puro es más eficiente si solo se requieren cargas a 12V.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Una familia rural requiere 2 lámparas, 1 radio y 1 TV a color. ¿Qué tipo de sistema fotovoltaico (CD o CA) recomendaría y por qué? Considere factores técnicos y económicos.</div>
+</div>
+
+<div class="secbar" style="background:#ffedd5;color:#7c2d12">🟠 APLICACIONES Y TIPOS DE SISTEMAS</div>
+
+<div class="block s2">
+  <div class="bh" style="background:#ffedd5;color:#7c2d12">Clasificación de Sistemas FV</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong style="font-size:11.5px">Individual CD</strong>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Panel &lt;100Wp + batería &lt;150Ah + regulador 12V + 2–3 lámparas 12V. El más económico. Para electrificación básica en zonas rurales dispersas.</div>
+    </div>
+    <div class="mini" style="border-top:3px solid #ea580c">
+      <strong style="font-size:11.5px">Individual CA</strong>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Sistema CD + inversor. Mayor capacidad de panel y batería. Permite usar electrodomésticos estándar a 120V. Más costoso pero más versátil.</div>
+    </div>
+    <div class="mini" style="border-top:3px solid #c2410c">
+      <strong style="font-size:11.5px">Centralizado Aislado</strong>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Sistema FV central que distribuye electricidad a varias viviendas por líneas. Para comunidades densas. Menor costo por kWh, mayor calidad de suministro.</div>
+    </div>
+  </div>
+  <hr class="divh">
+  <div class="two" style="margin-top:6px">
+    <div>
+      <div class="mini" style="border-top:3px solid #9a3412;margin-bottom:6px">
+        <strong style="font-size:11.5px">Usos productivos (sin batería posible)</strong>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">Bombeo de agua para riego (no necesita batería si opera solo de día). Caso: Chitré, Panamá — 4 paneles 120Wp + rastreador solar + bomba sumergible para riego por goteo de 1 hectárea.</div>
+      </div>
+    </div>
+    <div>
+      <div class="mini" style="border-top:3px solid #7c2d12">
+        <strong style="font-size:11.5px">Conectados a red (futuro)</strong>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">Sin banco de baterías; la energía se inyecta directamente a la red. Requiere inversor especial. Experiencias líderes: España y Alemania. Barrera principal: legislación para venta de energía a distribuidoras.</div>
+      </div>
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique por qué los sistemas centralizados tienen menor costo de energía que los individuales, y señale su principal desventaja operativa.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ffedd5;color:#7c2d12">Costos del Sistema FV</div>
+  <div class="def" style="border-color:#f97316;color:var(--color-text-primary)">Un sistema doméstico típico en América Central cuesta entre US$800–1000 (2002). El costo no es solo la compra: inversión inicial + mantenimiento + reemplazo de baterías conforman el costo total de ciclo de vida.</div>
+  <div style="margin:8px 0">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:2px">Módulo FV (30%)</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:30%;background:#f97316"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:2px">Batería (15%)</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:15%;background:#ea580c"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:2px">Inversor (15%)</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:15%;background:#c2410c"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:2px">Transporte (15%)*</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:15%;background:#9a3412"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:2px">Mano de obra (15%)</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:15%;background:#7c2d12"></div></div>
+  </div>
+  <div style="font-size:10.5px;color:var(--color-text-secondary)">* Zonas remotas: transporte puede subir al 30% del total</div>
+  <hr class="divh">
+  <div class="item"><div class="dot" style="background:#f97316"></div><div><strong>Inversión:</strong> 70–75% del costo total en vida útil (15–20 años)</div></div>
+  <div class="item"><div class="dot" style="background:#f97316"></div><div><strong>Mantenimiento:</strong> 3–5% (limpieza de paneles, agua en baterías)</div></div>
+  <div class="item"><div class="dot" style="background:#f97316"></div><div><strong>Reemplazo baterías:</strong> 20–27% (cada 3–5 años, 3–4 reemplazos)</div></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué el costo inicial de un sistema FV no refleja su costo real a lo largo de su vida útil? Identifique las tres categorías de costos y su peso porcentual.</div>
+</div>
+
+<div class="secbar" style="background:#ede9fe;color:#4c1d95">🟣 PANELES BIFACIALES — OOSHAKSARAEI ET AL. (2013)</div>
+
+<div class="block">
+  <div class="bh" style="background:#ede9fe;color:#4c1d95">Celda Bifacial vs Monofacial</div>
+  <div class="def" style="border-color:#7c3aed;color:var(--color-text-primary)">Una celda bifacial posee grillas metálicas conductoras tanto en la superficie frontal como en la posterior, permitiendo absorber radiación solar por ambas caras. La celda monofacial solo absorbe por la cara frontal (la posterior es metálica opaca).</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #7c3aed">
+      <strong style="font-size:11.5px">Monofacial</strong>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">Cara frontal: vidrio transparente. Cara posterior: metal opaco (reflejo total). Solo captura radiación directa frontal.</div>
+    </div>
+    <div class="mini" style="border-top:3px solid #6d28d9">
+      <strong style="font-size:11.5px">Bifacial</strong>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">Cara frontal: grilla metálica transparente. Cara posterior: también grilla. Captura difusa del suelo y reflejos laterales por la parte trasera.</div>
+    </div>
+  </div>
+  <hr class="divh">
+  <div class="rx">Factor de bifacialidad (K_bif) = η_PVrear / η_PVfront<br>Medido a igualdad de irradiancia en ambas caras<br>Valor típico del experimento: 0.92–1.00 (promedio 0.97)</div>
+  <div class="item" style="margin-top:6px"><div class="dot" style="background:#7c3aed"></div><div>El K_bif disminuye ligeramente con el ángulo de inclinación del panel: a mayor ángulo, mayores pérdidas por reflexión en la cara trasera. El recubrimiento antirreflexivo SiN (frontal) supera al SiO₂ (posterior) en índice de refracción.</div></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué el factor de bifacialidad K_bif disminuye con el ángulo de inclinación del panel bifacial? Relacione con los materiales antirreflexivos de cada superficie.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ede9fe;color:#4c1d95">Tipos de Reflectores</div>
+  <div class="def" style="border-color:#7c3aed;color:var(--color-text-primary)">El reflector externo bajo el panel bifacial dirige radiación hacia la cara posterior. El tipo, ángulo y separación del reflector determinan cuánta energía adicional se genera.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #4c1d95">
+      <strong style="font-size:11.5px">Espejo (mirror)</strong>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">Solo un haz dirigido. Reflexión especular perfecta (ángulo entrada = ángulo salida). Máxima concentración pero muy sensible a posición.</div>
+    </div>
+    <div class="mini" style="border-top:3px solid #7c3aed">
+      <strong style="font-size:11.5px">Semiesejo (aluminio)</strong>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">Parte refleja dirigida, parte se dispersa. Aluminio: asequible, durable, alta reflectancia. Óptimo a 30° y 115 mm de separación. Mejora: +20%.</div>
+    </div>
+    <div class="mini" style="border-top:3px solid #a78bfa">
+      <strong style="font-size:11.5px">Difuso (blanco)</strong>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">Dispersión en todas direcciones. Blanco pintado: ~75% reflectancia promedio. Óptimo a 10° (independiente de separación). Mejora: +15%.</div>
+    </div>
+  </div>
+  <div class="warn">⚠️ COLOR IMPORTA: Moehlecke et al. demostraron que blanco es el mejor reflector difuso (~75% reflectancia). El rendimiento decrece en orden: blanco → amarillo → naranja → rojo → verde → azul → marrón → gris → azul oscuro → verde oscuro (61–32%).</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Compare el reflector semiesejo y el difuso en términos de ángulo óptimo, separación óptima y mejora porcentual de potencia. ¿Cuál elegiría para una instalación fija y por qué?</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ede9fe;color:#4c1d95">Parámetros Clave del Sistema</div>
+  <div class="def" style="border-color:#7c3aed;color:var(--color-text-primary)">Tres parámetros de ajuste controlan el rendimiento del panel bifacial con reflector externo: ángulo del panel (α₁), ángulo del reflector (β) y separación panel-reflector (h).</div>
+  <div class="rx">η_panel = η_PVfront·τ_glass·P + η_PVrear·τ_glass·η_reflector·P<br><br>Panel bifaciality = K_bif · η_reflector · cos(α₂)/cos(α₁)<br><br>Packing factor P = Área celdas / Área total panel<br>(Experimento: P = 0.69 → 31% de espacios transparentes)</div>
+  <div class="two" style="margin-top:8px">
+    <div>
+      <div class="item"><div class="dot" style="background:#7c3aed"></div><div><strong>Categoría I (separación pequeña):</strong> La cara trasera captura poco; domina la energía frontal. Separación 75 mm insuficiente para reflexión óptima.</div></div>
+      <div class="item"><div class="dot" style="background:#7c3aed"></div><div><strong>Categoría II (separación media):</strong> Separación 115 mm = zona óptima. La trasera captura radiación significativa del reflector.</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="dot" style="background:#a78bfa"></div><div><strong>Categoría III (separación grande >250 mm):</strong> La luz difusa escapa fuera de la sección transversal de captación. Se pierde potencia. Reduce ángulo para compensar.</div></div>
+      <div class="mini" style="border-top:3px solid #7c3aed;margin-top:4px">
+        <strong style="font-size:11px">Resultado clave</strong>
+        <div style="font-size:11px;color:var(--color-text-secondary)">A diferencia del monofacial, la potencia máxima NO ocurre con radiación normal a la superficie — hay un trade-off entre cara frontal y trasera.</div>
+      </div>
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> El experimento muestra que el panel bifacial no produce potencia máxima con radiación perpendicular a su superficie. Explique el trade-off que ocurre y cómo el packing factor influye en este resultado.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ede9fe;color:#4c1d95">Resultados Experimentales</div>
+  <div class="def" style="border-color:#7c3aed;color:var(--color-text-primary)">Se construyó un panel bifacial con 4 celdas monocristalinas 5"×5" de Hitachi (tipo p, dopado con boro, texturas en pirámides invertidas, P=0.69). Se evaluó bajo simulador solar con reflectores de aluminio y aluminio pintado blanco.</div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div><strong>Reflector semiesejo:</strong> potencia máxima a 30° de inclinación y 115 mm de separación → mejora de <strong>+20%</strong> respecto a monofacial.</div></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div><strong>Reflector difuso blanco:</strong> potencia máxima a 10° de inclinación (independiente de separación) → mejora de <strong>+15%</strong>.</div></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div>El panel con P=0.69 tiene 31% de espacios vacíos entre celdas que transmiten luz hacia el reflector. Un P alto necesita reflector extendido; un P bajo facilita captación trasera natural.</div></div>
+  <div class="warn">⚠️ Con reflector difuso a separaciones >250 mm, la luz reflejada escapa fuera de la sección transversal del panel trasero: se pierde energía y la potencia cae. Para el semiesejo, el ángulo óptimo varía con la separación (no es constante).</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> En el experimento de Ooshaksaraei et al., si se aumenta la separación panel-reflector de 115 mm a 300 mm usando un reflector difuso blanco, ¿qué se espera que ocurra con la potencia generada? Justifique con la teoría de categorías I, II y III.</div>
+</div>
+
+<div class="secbar" style="background:#fee2e2;color:#991b1b">🔴 IMPACTO AMBIENTAL, VENTAJAS Y BARRERAS</div>
+
+<div class="block s2">
+  <div class="bh" style="background:#fee2e2;color:#991b1b">FV vs Planta Diesel — Comparación Ambiental</div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot" style="background:#dc2626"></div><div><strong>Diesel:</strong> produce humo (CO, HCs), ruido continuo, requiere combustible periódico (peligro de almacenamiento), emisiones de GEI, dependencia de cadena de suministro en zonas remotas.</div></div>
+      <div class="item"><div class="dot" style="background:#16a34a"></div><div><strong>FV:</strong> sin ruido (no tiene partes móviles), sin emisiones en operación, no requiere combustible, costo de operación casi nulo.</div></div>
+      <div class="item"><div class="dot" style="background:#f97316"></div><div><strong>Riesgo FV:</strong> baterías liberan H₂ durante la carga. En ambientes cerrados puede acumularse y causar explosión. Solución: ventilación con orificios en la parte superior.</div></div>
+    </div>
+    <div>
+      <div class="mini" style="border-left:3px solid #dc2626;margin-bottom:6px">
+        <strong style="font-size:11.5px">Caso Nicaragua: clínica en Bilwaskarma</strong>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">Sistema FV aumentó capacidad en 54%. Antes: ~40 gal/mes de diesel (~$100). Después: diesel solo en emergencias o equipos de 220V. Atiende +8000 pacientes/año.</div>
+      </div>
+      <div class="mini" style="border-left:3px solid #dc2626">
+        <strong style="font-size:11.5px">Caso Costa Rica: Reserva Guaymí</strong>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px">19 familias con sistemas FV individuales desde 2000. Financiado por Fondo Comunal de Energía con aportación de FOCER. Bosques bajo protección a cambio de energía solar.</div>
+      </div>
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Enuncie tres ventajas ambientales de los sistemas fotovoltaicos frente a generadores diesel y dos prácticas de manejo que deben seguirse para que el sistema FV no cause impacto ambiental negativo.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#fee2e2;color:#991b1b">Barreras y Oportunidades</div>
+  <div class="def" style="border-color:#dc2626;color:var(--color-text-primary)">A pesar del potencial solar de América Central (~3.5 millones de hogares sin red en 2002), la adopción masiva enfrenta barreras estructurales que van más allá del costo.</div>
+  <div class="item"><div class="dot" style="background:#dc2626"></div><div><strong>Costo inicial alto:</strong> la inversión de $800–1000 supera la capacidad de pago inmediata de familias rurales. La solución no es subsidio sino crédito a largo plazo adecuado.</div></div>
+  <div class="item"><div class="dot" style="background:#dc2626"></div><div><strong>Falta de personal capacitado</strong> para diseño e instalación en zonas rurales.</div></div>
+  <div class="item"><div class="dot" style="background:#dc2626"></div><div><strong>Equipos de baja calidad</strong> vendidos para reducir precios, generando expectativas falsas sobre confiabilidad.</div></div>
+  <div class="item"><div class="dot" style="background:#22c55e"></div><div><strong>Oportunidad:</strong> esquemas de alquiler (fee-for-service) permiten pago mensual sin ser propietario. Ya operativo en Honduras, Guatemala y Costa Rica.</div></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique por qué la barrera principal para la difusión de sistemas FV en zonas rurales NO es la falta de capacidad de pago sino la ausencia de mecanismos adecuados de financiamiento.</div>
+</div>
+
+<div class="secbar" style="background:#f1f5f9;color:#334155">⚫ TABLA INTEGRADORA — RESUMEN COMPARATIVO COMPLETO</div>
+
+<div class="block s3">
+  <div class="bh" style="background:#f1f5f9;color:#334155">Comparativa de Sistemas y Tecnologías</div>
+  <table class="tbl">
+    <tr>
+      <th>Concepto</th>
+      <th>Sistema CD (Individual)</th>
+      <th>Sistema CA (Individual)</th>
+      <th>Sistema Centralizado</th>
+      <th>Panel Bifacial + Reflector</th>
+    </tr>
+    <tr>
+      <td><strong>Voltaje operación</strong></td>
+      <td>12 V CD</td>
+      <td>12 V CD + 120 V CA</td>
+      <td>120 V CA distribuida</td>
+      <td>Depende del sistema base</td>
+    </tr>
+    <tr>
+      <td><strong>Batería necesaria</strong></td>
+      <td>Sí (&lt;150 Ah)</td>
+      <td>Sí (mayor capacidad)</td>
+      <td>Banco central</td>
+      <td>No en sí misma (mejora el panel)</td>
+    </tr>
+    <tr>
+      <td><strong>Inversor</strong></td>
+      <td>No</td>
+      <td>Sí</td>
+      <td>Sí (alta calidad)</td>
+      <td>Depende del sistema</td>
+    </tr>
+    <tr>
+      <td><strong>Costo relativo</strong></td>
+      <td>Más accesible</td>
+      <td>Moderado</td>
+      <td>Menor costo/kWh</td>
+      <td>+15–20% de inversión en panel</td>
+    </tr>
+    <tr>
+      <td><strong>Uso típico</strong></td>
+      <td>2 lámparas, radio, TV B/N</td>
+      <td>Más lámparas, TV color, bomba</td>
+      <td>30+ viviendas, equipos industriales</td>
+      <td>Maximizar generación por m² de silicio</td>
+    </tr>
+    <tr>
+      <td><strong>Reflector óptimo</strong></td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>Semiesejo: 30°, 115 mm (+20%)<br>Difuso blanco: 10°, 75–115 mm (+15%)</td>
+    </tr>
+    <tr>
+      <td><strong>Vida útil sistema</strong></td>
+      <td>15–20 años</td>
+      <td>15–20 años</td>
+      <td>20+ años</td>
+      <td>Igual que monofacial + ganancia bifacial</td>
+    </tr>
+    <tr>
+      <td><strong>Mantenimiento</strong></td>
+      <td>Bajo (limpieza)</td>
+      <td>Bajo (limpieza + revisar inversor)</td>
+      <td>Moderado (medidores, banco baterías)</td>
+      <td>Limpiar reflector + ajustar ángulo</td>
+    </tr>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ DATO INTEGRADOR CLAVE: El silicio representa ~50% del costo de un panel FV. La tecnología bifacial maximiza la generación del MISMO wafer de silicio capturando radiación trasera — por eso es económicamente atractiva, no solo técnicamente. Esta eficiencia de material conecta directamente la investigación básica (Ooshaksaraei et al.) con la viabilidad económica de la electrificación rural (Manual BUN-CA).</div>
+</div>
+
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+      <span id="progress-text" style="font-size:12px;color:#94a3b8">0 / 10 respondidas • 0 correctas</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+  <div class="quiz-body">
+
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">¿Cuál es la diferencia fundamental entre energía solar térmica y energía solar fotovoltaica?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) La térmica usa módulos de silicio y la fotovoltaica usa colectores de metal</button>
+        <button class="qbtn" data-q="1" data-correct="true">B) La térmica usa parte del espectro para producir calor; la fotovoltaica usa otra parte para producir electricidad directamente</button>
+        <button class="qbtn" data-q="1" data-correct="false">C) Ambas producen electricidad, pero la térmica lo hace mediante turbinas de vapor</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) Son idénticas; la diferencia solo está en la escala de la instalación</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">Una batería fotovoltaica puede suministrar 2 A durante 100 horas. ¿Cuál es su capacidad nominal y qué tasa de descarga implica?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) 50 Ah a tasa C-50</button>
+        <button class="qbtn" data-q="2" data-correct="false">B) 20 Ah a tasa C-20</button>
+        <button class="qbtn" data-q="2" data-correct="true">C) 200 Ah a tasa C-100</button>
+        <button class="qbtn" data-q="2" data-correct="false">D) 200 Ah a tasa C-20</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el regulador de carga es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="false">A) Protege la batería de sobrecargas provenientes de los módulos</button>
+        <button class="qbtn" data-q="3" data-correct="false">B) Interrumpe el flujo batería → cargas cuando la batería alcanza su descarga máxima</button>
+        <button class="qbtn" data-q="3" data-correct="true">C) Convierte la corriente directa de la batería en corriente alterna para los electrodomésticos</button>
+        <button class="qbtn" data-q="3" data-correct="false">D) Es uno de los componentes más confiables del sistema si se dimensiona correctamente</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">Un sistema fotovoltaico en una zona rural de América Central tiene un consumo diario de 273 Wh y trabaja a 12 V con un promedio de 4 horas solares pico. Aplicando el factor de seguridad del 20%, ¿qué amperaje mínimo deben producir los módulos?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="false">A) 5.7 amperios</button>
+        <button class="qbtn" data-q="4" data-correct="true">B) 6.8 amperios</button>
+        <button class="qbtn" data-q="4" data-correct="false">C) 4.5 amperios</button>
+        <button class="qbtn" data-q="4" data-correct="false">D) 8.2 amperios</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">En el experimento de Ooshaksaraei et al. (2013), ¿cuál es el factor de bifacialidad promedio (K_bif) del panel evaluado y qué significa físicamente?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) K_bif = 0.69, que es el packing factor del panel</button>
+        <button class="qbtn" data-q="5" data-correct="false">B) K_bif = 1.20, indicando que la cara trasera es más eficiente que la frontal</button>
+        <button class="qbtn" data-q="5" data-correct="true">C) K_bif = 0.97, indicando que la eficiencia de la cara trasera es ~97% de la eficiencia de la cara frontal bajo igual irradiancia</button>
+        <button class="qbtn" data-q="5" data-correct="false">D) K_bif = 0.85, valor derivado del silicio amorfo usado en el experimento</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">Un sistema fotovoltaico centralizado en El Salvador tiene 1680 Wp instalados y abastece a 35 familias con 2 lámparas fluorescentes de 11 W, 1 TV B/N de 18 W y 1 radio de 12 W cada una. Si una familia decide agregar una TV a color de 75 W, ¿qué problema técnico podría generarse?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="false">A) El regulador de carga se dañaría inmediatamente</button>
+        <button class="qbtn" data-q="6" data-correct="true">B) La demanda total superaría la capacidad del sistema, causando sobredescarga del banco de baterías o apagones</button>
+        <button class="qbtn" data-q="6" data-correct="false">C) El inversor dejaría de funcionar porque detectaría la CA incorrecta</button>
+        <button class="qbtn" data-q="6" data-correct="false">D) No habría ningún problema porque la TV a color opera a 12V</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">¿Por qué los sistemas fotovoltaicos conectados a la red NO requieren banco de baterías?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="false">A) Porque la red eléctrica actúa como regulador de voltaje en lugar del inversor</button>
+        <button class="qbtn" data-q="7" data-correct="true">B) Porque la energía generada se inyecta directamente a la red sin necesidad de almacenamiento local; la propia red es el "almacén"</button>
+        <button class="qbtn" data-q="7" data-correct="false">C) Porque los módulos FV conectados a la red tienen mayor eficiencia y no producen excedentes</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) Porque en los sistemas conectados a la red la radiación solar es más constante y no hay variabilidad</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">Según la fórmula de eficiencia total del panel bifacial con reflector extendido (η_panel = η_PVfront·τ_glass·P + η_PVrear·τ_glass·η_reflector·P), ¿qué le ocurre a la eficiencia total si el packing factor P se acerca a 1?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="false">A) La eficiencia total se maximiza porque hay más área activa de celda</button>
+        <button class="qbtn" data-q="8" data-correct="true">B) La contribución de la cara trasera se reduce porque quedan menos espacios vacíos para que la luz pase y sea reflejada de vuelta</button>
+        <button class="qbtn" data-q="8" data-correct="false">C) El bifacial se comporta igual que el monofacial independientemente del reflector</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) La eficiencia no cambia porque el reflector es externo y no depende del packing factor</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">Para un sistema FV básico a 12V con consumo de 27.3 Ah/día, 3 días de reserva y profundidad de descarga del 80%, ¿cuál es la capacidad corregida del banco de baterías?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="false">A) 81.9 Ah</button>
+        <button class="qbtn" data-q="9" data-correct="false">B) 65.5 Ah</button>
+        <button class="qbtn" data-q="9" data-correct="true">C) 102.4 Ah</button>
+        <button class="qbtn" data-q="9" data-correct="false">D) 120 Ah</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">Según los resultados de Ooshaksaraei et al., si se usa un reflector difuso blanco y se incrementa la separación panel-reflector de 115 mm a 300 mm, ¿qué se espera que ocurra y por qué?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) La potencia aumenta porque hay más espacio para que la luz difusa se distribuya uniformemente</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) La potencia se mantiene constante porque el reflector difuso es independiente de la separación</button>
+        <button class="qbtn" data-q="10" data-correct="true">C) La potencia disminuye porque la luz difusa se dispersa más allá de la sección transversal de captación de la cara trasera del panel (categoría III)</button>
+        <button class="qbtn" data-q="10" data-correct="false">D) La potencia aumenta solo si se eleva el ángulo del panel a 50°</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div id="quiz-results"></div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">BUN-CA (2002). Manuales sobre energía renovable: Solar Fotovoltaica. San José, Costa Rica. ISBN 9968-9708-9-1 · Ooshaksaraei P., Sopian K., Zulkifli R., Alghoul M.A., Zaidi S.H. (2013). Characterization of a Bifacial Photovoltaic Panel Integrated with External Diffuse and Semimirror Type Reflectors. International Journal of Photoenergy, Vol. 2013, Article ID 465837, DOI: 10.1155/2013/465837 · Moehlecke A. et al. (2001). Photovoltaic module with coloured diffuse reflectors. European PV Solar Energy Conference · Uematsu T. et al. (2003). Development of bifacial PV cells. Solar Energy Materials and Solar Cells, 75(3-4), 557–566</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: { correct: true, fb: "✅ ¡Correcto! La energía solar térmica y fotovoltaica utilizan partes distintas del espectro electromagnético. La térmica convierte la radiación en calor mediante colectores; la fotovoltaica usa el efecto fotoeléctrico en semiconductores para generar corriente eléctrica directamente, sin partes móviles ni ciclo termodinámico intermedio." },
+  2: { correct: 2, fb_correct: "✅ ¡Correcto! Capacidad = 2A × 100h = 200 Ah. La tasa C-100 significa que la batería se descarga completamente en 100 horas. Las baterías FV se especifican a C-100 precisamente porque su uso normal es entregar corriente moderada durante muchas horas, no corriente alta en segundos como las de auto.", fb_wrong: "❌ Incorrecto. La respuesta correcta es C: 200 Ah a tasa C-100. Capacidad = corriente × tiempo = 2A × 100h = 200 Ah. La tasa C-100 es la norma para baterías fotovoltaicas porque reflejan su modo de descarga real: corriente moderada durante largos períodos." },
+  3: { correct: 2, fb_correct: "✅ ¡Correcto! La conversión de CD a CA es función del INVERSOR, no del regulador. El regulador solo controla el flujo de carga y descarga de la batería, protegiéndola de sobrecargas y sobredescargas. Son dos componentes con funciones completamente distintas.", fb_wrong: "❌ Incorrecto. La respuesta correcta es C. El regulador de carga NO convierte CD a CA — esa es la función del inversor. El regulador únicamente controla que la batería no se sobrecargue (desde módulos) ni se sobredescargue (hacia cargas). Confundir estos dos componentes es un error muy frecuente." },
+  4: { correct: 1, fb_correct: "✅ ¡Correcto! Paso a paso: 273 Wh ÷ 12V = 22.75 Ah/día. Con factor de seguridad 20%: 22.75 × 1.2 = 27.3 Ah. Dividido entre 4 horas de sol: 27.3 ÷ 4 = 6.825 ≈ 6.8 A. Este es exactamente el ejemplo del Anexo 4 del Manual BUN-CA.", fb_wrong: "❌ Incorrecto. La respuesta correcta es B: 6.8 amperios. Proceso: 273Wh ÷ 12V = 22.75 Ah → × 1.2 (factor seg.) = 27.3 Ah → ÷ 4 horas sol = 6.8 A. El factor de seguridad del 20% compensa pérdidas en baterías y cableado." },
+  5: { correct: 2, fb_correct: "✅ ¡Correcto! K_bif = 0.97 es el promedio experimental medido en el rango 0°–50° de inclinación. Significa que bajo igual irradiancia en ambas caras, la cara posterior genera el 97% de lo que genera la frontal. La ligera diferencia se debe al recubrimiento antirreflexivo: SiN frontal (mayor índice de refracción) vs SiO₂ posterior.", fb_wrong: "❌ Incorrecto. La respuesta correcta es C: K_bif = 0.97. Este valor promedio se midió bajo simulador solar con el panel desde 0° a 50°. El factor de bifacialidad es el cociente de eficiencias de cara trasera sobre cara frontal bajo igual irradiancia — no es el packing factor ni un valor >1 (eso implicaría que la trasera es más eficiente)." },
+  6: { correct: 1, fb_correct: "✅ ¡Correcto! El sistema centralizado de El Salvador tiene 1680 Wp y atiende a 35 familias con una carga base de (11+11+18+12)W = 52 W/familia. Agregar 75 W por familia aumenta la demanda ~23 kW en una sola noche — muy por encima de la capacidad instalada. La sobredescarga dañaría el banco de baterías y apagar por LVD dejaría sin electricidad a toda la comunidad.", fb_wrong: "❌ Incorrecto. La respuesta correcta es B. El sistema tiene una capacidad fija. Los sistemas centralizados aislados no tienen la flexibilidad de ajustar generación en tiempo real. Si la demanda supera lo que el banco de baterías puede proveer, el regulador activa LVD (desconexión por bajo voltaje) afectando a toda la comunidad." },
+  7: { correct: 1, fb_correct: "✅ ¡Correcto! En sistemas conectados a la red, la energía se inyecta directamente a la red comercial. La red actúa como almacén distribuido: cuando el panel produce, entrega energía; cuando no produce (noche), el usuario consume de la red. Por eso no se necesita banco de baterías local, reduciendo significativamente los costos de mantenimiento y reemplazo.", fb_wrong: "❌ Incorrecto. La respuesta correcta es B. La red eléctrica actúa como almacén virtual: los excedentes de generación FV se inyectan a la red (como 'depósito') y se consumen de la red cuando no hay sol (como 'retiro'). Sin batería local, se elimina el componente más problemático y costoso del sistema." },
+  8: { correct: 1, fb_correct: "✅ ¡Correcto! Si P → 1, las celdas cubren casi toda el área del panel y no quedan espacios vacíos para que la luz pase al reflector y rebote hacia la cara posterior. La fórmula muestra que la contribución de la cara trasera (η_PVrear·τ_glass·η_reflector·P) depende de cuánta luz puede pasar por los espacios entre celdas. Con P = 0.69 en el experimento, el 31% de espacios permite captación trasera.", fb_wrong: "❌ Incorrecto. La respuesta correcta es B. El packing factor alto (P cercano a 1) paradójicamente reduce la ventaja bifacial: con menos espacios vacíos entre celdas, menos luz llega al reflector para rebotar hacia la cara posterior. Para paneles con P alto se necesita un reflector más grande que el panel mismo (extended reflector)." },
+  9: { correct: 2, fb_correct: "✅ ¡Correcto! Paso a paso del Anexo 4: Capacidad nominal = 27.3 × 3 = 81.9 Ah. Dividido entre el factor de descarga (0.8): 81.9 ÷ 0.8 = 102.4 Ah. El factor 0.8 significa que siempre se mantiene un 20% de reserva — nunca se descarga completamente la batería, lo que prolonga significativamente su vida útil.", fb_wrong: "❌ Incorrecto. La respuesta correcta es C: 102.4 Ah. La capacidad nominal es 27.3 × 3 = 81.9 Ah; pero como nunca se puede descargar al 100%, se divide entre 0.8: 81.9 ÷ 0.8 = 102.4 Ah. El 120 Ah (opción D) sería la batería real del mercado que se elegiría (≥ 102.4 Ah), pero la capacidad corregida calculada es 102.4 Ah." },
+  10: { correct: 2, fb_correct: "✅ ¡Correcto! A 300 mm de separación con reflector difuso se entra en la Categoría III del estudio: la luz reflejada difusamente se dispersa en un cono tan amplio que gran parte cae fuera de la sección transversal de captación de la cara posterior. La potencia cae porque la cara frontal vuelve a dominar. Para compensar, habría que reducir el ángulo del panel, no aumentarlo.", fb_wrong: "❌ Incorrecto. La respuesta correcta es C. El estudio identificó tres categorías para el reflector semiesejo. Para difuso, con separación >250 mm, la luz reflejada escapa del área de captación trasera (Categoría III). La ventaja bifacial se pierde y domina la cara frontal. El reflector difuso es relativamente insensible a la separación solo en rangos de 75–115 mm." }
+};
+
+let respondidas = 0;
+let correctas = 0;
+const answered = {};
+
+document.querySelector('.quiz-body').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn || btn.disabled) return;
+  
+  const q = btn.dataset.q;
+  if (answered[q]) return;
+  answered[q] = true;
+  
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll('.qbtn[data-q="' + q + '"]');
+  
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') {
+      b.classList.add('correct');
+      b.textContent = '✅ ' + b.textContent;
+    }
+    if (b === btn && !isCorrect) {
+      b.classList.add('wrong');
+      b.textContent = '❌ ' + b.textContent;
+    }
+  });
+  
+  const fb = document.getElementById('fb' + q);
+  const qnum = parseInt(q);
+  let fbText = '';
+  
+  if (qnum === 1 || qnum === 5 || qnum === 7) {
+    fbText = isCorrect ? feedbacks[qnum].fb : '❌ Incorrecto. ' + feedbacks[qnum].fb.replace('✅ ¡Correcto! ','');
+  } else {
+    fbText = isCorrect ? feedbacks[qnum].fb_correct : feedbacks[qnum].fb_wrong;
+  }
+  
+  fb.textContent = fbText;
+  fb.className = 'qfeedback ' + (isCorrect ? 'correct-fb' : 'wrong-fb');
+  fb.style.display = 'block';
+  
+  respondidas++;
+  if (isCorrect) correctas++;
+  
+  const pct = Math.round((respondidas / 10) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = respondidas + ' / 10 respondidas • ' + correctas + ' correctas';
+  
+  if (respondidas === 10) {
+    const res = document.getElementById('quiz-results');
+    let bg, msg;
+    if (correctas <= 4) { bg = '#fef2f2'; msg = '📚 Necesitas repasar el material — vuelve a revisar los bloques de componentes y paneles bifaciales.'; }
+    else if (correctas <= 7) { bg = '#fefce8'; msg = '📖 ¡Buen avance! Tienes bases sólidas pero sigue repasando los temas de costos y parámetros bifaciales.'; }
+    else { bg = '#f0fdf4'; msg = '🏆 ¡Excelente dominio del tema! Estás listo para el examen sobre sistemas FV y tecnología bifacial.'; }
+    res.innerHTML = '<div style="padding:14px;background:' + bg + ';border-radius:10px;font-size:13px;line-height:1.5">' + msg + '<br><strong>Puntaje: ' + correctas + ' / 10 correctas</strong><br><button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button></div>';
+    res.style.display = 'block';
+  }
+});
+
+function resetQuiz() {
+  respondidas = 0; correctas = 0;
+  for (let k in answered) delete answered[k];
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct','wrong');
+    b.textContent = b.textContent.replace(/^[✅❌] /,'');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f => { f.style.display='none'; f.textContent=''; });
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('progress-text').textContent = '0 / 10 respondidas • 0 correctas';
+  document.getElementById('quiz-results').style.display = 'none';
+}
+</script>
