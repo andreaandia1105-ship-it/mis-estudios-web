@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas de Investigación — Biodiesel & Maquinaria Agrícola</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #1a7a4a;
+    --verde-claro: #2ecc71;
+    --verde-oscuro: #0d3d25;
+    --tierra: #c8a96e;
+    --tierra-oscuro: #8b6914;
+    --humo: #e8e2d9;
+    --bg: #f4f0e8;
+    --texto: #1a1a1a;
+    --rojo-nox: #c0392b;
+    --azul-co: #2980b9;
+    --naranja: #e67e22;
+    --gris-card: #ffffff;
+    --sombra: 0 4px 24px rgba(0,0,0,0.10);
+    --radio: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Lora', Georgia, serif;
+    color: var(--texto);
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--verde-oscuro);
+    color: #fff;
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(46,204,113,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 10% 80%, rgba(200,169,110,0.13) 0%, transparent 50%);
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--verde-claro);
+    margin-bottom: 18px;
+    opacity: 0.9;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(26px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.1;
+    max-width: 700px;
+    position: relative;
+  }
+  .hero h1 span { color: var(--tierra); }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.72);
+    margin-top: 16px;
+    max-width: 600px;
+    line-height: 1.7;
+    position: relative;
+  }
+  .hero-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+    position: relative;
+  }
+  .badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .badge.green { background: rgba(46,204,113,0.2); border-color: var(--verde-claro); color: var(--verde-claro); }
+  .badge.gold { background: rgba(200,169,110,0.2); border-color: var(--tierra); color: var(--tierra); }
+
+  /* NAV TABS */
+  .nav-tabs {
+    background: var(--verde-oscuro);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 16px 24px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.25s;
+    letter-spacing: 0.5px;
+  }
+  .tab-btn:hover { color: rgba(255,255,255,0.85); }
+  .tab-btn.active { color: var(--verde-claro); border-bottom-color: var(--verde-claro); }
+
+  /* MAIN */
+  .main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  .section { display: none; animation: fadeUp 0.35s ease; }
+  .section.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .sec-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--verde-oscuro);
+    margin-bottom: 6px;
+  }
+  .sec-desc {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  /* CARDS GRID */
+  .grid { display: grid; gap: 20px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+  .card {
+    background: var(--gris-card);
+    border-radius: var(--radio);
+    padding: 24px;
+    box-shadow: var(--sombra);
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.13); }
+
+  .card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .tag-verde { background: #d4f5e3; color: var(--verde); }
+  .tag-azul { background: #d6eaf8; color: #1a6fa0; }
+  .tag-rojo { background: #fde8e6; color: var(--rojo-nox); }
+    .tag-naranja { background: #fdebd0; color: #9a4f00; }
+  .tag-tierra { background: #f9f0df; color: var(--tierra-oscuro); }
+  .tag-morado { background: #ede7f6; color: #5e35b1; }
+
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--verde-oscuro);
+    line-height: 1.3;
+  }
+  .card p { font-size: 13.5px; line-height: 1.7; color: #444; margin-bottom: 12px; }
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    color: var(--verde);
+    text-decoration: none;
+    border: 1px solid rgba(26,122,74,0.3);
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    word-break: break-all;
+  }
+  .card-link:hover { background: var(--verde); color: #fff; border-color: var(--verde); }
+  .card-link svg { flex-shrink: 0; }
+
+  /* IMRAD STEPS */
+  .imrad-steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex;
+    gap: 0;
+    position: relative;
+  }
+  .step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 52px;
+    flex-shrink: 0;
+  }
+  .step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    color: #fff;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .step-line {
+    width: 2px;
+    flex: 1;
+    min-height: 24px;
+    background: linear-gradient(to bottom, rgba(26,122,74,0.3), transparent);
+    margin: 0 auto;
+  }
+  .step:last-child .step-line { display: none; }
+  .step-body {
+    background: var(--gris-card);
+    border-radius: var(--radio);
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    flex: 1;
+    box-shadow: var(--sombra);
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .step-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 4px;
+  }
+  .step-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+    margin-bottom: 8px;
+  }
+  .step-body p { font-size: 13.5px; color: #444; line-height: 1.7; }
+  .step-body ul { padding-left: 18px; margin-top: 8px; }
+  .step-body li { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 3px; }
+  .step-tip {
+    background: #f0faf5;
+    border-left: 3px solid var(--verde-claro);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--verde);
+    font-style: italic;
+  }
+
+  /* EMISION TABLE */
+  .emi-table-wrap { overflow-x: auto; border-radius: var(--radio); box-shadow: var(--sombra); }
+  table { width: 100%; border-collapse: collapse; background: white; font-size: 13.5px; }
+  thead th {
+    background: var(--verde-oscuro);
+    color: #fff;
+    padding: 14px 16px;
+    text-align: left;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  tbody tr:nth-child(even) { background: #f8faf9; }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid #eee; color: #333; vertical-align: middle; }
+  .emi-down { color: #1a7a4a; font-weight: 600; }
+  .emi-up { color: var(--rojo-nox); font-weight: 600; }
+  .emi-neutral { color: var(--naranja); font-weight: 600; }
+
+  /* ROADMAP */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .road-card {
+    background: var(--gris-card);
+    border-radius: var(--radio);
+    padding: 20px;
+    box-shadow: var(--sombra);
+    border: 1px solid rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .road-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .road-card.c1::before { background: var(--verde-claro); }
+  .road-card.c2::before { background: var(--azul-co); }
+  .road-card.c3::before { background: var(--naranja); }
+  .road-card.c4::before { background: var(--rojo-nox); }
+  .road-card.c5::before { background: #9b59b6; }
+  .road-card.c6::before { background: var(--tierra); }
+  .road-card.c7::before { background: #1abc9c; }
+  .road-card.c8::before { background: #34495e; }
+  .road-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: #eee;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .road-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+    margin-bottom: 6px;
+  }
+  .road-card p { font-size: 12.5px; color: #555; line-height: 1.6; }
+
+  /* TOOLS */
+  .tool-card {
+    background: var(--gris-card);
+    border-radius: var(--radio);
+    padding: 22px;
+    box-shadow: var(--sombra);
+    border: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tool-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .tool-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+  }
+  .tool-card p { font-size: 13px; color: #555; line-height: 1.6; }
+  .tool-use {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--verde);
+    background: #edf9f2;
+    padding: 5px 10px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  .tool-free {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    display: inline-block;
+  }
+  .free { background: #d4f5e3; color: var(--verde); }
+  .paid { background: #fde8e6; color: var(--rojo-nox); }
+
+  /* ALERT BOXES */
+  .alert {
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .alert.info { background: #eaf4fb; color: #1a5276; border-left: 4px solid #2980b9; }
+  .alert.warn { background: #fef9e7; color: #7d6608; border-left: 4px solid #f1c40f; }
+  .alert.success { background: #eafaf1; color: #1e8449; border-left: 4px solid var(--verde-claro); }
+
+  /* FOOTER NOTE */
+  .footer-note {
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    color: #999;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero { padding: 36px 20px 32px; }
+    .main { padding: 28px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">🌿 Canvas de Investigación · Ingeniería Agrícola</div>
+  <h1>Emisiones por Combustión en<br><span>Maquinaria Agrícola con Biodiesel</span></h1>
+  <p class="hero-sub">Guía completa para tu trabajo de investigación interdisciplinario — Mecanización Agrícola · Energías Renovables · Contaminación Atmosférica</p>
+  <div class="hero-badges">
+    <span class="badge green">✓ Revisión Bibliográfica</span>
+    <span class="badge gold">✓ Contexto Perú</span>
+    <span class="badge">Formato IMRaD</span>
+    <span class="badge">APA 7</span>
+    <span class="badge">3 Cursos en 1</span>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('resumen')">📋 Resumen</button>
+  <button class="tab-btn" onclick="showTab('articulos')">📚 Artículos</button>
+  <button class="tab-btn" onclick="showTab('estructura')">✍️ Estructura IMRaD</button>
+  <button class="tab-btn" onclick="showTab('emisiones')">📊 Datos de Emisiones</button>
+  <button class="tab-btn" onclick="showTab('hoja')">🗺️ Hoja de Ruta</button>
+  <button class="tab-btn" onclick="showTab('programas')">🖥️ Programas</button>
+</div>
+
+<div class="main">
+
+  <!-- ===== RESUMEN ===== -->
+  <div id="tab-resumen" class="section active">
+    <div class="sec-title">¿De qué trata esta investigación?</div>
+    <p class="sec-desc">Tu trabajo analiza cómo el uso de biodiesel en maquinaria agrícola impacta las emisiones contaminantes, integrando tres cursos en un solo artículo sólido.</p>
+
+    <div class="alert success">
+      <span class="alert-icon">💡</span>
+      <div><strong>Título sugerido:</strong> "Evaluación comparativa de emisiones contaminantes en maquinaria agrícola operando con mezclas de biodiesel (B5–B20) frente al diésel convencional: implicancias para la mecanización sostenible en el Perú" — <em>Revisión bibliográfica sistemática</em></div>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="card-tag tag-verde">⚙️ Mecanización Agrícola</div>
+        <h3>Lo que aporta al curso</h3>
+        <p>Tipos de maquinaria agrícola (tractores, cosechadoras), motores de combustión por compresión, rendimiento con mezclas Bx, consumo específico de combustible y potencia efectiva.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag tag-tierra">☀️ Energías Renovables</div>
+        <h3>Lo que aporta al curso</h3>
+        <p>Biodiesel como biocombustible renovable, proceso de transesterificación, materias primas disponibles en Perú (palma aceitera, soya, aceite residual), balance energético del ciclo de vida.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag tag-rojo">🌫️ Contaminación Atmosférica</div>
+        <h3>Lo que aporta al curso</h3>
+        <p>Emisiones comparativas de CO, CO₂, NOx, HC y MP₂.₅. Aplicación de ECA para Aire y LMP del MINAM. Inventario de emisiones de maquinaria no de carretera en Perú.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:28px;">
+      <div class="alert info">
+        <span class="alert-icon">📌</span>
+        <div><strong>Pregunta de investigación sugerida:</strong> ¿En qué medida el uso de mezclas de biodiesel (B5, B10, B20) en maquinaria agrícola reduce las emisiones de contaminantes atmosféricos como CO, HC y MP en comparación con el diésel convencional, y cuáles son las implicancias para la agricultura peruana?</div>
+      </div>
+      <div class="alert warn">
+        <span class="alert-icon">⚠️</span>
+        <div><strong>La tensión central del paper:</strong> El biodiesel reduce CO, HC y material particulado — pero puede <em>incrementar</em> los NOx. Esa dualidad es el núcleo de tu discusión y te permite argumentar qué mezcla tiene el mejor balance ambiental neto.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ARTÍCULOS ===== -->
+  <div id="tab-articulos" class="section">
+    <div class="sec-title">Artículos y Fuentes Recomendadas</div>
+    <p class="sec-desc">9 fuentes organizadas por tema. Prioriza las marcadas como "Clave". Todas son de acceso libre.</p>
+
+    <div style="margin-bottom:20px;">
+      <div class="card-tag tag-verde" style="font-size:11px; padding:5px 14px;">🇵🇪 Fuentes Peruanas — Úsalas como antecedentes nacionales</div>
+    </div>
+
+    <div class="grid grid-2" style="margin-bottom:28px;">
+      <div class="card">
+        <div class="card-tag tag-verde">🇵🇪 MINAM · Oficial</div>
+        <h3>Inventario de Emisiones de Maquinaria Móvil No de Carretera en Perú y Lima</h3>
+        <p>Documento oficial del Ministerio del Ambiente. Clasifica maquinaria agrícola, forestal y minera por combustible, potencia y año. Datos nacionales reales para citar.</p>
+        <a class="card-link" href="https://sinia.minam.gob.pe/sites/default/files/sinia/archivos/public/docs/inventario_de_emisiones_maquinaria_movil_no_de_carretera.pdf" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          MINAM / SINIA — PDF Oficial
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-tag tag-verde">🇵🇪 UNALM · Tu universidad</div>
+        <h3>Opciones para producción y uso del Biodiesel en el Perú</h3>
+        <p>Investigación de la UNALM con Soluciones Prácticas–ITDG sobre producción de biodiesel en zonas rurales. Referencia directa a tu institución.</p>
+        <a class="card-link" href="https://latam.practicalaction.org/publicaciones/opciones-para-la-produccion-y-uso-del-biodiesel-en-el-peru/" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Practical Action / UNALM
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-tag tag-tierra">🇵🇪 PUCP · Tesis Nacional</div>
+        <h3>Evaluación experimental de mezclas DB5, DB7.5 y DB10 en motor Cummins</h3>
+        <p>Tesis de la PUCP con ensayos en banco dinamométrico real. Mide consumo de combustible y emisiones. Antecedente nacional de alta calidad para citar.</p>
+        <a class="card-link" href="https://core.ac.uk/download/196532684.pdf" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          CORE.ac.uk — PDF completo
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-tag tag-tierra">🇵🇪 BCRP</div>
+        <h3>Biocombustibles: Desarrollos recientes y situación en el Perú</h3>
+        <p>Documento del Banco Central de Reserva. Analiza el marco legal, la mezcla obligatoria B2/B5 en Perú y el impacto en emisiones de NOx. Contexto de política energética nacional.</p>
+        <a class="card-link" href="https://www.bcrp.gob.pe/docs/Publicaciones/Documentos-de-Trabajo/2008/Documento-Trabajo-05-2008.pdf" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          BCRP — PDF Oficial
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div class="card-tag tag-azul" style="font-size:11px; padding:5px 14px;">🌎 Fuentes Internacionales — Base técnica y científica</div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-tag tag-azul">⭐ CLAVE · Nature Sci. Reports 2021</div>
+        <h3>Evaluación de emisiones en tractor Kubota M-90 con biodiesel de aceite de fritura</h3>
+        <p>Open access. Testaron mezclas B0–B100 en un tractor real (Kubota M-90). Miden CO, CO₂, NOx, HC a diferentes cargas. Metodología muy aplicable como modelo para tu artículo.</p>
+        <a class="card-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8105339/" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          PubMed Central — Open Access
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-tag tag-azul">⭐ CLAVE · Redalyc — Español</div>
+        <h3>Biodiesel de aceite de fritura: índice de opacidad y emisiones (B10, B20, B30)</h3>
+        <p>En español. Concluye que el biodiesel reduce HC, CO y material particulado pero incrementa NOx — exactamente la tensión central de tu discusión.</p>
+        <a class="card-link" href="https://www.redalyc.org/journal/2570/257059542005/html/" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Redalyc — Acceso libre
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-tag tag-morado">Scielo Cuba · Español</div>
+        <h3>Uso del biodiesel en motores para actividades ganaderas/agrícolas (B5–B20)</h3>
+        <p>Revisión en español que compila múltiples estudios de mezclas B5 a B20 en motores agrícolas. Ideal como antecedente regional.</p>
+        <a class="card-link" href="http://scielo.sld.cu/scielo.php?pid=S2071-00542021000100007&script=sci_arttext" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Scielo Cuba — Acceso libre
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-tag tag-naranja">GEI Maquinaria · Redalyc</div>
+        <h3>Gases de efecto invernadero emitidos por maquinaria agrícola — Costa Rica</h3>
+        <p>Metodología de estimación de consumo de combustible por kW de potencia. Incluye cosechadoras, tractores y aspersores. Muy útil para adaptar la metodología a Perú.</p>
+        <a class="card-link" href="https://www.redalyc.org/journal/5156/515668884012/" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Redalyc — Acceso libre
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-tag tag-rojo">Elsevier · Simulación Aspen</div>
+        <h3>Simulación de combustión de mezclas B5, B10, B20 y B50 en Aspen Plus</h3>
+        <p>Calcula emisiones de CO, CO₂, NOx y SO₂ teóricas para cada mezcla. Muy útil para la sección de resultados si no tienes datos experimentales propios.</p>
+        <a class="card-link" href="https://www.elsevier.es/es-revista-ingenieria-investigacion-tecnologia-104-articulo-simulacion-aspen-combustion-mezclas-diesel-biodiesel-S1405774315721098" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Elsevier España
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="alert info">
+        <span class="alert-icon">🔍</span>
+        <div><strong>Para buscar más artículos usa:</strong> Google Scholar (<a href="https://scholar.google.com" target="_blank">scholar.google.com</a>), Scielo (<a href="https://scielo.org" target="_blank">scielo.org</a>), Redalyc (<a href="https://redalyc.org" target="_blank">redalyc.org</a>). Términos de búsqueda: <em>"biodiesel tractor emissions"</em>, <em>"emisiones biodiesel maquinaria agrícola"</em>, <em>"biodiesel B20 NOx agricultural engine"</em>. Filtra por años 2015–2025.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ESTRUCTURA IMRAD ===== -->
+  <div id="tab-estructura" class="section">
+    <div class="sec-title">Estructura IMRaD del Artículo</div>
+    <p class="sec-desc">El formato estándar de artículos científicos de ingeniería. Sigue este orden para escribirlo, pero <strong>redáctalo en el orden inverso</strong> (empieza por Metodología, no por Introducción).</p>
+
+    <div class="alert warn" style="margin-bottom: 28px;">
+      <span class="alert-icon">📝</span>
+      <div><strong>Orden de escritura recomendado:</strong> Metodología → Resultados → Discusión → Introducción → Conclusiones → Resumen → Título. Escribe el resumen siempre al final.</div>
+    </div>
+
+    <div class="imrad-steps">
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num" style="background:#1a7a4a;">T</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">Componente 1</div>
+          <h3>Título</h3>
+          <p>Debe ser preciso, descriptivo y sin palabras vacías como "estudio sobre" o "investigación acerca de". Incluye las variables principales, el método y el contexto geográfico.</p>
+          <ul>
+            <li>Incluye las variables: biodiesel, mezclas (B5–B20), maquinaria agrícola, emisiones</li>
+            <li>Menciona que es una revisión bibliográfica si no tienes lab</li>
+            <li>Máximo 20 palabras</li>
+          </ul>
+          <div class="step-tip">💡 Ejemplo: "Evaluación comparativa de emisiones de CO, NOx y HC en maquinaria agrícola operando con mezclas de biodiesel B5–B20: revisión bibliográfica con enfoque en el Perú"</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num" style="background:#1a7a4a;">R</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">Componente 2</div>
+          <h3>Resumen (Abstract)</h3>
+          <p>~200 palabras. Escríbelo al final. Responde 4 preguntas en orden:</p>
+          <ul>
+            <li><strong>¿Cuál es el problema?</strong> Las emisiones de maquinaria agrícola diésel contribuyen a la contaminación atmosférica...</li>
+            <li><strong>¿Qué hiciste?</strong> Se realizó una revisión bibliográfica de N estudios entre 2015 y 2025...</li>
+            <li><strong>¿Qué encontraste?</strong> El biodiesel reduce CO un X%, HC un Y%, pero incrementa NOx un Z%...</li>
+            <li><strong>¿Qué concluyes?</strong> La mezcla B20 representa el mejor balance ambiental...</li>
+          </ul>
+          <div class="step-tip">💡 No incluyas citas en el resumen. No uses abreviaciones sin definir antes.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num" style="background:#2ecc71;">I</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">IMRaD — Introducción</div>
+          <h3>Introducción</h3>
+          <p>Sigue el esquema de embudo: de lo general a lo específico. Para ingeniería: <strong>Tema → Problema → Solución propuesta</strong>.</p>
+          <ul>
+            <li><strong>Párrafo 1:</strong> Contexto global — cambio climático y rol de la agricultura en emisiones</li>
+            <li><strong>Párrafo 2:</strong> El problema — maquinaria agrícola como fuente de contaminantes (citar MINAM)</li>
+            <li><strong>Párrafo 3:</strong> La solución — biodiesel como alternativa renovable</li>
+            <li><strong>Párrafo 4:</strong> La brecha/tensión — reduce CO y HC pero incrementa NOx, ¿cuál mezcla es óptima?</li>
+            <li><strong>Párrafo 5:</strong> Objetivo — "El presente artículo tiene como objetivo analizar..."</li>
+          </ul>
+          <div class="step-tip">💡 Cada afirmación de la introducción debe tener una cita. Usa las fuentes del MINAM, BCRP y los artículos internacionales.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num" style="background:#2980b9;">M</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">IMRaD — Metodología</div>
+          <h3>Metodología (Materiales y Métodos)</h3>
+          <p>Como harás una revisión bibliográfica, explica cómo buscaste y seleccionaste los estudios. Debe ser reproducible: otro investigador debe poder repetir tu búsqueda.</p>
+          <ul>
+            <li><strong>Bases de datos:</strong> Google Scholar, Scielo, Redalyc, PubMed, Scopus</li>
+            <li><strong>Período de búsqueda:</strong> 2015–2025</li>
+            <li><strong>Términos usados:</strong> "biodiesel tractor emissions", "emisiones biodiesel maquinaria agrícola", "B5 B20 NOx agricultural engine"</li>
+            <li><strong>Criterios de inclusión:</strong> artículos en español/inglés, motores agrícolas o similares, mezclas B5–B100</li>
+            <li><strong>Criterios de exclusión:</strong> estudios solo en vehículos ligeros, anteriores al 2010</li>
+            <li><strong>Número final de artículos:</strong> declara cuántos revisaste</li>
+          </ul>
+          <div class="step-tip">💡 Puedes hacer un diagrama PRISMA (diagrama de flujo de selección de artículos). Es opcional pero da puntos extra de rigor.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num" style="background:#e67e22;">R</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">IMRaD — Resultados</div>
+          <h3>Resultados</h3>
+          <p>Presenta los datos encontrados en la literatura en tablas y figuras comparativas. No interpretes aquí — eso va en Discusión.</p>
+          <ul>
+            <li><strong>Tabla 1:</strong> Comparación de emisiones por mezcla (B5, B10, B20) — CO, NOx, HC, MP</li>
+            <li><strong>Tabla 2:</strong> Características del biodiesel vs diésel (densidad, viscosidad, poder calorífico, cetano)</li>
+            <li><strong>Tabla 3:</strong> Materias primas para biodiesel disponibles en Perú y su rendimiento</li>
+            <li><strong>Figura 1:</strong> Gráfico de barras comparativo de emisiones por mezcla</li>
+          </ul>
+          <div class="step-tip">💡 Cada tabla debe tener título arriba y fuente abajo. Usa formato APA 7 para tablas.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num" style="background:#c0392b;">D</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">IMRaD — Discusión</div>
+          <h3>Discusión</h3>
+          <p>La sección más importante. Interpretas, comparas y argumentas tus resultados.</p>
+          <ul>
+            <li>¿Cuál mezcla tiene el mejor balance ambiental neto? (reducción de CO+HC vs aumento de NOx)</li>
+            <li>¿Los estudios son consistentes entre sí? ¿Hay contradicciones?</li>
+            <li>¿Qué factores afectan los resultados? (tipo de motor, calidad del aceite, carga)</li>
+            <li>¿Qué implicancias tiene esto para el agro peruano? (cita normativa nacional)</li>
+            <li>¿Qué limitaciones tiene tu revisión?</li>
+          </ul>
+          <div class="step-tip">💡 Puedes estructurar la discusión por contaminante: primero CO, luego NOx, luego HC, luego MP. Eso da claridad.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num" style="background:#8e44ad;">C</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">Componente Final</div>
+          <h3>Conclusiones</h3>
+          <p>3 a 5 puntos concretos y directos. Deben responder a tu objetivo inicial. Evita repetir lo de la discusión literalmente.</p>
+          <ul>
+            <li>¿Se confirma que el biodiesel reduce CO y HC significativamente?</li>
+            <li>¿Qué mezcla recomiendas y por qué?</li>
+            <li>¿Qué se necesita investigar más en el contexto peruano?</li>
+          </ul>
+          <div class="step-tip">💡 Las conclusiones deben poder leerse solas, sin leer el resto del artículo. Que sean autocontenidas.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num" style="background:#555;">Ref</div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">Formato APA 7</div>
+          <h3>Referencias</h3>
+          <p>Incluye solo las fuentes que citaste en el texto. Orden alfabético por apellido del primer autor. Usa Zotero o Mendeley para generarlas automáticamente.</p>
+          <ul>
+            <li><strong>Artículo:</strong> Apellido, N. (año). Título del artículo. <em>Nombre de la Revista, vol</em>(núm), pp–pp. https://doi...</li>
+            <li><strong>Informe institucional:</strong> MINAM. (2022). <em>Inventario de emisiones de maquinaria móvil no de carretera en el Perú</em>. Ministerio del Ambiente.</li>
+            <li><strong>Tesis:</strong> Santivañez, L. (2016). <em>Evaluación experimental del consumo de combustible...</em> [Tesis de pregrado]. PUCP.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== DATOS DE EMISIONES ===== -->
+  <div id="tab-emisiones" class="section">
+    <div class="sec-title">Datos Comparativos de Emisiones</div>
+    <p class="sec-desc">Tabla base para tu sección de Resultados, compilada de los artículos revisados. Puedes usarla directamente en tu paper (citando las fuentes de cada fila).</p>
+
+    <div class="emi-table-wrap" style="margin-bottom: 28px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Mezcla</th>
+            <th>CO (monóxido de carbono)</th>
+            <th>NOx (óxidos de nitrógeno)</th>
+            <th>HC (hidrocarburos)</th>
+            <th>MP / Opacidad</th>
+            <th>CO₂ neto ciclo de vida</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>B0 (Diésel puro)</strong></td>
+            <td>Referencia base</td>
+            <td>Referencia base</td>
+            <td>Referencia base</td>
+            <td>Referencia base</td>
+            <td>Alto (combustible fósil)</td>
+          </tr>
+          <tr>
+            <td><strong>B5</strong></td>
+            <td class="emi-down">↓ 5–8%</td>
+            <td class="emi-up">↑ 2–3%</td>
+            <td class="emi-down">↓ 8–10%</td>
+            <td class="emi-down">↓ leve</td>
+            <td class="emi-down">↓ moderado</td>
+          </tr>
+          <tr>
+            <td><strong>B10</strong></td>
+            <td class="emi-down">↓ 10–14%</td>
+            <td class="emi-up">↑ 3–6%</td>
+            <td class="emi-down">↓ 12–18%</td>
+            <td class="emi-down">↓ 34%</td>
+            <td class="emi-down">↓ notable</td>
+          </tr>
+          <tr>
+            <td><strong>B20</strong></td>
+            <td class="emi-down">↓ 15–25%</td>
+            <td class="emi-up">↑ 5–10%</td>
+            <td class="emi-down">↓ 20–30%</td>
+            <td class="emi-down">↓ 38%</td>
+            <td class="emi-down">↓ significativo</td>
+          </tr>
+          <tr>
+            <td><strong>B100</strong></td>
+            <td class="emi-down">↓ 40–50%</td>
+            <td class="emi-up">↑ 10–15%</td>
+            <td class="emi-down">↓ 60–70%</td>
+            <td class="emi-down">↓ muy alto</td>
+            <td class="emi-neutral">Neutro (ciclo cerrado)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert warn">
+      <span class="alert-icon">⚠️</span>
+      <div><strong>Nota importante:</strong> Los porcentajes son rangos aproximados compilados de múltiples estudios. Los valores exactos varían según el tipo de motor, carga de trabajo, temperatura ambiente y calidad del aceite. En tu paper, cita cada valor con su fuente específica.</div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top: 24px;">
+      <div class="card">
+        <div class="card-tag tag-verde">✅ Contaminantes que REDUCEN con biodiesel</div>
+        <h3>CO, HC, Material Particulado, SO₂</h3>
+        <p>El biodiesel tiene mayor contenido de oxígeno intramolecular, lo que mejora la combustión y reduce estos contaminantes. A mayor proporción de biodiesel, mayor reducción. El SO₂ cae a casi cero porque el biodiesel no contiene azufre.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag tag-rojo">⚠️ Contaminante que puede AUMENTAR con biodiesel</div>
+        <h3>NOx (óxidos de nitrógeno)</h3>
+        <p>El principal punto crítico del biodiesel. Las altas temperaturas de combustión junto con el contenido de oxígeno del biodiesel favorecen la formación de NOx. Esto es un problema ya que los NOx contribuyen al smog fotoquímico y tienen un efecto invernadero 300 veces mayor que el CO₂.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="card">
+        <div class="card-tag tag-tierra">🇵🇪 Contexto normativo Perú — Para tu sección de Discusión</div>
+        <h3>Marco Legal Peruano del Biodiesel</h3>
+        <p style="margin-bottom: 12px;">Perú estableció mezcla obligatoria de B2 a partir de 2009 y B5 a partir de 2011 (Ley 28054, Ley de Promoción del Mercado de Biocombustibles). El MINAM regula las emisiones a través de los ECA para Aire (D.S. N° 003-2017-MINAM) y los LMP para vehículos.</p>
+        <p>Para maquinaria agrícola específicamente, el inventario del MINAM (2022) es la referencia principal. La maquinaria agrícola clasifica como "Maquinaria Móvil No de Carretera" (MMNC), categoría que incluye tractores, cosechadoras y aspersores.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HOJA DE RUTA ===== -->
+  <div id="tab-hoja" class="section">
+    <div class="sec-title">Hoja de Ruta para Escribir el Paper</div>
+    <p class="sec-desc">El orden correcto para escribirlo. No empieces por el principio — empieza por la Metodología, cuando ya sabes qué encontraste.</p>
+
+    <div class="roadmap">
+      <div class="road-card c1">
+        <div class="road-num">01</div>
+        <h4>Define tu pregunta</h4>
+        <p>¿Qué quieres responder exactamente? Escríbela en una oración. Esa pregunta es tu norte en todo el paper.</p>
+      </div>
+      <div class="road-card c2">
+        <div class="road-num">02</div>
+        <h4>Lee los artículos</h4>
+        <p>Lee los 9 artículos de este canvas. Toma notas de datos clave: porcentajes de emisión, tipo de motor, mezcla usada, conclusión.</p>
+      </div>
+      <div class="road-card c3">
+        <div class="road-num">03</div>
+        <h4>Escribe Metodología</h4>
+        <p>¿Qué buscaste? ¿Dónde? ¿Con qué criterios seleccionaste los artículos? Sección corta pero precisa.</p>
+      </div>
+      <div class="road-card c4">
+        <div class="road-num">04</div>
+        <h4>Arma las tablas</h4>
+        <p>Construye la tabla comparativa de emisiones por mezcla (B5, B10, B20) con los datos de cada artículo. Eso son tus Resultados.</p>
+      </div>
+      <div class="road-card c5">
+        <div class="road-num">05</div>
+        <h4>Escribe Discusión</h4>
+        <p>Interpreta los datos. ¿Qué mezcla es mejor? ¿Por qué aumenta el NOx? ¿Qué significa esto para el Perú?</p>
+      </div>
+      <div class="road-card c6">
+        <div class="road-num">06</div>
+        <h4>Escribe Introducción</h4>
+        <p>Ahora que ya sabes qué encontraste, la introducción es más fácil. Sigue el esquema: Tema → Problema → Solución.</p>
+      </div>
+      <div class="road-card c7">
+        <div class="road-num">07</div>
+        <h4>Escribe Conclusiones</h4>
+        <p>3–5 puntos concretos. Deben responder directamente a tu pregunta de investigación del paso 1.</p>
+      </div>
+      <div class="road-card c8">
+        <div class="road-num">08</div>
+        <h4>Resumen y Título final</h4>
+        <p>El resumen es lo último que escribes. El título puede ajustarse al final cuando ya sabes exactamente qué encontraste.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 28px;">
+      <div class="card">
+        <div class="card-tag tag-verde">📅 Cronograma sugerido (3 semanas)</div>
+        <h3>Plan de trabajo</h3>
+        <div style="margin-top:12px; display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:12px;">
+          <div style="background:#f0faf5; border-radius:10px; padding:14px;">
+            <div style="font-family:'DM Mono',monospace; font-size:11px; color:var(--verde); margin-bottom:6px;">SEMANA 1</div>
+            <p style="font-size:13px; color:#333;">Leer todos los artículos, tomar notas y armar las tablas de datos de emisiones. Definir la pregunta de investigación exacta.</p>
+          </div>
+          <div style="background:#fef9e7; border-radius:10px; padding:14px;">
+            <div style="font-family:'DM Mono',monospace; font-size:11px; color:#9a7d0a; margin-bottom:6px;">SEMANA 2</div>
+            <p style="font-size:13px; color:#333;">Escribir Metodología, Resultados y Discusión. Son las secciones más técnicas y requieren más tiempo.</p>
+          </div>
+          <div style="background:#fde8e6; border-radius:10px; padding:14px;">
+            <div style="font-family:'DM Mono',monospace; font-size:11px; color:#a93226; margin-bottom:6px;">SEMANA 3</div>
+            <p style="font-size:13px; color:#333;">Escribir Introducción, Conclusiones, Resumen y formatear Referencias en APA 7. Revisión final.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PROGRAMAS ===== -->
+  <div id="tab-programas" class="section">
+    <div class="sec-title">Programas que Necesitas</div>
+    <p class="sec-desc">Herramientas organizadas por función. La mayoría son gratuitas. Marca las esenciales antes de empezar.</p>
+
+    <div class="grid grid-2" style="margin-bottom: 28px;">
+
+      <div class="tool-card">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <div class="tool-icon" style="background:#f0faf5;">📝</div>
+          <div>
+            <h3>Microsoft Word / Google Docs</h3>
+            <span class="tool-free free">Gratuito</span>
+          </div>
+        </div>
+        <p>Para redactar el artículo completo. Usa los estilos de párrafo (Título 1, Título 2) para organizar las secciones. Google Docs permite colaborar en tiempo real.</p>
+        <span class="tool-use">Redacción del paper completo</span>
+        <a class="card-link" href="https://docs.google.com" target="_blank" style="margin-top:8px;">→ Google Docs (gratuito)</a>
+      </div>
+
+      <div class="tool-card">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <div class="tool-icon" style="background:#eaf4fb;">📚</div>
+          <div>
+            <h3>Zotero</h3>
+            <span class="tool-free free">Gratuito</span>
+          </div>
+        </div>
+        <p>Gestor de referencias bibliográficas. Guarda todos los artículos que leas, genera las citas en APA 7 automáticamente y crea la sección de Referencias con un clic. Integrable con Word y Google Docs.</p>
+        <span class="tool-use">Referencias y citas APA 7 automáticas</span>
+        <a class="card-link" href="https://www.zotero.org" target="_blank" style="margin-top:8px;">→ zotero.org — Instalar</a>
+      </div>
+
+      <div class="tool-card">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <div class="tool-icon" style="background:#fdebd0;">🔍</div>
+          <div>
+            <h3>Google Scholar</h3>
+            <span class="tool-free free">Gratuito</span>
+          </div>
+        </div>
+        <p>Motor de búsqueda académica. Busca artículos científicos, ve quién citó cada paper y encuentra versiones PDF gratuitas. Filtra por año para quedarte con publicaciones 2015–2025.</p>
+        <span class="tool-use">Búsqueda de artículos científicos</span>
+        <a class="card-link" href="https://scholar.google.com" target="_blank" style="margin-top:8px;">→ scholar.google.com</a>
+      </div>
+
+      <div class="tool-card">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <div class="tool-icon" style="background:#f4ecf7;">🔍</div>
+          <div>
+            <h3>Scielo + Redalyc</h3>
+            <span class="tool-free free">Gratuito</span>
+          </div>
+        </div>
+        <p>Las dos mejores bases de datos de artículos científicos latinoamericanos en español de acceso libre. Scielo tiene mayor rigor académico. Redalyc es excelente para ciencias agrícolas y ambientales.</p>
+        <span class="tool-use">Artículos en español, contexto latinoamericano</span>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+          <a class="card-link" href="https://scielo.org" target="_blank">→ scielo.org</a>
+          <a class="card-link" href="https://redalyc.org" target="_blank">→ redalyc.org</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <div class="tool-icon" style="background:#fde8e6;">📊</div>
+          <div>
+            <h3>Microsoft Excel / Google Sheets</h3>
+            <span class="tool-free free">Gratuito</span>
+          </div>
+        </div>
+        <p>Para construir y organizar las tablas comparativas de emisiones. También puedes hacer gráficos de barras comparativos de CO, NOx, HC por mezcla Bx para incluir en tu paper.</p>
+        <span class="tool-use">Tablas de datos y gráficos de resultados</span>
+        <a class="card-link" href="https://sheets.google.com" target="_blank" style="margin-top:8px;">→ Google Sheets (gratuito)</a>
+      </div>
+
+      <div class="tool-card">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <div class="tool-icon" style="background:#d4f5e3;">🤖</div>
+          <div>
+            <h3>Claude (este chat)</h3>
+            <span class="tool-free free">Gratuito</span>
+          </div>
+        </div>
+        <p>Puedes pedirme que te ayude a redactar secciones específicas, revisar tu introducción, explicar conceptos técnicos, reformular párrafos, o generar tablas de resultados a partir de los datos que encuentres.</p>
+        <span class="tool-use">Redacción, revisión y apoyo técnico</span>
+        <span class="tool-use" style="background:#eaf4fb; color:#1a6fa0;">No reemplaza las fuentes — siempre cita los artículos originales</span>
+      </div>
+
+      <div class="tool-card">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <div class="tool-icon" style="background:#fef9e7;">✏️</div>
+          <div>
+            <h3>Grammarly / LanguageTool</h3>
+            <span class="tool-free free">Gratuito (versión básica)</span>
+          </div>
+        </div>
+        <p>Corrector gramatical y de estilo para español. LanguageTool es completamente gratuito y funciona bien para textos académicos en español. Instálalo como extensión del navegador.</p>
+        <span class="tool-use">Corrección ortográfica y gramatical</span>
+        <a class="card-link" href="https://languagetool.org/es" target="_blank" style="margin-top:8px;">→ languagetool.org/es</a>
+      </div>
+
+      <div class="tool-card">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <div class="tool-icon" style="background:#eaf4fb;">📐</div>
+          <div>
+            <h3>Canva / draw.io</h3>
+            <span class="tool-free free">Gratuito</span>
+          </div>
+        </div>
+        <p>Para hacer figuras, diagramas de flujo (como el diagrama PRISMA de selección de artículos) o ilustraciones del proceso de transesterificación del biodiesel.</p>
+        <span class="tool-use">Figuras, diagramas e ilustraciones</span>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+          <a class="card-link" href="https://canva.com" target="_blank">→ canva.com</a>
+          <a class="card-link" href="https://app.diagrams.net" target="_blank">→ draw.io</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="alert success">
+      <span class="alert-icon">⭐</span>
+      <div><strong>Stack mínimo recomendado para empezar hoy:</strong> Instala <strong>Zotero</strong> primero (para no perder ninguna fuente), luego abre <strong>Google Docs</strong> para escribir, y usa <strong>Google Scholar + Scielo</strong> para buscar más artículos. Con esas 3 herramientas puedes hacer todo el paper.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer-note">Canvas creado con Claude · Ingeniería Agrícola UNALM · Biodiesel & Maquinaria Agrícola</div>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
