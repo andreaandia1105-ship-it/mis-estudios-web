@@ -1,0 +1,921 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.titbar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titbar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titbar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;padding:2px 8px;border-radius:12px;background:#1e3a5f;color:#93c5fd;border:0.5px solid #2d5a8a}
+.secbar{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.sec-blue{background:#dbeafe;color:#1e3a8a}
+.sec-green{background:#dcfce7;color:#14532d}
+.sec-yellow{background:#fef9c3;color:#713f12}
+.sec-teal{background:#ccfbf1;color:#134e4a}
+.sec-orange{background:#ffedd5;color:#7c2d12}
+.sec-purple{background:#ede9fe;color:#4c1d95}
+.sec-pink{background:#fce7f3;color:#831843}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-pink{background:#fce7f3;color:#831843}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def-blue{border-left:3px solid #3b82f6}
+.def-green{border-left:3px solid #22c55e}
+.def-yellow{border-left:3px solid #eab308}
+.def-teal{border-left:3px solid #14b8a6}
+.def-orange{border-left:3px solid #f97316}
+.def-purple{border-left:3px solid #8b5cf6}
+.def-red{border-left:3px solid #ef4444}
+.def-pink{border-left:3px solid #ec4899}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-yellow{background:#eab308}
+.dot-teal{background:#14b8a6}
+.dot-orange{background:#f97316}
+.dot-purple{background:#8b5cf6}
+.dot-red{background:#ef4444}
+.dot-pink{background:#ec4899}
+.dot-gray{background:#64748b}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.7;margin-bottom:8px}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.mini-blue{border-top:3px solid #3b82f6}
+.mini-green{border-top:3px solid #22c55e}
+.mini-yellow{border-top:3px solid #eab308}
+.mini-teal{border-top:3px solid #14b8a6}
+.mini-orange{border-top:3px solid #f97316}
+.mini-purple{border-top:3px solid #8b5cf6}
+.mini-red{border-top:3px solid #ef4444}
+.mini-gray{border-top:3px solid #64748b}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.num-badge{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-right:4px;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-r{background:#fee2e2;color:#991b1b}
+.nb-y{background:#fef9c3;color:#713f12}
+.nb-t{background:#ccfbf1;color:#134e4a}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin-bottom:4px}
+.stat-bar-fill{height:100%;border-radius:20px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.qcard{margin-bottom:14px}
+.qnum{font-family:'Oswald',sans-serif;font-size:11px;color:#64748b;margin-bottom:3px}
+.qtext{font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin-bottom:7px;line-height:1.45}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary)}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:0.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.ko{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px 10px 0 0;padding:12px 16px;margin:-12px -13px 14px}
+.quiz-header h3{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700}
+.quiz-header p{font-size:11px;color:#94a3b8;margin-top:3px}
+.prog-wrap{background:#1e3a5f;border-radius:20px;height:8px;margin:8px 0 4px}
+.prog-fill{height:100%;border-radius:20px;background:#22c55e;transition:width 0.4s}
+#results-panel{display:none;margin-top:14px;padding:12px;border-radius:10px;text-align:center}
+.res-ok{background:#f0fdf4;color:#14532d}
+.res-med{background:#fefce8;color:#713f12}
+.res-ko{background:#fef2f2;color:#991b1b}
+#reset-btn{margin-top:10px;background:#0f1e3a;color:#7dd3fc;border:none;padding:8px 18px;border-radius:8px;cursor:pointer;font-size:12px;font-family:'Source Sans 3',sans-serif}
+@media(prefers-color-scheme:dark){
+.sec-blue{background:#1e3a5f;color:#93c5fd}
+.sec-green{background:#14532d;color:#86efac}
+.sec-yellow{background:#422006;color:#fef08a}
+.sec-teal{background:#042f2e;color:#5eead4}
+.sec-orange{background:#431407;color:#fed7aa}
+.sec-purple{background:#2e1065;color:#c4b5fd}
+.sec-pink{background:#4a044e;color:#f0abfc}
+.bh-blue{background:#1e3a5f;color:#93c5fd}
+.bh-green{background:#14532d;color:#86efac}
+.bh-yellow{background:#422006;color:#fef08a}
+.bh-teal{background:#042f2e;color:#5eead4}
+.bh-orange{background:#431407;color:#fed7aa}
+.bh-purple{background:#2e1065;color:#c4b5fd}
+.bh-red{background:#450a0a;color:#fca5a5}
+.bh-gray{background:#1e293b;color:#94a3b8}
+.bh-pink{background:#4a044e;color:#f0abfc}
+.def-blue,.def-green,.def-yellow,.def-teal,.def-orange,.def-purple,.def-red,.def-pink{background:var(--color-background-secondary)}
+.warn{background:#431407;color:#fed7aa}
+.exam{background:#422006;border-color:#eab308;color:#fef08a}
+.nb-b{background:#1e3a5f;color:#93c5fd}
+.nb-g{background:#14532d;color:#86efac}
+.nb-r{background:#450a0a;color:#fca5a5}
+.nb-y{background:#422006;color:#fef08a}
+.nb-t{background:#042f2e;color:#5eead4}
+.qfeedback.ok{background:#14532d;color:#86efac}
+.qfeedback.ko{background:#450a0a;color:#fca5a5}
+.qbtn.correct{background:#14532d;border-color:#16a34a;color:#86efac}
+.qbtn.incorrect{background:#450a0a;border-color:#dc2626;color:#fca5a5}
+.res-ok{background:#14532d;color:#86efac}
+.res-med{background:#422006;color:#fef08a}
+.res-ko{background:#450a0a;color:#fca5a5}
+}
+</style>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="titbar">
+  <h1>⚡ ENERGÍA FOTOTÉRMICA — TERMAS Y COCINAS SOLARES</h1>
+  <p>Energías Renovables · Facultad de Ingeniería Agrícola · UNALM · CECADE · UNJBG · UCSS</p>
+  <div class="tags">
+    <span class="tag">Colector Solar</span><span class="tag">Eficiencia Térmica</span><span class="tag">Termosifón</span>
+    <span class="tag">CPVC vs Cobre</span><span class="tag">Balance Térmico</span><span class="tag">Dimensionamiento</span>
+    <span class="tag">Normas NTP</span><span class="tag">Cocinas Solares</span><span class="tag">Zonas Altoandinas</span>
+  </div>
+</div>
+
+<!-- ===================== SECCIÓN 1: FUNDAMENTOS ===================== -->
+<div class="secbar sec-blue">☀️ FUNDAMENTOS Y ESCENARIO TECNOLÓGICO</div>
+
+<div class="block">
+  <span class="bh bh-blue">Energía Solar Térmica (Fototérmica)</span>
+  <div class="def def-blue"><strong>Definición:</strong> La energía solar puede convertirse directamente en calor —energía fototérmica— sin pasar por electricidad. Es la base de termas, cocinas solares, secadores y concentradores industriales.</div>
+  <div class="item"><span class="dot dot-blue"></span><span>La energía solar es <strong>radiación electromagnética</strong>. Su intensidad varía con la hora, estación, nubosidad y altitud del lugar.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>Se compone de radiación <strong>directa</strong> (llega sin dispersión), <strong>difusa</strong> (dispersada por atmósfera) y <strong>reflejada</strong> (albedo). Los colectores planos captan las tres.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>La irradiancia pico sobre una superficie es <strong>≈1000–1100 W/m²</strong>. En Tarma (Junín) se registró hasta 1,161 kW/m² a las 11:00 am en día soleado.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la energía solar difusa es también aprovechable por un colector plano, a diferencia de un concentrador parabólico?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Escenario Tecnológico Solar</span>
+  <div class="flow">
+    <div class="fbox">☀️ Energía Solar</div>
+    <div class="farrow">→</div>
+    <div class="fbox" style="border-left:3px solid #f97316">Térmica</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Calentamiento agua</div>
+  </div>
+  <div class="flow">
+    <div class="fbox">☀️ Energía Solar</div>
+    <div class="farrow">→</div>
+    <div class="fbox" style="border-left:3px solid #3b82f6">Fotovoltaica</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Electricidad</div>
+  </div>
+  <div class="two">
+    <div class="mini mini-orange"><strong>Aplicaciones Térmicas</strong><br>Calentamiento agua, secado solar, refrigeración solar, temperado de piscinas, calentamiento industrial, concentradores</div>
+    <div class="mini mini-blue"><strong>Calentador Solar</strong><br>Aparato térmico e hidráulico que calienta agua <em>sólo</em> con energía solar, sin gas, petróleo, leña ni electricidad (Cavalcanti, UNALM)</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el Perú tiene un potencial estratégico para la energía fototérmica, especialmente en la sierra?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Contexto Peruano — Radiación Solar</span>
+  <div class="def def-orange">El Perú presenta radiación solar promedio diaria entre <strong>4.59 kWh/m²·día</strong> (Lima-La Molina) y <strong>7.09 kWh/m²·día</strong> (Arequipa-Characato). La sierra es la zona con mayor potencial nacional.</div>
+  <table class="tbl">
+    <tr><th>Región</th><th>Radiación (kWh/m²·d)</th><th>Inclin. Col.</th></tr>
+    <tr><td>Arequipa</td><td style="color:#d97706;font-weight:600">7.09 ★</td><td>27°</td></tr>
+    <tr><td>Puno</td><td>6.80</td><td>26°</td></tr>
+    <tr><td>Junín (Huancayo)</td><td>6.78</td><td>22°</td></tr>
+    <tr><td>Ayacucho</td><td>6.62</td><td>25°</td></tr>
+    <tr><td>Cajamarca</td><td>6.58</td><td>17°</td></tr>
+    <tr><td>Lima-La Molina</td><td style="color:#94a3b8">4.59</td><td>22°</td></tr>
+    <tr><td>Tacna (CERT)</td><td>5.75</td><td>~18°</td></tr>
+  </table>
+  <div class="warn">⚠️ El ángulo de inclinación del colector ≈ latitud del lugar. Orientar siempre hacia el <strong>NORTE GEOGRÁFICO</strong> en el hemisferio sur. En Tarma (Junín) se levantó 30° el lado sur para compensar la curvatura terrestre.</div>
+</div>
+
+<!-- ===================== SECCIÓN 2: COMPONENTES ===================== -->
+<div class="secbar sec-green">🔩 COMPONENTES DE LA TERMA SOLAR</div>
+
+<div class="block">
+  <span class="bh bh-green">A) El Colector Solar Plano</span>
+  <div class="def def-green">El colector es el "corazón" de la terma: capta la radiación solar y la convierte en calor que se transfiere al agua. Es un <strong>intercambiador de calor especial</strong> cuya fuente energética está a 150 millones de km.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Placa absorbedora:</strong> Generalmente de cobre o aluminio, pintada de negro mate (α ≈ 0.90). La pintura negra esmalte brillante tiene α ≈ 0.80 vs. la blanca α ≈ 0.25. Maximiza absorción de toda la radiación.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Pases o serpentín:</strong> Tubos adosados a la placa por donde circula el agua. En el estudio de Tarma: 10 curvas en U de ½" de diámetro, en CPVC o cobre.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Cubierta transparente:</strong> Vidrio templado (0.004 m de espesor) que genera <em>efecto invernadero</em>: deja pasar la radiación solar visible, pero bloquea la infrarroja lejana emitida por la placa caliente. Trampa de calor.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Aislamiento:</strong> Lana de vidrio (k=0.038), lana de roca (k=0.040) o espuma de poliuretano (k=0.026 W/m·k). Minimiza pérdidas hacia la caja. En Tarma: tecnopor de 1" en fondo y lados.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Caja:</strong> Estructura de triplay (Tarma: 0.01 m) o aluminio/acero que fija todos los componentes y los protege del ambiente.</span></div>
+  <div class="exam">🎯 EXAMEN: Explica por qué el vidrio del colector actúa como "trampa de calor" desde el punto de vista óptico y termodinámico.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">B) El Fluido Caloportador</span>
+  <div class="def def-blue">El agua es el mejor caloportador natural. Debe permanecer en estado líquido a todas las temperaturas y presiones de operación. En zonas de heladas (>3500 msnm) se usa solución de <strong>agua + glicol</strong> para bajar el punto de congelación.</div>
+  <div class="item"><span class="dot dot-blue"></span><span>El agua natural ebulle a <strong>85°C en el Cusco</strong> (presión atmosférica menor por altitud) y 100°C a nivel del mar. Esto debe considerarse para el diseño en zonas altoandinas.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>Termas de alta eficiencia trabajan con el agua entre <strong>60°C y 80°C</strong>. Para uso doméstico (ducha) se requiere entre 30–45°C.</span></div>
+  <div class="warn">⚠️ En zonas con heladas (>3500 msnm como Puno, Juliaca, Huaraz) se debe usar terma con circuito cerrado y anticongelante. El congelamiento causa ruptura irreversible del colector.</div>
+  <hr class="divh">
+  <span class="bh bh-teal">C) Tanque de Almacenamiento</span>
+  <div class="def def-teal">Almacena el agua caliente para uso posterior. Componentes modernos: tanque interno de <strong>Acero Inox. 304L</strong>, cobertor externo de Acero Inox., aislamiento de poliuretano rígido, sistema auxiliar eléctrico y ánodo de sacrificio de Magnesio (anti-corrosión).</div>
+  <div class="item"><span class="dot dot-teal"></span><span>Para el estudio en Tarma: tanque de 120 L de polietileno de alta densidad, aislado con tecnopor de 2" y protegido con techo de calamina a dos aguas.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Regla de dimensionamiento: <strong>1 m² de colector por cada 70 L</strong> de almacenamiento (Cushco/CECADE). Para 120 L → 2 m² de colector.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el ánodo de sacrificio de magnesio es importante en el tanque de acero inoxidable de una terma solar?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">D) El Termosifón Natural</span>
+  <div class="def def-yellow">El termosifón es el mecanismo de circulación natural del agua sin bomba. Ocurre porque el <strong>agua caliente es menos densa</strong> que la fría, sube hacia el tanque, y el agua fría de la base del tanque ingresa por la parte inferior del colector.</div>
+  <div class="flow">
+    <div class="fbox">Radiación calienta colector</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Agua en serpentín se calienta</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Densidad disminuye</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Agua sube al tanque (1/3 superior)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Agua fría baja al colector</div>
+  </div>
+  <div class="item"><span class="dot dot-yellow"></span><span>El ciclo se repite <strong>continuamente</strong> hasta que la temperatura del agua en los colectores se iguala a la del tanque. Este es el estado de equilibrio térmico.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span>El tanque debe ubicarse al <strong>lado sur</strong> de los colectores (en el hemisferio sur) para no proyectar sombras sobre ellos. Es imprescindible que esté <em>por encima</em> del nivel superior del colector para que el termosifón funcione.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir "circulación natural" (termosifón) con "circulación forzada" (bomba). Los sistemas sin bomba son más baratos pero requieren ubicación precisa del tanque respecto al colector.</div>
+</div>
+
+<!-- ===================== SECCIÓN 3: TIPOS DE COLECTORES ===================== -->
+<div class="secbar sec-teal">🔬 TIPOS DE COLECTORES SOLARES</div>
+
+<div class="block s3">
+  <span class="bh bh-teal">Comparativa de Colectores Solares</span>
+  <div class="three" style="margin-bottom:8px">
+    <div class="mini mini-green">
+      <strong>1. Placa Plana con Cubierta</strong><br>
+      Rango: 10–80°C. El más usado. Con cubierta simple: UL=7 W/°C·m², η₀=0.80. Con cubierta doble: UL=5, η₀=0.65. Con superficie selectiva de cromo negro: UL=5, η₀=0.80. La selectiva supera a ambas en toda la curva de eficiencia. <em>Uso: doméstico, calentamiento de agua</em>
+    </div>
+    <div class="mini mini-gray">
+      <strong>2. Placa Plana Sin Cubierta</strong><br>
+      Rango: 10–40°C. UL=15–25 W/°C·m², η₀=0.90 (alta porque sin vidrio hay menos reflexión). Gana max. 20°C sobre temperatura ambiente. Pérdidas altas por convección sin cubierta. <em>Uso: piscinas al aire libre, piscicultura, campamentos remotos</em>
+    </div>
+    <div class="mini mini-teal">
+      <strong>3. Tubos de Vacío</strong><br>
+      Rango: 10–130°C. UL=2 W/°C·m² (el menor, excelente aislación). 30% más eficientes que placa plana. El vacío elimina las pérdidas por convección. Son cilíndricos: los rayos inciden perpendicularmente durante más horas. Cuestan ~el doble por m². China produce 70% de los mundiales. <em>Uso: industrial de alta temperatura</em>
+    </div>
+  </div>
+  <div class="two">
+    <div>
+      <div class="mini mini-purple" style="margin-bottom:7px">
+        <strong>3a. Tubos Vacío — Flujo Directo</strong><br>
+        Dentro de cada tubo de vidrio hay una aleta de aluminio con recubrimiento selectivo, conectada a un tubo de cobre por donde fluye el agua. Puede instalarse horizontalmente. Tipos: concéntrico vidrio-metal, separado vidrio-metal, o vidrio-vidrio (más barato, menos eficiente pero más confiable).
+      </div>
+      <div class="mini mini-blue">
+        <strong>3b. Heat Pipe (Tubo de Calor)</strong><br>
+        Dentro del tubo hay un fluido vaporizante (mezcla de alcohol) que evapora con la radiación, sube al condensador, cede energía al agua de red, se licúa y baja por gravedad. "Superconductores del calor": conductividad miles de veces superior al mejor conductor sólido. Requieren inclinación mínima de 25°.
+      </div>
+    </div>
+    <div>
+      <table class="tbl">
+        <tr><th>Colector</th><th>UL (W/°C·m²)</th><th>η₀</th><th>T max</th></tr>
+        <tr><td>Sin cubierta</td><td>15–25</td><td>0.90</td><td>40°C</td></tr>
+        <tr><td>Cubierta simple</td><td>7</td><td>0.80</td><td>60°C</td></tr>
+        <tr><td>Cubierta doble</td><td>5</td><td>0.65</td><td>80°C</td></tr>
+        <tr><td>Sup. selectiva</td><td>5</td><td>0.80</td><td>80°C</td></tr>
+        <tr><td style="color:#14b8a6;font-weight:600">Tubos vacío</td><td style="color:#14b8a6;font-weight:600">2</td><td>0.70</td><td>130°C</td></tr>
+      </table>
+      <div style="font-size:10.5px;color:var(--color-text-secondary);margin-top:5px">Fuente: CENSOLAR – España</div>
+      <div class="exam" style="margin-top:6px">🎯 EXAMEN: ¿Por qué los colectores de tubos de vacío son hasta 30% más eficientes que los de placa plana, aunque su eficiencia óptica (η₀) sea menor?</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECCIÓN 4: BALANCE TÉRMICO ===================== -->
+<div class="secbar sec-yellow">📐 BALANCE TÉRMICO Y EFICIENCIA DEL COLECTOR</div>
+
+<div class="block s2">
+  <span class="bh bh-yellow">Balance Térmico del Colector Plano</span>
+  <div class="def def-yellow">La energía útil <strong>Qu</strong> es la diferencia entre la energía absorbida por la placa (Qab) y las pérdidas del colector (QL) por radiación y convección. Parte de la energía solar siempre se pierde: nadie logra 100% de eficiencia.</div>
+  <div class="two">
+    <div>
+      <div class="rx">
+        Qu = Qab – QL<br>
+        Qu = α·τ·I·Ac – UL·Ac·(Te–Tamb) [W]<br>
+        Qu = ṁ·c·(Ts–Te) [W]<br>
+        ─────────────────────────────────<br>
+        α = absortancia placa, τ = transmitancia cubierta<br>
+        ρ = reflectancia  →  α + τ + ρ = 1<br>
+        I = Irradiancia (W/m²), Ac = área colector (m²)<br>
+        UL = coef. global de pérdidas (W/m²·°C)<br>
+        Te = T entrada, Ts = T salida, Tamb = T ambiente<br>
+        ṁ = flujo másico agua (kg/s), c = 4.18 kJ/kg·°C
+      </div>
+      <div class="rx">
+        η = Qu / (I·Ac) = ṁ·Cp·(Ts–Te) / (I·Ac) × 100%<br>
+        ─── Ecuación característica (Polo & Torres) ───<br>
+        η = FR·(α·τ)N – FR·UL·(Te–Tamb)/I<br>
+        η = b – m·x  donde:<br>
+        b = FR·(α·τ)N (ordenada en origen)<br>
+        m = FR·UL (pendiente de la curva)<br>
+        x = (Te–Tamb)/I
+      </div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-yellow"></span><span>La <strong>curva característica</strong> η = f[(Te–Tamb)/I] es una recta descendente. A mayor diferencia de temperatura vs. ambiente, mayor pérdida, menor eficiencia.</span></div>
+      <div class="item"><span class="dot dot-yellow"></span><span>La <strong>superficie selectiva</strong> (cromo negro) supera a placa simple y doble en toda la curva porque tiene UL más bajo: menos pérdida por radiación infrarroja.</span></div>
+      <div class="item"><span class="dot dot-yellow"></span><span>Para x &lt; 0.06: la cubierta simple supera a la doble (mayor τ). Para x &gt; 0.10: la doble supera (menor UL). <em>La doble cubierta es mejor a altas temperaturas.</em></span></div>
+      <div class="item"><span class="dot dot-yellow"></span><span><strong>FR</strong> = factor de transferencia de calor (coeficiente de Hottel-Whillier). Depende del caudal del fluido y características de la placa (material, espesor, distancia entre tubos).</span></div>
+      <div class="warn">⚠️ ERROR COMÚN: Confundir η instantánea con eficiencia total del sistema. La η instantánea es en un momento fijo; la de la terma solar integra energía solar y térmica en todo el día.</div>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Fórmula de Eficiencia de la Terma (diaria)</span>
+  <div class="def def-yellow">La eficiencia energética diaria ηE evalúa cuánta de la energía solar disponible ese día fue efectivamente convertida en calor útil almacenado en el tanque. Esta es la métrica clave del estudio de Tarma.</div>
+  <div class="rx">
+    ηE = ET / ES<br>
+    ─────────────────────────<br>
+    ET = m · c · ΔT  [J]<br>
+    m = masa agua en terma [g]<br>
+    c = 4.18 J/g·°C<br>
+    ΔT = T_max(16:00h) – T_ini(8:00h) [°C]<br>
+    ─────────────────────────<br>
+    ES = es · A  [J]<br>
+    es = área bajo curva radiación vs tiempo [J/m²]<br>
+    A = área colector solar [m²]
+  </div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Ejemplo Tarma (soleado):</strong> ET = 1.2×10⁵g × 4.18 × (54.1–14.9)°C = 1.966×10⁷ J. ES = 6.67 kWh/m² × 1.5 m² = 3.60×10⁷ J. ηE = 54.59%.</span></div>
+  <div class="exam">🎯 EXAMEN: Si en un día soleado la energía solar recibida es 6.67 kWh/m² y el área del colector es 1.5 m², ¿cuál es la energía solar total recibida en joules? ¿Qué relación tiene con la eficiencia?</div>
+</div>
+
+<!-- ===================== SECCIÓN 5: MÉTODOS DE EVALUACIÓN ===================== -->
+<div class="secbar sec-purple">🔬 MÉTODOS EXPERIMENTALES DE EVALUACIÓN (Polo & Torres, Tacna)</div>
+
+<div class="block">
+  <span class="bh bh-purple">Método Estacionario — Eficiencia η</span>
+  <div class="def def-purple">Se mide en condiciones casi estacionarias (mediodía, cielo despejado). Se aplica la ecuación η = ṁ·c·(Ts–Te)/(Gt·Ac), variando la temperatura de entrada para obtener múltiples puntos de la curva característica. Por regresión lineal se obtienen τ·α y UL.</div>
+  <div class="item"><span class="dot dot-purple"></span><span>Las condiciones estacionarias son difíciles: la radiación solar varía continuamente. Solo al mediodía de días claros se aproximan condiciones semi-estacionarias.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>Procedimiento CECADE: caudal fijo a <strong>0.02 L/s</strong>, ángulo de inclinación 23° hacia el norte, esperar 15 min para equilibrio térmico antes de cada medición.</span></div>
+  <div class="rx">
+    η = ṁ·Cp·(Ts–Te) / (I·Ac) × 100%<br>
+    Caudal ṁ referencial = 0.02 kg/s<br>
+    Cp = 4.2 kJ/kg·K
+  </div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Determinación de τ·α y UL</span>
+  <div class="def def-purple">La <strong>eficiencia óptica τ·α</strong> se mide cuando Tm = Tamb (las pérdidas son cero, toda la energía absorbida va al fluido). El <strong>coeficiente UL</strong> se mide en oscuridad total (Gt = 0) con agua caliente recirculando.</div>
+  <div class="two">
+    <div>
+      <div class="mini mini-teal">
+        <strong>Eficiencia Óptica (τ·α)</strong><br>
+        Condición: ajustar Te para lograr Tm=(Te+Ts)/2 = Tamb. En ese punto η = τ·α. Resultado TECNOSOL (Tacna): <strong>τ·α = 0.80</strong>.
+      </div>
+    </div>
+    <div>
+      <div class="mini mini-purple">
+        <strong>Coeficiente UL</strong><br>
+        En oscuridad, con agua a 60°C: UL = ṁ·c·(Te–Ts)/[Ac·(Tm–Tamb)]. Resultado TECNOSOL: <strong>UL = 4.5 W/m²·°C</strong> (rango buena calidad: 4–5).
+      </div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué para determinar la eficiencia óptica se debe lograr que Tm = Tamb? ¿Qué término de la ecuación característica se anula en esa condición?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Método Transitorio y Parámetros del Sistema</span>
+  <div class="def def-purple">El <strong>método transitorio</strong> mide la curva de calentamiento sin extracción de fluido (cortocircuito). Permite obtener la eficiencia en intervalos Δt. Los parámetros de sistema integral evalúan la terma completa (colector + tuberías + tanque).</div>
+  <div class="rx">
+    Método transitorio:<br>
+    Qu = MC·(Tfin,i – Tinicio,i) / Δti<br>
+    Tm,i = (Tfin,i + Tinicio,i) / 2<br>
+    ─── Parámetros del Sistema Integral ───<br>
+    Fracción Solar:  f = QU / QD<br>
+    Grado Utilización: μ = QU / ES<br>
+    Eficiencia Técnica: η = Q_TOTAL / ES<br>
+    Q_TOTAL = QU + Q_almacenada
+  </div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Fracción solar (f):</strong> qué % de la demanda cubre la energía solar. f=1 → sistema 100% solar; f&lt;1 → necesita respaldo.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Grado de utilización (μ):</strong> qué % de la energía solar incidente fue realmente usada. Indica cuán bien se extrae la energía disponible.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Eficiencia técnica (η):</strong> incluye la energía almacenada no usada aún. Es el indicador más completo de rendimiento del sistema.</span></div>
+  <div class="warn">⚠️ Confusión frecuente: la fracción solar f NO es igual a la eficiencia técnica η. f mide si cubres la demanda; η mide cuánta energía solar captaste y aprovechaste. Son conceptualmente distintos.</div>
+</div>
+
+<!-- ===================== SECCIÓN 6: DIMENSIONAMIENTO ===================== -->
+<div class="secbar sec-orange">📏 DIMENSIONAMIENTO E INSTALACIÓN</div>
+
+<div class="block s2">
+  <span class="bh bh-orange">Fórmula de Dimensionamiento del Área Colectora</span>
+  <div class="def def-orange">El área colectora se calcula en función del consumo diario de agua caliente (C en litros), el clima del lugar (K1) y la orientación respecto al norte verdadero (K2). Es la fórmula clave para diseñar el tamaño del sistema.</div>
+  <div class="two">
+    <div>
+      <div class="rx">
+        A = (C × K1 × K2) / 100   [m²]<br>
+        ─────────────────────────────────<br>
+        C = consumo diario agua caliente (L)<br>
+        K1 = factor climático (ver tabla)<br>
+        K2 = factor de orientación<br>
+        ─────────────────────────────────<br>
+        K2 según desviación del Norte:<br>
+        0–15°: K2 = 1.00<br>
+        15–20°: K2 = 1.05<br>
+        20–25°: K2 = 1.10<br>
+        >25°: usar soporte especial
+      </div>
+    </div>
+    <div>
+      <table class="tbl">
+        <tr><th>Clima</th><th>K1 (tubos vacío)</th></tr>
+        <tr><td>Muy fríos (Puno, Cuzco, Juliaca, Huaraz)</td><td style="color:#3b82f6;font-weight:600">Heat pipe/vacío recom.</td></tr>
+        <tr><td>Lima (La Molina, Cañete)</td><td>1.35</td></tr>
+        <tr><td>Arequipa, Moquegua, Tacna</td><td>1.20</td></tr>
+        <tr><td>Cajamarca, Huancayo, Ayacucho</td><td>1.30</td></tr>
+        <tr><td>Cálidos: Piura, Tumbes</td><td>1.00</td></tr>
+      </table>
+      <div class="mini mini-orange" style="margin-top:7px">
+        <strong>Consumo referencial (litros/persona/día):</strong><br>
+        Duchas: 30 L · Baño tina: 100 L · Lavado: 20 L · Residencia: 45 L · Departamento: 60 L · Hospital: 125 L/cama
+      </div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Un hospedaje de 12 habitaciones con 25 personas en Arequipa requiere agua a 40°C mínimo. ¿Qué área de colección necesita aproximadamente? Use la fórmula y datos de la tabla. (Dato: Arequipa rad.=4.49 kWh/m²·día, η=75%)</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Instalación: Reglas Clave</span>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Sombras:</strong> Alejarse de obstáculos (paredes, árboles) al menos la misma dimensión del muro (relación 1:1). Las sombras entre las 9:00 y 15:00 horas son críticas: deben evitarse totalmente.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Soporte estructural:</strong> El techo debe soportar el peso del tanque + colectores llenos de agua. Para terma TES-120 (120 L) se necesitan 4.0 m² de área en techo.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Arranques:</strong> Agua fría, agua caliente y eléctrico deben estar juntos. La empresa instaladora cubre generalmente solo 3 m a la redonda del punto de agua fría.</span></div>
+  <div class="two">
+    <div class="mini mini-blue"><strong>Terma Solar vs Eléctrica</strong><br>
+    Eléctrica 100L (2kW, 2.5h/día): US$22.50/mes.<br>
+    Solar 100L: US$550 (US$5.50/litro).<br>
+    <strong>Retorno inversión: 2.04 años.</strong></div>
+    <div class="mini mini-green"><strong>Normas NTP (INDECOPI)</strong><br>
+    NTP 399.400:2001 – Eficiencia colectores<br>
+    NTP 399.404:2006 – Dimensionamiento<br>
+    NTP 399.405:2007 – Rendimiento anual<br>
+    NTP 399.482:2007 – Instalación<br>
+    NTP 399.484:2008 – Etiquetado</div>
+  </div>
+  <div class="warn">⚠️ Un buen colector no garantiza un buen sistema solar. La orientación, inclinación, sombras, distancia al tanque y aislamiento de tuberías determinan el rendimiento real del sistema completo.</div>
+</div>
+
+<!-- ===================== SECCIÓN 7: COCINAS SOLARES ===================== -->
+<div class="secbar sec-pink">🍳 COCINAS Y CONCENTRADORES SOLARES</div>
+
+<div class="block">
+  <span class="bh bh-pink">Tipo 1: Directo de Foco (Concentrador Parabólico)</span>
+  <div class="def def-pink">Usa espejos reflectores (aluminio, acero, vidrio) de forma parabólica o cilíndrica que <strong>concentran la radiación solar directa</strong> en un foco puntual donde se ubica la olla. Temperatura en el foco: ~300°C. Eficiencia: 50%.</div>
+  <div class="item"><span class="dot dot-pink"></span><span>Tamaños típicos: Área 1.20 m² (diámetro pequeño) o 2 m² con distancia focal 0.45 m. Pueden cocinar todo tipo de alimentos.</span></div>
+  <div class="item"><span class="dot dot-pink"></span><span>Requieren <strong>ajuste permanente del foco</strong> para seguir la trayectoria solar (o mecanismo automático de seguimiento). El viento enfría el foco → necesita protección.</span></div>
+  <div class="rx">
+    P = Qu / t  [kW]  (Potencia del concentrador)<br>
+    η = Qu / E × 100%<br>
+    E = A × I × t  [kJ]<br>
+    A = área concentrador (m²)<br>
+    I = Irradiancia (W/m²)  ·  t = tiempo (s)
+  </div>
+  <div class="warn">⚠️ Solo aprovecha radiación <em>directa</em>. En días nublados su potencia cae drásticamente, a diferencia del colector plano que también aprovecha la radiación difusa.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-pink">Tipo 2: Indirecto de Caja</span>
+  <div class="def def-pink">Cajas (cuadradas, rectangulares, cilíndricas) pintadas de negro, con <strong>doble vidrio</strong> que genera efecto invernadero. Usan reflectores planos para concentrar la energía solar en el interior. Orientar hacia el NORTE. Eficiencia: 30–40%.</div>
+  <div class="item"><span class="dot dot-pink"></span><span>Son sistemas de <strong>cocción lenta</strong>: ideales para guisos, estofados, cereales. Emplean poca o nada de agua. Temperatura interior alcanzable: 100–120°C en buen día soleado.</span></div>
+  <div class="item"><span class="dot dot-pink"></span><span>No requieren ajuste constante del sol. Más fáciles de construir artesanalmente y transferir tecnológicamente a comunidades rurales.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-pink">Ventajas y Desventajas</span>
+  <div class="two">
+    <div>
+      <div class="mini mini-green" style="margin-bottom:7px">
+        <strong>✅ Ventajas</strong><br>
+        Energía gratuita e inagotable. No contamina (cero gases invernadero, cero deforestación, cero lluvia ácida). No requiere medidor ni pago. Tecnología artesanal accesible. Mejora calidad de vida en zonas rurales.
+      </div>
+    </div>
+    <div>
+      <div class="mini mini-red">
+        <strong>❌ Desventajas</strong><br>
+        Depende del sol: no funciona de noche ni en días muy nublados. NO es solución definitiva para sustituir combustibles. Debe instalarse donde hay sol (patio, terraza). Los directos necesitan rastreo solar constante. No se puede almacenar calor para uso posterior.
+      </div>
+    </div>
+  </div>
+  <div class="rx">
+    Qu = m · cp · (Tf – Ti)   [kJ]<br>
+    m = masa carga (kg agua + olla con tapa)<br>
+    cp = calor específico carga (kJ/kg·K)<br>
+    Tf = temperatura final (ebullición), Ti = temperatura inicial
+  </div>
+  <div class="exam">🎯 EXAMEN: Comparando una cocina solar de concentrador parabólico con una de tipo caja, ¿cuál tiene mayor eficiencia y por qué? ¿Cuál es más adecuada para zonas rurales sin acceso a energía eléctrica?</div>
+</div>
+
+<!-- ===================== SECCIÓN 8: RESULTADOS EXPERIMENTALES ===================== -->
+<div class="secbar sec-green">📊 RESULTADOS EXPERIMENTALES — PERÚ</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Estudio Tarma, Junín (Lobato & Barrena — Colector CPVC vs Cobre)</span>
+  <div class="def def-green">Evaluación en Tarma (3050 msnm, Lat. 11°25'S) con dos colectores planos en paralelo: uno de CPVC y uno de cobre, cada uno de 1.5 m², 10 curvas en U de ½". Tanque 120 L. Datos tomados cada 30 min de 8:00 a 16:00 hrs durante 35 días (2016).</div>
+  <div class="three" style="margin-bottom:9px">
+    <div class="mini mini-green">
+      <strong>☀️ Día Soleado</strong><br>
+      Radiación: 1.161 kW/m² (pico 11:00)<br>
+      T interior CPVC: max 112°C<br>
+      T interior Cobre: max 85.8°C<br>
+      T tanque: 14.9°C→53.4°C (ΔT=39.2°C)<br>
+      <strong style="color:#14532d">η = 54.59%</strong>
+    </div>
+    <div class="mini mini-yellow">
+      <strong>⛅ Día Combinado</strong><br>
+      Radiación: picos promedio 0.80 kW/m²<br>
+      T interior CPVC: max 100°C<br>
+      T interior Cobre: max 80°C<br>
+      T tanque supera 40°C a 1:30pm<br>
+      <strong style="color:#713f12">η = 48.32%</strong>
+    </div>
+    <div class="mini mini-gray">
+      <strong>☁️ Día Nublado</strong><br>
+      Radiación: promedio 0.45 kW/m²<br>
+      T interior similar en ambos colectores<br>
+      T tanque: 16°C→28°C (ΔT=12.6°C)<br>
+      T salida promedio: 40°C en ambos<br>
+      <strong style="color:#334155">η = 30.01%</strong>
+    </div>
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-green"></span><span><strong>CPVC supera al cobre en temperatura:</strong> Diferencia promedio de 20°C en temperatura interior y en salida de agua. Aunque el plástico tiene menor conductividad térmica, el CPVC retiene más calor porque pierde menos por conducción hacia la caja metálica.</span></div>
+      <div class="item"><span class="dot dot-green"></span><span>La diferencia CPVC vs cobre solo es significativa cuando <strong>radiación &gt; 0.60 kW/m²</strong>. En días nublados (rad. &lt; 0.60) no hay diferencia significativa entre materiales.</span></div>
+      <div class="item"><span class="dot dot-green"></span><span>Después de un día soleado: agua a 54.1°C. Tras la noche (≈11.9°C de caída), a las 6:30 am quedan 42.2°C. Al extraer 20 litros (1 baño), temperatura solo baja 1°C. Sistema confiable incluso en zonas frías.</span></div>
+    </div>
+    <div>
+      <div style="margin-bottom:8px">
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">η día soleado 54.59%</div>
+        <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:54.59%;background:#22c55e"></div></div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">η día combinado 48.32%</div>
+        <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:48.32%;background:#eab308"></div></div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">η día nublado 30.01%</div>
+        <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:30.01%;background:#64748b"></div></div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">Chachapoyas soleado (Vigo&Trigoso) 52%</div>
+        <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:52%;background:#14b8a6"></div></div>
+      </div>
+      <div class="mini mini-orange">
+        <strong>Comparación Ciudades Peruanas</strong><br>
+        Tarma (3050m): 6.67 / 5.19 / 3.90 kWh/m²<br>
+        Chachapoyas (2350m): 5.42 / 4.01 / 3.22 kWh/m²<br>
+        Cajamarca (2700m): 4.68 kWh/m²<br>
+        Huancayo (3350m): 5.98 kWh/m² (mayor sierra)
+      </div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el colector de CPVC superó al de cobre en temperatura interior, a pesar de que el cobre tiene mucho mayor conductividad térmica? ¿Qué mecanismo físico explica este resultado?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Estudio Tacna (Polo & Torres — CERT-UNJBG)</span>
+  <div class="def def-teal">Evaluación comparativa entre terma tipo <strong>termosifón</strong> y tipo <strong>tanque-colector (TACO)</strong> en Tacna. Mismo colector (1.10 m²), mismo tanque (110 L), misma radiación y condiciones meteorológicas. Promedio anual en Tacna: 5.752 kWh/m²·día (superior al promedio mundial).</div>
+  <div class="item"><span class="dot dot-teal"></span><span>Colector TECNOSOL evaluado (12 años de uso): UL = <strong>4.5 W/m²·°C</strong> (dentro del rango buena calidad 4–5). Eficiencia óptica: <strong>τ·α = 0.80</strong>.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Perfil de demanda evaluado: 150 L/día a 45°C, distribuidos en 5 extracciones (07:00, 10:00, 13:00, 16:00, 20:00 h). Temperatura red (Te): 20°C.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Resultado: el <strong>termosifón tiene mayor fracción solar</strong> que el TACO en las mismas condiciones. El TACO tiene mayor eficiencia técnica por mejor aprovechamiento energético en el colector.</span></div>
+  <div class="warn">⚠️ La ausencia de Normas Técnicas Peruanas obligatorias para termas solares impide certificar calidad y garantizar uso masivo sostenible. El PNTP 399.400 existe como proyecto pero no tiene aplicación oficial (Polo & Torres).</div>
+</div>
+
+<!-- ===================== TABLA INTEGRADORA ===================== -->
+<div class="secbar sec-blue">📋 TABLA INTEGRADORA — RESUMEN COMPLETO</div>
+
+<div class="block s3">
+  <span class="bh bh-blue">Comparativa Integral del Sistema Fototérmico</span>
+  <table class="tbl">
+    <tr>
+      <th>Concepto</th><th>Definición / Fórmula</th><th>Valor Típico / Rango</th><th>Condición de Medición</th><th>Fuente / Referencia</th>
+    </tr>
+    <tr>
+      <td><strong>Eficiencia diaria ηE</strong></td>
+      <td>ET/ES = m·c·ΔT / (es·A)</td>
+      <td>30–55% (Tarma, Perú)</td>
+      <td>Día soleado, combinado o nublado</td>
+      <td>Lobato & Barrena (Tarma)</td>
+    </tr>
+    <tr>
+      <td><strong>Eficiencia instantánea η</strong></td>
+      <td>ṁ·Cp·(Ts–Te)/(I·Ac)</td>
+      <td>49–79% (UNALM 2019)</td>
+      <td>Mediodía, cielo despejado, I estable</td>
+      <td>Cavalcanti (UNALM)</td>
+    </tr>
+    <tr>
+      <td><strong>Coef. pérdidas UL</strong></td>
+      <td>ṁ·c·(Te–Ts)/[Ac·(Tm–Tamb)]</td>
+      <td>2–25 W/°C·m² según tipo</td>
+      <td>Oscuridad total, Gt=0, agua caliente</td>
+      <td>Polo & Torres (Tacna)</td>
+    </tr>
+    <tr>
+      <td><strong>Eficiencia óptica τ·α</strong></td>
+      <td>η cuando Tm = Tamb</td>
+      <td>0.65–0.90 según tipo</td>
+      <td>Sol directo, Tm ajustada = Tamb</td>
+      <td>Polo & Torres; CENSOLAR</td>
+    </tr>
+    <tr>
+      <td><strong>Fracción solar f</strong></td>
+      <td>QU / QD</td>
+      <td>0.6–0.9 (Tacna)</td>
+      <td>Perfil de demanda real del usuario</td>
+      <td>Polo & Torres (CERT-UNJBG)</td>
+    </tr>
+    <tr>
+      <td><strong>Área colector A</strong></td>
+      <td>C × K1 × K2 / 100</td>
+      <td>1 m² por 70 L almacenamiento</td>
+      <td>Función del clima y orientación</td>
+      <td>Cavalcanti (UNALM); CECADE</td>
+    </tr>
+    <tr>
+      <td><strong>Termosifón</strong></td>
+      <td>Circulación natural por ΔDensidad</td>
+      <td>Sin bomba; tanque sobre colector</td>
+      <td>ΔT colector > tanque</td>
+      <td>Duffie & Beckman; Valera</td>
+    </tr>
+    <tr>
+      <td><strong>CPVC vs Cobre</strong></td>
+      <td>Mayor retención calor en CPVC</td>
+      <td>CPVC +20°C vs cobre (rad>0.6kW/m²)</td>
+      <td>Radiación > 0.60 kW/m²</td>
+      <td>Lobato & Barrena (Tarma)</td>
+    </tr>
+    <tr>
+      <td><strong>Retorno inversión</strong></td>
+      <td>Costo terma / ahorro mensual anual</td>
+      <td>US$550 → ROI = 2.04 años</td>
+      <td>vs. terma eléctrica 2kW, 2.5h/día</td>
+      <td>Cavalcanti (UNALM)</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La eficiencia de una terma solar NO depende solo del tipo de colector, sino del sistema completo: orientación norte, ángulo de inclinación = latitud, aislamiento de tuberías, volumen del tanque proporcional al área colectora (1 m² por 70 L), y factor climático del lugar (K1). Un buen colector en un mal sistema puede tener peor rendimiento que un colector modesto bien instalado.</div>
+</div>
+
+<!-- ===================== QUIZ INTERACTIVO ===================== -->
+<div class="block s3" id="quiz-section">
+  <div class="quiz-header">
+    <h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3>
+    <p>Marca tu respuesta y descubre si es correcta • Cubre todo el material de los 5 documentos</p>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-bar" style="width:0%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:#7dd3fc;margin-top:4px">
+      <span id="prog-text">0 / 10 respondidas</span>
+      <span id="score-text">Aciertos: 0</span>
+    </div>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Qué mide la eficiencia instantánea (η) de un colector solar plano?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) La energía almacenada en el tanque vs. la demanda diaria del usuario</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) El calor útil entregado al fluido caloportador vs. la energía solar incidente sobre el colector</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) La temperatura máxima alcanzada en el interior del colector vs. la temperatura ambiente</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) El área del colector multiplicada por la radiación solar disponible ese día</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">En el estudio de Lobato & Barrena en Tarma (3050 msnm), ¿cuál fue el resultado comparativo entre los colectores CPVC y cobre en días soleados?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) El colector de cobre superó al CPVC porque el cobre tiene mayor conductividad térmica (≈400 W/m·K)</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) Ambos colectores alcanzaron exactamente la misma temperatura interior bajo las mismas condiciones</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="true">C) El colector de CPVC superó al de cobre, llegando a 112°C vs. 85.8°C del cobre, con ≈20°C de diferencia promedio</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) El colector de cobre fue mejor solo en días nublados porque pierde menos calor en condiciones de baja radiación</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Por qué el agua circula hacia el tanque sin necesidad de bomba en una terma solar con termosifón?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Porque el vidrio del colector genera una presión positiva que impulsa el fluido hacia arriba</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) Porque el agua caliente tiene menor densidad que la fría, sube naturalmente al tanque y el agua fría baja a reemplazarla</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Porque la radiación solar genera un vacío parcial en el colector que aspira el agua del tanque</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Porque el calor específico del agua disminuye con la temperatura, facilitando el flujo</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál tipo de colector tiene el coeficiente global de pérdidas térmicas (UL) más bajo, según los datos de CENSOLAR-España?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Colector sin cubierta: UL = 15–25 W/°C·m²</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Colector con cubierta simple: UL = 7 W/°C·m²</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Colector con superficie selectiva de cromo negro: UL = 5 W/°C·m²</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="true">D) Colector de tubos de vacío: UL = 2 W/°C·m²</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">En la fórmula de dimensionamiento A = (C × K1 × K2)/100, ¿qué representa el factor K1?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) El factor de corrección por orientación divergente del Norte verdadero (desviación este u oeste)</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) El factor de corrección climática según la zona del Perú (1.0 en climas cálidos, 1.35 en Lima)</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) La capacidad de almacenamiento en litros del tanque requerido</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) El número de personas en el hogar multiplicado por el consumo individual</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Según Polo & Torres (CERT-Tacna), la "fracción solar" (f) se define como:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) La energía solar útil usada dividida entre la energía solar incidente total (= grado de utilización)</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) La energía total almacenada en el sistema dividida entre la energía solar incidente</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) La energía solar útil usada (QU) dividida entre la energía de la demanda energética (QD)</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) La energía absorbida por la placa negra dividida entre las pérdidas del colector</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Bajo qué condición experimental se determina la eficiencia óptica (τ·α) de un colector solar, según el método estacionario de Polo & Torres?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="true">A) Cuando la temperatura media del fluido en el colector (Tm) es igual a la temperatura ambiente (Tamb), anulando el término de pérdidas</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Cuando la irradiancia solar es máxima (>1000 W/m²) y el cielo está completamente despejado</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) Cuando el colector está completamente en sombra y no recibe radiación directa (Gt = 0)</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Cuando la temperatura de entrada del agua es el doble de la temperatura ambiente del lugar</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre las cocinas solares es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Los concentradores parabólicos (tipo directo de foco) pueden alcanzar aproximadamente 300°C en el foco</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Las cocinas solares de tipo caja tienen eficiencias entre el 30 y 40%, siendo sistemas de cocción lenta</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Las cocinas solares constituyen una solución definitiva para sustituir completamente los combustibles tradicionales en zonas rurales del Perú</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Las cocinas solares de tipo caja emplean reflectores planos para concentrar la energía solar en el interior y deben orientarse hacia el norte</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">Si una terma eléctrica de 100 L (resistencia 2 kW, encendida 2.5 h/día) genera un gasto de US$22.50/mes y una terma solar de 100 L cuesta US$550, ¿en cuánto tiempo se recupera la inversión?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Aproximadamente 4.5 años</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Menos de 1 año</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Aproximadamente 2 años (cálculo exacto: 2.04 años)</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Entre 3 y 4 años</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">En la ecuación característica de eficiencia η = FR(ατ)N – FR·UL·(Te–Tamb)/I, la pendiente de la recta y la ordenada en el origen representan, respectivamente:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) La eficiencia óptica y el coeficiente global de pérdidas directamente</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) El factor de transferencia FR y el área del colector Ac</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) La pendiente = FR·UL (pérdidas ponderadas) y la ordenada en el origen = FR·(ατ)N (eficiencia óptica ponderada)</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) El flujo másico ṁ y la temperatura de entrada al colector Te</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="results-panel">
+    <div id="results-inner"></div>
+    <button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Lobato & Barrena (2016) – Eficiencia terma solar CPVC/Cobre, Tarma-Junín, UCSS/UNTRM |</span>
+  <span class="fc">Polo & Torres – Métodos experimentales evaluación colectores, CERT-UNJBG Tacna |</span>
+  <span class="fc">Cavalcanti (2020) – Energía Fototérmica, UNALM Facultad Ing. Agrícola |</span>
+  <span class="fc">CECADE/Zanabria – Cocinas solares y evaluación terma solar, Cusco |</span>
+  <span class="fc">Duffie & Beckman (2013) – Solar Engineering of Thermal Processes, 4ta Ed. | Vigo & Trigoso (2012) – UNTRM Chachapoyas | CENSOLAR – España | NTP 399.400–484, INDECOPI Perú</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {
+    b: "✅ ¡Correcto! La eficiencia instantánea η = Qu/(I·Ac) = ṁ·Cp·(Ts–Te)/(I·Ac) mide exactamente qué fracción de la energía solar incidente sobre el colector fue transferida útilmente al fluido. Es instantánea porque depende de las condiciones del momento (temperatura, radiación).",
+    wrong: "❌ Incorrecto. La respuesta correcta es B. La eficiencia instantánea η compara el calor útil que gana el fluido [Qu = ṁ·Cp·(Ts–Te)] con la energía solar incidente sobre el área del colector [I·Ac]. No involucra el tanque ni la demanda total."
+  },
+  2: {
+    c: "✅ ¡Correcto! Aunque el cobre tiene conductividad ≈400 W/m·K vs. ≈0.1 del CPVC, el colector de CPVC retuvo más calor porque sus paredes de plástico aíslan mejor y pierden menos hacia la caja metálica. El CPVC llegó a 112°C y el cobre a 85.8°C, con ≈20°C de diferencia promedio cuando la radiación superó 0.60 kW/m².",
+    wrong: "❌ Incorrecto. La respuesta correcta es C. Sorprendentemente, el CPVC superó al cobre. Aunque el cobre conduce mejor el calor, el CPVC retiene más porque sus paredes son aislantes: el calor se queda en el serpentín en lugar de disiparse hacia la caja. Esto fue validado experimentalmente en Tarma durante 35 días."
+  },
+  3: {
+    b: "✅ ¡Correcto! Este es el principio del termosifón natural. Al calentarse, el agua reduce su densidad (el agua caliente 'pesa menos'), asciende por los tubos hacia el tercio superior del tanque, y el agua más fría y densa de la base del tanque baja por gravedad para ocupar su lugar en el colector. El ciclo se repite sin bomba.",
+    wrong: "❌ Incorrecto. La respuesta correcta es B. El termosifón funciona por diferencia de densidades: agua caliente (menos densa) sube, agua fría (más densa) baja. Es un principio de convección natural. Ni el vidrio, ni el vacío, ni el calor específico intervienen en este mecanismo."
+  },
+  4: {
+    d: "✅ ¡Correcto! Los tubos de vacío tienen UL = 2 W/°C·m², el más bajo de todos los colectores. El vacío elimina completamente las pérdidas por convección (no hay gas que conduzca calor), dejando solo pérdidas por radiación infrarroja, que son mínimas. Por eso pueden trabajar entre 10°C y 130°C manteniendo buena eficiencia.",
+    wrong: "❌ Incorrecto. La respuesta correcta es D. El vacío en los tubos elimina la convección, el principal mecanismo de pérdida térmica. Por eso UL = 2 W/°C·m², muy inferior al colector sin cubierta (15–25) o con cubierta simple (7). Esto les permite alcanzar temperaturas de hasta 130°C con buena eficiencia."
+  },
+  5: {
+    b: "✅ ¡Correcto! K1 es el factor de corrección climática. Vale 1.0 en climas cálidos (Piura, Tumbes) donde la radiación solar compensa mejor la demanda, y sube hasta 1.35 en Lima o 1.30 en Cajamarca/Huancayo porque en esos climas se necesita más área colectora para suplir la misma demanda. K2 (no K1) es el factor de orientación.",
+    wrong: "❌ Incorrecto. La respuesta correcta es B. K1 corrige el área colectora según el clima regional del Perú: en climas fríos o con menor radiación se necesita más área, por eso K1 > 1.0. K2 es el factor de orientación (desviación del norte). Nunca confundir K1 con K2."
+  },
+  6: {
+    c: "✅ ¡Correcto! La fracción solar f = QU/QD indica qué porcentaje de la demanda energética diaria del usuario es cubierta por energía solar. Si f = 0.8, el sistema solar cubre el 80% de la demanda y el 20% restante requiere respaldo (eléctrico u otra fuente). Difiere del grado de utilización μ = QU/ES que compara con la energía solar incidente.",
+    wrong: "❌ Incorrecto. La respuesta correcta es C. La fracción solar mide cobertura de la demanda (f = QU/QD). El grado de utilización μ = QU/ES compara con la energía solar incidente. La eficiencia técnica η = Q_TOTAL/ES incluye también la energía almacenada no usada. Son tres parámetros distintos."
+  },
+  7: {
+    a: "✅ ¡Correcto! Cuando Tm = Tamb, el término de pérdidas UL·Ac·(Tm–Tamb) = 0, porque la diferencia de temperatura es cero. La ecuación η = τ·α – UL·(Tm–Tamb)/I se reduce a η = τ·α. Toda la energía absorbida se transfiere al fluido sin pérdidas. Esta es la condición pura para medir solo la eficiencia óptica.",
+    wrong: "❌ Incorrecto. La respuesta correcta es A. La clave está en la ecuación característica: η = τ·α – UL·(Tm–Tamb)/I. Cuando Tm = Tamb, el término de pérdidas (el segundo término) se anula, y η = τ·α directamente. Esta es la condición experimental que se debe lograr ajustando la temperatura de entrada del fluido."
+  },
+  8: {
+    c: "✅ ¡Correcto! Esta afirmación es FALSA. Las cocinas solares NO son una solución definitiva porque dependen de la disponibilidad del sol: no funcionan de noche ni en días muy nublados ni en épocas de lluvia continua. Son una solución complementaria o alterna que contribuye al ahorro energético, pero no pueden reemplazar totalmente los combustibles tradicionales (así lo indica el documento de CECADE/Zanabria).",
+    wrong: "❌ Incorrecto. La respuesta correcta es C. Las opciones A, B y D son verdaderas según los documentos. La afirmación FALSA es C: las cocinas solares NO son solución definitiva porque no funcionan de noche y dependen del clima. Son complemento, no sustituto total de los combustibles convencionales."
+  },
+  9: {
+    c: "✅ ¡Correcto! El cálculo exacto es: ROI = US$550 / (US$22.50/mes × 12 meses/año) = 550/270 = 2.04 años. Aproximadamente 2 años de ahorro en electricidad pagan la inversión en la terma solar. Esto hace muy atractiva la adopción de termas solares en hogares con acceso a buen recurso solar.",
+    wrong: "❌ Incorrecto. La respuesta correcta es C. El cálculo: ahorro anual = US$22.50/mes × 12 = US$270/año. Tiempo de retorno = US$550 / US$270 = 2.04 años ≈ 2 años. Un retorno muy competitivo que justifica la inversión inicial en una terma solar de placa plana."
+  },
+  10: {
+    c: "✅ ¡Correcto! En la ecuación lineal η = FR·(ατ)N – FR·UL·(Te–Tamb)/I, si se compara con la forma general y = b – m·x: la ordenada en el origen b = FR·(ατ)N representa la eficiencia óptica ponderada por FR (el rendimiento máximo cuando no hay diferencia de temperatura), y la pendiente m = FR·UL indica cómo aumentan las pérdidas al crecer la diferencia de temperatura respecto a la irradiancia.",
+    wrong: "❌ Incorrecto. La respuesta correcta es C. La ecuación es η = FR·(ατ)N – FR·UL·x. Comparando con y = b – mx: la ordenada b = FR·(ατ)N (eficiencia óptica ponderada, lo que se extrapolaria para ΔT=0) y la pendiente m = FR·UL (cómo caen las pérdidas al alejarse de la temperatura ambiente). FR no aparece sólo; multiplica a ambos parámetros."
+  }
+};
+
+let answered = 0;
+let correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true') {
+      b.classList.add('correct');
+      b.textContent = '✅ ' + b.textContent;
+    }
+  });
+  if(!isCorrect) {
+    btn.classList.add('incorrect');
+  }
+  const fb = document.getElementById('fb'+q);
+  const key = isCorrect ? btn.dataset.opt : 'wrong';
+  const feed = feedbacks[parseInt(q)];
+  const msg = feed[key] || feed.wrong;
+  fb.innerHTML = msg;
+  fb.className = 'qfeedback ' + (isCorrect ? 'ok' : 'ko');
+  fb.style.display = 'block';
+  answered++;
+  if(isCorrect) correct++;
+  const pct = Math.round((answered/10)*100);
+  document.getElementById('prog-bar').style.width = pct+'%';
+  document.getElementById('prog-text').textContent = answered + ' / 10 respondidas';
+  document.getElementById('score-text').textContent = 'Aciertos: ' + correct;
+  if(answered === 10) showResults();
+});
+
+function showResults() {
+  const panel = document.getElementById('results-panel');
+  const inner = document.getElementById('results-inner');
+  panel.style.display = 'block';
+  let cls, msg;
+  if(correct >= 8) { cls='res-ok'; msg='🎉 ¡Excelente dominio del tema! Estás listo/a para el examen.'; }
+  else if(correct >= 5) { cls='res-med'; msg='📚 ¡Buen avance! Repasa los bloques de balance térmico y métodos de evaluación.'; }
+  else { cls='res-ko'; msg='📖 Necesitas repasar el material. Revisa especialmente las fórmulas y los resultados experimentales.'; }
+  inner.innerHTML = '<div style="font-size:20px;font-weight:700;margin-bottom:6px">'+correct+' / 10 correctas</div><div style="font-size:13px">'+msg+'</div>';
+  panel.className = cls;
+}
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('prog-text').textContent = '0 / 10 respondidas';
+  document.getElementById('score-text').textContent = 'Aciertos: 0';
+  document.getElementById('results-panel').style.display = 'none';
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct','incorrect');
+    b.textContent = b.textContent.replace(/^[✅❌] /,'');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f => { f.style.display='none'; f.innerHTML=''; });
+}
+</script>

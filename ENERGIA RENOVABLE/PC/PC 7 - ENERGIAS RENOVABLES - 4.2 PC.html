@@ -1,0 +1,562 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:transparent}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:500}
+.bh.azul{background:#dbeafe;color:#1e3a8a}
+.bh.verde{background:#dcfce7;color:#14532d}
+.bh.rojo{background:#fee2e2;color:#991b1b}
+.bh.amarillo{background:#fef9c3;color:#713f12}
+.bh.morado{background:#ede9fe;color:#4c1d95}
+.bh.naranja{background:#ffedd5;color:#7c2d12}
+.bh.gris{background:#f1f5f9;color:#334155}
+.bh.teal{background:#ccfbf1;color:#134e4a}
+.def{border-left:3px solid #3b82f6;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.def.g{border-left-color:#16a34a}
+.def.a{border-left-color:#d97706}
+.def.t{border-left-color:#0d9488}
+.def.p{border-left-color:#7c3aed}
+.def.o{border-left-color:#ea580c}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot.b{background:#3b82f6}
+.dot.g{background:#16a34a}
+.dot.a{background:#d97706}
+.dot.r{background:#ef4444}
+.dot.t{background:#0d9488}
+.dot.p{background:#7c3aed}
+.dot.o{background:#ea580c}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.7;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:7px 0}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin:7px 0}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px}
+.mini.bb{border-top:3px solid #3b82f6}
+.mini.bg{border-top:3px solid #16a34a}
+.mini.ba{border-top:3px solid #d97706}
+.mini.bt{border-top:3px solid #0d9488}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);font-weight:600;text-align:left}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.secbar{grid-column:1/-1;background:var(--color-background-secondary);border-radius:9px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--color-text-primary);border-left:4px solid #3b82f6}
+.titbar{grid-column:1/-1;background:#0f1e3a;color:white;border-radius:12px;padding:14px 18px}
+.titbar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titbar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:#1e3a5f;color:#93c5fd}
+.footer{grid-column:1/-1;background:#0f1e3a;color:white;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;font-size:11px}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:white;border-radius:10px;padding:10px 16px;margin-bottom:14px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.qcard{background:var(--color-background-secondary);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.qtext{font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin-bottom:10px;line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.no{background:#fef2f2;border-left:3px solid #dc2626;color:#7f1d1d}
+.prog-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:8px 0}
+.prog-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .4s}
+#results-panel{background:#f0fdf4;border:1px solid #16a34a;border-radius:10px;padding:14px;margin-top:12px;display:none;text-align:center}
+#results-panel h3{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:6px}
+#reset-btn{margin-top:10px;background:#0f1e3a;color:white;border:none;border-radius:8px;padding:8px 20px;font-size:12px;cursor:pointer;font-family:'Source Sans 3',sans-serif}
+@media(prefers-color-scheme:dark){
+.bh.azul{background:#1e3a5f;color:#93c5fd}
+.bh.verde{background:#14532d;color:#86efac}
+.bh.amarillo{background:#422006;color:#fef08a}
+.bh.rojo{background:#450a0a;color:#fca5a5}
+.bh.morado{background:#2e1065;color:#c4b5fd}
+.bh.naranja{background:#431407;color:#fed7aa}
+.bh.gris{background:#1e293b;color:#94a3b8}
+.bh.teal{background:#042f2e;color:#5eead4}
+.def{background:var(--color-background-tertiary)}
+.warn{background:#431407;color:#fed7aa;border-left-color:#f97316}
+.exam{background:#422006;border-color:#d97706;color:#fef08a}
+}
+</style>
+
+<div class="cv">
+
+<div class="titbar">
+  <h1>⚡ SISTEMA DE BOMBEO DE AGUA FOTOVOLTAICO — PRÁCTICA 8</h1>
+  <p>Energías Renovables · CECADE / Universidad · Cusco, Perú</p>
+  <span class="pill">Caudal</span><span class="pill">Carga dinámica</span><span class="pill">Panel FV</span><span class="pill">Bomba solar</span><span class="pill">Diseño</span><span class="pill">Lorentz PS150</span><span class="pill">Grundfos SP</span>
+</div>
+
+<div class="secbar">🌊 SECCIÓN 1 — FUNDAMENTOS DEL BOMBEO SOLAR</div>
+
+<div class="block s2">
+  <span class="bh azul">¿Qué es y por qué importa?</span>
+  <div class="def">Un sistema de bombeo fotovoltaico (SBFV) convierte directamente energía solar en trabajo hidráulico — mueve agua sin red eléctrica ni combustible. Su ventaja estratégica: <strong>opera sin batería</strong>, almacenando energía como agua elevada en un depósito.</div>
+  <div class="item"><span class="dot b"></span><span>El agua se bombea <em>solo durante las horas de sol</em> a un depósito elevado. El tanque actúa como acumulador gravitacional: durante la noche o días nublados, el agua desciende por gravedad al punto de consumo, manteniendo presión y suministro continuo.</span></div>
+  <div class="item"><span class="dot g"></span><span>La coincidencia estacional es favorable: en zonas áridas, la época de mayor demanda de agua (verano) coincide con la de mayor radiación solar, maximizando el rendimiento del sistema cuando más se necesita.</span></div>
+  <div class="item"><span class="dot a"></span><span>El conversor de frecuencia (variador) entre paneles y bomba adapta la velocidad de rotación a la irradiancia disponible: más velocidad al mediodía, menos al amanecer. Esto evita paradas y protege la bomba de arranques bruscos.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Pensar que un SBFV siempre necesita baterías. No es así. Las baterías solo son necesarias en el Arreglo C (uso continuo nocturno). El Arreglo A (DC directo) y B (AC diurno) bombean SOLO cuando hay sol, almacenando el agua — no la electricidad.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la ausencia de batería es considerada una ventaja en los SBFV estándar, y en qué situaciones sí sería necesario incorporarla. Fundamente con los tres arreglos descritos en el documento.</div>
+</div>
+
+<div class="block">
+  <span class="bh teal">Componentes del sistema</span>
+  <div class="flow">
+    <div class="fbox">☀️ Paneles FV</div><div class="farrow">→</div>
+    <div class="fbox">Control / Variador</div><div class="farrow">→</div>
+    <div class="fbox">Motobomba</div><div class="farrow">→</div>
+    <div class="fbox">🗺️ Tanque elevado</div>
+  </div>
+  <div class="item"><span class="dot t"></span><span><strong>Paneles FV:</strong> generan DC proporcional a la irradiancia. Arreglos en serie aumentan voltaje; en paralelo aumentan corriente.</span></div>
+  <div class="item"><span class="dot t"></span><span><strong>Controlador / MPPT:</strong> optimiza la transferencia de energía panel→bomba siguiendo el punto de máxima potencia (MPP). El Lorentz PS150 integra MPPT.</span></div>
+  <div class="item"><span class="dot t"></span><span><strong>Float switch:</strong> detector de nivel que detiene la bomba cuando el tanque alcanza su capacidad máxima, protegiendo contra rebose y operación en seco.</span></div>
+  <div class="item"><span class="dot a"></span><span><strong>Bomba:</strong> puede ser DC (≤500W, sin inversor) o AC (>500W, centrífuga). La selección depende de la carga dinámica total y el caudal requerido.</span></div>
+</div>
+
+<div class="secbar">🔧 SECCIÓN 2 — LOS TRES ARREGLOS DE BOMBEO</div>
+
+<div class="block">
+  <span class="bh verde">Arreglo A — DC Directo</span>
+  <div class="def g">Panel → Regulador/Adaptador → Bomba DC. Sin baterías, sin inversor. El caudal es proporcional a la irradiancia del momento.</div>
+  <div class="item"><span class="dot g"></span><span>Ventaja principal: eficiencia eléctrica superior a bombas AC convencionales (requiere <em>menos</em> módulos para igual caudal). Vida útil >20 años.</span></div>
+  <div class="item"><span class="dot r"></span><span>Limitación: no reutiliza bombas existentes, no sirve para otros usos eléctricos (iluminación, etc.). Pocos fabricantes de calidad mundial.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el Arreglo A requiere menos módulos solares que un arreglo AC equivalente? Relacione con las curvas I-V.</div>
+</div>
+
+<div class="block">
+  <span class="bh amarillo">Arreglo B — AC Diurno</span>
+  <div class="def a">Panel → Inversor especial → Bomba AC. Sin baterías, pero con conversión DC→AC. Bombea solo durante el día.</div>
+  <div class="item"><span class="dot a"></span><span>Usa bombas estándar del mercado local — reparación y repuestos accesibles. Técnicos locales pueden dar mantenimiento sin especialización en bombas solares.</span></div>
+  <div class="item"><span class="dot r"></span><span>La eficiencia del conjunto depende de la calidad de la bomba (≈50%) y las pérdidas del inversor. El inversor puede ser costoso de reparar.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh naranja">Arreglo C — AC con Baterías</span>
+  <div class="def o">Panel → Regulador → Batería → Inversor → Bomba AC. Permite bombeo continuo (día y noche) y uso de electricidad para otros fines.</div>
+  <div class="item"><span class="dot o"></span><span>Un sistema central puede alimentar varias bombas simultáneamente. Se puede apoyar con red eléctrica o generador diesel en punto único.</span></div>
+  <div class="item"><span class="dot r"></span><span>Desventaja clave: requiere baterías incluso si solo se bombea de día. Las baterías tienen vida útil limitada (3-7 años) y son el componente de mayor costo de reposición.</span></div>
+  <div class="warn">⚠️ Para Arreglo C, se recomienda tener varias bombas pequeñas en lugar de pocas grandes, para ajustar el bombeo progresivamente a la radiación disponible durante el día.</div>
+</div>
+
+<div class="secbar">📐 SECCIÓN 3 — DISEÑO DEL SISTEMA DE BOMBEO (4 FASES)</div>
+
+<div class="block">
+  <span class="bh azul">Fase 1 — Demanda de Agua</span>
+  <div class="def">La demanda determina el tamaño del sistema. Se expresa como caudal horario Q (L/h) dividiendo el consumo diario entre las horas solares pico disponibles.</div>
+  <div class="rx">Q (L/h) = Consumo diario (L) ÷ Horas solares pico</div>
+  <div class="item"><span class="dot b"></span><span>OMS recomienda 40 L/persona·día para bebida, higiene y sanitarios en zonas rurales. En la práctica se usan 25-30 L/persona·día.</span></div>
+  <div class="item"><span class="dot b"></span><span>El volumen bombeado debe superar la demanda con <em>reserva mínima de 3 días</em> para enfrentar días nublados o mantenimiento.</span></div>
+  <hr class="divh">
+  <table class="tbl">
+    <tr><th>Usuario</th><th>L/día</th></tr>
+    <tr><td>Persona (todos usos)</td><td>284</td></tr>
+    <tr><td>Vaca lechera</td><td>133</td></tr>
+    <tr><td>Caballo</td><td>38-76</td></tr>
+    <tr><td>100 pollos</td><td>15</td></tr>
+    <tr><td>Cerdo</td><td>15</td></tr>
+  </table>
+  <div class="exam">🎯 EXAMEN: Un fundo en Cusco tiene 50 vacas lecheras. ¿Cuál es el caudal horario mínimo requerido si la zona tiene 5 horas pico de sol? Plantee la ecuación y resuelva numéricamente.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh amarillo">Fase 2 — Carga Dinámica Total (CDT)</span>
+  <div class="def a">La CDT es la presión total que la bomba debe vencer para impulsar el agua. Es la suma de tres componentes medidos en metros de columna de agua.</div>
+  <div class="rx">CDT = Altura Vertical Total + Pérdidas de Carga + Presión Tanque</div>
+  <div class="two" style="margin:8px 0">
+    <div>
+      <div class="mini bb"><strong>Altura Vertical Total</strong><br>= Nivel estático + Abatimiento + Altura de descarga.<br>Es la distancia física desde el agua en el pozo hasta el depósito elevado.</div>
+      <div class="mini bg"><strong>Nivel Estático (Standing Water Level)</strong><br>Distancia entre boca del pozo y la superficie del agua cuando la bomba NO está operando. Es el punto de referencia en reposo.</div>
+    </div>
+    <div>
+      <div class="mini ba"><strong>Nivel Dinámico (Pumping Level)</strong><br>Distancia a la superficie del agua cuando la bomba SÍ opera. Siempre mayor que el estático porque al bombear el acuífero se deprime localmente.</div>
+      <div class="mini bt"><strong>Abatimiento (Drawdown)</strong><br>= Nivel dinámico − Nivel estático. Indica la capacidad del acuífero para reponerse. Un abatimiento excesivo indica sobreexplotación del pozo.</div>
+    </div>
+  </div>
+  <div class="item"><span class="dot g"></span><span><strong>Pérdidas de carga:</strong> Fricciones en tuberías, codos, válvulas. Si el tanque está a ≤10 m del pozo y se usa tubería recomendada, se asume 5% de la altura vertical total como simplificación válida.</span></div>
+  <div class="item"><span class="dot b"></span><span><strong>Presión del tanque:</strong> Normalmente = 0 porque los tanques en estas aplicaciones son abiertos (descarga libre). Solo aplica si hubiera tanques presurizados herméticos.</span></div>
+  <div class="rx">H = Hd + Hs | Hs = A + B (sin abatimiento) ó A+B+C (con abatimiento C)<br>Hd = Hf + v²/2g (pérdida fricción + cinética)</div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir nivel estático con nivel dinámico. El diseño se hace con nivel DINÁMICO (el real durante operación). Usar el estático subestima la CDT y lleva a seleccionar una bomba subdimensionada.</div>
+  <div class="exam">🎯 EXAMEN: En el caso Yaurisque (CECADE), el nivel estático es 1.80 m, el abatimiento 0.52 m, la profundidad del pozo 6 m y la estructura del tanque tiene 6 m de altura. Calcule la altura vertical total Hs y la CDT asumiendo pérdidas del 5%.</div>
+</div>
+
+<div class="block">
+  <span class="bh teal">Fase 3 — Irradiancia Solar</span>
+  <div class="def t">La irradiancia promedio de la zona define cuántas horas pico equivalentes de sol existen. En Perú, los mapas del SENAMHI son la fuente oficial de referencia.</div>
+  <div class="item"><span class="dot t"></span><span>Yaurisque (Cusco, 3330 msnm) tiene un promedio anual de <strong>5.2 kWh/m²·día</strong>. Durante la época seca (abril-setiembre) es de 5 kWh/m²·día — justamente cuando mayor demanda de agua existe.</span></div>
+  <div class="item"><span class="dot t"></span><span>La altitud favorece la irradiancia: menor masa de aire, menos absorción atmosférica. Un sistema en Cusco recibe más irradiancia directa que uno a nivel del mar en la misma latitud.</span></div>
+  <table class="tbl" style="margin-top:8px">
+    <tr><th>Mes</th><th>Irrad. (kWh/m²/d)</th><th>Precip. (mm)</th></tr>
+    <tr><td>Ene-Mar</td><td>4.9–5.2</td><td>74–162</td></tr>
+    <tr><td>Abr-Set</td><td>4.5–5.8</td><td>2.7–36.6</td></tr>
+    <tr><td>Oct-Dic</td><td>5.7–5.9</td><td>55–143</td></tr>
+  </table>
+</div>
+
+<div class="block s2">
+  <span class="bh morado">Fase 4 — Selección de Bomba y Paneles</span>
+  <div class="def p">Con la CDT y el caudal diario se selecciona el tipo de bomba usando ábacos del fabricante. Con la irradiancia local y la eficiencia del sistema se calcula la potencia pico de paneles necesaria.</div>
+  <div class="rx">H·Vb = 367 · E · Pp · η (m⁴)<br>H: altura manométrica (m) | Vb: vol. bombeado (m³) | E: energía solar (kWh/m²)<br>Pp: potencia pico panel (kWp) | η: eficiencia motobomba | 367: factor de conversión</div>
+  <div class="item"><span class="dot p"></span><span>Del ábaco de selección: cargas bajas (&lt;15 m) con alto caudal → bomba centrífuga superficial. Cargas medias (15-45 m) → centrífuga sumergible multipasos. Cargas altas (&gt;45 m) con bajo caudal → bomba de cilindro o diafragma.</span></div>
+  <div class="item"><span class="dot p"></span><span>La potencia eléctrica requerida: <em>P = ρw · g · V̇ · H / ηp</em>. Para H=10.5 m, Q=0.0003 m³/s, ηp=0.40 → P = 77 W requerido. Un panel de 180 Wp con η sistema 30% puede bombear 9.4 m³/día en ese sitio.</span></div>
+  <div class="two" style="margin-top:8px">
+    <div class="mini bb"><strong>Caso Yaurisque (CECADE)</strong><br>Parcela 1500 m², 100 árboles × 50 L/d = 5 m³/día. Panel 180 Wp, E=5 kWh/m², η=30%. H·Vb = 99.1 m⁴. Para H=10.5 m → Vb=9.4 m³ &gt; 5 m³ ✓. P bomba = 77 W.</div>
+    <div class="mini bg"><strong>Verificación de suficiencia</strong><br>El volumen bombeado (9.4 m³) supera con margen la demanda (5 m³). Esto garantiza reserva hídrica incluso en días de nubosidad parcial. Siempre diseñar con margen de seguridad ≥20%.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Utilizando la fórmula H·Vb = 367·E·Pp·η, calcule la potencia pico necesaria para bombear 8 m³/día a una altura de 15 m, con irradiancia de 5 kWh/m² y eficiencia del sistema de 0.35. ¿El panel GYP-180M es suficiente?</div>
+</div>
+
+<div class="secbar">🔬 SECCIÓN 4 — EQUIPOS: PANELES Y BOMBAS</div>
+
+<div class="block">
+  <span class="bh azul">Panel FV GYP-180M (Práctica)</span>
+  <div class="def">Panel monocristalino de 180 Wp usado en los experimentos. Sus curvas I-V muestran la relación entre corriente y voltaje para distintos niveles de irradiancia y temperatura.</div>
+  <table class="tbl">
+    <tr><th>Parámetro</th><th>Valor</th></tr>
+    <tr><td>Pmax (STC)</td><td>180 Wp</td></tr>
+    <tr><td>Voc</td><td>43.2 V DC</td></tr>
+    <tr><td>Isc</td><td>5.6 A</td></tr>
+    <tr><td>Imp</td><td>5 A</td></tr>
+    <tr><td>Coef. Temp. Pmax</td><td>−0.44 %/°C</td></tr>
+    <tr><td>NOCT</td><td>47±2°C</td></tr>
+  </table>
+  <div class="item" style="margin-top:6px"><span class="dot b"></span><span>En arreglos en <em>serie</em> los voltajes se suman (corriente igual). En <em>paralelo</em> las corrientes se suman (voltaje igual). El MPP está en la región "casi vertical" de la curva I-V.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh verde">Bomba LORENTZ PS150 HR-07S</span>
+  <div class="def g">Bomba sumergible solar para pozos de 4", diseñada para operar directamente con paneles FV sin baterías. Motor ECDRIVE CC sin escobillas — libre de mantenimiento.</div>
+  <table class="tbl">
+    <tr><th>Parámetro</th><th>Valor</th></tr>
+    <tr><td>Altura máx.</td><td>60 m</td></tr>
+    <tr><td>Flujo máx.</td><td>1.4 m³/h</td></tr>
+    <tr><td>Potencia máx.</td><td>0.30 kW</td></tr>
+    <tr><td>Eficiencia motor</td><td>92%</td></tr>
+    <tr><td>Voltaje Vmp</td><td>&gt;17 V</td></tr>
+    <tr><td>Profundidad inmersión</td><td>250 m</td></tr>
+  </table>
+  <div class="item" style="margin-top:6px"><span class="dot g"></span><span>Incluye MPPT integrado: el controlador ajusta la frecuencia de operación en tiempo real según la irradiancia, maximizando la energía extraída del panel en todo momento.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh gris">Bombas Grundfos SP (sumergibles)</span>
+  <div class="def">Serie SP diseñada para agua dulce limpia sin partículas sólidas. Contenido de arena ≤50 g/m³. Aplicaciones: suministro doméstico, horticultura, agricultura, descenso de nivel freático.</div>
+  <div class="item"><span class="dot t"></span><span>Versiones SP-A-N, SP-A-R, SP-N, SP-R y SPE para líquidos más agresivos que agua potable (mayor resistencia a la corrosión).</span></div>
+  <div class="item"><span class="dot r"></span><span>Un mayor contenido de arena reduce la vida útil y aumenta riesgo de obstrucción. Para aguas con sedimentos, verificar siempre la concentración antes de seleccionar el modelo.</span></div>
+  <div class="warn">⚠️ Las bombas sumergibles requieren siempre estar en el agua para refrigerarse. Operación en seco incluso breve daña irreparablemente el motor. El float switch protege contra esto.</div>
+</div>
+
+<div class="secbar">🧪 SECCIÓN 5 — PROCEDIMIENTO EXPERIMENTAL</div>
+
+<div class="block s3">
+  <span class="bh morado">Experimentos del laboratorio — 5 mediciones clave</span>
+  <div class="three" style="margin-top:8px">
+    <div class="mini bb"><strong>Exp. 1: Curvas I-V del panel</strong><br>Se varía la resistencia de carga y se miden pares (V, I). Se traza la curva I-V para obtener Voc, Isc y el MPP. Se repite para distintas irradiancias. Revela cómo el panel responde a cambios en la carga eléctrica.</div>
+    <div class="mini bg"><strong>Exp. 2: Potencia vs Altura</strong><br>Se fija irradiancia constante y se mide caudal a 4 alturas (4, 8, 12, 16 m). A mayor altura, mayor presión requerida → menor caudal. La bomba opera en su curva H-Q característica.</div>
+    <div class="mini ba"><strong>Exp. 3: Caudal vs Potencia</strong><br>Se fija potencia máxima (al mediodía, I=1 kW/m²) y se mide caudal a distintas alturas. Muestra cuánto puede bombear la bomba a máxima potencia según la CDT del sistema.</div>
+    <div class="mini bt"><strong>Exp. 4: Irradiancia vs Potencia</strong><br>Se varía la irradiancia (200–1000 W/m²) y se mide P = I×V. La relación es casi lineal (más sol → más potencia). Debajo de ~200 W/m² el sistema puede no arrancar.</span></div>
+    <div class="mini bb"><strong>Exp. 5: Irradiancia vs Caudal</strong><br>Combina efectos anteriores: más irradiancia → más potencia → más caudal (si la altura es constante). Esta relación directa es la base del diseño con horas pico solares.</div>
+    <div class="mini bg"><strong>Resultado clave del caso real</strong><br>En Yaurisque (H=10.5 m, I=5 kWh/m²): la bomba teórica requiere 70 W mínimo para arrancar; en campo se midió arranque a ≈70 W. A 170 W bombea hasta 1.4 m³/h. Caudal de campo ≈20-30% superior al teórico por rozamientos reales.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: En el Experimento 2, si la irradiancia permanece constante a 800 W/m² y se dobla la altura de bombeo de 8 m a 16 m, ¿qué sucede con el caudal y con la potencia eléctrica consumida por la bomba? Explique el mecanismo físico.</div>
+</div>
+
+<div class="secbar">⚖️ SECCIÓN 6 — COMPARACIÓN DE TECNOLOGÍAS DE BOMBEO</div>
+
+<div class="block s3">
+  <span class="bh gris">Comparativa: Bomba Manual vs Diésel vs Solar</span>
+  <table class="tbl">
+    <tr>
+      <th>Criterio</th>
+      <th>🖐️ Manual</th>
+      <th>⛽ Diésel</th>
+      <th>☀️ Solar FV</th>
+    </tr>
+    <tr>
+      <td>Inversión inicial</td>
+      <td>Muy baja (más económica)</td>
+      <td>Moderada (54-42-32% vs SBFV)</td>
+      <td>Alta (100% referencia)</td>
+    </tr>
+    <tr>
+      <td>Costos operación/año</td>
+      <td>Muy bajos</td>
+      <td>$1,700–$9,800/año</td>
+      <td>$100–$4,700/año</td>
+    </tr>
+    <tr>
+      <td>Caudal típico</td>
+      <td>Bajo (consumo humano)</td>
+      <td>Cualquier potencia/caudal</td>
+      <td>Mediano (poblados, riego)</td>
+    </tr>
+    <tr>
+      <td>Vida útil</td>
+      <td>Variable</td>
+      <td>Depende mantenimiento</td>
+      <td>~20 años sin baterías</td>
+    </tr>
+    <tr>
+      <td>Contaminación</td>
+      <td>Ninguna</td>
+      <td>CO₂, ruido, polución</td>
+      <td>Ninguna (operación)</td>
+    </tr>
+    <tr>
+      <td>Autonomía</td>
+      <td>Requiere operador</td>
+      <td>Necesita combustible</td>
+      <td>Opera sin supervisión</td>
+    </tr>
+    <tr>
+      <td>Amortización Perú</td>
+      <td>Inmediata</td>
+      <td>Nunca (costos continuos)</td>
+      <td>~6 años en buen sitio</td>
+    </tr>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ DATO CLAVE: En Perú, con la excelente radiación solar y los precios actuales del diésel, el tiempo de amortización de un SBFV puede ser de solo 6 años, con una vida útil del sistema de más de 20 años. La ecuación económica favorece claramente la opción solar en zonas aisladas.</div>
+</div>
+
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta · Cubre todo el material de la práctica</p>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:12px;color:var(--color-text-secondary)">
+    <span id="prog-text">Respondidas: 0 / 10 · Correctas: 0</span>
+    <span id="score-text">0%</span>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la principal ventaja del sistema de bombeo fotovoltaico frente a otras tecnologías de bombeo en zonas rurales aisladas?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Tiene el menor costo inicial de inversión entre todas las opciones.</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) Puede operar de noche con la misma eficiencia que de día.</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) Generalmente no requiere batería, almacenando energía como agua elevada en un depósito.</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Puede bombear cualquier caudal independientemente de la irradiancia solar.</button>
+    </div>
+    <div class="qfeedback" id="fb1" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">La carga dinámica total (CDT) de un sistema de bombeo se calcula como:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) Solo la distancia vertical entre el pozo y el depósito de almacenamiento.</button>
+      <button class="qbtn" data-q="2" data-correct="true">B) Altura vertical total + pérdidas de carga por fricción + presión del tanque.</button>
+      <button class="qbtn" data-q="2" data-correct="false">C) El nivel estático del pozo multiplicado por el caudal requerido.</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) La diferencia entre el nivel dinámico y el nivel estático del pozo.</button>
+    </div>
+    <div class="qfeedback" id="fb2" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">En el caso experimental de Yaurisque (CECADE, Cusco), con un panel de 0.18 kWp, irradiancia de 5 kWh/m² y eficiencia del sistema de 30%, la capacidad de bombeo calculada fue:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) 5.0 m³/día — exactamente lo requerido sin margen.</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) 3.2 m³/día — insuficiente para la demanda.</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) 9.4 m³/día — con margen superior a la demanda de 5 m³/día.</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) 15.0 m³/día — muy por encima de cualquier demanda posible.</button>
+    </div>
+    <div class="qfeedback" id="fb3" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el nivel dinámico de un pozo es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Es la distancia entre la boca del pozo y la superficie del agua cuando la bomba está operando.</button>
+      <button class="qbtn" data-q="4" data-correct="true">B) El nivel dinámico siempre es igual al nivel estático porque el caudal del acuífero repone instantáneamente el agua extraída.</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) La diferencia entre nivel dinámico y estático se denomina "abatimiento" o drawdown.</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Para el diseño se debe usar el nivel dinámico, no el estático.</button>
+    </div>
+    <div class="qfeedback" id="fb4" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">En un arreglo fotovoltaico donde se conectan módulos en SERIE, ¿qué magnitud eléctrica aumenta?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) La corriente del arreglo aumenta proporcionalmente al número de módulos.</button>
+      <button class="qbtn" data-q="5" data-correct="true">B) El voltaje del arreglo aumenta, mientras la corriente permanece igual al de un módulo individual.</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) Tanto voltaje como corriente aumentan en la misma proporción.</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) La potencia máxima disminuye porque los módulos se cargan mutuamente.</button>
+    </div>
+    <div class="qfeedback" id="fb5" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Según las recomendaciones de la OMS para zonas rurales, ¿cuál es el consumo mínimo de agua por persona al día considerando bebida, higiene personal y usos sanitarios?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) 10 L/persona·día.</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) 20 L/persona·día.</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) 40 L/persona·día (valores prácticos en muchos países: 25-30 L/persona·día).</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) 100 L/persona·día — igual que en zonas urbanas con red domiciliaria.</button>
+    </div>
+    <div class="qfeedback" id="fb6" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">La bomba LORENTZ PS150 HR-07S incluye un sistema MPPT integrado en su controlador. ¿Qué función cumple el MPPT en un sistema de bombeo fotovoltaico?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Protege el motor contra sobrecalentamiento cuando la irradiancia es muy alta.</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) Almacena energía en una batería interna durante las horas de mayor irradiancia.</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) Ajusta continuamente la frecuencia de operación de la bomba para maximizar la transferencia de potencia del panel solar al motor.</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Convierte la corriente alterna del panel en corriente continua para el motor.</button>
+    </div>
+    <div class="qfeedback" id="fb7" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Cuál es el tiempo de amortización estimado de un sistema de bombeo fotovoltaico en Perú, en un sitio de buena radiación y considerando los precios actuales del diésel?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="true">A) Aproximadamente 6 años, con una vida útil del sistema que supera los 20 años.</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Más de 25 años, lo que lo hace económicamente inviable frente al diésel.</button>
+      <button class="qbtn" data-q="8" data-correct="false">C) El sistema nunca se amortiza porque el costo inicial es siempre mayor que los ahorros.</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) 2 años en todos los casos, sin importar el tamaño del sistema.</button>
+    </div>
+    <div class="qfeedback" id="fb8" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">Si se asume que el tanque de almacenamiento está a menos de 10 metros del pozo y se usó la tubería recomendada, ¿qué valor se utiliza como estimación simplificada de las pérdidas de carga?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Se ignoran completamente — son despreciables en sistemas pequeños.</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) 10% de la altura vertical total.</button>
+      <button class="qbtn" data-q="9" data-correct="true">C) 5% de la altura vertical total, como simplificación válida para ese caso.</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Se suma 1 metro adicional fijo independientemente del sistema.</button>
+    </div>
+    <div class="qfeedback" id="fb9" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">En el experimento de la práctica (bomba Lorentz PS150 en Yaurisque), la curva de datos muestra que para bombear a H=10 m el sistema arranca cuando la potencia supera aproximadamente 70 W. ¿Qué implicación práctica de diseño tiene este dato?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) Ninguna — las primeras y últimas horas del día no afectan el volumen total bombeado.</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) El panel debe dimensionarse solo para la irradiancia máxima del mediodía.</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) Las primeras horas de la mañana y últimas de la tarde pueden no activar la bomba; el volumen real bombeado es menor que el calculado con irradiancia pico constante.</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) Se debe instalar una batería obligatoriamente para cubrir esas horas de baja irradiancia.</button>
+    </div>
+    <div class="qfeedback" id="fb10" style="display:none"></div>
+  </div>
+
+  <div id="results-panel">
+    <h3 id="results-title"></h3>
+    <p id="results-msg" style="font-size:12px;margin-top:4px"></p>
+    <button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">CECADE — Práctica 8: Sistema de Bombeo de Agua FV · Yaurisque, Cusco, Perú</span>
+  <span class="fc">Lorentz PS150 HR-07S Datasheet · Grundfos SP Series Manual</span>
+  <span class="fc">Posorski & Haars (GTZ/IRE) — Rentabilidad SBFV · OMS — Guías agua rural</span>
+  <span class="fc">Solar Water Pump Design Guide (togosolar.com) · SENAMHI — Mapas radiación solar Perú</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1:{correct:"✅ ¡Correcto! La clave del SBFV es almacenar energía como agua en un depósito elevado, no como electricidad en baterías. Esto elimina el componente más costoso y de menor vida útil: la batería.",incorrect:"❌ Incorrecto. La respuesta correcta es C. El SBFV no tiene el menor costo inicial (lo tiene la bomba manual), ni opera de noche directamente. Su ventaja es no necesitar batería al almacenar agua elevada."},
+  2:{correct:"✅ ¡Correcto! CDT = Altura Vertical Total + Pérdidas de Carga + Presión Tanque. La presión de tanque suele ser cero (tanques abiertos). Las pérdidas de carga representan ~5% de la altura vertical si el tanque está cerca.",incorrect:"❌ Incorrecto. La respuesta correcta es B. El nivel estático solo es uno de los componentes de la altura vertical total, que a su vez es solo uno de los tres sumandos de la CDT. El abatimiento (D) forma parte de la altura vertical, no es la CDT."},
+  3:{correct:"✅ ¡Correcto! Usando H·Vb = 367·E·Pp·η = 367×5×0.18×0.30 = 99.1 m⁴. Para H=10.5 m → Vb = 99.1/10.5 = 9.4 m³/día. Esto supera los 5 m³/día requeridos, con margen del 88%.",incorrect:"❌ Incorrecto. La respuesta correcta es C. La fórmula H·Vb = 367·E·Pp·η da 99.1 m⁴. Dividiendo entre H=10.5 m se obtienen 9.4 m³/día, casi el doble de la demanda, lo que proporciona margen de seguridad."},
+  4:{correct:"✅ ¡Correcto! La afirmación B es falsa. El nivel dinámico SIEMPRE es mayor que el estático porque al bombear se crea una depresión local en el acuífero. Esa diferencia es el abatimiento. Ningún acuífero repone instantáneamente.",incorrect:"❌ Incorrecto. La respuesta correcta es B. Los acuíferos no reponen el agua instantáneamente. Al bombear, el nivel del agua desciende (abatimiento/drawdown). Por eso el nivel dinámico > nivel estático, y el diseño debe usar el dinámico."},
+  5:{correct:"✅ ¡Correcto! En arreglos serie: V_total = n × V_módulo, mientras I = I_módulo (constante). En arreglos paralelo: I_total = n × I_módulo, mientras V = V_módulo. Elegir serie o paralelo depende del voltaje requerido por la bomba.",incorrect:"❌ Incorrecto. La respuesta correcta es B. En serie, los voltajes se suman (como baterías en serie) y la corriente es la misma. En paralelo ocurre lo contrario: las corrientes se suman y el voltaje es igual al de un módulo."},
+  6:{correct:"✅ ¡Correcto! La OMS establece 40 L/persona·día como mínimo para bebida, higiene personal y sanitarios en zonas rurales. En la práctica, países en desarrollo usan 25-30 L/persona·día como valor de diseño.",incorrect:"❌ Incorrecto. La respuesta correcta es C. La OMS recomienda 40 L/persona·día. El valor de 284 L/persona de la Tabla 1 incluye todos los usos (agrícola, limpieza, etc.) y es muy superior. Para diseño básico rural se usan 25-40 L."},
+  7:{correct:"✅ ¡Correcto! MPPT (Maximum Power Point Tracking) rastrea continuamente el punto de operación que maximiza la potencia extraída del panel. En un SBFV esto se traduce en ajustar la velocidad de la bomba según la irradiancia disponible.",incorrect:"❌ Incorrecto. La respuesta correcta es C. El MPPT no protege contra sobrecalentamiento (eso lo hace la protección térmica) ni almacena energía (no hay batería interna). Los paneles FV generan DC, no AC. El MPPT optimiza la extracción de potencia."},
+  8:{correct:"✅ ¡Correcto! En Perú, con su excelente radiación solar y los precios del diésel, el período de amortización es de aproximadamente 6 años. Como el sistema dura más de 20 años, hay más de 14 años de operación sin costos de combustible.",incorrect:"❌ Incorrecto. La respuesta correcta es A. El documento indica explícitamente que en sitios de buena radiación y con precios actuales del diésel, el tiempo de amortización puede ser de 6 años con vida útil >20 años. Es una opción económicamente viable."},
+  9:{correct:"✅ ¡Correcto! Cuando el tanque está a ≤10 m del pozo y se usa la tubería recomendada, se puede asumir Hd = 5% × Altura Vertical Total como simplificación. Para el caso Yaurisque: Hs=10 m → Hd=0.5 m → H total=10.5 m.",incorrect:"❌ Incorrecto. La respuesta correcta es C. Las pérdidas no se ignoran (pueden ser significativas con tuberías largas) ni son 10% siempre. La simplificación del 5% solo aplica cuando el tanque está cerca (≤10 m) y la tubería es la recomendada."},
+  10:{correct:"✅ ¡Correcto! Este efecto de 'potencia mínima de arranque' es crítico en el diseño. Si la bomba necesita 70 W para arrancar, en las primeras 1-2 horas del día y las últimas, aunque haya sol, la bomba no bombea. El caudal diario real es menor que el calculado asumiendo irradiancia constante durante todas las horas pico.",incorrect:"❌ Incorrecto. La respuesta correcta es C. Las horas marginales SÍ importan para el volumen total. La solución correcta es diseñar con margen (se recomienda 20% extra) o usar variadores de frecuencia que permiten operar a baja velocidad incluso con poca irradiancia."}
+};
+
+let respondidas = 0;
+let correctas = 0;
+
+document.querySelector('.cv').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const card = document.getElementById('q'+q);
+  const allBtns = card.querySelectorAll('.qbtn');
+  
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true'){
+      b.classList.add('correct');
+      b.textContent = '✅ ' + b.textContent;
+    }
+  });
+  
+  if(!isCorrect){
+    btn.classList.add('incorrect');
+  }
+  
+  const fb = document.getElementById('fb'+q);
+  fb.style.display = 'block';
+  fb.className = 'qfeedback ' + (isCorrect ? 'ok' : 'no');
+  fb.innerHTML = feedbacks[q][isCorrect ? 'correct' : 'incorrect'];
+  
+  respondidas++;
+  if(isCorrect) correctas++;
+  
+  const pct = Math.round((correctas/respondidas)*100);
+  document.getElementById('prog-text').textContent = 'Respondidas: '+respondidas+' / 10 · Correctas: '+correctas;
+  document.getElementById('score-text').textContent = pct+'%';
+  document.getElementById('prog-fill').style.width = (respondidas/10*100)+'%';
+  
+  if(respondidas === 10){
+    const panel = document.getElementById('results-panel');
+    panel.style.display = 'block';
+    document.getElementById('results-title').textContent = correctas + ' / 10 correctas';
+    let msg, bg;
+    if(correctas <= 4){ msg='Necesitas repasar el material con más detalle.'; bg='#fee2e2'; }
+    else if(correctas <= 7){ msg='¡Buen avance! Refuerza los temas de diseño y cálculo.'; bg='#fef9c3'; }
+    else { msg='¡Excelente dominio del tema de bombeo fotovoltaico!'; bg='#dcfce7'; }
+    document.getElementById('results-msg').textContent = msg;
+    panel.style.background = bg;
+  }
+});
+
+function resetQuiz(){
+  respondidas = 0; correctas = 0;
+  for(let i=1;i<=10;i++){
+    const card = document.getElementById('q'+i);
+    card.querySelectorAll('.qbtn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('correct','incorrect');
+      b.textContent = b.textContent.replace(/^[✅❌] /,'');
+    });
+    const fb = document.getElementById('fb'+i);
+    fb.style.display='none';
+    fb.textContent='';
+  }
+  document.getElementById('prog-text').textContent='Respondidas: 0 / 10 · Correctas: 0';
+  document.getElementById('score-text').textContent='0%';
+  document.getElementById('prog-fill').style.width='0%';
+  document.getElementById('results-panel').style.display='none';
+}
+</script>

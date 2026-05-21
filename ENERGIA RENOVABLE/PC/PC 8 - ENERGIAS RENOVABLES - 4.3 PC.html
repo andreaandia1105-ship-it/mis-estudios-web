@@ -1,0 +1,614 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0}
+.top-tabs{display:flex;gap:8px;margin-bottom:1.5rem}
+.top-tab{padding:10px 22px;border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;font-size:14px;font-weight:500;transition:all .2s;display:flex;align-items:center;gap:7px}
+.top-tab.active{background:var(--color-background-primary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.top-tab i{font-size:17px}
+.view{display:none}.view.active{display:block}
+.hero{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:14px}
+.hero-icon{font-size:32px;line-height:1;flex-shrink:0;color:var(--color-text-warning)}
+.hero h2{font-size:16px;font-weight:500;margin-bottom:4px}
+.hero p{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.steps-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.5rem}
+.step-btn{padding:7px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;font-size:12px;font-weight:500;transition:all .2s;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.step-btn.active{border-color:var(--color-border-info);background:var(--color-background-info);color:var(--color-text-info)}
+.step-btn i{font-size:14px}
+.step-content{display:none}.step-content.active{display:block}
+.section-title{font-size:15px;font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-title i{font-size:18px;color:var(--color-text-warning)}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:1rem}
+.info-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.1rem}
+.info-card .label{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em}
+.info-card .val{font-size:22px;font-weight:500;line-height:1.1}
+.info-card .sub{font-size:12px;color:var(--color-text-secondary);margin-top:3px}
+.info-card.accent{border-top:2px solid var(--color-border-warning)}
+.formula-box{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px 14px;margin-bottom:12px;font-family:var(--font-mono);font-size:12px;line-height:1.7;color:var(--color-text-primary)}
+.formula-box .f-title{font-family:var(--font-sans);font-size:11px;color:var(--color-text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.formula-box .f-result{font-size:14px;font-weight:500;color:var(--color-text-success);margin-top:6px}
+.step-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:1rem}
+.step-table th{background:var(--color-background-secondary);padding:7px 10px;text-align:left;border-bottom:0.5px solid var(--color-border-tertiary);font-weight:500;font-size:11px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.03em}
+.step-table td{padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);vertical-align:top}
+.step-table tr:last-child td{border-bottom:none}
+.step-table .mono{font-family:var(--font-mono);font-size:11px}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
+.badge-warn{background:var(--color-background-warning);color:var(--color-text-warning)}
+.badge-info{background:var(--color-background-info);color:var(--color-text-info)}
+.badge-success{background:var(--color-background-success);color:var(--color-text-success)}
+.badge-danger{background:var(--color-background-danger);color:var(--color-text-danger)}
+.note-box{border-radius:var(--border-radius-md);padding:10px 13px;font-size:12px;line-height:1.6;margin-bottom:12px;border:none;border-left:3px solid transparent}
+.note-warn{background:var(--color-background-warning);color:var(--color-text-warning);border-left-color:var(--color-border-warning)}
+.note-info{background:var(--color-background-info);color:var(--color-text-info);border-left-color:var(--color-border-info)}
+.note-success{background:var(--color-background-success);color:var(--color-text-success);border-left-color:var(--color-border-success)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.flow-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.flow-box{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:7px 12px;font-size:12px;font-weight:500}
+.flow-arrow{color:var(--color-text-secondary);font-size:16px}
+.sheet-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:1rem}
+.sheet-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:10px 12px;cursor:pointer;transition:all .2s}
+.sheet-card:hover{border-color:var(--color-border-secondary)}
+.sheet-card .sn{font-size:11px;color:var(--color-text-secondary);margin-bottom:2px}
+.sheet-card .st{font-size:13px;font-weight:500}
+.sheet-card i{font-size:20px;color:var(--color-text-warning);margin-bottom:6px;display:block}
+.big-number{font-size:28px;font-weight:500;line-height:1}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:14px 0}
+.client-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:12px}
+.client-card h3{font-size:15px;font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.client-card h3 i{color:var(--color-text-success);font-size:18px}
+.client-card p{font-size:13px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:8px}
+.visual-system{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin:1rem 0;padding:1rem;background:var(--color-background-secondary);border-radius:var(--border-radius-lg)}
+.sys-box{text-align:center;padding:10px 14px;background:var(--color-background-primary);border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);min-width:80px}
+.sys-box i{font-size:26px;color:var(--color-text-warning);display:block;margin-bottom:4px}
+.sys-box span{font-size:11px;color:var(--color-text-secondary)}
+.sys-arrow{font-size:20px;color:var(--color-text-secondary);padding:0 4px}
+.faq-item{margin-bottom:8px}
+.faq-q{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s;border:0.5px solid var(--color-border-tertiary)}
+.faq-a{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-top:none;border-radius:0 0 var(--border-radius-md) var(--border-radius-md);padding:10px 14px;font-size:12px;color:var(--color-text-secondary);line-height:1.7;display:none}
+.faq-a.open{display:block}
+.cost-bar{margin-bottom:8px}
+.cost-bar .cb-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
+.cost-bar .cb-track{height:10px;background:var(--color-background-secondary);border-radius:20px;overflow:hidden}
+.cost-bar .cb-fill{height:100%;border-radius:20px;transition:width .4s}
+.panel-compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.panel-opt{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:12px;text-align:center}
+.panel-opt.best{border-color:var(--color-border-success);border-width:1.5px}
+.panel-opt .pw{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.panel-opt .pp{font-size:13px;font-weight:500;color:var(--color-text-success)}
+.panel-opt .pn{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.nav-btns{display:flex;justify-content:space-between;margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--color-border-tertiary)}
+.nav-btn{padding:8px 16px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;transition:all .2s}
+.nav-btn:hover{background:var(--color-background-primary);color:var(--color-text-primary)}
+.nav-btn:disabled{opacity:.3;cursor:default}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">Guía interactiva del sistema fotovoltaico: vista para ingeniero y para cliente</h2>
+
+<div class="top-tabs">
+  <button class="top-tab active" onclick="switchView('eng')"><i class="ti ti-tools" aria-hidden="true"></i> Vista Ingeniero</button>
+  <button class="top-tab" onclick="switchView('cli')"><i class="ti ti-user" aria-hidden="true"></i> Vista Cliente</button>
+</div>
+
+<!-- ====== ENGINEER VIEW ====== -->
+<div class="view active" id="view-eng">
+  <div class="hero">
+    <i class="ti ti-solar-panel" aria-hidden="true"></i>
+    <div>
+      <h2>Hoja de cálculo SFV — Dimensionado para vivienda rural</h2>
+      <p>Ejemplo base: <strong>Abancay, Apurímac</strong> · 13.76°S, 72.98°O · Irradiación peor mes: <strong>4.56 kWh/m²/día</strong> · T° ambiente: 16°C. El archivo tiene 7 hojas. Navega cada paso para entender qué calcular, cómo modificarlo y qué significa cada celda.</p>
+    </div>
+  </div>
+
+  <div class="steps-nav" id="eng-nav">
+    <button class="step-btn active" onclick="showStep('map')"><i class="ti ti-map" aria-hidden="true"></i>Mapa del archivo</button>
+    <button class="step-btn" onclick="showStep('consumo')"><i class="ti ti-plug" aria-hidden="true"></i>I–II · Consumo</button>
+    <button class="step-btn" onclick="showStep('solar')"><i class="ti ti-sun" aria-hidden="true"></i>III · Irradiación</button>
+    <button class="step-btn" onclick="showStep('paneles')"><i class="ti ti-solar-panel-2" aria-hidden="true"></i>IV–V · Paneles</button>
+    <button class="step-btn" onclick="showStep('baterias')"><i class="ti ti-battery" aria-hidden="true"></i>VI · Baterías</button>
+    <button class="step-btn" onclick="showStep('control')"><i class="ti ti-circuit-switch" aria-hidden="true"></i>VII–VIII · Regulador/Inv.</button>
+    <button class="step-btn" onclick="showStep('costos')"><i class="ti ti-cash" aria-hidden="true"></i>IX · Costos</button>
+  </div>
+
+  <!-- MAPA -->
+  <div class="step-content active" id="step-map">
+    <div class="section-title"><i class="ti ti-map-2" aria-hidden="true"></i>Estructura del archivo Excel (7 hojas)</div>
+    <div class="sheet-map">
+      <div class="sheet-card" onclick="showStep('consumo')">
+        <i class="ti ti-calculator" aria-hidden="true"></i>
+        <div class="sn">Hoja principal</div>
+        <div class="st">Dimencionado</div>
+        <p style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Todos los cálculos de principio a fin. El corazón del archivo.</p>
+      </div>
+      <div class="sheet-card" onclick="showStep('consumo')">
+        <i class="ti ti-bolt" aria-hidden="true"></i>
+        <div class="sn">Hoja auxiliar</div>
+        <div class="st">Equipos CC</div>
+        <p style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Detalle de consumo por día para equipos de corriente continua (12V/24V).</p>
+      </div>
+      <div class="sheet-card" onclick="showStep('consumo')">
+        <i class="ti ti-plug" aria-hidden="true"></i>
+        <div class="sn">Hoja auxiliar</div>
+        <div class="st">Equipo CA</div>
+        <p style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Detalle de consumo horario por día para equipos de 220V.</p>
+      </div>
+      <div class="sheet-card" onclick="showStep('paneles')">
+        <i class="ti ti-solar-panel-2" aria-hidden="true"></i>
+        <div class="sn">Catálogo</div>
+        <div class="st">Módulos FV</div>
+        <p style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Ingresa alternativas de paneles con potencia y precio para comparar.</p>
+      </div>
+      <div class="sheet-card" onclick="showStep('baterias')">
+        <i class="ti ti-battery-charging" aria-hidden="true"></i>
+        <div class="sn">Catálogo</div>
+        <div class="st">Baterias</div>
+        <p style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Cálculo y comparación de baterías según temperatura y capacidad.</p>
+      </div>
+      <div class="sheet-card" onclick="showStep('costos')">
+        <i class="ti ti-receipt" aria-hidden="true"></i>
+        <div class="sn">Presupuesto</div>
+        <div class="st">Costos</div>
+        <p style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Resumen de costos de equipos, instalación y transporte.</p>
+      </div>
+      <div class="sheet-card" onclick="showStep('control')">
+        <i class="ti ti-adjustments" aria-hidden="true"></i>
+        <div class="sn">Equipos</div>
+        <div class="st">Regulador e inversor</div>
+        <p style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Selección de regulador de carga e inversor para cargas CA.</p>
+      </div>
+    </div>
+    <div class="note-info">
+      <strong>Flujo de trabajo:</strong> Llena siempre las hojas auxiliares (Equipos CC, Equipo CA) primero. El resultado de consumo total se usa en la hoja <em>Dimencionado</em> como dato de entrada para todos los cálculos posteriores.
+    </div>
+    <div class="section-title" style="margin-top:1rem"><i class="ti ti-arrow-right" aria-hidden="true"></i>Secuencia de cálculo</div>
+    <div class="flow-row">
+      <div class="flow-box">Cargas diarias<br><span style="font-size:10px;color:var(--color-text-secondary)">Wh/día</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Recurso solar<br><span style="font-size:10px;color:var(--color-text-secondary)">HPS</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">N° paneles<br><span style="font-size:10px;color:var(--color-text-secondary)">Np</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">N° baterías<br><span style="font-size:10px;color:var(--color-text-secondary)">Nb</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Regulador<br><span style="font-size:10px;color:var(--color-text-secondary)">Imax</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Inversor<br><span style="font-size:10px;color:var(--color-text-secondary)">Pac</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box" style="border-color:var(--color-border-success)">Costos<br><span style="font-size:10px;color:var(--color-text-success)">US$</span></div>
+    </div>
+  </div>
+
+  <!-- CONSUMO -->
+  <div class="step-content" id="step-consumo">
+    <div class="section-title"><i class="ti ti-plug" aria-hidden="true"></i>Paso I–II · Datos generales y consumo diario</div>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="label">Ubicación del ejemplo</div>
+        <div class="val" style="font-size:16px">Abancay, Apurímac</div>
+        <div class="sub">13.76°S · 72.98°O · 16°C</div>
+      </div>
+      <div class="info-card accent">
+        <div class="label">Energía requerida total (ER)</div>
+        <div class="val big-number">513.8 <span style="font-size:14px">Wh/día</span></div>
+        <div class="sub">Incluye corrección por inversor (87%)</div>
+      </div>
+    </div>
+    <div class="section-title" style="font-size:13px;margin-top:4px"><i class="ti ti-table" aria-hidden="true"></i>Equipos del ejemplo (hojas Equipo CA y Equipos CC)</div>
+    <table class="step-table">
+      <thead><tr><th>#</th><th>Equipo</th><th>Cant.</th><th>Potencia (W)</th><th>Horas/día</th><th>Energía (Wh/día)</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Cargador celular</td><td>1</td><td class="mono">3.5</td><td>2</td><td><span class="badge badge-info">7</span></td></tr>
+        <tr><td>2</td><td>Laptop</td><td>1</td><td class="mono">65</td><td>2</td><td><span class="badge badge-info">130</span></td></tr>
+        <tr><td>3</td><td>Focos LED</td><td>5</td><td class="mono">10</td><td>5</td><td><span class="badge badge-warn">250</span></td></tr>
+        <tr><td>4</td><td>Módem wifi</td><td>1</td><td class="mono">30</td><td>2</td><td><span class="badge badge-info">60</span></td></tr>
+        <tr style="font-weight:500"><td colspan="4"></td><td>Potencia CA: 108.5 W</td><td><span class="badge badge-warn">447 Wh/día</span></td></tr>
+      </tbody>
+    </table>
+    <div class="formula-box">
+      <div class="f-title">Corrección por eficiencia del inversor (87%)</div>
+      Eac_corr = 447 ÷ 0.87 = 513.79 Wh/día
+      <div class="f-title" style="margin-top:8px">Energía demandada al SFV (EDsfv) — dividir entre efic. regulador 95%</div>
+      EDsfv = 513.79 ÷ 0.95 = <span class="f-result">540.83 Wh/día ← dato clave para siguientes pasos</span>
+    </div>
+    <div class="note-warn">
+      <strong>Celda a modificar:</strong> En la hoja <em>Dimencionado</em>, sección II, cambia los equipos (cantidad, potencia, horas de uso). También puedes detallarlos por día de semana en las hojas auxiliares <em>Equipo CA</em> y <em>Equipos CC</em>. El EDsfv se recalcula automáticamente.
+    </div>
+    <div class="note-info">
+      <strong>¿Tienes equipos en CC (12V o 24V)?</strong> Úsalos directamente desde la batería vía la hoja <em>Equipos CC</em>. No pasan por el inversor, así que no tienen la penalización del 87%. Son más eficientes en sistemas fotovoltaicos.
+    </div>
+  </div>
+
+  <!-- SOLAR -->
+  <div class="step-content" id="step-solar">
+    <div class="section-title"><i class="ti ti-sun" aria-hidden="true"></i>Paso III · Irradiación solar y Hora Pico Solar (HPS)</div>
+    <div class="three-col">
+      <div class="info-card">
+        <div class="label">Irradiación (mes peor)</div>
+        <div class="val">4.56 <span style="font-size:13px">kWh/m²/día</span></div>
+        <div class="sub">De tabla o atlas solar del SENAMHI</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Factor k (inclinación)</div>
+        <div class="val">0.83</div>
+        <div class="sub">Ángulo óptimo: lat + 10° = 23.76° ≈ 25°</div>
+      </div>
+      <div class="info-card accent">
+        <div class="label">HPS resultante</div>
+        <div class="val">3.78 <span style="font-size:13px">h/día</span></div>
+        <div class="sub">Ei = 4.56 × 0.83 = 3.78 kWh/m²</div>
+      </div>
+    </div>
+    <div class="formula-box">
+      <div class="f-title">Energía Incidente sobre el panel</div>
+      Ei = Irradiación × k = 4.56 × 0.83 = 3.785 kWh/m²/día
+      <br>
+      <div class="f-title" style="margin-top:8px">Hora Pico Solar (HPS) — horas equivalentes de sol pleno</div>
+      HPS = Ei ÷ 1 kW/m² = 3.785 h/día
+      <div class="f-result">HPS = 3.78 h — el panel de 150W equivale a 3.78 horas de producción máxima</div>
+    </div>
+    <div class="note-info">
+      <strong>¿Cómo cambio la ubicación?</strong> Modifica el valor de irradiación (celda de "mes peor" en sección I) usando el Atlas Solar del SENAMHI o la base de datos NASA POWER (power.larc.nasa.gov). Usa siempre el mes de menor irradiación para garantizar que el sistema funcione todo el año.
+    </div>
+    <div class="note-warn">
+      <strong>Factor k (corrección por ángulo):</strong> Si instalas el panel en posición horizontal (k=1.00), el cálculo es optimista. Siempre inclines el panel al ángulo óptimo (latitud + 10°) para maximizar captación en invierno, que es el mes peor en el hemisferio sur.
+    </div>
+    <table class="step-table">
+      <thead><tr><th>Latitud</th><th>Ángulo óptimo</th><th>Factor k típico</th></tr></thead>
+      <tbody>
+        <tr><td>0–10°S (selva)</td><td>10–20°</td><td>~0.95</td></tr>
+        <tr><td>10–15°S (sierra norte)</td><td>20–25°</td><td>~0.88</td></tr>
+        <tr><td>13.76°S (Abancay)</td><td>23.76° ≈ 25°</td><td><strong>0.83</strong></td></tr>
+        <tr><td>16–18°S (Puno, Arequipa)</td><td>26–28°</td><td>~0.80</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PANELES -->
+  <div class="step-content" id="step-paneles">
+    <div class="section-title"><i class="ti ti-solar-panel-2" aria-hidden="true"></i>Paso IV–V · Cálculo y selección de paneles</div>
+    <div class="formula-box">
+      <div class="f-title">Energía producida por panel (Epp) — corregida por eficiencia</div>
+      Epp = EDsfv ÷ Efic.panel = 540.83 ÷ 0.75 = 721.11 Wh
+      <div class="f-title" style="margin-top:8px">Número de paneles (Np)</div>
+      Np = Epp ÷ (Pp × HPS) = 721.11 ÷ (150 W × 3.78 h) = 1.27
+      <div class="f-result">Np = 2 paneles (redondear siempre al entero superior)</div>
+    </div>
+    <div class="section-title" style="font-size:13px"><i class="ti ti-list-check" aria-hidden="true"></i>Comparativo de paneles disponibles (hoja "Módulos FV")</div>
+    <div class="panel-compare">
+      <div class="panel-opt"><div class="pw">85 W</div><div class="pn">BP Solar 85W</div><div style="font-size:11px;margin-top:4px;color:var(--color-text-secondary)">3 paneles</div><div class="pp">US$ 1,182</div></div>
+      <div class="panel-opt"><div class="pw">80 W</div><div class="pn">Kyocera KC80</div><div style="font-size:11px;margin-top:4px;color:var(--color-text-secondary)">3 paneles</div><div class="pp">US$ 837</div></div>
+      <div class="panel-opt"><div class="pw">80 W</div><div class="pn">JC Solar JCSM-80D</div><div style="font-size:11px;margin-top:4px;color:var(--color-text-secondary)">3 paneles</div><div class="pp">US$ 1,104</div></div>
+      <div class="panel-opt"><div class="pw">75 W</div><div class="pn">BP Solar 75W</div><div style="font-size:11px;margin-top:4px;color:var(--color-text-secondary)">3 paneles</div><div class="pp">US$ 1,497</div></div>
+      <div class="panel-opt best"><div class="pw">150 W</div><div class="pn">Techno Sun 150W</div><div style="font-size:11px;margin-top:4px;color:var(--color-text-success)"><strong>✓ Opción elegida</strong></div><div class="pp">US$ 708</div><div style="font-size:10px;color:var(--color-text-secondary)">2 paneles × $354</div></div>
+    </div>
+    <div class="note-info">
+      <strong>¿Cómo agrego opciones de paneles?</strong> En la hoja <em>Módulos FV</em>, ingresa tipo, potencia (Wp) y costo (US$). El Np se recalcula automáticamente para cada alternativa. Elige la de menor costo total (Np × precio unitario) que cumpla con la potencia requerida.
+    </div>
+    <div class="note-warn">
+      <strong>Eficiencia del panel (75%):</strong> Este factor contempla pérdidas por temperatura, suciedad, sombras parciales y degradación. Para paneles premium puedes usar hasta 80%. No uses 100%.
+    </div>
+    <table class="step-table">
+      <thead><tr><th>Parámetro del panel</th><th>Valor del ejemplo</th><th>¿Dónde ajustar?</th></tr></thead>
+      <tbody>
+        <tr><td>Potencia pico (Ppico)</td><td class="mono">150 Wp</td><td>Sección IV / ficha técnica del panel</td></tr>
+        <tr><td>Voltaje nominal (Vnom)</td><td class="mono">18.99 V</td><td>Sección IV (define el banco de baterías)</td></tr>
+        <tr><td>Voltaje pico (Vpico)</td><td class="mono">22.42 V</td><td>Sección VII (cálculo del regulador)</td></tr>
+        <tr><td>Eficiencia del panel (%)</td><td class="mono">75%</td><td>Sección IV — conservador y recomendable</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BATERÍAS -->
+  <div class="step-content" id="step-baterias">
+    <div class="section-title"><i class="ti ti-battery-charging" aria-hidden="true"></i>Paso VI · Dimensionado del banco de baterías</div>
+    <div class="three-col">
+      <div class="info-card">
+        <div class="label">Autonomía (AUT)</div>
+        <div class="val">3 <span style="font-size:13px">días</span></div>
+        <div class="sub">Días sin sol — máx. 3 días recomendados</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Descarga máxima</div>
+        <div class="val">60%</div>
+        <div class="sub">Para baterías fotovoltaicas (no >50% en automotivas)</div>
+      </div>
+      <div class="info-card accent">
+        <div class="label">N° baterías necesarias</div>
+        <div class="val big-number">3 <span style="font-size:14px">unid.</span></div>
+        <div class="sub">110 Ah · 12V · η=90%</div>
+      </div>
+    </div>
+    <div class="formula-box">
+      <div class="f-title">Capacidad total del banco (Wh)</div>
+      Potencia = (AUT × EDsfv) ÷ (Rend × Descarga)
+      Potencia = (3 × 540.83) ÷ (0.90 × 0.60) = 3,004.6 Wh
+      <div class="f-title" style="margin-top:8px">Corrección por temperatura ambiente (T=16°C → factor=1.11)</div>
+      Potencia_corr = 3,004.6 × 1.11 = <span class="f-result">3,335.1 Wh</span>
+      <div class="f-title" style="margin-top:8px">Número de baterías</div>
+      Nb = 3,335.1 ÷ (110 Ah × 12 V) = 2.53 → <span class="f-result">3 baterías (siempre redondear arriba)</span>
+    </div>
+    <div class="section-title" style="font-size:13px"><i class="ti ti-thermometer" aria-hidden="true"></i>Factor de corrección por temperatura (hoja Baterías)</div>
+    <table class="step-table">
+      <thead><tr><th>T° ambiente</th><th>Factor corrección</th><th>Efecto</th></tr></thead>
+      <tbody>
+        <tr><td>27°C</td><td class="mono">1.00</td><td>Capacidad nominal</td></tr>
+        <tr><td>21°C</td><td class="mono">1.04</td><td>+4% de capacidad requerida</td></tr>
+        <tr><td><strong>16°C (Abancay)</strong></td><td class="mono"><strong>1.11</strong></td><td>+11% más — se usa este valor</td></tr>
+        <tr><td>10°C</td><td class="mono">1.19</td><td>+19% (sierra alta)</td></tr>
+        <tr><td>4°C</td><td class="mono">1.30</td><td>+30% (altiplano, Puno)</td></tr>
+        <tr><td>-7°C</td><td class="mono">1.59</td><td>+59% (zonas heladas)</td></tr>
+      </tbody>
+    </table>
+    <div class="note-warn">
+      <strong>Error común:</strong> Usar baterías automotivas con profundidad de descarga del 20% en lugar del 50–60% para baterías fotovoltaicas. Eso casi triplica el número de baterías necesarias y arruina el presupuesto.
+    </div>
+  </div>
+
+  <!-- CONTROL -->
+  <div class="step-content" id="step-control">
+    <div class="section-title"><i class="ti ti-circuit-switch" aria-hidden="true"></i>Paso VII · Regulador de carga</div>
+    <div class="formula-box">
+      <div class="f-title">Corriente máxima del generador (Imax_gen)</div>
+      Imax_gen = Ppico_panel ÷ Vpico = 150 W ÷ 22.42 V = 6.69 A
+      <div class="f-title" style="margin-top:8px">N° de reguladores (con factor de seguridad FS=25%)</div>
+      N_reg = Np × Imax_gen × (1 + 25/100) ÷ I_regulador
+      N_reg = 2 × 6.69 × 1.25 ÷ 10 = 1.67 → <span class="f-result">2 reguladores de 10A (ej. Morningstar SHS-10)</span>
+    </div>
+    <div class="note-info">
+      <strong>¿Cómo modificar?</strong> Si cambias el panel o su voltaje, ajusta Vpico en la sección VII. Si el regulador elegido tiene mayor corriente nominal (ej. 20A), bastarán menos unidades.
+    </div>
+    <hr class="divider">
+    <div class="section-title"><i class="ti ti-refresh-dot" aria-hidden="true"></i>Paso VIII · Inversor (para cargas en CA)</div>
+    <div class="formula-box">
+      <div class="f-title">Potencia de entrada del inversor</div>
+      Ip = Pac ÷ Efic.inversor = 108.5 W ÷ 0.85 = 127.6 W
+      <div class="f-title" style="margin-top:8px">N° de inversores</div>
+      N_inv = Ip ÷ P_modelo = 127.6 ÷ 300 W = 0.43 → <span class="f-result">1 inversor de 300W (redondear arriba)</span>
+    </div>
+    <div class="note-warn">
+      <strong>Importante:</strong> La potencia del inversor debe ser mayor que la suma de potencias de TODOS los equipos CA conectados simultáneamente (Pac = 108.5W). Si agregas equipos, recalcula Pac en la hoja de equipos CA.
+    </div>
+    <table class="step-table">
+      <thead><tr><th>Equipo</th><th>Modelo del ejemplo</th><th>Parámetro clave</th></tr></thead>
+      <tbody>
+        <tr><td>Regulador</td><td>Morningstar SHS-10 / Phocos CX10</td><td>10 A corriente nominal</td></tr>
+        <tr><td>Inversor</td><td>Modelo genérico 300W</td><td>300 W potencia de salida CA</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- COSTOS -->
+  <div class="step-content" id="step-costos">
+    <div class="section-title"><i class="ti ti-cash" aria-hidden="true"></i>Paso IX · Resumen de costos</div>
+    <div class="card-grid">
+      <div class="info-card"><div class="label">2 Paneles (Techno Sun 150W)</div><div class="val">$708</div><div class="sub">$354 × 2 unidades</div></div>
+      <div class="info-card"><div class="label">3 Baterías (110Ah, 12V)</div><div class="val">$976</div><div class="sub">~$325 × 3 unidades</div></div>
+      <div class="info-card"><div class="label">2 Reguladores (10A)</div><div class="val">$243</div><div class="sub">~$121 × 2 unidades</div></div>
+      <div class="info-card"><div class="label">1 Inversor (300W)</div><div class="val">$120</div><div class="sub">1 unidad</div></div>
+    </div>
+    <div class="formula-box">
+      Subtotal equipos = $708 + $976 + $243 + $120 = $2,047
+      Total con instalación (18%) = $2,047 × 1.18 = <span class="f-result">≈ US$ 2,415</span>
+    </div>
+    <div class="section-title" style="font-size:13px"><i class="ti ti-chart-bar" aria-hidden="true"></i>Distribución del costo</div>
+    <div class="cost-bar"><div class="cb-label"><span>Paneles solares</span><span>$708 · 29%</span></div><div class="cb-track"><div class="cb-fill" style="width:29%;background:var(--color-text-warning)"></div></div></div>
+    <div class="cost-bar"><div class="cb-label"><span>Baterías</span><span>$976 · 40%</span></div><div class="cb-track"><div class="cb-fill" style="width:40%;background:var(--color-text-info)"></div></div></div>
+    <div class="cost-bar"><div class="cb-label"><span>Reguladores</span><span>$243 · 10%</span></div><div class="cb-track"><div class="cb-fill" style="width:10%;background:var(--color-text-secondary)"></div></div></div>
+    <div class="cost-bar"><div class="cb-label"><span>Inversor</span><span>$120 · 5%</span></div><div class="cb-track"><div class="cb-fill" style="width:5%;background:var(--color-text-success)"></div></div></div>
+    <div class="cost-bar"><div class="cb-label"><span>Instalación y transporte (~18%)</span><span>$368 · 16%</span></div><div class="cb-track"><div class="cb-fill" style="width:16%;background:var(--color-text-danger)"></div></div></div>
+    <div class="note-info" style="margin-top:12px">
+      <strong>Completar en hoja "Costos":</strong> Añade costos reales de: (1) módulos FV según proveedor local, (2) baterías, inversores y reguladores cotizados, (3) instalación (5–10% del equipo), (4) transporte según ubicación del proyecto.
+    </div>
+    <div class="note-warn">
+      <strong>Las baterías representan el 40% del costo total</strong> — y también el 80–90% del mantenimiento durante 25 años. Considera baterías de larga vida (fotovoltaicas, no automotivas) aunque tengan mayor costo inicial.
+    </div>
+  </div>
+</div>
+
+<!-- ====== CLIENT VIEW ====== -->
+<div class="view" id="view-cli">
+  <div class="hero">
+    <i class="ti ti-home-eco" aria-hidden="true"></i>
+    <div>
+      <h2>¿Qué es este sistema y para qué sirve?</h2>
+      <p>Hemos calculado cuántos paneles solares, baterías y equipos necesitas para tener luz y electricidad en tu hogar <strong>sin necesidad de la red eléctrica</strong>. El sistema funciona con la energía del sol y la guarda en baterías para usarla también de noche.</p>
+    </div>
+  </div>
+
+  <div class="steps-nav" id="cli-nav">
+    <button class="step-btn active" onclick="showCliStep('como')"><i class="ti ti-help-circle" aria-hidden="true"></i>¿Cómo funciona?</button>
+    <button class="step-btn" onclick="showCliStep('equipos')"><i class="ti ti-plug" aria-hidden="true"></i>¿Qué puedo usar?</button>
+    <button class="step-btn" onclick="showCliStep('cuanto')"><i class="ti ti-cash" aria-hidden="true"></i>¿Cuánto cuesta?</button>
+    <button class="step-btn" onclick="showCliStep('bateria')"><i class="ti ti-battery" aria-hidden="true"></i>¿Y si hay nubes?</button>
+    <button class="step-btn" onclick="showCliStep('manten')"><i class="ti ti-tools" aria-hidden="true"></i>¿Qué mantenimiento?</button>
+  </div>
+
+  <!-- COMO FUNCIONA -->
+  <div class="step-content active" id="cstep-como">
+    <div class="section-title"><i class="ti ti-bulb" aria-hidden="true"></i>¿Cómo funciona el sistema solar?</div>
+    <div class="visual-system">
+      <div class="sys-box"><i class="ti ti-sun" aria-hidden="true"></i><span>Sol</span></div>
+      <span class="sys-arrow">→</span>
+      <div class="sys-box"><i class="ti ti-solar-panel" aria-hidden="true"></i><span>Paneles<br>2 unid.</span></div>
+      <span class="sys-arrow">→</span>
+      <div class="sys-box"><i class="ti ti-circuit-switch" aria-hidden="true"></i><span>Regulador<br>2 unid.</span></div>
+      <span class="sys-arrow">→</span>
+      <div class="sys-box"><i class="ti ti-battery-charging" aria-hidden="true"></i><span>Baterías<br>3 unid.</span></div>
+      <span class="sys-arrow">→</span>
+      <div class="sys-box"><i class="ti ti-refresh-dot" aria-hidden="true"></i><span>Inversor<br>1 unid.</span></div>
+      <span class="sys-arrow">→</span>
+      <div class="sys-box"><i class="ti ti-home" aria-hidden="true"></i><span>Tu hogar<br>220V</span></div>
+    </div>
+
+    <div class="client-card">
+      <h3><i class="ti ti-solar-panel" aria-hidden="true"></i>Paneles solares (2 paneles de 150W)</h3>
+      <p>Son las "antenas del sol". Los instalamos en el techo mirando hacia el norte, ligeramente inclinados. Durante el día capturan la luz solar y la convierten en electricidad.</p>
+      <p><span class="badge badge-warn">Importante:</span> Producen electricidad solo cuando hay luz solar, incluso con nubes parciales — aunque menos.</p>
+    </div>
+
+    <div class="client-card">
+      <h3><i class="ti ti-circuit-switch" aria-hidden="true"></i>Regulador de carga (2 unidades)</h3>
+      <p>Es el "vigilante" del sistema. Controla cuánta electricidad entra a las baterías para que no se dañen. Evita sobrecargas y descarga excesiva.</p>
+    </div>
+
+    <div class="client-card">
+      <h3><i class="ti ti-battery-charging" aria-hidden="true"></i>Baterías (3 unidades de 110Ah)</h3>
+      <p>Son el "tanque de reserva". Guardan la energía del día para usarla de noche o cuando hay días nublados. Tu sistema puede funcionar <strong>3 días completos sin sol</strong> con la energía guardada.</p>
+    </div>
+
+    <div class="client-card">
+      <h3><i class="ti ti-refresh-dot" aria-hidden="true"></i>Inversor (1 unidad de 300W)</h3>
+      <p>Es el "traductor". Las baterías guardan electricidad a 12V (como una batería de carro). El inversor la convierte a 220V para que puedas enchufar tus aparatos normales.</p>
+    </div>
+  </div>
+
+  <!-- EQUIPOS -->
+  <div class="step-content" id="cstep-equipos">
+    <div class="section-title"><i class="ti ti-plug" aria-hidden="true"></i>¿Qué equipos puedes conectar?</div>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem;line-height:1.7">El sistema está calculado para el siguiente consumo diario. <strong>No debes superar</strong> la potencia total de 108.5W ni la energía de 447 Wh/día sin recalcular el sistema.</p>
+    <table class="step-table">
+      <thead><tr><th>Equipo</th><th>¿Puede conectarse?</th><th>Consumo aprox.</th></tr></thead>
+      <tbody>
+        <tr><td>Focos LED (5 unidades)</td><td><span class="badge badge-success">Sí — incluido</span></td><td>5 × 10W = 50W</td></tr>
+        <tr><td>Cargador de celular</td><td><span class="badge badge-success">Sí — incluido</span></td><td>3.5W</td></tr>
+        <tr><td>Laptop / computadora</td><td><span class="badge badge-success">Sí — incluido</span></td><td>65W</td></tr>
+        <tr><td>Módem internet</td><td><span class="badge badge-success">Sí — incluido</span></td><td>30W</td></tr>
+        <tr><td>Radio / equipo de música</td><td><span class="badge badge-info">Sí, con cuidado</span></td><td>~120W</td></tr>
+        <tr><td>TV pequeña (LCD/LED)</td><td><span class="badge badge-warn">Requiere verificar</span></td><td>60–100W</td></tr>
+        <tr><td>Refrigeradora</td><td><span class="badge badge-danger">No recomendado</span></td><td>350W continuo</td></tr>
+        <tr><td>Lavadora / plancha eléctrica</td><td><span class="badge badge-danger">No — demasiado consumo</span></td><td>500–1000W</td></tr>
+        <tr><td>Ducha eléctrica</td><td><span class="badge badge-danger">No — demasiado consumo</span></td><td>3,500W</td></tr>
+      </tbody>
+    </table>
+    <div class="note-warn">
+      <strong>¿Quieres conectar más equipos?</strong> Avísale al ingeniero antes de instalar. El sistema debe redimensionarse para incluirlos — puede requerir más paneles o baterías.
+    </div>
+    <div class="note-success">
+      <strong>Consejo de ahorro:</strong> Usa focos LED en lugar de incandescentes. Un foco LED de 10W da la misma luz que uno incandescente de 100W, consumiendo 10 veces menos energía. Eso equivale a tener 10 focos LED por el precio de uno incandescente en tu sistema solar.
+    </div>
+  </div>
+
+  <!-- CUANTO CUESTA -->
+  <div class="step-content" id="cstep-cuanto">
+    <div class="section-title"><i class="ti ti-coin" aria-hidden="true"></i>¿Cuánto cuesta el sistema?</div>
+    <div class="card-grid">
+      <div class="info-card accent">
+        <div class="label">Inversión total estimada</div>
+        <div class="val big-number">~US$ 2,415</div>
+        <div class="sub">Incluye equipos, instalación y transporte</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Vida útil del sistema</div>
+        <div class="val">25+ <span style="font-size:13px">años</span></div>
+        <div class="sub">Paneles duran 25–30 años</div>
+      </div>
+    </div>
+    <div class="section-title" style="font-size:13px;margin-top:4px"><i class="ti ti-chart-pie" aria-hidden="true"></i>¿En qué se va el dinero?</div>
+    <div class="cost-bar"><div class="cb-label"><span>Baterías (lo más caro)</span><span>~$976 — 40%</span></div><div class="cb-track"><div class="cb-fill" style="width:40%;background:var(--color-text-info)"></div></div></div>
+    <div class="cost-bar"><div class="cb-label"><span>Paneles solares</span><span>~$708 — 29%</span></div><div class="cb-track"><div class="cb-fill" style="width:29%;background:var(--color-text-warning)"></div></div></div>
+    <div class="cost-bar"><div class="cb-label"><span>Instalación y transporte</span><span>~$368 — 15%</span></div><div class="cb-track"><div class="cb-fill" style="width:15%;background:var(--color-text-danger)"></div></div></div>
+    <div class="cost-bar"><div class="cb-label"><span>Reguladores e inversor</span><span>~$363 — 16%</span></div><div class="cb-track"><div class="cb-fill" style="width:16%;background:var(--color-text-secondary)"></div></div></div>
+
+    <div class="client-card" style="margin-top:1rem">
+      <h3><i class="ti ti-trending-down" aria-hidden="true"></i>¿Vale la pena la inversión?</h3>
+      <p>Si no tienes red eléctrica, el sistema solar es la opción más económica a largo plazo. La electricidad del sol es gratis una vez instalado el sistema.</p>
+      <p>Comparado con grupos electrógenos (generadores a gasolina), el sistema solar elimina el costo mensual de combustible (~S/150–300/mes en zonas rurales) y no genera ruido ni humo.</p>
+      <p><strong>Recuperación de inversión estimada:</strong> 4–6 años en zonas sin acceso a red eléctrica.</p>
+    </div>
+  </div>
+
+  <!-- BATERIA/NUBES -->
+  <div class="step-content" id="cstep-bateria">
+    <div class="section-title"><i class="ti ti-cloud" aria-hidden="true"></i>¿Qué pasa si hay días nublados?</div>
+    <div class="client-card">
+      <h3><i class="ti ti-battery-3" aria-hidden="true"></i>3 días de autonomía garantizados</h3>
+      <p>El banco de baterías fue calculado para almacenar suficiente energía para <strong>3 días completos</strong> sin ningún sol. Si en esos 3 días usas tus equipos con normalidad (según la lista calculada), tendrás electricidad sin problema.</p>
+      <p>Después del tercer día, si el sol vuelve, las baterías se recargan completamente en 4–6 horas de sol directo.</p>
+    </div>
+    <div class="note-info">
+      <strong>¿Qué pasa si hay más de 3 días sin sol?</strong> Las baterías llegarán a su límite mínimo de carga (40% de capacidad — el 60% ya se usó). En ese caso, el regulador apagará automáticamente la salida para proteger las baterías. Cuando vuelva el sol, todo se normaliza solo.
+    </div>
+    <div class="client-card">
+      <h3><i class="ti ti-calendar-stats" aria-hidden="true"></i>¿Para qué zona está calculado?</h3>
+      <p>Este cálculo usa el peor mes del año en <strong>Abancay, Apurímac</strong> — el mes con menos horas de sol (solo 3.78 horas de sol pleno por día en promedio). Así el sistema funciona bien incluso en el invierno más nublado.</p>
+      <p>Si tu hogar está en otra región, el ingeniero ajustará los datos de irradiación solar para tu ubicación específica.</p>
+    </div>
+    <table class="step-table">
+      <thead><tr><th>Situación</th><th>¿Qué hace el sistema?</th></tr></thead>
+      <tbody>
+        <tr><td>Día soleado</td><td>Paneles cargan baterías y alimentan equipos simultáneamente</td></tr>
+        <tr><td>Día parcialmente nublado</td><td>Paneles producen 20–70% de su capacidad. Baterías completan la diferencia</td></tr>
+        <tr><td>Noche despejada</td><td>Solo baterías alimentan los equipos. Sin problema</td></tr>
+        <tr><td>3+ días sin sol</td><td>Regulador protege baterías apagando la salida para evitar daños</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MANTENIMIENTO -->
+  <div class="step-content" id="cstep-manten">
+    <div class="section-title"><i class="ti ti-tools" aria-hidden="true"></i>¿Qué mantenimiento necesita?</div>
+    <div class="client-card">
+      <h3><i class="ti ti-calendar-event" aria-hidden="true"></i>Cada semana</h3>
+      <p>Limpia los paneles con un paño húmedo limpio si hay polvo o suciedad visible. El polvo puede reducir la producción hasta un 15%. En zonas con lluvia frecuente, la lluvia los limpia sola.</p>
+    </div>
+    <div class="client-card">
+      <h3><i class="ti ti-calendar-month" aria-hidden="true"></i>Cada mes</h3>
+      <p>Revisa el nivel de agua de las baterías (si son de plomo-ácido inundadas). Si el nivel está bajo, agrega agua destilada — nunca agua de caño. Verifica que los terminales no tengan corrosión blanca.</p>
+    </div>
+    <div class="client-card">
+      <h3><i class="ti ti-calendar-stats" aria-hidden="true"></i>Cada año</h3>
+      <p>Llama al instalador para una revisión completa: ajuste de conexiones, limpieza profunda, verificación del estado de las baterías y comprobación del rendimiento de los paneles.</p>
+    </div>
+    <div class="client-card">
+      <h3><i class="ti ti-replace" aria-hidden="true"></i>¿Cuándo reemplazar?</h3>
+      <p><strong>Baterías:</strong> Cada 5–8 años (depende del uso y mantenimiento). Es el componente de mayor costo de reemplazo.<br>
+      <strong>Regulador e inversor:</strong> Cada 10–15 años.<br>
+      <strong>Paneles solares:</strong> Duran 25–30 años con pequeña degradación gradual (~0.5% por año).</p>
+    </div>
+    <div class="note-warn">
+      <strong>Lo más importante:</strong> No conectes equipos de mayor potencia que los calculados (plancha, horno, refrigerador grande) sin consultar primero al ingeniero. Puede dañar el inversor o agotar las baterías en pocas horas.
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function switchView(v){
+  document.querySelectorAll('.top-tab').forEach((t,i)=>t.classList.toggle('active',i===(v==='eng'?0:1)));
+  document.querySelectorAll('.view').forEach((vv,i)=>vv.classList.toggle('active',i===(v==='eng'?0:1)));
+}
+
+var stepOrder=['map','consumo','solar','paneles','baterias','control','costos'];
+function showStep(id){
+  document.querySelectorAll('#step-'+id.replace('-','_'),'#step-map,#step-consumo,#step-solar,#step-paneles,#step-baterias,#step-control,#step-costos').forEach(el=>el.classList.remove('active'));
+  var target=document.getElementById('step-'+id);
+  if(target){target.classList.add('active');}
+  document.querySelectorAll('#eng-nav .step-btn').forEach((b,i)=>{
+    b.classList.toggle('active',stepOrder[i]===id);
+  });
+}
+
+var cliOrder=['como','equipos','cuanto','bateria','manten'];
+function showCliStep(id){
+  cliOrder.forEach(function(s){
+    var el=document.getElementById('cstep-'+s);
+    if(el)el.classList.remove('active');
+  });
+  var target=document.getElementById('cstep-'+id);
+  if(target)target.classList.add('active');
+  document.querySelectorAll('#cli-nav .step-btn').forEach(function(b,i){
+    b.classList.toggle('active',cliOrder[i]===id);
+  });
+}
+
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click',function(){
+    var a=this.nextElementSibling;
+    var icon=this.querySelector('i.ti-chevron-down');
+    if(a){a.classList.toggle('open');if(icon)icon.style.transform=a.classList.contains('open')?'rotate(180deg)':'';}
+  });
+});
+</script>

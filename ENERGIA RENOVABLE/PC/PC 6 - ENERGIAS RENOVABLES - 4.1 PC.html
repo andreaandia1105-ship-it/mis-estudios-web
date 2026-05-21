@@ -1,0 +1,550 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:transparent;}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px;}
+.cv-title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.cv-title p{font-size:11px;opacity:.7;margin-bottom:8px;}
+.cv-title .tags{display:flex;gap:6px;flex-wrap:wrap;}
+.cv-title .tag{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.15);color:#fff;}
+.section-bar{grid-column:1/-1;border-radius:8px;padding:7px 12px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.8;margin:6px 0;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:6px;line-height:1.5;}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.5;}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:6px 0;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0;}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;}
+/* QUIZ */
+#quiz-section{grid-column:1/-1;}
+.quiz-wrap{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:0;overflow:hidden;}
+.quiz-head{background:#0f1e3a;color:#fff;padding:12px 18px;}
+.quiz-head h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px;}
+.quiz-head p{font-size:11px;opacity:.65;}
+.quiz-body{padding:14px 18px;}
+.qprogress{margin-bottom:14px;}
+.qprogress-text{font-size:11.5px;color:var(--color-text-secondary);margin-bottom:5px;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:10px;}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .4s;}
+.qcard{margin-bottom:18px;padding-bottom:14px;border-bottom:0.5px solid var(--color-border-tertiary);}
+.qcard:last-child{border-bottom:none;margin-bottom:0;}
+.qnum{font-size:10.5px;color:var(--color-text-secondary);font-family:'Oswald',sans-serif;text-transform:uppercase;margin-bottom:4px;}
+.qtext{font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin-bottom:8px;line-height:1.5;}
+.qopts{display:flex;flex-direction:column;gap:5px;}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif;}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary);}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn.reveal{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;display:none;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.ko{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+.result-panel{display:none;margin-top:16px;border-radius:10px;padding:14px 16px;text-align:center;}
+.result-panel.show{display:block;}
+.result-panel.poor{background:#fee2e2;color:#991b1b;}
+.result-panel.mid{background:#fef9c3;color:#713f12;}
+.result-panel.good{background:#dcfce7;color:#14532d;}
+.result-panel h3{font-size:18px;font-weight:700;margin-bottom:4px;}
+.result-panel p{font-size:12px;}
+.reset-btn{margin-top:10px;padding:8px 18px;border-radius:8px;border:1px solid currentColor;background:transparent;cursor:pointer;font-size:12px;font-weight:600;color:inherit;}
+@media(prefers-color-scheme:dark){
+  .warn{background:#431407;color:#fed7aa;}
+  .exam{background:#422006;color:#fef08a;border-color:#854f0b;}
+  .qbtn.correct{background:#14532d;border-color:#16a34a;color:#86efac;}
+  .qbtn.incorrect{background:#450a0a;border-color:#dc2626;color:#fca5a5;}
+  .qbtn.reveal{background:#14532d;border-color:#16a34a;color:#86efac;}
+  .qfeedback.ok{background:#052e16;color:#86efac;}
+  .qfeedback.ko{background:#450a0a;color:#fca5a5;}
+  .result-panel.poor{background:#450a0a;color:#fca5a5;}
+  .result-panel.mid{background:#422006;color:#fef08a;}
+  .result-panel.good{background:#052e16;color:#86efac;}
+}
+</style>
+
+<div class="cv">
+<!-- TÍTULO -->
+<div class="cv-title">
+  <h1>Componentes de un Sistema Fotovoltaico Aislado</h1>
+  <p>Energías Renovables · Ing. Kenyi Cavalcanti Cárdenas, Mg Sc · UNALM — Facultad de Ingeniería Agrícola</p>
+  <div class="tags">
+    <span class="tag">Baterías</span>
+    <span class="tag">Reguladores</span>
+    <span class="tag">Inversores</span>
+    <span class="tag">Protecciones</span>
+    <span class="tag">Diseño SFVA</span>
+    <span class="tag">Cálculo de paneles</span>
+    <span class="tag">Dimensionamiento</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: BATERÍAS -->
+<div class="section-bar" style="background:#1e3a5f;color:#93c5fd;">🔵 Baterías — Sistemas de Almacenamiento de Energía (Storage)</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Taxonomía de sistemas de almacenamiento (Diap. 4)</span>
+  <div class="def" style="border-left:3px solid #3b82f6;">Los sistemas de almacenamiento de energía (Storage) permiten guardar la electricidad generada cuando hay excedente (sol abundante) y liberarla cuando la generación es insuficiente (noche, nubosidad). Sin almacenamiento, un sistema aislado no puede operar continuamente.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #3b82f6;"><strong>Almacenamiento Mecánico</strong><br>Bombeo hidráulico (PSH), aire comprimido (CAES), volantes de inercia (FES). Alta capacidad pero infraestructura grande.</div>
+    <div class="mini" style="border-top:3px solid #10b981;"><strong>Almacenamiento Térmico</strong><br>Sales fundidas, calor sensible, bombas de calor. Muy eficiente para calefacción industrial. Difícil reconvertir a eléctrico.</div>
+    <div class="mini" style="border-top:3px solid #8b5cf6;"><strong>Almacenamiento Electroquímico</strong><br>Baterías (BESS), celdas de combustible, Power-to-Gas. La tecnología dominante para sistemas FV residenciales y rurales.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Describa las cuatro grandes categorías de sistemas de almacenamiento de energía. ¿Por qué la categoría electroquímica es la más utilizada en sistemas fotovoltaicos aislados de pequeña y mediana escala?</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Química de la batería plomo-ácido (Diap. 9–10)</span>
+  <div class="def" style="border-left:3px solid #3b82f6;">La batería de plomo-ácido (PbSO₄) almacena energía mediante una reacción electroquímica reversible entre placas de plomo, peróxido de plomo y electrolito de ácido sulfúrico.</div>
+  <div class="rx">PbO₂ + Pb⁰ + 2H₂SO₄ ⇌ 2PbSO₄ + 2H₂O<br><span style="font-size:10px;color:#38bdf8;">← Descarga (libera energía) | Carga (almacena energía) →</span></div>
+  <div class="item"><span class="dot" style="background:#3b82f6;"></span><span><strong>Cátodo (positivo):</strong> PbO₂ negro/marrón → se reduce a PbSO₄ al descargar</span></div>
+  <div class="item"><span class="dot" style="background:#6b7280;"></span><span><strong>Ánodo (negativo):</strong> Pb⁰ esponjoso gris → se oxida a PbSO₄ al descargar</span></div>
+  <div class="item"><span class="dot" style="background:#f59e0b;"></span><span><strong>Electrolito:</strong> H₂SO₄ diluido; al descargar se consume generando H₂O, por eso la densidad del electrolito indica el estado de carga</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir el electrolito con el combustible. El H₂SO₄ no se consume permanentemente; el proceso es reversible durante la recarga. Lo que sí se deteriora irreversiblemente es la estructura de las placas con ciclos profundos.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Clasificación detallada de baterías plomo-ácido (Diap. 8–12)</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px;margin-bottom:8px;">
+    <div class="mini" style="border-left:3px solid #3b82f6;"><strong>Flooded — Libre de Mantenimiento</strong><br>Electrolito líquido sellado de fábrica. Aleación de plomo-calcio. Deep Cycle 50%. 100–300 ciclos. Económica pero vida corta.</div>
+    <div class="mini" style="border-left:3px solid #0ea5e9;"><strong>Flooded — Con Mantenimiento</strong><br>Requiere revisar nivel de electrolito y agregar agua destilada periódicamente. Aleación plomo-antimonio. Deep Cycle 80%. 300–1000 ciclos. Mejor para aplicaciones rurales.</div>
+    <div class="mini" style="border-left:3px solid #6366f1;"><strong>Sellada VRLA — AGM</strong><br>Electrolito absorbido en fibra de vidrio (Absorbed Glass Mat). Plomo-calcio. High Power, Deep Cycle 50%. 50–250 ciclos. Sin derrames, posición libre.</div>
+    <div class="mini" style="border-left:3px solid #8b5cf6;"><strong>Sellada VRLA — Gel</strong><br>Electrolito gelificado con sílice. Plomo-calcio. Electrolito inmovilizado. Deep Cycle 80%. 200–500 ciclos. Excelente para ciclo profundo y temperaturas extremas.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Compare las baterías Flooded con mantenimiento vs. las VRLA tipo Gel en términos de profundidad de descarga (DOD), número de ciclos y aplicaciones recomendadas para un sistema fotovoltaico rural en zonas alejadas del Perú.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d;">Vida útil: Temperatura y DOD (Diap. 13–14)</span>
+  <div class="def" style="border-left:3px solid #22c55e;">La vida útil de una batería está inversamente relacionada con la profundidad de descarga (DOD) y afectada por la temperatura de operación. Ambos factores se interrelacionan y determinan cuántos ciclos completos puede dar la batería antes de perder el 80% de su capacidad nominal.</div>
+  <div class="item"><span class="dot" style="background:#22c55e;"></span><span><strong>DOD 20%:</strong> ~5,000+ ciclos. Solo se usa la parte superficial de la carga. Máxima longevidad pero requiere banco de baterías grande.</span></div>
+  <div class="item"><span class="dot" style="background:#f59e0b;"></span><span><strong>DOD 50%:</strong> ~1,200–1,500 ciclos. Balance habitual para FV aislado. El diseño estándar usa Pd = 0.7 (70% DOD máx).</span></div>
+  <div class="item"><span class="dot" style="background:#ef4444;"></span><span><strong>DOD 80–100%:</strong> 300–500 ciclos. Descarga profunda frecuente sulfata irreversiblemente las placas.</span></div>
+  <div class="rx">A -10°C: ~60% de capacidad nominal<br>A 25°C: 100% (referencia)<br>A 35°C: ~110% pero vida útil reducida ~20%</div>
+  <div class="warn">⚠️ En zonas altoandinas del Perú (altiplano, Puno, Cusco) las temperaturas nocturnas pueden bajar a -5°C o menos, reduciendo drásticamente la capacidad disponible. El banco de baterías debe sobredimensionarse considerando este factor.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#f3e8ff;color:#4c1d95;">Comparativa Litio vs. Plomo (Diap. 17–20)</span>
+  <div class="def" style="border-left:3px solid #8b5cf6;">Las baterías de litio (Li-Ion) ofrecen mayor densidad energética (150–350 Wh/kg) frente a las de plomo-ácido (30–50 Wh/kg), lo que se traduce en menor peso y volumen por la misma capacidad. Sin embargo, el costo inicial es 3–5× mayor.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #8b5cf6;"><strong>Ventajas del Litio</strong><br>20+ años de vida calendar. 3× más compacto. 4–6× más ligero. Sin mantenimiento. DOD hasta 90%. Eficiencia carga/descarga >95%.</div>
+    <div class="mini" style="border-top:3px solid #6b7280;"><strong>Ventajas del Plomo</strong><br>Tecnología madura y probada. Costo inicial 3–5× menor. Reciclaje establecido. Amplia disponibilidad en zonas rurales peruanas. BMS simple.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué las baterías de litio tienen mayor densidad de energía que las de plomo-ácido? Argumente si el mayor costo del litio se justifica en un proyecto de electrificación rural en Perú con presupuesto limitado.</div>
+</div>
+
+<!-- SECCIÓN 2: REGULADORES -->
+<div class="section-bar" style="background:#14532d;color:#86efac;">🟢 Reguladores de Carga — Controladores PWM y MPPT</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d;">Función del regulador (Diap. 2–4)</span>
+  <div class="def" style="border-left:3px solid #22c55e;">El regulador (o controlador de carga) es el componente que gestiona el flujo de energía entre el generador FV, la batería y las cargas. Sin él, el panel podría destruir la batería por sobrecarga, o la batería podría descargarse completamente dañando tanto la batería como las cargas.</div>
+  <div class="item"><span class="dot" style="background:#22c55e;"></span><span><strong>Protección contra sobrecarga:</strong> Limita la corriente del panel a la batería cuando esta alcanza su voltaje máximo (p.ej. 14.4V en sistema 12V)</span></div>
+  <div class="item"><span class="dot" style="background:#ef4444;"></span><span><strong>Protección contra descarga profunda:</strong> Desconecta las cargas cuando el voltaje cae por debajo del límite (p.ej. 10.5V en 12V) evitando sulfatación irreversible</span></div>
+  <div class="item"><span class="dot" style="background:#f59e0b;"></span><span><strong>Bloqueo de corriente inversa:</strong> Impide que la batería se descargue a través de los paneles durante la noche (cuando el panel actúa como resistencia)</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Pensar que el regulador es opcional si se tiene un inversor. El inversor no protege la batería de sobrecarga ni de descarga profunda. Son funciones independientes.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d;">Controlador On-Off (Diap. 8)</span>
+  <div class="def" style="border-left:3px solid #22c55e;">El controlador On-Off es el tipo más simple: conecta y desconecta el panel en función del voltaje de batería. Cuando el voltaje llega al set-point de carga completa (p.ej. 14.4V a 65% SOC), corta la corriente. Cuando baja 1V, reconecta el arreglo solar.</div>
+  <div class="flow">
+    <div class="fbox">Batería &lt; set-point</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Panel ON (100% I)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Voltaje = 14.4V</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Panel OFF</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Baja 1V → ON</div>
+  </div>
+  <div class="item"><span class="dot" style="background:#ef4444;"></span><span>El ciclo On/Off genera oscilaciones en el voltaje de batería y estrés en los paneles por cambios bruscos de carga. Tecnología obsoleta para instalaciones modernas.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d;">Controlador PWM (Diap. 5–6, 9)</span>
+  <div class="def" style="border-left:3px solid #22c55e;">PWM (Pulse Width Modulation) carga la batería en pulsos de tensión de ancho variable. Cuando la batería se acerca a la carga completa, los pulsos se hacen más cortos y frecuentes, entregando menos energía suavemente hasta alcanzar la carga de mantenimiento (float). La energía en entrada y salida del controlador es la misma (mismo voltaje y corriente).</div>
+  <div class="item"><span class="dot" style="background:#22c55e;"></span><span><strong>Bulk charging:</strong> corriente máxima hasta ~80% SOC. Los paneles trabajan al voltaje que impone la batería.</span></div>
+  <div class="item"><span class="dot" style="background:#f59e0b;"></span><span><strong>Absorción:</strong> voltaje constante, corriente decrece. Pulsos cada vez más cortos.</span></div>
+  <div class="item"><span class="dot" style="background:#6b7280;"></span><span><strong>Float:</strong> mantiene la carga con pulsos mínimos para compensar autodescarga.</span></div>
+  <div class="warn">⚠️ El PWM requiere que los paneles y el regulador trabajen a la misma tensión nominal. No se puede usar un arreglo de 48V con un regulador PWM en un sistema de 12V.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#dcfce7;color:#14532d;">Controlador MPPT — Maximum Power Point Tracking (Diap. 6–7, 10–12)</span>
+  <div class="def" style="border-left:3px solid #22c55e;">El MPPT añade al PWM un algoritmo de seguimiento del punto de máxima potencia del panel. La energía en la entrada y salida es la misma, pero el voltaje y la corriente difieren: el MPPT "sube" el voltaje del panel a su Vmpp óptimo y convierte el excedente de tensión en corriente adicional hacia la batería, aumentando la producción solar hasta un 30%.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot" style="background:#22c55e;"></span><span><strong>Ventaja clave:</strong> Paneles y baterías pueden operar a tensiones diferentes. Un arreglo 48V puede cargar baterías de 24V.</span></div>
+      <div class="item"><span class="dot" style="background:#22c55e;"></span><span><strong>Eficiencia MPPT:</strong> >99.8% (ej. VT-65 Studer). Eficiencia de conversión ~99%.</span></div>
+      <div class="item"><span class="dot" style="background:#f59e0b;"></span><span><strong>Costo:</strong> 3–5× más caro que PWM. Justificado en instalaciones medianas/grandes o con paneles de alto voltaje (Voc > 50V).</span></div>
+    </div>
+    <div>
+      <div class="rx">Ejemplo VT-65 Studer:<br>Umax entrada: 150V<br>Pnom: 4/5kW<br>I bat: 65/80A<br>Ubat: 12–24–48V<br>η conv: 99% | η MPPT: >99.8%</div>
+      <div class="warn" style="margin-top:6px;">⚠️ Un convencional a 12V extrae ~53W de un panel de 75Wp. El mismo panel con MPPT entrega los 75W completos — aprovechamiento 41% mayor.</div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Explique por qué un controlador MPPT puede aumentar la producción de energía hasta un 30% respecto a un PWM, sabiendo que la energía total disponible del panel no cambia. ¿Qué principio eléctrico permite esta ganancia?</div>
+</div>
+
+<!-- SECCIÓN 3: INVERSORES -->
+<div class="section-bar" style="background:#431407;color:#fed7aa;">🟠 Inversores de Corriente — Conversión DC → AC</div>
+
+<div class="block">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12;">Función del inversor (Diap. 4)</span>
+  <div class="def" style="border-left:3px solid #f97316;">El inversor convierte la corriente continua (DC) de las baterías o del generador FV en corriente alterna (AC) para alimentar cargas convencionales (electrodomésticos, motores, iluminación fluorescente). Sin inversor, un sistema FV solo alimenta cargas DC.</div>
+  <div class="flow">
+    <div class="fbox">Panel FV (DC)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Regulador</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Batería (DC)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Inversor</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Cargas AC</div>
+  </div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12;">Tipos de inversores (Diap. 5–12)</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px;">
+    <div class="mini" style="border-left:3px solid #f97316;"><strong>Aislado (Off-Grid)</strong><br>Opera sin conexión a la red eléctrica. Incluye batería obligatoriamente. Ideal para viviendas rurales, sistemas autónomos. La topología más común en electrificación rural peruana (sierra, selva).</div>
+    <div class="mini" style="border-left:3px solid #ef4444;"><strong>Conectado a red — String</strong><br>Cada string (ramal) de paneles tiene su propio inversor. Topología en paralelo: múltiples string inverters conectados a un AC Combiner Box → transformador de media tensión → red eléctrica. Mayor resiliencia ante fallos.</div>
+    <div class="mini" style="border-left:3px solid #6366f1;"><strong>Conectado a red — Central</strong><br>Un inversor central único gestiona todos los PV Arrays. Más económico por potencia instalada pero punto único de fallo. Usado en plantas FV de gran escala (MW). DC de paneles → Central Inverter → transformador → red.</div>
+    <div class="mini" style="border-left:3px solid #8b5cf6;"><strong>Bimodal (Cargador)</strong><br>Opera tanto aislado (con baterías) como conectado a red pública. Si hay red, la usa para cargar baterías y alimentar cargas. Si la red falla, opera autónomamente. Requiere BMS sofisticado. Ideal para respaldo de energía.</div>
+  </div>
+  <div class="mini" style="border-top:3px solid #22c55e;"><strong>Microinversor</strong><br>Un inversor por cada panel individual. Conectado directamente al back de cada módulo FV. Ventaja: el fallo de un panel no afecta la producción de los demás (sin punto único de fallo a nivel de panel). Cada uno inyecta AC directamente a la red. Más costoso por Wp instalado pero óptimo para techados con sombras parciales.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué un microinversor es más conveniente que un inversor central para una instalación en techo con sombras parciales (árboles, chimeneas)? Explique el concepto de "mismatch loss" que justifica esta elección.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12;">Parámetros de selección del inversor</span>
+  <div class="def" style="border-left:3px solid #f97316;">Para seleccionar un inversor se deben conocer: la potencia AC total de las cargas, la tensión del banco de baterías, y la forma de onda requerida por los equipos (onda senoidal pura para cargas sensibles como motores y electrónica de precisión).</div>
+  <div class="item"><span class="dot" style="background:#f97316;"></span><span><strong>Potencia nominal (kW):</strong> Ligeramente superior a la potencia AC instalada (PAC) para operar en su rango de mayor eficiencia, sin sobredimensionar.</span></div>
+  <div class="item"><span class="dot" style="background:#f97316;"></span><span><strong>Tensión entrada (Vdc):</strong> Igual a la tensión del sistema de baterías (12/24/48V) con margen ya que el voltaje varía según SOC.</span></div>
+  <div class="item"><span class="dot" style="background:#f97316;"></span><span><strong>Tensión salida (Vef):</strong> 220V/50Hz en Perú. Verificar que sea senoidal pura para cargas sensibles.</span></div>
+  <div class="item"><span class="dot" style="background:#6b7280;"></span><span><strong>Marcas reconocidas:</strong> Studer, Steca, SMA, OutBack, Xantrex, Fronius, Schneider Electric, Victron Energy.</span></div>
+</div>
+
+<!-- SECCIÓN 4: PROTECCIONES -->
+<div class="section-bar" style="background:#422006;color:#fef08a;">🟡 Elementos de Corte y Protección (Sección 2.5)</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#fef9c3;color:#713f12;">Dispositivos de protección del sistema FV (Diap. 14–15)</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;">
+    <div class="mini" style="border-left:3px solid #f59e0b;"><strong>Interruptor Termomagnético DC/AC</strong><br>Protege contra cortocircuitos y sobrecargas. El modelo DC es específico para circuitos de corriente continua (no usar AC en DC; la corriente continua no tiene paso por cero y puede generar arco eléctrico persistente). Permite corte manual seguro del circuito.</div>
+    <div class="mini" style="border-left:3px solid #ef4444;"><strong>Fusible Solar PV</strong><br>Protección de sobrecorriente de respuesta rápida. Cada string de paneles debe llevar su propio fusible. Calibrado a 1.5× la Isc del string. En Perú se usan fusibles tipo gPV normalizados según IEC 60269-6. No reutilizables: deben reemplazarse tras operar.</div>
+    <div class="mini" style="border-left:3px solid #8b5cf6;"><strong>Supresor de Voltaje (SPD) y Puesta a Tierra</strong><br>El supresor de sobretensiones (lightning arrester) protege contra transientes por rayos. Indispensable en zonas con alta actividad eléctrica atmosférica (sierra peruana, Amazonia). La puesta a tierra disipa la energía del rayo de forma segura. Sin tierra, el rayo puede destruir toda la electrónica del sistema.</div>
+  </div>
+  <div class="warn" style="margin-top:8px;">⚠️ ERROR CRÍTICO: Usar interruptores automáticos de CA en circuitos de CC fotovoltaica. Los termomagnéticos AC no están diseñados para interrumpir corriente continua; al intentar abrir el circuito generan un arco eléctrico persistente que puede causar incendio. Siempre especificar "DC" en la placa del dispositivo.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué no se pueden utilizar fusibles o interruptores diseñados para corriente alterna (AC) en los circuitos de corriente continua (DC) de un sistema fotovoltaico? Explique el fenómeno eléctrico que lo hace peligroso.</div>
+</div>
+
+<!-- SECCIÓN 5: DISEÑO SFVA -->
+<div class="section-bar" style="background:#2e1065;color:#c4b5fd;">🟣 Diseño de Sistemas Fotovoltaicos Aislados (SFVA)</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95;">Cálculo del consumo energético (Diap. 4)</span>
+  <div class="def" style="border-left:3px solid #8b5cf6;">El primer paso del diseño es cuantificar la energía diaria que el sistema debe suministrar, separando cargas DC y AC porque cada una tiene pérdidas diferentes (la AC pasa por el inversor).</div>
+  <div class="two">
+    <div>
+      <div class="rx">E_DC (Wh) = Σ P_DCi × t_i<br><span style="font-size:10px;color:#38bdf8;">P_DC = potencia nominal [W]; t = horas/día</span></div>
+      <div class="rx">E_AC (Wh) = Σ P_ACi × t_i<br><span style="font-size:10px;color:#38bdf8;">P_AC = potencia nominal [W]; t = horas/día</span></div>
+      <div class="rx">E_T (Wh/día) = E_DC/η_bat + E_AC/(η_bat × η_inv)<br><span style="font-size:10px;color:#38bdf8;">η_bat ≈ 0.95 | η_inv ≈ 0.90 (típico)</span></div>
+    </div>
+    <div>
+      <div class="mini" style="border-top:3px solid #8b5cf6;"><strong>Ejemplo práctico (Ej.1):</strong><br>DC: 1500W/día (lámparas, teléfono, motor agua)<br>AC: 1500W/día (TV, lavadora, frigorífico, otros)<br>E_T = 1500/0.95 + 1500/(0.95×0.90)<br>= 1579 + 1754 = <strong>3334 Wh/día</strong></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Un sistema FV aislado alimenta cargas DC de 800 Wh/día y cargas AC de 1200 Wh/día. Si la eficiencia de la batería es 0.92 y la del inversor es 0.88, calcule la energía total diaria que debe generar el sistema generador.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95;">Dimensionamiento del generador FV (Diap. 5)</span>
+  <div class="def" style="border-left:3px solid #8b5cf6;">El número de paneles se calcula por balance energético usando las Horas Pico Solar (HPS) del peor mes y un factor de pérdidas del sistema.</div>
+  <div class="rx">N_T = E_T / (HPS × P_p × F_p)<br><span style="font-size:10px;color:#38bdf8;">HPS=irradiación [h] | P_p=potencia pico panel [W] | F_p≈0.75</span></div>
+  <div class="rx">N_S = V_bat / V_p (paneles en serie)<br>N_P = N_T / N_S (ramas en paralelo)</div>
+  <div class="mini" style="border-top:3px solid #8b5cf6;margin-top:6px;"><strong>Ej.1 resuelto:</strong> E_T=3334Wh, HPS=1.501h, Panel 110Wp, Fp=0.75<br>N_T = 3334/(1.501×110×0.75) = <strong>27 paneles</strong><br>N_S = 24/17.4 ≈ 2 (serie) → N_P = 27/2 = <strong>14 ramas</strong></div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95;">Dimensionamiento del acumulador (Diap. 6)</span>
+  <div class="def" style="border-left:3px solid #8b5cf6;">La capacidad del banco de baterías se determina por los días de autonomía (D), la energía diaria y la máxima profundidad de descarga (Pd) permitida. Para baterías de plomo ácido, Pd = 0.7.</div>
+  <div class="rx">C_a (Ah) = ΔE / (V_bat × P_d)<br><span style="font-size:10px;color:#38bdf8;">ΔE = D × E_T [Wh] | V_bat = tensión sistema [V]</span></div>
+  <div class="mini" style="border-top:3px solid #8b5cf6;margin-top:6px;"><strong>Ej.1:</strong> D=6 días, E_T=3334Wh<br>ΔE = 6×3334 = 20,004Wh<br>C_a = 20004/(24×0.7) = <strong>1190 Ah</strong></div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95;">Dimensionamiento del regulador (Diap. 7)</span>
+  <div class="def" style="border-left:3px solid #8b5cf6;">El regulador debe soportar la mayor entre la corriente generada por los paneles (I_G) y la consumida por las cargas (I_C).</div>
+  <div class="rx">I_G = N_P × I_mpg (corriente generada)<br>I_C = P_DC/V_bat + P_AC/(220×η_inv) (carga DC + AC)<br>I_R = max(I_G, I_C)</div>
+  <div class="mini" style="border-top:3px solid #8b5cf6;margin-top:6px;"><strong>Ej.1:</strong><br>I_G = 14 × 6.3 = 88.2A<br>I_C = 1500/24 + 1500/220 = 62.5+6.8 = 70.1A<br>I_R = max(88.2, 70.1) = <strong>88.2 A</strong></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el criterio de selección del regulador es el máximo entre la corriente de generación y la de consumo? ¿Qué ocurriría si se seleccionara un regulador con capacidad menor a la corriente de generación máxima?</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="section-bar" style="background:#1e293b;color:#94a3b8;">⚫ Tabla Integradora — Componentes del Sistema FV Aislado</div>
+<div class="block s3">
+  <span class="bh" style="background:#f1f5f9;color:#334155;">Resumen integrador de todos los componentes</span>
+  <table class="tbl">
+    <tr><th>Componente</th><th>Función principal</th><th>Parámetro clave de selección</th><th>Tipo recomendado (residencial rural)</th><th>Fórmula / Criterio de diseño</th></tr>
+    <tr><td><strong>Panel FV</strong></td><td>Generar energía eléctrica DC desde la radiación solar</td><td>Potencia pico (Wp), Vmpp, Impp</td><td>Monocristalino o policristalino 150–350Wp</td><td>N_T = E_T / (HPS × Pp × Fp)</td></tr>
+    <tr><td><strong>Batería</strong></td><td>Almacenar energía para períodos sin sol</td><td>Capacidad (Ah), DOD, ciclos de vida</td><td>VRLA Gel o Flooded-Antimonio para zonas remotas</td><td>C_a = D×E_T / (V_bat×Pd)</td></tr>
+    <tr><td><strong>Regulador PWM</strong></td><td>Proteger batería, controlar carga/descarga</td><td>Corriente máxima (A), tensión sistema</td><td>PWM para sistemas pequeños (&lt;500W)</td><td>I_R = max(I_G, I_C)</td></tr>
+    <tr><td><strong>Regulador MPPT</strong></td><td>Igual + maximizar extracción de potencia del panel</td><td>Vmpp panel, tensión batería, I max</td><td>MPPT para sistemas &gt;500W o panel Voc &gt;50V</td><td>Ganancia ≈ 30% sobre PWM</td></tr>
+    <tr><td><strong>Inversor aislado</strong></td><td>Convertir DC→AC para cargas convencionales</td><td>Potencia (kW), Vdc entrada, Vac salida</td><td>Onda senoidal pura, η&gt;90%, Vac=220V/50Hz</td><td>P_inv &gt; ΣP_AC; η_inv ≈ 0.85–0.95</td></tr>
+    <tr><td><strong>Protecciones</strong></td><td>Seguridad ante cortocircuito, rayo y sobretensión</td><td>Rating DC/AC, Icc, tensión sistema</td><td>Fusibles gPV + termomagnético DC + SPD + tierra</td><td>I_fusible = 1.5 × I_sc_string</td></tr>
+  </table>
+  <div class="warn" style="margin-top:8px;">⚠️ DATO INTEGRADOR CLAVE: Los valores de N_T, N_S y N_P siempre se redondean por exceso (hacia arriba). Un redondeo por defecto dejaría el sistema con déficit energético en el peor mes del año. Este criterio aplica también a la capacidad de baterías y a la corriente nominal del regulador.</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+<div class="quiz-wrap">
+  <div class="quiz-head">
+    <h2>📝 Quiz de Repaso — 10 Preguntas de Opción Múltiple</h2>
+    <p>Marca tu respuesta y descubre si es correcta con retroalimentación inmediata</p>
+  </div>
+  <div class="quiz-body">
+    <div class="qprogress">
+      <div class="qprogress-text" id="prog-text">Respondidas: 0 / 10 &nbsp;|&nbsp; Correctas: 0</div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">¿Cuál es la principal razón por la que se deben usar dispositivos de corte específicos para DC y no los diseñados para AC en circuitos fotovoltaicos?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) Los dispositivos AC son más caros y menos eficientes en sistemas solares</button>
+        <button class="qbtn" data-q="1" data-correct="false">B) El voltaje de los paneles supera siempre el límite máximo de los dispositivos AC</button>
+        <button class="qbtn" data-q="1" data-correct="true">C) La corriente continua no tiene paso por cero, lo que genera un arco eléctrico persistente al abrir el circuito AC</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) Los dispositivos AC no soportan corrientes superiores a 10A mientras que los paneles generan más</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">En una batería de plomo-ácido al 100% de descarga, ¿cuáles son los productos que se encuentran en ambos electrodos?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) PbO₂ en el positivo y Pb⁰ en el negativo</button>
+        <button class="qbtn" data-q="2" data-correct="false">B) H₂SO₄ en ambos electrodos y agua pura en el separador</button>
+        <button class="qbtn" data-q="2" data-correct="true">C) PbSO₄ en ambos electrodos y el electrolito se convierte principalmente en H₂O</button>
+        <button class="qbtn" data-q="2" data-correct="false">D) PbO₂ en ambos electrodos y H₂SO₄ concentrado en el electrolito</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">Un controlador MPPT permite aumentar la producción solar hasta un 30% respecto a un PWM con el mismo panel. ¿Cuál es el mecanismo que explica esta ganancia?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="false">A) El MPPT usa pulsos de mayor frecuencia que generan más calor en la batería, lo que aumenta su capacidad de absorción</button>
+        <button class="qbtn" data-q="3" data-correct="true">B) El MPPT permite al panel trabajar en su punto de máxima potencia (Vmpp) convirtiendo el excedente de tensión en corriente adicional hacia la batería</button>
+        <button class="qbtn" data-q="3" data-correct="false">C) El MPPT usa transformadores internos que amplifican la corriente del panel sin alterar el voltaje de salida</button>
+        <button class="qbtn" data-q="3" data-correct="false">D) El MPPT recarga el panel con energía de la batería durante la noche para mejorar su rendimiento al día siguiente</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">Un sistema FV aislado tiene cargas DC de 600 Wh/día y cargas AC de 1000 Wh/día. Con η_bat=0.95 y η_inv=0.90, ¿cuál es la energía total diaria que debe generar el arreglo FV?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="false">A) 1600 Wh/día (suma directa de cargas DC y AC)</button>
+        <button class="qbtn" data-q="4" data-correct="false">B) 1770 Wh/día (dividiendo el total entre η_bat)</button>
+        <button class="qbtn" data-q="4" data-correct="true">C) ≈ 1801 Wh/día (600/0.95 + 1000/(0.95×0.90))</button>
+        <button class="qbtn" data-q="4" data-correct="false">D) ≈ 2100 Wh/día (dividiendo el total entre η_bat × η_inv)</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">¿Cuál de las siguientes afirmaciones sobre los inversores bimodales (cargadores) es CORRECTA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) Son exclusivamente para sistemas aislados y no pueden conectarse a la red eléctrica pública</button>
+        <button class="qbtn" data-q="5" data-correct="true">B) Pueden operar de forma autónoma con baterías y, cuando hay red disponible, usarla para cargar las baterías y alimentar cargas</button>
+        <button class="qbtn" data-q="5" data-correct="false">C) Convierten corriente AC de la red en DC para los paneles, aumentando su eficiencia de generación</button>
+        <button class="qbtn" data-q="5" data-correct="false">D) Son idénticos a los microinversores pero con mayor potencia nominal por unidad</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">En el diseño del banco de baterías, los "días de autonomía" (D) se refieren a:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="false">A) Los días del año en que el sistema puede funcionar con máxima eficiencia según la irradiación</button>
+        <button class="qbtn" data-q="6" data-correct="false">B) La vida útil esperada del banco de baterías expresada en días naturales</button>
+        <button class="qbtn" data-q="6" data-correct="true">C) Los días consecutivos con ausencia de sol durante los cuales el sistema de acumulación debe poder suministrar toda la energía demandada</button>
+        <button class="qbtn" data-q="6" data-correct="false">D) El número de días que tarda en cargarse completamente el banco desde descarga total</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">¿Por qué las baterías VRLA tipo Gel son más adecuadas que las Flooded con mantenimiento para una instalación FV en una comunidad rural aislada de la sierra peruana?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="false">A) Porque las VRLA Gel tienen mayor capacidad nominal (Ah) por unidad de volumen que las Flooded</button>
+        <button class="qbtn" data-q="7" data-correct="false">B) Porque las baterías Gel son inmunes a las bajas temperaturas características de la sierra peruana</button>
+        <button class="qbtn" data-q="7" data-correct="true">C) Porque el electrolito gelificado no requiere mantenimiento (no hay que agregar agua) ni genera gases, lo que es crítico en zonas donde no hay personal técnico capacitado cerca</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) Porque las Flooded no pueden operar con inversores de onda senoidal pura, tecnología estándar en la sierra</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">Para seleccionar la corriente nominal del regulador de carga (I_R), la norma indica que debe ser:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="false">A) Exactamente igual a la corriente de cortocircuito (Isc) del total de paneles instalados</button>
+        <button class="qbtn" data-q="8" data-correct="false">B) La suma de la corriente de generación más la corriente de consumo de cargas</button>
+        <button class="qbtn" data-q="8" data-correct="true">C) El máximo entre la corriente de generación del arreglo FV (I_G) y la corriente consumida por las cargas (I_C)</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) La corriente de consumo de las cargas DC dividida entre la eficiencia del regulador</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">¿Cuál de las siguientes afirmaciones sobre las Horas Pico Solar (HPS) es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="false">A) Las HPS representan el número de horas equivalentes de irradiación máxima (1000 W/m²) que producen la misma energía que la irradiación real del día</button>
+        <button class="qbtn" data-q="9" data-correct="false">B) Para el dimensionamiento del generador FV se usa el HPS del peor mes del año para garantizar autonomía en el período crítico</button>
+        <button class="qbtn" data-q="9" data-correct="false">C) Un sitio con HPS=4h en el peor mes recibirá en ese período 4 kWh/m² de irradiación diaria promedio</button>
+        <button class="qbtn" data-q="9" data-correct="true">D) Las HPS son iguales en todo el territorio peruano ya que el país se ubica en la zona tropical y recibe irradiación constante durante todo el año</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">Al calcular el número de paneles (N_T), el resultado obtenido es 13.5. ¿Qué valor se debe adoptar en el diseño final y por qué?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) 13 paneles, redondeando al entero más cercano para no sobredimensionar el sistema</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) 13.5 paneles, usando paneles de diferente potencia para completar la fracción</button>
+        <button class="qbtn" data-q="10" data-correct="true">C) 14 paneles, redondeando siempre por exceso para garantizar que el sistema cubre la demanda energética incluso en el peor mes</button>
+        <button class="qbtn" data-q="10" data-correct="false">D) 14 paneles solo si el sistema está ubicado en una zona con irradiación inferior a 4 HPS; en caso contrario se acepta 13</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div class="result-panel" id="result-panel">
+      <h3 id="result-score"></h3>
+      <p id="result-msg"></p>
+      <button class="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Cavalcanti Cárdenas, K. — Diapositivas: Reguladores (2022), Inversores (2020), Baterías (2022), Diseño SFVA Ejemplos (2020). Facultad de Ingeniería Agrícola, UNALM.</span>
+  <span class="fc">Electric Power Research Institute — "Emerging energy generation and storage technology".</span>
+  <span class="fc">IEC 60269-6 — Fusibles de baja tensión para aplicaciones fotovoltaicas.</span>
+</div>
+</div>
+
+<script>
+const feedbacks={
+  1:{correct:2,texts:["Incorrecto. La respuesta correcta es C. El problema no es el costo ni el rating de voltaje, sino que la corriente continua no oscila y no tiene paso por cero, impidiendo que el arco eléctrico se extinga naturalmente al abrir el circuito.","Incorrecto. La respuesta correcta es C. El límite de voltaje puede ser similar, pero el problema fundamental es la naturaleza de la corriente continua: sin paso por cero, el arco persiste.","¡Correcto! La corriente alterna pasa por cero 100 veces por segundo (50Hz×2), lo que permite que el arco se extinga en cada paso. La corriente continua no tiene este paso por cero, por lo que el arco se mantiene y puede causar incendio.","Incorrecto. La respuesta correcta es C. Los ratings de corriente no son el problema; la mayoría de interruptores AC soportan decenas de amperios. El problema es la incapacidad de interrumpir el arco de CC."]},
+  2:{correct:2,texts:["Incorrecto. Esos son los estados de una batería completamente CARGADA: PbO₂ en el positivo y Pb⁰ en el negativo. Al descargarse, ambos se convierten en PbSO₄.","Incorrecto. La respuesta correcta es C. El H₂SO₄ se consume durante la descarga y el electrolito se convierte en agua; la densidad del electrolito disminuye, lo que se usa para medir el estado de carga.","¡Correcto! Al descargar completamente, la reacción PbO₂ + Pb⁰ + 2H₂SO₄ → 2PbSO₄ + 2H₂O convierte ambos electrodos en sulfato de plomo y el electrolito en agua. Por eso la densidad del electrolito cae a ~1.1 g/cm³ en batería descargada.","Incorrecto. La respuesta correcta es C. El PbO₂ solo está en el electrodo positivo cuando la batería está cargada; al descargarse se convierte en PbSO₄."]},
+  3:{correct:1,texts:["Incorrecto. La respuesta correcta es B. El calor generado no aumenta la capacidad; al contrario, el exceso de temperatura reduce la vida útil de la batería.","¡Correcto! El PWM obliga al panel a trabajar al voltaje de la batería (~12V), lejos del Vmpp del panel (~17-18V). El MPPT permite al panel operar en su Vmpp y usa electrónica de conversión (DC/DC) para transformar ese voltaje a la tensión de carga, recuperando la potencia que se perdía.","Incorrecto. La respuesta correcta es B. El MPPT no amplifica energía (eso violaría la conservación de energía); convierte voltaje en corriente mediante un convertidor DC/DC eficiente.","Incorrecto. La respuesta correcta es B. Las baterías no aportan energía a los paneles; la energía fluye solo del panel a la batería, no al revés durante la noche."]},
+  4:{correct:2,texts:["Incorrecto. La respuesta correcta es C. No se puede sumar directamente porque las cargas AC deben compensar las pérdidas del inversor además de las pérdidas de la batería.","Incorrecto. La respuesta correcta es C. 1770 Wh solo considera la eficiencia de la batería para el total, pero las cargas AC pasan además por el inversor, que tiene su propia eficiencia.","¡Correcto! E_DC/η_bat = 600/0.95 = 631.6 Wh. E_AC/(η_bat × η_inv) = 1000/(0.95×0.90) = 1000/0.855 = 1169.6 Wh. Total = 631.6 + 1169.6 ≈ 1801 Wh/día. Cada tipo de carga tiene su propia cadena de eficiencias.","Incorrecto. La respuesta correcta es C. Dividir el total por (η_bat × η_inv) aplicaría ambas eficiencias a las cargas DC, cuando estas solo pasan por la batería, no por el inversor."]},
+  5:{correct:1,texts:["Incorrecto. La respuesta correcta es B. Precisamente la característica definitoria del bimodal es su capacidad de operar en ambos modos: aislado y conectado a red.","¡Correcto! El inversor bimodal (o híbrido) tiene lógica para priorizar fuentes: cuando hay red, la usa para cargar baterías y alimentar cargas; cuando no hay red, opera autónomamente con las baterías. Esto lo hace ideal como sistema de respaldo en lugares con servicio eléctrico intermitente.","Incorrecto. La respuesta correcta es B. El inversor convierte DC→AC, nunca AC para los paneles. Los paneles solo reciben energía del sol, no de la red.","Incorrecto. La respuesta correcta es B. Los microinversores son unitarios por panel y siempre conectados a red; son una topología diferente sin capacidad bimodal inherente."]},
+  6:{correct:2,texts:["Incorrecto. La respuesta correcta es C. La eficiencia del sistema varía con la irradiación, pero ese concepto se maneja con las HPS, no con los días de autonomía.","Incorrecto. La respuesta correcta es C. La vida útil se mide en ciclos de carga/descarga, no en días de autonomía. Estos son conceptos distintos en el diseño FV.","¡Correcto! Los días de autonomía (D) definen el período sin sol que el sistema debe soportar alimentando las cargas normalmente solo con la energía del banco de baterías. Es el parámetro que dimensiona el 'colchón energético' del sistema frente a períodos nublados consecutivos.","Incorrecto. La respuesta correcta es C. El tiempo de carga desde cero depende de la corriente de carga y la capacidad de los paneles; no es lo que define los 'días de autonomía'."]},
+  7:{correct:2,texts:["Incorrecto. La respuesta correcta es C. En densidad energética volumétrica, las Flooded pueden ser comparables o superiores. La ventaja de la Gel es operacional, no de capacidad.","Incorrecto. La respuesta correcta es C. Las Gel también ven reducida su capacidad a bajas temperaturas (~60% a -10°C). La resistencia al frío no es su ventaja principal.","¡Correcto! En zonas rurales aisladas de la sierra peruana, el mantenimiento técnico es escaso o imposible. Las baterías Gel tienen electrolito inmovilizado que no requiere rellenado de agua destilada, no genera gases explosivos (H₂) en operación normal y puede instalarse en cualquier posición, eliminando los riesgos y costos de mantenimiento de las Flooded.","Incorrecto. La respuesta correcta es C. Las baterías Flooded son perfectamente compatibles con inversores de onda senoidal pura; la forma de onda del inversor no está relacionada con el tipo de batería."]},
+  8:{correct:2,texts:["Incorrecto. La respuesta correcta es C. La corriente de cortocircuito (Isc) es mayor que la Impp; usar Isc sobredimensionaría el regulador. Además, no considera las cargas.","Incorrecto. La respuesta correcta es C. Se debe elegir el máximo entre ambas corrientes, no sumarlas. El regulador no maneja simultáneamente la generación y el consumo en la misma dirección.","¡Correcto! El regulador debe poder manejar el mayor flujo de corriente que ocurra en su circuito. Si la generación supera al consumo, la corriente máxima es I_G. Si ocurre lo contrario (noche, consumo con batería), es I_C. Seleccionar el máximo asegura que el regulador no se sature en ningún escenario.","Incorrecto. La respuesta correcta es C. La eficiencia del regulador afecta las pérdidas térmicas, no el criterio de selección de la corriente nominal."]},
+  9:{correct:3,texts:["Incorrecto. Esta definición es correcta; la opción A NO es la falsa. Las HPS se calculan dividiendo la irradiación diaria total (Wh/m²) entre 1000 W/m², dando horas equivalentes.","Incorrecto. Esta afirmación es correcta; la opción B NO es la falsa. El diseño FV siempre usa el peor mes para garantizar que el sistema sea autónomo incluso en el período más desfavorable.","Incorrecto. Esta afirmación es correcta; la opción C NO es la falsa. Por definición, si HPS=4h, la irradiación equivale a 4h×1000W/m² = 4 kWh/m².","¡Correcto! Esta afirmación es FALSA. El Perú tiene una variabilidad de HPS enorme: la costa (Lima) tiene ~4–5 HPS, la sierra ~5–6 HPS, pero la selva puede bajar a 3–4 HPS. Además, dentro de cada región hay variación estacional significativa. No hay uniformidad en el territorio peruano."]},
+  10:{correct:2,texts:["Incorrecto. La respuesta correcta es C. Redondear a la baja (13) significa que el sistema generará menos energía de la calculada como mínima, causando déficit energético en el peor mes del año.","Incorrecto. La respuesta correcta es C. Los paneles son unidades discretas; no existe el 'panel de 0.5 veces'. Todos los valores fraccionados deben redondearse a números enteros.","¡Correcto! En diseño de sistemas FV, los valores N_T, N_S y N_P siempre se redondean por exceso. Esto garantiza que la energía generada sea igual o mayor a la demandada incluso en el mes más desfavorable. Un redondeo por defecto crearía un sistema con déficit energético.","Incorrecto. La respuesta correcta es C. El criterio de redondeo por exceso es universal en diseño FV, independientemente de las HPS del sitio. La ubicación geográfica ya está considerada en el valor de HPS utilizado en el cálculo."]}
+};
+
+let answered=0, correct=0;
+
+document.querySelector('.quiz-body').addEventListener('click',function(e){
+  const btn=e.target.closest('.qbtn');
+  if(!btn||btn.disabled)return;
+  const q=btn.dataset.q;
+  const isCorrect=btn.dataset.correct==='true';
+  const allBtns=document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  const fb=document.getElementById('fb'+q);
+  const idx=Array.from(allBtns).indexOf(btn);
+
+  allBtns.forEach((b,i)=>{
+    b.disabled=true;
+    if(b.dataset.correct==='true') b.classList.add('reveal');
+  });
+  if(!isCorrect) btn.classList.add('incorrect');
+  else btn.classList.remove('reveal'), btn.classList.add('correct');
+
+  const fdata=feedbacks[parseInt(q)];
+  const correctIdx=fdata.correct;
+  const text=fdata.texts[idx];
+  fb.className='qfeedback '+(isCorrect?'ok':'ko');
+  fb.innerHTML=(isCorrect?'✅ ':'❌ ')+text;
+  fb.style.display='block';
+
+  answered++;
+  if(isCorrect) correct++;
+  document.getElementById('prog-text').textContent='Respondidas: '+answered+' / 10 | Correctas: '+correct;
+  document.getElementById('prog-bar').style.width=(answered*10)+'%';
+
+  if(answered===10){
+    const panel=document.getElementById('result-panel');
+    document.getElementById('result-score').textContent=correct+' / 10 correctas';
+    let cls,msg;
+    if(correct<=4){cls='poor';msg='Necesitas repasar el material con más detalle. Revisa especialmente las fórmulas de diseño y los tipos de componentes.';}
+    else if(correct<=7){cls='mid';msg='¡Buen avance! Dominas los conceptos básicos. Refuerza los cálculos de dimensionamiento y las diferencias entre tipos de controladores.';}
+    else{cls='good';msg='¡Excelente dominio del tema! Estás preparado para el examen. Repasa los casos prácticos del Ejemplo 1 y 2.';}
+    panel.className='result-panel show '+cls;
+    document.getElementById('result-msg').textContent=msg;
+  }
+});
+
+function resetQuiz(){
+  answered=0; correct=0;
+  document.getElementById('prog-text').textContent='Respondidas: 0 / 10 | Correctas: 0';
+  document.getElementById('prog-bar').style.width='0%';
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.disabled=false;
+    b.classList.remove('correct','incorrect','reveal');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f=>f.style.display='none');
+  const panel=document.getElementById('result-panel');
+  panel.className='result-panel';
+}
+</script>
