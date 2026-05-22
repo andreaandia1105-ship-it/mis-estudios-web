@@ -1,0 +1,613 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;font-size:12px;color:var(--color-text-primary)}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titlebar p{font-size:11px;opacity:.8;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:11px;padding:2px 9px;border-radius:20px;display:inline-block;margin:2px}
+.pill-w{background:#1e3a5f;color:#93c5fd}
+.secbar{grid-column:1/-1;border-radius:9px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:#fff}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-pink{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+  .bh-blue{background:#1e3a5f;color:#93c5fd}
+  .bh-green{background:#14532d;color:#86efac}
+  .bh-yellow{background:#422006;color:#fef08a}
+  .bh-red{background:#450a0a;color:#fca5a5}
+  .bh-purple{background:#2e1065;color:#c4b5fd}
+  .bh-teal{background:#042f2e;color:#5eead4}
+  .bh-orange{background:#431407;color:#fed7aa}
+  .bh-gray{background:#1e293b;color:#94a3b8}
+  .bh-pink{background:#4a044e;color:#f0abfc}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#22c55e}
+.def-yellow{border-color:#eab308}
+.def-teal{border-color:#14b8a6}
+.def-purple{border-color:#8b5cf6}
+.def-orange{border-color:#f97316}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-yellow{background:#eab308}
+.dot-teal{background:#14b8a6}
+.dot-purple{background:#8b5cf6}
+.dot-orange{background:#f97316}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:8px 11px;border-radius:7px;text-align:center;line-height:1.7;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#854d0e}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5;margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;line-height:1.4;text-align:center}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:.5px solid var(--color-border-tertiary);margin:7px 0}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:4px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.nb{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-r{background:#fee2e2;color:#991b1b}
+.nb-y{background:#fef9c3;color:#713f12}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;font-size:11px}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.qcard{border:.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px;margin-bottom:10px;background:var(--color-background-secondary)}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;line-height:1.4;color:var(--color-text-primary)}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary)}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.7;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+  .qfeedback.ok{background:#052e16;color:#86efac}
+  .qfeedback.fail{background:#450a0a;color:#fca5a5}
+}
+#quiz-result{border-radius:10px;padding:12px 16px;font-size:13px;margin-top:14px;display:none}
+#quiz-result.low{background:#fee2e2;color:#991b1b}
+#quiz-result.mid{background:#fef9c3;color:#713f12}
+#quiz-result.high{background:#dcfce7;color:#14532d}
+.progress-bar-wrap{background:var(--color-background-secondary);border-radius:20px;height:10px;margin:6px 0}
+.progress-bar-fill{height:100%;border-radius:20px;background:#22c55e;transition:width .3s}
+</style>
+
+<div class="cv">
+
+<div class="titlebar">
+  <h1>COLECTORES SOLARES DE TUBO EVACUADO CON HEAT PIPE (HPSC)</h1>
+  <p>Ingeniería de Energía Solar · Rendimiento Térmico y Exergético · Fluidos de Trabajo · Diseño y Aplicaciones</p>
+  <div class="pills">
+    <span class="pill pill-w">Jayanthi et al. 2019</span>
+    <span class="pill pill-w">Siuta-Olcha et al. 2020</span>
+    <span class="pill pill-w">Fichas Técnicas GeoEnergia Perú</span>
+    <span class="pill pill-w">Eficiencia Térmica</span>
+    <span class="pill pill-w">Eficiencia Exergética</span>
+    <span class="pill pill-w">R134a vs Agua Destilada</span>
+    <span class="pill pill-w">Aplicaciones Domésticas</span>
+  </div>
+</div>
+
+<div class="secbar" style="background:#1e3a8a;">⚙️ SECCIÓN 1 — FUNDAMENTOS DEL SISTEMA HPSC</div>
+
+<div class="block s3">
+  <span class="bh bh-blue">¿Qué es un Colector Solar de Heat Pipe?</span>
+  <div class="def def-blue">Un <strong>Heat Pipe Solar Collector (HPSC)</strong> es un dispositivo que convierte la radiación solar en energía térmica útil mediante tubos evacuados que contienen un fluido de trabajo en fase líquido-vapor. El vacío interno elimina casi todas las pérdidas convectivas, logrando eficiencias superiores a los colectores de placa plana, especialmente en climas fríos o nublados.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #3b82f6">
+      <strong>Tubo de vidrio evacuado</strong><br>
+      Fabricado en vidrio borosilicato 3.3 (58 mm Ø exterior, 1800 mm largo). El vacío entre el tubo exterior e interior reduce la pérdida convectiva a casi cero. La capa interior tiene recubrimiento selectivo de absorción (AL/AL-ALN) con coeficiente de absorción 0.93–0.96 y emisión 0.04–0.06 — lo que significa que absorbe casi toda la radiación incidente pero emite muy poca como calor.
+    </div>
+    <div class="mini" style="border-left:3px solid #8b5cf6">
+      <strong>Heat pipe (tubo de calor)</strong><br>
+      Tubo de cobre (18 mm Ø, 1820 mm) sellado con fluido de trabajo en su interior. El calor evapora el fluido en la sección evaporadora (base), el vapor asciende por capilaridad al condensador (cabezal), libera calor al agua de consumo y regresa al estado líquido. El wick (mecha interna) facilita el retorno del condensado por fuerzas capilares, sin necesidad de bomba.
+    </div>
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Manifold (cabezal/colector)</strong><br>
+      Intercambiador de calor donde los heat pipes ceden su energía al agua del tanque. El calor ganado por el agua equivale al calor cedido por el condensador. El manifold está aislado con lana de vidrio para minimizar pérdidas por conducción. El agua caliente almacenada en el tanque (acero inox SUS 304-2B, aislante poliuretano 50 mm) mantiene la temperatura hasta 72 horas.
+    </div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Radiación solar</div><div class="farrow">→</div>
+    <div class="fbox">Absorción en placa selectiva</div><div class="farrow">→</div>
+    <div class="fbox">Evaporación fluido de trabajo</div><div class="farrow">→</div>
+    <div class="fbox">Vapor asciende al condensador</div><div class="farrow">→</div>
+    <div class="fbox">Transferencia de calor al agua</div><div class="farrow">→</div>
+    <div class="fbox">Condensado retorna por wick</div><div class="farrow">→</div>
+    <div class="fbox">Agua caliente → tanque</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: El tubo evacuado no elimina el 100% de las pérdidas — solo las convectivas. Aún existen pérdidas por conducción y radiación, cuantificadas por el coeficiente medio de pérdidas (0.60–0.70 W/m²·°C para los tubos de GeoEnergia Perú). Confundir "vacío = sin pérdidas" es un error de examen.</div>
+  <div class="exam">🎯 EXAMEN: Explique el mecanismo de transferencia de calor en un HPSC, identificando qué fenómeno de transferencia ocurre en cada componente (tubo evacuado, heat pipe, manifold) y por qué el vacío mejora la eficiencia respecto a un colector de placa plana.</div>
+</div>
+
+<div class="secbar" style="background:#166534;">🔧 SECCIÓN 2 — ESPECIFICACIONES TÉCNICAS (FICHAS PERUANAS)</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Tubos al Vacío de Triple Capa — Specs Técnicas</span>
+  <div class="def def-green">Los tubos de triple capa (GeoEnergia Arequipa) son la interfaz solar-térmica del sistema. Su diseño de triple pared con recubrimiento selectivo define directamente qué fracción de la radiación incidente se convierte en calor útil. Son intercambiables entre modelos y su calidad determina el rendimiento del sistema completo.</div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot dot-green"></div><div><strong>Material:</strong> Vidrio Borosilicato 3.3 — mismo que el vidrio de laboratorio, resistente a choques térmicos y químicos.</div></div>
+      <div class="item"><div class="dot dot-green"></div><div><strong>Espesor de pared:</strong> 1.60 mm — compromiso entre resistencia mecánica (granizo hasta 30 mm Ø) y transmisión óptica.</div></div>
+      <div class="item"><div class="dot dot-green"></div><div><strong>Dimensiones:</strong> 58 mm Ø exterior × 1800 mm longitud (área de colección ≈ 0.329 m² por tubo).</div></div>
+      <div class="item"><div class="dot dot-green"></div><div><strong>Recubrimiento selectivo:</strong> AL/AL-ALN(H)-ALALN(L)/ALN — multicapa de aluminio y nitruro de aluminio que actúa como filtro: alta absorción solar (0.93–0.96) y baja emisión infrarroja (0.04–0.06).</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="dot dot-teal"></div><div><strong>Temperatura de agua caliente:</strong> 55°C a 95°C (modelo GeoEnergia) / 55°C a 75°C (modelo TSV).</div></div>
+      <div class="item"><div class="dot dot-teal"></div><div><strong>Resistencia:</strong> Hasta –25°C en exterior sin daño al sistema — clave para zonas altoandinas del Perú.</div></div>
+      <div class="item"><div class="dot dot-teal"></div><div><strong>Coef. medio de pérdidas:</strong> 0.60–0.70 W/(m²·°C) — valor muy bajo comparado con placa plana (~3–6 W/m²·°C).</div></div>
+      <div class="item"><div class="dot dot-teal"></div><div><strong>Preservación de calor del tanque:</strong> 72 horas — gracias al aislante de espuma de poliuretano de alta densidad (50 mm espesor).</div></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el recubrimiento selectivo AL/ALN es esencial para el rendimiento del tubo evacuado? Explique el concepto de "selectividad espectral" y cómo los valores de absorción (0.93–0.96) y emisión (0.04–0.06) se traducen en menor pérdida de calor.</div>
+</div>
+
+<div class="block s1">
+  <span class="bh bh-teal">Modelos Comerciales — Perú</span>
+  <div class="def def-teal">La selección del modelo correcto impacta directamente la rentabilidad del sistema. A mayor capacidad, menor costo por litro calentado, pero mayor inversión inicial. La empresa GeoEnergia (Arequipa) reporta hasta 70% de ahorro anual en electricidad.</div>
+  <table class="tbl" style="margin-top:6px">
+    <tr><th>Modelo</th><th>Cap. (L)</th><th>Tubos</th><th>Personas</th></tr>
+    <tr><td>T-100-10</td><td>100</td><td>10</td><td>3–4</td></tr>
+    <tr><td>T-150-15</td><td>150</td><td>15</td><td>5–6</td></tr>
+    <tr><td>T-200-20</td><td>200</td><td>20</td><td>7–8</td></tr>
+    <tr><td>T-240-24</td><td>240</td><td>24</td><td>8–9</td></tr>
+    <tr><td>T-300-30</td><td>300</td><td>30</td><td>10–11</td></tr>
+  </table>
+  <div class="warn">⚠️ El ángulo de inclinación del soporte (28° en GeoEnergia, 25° en TSV) no es arbitrario — debe aproximarse a la latitud geográfica de instalación para maximizar la captación solar anual. En Arequipa (latitud ≈ –16°S) un ángulo de 25–28° es razonable como promedio anual.</div>
+</div>
+
+<div class="secbar" style="background:#7c2d12;">🧪 SECCIÓN 3 — FLUIDOS DE TRABAJO: AGUA DESTILADA vs R134a</div>
+
+<div class="block s2">
+  <span class="bh bh-orange">Comparación de Propiedades Físicas Clave</span>
+  <div class="def def-orange">El fluido de trabajo en el heat pipe define la velocidad de evaporación, la capacidad de transporte de calor y las temperaturas de operación del sistema. Jayanthi et al. (2019) demostraron experimentalmente que el R134a supera al agua destilada en este contexto específico.</div>
+  <table class="tbl">
+    <tr><th>Propiedad</th><th>Agua Destilada</th><th>R134a</th><th>Implicancia</th></tr>
+    <tr><td>Punto de ebullición</td><td>99.98°C</td><td>–26.1°C</td><td>R134a se evapora a temperatura ambiente → mayor eficiencia</td></tr>
+    <tr><td>Temperatura crítica</td><td>647 K</td><td>122°C</td><td>R134a opera lejos de su punto crítico en condiciones normales</td></tr>
+    <tr><td>Calor específico</td><td>75.375 J/mol·K</td><td>0.852 kJ/kg·K</td><td>Agua tiene mayor capacidad calorífica másica</td></tr>
+    <tr><td>Conductividad térmica</td><td>0.58 W/mK</td><td>0.0145 W/mK</td><td>Agua conduce más calor en fase líquida</td></tr>
+    <tr><td>Viscosidad</td><td>1 cP</td><td>0.012 Pa·s</td><td>R134a más fluido → mejor circulación por el wick</td></tr>
+    <tr><td>GWP (Potencial calentamiento)</td><td>—</td><td>1200</td><td>R134a es potente GEI → implicancia ambiental</td></tr>
+    <tr><td>Agotamiento de ozono</td><td>0%</td><td>0%</td><td>Ambos son ODP=0 (no dañan capa de ozono)</td></tr>
+  </table>
+  <div class="warn">⚠️ DILEMA TÉCNICO-AMBIENTAL: Aunque R134a ofrece mejor eficiencia térmica (+37.37%), su GWP de 1200 lo convierte en un gas de efecto invernadero significativo. En diseño sostenible, se evalúan alternativas como R290 (propano) o CO₂ supercrítico con GWP mucho menor.</div>
+  <div class="exam">🎯 EXAMEN: Un ingeniero propone reemplazar agua destilada por R134a en un HPSC doméstico argumentando mayor eficiencia. Evalúe técnica y ambientalmente esta propuesta, considerando el punto de ebullición de cada fluido y el impacto climático del R134a (GWP=1200).</div>
+</div>
+
+<div class="block s1">
+  <span class="bh bh-red">¿Por qué R134a es más eficiente?</span>
+  <div class="def" style="border-color:#dc2626">La clave está en el <strong>punto de ebullición bajo</strong> del R134a (–26.1°C vs 99.98°C del agua). Esto significa que a las temperaturas típicas de operación solar (40–90°C), el R134a ya se encuentra muy por encima de su punto de ebullición, evaporándose rápidamente y transportando calor de forma mucho más eficiente.</div>
+  <div class="item"><div class="dot dot-teal"></div><div>El R134a se evapora incluso a bajas irradiancias, activando el ciclo de heat pipe más temprano en el día.</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div>La mayor capacidad de transporte de calor eleva más la temperatura de la pared del heat pipe (84°C vs 72°C a las 13:00h).</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div>El ciclo de evaporación-condensación es más intenso → mayor Qu (energía útil ganada) en cada intervalo horario.</div></div>
+  <div class="rx">
+    η_R134a promedio = 42.95%<br>
+    η_Agua destilada promedio = 31.28%<br>
+    Incremento = (42.95 − 31.28) / 31.28 × 100 = <strong>37.37%</strong>
+  </div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-orange">Resultados Experimentales Completos — Jayanthi et al. (2019)</span>
+  <p style="font-size:11px;color:var(--color-text-secondary);margin-bottom:7px">HPSC: cobre, Ø58mm×1800mm, ángulo 45°, flujo másico agua = 0.0042 kg/s, fill ratio = 0.5, mediciones cada hora de 10:00 a 15:00</p>
+  <div class="two">
+    <div>
+      <p style="font-size:11px;font-weight:600;margin-bottom:4px;color:var(--color-text-secondary)">AGUA DESTILADA</p>
+      <table class="tbl">
+        <tr><th>Hora</th><th>T₁ (°C)</th><th>T₂ (°C)</th><th>T_hp (°C)</th><th>Qu (W)</th><th>η (%)</th></tr>
+        <tr><td>10:00</td><td>28</td><td>49</td><td>55</td><td>369.3</td><td>29.65</td></tr>
+        <tr><td>11:00</td><td>29</td><td>52</td><td>59</td><td>404.5</td><td>30.55</td></tr>
+        <tr><td>12:00</td><td>31</td><td>56</td><td>69</td><td>439.6</td><td>31.94</td></tr>
+        <tr><td>13:00</td><td>34</td><td>60</td><td>72</td><td>457.2</td><td>32.91</td></tr>
+        <tr><td>14:00</td><td>32</td><td>55</td><td>64</td><td>404.5</td><td>31.16</td></tr>
+        <tr><td>15:00</td><td>30</td><td>51</td><td>58</td><td>369.3</td><td>30.45</td></tr>
+      </table>
+    </div>
+    <div>
+      <p style="font-size:11px;font-weight:600;margin-bottom:4px;color:var(--color-text-secondary)">R134a</p>
+      <table class="tbl">
+        <tr><th>Hora</th><th>T₁ (°C)</th><th>T₂ (°C)</th><th>T_hp (°C)</th><th>Qu (W)</th><th>η (%)</th></tr>
+        <tr><td>10:00</td><td>29</td><td>54</td><td>65</td><td>439.6</td><td>35.29</td></tr>
+        <tr><td>11:00</td><td>30</td><td>59</td><td>68</td><td>510.0</td><td>38.49</td></tr>
+        <tr><td>12:00</td><td>31</td><td>68</td><td>79</td><td>650.7</td><td>47.26</td></tr>
+        <tr><td>13:00</td><td>34</td><td>71</td><td>84</td><td>703.4</td><td>50.62</td></tr>
+        <tr><td>14:00</td><td>32</td><td>67</td><td>78</td><td>615.5</td><td>47.33</td></tr>
+        <tr><td>15:00</td><td>30</td><td>59</td><td>68</td><td>510.0</td><td>42.05</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="secbar" style="background:#4c1d95;">📐 SECCIÓN 4 — FÓRMULAS Y CÁLCULO DE EFICIENCIAS</div>
+
+<div class="block s2">
+  <span class="bh bh-yellow">Eficiencia Térmica — Fórmulas y Variables</span>
+  <div class="def def-yellow">La <strong>eficiencia térmica</strong> (η) es la fracción de la energía solar incidente que el colector logra transferir al fluido de trabajo como calor útil. Se basa en el 1er Principio de la Termodinámica (conservación de energía). No distingue la "calidad" de esa energía.</div>
+  <div class="rx">
+    η_TH = Q̇u / (I_sol × A_col)<br><br>
+    Q̇u (W) = ṁ_col × c_p × (T_f,2 − T_f,1)<br><br>
+    A_col = π × D × L = π × 0.058 × 1.8 = 0.3279 m²<br><br>
+    También: η_TH = F_R(τα) − F_R·U_L × [(T_f,1 − T_a)/I_sol]
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot dot-yellow"></div><div><strong>I_sol</strong>: Intensidad de radiación solar (W/m²) — parámetro climático</div></div>
+      <div class="item"><div class="dot dot-yellow"></div><div><strong>A_col</strong>: Área del colector (m²) — parámetro geométrico</div></div>
+      <div class="item"><div class="dot dot-yellow"></div><div><strong>ṁ_col</strong>: Flujo másico del fluido (kg/s) — parámetro operacional</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="dot dot-purple"></div><div><strong>F_R</strong>: Factor de remoción de calor del colector — propiedad del diseño</div></div>
+      <div class="item"><div class="dot dot-purple"></div><div><strong>τα</strong>: Producto transmitancia-absorptancia — eficiencia óptica</div></div>
+      <div class="item"><div class="dot dot-purple"></div><div><strong>U_L</strong>: Coeficiente global de pérdidas de calor (W/m²·K)</div></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: La eficiencia térmica NO es constante — disminuye a medida que aumenta la diferencia (T_f,1 − T_a)/I_sol. Esto se evidencia en la curva experimental de Siuta-Olcha et al. (R² = 0.61). A mayor temperatura de entrada del fluido respecto al ambiente, mayor pérdida de calor y menor η.</div>
+  <div class="exam">🎯 EXAMEN: Calcule la eficiencia térmica de un HPSC con D=0.058m, L=1.8m, fluido masa 0.0042 kg/s, Cp=4187 J/kg·K, ΔT=26°C y radiación solar I=1050 W/m². Identifique qué representa físicamente cada término de la ecuación.</div>
+</div>
+
+<div class="block s1">
+  <span class="bh bh-purple">Eficiencia Exergética — Concepto y Fórmula</span>
+  <div class="def def-purple">La <strong>eficiencia exergética</strong> se basa en el 2do Principio de la Termodinámica. Mide no solo cuánta energía se transfiere, sino qué tan aprovechable (de alta calidad) es esa energía. La exergía cuantifica la capacidad máxima de trabajo útil. Es siempre menor que la eficiencia energética porque incluye irreversibilidades.</div>
+  <div class="rx">
+    η_EX = (Ėx_f,2 − Ėx_f,1) / Ėx_1,S<br><br>
+    Ėx_f,2 = ṁ·c_p·[T_f,2 − T_a − T_a·ln(T_f,2/T_a)]<br><br>
+    Ėx_1,S = I_sol·A_col·(1 − T_a/T_S)<br><br>
+    donde T_S = 4500 K (temperatura aparente del Sol)
+  </div>
+  <div class="item"><div class="dot dot-purple"></div><div>La exergía solar (Ėx_1,S) usa T_S = 4500 K — el Sol como fuente de muy alta temperatura implica que casi toda su radiación tiene potencial de trabajo, pero la conversión es inevitablemente ineficiente.</div></div>
+  <div class="item"><div class="dot dot-purple"></div><div>Las eficiencias exergéticas típicas de HPSC son bajas: 2–5%. Esto no es un "error" — refleja la realidad termodinámica de convertir radiación de alta temperatura en calor de baja temperatura.</div></div>
+</div>
+
+<div class="secbar" style="background:#0f766e;">🌬️ SECCIÓN 5 — CONDICIONES CLIMÁTICAS Y RENDIMIENTO (POLONIA)</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Resultados Siuta-Olcha et al. (2020) — Lublin, Polonia</span>
+  <div class="def def-teal">El estudio polaco es especialmente valioso porque evalúa el HPSC bajo condiciones climáticas reales y variables durante 2 meses completos (julio–agosto), con medición simultánea de irradiancia, temperatura, viento y parámetros del colector cada 5 minutos. Colector: 24 tubos, 3.9 m² área bruta, fluido: agua + propilenglicol 50%.</div>
+  <div class="two">
+    <div>
+      <p style="font-size:11px;font-weight:600;color:var(--color-text-secondary);margin-bottom:5px">JULIO (mejor mes)</p>
+      <div class="mini" style="border-top:3px solid #14b8a6">
+        <strong>Irradiación mensual:</strong> 80 kWh/m²<br>
+        <strong>Irradiación diaria prom.:</strong> 2.6 kWh/m²·d<br>
+        <strong>Ganancia térmica prom.:</strong> 163 W/m²<br>
+        <strong>η_TH promedio mensual:</strong> <span style="color:#16a34a;font-weight:700">45.3%</span><br>
+        <strong>η_EX promedio mensual:</strong> <span style="color:#7c3aed;font-weight:700">2.62%</span><br>
+        <strong>Rango η_TH diaria:</strong> 11.4% – 75.25%
+      </div>
+    </div>
+    <div>
+      <p style="font-size:11px;font-weight:600;color:var(--color-text-secondary);margin-bottom:5px">AGOSTO (mayor irradiación)</p>
+      <div class="mini" style="border-top:3px solid #3b82f6">
+        <strong>Irradiación mensual:</strong> 112.8 kWh/m²<br>
+        <strong>Irradiación diaria prom.:</strong> 3.64 kWh/m²·d<br>
+        <strong>Ganancia térmica prom.:</strong> 145 W/m²<br>
+        <strong>η_TH promedio mensual:</strong> <span style="color:#d97706;font-weight:700">32.9%</span><br>
+        <strong>η_EX promedio mensual:</strong> <span style="color:#7c3aed;font-weight:700">2.15%</span><br>
+        <strong>Rango η_TH diaria:</strong> 16.28% – 52.62%
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ PARADOJA CLIMÁTICA: A pesar de mayor irradiación en agosto (112.8 vs 80 kWh/m²), la eficiencia térmica fue MENOR en agosto (32.9% vs 45.3%). La razón: en agosto aumenta la diferencia (T_entrada − T_ambiente), lo que incrementa las pérdidas. Mayor irradiación no siempre implica mayor eficiencia instantánea.</div>
+  <div class="exam">🎯 EXAMEN: En el estudio de Siuta-Olcha (2020), julio mostró mayor eficiencia térmica (45.3%) que agosto (32.9%), pese a que agosto tuvo mayor irradiación solar. Explique este fenómeno desde las ecuaciones de eficiencia del colector y el papel de la diferencia de temperatura (T_f,1 − T_a).</div>
+</div>
+
+<div class="block s1">
+  <span class="bh bh-pink">Impacto del Viento en la Eficiencia</span>
+  <div class="def" style="border-color:#ec4899">El viento incrementa la convección forzada sobre la superficie del colector, aumentando la pérdida de calor. Aunque el vacío protege el interior del tubo, el manifold y las conexiones externas quedan expuestos. Este efecto fue cuantificado rigurosamente en el estudio polaco.</div>
+  <div class="rx">
+    Aumento de v_w: 0.09 → 0.86 m/s<br>
+    → η_TH disminuye 67% (R² = 0.6885)<br>
+    → η_EX disminuye 41% (R² = 0.4349)<br><br>
+    Correlaciones experimentales:<br>
+    η_TH ≈ 21.934 × v_w^(−0.405)<br>
+    η_EX ≈ 1.6448 × v_w^(−0.234)
+  </div>
+  <div class="item"><div class="dot dot-pink" style="background:#ec4899"></div><div>La eficiencia térmica es MÁS sensible al viento (R²=0.69) que la exergética (R²=0.43), porque el viento afecta directamente la cantidad de calor transferido.</div></div>
+  <div class="item"><div class="dot dot-pink" style="background:#ec4899"></div><div>Velocidades de viento bajas (0.2–0.4 m/s) ya reducen apreciablemente el rendimiento. En el diseño de instalaciones, la orientación para proteger del viento dominante es una decisión de ingeniería crítica.</div></div>
+</div>
+
+<div class="block s1">
+  <span class="bh bh-blue">Incertidumbre de Medición</span>
+  <div class="def def-blue">Toda medición experimental tiene errores. Siuta-Olcha et al. cuantificaron la incertidumbre relativa promedio mediante la propagación de errores de todos los instrumentos.</div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>δ(Q̇u) = 1.4%</strong> — Muy baja; el caudal y temperaturas se miden con precisión.</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>δ(η_TH) = 4.3%</strong> — La incertidumbre del piranómetro (±20 W/m² a 1000 W/m²) contribuye significativamente.</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>δ(η_EX) = 4.5%</strong> — Se añade la incertidumbre de T_a al cálculo de exergía solar.</div></div>
+  <div class="warn">⚠️ En experimentos solares, la incertidumbre del piranómetro (sensor de irradiancia) es la fuente dominante de error. Comparar resultados de distintos estudios sin considerar sus instrumentos de medición es un error metodológico.</div>
+</div>
+
+<div class="secbar" style="background:#334155;">📊 TABLA INTEGRADORA FINAL — SÍNTESIS COMPARATIVA DE LOS 4 DOCUMENTOS</div>
+
+<div class="block s3">
+  <span class="bh bh-gray">Comparación Global de Estudios y Sistemas</span>
+  <table class="tbl">
+    <tr>
+      <th>Parámetro</th>
+      <th>Jayanthi 2019 (India) — Agua destilada</th>
+      <th>Jayanthi 2019 (India) — R134a</th>
+      <th>Siuta-Olcha 2020 (Polonia)</th>
+      <th>GeoEnergia (Perú)</th>
+    </tr>
+    <tr><td>Fluido de trabajo</td><td>Agua destilada (H₂O)</td><td>R134a (CH₂FCF₃)</td><td>Agua + propilenglicol 50%</td><td>No especificado</td></tr>
+    <tr><td>Número de tubos</td><td>1 tubo experimental</td><td>1 tubo experimental</td><td>24 tubos</td><td>8 a 30 tubos (modelos)</td></tr>
+    <tr><td>Área colectora</td><td>0.3279 m²</td><td>0.3279 m²</td><td>3.6 m² (apertura)</td><td>0.80 m² a 2.40 m²</td></tr>
+    <tr><td>η_TH promedio</td><td>31.28%</td><td><strong>42.95%</strong></td><td>45.3% (jul) / 32.9% (ago)</td><td>No reportada</td></tr>
+    <tr><td>η_EX promedio</td><td>No calculada</td><td>No calculada</td><td>2.62% (jul) / 2.15% (ago)</td><td>No reportada</td></tr>
+    <tr><td>T máxima alcanzada</td><td>60°C (salida agua)</td><td>71°C (salida agua)</td><td>324.2 K ≈ 51°C (fluido)</td><td>55°C – 95°C</td></tr>
+    <tr><td>Ángulo inclinación</td><td>45°</td><td>45°</td><td>38°</td><td>28° (GeoEnergia) / 25° (TSV)</td></tr>
+    <tr><td>Material tubo</td><td>Vidrio borosilicato</td><td>Vidrio borosilicato</td><td>Vidrio borosilicato</td><td>Vidrio borosilicato 3.3</td></tr>
+    <tr><td>Diámetro tubo</td><td>58 mm</td><td>58 mm</td><td>58 mm</td><td>58 mm</td></tr>
+    <tr><td>Aislante tanque</td><td>Lana de vidrio</td><td>Lana de vidrio</td><td>Lana mineral 100 mm</td><td>Poliuretano 50 mm</td></tr>
+    <tr><td>Clima de estudio</td><td>Chennai, India (tropical)</td><td>Chennai, India (tropical)</td><td>Lublin, Polonia (continental húmedo)</td><td>Arequipa, Perú (árido andino)</td></tr>
+    <tr><td>Ventaja principal</td><td>Referencia base (sin GWP)</td><td>+37.37% eficiencia</td><td>Datos reales 2 meses, exergía</td><td>Resistencia –25°C, 70% ahorro</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: Los 4 documentos confirman que el diámetro exterior estándar de 58 mm y la longitud de 1800 mm son parámetros universalmente adoptados para tubos evacuados con heat pipe, independientemente del fabricante (India, Polonia o Perú). Esto facilita la interoperabilidad y reemplazo de componentes.</div>
+</div>
+
+<div class="secbar" style="background:#0f1e3a;">📝 QUIZ DE REPASO INTERACTIVO</div>
+
+<div class="block s3" id="quiz-section">
+  <div style="background:#0f1e3a;border-radius:10px;padding:12px 16px;margin-bottom:14px">
+    <p style="font-family:'Oswald',sans-serif;font-size:14px;color:#fff;font-weight:700">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</p>
+    <p style="font-size:11px;color:#94a3b8">Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+    <span style="font-size:12px;color:var(--color-text-secondary)" id="prog-text">Respondidas: 0/10 · Aciertos: 0</span>
+    <div class="progress-bar-wrap" style="flex:1"><div class="progress-bar-fill" id="prog-bar" style="width:0%"></div></div>
+    <span style="font-size:12px;font-weight:600" id="prog-pct">0%</span>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la principal razón por la que los tubos evacuados tienen menor pérdida de calor que los colectores de placa plana?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Usan vidrio borosilicato, que es mejor aislante que el vidrio común</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) El recubrimiento selectivo absorbe el 100% de la radiación solar incidente</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) El vacío entre las capas del tubo elimina las pérdidas convectivas de calor</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) El ángulo de inclinación de 45° maximiza la captación solar durante todo el año</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">En el experimento de Jayanthi et al. (2019), la eficiencia promedio con R134a fue 42.95% vs 31.28% con agua destilada. ¿Cuál es el porcentaje exacto de incremento en eficiencia?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) 11.67%</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) 27.20%</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) 37.37%</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) 42.95%</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Por qué el R134a logra mayor eficiencia que el agua destilada como fluido de trabajo en el heat pipe?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) Porque tiene mayor conductividad térmica (0.58 vs 0.0145 W/mK)</button>
+      <button class="qbtn" data-q="3" data-correct="true">B) Porque su punto de ebullición bajo (–26.1°C) permite evaporarse rápidamente a temperatura ambiente, aumentando el transporte de calor</button>
+      <button class="qbtn" data-q="3" data-correct="false">C) Porque su GWP=1200 indica mayor capacidad de almacenar energía térmica</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Porque tiene mayor calor específico másico que el agua destilada</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">En el estudio de Siuta-Olcha et al. (2020), al aumentar la velocidad del viento de 0.09 a 0.86 m/s, ¿cuánto disminuye la eficiencia térmica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) 41%</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) 45.3%</button>
+      <button class="qbtn" data-q="4" data-correct="true">C) 67%</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) 37.37%</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la eficiencia EXERGÉTICA es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Se basa en el segundo principio de la termodinámica</button>
+      <button class="qbtn" data-q="5" data-correct="false">B) Es siempre menor que la eficiencia energética (térmica) del colector</button>
+      <button class="qbtn" data-q="5" data-correct="true">C) Una eficiencia exergética del 2–3% indica que el colector tiene un diseño deficiente y debe ser reemplazado</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) Usa la temperatura aparente del Sol (T_S = 4500 K) en su cálculo</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Las fichas técnicas peruanas (GeoEnergia) indican que los tubos al vacío tienen un coeficiente de absorción de 0.93–0.96 y emisión de 0.04–0.06. ¿Qué propiedad del tubo permite esta combinación?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) El vidrio borosilicato 3.3, que filtra radiación infrarroja naturalmente</button>
+      <button class="qbtn" data-q="6" data-correct="true">B) El recubrimiento selectivo AL/AL-ALN multicapa, que absorbe la banda solar pero emite poco en el infrarrojo</button>
+      <button class="qbtn" data-q="6" data-correct="false">C) El vacío interior, que impide que la energía se radíe hacia el exterior</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) La temperatura de operación (55°–95°C), que reduce la emisividad del vidrio</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">En Polonia (Siuta-Olcha 2020), julio tuvo mayor eficiencia térmica (45.3%) que agosto (32.9%) pese a menor irradiación. ¿Cuál es la causa principal?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) En julio hay más horas de sol disponibles que en agosto en Polonia</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) En agosto el viento es siempre más fuerte que en julio</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) En agosto la diferencia (T_entrada_fluido − T_ambiente) es mayor, aumentando las pérdidas y disminuyendo la eficiencia según η_TH = F_R(τα) − F_R·U_L·[(T_f,1−T_a)/I_sol]</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) El fluido de trabajo (agua+propilenglicol) pierde eficiencia a temperaturas de agosto</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Para calcular la eficiencia térmica de un HPSC con D=0.058 m y L=1.8 m, ¿cuál es el área colectora correcta?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) A = π/4 × D² = 0.00264 m² (área transversal)</button>
+      <button class="qbtn" data-q="8" data-correct="true">B) A = π × D × L = π × 0.058 × 1.8 = 0.3279 m² (área lateral del cilindro)</button>
+      <button class="qbtn" data-q="8" data-correct="false">C) A = D × L = 0.058 × 1.8 = 0.1044 m² (área rectangular proyectada)</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) A = 2π × (D/2)² = 0.00529 m² (dos bases del cilindro)</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">En el contexto peruano, GeoEnergia Arequipa ofrece termas solares con resistencia hasta –25°C. ¿En qué zonas del Perú es esta característica especialmente importante?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) En la costa peruana (Lima, Ica), donde las temperaturas oceánicas son bajas</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) En la selva amazónica, donde las lluvias pueden enfriar el sistema</button>
+      <button class="qbtn" data-q="9" data-correct="true">C) En zonas altoandinas (Puno, Cusco, Arequipa alta), donde las heladas nocturnas pueden alcanzar temperaturas muy por debajo de cero</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Solo en Arequipa, donde está ubicada la empresa fabricante</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia fundamental entre eficiencia energética (η_TH) y eficiencia exergética (η_EX) al analizar un colector solar?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) La eficiencia energética mide la temperatura del fluido; la exergética mide el caudal</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) La eficiencia energética aplica al colector; la exergética aplica solo al tanque de almacenamiento</button>
+      <button class="qbtn" data-q="10" data-correct="false">C) La eficiencia energética usa la 2ª Ley; la exergética usa la 1ª Ley de la Termodinámica</button>
+      <button class="qbtn" data-q="10" data-correct="true">D) La eficiencia energética (1ª Ley) cuantifica cuánta energía se transfiere; la exergética (2ª Ley) cuantifica la calidad aprovechable de esa energía, incluyendo las irreversibilidades del proceso</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="quiz-result"></div>
+  <button id="reset-btn" style="display:none;margin-top:10px;background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:9px 18px;cursor:pointer;font-size:13px;font-family:'Oswald',sans-serif">🔄 Reiniciar Quiz</button>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">
+    [1] Jayanthi N. et al. (2019). Experimental investigation on the thermal performance of heat pipe solar collector (HPSC). Materials Today: Proceedings. DOI: 10.1016/j.matpr.2019.07.607 ·
+    [2] Siuta-Olcha A., Cholewa T., Dopieralska-Howoruszko K. (2020). Experimental studies of thermal performance of an evacuated tube heat pipe solar collector in Polish climatic conditions. Environmental Science and Pollution Research. DOI: 10.1007/s11356-020-07920-3 ·
+    [3] GeoEnergia Perú (s.f.). Ficha Técnica: Calentador Solar de Agua. Arequipa, Perú. www.geoenergiaperu.com ·
+    [4] Fabricante TSV (s.f.). Termas Solares: Tubos al Vacío — Ficha Técnica Serie TSV.
+  </span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {correct: 'C', text: {
+    C: '✅ ¡Correcto! El vacío entre las paredes del tubo eliminina la convección (que requiere un medio material para ocurrir). Sin aire entre las paredes, el calor no puede escapar por convección, que es el mecanismo de pérdida dominante en colectores convencionales.',
+    _: '❌ Incorrecto. La respuesta correcta es C. El vacío elimina el mecanismo de pérdida convectiva: sin moléculas de aire entre las paredes, no hay transporte convectivo de calor desde el absorbedor hacia el exterior del tubo.'
+  }},
+  2: {correct: 'C', text: {
+    C: '✅ ¡Correcto! El cálculo es: (42.95 − 31.28) / 31.28 × 100 = 11.67/31.28 × 100 = 37.37%. Este es el incremento relativo, no la diferencia absoluta (que sería 11.67 puntos porcentuales).',
+    _: '❌ Incorrecto. La respuesta es C: 37.37%. Incremento relativo = (42.95−31.28)/31.28 × 100. No confundir con la diferencia absoluta (11.67 pp) ni con la eficiencia absoluta del R134a (42.95%).'
+  }},
+  3: {correct: 'B', text: {
+    B: '✅ ¡Correcto! El punto de ebullición bajo de R134a (−26.1°C) significa que opera muy lejos de su punto de ebullición a temperaturas solares normales, con ciclos de evaporación-condensación mucho más activos e intensos.',
+    _: '❌ Incorrecto. La respuesta es B. Paradójicamente, el agua tiene MAYOR conductividad térmica (0.58 vs 0.0145 W/mK), pero el R134a gana por su bajo punto de ebullición, que activa el ciclo del heat pipe más eficientemente a temperaturas solares.'
+  }},
+  4: {correct: 'C', text: {
+    C: '✅ ¡Correcto! El 67% corresponde a la disminución de eficiencia TÉRMICA. La eficiencia exergética disminuye un 41% — esta diferencia de sensibilidad al viento es un resultado clave del estudio polaco.',
+    _: '❌ Incorrecto. La respuesta es C: 67% para η_TH. El 41% corresponde a la disminución de eficiencia EXERGÉTICA, no térmica. El viento afecta más a la transferencia de calor (térmica) que a la calidad de la energía (exergética).'
+  }},
+  5: {correct: 'C', text: {
+    C: '✅ ¡Correcto! La afirmación C es FALSA. Las eficiencias exergéticas típicas de colectores solares son bajas (2–5%) por una razón termodinámica fundamental: se convierte energía de una fuente a 4500 K (el Sol) en calor a ~60–90°C. Esto no indica diseño deficiente — es la realidad de la 2ª Ley.',
+    _: '❌ Incorrecto. La respuesta FALSA es C. No es un error de diseño tener η_EX = 2–3%. La exergía solar es muy alta (fuente a ~4500 K) mientras el calor útil está a solo 60–90°C; la degradación termodinámica es inevitable.'
+  }},
+  6: {correct: 'B', text: {
+    B: '✅ ¡Correcto! El recubrimiento selectivo multicapa AL/AL-ALN funciona como un "filtro espectral": altamente absorbente en el espectro solar visible/UV (0.93–0.96) pero de baja emisividad en el infrarrojo térmico (0.04–0.06), minimizando la reemisión de calor.',
+    _: '❌ Incorrecto. La respuesta es B. El recubrimiento selectivo, no el vidrio ni el vacío, es el responsable de la selectividad espectral. El vacío evita pérdidas convectivas, pero la baja emisividad (0.04–0.06) la provee específicamente el recubrimiento AL/ALN.'
+  }},
+  7: {correct: 'C', text: {
+    C: '✅ ¡Correcto! La ecuación η_TH = F_R(τα) − F_R·U_L·[(T_f,1−T_a)/I_sol] muestra que a mayor cociente (T_f,1−T_a)/I_sol, menor η_TH. En agosto, la temperatura de entrada del fluido al colector era mayor, aumentando el numerador de ese cociente y penalizando la eficiencia.',
+    _: '❌ Incorrecto. La respuesta es C. La clave está en la ecuación de eficiencia: el término (T_f,1−T_a)/I_sol determina las pérdidas relativas. En agosto, el fluido entraba más caliente, elevando ese cociente y bajando la eficiencia a pesar de mayor irradiación.'
+  }},
+  8: {correct: 'B', text: {
+    B: '✅ ¡Correcto! El área lateral del cilindro (A = π·D·L) es la que recibe la radiación solar sobre el tubo evacuado. En el paper de Jayanthi: A = π × 0.058 × 1.8 = 0.3279 m². No es la sección transversal ni el área rectangular proyectada.',
+    _: '❌ Incorrecto. La respuesta es B: A = π × D × L = 0.3279 m². El tubo evacuado es un cilindro que capta radiación en su área lateral (superficie curva exterior). La sección transversal (π/4·D²) es irrelevante para la captación solar.'
+  }},
+  9: {correct: 'C', text: {
+    C: '✅ ¡Correcto! Las zonas altoandinas del Perú (Puno a 3800 m, Cusco, Sierra de Arequipa) registran heladas frecuentes donde la temperatura puede bajar de –10°C a –20°C. La resistencia hasta –25°C permite que la terma funcione sin daños por congelación en estas condiciones extremas.',
+    _: '❌ Incorrecto. La respuesta es C. En la costa y selva peruana las temperaturas rara vez bajan de 10°C. Es en el altiplano andino donde la resistencia a –25°C es crítica: las heladas nocturnas son frecuentes en Puno, Cusco y las zonas altas de Arequipa.'
+  }},
+  10: {correct: 'D', text: {
+    D: '✅ ¡Correcto! La distinción es fundamental: η_TH (1ª Ley) solo cuantifica cuánta energía se transfirió, sin importar su calidad. η_EX (2ª Ley) evalúa qué tan útil es esa energía para realizar trabajo, penalizando las irreversibilidades. Por eso η_EX (2–3%) << η_TH (30–45%).',
+    _: '❌ Incorrecto. La respuesta es D. La eficiencia ENERGÉTICA usa la 1ª Ley (conservación) y la EXERGÉTICA usa la 2ª Ley (calidad/entropía). No confundir: la eficiencia exergética siempre es menor porque incluye las pérdidas por irreversibilidades que la energética ignora.'
+  }}
+};
+
+let answered = 0, correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('qbtn')) return;
+  const btn = e.target;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  const fb = document.getElementById('fb'+q);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('correct');
+  });
+  if (!isCorrect) btn.classList.add('wrong');
+  else correct++;
+  answered++;
+  const letter = btn.textContent.trim()[0];
+  const fd = feedbacks[parseInt(q)];
+  fb.className = 'qfeedback ' + (isCorrect ? 'ok' : 'fail');
+  fb.textContent = fd.text[isCorrect ? fd.correct : '_'];
+  fb.style.display = 'block';
+  const pct = Math.round((answered/10)*100);
+  document.getElementById('prog-text').textContent = 'Respondidas: '+answered+'/10 · Aciertos: '+correct;
+  document.getElementById('prog-bar').style.width = pct+'%';
+  document.getElementById('prog-pct').textContent = pct+'%';
+  if (answered === 10) {
+    const res = document.getElementById('quiz-result');
+    res.style.display = 'block';
+    document.getElementById('reset-btn').style.display = 'inline-block';
+    if (correct <= 4) { res.className=''; res.style.background='#fee2e2'; res.style.color='#991b1b'; res.textContent = '📊 Resultado: '+correct+'/10 — Necesitas repasar el material con más detalle. Revisa las secciones de eficiencia y fluidos de trabajo.'; }
+    else if (correct <= 7) { res.className=''; res.style.background='#fef9c3'; res.style.color='#713f12'; res.textContent = '📊 Resultado: '+correct+'/10 — ¡Buen avance! Refuerza los conceptos de exergía y el análisis paramétrico del viento.'; }
+    else { res.className=''; res.style.background='#dcfce7'; res.style.color='#14532d'; res.textContent = '📊 Resultado: '+correct+'/10 — ¡Excelente dominio del tema! Estás listo para el examen sobre colectores solares de heat pipe.'; }
+    res.style.borderRadius = '10px'; res.style.padding = '12px 16px'; res.style.fontSize = '13px'; res.style.marginTop = '10px';
+  }
+});
+
+document.getElementById('reset-btn').addEventListener('click', function() {
+  answered = 0; correct = 0;
+  document.querySelectorAll('.qbtn').forEach(b => { b.disabled = false; b.classList.remove('correct','wrong'); });
+  document.querySelectorAll('.qfeedback').forEach(f => { f.style.display = 'none'; });
+  document.getElementById('prog-text').textContent = 'Respondidas: 0/10 · Aciertos: 0';
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('prog-pct').textContent = '0%';
+  document.getElementById('quiz-result').style.display = 'none';
+  this.style.display = 'none';
+});
+</script>

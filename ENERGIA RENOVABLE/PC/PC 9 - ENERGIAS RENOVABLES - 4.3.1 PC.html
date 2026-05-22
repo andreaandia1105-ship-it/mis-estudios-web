@@ -1,0 +1,699 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:span 3}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titlebar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{font-size:10px;padding:2px 9px;border-radius:20px;display:inline-block}
+.pill-blue{background:#1e3a5f;color:#93c5fd}
+.pill-green{background:#14532d;color:#86efac}
+.pill-amber{background:#422006;color:#fef08a}
+.pill-teal{background:#042f2e;color:#5eead4}
+.pill-orange{background:#431407;color:#fed7aa}
+.secbar{grid-column:1/-1;padding:7px 14px;border-radius:9px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.03em;display:flex;align-items:center;gap:8px}
+.sec-blue{background:#dbeafe;color:#1e3a8a}
+.sec-green{background:#dcfce7;color:#14532d}
+.sec-amber{background:#fef9c3;color:#713f12}
+.sec-teal{background:#ccfbf1;color:#134e4a}
+.sec-orange{background:#ffedd5;color:#7c2d12}
+.sec-purple{background:#ede9fe;color:#4c1d95}
+@media(prefers-color-scheme:dark){
+  .sec-blue{background:#1e3a5f;color:#93c5fd}
+  .sec-green{background:#14532d;color:#86efac}
+  .sec-amber{background:#422006;color:#fef08a}
+  .sec-teal{background:#042f2e;color:#5eead4}
+  .sec-orange{background:#431407;color:#fed7aa}
+  .sec-purple{background:#2e1065;color:#c4b5fd}
+}
+.bh{font-family:'Oswald',sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.04em}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-amber{background:#fef9c3;color:#713f12}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-red{background:#fee2e2;color:#991b1b}
+@media(prefers-color-scheme:dark){
+  .bh-blue{background:#1e3a5f;color:#93c5fd}
+  .bh-green{background:#14532d;color:#86efac}
+  .bh-amber{background:#422006;color:#fef08a}
+  .bh-teal{background:#042f2e;color:#5eead4}
+  .bh-orange{background:#431407;color:#fed7aa}
+  .bh-purple{background:#2e1065;color:#c4b5fd}
+  .bh-gray{background:#1e293b;color:#94a3b8}
+  .bh-red{background:#450a0a;color:#fca5a5}
+}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;line-height:1.55;background:var(--color-background-secondary);margin-bottom:9px}
+.def-blue{border-left:3px solid #3b82f6}
+.def-green{border-left:3px solid #22c55e}
+.def-amber{border-left:3px solid #f59e0b}
+.def-teal{border-left:3px solid #14b8a6}
+.def-orange{border-left:3px solid #f97316}
+.def-purple{border-left:3px solid #8b5cf6}
+.def-red{border-left:3px solid #ef4444}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-amber{background:#f59e0b}
+.dot-teal{background:#14b8a6}
+.dot-orange{background:#f97316}
+.dot-purple{background:#8b5cf6}
+.dot-red{background:#ef4444}
+.rx{background:#0f172a;color:#7dd3fc;font-family:'Courier New',monospace;font-size:11px;padding:8px 12px;border-radius:7px;text-align:center;line-height:1.7;margin-bottom:9px}
+.rx .result{color:#86efac;font-weight:600}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:8px 11px;margin-bottom:9px;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:9px 12px;margin-bottom:9px;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#f59e0b}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:9px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:9px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:9px}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:6px;font-size:11.5px;font-weight:500}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--color-text-secondary)}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;color:var(--color-text-primary)}
+.tbl tr:last-child td{border-bottom:none}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.num-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0}
+.nb-blue{background:#dbeafe;color:#1e3a8a}
+.nb-green{background:#dcfce7;color:#14532d}
+.nb-amber{background:#fef9c3;color:#713f12}
+.nb-teal{background:#ccfbf1;color:#134e4a}
+@media(prefers-color-scheme:dark){
+  .nb-blue{background:#1e3a5f;color:#93c5fd}
+  .nb-green{background:#14532d;color:#86efac}
+  .nb-amber{background:#422006;color:#fef08a}
+  .nb-teal{background:#042f2e;color:#5eead4}
+}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:10px;margin-top:3px;margin-bottom:2px}
+.stat-bar-fill{height:100%;border-radius:20px}
+.footer-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8;line-height:1.6}
+.qcard{margin-bottom:14px;padding:12px;background:var(--color-background-secondary);border-radius:9px;border:0.5px solid var(--color-border-tertiary)}
+.qnum{font-size:10.5px;color:var(--color-text-secondary);margin-bottom:3px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:9px;line-height:1.5;color:var(--color-text-primary)}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:7px 11px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary)}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;line-height:1.55}
+.qfb-ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfb-no{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+  .qfb-ok{background:#14532d;color:#86efac}
+  .qfb-no{background:#450a0a;color:#fca5a5}
+}
+#quiz-progress-bar .fill{background:#22c55e;transition:width .4s}
+#quiz-results{display:none;padding:14px;border-radius:10px;text-align:center;margin-top:14px}
+#quiz-results h3{font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px}
+#quiz-results p{font-size:13px;margin-bottom:10px}
+.btn-reset{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;cursor:pointer;font-family:'Oswald',sans-serif;letter-spacing:.04em}
+</style>
+
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="titlebar">
+  <h1>☀️ SISTEMAS FOTOVOLTAICOS — DIMENSIONADO PARA VIVIENDA RURAL</h1>
+  <p>Curso: Energías Renovables · PC 8 · Caso base: Abancay, Apurímac (13.76°S · 72.98°O · 16°C) · EDsfv = 540.83 Wh/día</p>
+  <div class="pills">
+    <span class="pill pill-blue">Consumo energético</span>
+    <span class="pill pill-green">Irradiación & HPS</span>
+    <span class="pill pill-amber">Paneles FV</span>
+    <span class="pill pill-teal">Banco de baterías</span>
+    <span class="pill pill-orange">Regulador & Inversor</span>
+    <span class="pill pill-blue">Costos US$</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: INTRODUCCIÓN -->
+<div class="secbar sec-blue">🏗️ PASO I–II · DATOS GENERALES Y CONSUMO DIARIO</div>
+
+<div class="block">
+  <div class="bh bh-blue">¿Qué es un SFV Aislado?</div>
+  <div class="def def-blue">Un Sistema Fotovoltaico Aislado (SFV) convierte energía solar en electricidad sin depender de la red pública. Es la solución estándar para viviendas rurales en Perú donde el tendido eléctrico es económicamente inviable. Funciona con paneles, baterías, regulador e inversor.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Energía requerida (ER)</b>: suma de todos los consumos diarios de los equipos del hogar en Wh/día.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Corrección por inversor</b>: los equipos CA pierden ~13% al pasar por el inversor (eficiencia 87%), lo que eleva la demanda real.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>EDsfv</b>: energía que el sistema FV debe producir, ya corregida también por el regulador (95%).</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué se aplica un factor de corrección del 87% al consumo en CA y no al consumo en CC? Explica la relación entre eficiencia del inversor y demanda al sistema fotovoltaico.</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-amber">Equipos del ejemplo</div>
+  <table class="tbl">
+    <thead><tr><th>#</th><th>Equipo</th><th>W</th><th>h/día</th><th>Wh/día</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Cargador celular</td><td>3.5</td><td>2</td><td>7</td></tr>
+      <tr><td>2</td><td>Laptop</td><td>65</td><td>2</td><td>130</td></tr>
+      <tr><td>3</td><td>5 focos LED</td><td>50</td><td>5</td><td>250</td></tr>
+      <tr><td>4</td><td>Módem wifi</td><td>30</td><td>2</td><td>60</td></tr>
+      <tr style="font-weight:600"><td colspan="3">Subtotal CA</td><td>—</td><td>447 Wh/día</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ ERROR COMÚN: Usar la potencia nominal del equipo sin multiplicar por horas de uso reales. Un foco de 10W encendido 5 h = 50 Wh/día, NO 10 Wh/día.</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-teal">Cadena de cálculo de la demanda</div>
+  <div class="flow">
+    <div class="fbox">Equipos (Wh/día)</div><span class="farrow">→</span>
+    <div class="fbox">÷ η inv (87%)</div><span class="farrow">→</span>
+    <div class="fbox">Eac_corr</div><span class="farrow">→</span>
+    <div class="fbox">÷ η reg (95%)</div><span class="farrow">→</span>
+    <div class="fbox" style="border:1px solid #14b8a6;color:var(--color-text-primary)"><b>EDsfv</b></div>
+  </div>
+  <div class="rx">
+    Eac_corr = 447 ÷ 0.87 = 513.79 Wh/día<br>
+    EDsfv = 513.79 ÷ 0.95 = <span class="result">540.83 Wh/día ← dato clave</span>
+  </div>
+  <div class="item"><span class="dot dot-teal"></span><span>Equipos en CC (12V/24V) evitan la penalización del inversor y son más eficientes en SFV.</span></div>
+</div>
+
+<!-- SECCIÓN 2: IRRADIACIÓN -->
+<div class="secbar sec-green">☀️ PASO III · IRRADIACIÓN SOLAR Y HORA PICO SOLAR (HPS)</div>
+
+<div class="block">
+  <div class="bh bh-green">¿Qué es la HPS?</div>
+  <div class="def def-green">La Hora Pico Solar (HPS) no son horas de sol, sino el número de horas equivalentes de irradiación de 1 kW/m². Por ejemplo: 3.78 HPS significa que ese día recibes la misma energía que si el sol brillara a máxima potencia exactamente 3h 47min. Es el divisor que convierte demanda energética en potencia de panel.</div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Fuente de datos</b>: Atlas Solar del SENAMHI Perú o base de datos NASA POWER. Usar siempre el mes de menor irradiación para garantizar autonomía en el peor escenario.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Factor k</b>: corrección por ángulo de inclinación del panel. El ángulo óptimo es la latitud del lugar + 10°, lo que maximiza captación en invierno (mes crítico en hemisferio sur).</span></div>
+  <div class="rx">
+    Ei = Irradiación × k = 4.56 × 0.83 = 3.785 kWh/m²/día<br>
+    HPS = Ei ÷ 1 kW/m² = <span class="result">3.78 h/día</span>
+  </div>
+</div>
+
+<div class="block">
+  <div class="bh bh-green">Factor k según latitud (Perú)</div>
+  <table class="tbl">
+    <thead><tr><th>Zona</th><th>Latitud</th><th>Ángulo ópt.</th><th>Factor k</th></tr></thead>
+    <tbody>
+      <tr><td>Selva</td><td>0–10°S</td><td>10–20°</td><td>~0.95</td></tr>
+      <tr><td>Sierra norte</td><td>10–15°S</td><td>20–25°</td><td>~0.88</td></tr>
+      <tr style="background:var(--color-background-secondary)"><td><b>Abancay</b></td><td>13.76°S</td><td>25°</td><td><b>0.83</b></td></tr>
+      <tr><td>Puno/Arequipa</td><td>16–18°S</td><td>26–28°</td><td>~0.80</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ Si instalas el panel en horizontal (k=1.00), sobreestimas la producción. Siempre usar el k correspondiente a la latitud del proyecto.</div>
+  <div class="exam">🎯 EXAMEN: Para un proyecto en Puno (16°S) con irradiación de 5.2 kWh/m²/día y factor k=0.80, calcula la HPS y explica por qué NO se usa la irradiación directamente como HPS.</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-teal">Resumen de datos de irradiación — Abancay</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e"><b style="font-size:13px">4.56</b><br><span style="color:var(--color-text-secondary);font-size:10.5px">kWh/m²/día (mes peor)</span></div>
+    <div class="mini" style="border-top:3px solid #f59e0b"><b style="font-size:13px">0.83</b><br><span style="color:var(--color-text-secondary);font-size:10.5px">Factor k (25° inclinación)</span></div>
+    <div class="mini" style="border-top:3px solid #14b8a6"><b style="font-size:13px">3.78</b><br><span style="color:var(--color-text-secondary);font-size:10.5px">HPS resultante (h/día)</span></div>
+  </div>
+  <div class="item"><span class="dot dot-teal"></span><span>Con solo 3.78 HPS, Abancay está por debajo del promedio andino (~4.5–5.5 h). Esto hace que el sistema necesite más paneles que en zonas más soleadas como Arequipa.</span></div>
+</div>
+
+<!-- SECCIÓN 3: PANELES -->
+<div class="secbar sec-amber">🔆 PASOS IV–V · CÁLCULO Y SELECCIÓN DE PANELES</div>
+
+<div class="block s2">
+  <div class="bh bh-amber">¿Cuántos paneles necesito?</div>
+  <div class="def def-amber">El número de paneles se calcula dividiendo la energía que debe producir cada panel (considerando pérdidas reales del 25%) entre la energía que un panel puede entregar en las horas pico disponibles. La eficiencia del 75% contempla pérdidas por temperatura, suciedad, sombras parciales y degradación gradual del panel.</div>
+  <div class="two">
+    <div>
+      <div class="rx">
+        Epp = EDsfv ÷ η_panel = 540.83 ÷ 0.75 = 721.11 Wh<br>
+        Np = Epp ÷ (Pp × HPS) = 721.11 ÷ (150 × 3.78)<br>
+        Np = 1.27 → <span class="result">2 paneles (siempre al entero superior)</span>
+      </div>
+      <div class="warn">⚠️ NUNCA redondear al entero inferior: si necesitas 1.27 paneles y pones 1, el sistema quedará subdimensionado y las baterías no se cargarán completamente.</div>
+    </div>
+    <div>
+      <div class="bh bh-gray">Parámetros del panel elegido</div>
+      <table class="tbl">
+        <thead><tr><th>Parámetro</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Modelo</td><td>Techno Sun 150W</td></tr>
+          <tr><td>Potencia pico (Pp)</td><td>150 Wp</td></tr>
+          <tr><td>V nominal (Vnom)</td><td>18.99 V</td></tr>
+          <tr><td>V pico (Vpico)</td><td>22.42 V</td></tr>
+          <tr><td>Eficiencia usada</td><td>75%</td></tr>
+          <tr><td>Costo por panel</td><td>US$ 354</td></tr>
+          <tr><td>Total paneles</td><td>2 unidades</td></tr>
+          <tr style="font-weight:600"><td>Subtotal paneles</td><td>US$ 708</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Qué diferencia hay entre el voltaje nominal (Vnom) y el voltaje pico (Vpico) de un panel? ¿En qué paso del dimensionado se usa cada uno y por qué?</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-gray">Comparativo de paneles disponibles</div>
+  <table class="tbl">
+    <thead><tr><th>Modelo</th><th>Wp</th><th>Np</th><th>Costo</th></tr></thead>
+    <tbody>
+      <tr><td>BP Solar 85W</td><td>85</td><td>3</td><td>$1,182</td></tr>
+      <tr><td>Kyocera KC80</td><td>80</td><td>3</td><td>$837</td></tr>
+      <tr><td>JC Solar 80D</td><td>80</td><td>3</td><td>$1,104</td></tr>
+      <tr><td>BP Solar 75W</td><td>75</td><td>3</td><td>$1,497</td></tr>
+      <tr style="background:#dcfce7"><td><b>✅ Techno Sun 150W</b></td><td>150</td><td>2</td><td><b>$708</b></td></tr>
+    </tbody>
+  </table>
+  <div class="item"><span class="dot dot-green"></span><span>Usar paneles de mayor potencia unitaria reduce el número de paneles y el costo total, a pesar de que el precio individual sea más alto.</span></div>
+</div>
+
+<!-- SECCIÓN 4: BATERÍAS -->
+<div class="secbar sec-teal">🔋 PASO VI · BANCO DE BATERÍAS</div>
+
+<div class="block">
+  <div class="bh bh-teal">¿Por qué necesitamos baterías?</div>
+  <div class="def def-teal">Las baterías almacenan la energía generada durante el día para utilizarla de noche o durante días nublados. El banco se dimensiona para garantizar la "autonomía" deseada: los días que el sistema puede funcionar sin ningún aporte solar. A mayor autonomía, mayor costo y peso del sistema.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Autonomía (AUT)</b>: días de reserva. 3 días es el estándar para zonas con clima variable como la sierra peruana.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Profundidad de descarga (PD)</b>: fracción de la capacidad que se puede usar. Para baterías fotovoltaicas: 60%. Para automotivas: máximo 50% (si las usas al 60%, se dañan antes).</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Factor de temperatura</b>: el frío reduce la capacidad efectiva de la batería. A 16°C (Abancay), la batería rinde 11% menos que a 27°C, entonces necesitas 11% más de capacidad instalada.</span></div>
+</div>
+
+<div class="block">
+  <div class="bh bh-teal">Fórmulas del banco de baterías</div>
+  <div class="rx">
+    Pot_banco = (AUT × EDsfv) ÷ (η_bat × PD)<br>
+    Pot_banco = (3 × 540.83) ÷ (0.90 × 0.60) = 3,004.6 Wh<br><br>
+    Corrección T°: 16°C → factor = 1.11<br>
+    Pot_corr = 3,004.6 × 1.11 = 3,335.1 Wh<br><br>
+    Nb = 3,335.1 ÷ (110 Ah × 12 V) = 2.53<br>
+    → <span class="result">3 baterías (110 Ah · 12V) siempre al entero superior</span>
+  </div>
+  <div class="warn">⚠️ ERROR CRÍTICO: Usar baterías automotivas (PD=20%) en lugar de fotovoltaicas (PD=60%). Con PD=20%, Nb = 3,335 ÷ 264 = 12.6 → 13 baterías (en lugar de 3). ¡Cuatro veces más caras!</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-purple">Factor de corrección por temperatura</div>
+  <table class="tbl">
+    <thead><tr><th>T° amb.</th><th>Factor</th><th>Efecto</th></tr></thead>
+    <tbody>
+      <tr><td>27°C</td><td>1.00</td><td>Capacidad nominal base</td></tr>
+      <tr><td>21°C</td><td>1.04</td><td>+4% de capacidad requerida</td></tr>
+      <tr style="background:var(--color-background-secondary)"><td><b>16°C (Abancay)</b></td><td><b>1.11</b></td><td>+11% → valor usado</td></tr>
+      <tr><td>10°C</td><td>1.19</td><td>+19% (sierra alta)</td></tr>
+      <tr><td>4°C</td><td>1.30</td><td>+30% (altiplano, Puno)</td></tr>
+      <tr><td>−7°C</td><td>1.59</td><td>+59% (zonas heladas)</td></tr>
+    </tbody>
+  </table>
+  <div class="exam">🎯 EXAMEN: Para un proyecto en Puno (4°C), ¿por qué se requieren más baterías que en Abancay (16°C) aunque la demanda energética sea la misma? Calcula la diferencia en capacidad requerida.</div>
+</div>
+
+<!-- SECCIÓN 5: REGULADOR E INVERSOR -->
+<div class="secbar sec-orange">⚡ PASOS VII–VIII · REGULADOR DE CARGA E INVERSOR</div>
+
+<div class="block">
+  <div class="bh bh-orange">Regulador de carga</div>
+  <div class="def def-orange">El regulador controla el flujo de corriente entre los paneles y las baterías, impidiendo sobrecargas (que acortan la vida de la batería) y descargas excesivas. Se dimensiona por corriente máxima, no por potencia. El factor de seguridad del 25% cubre transitorios de irradiación en días de nubes dispersas.</div>
+  <div class="rx">
+    Imax_gen = Ppico_panel ÷ Vpico = 150 ÷ 22.42 = 6.69 A<br>
+    N_reg = Np × Imax × 1.25 ÷ I_regulador<br>
+    N_reg = 2 × 6.69 × 1.25 ÷ 10 = 1.67<br>
+    → <span class="result">2 reguladores de 10A (Morningstar SHS-10)</span>
+  </div>
+  <div class="item"><span class="dot dot-orange"></span><span>Si se elige un regulador de 20A en lugar de 10A, el resultado sería N_reg = 0.84 → 1 regulador. Esto reduce costos y simplifica la instalación.</span></div>
+</div>
+
+<div class="block">
+  <div class="bh bh-orange">Inversor CC→CA</div>
+  <div class="def def-orange">El inversor convierte la corriente continua de las baterías (12V CC) en corriente alterna (220V CA) para alimentar los equipos domésticos convencionales. Su potencia nominal debe superar la suma de todos los equipos CA que podrían encenderse simultáneamente (Pac = 108.5W).</div>
+  <div class="rx">
+    Ip = Pac ÷ η_inversor = 108.5 ÷ 0.85 = 127.6 W<br>
+    N_inv = 127.6 ÷ 300 W = 0.43<br>
+    → <span class="result">1 inversor de 300W (redondear siempre al entero superior)</span>
+  </div>
+  <div class="warn">⚠️ La potencia del inversor se elige por la potencia simultánea (Pac), no por la energía diaria. Si agregas una refrigeradora (350W), el inversor de 300W quedaría subdimensionado y se dañaría.</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-gray">Resumen del sistema</div>
+  <div class="flow">
+    <div class="fbox">☀️ 2 Paneles 150W</div><span class="farrow">→</span>
+    <div class="fbox">🔌 2 Reguladores 10A</div><span class="farrow">→</span>
+    <div class="fbox">🔋 3 Baterías 110Ah</div><span class="farrow">→</span>
+    <div class="fbox">⚡ 1 Inversor 300W</div><span class="farrow">→</span>
+    <div class="fbox" style="border:1px solid #f97316">🏠 220V Hogar</div>
+  </div>
+  <table class="tbl">
+    <thead><tr><th>Componente</th><th>Modelo</th><th>Parámetro clave</th></tr></thead>
+    <tbody>
+      <tr><td>2 Paneles</td><td>Techno Sun 150W</td><td>150 Wp · 22.42 V pico</td></tr>
+      <tr><td>2 Reguladores</td><td>Morningstar SHS-10</td><td>10 A corriente nominal</td></tr>
+      <tr><td>3 Baterías</td><td>110 Ah · 12V FV</td><td>PD=60% · η=90%</td></tr>
+      <tr><td>1 Inversor</td><td>Genérico 300W</td><td>300 W salida CA · η=85%</td></tr>
+    </tbody>
+  </table>
+  <div class="exam">🎯 EXAMEN: Explica por qué el regulador se dimensiona usando el voltaje PICO del panel (Vpico = 22.42V) y no el voltaje nominal (Vnom = 18.99V). ¿Qué consecuencia tendría usar Vnom?</div>
+</div>
+
+<!-- SECCIÓN 6: COSTOS -->
+<div class="secbar sec-purple">💰 PASO IX · ANÁLISIS DE COSTOS</div>
+
+<div class="block s2">
+  <div class="bh bh-purple">Presupuesto del sistema</div>
+  <div class="two">
+    <div>
+      <div class="rx">
+        Subtotal equipos:<br>
+        $708 + $976 + $243 + $120 = $2,047<br><br>
+        Instalación y transporte (+18%):<br>
+        $2,047 × 1.18 = <span class="result">≈ US$ 2,415 total</span>
+      </div>
+      <div class="item"><span class="dot dot-purple"></span><span><b>Recuperación de inversión</b>: 4–6 años en zonas sin acceso a red eléctrica, comparado con grupos electrógenos a gasolina (S/150–300/mes de combustible).</span></div>
+      <div class="item"><span class="dot dot-purple"></span><span><b>Vida útil</b>: paneles 25–30 años, baterías 5–8 años (requieren reemplazo), regulador e inversor 10–15 años.</span></div>
+    </div>
+    <div>
+      <div class="bh bh-gray">Distribución del costo</div>
+      <div style="margin-bottom:7px">
+        <div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:2px"><span>🔋 Baterías (3 unid.)</span><span><b>$976 · 40%</b></span></div>
+        <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:40%;background:#3b82f6"></div></div>
+      </div>
+      <div style="margin-bottom:7px">
+        <div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:2px"><span>☀️ Paneles (2 unid.)</span><span><b>$708 · 29%</b></span></div>
+        <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:29%;background:#f59e0b"></div></div>
+      </div>
+      <div style="margin-bottom:7px">
+        <div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:2px"><span>🔧 Instalación (18%)</span><span><b>$368 · 15%</b></span></div>
+        <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:15%;background:#ef4444"></div></div>
+      </div>
+      <div style="margin-bottom:7px">
+        <div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:2px"><span>⚡ Reguladores</span><span><b>$243 · 10%</b></span></div>
+        <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:10%;background:#94a3b8"></div></div>
+      </div>
+      <div style="margin-bottom:7px">
+        <div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:2px"><span>🔄 Inversor</span><span><b>$120 · 5%</b></span></div>
+        <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:5%;background:#22c55e"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ DATO INTEGRADOR: Las baterías representan el 40% del costo inicial Y el 80–90% del mantenimiento a 25 años. Si en 10 años cambias las baterías 2 veces ($976 × 2), eso ya supera el costo de los paneles. Priorizar baterías fotovoltaicas de larga vida desde el inicio.</div>
+</div>
+
+<div class="block">
+  <div class="bh bh-gray">¿Qué equipos puede soportar?</div>
+  <table class="tbl">
+    <thead><tr><th>Equipo</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td>5 focos LED, laptop, cargador, módem</td><td style="color:#16a34a">✅ Incluido</td></tr>
+      <tr><td>Radio / pequeño equipo</td><td style="color:#d97706">⚠️ Con cuidado</td></tr>
+      <tr><td>TV LCD pequeña</td><td style="color:#d97706">⚠️ Verificar</td></tr>
+      <tr><td>Refrigeradora (350W)</td><td style="color:#dc2626">❌ No recomendado</td></tr>
+      <tr><td>Plancha / lavadora</td><td style="color:#dc2626">❌ Demasiado consumo</td></tr>
+      <tr><td>Ducha eléctrica (3,500W)</td><td style="color:#dc2626">❌ Imposible</td></tr>
+    </tbody>
+  </table>
+  <div class="exam">🎯 EXAMEN: El costo de instalación se estima como un 18% del subtotal de equipos. ¿Por qué esta cifra varía significativamente en proyectos rurales de zonas remotas del Perú? Nombra al menos 3 factores que la aumentan.</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="secbar sec-blue">📊 TABLA INTEGRADORA — TODOS LOS PASOS EN UNA VISTA</div>
+
+<div class="block s3">
+  <div class="bh bh-blue">Resumen completo del dimensionado — Abancay, Apurímac</div>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Paso</th>
+        <th>Concepto</th>
+        <th>Variable clave</th>
+        <th>Fórmula/Criterio</th>
+        <th>Resultado</th>
+        <th>Equipo seleccionado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="num-badge nb-blue">I</span></td><td>Datos generales</td><td>Ubicación</td><td>Latitud → ángulo óptimo</td><td>13.76°S → 25°</td><td>—</td></tr>
+      <tr><td><span class="num-badge nb-blue">II</span></td><td>Consumo diario</td><td>EDsfv</td><td>(ΣWh/día ÷ 0.87) ÷ 0.95</td><td>540.83 Wh/día</td><td>—</td></tr>
+      <tr><td><span class="num-badge nb-green">III</span></td><td>Irradiación / HPS</td><td>HPS</td><td>4.56 × 0.83 ÷ 1</td><td>3.78 h/día</td><td>—</td></tr>
+      <tr><td><span class="num-badge nb-amber">IV-V</span></td><td>Paneles FV</td><td>Np</td><td>EDsfv ÷ (0.75 × Pp × HPS)</td><td>1.27 → 2 und.</td><td>Techno Sun 150W — $708</td></tr>
+      <tr><td><span class="num-badge nb-teal">VI</span></td><td>Banco baterías</td><td>Nb</td><td>(3×EDsfv)÷(0.9×0.6) × 1.11 ÷ Vnom</td><td>2.53 → 3 und.</td><td>110Ah 12V FV — $976</td></tr>
+      <tr><td><span class="num-badge nb-blue">VII</span></td><td>Regulador</td><td>N_reg</td><td>Np × (Pp/Vpico) × 1.25 ÷ I_reg</td><td>1.67 → 2 und.</td><td>Morningstar 10A — $243</td></tr>
+      <tr><td><span class="num-badge nb-blue">VIII</span></td><td>Inversor</td><td>N_inv</td><td>Pac ÷ η_inv ÷ P_modelo</td><td>0.43 → 1 und.</td><td>Genérico 300W — $120</td></tr>
+      <tr style="font-weight:600"><td><span class="num-badge nb-blue">IX</span></td><td>Costos</td><td>Total</td><td>Subtotal × 1.18</td><td colspan="2">US$ 2,047 equipos → US$ 2,415 total instalado</td></tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: El orden del dimensionado es ESTRICTO. El EDsfv (Paso II) es el dato de entrada de TODOS los cálculos posteriores. Un error en la estimación del consumo se propaga y afecta el número de paneles, baterías, regulador e inversor — y por ende, el costo total. Verificar siempre el inventario de equipos antes de continuar.</div>
+</div>
+
+<!-- QUIZ -->
+<div class="block s3" id="quiz-section">
+  <div style="background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px">
+    <div style="font-family:'Oswald',sans-serif;font-size:15px;font-weight:700">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+    <div style="font-size:11px;color:#94a3b8;margin-top:3px">Marca tu respuesta y descubre si es correcta. ¡Cubre todo el dimensionado FV!</div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--color-text-secondary);margin-bottom:6px">
+    <span id="quiz-progress-text">Pregunta 0 de 10 respondidas</span>
+    <span id="quiz-score-text">Aciertos: 0</span>
+  </div>
+  <div class="stat-bar-wrap" id="quiz-progress-bar" style="margin-bottom:14px">
+    <div class="fill stat-bar-fill" style="width:0%"></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <div class="qnum">Pregunta 1 / 10</div>
+    <div class="qtext">En el dimensionado de un SFV, ¿por qué se divide el consumo en CA entre la eficiencia del inversor (87%) ANTES de calcular el EDsfv?</div>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Porque el inversor genera calor y hay que compensar esa pérdida térmicamente</button>
+      <button class="qbtn" data-q="1" data-correct="true">B) Porque el inversor consume más energía de la que entrega: para producir 447 Wh útiles, necesita recibir 447÷0.87 = 513.8 Wh de la batería</button>
+      <button class="qbtn" data-q="1" data-correct="false">C) Para convertir unidades de CA a CC en el cálculo</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Porque el 13% restante se pierde en el regulador, no en el inversor</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <div class="qnum">Pregunta 2 / 10</div>
+    <div class="qtext">¿Qué representa exactamente la Hora Pico Solar (HPS = 3.78 h/día) para el ejemplo de Abancay?</div>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) Las horas del día en que el sol brilla directamente sobre los paneles sin obstrucción</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) El tiempo total de luz solar desde el amanecer hasta el atardecer</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) Las horas equivalentes de irradiación de 1 kW/m², es decir, en 3.78 h a potencia máxima se recibe la misma energía que durante todo el día real</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) El promedio anual de horas de sol en Abancay según el SENAMHI</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <div class="qnum">Pregunta 3 / 10</div>
+    <div class="qtext">El factor k = 0.83 para Abancay (13.76°S) se determina inclinando el panel a 25°. ¿Por qué NO se instala horizontal (k=1.00) si así se captaría irradiación desde todas las direcciones?</div>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) Porque los paneles horizontales se ensucian más con lluvia y polvo</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) Porque k=1.00 no es un valor válido en las tablas de irradiación del SENAMHI</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) Porque la inclinación óptima maximiza la captación en el mes crítico (invierno del hemisferio sur). Un panel horizontal sobreestima la producción real y lleva a un sistema subdimensionado</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Por razones estructurales: la carga de viento es mayor en paneles inclinados</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <div class="qnum">Pregunta 4 / 10</div>
+    <div class="qtext">Al calcular Np = 1.27 paneles, el resultado se redondea a 2. ¿Qué consecuencia concreta tendría instalar solo 1 panel de 150W?</div>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="true">A) El panel produciría solo 78.8% de la energía demandada diariamente. Las baterías nunca llegarían al 100% de carga y se degradarían prematuramente por descargas sucesivas incompletas</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) El sistema funcionaría normalmente pero habría que reducir el número de baterías a 2</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) El inversor se vería obligado a trabajar a mayor voltaje, lo que lo dañaría</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Se necesitaría un regulador de mayor amperaje para compensar</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <div class="qnum">Pregunta 5 / 10</div>
+    <div class="qtext">¿Cuál es la diferencia crítica entre usar baterías AUTOMOTIVAS y baterías FOTOVOLTAICAS en un SFV?</div>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Las fotovoltaicas son de mayor voltaje (24V) mientras que las automotivas son de 12V</button>
+      <button class="qbtn" data-q="5" data-correct="false">B) Las automotivas tienen mayor densidad de energía y duran más en aplicaciones solares</button>
+      <button class="qbtn" data-q="5" data-correct="true">C) Las fotovoltaicas toleran descargas del 60%, mientras que las automotivas solo el 20–50%. Usar automotivas al 60% las destruye rápidamente y casi triplica el número necesario si se usa PD=20%</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) Las fotovoltaicas no necesitan corrección por temperatura porque están diseñadas para exteriores</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <div class="qnum">Pregunta 6 / 10</div>
+    <div class="qtext">El banco de baterías de Abancay requiere corrección por temperatura (factor 1.11 a 16°C). ¿Qué pasaría si se omite esta corrección y se instalan solo 2 baterías?</div>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) Nada relevante: el factor de temperatura es un margen de seguridad conservador, no un requisito físico</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) Las baterías entregarían más energía de la calculada por efecto del frío andino</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) La capacidad real del banco sería insuficiente: a 16°C las baterías rinden ~11% menos, por lo que 2 baterías no garantizarían los 3 días de autonomía diseñados y el sistema fallaría antes de lo previsto</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Se necesitaría un regulador de mayor corriente para compensar la menor capacidad</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <div class="qnum">Pregunta 7 / 10</div>
+    <div class="qtext">El regulador se calcula con la fórmula N_reg = Np × (Pp/Vpico) × 1.25 ÷ I_reg. ¿Por qué se usa el voltaje PICO (22.42V) y NO el voltaje nominal (18.99V)?</div>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) El voltaje pico es el valor estándar que aparece en todas las fichas técnicas de reguladores</button>
+      <button class="qbtn" data-q="7" data-correct="true">B) Porque la corriente máxima que debe soportar el regulador ocurre cuando el panel opera a su punto de máxima potencia (voltaje pico). Usar el nominal subestimaría la corriente real y podría quemar el regulador</button>
+      <button class="qbtn" data-q="7" data-correct="false">C) El voltaje nominal es el voltaje de las baterías, no del panel, y no sirve para este cálculo</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) El factor de seguridad del 25% ya compensa la diferencia entre Vnom y Vpico</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <div class="qnum">Pregunta 8 / 10</div>
+    <div class="qtext">Un cliente en Abancay quiere agregar una refrigeradora de 350W al sistema diseñado (inversor de 300W, 2 paneles). ¿Cuál es la afirmación CORRECTA?</div>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Se puede conectar directamente porque la refrigeradora trabaja a ciclos y no siempre consume 350W</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Solo hay que cambiar el inversor a uno de 500W, los demás componentes no cambian</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Hay que redimensionar completamente el sistema: el inversor (300W < 350W), los paneles (mayor EDsfv) y posiblemente las baterías, porque la demanda diaria aumenta significativamente</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) El regulador actual de 10A es suficiente; solo habría que agregar un segundo regulador en paralelo</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <div class="qnum">Pregunta 9 / 10</div>
+    <div class="qtext">En el contexto peruano, ¿cuál es la principal razón por la que las baterías representan el componente de mayor costo de mantenimiento a largo plazo en un SFV rural?</div>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Porque se oxidan con la humedad de la sierra y la selva, requiriendo reemplazo frecuente del casing</button>
+      <button class="qbtn" data-q="9" data-correct="true">B) Porque su vida útil (5–8 años) es mucho menor que la de los paneles (25–30 años), y su reemplazo en zonas remotas incluye transporte y mano de obra, lo que puede duplicar el costo del equipo</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) Porque el costo de importación de baterías fotovoltaicas en Perú es el más alto de Sudamérica</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Porque la normativa peruana obliga a reemplazarlas cada 3 años como medida de seguridad eléctrica</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <div class="qnum">Pregunta 10 / 10</div>
+    <div class="qtext">¿Cuál de las siguientes afirmaciones sobre el EDsfv (540.83 Wh/día) es FALSA?</div>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) El EDsfv es la energía real que los paneles deben producir, ya descontadas las pérdidas del inversor y el regulador</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) Un error en el inventario de equipos (ej. olvidar un equipo) provocaría un EDsfv subestimado y un sistema subdimensionado</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) Si los equipos fueran todos en CC (12V), el EDsfv sería mayor que 540.83 Wh/día porque los equipos CC necesitan pasar por el inversor</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) El EDsfv se usa como dato de entrada tanto para calcular el número de paneles como la capacidad del banco de baterías</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <!-- Resultados -->
+  <div id="quiz-results">
+    <h3 id="quiz-result-title"></h3>
+    <p id="quiz-result-msg"></p>
+    <button class="btn-reset" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-bar">
+  <div>
+    <div class="ft">REFERENCIAS</div>
+    <div class="fc">
+      • Hoja de cálculo SFV — Dimensionado vivienda rural (Abancay, Apurímac) · Curso Energías Renovables<br>
+      • SENAMHI Perú — Atlas Solar Nacional · NASA POWER (power.larc.nasa.gov)<br>
+      • IEC 60364-7-712 · Especificaciones técnicas: Techno Sun 150W, Morningstar SHS-10, Baterías FV 110Ah/12V
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var answered = 0, correct_count = 0;
+
+var feedbacks = {
+  1: { correct: "✅ ¡Correcto! El inversor tiene una eficiencia del 87%: por cada 100 Wh que necesitas entregar a los equipos CA, el inversor consume 100÷0.87 = 114.9 Wh de la batería. Esa diferencia del 13% hay que 'producirla' con los paneles.", wrong: "❌ Incorrecto. La clave está en la eficiencia del inversor como convertidor de energía. Si η=87%, entonces necesita recibir más energía de la que entrega. La respuesta correcta es B." },
+  2: { correct: "✅ ¡Correcto! La HPS es un concepto equivalente: simplifica el cálculo al expresar la energía solar diaria como horas de irradiación a 1 kW/m². Es el 'divisor' que convierte Wh de demanda en W de panel necesario.", wrong: "❌ Incorrecto. La HPS no son las horas de luz solar real. Es un valor equivalente (energía total diaria ÷ 1 kW/m²) que facilita los cálculos. La respuesta correcta es C." },
+  3: { correct: "✅ ¡Correcto! El mes crítico en el hemisferio sur es el invierno (junio–agosto), cuando el sol está más bajo. Inclinando el panel a latitud+10°, se maximiza la captación precisamente en esos meses desfavorables.", wrong: "❌ Incorrecto. La razón técnica es que la inclinación optimiza la captación en el mes de menor irradiación, que es el mes de diseño. Un panel horizontal sobreestima la producción real. La respuesta correcta es C." },
+  4: { correct: "✅ ¡Correcto! Con 1 solo panel (150W × 3.78h × 0.75 = 425.25 Wh/día vs 540.83 Wh demandados), el sistema produciría solo el 78.6% de lo necesario. Las baterías se irían descargando progresivamente hasta fallar.", wrong: "❌ Incorrecto. Con 1 panel se produce menos energía de la demandada cada día. Las baterías nunca se recuperan completamente y se degradan. La respuesta correcta es A." },
+  5: { correct: "✅ ¡Correcto! La profundidad de descarga (PD) es el parámetro definitivo. Una batería automotiva descargada al 60% repetidamente pierde capacidad en pocas semanas. Las FV están diseñadas para ciclos profundos.", wrong: "❌ Incorrecto. La diferencia clave es la profundidad de descarga permitida. Las automotivas colapsan con ciclos profundos. La respuesta correcta es C." },
+  6: { correct: "✅ ¡Correcto! A 16°C, la batería entrega aproximadamente un 11% menos de su capacidad nominal. Con 2 baterías sin corrección: 2×110×12 = 2,640 Wh, pero la demanda era 3,335 Wh. El sistema fallaría el tercer día sin sol.", wrong: "❌ Incorrecto. El frío reduce físicamente la capacidad de las baterías. No es un margen teórico sino un hecho electroquímico: las reacciones internas son más lentas a bajas temperaturas. La respuesta correcta es C." },
+  7: { correct: "✅ ¡Correcto! La corriente máxima del panel se da en su punto de máxima potencia (voltaje pico). Si usas el voltaje nominal (más bajo), calcularías una corriente más alta, lo que paradójicamente llevaría a sobredimensionar el regulador, pero el problema real es conceptual: el cálculo de corriente debe hacerse en el punto real de operación.", wrong: "❌ Incorrecto. El voltaje pico es el voltaje al que opera el panel en su punto de máxima potencia (PPmax), que es el punto de operación real del sistema. Ahí se genera la corriente máxima. La respuesta correcta es B." },
+  8: { correct: "✅ ¡Correcto! Agregar una refrigeradora cambia todo el sistema: la potencia simultánea supera el inversor (300W < 350W), el consumo diario aumenta en ~4,200 Wh/día (350W × 12h), lo que eleva el EDsfv y exige más paneles y baterías.", wrong: "❌ Incorrecto. El diseño de un SFV es integral: la demanda afecta paneles, baterías y todos los equipos de control. No basta cambiar un solo componente. La respuesta correcta es C." },
+  9: { correct: "✅ ¡Correcto! Los paneles duran 25–30 años, pero las baterías 5–8 años. En 25 años cambiarás las baterías 3–5 veces. En zonas remotas, el transporte puede valer tanto como el equipo. Por eso, baterías de calidad desde el inicio son la decisión más rentable.", wrong: "❌ Incorrecto. El factor determinante es la vida útil corta de las baterías (5–8 años vs 25–30 de los paneles) combinada con el costo logístico de reemplazo en zonas rurales del Perú. La respuesta correcta es B." },
+  10: { correct: "✅ ¡Correcto! C es falsa: los equipos en CC NO pasan por el inversor, por lo tanto no sufren la penalización del 87%. Si todo fuera CC, el EDsfv sería MENOR, no mayor. Los equipos CC son más eficientes en SFV.", wrong: "❌ Incorrecto. La afirmación falsa es C: los equipos CC van directamente de la batería al equipo sin pasar por el inversor. Eso reduce la pérdida del 13% del inversor y disminuye el EDsfv. La respuesta correcta es C." }
+};
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('qbtn')) return;
+  var btn = e.target;
+  var qn = parseInt(btn.dataset.q);
+  var isCorrect = btn.dataset.correct === 'true';
+  var card = document.getElementById('q' + qn);
+  var allBtns = card.querySelectorAll('.qbtn');
+  var fb = document.getElementById('fb' + qn);
+
+  allBtns.forEach(function(b) {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('correct');
+  });
+  if (!isCorrect) btn.classList.add('wrong');
+
+  fb.style.display = 'block';
+  fb.className = 'qfeedback ' + (isCorrect ? 'qfb-ok' : 'qfb-no');
+  fb.innerHTML = isCorrect ? feedbacks[qn].correct : feedbacks[qn].wrong;
+
+  answered++;
+  if (isCorrect) correct_count++;
+
+  document.getElementById('quiz-progress-text').textContent = 'Pregunta ' + answered + ' de 10 respondidas';
+  document.getElementById('quiz-score-text').textContent = 'Aciertos: ' + correct_count;
+  document.querySelector('#quiz-progress-bar .fill').style.width = (answered * 10) + '%';
+
+  if (answered === 10) {
+    var res = document.getElementById('quiz-results');
+    res.style.display = 'block';
+    var title = document.getElementById('quiz-result-title');
+    var msg = document.getElementById('quiz-result-msg');
+    var score = correct_count + ' / 10 respuestas correctas';
+    if (correct_count <= 4) {
+      res.style.background = '#fee2e2'; res.style.color = '#991b1b';
+      title.textContent = score;
+      msg.textContent = 'Necesitas repasar el material. Vuelve a los bloques de fórmulas y la tabla integradora.';
+    } else if (correct_count <= 7) {
+      res.style.background = '#fef9c3'; res.style.color = '#713f12';
+      title.textContent = score;
+      msg.textContent = '¡Buen avance! Repasa los errores y presta atención a los factores de corrección.';
+    } else {
+      res.style.background = '#dcfce7'; res.style.color = '#14532d';
+      title.textContent = score;
+      msg.textContent = '¡Excelente dominio del tema! Estás listo para el examen de SFV.';
+    }
+  }
+});
+
+function resetQuiz() {
+  answered = 0; correct_count = 0;
+  document.getElementById('quiz-progress-text').textContent = 'Pregunta 0 de 10 respondidas';
+  document.getElementById('quiz-score-text').textContent = 'Aciertos: 0';
+  document.querySelector('#quiz-progress-bar .fill').style.width = '0%';
+  document.getElementById('quiz-results').style.display = 'none';
+  for (var i = 1; i <= 10; i++) {
+    var card = document.getElementById('q' + i);
+    card.querySelectorAll('.qbtn').forEach(function(b) {
+      b.disabled = false;
+      b.classList.remove('correct','wrong');
+    });
+    var fb = document.getElementById('fb' + i);
+    fb.style.display = 'none';
+    fb.innerHTML = '';
+    fb.className = 'qfeedback';
+  }
+}
+</script>
