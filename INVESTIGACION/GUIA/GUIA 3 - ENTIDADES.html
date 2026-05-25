@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Canvas · Normativas Meteorológicas Perú · Todos los Sectores</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #0f1623;
+  --bg2:       #141d2e;
+  --bg3:       #1a2540;
+  --surface:   #1e2d45;
+  --surface2:  #243452;
+  --border:    rgba(255,255,255,0.07);
+
+  --blue:      #3b82f6;
+  --blue-d:    rgba(59,130,246,0.12);
+  --blue-b:    rgba(59,130,246,0.25);
+
+  --green:     #22c55e;
+  --green-d:   rgba(34,197,94,0.12);
+
+  --red:       #ef4444;
+  --red-d:     rgba(239,68,68,0.12);
+
+  --yellow:    #eab308;
+  --yellow-d:  rgba(234,179,8,0.12);
+
+  --purple:    #a855f7;
+  --purple-d:  rgba(168,85,247,0.12);
+
+  --teal:      #14b8a6;
+  --teal-d:    rgba(20,184,166,0.12);
+
+  --orange:    #f97316;
+  --orange-d:  rgba(249,115,22,0.12);
+
+  --gray:      #94a3b8;
+  --gray-d:    rgba(148,163,184,0.10);
+
+  --pink:      #ec4899;
+  --pink-d:    rgba(236,72,153,0.12);
+
+  --text:      #e2eaf4;
+  --muted:     #7a90a8;
+
+  --font-head: 'Oswald', sans-serif;
+  --font-body: 'Source Sans 3', sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:#f0f4fa; --bg2:#e8eef8; --bg3:#dde5f2;
+    --surface:#ffffff; --surface2:#f5f8ff;
+    --border:rgba(0,0,0,0.08);
+    --text:#1e2d45; --muted:#5a7090;
+    --blue-d:rgba(59,130,246,0.08);
+    --green-d:rgba(34,197,94,0.08);
+    --red-d:rgba(239,68,68,0.08);
+    --yellow-d:rgba(234,179,8,0.08);
+    --purple-d:rgba(168,85,247,0.08);
+    --teal-d:rgba(20,184,166,0.08);
+    --orange-d:rgba(249,115,22,0.08);
+    --gray-d:rgba(148,163,184,0.06);
+    --pink-d:rgba(236,72,153,0.08);
+  }
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.6}
+
+.canvas{max-width:1400px;margin:0 auto;padding:20px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+
+/* ── TITLE BAR ── */
+.title-bar{grid-column:1/-1;background:linear-gradient(135deg,#0d1f3c,#1e3a6e,#0d2040);border-radius:14px;padding:28px 32px;border:1px solid var(--border);position:relative;overflow:hidden}
+.title-bar::before{content:'';position:absolute;right:-40px;top:-40px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.15),transparent 70%);pointer-events:none}
+.title-bar h1{font-family:var(--font-head);font-size:28px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:.5px}
+.title-bar .sub{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:16px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85);background:rgba(255,255,255,.07)}
+
+/* ── SECTION HEADER ── */
+.sec-bar{grid-column:1/-1;border-radius:8px;padding:10px 18px;display:flex;align-items:center;gap:10px;margin-top:6px}
+.sec-bar h2{font-family:var(--font-head);font-size:15px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:#fff}
+.sec-bar .ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;background:rgba(255,255,255,.12);flex-shrink:0}
+
+/* ── BLOCK ── */
+.block{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.block.full{grid-column:1/-1}
+.block.half{grid-column:span 2}
+
+.block-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:2px}
+.block-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+.block-title{font-family:var(--font-head);font-size:15px;font-weight:600;color:var(--text);letter-spacing:.2px}
+.block-sub{font-size:11px;color:var(--muted);font-weight:500;margin-top:1px}
+
+/* ── DEF BOXES ── */
+.defs{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.def{border-radius:8px;padding:10px 12px;border-left:3px solid}
+.def-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.def p{font-size:12px;line-height:1.55;margin:0}
+
+/* ── ITEMS ── */
+.items{display:flex;flex-direction:column;gap:4px}
+.item{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;padding:4px 0;border-bottom:1px solid var(--border)}
+.item:last-child{border-bottom:none}
+.item-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.item-text{color:var(--text)}
+.item-text strong{font-weight:600}
+
+/* ── FLOW ── */
+.flow{display:flex;align-items:center;gap:4px;flex-wrap:wrap;background:var(--bg2);border-radius:8px;padding:8px 10px}
+.flow-step{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:11px;color:var(--text);text-align:center;min-width:80px}
+.flow-arrow{color:var(--muted);font-size:14px;flex-shrink:0}
+
+/* ── MINI CARDS ── */
+.minis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px}
+.mini{border-radius:8px;padding:10px;border:1px solid var(--border);text-align:center}
+.mini-icon{font-size:18px;margin-bottom:4px}
+.mini-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px}
+.mini-desc{font-size:10.5px;color:var(--muted);line-height:1.4}
+
+/* ── WARN ── */
+.warn{border-radius:8px;padding:10px 12px;border-left:3px solid var(--red);background:var(--red-d);display:flex;gap:8px;align-items:flex-start}
+.warn-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.warn p{font-size:12px;color:var(--text);line-height:1.5;margin:0}
+
+/* ── EXAM ── */
+.exam{border-radius:8px;padding:10px 12px;background:var(--blue-d);border:1px solid var(--blue-b)}
+.exam p{font-size:12px;color:var(--text);margin:0;line-height:1.55}
+.exam strong{color:var(--blue);font-weight:700}
+
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:11.5px}
+.tbl th{background:var(--bg3);color:var(--muted);font-weight:700;font-size:10px;letter-spacing:.5px;text-transform:uppercase;padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--bg2)}
+.tbl strong{color:var(--text);font-weight:600}
+.tbadge{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:3px;margin-top:3px}
+
+/* ── PROGRESS BAR ── */
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.bar-label{font-size:11px;color:var(--muted);min-width:80px}
+.bar-track{flex:1;height:6px;border-radius:3px;background:var(--border);overflow:hidden}
+.bar-fill{height:100%;border-radius:3px}
+.bar-val{font-size:11px;font-weight:700;min-width:30px;text-align:right}
+
+/* ── QUIZ ── */
+.quiz-wrap{grid-column:1/-1;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.quiz-header h3{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--text)}
+.quiz-progress-bar{width:100%;height:6px;background:var(--bg3);border-radius:3px;margin-bottom:16px;overflow:hidden}
+.quiz-progress-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .4s}
+.quiz-q{font-size:14px;color:var(--text);font-weight:600;margin-bottom:12px;line-height:1.5}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.quiz-opt{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 13px;font-size:13px;cursor:pointer;color:var(--text);transition:all .2s;text-align:left;display:flex;gap:8px;align-items:flex-start}
+.quiz-opt:hover:not([disabled]){border-color:var(--blue);background:var(--blue-d)}
+.quiz-opt.correct{background:rgba(34,197,94,.15);border-color:var(--green);color:var(--green)}
+.quiz-opt.wrong{background:rgba(239,68,68,.12);border-color:var(--red);color:var(--red)}
+.quiz-opt[disabled]{cursor:not-allowed;opacity:.8}
+.opt-letter{width:20px;height:20px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.quiz-feedback{font-size:12.5px;padding:10px 14px;border-radius:8px;margin-bottom:10px;line-height:1.55}
+.quiz-feedback.ok{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.25)}
+.quiz-feedback.fail{background:rgba(239,68,68,.10);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
+.quiz-nav{display:flex;align-items:center;justify-content:space-between}
+.quiz-counter{font-size:12px;color:var(--muted)}
+.quiz-btn{background:var(--blue);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body)}
+.quiz-btn:hover{opacity:.9}
+.quiz-btn.secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.quiz-results{text-align:center;padding:20px}
+.quiz-score{font-size:48px;font-family:var(--font-head);color:var(--blue);font-weight:700}
+.quiz-score-sub{font-size:14px;color:var(--muted);margin-top:4px;margin-bottom:20px}
+.score-detail{display:flex;gap:12px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.score-pill{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600}
+
+/* ── FOOTER ── */
+.refs{grid-column:1/-1;background:#0a1220;border:1px solid var(--border);border-radius:12px;padding:20px 24px}
+.refs h4{font-family:var(--font-head);font-size:14px;font-weight:600;color:var(--gray);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px}
+.refs ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:4px 20px;list-style:none}
+.refs li{font-size:11.5px;color:var(--muted);padding:3px 0;display:flex;gap:6px}
+.refs li::before{content:'→';color:var(--blue);flex-shrink:0}
+.refs a{color:var(--blue);text-decoration:none}
+.refs a:hover{text-decoration:underline}
+
+/* ── COLOR HELPERS ── */
+.c-blue{color:var(--blue)} .c-green{color:var(--green)} .c-red{color:var(--red)}
+.c-yellow{color:var(--yellow)} .c-purple{color:var(--purple)} .c-teal{color:var(--teal)}
+.c-orange{color:var(--orange)} .c-pink{color:var(--pink)}
+
+.bg-blue{background:var(--blue-d)} .bg-green{background:var(--green-d)}
+.bg-red{background:var(--red-d)} .bg-yellow{background:var(--yellow-d)}
+.bg-purple{background:var(--purple-d)} .bg-teal{background:var(--teal-d)}
+.bg-orange{background:var(--orange-d)} .bg-gray{background:var(--gray-d)}
+.bg-pink{background:var(--pink-d)}
+
+.b-blue{border-color:var(--blue)} .b-green{border-color:var(--green)}
+.b-red{border-color:var(--red)} .b-yellow{border-color:var(--yellow)}
+.b-purple{border-color:var(--purple)} .b-teal{border-color:var(--teal)}
+.b-orange{border-color:var(--orange)} .b-gray{border-color:var(--gray)}
+.b-pink{border-color:var(--pink)}
+
+/* sec bar colors */
+.sb-blue{background:linear-gradient(90deg,rgba(59,130,246,.25),transparent)}
+.sb-green{background:linear-gradient(90deg,rgba(34,197,94,.22),transparent)}
+.sb-red{background:linear-gradient(90deg,rgba(239,68,68,.22),transparent)}
+.sb-yellow{background:linear-gradient(90deg,rgba(234,179,8,.22),transparent)}
+.sb-purple{background:linear-gradient(90deg,rgba(168,85,247,.22),transparent)}
+.sb-teal{background:linear-gradient(90deg,rgba(20,184,166,.22),transparent)}
+.sb-orange{background:linear-gradient(90deg,rgba(249,115,22,.22),transparent)}
+.sb-pink{background:linear-gradient(90deg,rgba(236,72,153,.22),transparent)}
+
+@media(max-width:900px){.canvas{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.canvas{grid-template-columns:1fr}.block.half{grid-column:1}.quiz-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="canvas">
+
+<!-- ═══════════════════════════════════════════ TITLE BAR -->
+<div class="title-bar">
+  <h1>Normativas Meteorológicas e Hidrológicas · Perú</h1>
+  <p class="sub">Canvas de estudio completo · Todos los sectores productivos · Meteoservicios</p>
+  <div class="pills">
+    <span class="pill">MINEM</span><span class="pill">SENACE</span><span class="pill">SENAMHI</span>
+    <span class="pill">ANA</span><span class="pill">OEFA</span><span class="pill">MINAM</span>
+    <span class="pill">MTC</span><span class="pill">MINAGRI</span><span class="pill">MINEDU</span>
+    <span class="pill">OMM / WMO</span><span class="pill">ENFEN</span>
+  </div>
+</div>
+
+<!-- ═══ SEC 1: MARCO INSTITUCIONAL -->
+<div class="sec-bar sb-blue" style="grid-column:1/-1">
+  <div class="ico">🏛️</div>
+  <h2>01 · Marco Institucional — ¿Quién regula la meteorología en Perú?</h2>
+</div>
+
+<!-- SENAMHI -->
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-blue" style="color:var(--blue)">🌦️</div>
+    <div><div class="block-title">SENAMHI</div><div class="block-sub">Ley N° 24031 · Servicio Nacional de Meteorología e Hidrología</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-blue b-blue">
+      <div class="def-label c-blue">Para el especialista</div>
+      <p>Organismo rector del SMN peruano. Genera, valida y distribuye información hidrometeorológica oficial. Tiene potestad para certificar datos usados en instrumentos de gestión ambiental.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Es como el "notario oficial" del clima en Perú: si necesitas que un dato meteorológico sea válido legalmente, SENAMHI lo tiene que respaldar.</p>
+    </div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--blue)"></div><div class="item-text"><strong>Ley N° 24031</strong> crea el SENAMHI como institución pública con sede en Lima.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--blue)"></div><div class="item-text">Opera la <strong>red de más de 900 estaciones</strong> meteorológicas e hidrológicas en todo Perú.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--blue)"></div><div class="item-text">Emite <strong>perspectivas climáticas estacionales</strong> y boletines hidrometeorológicos nacionales.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--blue)"></div><div class="item-text">Descarga de datos: <strong>senamhi.gob.pe</strong> → Servicios → Datos históricos.</div></div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> ¿Por qué un informe meteorológico privado para un EIA necesita trazabilidad con datos de SENAMHI y no puede basarse solo en fuentes satelitales libres?</p></div>
+</div>
+
+<!-- ANA -->
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-teal" style="color:var(--teal)">💧</div>
+    <div><div class="block-title">ANA — Autoridad Nacional del Agua</div><div class="block-sub">Ley N° 29338 · R.J. N° 0332-2016-ANA</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-teal b-teal">
+      <div class="def-label c-teal">Para el especialista</div>
+      <p>Ente rector del Sistema Nacional de Gestión de Recursos Hídricos. Administra autorizaciones de uso de agua y exige estudios hidrológicos para obras en cauces naturales.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Nadie puede construir una obra cerca a un río sin decirle a la ANA cuánta lluvia cae ahí y qué tan grande puede crecer el río. Tú haces ese cálculo.</p>
+    </div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text">Exige <strong>estudios hidrológicos</strong> para autorizar obras en cauces y delimitar fajas marginales.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text">La <strong>R.J. 0332-2016-ANA</strong> define criterios para delimitación de fajas marginales con caudales de diseño.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text">El meteorólogo aporta la <strong>serie de precipitación</strong> que alimenta el modelo hidrológico.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text">Aplica a proyectos de toda industria que intercepte cuencas: minería, energía, infraestructura.</div></div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> ¿Qué diferencia hay entre un caudal de diseño para Tr=25 años y uno para Tr=500 años, y en qué tipo de obra se aplica cada uno?</p></div>
+</div>
+
+<!-- OMM/WMO -->
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-purple" style="color:var(--purple)">🌐</div>
+    <div><div class="block-title">OMM / WMO — Organización Meteorológica Mundial</div><div class="block-sub">Guías técnicas internacionales</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-purple b-purple">
+      <div class="def-label c-purple">Para el especialista</div>
+      <p>Organismo de Naciones Unidas rector de normas técnicas para servicios meteorológicos nacionales. Sus guías son referencia metodológica obligatoria para cálculos como PMP e IDF.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Es el "libro de recetas" internacional del meteorólogo. Cuando necesitas justificar un método de cálculo ante un revisor técnico, citas la guía de la OMM.</p>
+    </div>
+  </div>
+  <div class="minis">
+    <div class="mini bg-purple" style="border-color:var(--purple)">
+      <div class="mini-title c-purple">WMO-1045</div>
+      <div class="mini-desc">Manual para estimación de PMP (Precipitación Máxima Probable)</div>
+    </div>
+    <div class="mini bg-purple" style="border-color:var(--purple)">
+      <div class="mini-title c-purple">WMO-49</div>
+      <div class="mini-desc">Reglamento Técnico OMM — observación y pronóstico</div>
+    </div>
+    <div class="mini bg-purple" style="border-color:var(--purple)">
+      <div class="mini-title c-purple">WMO-168</div>
+      <div class="mini-desc">Guía de prácticas hidrológicas</div>
+    </div>
+  </div>
+  <div class="warn">
+    <div class="warn-icon">⚠️</div>
+    <p>Las guías de la OMM NO son normas legales peruanas. Son referencias técnicas metodológicas. No se citan como "obliga la OMM"; se citan como "el método usado sigue la guía WMO-1045".</p>
+  </div>
+</div>
+
+<!-- ═══ SEC 2: MINERÍA -->
+<div class="sec-bar sb-yellow" style="grid-column:1/-1">
+  <div class="ico">⛏️</div>
+  <h2>02 · Sector Minero — DS 024, DS 040, Ley 28090</h2>
+</div>
+
+<!-- DS 024 -->
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-yellow" style="color:var(--yellow)">🦺</div>
+    <div><div class="block-title">DS 024-2016-EM</div><div class="block-sub">Reglamento de Seguridad y Salud Ocupacional en Minería · mod. DS 023-2017-EM y DS 034-2023-EM</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-yellow b-yellow">
+      <div class="def-label c-yellow">Para el especialista</div>
+      <p>Reglamento sectorial que establece obligaciones de SSO en toda operación minera. Incluye gestión de riesgos por fenómenos naturales (tormenta eléctrica, lluvia, huaico). El DS 034-2023-EM es su modificación más reciente.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>La ley que dice que una mina debe proteger a sus trabajadores del mal tiempo. Si no tiene pronóstico ni protocolos ante tormenta, está incumpliendo la norma.</p>
+    </div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--yellow)"></div><div class="item-text"><strong>Protocolos ante tormenta eléctrica:</strong> suspensión de voladuras, transporte de explosivos y trabajos en altura.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--yellow)"></div><div class="item-text">Obliga a identificar <strong>zonas de riesgo hidrometeorológico</strong> en el mapa de riesgos de la operación.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--yellow)"></div><div class="item-text">Requiere <strong>plan de contingencia</strong> actualizado que incluya escenarios climáticos.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--yellow)"></div><div class="item-text">El meteorólogo aporta: <strong>pronóstico diario, alertas SAT, umbrales de lluvia</strong> para activar niveles de alerta.</div></div>
+  </div>
+  <div class="flow">
+    <div class="flow-step">Lluvia intensa pronosticada</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Alerta nivel Rojo emitida</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Suspensión de actividad</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Registro en bitácora SSO</div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> Una mina en Puno tiene un evento de granizo intenso durante una voladura programada. ¿Qué norma respaldó la decisión de suspender la operación y qué documento técnico debería existir como sustento?</p></div>
+</div>
+
+<!-- DS 040 -->
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-green" style="color:var(--green)">🌿</div>
+    <div><div class="block-title">DS 040-2014-EM</div><div class="block-sub">Reglamento de Protección y Gestión Ambiental Minera</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-green b-green">
+      <div class="def-label c-green">Para el especialista</div>
+      <p>Norma ambiental central del subsector minero. Regula la elaboración de EIA, DIA e ITS para actividades de explotación, beneficio y transporte minero. Exige caracterización meteorológica como componente obligatorio.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Para que una mina obtenga permiso ambiental, tiene que describir cómo es el clima del lugar. Tú haces esa descripción técnica — es la "línea base meteorológica".</p>
+    </div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text"><strong>Componente meteorológico obligatorio</strong> en toda línea base ambiental: precipitación, temperatura, humedad, viento.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text">La <strong>rosa de vientos</strong> es exigida para evaluar dispersión de polvo y contaminantes atmosféricos.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text">Se aplica a EIA-d, EIA-sd, DIA e ITS presentados ante <strong>SENACE y MINEM</strong>.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text">También rige para <strong>estudios de modificación</strong> de EIA aprobados previamente.</div></div>
+  </div>
+  <div class="warn">
+    <div class="warn-icon">⚠️</div>
+    <p>El DS 040 no menciona métodos de cálculo específicos para precipitación. Los términos de referencia (TR) de SENACE sí los detallan por tipo de proyecto. Siempre lee los TR antes de diseñar el estudio meteorológico.</p>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> ¿Qué información meteorológica mínima exigiría el área ambiental de una minera para su EIA de exploración bajo el DS 040-2014-EM?</p></div>
+</div>
+
+<!-- Ley 28090 + DS 033 -->
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-red" style="color:var(--red)">🏔️</div>
+    <div><div class="block-title">Ley N° 28090 + DS 033-2005-EM</div><div class="block-sub">Ley y Reglamento para el Cierre de Minas</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-red b-red">
+      <div class="def-label c-red">Para el especialista</div>
+      <p>Marco legal que obliga a toda operación minera a presentar un Plan de Cierre. Incluye análisis hidrológico: PMP, caudales de diseño para depósitos de relaves, drenaje ácido y estabilidad de taludes bajo lluvia extrema.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Cuando una mina cierra, tiene que demostrar que sus residuos y estructuras sobrevivirán hasta la lluvia más grande posible en los próximos 500 años. Tú calculas qué tan grande es esa lluvia.</p>
+    </div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--red)"></div><div class="item-text"><strong>PMP (Precipitación Máxima Probable):</strong> se calcula con métodos estadísticos (Gumbel, Log-Pearson III, Hershfield).</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--red)"></div><div class="item-text"><strong>Periodos de retorno:</strong> relaves y presas requieren Tr = 200 a 500 años según nivel de riesgo.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--red)"></div><div class="item-text">El <strong>balance hídrico de cierre</strong> requiere series de precipitación y evapotranspiración.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--red)"></div><div class="item-text">Presentación ante <strong>MINEM</strong>. Revisado también por OEFA en fase de fiscalización.</div></div>
+  </div>
+  <div class="flow">
+    <div class="flow-step">Serie histórica de lluvias</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Ajuste distribución (Gumbel/LP3)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">PMP / IDF</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Diseño hidráulico del cierre</div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> ¿Por qué el Plan de Cierre requiere cálculos con Tr=500 años y no con Tr=100 años como en una carretera convencional?</p></div>
+</div>
+
+<!-- ═══ SEC 3: ENERGÍA -->
+<div class="sec-bar sb-orange" style="grid-column:1/-1">
+  <div class="ico">⚡</div>
+  <h2>03 · Sector Energía — Hidroeléctricas, Solar y Eólico</h2>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-orange" style="color:var(--orange)">🌊</div>
+    <div><div class="block-title">Hidroeléctricas — ANA + OSINERGMIN</div><div class="block-sub">Ley N° 29338 · DS 014-2011-EM · DS 093-2015-EM</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-orange b-orange">
+      <div class="def-label c-orange">Para el especialista</div>
+      <p>Las concesiones de generación eléctrica hidráulica requieren estudios hidrológicos completos: curvas de duración de caudales, crecidas de diseño y modelamiento hidrológico de la cuenca aportante.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Para construir una hidroeléctrica, hay que saber cuánta agua tiene el río en cada mes del año y cuánta puede traer en una crecida extrema. La lluvia que cae en la cuenca determina todo eso.</p>
+    </div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--orange)"></div><div class="item-text"><strong>Curva de duración de caudales (CDC):</strong> derivada de precipitación → modelo lluvia-escorrentía → caudales diarios.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--orange)"></div><div class="item-text"><strong>Crecida de diseño (Tr=500–10000a):</strong> para dimensionar aliviadero de la presa.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--orange)"></div><div class="item-text"><strong>Variabilidad ENSO:</strong> crítica para proyectar producción anual y bancabilidad del proyecto.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--orange)"></div><div class="item-text">La <strong>ANA</strong> exige estos estudios para otorgar la Licencia de Uso de Agua.</div></div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> ¿Cómo afecta una anomalía negativa de precipitación (año seco) la producción proyectada de una central hidroeléctrica y qué instrumentos climáticos usarías para anticiparla?</p></div>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-orange" style="color:var(--orange)">☀️</div>
+    <div><div class="block-title">Energía Solar y Eólica (RER)</div><div class="block-sub">DS 012-2011-EM · DS 020-2013-EM · MINEM</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-orange b-orange">
+      <div class="def-label c-orange">Para el especialista</div>
+      <p>Los proyectos de Recursos Energéticos Renovables (RER) requieren Energy Yield Assessment (EYA) como estudio de pre-factibilidad. Para solar: radiación global horizontal (GHI, DNI, DHI). Para eólico: serie de viento en buje y distribución Weibull.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Para saber si vale la pena poner paneles o molinos en un lugar, hay que medir exactamente cuánto sol o viento hay durante todo el año. Eso es el EYA.</p>
+    </div>
+  </div>
+  <div class="minis">
+    <div class="mini bg-orange" style="border-color:var(--orange)">
+      <div class="mini-title c-orange">GHI</div>
+      <div class="mini-desc">Global Horizontal Irradiance — recurso solar total por m²</div>
+    </div>
+    <div class="mini bg-orange" style="border-color:var(--orange)">
+      <div class="mini-title c-orange">DNI</div>
+      <div class="mini-desc">Direct Normal Irradiance — para plantas concentradas (CSP)</div>
+    </div>
+    <div class="mini bg-orange" style="border-color:var(--orange)">
+      <div class="mini-title c-orange">Weibull</div>
+      <div class="mini-desc">Distribución estadística del viento para diseño eólico</div>
+    </div>
+    <div class="mini bg-orange" style="border-color:var(--orange)">
+      <div class="mini-title c-orange">Micro-siting</div>
+      <div class="mini-desc">WRF + mediciones para ubicación exacta de aerogeneradores</div>
+    </div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> ¿Por qué para un proyecto eólico en la sierra peruana se prefiere el modelamiento WRF sobre el uso directo de datos de una estación SENAMHI cercana?</p></div>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-red" style="color:var(--red)">🏗️</div>
+    <div><div class="block-title">Infraestructura y Líneas de Transmisión</div><div class="block-sub">MTC · OSINERGMIN · DS 020-97-EM</div></div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--red)"></div><div class="item-text"><strong>Torres de transmisión:</strong> diseño estructural considera velocidad de viento extrema (Tr=50–100a) y acumulación de hielo.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--red)"></div><div class="item-text"><strong>Subestaciones:</strong> drenaje pluvial dimensionado con caudales de diseño por eventos máximos en 24h.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--red)"></div><div class="item-text"><strong>OSINERGMIN</strong> fiscaliza el cumplimiento de criterios de seguridad ante eventos climatológicos extremos.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--red)"></div><div class="item-text">Meteorólogo aporta: <strong>viento de diseño, granizo, heladas</strong> y modelamiento microclimático de la ruta.</div></div>
+  </div>
+  <div class="warn">
+    <div class="warn-icon">⚠️</div>
+    <p>La norma de electricidad en Perú (CNE) adopta estándares IEC. El meteorólogo debe conocer qué variables climatológicas pide la norma eléctrica — no solo la ambiental.</p>
+  </div>
+</div>
+
+<!-- ═══ SEC 4: AMBIENTAL / CALIDAD DEL AIRE -->
+<div class="sec-bar sb-teal" style="grid-column:1/-1">
+  <div class="ico">💨</div>
+  <h2>04 · Calidad del Aire y Dispersión Atmosférica</h2>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-teal" style="color:var(--teal)">🌫️</div>
+    <div><div class="block-title">ECA Aire y DTM</div><div class="block-sub">DS 003-2017-MINAM · DS 027-2021-MINAM</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-teal b-teal">
+      <div class="def-label c-teal">Para el especialista</div>
+      <p>El ECA Aire (DS 003-2017-MINAM) fija los límites de PM10, PM2.5, NO2, SO2, CO, O3 y Pb en el aire. El DTM (DS 027-2021-MINAM) norma los datos meteorológicos requeridos para modelamiento de dispersión ante OEFA y SENACE.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Para demostrar que una fábrica o mina no contamina el aire más allá de lo permitido, hay que hacer una simulación de cómo el viento dispersa los contaminantes. El meteorólogo da los datos del viento para esa simulación.</p>
+    </div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text"><strong>DTM:</strong> requiere mínimo 3 años de datos horarios de temperatura, humedad, viento y precipitación de una estación representativa.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text">Modelos usados: <strong>AERMOD</strong> (EPA-USEPA, estándar en Perú), CALPUFF (terreno complejo).</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text"><strong>OEFA</strong> evalúa el DTM como parte del EIA en proyectos con emisiones al aire (industria, minería, energía).</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text">La estación debe cumplir criterio de distancia (radio &lt;5km para DTM según SENAMHI).</div></div>
+  </div>
+  <div class="flow">
+    <div class="flow-step">Datos horarios estación</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Procesamiento meteorológico (AERMET)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Modelo AERMOD</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Mapa de concentraciones vs ECA</div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> ¿Por qué el DS 027-2021-MINAM exige que la estación meteorológica para un DTM esté a menos de 5 km de la fuente de emisión, y qué sucede si no existe ninguna estación en ese radio?</p></div>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-teal" style="color:var(--teal)">🏭</div>
+    <div><div class="block-title">Industria y ECA Ruido</div><div class="block-sub">DS 085-2003-PCM · ISO 9613-2</div></div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text"><strong>Modelamiento acústico (SoundPLAN, CadnaA):</strong> requiere datos de viento dominante y temperatura para calcular propagación del sonido.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text">La <strong>ISO 9613-2</strong> define correcciones atmosféricas (temperatura, humedad) en propagación acústica.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text">El <strong>DS 085-2003-PCM</strong> fija Estándares Nacionales de Calidad Ambiental para Ruido en Perú.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--teal)"></div><div class="item-text">Aplica en proyectos con fuentes ruidosas cerca de poblaciones: plantas de beneficio, cementeras, aeropuertos.</div></div>
+  </div>
+  <div class="warn">
+    <div class="warn-icon">⚠️</div>
+    <p>La meteorología para ruido no es la misma que para dispersión de gases. El viento favorece la propagación del sonido en dirección de la fuente. Se necesita la rosa de vientos mensual para identificar los receptores más impactados.</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-teal" style="color:var(--teal)">☁️</div>
+    <div><div class="block-title">Dispersión Tóxica — EVAR</div><div class="block-sub">Ley SINAGERD N° 29664 · DS 048-2011-PCM</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-teal b-teal">
+      <div class="def-label c-teal">Para el especialista</div>
+      <p>El EVAR (Evaluación de Riesgo) para instalaciones con sustancias peligrosas (OSINERGMIN) requiere modelamiento de nubes tóxicas e inflamables con modelos PHAST, ALOHA o SLAB. Input meteorológico: clase de estabilidad Pasquill-Gifford, viento.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Si se rompe un tanque de gas o cloro en una planta, el modelo calcula hasta dónde llega la nube peligrosa según el viento. El meteorólogo define el peor escenario de viento.</p>
+    </div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> En un EVAR, ¿por qué se usa la clase de estabilidad atmosférica D (condición neutra) como escenario base y no la F (muy estable)?</p></div>
+</div>
+
+<!-- ═══ SEC 5: AGRICULTURA -->
+<div class="sec-bar sb-green" style="grid-column:1/-1">
+  <div class="ico">🌾</div>
+  <h2>05 · Sector Agrícola — MINAGRI, SERFOR, ANA</h2>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-green" style="color:var(--green)">🌱</div>
+    <div><div class="block-title">Riesgo Agroclimático y Sequías</div><div class="block-sub">MINAGRI · AGROIDEAS · DS 009-2014-MINAGRI</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-green b-green">
+      <div class="def-label c-green">Para el especialista</div>
+      <p>El sector agrícola usa índices de sequía (SPI, SPEI, PDSI), evapotranspiración de referencia (ETo por Penman-Monteith FAO-56), y balance hídrico de cultivos para estimar déficit hídrico y riesgo de helada.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>El agricultor necesita saber si va a llover suficiente para sus cultivos o si va a helar en los meses críticos. El meteorólogo calcula eso con datos de varias décadas.</p>
+    </div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text"><strong>SPI (Standardized Precipitation Index):</strong> mide déficit o superávit de lluvia respecto al promedio histórico.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text"><strong>ETo (Penman-Monteith FAO-56):</strong> referencia internacional para calcular cuánta agua necesita un cultivo.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text"><strong>ENSO en agricultura:</strong> El Niño → exceso costas; sequía sierra. La Niña → exceso sierra; déficit costa.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text">El <strong>SENAMHI</strong> emite boletines agroclimáticos mensuales por región que puedes citar.</div></div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> ¿Cómo se interpreta un valor de SPI = -1.5 para la región Cusco en enero y qué implica para el ciclo de siembra del maíz?</p></div>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-green" style="color:var(--green)">❄️</div>
+    <div><div class="block-title">Heladas y Friaje — GRD</div><div class="block-sub">Ley SINAGERD N° 29664 · INDECI · CENEPRED</div></div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text"><strong>Helada meteorológica:</strong> Tmin ≤ 0°C en abrigo. <strong>Helada agronómica:</strong> Tmin ≤ 4°C (daña cultivos tropicales).</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text"><strong>Friaje:</strong> ingreso de masas de aire frío polar a la selva, causa lluvias y descenso brusco de temperatura.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text">El <strong>CENEPRED</strong> elabora mapas de zonas expuestas a heladas a escala regional con datos SENAMHI.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--green)"></div><div class="item-text">Servicio meteorológico: <strong>pronóstico de helada a 72h</strong> para comunidades altoandinas.</div></div>
+  </div>
+  <div class="warn">
+    <div class="warn-icon">⚠️</div>
+    <p>Confusión frecuente: helada ≠ friaje. La helada ocurre por irradiación nocturna en cielos despejados (puna). El friaje es una advección fría de origen polar que afecta la selva con lluvia y descenso térmico.</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-green" style="color:var(--green)">🌊</div>
+    <div><div class="block-title">El Niño / La Niña — ENFEN</div><div class="block-sub">Comité Multisectorial ENFEN · IMARPE · SENAMHI</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-green b-green">
+      <div class="def-label c-green">Para el especialista</div>
+      <p>El ENFEN emite perspectivas oficiales del estado del ENSO para Perú: probabilidades de escenario Lluvioso-Normal-Deficiente por región y por trimestre. Base para pronósticos estacionales y alertas hidrometeorológicas.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>El ENFEN es el grupo de científicos que cada mes dice si viene El Niño o La Niña en Perú y qué tan probable es. Sus comunicados son la base oficial para decirle a un cliente qué esperar de la lluvia en los próximos meses.</p>
+    </div>
+  </div>
+  <div class="minis">
+    <div class="mini bg-green" style="border-color:var(--green)">
+      <div class="mini-title c-green">El Niño</div>
+      <div class="mini-desc">Lluvia excesiva en costa norte; sequía relativa en sierra sur</div>
+    </div>
+    <div class="mini bg-green" style="border-color:var(--green)">
+      <div class="mini-title c-green">La Niña</div>
+      <div class="mini-desc">Mayor lluvia en sierra; déficit en costa norte</div>
+    </div>
+    <div class="mini bg-green" style="border-color:var(--green)">
+      <div class="mini-title c-green">Neutro</div>
+      <div class="mini-desc">Condiciones cercanas al promedio climatológico</div>
+    </div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> ¿Cómo afecta un evento El Niño Costero (vs. El Niño Global) a la distribución de lluvias en la sierra sur del Perú? ¿Son iguales sus efectos?</p></div>
+</div>
+
+<!-- ═══ SEC 6: INFRAESTRUCTURA / TRANSPORTE -->
+<div class="sec-bar sb-purple" style="grid-column:1/-1">
+  <div class="ico">🛣️</div>
+  <h2>06 · Infraestructura, Transporte y Urbanismo</h2>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-purple" style="color:var(--purple)">🌉</div>
+    <div><div class="block-title">Carreteras, Puentes y Drenaje Pluvial</div><div class="block-sub">MTC · Manual de Diseño de Carreteras (DG-2018) · ANA</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-purple b-purple">
+      <div class="def-label c-purple">Para el especialista</div>
+      <p>El DG-2018 del MTC requiere análisis de caudales de diseño para alcantarillas (Tr=25–50a), puentes (Tr=100–500a) y drenaje pluvial urbano (Tr=2–10a). La crecida máxima de diseño se obtiene con modelos hidrológicos que parten de la precipitación.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Cuando diseñas un puente, necesitas saber qué tan grande puede crecer el río debajo. Ese cálculo empieza con cuánta lluvia puede caer en la cuenca en las peores condiciones.</p>
+    </div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--purple)"></div><div class="item-text"><strong>Alcantarilla:</strong> Tr = 25 a 50 años. <strong>Puente:</strong> Tr = 100 a 500 años. <strong>Presa de retención:</strong> Tr ≥ 500 años.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--purple)"></div><div class="item-text">Métodos: <strong>Racional modificado</strong> (cuencas pequeñas), <strong>HEC-HMS</strong> (cuencas medianas-grandes).</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--purple)"></div><div class="item-text">La <strong>curva IDF</strong> es el insumo fundamental para drenaje urbano y diseño vial.</div></div>
+  </div>
+  <div class="exam"><p><strong>🎯 EXAMEN:</strong> ¿Por qué se usa Tr=500 años para diseñar el aliviadero de una presa y solo Tr=25 años para una alcantarilla de carretera secundaria?</p></div>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-purple" style="color:var(--purple)">✈️</div>
+    <div><div class="block-title">Aeropuertos y Aviación</div><div class="block-sub">MTC · CORPAC · ICAO — Perú</div></div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--purple)"></div><div class="item-text"><strong>METAR:</strong> reporte meteorológico aeronáutico cada 30 min — visibilidad, techo de nubes, viento, temperatura.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--purple)"></div><div class="item-text"><strong>TAF:</strong> pronóstico para aeródromo válido 24–30h. Obligatorio para vuelos IFR.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--purple)"></div><div class="item-text"><strong>CORPAC</strong> opera las estaciones aeronáuticas en Perú y emite METAR/TAF.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--purple)"></div><div class="item-text">Servicio meteorológico para proyectos: análisis de condiciones IFR/VFR, viento cruzado, cizalladura.</div></div>
+  </div>
+  <div class="warn">
+    <div class="warn-icon">⚠️</div>
+    <p>Los servicios meteorológicos aeronáuticos en Perú son competencia exclusiva del SENAMHI en coordinación con el MTC/CORPAC. Un meteorólogo privado puede hacer estudios de caracterización, pero no emitir METAR/TAF oficiales.</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-head">
+    <div class="block-icon bg-purple" style="color:var(--purple)">🏙️</div>
+    <div><div class="block-title">Urbanismo y GRD — CENEPRED</div><div class="block-sub">Ley SINAGERD N° 29664 · DS 048-2011-PCM</div></div>
+  </div>
+  <div class="defs">
+    <div class="def bg-purple b-purple">
+      <div class="def-label c-purple">Para el especialista</div>
+      <p>La Ley 29664 (SINAGERD) crea el Sistema Nacional de Gestión del Riesgo de Desastres. El CENEPRED elabora la Evaluación de Riesgo (EVAR) que incluye amenaza hidrometeorológica: lluvias extremas, huaicos, inundaciones, heladas y sequías.</p>
+    </div>
+    <div class="def bg-gray" style="border-color:var(--gray)">
+      <div class="def-label" style="color:var(--gray)">Sin tecnicismos</div>
+      <p>Cuando un municipio necesita saber qué zonas corren riesgo de inundarse, el meteorólogo aporta los datos de lluvia extrema que alimentan el mapa de peligro.</p>
+    </div>
+  </div>
+  <div class="items">
+    <div class="item"><div class="item-dot" style="background:var(--purple)"></div><div class="item-text"><strong>EVAR:</strong> Evaluación de Riesgo. Incluye análisis de peligros hidrometeorológicos con datos históricos y proyecciones.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--purple)"></div><div class="item-text"><strong>Instrumentos:</strong> planes de prevención, atlas de peligros, mapas de riesgo a escala local.</div></div>
+    <div class="item"><div class="item-dot" style="background:var(--purple)"></div><div class="item-text">Norma el uso del <strong>análisis de frecuencia</strong> de eventos extremos como insumo para zonificación urbana.</div></div>
+  </div>
+</div>
+
+<!-- ═══ SEC 7: TABLA INTEGRADORA -->
+<div class="sec-bar sb-blue" style="grid-column:1/-1">
+  <div class="ico">📊</div>
+  <h2>07 · Tabla Integradora — Normativa por Sector y Uso Meteorológico</h2>
+</div>
+
+<div class="block full">
+  <div style="overflow-x:auto">
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Norma / Referencia</th>
+        <th>Sector</th>
+        <th>Organismo</th>
+        <th>¿Qué dato meteorológico pide?</th>
+        <th>Servicio Meteoservicios aplicable</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>DS 024-2016-EM</strong><br><span class="tbadge" style="background:rgba(234,179,8,.15);color:var(--yellow)">Seguridad</span></td>
+        <td>Minería</td>
+        <td>MINEM / OSINERGMIN</td>
+        <td>Pronóstico tormenta eléctrica, lluvia intensa, umbrales de alerta</td>
+        <td>Pronóstico operativo, SAT</td>
+        <td style="color:var(--green)">✓ Vigente</td>
+      </tr>
+      <tr>
+        <td><strong>DS 040-2014-EM</strong><br><span class="tbadge" style="background:rgba(34,197,94,.15);color:var(--green)">Ambiental</span></td>
+        <td>Minería</td>
+        <td>MINEM / SENACE</td>
+        <td>Precipitación, temperatura, humedad, viento (rosa), evapotranspiración</td>
+        <td>Línea base meteorológica EIA/DIA</td>
+        <td style="color:var(--green)">✓ Vigente</td>
+      </tr>
+      <tr>
+        <td><strong>Ley 28090 + DS 033-2005-EM</strong><br><span class="tbadge" style="background:rgba(239,68,68,.15);color:var(--red)">Cierre</span></td>
+        <td>Minería</td>
+        <td>MINEM / OEFA</td>
+        <td>PMP, curvas IDF, caudales de diseño Tr=100–500a, balance hídrico</td>
+        <td>Informe PMP/IDF, balance hídrico</td>
+        <td style="color:var(--green)">✓ Vigente</td>
+      </tr>
+      <tr>
+        <td><strong>DS 003-2017-MINAM (ECA Aire)</strong><br><span class="tbadge" style="background:rgba(20,184,166,.15);color:var(--teal)">Calidad aire</span></td>
+        <td>Industria/Minería</td>
+        <td>MINAM / OEFA</td>
+        <td>Datos horarios estación (T, HR, viento) para modelo AERMOD</td>
+        <td>DTM, línea base meteorológica</td>
+        <td style="color:var(--green)">✓ Vigente</td>
+      </tr>
+      <tr>
+        <td><strong>DS 027-2021-MINAM (DTM)</strong><br><span class="tbadge" style="background:rgba(20,184,166,.15);color:var(--teal)">Dispersión</span></td>
+        <td>Industria/Minería</td>
+        <td>OEFA / SENACE</td>
+        <td>≥3 años datos horarios, estación a &lt;5km, criterios representatividad</td>
+        <td>DTM, datos meteorológicos procesados</td>
+        <td style="color:var(--green)">✓ Vigente</td>
+      </tr>
+      <tr>
+        <td><strong>Ley 29338 + R.J. 0332-2016-ANA</strong><br><span class="tbadge" style="background:rgba(20,184,166,.15);color:var(--teal)">Hidrología</span></td>
+        <td>Todos los sectores</td>
+        <td>ANA</td>
+        <td>Series de precipitación, caudales de diseño, faja marginal</td>
+        <td>Informe hidrológico, PMP/IDF</td>
+        <td style="color:var(--green)">✓ Vigente</td>
+      </tr>
+      <tr>
+        <td><strong>DG-2018 MTC</strong><br><span class="tbadge" style="background:rgba(168,85,247,.15);color:var(--purple)">Vial</span></td>
+        <td>Transporte</td>
+        <td>MTC</td>
+        <td>IDF para drenaje, caudales Tr=25–500a según obra</td>
+        <td>Curvas IDF, estudio hidrológico vial</td>
+        <td style="color:var(--green)">✓ Vigente</td>
+      </tr>
+      <tr>
+        <td><strong>DS 012-2011-EM (RER)</strong><br><span class="tbadge" style="background:rgba(249,115,22,.15);color:var(--orange)">Energía</span></td>
+        <td>Energía RER</td>
+        <td>MINEM / OSINERGMIN</td>
+        <td>GHI, DNI, viento en buje, serie 10+ años, distribución Weibull</td>
+        <td>EYA solar/eólico, recurso energético</td>
+        <td style="color:var(--green)">✓ Vigente</td>
+      </tr>
+      <tr>
+        <td><strong>Ley 29664 SINAGERD</strong><br><span class="tbadge" style="background:rgba(236,72,153,.15);color:var(--pink)">GRD</span></td>
+        <td>Gobierno/Todos</td>
+        <td>INDECI / CENEPRED</td>
+        <td>Frecuencia eventos extremos, análisis de peligros hidrometeorológicos</td>
+        <td>Análisis de riesgo, alertas tempranas</td>
+        <td style="color:var(--green)">✓ Vigente</td>
+      </tr>
+      <tr>
+        <td><strong>Ley 24031 (SENAMHI)</strong><br><span class="tbadge" style="background:rgba(59,130,246,.15);color:var(--blue)">Institucional</span></td>
+        <td>Todos</td>
+        <td>SENAMHI</td>
+        <td>Datos hidrometeorológicos oficiales — fuente primaria trazable</td>
+        <td>Base de todos los servicios</td>
+        <td style="color:var(--green)">✓ Vigente</td>
+      </tr>
+      <tr>
+        <td><strong>WMO-1045 (OMM)</strong><br><span class="tbadge" style="background:rgba(168,85,247,.15);color:var(--purple)">Técnica</span></td>
+        <td>Todos</td>
+        <td>OMM (referencia)</td>
+        <td>Metodología PMP: método estadístico (Hershfield) y meteorológico</td>
+        <td>Referencia metodológica para PMP</td>
+        <td style="color:var(--yellow)">↻ Referencia</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="warn" style="margin-top:12px">
+    <div class="warn-icon">⚠️</div>
+    <p><strong>Dato integrador clave:</strong> Todas las normas sectoriales peruanas convergen en un punto: necesitan datos hidrometeorológicos trazables y metodologías validadas. El meteorólogo que conoce las normas de cada sector puede posicionarse como proveedor transversal de información técnica en minería, energía, infraestructura, calidad del aire y GRD.</p>
+  </div>
+</div>
+
+<!-- ═══ QUIZ -->
+<div class="quiz-wrap" id="quiz-section">
+  <div class="quiz-header">
+    <h3>Quiz · Normativas Meteorológicas</h3>
+    <span id="quiz-score-tag" style="font-size:13px;color:var(--muted)"></span>
+  </div>
+  <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="qpb" style="width:0%"></div></div>
+  <div id="quiz-body"></div>
+</div>
+
+<!-- ═══ FOOTER REFERENCIAS -->
+<div class="refs">
+  <h4>Fuentes y referencias</h4>
+  <ul>
+    <li>DS 024-2016-EM: <a href="https://www.gob.pe/institucion/osinergmin/normas-legales/741887-024-2016-em" target="_blank">gob.pe/osinergmin</a></li>
+    <li>DS 040-2014-EM: <a href="https://www.senace.gob.pe/wp-content/uploads/filebase/senacenormativa/NAS-4-6-01-DS-040-2014-EM.pdf" target="_blank">senace.gob.pe</a></li>
+    <li>Ley 28090 + DS 033-2005-EM: <a href="https://www.gob.pe/institucion/minem/informes-publicaciones/4156124-ley-y-reglamento-que-regula-el-cierre-de-minas-ed-2025" target="_blank">minem.gob.pe Ed.2025</a></li>
+    <li>DS 034-2023-EM: <a href="https://www.gob.pe/institucion/minem/normas-legales/4743960-034-2023-em" target="_blank">gob.pe/minem</a></li>
+    <li>Ley 24031 SENAMHI: <a href="https://www.gob.pe/institucion/senamhi/normas-legales/850222-24031-senamhi" target="_blank">gob.pe/senamhi</a></li>
+    <li>DS 027-2021-MINAM (DTM): buscar en <a href="https://www.gob.pe/minam" target="_blank">gob.pe/minam</a></li>
+    <li>DS 003-2017-MINAM (ECA Aire): <a href="https://www.gob.pe/minam" target="_blank">gob.pe/minam</a></li>
+    <li>Ley 29338 (ANA): <a href="https://www.gob.pe/institucion/ana/normas-legales/194730-29338" target="_blank">gob.pe/ana</a></li>
+    <li>WMO-1045 Manual PMP: <a href="https://library.wmo.int/records/item/57095-manual-on-estimation-of-probable-maximum-precipitation-pmp" target="_blank">library.wmo.int</a></li>
+    <li>ENFEN perspectivas ENSO: <a href="https://www.imarpe.gob.pe/imarpe/index.php?id_seccion=I0152020000000000000000" target="_blank">imarpe.gob.pe/enfen</a></li>
+    <li>Datos SENAMHI: <a href="https://www.senamhi.gob.pe/?p=descarga-datos-hidrometeorologicos" target="_blank">senamhi.gob.pe</a></li>
+    <li>Ley 29664 SINAGERD: <a href="https://www.gob.pe/indeci" target="_blank">indeci.gob.pe</a></li>
+    <li>DG-2018 MTC: <a href="https://www.mtc.gob.pe" target="_blank">mtc.gob.pe</a></li>
+    <li>DS 012-2011-EM (RER): <a href="https://www.minem.gob.pe" target="_blank">minem.gob.pe</a></li>
+  </ul>
+</div>
+
+</div><!-- /canvas -->
+
+<script>
+const questions = [
+  {
+    q: "¿Cuál es la norma base de seguridad y salud ocupacional en minería que obliga a gestionar riesgos por tormenta eléctrica?",
+    opts: ["Ley N° 28090","DS 040-2014-EM","DS 024-2016-EM","DS 033-2005-EM"],
+    ans: 2,
+    fb_ok: "Correcto. El DS 024-2016-EM (modificado por DS 034-2023-EM) es el reglamento de SSO minero. Incluye la obligación de protocolos ante fenómenos meteorológicos adversos.",
+    fb_fail: "Incorrecto. La respuesta correcta es el DS 024-2016-EM. La Ley 28090 es de cierre de minas; el DS 040 es ambiental; el DS 033 es el reglamento de cierre."
+  },
+  {
+    q: "Para elaborar la línea base meteorológica de un EIA minero ante SENACE, ¿cuál es la norma sectorial que lo exige?",
+    opts: ["Ley N° 24031","DS 024-2016-EM","DS 040-2014-EM","DS 027-2021-MINAM"],
+    ans: 2,
+    fb_ok: "Correcto. El DS 040-2014-EM es el reglamento ambiental minero que obliga a caracterizar el clima local como parte de la línea base ambiental en todo instrumento de gestión ambiental del sector.",
+    fb_fail: "Incorrecto. La respuesta es el DS 040-2014-EM. La Ley 24031 crea el SENAMHI; el DS 027 es para dispersión atmosférica (DTM); el DS 024 es de seguridad."
+  },
+  {
+    q: "Un ingeniero pide calcular la Precipitación Máxima Probable (PMP) para el diseño de una cancha de relaves. ¿Qué referencia metodológica internacional es la más citada?",
+    opts: ["WMO-168","WMO-1045","WMO-49","ISO 9613-2"],
+    ans: 1,
+    fb_ok: "Correcto. El WMO-1045 es el Manual de la OMM para la estimación de la PMP. Es la referencia metodológica estándar para este cálculo a nivel internacional.",
+    fb_fail: "Incorrecto. La respuesta es el WMO-1045. El WMO-168 es sobre prácticas hidrológicas; el WMO-49 es el reglamento técnico de observación; la ISO 9613-2 es de acústica."
+  },
+  {
+    q: "¿Qué periodo de retorno (Tr) se exige generalmente para el diseño del aliviadero de una presa de relaves de alto riesgo?",
+    opts: ["Tr = 25 años","Tr = 100 años","Tr = 200 años","Tr = 500 años o más"],
+    ans: 3,
+    fb_ok: "Correcto. Para estructuras de retención de relaves de alto riesgo, la práctica estándar (y la que avala el WMO-1045 y los lineamientos MINEM) exige Tr de 500 años o superior por el impacto catastrófico de un fallo.",
+    fb_fail: "Incorrecto. Tr=25 es para alcantarillas menores; Tr=100 para puentes convencionales. Una presa de relaves de alto riesgo requiere Tr≥500 años dado el daño potencial de un colapso."
+  },
+  {
+    q: "¿Cuál organismo es el rector de los recursos hídricos en Perú y exige estudios hidrológicos para obras en cauces?",
+    opts: ["SENAMHI","ANA","OEFA","SENACE"],
+    ans: 1,
+    fb_ok: "Correcto. La ANA (Autoridad Nacional del Agua), creada por la Ley N° 29338, es el ente rector del Sistema Nacional de Gestión de Recursos Hídricos y exige estudios para obras en cauces y fajas marginales.",
+    fb_fail: "Incorrecto. SENAMHI genera datos meteorológicos; OEFA fiscaliza lo ambiental; SENACE evalúa EIAs. La ANA regula el uso del agua y exige los estudios hidrológicos."
+  },
+  {
+    q: "Un proyecto de dispersión tóxica (EVAR) para una planta de gas necesita meteorología. ¿Qué variable define el 'peor escenario' para una nube peligrosa?",
+    opts: ["Temperatura máxima anual","Precipitación máxima diaria","Clase de estabilidad atmosférica muy estable (F) con viento calmo","Humedad relativa mínima"],
+    ans: 2,
+    fb_ok: "Correcto. La clase F (muy estable, viento calmo) de la clasificación Pasquill-Gifford genera la menor dispersión, concentrando la nube tóxica cerca de la fuente. Es el escenario más conservador para EVAR.",
+    fb_fail: "Incorrecto. La respuesta es la clase de estabilidad F (muy estable + viento calmo). En condiciones estables el contaminante no se dispersa bien, lo que produce las máximas concentraciones a nivel del suelo."
+  },
+  {
+    q: "¿Qué índice estandarizado se usa para cuantificar sequías en el sector agrícola peruano?",
+    opts: ["SPI (Standardized Precipitation Index)","PMP (Precipitación Máxima Probable)","IDF (Intensidad-Duración-Frecuencia)","ONI (Oceanic Niño Index)"],
+    ans: 0,
+    fb_ok: "Correcto. El SPI (Standardized Precipitation Index) es el índice recomendado por la OMM para caracterizar sequías meteorológicas. Valores SPI < -1 indican déficit moderado; < -2 son sequías extremas.",
+    fb_fail: "Incorrecto. La respuesta es el SPI. La PMP e IDF son para diseño hidráulico; el ONI mide la anomalía de temperatura del océano Pacífico. El SPI es el estándar para clasificar sequías."
+  },
+  {
+    q: "Para un proyecto de energía solar, ¿cuál variable meteorológica es el insumo principal del Energy Yield Assessment (EYA)?",
+    opts: ["Temperatura máxima","Precipitación anual","Irradiancia horizontal global (GHI)","Humedad relativa promedio"],
+    ans: 2,
+    fb_ok: "Correcto. El GHI (Global Horizontal Irradiance) medido en W/m² es la variable fundamental para estimar la producción de energía fotovoltaica. Se complementa con DNI para plantas de concentración solar (CSP).",
+    fb_fail: "Incorrecto. La temperatura y humedad afectan el rendimiento de los paneles pero no son el insumo principal. La precipitación es irrelevante para el rendimiento. El GHI es la variable central del EYA solar."
+  },
+  {
+    q: "¿Cuál es la principal diferencia entre El Niño Costero y El Niño Global en cuanto a su efecto sobre la sierra peruana?",
+    opts: [
+      "Ambos generan lluvias excesivas en la sierra sur del Perú",
+      "El Niño Costero se concentra en la costa norte; la sierra sur puede tener condiciones secas o neutras",
+      "El Niño Global solo afecta la selva amazónica",
+      "No hay diferencia; los dos tienen los mismos efectos en todo el Perú"
+    ],
+    ans: 1,
+    fb_ok: "Correcto. El Niño Costero es un calentamiento localizado frente a la costa norte peruana y ecuatoriana. Su impacto en la sierra sur puede ser neutro o ligeramente seco. El Niño Global (Modoki o clásico) tiene patrones de teleconexión diferentes.",
+    fb_fail: "Incorrecto. La respuesta correcta es B. El Niño Costero afecta principalmente la costa norte del Perú con lluvias extremas. La sierra sur puede estar en condiciones neutras o incluso con déficit en ese mismo evento."
+  },
+  {
+    q: "Una empresa presenta un EIA a SENACE que incluye modelamiento de dispersión de gases. El área de revisión observa que no hay una estación meteorológica dentro de los 5 km del proyecto. ¿Qué puede hacer el consultor para resolver la observación?",
+    opts: [
+      "Usar datos de satélite libre (ERA5) y argumentar que son equivalentes",
+      "Citar que el DS 024 no exige distancia específica",
+      "Proponer la instalación de una estación temporal o usar modelamiento WRF calibrado con datos SENAMHI, según criterios del DTM",
+      "Solicitar que SENACE cambie los términos de referencia"
+    ],
+    ans: 2,
+    fb_ok: "Correcto. Ante ausencia de estación representativa, la práctica aceptada es instalar una estación temporal (mínimo 1 año continuo) o usar modelamiento mesoescalar (WRF) calibrado con estaciones oficiales SENAMHI. Esto debe justificarse técnicamente en el DTM.",
+    fb_fail: "Incorrecto. ERA5 solo puede usarse como complemento, no como sustituto de datos observados según el DS 027-2021-MINAM. La respuesta correcta es proponer estación temporal o modelamiento WRF calibrado."
+  }
+];
+
+let current = 0, score = 0, answered = false;
+const body = document.getElementById('quiz-body');
+const pb   = document.getElementById('qpb');
+const tag  = document.getElementById('quiz-score-tag');
+
+function render(){
+  if(current >= questions.length){ showResults(); return; }
+  const q = questions[current];
+  pb.style.width = ((current/questions.length)*100)+'%';
+  tag.textContent = `${current+1} / ${questions.length}`;
+  answered = false;
+  body.innerHTML = `
+    <p class="quiz-q">${q.q}</p>
+    <div class="quiz-opts">
+      ${q.opts.map((o,i)=>`
+        <button class="quiz-opt" onclick="pick(${i})" id="opt-${i}">
+          <span class="opt-letter">${['A','B','C','D'][i]}</span>
+          ${o}
+        </button>`).join('')}
+    </div>
+    <div id="qfb" style="display:none" class="quiz-feedback"></div>
+    <div class="quiz-nav">
+      <span class="quiz-counter">Pregunta ${current+1} de ${questions.length}</span>
+      <button class="quiz-btn" id="qnext" style="display:none" onclick="next()">
+        ${current===questions.length-1?'Ver resultados':'Siguiente →'}
+      </button>
+    </div>`;
+}
+
+function pick(i){
+  if(answered) return;
+  answered = true;
+  const q = questions[current];
+  const fb = document.getElementById('qfb');
+  // Disable all
+  document.querySelectorAll('.quiz-opt').forEach(b=>b.setAttribute('disabled',''));
+  // Mark correct always green
+  document.getElementById('opt-'+q.ans).classList.add('correct');
+  if(i===q.ans){
+    score++;
+    fb.className='quiz-feedback ok';
+    fb.textContent='✓ '+q.fb_ok;
+  } else {
+    document.getElementById('opt-'+i).classList.add('wrong');
+    fb.className='quiz-feedback fail';
+    fb.textContent='✗ '+q.fb_fail;
+  }
+  fb.style.display='block';
+  document.getElementById('qnext').style.display='block';
+}
+
+function next(){ current++; render(); }
+
+function showResults(){
+  pb.style.width='100%';
+  const pct = Math.round((score/questions.length)*100);
+  const msg = pct>=80?'Excelente dominio normativo':pct>=60?'Buen nivel, refuerza los temas fallados':'Revisa las secciones del canvas y vuelve a intentarlo';
+  body.innerHTML = `
+    <div class="quiz-results">
+      <div class="quiz-score">${score}/${questions.length}</div>
+      <div class="quiz-score-sub">${pct}% · ${msg}</div>
+      <div class="score-detail">
+        <span class="score-pill" style="background:rgba(34,197,94,.15);color:var(--green)">${score} correctas</span>
+        <span class="score-pill" style="background:rgba(239,68,68,.12);color:var(--red)">${questions.length-score} incorrectas</span>
+      </div>
+      <button class="quiz-btn" onclick="restart()">Reiniciar quiz</button>
+    </div>`;
+}
+
+function restart(){ current=0; score=0; render(); }
+render();
+</script>
+</body>
+</html>

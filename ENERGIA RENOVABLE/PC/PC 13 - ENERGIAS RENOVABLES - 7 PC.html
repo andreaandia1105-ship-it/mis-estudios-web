@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC 13 - Análisis de Velocidad de Viento 60m</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    padding: 16px;
+  }
+
+  /* ── GRID PRINCIPAL ── */
+  .cv {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .s3 { grid-column: 1 / -1; }
+  .s2 { grid-column: span 2; }
+
+  /* ── BLOQUES ── */
+  .block {
+    background: #ffffff;
+    border: 0.5px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+
+  /* ── ENCABEZADOS DE BLOQUE ── */
+  .bh {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding: 3px 9px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .bh-blue   { background: #dbeafe; color: #1e3a8a; }
+  .bh-green  { background: #dcfce7; color: #14532d; }
+  .bh-amber  { background: #fef9c3; color: #713f12; }
+  .bh-purple { background: #ede9fe; color: #4c1d95; }
+  .bh-teal   { background: #ccfbf1; color: #134e4a; }
+
+  /* ── BARRA DE SECCIÓN ── */
+  .secbar {
+    grid-column: 1 / -1;
+    background: #0f1e3a;
+    color: #fff;
+    border-radius: 10px;
+    padding: 9px 16px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* ── DEFINICIONES ── */
+  .def {
+    border-left: 3px solid;
+    padding: 8px 11px;
+    border-radius: 0 8px 8px 0;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    background: #f8fafc;
+  }
+  .def-blue   { border-color: #3b82f6; }
+  .def-green  { border-color: #22c55e; }
+  .def-amber  { border-color: #f59e0b; }
+  .def-purple { border-color: #8b5cf6; }
+  .def-teal   { border-color: #14b8a6; }
+
+  /* ── ITEMS ── */
+  .item { display: flex; gap: 8px; font-size: 12px; line-height: 1.6; margin-bottom: 6px; }
+  .dot  { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  .dot-blue   { background: #3b82f6; }
+  .dot-green  { background: #22c55e; }
+  .dot-amber  { background: #f59e0b; }
+  .dot-purple { background: #8b5cf6; }
+  .dot-teal   { background: #14b8a6; }
+
+  /* ── FÓRMULAS ── */
+  .rx {
+    background: #0f172a;
+    color: #7dd3fc;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 1.8;
+    margin: 8px 0;
+  }
+
+  /* ── ADVERTENCIAS ── */
+  .warn {
+    background: #fff7ed;
+    border-left: 3px solid #f97316;
+    border-radius: 0 8px 8px 0;
+    font-size: 11.5px;
+    color: #7c2d12;
+    padding: 8px 11px;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* ── PREGUNTA DE EXAMEN ── */
+  .exam {
+    background: #fefce8;
+    border: 1px solid #facc15;
+    border-radius: 8px;
+    font-size: 11.5px;
+    color: #713f12;
+    padding: 9px 12px;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+
+  /* ── GRILLAS INTERNAS ── */
+  .two   { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0; }
+  .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 8px 0; }
+
+  /* ── MINI TARJETAS ── */
+  .mini { background: #f8fafc; border-radius: 8px; padding: 8px 10px; font-size: 11.5px; line-height: 1.5; }
+  .mini b { display: block; margin-bottom: 3px; font-weight: 600; }
+
+  /* ── PILLS ── */
+  .pill { font-size: 11px; padding: 2px 9px; border-radius: 20px; display: inline-block; margin: 2px; }
+
+  /* ── FLUJO ── */
+  .flow   { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .fbox   { background: #f1f5f9; padding: 5px 9px; border-radius: 7px; font-size: 11.5px; }
+  .farrow { color: #64748b; font-size: 14px; }
+
+  /* ── IMÁGENES ── */
+  .img-block {
+    margin: 10px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 0.5px solid #e2e8f0;
+  }
+  .img-block img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+  }
+  /* Si la imagen no carga, muestra un placeholder visible */
+  .img-block img::after {
+    content: attr(alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    color: #94a3b8;
+    font-size: 12px;
+    min-height: 80px;
+    padding: 12px;
+    text-align: center;
+  }
+  .img-label {
+    font-size: 10px;
+    color: #94a3b8;
+    text-align: center;
+    padding: 4px 0 2px;
+    font-style: italic;
+  }
+
+  /* ── TABLA ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .tbl th {
+    background: #f8fafc;
+    padding: 5px 8px;
+    border-bottom: 0.5px solid #e2e8f0;
+    text-align: left;
+    font-weight: 600;
+  }
+  .tbl td { padding: 5px 8px; border-bottom: 0.5px solid #e2e8f0; vertical-align: top; }
+  .tbl tr.highlight td { background: #eff6ff; font-weight: 600; }
+
+  /* ── DIVIDER ── */
+  .divh { border: none; border-top: 0.5px solid #e2e8f0; margin: 8px 0; }
+
+  /* ── FOOTER ── */
+  .footer-bar {
+    grid-column: 1 / -1;
+    background: #0f1e3a;
+    border-radius: 10px;
+    padding: 12px 18px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+</style>
+</head>
+<body>
+
+<div class="cv">
+
+  <!-- ══ TÍTULO ══ -->
+  <div class="s3 block" style="background:#0f1e3a;color:#fff;border:none;padding:16px 20px">
+    <div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px">
+      Análisis de velocidad de viento — Altura 60 m
+    </div>
+    <div style="font-size:11px;color:#94a3b8;margin-bottom:10px">
+      PC 13 · Energías Renovables · UNALM 2026-I · u60 (m/s) · 109 observaciones cada 10 min
+    </div>
+    <div>
+      <span class="pill" style="background:#1e3a5f;color:#93c5fd">Vm = 10.16 m/s</span>
+      <span class="pill" style="background:#14532d;color:#86efac">Máx = 14.64 m/s</span>
+      <span class="pill" style="background:#422006;color:#fef08a">Mín = 7.34 m/s</span>
+      <span class="pill" style="background:#2e1065;color:#c4b5fd">σ = 2.25 m/s</span>
+      <span class="pill" style="background:#042f2e;color:#5eead4">C Rayleigh = 11.47 m/s</span>
+    </div>
+  </div>
+
+  <!-- ══ SECCIÓN 1: DISTRIBUCIÓN DE TIEMPO ══ -->
+  <div class="s3 secbar">Paso 1 — Distribución de tiempo: ¿qué velocidad hubo en cada momento?</div>
+
+  <div class="block s2">
+    <span class="bh bh-blue">¿Qué es la distribución de tiempo?</span>
+    <div class="def def-blue">
+      Es una tabla que organiza TODAS las mediciones en una cuadrícula de <strong>hora × medida dentro de la hora</strong>.
+      Cada celda = la velocidad exacta registrada en ese instante.
+    </div>
+    <div class="flow">
+      <div class="fbox">Hora 0 (medianoche)</div><div class="farrow">→</div>
+      <div class="fbox">Medida 1: 00:00</div><div class="farrow">→</div>
+      <div class="fbox">Medida 2: 00:10</div><div class="farrow">→</div>
+      <div class="fbox">Medida 3: 00:20</div><div class="farrow">→</div>
+      <div class="fbox">... hasta :50</div>
+    </div>
+    <div class="item"><div class="dot dot-blue"></div><div><strong>Filas</strong> = hora entera del día (0, 1, 2, ..., 18 en tus datos)</div></div>
+    <div class="item"><div class="dot dot-blue"></div><div><strong>Columnas</strong> = medida 1 (min 0), medida 2 (min 10), medida 3 (min 20), medida 4 (min 30), medida 5 (min 40), medida 6 (min 50)</div></div>
+    <div class="item"><div class="dot dot-blue"></div><div>Tus datos van de 00:00 hasta 18:00 → 109 obs = 18 h × 6 + 1 extra</div></div>
+    <div class="warn">⚠️ La hora 18 solo tiene Medida 1 (9.987 m/s) y las demás son NaN porque los datos se cortaron ahí.</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-blue">Resultado de tu tabla</span>
+    <table class="tbl">
+      <tr><th>Hora</th><th>M1 (0')</th><th>M2 (10')</th><th>M3 (20')</th><th>M4 (30')</th></tr>
+      <tr><td>0</td><td>8.563</td><td>8.628</td><td>8.068</td><td>8.181</td></tr>
+      <tr><td>10</td><td>10.067</td><td>9.970</td><td>10.006</td><td>11.136</td></tr>
+      <tr class="highlight"><td>12</td><td>14.617</td><td>13.543</td><td>13.544</td><td>14.432</td></tr>
+      <tr><td>18</td><td>9.987</td><td style="color:#94a3b8">NaN</td><td style="color:#94a3b8">NaN</td><td style="color:#94a3b8">NaN</td></tr>
+    </table>
+    <!-- IMAGEN 1: captura de la tabla del Excel del profesor -->
+    <div class="img-block">
+      <img src="pc13_tabla_tiempo.png" alt="Tabla distribución de tiempo — Excel del profesor">
+    </div>
+    <div class="img-label">Tabla distribución de tiempo (Excel del profesor)</div>
+  </div>
+
+  <!-- ══ SECCIÓN 2: DISTRIBUCIÓN DE FRECUENCIAS ══ -->
+  <div class="s3 secbar">Paso 2 — Distribución de frecuencias: ¿cuánto tiempo sopló el viento en cada rango?</div>
+
+  <div class="block">
+    <span class="bh bh-green">¿Qué es un intervalo de velocidad?</span>
+    <div class="def def-green">
+      Se divide el rango de velocidades en "cajitas" de 1 m/s cada una (0–1, 1–2, ...) y se cuenta cuántas observaciones caen en cada cajita.
+    </div>
+    <div class="item"><div class="dot dot-green"></div><div>Tus datos van de 7.34 a 14.64 m/s → solo los intervalos 7–8 hasta 14–15 tienen datos</div></div>
+    <div class="item"><div class="dot dot-green"></div><div>Los intervalos 0–7 y 15–20 tienen frecuencia = 0 (no hubo vientos tan lentos ni tan rápidos ese día)</div></div>
+    <!-- IMAGEN 2: histograma generado por Python -->
+    <div class="img-block">
+      <img src="pc13_histograma.png" alt="Histograma distribución de frecuencias">
+    </div>
+    <div class="img-label">Histograma generado por el código Python</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-green">Las 4 columnas que calcula el código</span>
+    <div class="two" style="margin-top:8px">
+      <div class="mini" style="border-top:3px solid #22c55e"><b>Frec. absoluta</b>¿Cuántas mediciones caen en ese intervalo? Ej: 47 mediciones entre 8 y 9 m/s</div>
+      <div class="mini" style="border-top:3px solid #3b82f6"><b>Frec. relativa (%)</b>47 / 109 = 43.1% del tiempo estuvo entre 8–9 m/s</div>
+      <div class="mini" style="border-top:3px solid #f59e0b"><b>Frec. acumulada (%)</b>Suma de todos los % anteriores. ¿Qué % del tiempo el viento estuvo POR DEBAJO de X m/s?</div>
+      <div class="mini" style="border-top:3px solid #8b5cf6"><b>Duración (h)</b>Frec. absoluta × 10 min = horas reales. Ej: 47 × (10/60) = 7.83 h</div>
+    </div>
+    <div class="exam">🎯 Examen: El intervalo 8–9 m/s concentra el 43.1% de las observaciones. ¿Qué implica esto para el diseño de un aerogenerador en este sitio?</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-green">Resultado de tus datos</span>
+    <table class="tbl">
+      <tr><th>Intervalo</th><th>Frec. abs.</th><th>Frec. rel. %</th><th>Duración h</th></tr>
+      <tr><td>7–8</td><td>9</td><td>8.26%</td><td>1.50</td></tr>
+      <tr class="highlight"><td>8–9</td><td>47</td><td>43.12%</td><td>7.83</td></tr>
+      <tr><td>9–10</td><td>6</td><td>5.50%</td><td>1.00</td></tr>
+      <tr><td>10–11</td><td>8</td><td>7.34%</td><td>1.33</td></tr>
+      <tr><td>11–12</td><td>10</td><td>9.17%</td><td>1.67</td></tr>
+      <tr><td>12–13</td><td>8</td><td>7.34%</td><td>1.33</td></tr>
+      <tr><td>13–14</td><td>14</td><td>12.84%</td><td>2.33</td></tr>
+      <tr><td>14–15</td><td>7</td><td>6.42%</td><td>1.17</td></tr>
+    </table>
+    <div class="warn">⚠️ El intervalo dominante es 8–9 m/s con 43% del tiempo. El viento es moderado-alto y bastante constante.</div>
+  </div>
+
+  <!-- ══ SECCIÓN 3: VELOCIDAD MEDIA ══ -->
+  <div class="s3 secbar">Paso 3 — Velocidad media: el valor representativo de todo el viento</div>
+
+  <div class="block s2">
+    <span class="bh bh-amber">¿Cómo se calcula la velocidad media?</span>
+    <div class="def def-amber">
+      La velocidad media es el promedio representativo del viento. El código te da dos métodos.
+      El profesor usa la <strong>ponderada por frecuencia relativa</strong>, más precisa porque usa los límites de los intervalos.
+    </div>
+    <hr class="divh">
+    <div class="two">
+      <div>
+        <div style="font-size:11.5px;font-weight:600;margin-bottom:6px;color:#64748b">Método 1 — Media simple (aritmética)</div>
+        <div class="rx">Vm = (v₁ + v₂ + ... + vₙ) / n<br>Vm = suma de mediciones ÷ 109<br>Vm = 10.1612 m/s</div>
+        <div class="item" style="margin-top:6px"><div class="dot dot-amber"></div><div>Pandas lo hace con <code>.mean()</code> directamente sobre la columna</div></div>
+      </div>
+      <div>
+        <div style="font-size:11.5px;font-weight:600;margin-bottom:6px;color:#64748b">Método 2 — Media ponderada (método del profe)</div>
+        <div class="rx">Vm = Σ (marca_clase × frec_relativa)<br><br>= 7.5×0.0826 + 8.5×0.4312<br>+ 9.5×0.0550 + 10.5×0.0734 + ...<br><br>Vm = 10.2156 m/s</div>
+        <div class="item" style="margin-top:6px"><div class="dot dot-amber"></div><div>Usa el punto medio de cada intervalo (marca de clase) multiplicado por su peso</div></div>
+      </div>
+    </div>
+    <div class="warn">⚠️ La diferencia entre 10.16 y 10.22 es pequeña aquí, pero en datos más irregulares puede ser significativa. El método ponderado es el estándar en ingeniería eólica.</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-amber">Marca de clase: la clave del método</span>
+    <div class="def def-amber">
+      La <strong>marca de clase</strong> es el punto medio de cada intervalo = (límite inferior + límite superior) / 2.
+      Representa a TODAS las velocidades que caen dentro de ese rango.
+    </div>
+    <table class="tbl">
+      <tr><th>Intervalo</th><th>Lím. inf.</th><th>Lím. sup.</th><th>Marca = (inf+sup)/2</th><th>Aporte a Vm</th></tr>
+      <tr><td>7–8</td><td>7</td><td>8</td><td><strong>7.5</strong></td><td>7.5 × 0.0826 = 0.620</td></tr>
+      <tr class="highlight"><td>8–9</td><td>8</td><td>9</td><td><strong>8.5</strong></td><td>8.5 × 0.4312 = 3.665</td></tr>
+      <tr><td>9–10</td><td>9</td><td>10</td><td><strong>9.5</strong></td><td>9.5 × 0.0550 = 0.523</td></tr>
+      <tr><td>13–14</td><td>13</td><td>14</td><td><strong>13.5</strong></td><td>13.5 × 0.1284 = 1.733</td></tr>
+    </table>
+    <!-- IMAGEN 3: tabla de frecuencias del Excel del profesor -->
+    <div class="img-block">
+      <img src="pc13_tabla_frecuencias.png" alt="Tabla de frecuencias — Excel del profesor">
+    </div>
+    <div class="img-label">Tabla de frecuencias del Excel del profesor</div>
+    <div class="exam">🎯 Examen: Si la frecuencia relativa del intervalo 8–9 m/s es 43.12% y su marca de clase es 8.5 m/s, ¿cuánto aporta solo ese intervalo a la velocidad media ponderada?
+      <br><span style="font-size:11px;color:#92400e;margin-top:4px;display:block">Respuesta: 8.5 × 0.4312 = <strong>3.665 m/s</strong> — el mayor aporte individual</span>
+    </div>
+  </div>
+
+  <!-- ══ SECCIÓN 4: RAYLEIGH Y POTENCIA ══ -->
+  <div class="s3 secbar">Paso 4 — Distribución Rayleigh y Potencia del viento</div>
+
+  <div class="block">
+    <span class="bh bh-purple">¿Qué es Rayleigh?</span>
+    <div class="def def-purple">
+      Rayleigh es un modelo matemático (Weibull con K=2) que predice con qué probabilidad aparece cada velocidad de viento, usando solo la velocidad media como parámetro.
+    </div>
+    <div class="rx">C = Vm / (√π / 2) = 10.1612 / 0.8862<br>C = 11.4657 m/s<br><br>R(V) = (2/C²) × V × exp(-(V/C)²)</div>
+    <!-- IMAGEN 4: curva Rayleigh -->
+    <div class="img-block">
+      <img src="pc13_rayleigh.png" alt="Distribución Rayleigh K=2">
+    </div>
+    <div class="img-label">Curva Rayleigh generada por Python</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-purple">Potencia del viento</span>
+    <div class="def def-purple">
+      La potencia disponible en el viento crece con el <strong>cubo</strong> de la velocidad. Duplicar la velocidad multiplica la potencia por 8.
+    </div>
+    <div class="rx">P_disp = ½ × ρ × A × V³<br>P_ext = Cp × P_disp<br><br>A Vm=10.16 m/s, A=1 m²:<br>P_disp = 642.6 W | P_ext = 257 W</div>
+    <div class="item" style="margin-top:8px"><div class="dot dot-purple"></div><div>ρ = 1.225 kg/m³ (estándar — ajustar con altitud y temperatura real)</div></div>
+    <div class="item"><div class="dot dot-purple"></div><div>Cp = 0.40 asumido — límite de Betz = 0.593</div></div>
+    <div class="item"><div class="dot dot-purple"></div><div>Energía anual: <strong>3,020 kWh/año</strong> por m² de rotor</div></div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-purple">Gráficos de potencia y energía</span>
+    <!-- IMAGEN 5: gráfico potencia vs velocidad -->
+    <div class="img-block">
+      <img src="pc13_potencia.png" alt="Gráfico Potencia vs Velocidad">
+    </div>
+    <div class="img-label">P = f(V) generado por Python</div>
+    <!-- IMAGEN 6: serie temporal -->
+    <div class="img-block">
+      <img src="pc13_serie_temporal.png" alt="Serie temporal de velocidad de viento">
+    </div>
+    <div class="img-label">Serie temporal — velocidad a 60 m</div>
+    <div class="two" style="margin-top:10px">
+      <div class="mini" style="border-left:3px solid #f97316;border-radius:0 8px 8px 0">
+        <b>Densidad real del aire</b>
+        Altitud (m) y temperatura (°C) del sitio:<br>
+        <code style="font-size:10px">ρ = 353.05/T × exp(-0.034163×Z/T)</code>
+      </div>
+      <div class="mini" style="border-left:3px solid #f97316;border-radius:0 8px 8px 0">
+        <b>Área de rotor</b>
+        Con el diámetro D del aerogenerador:<br>
+        <code style="font-size:10px">A = π × (D/2)²</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RESUMEN INTEGRADOR ══ -->
+  <div class="s3 block">
+    <span class="bh bh-teal">Resumen integrador — todo el análisis de un vistazo</span>
+    <table class="tbl" style="margin-top:8px">
+      <tr>
+        <th>Paso</th><th>Qué calcula</th><th>Resultado clave</th><th>Para qué sirve</th><th>Pendiente</th>
+      </tr>
+      <tr><td>1. Dist. de tiempo</td><td>Matriz hora × medida</td><td>Hora 12 tiene vientos más fuertes (~14 m/s)</td><td>Ver patrón diurno del viento</td><td>—</td></tr>
+      <tr><td>2. Dist. de frecuencias</td><td>Conteo por intervalos de 1 m/s</td><td>Intervalo 8–9 m/s domina con 43.1%</td><td>Entender dónde "vive" el viento</td><td>—</td></tr>
+      <tr class="highlight"><td>3. Velocidad media</td><td>Promedio ponderado por frec. relativa</td><td>Vm = 10.16 m/s (simple) / 10.22 (ponderada)</td><td>Parámetro base para todo cálculo</td><td>—</td></tr>
+      <tr><td>4. Rayleigh (K=2)</td><td>Distribución de probabilidad</td><td>C = 11.47 m/s</td><td>Predecir frecuencia de cada velocidad</td><td>—</td></tr>
+      <tr><td>5. Potencia</td><td>P = ½ρAV³</td><td>642.6 W disponibles a Vm (A=1 m²)</td><td>Diseñar el aerogenerador</td><td>ρ real, área rotor</td></tr>
+      <tr><td>6. Energía anual</td><td>Σ P×tiempo por intervalo</td><td>3,020 kWh/año por m² de rotor</td><td>Evaluar viabilidad económica</td><td>Cp y área reales</td></tr>
+    </table>
+    <div class="warn" style="margin-top:10px">
+      ⚠️ Dato integrador: tus 109 observaciones son solo ~18 horas de un día. Para un análisis real se necesitan al menos un año de datos (8,760 h).
+      La energía anual de 3,020 kWh/año se obtuvo extrapolando la distribución Rayleigh, NO midiendo un año real.
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="footer-bar">
+    <span style="font-size:12px;color:#7dd3fc;font-weight:600">REFERENCIAS:</span>
+    <span style="font-size:11px;color:#94a3b8">Manwell, J.F. et al. (2009) — Wind Energy Explained. Wiley.</span>
+    <span style="font-size:11px;color:#94a3b8">Material del profesor — UNALM Energías Renovables 2026-I</span>
+  </div>
+
+</div>
+</body>
+</html>
