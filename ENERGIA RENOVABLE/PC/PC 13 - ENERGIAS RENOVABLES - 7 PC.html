@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PC 13 - Análisis de Velocidad de Viento 60m</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<!--
+  ══════════════════════════════════════════════
+  IMÁGENES NECESARIAS — renombra tus PNG así y
+  colócalos en la MISMA carpeta que este HTML
+  ══════════════════════════════════════════════
+  ✓ pc13_histograma.png        <- Python/Colab
+  ✓ pc13_rayleigh.png          <- Python/Colab
+  ✓ pc13_potencia.png          <- Python/Colab
+  ✓ pc13_serie_temporal.png    <- Python/Colab
+  ○ pc13_tabla_excel.png       <- Win+Shift+S (captura Excel del profesor)
+  ○ pc13_tabla_frecuencias.png <- Win+Shift+S (captura tabla frecuencias)
+  ══════════════════════════════════════════════
+-->
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Source Sans 3',sans-serif;background:#f1f5f9;color:#1e293b;padding:16px}
@@ -18,98 +31,80 @@ body{font-family:'Source Sans 3',sans-serif;background:#f1f5f9;color:#1e293b;pad
 .bh-amber{background:#fef9c3;color:#713f12}
 .bh-purple{background:#ede9fe;color:#4c1d95}
 .bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-red{background:#fee2e2;color:#991b1b}
 .secbar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;
         padding:9px 16px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:500}
 .def{border-left:3px solid;padding:8px 11px;border-radius:0 8px 8px 0;
-     font-size:12px;line-height:1.6;margin-bottom:10px;background:#f8fafc}
+     font-size:12.5px;line-height:1.7;margin-bottom:10px;background:#f8fafc}
 .def-blue{border-color:#3b82f6}.def-green{border-color:#22c55e}
 .def-amber{border-color:#f59e0b}.def-purple{border-color:#8b5cf6}
-.item{display:flex;gap:8px;font-size:12px;line-height:1.6;margin-bottom:6px}
-.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.def-teal{border-color:#14b8a6}.def-red{border-color:#ef4444}
+.item{display:flex;gap:8px;font-size:12.5px;line-height:1.7;margin-bottom:7px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:6px;flex-shrink:0}
 .dot-blue{background:#3b82f6}.dot-green{background:#22c55e}
 .dot-amber{background:#f59e0b}.dot-purple{background:#8b5cf6}
+.dot-teal{background:#14b8a6}.dot-red{background:#ef4444}
 .rx{background:#0f172a;color:#7dd3fc;font-family:'Courier New',monospace;
-    font-size:11px;padding:8px 12px;border-radius:8px;text-align:center;line-height:1.8;margin:8px 0}
+    font-size:11.5px;padding:10px 14px;border-radius:8px;text-align:center;line-height:2;margin:8px 0}
+.rx .var{color:#fde68a}.rx .res{color:#86efac;font-weight:700}
 .warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;
-      font-size:11.5px;color:#7c2d12;padding:8px 11px;margin-top:10px;line-height:1.5}
+      font-size:12px;color:#7c2d12;padding:8px 11px;margin-top:10px;line-height:1.6}
+.tip{background:#eff6ff;border-left:3px solid #3b82f6;border-radius:0 8px 8px 0;
+     font-size:12px;color:#1e3a8a;padding:8px 11px;margin-top:8px;line-height:1.6}
 .exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;
-      font-size:11.5px;color:#713f12;padding:9px 12px;margin-top:10px;line-height:1.6}
+      font-size:12px;color:#713f12;padding:9px 12px;margin-top:10px;line-height:1.6}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
-.mini{background:#f8fafc;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
-.mini b{display:block;margin-bottom:3px;font-weight:600}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:8px 0}
+.mini{background:#f8fafc;border-radius:8px;padding:10px 12px;font-size:12px;line-height:1.6}
+.mini b{display:block;margin-bottom:4px;font-weight:600;font-size:12.5px}
 .pill{font-size:11px;padding:2px 9px;border-radius:20px;display:inline-block;margin:2px}
 .flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:8px 0}
-.fbox{background:#f1f5f9;padding:5px 9px;border-radius:7px;font-size:11.5px}
-.farrow{color:#64748b;font-size:14px}
-.divh{border:none;border-top:0.5px solid #e2e8f0;margin:8px 0}
-.tbl{width:100%;border-collapse:collapse;font-size:11px}
-.tbl th{background:#f8fafc;padding:5px 8px;border-bottom:0.5px solid #e2e8f0;text-align:left;font-weight:600}
-.tbl td{padding:5px 8px;border-bottom:0.5px solid #e2e8f0;vertical-align:top}
+.fbox{background:#f1f5f9;padding:6px 10px;border-radius:7px;font-size:12px;line-height:1.5}
+.farrow{color:#64748b;font-size:16px}
+.divh{border:none;border-top:0.5px solid #e2e8f0;margin:10px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{background:#f8fafc;padding:6px 8px;border-bottom:0.5px solid #e2e8f0;
+        text-align:left;font-weight:600;font-size:11.5px}
+.tbl td{padding:6px 8px;border-bottom:0.5px solid #e2e8f0;vertical-align:top;font-size:12px}
 .tbl tr.hl td{background:#eff6ff;font-weight:600}
+.tbl tr.hl2 td{background:#f0fdf4;font-weight:600}
 .footer-bar{grid-column:1/-1;background:#0f1e3a;border-radius:10px;
             padding:12px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
-
-/* ── IMÁGENES ── */
+.paso-num{display:inline-flex;align-items:center;justify-content:center;
+          width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;
+          background:#0f1e3a;color:#fff;margin-right:6px;flex-shrink:0}
+/* Imágenes */
 .img-block{margin:10px 0;border-radius:8px;overflow:hidden;border:0.5px solid #e2e8f0;background:#f8fafc}
-.img-block img{width:100%;display:block;border-radius:8px}
-.img-missing{border:1.5px dashed #cbd5e1 !important;min-height:80px;
-             display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;padding:16px}
-.img-missing span{color:#94a3b8;font-size:12px;text-align:center}
+.img-block img{width:100%;display:block}
+.img-missing{border:1.5px dashed #cbd5e1 !important;min-height:75px;background:#f8fafc;
+             display:flex;align-items:center;justify-content:center;padding:12px;border-radius:8px}
+.img-missing span{color:#94a3b8;font-size:11.5px;text-align:center}
 .img-caption{font-size:10.5px;color:#94a3b8;text-align:center;padding:4px 8px;font-style:italic}
-
-/* ── QUIZ ── */
+/* Quiz */
 .qcard{background:#fff;border:0.5px solid #e2e8f0;border-radius:10px;padding:14px;margin-bottom:12px}
-.qnum{font-size:10px;color:#3b82f6;font-weight:700;margin-bottom:4px}
-.qtext{font-size:12.5px;font-weight:600;margin-bottom:10px;line-height:1.5}
+.qnum{font-size:10px;color:#3b82f6;font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.qtext{font-size:13px;font-weight:600;margin-bottom:10px;line-height:1.5;color:#1e293b}
 .qbtn{display:block;width:100%;text-align:left;background:#f8fafc;border:1px solid #e2e8f0;
-      border-radius:8px;padding:8px 12px;font-size:12px;cursor:pointer;margin-bottom:5px;transition:.2s;font-family:inherit}
+      border-radius:8px;padding:9px 13px;font-size:12.5px;cursor:pointer;margin-bottom:5px;
+      transition:.2s;font-family:inherit;color:#1e293b;line-height:1.4}
 .qbtn:hover{background:#eff6ff;border-color:#bfdbfe}
-.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;pointer-events:none;opacity:1}
-.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b;pointer-events:none;opacity:.7}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;pointer-events:none}
+.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b;pointer-events:none;opacity:.75}
 .qbtn.disabled{pointer-events:none;opacity:.6}
-.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;display:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:9px 13px;font-size:12px;margin-top:8px;line-height:1.6;display:none}
 .qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
 .qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
-.prog-bar-wrap{width:100%;background:#e2e8f0;border-radius:20px;height:10px;margin:8px 0}
-.prog-bar-fill{height:100%;border-radius:20px;background:#22c55e;transition:.3s}
+.prog-wrap{width:100%;background:#e2e8f0;border-radius:20px;height:10px;margin:8px 0}
+.prog-fill{height:100%;border-radius:20px;background:#22c55e;transition:.3s;width:0%}
+/* Cálculo manual visual */
+.calc-step{background:#f8fafc;border:0.5px solid #e2e8f0;border-radius:8px;
+           padding:10px 12px;margin:6px 0;font-size:12px;line-height:1.7}
+.calc-step .label{font-weight:600;color:#475569;font-size:11px;text-transform:uppercase;
+                  letter-spacing:.04em;margin-bottom:4px;display:block}
+.calc-hl{background:#fef9c3;padding:1px 5px;border-radius:4px;font-weight:700;color:#713f12}
 </style>
 </head>
 <body>
-
-<!-- ══════════════════════════════════════════════════
-     GUÍA DE IMÁGENES — renombra tus PNG exactamente así
-     y colócalos en la MISMA carpeta que este HTML
-     ══════════════════════════════════════════════════ -->
-<div id="img-guide" style="background:#0f172a;color:#e2e8f0;font-family:'Courier New',monospace;
-  font-size:12px;padding:16px 20px;margin-bottom:14px;border-radius:12px;
-  border-left:4px solid #3b82f6;max-width:1200px;margin:0 auto 14px">
-  <div style="color:#7dd3fc;font-weight:700;margin-bottom:10px;font-size:13px;font-family:'Oswald',sans-serif">
-    📁 IMÁGENES NECESARIAS — coloca estos PNG en la misma carpeta que el HTML
-  </div>
-  <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:center">
-    <span style="color:#86efac">✓ pc13_histograma.png</span>
-    <span style="color:#64748b">← histograma de frecuencias (generado por Python/Colab)</span>
-    <span style="color:#86efac">✓ pc13_rayleigh.png</span>
-    <span style="color:#64748b">← curva distribución Rayleigh K=2 (generado por Python/Colab)</span>
-    <span style="color:#86efac">✓ pc13_potencia.png</span>
-    <span style="color:#64748b">← gráfico P=f(V) potencia vs velocidad (generado por Python/Colab)</span>
-    <span style="color:#86efac">✓ pc13_serie_temporal.png</span>
-    <span style="color:#64748b">← serie temporal velocidad 60m (generado por Python/Colab)</span>
-    <span style="color:#fcd34d">○ pc13_tabla_excel.png</span>
-    <span style="color:#64748b">← captura del Excel del profesor (Win+Shift+S)</span>
-    <span style="color:#fcd34d">○ pc13_tabla_frecuencias.png</span>
-    <span style="color:#64748b">← captura tabla de frecuencias del Excel del profesor (Win+Shift+S)</span>
-  </div>
-  <div style="margin-top:10px;font-size:11px;color:#475569;border-top:1px solid #1e293b;padding-top:8px;display:flex;justify-content:space-between;align-items:center">
-    <span>✓ verde = generado por código &nbsp;|&nbsp; ○ amarillo = captura manual</span>
-    <button onclick="document.getElementById('img-guide').style.display='none'"
-      style="background:#1e293b;color:#94a3b8;border:1px solid #334155;padding:3px 12px;
-             border-radius:6px;cursor:pointer;font-size:11px;font-family:inherit">
-      Ocultar guía ✕
-    </button>
-  </div>
-</div>
-
 <div class="cv">
 
 <!-- ══ TÍTULO ══ -->
@@ -118,7 +113,7 @@ body{font-family:'Source Sans 3',sans-serif;background:#f1f5f9;color:#1e293b;pad
     Análisis de velocidad de viento — Altura 60 m
   </div>
   <div style="font-size:11px;color:#94a3b8;margin-bottom:10px">
-    PC 13 · Energías Renovables · UNALM 2026-I · u60 (m/s) · 109 observaciones cada 10 min
+    PC 13 · Energías Renovables · UNALM 2026-I · Columna u60 (m/s) · 109 observaciones cada 10 minutos
   </div>
   <div>
     <span class="pill" style="background:#1e3a5f;color:#93c5fd">Vm = 10.16 m/s</span>
@@ -130,350 +125,474 @@ body{font-family:'Source Sans 3',sans-serif;background:#f1f5f9;color:#1e293b;pad
 </div>
 
 <!-- ══ SECCIÓN 1 ══ -->
-<div class="s3 secbar">Paso 1 — Distribución de tiempo: ¿qué velocidad hubo en cada momento?</div>
+<div class="s3 secbar">Paso 1 — Distribución de tiempo: organizando las mediciones</div>
 
 <div class="block s2">
-  <span class="bh bh-blue">¿Qué es la distribución de tiempo?</span>
+  <span class="bh bh-blue">¿Qué es y para qué sirve?</span>
   <div class="def def-blue">
-    Es una tabla que organiza TODAS las mediciones en una cuadrícula de <strong>hora × medida dentro de la hora</strong>.
-    Cada celda = la velocidad exacta registrada en ese instante.
+    Imagina que tienes un sensor de viento que anota la velocidad <strong>cada 10 minutos durante todo el día</strong>.
+    Al final del día tienes 109 números sueltos. La distribución de tiempo los organiza en una tabla ordenada
+    para que puedas ver fácilmente <em>cuándo</em> sopló más fuerte y <em>cuándo</em> más suave.
   </div>
+  <div class="item"><div class="dot dot-blue"></div>
+    <div>Tus datos cubren desde las <strong>00:00 hasta las 18:00</strong> — solo 18 horas de un día, no 24.</div>
+  </div>
+  <div class="item"><div class="dot dot-blue"></div>
+    <div>Cada hora tiene <strong>6 mediciones</strong> (minuto 0, 10, 20, 30, 40, 50). La hora 18 solo tiene 1 porque los datos se cortaron ahí.</div>
+  </div>
+  <div class="tip">💡 <strong>Analogía:</strong> Es como una tabla de asistencia escolar — las filas son las horas (como los días de la semana) y las columnas son las mediciones dentro de esa hora (como los periodos de clase).</div>
+  <hr class="divh">
   <div class="flow">
-    <div class="fbox">Hora 0 (medianoche)</div><div class="farrow">→</div>
-    <div class="fbox">Medida 1: 00:00</div><div class="farrow">→</div>
-    <div class="fbox">Medida 2: 00:10</div><div class="farrow">→</div>
-    <div class="fbox">Medida 3: 00:20</div><div class="farrow">→</div>
-    <div class="fbox">... hasta :50</div>
+    <div class="fbox"><strong>Fila</strong> = hora entera<br><small style="color:#64748b">0, 1, 2, ... 18</small></div>
+    <div class="farrow">→</div>
+    <div class="fbox"><strong>Columna M1</strong><br><small style="color:#64748b">minuto :00</small></div>
+    <div class="farrow">→</div>
+    <div class="fbox"><strong>Columna M2</strong><br><small style="color:#64748b">minuto :10</small></div>
+    <div class="farrow">→</div>
+    <div class="fbox"><strong>Columna M3</strong><br><small style="color:#64748b">minuto :20</small></div>
+    <div class="farrow">→ ... hasta M6 (:50)</div>
   </div>
-  <div class="item"><div class="dot dot-blue"></div><div><strong>Filas</strong> = hora entera del día (0, 1, 2, ..., 18 en tus datos)</div></div>
-  <div class="item"><div class="dot dot-blue"></div><div><strong>Columnas</strong> = medida 1 (min 0), medida 2 (min 10), ..., medida 6 (min 50)</div></div>
-  <div class="item"><div class="dot dot-blue"></div><div>109 obs = 18 h × 6 medidas + 1 extra (hora 18 incompleta)</div></div>
-  <div class="warn">⚠️ La hora 18 solo tiene Medida 1 (9.987 m/s) — las demás son NaN porque los datos se cortaron ahí.</div>
+  <div class="warn">⚠️ La celda (Hora=12, M1) = 14.617 m/s significa: a las 12:00 en punto, el viento soplaba a 14.617 m/s. Es la velocidad más alta del día.</div>
 </div>
 
 <div class="block">
-  <span class="bh bh-blue">Resultado de tu tabla</span>
+  <span class="bh bh-blue">Tu tabla resultante</span>
   <table class="tbl">
-    <tr><th>Hora</th><th>M1 (0')</th><th>M2 (10')</th><th>M3 (20')</th><th>M4 (30')</th></tr>
+    <tr><th>Hora</th><th>M1 (:00)</th><th>M2 (:10)</th><th>M3 (:20)</th><th>M4 (:30)</th></tr>
     <tr><td>0</td><td>8.563</td><td>8.628</td><td>8.068</td><td>8.181</td></tr>
     <tr><td>10</td><td>10.067</td><td>9.970</td><td>10.006</td><td>11.136</td></tr>
-    <tr class="hl"><td>12</td><td>14.617</td><td>13.543</td><td>13.544</td><td>14.432</td></tr>
-    <tr><td>18</td><td>9.987</td><td style="color:#94a3b8">NaN</td><td style="color:#94a3b8">NaN</td><td style="color:#94a3b8">NaN</td></tr>
+    <tr class="hl"><td><strong>12</strong></td><td><strong>14.617</strong></td><td>13.543</td><td>13.544</td><td>14.432</td></tr>
+    <tr><td>18</td><td>9.987</td><td style="color:#94a3b8;font-style:italic">NaN</td><td style="color:#94a3b8;font-style:italic">NaN</td><td style="color:#94a3b8;font-style:italic">NaN</td></tr>
   </table>
-  <!-- IMAGEN: captura Excel del profesor -->
-  <div class="img-block" id="ib-tabla-excel">
-    <img src="pc13_tabla_excel.png" alt="Tabla distribución de tiempo — Excel del profesor"
-         onload="document.getElementById('ib-tabla-excel').classList.remove('img-missing')"
-         onerror="document.getElementById('ib-tabla-excel').classList.add('img-missing');this.style.display='none'">
-    <span class="img-missing" style="display:none">📷 pc13_tabla_excel.png — captura del Excel del profesor</span>
-    <div class="img-caption">Tabla distribución de tiempo (Excel del profesor)</div>
+  <div class="tip" style="margin-top:10px">💡 <strong>¿Qué es NaN?</strong> "Not a Number" — significa que no hay dato. La hora 18 se cortó antes de completarse, así que solo existe la medición de las 18:00 en punto.</div>
+  <div class="img-block" id="ib1">
+    <img src="pc13_tabla_excel.png" alt="Tabla distribución de tiempo del Excel del profesor"
+         onerror="document.getElementById('ib1').innerHTML='<div class=img-missing><span>📷 pc13_tabla_excel.png pendiente</span></div>'">
+    <div class="img-caption">Tabla del Excel del profesor para comparar</div>
   </div>
+  <div class="exam">🎯 Examen: ¿Por qué la hora 12 tiene las velocidades más altas del día? ¿Qué fenómeno meteorológico explicaría esto?</div>
 </div>
 
 <!-- ══ SECCIÓN 2 ══ -->
-<div class="s3 secbar">Paso 2 — Distribución de frecuencias: ¿cuánto tiempo sopló el viento en cada rango?</div>
+<div class="s3 secbar">Paso 2 — Distribución de frecuencias: ¿con qué velocidades sopla más el viento?</div>
 
 <div class="block">
-  <span class="bh bh-green">¿Qué es un intervalo de velocidad?</span>
+  <span class="bh bh-green">¿Qué es una distribución de frecuencias?</span>
   <div class="def def-green">
-    Se divide el rango de velocidades en "cajitas" de 1 m/s (0–1, 1–2, ...) y se cuenta cuántas observaciones caen en cada una.
+    En vez de analizar los 109 valores uno por uno, los <strong>agrupamos en rangos</strong> (llamados intervalos o "clases")
+    y contamos cuántos caen en cada rango. Así podemos ver de un vistazo cuál es la velocidad "más típica" del sitio.
   </div>
-  <div class="item"><div class="dot dot-green"></div><div>Tus datos: 7.34 → 14.64 m/s → solo intervalos 7–8 hasta 14–15 tienen datos</div></div>
-  <div class="item"><div class="dot dot-green"></div><div>Los intervalos 0–7 y 15–20 tienen frecuencia = 0 ese día</div></div>
-  <!-- IMAGEN: histograma Python -->
-  <div class="img-block" id="ib-hist">
+  <div class="item"><div class="dot dot-green"></div>
+    <div><strong>Intervalo:</strong> un rango de velocidades de ancho fijo. Aquí usamos intervalos de 1 m/s: 0–1, 1–2, 2–3, ..., 19–20.</div>
+  </div>
+  <div class="item"><div class="dot dot-green"></div>
+    <div>Como tus datos van de <strong>7.34 a 14.64 m/s</strong>, solo los intervalos 7–8 hasta 14–15 tienen datos. Los demás están vacíos.</div>
+  </div>
+  <div class="tip">💡 <strong>Analogía:</strong> Es como contar cuántos alumnos sacaron entre 0-10, 11-13, 14-16, 17-20 en un examen. No te importa la nota exacta de cada uno, sino en qué rango cae la mayoría.</div>
+  <div class="img-block" id="ib2">
     <img src="pc13_histograma.png" alt="Histograma distribución de frecuencias"
-         onerror="document.getElementById('ib-hist').innerHTML='<div class=img-missing><span>📷 pc13_histograma.png — ejecuta el código Python para generar esta imagen</span></div>'">
-    <div class="img-caption">Histograma generado por Python/Colab</div>
+         onerror="document.getElementById('ib2').innerHTML='<div class=img-missing><span>📷 pc13_histograma.png — ejecuta el código Python</span></div>'">
+    <div class="img-caption">Histograma generado por Python — cada barra = un intervalo de 1 m/s</div>
   </div>
 </div>
 
 <div class="block">
-  <span class="bh bh-green">Las 4 columnas que calcula el código</span>
-  <div class="two" style="margin-top:8px">
-    <div class="mini" style="border-top:3px solid #22c55e"><b>Frec. absoluta</b>¿Cuántas mediciones caen ahí? Ej: 47 entre 8–9 m/s</div>
-    <div class="mini" style="border-top:3px solid #3b82f6"><b>Frec. relativa (%)</b>47/109 = 43.1% del tiempo entre 8–9 m/s</div>
-    <div class="mini" style="border-top:3px solid #f59e0b"><b>Frec. acumulada (%)</b>Suma progresiva. ¿Qué % del tiempo el viento estuvo bajo X m/s?</div>
-    <div class="mini" style="border-top:3px solid #8b5cf6"><b>Duración (h)</b>Frec. abs × 10 min. Ej: 47 × (10/60) = 7.83 h</div>
+  <span class="bh bh-green">Las 4 columnas explicadas</span>
+  <div style="margin-top:4px">
+    <div class="mini" style="border-top:3px solid #22c55e;margin-bottom:8px">
+      <b>1. Frecuencia absoluta</b>
+      Es simplemente <strong>contar</strong> cuántas de las 109 mediciones caen en ese intervalo.
+      Ej: 47 mediciones estuvieron entre 8 y 9 m/s.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6;margin-bottom:8px">
+      <b>2. Frecuencia relativa (%)</b>
+      Es la frecuencia absoluta dividida entre el total, expresada en porcentaje.
+      Te dice: <em>"del total del tiempo, ¿qué % soplaba en ese rango?"</em>
+      Ej: 47 ÷ 109 × 100 = <strong>43.1%</strong>
+    </div>
+    <div class="mini" style="border-top:3px solid #f59e0b;margin-bottom:8px">
+      <b>3. Frecuencia acumulada (%)</b>
+      Se va sumando cada % al anterior. Responde: <em>"¿qué % del tiempo el viento fue MENOR que X m/s?"</em>
+      Ej: al llegar al intervalo 9–10, la acumulada es 56.88% → el viento estuvo por debajo de 10 m/s el 56.88% del tiempo.
+    </div>
+    <div class="mini" style="border-top:3px solid #8b5cf6">
+      <b>4. Duración (horas)</b>
+      Frecuencia absoluta × 10 minutos, convertido a horas.
+      Te dice cuántas horas reales soplaba en ese rango.
+      Ej: 47 mediciones × 10 min ÷ 60 = <strong>7.83 horas</strong>
+    </div>
   </div>
-  <div class="exam">🎯 Examen: El intervalo 8–9 m/s concentra el 43.1% de las observaciones. ¿Qué implica esto para el diseño de un aerogenerador en este sitio?</div>
 </div>
 
 <div class="block">
-  <span class="bh bh-green">Resultado de tus datos</span>
+  <span class="bh bh-green">Tus resultados (solo intervalos con datos)</span>
   <table class="tbl">
-    <tr><th>Intervalo</th><th>Frec. abs.</th><th>Frec. rel. %</th><th>Duración h</th></tr>
-    <tr><td>7–8</td><td>9</td><td>8.26%</td><td>1.50</td></tr>
-    <tr class="hl"><td>8–9</td><td>47</td><td>43.12%</td><td>7.83</td></tr>
-    <tr><td>9–10</td><td>6</td><td>5.50%</td><td>1.00</td></tr>
-    <tr><td>10–11</td><td>8</td><td>7.34%</td><td>1.33</td></tr>
-    <tr><td>11–12</td><td>10</td><td>9.17%</td><td>1.67</td></tr>
-    <tr><td>12–13</td><td>8</td><td>7.34%</td><td>1.33</td></tr>
-    <tr><td>13–14</td><td>14</td><td>12.84%</td><td>2.33</td></tr>
-    <tr><td>14–15</td><td>7</td><td>6.42%</td><td>1.17</td></tr>
+    <tr><th>Intervalo</th><th>Frec. abs.</th><th>Frec. rel. %</th><th>Acumulada %</th><th>Duración h</th></tr>
+    <tr><td>7–8 m/s</td><td>9</td><td>8.26%</td><td>8.26%</td><td>1.50</td></tr>
+    <tr class="hl"><td>8–9 m/s ★</td><td>47</td><td>43.12%</td><td>51.38%</td><td>7.83</td></tr>
+    <tr><td>9–10 m/s</td><td>6</td><td>5.50%</td><td>56.88%</td><td>1.00</td></tr>
+    <tr><td>10–11 m/s</td><td>8</td><td>7.34%</td><td>64.22%</td><td>1.33</td></tr>
+    <tr><td>11–12 m/s</td><td>10</td><td>9.17%</td><td>73.39%</td><td>1.67</td></tr>
+    <tr><td>12–13 m/s</td><td>8</td><td>7.34%</td><td>80.73%</td><td>1.33</td></tr>
+    <tr><td>13–14 m/s</td><td>14</td><td>12.84%</td><td>93.58%</td><td>2.33</td></tr>
+    <tr><td>14–15 m/s</td><td>7</td><td>6.42%</td><td>100%</td><td>1.17</td></tr>
   </table>
-  <div class="warn">⚠️ El intervalo 8–9 m/s domina con 43% del tiempo — viento moderado-alto y constante.</div>
+  <div class="warn">⚠️ ★ El intervalo 8–9 m/s domina con el 43% del tiempo — casi la mitad del día el viento estuvo en ese rango. Esto es clave para dimensionar un aerogenerador: se diseña para trabajar bien cerca de esa velocidad.</div>
+  <div class="exam">🎯 Examen: Según la frecuencia acumulada, ¿qué porcentaje del tiempo el viento sopló a MENOS de 10 m/s? ¿Qué implica esto para la producción energética del sitio?</div>
 </div>
 
 <!-- ══ SECCIÓN 3 ══ -->
-<div class="s3 secbar">Paso 3 — Velocidad media: el valor representativo de todo el viento</div>
+<div class="s3 secbar">Paso 3 — Velocidad media: el valor que representa todo el viento</div>
 
 <div class="block s2">
-  <span class="bh bh-amber">¿Cómo se calcula la velocidad media?</span>
+  <span class="bh bh-amber">¿Qué significa "velocidad media"?</span>
   <div class="def def-amber">
-    El código da dos métodos. El profesor usa la <strong>ponderada por frecuencia relativa</strong> porque usa los límites de los intervalos (marca de clase).
+    La velocidad media es un <strong>número único que resume todo el comportamiento del viento</strong> en el periodo medido.
+    Es como la "nota promedio" del viento: si el viento fuera un alumno, su velocidad media sería su promedio de notas.
+    Con este valor se hacen todos los cálculos de energía y se comparan sitios entre sí.
+  </div>
+  <div class="item"><div class="dot dot-amber"></div>
+    <div>Un sitio con Vm = 6 m/s es mediocre para energía eólica. Vm = 10 m/s como el tuyo es <strong>bastante bueno</strong>.</div>
+  </div>
+  <div class="item"><div class="dot dot-amber"></div>
+    <div>Existen dos formas de calcularla. El resultado es casi igual, pero el método del profesor (ponderada) es el estándar técnico porque agrupa los datos en intervalos antes de promediar.</div>
   </div>
   <hr class="divh">
-  <div class="two">
-    <div>
-      <div style="font-size:11.5px;font-weight:600;margin-bottom:6px;color:#64748b">Método 1 — Media simple</div>
-      <div class="rx">Vm = Σ vᵢ / n<br>= suma de las 109 mediciones ÷ 109<br>Vm = 10.1612 m/s</div>
-      <div class="item" style="margin-top:6px"><div class="dot dot-amber"></div><div>En Python: <code>vel.mean()</code></div></div>
-    </div>
-    <div>
-      <div style="font-size:11.5px;font-weight:600;margin-bottom:6px;color:#64748b">Método 2 — Media ponderada (profe)</div>
-      <div class="rx">Vm = Σ (marca_clase × frec_relativa)<br><br>= 7.5×0.0826 + 8.5×0.4312<br>+ 9.5×0.0550 + ...<br><br>Vm = 10.2156 m/s</div>
-      <div class="item" style="margin-top:6px"><div class="dot dot-amber"></div><div>Punto medio de cada intervalo × su peso proporcional</div></div>
-    </div>
+
+  <!-- MÉTODO 1 -->
+  <div style="font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;color:#0f1e3a;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em">
+    Método 1 — Media aritmética simple (lo que hace Python con .mean())
   </div>
-  <div class="warn">⚠️ La diferencia (10.16 vs 10.22) es pequeña aquí. El método ponderado es el estándar en ingeniería eólica.</div>
+  <div class="def def-amber" style="margin-bottom:8px">
+    Sumas todos los valores de velocidad y los divides entre cuántos son. Es el promedio de toda la vida.
+  </div>
+  <div class="calc-step">
+    <span class="label">Fórmula</span>
+    Vm = (v₁ + v₂ + v₃ + ... + v₁₀₉) ÷ 109
+  </div>
+  <div class="calc-step">
+    <span class="label">Con tus datos (primeros valores como ejemplo)</span>
+    Vm = (8.563 + 8.628 + 8.068 + 8.181 + 8.076 + ... + 9.987) ÷ 109
+  </div>
+  <div class="calc-step">
+    <span class="label">Resultado</span>
+    Vm = 1107.57 ÷ 109 = <span class="calc-hl">10.1612 m/s</span>
+  </div>
+  <hr class="divh">
+
+  <!-- MÉTODO 2 -->
+  <div style="font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;color:#0f1e3a;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em">
+    Método 2 — Media ponderada por frecuencia relativa (método del profesor)
+  </div>
+  <div class="def def-amber" style="margin-bottom:8px">
+    En vez de usar cada valor individual, usas los <strong>intervalos</strong>. Para cada intervalo calculas su punto medio
+    (marca de clase) y lo multiplicas por qué fracción del tiempo representó ese intervalo. Luego sumas todo.
+  </div>
+  <div class="warn" style="margin-bottom:8px">⚠️ <strong>¿Por qué "ponderada"?</strong> "Ponderar" = dar peso a cada cosa según su importancia. El intervalo 8–9 m/s ocurrió el 43% del tiempo, así que "pesa" más en el promedio que el 7–8 m/s que solo ocurrió el 8%.</div>
 </div>
 
 <div class="block">
-  <span class="bh bh-amber">Marca de clase: la clave del método</span>
+  <span class="bh bh-amber">Marca de clase: el punto medio del intervalo</span>
   <div class="def def-amber">
-    Punto medio del intervalo = (lím. inferior + lím. superior) / 2. Representa a TODAS las velocidades de ese rango.
+    Como no sabemos la velocidad exacta de cada medición dentro de un intervalo, asumimos que
+    <strong>todas estuvieron en el punto medio</strong>. Eso es la marca de clase.
+    Para el intervalo 8–9: marca = (8 + 9) ÷ 2 = <strong>8.5 m/s</strong>
   </div>
-  <table class="tbl">
-    <tr><th>Intervalo</th><th>Lím. inf.</th><th>Lím. sup.</th><th>Marca</th><th>Aporte a Vm</th></tr>
-    <tr><td>7–8</td><td>7</td><td>8</td><td><strong>7.5</strong></td><td>7.5 × 0.0826 = 0.620</td></tr>
-    <tr class="hl"><td>8–9</td><td>8</td><td>9</td><td><strong>8.5</strong></td><td>8.5 × 0.4312 = 3.665</td></tr>
-    <tr><td>9–10</td><td>9</td><td>10</td><td><strong>9.5</strong></td><td>9.5 × 0.0550 = 0.523</td></tr>
-    <tr><td>13–14</td><td>13</td><td>14</td><td><strong>13.5</strong></td><td>13.5 × 0.1284 = 1.733</td></tr>
+  <table class="tbl" style="margin-top:8px">
+    <tr><th>Intervalo</th><th>Lím. inf.</th><th>Lím. sup.</th><th>Marca = (inf+sup)÷2</th><th>Frec. rel.</th><th>Aporte = marca × frec</th></tr>
+    <tr><td>7–8</td><td>7</td><td>8</td><td>7.5</td><td>0.0826</td><td>7.5 × 0.0826 = 0.620</td></tr>
+    <tr class="hl"><td>8–9 ★</td><td>8</td><td>9</td><td>8.5</td><td>0.4312</td><td>8.5 × 0.4312 = <strong>3.665</strong></td></tr>
+    <tr><td>9–10</td><td>9</td><td>10</td><td>9.5</td><td>0.0550</td><td>9.5 × 0.0550 = 0.523</td></tr>
+    <tr><td>10–11</td><td>10</td><td>11</td><td>10.5</td><td>0.0734</td><td>10.5 × 0.0734 = 0.771</td></tr>
+    <tr><td>11–12</td><td>11</td><td>12</td><td>11.5</td><td>0.0917</td><td>11.5 × 0.0917 = 1.055</td></tr>
+    <tr><td>12–13</td><td>12</td><td>13</td><td>12.5</td><td>0.0734</td><td>12.5 × 0.0734 = 0.918</td></tr>
+    <tr><td>13–14</td><td>13</td><td>14</td><td>13.5</td><td>0.1284</td><td>13.5 × 0.1284 = 1.733</td></tr>
+    <tr><td>14–15</td><td>14</td><td>15</td><td>14.5</td><td>0.0642</td><td>14.5 × 0.0642 = 0.931</td></tr>
+    <tr class="hl2"><td colspan="5"><strong>SUMA DE TODOS LOS APORTES =</strong></td><td><strong>10.216 m/s ✓</strong></td></tr>
   </table>
-  <!-- IMAGEN: tabla de frecuencias del Excel del profesor -->
-  <div class="img-block" id="ib-freq-excel">
-    <img src="pc13_tabla_frecuencias.png" alt="Tabla de frecuencias — Excel del profesor"
-         onerror="document.getElementById('ib-freq-excel').innerHTML='<div class=img-missing><span>📷 pc13_tabla_frecuencias.png — captura del Excel del profesor</span></div>'">
-    <div class="img-caption">Tabla de frecuencias (Excel del profesor)</div>
+  <div class="tip">💡 El intervalo 8–9 m/s aporta <strong>3.665 m/s</strong> al total — el mayor aporte. Tiene sentido porque ocurrió el 43% del tiempo.</div>
+  <div class="img-block" id="ib3">
+    <img src="pc13_tabla_frecuencias.png" alt="Tabla de frecuencias del Excel del profesor"
+         onerror="document.getElementById('ib3').innerHTML='<div class=img-missing><span>📷 pc13_tabla_frecuencias.png pendiente</span></div>'">
+    <div class="img-caption">Tabla del Excel del profesor</div>
   </div>
-  <div class="exam">🎯 Examen: Si la frec. relativa del intervalo 8–9 m/s es 43.12% y la marca de clase es 8.5 m/s, ¿cuánto aporta ese intervalo a la velocidad media ponderada?
-    <br><span style="font-size:11px;margin-top:4px;display:block">Respuesta: 8.5 × 0.4312 = <strong>3.665 m/s</strong> — el mayor aporte individual</span>
-  </div>
+  <div class="exam">🎯 Examen: Calcula manualmente el aporte del intervalo 13–14 m/s a la velocidad media ponderada, sabiendo que su frecuencia relativa es 12.84%. ¿Qué marca de clase le corresponde?</div>
 </div>
 
 <!-- ══ SECCIÓN 4 ══ -->
-<div class="s3 secbar">Paso 4 — Distribución Rayleigh y Potencia del viento</div>
+<div class="s3 secbar">Paso 4 — Distribución Rayleigh: modelar matemáticamente el viento</div>
 
 <div class="block">
-  <span class="bh bh-purple">¿Qué es Rayleigh?</span>
+  <span class="bh bh-purple">¿Qué es la distribución Rayleigh?</span>
   <div class="def def-purple">
-    Modelo matemático (Weibull K=2) que predice con qué probabilidad aparece cada velocidad, usando solo Vm como parámetro.
+    Hasta ahora analizaste los datos que ya tienes (18 horas). Pero necesitas predecir cómo se comportará
+    el viento <strong>todo el año</strong>. Rayleigh es un modelo matemático que hace eso:
+    con solo conocer la velocidad media, genera una curva que predice la probabilidad de cada velocidad.
   </div>
-  <div class="rx">C = Vm / (√π / 2) = 10.1612 / 0.8862<br>C = 11.4657 m/s<br><br>R(V) = (2/C²) × V × exp(-(V/C)²)</div>
-  <!-- IMAGEN: curva Rayleigh Python -->
-  <div class="img-block" id="ib-rayleigh">
-    <img src="pc13_rayleigh.png" alt="Distribución Rayleigh K=2"
-         onerror="document.getElementById('ib-rayleigh').innerHTML='<div class=img-missing><span>📷 pc13_rayleigh.png — ejecuta el código Python para generar esta imagen</span></div>'">
-    <div class="img-caption">Curva Rayleigh generada por Python/Colab</div>
+  <div class="item"><div class="dot dot-purple"></div>
+    <div><strong>Es un caso especial de la distribución Weibull</strong> con parámetro de forma K=2. Weibull es el modelo más usado en energía eólica porque describe bien cómo se distribuye el viento en la naturaleza.</div>
   </div>
+  <div class="item"><div class="dot dot-purple"></div>
+    <div>Solo necesitas un dato de entrada: <strong>la velocidad media Vm</strong>. De ahí calculas C y ya tienes la curva completa.</div>
+  </div>
+  <div class="rx">
+    C = Vm ÷ (√π ÷ 2)<br>
+    C = 10.1612 ÷ 0.8862 = <span class="res">11.4657 m/s</span><br><br>
+    R(V) = (2/C²) × V × exp(−(V/C)²)
+  </div>
+  <div class="tip">💡 <strong>¿Qué es C?</strong> Es el "parámetro de escala" — controla qué tan "estirada" está la curva hacia velocidades altas. A mayor C, el viento tiende a velocidades más altas.</div>
+  <div class="img-block" id="ib4">
+    <img src="pc13_rayleigh.png" alt="Curva Rayleigh K=2"
+         onerror="document.getElementById('ib4').innerHTML='<div class=img-missing><span>📷 pc13_rayleigh.png — ejecuta el código Python</span></div>'">
+    <div class="img-caption">Curva Rayleigh — la línea roja predice la distribución del viento todo el año</div>
+  </div>
+  <div class="exam">🎯 Examen: ¿Por qué se usa la distribución Rayleigh (K=2) en vez de calcular directamente con los datos medidos?</div>
 </div>
 
 <div class="block">
-  <span class="bh bh-purple">Potencia del viento</span>
+  <span class="bh bh-purple">Potencia del viento — ¿cuánta energía hay en el viento?</span>
   <div class="def def-purple">
-    La potencia crece con el <strong>cubo</strong> de la velocidad. Duplicar V → potencia × 8.
+    No todo el viento que pasa por una turbina se convierte en electricidad. Primero hay que saber
+    <strong>cuánta energía contiene el viento</strong> (potencia disponible), y luego cuánto puede extraer
+    la turbina (potencia extraíble).
   </div>
-  <div class="rx">P_disp = ½ × ρ × A × V³<br>P_ext = Cp × P_disp<br><br>A Vm=10.16 m/s, A=1 m²:<br>P_disp = 642.6 W | P_ext = 257 W</div>
-  <div class="item" style="margin-top:8px"><div class="dot dot-purple"></div><div>ρ = 1.225 kg/m³ (estándar — ajustar con altitud real)</div></div>
-  <div class="item"><div class="dot dot-purple"></div><div>Cp = 0.40 asumido — límite de Betz = 0.593</div></div>
-  <div class="item"><div class="dot dot-purple"></div><div>Energía anual estimada: <strong>3,020 kWh/año</strong> por m² de rotor</div></div>
-  <div class="exam">🎯 Examen: ¿Por qué la potencia disponible en el viento es proporcional a V³ y no a V²?</div>
+  <div class="item"><div class="dot dot-purple"></div>
+    <div><strong>ρ (rho)</strong> = densidad del aire en kg/m³. El aire pesa, y entre más pesado (más frío, más bajo sobre el nivel del mar), más energía tiene el viento.</div>
+  </div>
+  <div class="item"><div class="dot dot-purple"></div>
+    <div><strong>A</strong> = área que barre el rotor en m². Una turbina más grande captura más viento.</div>
+  </div>
+  <div class="item"><div class="dot dot-purple"></div>
+    <div><strong>V³</strong> = velocidad al cubo. Este es el dato más importante: si el viento <em>duplica</em> su velocidad, la potencia se <strong>multiplica por 8</strong> (2³ = 8).</div>
+  </div>
+  <div class="rx">
+    P_disponible = ½ × <span class="var">ρ</span> × <span class="var">A</span> × <span class="var">V</span>³<br>
+    P_extraíble = <span class="var">Cp</span> × P_disponible<br><br>
+    A Vm = 10.16 m/s, A = 1 m²:<br>
+    P_disp = ½ × 1.225 × 1 × 10.16³ = <span class="res">642.6 W</span>
+  </div>
+  <div class="warn">⚠️ <strong>Límite de Betz:</strong> ninguna turbina puede extraer más del 59.3% de la potencia del viento. Si lo hiciera, detendría el aire completamente — físicamente imposible. Por eso Cp máximo = 0.593. Usamos Cp = 0.40 que es valor típico real.</div>
 </div>
 
 <div class="block">
-  <span class="bh bh-purple">Gráficos generados por Python</span>
-  <!-- IMAGEN: potencia vs velocidad -->
-  <div class="img-block" id="ib-pot">
-    <img src="pc13_potencia.png" alt="Gráfico Potencia vs Velocidad"
-         onerror="document.getElementById('ib-pot').innerHTML='<div class=img-missing><span>📷 pc13_potencia.png — ejecuta el código Python para generar esta imagen</span></div>'">
-    <div class="img-caption">P = f(V) generado por Python/Colab</div>
+  <span class="bh bh-purple">Gráficos de potencia y serie temporal</span>
+  <div class="img-block" id="ib5">
+    <img src="pc13_potencia.png" alt="Potencia vs Velocidad"
+         onerror="document.getElementById('ib5').innerHTML='<div class=img-missing><span>📷 pc13_potencia.png — ejecuta el código Python</span></div>'">
+    <div class="img-caption">P = f(V) — nota la curva cúbica: sube muy rápido a altas velocidades</div>
   </div>
-  <!-- IMAGEN: serie temporal -->
-  <div class="img-block" id="ib-serie">
+  <div class="img-block" id="ib6">
     <img src="pc13_serie_temporal.png" alt="Serie temporal velocidad 60m"
-         onerror="document.getElementById('ib-serie').innerHTML='<div class=img-missing><span>📷 pc13_serie_temporal.png — ejecuta el código Python para generar esta imagen</span></div>'">
-    <div class="img-caption">Serie temporal — velocidad a 60 m</div>
+         onerror="document.getElementById('ib6').innerHTML='<div class=img-missing><span>📷 pc13_serie_temporal.png — ejecuta el código Python</span></div>'">
+    <div class="img-caption">Serie temporal — velocidad hora por hora, línea roja = media (10.16 m/s)</div>
   </div>
   <div class="two" style="margin-top:10px">
     <div class="mini" style="border-left:3px solid #f97316;border-radius:0 8px 8px 0">
-      <b>Densidad real del aire</b>
-      <code style="font-size:10px">ρ = 353.05/T × exp(-0.034163×Z/T)</code><br>
-      con T en Kelvin y Z en metros
+      <b>⚠️ Pendiente: densidad real</b>
+      La densidad del aire cambia con la altitud y temperatura del sitio de medición. A mayor altitud, el aire es menos denso y hay menos energía en el viento.
+      <br><code style="font-size:10.5px">ρ = 353.05/T × exp(−0.034163×Z/T)</code>
+      <br><small>T en Kelvin, Z en metros</small>
     </div>
     <div class="mini" style="border-left:3px solid #f97316;border-radius:0 8px 8px 0">
-      <b>Área de rotor</b>
-      <code style="font-size:10px">A = π × (D/2)²</code><br>
-      Actualiza AREA_ROTOR en el código Python
+      <b>⚠️ Pendiente: área de rotor</b>
+      Calculamos con A=1 m² por ahora. Cuando tengas el diámetro D del aerogenerador:
+      <br><code style="font-size:10.5px">A = π × (D/2)²</code>
+      <br>Actualiza AREA_ROTOR en el código Python.
     </div>
   </div>
 </div>
 
 <!-- ══ RESUMEN ══ -->
 <div class="s3 block">
-  <span class="bh bh-teal">Resumen integrador</span>
+  <span class="bh bh-teal">Resumen integrador — todo el análisis de un vistazo</span>
   <table class="tbl" style="margin-top:8px">
-    <tr><th>Paso</th><th>Qué calcula</th><th>Resultado clave</th><th>Para qué sirve</th><th>Pendiente</th></tr>
-    <tr><td>1. Dist. de tiempo</td><td>Matriz hora × medida</td><td>Hora 12 → vientos más fuertes ~14 m/s</td><td>Patrón diurno del viento</td><td>—</td></tr>
-    <tr><td>2. Dist. de frecuencias</td><td>Conteo por intervalos 1 m/s</td><td>8–9 m/s domina con 43.1%</td><td>Dónde "vive" el viento</td><td>—</td></tr>
-    <tr class="hl"><td>3. Velocidad media</td><td>Ponderado por frec. relativa</td><td>Vm = 10.16 / 10.22 m/s</td><td>Parámetro base</td><td>—</td></tr>
-    <tr><td>4. Rayleigh K=2</td><td>Distribución de probabilidad</td><td>C = 11.47 m/s</td><td>Predecir frecuencia de V</td><td>—</td></tr>
-    <tr><td>5. Potencia</td><td>P = ½ρAV³</td><td>642.6 W a Vm (A=1 m²)</td><td>Diseñar aerogenerador</td><td>ρ real, área rotor</td></tr>
-    <tr><td>6. Energía anual</td><td>Σ P×tiempo/intervalo</td><td>3,020 kWh/año por m²</td><td>Viabilidad económica</td><td>Cp y área reales</td></tr>
+    <tr><th>Paso</th><th>¿Qué calcula?</th><th>¿Cómo?</th><th>Resultado clave</th><th>¿Para qué sirve?</th></tr>
+    <tr>
+      <td><strong>1.</strong> Dist. de tiempo</td>
+      <td>Organiza las 109 mediciones en una tabla hora × medida</td>
+      <td>Pivot table: filas=hora, cols=minuto dentro de la hora</td>
+      <td>Hora 12 = vientos más fuertes (~14 m/s)</td>
+      <td>Ver el patrón diurno: ¿cuándo sopla más?</td>
+    </tr>
+    <tr>
+      <td><strong>2.</strong> Dist. de frecuencias</td>
+      <td>Agrupa velocidades en rangos de 1 m/s y cuenta cuántas caen en cada uno</td>
+      <td>Contar, dividir entre total, sumar acumulado</td>
+      <td>8–9 m/s domina con 43.1% del tiempo</td>
+      <td>Ver qué velocidades son más comunes en el sitio</td>
+    </tr>
+    <tr class="hl">
+      <td><strong>3.</strong> Velocidad media</td>
+      <td>Un número que resume todo el viento</td>
+      <td>Σ(marca_clase × frec_relativa) por cada intervalo</td>
+      <td>Vm = 10.16 m/s (simple) / 10.22 m/s (ponderada)</td>
+      <td>Parámetro base para calcular energía y comparar sitios</td>
+    </tr>
+    <tr>
+      <td><strong>4.</strong> Rayleigh K=2</td>
+      <td>Curva de probabilidad del viento para todo el año</td>
+      <td>C = Vm/0.8862 → R(V) = fórmula Weibull con K=2</td>
+      <td>C = 11.47 m/s</td>
+      <td>Predecir con qué frecuencia aparece cada velocidad</td>
+    </tr>
+    <tr>
+      <td><strong>5.</strong> Potencia</td>
+      <td>Energía que contiene el viento por unidad de área</td>
+      <td>P = ½ρAV³, P_ext = Cp × P</td>
+      <td>642.6 W disponibles a Vm (A=1 m²)</td>
+      <td>Dimensionar el aerogenerador</td>
+    </tr>
+    <tr>
+      <td><strong>6.</strong> Energía anual</td>
+      <td>Total de energía producible en un año</td>
+      <td>Σ(P_intervalo × horas_anuales_del_intervalo)</td>
+      <td>3,020 kWh/año por m² de rotor</td>
+      <td>Evaluar si el sitio es rentable energéticamente</td>
+    </tr>
   </table>
-  <div class="warn" style="margin-top:10px">⚠️ Dato clave: las 109 obs son solo ~18 h de UN día. La energía anual de 3,020 kWh/año se extrapoló con Rayleigh a 8,760 h/año — NO es medición real de un año.</div>
+  <div class="warn" style="margin-top:10px">⚠️ <strong>Limitación importante:</strong> las 109 observaciones cubren solo ~18 horas de un día. La energía anual de 3,020 kWh/año se obtuvo extrapolando la distribución Rayleigh a 8,760 h/año — asume que el viento siempre se comporta igual. Para un proyecto real se necesita al menos 1 año de datos continuos.</div>
 </div>
 
 <!-- ══ QUIZ ══ -->
 <div class="s3 block" id="quiz-section" style="padding:16px 18px">
   <div style="background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px">
     <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:700">📝 QUIZ DE REPASO — 10 PREGUNTAS</div>
-    <div style="font-size:11px;color:#94a3b8;margin-top:2px">Marca tu respuesta y descubre si es correcta</div>
+    <div style="font-size:11px;color:#94a3b8;margin-top:2px">Marca tu respuesta y descubre si es correcta. La respuesta correcta siempre se muestra en verde.</div>
   </div>
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
-    <span id="prog-text" style="font-size:12px;color:#64748b;white-space:nowrap">0 / 10 respondidas</span>
-    <div class="prog-bar-wrap" style="flex:1"><div class="prog-bar-fill" id="prog-fill" style="width:0%"></div></div>
+    <span id="prog-text" style="font-size:12px;color:#64748b;white-space:nowrap">0 / 10</span>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
     <span id="score-text" style="font-size:12px;font-weight:600;color:#16a34a;white-space:nowrap">0 correctas</span>
   </div>
 
   <div class="qcard" id="q1">
     <p class="qnum">Pregunta 1 / 10</p>
-    <p class="qtext">¿Cuántas observaciones tiene el conjunto de datos y cada cuánto tiempo fueron tomadas?</p>
+    <p class="qtext">El dataset tiene 109 observaciones tomadas cada 10 minutos. ¿Cuántas horas de datos cubre aproximadamente?</p>
     <div class="qopts">
-      <button class="qbtn" data-q="1" data-correct="false">A) 109 observaciones cada 1 hora</button>
-      <button class="qbtn" data-q="1" data-correct="true">B) 109 observaciones cada 10 minutos</button>
-      <button class="qbtn" data-q="1" data-correct="false">C) 60 observaciones cada 10 minutos</button>
-      <button class="qbtn" data-q="1" data-correct="false">D) 109 observaciones cada 30 minutos</button>
+      <button class="qbtn" data-q="1" data-correct="false">A) 24 horas (un día completo)</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) 6 horas</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) Aproximadamente 18 horas</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) 109 horas</button>
     </div>
-    <div class="qfeedback ok" id="fb1-ok">✅ ¡Correcto! El dataset tiene 109 mediciones tomadas cada 10 minutos, cubriendo aproximadamente 18 horas de un día (de 00:00 a 18:00 h).</div>
-    <div class="qfeedback fail" id="fb1-fail">❌ Incorrecto — la respuesta correcta es B. Cada fila del Excel representa una medición de 10 minutos. 109 × 10 min ≈ 18 horas de datos.</div>
+    <div class="qfeedback ok" id="fb1-ok">✅ ¡Correcto! 109 mediciones × 10 min = 1,090 min ÷ 60 = 18.17 horas. Los datos van de las 00:00 hasta las 18:00, no cubre un día completo.</div>
+    <div class="qfeedback fail" id="fb1-fail">❌ Incorrecto — respuesta C. 109 × 10 min = 1,090 min ÷ 60 = ~18 horas. El dataset va de 00:00 a 18:00, no es un día completo.</div>
   </div>
 
   <div class="qcard" id="q2">
     <p class="qnum">Pregunta 2 / 10</p>
-    <p class="qtext">En la distribución de tiempo, ¿qué representa cada FILA y cada COLUMNA de la tabla?</p>
+    <p class="qtext">En la distribución de tiempo, la celda correspondiente a Hora=12 y Medida 1 tiene el valor 14.617. ¿Qué significa exactamente ese número?</p>
     <div class="qopts">
-      <button class="qbtn" data-q="2" data-correct="false">A) Fila = medida (10 min), Columna = hora del día</button>
-      <button class="qbtn" data-q="2" data-correct="false">B) Fila = intervalo de velocidad, Columna = hora</button>
-      <button class="qbtn" data-q="2" data-correct="true">C) Fila = hora entera del día, Columna = medida dentro de la hora (cada 10 min)</button>
-      <button class="qbtn" data-q="2" data-correct="false">D) Fila = día, Columna = hora del día</button>
+      <button class="qbtn" data-q="2" data-correct="false">A) El promedio de velocidad de toda la hora 12</button>
+      <button class="qbtn" data-q="2" data-correct="true">B) A las 12:00 en punto, el viento soplaba a 14.617 m/s</button>
+      <button class="qbtn" data-q="2" data-correct="false">C) La velocidad máxima registrada en todo el día</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) La suma de velocidades de la hora 12</button>
     </div>
-    <div class="qfeedback ok" id="fb2-ok">✅ ¡Correcto! Cada fila es una hora entera (0, 1, 2... 18) y cada columna es la medida dentro de esa hora: M1=minuto 0, M2=minuto 10, ..., M6=minuto 50.</div>
-    <div class="qfeedback fail" id="fb2-fail">❌ Incorrecto — la respuesta es C. La tabla organiza: filas = hora del día, columnas = cada medición de 10 min dentro de esa hora.</div>
+    <div class="qfeedback ok" id="fb2-ok">✅ ¡Correcto! Cada celda de la tabla es una medición puntual. Hora=12, Medida 1 (minuto :00) = 14.617 m/s registrado exactamente a las 12:00.</div>
+    <div class="qfeedback fail" id="fb2-fail">❌ Incorrecto — respuesta B. La tabla muestra velocidades puntuales, no promedios ni sumas. Medida 1 = minuto :00 de esa hora.</div>
   </div>
 
   <div class="qcard" id="q3">
     <p class="qnum">Pregunta 3 / 10</p>
-    <p class="qtext">¿Cuál es el intervalo de velocidad más frecuente en tus datos y qué porcentaje del tiempo representa?</p>
+    <p class="qtext">¿Qué representa la frecuencia relativa del intervalo 8–9 m/s (43.12%)?</p>
     <div class="qopts">
-      <button class="qbtn" data-q="3" data-correct="false">A) 13–14 m/s con 12.84% del tiempo</button>
-      <button class="qbtn" data-q="3" data-correct="false">B) 7–8 m/s con 8.26% del tiempo</button>
-      <button class="qbtn" data-q="3" data-correct="false">C) 10–11 m/s con 7.34% del tiempo</button>
-      <button class="qbtn" data-q="3" data-correct="true">D) 8–9 m/s con 43.12% del tiempo</button>
+      <button class="qbtn" data-q="3" data-correct="false">A) Que 43 de cada 100 m/s del día estuvieron entre 8 y 9</button>
+      <button class="qbtn" data-q="3" data-correct="true">B) Que el 43.12% del tiempo registrado, el viento estuvo entre 8 y 9 m/s</button>
+      <button class="qbtn" data-q="3" data-correct="false">C) Que la velocidad media es 43.12 m/s</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Que hubo 43 horas con viento entre 8 y 9 m/s</button>
     </div>
-    <div class="qfeedback ok" id="fb3-ok">✅ ¡Correcto! El intervalo 8–9 m/s domina con 47 observaciones de 109 = 43.12%. Esto significa que el viento sopló casi la mitad del tiempo registrado entre 8 y 9 m/s.</div>
-    <div class="qfeedback fail" id="fb3-fail">❌ Incorrecto — la respuesta es D. 47 de 109 observaciones estuvieron entre 8–9 m/s = 43.12%. Es el intervalo absolutamente dominante.</div>
+    <div class="qfeedback ok" id="fb3-ok">✅ ¡Correcto! Frecuencia relativa = (frec. absoluta ÷ total) × 100 = (47 ÷ 109) × 100 = 43.12%. Significa que casi la mitad del tiempo el viento estuvo en ese rango.</div>
+    <div class="qfeedback fail" id="fb3-fail">❌ Incorrecto — respuesta B. La frecuencia relativa es el porcentaje de observaciones (tiempo) en ese rango: 47 de 109 = 43.12% del tiempo total medido.</div>
   </div>
 
   <div class="qcard" id="q4">
     <p class="qnum">Pregunta 4 / 10</p>
-    <p class="qtext">¿Qué es la "marca de clase" de un intervalo y cómo se calcula?</p>
+    <p class="qtext">La frecuencia acumulada al llegar al intervalo 9–10 m/s es 56.88%. ¿Qué significa esto?</p>
     <div class="qopts">
-      <button class="qbtn" data-q="4" data-correct="true">A) Es el punto medio del intervalo: (límite inferior + límite superior) / 2</button>
-      <button class="qbtn" data-q="4" data-correct="false">B) Es el valor máximo registrado dentro del intervalo</button>
-      <button class="qbtn" data-q="4" data-correct="false">C) Es la frecuencia relativa del intervalo expresada en m/s</button>
-      <button class="qbtn" data-q="4" data-correct="false">D) Es el límite inferior del intervalo</button>
+      <button class="qbtn" data-q="4" data-correct="false">A) Que el 56.88% del tiempo el viento estuvo SOBRE 10 m/s</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) Que hay 56 intervalos de velocidad</button>
+      <button class="qbtn" data-q="4" data-correct="true">C) Que el 56.88% del tiempo el viento estuvo POR DEBAJO de 10 m/s</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Que la velocidad media es 5.688 m/s</button>
     </div>
-    <div class="qfeedback ok" id="fb4-ok">✅ ¡Correcto! La marca de clase representa a TODAS las velocidades dentro del intervalo con un único valor. Para 8–9 m/s: (8+9)/2 = 8.5 m/s.</div>
-    <div class="qfeedback fail" id="fb4-fail">❌ Incorrecto — la respuesta es A. La marca de clase es el punto medio: (lím. inf + lím. sup) / 2. Para el intervalo 8–9: marca = 8.5 m/s.</div>
+    <div class="qfeedback ok" id="fb4-ok">✅ ¡Correcto! La acumulada suma todos los porcentajes desde 0 hasta ese intervalo. Al llegar a 9–10, ya sumamos todos los intervalos menores: 56.88% del tiempo el viento fue menor a 10 m/s.</div>
+    <div class="qfeedback fail" id="fb4-fail">❌ Incorrecto — respuesta C. La frecuencia acumulada suma desde el inicio: incluye todos los intervalos de 0–1 hasta 9–10. Significa que el 56.88% del tiempo el viento fue MENOR a 10 m/s.</div>
   </div>
 
   <div class="qcard" id="q5">
     <p class="qnum">Pregunta 5 / 10</p>
-    <p class="qtext">¿Cuánto aporta el intervalo 8–9 m/s a la velocidad media ponderada si su marca de clase es 8.5 m/s y su frecuencia relativa es 43.12%?</p>
+    <p class="qtext">¿Cuál es la marca de clase del intervalo 13–14 m/s y cuánto aporta a la velocidad media ponderada si su frecuencia relativa es 12.84%?</p>
     <div class="qopts">
-      <button class="qbtn" data-q="5" data-correct="false">A) 8.5 m/s (aporta su marca completa)</button>
-      <button class="qbtn" data-q="5" data-correct="false">B) 0.4312 m/s</button>
-      <button class="qbtn" data-q="5" data-correct="true">C) 3.665 m/s</button>
-      <button class="qbtn" data-q="5" data-correct="false">D) 43.12 m/s</button>
+      <button class="qbtn" data-q="5" data-correct="false">A) Marca = 14, aporte = 1.798 m/s</button>
+      <button class="qbtn" data-q="5" data-correct="true">B) Marca = 13.5, aporte = 1.733 m/s</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) Marca = 13, aporte = 1.669 m/s</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) Marca = 13.5, aporte = 13.5 m/s</button>
     </div>
-    <div class="qfeedback ok" id="fb5-ok">✅ ¡Correcto! Aporte = marca × frec. relativa = 8.5 × 0.4312 = 3.665 m/s. Es el mayor aporte individual de todos los intervalos y explica por qué Vm ≈ 10 m/s.</div>
-    <div class="qfeedback fail" id="fb5-fail">❌ Incorrecto — la respuesta es C. Se multiplica: 8.5 m/s × 0.4312 = 3.665 m/s. La suma de todos los aportes da Vm = 10.2156 m/s.</div>
+    <div class="qfeedback ok" id="fb5-ok">✅ ¡Correcto! Marca = (13+14)÷2 = 13.5 m/s. Aporte = 13.5 × 0.1284 = 1.733 m/s. La frec. relativa va en decimal (12.84% = 0.1284) al multiplicar.</div>
+    <div class="qfeedback fail" id="fb5-fail">❌ Incorrecto — respuesta B. Marca = (13+14)÷2 = 13.5. Aporte = 13.5 × 0.1284 = 1.733 m/s. Recuerda: la frecuencia relativa se usa en decimal (÷100).</div>
   </div>
 
   <div class="qcard" id="q6">
     <p class="qnum">Pregunta 6 / 10</p>
-    <p class="qtext">¿Cuál es la diferencia entre la velocidad media simple y la velocidad media ponderada, y cuál es más precisa?</p>
+    <p class="qtext">¿Por qué la velocidad media ponderada (10.2156 m/s) es ligeramente mayor que la simple (10.1612 m/s)?</p>
     <div class="qopts">
-      <button class="qbtn" data-q="6" data-correct="false">A) La simple es más precisa porque usa todos los datos individuales</button>
-      <button class="qbtn" data-q="6" data-correct="false">B) Son idénticas matemáticamente, no hay diferencia</button>
-      <button class="qbtn" data-q="6" data-correct="true">C) La ponderada usa las marcas de clase × frecuencias relativas; es el estándar en ingeniería eólica</button>
-      <button class="qbtn" data-q="6" data-correct="false">D) La simple usa distribución Rayleigh, la ponderada no</button>
+      <button class="qbtn" data-q="6" data-correct="false">A) Porque la fórmula ponderada siempre da un valor mayor</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) Porque hay un error en el código Python</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) Porque los intervalos de velocidades altas (13–14 m/s) tienen marcas de clase que redondean hacia arriba vs los valores exactos</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) No debería haber diferencia, ambos miden lo mismo exactamente</button>
     </div>
-    <div class="qfeedback ok" id="fb6-ok">✅ ¡Correcto! Simple = Σvᵢ/n = 10.1612 m/s. Ponderada = Σ(marca×frec.rel) = 10.2156 m/s. La diferencia es pequeña aquí, pero la ponderada es el método estándar en análisis eólico.</div>
-    <div class="qfeedback fail" id="fb6-fail">❌ Incorrecto — la respuesta es C. La simple suma todos los valores brutos; la ponderada usa los intervalos como agrupación, que es el método que usa el profesor.</div>
+    <div class="qfeedback ok" id="fb6-ok">✅ ¡Correcto! La diferencia existe porque la media ponderada usa los puntos medios de los intervalos (marcas de clase), no los valores exactos. Pequeñas diferencias de redondeo se acumulan.</div>
+    <div class="qfeedback fail" id="fb6-fail">❌ Incorrecto — respuesta C. La ponderada usa marcas de clase (promedios de intervalos), no valores exactos. La pequeña diferencia viene de ese redondeo al punto medio de cada cajita.</div>
   </div>
 
   <div class="qcard" id="q7">
     <p class="qnum">Pregunta 7 / 10</p>
-    <p class="qtext">En la distribución Rayleigh (K=2), ¿cómo se calcula el parámetro de escala C a partir de la velocidad media Vm?</p>
+    <p class="qtext">¿Para qué sirve la distribución Rayleigh en este análisis? ¿Qué problema resuelve?</p>
     <div class="qopts">
-      <button class="qbtn" data-q="7" data-correct="false">A) C = Vm × 2</button>
-      <button class="qbtn" data-q="7" data-correct="true">B) C = Vm / (√π / 2) ≈ Vm / 0.8862</button>
-      <button class="qbtn" data-q="7" data-correct="false">C) C = Vm²</button>
-      <button class="qbtn" data-q="7" data-correct="false">D) C = √Vm</button>
+      <button class="qbtn" data-q="7" data-correct="false">A) Para calcular la velocidad media con más precisión</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) Para graficar la distribución de frecuencias observada</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) Para extrapolar el comportamiento del viento a todo el año usando solo la velocidad media, sin necesitar un año entero de datos</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Para calcular la densidad del aire a diferentes alturas</button>
     </div>
-    <div class="qfeedback ok" id="fb7-ok">✅ ¡Correcto! C = Vm / (√π/2). Para Vm = 10.1612 m/s → C = 10.1612/0.8862 = 11.4657 m/s. Esta relación viene de la propiedad matemática de la distribución Rayleigh.</div>
-    <div class="qfeedback fail" id="fb7-fail">❌ Incorrecto — la respuesta es B. La relación entre Vm y C en Rayleigh es: C = Vm / (√π/2) = Vm / 0.8862. Con Vm=10.16 → C=11.47 m/s.</div>
+    <div class="qfeedback ok" id="fb7-ok">✅ ¡Correcto! Solo tienes 18 horas de datos. Con Rayleigh (usando Vm), generas una curva que predice cómo se distribuirán las velocidades en las 8,760 horas del año. Es un modelo matemático de extrapolación.</div>
+    <div class="qfeedback fail" id="fb7-fail">❌ Incorrecto — respuesta C. El problema es que solo tienes 18 horas. Rayleigh permite predecir el comportamiento anual del viento conociendo solo Vm, sin medir un año completo.</div>
   </div>
 
   <div class="qcard" id="q8">
     <p class="qnum">Pregunta 8 / 10</p>
-    <p class="qtext">¿Cuál afirmación sobre la potencia del viento es FALSA?</p>
+    <p class="qtext">Si la velocidad del viento pasa de 8 m/s a 16 m/s (se duplica), ¿qué le pasa a la potencia disponible?</p>
     <div class="qopts">
-      <button class="qbtn" data-q="8" data-correct="false">A) P = ½ × ρ × A × V³</button>
-      <button class="qbtn" data-q="8" data-correct="false">B) Duplicar la velocidad multiplica la potencia por 8</button>
-      <button class="qbtn" data-q="8" data-correct="true">C) El límite de Betz establece que se puede extraer hasta el 100% de la potencia disponible</button>
-      <button class="qbtn" data-q="8" data-correct="false">D) La potencia es proporcional al cubo de la velocidad</button>
+      <button class="qbtn" data-q="8" data-correct="false">A) Se duplica (×2)</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Se cuadruplica (×4)</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Se multiplica por 8 (×8)</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Se multiplica por 16 (×16)</button>
     </div>
-    <div class="qfeedback ok" id="fb8-ok">✅ ¡Correcto! C es falsa. El límite de Betz establece que el máximo teórico extractable es 59.3% (Cp = 0.593), no el 100%. Extraer más significaría detener completamente el viento, lo cual es físicamente imposible.</div>
-    <div class="qfeedback fail" id="fb8-fail">❌ Incorrecto — la respuesta falsa es C. El límite de Betz = 0.593 = 59.3% máximo. Nunca se puede extraer el 100% de la potencia del viento.</div>
+    <div class="qfeedback ok" id="fb8-ok">✅ ¡Correcto! P = ½ρAV³. Si V se duplica: P_nueva = ½ρA(2V)³ = ½ρA × 8V³ = 8 × P_original. El cubo hace que pequeños aumentos de velocidad generen grandes aumentos de potencia.</div>
+    <div class="qfeedback fail" id="fb8-fail">❌ Incorrecto — respuesta C. La potencia depende de V³ (velocidad al cubo). Si V×2: nueva potencia = (2)³ = 8 veces más. Por eso sitios con viento de 12 m/s son mucho mejores que los de 8 m/s.</div>
   </div>
 
   <div class="qcard" id="q9">
     <p class="qnum">Pregunta 9 / 10</p>
-    <p class="qtext">¿Por qué la energía anual calculada de 3,020 kWh/año NO es un valor confiable para diseño real?</p>
+    <p class="qtext">¿Cuál afirmación sobre el límite de Betz es CORRECTA?</p>
     <div class="qopts">
-      <button class="qbtn" data-q="9" data-correct="false">A) Porque la fórmula P = ½ρAV³ está mal aplicada</button>
-      <button class="qbtn" data-q="9" data-correct="false">B) Porque Rayleigh no es válido para vientos superiores a 10 m/s</button>
-      <button class="qbtn" data-q="9" data-correct="true">C) Porque se extrapoló una distribución de solo ~18 horas a 8,760 h/año, sin representar la variabilidad estacional</button>
-      <button class="qbtn" data-q="9" data-correct="false">D) Porque el coeficiente Cp=0.40 es demasiado alto</button>
+      <button class="qbtn" data-q="9" data-correct="false">A) Una turbina eficiente puede extraer el 100% de la potencia del viento</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) El límite de Betz establece que el máximo extraíble es el 40% (Cp = 0.40)</button>
+      <button class="qbtn" data-q="9" data-correct="true">C) Ninguna turbina puede superar el 59.3% de eficiencia (Cp = 0.593) por razones físicas fundamentales</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) El límite de Betz solo aplica a turbinas de eje horizontal</button>
     </div>
-    <div class="qfeedback ok" id="fb9-ok">✅ ¡Correcto! Las 109 observaciones cubren solo ~18 horas de un día. Extrapolar eso a 8,760 h/año asume que el viento siempre se comporta igual, ignorando variaciones estacionales, diurnas y climáticas.</div>
-    <div class="qfeedback fail" id="fb9-fail">❌ Incorrecto — la respuesta es C. El problema es la representatividad: 18 horas no son suficientes para caracterizar un año completo de recurso eólico.</div>
+    <div class="qfeedback ok" id="fb9-ok">✅ ¡Correcto! Betz (1919) demostró matemáticamente que extraer el 100% detendría el aire completamente — imposible. El máximo teórico es 16/27 ≈ 59.3%. Las turbinas reales operan entre Cp = 0.35–0.45.</div>
+    <div class="qfeedback fail" id="fb9-fail">❌ Incorrecto — respuesta C. El límite de Betz es una ley física (no una limitación tecnológica): 59.3% máximo. Cp=0.40 que usamos es un valor típico real, no el máximo teórico.</div>
   </div>
 
   <div class="qcard" id="q10">
     <p class="qnum">Pregunta 10 / 10</p>
-    <p class="qtext">¿Qué datos adicionales necesitas para completar el cálculo real de potencia y energía de este sitio?</p>
+    <p class="qtext">La energía anual calculada fue 3,020 kWh/año con A=1 m². Si el diámetro real del rotor es D=5 metros, ¿cuánta energía anual produciría aproximadamente?</p>
     <div class="qopts">
-      <button class="qbtn" data-q="10" data-correct="false">A) Solo el diámetro del rotor</button>
-      <button class="qbtn" data-q="10" data-correct="false">B) Solo la densidad real del aire</button>
-      <button class="qbtn" data-q="10" data-correct="false">C) Velocidad media de un año completo de datos</button>
-      <button class="qbtn" data-q="10" data-correct="true">D) Densidad real del aire (altitud+temperatura), diámetro del rotor, Cp real de la máquina y datos de al menos un año</button>
+      <button class="qbtn" data-q="10" data-correct="false">A) 15,100 kWh/año (×5, porque D=5)</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) 3,025 kWh/año (casi igual, el diámetro no importa mucho)</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) ~59,300 kWh/año (A = π×(2.5)² ≈ 19.63 m², energía × 19.63)</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) 9,060 kWh/año (×3, porque el radio es 2.5 ≈ 3)</button>
     </div>
-    <div class="qfeedback ok" id="fb10-ok">✅ ¡Correcto! Para un diseño real se necesita: (1) ρ real con altitud y T del sitio, (2) área de rotor con el D real, (3) Cp según curva de potencia de la turbina, y (4) al menos 1 año de datos para capturar variabilidad estacional.</div>
-    <div class="qfeedback fail" id="fb10-fail">❌ Incorrecto — la respuesta es D. Todos esos factores son necesarios: densidad real, área del rotor, eficiencia real (Cp) y datos representativos de al menos un año.</div>
+    <div class="qfeedback ok" id="fb10-ok">✅ ¡Correcto! A = π × (D/2)² = π × (5/2)² = π × 6.25 ≈ 19.63 m². Energía = 3,020 × 19.63 ≈ 59,283 kWh/año. El área crece con el cuadrado del radio, no linealmente con el diámetro.</div>
+    <div class="qfeedback fail" id="fb10-fail">❌ Incorrecto — respuesta C. A = π×(D/2)² = π×2.5² ≈ 19.63 m². La energía escala linealmente con el área: 3,020 × 19.63 ≈ 59,280 kWh/año. El área no es el diámetro — es el círculo que barre el rotor.</div>
   </div>
 
   <div id="quiz-result" style="display:none;border-radius:10px;padding:14px 16px;margin-top:10px;text-align:center">
@@ -491,71 +610,51 @@ body{font-family:'Source Sans 3',sans-serif;background:#f1f5f9;color:#1e293b;pad
   <span style="font-size:11px;color:#94a3b8">Material del profesor — UNALM Energías Renovables 2026-I</span>
 </div>
 
-</div><!-- fin .cv -->
+</div>
 
 <script>
-let respondidas = 0, correctas = 0;
-
-document.getElementById('quiz-section').addEventListener('click', function(e) {
-  if (!e.target.classList.contains('qbtn')) return;
-  const btn = e.target;
-  const q = btn.dataset.q;
-  const isCorrect = btn.dataset.correct === 'true';
-
-  // Deshabilitar todos los botones de esta pregunta
-  document.querySelectorAll(`.qbtn[data-q="${q}"]`).forEach(b => {
+let respondidas=0,correctas=0;
+document.getElementById('quiz-section').addEventListener('click',function(e){
+  if(!e.target.classList.contains('qbtn'))return;
+  const btn=e.target,q=btn.dataset.q,ok=btn.dataset.correct==='true';
+  document.querySelectorAll(`.qbtn[data-q="${q}"]`).forEach(b=>{
     b.classList.add('disabled');
-    if (b.dataset.correct === 'true') b.classList.add('correct');
+    if(b.dataset.correct==='true')b.classList.add('correct');
   });
-  if (!isCorrect) btn.classList.add('wrong');
-
-  // Mostrar feedback
-  const fbOk = document.getElementById(`fb${q}-ok`);
-  const fbFail = document.getElementById(`fb${q}-fail`);
-  if (fbOk) fbOk.style.display = isCorrect ? 'block' : 'none';
-  if (fbFail) fbFail.style.display = isCorrect ? 'none' : 'block';
-
-  respondidas++;
-  if (isCorrect) correctas++;
-
-  // Actualizar progreso
-  const pct = Math.round(respondidas / 10 * 100);
-  document.getElementById('prog-fill').style.width = pct + '%';
-  document.getElementById('prog-text').textContent = `${respondidas} / 10 respondidas`;
-  document.getElementById('score-text').textContent = `${correctas} correctas`;
-
-  // Resultado final
-  if (respondidas === 10) {
-    const res = document.getElementById('quiz-result');
-    res.style.display = 'block';
-    const txt = document.getElementById('result-text');
-    const sub = document.getElementById('result-sub');
-    if (correctas <= 4) {
-      res.style.background = '#fee2e2'; txt.style.color = '#991b1b';
-      txt.textContent = `${correctas} / 10 — Necesitas repasar el material`;
-      sub.textContent = 'Revisa los bloques de distribución de frecuencias y velocidad media.';
-    } else if (correctas <= 7) {
-      res.style.background = '#fef9c3'; txt.style.color = '#713f12';
-      txt.textContent = `${correctas} / 10 — ¡Buen avance, sigue repasando!`;
-      sub.textContent = 'Repasa los conceptos de Rayleigh, Betz y limitaciones del análisis.';
-    } else {
-      res.style.background = '#dcfce7'; txt.style.color = '#14532d';
-      txt.textContent = `${correctas} / 10 — ¡Excelente dominio del tema!`;
-      sub.textContent = 'Estás listo para el examen. Recuerda los pendientes (densidad real, área rotor).';
-    }
+  if(!ok)btn.classList.add('wrong');
+  const fbOk=document.getElementById(`fb${q}-ok`);
+  const fbFail=document.getElementById(`fb${q}-fail`);
+  if(fbOk)fbOk.style.display=ok?'block':'none';
+  if(fbFail)fbFail.style.display=ok?'none':'block';
+  respondidas++;if(ok)correctas++;
+  const pct=Math.round(respondidas/10*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=`${respondidas} / 10`;
+  document.getElementById('score-text').textContent=`${correctas} correctas`;
+  if(respondidas===10){
+    const res=document.getElementById('quiz-result');
+    res.style.display='block';
+    const txt=document.getElementById('result-text');
+    const sub=document.getElementById('result-sub');
+    if(correctas<=4){res.style.background='#fee2e2';txt.style.color='#991b1b';
+      txt.textContent=`${correctas}/10 — Necesitas repasar el material`;
+      sub.textContent='Repasa especialmente frecuencias, velocidad media y potencia.';}
+    else if(correctas<=7){res.style.background='#fef9c3';txt.style.color='#713f12';
+      txt.textContent=`${correctas}/10 — ¡Buen avance, sigue repasando!`;
+      sub.textContent='Repasa Rayleigh, límite de Betz y el cálculo manual de la media ponderada.';}
+    else{res.style.background='#dcfce7';txt.style.color='#14532d';
+      txt.textContent=`${correctas}/10 — ¡Excelente dominio del tema!`;
+      sub.textContent='Listo para el examen. Recuerda pendientes: densidad real y área de rotor.';}
   }
 });
-
-function resetQuiz() {
-  respondidas = 0; correctas = 0;
-  document.getElementById('prog-fill').style.width = '0%';
-  document.getElementById('prog-text').textContent = '0 / 10 respondidas';
-  document.getElementById('score-text').textContent = '0 correctas';
-  document.getElementById('quiz-result').style.display = 'none';
-  document.querySelectorAll('.qbtn').forEach(b => {
-    b.classList.remove('correct','wrong','disabled');
-  });
-  document.querySelectorAll('.qfeedback').forEach(f => f.style.display = 'none');
+function resetQuiz(){
+  respondidas=0;correctas=0;
+  document.getElementById('prog-fill').style.width='0%';
+  document.getElementById('prog-text').textContent='0 / 10';
+  document.getElementById('score-text').textContent='0 correctas';
+  document.getElementById('quiz-result').style.display='none';
+  document.querySelectorAll('.qbtn').forEach(b=>b.classList.remove('correct','wrong','disabled'));
+  document.querySelectorAll('.qfeedback').forEach(f=>f.style.display='none');
 }
 </script>
 </body>
