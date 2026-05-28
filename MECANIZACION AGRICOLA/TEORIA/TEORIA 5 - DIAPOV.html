@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEORÍA 5 — Labranza | Mecanización Agrícola</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .cv {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 9px;
+      padding: 12px;
+      background: #f1f5f9;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .block {
+      background: #ffffff;
+      border: 0.5px solid #e2e8f0;
+      border-radius: 11px;
+      padding: 12px 13px;
+    }
+
+    .s2 { grid-column: span 2; }
+    .s3 { grid-column: 1 / -1; }
+
+    .secbar {
+      grid-column: 1 / -1;
+      background: #f1f5f9;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .secbar-green  { border-left: 4px solid #16a34a; }
+    .secbar-blue   { border-left: 4px solid #2563eb; }
+    .secbar-amber  { border-left: 4px solid #d97706; }
+    .secbar-purple { border-left: 4px solid #7c3aed; }
+    .secbar-teal   { border-left: 4px solid #0d9488; }
+    .secbar-orange { border-left: 4px solid #ea580c; }
+    .secbar-red    { border-left: 4px solid #dc2626; }
+
+    /* Header bar */
+    .header-bar {
+      grid-column: 1 / -1;
+      background: #0f1e3a;
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .header-bar .ht {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #7dd3fc;
+      letter-spacing: 0.5px;
+    }
+    .header-bar .hs {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+    .header-bar .hbadge {
+      background: #1e3a5f;
+      border: 1px solid #2563eb;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 11px;
+      color: #93c5fd;
+      font-family: 'Oswald', sans-serif;
+      text-align: right;
+    }
+
+    /* Block header */
+    .bh {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .bh-blue   { background: #dbeafe; color: #1e3a8a; }
+    .bh-green  { background: #dcfce7; color: #14532d; }
+    .bh-amber  { background: #fef9c3; color: #713f12; }
+    .bh-purple { background: #ede9fe; color: #4c1d95; }
+    .bh-teal   { background: #ccfbf1; color: #134e4a; }
+    .bh-orange { background: #ffedd5; color: #7c2d12; }
+    .bh-red    { background: #fee2e2; color: #991b1b; }
+    .bh-gray   { background: #f1f5f9; color: #334155; }
+
+    .def {
+      border-left: 3px solid #2563eb;
+      padding: 7px 10px;
+      border-radius: 0 7px 7px 0;
+      font-size: 12px;
+      background: #f8fafc;
+      margin: 6px 0;
+    }
+    .def-green  { border-left-color: #16a34a; }
+    .def-amber  { border-left-color: #d97706; }
+    .def-purple { border-left-color: #7c3aed; }
+    .def-teal   { border-left-color: #0d9488; }
+    .def-orange { border-left-color: #ea580c; }
+    .def-red    { border-left-color: #dc2626; }
+
+    .item { display: flex; gap: 7px; font-size: 12px; line-height: 1.5; margin: 4px 0; }
+    .dot  { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .dot-blue   { background: #2563eb; }
+    .dot-green  { background: #16a34a; }
+    .dot-amber  { background: #d97706; }
+    .dot-purple { background: #7c3aed; }
+    .dot-teal   { background: #0d9488; }
+    .dot-orange { background: #ea580c; }
+    .dot-red    { background: #dc2626; }
+
+    .rx {
+      background: #0f172a;
+      color: #7dd3fc;
+      font-family: monospace;
+      font-size: 11px;
+      padding: 7px 11px;
+      border-radius: 7px;
+      text-align: center;
+      line-height: 1.6;
+      margin: 6px 0;
+    }
+
+    .warn {
+      background: #fff7ed;
+      border-left: 3px solid #f97316;
+      border-radius: 0 8px 8px 0;
+      font-size: 11.5px;
+      color: #7c2d12;
+      padding: 7px 10px;
+      margin: 6px 0;
+    }
+
+    .tip {
+      background: #f0fdf4;
+      border-left: 3px solid #22c55e;
+      border-radius: 0 8px 8px 0;
+      font-size: 11.5px;
+      color: #14532d;
+      padding: 7px 10px;
+      margin: 6px 0;
+    }
+
+    .exam {
+      background: #fefce8;
+      border: 1px solid #facc15;
+      border-radius: 8px;
+      font-size: 11.5px;
+      color: #713f12;
+      padding: 8px 11px;
+      margin-top: 8px;
+    }
+
+    .mini { background: #f8fafc; border-radius: 8px; padding: 8px 10px; font-size: 11.5px; }
+    .two   { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; }
+
+    .flow   { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 6px 0; }
+    .fbox   { background: #f8fafc; padding: 4px 9px; border-radius: 6px; font-size: 11.5px; }
+    .farrow { color: #64748b; font-size: 15px; }
+
+    .tbl { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .tbl th {
+      background: #f8fafc;
+      padding: 5px 7px;
+      border-bottom: 0.5px solid #e2e8f0;
+      font-family: 'Oswald', sans-serif;
+      text-align: left;
+    }
+    .tbl td { padding: 5px 7px; border-bottom: 0.5px solid #e2e8f0; vertical-align: top; }
+    .tbl tr:hover td { background: #f8fafc; }
+
+    .divh { border: none; border-top: 0.5px solid #e2e8f0; margin: 7px 0; }
+
+    .label { display: block; font-size: 10.5px; color: #64748b; margin-bottom: 3px; font-weight: 600; }
+
+    .footer-bar {
+      background: #0f1e3a;
+      color: white;
+      border-radius: 10px;
+      padding: 11px 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .ft { font-family: 'Oswald', sans-serif; font-size: 12px; color: #7dd3fc; }
+    .fc { font-size: 11px; color: #94a3b8; }
+
+    /* QUIZ */
+    .qbtn {
+      display: block; width: 100%; text-align: left; margin-bottom: 5px;
+      padding: 8px 12px; font-size: 12px; border-radius: 8px; cursor: pointer;
+      background: #f8fafc; border: 1px solid #e2e8f0; transition: all 0.2s;
+      font-family: 'Source Sans 3', sans-serif;
+    }
+    .qbtn:hover:not(:disabled) { background: #f1f5f9; border-color: #cbd5e1; }
+    .qbtn.correct  { background: #dcfce7; border-color: #16a34a; color: #14532d; font-weight: 600; }
+    .qbtn.wrong    { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+    .qbtn:disabled { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+    .qfeedback { border-radius: 0 8px 8px 0; padding: 8px 11px; font-size: 11.5px; margin-top: 8px; }
+    .qfeedback.fb-ok  { background: #f0fdf4; border-left: 3px solid #16a34a; color: #14532d; }
+    .qfeedback.fb-err { background: #fef2f2; border-left: 3px solid #dc2626; color: #991b1b; }
+
+    strong { font-weight: 600; }
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: 'Oswald', sans-serif;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+    .tag-blue   { background: #dbeafe; color: #1e3a8a; }
+    .tag-green  { background: #dcfce7; color: #14532d; }
+    .tag-orange { background: #ffedd5; color: #7c2d12; }
+    .tag-purple { background: #ede9fe; color: #4c1d95; }
+  </style>
+</head>
+<body>
+<div class="cv">
+
+  <!-- HEADER -->
+  <div class="header-bar">
+    <div>
+      <div class="ht">🌾 LABRANZA — MECANIZACIÓN AGRÍCOLA</div>
+      <div class="hs">Teoría 5 · Labranza Primaria · Tipos de Arados · Comparativa de Implementos</div>
+    </div>
+    <div class="hbadge">
+      TEORÍA 5 — DIAPOV<br>
+      <span style="color:#64748b;font-size:10px;">Mecanización Agrícola</span>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 1: CONCEPTOS FUNDAMENTALES ===== -->
+  <div class="secbar secbar-blue">📚 1. CONCEPTOS FUNDAMENTALES DE LABRANZA</div>
+
+  <!-- ¿Qué es labranza? -->
+  <div class="block">
+    <span class="bh bh-blue">Definición · Labranza</span>
+    <div class="def">
+      La <strong>labranza</strong> es el conjunto de operaciones mecánicas que se aplican al suelo agrícola para modificar sus propiedades físicas (estructura, porosidad, densidad aparente) con el fin de crear condiciones favorables para la germinación y el desarrollo radicular del cultivo.
+    </div>
+    <div class="item"><span class="dot dot-blue"></span><span>No es solo "voltear tierra": su objetivo principal es <strong>preparar un ambiente óptimo</strong> donde semilla y raíz puedan establecerse con mínima resistencia mecánica.</span></div>
+    <div class="item"><span class="dot dot-blue"></span><span>Modifica la <strong>relación suelo-agua-aire</strong>: al romper terrones y aumentar macroporos, mejora infiltración y aireación.</span></div>
+    <div class="item"><span class="dot dot-blue"></span><span>Tiene costo energético alto: representa entre el <strong>30–50 % del combustible total</strong> de la campaña agrícola.</span></div>
+    <div class="tip">💡 <strong>Analogía:</strong> Preparar el suelo es como esponjar una almohada antes de dormir: la semilla necesita un "colchón" suelto y aireado para germinar bien. Si está muy compacto, la raíz gasta energía rompiendo resistencia en vez de crecer.</div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> ¿Cuál es el objetivo principal de las operaciones de labranza sobre el suelo agrícola y qué propiedad física busca modificar prioritariamente?</div>
+  </div>
+
+  <!-- Tipos de labranza -->
+  <div class="block">
+    <span class="bh bh-green">Clasificación · Tipos de Labranza</span>
+    <div class="def def-green">
+      La labranza se clasifica en <strong>primaria</strong> y <strong>secundaria</strong> según la profundidad de trabajo y el grado de alteración que produce en el perfil del suelo.
+    </div>
+    <div class="mini" style="margin-bottom:6px;">
+      <span class="label">LABRANZA PRIMARIA</span>
+      <div class="item"><span class="dot dot-green"></span><span>Operación inicial y más profunda (15–60 cm según implemento). Rompe el suelo sin disturbar desde el último ciclo. Corta raíces, voltea o fragmenta capas compactadas.</span></div>
+      <div class="item"><span class="dot dot-green"></span><span>Implementos: arado de vertedera, arado de discos, arado cincel, subsolador.</span></div>
+    </div>
+    <div class="mini">
+      <span class="label">LABRANZA SECUNDARIA</span>
+      <div class="item"><span class="dot dot-amber"></span><span>Operaciones complementarias (superficiales, 5–15 cm) para afinar el suelo después de la primaria. Incluye rastreo, nivelación, surcado.</span></div>
+    </div>
+    <div class="warn">⚠️ <strong>Confusión frecuente:</strong> "Labranza primaria" NO significa "la más importante" sino la <em>primera en el tiempo</em> dentro del ciclo de preparación. La secundaria no puede realizarse efectivamente sin la primaria previa.</div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> Explica la diferencia entre labranza primaria y secundaria, indicando rango de profundidad y tipo de implemento asociado a cada una.</div>
+  </div>
+
+  <!-- Arados en general -->
+  <div class="block">
+    <span class="bh bh-amber">Concepto · El Arado</span>
+    <div class="def def-amber">
+      Un <strong>arado</strong> es el implemento agrícola de tracción (animal o mecánica) diseñado para la labranza primaria. Su función es cortar, levantar y —en algunos tipos— voltear o fracturar el perfil de suelo a profundidades mayores que cualquier otro equipo de preparación.
+    </div>
+    <div class="item"><span class="dot dot-amber"></span><span><strong>Partes comunes a todos los arados:</strong> estructura portante (chasis o timón), elemento de corte activo (reja, disco o cincel) y sistema de enganche al tractor (tres puntos hidráulico o tiro directo).</span></div>
+    <div class="item"><span class="dot dot-amber"></span><span>El principio de trabajo varía: corte + volteo (vertedera), corte + desplazamiento lateral (disco), o fractura en profundidad sin volteo (cincel/subsolador).</span></div>
+    <div class="tip">💡 <strong>Analogía:</strong> Piensa en el arado como un cuchillo de cocina: la vertedera sería un cuchillo que rebana y da vuelta el filete; el cincel sería un tenedor que pincha y afloja sin mover el trozo.</div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> ¿Cuáles son las partes fundamentales comunes a todo tipo de arado y qué función cumple cada una durante la labranza primaria?</div>
+  </div>
+
+  <!-- ===== SECCIÓN 2: ARADO DE VERTEDERA ===== -->
+  <div class="secbar secbar-purple">🔧 2. ARADO DE VERTEDERA</div>
+
+  <!-- Definición y componentes -->
+  <div class="block s2">
+    <span class="bh bh-purple">Definición · Arado de Vertedera</span>
+    <div class="def def-purple">
+      El <strong>arado de vertedera</strong> es el implemento de labranza primaria más tradicional. Su mecanismo de trabajo consiste en cortar una franja de suelo (llamada "furca" o "tablón") y <em>voltearla lateralmente</em> mediante la superficie curva de la vertedera, enterrando residuos de cosecha y malezas, e incorporando materia orgánica superficial al horizonte inferior.
+    </div>
+    <div class="two" style="margin-top:8px;">
+      <div>
+        <span class="label">COMPONENTES PRINCIPALES</span>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Reja (o reja-punta):</strong> pieza de acero endurecido que realiza el corte horizontal del suelo. Es la parte más desgastada y suele ser intercambiable. En el arado de vertedera moderno existe también la <em>punta intercambiable</em>.</span></div>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Vertedera (o ala):</strong> superficie metálica curva ubicada encima y detrás de la reja. Su curvatura helicoidal toma el bloque cortado, lo gira y lo deposita invertido al costado del surco.</span></div>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Cuchilla integrada:</strong> disco o cuchilla vertical que precorta el suelo verticalmente antes que la reja corte horizontalmente. Mejora el corte en suelos con rastrojo abundante.</span></div>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Timón / Chasis:</strong> estructura que une todos los elementos y transmite la tracción del tractor. Incluye el sistema de regulación de profundidad.</span></div>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Regulador de profundidad:</strong> orificio o tornillo que permite ajustar la inclinación de la reja y por tanto la profundidad de trabajo (generalmente 15–30 cm).</span></div>
+      </div>
+      <div>
+        <span class="label">TIPOS DE VERTEDERA POR FORMA</span>
+        <div class="mini" style="margin-bottom:5px;">
+          <strong>Cilíndrica:</strong> produce volteo brusco del terrón. Adecuada para suelos ligeros y bien preparados.
+        </div>
+        <div class="mini" style="margin-bottom:5px;">
+          <strong>Helicoidal:</strong> desplaza y desmenuza progresivamente. Mejor para suelos arcillosos y húmedos.
+        </div>
+        <div class="mini" style="margin-bottom:5px;">
+          <strong>Combinada:</strong> parte cilíndrica abajo, helicoidal arriba. Corta limpio y desmorona el terrón simultáneamente.
+        </div>
+        <span class="label" style="margin-top:8px;">TIPOS HISTÓRICOS (arado tracción animal)</span>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Matador:</strong> forma tradicional con mancera y timón visible, reja simple.</span></div>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Oliver:</strong> con alma (telera) y tornillo regulador; mayor rigidez estructural.</span></div>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Diecinueve / Siete cuartas / Timón largo:</strong> variantes regionales latinoamericanas con timones más largos para mayor control de profundidad.</span></div>
+        <div class="item"><span class="dot dot-purple"></span><span><strong>Alcultzingo:</strong> modificación mexicana del timón largo donde la mancera curvada facilita el manejo del operario.</span></div>
+      </div>
+    </div>
+    <div class="divh"></div>
+    <div class="flow">
+      <span class="fbox">Cuchilla corta vertical</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Reja corta horizontal</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Vertedera levanta y voltea</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Bloque queda invertido</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Residuos enterrados</span>
+    </div>
+    <div class="warn">⚠️ <strong>Limitación clave:</strong> El volteo del suelo destruye la estructura microbiana superficial y puede provocar <em>piso de arado</em> (capa compactada justo debajo de la profundidad de trabajo) si se usa repetidamente a la misma profundidad. Por eso se recomienda variar profundidad o combinar con subsolado periódico.</div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> Describe el proceso de trabajo del arado de vertedera, nombrando la función específica de la reja, la vertedera y la cuchilla integrada. ¿Qué efecto produce en los residuos de cosecha?</div>
+  </div>
+
+  <!-- Ventajas/Desventajas vertedera -->
+  <div class="block">
+    <span class="bh bh-purple">Análisis · Ventajas y Desventajas</span>
+    <div class="two">
+      <div>
+        <span class="label" style="color:#14532d;">✅ VENTAJAS</span>
+        <div class="item"><span class="dot dot-green"></span><span>Incorpora eficientemente residuos y malezas al suelo.</span></div>
+        <div class="item"><span class="dot dot-green"></span><span>Expone huevos y larvas de plagas del suelo a la superficie (control biológico natural).</span></div>
+        <div class="item"><span class="dot dot-green"></span><span>Produce cama de siembra profunda y aireada.</span></div>
+        <div class="item"><span class="dot dot-green"></span><span>Apto para suelos con alta presencia de rastrojos.</span></div>
+      </div>
+      <div>
+        <span class="label" style="color:#991b1b;">❌ DESVENTAJAS</span>
+        <div class="item"><span class="dot dot-red"></span><span>Alto requerimiento de potencia del tractor (mayor consumo de combustible).</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>Genera "piso de arado" con uso repetido a igual profundidad.</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>Deja suelo expuesto a erosión hídrica y eólica tras el volteo.</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>No adecuado para suelos pedregosos (daña la reja).</span></div>
+      </div>
+    </div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> ¿Por qué el uso continuado del arado de vertedera a la misma profundidad puede perjudicar la productividad del suelo a largo plazo? Nombra el fenómeno y explica su mecanismo.</div>
+  </div>
+
+  <!-- ===== SECCIÓN 3: ARADO DE DISCOS ===== -->
+  <div class="secbar secbar-teal">⚙️ 3. ARADO DE DISCOS</div>
+
+  <div class="block s2">
+    <span class="bh bh-teal">Definición · Arado de Discos</span>
+    <div class="def def-teal">
+      El <strong>arado de discos</strong> reemplaza la reja fija por discos cóncavos esféricos de acero que giran libremente sobre su eje al avanzar. En lugar de cortar y voltear bloques continuos de suelo, el disco <em>penetra girando</em>, corta la capa y desplaza el suelo lateralmente mediante la curvatura de su cara cóncava.
+    </div>
+    <div class="two" style="margin-top:8px;">
+      <div>
+        <span class="label">PRINCIPIO DE TRABAJO</span>
+        <div class="item"><span class="dot dot-teal"></span><span>El disco gira libremente, por lo que se <strong>autoafila</strong> por el rozamiento con el suelo. A diferencia de la reja, no requiere afilado manual periódico.</span></div>
+        <div class="item"><span class="dot dot-teal"></span><span>Los discos se montan con un <strong>ángulo de ataque</strong> respecto a la dirección de avance (generalmente 42–45°) y un <strong>ángulo de inclinación</strong> vertical. Ambos ángulos determinan la profundidad y el grado de volteo.</span></div>
+        <div class="item"><span class="dot dot-teal"></span><span>Trabaja bien a <strong>15–25 cm de profundidad</strong>. No voltea tan perfectamente como la vertedera, pero fragmenta y desplaza bien.</span></div>
+        <div class="item"><span class="dot dot-teal"></span><span>Disponible en versión <strong>reversible hidráulico</strong>: los cuerpos giran para trabajar en sentido alternado en los cabeceos del campo, evitando crear lomas centrales.</span></div>
+      </div>
+      <div>
+        <span class="label">VENTAJAS SOBRE LA VERTEDERA</span>
+        <div class="item"><span class="dot dot-teal"></span><span>Funciona en suelos <strong>pedregosos, secos o con mucho rastrojo</strong> donde la reja se trabaría o rompería.</span></div>
+        <div class="item"><span class="dot dot-teal"></span><span>Menor riesgo de rotura por piedras: el disco gira y esquiva obstáculos.</span></div>
+        <div class="item"><span class="dot dot-teal"></span><span>Menos desgaste de piezas en suelos abrasivos.</span></div>
+        <div class="item"><span class="dot dot-teal"></span><span>Adecuado para suelos de textura media a pesada con humedad moderada.</span></div>
+        <span class="label" style="margin-top:8px;">LIMITACIONES</span>
+        <div class="item"><span class="dot dot-red"></span><span>Menor incorporación de residuos que la vertedera.</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>Suelo queda más fragmentado que volteado: requiere más pases de rastra secundaria.</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>También puede generar piso de arado con uso repetido.</span></div>
+      </div>
+    </div>
+    <div class="tip">💡 <strong>Analogía:</strong> Imagina cortar una manzana con un cuchillo recto (vertedera) versus hacerlo con una cuchara de bordes afilados que gira (disco). La cuchara no corta tan limpio pero funciona incluso si hay semillas duras adentro (piedras).</div>
+    <div class="divh"></div>
+    <div class="flow">
+      <span class="fbox">Disco penetra girando</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Corte por borde afilado rotante</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Cara cóncava desplaza suelo</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Fragmentación lateral</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Surco abierto con terrón fragmentado</span>
+    </div>
+    <div class="warn">⚠️ <strong>Error común:</strong> Creer que el arado de discos y la rastra de discos son lo mismo. La rastra (labranza secundaria) usa discos más pequeños en grupos que actúan superficialmente; el arado de discos usa discos grandes individuales montados en cuerpos separados para labranza profunda primaria.</div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> ¿En qué tipo de suelo es preferible usar el arado de discos sobre el arado de vertedera? Justifica tu respuesta explicando el principio de funcionamiento del disco.</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-teal">Parámetros · Regulación de Discos</span>
+    <div class="rx">
+      Ángulo de ataque: 42° – 45° respecto al avance<br>
+      Ángulo de inclinación vertical: 15° – 25°<br>
+      Diámetro típico del disco: 56 – 71 cm<br>
+      Profundidad de trabajo: 15 – 25 cm
+    </div>
+    <div class="item"><span class="dot dot-teal"></span><span><strong>Mayor ángulo de ataque</strong> → mayor volteo y movimiento de suelo, pero más resistencia al avance (más combustible).</span></div>
+    <div class="item"><span class="dot dot-teal"></span><span><strong>Mayor ángulo de inclinación</strong> → mayor penetración, útil en suelos duros.</span></div>
+    <div class="item"><span class="dot dot-teal"></span><span>El operario ajusta ambos ángulos desde el tractor según condición del suelo.</span></div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> Si se desea aumentar la profundidad de trabajo de un arado de discos sin cambiar la velocidad de avance, ¿qué parámetro de regulación debería modificarse y en qué sentido?</div>
+  </div>
+
+  <!-- ===== SECCIÓN 4: ARADO CINCEL ===== -->
+  <div class="secbar secbar-orange">⛏️ 4. ARADO CINCEL</div>
+
+  <div class="block">
+    <span class="bh bh-orange">Definición · Arado Cincel</span>
+    <div class="def def-orange">
+      El <strong>arado cincel</strong> rompe y fractura el suelo en profundidad <strong>sin voltear el perfil</strong>. Consiste en brazos (cuerpos) rígidos o flexibles terminados en puntas de cincel que penetran verticalmente en el suelo, fragmentando capas compactadas y mejorando la aireación e infiltración de agua sin alterar el orden natural de los horizontes.
+    </div>
+    <div class="item"><span class="dot dot-orange"></span><span>Profundidad típica de trabajo: <strong>20–40 cm</strong>. Puede llegar a zonas que la vertedera no alcanza.</span></div>
+    <div class="item"><span class="dot dot-orange"></span><span>Al no invertir el suelo, <strong>conserva la materia orgánica y microbiota superficial</strong> en su posición natural.</span></div>
+    <div class="item"><span class="dot dot-orange"></span><span>Compatible con agricultura de conservación: deja rastrojo sobre la superficie.</span></div>
+    <div class="warn">⚠️ El cincel NO incorpora residuos al suelo. Si el objetivo es enterrar malezas o rastrojo, no es el implemento adecuado. Es ideal cuando se quiere romper compactación sin alterar el perfil.</div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> ¿Cuál es la diferencia fundamental entre el arado cincel y el arado de vertedera en cuanto al efecto que producen sobre la estructura del perfil del suelo?</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-orange">Tipos · Cincel Rígido vs. Vibratorio</span>
+    <div class="two">
+      <div class="mini">
+        <span class="label">CINCEL RÍGIDO</span>
+        <div class="item"><span class="dot dot-orange"></span><span>Brazos completamente fijos, sin movimiento relativo al chasis.</span></div>
+        <div class="item"><span class="dot dot-orange"></span><span>Fractura el suelo por presión y cizallamiento directo al avanzar.</span></div>
+        <div class="item"><span class="dot dot-orange"></span><span>Mayor requerimiento de potencia.</span></div>
+        <div class="item"><span class="dot dot-orange"></span><span>Puede dañarse ante piedras o raíces grandes al no tener flexibilidad.</span></div>
+      </div>
+      <div class="mini">
+        <span class="label">CINCEL VIBRATORIO (flexible)</span>
+        <div class="item"><span class="dot dot-amber"></span><span>Brazos montados sobre resortes que permiten vibración y deflexión.</span></div>
+        <div class="item"><span class="dot dot-amber"></span><span>La vibración mejora la fragmentación del suelo con <strong>menor consumo de energía</strong> que el rígido.</span></div>
+        <div class="item"><span class="dot dot-amber"></span><span>Ante obstáculos (piedras), el brazo cede y regresa a posición, evitando roturas.</span></div>
+        <div class="item"><span class="dot dot-amber"></span><span>Mayor área de influencia lateral por efecto de vibración.</span></div>
+      </div>
+    </div>
+    <div class="tip">💡 <strong>Analogía:</strong> El cincel rígido es como un clavo derecho que martillas: rompe lo que encuentra. El vibratorio es como un diapasón: vibra y sus ondas aflojan un área mayor con menos esfuerzo directo.</div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> Compara el cincel rígido con el vibratorio en términos de requerimiento de potencia, acción sobre el suelo y protección ante obstáculos. ¿Cuál elegirías en un suelo con presencia de piedras y por qué?</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-orange">Configuración · Disposición de Brazos</span>
+    <div class="def def-orange">
+      Los brazos del cincel se disponen en <strong>filas escalonadas</strong> (generalmente 2–3 filas) para evitar obstrucción por rastrojos y distribuir uniformemente la fractura en todo el ancho de trabajo.
+    </div>
+    <div class="item"><span class="dot dot-orange"></span><span>La separación entre brazos de la misma fila varía entre <strong>25–40 cm</strong>. A menor separación, mayor fragmentación pero mayor resistencia al avance.</span></div>
+    <div class="item"><span class="dot dot-orange"></span><span>Las puntas de cincel son intercambiables y de distintas formas: punta estrecha (suelos duros), punta ancha en abanico (mayor volumen de suelo fracturado).</span></div>
+    <div class="item"><span class="dot dot-orange"></span><span>Algunos modelos añaden <strong>alas laterales</strong> en la punta para aumentar el área de influencia por pasada.</span></div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> ¿Por qué los brazos del arado cincel se disponen en filas escalonadas y no en una sola fila transversal? Explica el principio que justifica esta configuración.</div>
+  </div>
+
+  <!-- ===== SECCIÓN 5: ARADO SUBSOLADOR ===== -->
+  <div class="secbar secbar-red">🌋 5. ARADO SUBSOLADOR</div>
+
+  <div class="block s2">
+    <span class="bh bh-red">Definición · Subsolador</span>
+    <div class="def def-red">
+      El <strong>subsolador</strong> es el implemento de labranza más profundo. Opera por debajo del horizonte de labranza convencional, entre <strong>40 y 80 cm</strong> de profundidad, con el objetivo específico de romper capas densas o impermeables que ningún otro arado puede alcanzar.
+    </div>
+    <div class="two" style="margin-top:8px;">
+      <div>
+        <span class="label">FUNCIÓN PRINCIPAL</span>
+        <div class="item"><span class="dot dot-red"></span><span>Destruye el <strong>subsuelo compactado</strong> o "piso de arado" generado por años de labranza convencional repetida a la misma profundidad.</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>Rompe <strong>capas cementadas o endurecidas</strong> (fragipán, pisos arcillosos, costras de calcio) que actúan como barrera impermeable al agua y a las raíces.</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>Al fracturar en profundidad, permite que el agua de lluvia o riego <strong>percole hacia capas más profundas</strong>, reduciendo encharcamiento superficial.</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>Las raíces de cultivos profundos (alfalfa, maíz, árboles frutales) pueden penetrar las capas antes bloqueadas.</span></div>
+      </div>
+      <div>
+        <span class="label">CARACTERÍSTICAS DEL EQUIPO</span>
+        <div class="item"><span class="dot dot-red"></span><span>Pocos brazos (1–5), muy robustos y más profundos que el cincel convencional.</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>Requiere tractores de <strong>muy alta potencia</strong> o incluso bulldozers con winch (como se muestra en la diapositiva con bulldozer y persona de referencia de escala).</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>Velocidad de avance muy lenta (1,5–3 km/h) por la resistencia enorme del suelo compactado profundo.</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>Operación poco frecuente: se aplica cada <strong>4–8 años</strong> según historial del campo, no cada ciclo.</span></div>
+        <div class="item"><span class="dot dot-red"></span><span>Algunos subsoladores incorporan <strong>sistemas de inyección de agua</strong> para facilitar la penetración en suelos muy secos.</span></div>
+      </div>
+    </div>
+    <div class="divh"></div>
+    <div class="flow">
+      <span class="fbox">Diagnóstico: compactación >40 cm</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Subsolador penetra 40–80 cm</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Fractura capa densa sin voltear</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Macroporos profundos se abren</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Agua y raíces penetran libremente</span>
+    </div>
+    <div class="tip">💡 <strong>Analogía:</strong> El subsolador actúa como un médico que perfora un hueso compactado: no mueve el tejido externo, solo abre canales internos para restablecer la circulación (agua y raíces en este caso). La operación es puntual, especializada y no se hace rutinariamente.</div>
+    <div class="warn">⚠️ <strong>Error grave:</strong> Usar el subsolador en suelos húmedos o plásticos NO es efectivo: en lugar de fracturar, el suelo se amasa alrededor del brazo y cierra los poros al retirarse. Debe operarse en suelo con humedad <em>por debajo del límite plástico</em> (suelo firme pero no seco al extremo).</div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> ¿En qué condición de humedad del suelo debe operar el subsolador para ser efectivo, y por qué su uso en suelo plástico resulta contraproducente?</div>
+  </div>
+
+  <div class="block">
+    <span class="bh bh-red">Comparativa · Cincel vs. Subsolador</span>
+    <div class="item"><span class="dot dot-red"></span><span><strong>Profundidad:</strong> Cincel 20–40 cm · Subsolador 40–80 cm.</span></div>
+    <div class="item"><span class="dot dot-red"></span><span><strong>Objetivo:</strong> Cincel descompacta horizonte de labranza · Subsolador rompe barreras sub-superficiales.</span></div>
+    <div class="item"><span class="dot dot-red"></span><span><strong>Frecuencia:</strong> Cincel puede usarse cada ciclo · Subsolador cada varios años.</span></div>
+    <div class="item"><span class="dot dot-red"></span><span><strong>Potencia:</strong> Cincel: tractores convencionales · Subsolador: alta potencia o bulldozer.</span></div>
+    <div class="exam">🎯 <strong>EXAMEN:</strong> Un agricultor nota que sus cultivos de maíz muestran raíces poco profundas y acumulación de agua tras las lluvias. ¿Qué implemento de labranza recomendarías y por qué? Justifica con profundidad de trabajo y efecto sobre el suelo.</span></div>
+  </div>
+
+  <!-- ===== TABLA INTEGRADORA ===== -->
+  <div class="secbar secbar-blue">📊 6. TABLA INTEGRADORA — COMPARATIVA COMPLETA DE IMPLEMENTOS</div>
+
+  <div class="block s3">
+    <span class="bh bh-blue">Resumen · Todos los Arados de Labranza Primaria</span>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Implemento</th>
+          <th>Mecanismo de Corte</th>
+          <th>Profundidad</th>
+          <th>¿Voltea Suelo?</th>
+          <th>Suelo Ideal</th>
+          <th>Ventaja Principal</th>
+          <th>Limitación Principal</th>
+          <th>Potencia Requerida</th>
+          <th>Frecuencia de Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Vertedera (tracción animal)</strong><br><span style="color:#64748b;font-size:10px;">Matador, Oliver, Diecinueve, Timón largo</span></td>
+          <td>Reja fija + superficie curva helicoidal</td>
+          <td>10–25 cm</td>
+          <td>✅ Volteo completo</td>
+          <td>Suelos profundos sin piedras, húmedos a secos</td>
+          <td>Incorpora residuos y malezas eficientemente</td>
+          <td>Baja potencia animal; lento; limitado a pequeñas parcelas</td>
+          <td>Baja (animal)</td>
+          <td>Cada ciclo</td>
+        </tr>
+        <tr style="background:#faf5ff;">
+          <td><strong>Vertedera (mecánico)</strong><br><span style="color:#64748b;font-size:10px;">Con cuchilla integrada y punta intercambiable</span></td>
+          <td>Cuchilla + reja + vertedera helicoidal</td>
+          <td>15–30 cm</td>
+          <td>✅ Volteo completo</td>
+          <td>Suelos profundos sin piedras, con rastrojo</td>
+          <td>Incorpora residuos; expone plagas; cama profunda</td>
+          <td>Genera piso de arado; alto consumo; erosión post-volteo</td>
+          <td>Alta</td>
+          <td>Cada ciclo</td>
+        </tr>
+        <tr>
+          <td><strong>Discos</strong><br><span style="color:#64748b;font-size:10px;">Simple, reversible hidráulico</span></td>
+          <td>Disco cóncavo giratorio</td>
+          <td>15–25 cm</td>
+          <td>⚠️ Parcial (desplaza lateralmente)</td>
+          <td>Suelos pedregosos, secos, con raíces</td>
+          <td>Autoafilado; no se traba con piedras; versátil</td>
+          <td>Menor incorporación de residuos; requiere más pases de rastra</td>
+          <td>Media-alta</td>
+          <td>Cada ciclo</td>
+        </tr>
+        <tr style="background:#fff7ed;">
+          <td><strong>Cincel Rígido</strong></td>
+          <td>Brazos fijos con punta cincel</td>
+          <td>20–40 cm</td>
+          <td>❌ Sin volteo</td>
+          <td>Suelos con compactación media, sin muchas piedras</td>
+          <td>Conserva perfil del suelo; mejora infiltración</td>
+          <td>Alta potencia; puede romperse ante obstáculos</td>
+          <td>Alta</td>
+          <td>Cada ciclo o alternado</td>
+        </tr>
+        <tr>
+          <td><strong>Cincel Vibratorio</strong></td>
+          <td>Brazos con resorte + vibración</td>
+          <td>20–40 cm</td>
+          <td>❌ Sin volteo</td>
+          <td>Suelos con piedras o raíces; variados</td>
+          <td>Menor consumo que rígido; protección ante piedras; mayor área de fragmentación</td>
+          <td>Más costoso; mantenimiento de resortes</td>
+          <td>Media-alta</td>
+          <td>Cada ciclo o alternado</td>
+        </tr>
+        <tr style="background:#fef2f2;">
+          <td><strong>Subsolador</strong></td>
+          <td>Brazos robustos de penetración profunda</td>
+          <td>40–80 cm</td>
+          <td>❌ Sin volteo</td>
+          <td>Suelos con piso de arado o capas cementadas; suelo firme (no plástico)</td>
+          <td>Único implemento que rompe barreras profundas; mejora drenaje profundo</td>
+          <td>Muy alta potencia; velocidad muy lenta; ineficaz en suelo húmedo/plástico</td>
+          <td>Muy alta (bulldozer)</td>
+          <td>Cada 4–8 años</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warn" style="margin-top:10px;">⚠️ <strong>Dato integrador clave:</strong> La elección del implemento de labranza primaria no depende solo del tipo de suelo sino de la combinación de tres factores: (1) objetivo de manejo del residuo (incorporar vs. conservar), (2) presencia o ausencia de capas compactadas y su profundidad, y (3) potencia disponible del equipo de tracción. Un error común es usar siempre la misma herramienta sin diagnosticar el estado real del perfil del suelo.</div>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <div class="secbar secbar-green">🧠 7. QUIZ INTERACTIVO DE REPASO</div>
+
+  <div class="block s3" id="quiz-section">
+    <div style="background:#0f1e3a;color:white;border-radius:10px 10px 0 0;padding:12px 16px;margin:-12px -13px 14px;font-family:'Oswald',sans-serif;font-size:14px;">
+      📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE
+      <div style="font-size:11px;font-weight:400;color:#94a3b8;margin-top:3px;">Marca tu respuesta y descubre si es correcta</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span id="qprog-text" style="font-size:12px;color:#64748b;white-space:nowrap;">Pregunta 0 de 10 respondidas</span>
+      <div style="flex:1;background:#e2e8f0;border-radius:20px;height:8px;">
+        <div id="qprog-bar" style="width:0%;height:100%;border-radius:20px;background:#16a34a;transition:width 0.3s;"></div>
+      </div>
+      <span id="qscore-text" style="font-size:12px;font-weight:600;color:#1e293b;white-space:nowrap;">0 / 10 ✓</span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qcard" id="q1" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 1 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál es el objetivo principal de la labranza primaria en comparación con la secundaria?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Nivelar la superficie para la siembra directa</button>
+        <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Incorporar fertilizantes al suelo superficial</button>
+        <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Romper y aflojar el suelo a mayor profundidad para crear condiciones para el desarrollo radicular</button>
+        <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Eliminar malezas superficiales sin alterar el perfil del suelo</button>
+      </div>
+      <div class="qfeedback" id="fb1" style="display:none;"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qcard" id="q2" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 2 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Qué pieza del arado de vertedera realiza el corte HORIZONTAL del suelo?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) La vertedera</button>
+        <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) La reja</button>
+        <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) La cuchilla integrada</button>
+        <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) El timón</button>
+      </div>
+      <div class="qfeedback" id="fb2" style="display:none;"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qcard" id="q3" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 3 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál es el fenómeno negativo que se produce al usar repetidamente el arado de vertedera a la misma profundidad?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Pérdida de pH del suelo por oxidación</button>
+        <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Aumento excesivo de la porosidad total</button>
+        <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Destrucción de la microbiota superficial por volteo excesivo</button>
+        <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) Formación de un "piso de arado" o capa compactada justo debajo de la profundidad de trabajo</button>
+      </div>
+      <div class="qfeedback" id="fb3" style="display:none;"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qcard" id="q4" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 4 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">En un suelo pedregoso y seco con abundante rastrojo de cosecha, ¿qué tipo de arado de labranza primaria es más recomendable?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Arado de vertedera con reja fija</button>
+        <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) Arado de discos</button>
+        <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Subsolador de alta potencia</button>
+        <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Arado de timón largo (tracción animal)</button>
+      </div>
+      <div class="qfeedback" id="fb4" style="display:none;"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qcard" id="q5" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 5 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál es la diferencia fundamental entre el arado cincel RÍGIDO y el VIBRATORIO?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) El vibratorio voltea el suelo y el rígido no</button>
+        <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) El rígido trabaja más profundo que el vibratorio</button>
+        <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) El vibratorio usa resortes que permiten deflexión ante obstáculos y requiere menos potencia que el rígido</button>
+        <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) El rígido se usa en labranza secundaria y el vibratorio en labranza primaria</button>
+      </div>
+      <div class="qfeedback" id="fb5" style="display:none;"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qcard" id="q6" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 6 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿A qué profundidad trabaja típicamente un subsolador y cuál es su función específica?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) 5–15 cm; afinar la cama de siembra superficial</button>
+        <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) 15–25 cm; incorporar residuos orgánicos al horizonte A</button>
+        <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) 20–40 cm; descompactar el horizonte de labranza sin voltear</button>
+        <button class="qbtn" data-q="6" data-opt="d" data-correct="true">D) 40–80 cm; romper capas compactadas o cementadas por debajo del horizonte de labranza convencional</button>
+      </div>
+      <div class="qfeedback" id="fb6" style="display:none;"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qcard" id="q7" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 7 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál afirmación sobre el arado de discos es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Los discos se autoafilan por el rozamiento con el suelo</button>
+        <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Es adecuado para suelos con presencia de piedras o raíces</button>
+        <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) Voltea completamente el perfil del suelo igual que el arado de vertedera</button>
+        <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) El ángulo de ataque del disco influye en el grado de movimiento del suelo y el consumo de combustible</button>
+      </div>
+      <div class="qfeedback" id="fb7" style="display:none;"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qcard" id="q8" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 8 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Por qué NO se recomienda usar el subsolador cuando el suelo está muy húmedo o en estado plástico?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Porque el equipo se atasca mecánicamente y no puede avanzar</button>
+        <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) Porque el suelo plástico se amasa alrededor del brazo y cierra los macroporos al retirar el implemento, anulando el efecto</button>
+        <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Porque la humedad oxida las piezas de acero del brazo irreparablemente</button>
+        <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Porque la labranza en suelos húmedos está prohibida por regulaciones ambientales</button>
+      </div>
+      <div class="qfeedback" id="fb8" style="display:none;"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qcard" id="q9" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 9 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">Un productor quiere romper la compactación del suelo SIN enterrar los residuos superficiales de la cosecha anterior (para conservar cobertura del suelo). ¿Qué implemento debe usar?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Arado de vertedera mecánico con cuchilla integrada</button>
+        <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Arado de discos reversible hidráulico</button>
+        <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Arado cincel (rígido o vibratorio)</button>
+        <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Arado de timón largo tipo Matador</button>
+      </div>
+      <div class="qfeedback" id="fb9" style="display:none;"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qcard" id="q10" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 10 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál de los siguientes arados requiere la mayor potencia de tracción y se usa con menor frecuencia dentro del ciclo agrícola?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Arado de vertedera mecánico</button>
+        <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Arado cincel vibratorio</button>
+        <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Arado de discos reversible</button>
+        <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) Subsolador</button>
+      </div>
+      <div class="qfeedback" id="fb10" style="display:none;"></div>
+    </div>
+
+    <!-- Panel de resultados -->
+    <div id="quiz-result" style="display:none;padding:14px;border-radius:10px;margin-top:12px;text-align:center;">
+      <div id="result-title" style="font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px;"></div>
+      <div id="result-msg" style="font-size:13px;margin-bottom:12px;"></div>
+      <button onclick="resetQuiz()" style="background:#0f1e3a;color:white;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-family:'Oswald',sans-serif;">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="block s3">
+    <div class="footer-bar">
+      <div>
+        <div class="ft">📖 REFERENCIAS Y FUENTES</div>
+      </div>
+      <div class="fc">FAO — Manual de Labranza (w0613t0j.htm) · Magrama/MAPA — Arado Vertedera · Baldan Argentina — Arados AAF y ARH · Insergewhs Perú — Arado Cincel Rígido · Agrobyte — Subsolador Pino Radiata · Industrias Pesce — Subsolador</div>
+    </div>
+    <div style="margin-top:8px;font-size:10.5px;color:#94a3b8;text-align:center;">TEORÍA 5 — DIAPOV · Mecanización Agrícola · Canvas de Estudio Universitario</div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  let respondidas = 0, aciertos = 0;
+  const total = 10;
+
+  const feedbacks = {
+    1: {
+      correct: "✅ ¡Correcto! La labranza primaria trabaja a mayor profundidad (15–80 cm según implemento) y su objetivo es crear un perfil de suelo suelto y aireado que permita el desarrollo radicular. La secundaria solo afina superficialmente.",
+      wrong: "❌ Incorrecto. La respuesta correcta es C. La labranza primaria busca romper y aflojar el suelo en profundidad para que las raíces y el agua penetren sin resistencia. Nivelación, fertilización e incorporación superficial son objetivos de otras operaciones."
+    },
+    2: {
+      correct: "✅ ¡Correcto! La reja es la pieza que corta horizontalmente el suelo. La cuchilla integrada realiza el corte vertical previo, y la vertedera (ala) se encarga de levantar y voltear el bloque ya cortado.",
+      wrong: "❌ Incorrecto. La respuesta correcta es B (la reja). La vertedera voltea el suelo pero no corta; la cuchilla integrada corta verticalmente (no horizontalmente); el timón es la estructura portante."
+    },
+    3: {
+      correct: "✅ ¡Correcto! El 'piso de arado' es una capa compactada que se forma exactamente debajo de la profundidad de trabajo cuando se labra siempre a la misma profundidad. El pie del arado y la compresión lateral del suelo crean esta barrera impermeable para raíces y agua.",
+      wrong: "❌ Incorrecto. La respuesta correcta es D. El fenómeno es el 'piso de arado': capa compactada bajo la profundidad habitual de trabajo. Para evitarlo se varía la profundidad o se aplica subsolado periódico."
+    },
+    4: {
+      correct: "✅ ¡Correcto! El arado de discos es ideal para suelos pedregosos y secos porque sus discos giran libremente al encontrar obstáculos (piedras, raíces), evitando roturas. La reja fija de la vertedera se trabaría o rompería en esas condiciones.",
+      wrong: "❌ Incorrecto. La respuesta correcta es B (arado de discos). La reja fija de la vertedera se rompe con piedras; el subsolador no es para labranza rutinaria; el arado animal no tiene potencia suficiente para suelos secos y pedregosos."
+    },
+    5: {
+      correct: "✅ ¡Correcto! El cincel vibratorio tiene brazos montados sobre resortes que permiten vibrar y ceder ante obstáculos. Esto reduce el requerimiento de potencia y protege el equipo. Ambos tipos NO voltean el suelo.",
+      wrong: "❌ Incorrecto. La respuesta correcta es C. Ninguno de los dos tipos de cincel voltea el suelo. El rígido trabaja por cizallamiento directo; el vibratorio usa energía de vibración para fracturar más eficientemente con menos potencia."
+    },
+    6: {
+      correct: "✅ ¡Correcto! El subsolador trabaja entre 40–80 cm, por debajo del horizonte de labranza convencional. Su función es romper capas compactadas (piso de arado) o cementadas que impiden el drenaje profundo y la penetración radicular.",
+      wrong: "❌ Incorrecto. La respuesta correcta es D. El cincel trabaja a 20–40 cm (opción C), no el subsolador. El subsolador es el implemento de mayor profundidad, diseñado para barreras que ningún otro implemento alcanza."
+    },
+    7: {
+      correct: "✅ ¡Correcto! La afirmación C es FALSA. El arado de discos NO voltea completamente el suelo como la vertedera: su acción es de corte y desplazamiento lateral. El suelo queda más fragmentado que volteado, por eso requiere más pases de rastra secundaria.",
+      wrong: "❌ Incorrecto. La afirmación FALSA es C. El disco no voltea el suelo completamente; solo lo desplaza lateralmente. Las otras opciones (A, B, D) son afirmaciones verdaderas sobre el arado de discos."
+    },
+    8: {
+      correct: "✅ ¡Correcto! Cuando el suelo está en estado plástico (húmedo), el material se comporta como arcilla maleable: en vez de fracturarse, se amasa y fluye alrededor del brazo del subsolador, cerrando los canales al retirarse. El efecto es nulo o contraproducente.",
+      wrong: "❌ Incorrecto. La respuesta correcta es B. No es un problema mecánico del equipo ni de corrosión: es que el suelo plástico no fractura, se deforma plásticamente y cierra los poros al retirar el implemento."
+    },
+    9: {
+      correct: "✅ ¡Correcto! El cincel (rígido o vibratorio) es el implemento que rompe compactación SIN voltear el suelo, preservando la cobertura de residuos en superficie. Esto lo hace compatible con sistemas de agricultura de conservación y labranza mínima.",
+      wrong: "❌ Incorrecto. La respuesta correcta es C (arado cincel). La vertedera y el disco voltean o desplazan el suelo incorporando residuos. El cincel fractura en profundidad sin alterar el perfil ni enterrar la cobertura superficial."
+    },
+    10: {
+      correct: "✅ ¡Correcto! El subsolador requiere la mayor potencia (puede necesitar bulldozer) porque trabaja a 40–80 cm contra suelos muy compactados. Por su alto costo de operación y porque el efecto dura años, se usa solo cada 4–8 años, no en cada ciclo.",
+      wrong: "❌ Incorrecto. La respuesta correcta es D (subsolador). Trabaja a la mayor profundidad (40–80 cm), requiere más potencia que cualquier otro arado primario, y se aplica solo cada 4–8 años por ser una operación costosa y de efecto duradero."
+    }
+  };
+
+  document.getElementById('quiz-section').addEventListener('click', function(e) {
+    const btn = e.target.closest('.qbtn');
+    if (!btn || btn.disabled) return;
+
+    const q = btn.dataset.q;
+    const isCorrect = btn.dataset.correct === 'true';
+    const opts = document.querySelectorAll('.qbtn[data-q="' + q + '"]');
+
+    opts.forEach(function(b) {
+      b.disabled = true;
+      if (b.dataset.correct === 'true') b.classList.add('correct');
+    });
+    if (!isCorrect) btn.classList.add('wrong');
+
+    const fb = document.getElementById('fb' + q);
+    fb.style.display = 'block';
+    fb.className = 'qfeedback ' + (isCorrect ? 'fb-ok' : 'fb-err');
+    fb.innerHTML = isCorrect ? feedbacks[q].correct : feedbacks[q].wrong;
+
+    respondidas++;
+    if (isCorrect) aciertos++;
+
+    document.getElementById('qprog-text').textContent = 'Pregunta ' + respondidas + ' de ' + total + ' respondidas';
+    document.getElementById('qprog-bar').style.width = (respondidas / total * 100) + '%';
+    document.getElementById('qscore-text').textContent = aciertos + ' / ' + total + ' ✓';
+
+    if (respondidas === total) mostrarResultado();
+  });
+
+  function mostrarResultado() {
+    var r = document.getElementById('quiz-result');
+    var title = document.getElementById('result-title');
+    var msg = document.getElementById('result-msg');
+    r.style.display = 'block';
+
+    if (aciertos <= 4) {
+      r.style.background = '#fee2e2'; title.style.color = '#991b1b';
+      title.textContent = aciertos + ' / ' + total + ' — Necesitas repasar el material';
+      msg.textContent = 'Vuelve a los bloques donde fallaste y repasa las definiciones de cada tipo de arado.';
+    } else if (aciertos <= 7) {
+      r.style.background = '#fef9c3'; title.style.color = '#713f12';
+      title.textContent = aciertos + ' / ' + total + ' — ¡Buen avance, sigue repasando!';
+      msg.textContent = 'Casi listo para el examen. Refuerza la comparativa entre cincel, subsolador y vertedera.';
+    } else {
+      r.style.background = '#dcfce7'; title.style.color = '#14532d';
+      title.textContent = aciertos + ' / ' + total + ' — ¡Excelente dominio del tema!';
+      msg.textContent = 'Estás preparado. Repasa una última vez la tabla integradora antes del examen.';
+    }
+  }
+
+  window.resetQuiz = function() {
+    respondidas = 0; aciertos = 0;
+    document.querySelectorAll('.qbtn').forEach(function(b) {
+      b.disabled = false;
+      b.classList.remove('correct', 'wrong');
+    });
+    document.querySelectorAll('.qfeedback').forEach(function(f) { f.style.display = 'none'; });
+    document.getElementById('quiz-result').style.display = 'none';
+    document.getElementById('qprog-text').textContent = 'Pregunta 0 de 10 respondidas';
+    document.getElementById('qprog-bar').style.width = '0%';
+    document.getElementById('qscore-text').textContent = '0 / 10 ✓';
+  };
+})();
+</script>
+</body>
+</html>

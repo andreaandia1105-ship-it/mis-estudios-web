@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEORIA 10 — Maquinaria para Siembra y Mantenimiento de Cultivos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f1f5f9; font-family: 'Source Sans 3', sans-serif; color: #1e293b; font-size: 13px; }
+    .cv { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; padding: 12px; background: #f1f5f9; }
+    .block { background: #ffffff; border: 0.5px solid #e2e8f0; border-radius: 11px; padding: 12px 13px; }
+    .s2 { grid-column: span 2; }
+    .s3 { grid-column: 1 / -1; }
+    .secbar { grid-column: 1/-1; background: #f1f5f9; padding: 8px 12px; border-radius: 8px; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 700; color: #1e293b; border-left: 4px solid #16a34a; }
+    .bh { font-family: 'Oswald', sans-serif; font-size: 12px; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+    .def { border-left: 3px solid #3b82f6; padding: 7px 10px; border-radius: 0 7px 7px 0; font-size: 12px; background: #f8fafc; margin: 6px 0; }
+    .item { display: flex; gap: 7px; font-size: 12px; line-height: 1.5; margin: 4px 0; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .rx { background: #0f172a; color: #7dd3fc; font-family: monospace; font-size: 11px; padding: 7px 11px; border-radius: 7px; text-align: center; line-height: 1.6; margin: 6px 0; }
+    .warn { background: #fff7ed; border-left: 3px solid #f97316; border-radius: 0 8px 8px 0; font-size: 11.5px; color: #7c2d12; padding: 7px 10px; margin: 6px 0; }
+    .tip { background: #f0fdf4; border-left: 3px solid #22c55e; border-radius: 0 8px 8px 0; font-size: 11.5px; color: #14532d; padding: 7px 10px; margin: 6px 0; }
+    .exam { background: #fefce8; border: 1px solid #facc15; border-radius: 8px; font-size: 11.5px; color: #713f12; padding: 8px 11px; margin-top: 8px; }
+    .mini { background: #f8fafc; border-radius: 8px; padding: 8px 10px; font-size: 11.5px; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; }
+    .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 6px 0; }
+    .fbox { background: #f8fafc; padding: 4px 9px; border-radius: 6px; font-size: 11.5px; }
+    .farrow { color: #64748b; font-size: 15px; }
+    .tbl { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .tbl th { background: #f8fafc; padding: 5px 7px; border-bottom: 0.5px solid #e2e8f0; font-family: 'Oswald', sans-serif; text-align: left; }
+    .tbl td { padding: 5px 7px; border-bottom: 0.5px solid #e2e8f0; vertical-align: top; }
+    .divh { border: none; border-top: 0.5px solid #e2e8f0; margin: 7px 0; }
+    .footer-bar { background: #0f1e3a; color: white; border-radius: 10px; padding: 11px 18px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .ft { font-family: 'Oswald', sans-serif; font-size: 12px; color: #7dd3fc; }
+    .fc { font-size: 11px; color: #94a3b8; }
+    /* Header principal */
+    .header-main { background: #0f1e3a; border-radius: 12px; padding: 18px 22px; color: white; }
+    .header-main h1 { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 700; color: #7dd3fc; letter-spacing: 1px; }
+    .header-main p { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+    .header-badge { display: inline-block; background: #16a34a; color: white; font-family: 'Oswald', sans-serif; font-size: 10px; padding: 2px 8px; border-radius: 4px; margin-right: 6px; }
+    /* Quiz */
+    .qbtn { display: block; width: 100%; text-align: left; margin-bottom: 5px; padding: 8px 12px; font-size: 12px; border-radius: 8px; cursor: pointer; background: #f8fafc; border: 1px solid #e2e8f0; transition: all 0.2s; font-family: 'Source Sans 3', sans-serif; }
+    .qbtn:hover:not(:disabled) { background: #f1f5f9; border-color: #cbd5e1; }
+    .qbtn.correct { background: #dcfce7; border-color: #16a34a; color: #14532d; font-weight: 600; }
+    .qbtn.wrong { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+    .qbtn:disabled { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+    .qfeedback { border-radius: 0 8px 8px 0; padding: 8px 11px; font-size: 11.5px; margin-top: 8px; }
+    .qfeedback.fb-ok { background: #f0fdf4; border-left: 3px solid #16a34a; color: #14532d; }
+    .qfeedback.fb-err { background: #fef2f2; border-left: 3px solid #dc2626; color: #991b1b; }
+    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: #0f1e3a; color: white; font-family: 'Oswald', sans-serif; font-size: 11px; flex-shrink: 0; margin-right: 6px; }
+  </style>
+</head>
+<body>
+<div class="cv">
+
+  <!-- HEADER -->
+  <div class="block s3 header-main">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div>
+        <div style="margin-bottom:6px;">
+          <span class="header-badge">TEORÍA 10</span>
+          <span class="header-badge" style="background:#0369a1;">ING. AUGUSTO ZINGG ROSELL</span>
+        </div>
+        <h1>MAQUINARIA PARA SIEMBRA Y MANTENIMIENTO DE CULTIVOS</h1>
+        <p>Sembradora · Clasificación · Partes · Tren de siembra · Tipos de distribución · Trasplantadoras · Propiedades agrotécnicas</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 1: CONCEPTOS BASE ===== -->
+  <div class="secbar" style="border-left-color:#3b82f6;">📌 SECCIÓN 1 — CONCEPTOS FUNDAMENTALES: SEMBRAR Y SEMILLA</div>
+
+  <!-- Sembrar -->
+  <div class="block">
+    <span class="bh" style="background:#dbeafe;color:#1e3a8a;">SEMBRAR — DEFINICIÓN</span>
+    <div class="def" style="border-left-color:#3b82f6;">
+      Acción de esparcir semillas en un terreno preparado para que germinen y produzcan plantas o frutos. Es el punto de partida de todo ciclo agrícola.
+    </div>
+    <div class="item"><div class="dot" style="background:#3b82f6;"></div><span><strong>Terreno preparado:</strong> la preparación previa (arado, rastra) es indispensable para que la semilla encuentre las condiciones de humedad, temperatura y aireación necesarias.</span></div>
+    <div class="item"><div class="dot" style="background:#3b82f6;"></div><span><strong>Germinación:</strong> proceso en el que la semilla absorbe agua, reactiva su metabolismo y emite la radícula (raíz embrionaria) y la plúmula (tallo embrionario).</span></div>
+    <div class="tip">💡 Piénsalo como "instalar un programa": el terreno es el sistema operativo (RAM, disco), la semilla es el instalador. Si el sistema no está bien configurado, la instalación falla.</div>
+    <div class="exam">🎯 EXAMEN: Según la definición técnica, ¿qué condición previa es indispensable para que el acto de sembrar sea efectivo y no resulte en pérdida de semilla?</div>
+  </div>
+
+  <!-- Semilla -->
+  <div class="block">
+    <span class="bh" style="background:#dbeafe;color:#1e3a8a;">SEMILLA — ESTRUCTURA Y DEFINICIÓN</span>
+    <div class="def" style="border-left-color:#3b82f6;">
+      La semilla es el óvulo fecundado y maduro. Puesta en condiciones adecuadas de suelo, origina una nueva planta de la misma especie. En agricultura también se consideran semillas ciertos órganos vegetativos capaces de reproducirse.
+    </div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Cubierta (testa):</strong> capa protectora externa que regula la entrada de agua y gases.</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Plúmula:</strong> embrión del tallo y las primeras hojas.</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Radícula:</strong> embrión de la raíz principal.</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Micrópilo:</strong> pequeño poro por donde entra el agua para activar la germinación.</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Cotiledón:</strong> hoja embrionaria que almacena los nutrientes que alimentan al embrión hasta que puede realizar fotosíntesis.</span></div>
+    <div class="exam">🎯 EXAMEN: ¿Cuál estructura de la semilla cumple la función de reserva nutricional durante la germinación antes de que la plántula sea autosuficiente?</div>
+  </div>
+
+  <!-- Condiciones semillas -->
+  <div class="block">
+    <span class="bh" style="background:#dbeafe;color:#1e3a8a;">CONDICIONES DE LAS SEMILLAS</span>
+    <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>Conformación:</strong> la forma y tamaño determinan el tipo de dosificador que puede usarse; semillas irregulares requieren mecanismos de precisión.</span></div>
+    <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>Madurez:</strong> solo la semilla con su proceso de maduración completo tiene el embrión con suficiente energía acumulada para germinar con éxito.</span></div>
+    <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>Sanidad:</strong> la ausencia de patógenos (hongos, bacterias, insectos) garantiza que la tasa de germinación no se vea reducida por enfermedades preexistentes.</span></div>
+    <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>Poder germinativo:</strong> porcentaje de semillas de un lote que efectivamente germinan en condiciones controladas; define la densidad de siembra necesaria.</span></div>
+    <hr class="divh">
+    <div style="font-family:'Oswald',sans-serif;font-size:11px;color:#1e293b;margin-bottom:5px;">CONDICIONES AMBIENTALES PARA LA PLANTA</div>
+    <div class="three">
+      <div class="mini" style="background:#dbeafe;text-align:center;"><strong>🌦 CLIMÁTICAS</strong><br><span style="font-size:10.5px;">Lluvia, viento, humedad relativa</span></div>
+      <div class="mini" style="background:#fef9c3;text-align:center;"><strong>🌡 TEMPERATURA</strong><br><span style="font-size:10.5px;">Óptima por especie</span></div>
+      <div class="mini" style="background:#dcfce7;text-align:center;"><strong>☀️ LUZ</strong><br><span style="font-size:10.5px;">Fotoperiodo y energía</span></div>
+    </div>
+    <div class="warn">⚠️ El poder germinativo NO es permanente: decrece con el tiempo de almacenamiento y las condiciones de humedad y temperatura del depósito. Una semilla de buen aspecto puede tener poder germinativo muy bajo.</div>
+    <div class="exam">🎯 EXAMEN: Si un lote de semillas de trigo tiene un poder germinativo del 70%, y se quiere lograr una densidad de 200 plantas/m², ¿cuántas semillas por m² deben sembrarse como mínimo?</div>
+  </div>
+
+  <!-- ===== SECCIÓN 2: HISTORIA Y TIPOS DE SIEMBRA ===== -->
+  <div class="secbar" style="border-left-color:#16a34a;">🌱 SECCIÓN 2 — HISTORIA Y TIPOS DE SIEMBRA</div>
+
+  <!-- Historia -->
+  <div class="block">
+    <span class="bh" style="background:#dcfce7;color:#14532d;">RESEÑA HISTÓRICA</span>
+    <div class="def" style="border-left-color:#16a34a;">
+      Antigüamente la siembra se hacía a mano arrojando la simiente sobre la superficie del terreno con distribución irregular. La uniformidad dependía de la habilidad del operario, lo que generaba grandes pérdidas.
+    </div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Problemas de la siembra manual antigua:</strong> pocas semillas quedaban a profundidad adecuada; muchas quedaban enterradas demasiado profundo o en superficie; las aves consumían las semillas expuestas.</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Consecuencias:</strong> se necesitaban altas dosis de siembra para compensar pérdidas, aumentando los costos. La irregularidad producía alta proporción de plantas débiles por nacencia dificultosa.</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Solución moderna:</strong> las sembradoras mecánicas resuelven todos estos problemas siempre que se elijan correctamente según tipo de semilla y condiciones, y se operen adecuadamente.</span></div>
+    <div class="tip">💡 Es como pasar de escribir a mano en papeles sueltos a usar un procesador de texto: la información (semilla) llega siempre al lugar correcto, con el espaciado correcto, sin pérdidas.</div>
+    <div class="exam">🎯 EXAMEN: ¿Cuál era el principal mecanismo por el que la siembra manual antigua generaba plantas debilitadas, y cómo lo resuelve la maquinaria moderna?</div>
+  </div>
+
+  <!-- Tipos de siembra -->
+  <div class="block">
+    <span class="bh" style="background:#dcfce7;color:#14532d;">TIPOS DE SIEMBRA</span>
+    <div class="two">
+      <div class="mini" style="background:#dcfce7;">
+        <strong>🤚 SIEMBRA MANUAL</strong><br>
+        <span style="font-size:11px;">Se coloca la semilla en la cama de siembra con la mano según época y cultivo. Adecuada para pequeñas superficies o cultivos especiales. No ofrece uniformidad ni profundidad constante.</span>
+      </div>
+      <div class="mini" style="background:#dbeafe;">
+        <strong>🚜 SIEMBRA MECANIZADA</strong><br>
+        <span style="font-size:11px;">Usa sembradoras mecánicas remolcadas por tractor. Solo viable en terrenos planos. Mayor rapidez, aprovechamiento máximo del terreno y uniformidad de distribución.</span>
+      </div>
+    </div>
+    <hr class="divh">
+    <div style="font-family:'Oswald',sans-serif;font-size:11px;color:#1e293b;margin:5px 0;">FORMAS DE REALIZAR LA SIEMBRA</div>
+    <div class="two">
+      <div>
+        <div class="item"><div class="dot" style="background:#7c3aed;"></div><span><strong>a) A voleo:</strong> semillas distribuidas al azar sobre toda la superficie.</span></div>
+        <div class="item"><div class="dot" style="background:#7c3aed;"></div><span><strong>b) A chorrillo (líneas):</strong> semillas continuas en líneas a ~10 mm de distancia.</span></div>
+        <div class="item"><div class="dot" style="background:#7c3aed;"></div><span><strong>c) En fajas:</strong> varias líneas próximas agrupadas en fajas separadas (60–80 mm).</span></div>
+      </div>
+      <div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>d) A golpes:</strong> grupos de semillas a distancias regulares (a, b, c).</span></div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>e) Monograno:</strong> una semilla por punto, a distancia fija y constante. Máxima precisión.</span></div>
+      </div>
+    </div>
+    <div class="exam">🎯 EXAMEN: ¿Qué tipo de siembra garantiza la mayor precisión en la colocación individual de semillas y para qué cultivos es especialmente recomendada?</div>
+  </div>
+
+  <!-- Formas según superficie -->
+  <div class="block">
+    <span class="bh" style="background:#dcfce7;color:#14532d;">FORMAS SEGÚN SUPERFICIE DE TERRENO</span>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Siembra en surcos:</strong> la semilla se deposita en el fondo de un surco abierto. Permite control de profundidad y mejor contacto semilla-suelo.</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Siembra en llano:</strong> sobre superficie plana sin surcos. Sencilla pero menor control de profundidad.</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Siembra en cerro (caballón):</strong> se siembra sobre lomos elevados del terreno. Favorece drenaje y aireación de raíces. Usada en cultivos sensibles al encharcamiento (ej. maíz, papa).</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Siembra en caballones:</strong> similar al cerro pero con forma más definida. Permite la circulación de maquinaria entre los caballones sin pisar el cultivo.</span></div>
+    <div class="warn">⚠️ Error frecuente: confundir "siembra en cerro" con "siembra en surcos". En el surco la semilla va en la depresión; en el cerro va sobre la elevación. El drenaje es opuesto en ambos casos.</div>
+    <div class="exam">🎯 EXAMEN: ¿En qué condición de suelo o de cultivo se prefiere la siembra en cerro o caballón frente a la siembra en surco? Justifique.</div>
+  </div>
+
+  <!-- ===== SECCIÓN 3: LA SEMBRADORA ===== -->
+  <div class="secbar" style="border-left-color:#7c3aed;">⚙️ SECCIÓN 3 — LA SEMBRADORA: DEFINICIÓN Y PARTES</div>
+
+  <!-- Definición sembradora -->
+  <div class="block">
+    <span class="bh" style="background:#ede9fe;color:#4c1d95;">SEMBRADORA — DEFINICIÓN</span>
+    <div class="def" style="border-left-color:#7c3aed;">
+      Máquina que permite la siembra regular, bien sobre toda la superficie o en líneas equidistantes y a profundidad uniforme. Resuelve los tres problemas clásicos de la siembra manual: uniformidad de distribución, control de profundidad y protección de la semilla.
+    </div>
+    <div class="tip">💡 Si la semilla es como una carta, la sembradora es el cartero automatizado: pone cada carta exactamente en el buzón correcto, a la misma profundidad, sin que nadie la intercepte (pájaros, lluvia).</div>
+    <hr class="divh">
+    <div style="font-family:'Oswald',sans-serif;font-size:11px;color:#1e293b;margin-bottom:4px;">CLASIFICACIÓN DE SEMBRADORAS</div>
+    <div class="two">
+      <div>
+        <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-bottom:3px;">POR TIPO DE SEMILLA</div>
+        <div class="item"><div class="dot" style="background:#7c3aed;"></div><span>Sembradora de grano fino (trigo, cebada, avena)</span></div>
+        <div class="item"><div class="dot" style="background:#7c3aed;"></div><span>Sembradora de grano grueso (maíz, soja, girasol)</span></div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:600;color:#0369a1;margin-bottom:3px;">POR METODOLOGÍA</div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span>Siembra clásica o convencional</span></div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span>Siembra directa (sin laboreo previo)</span></div>
+      </div>
+    </div>
+    <div class="exam">🎯 EXAMEN: ¿Cuál es la principal diferencia entre una sembradora de grano fino y una de grano grueso en cuanto a su sistema dosificador?</div>
+  </div>
+
+  <!-- Bastidor y Tolva -->
+  <div class="block">
+    <span class="bh" style="background:#ede9fe;color:#4c1d95;">PARTES: BASTIDOR Y TOLVA</span>
+    <div style="margin-bottom:6px;">
+      <div style="font-size:11.5px;font-weight:600;color:#4c1d95;">🔩 BASTIDOR</div>
+      <div class="item"><div class="dot" style="background:#7c3aed;"></div><span>Armazón estructural que soporta toda la maquinaria. Formado por una barra que soporta la tolva, los órganos de enterrado y el sistema de enganche al tractor.</span></div>
+      <div class="item"><div class="dot" style="background:#7c3aed;"></div><span>Permite gran variabilidad de distancias entre líneas según el cultivo y el marco de plantación deseado.</span></div>
+    </div>
+    <hr class="divh">
+    <div>
+      <div style="font-size:11.5px;font-weight:600;color:#4c1d95;">🗃 TOLVA</div>
+      <div class="item"><div class="dot" style="background:#16a34a;"></div><span>Depósito que contiene las semillas. Debe tener facilidad de acceso para llenado y posibilidad de vaciado total para evitar mezclas entre cultivos.</span></div>
+      <div class="item"><div class="dot" style="background:#16a34a;"></div><span>Requiere visibilidad del nivel de contenido para evitar que la siembra quede incompleta.</span></div>
+      <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Agitadores:</strong> evitan atascos por compactación de semillas, especialmente en semillas pequeñas o tratadas.</span></div>
+      <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Separadores:</strong> permiten dividir la tolva para diferentes tipos de semillas o semilla + fertilizante simultáneamente.</span></div>
+    </div>
+    <div class="warn">⚠️ No vaciar completamente la tolva entre cultivos distintos puede causar contaminación del lote siguiente. Es un error común que compromete la pureza varietal.</div>
+    <div class="exam">🎯 EXAMEN: ¿Por qué la tolva de una sembradora debe poder vaciarse completamente y cuál es la consecuencia técnica de no hacerlo?</div>
+  </div>
+
+  <!-- Órganos de enterrado y otras características -->
+  <div class="block">
+    <span class="bh" style="background:#ede9fe;color:#4c1d95;">PARTES: ÓRGANOS DE ENTERRADO</span>
+    <div class="def" style="border-left-color:#7c3aed;">
+      Elementos de la máquina responsables de abrir el surco, depositar la semilla y cerrarlo a la profundidad correcta. Son la parte más crítica porque determinan la calidad final de la siembra.
+    </div>
+    <div class="item"><div class="dot" style="background:#7c3aed;"></div><span><strong>Adaptabilidad:</strong> deben funcionar en suelos arcillosos, arenosos, con o sin rastrojo, sin modificar la profundidad de trabajo.</span></div>
+    <div class="item"><div class="dot" style="background:#7c3aed;"></div><span><strong>Uniformidad en profundidad:</strong> variaciones de ±1 cm en profundidad pueden significar diferencias de días en la emergencia y plantas débiles.</span></div>
+    <div class="item"><div class="dot" style="background:#7c3aed;"></div><span><strong>Apertura y cierre del surco:</strong> el surco debe abrirse limpiamente, recibir la semilla y cerrarse con buena compactación lateral para asegurar contacto suelo-semilla.</span></div>
+    <div class="item"><div class="dot" style="background:#7c3aed;"></div><span><strong>Resistencia a la abrasión:</strong> trabajan en contacto permanente con partículas de suelo abrasivas, por lo que deben ser de acero endurecido.</span></div>
+    <hr class="divh">
+    <div style="font-family:'Oswald',sans-serif;font-size:11px;color:#1e293b;margin-bottom:4px;">OTRAS CARACTERÍSTICAS DESEABLES DE LA SEMBRADORA</div>
+    <div class="two">
+      <div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span>Existencia de marcadores de línea</span></div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span>Buena maniobrabilidad</span></div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span>Facilidad de transporte</span></div>
+      </div>
+      <div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span>Simplicidad de mecanismos</span></div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span>Solidez estructural</span></div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span>Elevada capacidad de trabajo y precio competitivo</span></div>
+      </div>
+    </div>
+    <div class="exam">🎯 EXAMEN: ¿Cuál es la consecuencia agronómica de que los órganos de enterrado no mantengan profundidad uniforme durante la siembra?</div>
+  </div>
+
+  <!-- ===== SECCIÓN 4: TIPOS DE SEMBRADORAS ===== -->
+  <div class="secbar" style="border-left-color:#0369a1;">🔧 SECCIÓN 4 — CLASIFICACIÓN DE SEMBRADORAS POR MÉTODO DE TRABAJO</div>
+
+  <!-- Convencional vs Directa -->
+  <div class="block s2">
+    <span class="bh" style="background:#dbeafe;color:#1e3a8a;">CONVENCIONAL vs. SIEMBRA DIRECTA</span>
+    <div class="two">
+      <div>
+        <div style="font-size:11.5px;font-weight:600;color:#1e3a8a;margin-bottom:5px;">🔴 SEMBRADORA CONVENCIONAL</div>
+        <div class="item"><div class="dot" style="background:#3b82f6;"></div><span>Diseñada para operar sobre suelos <strong>previamente trabajados</strong> con arado y rastra.</span></div>
+        <div class="item"><div class="dot" style="background:#3b82f6;"></div><span>El suelo mullido facilita la apertura del surco con <strong>poca energía</strong>. Los órganos de enterrado son ligeros.</span></div>
+        <div class="item"><div class="dot" style="background:#3b82f6;"></div><span>Requiere laboreo previo completo → mayor costo energético total del sistema, mayor riesgo de erosión del suelo.</span></div>
+        <div class="mini" style="background:#dbeafe;margin-top:6px;font-size:11px;">Cultivos típicos: cereales de invierno (trigo, cebada, centeno) en suelos bien preparados.</div>
+      </div>
+      <div>
+        <div style="font-size:11.5px;font-weight:600;color:#dc2626;margin-bottom:5px;">🟡 SEMBRADORA DE SIEMBRA DIRECTA</div>
+        <div class="item"><div class="dot" style="background:#dc2626;"></div><span>Estructura <strong>muy pesada y robusta</strong> para penetrar en terrenos con rastrojos sin laboreo previo.</span></div>
+        <div class="item"><div class="dot" style="background:#dc2626;"></div><span>Posee discos cortadores de rastrojo que abren paso antes de que la reja de siembra deposite la semilla. Consume más energía por pasada.</span></div>
+        <div class="item"><div class="dot" style="background:#dc2626;"></div><span>Protege la estructura del suelo, reduce erosión, conserva la humedad bajo el rastrojo (cobertura permanente).</span></div>
+        <div class="mini" style="background:#fee2e2;margin-top:6px;font-size:11px;">Cultivos típicos: soja, maíz, girasol en sistemas de agricultura conservacionista.</div>
+      </div>
+    </div>
+    <hr class="divh">
+    <div style="font-family:'Oswald',sans-serif;font-size:11px;color:#1e293b;margin-bottom:4px;">PARTES ESPECÍFICAS DE LA SEMBRADORA DE SIEMBRA DIRECTA</div>
+    <div class="three">
+      <div class="mini"><strong>Elementos de preparación del suelo</strong><br><span style="font-size:10.5px;">Discos y rejas para microlabranza localizada</span></div>
+      <div class="mini"><strong>Reja de apertura de suelo</strong><br><span style="font-size:10.5px;">Corta rastrojo y abre surco en suelo sin laborear</span></div>
+      <div class="mini"><strong>Elemento de compresión del suelo</strong><br><span style="font-size:10.5px;">Cierra y compacta el surco para buen contacto semilla-suelo</span></div>
+    </div>
+    <div class="warn">⚠️ Usar una sembradora convencional en suelo sin laborear sobrecarga los órganos de enterrado y puede romper piezas o producir siembra irregular. La sembradora directa pesa 2 a 4 veces más que la convencional.</div>
+    <div class="exam">🎯 EXAMEN: ¿Por qué la sembradora de siembra directa necesita una estructura más pesada y qué función específica cumplen sus discos cortadores?</div>
+  </div>
+
+  <!-- Sembradoras a voleo -->
+  <div class="block">
+    <span class="bh" style="background:#dbeafe;color:#1e3a8a;">SEMBRADORAS A VOLEO</span>
+    <div class="def" style="border-left-color:#3b82f6;">
+      Distribuyen semillas sobre toda la superficie sin formar líneas. Son las más simples pero las de menor precisión. Ideales para siembras densas de pratenses, céspedes o pasturas.
+    </div>
+    <div style="font-size:11.5px;font-weight:600;color:#1e3a8a;margin:5px 0 3px;">Tipos:</div>
+    <div class="item"><div class="dot" style="background:#3b82f6;"></div><span><strong>Sembradora centrífuga:</strong> usa un disco giratorio que lanza las semillas por fuerza centrífuga. Cubre gran ancho de trabajo. Fácil de regular la dosis cambiando la apertura de la tolva o la velocidad del disco.</span></div>
+    <div class="item"><div class="dot" style="background:#3b82f6;"></div><span><strong>Sembradora de caída libre:</strong> las semillas caen por gravedad desde la tolva directamente sobre el suelo a través de distribuidores. Menor dispersión lateral, usada para pratenses.</span></div>
+    <div class="tip">💡 La sembradora centrífuga es como un aspersor de jardín: llega lejos pero con distribución irregular en los bordes. La de caída libre es más precisa pero cubre menos ancho.</div>
+    <div class="exam">🎯 EXAMEN: ¿Cuál es el principio de funcionamiento de la sembradora centrífuga y qué limitación tiene respecto a la uniformidad de distribución?</div>
+  </div>
+
+  <!-- ===== SECCIÓN 5: SEMBRADORAS EN LÍNEAS Y MONOGRANO ===== -->
+  <div class="secbar" style="border-left-color:#f97316;">🌾 SECCIÓN 5 — SEMBRADORAS EN LÍNEAS, MONOGRANO Y TREN DE SIEMBRA</div>
+
+  <!-- Sembradoras en líneas -->
+  <div class="block">
+    <span class="bh" style="background:#ffedd5;color:#7c2d12;">SEMBRADORAS EN LÍNEAS O A CHORRILLO</span>
+    <div class="def" style="border-left-color:#f97316;">
+      Depositan semillas de forma continua en líneas. Son las más usadas para cereales (trigo, cebada, avena, centeno). Ofrecen buen control de dosis y distribución regular por línea.
+    </div>
+    <div class="two">
+      <div>
+        <div class="item"><div class="dot" style="background:#f97316;"></div><span><strong>Dosificación centralizada:</strong> un solo mecanismo dosificador abastece todas las líneas desde una tolva única. Más simple pero puede haber diferencias entre líneas.</span></div>
+      </div>
+      <div>
+        <div class="item"><div class="dot" style="background:#f97316;"></div><span><strong>Dosificación y tubos independientes:</strong> cada línea tiene su propio dosificador. Mayor uniformidad y posibilidad de regular cada línea individualmente.</span></div>
+      </div>
+    </div>
+    <div class="warn">⚠️ No confundir "siembra a chorrillo" (continua en línea) con "siembra a golpes" (grupos espaciados en línea). En chorrillo la semilla cae sin interrupción; a golpes solo en puntos determinados.</div>
+    <div class="exam">🎯 EXAMEN: ¿Qué ventaja ofrece la dosificación con tubos de caída independientes frente a la dosificación centralizada en una sembradora a chorrillo?</div>
+  </div>
+
+  <!-- Sembradora monograno -->
+  <div class="block">
+    <span class="bh" style="background:#ffedd5;color:#7c2d12;">SEMBRADORA MONOGRANO O DE PRECISIÓN</span>
+    <div class="def" style="border-left-color:#f97316;">
+      Deposita exactamente una semilla por posición a distancias iguales y constantes. Máxima precisión en la colocación. Diseñada para cultivos en hileras amplias (maíz, girasol, remolacha, algodón).
+    </div>
+    <div class="item"><div class="dot" style="background:#f97316;"></div><span><strong>Mecanismo selector:</strong> usa un disco con alvéolos del tamaño de cada semilla. Al girar, cada alvéolo captura exactamente una semilla y la suelta en el punto de siembra. Requiere semillas calibradas (mismo tamaño).</span></div>
+    <div class="item"><div class="dot" style="background:#f97316;"></div><span><strong>Ventaja económica:</strong> al sembrar menos semillas con más precisión, se reduce el costo de semilla y se elimina el aclareo posterior (operación de eliminar exceso de plantas).</span></div>
+    <div class="item"><div class="dot" style="background:#f97316;"></div><span><strong>Modelos combinados:</strong> existen sembradoras monograno con abonado simultáneo y distribución de microgránulos (insecticidas, fungicidas) en la misma pasada.</span></div>
+    <div class="tip">💡 La sembradora monograno es como una impresora: cada "punto de tinta" (semilla) cae exactamente donde debe, con el espaciado programado. La sembradora convencional sería como escribir a mano.</div>
+    <div class="exam">🎯 EXAMEN: ¿Por qué la sembradora monograno requiere que las semillas estén calibradas en tamaño y qué ocurre si se mezclan semillas de distintos tamaños?</div>
+  </div>
+
+  <!-- Tren de siembra -->
+  <div class="block">
+    <span class="bh" style="background:#ffedd5;color:#7c2d12;">TREN DE SIEMBRA — 6 ETAPAS</span>
+    <div class="def" style="border-left-color:#f97316;">
+      Secuencia de operaciones que realiza cada unidad de siembra al avanzar la máquina. Cada etapa es crítica y su falla compromete el resultado final.
+    </div>
+    <div class="flow">
+      <div class="fbox" style="background:#dbeafe;"><span class="step-num">1</span>Corte residuo / microlabranza</div>
+      <div class="farrow">→</div>
+      <div class="fbox" style="background:#dcfce7;"><span class="step-num">2</span>Apertura del surco</div>
+      <div class="farrow">→</div>
+      <div class="fbox" style="background:#fef9c3;"><span class="step-num">3</span>Control de profundidad</div>
+      <div class="farrow">→</div>
+      <div class="fbox" style="background:#ffedd5;"><span class="step-num">4</span>Depositar la semilla</div>
+      <div class="farrow">→</div>
+      <div class="fbox" style="background:#ede9fe;"><span class="step-num">5</span>Apretar la semilla</div>
+      <div class="farrow">→</div>
+      <div class="fbox" style="background:#fee2e2;"><span class="step-num">6</span>Cubrir y compactar</div>
+    </div>
+    <div class="item" style="margin-top:5px;"><div class="dot" style="background:#f97316;"></div><span><strong>Etapa 1 (corte residuo):</strong> exclusiva de siembra directa; discos cortadores eliminan el impedimento del rastrojo.</span></div>
+    <div class="item"><div class="dot" style="background:#f97316;"></div><span><strong>Etapa 3 (control profundidad):</strong> ruedas limitadoras de profundidad ajustan a cuántos cm va la semilla; crítica para germinación uniforme.</span></div>
+    <div class="item"><div class="dot" style="background:#f97316;"></div><span><strong>Etapa 5 (apretar semilla):</strong> elimina cámaras de aire alrededor de la semilla; mejora la absorción de agua y el contacto con partículas de suelo.</span></div>
+    <div class="exam">🎯 EXAMEN: En el tren de siembra, ¿cuál es la función específica de la etapa "apretar la semilla" y qué problema agronómico previene?</div>
+  </div>
+
+  <!-- ===== SECCIÓN 6: COMPONENTES INTERNOS ===== -->
+  <div class="secbar" style="border-left-color:#0891b2;">🔩 SECCIÓN 6 — COMPONENTES INTERNOS: DOSIFICADORES, CONDUCTORES Y ENTERRADORES</div>
+
+  <!-- Dosificadores -->
+  <div class="block">
+    <span class="bh" style="background:#ccfbf1;color:#134e4a;">TRAMPILLA Y DOSIFICADORES</span>
+    <div class="def" style="border-left-color:#0891b2;">
+      Mecanismo que regula el flujo de semillas desde la tolva hacia los conductores. Es el corazón de la sembradora: determina la dosis de siembra (kg/ha).
+    </div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>Carraca o rodillo alimentador:</strong> rodillo estriado o de alvéolos que gira y arrastra una cantidad controlada de semillas. La apertura de la trampilla y la velocidad del rodillo determinan la dosis.</span></div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>Copa alimentadora:</strong> captura semillas individuales para sembradoras de precisión; más selectiva que el rodillo.</span></div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>Palanca de regulación:</strong> ajusta el índice de densidad de siembra. Tiene escala graduada para distintos cultivos y normas de siembra. Posiciona los piñones de transmisión que controlan la velocidad del dosificador.</span></div>
+    <div class="warn">⚠️ La misma posición de la palanca da dosis distintas según el tipo de semilla (tamaño, peso, forma). Siempre hacer una prueba en campo antes de sembrar para verificar la dosis real.</div>
+    <div class="exam">🎯 EXAMEN: ¿Cómo se verifica en campo que la palanca de regulación está correctamente calibrada para obtener la dosis de siembra deseada?</div>
+  </div>
+
+  <!-- Conductores -->
+  <div class="block">
+    <span class="bh" style="background:#ccfbf1;color:#134e4a;">CONDUCTORES DE SEMILLA</span>
+    <div class="def" style="border-left-color:#0891b2;">
+      Canales o tubos que llevan la semilla desde el dosificador hasta el punto de enterrado. Su diseño afecta la distribución en el surco.
+    </div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>De láminas de espiral:</strong> tubo rígido de espiral metálica. Resistente y de bajo rebote de semilla. Uso en sembradoras de cereales.</span></div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>De caucho en forma de cono:</strong> flexible, amortigua golpes. Permite cierta angulación. Semillas no rebotan.</span></div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>En forma de embudos:</strong> serie de embudos apilados. Guía la semilla reduciendo velocidad de caída progresivamente.</span></div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>Manguera de goma flexible:</strong> versátil, se adapta a movimientos del órgano de enterrado. Más común en sembradoras modernas.</span></div>
+    <div class="tip">💡 Un conductor mal diseñado es como una resbaladilla con ángulo incorrecto: las semillas llegan al fondo descontroladas, se rebotan y quedan distribuidas irregularmente en el surco.</div>
+    <div class="exam">🎯 EXAMEN: ¿Por qué en sembradoras de precisión se prefieren conductores que amortigüen la caída de la semilla en lugar de conductores rígidos?</div>
+  </div>
+
+  <!-- Enterradores -->
+  <div class="block">
+    <span class="bh" style="background:#ccfbf1;color:#134e4a;">ENTERRADORES (ÓRGANOS DE APERTURA)</span>
+    <div class="def" style="border-left-color:#0891b2;">
+      Elementos que físicamente abren el surco en el suelo. Existen varios tipos según el tipo de suelo y la profundidad requerida.
+    </div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>De quilla simple:</strong> reja en V. Simple y económico. Para suelos ligeros ya preparados. Forma surco en V limpio.</span></div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>De quilla compuesto:</strong> lleva aletas laterales que amplían el surco. Mejor distribución en siembra a chorrillo.</span></div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>De quilla alargado (patín):</strong> deslizador largo que proporciona mejor control de profundidad en suelos irregulares.</span></div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>De reja o azada:</strong> más agresivo, para suelos más compactos. Desplaza más tierra.</span></div>
+    <div class="item"><div class="dot" style="background:#0891b2;"></div><span><strong>De reja compuesto:</strong> combina disco de corte + reja de apertura. Para siembra directa con rastrojo.</span></div>
+    <div class="exam">🎯 EXAMEN: ¿Qué tipo de enterrador es más adecuado para siembra directa en terreno con rastrojo y por qué los de quilla simple son insuficientes en esa condición?</div>
+  </div>
+
+  <!-- ===== SECCIÓN 7: TRASPLANTADORAS Y PLANTADORAS ===== -->
+  <div class="secbar" style="border-left-color:#16a34a;">🌿 SECCIÓN 7 — TRASPLANTADORAS Y PLANTADORAS</div>
+
+  <!-- Trasplantadoras -->
+  <div class="block s2">
+    <span class="bh" style="background:#dcfce7;color:#14532d;">TRASPLANTADORAS Y PLANTADORAS</span>
+    <div class="def" style="border-left-color:#16a34a;">
+      Máquinas para instalar plántulas o fragmentos vegetativos en lugar de semillas. Se usan cuando el cultivo necesita ser germinado en vivero antes de pasar al campo definitivo, o cuando se trabaja con material vegetativo.
+    </div>
+    <div class="two">
+      <div>
+        <div style="font-size:11.5px;font-weight:600;color:#14532d;margin-bottom:4px;">🌱 TRASPLANTADORAS</div>
+        <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>A raíz desnuda:</strong> instala plántulas sin sustrato en sus raíces. Las raíces se introducen directamente en el suelo. Requiere riego inmediato. Cultivos: lechuga, cebolla, tabaco.</span></div>
+        <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Con cepellón:</strong> instala plántulas con el bloque de sustrato en que germinaron. Menor estrés de trasplante, mayor tasa de prendimiento. Cultivos: tomate, pimiento, coliflor.</span></div>
+      </div>
+      <div>
+        <div style="font-size:11.5px;font-weight:600;color:#0369a1;margin-bottom:4px;">🪵 PLANTADORAS</div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>Estaquillas:</strong> fragmentos de tallo o rama capaces de enraizar. Se insertan verticalmente en el suelo. Cultivos: vid, sauce, chopo.</span></div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>Varetas:</strong> ramas más largas, similares a estaquillas pero de mayor longitud. Plantadoras de sauce de biomasa energética.</span></div>
+        <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>Trasplantadora de árboles:</strong> máquinas grandes que extraen árboles con cepellón y los reimplantan en nueva ubicación.</span></div>
+      </div>
+    </div>
+    <hr class="divh">
+    <div style="font-family:'Oswald',sans-serif;font-size:11px;color:#1e293b;margin-bottom:4px;">OTROS MÉTODOS DE PLANTACIÓN</div>
+    <div class="three">
+      <div class="mini"><strong>Manual con perforadora</strong><br><span style="font-size:10.5px;">Motor a gasolina con barrena. Genera hueco para plantar árbol individual. Trabajo manual intensivo.</span></div>
+      <div class="mini"><strong>Con retroexcavadora</strong><br><span style="font-size:10.5px;">Para plantaciones forestales de gran escala. Crea hoyos profundos rápidamente en terrenos difíciles.</span></div>
+      <div class="mini"><strong>Plantación con perforadora montada</strong><br><span style="font-size:10.5px;">Barrena montada en tractor o miniexcavadora. Más eficiente que manual, menos costosa que retroexcavadora.</span></div>
+    </div>
+    <div class="warn">⚠️ No confundir trasplantadora (instala plántulas ya germinadas) con sembradora (coloca semillas). La trasplantadora trabaja con material vivo delicado que puede estresarse por calor o desecación durante la operación.</div>
+    <div class="exam">🎯 EXAMEN: ¿En qué se diferencia técnicamente una trasplantadora a raíz desnuda de una para planta con cepellón, y qué efecto tienen en el estrés de trasplante?</div>
+  </div>
+
+  <!-- Clasificación completa -->
+  <div class="block">
+    <span class="bh" style="background:#dcfce7;color:#14532d;">CLASIFICACIÓN COMPLETA DE EQUIPOS</span>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Sembradoras a voleo:</strong> centrífuga, caída libre</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Sembradoras en líneas:</strong> dosificación central o independiente</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Sembradoras de precisión:</strong> monograno con disco alveolar</span></div>
+    <div class="item"><div class="dot" style="background:#16a34a;"></div><span><strong>Sembradoras siembra directa:</strong> estructura pesada, corte rastrojo</span></div>
+    <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>Trasplantadoras raíz desnuda:</strong> para hortalizas fragiles</span></div>
+    <div class="item"><div class="dot" style="background:#0369a1;"></div><span><strong>Trasplantadoras con cepellón:</strong> mayor tasa de prendimiento</span></div>
+    <div class="item"><div class="dot" style="background:#7c3aed;"></div><span><strong>Plantadoras de estaquillas:</strong> reproducción vegetativa</span></div>
+    <div class="item"><div class="dot" style="background:#7c3aed;"></div><span><strong>Plantadoras de varetas:</strong> cultivos forestales energéticos</span></div>
+    <div class="exam">🎯 EXAMEN: Un agricultor quiere sembrar remolacha azucarera con máxima eficiencia y mínimo uso de semilla. ¿Qué tipo de sembradora es la más adecuada y por qué?</div>
+  </div>
+
+  <!-- ===== SECCIÓN 8: PROPIEDADES AGROTÉCNICAS ===== -->
+  <div class="secbar" style="border-left-color:#b45309;">📊 SECCIÓN 8 — PROPIEDADES FÍSICAS Y DATOS AGROTÉCNICOS DE SEMILLAS</div>
+
+  <div class="block s3">
+    <span class="bh" style="background:#fef9c3;color:#713f12;">TABLA DE PROPIEDADES FÍSICAS Y DATOS AGROTÉCNICOS</span>
+    <div style="overflow-x:auto;">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Cultivo</th>
+            <th>Longitud (mm)</th>
+            <th>Anchura (mm)</th>
+            <th>Espesor (mm)</th>
+            <th>Masa 1000 granos (g)</th>
+            <th>Densidad (kg/dm³)</th>
+            <th>Granos/litro</th>
+            <th>Ángulo rozamiento (°)</th>
+            <th>Densidad siembra (kg/ha)</th>
+            <th>Distancia línea (cm)</th>
+            <th>Profundidad (cm)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#f8fafc;">
+            <td><strong>Trigo</strong></td>
+            <td>5,0–8,6 (6,8)</td>
+            <td>1,6–4,6 (3,1)</td>
+            <td>1,5–3,5 (2,5)</td>
+            <td>25–50 (37,5)</td>
+            <td>0,72–0,80 (0,76)</td>
+            <td>17.400–22.200 (20.000)</td>
+            <td>30–33 (35)</td>
+            <td>100–200</td>
+            <td>10–15</td>
+            <td>2,5–5</td>
+          </tr>
+          <tr>
+            <td><strong>Cebada</strong></td>
+            <td>7,0–13,5 (10,2)</td>
+            <td>2,5–5,0 (3,8)</td>
+            <td>1,5–3,0 (2,3)</td>
+            <td>30–50 (38)</td>
+            <td>0,58–0,68 (0,64)</td>
+            <td>14.500–17.800 (16.000)</td>
+            <td>34–40 (37)</td>
+            <td>110–160</td>
+            <td>10–15</td>
+            <td>3–5</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td><strong>Avena</strong></td>
+            <td>8,5–20 (14,3)</td>
+            <td>2,0–3,5 (2,8)</td>
+            <td>1,0–2,6 (1,8)</td>
+            <td>14–34 (24)</td>
+            <td>0,4–0,5 (0,45)</td>
+            <td>17.000–20.000 (18.500)</td>
+            <td>34–43 (38)</td>
+            <td>140–180</td>
+            <td>10–15</td>
+            <td>3–5</td>
+          </tr>
+          <tr>
+            <td><strong>Centeno</strong></td>
+            <td>5,0–10 (7,5)</td>
+            <td>1,5–3,5 (2,5)</td>
+            <td>1,5–3,0 (2,3)</td>
+            <td>26–50 (38)</td>
+            <td>0,68–0,74 (0,71)</td>
+            <td>17.700–22.800 (21.000)</td>
+            <td>32–36 (34)</td>
+            <td>100–180</td>
+            <td>10–15</td>
+            <td>2–3</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td><strong>Judías</strong></td>
+            <td>10–18</td>
+            <td>8–12</td>
+            <td>5–12</td>
+            <td>300–1.200</td>
+            <td>0,75–0,84</td>
+            <td>—</td>
+            <td>32</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>Guisantes</strong></td>
+            <td>6,6–8,6</td>
+            <td>5,6–7,9</td>
+            <td>4,7–7,3</td>
+            <td>78–560</td>
+            <td>0,74–0,84</td>
+            <td>8.000–12.000</td>
+            <td>28–34</td>
+            <td>120–280</td>
+            <td>20–35</td>
+            <td>3–8</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td><strong>Maíz</strong></td>
+            <td>10–20</td>
+            <td>5–12</td>
+            <td>2–5</td>
+            <td>100–200</td>
+            <td>0,65–0,75</td>
+            <td>4.300</td>
+            <td>31</td>
+            <td>50–80</td>
+            <td>60–70</td>
+            <td>4–8</td>
+          </tr>
+          <tr>
+            <td><strong>Alfalfa</strong></td>
+            <td>1,7–2,8</td>
+            <td>1,2–2,0</td>
+            <td>0,8–2,8</td>
+            <td>1,4–2,8</td>
+            <td>0,80</td>
+            <td>430.000</td>
+            <td>33</td>
+            <td>6–25</td>
+            <td>15–30</td>
+            <td>1–2</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td><strong>Glomérulos de remolacha</strong></td>
+            <td>6,5–8,5</td>
+            <td>5,5–8,0</td>
+            <td>5–7</td>
+            <td>15–30</td>
+            <td>0,65</td>
+            <td>5.000–10.000</td>
+            <td>45</td>
+            <td>20–30</td>
+            <td>40–50</td>
+            <td>1,5–4</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="warn" style="margin-top:8px;">⚠️ DATO INTEGRADOR CLAVE: La masa de 1.000 granos varía desde 1,4 g (alfalfa) hasta 1.200 g (judías). Esto explica por qué el sistema dosificador debe ser completamente diferente para cada cultivo: la misma apertura de trampilla daría miles de semillas de alfalfa pero solo decenas de semillas de judías. Fuente: J. Ortiz Cañavate, "Las máquinas agrícolas y su aplicación".</div>
+    <div class="exam">🎯 EXAMEN: Dado que la alfalfa tiene una densidad de siembra de 6–25 kg/ha y la remolacha solo 20–30 kg/ha, pero la alfalfa tiene 430.000 granos/litro y la remolacha 5.000–10.000 ¿qué implica esto para la precisión exigida al dosificador en cada cultivo?</div>
+  </div>
+
+  <!-- ===== TABLA INTEGRADORA ===== -->
+  <div class="secbar" style="border-left-color:#0f172a;">📋 TABLA INTEGRADORA — RESUMEN COMPARATIVO DE SISTEMAS DE SIEMBRA</div>
+
+  <div class="block s3">
+    <span class="bh" style="background:#f1f5f9;color:#334155;">TABLA INTEGRADORA: TIPOS DE SEMBRADORA Y SUS CARACTERÍSTICAS CLAVE</span>
+    <div style="overflow-x:auto;">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Tipo de Sembradora</th>
+            <th>Método de distribución</th>
+            <th>Suelo requerido</th>
+            <th>Precisión</th>
+            <th>Cultivos típicos</th>
+            <th>Peso relativo</th>
+            <th>Dosis de semilla</th>
+            <th>Ventaja principal</th>
+            <th>Limitación clave</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#f8fafc;">
+            <td><strong>A voleo centrífuga</strong></td>
+            <td>Disco giratorio por fuerza centrífuga</td>
+            <td>Cualquier suelo plano</td>
+            <td>Baja</td>
+            <td>Pratenses, pasturas, céspedes</td>
+            <td>Ligero</td>
+            <td>Alta (kg/ha elevado)</td>
+            <td>Gran ancho de trabajo, rápida</td>
+            <td>Sin control de profundidad ni espaciado</td>
+          </tr>
+          <tr>
+            <td><strong>A chorrillo (líneas)</strong></td>
+            <td>Rodillo dosificador + tubo de caída</td>
+            <td>Laboreado</td>
+            <td>Media</td>
+            <td>Trigo, cebada, avena, centeno</td>
+            <td>Medio</td>
+            <td>100–200 kg/ha</td>
+            <td>Control de líneas y dosis</td>
+            <td>Sin control de espaciado en línea</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td><strong>Monograno (precisión)</strong></td>
+            <td>Disco alveolar, una semilla/punto</td>
+            <td>Laboreado</td>
+            <td>Muy alta</td>
+            <td>Maíz, girasol, remolacha, algodón</td>
+            <td>Medio</td>
+            <td>Baja (solo semilla necesaria)</td>
+            <td>Máxima eficiencia de semilla, elimina aclareo</td>
+            <td>Requiere semilla calibrada, más cara</td>
+          </tr>
+          <tr>
+            <td><strong>Convencional</strong></td>
+            <td>Varios sistemas, sobre suelo preparado</td>
+            <td>Laboreado previamente</td>
+            <td>Media</td>
+            <td>Cereales, leguminosas</td>
+            <td>Medio</td>
+            <td>Variable</td>
+            <td>Simple, económica, menor energía por pasada</td>
+            <td>Requiere laboreo previo completo</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td><strong>Siembra directa</strong></td>
+            <td>Discos cortadores + tren siembra completo</td>
+            <td>Sin laboreo, con rastrojo</td>
+            <td>Media-alta</td>
+            <td>Soja, maíz, girasol (conservacionista)</td>
+            <td>Muy pesado (2–4×)</td>
+            <td>Variable</td>
+            <td>Conserva suelo, reduce erosión y costos totales</td>
+            <td>Alto costo inicial, requiere mayor potencia</td>
+          </tr>
+          <tr>
+            <td><strong>Trasplantadora raíz desnuda</strong></td>
+            <td>Plántula insertada directamente</td>
+            <td>Laboreado, húmedo</td>
+            <td>Alta</td>
+            <td>Lechuga, cebolla, tabaco</td>
+            <td>Ligero-medio</td>
+            <td>N/A (plántulas)</td>
+            <td>Plantas previamente seleccionadas</td>
+            <td>Mayor estrés de trasplante</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td><strong>Trasplantadora con cepellón</strong></td>
+            <td>Bloque de sustrato + plántula</td>
+            <td>Laboreado</td>
+            <td>Alta</td>
+            <td>Tomate, pimiento, coliflor, brassicas</td>
+            <td>Medio</td>
+            <td>N/A (plántulas)</td>
+            <td>Menor estrés, mayor prendimiento</td>
+            <td>Requiere bandejas de semillero, más costoso</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="warn" style="margin-top:8px;">⚠️ DATO INTEGRADOR CLAVE: La elección del sistema de siembra no depende solo del cultivo, sino de la combinación: tipo de suelo + tipo de semilla + sistema de producción (convencional vs. conservacionista) + potencia disponible del tractor + coste de semilla. Un error en la elección puede duplicar el costo de producción o reducir la nascencia en un 40%.</div>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <div class="block s3" id="quiz-section">
+    <div style="background:#0f1e3a;color:white;border-radius:10px 10px 0 0;padding:12px 16px;margin:-12px -13px 14px;font-family:'Oswald',sans-serif;font-size:14px;">
+      📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE
+      <div style="font-size:11px;font-weight:400;color:#94a3b8;margin-top:3px;">Marca tu respuesta y descubre si es correcta</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span id="qprog-text" style="font-size:12px;color:#64748b;white-space:nowrap;">Pregunta 0 de 10 respondidas</span>
+      <div style="flex:1;background:#e2e8f0;border-radius:20px;height:8px;">
+        <div id="qprog-bar" style="width:0%;height:100%;border-radius:20px;background:#16a34a;transition:width 0.3s;"></div>
+      </div>
+      <span id="qscore-text" style="font-size:12px;font-weight:600;color:#1e293b;white-space:nowrap;">0 / 10 ✓</span>
+    </div>
+
+    <!-- P1 -->
+    <div class="qcard" id="q1" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 1 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál estructura de la semilla actúa como reserva de nutrientes que alimenta al embrión durante la germinación?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Radícula</button>
+        <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Plúmula</button>
+        <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Cotiledón</button>
+        <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Micrópilo</button>
+      </div>
+      <div class="qfeedback" id="fb1" style="display:none;"></div>
+    </div>
+
+    <!-- P2 -->
+    <div class="qcard" id="q2" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 2 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">La sembradora de siembra directa necesita una estructura más pesada que la convencional principalmente para:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Aumentar la capacidad de la tolva de semillas</button>
+        <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Cortar el rastrojo y penetrar en suelo sin laborear</button>
+        <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Reducir la velocidad de trabajo en campo</button>
+        <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Permitir el transporte en carretera</button>
+      </div>
+      <div class="qfeedback" id="fb2" style="display:none;"></div>
+    </div>
+
+    <!-- P3 -->
+    <div class="qcard" id="q3" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 3 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">En el tren de siembra de la sembradora directa, ¿cuál es el orden correcto de las operaciones?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Depositar semilla → Abrir surco → Cubrir → Comprimir</button>
+        <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Apertura del surco → Corte de residuo → Depositar → Cubrir</button>
+        <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) Corte residuo → Apertura surco → Control profundidad → Depositar → Apretar → Cubrir</button>
+        <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Control profundidad → Corte residuo → Apertura surco → Cubrir → Depositar</button>
+      </div>
+      <div class="qfeedback" id="fb3" style="display:none;"></div>
+    </div>
+
+    <!-- P4 -->
+    <div class="qcard" id="q4" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 4 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál afirmación sobre la sembradora monograno es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Deposita exactamente una semilla por punto de siembra</button>
+        <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Requiere semillas calibradas para funcionar correctamente</button>
+        <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Es adecuada para siembra densa de trigo y cebada</button>
+        <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Elimina la necesidad de realizar aclareo posterior</button>
+      </div>
+      <div class="qfeedback" id="fb4" style="display:none;"></div>
+    </div>
+
+    <!-- P5 -->
+    <div class="qcard" id="q5" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 5 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">Según la tabla de propiedades agrotécnicas, ¿cuál cultivo tiene el mayor número de granos por litro?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Trigo (20.000 granos/litro)</button>
+        <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Maíz (4.300 granos/litro)</button>
+        <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Centeno (21.000 granos/litro)</button>
+        <button class="qbtn" data-q="5" data-opt="d" data-correct="true">D) Alfalfa (430.000 granos/litro)</button>
+      </div>
+      <div class="qfeedback" id="fb5" style="display:none;"></div>
+    </div>
+
+    <!-- P6 -->
+    <div class="qcard" id="q6" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 6 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">La tolva de una sembradora debe poder vaciarse totalmente principalmente para:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Reducir el peso total de la máquina al final de cada jornada</button>
+        <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) Evitar mezclas de semillas entre diferentes cultivos o variedades</button>
+        <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Facilitar el mantenimiento y limpieza general de la máquina</button>
+        <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Permitir aumentar la velocidad de siembra al disminuir la carga</button>
+      </div>
+      <div class="qfeedback" id="fb6" style="display:none;"></div>
+    </div>
+
+    <!-- P7 -->
+    <div class="qcard" id="q7" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 7 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">Un agricultor quiere sembrar maíz con distancia entre líneas de 60–70 cm y máxima eficiencia de semilla. ¿Qué sistema de siembra y enterrador son los más apropiados?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Sembradora a voleo con enterrador de quilla simple</button>
+        <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Sembradora a chorrillo con enterrador de reja compuesto</button>
+        <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) Sembradora monograno con enterrador de disco doble</button>
+        <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Trasplantadora de raíz desnuda con enterrador de quilla alargado</button>
+      </div>
+      <div class="qfeedback" id="fb7" style="display:none;"></div>
+    </div>
+
+    <!-- P8 -->
+    <div class="qcard" id="q8" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 8 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál es la diferencia entre una trasplantadora a raíz desnuda y una para planta con cepellón?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) La de raíz desnuda trabaja más rápido porque no necesita preparar el terreno</button>
+        <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) La de cepellón produce menor estrés de trasplante al llevar sustrato con la raíz</button>
+        <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) La de raíz desnuda solo se usa para cultivos leñosos como viña y frutales</button>
+        <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) No existe diferencia técnica, solo de nombre comercial</button>
+      </div>
+      <div class="qfeedback" id="fb8" style="display:none;"></div>
+    </div>
+
+    <!-- P9 -->
+    <div class="qcard" id="q9" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 9 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">Según la tabla agrotécnica, la profundidad de siembra del trigo (2,5–5 cm) es mayor que la de la alfalfa (1–2 cm). ¿Cuál es la razón técnica principal?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) El trigo necesita más luz para germinar que la alfalfa</button>
+        <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) La alfalfa prefiere suelos más compactos cerca de la superficie</button>
+        <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) El trigo tiene mayor masa de grano con más reservas para emerger desde mayor profundidad</button>
+        <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) La alfalfa es un cultivo de invierno y el trigo de verano</button>
+      </div>
+      <div class="qfeedback" id="fb9" style="display:none;"></div>
+    </div>
+
+    <!-- P10 -->
+    <div class="qcard" id="q10" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 10 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿En qué tipo de siembra según la superficie del terreno se colocan las semillas en la parte elevada del suelo, y cuál es su ventaja principal?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Siembra en surcos; ventaja: facilita el riego por gravedad</button>
+        <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Siembra en llano; ventaja: uniformidad de distribución</button>
+        <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) Siembra en cerro/caballón; ventaja: favorece el drenaje y evita encharcamiento</button>
+        <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Siembra a voleo; ventaja: cubre toda la superficie sin surcos</button>
+      </div>
+      <div class="qfeedback" id="fb10" style="display:none;"></div>
+    </div>
+
+    <!-- Resultado -->
+    <div id="quiz-result" style="display:none;padding:14px;border-radius:10px;margin-top:12px;text-align:center;">
+      <div id="result-title" style="font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px;"></div>
+      <div id="result-msg" style="font-size:13px;margin-bottom:12px;"></div>
+      <button onclick="resetQuiz()" style="background:#0f1e3a;color:white;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-family:'Oswald',sans-serif;">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="block s3">
+    <div class="footer-bar">
+      <span class="ft">📚 TEORÍA 10 — MAQUINARIA PARA SIEMBRA Y MANTENIMIENTO DE CULTIVOS</span>
+      <span class="fc">Ing. Augusto Zingg Rosell</span>
+      <span class="fc">|</span>
+      <span class="fc">Fuente: Las máquinas agrícolas y su aplicación — J. Ortiz Cañavate</span>
+      <span class="fc">|</span>
+      <span class="fc">Canvas generado para repaso universitario</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  let respondidas = 0, aciertos = 0;
+  const total = 10;
+
+  const feedbacks = {
+    1: {
+      correct: "✅ ¡Correcto! El cotiledón es la hoja embrionaria de reserva que almacena almidones, lípidos y proteínas que alimentan al embrión hasta que puede hacer fotosíntesis autónomamente.",
+      wrong: "❌ Incorrecto. La respuesta correcta es C) Cotiledón. La radícula forma la raíz, la plúmula forma el tallo/hojas, y el micrópilo es solo un poro de entrada de agua."
+    },
+    2: {
+      correct: "✅ ¡Correcto! La siembra directa implica penetrar suelo compactado y con rastrojo sin laboreo previo. Los discos cortadores pesados cortan el residuo vegetal antes de que la reja abra el surco.",
+      wrong: "❌ Incorrecto. La respuesta correcta es B). La estructura pesada permite vencer la resistencia del suelo no laboreado y del rastrojo. No tiene relación con la tolva, velocidad o transporte."
+    },
+    3: {
+      correct: "✅ ¡Correcto! El orden lógico del tren de siembra es: 1-Cortar residuo, 2-Abrir surco, 3-Controlar profundidad, 4-Depositar semilla, 5-Apretar semilla para contacto suelo-semilla, 6-Cubrir y compactar.",
+      wrong: "❌ Incorrecto. La respuesta correcta es C). El corte de residuo debe ocurrir antes de abrir el surco; la semilla se deposita después de controlar la profundidad, nunca antes de abrir el surco."
+    },
+    4: {
+      correct: "✅ ¡Correcto! La afirmación FALSA es C). La sembradora monograno está diseñada para cultivos en hileras anchas (maíz, girasol, remolacha) donde se siembra una sola semilla por punto. Para trigo y cebada (siembras densas) se usan sembradoras a chorrillo.",
+      wrong: "❌ Incorrecto. La respuesta correcta es C). La sembradora monograno NO es adecuada para cereales de grano fino como trigo o cebada que necesitan densidades altísimas (100-200 kg/ha) en siembra continua."
+    },
+    5: {
+      correct: "✅ ¡Correcto! La alfalfa tiene 430.000 granos/litro, muy superior al trigo (20.000) o centeno (21.000). Esto se debe al tamaño microscópico de la semilla de alfalfa (1,7–2,8 mm de longitud vs 5–8,6 mm del trigo).",
+      wrong: "❌ Incorrecto. La respuesta correcta es D) Alfalfa con 430.000 granos/litro. Su semilla es extremadamente pequeña (masa de 1.000 granos: solo 1,4–2,8 g), lo que implica que caben centenares de miles en un litro."
+    },
+    6: {
+      correct: "✅ ¡Correcto! Vaciar completamente la tolva evita que queden semillas de un cultivo anterior mezcladas con el nuevo, lo que contaminaría el lote con otra variedad o especie. Esto es especialmente crítico en producción de semilla certificada.",
+      wrong: "❌ Incorrecto. La respuesta correcta es B). El vaciado total es por pureza varietal, no por peso, mantenimiento o velocidad. Una contaminación del 1% puede hacer que el lote no pase los controles de calidad de semilla."
+    },
+    7: {
+      correct: "✅ ¡Correcto! Para maíz con máxima eficiencia de semilla, la sembradora monograno es la indicada: coloca una semilla por punto a 60-70 cm entre líneas. El enterrador de disco doble es el más usado en monograno para maíz por su precisión y resistencia.",
+      wrong: "❌ Incorrecto. La respuesta correcta es C). Voleo no permite control de espaciado; chorrillo desperdicia semilla; trasplantadora no aplica para maíz de siembra directa por semilla."
+    },
+    8: {
+      correct: "✅ ¡Correcto! La trasplantadora con cepellón lleva el bloque de sustrato con las raíces, manteniendo la microbiota y el ambiente radicular que la plántula ya conoce. Esto reduce el estrés de trasplante y mejora la tasa de prendimiento frente a raíz desnuda.",
+      wrong: "❌ Incorrecto. La respuesta correcta es B). La diferencia es agronómica: el cepellón protege las raíces y reduce el estrés. No tiene relación con velocidad de trabajo, tipo de cultivo ni nombre comercial."
+    },
+    9: {
+      correct: "✅ ¡Correcto! Una semilla más grande y pesada (trigo: 25-50 g/1000 granos) tiene más reservas energéticas en el cotiledón para elongar el hipocótilo y emerger desde mayor profundidad. La alfalfa (1,4-2,8 g/1000 granos) tiene tan pocas reservas que no puede emerger desde más de 2 cm.",
+      wrong: "❌ Incorrecto. La respuesta correcta es C). La profundidad máxima posible es directamente proporcional a las reservas del cotiledón. Ni la luz, la compactación ni la estación del año explican esta diferencia tan marcada."
+    },
+    10: {
+      correct: "✅ ¡Correcto! La siembra en cerro o caballón ubica la semilla sobre una elevación del terreno, lo que facilita el drenaje del exceso de agua y evita el encharcamiento. Es especialmente útil en suelos mal drenados o para cultivos sensibles al exceso de humedad en la zona radicular.",
+      wrong: "❌ Incorrecto. La respuesta correcta es C) Siembra en cerro/caballón. En surco la semilla va en la depresión; en llano sobre superficie plana; el voleo distribuye sin surcos ni elevaciones."
+    }
+  };
+
+  document.getElementById('quiz-section').addEventListener('click', function(e) {
+    const btn = e.target.closest('.qbtn');
+    if (!btn || btn.disabled) return;
+
+    const q = btn.dataset.q;
+    const isCorrect = btn.dataset.correct === 'true';
+    const opts = document.querySelectorAll('.qbtn[data-q="' + q + '"]');
+
+    opts.forEach(b => {
+      b.disabled = true;
+      if (b.dataset.correct === 'true') b.classList.add('correct');
+    });
+    if (!isCorrect) btn.classList.add('wrong');
+
+    const fb = document.getElementById('fb' + q);
+    fb.style.display = 'block';
+    fb.className = 'qfeedback ' + (isCorrect ? 'fb-ok' : 'fb-err');
+    fb.innerHTML = isCorrect ? feedbacks[q].correct : feedbacks[q].wrong;
+
+    respondidas++;
+    if (isCorrect) aciertos++;
+
+    document.getElementById('qprog-text').textContent = 'Pregunta ' + respondidas + ' de ' + total + ' respondidas';
+    document.getElementById('qprog-bar').style.width = (respondidas / total * 100) + '%';
+    document.getElementById('qscore-text').textContent = aciertos + ' / ' + total + ' ✓';
+
+    if (respondidas === total) mostrarResultado();
+  });
+
+  function mostrarResultado() {
+    const r = document.getElementById('quiz-result');
+    const title = document.getElementById('result-title');
+    const msg = document.getElementById('result-msg');
+    r.style.display = 'block';
+
+    if (aciertos <= 4) {
+      r.style.background = '#fee2e2'; title.style.color = '#991b1b';
+      title.textContent = aciertos + ' / ' + total + ' — Necesitas repasar el material';
+      msg.textContent = 'Vuelve a los bloques donde fallaste y repasa las definiciones. Presta especial atención a la clasificación de sembradoras y el tren de siembra.';
+    } else if (aciertos <= 7) {
+      r.style.background = '#fef9c3'; title.style.color = '#713f12';
+      title.textContent = aciertos + ' / ' + total + ' — ¡Buen avance, sigue repasando!';
+      msg.textContent = 'Casi listo para el examen. Refuerza los conceptos sobre propiedades agrotécnicas y diferencias entre tipos de sembradoras.';
+    } else {
+      r.style.background = '#dcfce7'; title.style.color = '#14532d';
+      title.textContent = aciertos + ' / ' + total + ' — ¡Excelente dominio del tema!';
+      msg.textContent = 'Estás preparado. Repasa una última vez la tabla integradora antes del examen.';
+    }
+  }
+
+  window.resetQuiz = function() {
+    respondidas = 0; aciertos = 0;
+    document.querySelectorAll('.qbtn').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct', 'wrong');
+    });
+    document.querySelectorAll('.qfeedback').forEach(f => f.style.display = 'none');
+    document.getElementById('quiz-result').style.display = 'none';
+    document.getElementById('qprog-text').textContent = 'Pregunta 0 de 10 respondidas';
+    document.getElementById('qprog-bar').style.width = '0%';
+    document.getElementById('qscore-text').textContent = '0 / 10 ✓';
+  };
+})();
+</script>
+</body>
+</html>

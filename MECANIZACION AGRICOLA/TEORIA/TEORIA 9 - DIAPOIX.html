@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEORIA 9 — Mantenimiento de Cultivos: Maquinaria Agrícola</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Source Sans 3',sans-serif;font-weight:400;background:#f1f5f9;color:#1e293b;}
+    .cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:#f1f5f9;}
+    .block{background:#ffffff;border:0.5px solid #e2e8f0;border-radius:11px;padding:12px 13px;}
+    .s2{grid-column:span 2;}
+    .s3{grid-column:1 / -1;}
+    .secbar{grid-column:1/-1;background:#f1f5f9;padding:8px 12px;border-radius:8px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:#1e293b;}
+    /* Header block */
+    .header-bar{grid-column:1/-1;background:#0f1e3a;color:white;border-radius:11px;padding:18px 22px;}
+    .header-bar h1{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;letter-spacing:1px;}
+    .header-bar p{font-size:12px;color:#94a3b8;margin-top:4px;}
+    .header-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+    .htag{background:#1e3a8a;color:#bfdbfe;font-size:10.5px;padding:2px 9px;border-radius:20px;font-family:'Oswald',sans-serif;}
+    /* Components */
+    .bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+    .def{border-left:3px solid #3b82f6;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:#f8fafc;margin:6px 0;}
+    .item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin:4px 0;}
+    .dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+    .rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0;}
+    .warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0;}
+    .tip{background:#f0fdf4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;font-size:11.5px;color:#14532d;padding:7px 10px;margin:6px 0;}
+    .exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;}
+    .mini{background:#f8fafc;border-radius:8px;padding:8px 10px;font-size:11.5px;}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+    .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+    .flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0;}
+    .fbox{background:#f8fafc;padding:4px 9px;border-radius:6px;font-size:11.5px;}
+    .farrow{color:#64748b;font-size:15px;}
+    .tbl{width:100%;border-collapse:collapse;font-size:11px;}
+    .tbl th{background:#f8fafc;padding:5px 7px;border-bottom:0.5px solid #e2e8f0;font-family:'Oswald',sans-serif;text-align:left;}
+    .tbl td{padding:5px 7px;border-bottom:0.5px solid #e2e8f0;vertical-align:top;}
+    .divh{border:none;border-top:0.5px solid #e2e8f0;margin:7px 0;}
+    .footer-bar{background:#0f1e3a;color:white;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+    .ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;}
+    .fc{font-size:11px;color:#94a3b8;}
+    /* Quiz */
+    .qbtn{display:block;width:100%;text-align:left;margin-bottom:5px;padding:8px 12px;font-size:12px;border-radius:8px;cursor:pointer;background:#f8fafc;border:1px solid #e2e8f0;transition:all 0.2s;font-family:'Source Sans 3',sans-serif;}
+    .qbtn:hover:not(:disabled){background:#f1f5f9;border-color:#cbd5e1;}
+    .qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;font-weight:600;}
+    .qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+    .qbtn:disabled{opacity:0.6;cursor:not-allowed;pointer-events:none;}
+    .qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;}
+    .qfeedback.fb-ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+    .qfeedback.fb-err{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+  </style>
+</head>
+<body>
+<div class="cv">
+
+  <!-- HEADER -->
+  <div class="header-bar">
+    <h1>MANTENIMIENTO DE CULTIVOS — MAQUINARIA AGRÍCOLA</h1>
+    <p>Autor: Augusto Zingg Rosell &nbsp;·&nbsp; Teoría 9 — DIAPOIX</p>
+    <div class="header-tags">
+      <span class="htag">Abonadoras</span>
+      <span class="htag">Pulverizadoras</span>
+      <span class="htag">Asperjadoras</span>
+      <span class="htag">Atomizadoras</span>
+      <span class="htag">Fertilizadoras</span>
+      <span class="htag">Fumigadoras</span>
+      <span class="htag">Cultivadores</span>
+      <span class="htag">Escrepas</span>
+      <span class="htag">Bombas</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECCIÓN 1: ABONADORAS -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="secbar" style="border-left:4px solid #3b82f6;">⚗️ SECCIÓN 1 — ABONADORAS</div>
+
+  <!-- Bloque: Concepto General -->
+  <div class="block">
+    <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Definición y Propósito</span>
+    <div class="def">
+      Las <strong>abonadoras</strong> son máquinas cuya misión es distribuir uniformemente el abono en el terreno, de modo que el sistema radicular de las plantas encuentre en las zonas de absorción todos los elementos nutritivos necesarios para su correcto desarrollo.
+    </div>
+    <div class="item"><span class="dot" style="background:#3b82f6;"></span><span>La elección de la abonadora depende de la <strong>naturaleza y características del abono</strong>: sólido, líquido, orgánico, nitrogenado, fosfatado o potásico.</span></div>
+    <div class="item"><span class="dot" style="background:#3b82f6;"></span><span>Los abonos nitrogenados nítricos se disuelven rápido con el agua de lluvia o riego → pueden aplicarse en superficie incluso con el cultivo ya establecido.</span></div>
+    <div class="item"><span class="dot" style="background:#3b82f6;"></span><span>Los abonos fosfatados y potásicos se fijan al suelo y el agua ejerce poca influencia en su movilidad → deben depositarse en la profundidad requerida o enterrarse.</span></div>
+    <div class="tip">💡 <strong>Analogía:</strong> Piensa en el abono como medicamento para las raíces: si lo dejas en la superficie y no llega a donde debe, el cultivo no se "cura". Cada tipo de abono tiene su "vía de administración" óptima.</div>
+    <div class="exam">🎯 EXAMEN: Explique por qué los abonos fosfatados y potásicos no pueden aplicarse siempre en superficie como los nitrogenados nítricos, y describa las dos alternativas para colocarlos correctamente en el suelo.</div>
+  </div>
+
+  <!-- Bloque: Abonadoras de Superficie -->
+  <div class="block">
+    <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Abonadoras de Superficie</span>
+    <div class="def">Distribuyen el abono sobre la superficie del terreno. Son adecuadas para abonos solubles o para quienes serán incorporados luego con una labor posterior.</div>
+    <div class="item"><span class="dot" style="background:#3b82f6;"></span><span><strong>Centrífuga:</strong> Posee una tolva, dosificador, agitador, par cónico y un distribuidor de paletas giratorias que proyectan el abono en arco amplio. Componentes clave: tolva (1), enganche (2), chasis (3), cardán (4), par cónico (5), enganche para remolque (6), distribuidor (7), dosificador (8), agitador (9).</span></div>
+    <div class="item"><span class="dot" style="background:#3b82f6;"></span><span><strong>Pendular:</strong> En lugar de discos, usa un tubo oscilante (péndulo) que distribuye el abono de lado a lado. Componentes: palanca reguladora (1), corredera (2), deflector (3), péndulo (4), dosificador (5), tolva (6).</span></div>
+    <div class="item"><span class="dot" style="background:#3b82f6;"></span><span><strong>Neumática:</strong> Usa corriente de aire para transportar el abono desde la tolva hasta las rampas distribuidoras desplegadas lateralmente. Permite gran anchura de trabajo.</span></div>
+    <div class="item"><span class="dot" style="background:#3b82f6;"></span><span><strong>Centrífuga con distribuidor en líneas:</strong> Combina la tolva centrífuga con tubos conductores a rejas, depositando el abono en líneas precisas junto a las plantas.</span></div>
+    <div class="warn">⚠️ No confundir la abonadora <em>centrífuga</em> (distribución amplia en abanico) con la <em>pendular</em> (oscilación controlada): la primera cubre más superficie pero con menos precisión lateral; la segunda es más uniforme en franjas angostas.</div>
+    <div class="exam">🎯 EXAMEN: Describa el principio de funcionamiento de la abonadora centrífuga, indicando el papel del agitador, el dosificador y el distribuidor en el proceso de aplicación del abono.</div>
+  </div>
+
+  <!-- Bloque: Abonadoras Localizadas -->
+  <div class="block">
+    <span class="bh" style="background:#ede9fe;color:#4c1d95;">Abonadoras Localizadas</span>
+    <div class="def">Depositan el abono directamente a la profundidad y posición requerida por el cultivo, junto a la raíz. Son ideales para abonos fosfatados, potásicos y orgánicos que no se movilizan con el agua.</div>
+    <div class="item"><span class="dot" style="background:#7c3aed;"></span><span>Componentes principales: <strong>rueda motriz limitadora de profundidad</strong>, tolva, cepillo dosificador, cinta transportadora, conducto caída, brazo con reja.</span></div>
+    <div class="item"><span class="dot" style="background:#7c3aed;"></span><span>La reja abre un surco, el abono cae por el conducto directo a esa ranura, y la tierra cubre el depósito. La raíz lo encuentra en su zona de máxima absorción.</span></div>
+    <div class="item"><span class="dot" style="background:#7c3aed;"></span><span>Existen modelos de <strong>dos rejas con anchura y profundidad variables</strong> (tipo Fertisol), permitiendo adaptar la máquina a distintos cultivos y espaciados entre surcos.</span></div>
+    <div class="tip">💡 <strong>Analogía:</strong> La abonadora localizada actúa como una "inyección intramuscular" comparada con la de superficie que es como "tomar una pastilla": ambas aportan el nutriente, pero la localizada garantiza que llegue exactamente donde se necesita.</div>
+    <div class="exam">🎯 EXAMEN: ¿En qué situaciones agronómicas es preferible usar una abonadora localizada en vez de una de superficie? Justifique considerando la movilidad de los nutrientes en el suelo.</div>
+  </div>
+
+  <!-- Bloque: Abonadora de Estiércol Líquido -->
+  <div class="block s2">
+    <span class="bh" style="background:#dcfce7;color:#14532d;">Abonadora de Estiércol Líquido (Cisterna)</span>
+    <div class="def">Equipo especializado para distribuir purines (estiércol líquido) en el terreno. El purín es un abono orgánico rico en nitrógeno pero de difícil manejo por su estado físico y olor.</div>
+    <div class="two">
+      <div>
+        <div class="item"><span class="dot" style="background:#16a34a;"></span><span><strong>Componentes de la cisterna:</strong> mando apertura/cierre, filtro, tanque, manguera llenado, entrada/salida, equipo neumático, chasis, esparcidor de purín.</span></div>
+        <div class="item"><span class="dot" style="background:#16a34a;"></span><span>El <strong>filtro</strong> evita obstrucciones en las boquillas. El <strong>equipo neumático</strong> presuriza el tanque para expulsar el líquido de manera controlada.</span></div>
+      </div>
+      <div>
+        <div class="item"><span class="dot" style="background:#16a34a;"></span><span>Los modelos más avanzados localizan el purín a <strong>25 cm de profundidad</strong> (Terra-Gator 2204), inyectándolo directamente en el suelo y reduciendo pérdidas por volatilización de amoniaco.</span></div>
+        <div class="item"><span class="dot" style="background:#16a34a;"></span><span>La inyección subterránea también <strong>elimina los problemas de olor</strong> y reduce la contaminación de napas freáticas.</span></div>
+      </div>
+    </div>
+    <div class="warn">⚠️ Error frecuente: creer que el estiércol líquido se aplica igual que el abono mineral. El purín requiere máquinas con sistemas de agitación o presión especiales por su densidad y viscosidad variables.</div>
+    <div class="exam">🎯 EXAMEN: Compare la aplicación superficial versus la inyección a 25 cm de profundidad de estiércol líquido, evaluando las diferencias en eficiencia agronómica y ambiental.</div>
+  </div>
+
+  <!-- Sembradora-Abonadora -->
+  <div class="block">
+    <span class="bh" style="background:#ccfbf1;color:#134e4a;">Sembradora-Abonadora Combinada</span>
+    <div class="def">Máquina que en una sola pasada realiza simultáneamente la siembra y la abonación de fondo, colocando el fertilizante y la semilla en posiciones diferenciadas del mismo surco.</div>
+    <div class="item"><span class="dot" style="background:#0d9488;"></span><span>El conducto de abono deposita el fertilizante <strong>por debajo o al lado</strong> de la semilla, evitando el contacto directo que podría quemar la semilla por concentración osmótica.</span></div>
+    <div class="item"><span class="dot" style="background:#0d9488;"></span><span>Ahorra tiempo y reduce el número de pasadas del tractor → menor compactación del suelo y menor consumo de combustible.</span></div>
+    <div class="tip">💡 <strong>Analogía:</strong> Como plantar una semilla en una maceta y agregar el abono en la misma operación: eficiente y sincronizado.</div>
+    <div class="exam">🎯 EXAMEN: Explique por qué en una sembradora-abonadora el fertilizante no se coloca en contacto directo con la semilla, y qué consecuencias tendría si esto ocurriera.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECCIÓN 2: PULVERIZADORAS Y ASPERJADORAS -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="secbar" style="border-left:4px solid #f97316;">💧 SECCIÓN 2 — PULVERIZADORAS Y ASPERJADORAS</div>
+
+  <!-- Asperjadora -->
+  <div class="block">
+    <span class="bh" style="background:#ffedd5;color:#7c2d12;">Asperjadora</span>
+    <div class="def">Equipo diseñado para fumigar cultivos. Dispersa productos fitosanitarios en forma de spray sobre las plantas o el suelo. El operario debe usar mascarilla para protegerse de los vapores químicos.</div>
+    <div class="item"><span class="dot" style="background:#ea580c;"></span><span>Puede ser manual (mochila), de tractor o autopropulsada, dependiendo del tamaño del cultivo.</span></div>
+    <div class="item"><span class="dot" style="background:#ea580c;"></span><span>La diferencia con la pulverizadora radica principalmente en el <strong>tamaño de las gotas</strong>: la asperjadora genera gotas más grandes (aspersión gruesa).</span></div>
+    <div class="warn">⚠️ El uso de mascarilla y equipo de protección personal (EPP) no es opcional: los plaguicidas son compuestos tóxicos que pueden ingresar por vía respiratoria, dérmica y ocular.</div>
+    <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia principal entre una asperjadora y una pulverizadora en términos del tamaño de gota generado, y cómo afecta esto la cobertura del tratamiento fitosanitario?</div>
+  </div>
+
+  <!-- Pulverizadora: Concepto -->
+  <div class="block">
+    <span class="bh" style="background:#ffedd5;color:#7c2d12;">Pulverizadora — Definición y Tipos</span>
+    <div class="def">Máquina agrícola que dispersa compuestos líquidos (agua, herbicidas, plaguicidas) en forma de gotas muy finas mediante presión hidráulica, corriente de aire o fuerza centrífuga, con aplicación fitosanitaria.</div>
+    <div class="item"><span class="dot" style="background:#ea580c;"></span><span><strong>Chorro proyectado (hidráulicas):</strong> Las gotas adquieren energía cinética en la boquilla por la presión de la bomba. Se subdividen en mecánicas (boquilla pulveriza el líquido) y neumáticas (corriente de aire desintegra una lámina líquida).</span></div>
+    <div class="item"><span class="dot" style="background:#ea580c;"></span><span><strong>Chorro transportado (atomizadores o hidroneumáticos):</strong> Combinan presión hidráulica con una corriente de aire a gran velocidad que arrastra y desmenuza las gotas hacia la zona de tratamiento.</span></div>
+    <div class="item"><span class="dot" style="background:#ea580c;"></span><span><strong>Centrífugos (ultrabajo volumen - UBV):</strong> Un disco girando a gran velocidad forma las gotas por fuerza centrífuga. Usan muy poco líquido por hectárea.</span></div>
+    <div class="tip">💡 Piensa en un rociador de cocina (hidráulico), un soplador de hojas con spray (neumático) y el agua que sale de un disco de esmeril (centrífugo): tres principios físicos distintos para generar gotas.</div>
+    <div class="exam">🎯 EXAMEN: Clasifique los pulverizadores según el mecanismo de formación de gotas, explique el principio físico de cada tipo y mencione una ventaja específica de cada uno.</div>
+  </div>
+
+  <!-- Pulverizadora de mochila -->
+  <div class="block">
+    <span class="bh" style="background:#ffedd5;color:#7c2d12;">Pulverizadora de Mochila — Componentes</span>
+    <div class="def">Pulverizador portátil de membrana accionado manualmente, usado para tratamientos en áreas pequeñas o en cultivos arbóreos con extensión alargadora.</div>
+    <div class="flow">
+      <span class="fbox">Palanca accionamiento</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Bomba membrana</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Calderín (amortiguador)</span>
+      <span class="farrow">→</span>
+      <span class="fbox">Lanza + boquilla</span>
+    </div>
+    <div class="rx">Componentes (Fig. 14.4):
+1-Palanca | 2-Agitador | 3-Aspiración
+4-Impulsión | 5-Válvulas | 6-Membrana
+7-Bomba membrana | 8-Llave de paso | 9-Lanza
+10-Boquilla | 11-Calderín | 12-Aire a presión
+13-Depósito | 14-Orificio de carga | 15-Filtro</div>
+    <div class="item"><span class="dot" style="background:#ea580c;"></span><span>El <strong>calderín</strong> amortigua las pulsaciones de la bomba para mantener una presión constante en la boquilla → gotas uniformes.</span></div>
+    <div class="item"><span class="dot" style="background:#ea580c;"></span><span>El <strong>agitador</strong> mantiene en suspensión los productos que tienden a sedimentar en el depósito.</span></div>
+    <div class="exam">🎯 EXAMEN: Explique la función del calderín amortiguador en un pulverizador de mochila y qué ocurriría con la calidad del tratamiento si este componente falla o no existe.</div>
+  </div>
+
+  <!-- Pulverizadora de tractor -->
+  <div class="block s2">
+    <span class="bh" style="background:#ffedd5;color:#7c2d12;">Pulverizadora de Tractor — Circuito Hidráulico</span>
+    <div class="def">Sistema montado sobre tractor que bombea el caldo desde el depósito, lo regula mediante válvula y manómetro, y lo distribuye a través de barras con boquillas sobre el cultivo.</div>
+    <div class="two">
+      <div>
+        <div class="flow">
+          <span class="fbox">Depósito</span><span class="farrow">→</span>
+          <span class="fbox">Filtro</span><span class="farrow">→</span>
+          <span class="fbox">Bomba</span><span class="farrow">→</span>
+          <span class="fbox">Válvula reguladora</span>
+        </div>
+        <div class="flow">
+          <span class="fbox">Manómetro</span><span class="farrow">→</span>
+          <span class="fbox">Distribuidor</span><span class="farrow">→</span>
+          <span class="fbox">Barras</span><span class="farrow">→</span>
+          <span class="fbox">Boquillas ↓</span>
+        </div>
+        <div class="item"><span class="dot" style="background:#ea580c;"></span><span>La <strong>válvula reguladora</strong> devuelve el exceso al depósito (retorno), manteniendo presión constante en boquillas.</span></div>
+        <div class="item"><span class="dot" style="background:#ea580c;"></span><span>El <strong>manómetro</strong> indica la presión de trabajo; es el instrumento de control más importante para garantizar el tamaño de gota correcto.</span></div>
+      </div>
+      <div>
+        <div class="item"><span class="dot" style="background:#ea580c;"></span><span>Sistema de <strong>caudal proporcional al avance</strong>: usa un orificio calibrado o dispositivo de membrana para que, al aumentar la velocidad del tractor, aumente también el caudal → dosis constante por hectárea.</span></div>
+        <div class="item"><span class="dot" style="background:#ea580c;"></span><span>Las pulverizadoras de tractor pueden configurarse para <strong>cultivos bajos</strong> (barras horizontales), <strong>viñas</strong> (barras inclinadas en caballete) o <strong>árboles en línea</strong> (boquillas laterales orientables).</span></div>
+        <div class="mini" style="margin-top:6px;">
+          <strong>Posiciones de trabajo:</strong><br>
+          Barras plegadas = transporte<br>
+          Barras extendidas = trabajo en campo
+        </div>
+      </div>
+    </div>
+    <div class="warn">⚠️ Confundir pulverizadora con atomizadora es un error común: la pulverizadora distribuye el caldo principalmente por presión hidráulica, mientras que la atomizadora usa una turbina de aire de alta velocidad como vehículo de transporte.</div>
+    <div class="exam">🎯 EXAMEN: Dibuje y explique el circuito hidráulico de un pulverizador de tractor, indicando la función de cada componente (depósito, bomba, filtro, válvula reguladora, manómetro, distribuidor y boquillas).</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECCIÓN 3: ATOMIZADORAS -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="secbar" style="border-left:4px solid #8b5cf6;">🌀 SECCIÓN 3 — ATOMIZADORAS</div>
+
+  <!-- Atomizadora -->
+  <div class="block s2">
+    <span class="bh" style="background:#ede9fe;color:#4c1d95;">Atomizadora — Pulverizadora Hidroneumática</span>
+    <div class="def">La atomizadora (pulverizador de chorro transportado) combina presión hidráulica para formar las gotas con una corriente de aire de alta velocidad generada por un ventilador, que las transporta y dispersa profundamente en el follaje.</div>
+    <div class="two">
+      <div>
+        <div class="item"><span class="dot" style="background:#7c3aed;"></span><span><strong>Componentes (Fig. 16.4a):</strong> distribuidor (1), bomba (2), rueda (3), boquillas (4), cuba (5), multiplicador (6).</span></div>
+        <div class="item"><span class="dot" style="background:#7c3aed;"></span><span>El <strong>multiplicador</strong> incrementa la velocidad de rotación desde la toma de fuerza del tractor hasta la velocidad necesaria para el ventilador.</span></div>
+        <div class="item"><span class="dot" style="background:#7c3aed;"></span><span>Tipos según movilidad: <strong>suspendido</strong> (enganchado a tractor) y <strong>arrastrado</strong> (con sus propias ruedas). El arrastrado (Fig. 16.2) incluye: salida de aire (1), envolvente (2), ventilador (3), boquilla (4).</span></div>
+      </div>
+      <div>
+        <div class="item"><span class="dot" style="background:#7c3aed;"></span><span><strong>Pulverización neumática con espolvoreador:</strong> El agitador neumático (1) mueve el polvo desde la tobera hacia el ventilador (2) que lo proyecta por la boquilla (3). Permite tratar con polvos secos.</span></div>
+        <div class="item"><span class="dot" style="background:#7c3aed;"></span><span>Los <strong>pulverizadores neumáticos de salidas orientables</strong> (Fig. 16.6) permiten dirigir el chorro de aire+caldo exactamente hacia la copa de los árboles frutales, reduciendo derivas.</span></div>
+      </div>
+    </div>
+    <div class="tip">💡 <strong>Analogía:</strong> La atomizadora funciona como un secador de pelo profesional al que se le inyecta insecticida: el aire de alta velocidad lleva las gotitas exactamente donde apuntas, llegando incluso al envés de las hojas donde se esconden las plagas.</div>
+    <div class="exam">🎯 EXAMEN: Explique en qué se diferencia el mecanismo de tratamiento de una atomizadora respecto a una pulverizadora hidráulica estándar, y en qué tipo de cultivos es preferible usar cada una.</div>
+  </div>
+
+  <!-- Bombas para pulverizadoras -->
+  <div class="block">
+    <span class="bh" style="background:#ede9fe;color:#4c1d95;">Bombas para Pulverizadoras</span>
+    <div class="def">Las bombas son el corazón de cualquier pulverizador: generan la presión hidráulica que hace posible la atomización del caldo. Existen varios tipos según la presión requerida y el caudal.</div>
+    <div class="item"><span class="dot" style="background:#7c3aed;"></span><span><strong>Bomba de diafragma:</strong> Componentes: válvula aspiración (1), rodamiento (2), leva (3), eje motriz (4), biela (5), pistón (6), diafragma (7), válvula impulsión (8). La leva convierte el movimiento rotativo en alternativo, flexionando el diafragma.</span></div>
+    <div class="item"><span class="dot" style="background:#7c3aed;"></span><span><strong>Bomba de pistón:</strong> Aspiración (1), cigüeñal (2), biela (3), pistón guía (4), pistón (5), impulsión (6), amortiguador (7), manómetro (8). Genera altas presiones.</span></div>
+    <div class="item"><span class="dot" style="background:#7c3aed;"></span><span><strong>Bomba de engranajes:</strong> Dos engranajes que al girar crean vacío en el lado de aspiración y presión en el de impulsión. Sencilla y robusta, usada para bajas presiones.</span></div>
+    <div class="item"><span class="dot" style="background:#7c3aed;"></span><span><strong>Bomba pistón-membrana:</strong> Híbrido que aúna la resistencia de la membrana (sin contacto del líquido con partes móviles) con la alta presión del pistón.</span></div>
+    <div class="warn">⚠️ La bomba de diafragma es más resistente a los productos corrosivos (el diafragma los aísla de los componentes mecánicos), mientras que la de pistón tolera mayores presiones pero se desgasta más con líquidos abrasivos.</div>
+    <div class="exam">🎯 EXAMEN: Compare la bomba de diafragma con la bomba de pistón en términos de principio de funcionamiento, presión máxima alcanzable y resistencia a productos fitosanitarios corrosivos.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECCIÓN 4: FERTILIZADORAS Y FUMIGADORAS -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="secbar" style="border-left:4px solid #16a34a;">🌿 SECCIÓN 4 — FERTILIZADORAS Y FUMIGADORAS</div>
+
+  <!-- Fertilizadora -->
+  <div class="block">
+    <span class="bh" style="background:#dcfce7;color:#14532d;">Fertilizadora</span>
+    <div class="def">Máquina empleada en agricultura para esparcir por el terreno un compuesto fertilizante. Su finalidad es enriquecer el suelo con los nutrientes necesarios para facilitar el trabajo del hombre y favorecer el crecimiento vegetal.</div>
+    <div class="item"><span class="dot" style="background:#16a34a;"></span><span>A diferencia de la abonadora (que puede distribuir abono orgánico o mineral en cualquier estado), la fertilizadora suele asociarse a la distribución de <strong>fertilizantes minerales granulados o en polvo</strong>.</span></div>
+    <div class="item"><span class="dot" style="background:#16a34a;"></span><span>Los modelos de tolva grande (tipo B910) pueden aplicar grandes volúmenes en poco tiempo, ideales para extensas superficies.</span></div>
+    <div class="item"><span class="dot" style="background:#16a34a;"></span><span>También existen fertilizadoras líquidas con tanque y rejas inyectoras para fertilizantes en solución (amoniaco anhidro, urea líquida).</span></div>
+    <div class="tip">💡 El término "fertilizadora" es más amplio que "abonadora": toda abonadora fertiliza, pero no toda fertilizadora es técnicamente una abonadora (las que aplican enmiendas calcáreas o azufre, por ejemplo, también se llaman fertilizadoras).</div>
+    <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia conceptual entre una abonadora y una fertilizadora? Dé un ejemplo de uso específico de cada una.</div>
+  </div>
+
+  <!-- Fumigadora -->
+  <div class="block">
+    <span class="bh" style="background:#fee2e2;color:#991b1b;">Fumigadora</span>
+    <div class="def">Máquina agrícola encargada de esparcir un compuesto plaguicida de diferentes formas para proteger un cultivo o terreno de agentes nocivos (plagas, enfermedades, malezas).</div>
+    <div class="item"><span class="dot" style="background:#dc2626;"></span><span>El compuesto <strong>plaguicida</strong> puede clasificarse según su destino (insecticida, fungicida, herbicida, acaricida), su acción específica (de contacto, sistémico), forma de presentación (polvo, líquido, granulado), composición química o grado de peligrosidad.</span></div>
+    <div class="item"><span class="dot" style="background:#dc2626;"></span><span>La fumigación también puede realizarse con <strong>aviones pequeños o avionetas</strong> (fumigación aérea), indispensable en zonas inaccesibles o para tratamientos de gran extensión en poco tiempo.</span></div>
+    <div class="item"><span class="dot" style="background:#dc2626;"></span><span>Las fumigadoras terrestres de barra larga (autopropulsadas) pueden tratar decenas de hectáreas por hora con gran uniformidad.</span></div>
+    <div class="warn">⚠️ Confundir "fumigar" (técnicamente: aplicar gases tóxicos en espacio cerrado) con "pulverizar" es muy común. En el ámbito agrícola popular se usa "fumigadora" para cualquier máquina de aplicación fitosanitaria, aunque técnicamente no siempre sea correcto.</div>
+    <div class="exam">🎯 EXAMEN: Enumere y explique al menos cuatro criterios por los cuales se pueden clasificar los plaguicidas utilizados en fumigación, dando un ejemplo de producto para cada criterio.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECCIÓN 5: CULTIVADOR Y ESCREPA -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="secbar" style="border-left:4px solid #0ea5e9;">🚜 SECCIÓN 5 — CULTIVADOR Y ESCREPA</div>
+
+  <!-- Cultivador -->
+  <div class="block">
+    <span class="bh" style="background:#e0f2fe;color:#0c4a6e;">Cultivador</span>
+    <div class="def">Herramienta accionada por tractor para revolver y pulverizar el suelo antes de plantar, o para eliminar malas hierbas entre líneas de cultivo, aireando y aflojando el suelo a mayor profundidad que la grada.</div>
+    <div class="item"><span class="dot" style="background:#0ea5e9;"></span><span>Sistema de <strong>enganche de 3 puntos</strong> para tractores categoría II y III, con enganche rápido.</span></div>
+    <div class="item"><span class="dot" style="background:#0ea5e9;"></span><span>La <strong>doble barra porta-herramienta</strong> permite ajustar los timones al espaciado del cultivo deslizándolos lateralmente.</span></div>
+    <div class="item"><span class="dot" style="background:#0ea5e9;"></span><span>Los timones tienen <strong>3 posiciones de altura</strong>: alto despeje, bajo despeje e intermedia, adaptándose a distintas fases de desarrollo del cultivo.</span></div>
+    <div class="mini">
+      <strong>Especificaciones comparativas:</strong><br>
+      CMB 0802-9: 9 timones, ancho hasta 3m, 45 hp, 320 kg<br>
+      CMB 1301-13: 13 timones, ancho hasta 4m, 65 hp, 530 kg
+    </div>
+    <div class="tip">💡 <strong>Analogía:</strong> El cultivador es como un peine de dientes metálicos pasado entre las plantas: elimina las "malas hierbas" (pelos no deseados) sin dañar el cultivo, y al mismo tiempo airea el suelo (el cuero cabelludo).</div>
+    <div class="exam">🎯 EXAMEN: Diferencie el cultivador de la grada en cuanto a profundidad de trabajo, momento de uso en el ciclo del cultivo y efecto sobre las malas hierbas.</div>
+  </div>
+
+  <!-- Escrepa -->
+  <div class="block s2">
+    <span class="bh" style="background:#e0f2fe;color:#0c4a6e;">Escrepa (Scraper)</span>
+    <div class="def">Máquina de movimiento de tierras acoplada a tractor que corta, carga, transporta y deposita material del suelo en operaciones de nivelación, terraceo o relleno de terrenos agrícolas.</div>
+    <div class="two">
+      <div>
+        <div class="item"><span class="dot" style="background:#0ea5e9;"></span><span><strong>Afinadoras:</strong> Trabajan con gran precisión en áreas pequeñas o con distancias de acarreo ≤ 200 m. Ideales para nivelación fina de parcelas.</span></div>
+        <div class="item"><span class="dot" style="background:#0ea5e9;"></span><span><strong>Afinadoras con eyector:</strong> Mayor capacidad de carga, menor ancho de corte (más maniobrable en caminos). El eyector expulsa la tierra hacia delante.</span></div>
+        <div class="item"><span class="dot" style="background:#0ea5e9;"></span><span><strong>Cargadoras:</strong> Equipadas con compuerta; pueden transportar tierra del área de corte al área de relleno sin pérdida de material. Mayor distancia de acarreo.</span></div>
+      </div>
+      <div>
+        <div class="mini">
+          <strong>Especificaciones Modelo 550:</strong><br>
+          Capacidad máx: 4.2 m³ | Al ras: 3 m³<br>
+          Ancho corte: 1.83 m | Ancho total: 2.03 m<br>
+          Peso: 2,386 kg | Despeje: 25.4 cm<br>
+          Potencia: 115–135 hp<br>
+          Llantas delant: 11×15 | Traseras: 12.5×16
+        </div>
+        <div class="item" style="margin-top:6px;"><span class="dot" style="background:#0ea5e9;"></span><span>Tractores requeridos: desde <strong>60 hp hasta más de 500 hp</strong> dependiendo del modelo.</span></div>
+      </div>
+    </div>
+    <div class="warn">⚠️ La escrepa no es una máquina de labranza sino de <em>movimiento de tierras</em>: su función es nivelar y redistribuir suelo, no prepararlo para siembra. No debe confundirse con el cultivador ni con la subsoladora.</div>
+    <div class="exam">🎯 EXAMEN: Describa los tres tipos de escrepas agrícolas (afinadora, afinadora con eyector y cargadora), indicando para qué escenario específico de trabajo es más adecuada cada una.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- TABLA INTEGRADORA -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="secbar" style="border-left:4px solid #0f1e3a;">📊 TABLA INTEGRADORA — RESUMEN COMPARATIVO DE MAQUINARIA DE MANTENIMIENTO</div>
+
+  <div class="block s3">
+    <span class="bh" style="background:#f1f5f9;color:#334155;">Comparación General de Máquinas</span>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Máquina</th>
+          <th>Función Principal</th>
+          <th>Material Aplicado</th>
+          <th>Mecanismo de Distribución</th>
+          <th>Profundidad de Trabajo</th>
+          <th>Tipo de Cultivo / Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#dbeafe20;">
+          <td><strong>Abonadora centrífuga</strong></td>
+          <td>Distribuir abono en superficie</td>
+          <td>Abonos sólidos granulados (N, P, K)</td>
+          <td>Discos giratorios proyectan en abanico</td>
+          <td>Superficie</td>
+          <td>Cereales, prados, cultivos extensivos</td>
+        </tr>
+        <tr>
+          <td><strong>Abonadora pendular</strong></td>
+          <td>Distribución uniforme en franja</td>
+          <td>Abonos sólidos finos</td>
+          <td>Tubo oscilante (péndulo)</td>
+          <td>Superficie</td>
+          <td>Cultivos en línea, viñedos</td>
+        </tr>
+        <tr style="background:#ede9fe20;">
+          <td><strong>Abonadora localizada</strong></td>
+          <td>Depositar abono junto a raíz</td>
+          <td>P, K, abonos orgánicos</td>
+          <td>Reja + conducto de caída</td>
+          <td>5–20 cm</td>
+          <td>Cultivos de escarda, frutales</td>
+        </tr>
+        <tr>
+          <td><strong>Cisterna purín</strong></td>
+          <td>Aplicar estiércol líquido</td>
+          <td>Purines, digestatos</td>
+          <td>Gravedad o presión neumática</td>
+          <td>Superficie o 25 cm (inyección)</td>
+          <td>Prados, maíz, cereales</td>
+        </tr>
+        <tr style="background:#fef9c320;">
+          <td><strong>Pulverizadora hidráulica</strong></td>
+          <td>Tratamiento fitosanitario</td>
+          <td>Herbicidas, fungicidas, insecticidas</td>
+          <td>Bomba + boquillas a presión</td>
+          <td>Foliar (superficie hoja)</td>
+          <td>Cultivos bajos, cereales, hortalizas</td>
+        </tr>
+        <tr>
+          <td><strong>Atomizadora</strong></td>
+          <td>Tratamiento foliar en volumen</td>
+          <td>Fungicidas, insecticidas</td>
+          <td>Ventilador + boquillas</td>
+          <td>Foliar penetrante</td>
+          <td>Frutales, viñedos, olivos</td>
+        </tr>
+        <tr style="background:#dcfce720;">
+          <td><strong>Fertilizadora</strong></td>
+          <td>Esparcir fertilizante mineral</td>
+          <td>Fertilizantes minerales/líquidos</td>
+          <td>Centrífuga, distribución en líneas</td>
+          <td>Superficie o inyectada</td>
+          <td>Cualquier cultivo extensivo</td>
+        </tr>
+        <tr>
+          <td><strong>Fumigadora</strong></td>
+          <td>Control de plagas y enfermedades</td>
+          <td>Plaguicidas (insect., fungic., herb.)</td>
+          <td>Barras + boquillas o aérea</td>
+          <td>Foliar o suelo</td>
+          <td>Grandes extensiones, fumigación aérea</td>
+        </tr>
+        <tr style="background:#e0f2fe20;">
+          <td><strong>Cultivador</strong></td>
+          <td>Preparación suelo / escarda</td>
+          <td>No aplica material</td>
+          <td>Timones que remueven el suelo</td>
+          <td>10–25 cm</td>
+          <td>Entre líneas de cultivo</td>
+        </tr>
+        <tr>
+          <td><strong>Escrepa</strong></td>
+          <td>Nivelación y movimiento de tierras</td>
+          <td>No aplica material</td>
+          <td>Cuchilla de corte + cuba</td>
+          <td>Variable (corte superficial)</td>
+          <td>Preparación terrenos, nivelación parcelas</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warn" style="margin-top:10px;">⚠️ <strong>Dato integrador clave:</strong> La selección de la máquina correcta depende de tres variables simultáneas: (1) el <em>estado físico del insumo</em> a aplicar (sólido/líquido/gaseoso), (2) la <em>movilidad del nutriente o plaguicida</em> en el suelo, y (3) el <em>tipo y estado de desarrollo del cultivo</em>. Ignorar cualquiera de estas variables puede anular la eficacia del tratamiento o dañar el cultivo.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- QUIZ INTERACTIVO -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="block s3" id="quiz-section">
+    <div style="background:#0f1e3a;color:white;border-radius:10px 10px 0 0;padding:12px 16px;margin:-12px -13px 14px;font-family:'Oswald',sans-serif;font-size:14px;">
+      📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE
+      <div style="font-size:11px;font-weight:400;color:#94a3b8;margin-top:3px;">Marca tu respuesta y descubre si es correcta</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span id="qprog-text" style="font-size:12px;color:#64748b;white-space:nowrap;">Pregunta 0 de 10 respondidas</span>
+      <div style="flex:1;background:#e2e8f0;border-radius:20px;height:8px;">
+        <div id="qprog-bar" style="width:0%;height:100%;border-radius:20px;background:#16a34a;transition:width 0.3s;"></div>
+      </div>
+      <span id="qscore-text" style="font-size:12px;font-weight:600;color:#1e293b;white-space:nowrap;">0 / 10 ✓</span>
+    </div>
+
+    <!-- P1 -->
+    <div class="qcard" id="q1" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 1 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Por qué los abonos fosfatados y potásicos NO pueden aplicarse en superficie igual que los nitrogenados nítricos?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Porque son más baratos y se desperdician si se aplican en superficie</button>
+        <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Porque son tóxicos para las plantas si no se entierran</button>
+        <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Porque se fijan al suelo y el agua ejerce poca influencia en su movilidad hacia las raíces</button>
+        <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Porque generan gases peligrosos al contacto con el aire</button>
+      </div>
+      <div class="qfeedback" id="fb1" style="display:none;"></div>
+    </div>
+
+    <!-- P2 -->
+    <div class="qcard" id="q2" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 2 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">En una abonadora centrífuga, ¿cuál componente regula la cantidad de abono que sale hacia los discos distribuidores?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) El agitador</button>
+        <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) El cardán</button>
+        <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) El chasis</button>
+        <button class="qbtn" data-q="2" data-opt="d" data-correct="true">D) El dosificador</button>
+      </div>
+      <div class="qfeedback" id="fb2" style="display:none;"></div>
+    </div>
+
+    <!-- P3 -->
+    <div class="qcard" id="q3" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 3 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál es la ventaja principal de inyectar estiércol líquido (purín) a 25 cm de profundidad en lugar de aplicarlo en superficie?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Es más barato y requiere menos combustible</button>
+        <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) Reduce la volatilización de amoniaco y los problemas de olor, mejorando la eficiencia del nitrógeno</button>
+        <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Permite aplicarlo con cualquier época del año sin restricciones</button>
+        <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Hace innecesario el uso de filtros en la cisterna</button>
+      </div>
+      <div class="qfeedback" id="fb3" style="display:none;"></div>
+    </div>
+
+    <!-- P4 -->
+    <div class="qcard" id="q4" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 4 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">Los pulverizadores centrífugos o de ultrabajo volumen (UBV) generan gotas mediante:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) La presión hidráulica de una bomba de pistón</button>
+        <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Una corriente de aire a alta velocidad que desmenuza el líquido</button>
+        <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Un disco girando a gran velocidad que proyecta el líquido por fuerza centrífuga</button>
+        <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Una membrana que vibra y atomiza el líquido ultrasónicamente</button>
+      </div>
+      <div class="qfeedback" id="fb4" style="display:none;"></div>
+    </div>
+
+    <!-- P5 -->
+    <div class="qcard" id="q5" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 5 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">En el circuito hidráulico de un pulverizador de tractor, ¿cuál es la función de la válvula reguladora?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Medir la presión de trabajo en las boquillas</button>
+        <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Filtrar las impurezas del caldo antes de llegar a la bomba</button>
+        <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Controlar el caudal total aplicado por hectárea</button>
+        <button class="qbtn" data-q="5" data-opt="d" data-correct="true">D) Devolver el exceso de caldo al depósito (retorno) para mantener presión constante en las boquillas</button>
+      </div>
+      <div class="qfeedback" id="fb5" style="display:none;"></div>
+    </div>
+
+    <!-- P6 -->
+    <div class="qcard" id="q6" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 6 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿En qué se diferencia fundamentalmente una atomizadora de una pulverizadora hidráulica convencional?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) La atomizadora usa productos biológicos; la pulverizadora, solo químicos</button>
+        <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) La atomizadora incorpora un ventilador de alta velocidad que transporta las gotas al follaje; la pulverizadora solo usa presión hidráulica</button>
+        <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) La atomizadora trabaja exclusivamente con polvo seco; la pulverizadora solo con líquidos</button>
+        <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) La atomizadora requiere mayor presión de bomba que la pulverizadora</button>
+      </div>
+      <div class="qfeedback" id="fb6" style="display:none;"></div>
+    </div>
+
+    <!-- P7 -->
+    <div class="qcard" id="q7" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 7 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál afirmación sobre la bomba de diafragma es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) El diafragma aísla el líquido de los componentes mecánicos, aumentando su resistencia a corrosión</button>
+        <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Una leva convierte el movimiento rotativo del eje en movimiento alternativo</button>
+        <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) Puede generar presiones más altas que la bomba de pistón convencional</button>
+        <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Posee válvulas de aspiración e impulsión que controlan el flujo del líquido</button>
+      </div>
+      <div class="qfeedback" id="fb7" style="display:none;"></div>
+    </div>
+
+    <!-- P8 -->
+    <div class="qcard" id="q8" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 8 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">En la sembradora-abonadora combinada, ¿por qué el fertilizante se deposita separado de la semilla y no en contacto directo con ella?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Para evitar que el fertilizante sea comido por los pájaros junto con la semilla</button>
+        <button class="qbtn" data-opt="b" data-q="8" data-correct="true">B) Porque la alta concentración de sales del fertilizante puede provocar plasmólisis (deshidratación osmótica) y muerte del embrión</button>
+        <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Por razones de mecánica de la máquina, no por razones agronómicas</button>
+        <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Para que el fertilizante llegue primero a las raíces antes de que la semilla germine</button>
+      </div>
+      <div class="qfeedback" id="fb8" style="display:none;"></div>
+    </div>
+
+    <!-- P9 -->
+    <div class="qcard" id="q9" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 9 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">¿Cuál tipo de escrepa es más adecuada para trabajar en distancias de acarreo cortas (≤200 m) con gran precisión de nivelación?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-opt="a" data-correct="true">A) Escrepa afinadora</button>
+        <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Escrepa cargadora</button>
+        <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Escrepa con eyector de gran capacidad</button>
+        <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Escrepa de movimiento de tierras pesado</button>
+      </div>
+      <div class="qfeedback" id="fb9" style="display:none;"></div>
+    </div>
+
+    <!-- P10 -->
+    <div class="qcard" id="q10" style="margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e2e8f0;">
+      <p style="font-size:11px;color:#64748b;margin:0 0 4px;font-family:'Oswald',sans-serif;">PREGUNTA 10 / 10</p>
+      <p style="font-size:13px;font-weight:600;color:#1e293b;margin:0 0 10px;">El cultivador agrícola se diferencia de la grada principalmente en que:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) El cultivador aplica abonos; la grada no</button>
+        <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) La grada trabaja más profundo que el cultivador</button>
+        <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) El cultivador trabaja generalmente a mayor profundidad que la grada y se usa entre líneas de cultivo ya establecido</button>
+        <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) El cultivador solo se usa antes de plantar; la grada solo después de la cosecha</button>
+      </div>
+      <div class="qfeedback" id="fb10" style="display:none;"></div>
+    </div>
+
+    <!-- Panel resultado -->
+    <div id="quiz-result" style="display:none;padding:14px;border-radius:10px;margin-top:12px;text-align:center;">
+      <div id="result-title" style="font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px;"></div>
+      <div id="result-msg" style="font-size:13px;margin-bottom:12px;"></div>
+      <button onclick="resetQuiz()" style="background:#0f1e3a;color:white;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-family:'Oswald',sans-serif;">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-bar s3">
+    <span class="ft">TEORÍA 9 — DIAPOIX</span>
+    <span class="fc">Mantenimiento de Cultivos · Augusto Zingg Rosell</span>
+    <span class="fc">Maquinaria: Abonadoras · Pulverizadoras · Atomizadoras · Fertilizadoras · Fumigadoras · Cultivadores · Escrepas</span>
+    <span class="fc" style="margin-left:auto;">Canvas generado para estudio universitario</span>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  let respondidas = 0, aciertos = 0;
+  const total = 10;
+
+  const feedbacks = {
+    1: {
+      correct: "✅ ¡Correcto! Los abonos fosfatados y potásicos se fijan químicamente a las partículas del suelo (arcillas, óxidos), y el agua de lluvia o riego tiene muy poco poder para moverlos hacia las raíces. Por eso deben colocarse directamente donde las raíces puedan encontrarlos.",
+      wrong: "❌ Incorrecto. La correcta es C. El problema no es toxicidad ni costo, sino que estos iones (PO₄³⁻, K⁺) quedan fijados en el suelo y el agua no los arrastra eficientemente hacia las raíces como sí hace con el NO₃⁻ (nitrógeno nítrico)."
+    },
+    2: {
+      correct: "✅ ¡Correcto! El dosificador es la compuerta regulable que controla la apertura por donde cae el abono desde la tolva hacia los discos. El agitador solo evita que se apelmace, y el cardán transmite potencia.",
+      wrong: "❌ Incorrecto. La correcta es D — el dosificador. El agitador evita atascos pero no regula la cantidad; el cardán transmite la fuerza del tractor a la máquina."
+    },
+    3: {
+      correct: "✅ ¡Correcto! Al inyectarse a 25 cm de profundidad, el purín queda en contacto directo con el suelo húmedo y las bacterias descomponedoras. El amoniaco (NH₃), que es el principal nutriente nitrogenado pero también el principal contaminante olfativo, no puede volatilizarse hacia la atmósfera porque está cubierto por tierra.",
+      wrong: "❌ Incorrecto. La correcta es B. La inyección profunda reduce la volatilización de amoniaco (pérdida de hasta 80% del N en aplicación superficial) y elimina prácticamente el olor, además de reducir escorrentía."
+    },
+    4: {
+      correct: "✅ ¡Correcto! Los pulverizadores centrífugos o UBV usan un disco que gira a muy alta velocidad (10,000–20,000 rpm). El líquido se deposita en el centro y la fuerza centrífuga lo empuja hacia el borde, donde se fragmenta en gotas extremadamente finas y uniformes.",
+      wrong: "❌ Incorrecto. La correcta es C. Los pulverizadores UBV son precisamente una alternativa a la presión hidráulica: usan energía mecánica rotacional en lugar de presión de bomba para generar las gotas."
+    },
+    5: {
+      correct: "✅ ¡Correcto! La válvula reguladora (o limitadora de presión) tiene una función de 'bypass' o retorno: cuando la presión en el circuito supera el valor ajustado, abre una vía de retorno al depósito, evitando que la presión suba y garantizando presión constante en las boquillas.",
+      wrong: "❌ Incorrecto. La correcta es D. Medir la presión es función del manómetro; filtrar el caldo es función del filtro; el caudal por hectárea se controla ajustando velocidad de avance y apertura de sección."
+    },
+    6: {
+      correct: "✅ ¡Correcto! La diferencia clave es el ventilador: la atomizadora genera una corriente de aire de alta velocidad que actúa como 'vector de transporte' de las microgotas, penetrando profundamente en la copa de frutales y viñedos donde una pulverizadora hidráulica no llegaría eficientemente.",
+      wrong: "❌ Incorrecto. La correcta es B. Ambas máquinas pueden usar productos líquidos similares; la diferencia es el mecanismo de transporte de las gotas: presión hidráulica vs. corriente de aire."
+    },
+    7: {
+      correct: "✅ ¡Correcto! La afirmación FALSA es C. La bomba de diafragma NO genera presiones mayores que la de pistón; al contrario, su punto fuerte es la resistencia a la corrosión gracias al diafragma que aísla el líquido. La bomba de pistón tolera presiones más elevadas.",
+      wrong: "❌ Incorrecto. La correcta (la afirmación FALSA) es C. La bomba de diafragma tiene la ventaja de resistir mejor los líquidos corrosivos, no de generar más presión."
+    },
+    8: {
+      correct: "✅ ¡Correcto! El fertilizante mineral (especialmente los nitrogenados y potásicos) crea una solución de alta concentración de sales en el suelo húmedo. Si la semilla está en contacto directo, el gradiente osmótico extrae agua del interior de la semilla (plasmólisis), impidiendo la germinación o matando el embrión.",
+      wrong: "❌ Incorrecto. La correcta es B. El motivo es puramente fisicoquímico: la alta concentración iónica del fertilizante crea un gradiente osmótico que deshidrata la semilla. Por eso la separación mínima recomendada es de 3–5 cm lateralmente."
+    },
+    9: {
+      correct: "✅ ¡Correcto! La escrepa afinadora está diseñada para trabajos de nivelación de precisión en áreas pequeñas o con distancias de acarreo no mayores a 200 m. Su nombre indica precisamente eso: 'afina' o perfecciona el nivel del terreno con alta exactitud.",
+      wrong: "❌ Incorrecto. La correcta es A — la escrepa afinadora. La cargadora es para grandes volúmenes y distancias; la de eyector tiene mayor capacidad pero menor precisión."
+    },
+    10: {
+      correct: "✅ ¡Correcto! El cultivador trabaja generalmente entre 10 y 25 cm de profundidad (más que una grada superficial) y se utiliza entre las líneas de un cultivo ya implantado para controlar malas hierbas y mejorar la aireación, sin dañar las plantas.",
+      wrong: "❌ Incorrecto. La correcta es C. La grada trabaja generalmente más superficial; el cultivador puede actuar después de implantado el cultivo (función de escarda), que es su uso más característico."
+    }
+  };
+
+  document.getElementById('quiz-section').addEventListener('click', function(e) {
+    const btn = e.target.closest('.qbtn');
+    if (!btn || btn.disabled) return;
+    const q = btn.dataset.q;
+    const isCorrect = btn.dataset.correct === 'true';
+    const opts = document.querySelectorAll('.qbtn[data-q="' + q + '"]');
+    opts.forEach(function(b) {
+      b.disabled = true;
+      if (b.dataset.correct === 'true') b.classList.add('correct');
+    });
+    if (!isCorrect) btn.classList.add('wrong');
+    const fb = document.getElementById('fb' + q);
+    fb.style.display = 'block';
+    fb.className = 'qfeedback ' + (isCorrect ? 'fb-ok' : 'fb-err');
+    fb.innerHTML = isCorrect ? feedbacks[q].correct : feedbacks[q].wrong;
+    respondidas++;
+    if (isCorrect) aciertos++;
+    document.getElementById('qprog-text').textContent = 'Pregunta ' + respondidas + ' de ' + total + ' respondidas';
+    document.getElementById('qprog-bar').style.width = (respondidas / total * 100) + '%';
+    document.getElementById('qscore-text').textContent = aciertos + ' / ' + total + ' ✓';
+    if (respondidas === total) mostrarResultado();
+  });
+
+  function mostrarResultado() {
+    var r = document.getElementById('quiz-result');
+    var title = document.getElementById('result-title');
+    var msg = document.getElementById('result-msg');
+    r.style.display = 'block';
+    if (aciertos <= 4) {
+      r.style.background = '#fee2e2'; title.style.color = '#991b1b';
+      title.textContent = aciertos + ' / ' + total + ' — Necesitas repasar el material';
+      msg.textContent = 'Vuelve a los bloques donde fallaste y repasa las definiciones.';
+    } else if (aciertos <= 7) {
+      r.style.background = '#fef9c3'; title.style.color = '#713f12';
+      title.textContent = aciertos + ' / ' + total + ' — ¡Buen avance, sigue repasando!';
+      msg.textContent = 'Casi listo para el examen. Refuerza los conceptos donde tuviste dudas.';
+    } else {
+      r.style.background = '#dcfce7'; title.style.color = '#14532d';
+      title.textContent = aciertos + ' / ' + total + ' — ¡Excelente dominio del tema!';
+      msg.textContent = 'Estás preparado. Repasa una última vez la tabla integradora.';
+    }
+  }
+
+  window.resetQuiz = function() {
+    respondidas = 0; aciertos = 0;
+    document.querySelectorAll('.qbtn').forEach(function(b) {
+      b.disabled = false;
+      b.classList.remove('correct', 'wrong');
+    });
+    document.querySelectorAll('.qfeedback').forEach(function(f) { f.style.display = 'none'; });
+    document.getElementById('quiz-result').style.display = 'none';
+    document.getElementById('qprog-text').textContent = 'Pregunta 0 de 10 respondidas';
+    document.getElementById('qprog-bar').style.width = '0%';
+    document.getElementById('qscore-text').textContent = '0 / 10 ✓';
+  };
+})();
+</script>
+</body>
+</html>
