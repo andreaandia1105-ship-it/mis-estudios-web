@@ -1,0 +1,551 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.cv .s3{grid-column:1/-1}
+.cv .s2{grid-column:span 2}
+.block{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.bar{grid-column:1/-1;border-radius:10px;padding:8px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.titbar{grid-column:1/-1;background:#0f1e3a;border-radius:12px;padding:14px 18px;color:#fff}
+.titbar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titbar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;font-weight:600}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:700}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.rx b{color:#fbbf24}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0;line-height:1.5}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:9px 11px;margin-top:8px;line-height:1.5}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:6px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:6px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:6px;font-size:11px;font-weight:600}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);font-weight:600;text-align:left}
+.tbl td{padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.divh{border:none;border-top:.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.num-badge{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-r{background:#fee2e2;color:#991b1b}
+.nb-y{background:#fef9c3;color:#713f12}
+.crit{background:#fee2e2;border-left:3px solid #dc2626;border-radius:0 8px 8px 0;font-size:11.5px;color:#991b1b;padding:7px 10px;margin:6px 0;line-height:1.5}
+.ok{background:#dcfce7;border-left:3px solid #16a34a;border-radius:0 8px 8px 0;font-size:11.5px;color:#14532d;padding:7px 10px;margin:6px 0;line-height:1.5}
+.qcard{margin-bottom:14px;padding:12px;background:var(--color-background-secondary);border-radius:10px;border:.5px solid var(--color-border-tertiary)}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:600}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;color:var(--color-text-primary);line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:8px;padding:7px 11px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover{background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;margin-top:8px;padding:8px 11px;border-radius:0 8px 8px 0;font-size:11.5px;line-height:1.5}
+.qfeedback.ok{display:block;background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{display:block;background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.prog-bar{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:8px 0}
+.prog-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .3s}
+.result-panel{display:none;padding:14px;border-radius:10px;text-align:center;margin-top:10px}
+</style>
+
+<div class="cv" role="main">
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden">Canvas visual de dimensionamiento de sistema fotovoltaico off-grid — curso Energías Renovables UNALM</h2>
+
+<div class="titbar">
+  <h1>Dimensionamiento Sistema FV Off-Grid</h1>
+  <p>Curso: Energías Renovables · Docente: MgSc. Kenyi Cavalcanti Cárdenas · UNALM 2026-I · Caso: Cieneguilla, Lima</p>
+  <span class="pill" style="background:#1e3a5f;color:#93c5fd">Demanda energética</span>
+  <span class="pill" style="background:#14532d;color:#86efac">Paneles FV</span>
+  <span class="pill" style="background:#422006;color:#fef08a">HSP / GHI / P_G</span>
+  <span class="pill" style="background:#2e1065;color:#c4b5fd">Baterías</span>
+  <span class="pill" style="background:#450a0a;color:#fca5a5">Errores críticos</span>
+  <span class="pill" style="background:#042f2e;color:#5eead4">Controlador MPPT</span>
+</div>
+
+<div class="bar" style="background:#1e3a8a;color:#fff">
+  <i class="ti ti-bolt" aria-hidden="true"></i> BLOQUE 1 — Energía demandada al sistema (E_T y E_Dsfv)
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#dbeafe;color:#1e3a8a">¿Qué es E_T?</div>
+  <div class="def" style="border-color:#2563eb">
+    <b>E_T</b> = Energía total que el sistema debe producir para que los equipos reciban lo que consumen. No es el consumo de los equipos — es cuánto hay que generar de más para compensar las pérdidas en batería e inversor.
+  </div>
+  <div class="item"><div class="dot" style="background:#2563eb"></div><span><b>E_CA</b> = consumo de cargas de corriente alterna (CA) — las que pasan por el inversor (TV, refrig., lavadora, laptops, LED, router).</span></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><span><b>E_CC</b> = consumo de cargas de corriente continua (CC) — las que van directo a la batería sin pasar por el inversor (bomba DC, iluminación 24V directa).</span></div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><span><b>η_bat</b> = eficiencia de la batería: fracción de energía que no se pierde al cargar/descargar. Plomo-ácido: 0.90–0.95. Litio: 0.98.</span></div>
+  <div class="item"><div class="dot" style="background:#dc2626"></div><span><b>η_inv</b> = eficiencia del inversor: fracción que no se pierde al convertir CC→CA. Onda sinusoidal pura: 0.90–0.95.</span></div>
+  <div class="rx">E_T = <b>E_CA</b> / (η_bat × η_inv) + <b>E_CC</b> / η_bat<br><span style="color:#94a3b8;font-size:10px">ejemplo: 3820/(0.95×0.90) + 0/0.95 = 4,468 Wh/día</span></div>
+  <div class="warn">⚠ ERROR COMÚN: Usar un % fijo de pérdidas (ej. "30%") en lugar de esta fórmula. El % no distingue si la carga pasa o no por el inversor. Una carga CC no paga la penalización del inversor y se estaría sobredimensionando.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la fórmula E_T = E_CA/(η_bat×η_inv) + E_CC/η_bat distingue entre cargas CA y CC? ¿Qué error se comete si se aplica un solo factor de pérdidas global?</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#dcfce7;color:#14532d">¿Qué es E_Dsfv?</div>
+  <div class="def" style="border-color:#16a34a">
+    <b>E_Dsfv</b> = Energía demandada al generador fotovoltaico. Es la energía que los paneles deben producir, incluyendo la pérdida adicional en el controlador de carga (MPPT o PWM).
+  </div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><span><b>η_reg</b> = eficiencia del regulador/controlador. MPPT: 0.93–0.98 (usar 0.95). PWM: 0.75–0.80. Esta diferencia es enorme en sistemas grandes.</span></div>
+  <div class="rx">E_Dsfv = <b>E_T</b> / η_reg<br><span style="color:#94a3b8;font-size:10px">ejemplo: 4468 / 0.95 = 4,703 Wh/día</span></div>
+  <div class="flow">
+    <div class="fbox">Equipos consumen 3,820 Wh</div><div class="farrow">→</div>
+    <div class="fbox">+ pérd. batería+inv → 4,468 Wh</div><div class="farrow">→</div>
+    <div class="fbox">+ pérd. controlador → 4,703 Wh</div>
+  </div>
+  <div class="divh"></div>
+  <p style="font-size:11.5px;color:var(--color-text-secondary);line-height:1.5">El dato que va al cálculo de paneles es siempre <b>E_Dsfv</b>, no el consumo bruto. Si usas 3,820 en lugar de 4,703, dimensionas un sistema que no alcanza a cubrir la demanda real.</p>
+  <div class="exam">🎯 EXAMEN: Una vivienda consume 2,500 Wh/día en cargas CA. Con η_bat=0.95, η_inv=0.90, η_reg=0.95 — calcula E_T y E_Dsfv paso a paso.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#fef9c3;color:#713f12">Eficiencias — resumen</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #2563eb">
+      <b style="font-size:11px;color:#1e3a8a">η_bat</b><br>
+      <span style="font-size:11px">Batería<br>Plomo: 0.90–0.95<br>AGM: 0.95<br>Litio: 0.98</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #dc2626">
+      <b style="font-size:11px;color:#991b1b">η_inv</b><br>
+      <span style="font-size:11px">Inversor<br>Onda pura: 0.90<br>Onda mod.: 0.85<br>⚠ motores→pura</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #16a34a">
+      <b style="font-size:11px;color:#14532d">η_reg</b><br>
+      <span style="font-size:11px">Controlador<br>MPPT: 0.95<br>PWM: 0.78<br>Diferencia real!</span>
+    </div>
+  </div>
+  <div class="warn">⚠ CUIDADO con baterías de plomo: si dejas que se descarguen más del 50–70% (DOD > 0.70), su vida útil en ciclos cae drásticamente. Una batería que dura 400 ciclos al 50% dura solo 200 ciclos al 80%.</div>
+</div>
+
+<div class="bar" style="background:#f59e0b;color:#1c1917">
+  <i class="ti ti-sun" aria-hidden="true"></i> BLOQUE 2 — Recurso solar: GHI, GTI, PVOUT y HSP
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#fef9c3;color:#713f12">GHI</div>
+  <div class="def" style="border-color:#f59e0b">
+    <b>GHI</b> (Global Horizontal Irradiation) = irradiación que cae sobre una superficie completamente horizontal. Es el dato que da el <b>Global Solar Atlas</b> y PVGIS. Unidades: kWh/m²/día. Para Cieneguilla: 5.962 kWh/m²/día.
+  </div>
+  <div class="item"><div class="dot" style="background:#f59e0b"></div><span>Numéricamente equivale a las <b>Horas Sol Pico (HSP)</b>: si GHI=5.962, entonces HSP=5.962 h/día — es decir, el equivalente a 5.962 horas de sol a 1,000 W/m².</span></div>
+  <div class="item"><div class="dot" style="background:#f59e0b"></div><span><b>No incluye corrección por ángulo de inclinación</b> del panel. Asume panel horizontal. Por eso al usarlo necesitas P_G=0.75.</span></div>
+  <div class="rx">HSP (de GHI) = GHI × <b>k</b> × P_G<br><span style="color:#94a3b8;font-size:10px">k=factor corrección angular. Si panel horizontal: k=1.00</span></div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#fef9c3;color:#713f12">GTI y PVOUT</div>
+  <div class="def" style="border-color:#d97706">
+    <b>GTI</b> (Global Tilted Irradiation) = GHI corregido por el ángulo de inclinación β del panel. Para Cieneguilla con β=15°: GTI=6.134 kWh/m²/día — más que GHI porque el panel capta mejor el sol inclinado.
+  </div>
+  <div class="item"><div class="dot" style="background:#d97706"></div><span><b>Factor k</b> = GTI/GHI = 6.134/5.962 = 1.029. Significa que inclinar el panel 15° da 2.9% más energía que dejarlo plano.</span></div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><span><b>PVOUT</b> = GTI ya con las pérdidas del sistema descontadas (temperatura del panel, suciedad, mismatch entre módulos, resistencia del cableado). Para Cieneguilla: 4.840 kWh/kWp/día. Si usas PVOUT, P_G=1.00.</span></div>
+  <div class="warn">⚠ NO uses GHI con P_G=1.00, ni PVOUT con P_G=0.75. Es un error grave que duplica o elimina las pérdidas del sistema. La regla: GHI/GTI → P_G=0.75. PVOUT → P_G=1.00.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#fef9c3;color:#713f12">¿Cuál usar?</div>
+  <table class="tbl">
+    <thead><tr><th>Dato</th><th>Valor (Cien.)</th><th>P_G</th><th>Cuándo</th></tr></thead>
+    <tbody>
+      <tr><td><b>GHI</b></td><td>5.962</td><td><b style="color:#dc2626">0.75</b></td><td>Solo tienes el Atlas Solar</td></tr>
+      <tr><td><b>GTI</b></td><td>6.134</td><td><b style="color:#dc2626">0.75</b></td><td>PVGIS con ángulo óptimo</td></tr>
+      <tr><td><b>PVOUT</b></td><td>4.840</td><td><b style="color:#16a34a">1.00</b></td><td>PVGIS con pérdidas incluidas</td></tr>
+    </tbody>
+  </table>
+  <div class="divh"></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><span><b>Diseño por peor mes:</b> si usas el promedio anual (GHI=5.962) pero en julio el GHI baja a 4.3, tu sistema puede no cubrir la demanda en invierno. Para sistemas críticos, dimensiona con el HSP del mes más desfavorable.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué si usas GHI como HSP debes aplicar P_G=0.75, pero si usas PVOUT debes usar P_G=1.00? ¿Qué error conceptual implica usar ambos sin esta distinción?</div>
+</div>
+
+<div class="bar" style="background:#14532d;color:#dcfce7">
+  <i class="ti ti-solar-panel" aria-hidden="true"></i> BLOQUE 3 — Dimensionamiento del generador fotovoltaico
+</div>
+
+<div class="block s2">
+  <div class="bh" style="background:#dcfce7;color:#14532d">N_T — Número total de paneles</div>
+  <div class="def" style="border-color:#16a34a">
+    Cuántos paneles necesito para que, en las horas de sol disponibles y considerando las pérdidas reales, se genere la energía que el sistema demanda.
+  </div>
+  <div class="rx">N_T = E_Dsfv / (<b>P_panel</b> × HSP × P_G)<br>
+  <span style="color:#94a3b8;font-size:10px">P_panel = potencia pico del panel (Wp) | HSP = horas sol pico | P_G = factor pérdidas generador</span><br>
+  Ejemplo (460Wp, GHI): 4703 / (460 × 5.962 × 0.75) = 4703 / 2057 = 2.29 → <b style="color:#fbbf24">3 paneles</b>
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="dot" style="background:#16a34a"></div><span><b>P_panel (Wp)</b>: potencia pico del panel en condiciones estándar (STC: 1000 W/m², 25°C, AM1.5). De la ficha técnica.</span></div>
+      <div class="item"><div class="dot" style="background:#16a34a"></div><span><b>N_S</b> = paneles en serie = V_bat / Vmpp. Ajusta el voltaje del string al voltaje del banco.</span></div>
+      <div class="item"><div class="dot" style="background:#16a34a"></div><span><b>N_P</b> = ramas en paralelo = N_T / N_S. Ajusta la corriente total del campo FV.</span></div>
+    </div>
+    <div>
+      <div class="crit">⚠ ERROR CRÍTICO: Usar Impp = P/Vmpp (calculado) en lugar del Impp de la ficha técnica. La diferencia puede ser 1–3%, lo que afecta el dimensionamiento del controlador. Siempre leer Impp de la ficha.</div>
+      <div class="warn">⚠ SOBREDIMENSIONAMIENTO: Si produces 6,707 Wh/día cuando solo necesitas 4,703, estás instalando un panel de más. No es un error técnico pero sí es ineficiencia económica — señálalo en tu análisis comparativo.</div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Con E_Dsfv=5,200 Wh/día, panel de 550Wp, GHI=5.5 h/día y P_G=0.75 — ¿cuántos paneles necesitas? ¿Qué pasa con ese resultado si usas PVOUT=4.8 h/día con P_G=1.00?</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#dcfce7;color:#14532d">Ficha técnica del panel</div>
+  <div class="def" style="border-color:#16a34a">Los parámetros que necesitas extraer directamente de la ficha técnica (STC: 1000 W/m², 25°C):</div>
+  <table class="tbl">
+    <thead><tr><th>Símbolo</th><th>Nombre</th><th>Para qué sirve</th></tr></thead>
+    <tbody>
+      <tr><td><b>Pmax / Wp</b></td><td>Potencia pico</td><td>P_panel en la fórmula N_T</td></tr>
+      <tr><td><b>Vmpp</b></td><td>Tensión a máx. potencia</td><td>Calcular N_S y verificar compatibilidad con MPPT</td></tr>
+      <tr><td><b>Impp</b></td><td>Corriente a máx. potencia</td><td>Calcular I_G del controlador — leer de ficha, NO calcular</td></tr>
+      <tr><td><b>Voc</b></td><td>Tensión circuito abierto</td><td>Verificar que no supere el voltaje máx. de entrada del MPPT</td></tr>
+      <tr><td><b>Isc</b></td><td>Corriente cortocircuito</td><td>Dimensionar fusibles de protección por string</td></tr>
+      <tr><td><b>η módulo</b></td><td>Eficiencia</td><td>Comparar opciones — a mayor η, menos área necesitas</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠ Voc es el voltaje máximo que el panel puede alcanzar (sin carga, al amanecer). Con 1 panel en serie y Voc=50V, el controlador debe soportar al menos 50V de entrada. Los MPPT de 60A para 24V típicamente soportan hasta 100V — no hay problema con 1 panel en serie.</div>
+</div>
+
+<div class="bar" style="background:#2e1065;color:#ede9fe">
+  <i class="ti ti-battery" aria-hidden="true"></i> BLOQUE 4 — Banco de baterías
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ede9fe;color:#4c1d95">C_n — Capacidad del banco</div>
+  <div class="def" style="border-color:#7c3aed">
+    Cuántos Ah debe almacenar el banco para cubrir D días sin sol, considerando que no puedes descargar la batería completamente (DOD).
+  </div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><span><b>D</b> = días de autonomía: cuántos días sin sol puede operar el sistema solo con baterías. Mínimo 2. Zonas nubladas (sierra, selva): 3–5 días.</span></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><span><b>DOD</b> (Depth of Discharge) = profundidad de descarga máxima permitida. Plomo-ácido: 0.50–0.70. AGM: 0.70. Litio: 0.80–0.90. Si no respetas el DOD, la batería dura mucho menos.</span></div>
+  <div class="rx">ΔE = D × E_T &nbsp;&nbsp;|&nbsp;&nbsp; C_n = ΔE / (V_bat × DOD)<br>
+  <span style="color:#94a3b8;font-size:10px">Ejemplo: ΔE=2×4468=8936Wh | C_n=8936/(24×0.70)=532 Ah</span></div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#fee2e2;color:#991b1b">ERROR CRÍTICO — Baterías 12V en sistema 24V</div>
+  <div class="crit">PROBLEMA REAL: El Excel calcula N_bat=REDONDEAR.ARRIBA(532/200)=3 baterías. Pero con baterías de 12V en un sistema de 24V, siempre necesitas número PAR, porque debes conectar 2 en serie para sumar los voltajes. Con 3 unidades (número impar), una batería queda sin par y el sistema no se puede armar físicamente.</div>
+  <div class="ok">SOLUCIÓN CORRECTA: Con baterías de 12V/200Ah:<br>• 2 en serie → 1 módulo de 24V/200Ah<br>• C_n=532Ah → necesitas 532/200=2.66 → 3 módulos<br>• 3 módulos × 2 baterías = <b>6 baterías de 12V/200Ah</b><br>• Configuración: 3 strings en paralelo, cada string = 2 baterías en serie</div>
+  <div class="warn">⚠ La fórmula del Excel es correcta matemáticamente para la capacidad, pero ignora la restricción eléctrica de paridad. Cuando uses baterías de 12V con sistema 24V, siempre multiplica N_bat por 2 (o asegúrate de que sea par).</div>
+  <div class="exam">🎯 EXAMEN: Un sistema de 24V requiere 450Ah de capacidad. Disponemos de baterías de 12V/150Ah. ¿Cuántas baterías se necesitan y cómo se conectan? Dibuja el esquema de conexión.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ede9fe;color:#4c1d95">Tecnologías de baterías</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #dc2626">
+      <b style="font-size:11px">Plomo-ácido abierta</b><br>
+      <span style="font-size:11px">DOD: 50% | Ciclos: 300–400<br>Mantenimiento mensual<br>Más barata pero corta vida<br>~2–3 años uso diario</span>
+    </div>
+    <div class="mini" style="border-left:3px solid #2563eb">
+      <b style="font-size:11px">AGM (sellada)</b><br>
+      <span style="font-size:11px">DOD: 70% | Ciclos: 500–600<br>Sin mantenimiento<br>Precio intermedio<br>~3–5 años uso diario</span>
+    </div>
+    <div class="mini" style="border-left:3px solid #16a34a">
+      <b style="font-size:11px">GEL</b><br>
+      <span style="font-size:11px">DOD: 70% | Ciclos: 600<br>Apta para calor<br>Similar AGM en precio<br>Buena para Cieneguilla</span>
+    </div>
+    <div class="mini" style="border-left:3px solid #7c3aed">
+      <b style="font-size:11px">Litio LiFePO4</b><br>
+      <span style="font-size:11px">DOD: 80–90% | Ciclos: 3000+<br>Sin mantenimiento<br>3–4× más cara<br>Mejor a largo plazo</span>
+    </div>
+  </div>
+</div>
+
+<div class="bar" style="background:#042f2e;color:#ccfbf1">
+  <i class="ti ti-cpu" aria-hidden="true"></i> BLOQUE 5 — Controlador MPPT y dimensionamiento del regulador
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ccfbf1;color:#134e4a">MPPT vs PWM</div>
+  <div class="def" style="border-color:#0d9488">
+    El controlador regula la carga de las baterías desde los paneles. MPPT (Maximum Power Point Tracking) extrae la máxima potencia posible del panel ajustando el punto de operación. PWM (Pulse Width Modulation) es más simple y barato pero mucho menos eficiente cuando Vmpp >> V_bat.
+  </div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #dc2626">
+      <b style="font-size:11px;color:#991b1b">PWM — Cuándo NO usar</b><br>
+      <span style="font-size:11px">Si Vmpp del panel (ej. 42V) es muy diferente a V_bat (24V): aprovecha solo 24/42 = 57% de la energía. El resto se disipa como calor. Para >500Wp es un desperdicio enorme.</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #16a34a">
+      <b style="font-size:11px;color:#14532d">MPPT — Cuándo usar</b><br>
+      <span style="font-size:11px">Cuando Vmpp del panel difiere del V_bat. Eficiencia 93–98%. Para sistemas >500Wp es obligatorio. Compensa su mayor costo en pocas semanas de operación.</span>
+    </div>
+  </div>
+  <div class="crit">ERROR REAL DEL CASO: Con sistema 24V y paneles de Vmpp=42V, un PWM solo aprovecharía el 57% de la energía. La pérdida sería ~590 Wh/día — equivalente a casi un panel entero generando en vano. El MPPT de 60A (~S/.400) es obligatorio aquí.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ccfbf1;color:#134e4a">Cálculo I_R del controlador</div>
+  <div class="def" style="border-color:#0d9488">
+    El controlador debe soportar la corriente mayor entre la que generan los paneles (I_G) y la que consumen las cargas (I_C). Se elige el máximo de ambas, con un factor de seguridad de 1.25.
+  </div>
+  <div class="item"><div class="dot" style="background:#0d9488"></div><span><b>I_G</b> = N_P × Impp (corriente de cada rama en paralelo × número de ramas). Impp viene de la ficha técnica, no se calcula como P/Vmpp.</span></div>
+  <div class="item"><div class="dot" style="background:#0d9488"></div><span><b>I_C</b> = P_simultanea / (η_inv × V_bat). La corriente que la batería debe dar al inversor para cubrir el pico de potencia simultánea.</span></div>
+  <div class="rx">I_R = max(I_G, I_C) &nbsp;→&nbsp; Controlador ≥ I_R × 1.25<br>
+  <span style="color:#94a3b8;font-size:10px">Ejemplo: I_G=26.8A | I_C=960/(0.90×24)=44.4A → I_R=44.4A → ×1.25=55.5A → MPPT 60A</span></div>
+  <div class="warn">⚠ Si tienes cargas adicionales (ej. "Otros CA" de 300W) que SÍ se usan simultáneamente, la potencia simultánea sube y I_C sube también. Esto puede requerir un controlador de 80A en lugar de 60A. Verifica qué cargas realmente se usan al mismo tiempo.</div>
+  <div class="exam">🎯 EXAMEN: I_G=30A, P_simultanea=1200W, η_inv=0.90, V_bat=24V. Calcula I_C, I_R y la corriente nominal mínima del controlador. ¿Cambiaría el resultado si V_bat fuera 12V?</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ccfbf1;color:#134e4a">Inversor</div>
+  <div class="def" style="border-color:#0d9488">
+    Convierte CC del banco de baterías en CA para alimentar las cargas alternas. Debe ser onda sinusoidal pura si hay motores (refrigeradora, lavadora). La onda modificada daña motores y aumenta su consumo.</div>
+  <div class="item"><div class="dot" style="background:#dc2626"></div><span><b>Factor arranque motores</b>: al encenderse, los motores consumen 2–3× su potencia nominal durante 1–3 segundos. El inversor y el cableado deben soportar ese pico.</span></div>
+  <div class="rx">P_inv = P_simultanea × factor_arranque (1.25–1.30)<br>
+  <span style="color:#94a3b8;font-size:10px">Ejemplo: 960W × 1.30 = 1,248W → inversor ≥ 1,500W onda sinusoidal pura, 24V CC</span></div>
+  <div class="warn">⚠ VERIFICAR: El inversor debe ser de 24V de entrada, no de 12V ni 48V. En el mercado peruano los inversores de 24V son menos comunes que los de 12V o 48V. Buscar específicamente "inversor 24V onda sinusoidal pura". Victron Phoenix 24/2000 o equivalentes Must Solar 2000W 24V.</div>
+</div>
+
+<div class="bar" style="background:#7c2d12;color:#ffedd5">
+  <i class="ti ti-plug" aria-hidden="true"></i> BLOQUE 6 — Cableado del sistema
+</div>
+
+<div class="block s3">
+  <div class="bh" style="background:#ffedd5;color:#7c2d12">Criterios de selección de conductores</div>
+  <div class="def" style="border-color:#ea580c">El cableado se dimensiona por la corriente máxima de cada tramo y la longitud del tendido. Secciones insuficientes generan calor, pérdidas de voltaje y riesgo de incendio.</div>
+  <table class="tbl">
+    <thead><tr><th>Tramo</th><th>Corriente máx.</th><th>Sección mín.</th><th>Cable</th><th>Observación crítica</th></tr></thead>
+    <tbody>
+      <tr><td><b>Paneles → Controlador</b></td><td>I_G (~26.8A)</td><td>4–6 mm²</td><td>Cable solar USE-2 / PV Wire</td><td>Doble aislamiento UV obligatorio. Exterior expuesto al sol.</td></tr>
+      <tr><td><b>Controlador ↔ Baterías</b></td><td>max(I_G,I_C) (~44A)</td><td>16 mm²</td><td>Cable THW / NYY flexible</td><td>Tramo corto (&lt;2m). Mayor sección = menor pérdida de voltaje.</td></tr>
+      <tr><td><b>Baterías → Inversor</b></td><td>~52A nominal / ~68A pico</td><td><span style="color:#dc2626"><b>25 mm²</b></span></td><td>Cable flexible alta corriente</td><td>⚠ ERROR: El Excel pone 16mm². Para el pico de arranque de motores (×1.3) la corriente sube a ~68A. Usar 25mm² por seguridad.</td></tr>
+      <tr><td><b>Inversor → Cargas CA</b></td><td>~5.7A (220V CA)</td><td>2.5 mm²</td><td>Cable NMT 2×2.5mm²</td><td>Instalación interior. Tablero con breaker por circuito.</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠ NORMATIVA PERUANA: El cableado debe cumplir el CNE Tomo V (Código Nacional de Electricidad — Utilización), la NTP 370 para conductores, y el Reglamento MINEM para sistemas FV rurales (DS 025-2007-EM). Sin respetar estas normas, el proyecto no puede ser firmado por un ingeniero colegiado.</div>
+</div>
+
+<div class="bar" style="background:#1e3a8a;color:#dbeafe">
+  <i class="ti ti-table" aria-hidden="true"></i> TABLA INTEGRADORA — Resumen de todo el dimensionamiento
+</div>
+
+<div class="block s3">
+  <table class="tbl">
+    <thead><tr><th>Componente</th><th>Fórmula clave</th><th>Variables (significado)</th><th>Resultado caso Cieneguilla</th><th>Error crítico a evitar</th></tr></thead>
+    <tbody>
+      <tr><td><b>E_T</b></td><td>E_CA/(η_bat×η_inv) + E_CC/η_bat</td><td>E_CA: consumo CA | E_CC: consumo CC | η_bat: efic. batería | η_inv: efic. inversor</td><td>3820/(0.95×0.90)+0 = <b>4,468 Wh/día</b></td><td>Usar factor % fijo sin separar CA/CC</td></tr>
+      <tr><td><b>E_Dsfv</b></td><td>E_T / η_reg</td><td>η_reg: eficiencia controlador MPPT (0.95)</td><td>4468/0.95 = <b>4,703 Wh/día</b></td><td>Dimensionar paneles con E_T en lugar de E_Dsfv</td></tr>
+      <tr><td><b>N_T paneles</b></td><td>E_Dsfv / (P_panel×HSP×P_G)</td><td>P_panel: Wp del panel | HSP: h/día | P_G: 0.75 (GHI/GTI) o 1.00 (PVOUT)</td><td>4703/(460×5.962×0.75) = <b>3 paneles</b></td><td>Mezclar HSP y P_G incompatibles (ej. PVOUT con P_G=0.75)</td></tr>
+      <tr><td><b>C_n baterías</b></td><td>(D×E_T) / (V_bat×DOD)</td><td>D: días autonomía | V_bat: voltaje sistema | DOD: prof. descarga</td><td>(2×4468)/(24×0.70) = <b>532 Ah</b></td><td>Con bat. 12V en sistema 24V: N_bat debe ser par siempre</td></tr>
+      <tr><td><b>I_R controlador</b></td><td>max(I_G, I_C) × 1.25</td><td>I_G=N_P×Impp | I_C=P_simul/(η_inv×V_bat)</td><td>max(26.8, 44.4)×1.25 = <b>55.5A → MPPT 60A</b></td><td>Usar Impp calculado (P/Vmpp) en lugar del dato de ficha técnica</td></tr>
+      <tr><td><b>P_inv</b></td><td>P_simultanea × factor_arranque</td><td>P_simultanea: suma de potencias CA | factor: 1.25–1.30 por motores</td><td>960×1.30 = <b>1,248W → inv. 1,500W</b></td><td>Usar onda modificada con refrigeradora o lavadora</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠ DATO INTEGRADOR CLAVE: Si dimensionas con HSP promedio anual (5.962 h/día) pero en julio el GHI baja a 4.3, la producción real en invierno es 1100×4.3×0.75 = 3,548 Wh/día, menor que la demanda de 4,703 Wh/día. El sistema falla en el peor mes. Para cobertura anual garantizada, usar el HSP del mes más desfavorable como dato de diseño.</div>
+</div>
+
+<div class="bar" style="background:#0f1e3a;color:#fff">
+  <i class="ti ti-help-circle" aria-hidden="true"></i> QUIZ DE REPASO — 10 preguntas de opción múltiple
+</div>
+
+<div class="block s3">
+  <div style="background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px">
+    <p style="font-family:'Oswald',sans-serif;font-size:14px;margin-bottom:2px">Pon a prueba tu comprensión del dimensionamiento FV</p>
+    <p style="font-size:11px;color:#94a3b8">Marca tu respuesta y descubre si es correcta con la explicación</p>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+    <span style="font-size:12px;color:var(--color-text-secondary)" id="prog-txt">0 de 10 respondidas · 0 correctas</span>
+    <div class="prog-bar" style="flex:1"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la razón principal para usar la fórmula E_T = E_CA/(η_bat×η_inv) + E_CC/η_bat en lugar de un factor de pérdidas fijo del 30%?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Porque el 30% es siempre insuficiente para cubrir las pérdidas reales del sistema.</button>
+      <button class="qbtn" data-q="1" data-correct="true">B) Porque las cargas CC no pasan por el inversor y no deben pagar su penalización, mientras que las CA sí.</button>
+      <button class="qbtn" data-q="1" data-correct="false">C) Porque η_bat y η_inv siempre suman exactamente 30% de pérdidas en todos los sistemas.</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Porque el factor 30% solo aplica para sistemas de 12V y no para sistemas de 24V.</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Un sistema usa GHI = 5.5 kWh/m²/día como HSP. ¿Qué valor de P_G debe aplicarse en la fórmula N_T = E_Dsfv / (P_panel × HSP × P_G)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) P_G = 1.00, porque GHI ya incluye las pérdidas del sistema fotovoltaico.</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) P_G = 0.95, que es la eficiencia del controlador MPPT.</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) P_G = 0.75, porque GHI no descuenta pérdidas reales del generador (temperatura, suciedad, mismatch).</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) P_G = 0.85, promedio entre la eficiencia del inversor y la del controlador.</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">En un sistema de 24V se necesitan 480 Ah de capacidad en el banco de baterías. Se dispone de baterías de 12V/120Ah. ¿Cuántas baterías se necesitan y en qué configuración?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) 4 baterías en paralelo, formando un banco de 12V/480Ah.</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) 5 baterías: 4 en paralelo más 1 en serie para ajustar voltaje.</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) 8 baterías: 4 strings de 2 baterías en serie cada uno, todos en paralelo → 24V/480Ah.</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) 4 baterías en serie, formando un banco de 48V/120Ah.</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Por qué un controlador PWM es ineficiente en un sistema de 24V con paneles de Vmpp = 42V?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Porque el PWM no es compatible con baterías de plomo-ácido en sistemas de 24V.</button>
+      <button class="qbtn" data-q="4" data-correct="true">B) Porque el PWM no aprovecha el exceso de voltaje (42V vs 24V) y lo disipa como calor, usando solo el 57% de la energía disponible.</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) Porque el PWM solo funciona con paneles cuyo Vmpp es inferior a 20V.</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Porque el PWM no puede manejar corrientes superiores a 20A en sistemas fotovoltaicos.</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia entre GHI, GTI y PVOUT, y cómo afecta al factor P_G que debes usar?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Son tres nombres distintos para el mismo dato solar; P_G siempre es 0.75 independientemente del dato usado.</button>
+      <button class="qbtn" data-q="5" data-correct="false">B) GHI y GTI requieren P_G=1.00 porque ya incluyen las pérdidas del sistema; PVOUT requiere P_G=0.75.</button>
+      <button class="qbtn" data-q="5" data-correct="true">C) GHI es horizontal (P_G=0.75), GTI es inclinado pero sin pérdidas del sistema (P_G=0.75), PVOUT incluye pérdidas del sistema (P_G=1.00).</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) GHI requiere P_G=0.50 porque no considera el ángulo ni las pérdidas; GTI y PVOUT requieren P_G=0.75.</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Por qué es obligatorio usar un inversor de onda sinusoidal pura (y no onda modificada) cuando el sistema alimenta una refrigeradora y una lavadora?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) Porque la onda modificada opera a 60 Hz y los motores requieren exactamente 50 Hz para funcionar correctamente.</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) Porque los inversores de onda modificada no pueden conectarse a sistemas de 24V.</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) Porque los motores de refrigeradora y lavadora se dañan con las armónicas de la onda modificada y consumen hasta 25% más energía, reduciendo la vida útil del equipo.</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Porque la onda modificada no puede superar 500W de potencia, insuficiente para la lavadora de 500W.</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">El parámetro Impp de un panel debe obtenerse de la ficha técnica y NO calcularse como P_panel/Vmpp. ¿Por qué?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Porque la fórmula P/V solo aplica en corriente continua y los paneles generan corriente alterna.</button>
+      <button class="qbtn" data-q="7" data-correct="true">B) Porque el Impp medido en condiciones STC reales puede diferir 1–3% del valor calculado, afectando el dimensionamiento del controlador en sistemas grandes.</button>
+      <button class="qbtn" data-q="7" data-correct="false">C) Porque Vmpp en la ficha técnica se mide a 0°C, no a 25°C, y el cálculo P/V daría un valor incorrecto.</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Porque P_panel/Vmpp da la corriente de cortocircuito (Isc), no la corriente de máxima potencia (Impp).</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Un sistema FV en Cieneguilla se dimensionó con HSP=5.962 h/día (GHI promedio anual). En julio, el GHI baja a 4.3 h/día. Con 2 paneles de 550Wp y P_G=0.75, ¿qué ocurre en ese mes?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) El sistema funciona igual porque las baterías compensan cualquier déficit indefinidamente.</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) La producción baja ligeramente pero sigue siendo mayor que la demanda de 4,703 Wh/día.</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) La producción es 1100×4.3×0.75 = 3,548 Wh/día, menor que los 4,703 Wh/día requeridos — el sistema no cubre la demanda en invierno.</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) El MPPT compensa automáticamente la menor irradiación y mantiene la producción constante todo el año.</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Por qué el tramo baterías→inversor debe usar cable de 25mm² y no 16mm², aunque la corriente nominal calculada sea 52A?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Porque las baterías de 24V requieren secciones mayores que las de 12V por normativa eléctrica peruana.</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) Porque el cable entre baterías e inversor siempre debe ser de 25mm² independientemente de la corriente.</button>
+      <button class="qbtn" data-q="9" data-correct="true">C) Porque al arrancar la lavadora y la refrigeradora, la corriente pico sube a ~68A (52A×1.3), lo cual es marginal para 16mm² y representa un riesgo eléctrico real.</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Porque 16mm² solo aplica para cables de CA y el tramo baterías→inversor es de CC.</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el voltaje del sistema es CORRECTA para una demanda de 4,700 Wh/día?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) Usar 12V es preferible porque hay más variedad de baterías de 12V en el mercado peruano.</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) 48V es obligatorio para demandas mayores a 3,000 Wh/día según normativa peruana.</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) 24V es el voltaje correcto para este rango (1,000–5,000 Wh/día) porque reduce a la mitad la corriente respecto a 12V, permitiendo cables más delgados y menor riesgo eléctrico.</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) El voltaje del sistema no afecta el dimensionamiento del cableado, solo la selección del inversor.</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div class="result-panel" id="result-panel"></div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Global Solar Atlas — globalsolaratlas.info · PVGIS JRC — re.jrc.ec.europa.eu · OSINERGMIN — Guía sistemas FV aislados · CNE Tomo V — Código Nacional de Electricidad Utilización · DS 025-2007-EM — Reglamento MINEM sistemas FV rurales · Cavalcanti Cárdenas, K.G. — Diapositivas Energías Renovables UNALM 2026-I</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1:{correct:"B es correcta. Las cargas CC (corriente continua) van directamente de la batería al equipo sin pasar por el inversor, por eso no sufren la pérdida de eficiencia del inversor (η_inv). Si aplicaras un factor fijo de 30% a todo, estarías sobrepenalizando las cargas CC y subestimando la energía que realmente necesitas generar.",wrong:"Incorrecto. La razón no tiene que ver con si el 30% es suficiente o con el voltaje del sistema. La clave es que las cargas CA pasan por el inversor y las CC no, por lo que cada tipo tiene una ruta de pérdidas diferente que la fórmula captura correctamente."},
+  2:{correct:"C es correcta. El GHI mide la irradiación sobre plano horizontal sin descontar las pérdidas reales del generador FV (calentamiento del panel, suciedad acumulada, diferencias entre módulos). P_G = 0.75 corrige todo eso. Solo si usas PVOUT de PVGIS puedes usar P_G = 1.00, porque ese dato ya tiene esas pérdidas descontadas.",wrong:"Incorrecto. P_G = 1.00 solo aplica cuando usas PVOUT, que ya tiene las pérdidas del sistema incluidas. Con GHI o GTI siempre debes aplicar P_G = 0.75 para descontar las pérdidas reales del generador."},
+  3:{correct:"C es correcta. Con baterías de 12V en un sistema de 24V, necesitas 2 baterías en serie para llegar a 24V (voltajes se suman). Eso forma un 'string' de 24V/120Ah. Para llegar a 480Ah necesitas 480/120 = 4 strings en paralelo. 4 strings × 2 baterías = 8 baterías. Error crítico real: si el cálculo da número impar (como 3), siempre redondea al par siguiente.",wrong:"Incorrecto. Con baterías de 12V en sistema 24V siempre necesitas pares en serie. 4 baterías en paralelo daría un banco de 12V/480Ah — voltaje insuficiente. Necesitas 4 strings de 2 baterías en serie = 8 baterías."},
+  4:{correct:"B es correcta. El PWM simplemente 'corta' la corriente para regular la carga, sin aprovechar el exceso de voltaje del panel. Con Vmpp=42V y V_bat=24V, el aprovechamiento real es solo 24/42 = 57%. El 43% restante se convierte en calor. El MPPT convierte ese exceso de voltaje en corriente adicional, aprovechando el 93–98% de la energía disponible.",wrong:"Incorrecto. El problema del PWM es estrictamente la diferencia entre Vmpp del panel y el voltaje del banco. No tiene relación con la compatibilidad de baterías ni con la frecuencia. Cuando Vmpp >> V_bat, el PWM desperdicia la diferencia de voltaje como calor."},
+  5:{correct:"C es correcta. GHI mide irradiación horizontal (plano plano). GTI la corrige por el ángulo de inclinación pero no descuenta pérdidas del sistema FV. PVOUT de PVGIS ya incluye todo: corrección de ángulo + pérdidas por temperatura, suciedad y mismatch. Por eso GHI y GTI requieren P_G=0.75 adicional, pero PVOUT ya tiene esas pérdidas dentro y usa P_G=1.00.",wrong:"Incorrecto. La regla es: datos que no incluyen pérdidas del sistema (GHI, GTI) → P_G=0.75. Datos que ya incluyen pérdidas (PVOUT) → P_G=1.00. Mezclarlos incorrectamente es uno de los errores más comunes en dimensionamiento FV."},
+  6:{correct:"C es correcta. Los motores eléctricos son cargas inductivas que reaccionan a la forma de onda. La onda modificada contiene armónicas que generan calor adicional en los bobinados del motor, reduciendo su vida útil y aumentando el consumo entre un 15% y 25%. Una refrigeradora con onda modificada puede fallar prematuramente y consumir significativamente más energía.",wrong:"Incorrecto. La razón es la sensibilidad de los motores eléctricos a las armónicas de la onda modificada. Los motores de refrigeradora y lavadora son cargas inductivas que se dañan con esas distorsiones, independientemente de la frecuencia o la potencia del inversor."},
+  7:{correct:"B es correcta. El fabricante mide Impp en condiciones STC controladas con el panel específico, considerando las curvas I-V reales. El cálculo P/V es una aproximación que puede diferir 1–3% del valor real. En sistemas grandes (varios paneles en paralelo), esa diferencia acumula error en el dimensionamiento del controlador, que puede quedar subdimensionado.",wrong:"Incorrecto. Los paneles FV generan corriente continua (CC), no alterna. La razón es que Impp medido en laboratorio bajo condiciones STC reales puede diferir del cálculo P/V por la no-linealidad de las curvas I-V del panel. Siempre leer Impp de la ficha técnica."},
+  8:{correct:"C es correcta. Este es el error de diseñar con el promedio anual en lugar del peor mes. Producción en julio = N_T × P_panel × HSP_julio × P_G = 2 × 550 × 4.3 × 0.75 = 3,548 Wh/día, que es claramente inferior a los 4,703 Wh/día requeridos. La solución es dimensionar con el HSP del mes más desfavorable, que generalmente resulta en 1 panel adicional.",wrong:"Incorrecto. Las baterías solo almacenan energía — no la generan. Si el sistema produce menos de lo que consume en varios días consecutivos (como ocurre en invierno), las baterías se agotan. El MPPT extrae la máxima potencia disponible pero no puede crear energía solar adicional."},
+  9:{correct:"C es correcta. La corriente nominal de 52A se calcula con la potencia simultánea en operación estable. Pero al arrancar la lavadora (motor 500W), la corriente de arranque puede ser 2–3× la nominal durante 1–3 segundos, llevando el pico a 68–80A. El cable de 16mm² está en el límite para ese pico, representando un riesgo real de sobrecalentamiento. El CNE recomienda 25mm² para esas corrientes.",wrong:"Incorrecto. El problema es la corriente de pico de arranque de los motores (lavadora, refrigeradora), que puede superar 1.3× la corriente nominal. Para el tramo de mayor corriente del sistema (baterías→inversor) se debe usar la sección que soporte tanto la corriente nominal como el pico de arranque."},
+  10:{correct:"C es correcta. El voltaje del sistema afecta directamente la corriente: P = V × I. A mayor voltaje, menor corriente para la misma potencia. Con 12V y 960W de pico, la corriente sería 80A — requiriendo cables muy gruesos. Con 24V baja a 40A, permitiendo cables más delgados y seguros. La regla práctica: <1000 Wh/día → 12V, 1000–5000 Wh/día → 24V, >5000 Wh/día → 48V.",wrong:"Incorrecto. El voltaje del sistema es una de las decisiones de diseño más importantes porque determina directamente las corrientes de operación y por tanto las secciones de cable requeridas. Mayor voltaje = menor corriente = cables más delgados y sistema más seguro y eficiente."}
+};
+
+let answered=0, correct_count=0;
+const container=document.querySelector('.block.s3:last-of-type');
+
+document.addEventListener('click',function(e){
+  if(!e.target.classList.contains('qbtn'))return;
+  const btn=e.target;
+  const q=btn.dataset.q;
+  const isCorrect=btn.dataset.correct==='true';
+  const allBtns=document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  const fb=document.getElementById(`fb${q}`);
+  if(fb.style.display==='block'||fb.classList.contains('ok')||fb.classList.contains('fail'))return;
+  allBtns.forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.correct==='true'){b.classList.add('correct');b.textContent='✅ '+b.textContent;}
+    else if(b===btn&&!isCorrect){b.classList.add('wrong');b.textContent='❌ '+b.textContent;}
+  });
+  answered++;
+  if(isCorrect)correct_count++;
+  fb.className='qfeedback '+(isCorrect?'ok':'fail');
+  const fd=feedbacks[parseInt(q)];
+  fb.innerHTML=isCorrect?('✅ ¡Correcto! '+fd.correct):('❌ Incorrecto. '+fd.wrong);
+  const pct=Math.round((answered/10)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-txt').textContent=`${answered} de 10 respondidas · ${correct_count} correctas`;
+  if(answered===10){
+    const rp=document.getElementById('result-panel');
+    rp.style.display='block';
+    let msg,bg;
+    if(correct_count<=4){msg='Necesitas repasar el material — repasa las secciones de E_T, HSP y configuración de baterías';bg='#fef2f2'}
+    else if(correct_count<=7){msg='¡Buen avance! Sigue repasando los errores críticos de baterías y cableado';bg='#fefce8'}
+    else{msg='¡Excelente dominio del dimensionamiento FV! Estás listo para el examen';bg='#f0fdf4'}
+    rp.style.background=bg;
+    rp.style.borderRadius='10px';
+    rp.style.padding='14px';
+    rp.innerHTML=`<p style="font-size:16px;font-weight:500;margin-bottom:6px">${correct_count} / 10 correctas</p><p style="font-size:13px;margin-bottom:10px">${msg}</p><button onclick="resetQuiz()" style="padding:8px 16px;border-radius:8px;border:.5px solid var(--color-border-secondary);background:var(--color-background-secondary);cursor:pointer;font-size:12px">Reiniciar quiz</button>`;
+  }
+});
+
+function resetQuiz(){
+  answered=0;correct_count=0;
+  document.getElementById('prog-fill').style.width='0%';
+  document.getElementById('prog-txt').textContent='0 de 10 respondidas · 0 correctas';
+  document.getElementById('result-panel').style.display='none';
+  for(let i=1;i<=10;i++){
+    const fb=document.getElementById(`fb${i}`);
+    fb.className='qfeedback';
+    fb.innerHTML='';
+    document.querySelectorAll(`.qbtn[data-q="${i}"]`).forEach(b=>{
+      b.disabled=false;
+      b.classList.remove('correct','wrong');
+      b.textContent=b.textContent.replace('✅ ','').replace('❌ ','');
+    });
+  }
+}
+</script>

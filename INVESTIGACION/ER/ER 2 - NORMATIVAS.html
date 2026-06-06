@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-text-primary)}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px}
+.full{grid-column:1/-1}
+.s2{grid-column:span 2}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.title-bar{background:#0f1e3a;color:#fff;border-radius:12px;padding:12px 18px}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.title-bar p{font-size:11px;color:#94a3b8}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tag{font-size:10px;padding:2px 8px;border-radius:20px;background:#1e3a5f;color:#93c5fd;font-family:'Oswald',sans-serif}
+.sec-bar{grid-column:1/-1;border-radius:8px;padding:6px 12px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700}
+.sec-blue{background:#dbeafe;color:#1e3a8a}
+.sec-green{background:#dcfce7;color:#14532d}
+.sec-yellow{background:#fef9c3;color:#713f12}
+.sec-orange{background:#ffedd5;color:#7c2d12}
+.sec-purple{background:#ede9fe;color:#4c1d95}
+.sec-teal{background:#ccfbf1;color:#134e4a}
+.sec-red{background:#fee2e2;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.sec-blue{background:#1e3a5f;color:#93c5fd}
+.sec-green{background:#14532d;color:#86efac}
+.sec-yellow{background:#422006;color:#fef08a}
+.sec-orange{background:#431407;color:#fed7aa}
+.sec-purple{background:#2e1065;color:#c4b5fd}
+.sec-teal{background:#042f2e;color:#5eead4}
+.sec-red{background:#450a0a;color:#fca5a5}
+}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-pink{background:#fce7f3;color:#831843}
+.bh-gray{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd}
+.bh-green{background:#14532d;color:#86efac}
+.bh-yellow{background:#422006;color:#fef08a}
+.bh-orange{background:#431407;color:#fed7aa}
+.bh-purple{background:#2e1065;color:#c4b5fd}
+.bh-teal{background:#042f2e;color:#5eead4}
+.bh-red{background:#450a0a;color:#fca5a5}
+.bh-pink{background:#4a044e;color:#f0abfc}
+.bh-gray{background:#1e293b;color:#94a3b8}
+}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.def-blue{border-left:3px solid #3b82f6}
+.def-green{border-left:3px solid #22c55e}
+.def-yellow{border-left:3px solid #eab308}
+.def-orange{border-left:3px solid #f97316}
+.def-purple{border-left:3px solid #8b5cf6}
+.def-teal{border-left:3px solid #14b8a6}
+.def-red{border-left:3px solid #ef4444}
+.def-pink{border-left:3px solid #ec4899}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-yellow{background:#eab308}
+.dot-orange{background:#f97316}
+.dot-purple{background:#8b5cf6}
+.dot-teal{background:#14b8a6}
+.dot-red{background:#ef4444}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin-bottom:8px}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-bottom:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#ca8a04}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-family:'Oswald',sans-serif;font-size:11px}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.footer{background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;flex-shrink:0}
+.fc{font-size:11px;color:#94a3b8;line-height:1.6}
+.ql{font-size:11px;color:#64748b;margin-bottom:3px}
+.num-badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;font-size:10px;font-weight:700;margin-right:4px;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-r{background:#fee2e2;color:#991b1b}
+.nb-y{background:#fef9c3;color:#713f12}
+@media(prefers-color-scheme:dark){.nb-b{background:#1e3a5f;color:#93c5fd}.nb-g{background:#14532d;color:#86efac}.nb-r{background:#450a0a;color:#fca5a5}.nb-y{background:#422006;color:#fef08a}}
+/* QUIZ */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:14px}
+.quiz-header h3{font-family:'Oswald',sans-serif;font-size:14px;margin-bottom:3px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.prog-wrap{margin-bottom:12px}
+.prog-text{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;display:flex;justify-content:space-between}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:8px}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width 0.4s}
+.qcard{margin-bottom:14px;padding:10px 12px;background:var(--color-background-secondary);border-radius:10px}
+.qnum{font-size:10px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:12px;margin-bottom:8px;line-height:1.5;font-weight:600;color:var(--color-text-primary)}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:7px 10px;font-size:11.5px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;color:var(--color-text-primary)}
+.qbtn:hover{background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.show-correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:0.7;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;display:none}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){.qfeedback.ok{background:#14532d;color:#86efac}.qfeedback.fail{background:#450a0a;color:#fca5a5}}
+#result-panel{display:none;border-radius:10px;padding:12px;margin-top:10px;text-align:center}
+#result-panel h4{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:6px}
+#result-panel p{font-size:12px}
+.result-ok{background:#dcfce7;color:#14532d}
+.result-mid{background:#fef9c3;color:#713f12}
+.result-bad{background:#fee2e2;color:#991b1b}
+.reset-btn{margin-top:10px;padding:7px 16px;background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);border-radius:8px;cursor:pointer;font-size:12px;color:var(--color-text-primary)}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+b{font-weight:600}
+a{color:#3b82f6;text-decoration:none}
+a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="full title-bar">
+  <h1>📄 Normativa Peruana: Sistema Pico Fotovoltaico (SPFV) — R.D. N° 272-2016-MEM/DGE</h1>
+  <p>Energías Renovables · Facultad de Ingeniería Agrícola · UNALM · Prof. Kenyi Cavalcanti</p>
+  <div class="tags">
+    <span class="tag">SPFV</span><span class="tag">Electrificación Rural</span><span class="tag">MEM-DGE</span>
+    <span class="tag">Ley N° 28749</span><span class="tag">DS 018-2020-EM</span><span class="tag">DS 020-2013-EM</span>
+    <span class="tag">OSINERGMIN</span><span class="tag">ADINELSA</span><span class="tag">SER</span>
+  </div>
+</div>
+
+<!-- ══════════════════════ BLOQUE 1: LA NORMA CENTRAL ══════════════════════ -->
+<div class="full sec-bar sec-blue">🔵 1 · La norma central: R.D. N° 272-2016-MEM/DGE — ¿Qué regula exactamente?</div>
+
+<div class="block">
+  <span class="bh bh-blue">Definición y objeto</span>
+  <div class="def def-blue">La <b>Resolución Directoral N° 272-2016-MEM/DGE</b> (28 oct 2016) aprueba las <b>Especificaciones Técnicas y el Procedimiento de Evaluación de un Sistema Pico Fotovoltaico (SPFV) y sus componentes</b>. Es emitida por la Dirección General de Electricidad (DGE) del MINEM, en cumplimiento del art. 11 de la Ley N° 28749 que obliga a contar con normas específicas de diseño y construcción para zonas rurales.</div>
+  <div class="item"><span class="dot dot-blue"></span><span>Un <b>SPFV</b> es un sistema fotovoltaico de muy baja potencia (pico-scale), diseñado para electrificación rural básica: iluminación LED, carga de celulares, pequeños equipos.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>La norma fija qué características mínimas deben cumplir el panel, batería, controlador y luminaria para ser aceptados en proyectos financiados por el Estado.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>Establece el <b>procedimiento de evaluación</b> que OSINERGMIN y la DGE usan para verificar que los equipos cumplan antes de ser desplegados.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la base legal que obliga a la DGE a emitir normas técnicas específicas para sistemas fotovoltaicos rurales como el SPFV, y cuál entidad lo emite?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">¿Por qué existe esta norma?</span>
+  <div class="flow">
+    <div class="fbox">Zonas sin red eléctrica</div><div class="farrow">→</div>
+    <div class="fbox">Estado subsidia SPFV</div><div class="farrow">→</div>
+    <div class="fbox">Necesidad de estándar</div><div class="farrow">→</div>
+    <div class="fbox">R.D. 272-2016</div>
+  </div>
+  <div class="item"><span class="dot dot-blue"></span><span>Sin estándar, los proveedores podrían entregar equipos de baja calidad que fallen en campo, dejando a las familias sin servicio.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>El Estado peruano —a través del MINEM/DGER— financia y transfiere estos sistemas a ADINELSA o EDE; necesita garantía de calidad antes de pagar.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>Vincula con el DS 020-2013-EM (subastas de áreas no conectadas a red): los equipos que ganen la subasta deben cumplir esta norma técnica.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir el SPFV (pico, &lt; ~50 Wp, para uso doméstico básico) con un sistema fotovoltaico autónomo convencional (kWp, para cargas mayores). El SPFV tiene especificaciones mucho más restrictivas de potencia y componentes.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Vigencia y publicación</span>
+  <div class="def def-blue">Entra en vigor al día siguiente de su publicación (Artículo 2). Se publica en la web del MINEM (www.minem.gob.pe) según Decreto Supremo N° 014-2012-JUS. La firma la Directora General de Electricidad: <b>Carla Paola Sosa Vela</b>.</div>
+  <div class="item"><span class="dot dot-blue"></span><span>El Anexo —las especificaciones técnicas detalladas— forma parte integral de la resolución. La norma sin el Anexo es incompleta.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>Las actualizaciones de esta norma son permanentes según la Ley N° 28749, art. 11: la DGE debe mantenerlas vigentes.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Qué instrumento legal obliga a actualizar permanentemente las normas técnicas de diseño y construcción para los SER fotovoltaicos?</div>
+</div>
+
+<!-- ══════════════════════ BLOQUE 2: JERARQUÍA NORMATIVA ══════════════════════ -->
+<div class="full sec-bar sec-teal">🩵 2 · Jerarquía normativa completa del marco regulatorio peruano de electrificación rural fotovoltaica</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Pirámide legal: de la ley a la resolución técnica</span>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <b>Nivel 1 — Ley del Congreso</b><br>
+      Ley N° 28749 (2006): Ley General de Electrificación Rural. Es la base: declara necesidad pública la electrificación rural, crea los SER, define recursos y rol del Estado.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <b>Nivel 2 — Decreto Supremo</b><br>
+      DS 018-2020-EM: Reglamento vigente de la Ley 28749. Deroga DS 025-2007-EM. Define procedimientos, transferencias, VAD, concesiones rurales. Modificado por DS 003-2026-EM.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <b>Nivel 3 — Decreto Legislativo</b><br>
+      D.Leg. 1207 (2015): Modifica arts. 3,6,9,10,14,15,18 de la Ley 28749. Amplía SER a transmisión, regula impacto ambiental, moderniza transferencias.
+    </div>
+  </div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #8b5cf6">
+      <b>Nivel 4 — DS específico RER</b><br>
+      DS 020-2013-EM: Reglamento de Inversión Eléctrica en Áreas No Conectadas a Red. Regula subastas de SPFV, Cargo RER Autónomo, Fideicomiso, FOSE/FISE.
+    </div>
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <b>Nivel 5 — Ley RER</b><br>
+      D.Leg. 1002 (2008): Promoción de inversión para generación con RER. Base legal de las subastas de energía solar rural. Reglamentado por DS 012-2011-EM.
+    </div>
+    <div class="mini" style="border-top:3px solid #ec4899">
+      <b>Nivel 6 — Norma técnica DGE</b><br>
+      <b>R.D. 272-2016-MEM/DGE</b>: Especificaciones técnicas SPFV. Es el nivel más operativo: define qué deben cumplir los equipos físicamente para ser aceptados.
+    </div>
+  </div>
+  <div class="warn">⚠️ RELACIÓN CLAVE: La R.D. 272-2016 es el "extremo técnico" de la pirámide. Cuando el DS 020-2013-EM ordena instalar SPFV en áreas no conectadas, los equipos deben cumplir la R.D. 272-2016. Ambas normas son inseparables en la práctica.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Modificaciones recientes 2026</span>
+  <div class="def def-teal">En abril 2026, el DS 003-2026-EM modifica significativamente el DS 018-2020-EM (Reglamento de Electrificación Rural), ampliando el alcance de los usos productivos, los fondos concursables y el procedimiento de transferencia de SER entre el Estado y las EDE/ADINELSA.</div>
+  <div class="item"><span class="dot dot-teal"></span><span>Se crea el <b>Fondo de Promoción de Uso Productivo</b>: financia educación y capacitación en uso seguro y productivo de la electricidad rural.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Se definen los <b>Fondos Concursables</b>: financian Programas de Uso Productivo seleccionados por concurso, conducidos por el MINEM.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Se crea el art. 45-A: regula transferencia de SER ejecutados por Gobiernos Regionales/Locales a ADINELSA o EDE (antes era un vacío normativo).</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Qué norma de 2026 modifica el Reglamento de Electrificación Rural y cuál es su principal innovación en materia de usos productivos?</div>
+</div>
+
+<!-- ══════════════════════ BLOQUE 3: ENTIDADES ══════════════════════ -->
+<div class="full sec-bar sec-green">🟢 3 · Entidades clave y sus roles en el sistema normativo</div>
+
+<div class="block">
+  <span class="bh bh-green">MINEM / DGE / DGER</span>
+  <div class="def def-green">El <b>MINEM</b> (Ministerio de Energía y Minas) es la autoridad rector. Dentro de él: la <b>DGE</b> (Dir. Gral. de Electricidad) emite normas técnicas como la R.D. 272-2016, y la <b>DGER</b> (Dir. Gral. de Electrificación Rural) ejecuta proyectos, administra recursos y transfiere sistemas.</div>
+  <div class="item"><span class="dot dot-green"></span><span><b>DGE</b>: aprueba normas técnicas, otorga Concesiones Eléctricas Rurales (CER), califica SER, declara caducidad de concesiones.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>DGER</b>: formula el PNER (Plan Nacional de Electrificación Rural), administra el presupuesto, ejecuta obras, suscribe convenios, conduce fondos concursables.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">OSINERGMIN y ADINELSA</span>
+  <div class="def def-green"><b>OSINERGMIN</b> fiscaliza el cumplimiento de normas, fija tarifas rurales (VAD, Cargo RER Autónomo), conduce subastas (vía Comité), supervisa calidad del servicio. <b>ADINELSA</b> (Empresa de Administración de Infraestructura Eléctrica SA) recibe los SER ejecutados por el Estado y los opera o subcontrata su O&M a las EDE.</div>
+  <div class="item"><span class="dot dot-green"></span><span>OSINERGMIN regula el <b>Cargo RER Autónomo</b> anualmente: es el precio que paga el usuario por el SPFV, incluyendo O&M y reposición por 20 años.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span>ADINELSA puede celebrar convenios con empresas privadas para O&M de los SER en su cartera (art. 41.6 del DS 018-2020-EM).</span></div>
+  <div class="exam">🎯 EXAMEN: Explique la diferencia funcional entre DGE y DGER dentro del MINEM, y cuál de las dos emite las especificaciones técnicas del SPFV.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">EDE, FONAFE y Gobiernos Subnacionales</span>
+  <div class="def def-green">Las <b>EDE</b> (Empresas de Distribución Eléctrica) estatales bajo el ámbito del <b>FONAFE</b> reciben transferencias de recursos y SER para operar. Los <b>Gobiernos Regionales y Locales</b> pueden ejecutar SER con convenios DGER, pero deben transferirlos a ADINELSA o EDE una vez concluidos.</div>
+  <div class="item"><span class="dot dot-green"></span><span>Las obras ejecutadas por Gobiernos Regionales/Locales que no cumplen el CNE son "subsanadas" con fondos DGER, pero deben transferirse primero a ADINELSA (nuevo art. 45-A, DS 003-2026-EM).</span></div>
+</div>
+
+<!-- ══════════════════════ BLOQUE 4: SER y SPFV ══════════════════════ -->
+<div class="full sec-bar sec-yellow">🟡 4 · Definiciones técnicas: SER, Suministros No Convencionales y SPFV</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Sistema Eléctrico Rural (SER)</span>
+  <div class="def def-yellow">Un <b>SER</b> es todo sistema eléctrico de transmisión y/o distribución desarrollado en zonas rurales, localidades aisladas o de frontera, de preferente interés social, calificado por el MINEM. Incluye generación aislada. Son inembargables y de utilidad pública.</div>
+  <div class="item"><span class="dot dot-yellow"></span><span>Los SER pueden ser <b>convencionales</b> (red conectada al SEIN o central aislada térmica/hidráulica) o <b>no convencionales</b> (parcial o totalmente RER: solar, eólico, biomasa, hidro).</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span>Un <b>SPFV es un Suministro No Convencional</b>: dotación individual de energía solar fotovoltaica a un usuario que no tiene acceso a redes convencionales.</span></div>
+  <div class="rx">Criterios de calificación SER:<br>Potencia generación ≤ 20 MW | Tensión transmisión ≤ 220 kV | Tensión distribución ≤ 33 kV<br>Demanda dimensionada para 20 años horizonte</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Tarifa del SPFV (Cargo RER Autónomo)</span>
+  <div class="def def-yellow">El usuario de un SPFV paga la <b>Tarifa RER Autónoma</b> = Cargo RER Autónomo − compensaciones FOSE/FISE. El Cargo RER Autónomo lo fija OSINERGMIN anualmente e incluye: remuneración al Inversionista, costos de comercialización del Distribuidor y administración del Fideicomiso.</div>
+  <div class="rx">Tarifa RER Autónoma = Cargo RER Autónomo − FOSE − FISE − otros<br>Vida útil reconocida: 20 años | Expresada como cargo fijo mensual (S/./mes)</div>
+  <div class="item"><span class="dot dot-yellow"></span><span>El <b>FOSE</b> (Fondo de Compensación Social Eléctrica) subsidia la tarifa a usuarios residenciales de bajos ingresos.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span>El <b>FISE</b> (Fondo de Inclusión Social Energético, Ley N° 29852) subsidia la tarifa a escuelas, postas médicas, locales comunales y poblaciones vulnerables.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: El Cargo RER Autónomo no es la tarifa que paga el usuario. La tarifa final es menor porque descuenta compensaciones sociales. El cargo es la remuneración bruta que recibe el Inversionista.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué es el Cargo RER Autónomo y en qué se diferencia de la Tarifa RER Autónoma que paga el usuario final de un SPFV?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Fondo de Reposición</span>
+  <div class="def def-yellow">Cuando la inversión del SPFV es financiada por el Estado, la tarifa no incluye la anualidad del VNR (Valor Nuevo de Reemplazo) completa, sino un <b>Fondo de Reposición</b>: una fracción que garantiza el reemplazo de equipos al cabo de su vida útil (20 años para suministros no convencionales).</div>
+  <div class="rx">Factor Fondo de Reposición = Factor de reposición / Factor anualidad VNR<br>Factor reposición: vida útil 30 años, tasa interés pasiva mercado (SBS)</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué en los SPFV financiados por el Estado se usa un Fondo de Reposición en lugar de incluir la anualidad completa del VNR en la tarifa?</div>
+</div>
+
+<!-- ══════════════════════ BLOQUE 5: SUBASTAS ══════════════════════ -->
+<div class="full sec-bar sec-orange">🟠 5 · Mecanismo de subastas para áreas no conectadas a red (DS 020-2013-EM)</div>
+
+<div class="block s2">
+  <span class="bh bh-orange">Proceso de subasta de SPFV paso a paso</span>
+  <div class="flow">
+    <div class="fbox">MINEM define Área</div><div class="farrow">→</div>
+    <div class="fbox">OSINERGMIN convoca</div><div class="farrow">→</div>
+    <div class="fbox">Postores se registran</div><div class="farrow">→</div>
+    <div class="fbox">Presentan oferta (US$/año)</div><div class="farrow">→</div>
+    <div class="fbox">Adjudicación menor precio</div><div class="farrow">→</div>
+    <div class="fbox">Contrato Inversión+Servicio</div><div class="farrow">→</div>
+    <div class="fbox">Plazo Vigencia 20 años</div>
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Variable de competencia:</b> la <b>Remuneración Anual</b> (US$/año por área). Gana quien oferte el menor valor, siempre que no supere la <b>Remuneración Base</b> calculada por OSINERGMIN.</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Contrato de Inversión:</b> suscrito entre el Inversionista adjudicado y el MINEM. Vigencia = Plazo de Vigencia (hasta 20 años desde puesta en operación comercial).</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Contrato de Servicio:</b> entre el Inversionista y el Distribuidor (EDE o ADINELSA). El Inversionista responde ante el Distribuidor por las sanciones que imponga OSINERGMIN.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Fideicomiso:</b> administra los fondos de la cadena de pagos: ingresos por Tarifa RER Autónoma + compensaciones FOSE/FISE → garantizan la Remuneración Anual al Inversionista.</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Garantías exigidas:</b> (i) Garantía de Seriedad de Oferta (Carta Fianza a favor de OSINERGMIN), (ii) Garantía de Fiel Cumplimiento a favor del MINEM hasta la puesta en operación.</span></div>
+      <div class="item"><span class="dot dot-orange"></span><span><b>Equipos declarados nuevos</b> en la oferta; OSINERGMIN verifica el certificado del fabricante durante la etapa de construcción. Los SPFV deben cumplir la R.D. 272-2016.</span></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: El Inversionista NO necesita permiso o licencia municipal para instalar los SPFV (art. 3 DS 020-2013-EM), pues se instalan en el predio del usuario, salvo la Concesión Eléctrica Rural (CER) que otorga la DGE.</div>
+  <div class="exam">🎯 EXAMEN: En una subasta de áreas no conectadas a red, ¿cuál es la variable de decisión que determina el ganador y qué límite máximo debe respetar esa variable?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Concesión Eléctrica Rural (CER)</span>
+  <div class="def def-orange">La <b>CER</b> es el título habilitante otorgado por el MINEM (vía DGE) para desarrollar actividades eléctricas en SER. Para el SPFV: es la concesión de "dotación de energía eléctrica mediante generación autónoma con fuentes no convencionales" (art. 48.2.d del DS 018-2020-EM).</div>
+  <div class="item"><span class="dot dot-orange"></span><span>Vigencia <b>indeterminada</b>. Se otorga por Resolución Directoral de la DGE, sin pago de derechos de tramitación.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span>Para proyectos del PNER: calificación SER automática. Para proyectos fuera del PNER: trámite ante la DGE (30 días hábiles, silencio administrativo positivo para calificación SER).</span></div>
+</div>
+
+<!-- ══════════════════════ BLOQUE 6: PNER y Planificación ══════════════════════ -->
+<div class="full sec-bar sec-purple">🟣 6 · Planificación: PNER y criterios de priorización</div>
+
+<div class="block">
+  <span class="bh bh-purple">Plan Nacional de Electrificación Rural (PNER)</span>
+  <div class="def def-purple">El <b>PNER</b> es el instrumento vinculante del Estado para la electrificación rural. Horizonte 10 años. Tiene dos componentes: <b>Largo Plazo</b> (políticas y estrategias, se actualiza cada 5 años) y <b>Mediano Plazo</b> (inversiones concretas, 3 años, se actualiza anualmente). Lo formula la DGER y se aprueba por Resolución Ministerial en junio de cada año.</div>
+  <div class="item"><span class="dot dot-purple"></span><span>Los proyectos en el PNER obtienen calificación SER <b>automáticamente</b> al declararse viables en el sistema INVIERTE.PE.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>El SIER (Sistema de Información de Electrificación Rural) es la fuente oficial de seguimiento: desde formulación hasta operación comercial.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuáles son los cuatro criterios mínimos de priorización para incorporar nuevas inversiones en el componente de Mediano Plazo del PNER?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Criterios de priorización (art. 15 DS 018-2020-EM)</span>
+  <div class="def def-purple">Los cuatro criterios mínimos de priorización son obligatorios y pueden complementarse con criterios adicionales por Resolución Ministerial.</div>
+  <div class="item"><span class="num-badge nb-b">1</span><span><b>Coeficiente de electrificación rural</b> (menor coeficiente = mayor prioridad)</span></div>
+  <div class="item"><span class="num-badge nb-r">2</span><span><b>Índice de pobreza</b> del área geográfica</span></div>
+  <div class="item"><span class="num-badge nb-g">3</span><span><b>Uso productivo de la electricidad</b> (potencial de actividades económicas)</span></div>
+  <div class="item"><span class="num-badge nb-y">4</span><span><b>Utilización de energías renovables</b></span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Impacto ambiental (Ley 28749, art. 15)</span>
+  <div class="def def-purple">Para proyectos de <b>distribución SER</b>: se requiere <b>DIA</b> (Declaración de Impacto Ambiental) ante la entidad competente. Para proyectos de <b>transmisión SER</b>: criterios de clasificación anticipada por DS. Siempre se requiere <b>CIRA</b> (Certificado de Inexistencia de Restos Arqueológicos) o Plan de Monitoreo Arqueológico del Ministerio de Cultura.</div>
+  <div class="item"><span class="dot dot-purple"></span><span>Para el SPFV (instalación en predio del usuario): no requiere DIA ni permisos ambientales, pues es un equipo en propiedad privada. Esta es una ventaja clave del modelo de subasta del DS 020-2013-EM.</span></div>
+</div>
+
+<!-- ══════════════════════ BLOQUE 7: NORMAS COMPLEMENTARIAS ══════════════════════ -->
+<div class="full sec-bar sec-red">🔴 7 · Normativa complementaria que debe conocer (no está en el PDF pero es esencial)</div>
+
+<div class="block s2">
+  <span class="bh bh-red">Normas que complementan la R.D. 272-2016</span>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <b>Código Nacional de Electricidad (CNE) – Suministro 2011</b><br>
+      Norma técnica base para instalaciones eléctricas. Los SER deben cumplirla. Emitida por MEM. Es el estándar de referencia para inspecciones de OSINERGMIN.
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <b>NTCSER – Norma Técnica de Calidad de Servicios Eléctricos Rurales</b><br>
+      (R.D. N° 016-2008-EM-DGE). Define indicadores de calidad de suministro (tensión, frecuencia, interrupciones) aplicables a SER. OSINERGMIN fiscaliza su cumplimiento.
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <b>D.Leg. N° 1002 / DS 012-2011-EM</b><br>
+      Ley de Promoción RER y su Reglamento. Regulan las subastas RER para el SEIN. Para SPFV rurales, aplica el DS 020-2013-EM (áreas no conectadas a red), no este decreto.
+    </div>
+  </div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <b>Ley N° 27510 / Ley N° 28307 (FOSE)</b><br>
+      Crean y regulan el Fondo de Compensación Social Eléctrica. Reducen la tarifa a usuarios rurales de bajos ingresos. Clave para la viabilidad financiera del SPFV.
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <b>Ley N° 29852 (FISE)</b><br>
+      Fondo de Inclusión Social Energético. Financia el balón de GLP en zonas rurales y subsidia el SPFV a escuelas, postas y comunidades vulnerables.
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <b>D.Leg. N° 1652 (2023) y DS 003-2026-EM</b><br>
+      Modifican la Ley 28749 y su Reglamento. Aceleran la ejecución de proyectos rurales, amplían usos productivos y regulan transferencia de SER de gobiernos subnacionales.
+    </div>
+  </div>
+  <div class="warn">⚠️ NORMAS QUE BUSCAR: Para tu curso, también revisa la R.D. N° 003-2007-EM-DGE (recursos RER prioridad en SER) y la R.D. N° 016-2008-EM-DGE (NTCSER). Son complementarias directas de la R.D. 272-2016 en campo.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-red">Entidades para complementar información</span>
+  <div class="item"><span class="dot dot-red"></span><span><b>MINEM – DGER</b>: <a href="https://www.gob.pe/minem" target="_blank">www.gob.pe/minem</a> → sección Electricidad → Electrificación Rural. Aquí están los PNER, normas técnicas DGE y registros de proyectos.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><b>OSINERGMIN</b>: <a href="https://www.osinergmin.gob.pe" target="_blank">www.osinergmin.gob.pe</a> → Electricidad → Tarifas rurales, Cargo RER Autónomo, normas de calidad SER.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><b>SPIJ – Sistema Peruano de Información Jurídica</b>: <a href="https://spij.minjus.gob.pe" target="_blank">spij.minjus.gob.pe</a> → buscar "28749", "272-2016-MEM", "018-2020-EM". Es la base oficial de normas.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><b>El Peruano</b>: <a href="https://elperuano.pe/normaslegal" target="_blank">elperuano.pe/normaslegal</a> → Normas Legales. Para verificar publicación oficial de cualquier DS o RD.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><b>ADINELSA</b>: consultar sus reportes de cartera SER en el portal FONAFE (<a href="https://www.fonafe.gob.pe" target="_blank">fonafe.gob.pe</a>).</span></div>
+  <div class="exam">🎯 EXAMEN: ¿En qué portal oficial se publica la Norma DGE que aprueba las especificaciones técnicas del SPFV y qué Decreto Supremo obliga esa publicación?</div>
+</div>
+
+<!-- ══════════════════════ TABLA INTEGRADORA ══════════════════════ -->
+<div class="full sec-bar sec-gray" style="background:#f1f5f9;color:#334155">⚫ 8 · Tabla integradora: resumen comparativo de las normas principales</div>
+<div class="full block">
+  <span class="bh bh-gray">Mapa normativo consolidado</span>
+  <table class="tbl">
+    <tr>
+      <th>Norma</th><th>Tipo</th><th>Año</th><th>Entidad emisora</th><th>Qué regula</th><th>Vinculación con SPFV</th>
+    </tr>
+    <tr><td><b>Ley N° 28749</b></td><td>Ley del Congreso</td><td>2006</td><td>Congreso de la República</td><td>Marco general electrificación rural, SER, recursos, roles</td><td>Base legal de todo el sistema. SPFV es SER no convencional.</td></tr>
+    <tr><td><b>DS 018-2020-EM</b></td><td>Decreto Supremo</td><td>2020</td><td>MINEM + MEF</td><td>Reglamento Ley 28749: planificación, financiamiento, CER, transferencias, VAD</td><td>Define concesión rural para SPFV (art. 48.2.d), tarifa, Fondo de Reposición.</td></tr>
+    <tr><td><b>DS 003-2026-EM</b></td><td>Decreto Supremo</td><td>2026</td><td>MINEM + MEF</td><td>Modifica DS 018-2020-EM: usos productivos, fondos concursables, art. 45-A</td><td>Amplía financiamiento para capacitación en uso de SPFV productivo.</td></tr>
+    <tr><td><b>DS 020-2013-EM</b></td><td>Decreto Supremo</td><td>2013</td><td>MINEM</td><td>Subastas de SPFV en áreas no conectadas, Cargo RER Autónomo, Fideicomiso</td><td>Norma operativa directa del SPFV: cómo se contrata, remunera y opera.</td></tr>
+    <tr><td><b>D.Leg. 1002 / DS 012-2011-EM</b></td><td>Dec. Legislativo + DS</td><td>2008/2011</td><td>Poder Ejecutivo / MINEM</td><td>Promoción RER para generación eléctrica (subastas SEIN)</td><td>Base de las subastas; para SPFV rurales aplica DS 020-2013-EM.</td></tr>
+    <tr><td><b>R.D. 272-2016-MEM/DGE</b></td><td>Resolución Directoral</td><td>2016</td><td>DGE – MINEM</td><td>Especificaciones técnicas y procedimiento evaluación SPFV y sus componentes</td><td>Norma técnica directa: qué debe cumplir el panel, batería, controlador, luminaria.</td></tr>
+    <tr><td><b>ETS-RS-* (Lum. FC)</b></td><td>Especificación Técnica</td><td>2006</td><td>DGE – MINEM</td><td>Luminarias para lámparas fluorescentes compactas en redes secundarias</td><td>Complementa la R.D. 272-2016 para el componente de iluminación del SPFV.</td></tr>
+    <tr><td><b>Ley 27510 / 28307 (FOSE)</b></td><td>Ley del Congreso</td><td>2001/2004</td><td>Congreso</td><td>Fondo de Compensación Social Eléctrica: subsidio tarifario usuarios rurales</td><td>Reduce la Tarifa RER Autónoma que paga el usuario del SPFV.</td></tr>
+    <tr><td><b>Ley N° 29852 (FISE)</b></td><td>Ley del Congreso</td><td>2012</td><td>Congreso</td><td>Fondo de Inclusión Social Energético: subsidio a poblaciones vulnerables</td><td>Subsidia SPFV a escuelas, postas, comunidades (vía MINEM por Res. Ministerial).</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: El SPFV no está regulado por una sola norma sino por una cadena: la Ley 28749 le da existencia legal (SER no convencional), el DS 020-2013-EM regula cómo se contrata y remunera, la R.D. 272-2016-MEM/DGE define qué equipo es técnicamente aceptable, y el FOSE/FISE determinan cuánto paga el usuario final. Sin entender esta cadena, no se puede diseñar ni ejecutar un proyecto SPFV correctamente.</div>
+</div>
+
+<!-- ══════════════════════ QUIZ ══════════════════════ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-text"><span id="prog-text">Pregunta 0 de 10 respondidas</span><span id="score-text">Aciertos: 0/0</span></div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la norma que aprueba las Especificaciones Técnicas y el Procedimiento de Evaluación de un Sistema Pico Fotovoltaico (SPFV) en Perú?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Decreto Supremo N° 018-2020-EM</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) Ley N° 28749 – Ley General de Electrificación Rural</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) Resolución Directoral N° 272-2016-MEM/DGE</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Decreto Supremo N° 020-2013-EM</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Según la Ley N° 28749, ¿qué entidad del MINEM es competente para emitir normas de diseño y construcción para los SER fotovoltaicos?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) DGER – Dirección General de Electrificación Rural</button>
+      <button class="qbtn" data-q="2" data-correct="true">B) DGE – Dirección General de Electricidad</button>
+      <button class="qbtn" data-q="2" data-correct="false">C) OSINERGMIN</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) ADINELSA</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">En el mecanismo de subastas del DS 020-2013-EM para áreas no conectadas a red, ¿cuál es la variable de competencia que determina al ganador?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) El mayor número de sistemas SPFV comprometidos a instalar</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) El menor porcentaje de subsidio del Estado</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) La menor Remuneración Anual (US$/año), sin superar la Remuneración Base</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) La mayor eficiencia del panel fotovoltaico ofertado</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la Tarifa RER Autónoma es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Es el Cargo RER Autónomo descontando las compensaciones sociales (FOSE, FISE)</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) Se expresa como un cargo fijo mensual</button>
+      <button class="qbtn" data-q="4" data-correct="true">C) Es igual al Cargo RER Autónomo que recibe el Inversionista</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Reconoce una vida útil de 20 años para los suministros no convencionales</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Qué es el Fondo de Reposición en el contexto de un SPFV financiado por el Estado peruano?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Un presupuesto que el usuario paga directamente para reemplazar paneles dañados</button>
+      <button class="qbtn" data-q="5" data-correct="true">B) Una fracción de la anualidad del VNR incluida en la tarifa para garantizar el reemplazo de equipos al cabo de su vida útil</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) El monto que el Estado transfiere a ADINELSA para operar los sistemas</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) El fondo del FISE destinado a subsidiar comunidades vulnerables</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">El DS 003-2026-EM modifica el Reglamento de Electrificación Rural (DS 018-2020-EM). ¿Cuál es su principal innovación normativa?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) Crea el Sistema Pico Fotovoltaico como nueva categoría de SER</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) Deroga la Ley N° 28749 y la reemplaza con nueva ley</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) Crea el Fondo de Promoción de Uso Productivo, los Fondos Concursables y el artículo 45-A sobre transferencia de SER de gobiernos subnacionales</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Elimina el rol de ADINELSA en la operación de SER</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Cuáles son los cuatro criterios mínimos de priorización para incorporar proyectos en el componente de Mediano Plazo del PNER, según el DS 018-2020-EM?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Coeficiente de electrificación, costo por conexión, potencia instalada, distancia a red</button>
+      <button class="qbtn" data-q="7" data-correct="true">B) Coeficiente de electrificación rural, índice de pobreza, uso productivo de la electricidad, utilización de energías renovables</button>
+      <button class="qbtn" data-q="7" data-correct="false">C) Índice de pobreza, demanda proyectada, subsidio requerido, número de beneficiarios</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Uso de RER, factibilidad ambiental, rentabilidad social, disponibilidad presupuestal</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Para un proyecto de distribución SER (no transmisión), ¿qué instrumento ambiental se requiere para iniciar obras, según la Ley N° 28749 (art. 15)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Estudio de Impacto Ambiental (EIA) detallado</button>
+      <button class="qbtn" data-q="8" data-correct="true">B) Declaración de Impacto Ambiental (DIA) aprobada por la entidad competente</button>
+      <button class="qbtn" data-q="8" data-correct="false">C) Solo un informe de compatibilidad de uso de suelo municipal</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) No se requiere instrumento ambiental para SER de distribución</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia principal entre la DGE y la DGER dentro del MINEM en el contexto de los SPFV?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) La DGE ejecuta las obras de campo y la DGER emite las normas técnicas</button>
+      <button class="qbtn" data-q="9" data-correct="true">B) La DGE emite normas técnicas y otorga CER; la DGER ejecuta proyectos, administra recursos y formula el PNER</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) Son la misma entidad con distintos nombres según el año de la norma</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) La DGER regula las tarifas y la DGE fiscaliza la calidad del servicio</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿En qué portal oficial debe publicarse la R.D. N° 272-2016-MEM/DGE según lo indica la propia resolución, y qué norma lo exige?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) En el Diario Oficial El Peruano, según la Ley N° 28749</button>
+      <button class="qbtn" data-q="10" data-correct="true">B) En la página web del MINEM (www.minem.gob.pe), según el Decreto Supremo N° 014-2012-JUS</button>
+      <button class="qbtn" data-q="10" data-correct="false">C) En el portal del SPIJ del Ministerio de Justicia, según la Ley del Procedimiento Administrativo General</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) En el portal de OSINERGMIN, según el DS 018-2020-EM</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="result-panel">
+    <h4 id="result-title"></h4>
+    <p id="result-msg"></p>
+    <button class="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="full footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">
+    R.D. N° 272-2016-MEM/DGE (28 oct 2016) · Ley N° 28749 (2006) · DS N° 018-2020-EM · DS N° 003-2026-EM · DS N° 020-2013-EM · D.Leg. N° 1207 (2015) · D.Leg. N° 1002 (2008) · DS N° 012-2011-EM · Ley N° 27510/28307 (FOSE) · Ley N° 29852 (FISE) · CNE Suministro 2011 · NTCSER (R.D. N° 016-2008-EM-DGE) · ETS-RS-* Luminarias CFL (2006)
+  </span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1:{ok:"✅ ¡Correcto! La R.D. N° 272-2016-MEM/DGE es la norma técnica específica emitida por la DGE que aprueba las especificaciones del SPFV. El DS 018-2020-EM es el reglamento general y el DS 020-2013-EM regula las subastas, pero ninguno es la norma técnica del equipo.", fail:"❌ Incorrecto. La respuesta correcta es C) R.D. N° 272-2016-MEM/DGE. Es una Resolución Directoral de la DGE, no un Decreto Supremo ni la Ley base. Las normas técnicas de equipos son emitidas por la DGE mediante resoluciones directorales."},
+  2:{ok:"✅ ¡Correcto! La DGE (Dirección General de Electricidad) emite las normas técnicas de diseño, construcción y calidad, incluyendo las del SPFV. La DGER ejecuta proyectos y administra recursos, pero no emite normas técnicas.", fail:"❌ Incorrecto. La respuesta correcta es B) DGE. El art. 11 de la Ley 28749 señala expresamente que la DGE debe adecuar el CNE y emitir normas de diseño y construcción para los SER. La DGER ejecuta, pero no norma."},
+  3:{ok:"✅ ¡Correcto! La variable es la Remuneración Anual (US$/año por área). Gana quien proponga el menor valor sin exceder la Remuneración Base que calcula OSINERGMIN. Este diseño garantiza eficiencia en el gasto público.", fail:"❌ Incorrecto. La respuesta correcta es C). En las subastas de áreas no conectadas a red, el criterio es el menor precio anual (Remuneración Anual), no la mayor cantidad de equipos ni la mayor eficiencia técnica."},
+  4:{ok:"✅ ¡Correcto! La afirmación C es falsa. El Cargo RER Autónomo es la remuneración bruta que recibe el Inversionista (incluye O&M, comercialización, administración del fideicomiso). La Tarifa RER Autónoma es lo que paga el usuario, que es MENOR porque descuenta FOSE, FISE y otras compensaciones.", fail:"❌ Incorrecto. La respuesta correcta es C). El Cargo RER Autónomo ≠ Tarifa RER Autónoma. La tarifa que paga el usuario ya tiene descontados los subsidios sociales."},
+  5:{ok:"✅ ¡Correcto! El Fondo de Reposición es una fracción del VNR que se incluye en la tarifa para asegurar que, al final de la vida útil de los equipos (20 años para SPFV), haya recursos para reponerlos. Es necesario porque el Estado financió la inversión inicial y no la cobra como anualidad completa.", fail:"❌ Incorrecto. La respuesta correcta es B). El Fondo de Reposición es un mecanismo tarifario, no una transferencia directa. Reemplaza la amortización completa del VNR en la tarifa, haciendo la tarifa más baja durante la vida útil del sistema."},
+  6:{ok:"✅ ¡Correcto! El DS 003-2026-EM crea el Fondo de Promoción de Uso Productivo (para educación en uso de electricidad), define los Fondos Concursables (para Programas de Uso Productivo) y añade el art. 45-A que regula la transferencia de SER ejecutados por Gobiernos Regionales/Locales.", fail:"❌ Incorrecto. La respuesta correcta es C). El DS 003-2026-EM modifica el DS 018-2020-EM pero no deroga la Ley 28749 ni elimina a ADINELSA. Su innovación central es el marco para usos productivos y la regularización de SER subnacionales."},
+  7:{ok:"✅ ¡Correcto! Los cuatro criterios del art. 15 del DS 018-2020-EM son: (1) coeficiente de electrificación rural, (2) índice de pobreza, (3) uso productivo de la electricidad, (4) utilización de energías renovables. Estos criterios orientan hacia las comunidades más necesitadas con potencial productivo.", fail:"❌ Incorrecto. La respuesta correcta es B). Los criterios son los cuatro definidos en el art. 15 del DS 018-2020-EM. El costo o la rentabilidad financiera no son criterios de priorización en el PNER; el sistema está orientado a objetivos sociales."},
+  8:{ok:"✅ ¡Correcto! Para proyectos de distribución SER se requiere la DIA (Declaración de Impacto Ambiental). Solo para proyectos de transmisión SER se aplican criterios distintos de clasificación anticipada. El SPFV en zonas no conectadas no requiere DIA porque se instala en predios privados.", fail:"❌ Incorrecto. La respuesta correcta es B) DIA. El EIA completo se exige para proyectos de transmisión. Los proyectos de distribución SER tienen el instrumento simplificado DIA, que reduce tiempos de aprobación."},
+  9:{ok:"✅ ¡Correcto! La DGE emite normas técnicas (como la R.D. 272-2016), otorga CER, califica SER y declara caducidades. La DGER formula el PNER, administra el presupuesto de electrificación, ejecuta obras, suscribe convenios y conduce fondos concursables. Son complementarias, no intercambiables.", fail:"❌ Incorrecto. La respuesta correcta es B). Es un error muy común confundirlas. Regla mnemotécnica: DG-E = Electricidad = normas técnicas; DG-E-R = Electrificación Rural = ejecución de proyectos."},
+  10:{ok:"✅ ¡Correcto! La R.D. 272-2016 en su Artículo 3 ordena publicar la resolución y su Anexo en la página web del MINEM (www.minem.gob.pe), conforme al DS N° 014-2012-JUS que regula la publicación de normas en portales institucionales.", fail:"❌ Incorrecto. La respuesta correcta es B). Si bien las normas de mayor rango se publican en El Peruano, esta resolución directoral se publica en el portal del MINEM según el DS 014-2012-JUS. El Artículo 3 de la propia R.D. lo indica expresamente."}
+};
+
+let answered=0, correct=0;
+document.querySelector('#quiz-section').addEventListener('click', function(e){
+  const btn=e.target.closest('.qbtn');
+  if(!btn) return;
+  const q=btn.dataset.q;
+  const isCorrect=btn.dataset.correct==='true';
+  const btns=document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  btns.forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.correct==='true') b.classList.add('show-correct');
+  });
+  if(isCorrect){btn.classList.add('correct');correct++;}
+  else{btn.classList.add('incorrect');}
+  const fb=document.getElementById('fb'+q);
+  fb.style.display='block';
+  fb.className='qfeedback '+(isCorrect?'ok':'fail');
+  fb.innerHTML=isCorrect?feedbacks[q].ok:feedbacks[q].fail;
+  answered++;
+  document.getElementById('prog-text').textContent=`Pregunta ${answered} de 10 respondidas`;
+  document.getElementById('score-text').textContent=`Aciertos: ${correct}/${answered}`;
+  document.getElementById('prog-bar').style.width=(answered*10)+'%';
+  if(answered===10){
+    const panel=document.getElementById('result-panel');
+    panel.style.display='block';
+    const title=document.getElementById('result-title');
+    const msg=document.getElementById('result-msg');
+    if(correct<=4){panel.className='result-bad';title.textContent=`${correct}/10 — Necesitas repasar el material`;msg.textContent='Vuelve a revisar el canvas, especialmente la jerarquía normativa y los mecanismos tarifarios.';}
+    else if(correct<=7){panel.className='result-mid';title.textContent=`${correct}/10 — ¡Buen avance, sigue repasando!`;msg.textContent='Tienes la base. Refuerza las diferencias entre DGE/DGER, Cargo RER Autónomo vs Tarifa RER Autónoma, y el DS 003-2026-EM.';}
+    else{panel.className='result-ok';title.textContent=`${correct}/10 — ¡Excelente dominio del tema!`;msg.textContent='Dominas el marco normativo del SPFV. Puedes afrontar el examen con confianza. ¡Bien hecho!';}
+  }
+});
+
+function resetQuiz(){
+  answered=0;correct=0;
+  document.getElementById('prog-text').textContent='Pregunta 0 de 10 respondidas';
+  document.getElementById('score-text').textContent='Aciertos: 0/0';
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('result-panel').style.display='none';
+  for(let i=1;i<=10;i++){
+    const btns=document.querySelectorAll(`.qbtn[data-q="${i}"]`);
+    btns.forEach(b=>{b.disabled=false;b.classList.remove('correct','incorrect','show-correct');});
+    const fb=document.getElementById('fb'+i);
+    fb.style.display='none';fb.innerHTML='';fb.className='qfeedback';
+  }
+}
+</script>
+</body>
+</html>

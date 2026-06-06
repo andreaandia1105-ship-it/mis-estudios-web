@@ -1,0 +1,539 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.sec{grid-column:1/-1;border-radius:9px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.4px;color:#fff}
+.titbar{grid-column:1/-1;background:#0f1e3a;border-radius:12px;padding:14px 18px;color:#fff}
+.titbar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titbar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;line-height:1.5}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.5}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;line-height:1.4}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.ft{grid-column:1/-1;background:#0f1e3a;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft-label{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;flex-shrink:0;padding-top:1px}
+.ft-refs{font-size:11px;color:#94a3b8;line-height:1.6}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:4px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.nb{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-o{background:#ffedd5;color:#7c2d12}
+.nb-p{background:#ede9fe;color:#4c1d95}
+.nb-r{background:#fee2e2;color:#991b1b}
+
+.qcard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.qnum{font-size:10px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.5px}
+.qtext{font-size:13px;font-weight:500;margin-bottom:10px;line-height:1.5;color:var(--color-text-primary)}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary);border-color:var(--color-border-secondary)}
+.qbtn.correct{background:#dcfce7!important;border-color:#16a34a!important;color:#14532d!important}
+.qbtn.wrong{background:#fee2e2!important;border-color:#dc2626!important;color:#991b1b!important}
+.qbtn:disabled{opacity:.7;cursor:not-allowed}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;border-left:3px solid}
+.qf-ok{background:#f0fdf4;border-color:#16a34a;color:#14532d}
+.qf-err{background:#fef2f2;border-color:#dc2626;color:#991b1b}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px 10px 0 0;padding:12px 16px;margin:-12px -13px 12px}
+.quiz-header h3{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.progress-wrap{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.progress-label{font-size:12px;color:var(--color-text-secondary);white-space:nowrap}
+#result-panel{display:none;border-radius:8px;padding:12px 14px;margin-top:12px;font-size:13px}
+.btn-reset{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;cursor:pointer;margin-top:10px;font-family:'Source Sans 3',sans-serif}
+</style>
+
+<div class="cv">
+
+<div class="titbar">
+  <h1>Hoja de Ruta — Empresa de Energías Renovables</h1>
+  <p>Guía integral: formación, habilitación legal, mercados y expansión | Ingeniería Meteorológica UNALM</p>
+  <div>
+    <span class="pill" style="background:#1e3a8a;color:#bfdbfe">Formación técnica</span>
+    <span class="pill" style="background:#14532d;color:#bbf7d0">Marco legal Perú</span>
+    <span class="pill" style="background:#7c2d12;color:#fed7aa">Ventas y comercio</span>
+    <span class="pill" style="background:#4c1d95;color:#e9d5ff">Mercado público</span>
+    <span class="pill" style="background:#0f766e;color:#99f6e4">Exportar servicios</span>
+  </div>
+</div>
+
+<div class="sec" style="background:#1e3a8a">🎓 BLOQUE 1 — FORMACIÓN TÉCNICA NECESARIA</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a">Tu base actual y lo que falta</span>
+  <div class="def" style="border-color:#3b82f6">
+    Ingeniería Meteorológica te da ventaja real en recurso solar, modelado climático y análisis de datos. Pero para firmar proyectos, vender a empresas y operar legalmente necesitas cubrir brechas específicas en ingeniería eléctrica aplicada y normativa.
+  </div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #16a34a">
+      <strong style="color:#14532d">Lo que YA tienes</strong><br>
+      Análisis de recurso solar (GHI, DNI, PVGIS), modelado climatológico, estadística aplicada, manejo de datos meteorológicos, SIG. Esto equivale al 40% de lo que necesita un diseñador FV.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong style="color:#7c2d12">Lo que te falta cubrir</strong><br>
+      Circuitos DC/AC, dimensionamiento eléctrico, normativa CNE, diseño estructural básico de soportes, gestión de proyectos de ingeniería, redacción de expedientes técnicos MINEM.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué un meteorólogo tiene ventaja competitiva en diseño FV frente a un técnico electricista? ¿Qué aportaría cada uno que el otro no puede?</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a">Cursos técnicos FV — prioridad inmediata</span>
+  <div class="item"><div class="nb nb-b">1</div><div><strong>Diseño de sistemas FV on-grid y off-grid</strong> — PVsyst, AutoCAD Solar, dimensionamiento profesional. Proveedor: SolarEdge Academy (gratis online), IRENA Learning Platform.</div></div>
+  <div class="item"><div class="nb nb-b">2</div><div><strong>Electricidad DC/AC básica aplicada</strong> — Circuitos, protecciones, cableado según NEC/CNE. Puede cursarse en SENATI o TECSUP como curso libre.</div></div>
+  <div class="item"><div class="nb nb-b">3</div><div><strong>Software PVsyst</strong> — Estándar mundial para simulación y diseño FV. Tiene versión educativa gratuita. Imprescindible para presentar expedientes a bancos e inversionistas.</div></div>
+  <div class="item"><div class="nb nb-b">4</div><div><strong>AutoCAD / QGIS para layouts solares</strong> — Para elaborar planos técnicos requeridos en expedientes MINEM y municipalidades.</div></div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95">Certificaciones internacionales clave</span>
+  <div class="item"><div class="nb nb-p">A</div><div><strong>NABCEP PV Associate</strong> (EE.UU.) — La certificación más reconocida mundialmente para instaladores y diseñadores FV. Examen en inglés, ~$300. Válida para diferenciarte ante clientes grandes.</div></div>
+  <div class="item"><div class="nb nb-p">B</div><div><strong>SEI Solar Training</strong> (Solar Energy International) — Cursos modulares desde diseño básico hasta avanzado. Reconocidos en Latinoamérica para proyectos con financiamiento internacional.</div></div>
+  <div class="item"><div class="nb nb-p">C</div><div><strong>IRENA — Renewable Energy Learning Partnership</strong> — Cursos gratis en línea. Muy útil para el componente de políticas y proyectos en países en desarrollo.</div></div>
+  <div class="warn">⚠ No confundas cursos cortos con habilitación profesional. Un certificado de 40h no te habilita a firmar proyectos en Perú — eso lo hace el CIP. Los cursos son para competencia técnica, el CIP para firma legal.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12">Cursos de negocio y gestión — igual de importantes</span>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #f97316">
+      <strong>Gestión de proyectos</strong><br>
+      PMP o PRINCE2 básico. Para ejecutar proyectos con presupuesto, cronograma y entregables reales. ESAN y PAD ofrecen versiones cortas en Perú.
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316">
+      <strong>Finanzas para ingenieros</strong><br>
+      TIR, VAN, flujos de caja, análisis de retorno. Imprescindible para presentar proyectos a bancos de desarrollo (CAF, BID, COFIDE).
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316">
+      <strong>Licitaciones y contratos públicos</strong><br>
+      Ley de Contrataciones del Estado (Ley 30225) y SEACE. Sin esto no puedes participar en concursos del Estado peruano.
+    </div>
+    <div class="mini" style="border-left:3px solid #ea580c">
+      <strong>Marketing B2B</strong><br>
+      Venta técnica a empresas agroindustriales, mineras, municipalidades. Muy diferente al marketing de redes para casas.
+    </div>
+    <div class="mini" style="border-left:3px solid #ea580c">
+      <strong>Comercio exterior básico</strong><br>
+      Para importar equipos sin sobrecostos arancelarios y para exportar servicios técnicos a otros países andinos.
+    </div>
+    <div class="mini" style="border-left:3px solid #ea580c">
+      <strong>Inglés técnico</strong><br>
+      Fichas técnicas, normas IEC, comunicación con proveedores asiáticos y organismos internacionales están en inglés. Sin esto pagas intermediarios.
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ccfbf1;color:#134e4a">Ruta de formación por etapas</span>
+  <div class="flow">
+    <div class="fbox"><strong>Año 1</strong><br>Titularte + CIP<br>PVsyst gratis<br>CNE básico</div>
+    <div class="farrow">→</div>
+    <div class="fbox"><strong>Año 2</strong><br>NABCEP<br>Gestión proyectos<br>1er proyecto real</div>
+    <div class="farrow">→</div>
+    <div class="fbox"><strong>Año 3</strong><br>Licitaciones<br>Socio eléctrico<br>Registro MINEM</div>
+    <div class="farrow">→</div>
+    <div class="fbox"><strong>Año 4+</strong><br>Mercado público<br>Exportar servicios<br>Escalar empresa</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué no conviene saltar directamente al mercado público sin antes ejecutar proyectos privados pequeños? Justifica con al menos 3 razones técnicas y comerciales.</div>
+</div>
+
+<div class="sec" style="background:#14532d">🏢 BLOQUE 2 — CONSTITUCIÓN LEGAL Y HABILITACIÓN EN PERÚ</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d">Tipo de empresa recomendada</span>
+  <div class="def" style="border-color:#16a34a">
+    Para una empresa que vende equipos Y presta servicios técnicos, la forma jurídica óptima es la SAC (Sociedad Anónima Cerrada). Permite socios, emisión de acciones para inversores futuros y tiene mejor imagen ante clientes corporativos que una EIRL.
+  </div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><div><strong>SUNARP:</strong> Búsqueda de nombre + escritura pública + inscripción. Costo total ~S/.400–600. Plazo: 7–15 días hábiles.</div></div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><div><strong>SUNAT:</strong> RUC con CIIU 4321 (instalaciones eléctricas) y/o 4669 (venta mayorista de otros productos). Para importar también necesitas activar comercio exterior en tu RUC.</div></div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><div><strong>Régimen tributario:</strong> Empieza en Régimen MYPE Tributario (RMT) — IR de 10% hasta 15 UIT, luego 29.5%. Emite facturas electrónicas desde el inicio.</div></div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d">Habilitaciones técnicas obligatorias</span>
+  <div class="item"><div class="nb nb-g">1</div><div><strong>CIP — Colegio de Ingenieros del Perú:</strong> Debes titularte y colegiarte. El CIP Capítulo de Ingeniería Mecánica y Eléctrica (o Civil) es quien habilita firmas en proyectos eléctricos. Sin esto no puedes firmar expedientes legalmente.</div></div>
+  <div class="item"><div class="nb nb-g">2</div><div><strong>Registro DGE-MINEM como Ejecutor de Obras Eléctricas:</strong> Obligatorio para ejecutar proyectos con financiamiento público o concesiones. Requiere CIP, experiencia acreditada y presentar documentos ante la Dirección General de Electricidad.</div></div>
+  <div class="item"><div class="nb nb-g">3</div><div><strong>OSINERGMIN — Registro de Instaladores:</strong> Para proyectos en áreas no conectadas a red y sistemas de hasta 500 kW. Permite participar en programas de electrificación rural del Estado.</div></div>
+  <div class="warn">⚠ El registro DGE requiere que el representante técnico tenga al menos 2 años de experiencia acreditada en proyectos eléctricos. Si no la tienes al inicio, asociarte con un ingeniero eléctrico con experiencia es la vía más rápida.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d">Para vender equipos (no solo instalar)</span>
+  <div class="def" style="border-color:#16a34a">
+    Vender paneles, baterías e inversores es actividad comercial, no requiere registro técnico especial. Sí requiere RUC activo con la actividad de comercio, y si importas directamente, activar importaciones en SUNAT y gestionar DAM (Declaración Aduanera de Mercancías) con Aduanas.
+  </div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><div><strong>Importación directa:</strong> Necesitas Agente de Aduana (obligatorio para cargas &gt;$2,000 FOB). El arancel para paneles solares en Perú es 0% (partida 8541.40.00) — gran ventaja.</div></div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><div><strong>Garantías y post-venta:</strong> La Ley de Protección al Consumidor (Ley 29571) exige garantía mínima de 2 años para bienes. Para equipos FV esto es especialmente crítico — define tu política desde el inicio.</div></div>
+  <div class="item"><div class="dot" style="background:#16a34a"></div><div><strong>Certificación de equipos:</strong> Para vender en proyectos públicos, los equipos deben tener certificación IEC (IEC 61215 para paneles, IEC 62109 para inversores). Exige esto a tus proveedores desde el primer pedido.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la partida arancelaria de los paneles solares en Perú y qué ventaja competitiva representa frente a otros productos electrónicos importados?</div>
+</div>
+
+<div class="sec" style="background:#7c2d12">🛒 BLOQUE 3 — MODELO DE NEGOCIO: VENDER Y SERVIR</div>
+
+<div class="block">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12">Los 3 flujos de ingreso posibles</span>
+  <div class="item"><div class="nb nb-o">A</div><div><strong>Venta de equipos (producto):</strong> Paneles, baterías, inversores, controladores, cables, estructuras. Margen bruto típico: 20–35%. Requiere stock o acuerdo con proveedor drop-shipping.</div></div>
+  <div class="item"><div class="nb nb-o">B</div><div><strong>Servicio de diseño e instalación:</strong> Expediente técnico + suministro + instalación + puesta en marcha. Margen: 25–45%. El más rentable si escala, porque combina material y mano de obra.</div></div>
+  <div class="item"><div class="nb nb-o">C</div><div><strong>Servicio recurrente (O&amp;M):</strong> Operación y Mantenimiento mensual o anual. Ingresos predecibles, bajo costo incremental una vez instalado el sistema. Muy escaso en Perú — gran oportunidad.</div></div>
+  <div class="rx">Ingreso mensual = N_sistemas × tarifa_O&M_mensual<br>Ej: 50 sistemas × S/.150/mes = S/.7,500/mes pasivos</div>
+  <div class="warn">⚠ El error más común de empresas nuevas: solo venden equipos y no ofrecen instalación. Pierden el 60% del valor del proyecto. Siempre ofrece el paquete completo "Llave en mano".</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12">Segmentos de mercado por rentabilidad</span>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>Residencial urbano</strong><br>
+      Lima y ciudades medianas. On-grid con net metering. Ticket: S/.15,000–35,000. Muy competido. Margen bajo. Solo para volumen.
+    </div>
+    <div class="mini" style="border-top:3px solid #16a34a">
+      <strong>Rural off-grid</strong><br>
+      Sierra y selva. Sistemas 12–48V. Ticket: S/.8,000–25,000. Menos competencia. Tu perfil SENAMHI ayuda (conoces zonas).
+    </div>
+    <div class="mini" style="border-top:3px solid #7c3aed">
+      <strong>Agroindustrial</strong><br>
+      Bombeo solar, riego, cámaras frías. Ticket: S/.50,000–500,000. Alto margen. Requiere experiencia técnica mayor.
+    </div>
+    <div class="mini" style="border-top:3px solid #0f766e">
+      <strong>Telecomunicaciones</strong><br>
+      Torres de antena, repetidoras rurales. Ticket: S/.30,000–150,000. Empresas como Claro/Entel contratan esto regularmente.
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12">Tu ventaja diferencial como meteorólogo</span>
+  <div class="def" style="border-color:#f97316">
+    Ningún instalador común puede hacer estudios de recurso solar validados científicamente, predecir variabilidad estacional o emitir informes técnicos con sustento climatológico. Eso es tuyo exclusivamente.
+  </div>
+  <div class="item"><div class="dot" style="background:#f97316"></div><div><strong>Estudio de recurso solar</strong> con datos SENAMHI + PVGIS + análisis estadístico → cobrable como servicio independiente (S/.2,000–8,000 por estudio según escala del proyecto).</div></div>
+  <div class="item"><div class="dot" style="background:#f97316"></div><div><strong>Informe de viabilidad climatológica</strong> para bancos e inversionistas → documento que certifica la producción esperada del sistema. Requerido en proyectos &gt;100kWp.</div></div>
+  <div class="item"><div class="dot" style="background:#f97316"></div><div><strong>Monitoreo post-instalación</strong> con interpretación de datos meteorológicos → diferencia si la baja producción es falla del sistema o evento climático. Valioso para garantías.</div></div>
+  <div class="exam">🎯 EXAMEN: Diseña un servicio de "auditoría solar" que solo un ingeniero meteorólogo podría ofrecer. ¿Qué datos usarías, qué entregables daría y a qué tipo de cliente se lo venderías?</div>
+</div>
+
+<div class="sec" style="background:#4c1d95">🏛 BLOQUE 4 — MERCADO PÚBLICO: ESTADO PERUANO</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95">Cómo vender al Estado peruano</span>
+  <div class="def" style="border-color:#7c3aed">
+    El Estado es el mayor comprador de sistemas FV en Perú a través del MINEM-DGER (Dirección General de Electrificación Rural), gobiernos regionales y municipalidades. Los proyectos se adjudican por licitación pública en el portal SEACE.
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><div class="nb nb-p">1</div><div><strong>Inscripción en RNP (Registro Nacional de Proveedores):</strong> OSCE. Obligatorio para contratar con el Estado. Categorías: Bienes, Servicios, Obras, Consultoría. Para sistemas FV necesitas Bienes + Servicios + potencialmente Obras.</div></div>
+      <div class="item"><div class="nb nb-p">2</div><div><strong>Portal SEACE:</strong> seace.osce.gob.pe — Aquí se publican TODAS las licitaciones. Crear alerta por palabras clave: "fotovoltaico", "solar", "electrificación rural", "energía renovable".</div></div>
+      <div class="item"><div class="nb nb-p">3</div><div><strong>Ley de Contrataciones del Estado (Ley 30225):</strong> Define tipos de proceso según monto. Adjudicación Simplificada (&lt;400 UIT), Licitación Pública (&gt;400 UIT). Estudia los tipos de proceso.</div></div>
+    </div>
+    <div>
+      <div class="item"><div class="nb nb-p">4</div><div><strong>Consorcio al inicio:</strong> Para proyectos grandes sin experiencia acreditada, consorciarte con una empresa establecida te permite participar y ganar experiencia registrable para futuros procesos.</div></div>
+      <div class="item"><div class="nb nb-p">5</div><div><strong>FONER y DGER:</strong> El Fondo de Electrificación Rural financia proyectos en zonas aisladas. Los sistemas FV off-grid son el componente principal. Seguir sus convocatorias.</div></div>
+      <div class="item"><div class="nb nb-p">6</div><div><strong>GIZ y Cooperación Internacional:</strong> Agencia Alemana de Cooperación financia proyectos FV en Perú regularmente. También BID, Banco Mundial, USAID. Estos no pasan por SEACE pero sí por PROINVERSIÓN.</div></div>
+    </div>
+  </div>
+  <div class="warn">⚠ El mayor error en licitaciones: presentarse sin cumplir TODOS los requisitos técnicos mínimos (RTM). Tu propuesta puede ser la mejor técnicamente pero descalificada por falta de un documento. Lee el TDR completo antes de decidir participar.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95">Documentos clave para licitaciones</span>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div><strong>Expediente técnico:</strong> Memoria descriptiva, especificaciones técnicas, planos, metrados, presupuesto, cronograma. Firmado por ing. colegiado habilitado.</div></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div><strong>Experiencia acreditada:</strong> Contratos o constancias de proyectos similares ejecutados. En los primeros años este es el mayor cuello de botella.</div></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div><strong>Solvencia económica:</strong> Estados financieros auditados. Para proyectos &gt;S/.200,000 suelen pedir capacidad económica mínima.</div></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div><strong>Carta fianza:</strong> Garantía bancaria de seriedad de oferta y fiel cumplimiento. Costo: 1–3% del monto del contrato. Necesitas línea de crédito bancaria.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué una empresa nueva no puede ganar directamente una Licitación Pública de proyectos de electrificación rural por más que tenga la mejor propuesta técnica? ¿Cuál es la vía alternativa?</div>
+</div>
+
+<div class="sec" style="background:#0f766e">🌎 BLOQUE 5 — EXPANSIÓN INTERNACIONAL</div>
+
+<div class="block">
+  <span class="bh" style="background:#ccfbf1;color:#134e4a">Exportar servicios técnicos desde Perú</span>
+  <div class="def" style="border-color:#0d9488">
+    Exportar servicios (estudios, diseños, consultoría) es legal, no requiere establecimiento físico en el otro país y tiene exoneración de IGV en Perú (Decreto Legislativo 1119). Es el camino más fácil para internacionalizarse.
+  </div>
+  <div class="item"><div class="dot" style="background:#0d9488"></div><div><strong>Mercados objetivo cercanos:</strong> Bolivia, Ecuador, Paraguay — menor desarrollo solar, menos competencia local, misma zona horaria y español. Bolivia especialmente: alto potencial solar en altiplano.</div></div>
+  <div class="item"><div class="dot" style="background:#0d9488"></div><div><strong>Mecanismo:</strong> Contrato de prestación de servicios en moneda extranjera, factura en dólares, registro en SUNAT como exportador de servicios. PROMPERÚ tiene programa de apoyo para exportadores de servicios.</div></div>
+  <div class="item"><div class="dot" style="background:#0d9488"></div><div><strong>Certificaciones que abren puertas internacionales:</strong> ISO 9001 (calidad), NABCEP, membresía en ISES (International Solar Energy Society) o SolarPower Europe.</div></div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ccfbf1;color:#134e4a">Organismos internacionales de financiamiento</span>
+  <div class="item"><div class="nb nb-g">BID</div><div><strong>Banco Interamericano de Desarrollo</strong> — Financia proyectos FV en toda Latinoamérica. Tiene ventanilla para PYMES. Requiere socio local en el país destino.</div></div>
+  <div class="item"><div class="nb nb-g">GIZ</div><div><strong>Agencia Alemana de Cooperación</strong> — Opera en Perú, Bolivia, Ecuador. Contrata consultores y empresas para proyectos de energía rural. Registro en su portal de proveedores.</div></div>
+  <div class="item"><div class="nb nb-g">IRENA</div><div><strong>Agencia Internacional de Energías Renovables</strong> — Publica convocatorias para estudios y proyectos piloto. Sede en Abu Dhabi, pero opera globalmente. Requiere inglés.</div></div>
+  <div class="warn">⚠ Para acceder a financiamiento internacional necesitas estados financieros en inglés, auditoría externa y a menudo certificación ISO. Planifica esto desde el año 3 de la empresa.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué ventaja tiene exportar "servicios técnicos de consultoría solar" frente a exportar "equipos fotovoltaicos" en términos de capital de trabajo, riesgo logístico y requisitos legales?</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ccfbf1;color:#134e4a">¿Es rentable para tu perfil?</span>
+  <div class="def" style="border-color:#0d9488">
+    Sí — con la condición de diferenciarte por el lado técnico-científico, no competir en precio con instaladores informales.
+  </div>
+  <div class="item"><div class="dot" style="background:#0d9488"></div><div>El mercado FV en Perú crece ~25% anual. La demanda rural off-grid sigue sin cobertura adecuada en más del 40% del territorio.</div></div>
+  <div class="item"><div class="dot" style="background:#0d9488"></div><div>Tu perfil SENAMHI + UNALM es una combinación que muy pocos instaladores tienen. Úsala como credencial, no solo como antecedente académico.</div></div>
+  <div class="item"><div class="dot" style="background:#0d9488"></div><div>El nicho de O&amp;M (mantenimiento con análisis de datos meteorológicos) está prácticamente vacío en Perú. Una empresa especializada en ese servicio podría dominar el mercado en 5 años.</div></div>
+</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#f1f5f9;color:#334155">Tabla resumen integral — Hoja de ruta por etapa</span>
+  <table class="tbl">
+    <tr>
+      <th>Etapa</th><th>Plazo</th><th>Formación prioritaria</th><th>Acción legal/comercial</th><th>Mercado objetivo</th><th>Ingreso estimado/mes</th>
+    </tr>
+    <tr>
+      <td><strong>0 — Base</strong></td><td>Ahora–1 año</td><td>PVsyst gratis, CNE Tomo V, electricidad DC/AC en TECSUP</td><td>Titularte, CIP, constituir SAC, RUC</td><td>Proyectos propios, amigos, familiares</td><td>S/.0 – 2,000</td>
+    </tr>
+    <tr>
+      <td><strong>1 — Arranque</strong></td><td>1–2 años</td><td>NABCEP Associate, gestión de proyectos, AutoCAD</td><td>RNP (OSCE), primer contrato privado firmado</td><td>Residencial rural, agrícola pequeño</td><td>S/.2,000 – 6,000</td>
+    </tr>
+    <tr>
+      <td><strong>2 — Crecimiento</strong></td><td>2–4 años</td><td>Licitaciones públicas, finanzas para ingenieros, ISO 9001</td><td>Registro DGE-MINEM, primer consorcio público</td><td>Proyectos MINEM, municipalidades, agroindustria</td><td>S/.6,000 – 20,000</td>
+    </tr>
+    <tr>
+      <td><strong>3 — Escala</strong></td><td>4–7 años</td><td>MBA parcial o especialización, inglés técnico avanzado</td><td>Exportador de servicios SUNAT, ISO 9001 certificada</td><td>Bolivia, Ecuador, licitaciones BID/GIZ</td><td>S/.20,000 – 60,000</td>
+    </tr>
+    <tr>
+      <td><strong>4 — Internacional</strong></td><td>7+ años</td><td>Certificaciones IEC, IRENA network</td><td>Filial o alianza en país destino</td><td>Mercado andino, cooperación internacional</td><td>$20,000+ USD</td>
+    </tr>
+  </table>
+  <div class="warn">⚠ Dato integrador clave: El arancel 0% para paneles solares (partida 8541.40.00) + la exoneración de IGV para exportación de servicios + el crecimiento del 25% anual del mercado FV peruano = ventana de oportunidad real en los próximos 5–7 años. Quien se posicione técnicamente ahora captura ese mercado antes de que se sature.</div>
+</div>
+
+<div class="block s3">
+  <div class="quiz-header">
+    <h3>Quiz de repaso — 10 preguntas</h3>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="progress-wrap">
+    <span class="progress-label">Respondidas: <strong id="prog-text">0 / 10</strong></span>
+    <div class="stat-bar-wrap" style="flex:1">
+      <div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a;transition:width .3s"></div>
+    </div>
+    <span class="progress-label">Aciertos: <strong id="score-text">0</strong></span>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la forma jurídica más recomendada para una empresa que combina venta de equipos FV e instalación de sistemas, y planea admitir socios inversores en el futuro?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) EIRL — Empresa Individual de Responsabilidad Limitada</button>
+      <button class="qbtn" data-q="1" data-correct="true">B) SAC — Sociedad Anónima Cerrada</button>
+      <button class="qbtn" data-q="1" data-correct="false">C) SRL — Sociedad de Responsabilidad Limitada</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Persona Natural con Negocio</button>
+    </div>
+    <div class="qfeedback" id="fb1" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">¿Cuál es la partida arancelaria de los paneles solares en Perú y qué arancel de importación aplica actualmente?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) Partida 8537.10.00 — arancel 12%</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) Partida 8544.60.00 — arancel 6%</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) Partida 8541.40.00 — arancel 0%</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) Partida 8501.61.00 — arancel 4%</button>
+    </div>
+    <div class="qfeedback" id="fb2" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Para participar en una licitación pública de sistemas FV del Estado peruano, ¿cuál de estos registros es OBLIGATORIO tener antes de presentar propuesta?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) Certificación NABCEP vigente</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) ISO 9001 certificada por ente acreditado</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) Inscripción en el RNP del OSCE</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Registro en la Cámara de Comercio de Lima</button>
+    </div>
+    <div class="qfeedback" id="fb3" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">Un ingeniero meteorólogo quiere firmar legalmente el expediente técnico eléctrico de un sistema FV de 50 kWp en Perú. ¿Qué requisito previo indispensable debe cumplir?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Tener un curso de electricidad de 80 horas en SENATI</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) Contar con certificación NABCEP vigente</button>
+      <button class="qbtn" data-q="4" data-correct="true">C) Estar titulado y colegiado en el CIP con habilitación vigente</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Tener mínimo 5 años de experiencia laboral en el sector</button>
+    </div>
+    <div class="qfeedback" id="fb4" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál de los siguientes servicios representa el mayor potencial de ingresos recurrentes y baja competencia en el mercado FV peruano actual?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Venta de paneles solares a clientes residenciales en Lima</button>
+      <button class="qbtn" data-q="5" data-correct="false">B) Instalación de sistemas on-grid en edificios de departamentos</button>
+      <button class="qbtn" data-q="5" data-correct="true">C) Operación y Mantenimiento (O&M) con monitoreo de datos climáticos</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) Importación y reventa de controladores MPPT en MercadoLibre</button>
+    </div>
+    <div class="qfeedback" id="fb5" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Una empresa peruana de consultoría solar emite una factura a una empresa boliviana por un estudio de recurso solar realizado desde Lima. ¿Qué tratamiento tributario corresponde en Perú?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) Paga IGV normal del 18% como cualquier servicio local</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) Está exonerada de IR pero paga IGV</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) Exonerada de IGV por ser exportación de servicios (D.Leg. 1119)</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Debe tributar en Bolivia según convenio de doble imposición</button>
+    </div>
+    <div class="qfeedback" id="fb6" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Cuál es la norma técnica peruana que regula la capacidad de corriente de conductores en instalaciones eléctricas y que debes dominar para dimensionar el cableado de un sistema FV?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) NTP 370.310 — Certificación de instalaciones en viviendas</button>
+      <button class="qbtn" data-q="7" data-correct="true">B) NTP 370.301 — Capacidad de corriente de conductores en canalizaciones</button>
+      <button class="qbtn" data-q="7" data-correct="false">C) DS 025-2007-EM — Reglamento de Electrificación Rural</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) RD 042-2006/MEM-DGE — Especificaciones técnicas de sistemas FV</button>
+    </div>
+    <div class="qfeedback" id="fb7" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Una empresa nueva sin experiencia acreditada quiere participar en un proyecto de electrificación rural de S/.800,000 del MINEM. ¿Cuál es la estrategia más viable?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Presentarse directamente con certificaciones técnicas como sustituto de experiencia</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Esperar 5 años hasta tener la experiencia mínima requerida</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Formar consorcio con empresa establecida que aporte la experiencia acreditada</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Subcontratar todo el proyecto y solo hacer la gestión administrativa</button>
+    </div>
+    <div class="qfeedback" id="fb8" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cuál de los siguientes segmentos de mercado representa el mayor ticket promedio por proyecto y el margen más alto, pero requiere mayor experiencia técnica previa?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Residencial urbano en Lima Metropolitana</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) Sistemas off-grid residenciales en zonas rurales</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) Venta de equipos sueltos en tienda online</button>
+      <button class="qbtn" data-q="9" data-correct="true">D) Agroindustrial: bombeo solar, riego y cámaras frías</button>
+    </div>
+    <div class="qfeedback" id="fb9" style="display:none"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál afirmación sobre el modelo de negocio de una empresa FV es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) El servicio O&M genera ingresos recurrentes con bajo costo incremental</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) La venta "llave en mano" combina equipo + instalación y tiene el mejor margen</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) Solo vender equipos sin instalación es suficiente para ser rentable a largo plazo</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) Los estudios de recurso solar son un servicio independiente cobrable</button>
+    </div>
+    <div class="qfeedback" id="fb10" style="display:none"></div>
+  </div>
+
+  <div id="result-panel"></div>
+</div>
+
+<div class="ft">
+  <span class="ft-label">REFERENCIAS:</span>
+  <span class="ft-refs">
+    OSCE — Ley 30225 Ley de Contrataciones del Estado | SUNAT — D.Leg. 1119 Exportación de Servicios | MINEM-DGE — RD 042-2006 Especificaciones FV | INDECOPI — NTP 370.301, 370.310 | NABCEP — nabcep.org | PVsyst — pvsyst.com | IRENA Learning Platform — irena.org/learning | SEI Solar Training — solarenergy.org | PROMPERÚ — Exportación de Servicios — siicex.gob.pe | CNE Tomo V Utilización — minem.gob.pe
+  </span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1:{correct:"B",ok:"La SAC es ideal porque permite múltiples socios, emisión de acciones para atraer inversión futura y tiene mejor imagen ante clientes corporativos. La EIRL solo admite un titular y no puede emitir acciones.",err:"La SAC (Sociedad Anónima Cerrada) es la forma correcta. Permite socios, acciones y tiene mejor imagen corporativa que la EIRL o persona natural."},
+  2:{correct:"C",ok:"La partida 8541.40.00 corresponde a 'dispositivos semiconductores fotosensibles incluidas las células fotovoltaicas'. Perú aplica 0% de arancel, lo que hace la importación directa altamente rentable frente a comprar a distribuidores locales.",err:"La partida 8541.40.00 con arancel 0% es la correcta. Este arancel preferencial fue establecido para promover la energía renovable y es una ventaja competitiva real para importadores directos."},
+  3:{correct:"C",ok:"El RNP (Registro Nacional de Proveedores) del OSCE es el requisito básico e indispensable para contratar con cualquier entidad del Estado peruano. Sin él, la propuesta es descalificada automáticamente sin importar su calidad técnica.",err:"El RNP del OSCE es obligatorio. NABCEP e ISO son certificaciones técnicas valiosas pero no reemplazan el registro legal de proveedor del Estado."},
+  4:{correct:"C",ok:"En Perú, solo un profesional titulado y colegiado en el CIP con habilitación vigente puede firmar legalmente expedientes técnicos de ingeniería. Los cursos y certificaciones internacionales complementan la competencia pero no reemplazan al CIP.",err:"El CIP con habilitación vigente es el requisito legal indispensable para firmar proyectos en Perú. Ningún curso ni certificación internacional lo reemplaza."},
+  5:{correct:"C",ok:"El O&M con análisis de datos climáticos es el nicho menos saturado en el mercado peruano. Genera ingresos recurrentes predecibles, tiene bajo costo incremental una vez instalado el sistema, y combina perfectamente con el perfil meteorológico.",err:"El O&M con monitoreo climático es la respuesta correcta. Es el único servicio que combina ingresos recurrentes + baja competencia + aprovecha directamente el perfil de un ingeniero meteorólogo."},
+  6:{correct:"C",ok:"El D.Leg. 1119 establece que los servicios exportados (prestados en Perú pero utilizados en el exterior) están exonerados de IGV. Esto aplica perfectamente a estudios de recurso solar entregados a clientes extranjeros. El IR sí se paga normalmente.",err:"La exoneración de IGV para exportación de servicios (D.Leg. 1119) es el tratamiento correcto. El servicio se presta en Perú pero se consume en el exterior, calificando como exportación."},
+  7:{correct:"B",ok:"La NTP 370.301 regula la capacidad de corriente de conductores en canalizaciones y es la referencia técnica para dimensionar secciones de cable en instalaciones eléctricas peruanas, incluyendo sistemas FV. Es distinta a la 370.310 que trata certificación de instalaciones.",err:"La NTP 370.301 es la correcta para dimensionamiento de conductores. La RD 042-2006/MEM-DGE aplica a especificaciones de equipos FV para electrificación rural, no a cableado."},
+  8:{correct:"C",ok:"El consorcio es la vía estándar para empresas nuevas en el mercado público peruano. Permite cumplir los requisitos de experiencia acreditada a través del socio establecido, mientras la empresa nueva aporta capacidad técnica y gana experiencia registrable para futuros procesos.",err:"El consorcio con empresa establecida es la estrategia correcta. Las bases de licitación admiten consorcios donde los requisitos de experiencia pueden ser cumplidos por cualquiera de los integrantes."},
+  9:{correct:"D",ok:"El segmento agroindustrial (bombeo solar, riego tecnificado, cámaras frías) tiene tickets de S/.50,000–500,000 por proyecto con márgenes del 30–45%. Es el más rentable pero requiere diseño de media tensión, bombas especializadas y experiencia en procesos agroindustriales.",err:"Agroindustrial es el segmento de mayor ticket y margen. Los proyectos de bombeo solar para riego o cámaras frías son técnicamente más complejos pero económicamente mucho más atractivos."},
+  10:{correct:"C",ok:"Falso: solo vender equipos sin instalación captura apenas el 35–40% del valor del proyecto. El margen real está en el paquete completo (llave en mano) y en servicios recurrentes de O&M. Las empresas que solo venden equipo compiten en precio y tienen márgenes muy bajos.",err:"La afirmación falsa es C. Solo vender equipos sin instalación es el modelo de menor margen y más competido. La rentabilidad real viene del servicio integral y el O&M recurrente."}
+};
+
+let answered=0,score=0;
+
+document.addEventListener('click',function(e){
+  const btn=e.target.closest('.qbtn');
+  if(!btn||btn.disabled)return;
+  const q=parseInt(btn.dataset.q);
+  const isCorrect=btn.dataset.correct==='true';
+  const card=document.getElementById('q'+q);
+  const btns=card.querySelectorAll('.qbtn');
+  btns.forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.correct==='true'){b.classList.add('correct');b.textContent='✅ '+b.textContent;}
+    else if(b===btn&&!isCorrect){b.classList.add('wrong');b.textContent='❌ '+b.textContent;}
+  });
+  const fb=document.getElementById('fb'+q);
+  const f=feedbacks[q];
+  if(isCorrect){
+    fb.className='qfeedback qf-ok';
+    fb.innerHTML='<strong>✅ ¡Correcto!</strong> '+f.ok;
+    score++;
+    document.getElementById('score-text').textContent=score;
+  } else {
+    fb.className='qfeedback qf-err';
+    fb.innerHTML='<strong>❌ Incorrecto.</strong> La respuesta correcta es '+f.correct+'. '+f.err;
+  }
+  fb.style.display='block';
+  answered++;
+  document.getElementById('prog-text').textContent=answered+' / 10';
+  document.getElementById('prog-bar').style.width=(answered*10)+'%';
+  if(answered===10){
+    const rp=document.getElementById('result-panel');
+    let bg,msg;
+    if(score<=4){bg='#fef2f2';msg='Necesitas repasar el material con más detalle.';}
+    else if(score<=7){bg='#fefce8';msg='¡Buen avance! Sigue repasando los puntos fallidos.';}
+    else{bg='#f0fdf4';msg='¡Excelente dominio del tema!';}
+    rp.style.cssText='display:block;background:'+bg+';border-radius:8px;padding:12px 14px;margin-top:12px;font-size:13px';
+    rp.innerHTML='<strong>Resultado: '+score+' / 10 correctas</strong><br>'+msg+'<br><button class="btn-reset" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>';
+  }
+});
+
+function resetQuiz(){
+  answered=0;score=0;
+  document.getElementById('prog-text').textContent='0 / 10';
+  document.getElementById('score-text').textContent='0';
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('result-panel').style.display='none';
+  for(let q=1;q<=10;q++){
+    const card=document.getElementById('q'+q);
+    const btns=card.querySelectorAll('.qbtn');
+    btns.forEach(b=>{
+      b.disabled=false;
+      b.classList.remove('correct','wrong');
+      b.textContent=b.textContent.replace('✅ ','').replace('❌ ','');
+    });
+    const fb=document.getElementById('fb'+q);
+    fb.style.display='none';
+    fb.className='qfeedback';
+  }
+}
+</script>

@@ -1,0 +1,600 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-pink{background:#fce7f3;color:#831843}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#16a34a}
+.def-red{border-color:#dc2626}
+.def-yellow{border-color:#ca8a04}
+.def-purple{border-color:#7c3aed}
+.def-teal{border-color:#0d9488}
+.def-orange{border-color:#f97316}
+.def-gray{border-color:#64748b}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#16a34a}
+.dot-red{background:#dc2626}
+.dot-yellow{background:#ca8a04}
+.dot-purple{background:#7c3aed}
+.dot-teal{background:#0d9488}
+.dot-orange{background:#f97316}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 11px;margin-top:8px}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:9px 12px;margin-top:10px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:7px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.pill-blue{background:#dbeafe;color:#1e3a8a}
+.pill-green{background:#dcfce7;color:#14532d}
+.pill-orange{background:#ffedd5;color:#7c2d12}
+.sec-bar{grid-column:1/-1;background:var(--color-background-secondary);border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--color-text-primary);letter-spacing:0.5px}
+.title-bar{grid-column:1/-1;background:#0f1e3a;border-radius:12px;padding:14px 18px;color:#fff}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;margin-bottom:3px}
+.title-bar p{font-size:11px;color:#94a3b8}
+.footer-bar{grid-column:1/-1;background:#0f1e3a;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.qcard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.qtext{font-size:13px;font-weight:500;margin-bottom:10px;color:var(--color-text-primary)}
+.qbtn{width:100%;text-align:left;background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;cursor:pointer;margin-bottom:5px;transition:all 0.2s;color:var(--color-text-primary);display:block}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.reveal-correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:0.6;cursor:not-allowed}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none}
+.fb-ok{background:#f0fdf4;border-left:3px solid #16a34a}
+.fb-err{background:#fef2f2;border-left:3px solid #dc2626}
+.prog-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:10px;margin:8px 0}
+.prog-fill{height:100%;border-radius:20px;background:#16a34a;transition:width 0.3s}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px 10px 0 0;padding:12px 16px;margin:-12px -14px 14px -14px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.result-panel{border-radius:10px;padding:14px;font-size:13px;margin-top:14px;display:none}
+.btn-reset{background:transparent;border:1px solid var(--color-border-secondary);border-radius:8px;padding:7px 16px;font-size:12px;cursor:pointer;margin-top:8px;color:var(--color-text-primary)}
+.btn-reset:hover{background:var(--color-background-secondary)}
+</style>
+
+<h2 class="sr-only" style="position:absolute;left:-9999px">Canvas visual de resumen — Seguridad Eléctrica, Certificación y Mantenimiento, NTP 370.310 y normativas relacionadas</h2>
+
+<div class="cv">
+
+<div class="title-bar">
+  <h1>Seguridad Eléctrica — Certificación y Mantenimiento de Instalaciones en Viviendas</h1>
+  <p>NTP 370.310:2013 | NTP 370.301:2002 | NTP 370.053:1999 | INDECOPI — Ingeniería Eléctrica</p>
+  <div style="margin-top:8px">
+    <span class="pill pill-blue">Certificación</span>
+    <span class="pill pill-green">Mantenimiento</span>
+    <span class="pill pill-orange">Capacidad de conductores</span>
+    <span class="pill pill-blue">Puesta a tierra</span>
+    <span class="pill pill-green">Inspección</span>
+  </div>
+</div>
+
+<div class="sec-bar">🏠 Norma NTP 370.310 — Objeto, Campo de Aplicación y Definiciones Clave</div>
+
+<div class="block">
+  <span class="bh bh-blue">Objeto de la NTP 370.310</span>
+  <div class="def def-blue">Establece medidas para garantizar la seguridad mediante la <b>certificación</b> de instalaciones eléctricas en viviendas unifamiliares y edificios multifamiliares, así como las acciones de mantenimiento periódico.</div>
+  <div class="item"><span class="dot dot-blue"></span><span>Se aplica a instalaciones nuevas, ampliaciones, reformas y modificaciones en servicio.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>Busca verificar que la instalación cumpla requisitos de seguridad antes de su puesta en servicio.</span></div>
+  <div class="exam">🎯 Examen: ¿Cuál es la diferencia fundamental entre "verificación" e "inspección" según la NTP 370.310, y por qué es importante distinguirlas en un proceso de certificación?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Campo de Aplicación</span>
+  <div class="flow">
+    <div class="fbox">Monofásico 220V</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Trifásico 220V (3 hilos)</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Trifásico 380/220V (4 hilos con neutro a tierra)</div>
+  </div>
+  <div class="item"><span class="dot dot-orange"></span><span><b>Vivienda unifamiliar:</b> Casa o departamento privado para ocupación de un individuo o familia.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span><b>Edificio multifamiliar:</b> Dos o más unidades de vivienda con copropiedad de terreno y áreas comunes.</span></div>
+  <div class="warn">⚠️ No confundir "ampliación" (extensión del área construida con nuevas instalaciones) con "renovación" (reemplazo por aumento de carga o envejecimiento). Tienen diferentes implicancias en el proceso de certificación.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Definiciones Esenciales</span>
+  <div class="mini" style="border-left:3px solid #7c3aed"><b>Verificación</b> — Conjunto de inspecciones y pruebas para confirmar conformidad con la normativa vigente. Es el proceso global.</div>
+  <div class="mini" style="border-left:3px solid #3b82f6"><b>Inspección</b> — Examen usando todos los sentidos (visual, táctil) para verificar correcta selección y montaje de materiales.</div>
+  <div class="mini" style="border-left:3px solid #16a34a"><b>Pruebas/Ensayos</b> — Mediciones instrumentales de valores que no pueden determinarse visualmente (resistencia, impedancia).</div>
+  <div class="mini" style="border-left:3px solid #ca8a04"><b>Mantenimiento</b> — Combinación de acciones técnicas y administrativas para mantener o restituir el estado funcional requerido.</div>
+</div>
+
+<div class="sec-bar">🔍 Proceso de Certificación — Condiciones Generales e Inspección</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Documentos Requeridos para la Verificación</span>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-teal"></span><span>Plano de ubicación de la vivienda</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span>Diagrama unifilar del sistema</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span>Planos de emplazamiento con ubicación de puesta a tierra</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span>Proyecto de instalación eléctrica interior (edificios multifamiliares)</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-teal"></span><span>Tipo y composición de circuitos (conductores, secciones, canalizaciones)</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span>Características de dispositivos de protección, aislamiento y mando</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span>Certificados de inspecciones anteriores (inspección periódica)</span></div>
+    </div>
+  </div>
+  <hr class="divh">
+  <div class="flow">
+    <div class="fbox">Personal calificado competente</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Precauciones de seguridad</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Verificación + Ensayos</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Certificado de Inspección</div>
+  </div>
+  <div class="exam">🎯 Examen: Un instalador omite el diagrama unifilar antes de la verificación porque considera que la instalación es sencilla. ¿Qué establece la NTP 370.310 al respecto y cuáles serían las consecuencias para la certificación?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Métodos de Ensayo (NTP 370.304)</span>
+  <div class="item"><span class="dot dot-green"></span><span><b>a)</b> Continuidad de conductores de protección y uniones equipotenciales (apt. 7.2)</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>b)</b> Resistencia de aislamiento (apt. 7.3)</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>c)</b> Resistencia de puesta a tierra (apt. 7.5.2)</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>d)</b> Funcionamiento de dispositivos de corriente residual (apt. 7.5.4)</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>e)</b> Impedancia del bucle de falla (apt. 7.5.3)</span></div>
+  <div class="warn">⚠️ Todos estos ensayos referencian la NTP 370.304. No basta con la inspección visual — las pruebas instrumentales son obligatorias para la certificación.</div>
+</div>
+
+<div class="sec-bar">⚡ Clasificación de Defectos y Resultados de la Verificación (Anexo A)</div>
+
+<div class="block">
+  <span class="bh bh-red">Defecto Muy Grave</span>
+  <div class="def def-red">Constituye un <b>peligro inmediato</b> para la seguridad de personas o bienes. Incluye incumplimientos que pueden provocar choques eléctricos directos.</div>
+  <div class="item"><span class="dot dot-red"></span><span>Instalación NO puede entrar en servicio bajo ninguna circunstancia.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span>Resultado de la calificación: <b>No conforme</b>. Certificado negativo.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Defecto Grave</span>
+  <div class="def def-yellow">No supone peligro inmediato, pero puede serlo al originarse una falla. También reduce sustancialmente la capacidad de utilización.</div>
+  <div class="item"><span class="dot dot-yellow"></span><span>Falta de conexiones equipotenciales requeridas</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span>Inexistencia de puesta a tierra o falta de aislamiento</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span>Falta de protección contra cortocircuitos y sobrecargas</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span>Sección insuficiente de conductores de protección</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span>Empleo de materiales no normalizados</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span>Acumulación reiterada de defectos leves</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Defecto Leve + Calificaciones</span>
+  <div class="def def-green">No supone peligro para personas ni bienes, no perturba el funcionamiento. La desviación respecto a lo reglamentado no tiene valor significativo.</div>
+  <hr class="divh">
+  <div class="mini" style="border-top:3px solid #16a34a"><b>Conforme</b> — Ningún defecto muy grave ni grave. Los defectos leves se anotan para corrección antes de la próxima inspección.</div>
+  <div class="mini" style="border-top:3px solid #dc2626"><b>No conforme</b> — Al menos un defecto grave o muy grave. Nuevas instalaciones no entran en servicio; instalaciones en servicio reciben certificado negativo.</div>
+  <div class="exam">🎯 Examen: Se detecta que un tablero de distribución tiene reiteración de defectos leves en 4 puntos distintos. ¿Cómo clasifica esto la NTP 370.310 y qué implica para la calificación final de la instalación?</div>
+</div>
+
+<div class="sec-bar">🔌 Conductores de Protección — NTP 370.053</div>
+
+<div class="block">
+  <span class="bh bh-blue">Tipos y Materiales</span>
+  <div class="def def-blue">El conductor de protección debe ser de <b>cobre</b>, resistente a la corrosión. Puede ser sólido o cableado, aislado, cubierto o desnudo.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #3b82f6"><b>Conductor de puesta a tierra</b><br><span style="font-size:10.5px">Conecta el sistema al electrodo de tierra</span></div>
+    <div class="mini" style="border-left:3px solid #7c3aed"><b>Conductor de protección</b><br><span style="font-size:10.5px">Une masas metálicas al sistema de tierra</span></div>
+    <div class="mini" style="border-left:3px solid #0d9488"><b>Puente de unión</b><br><span style="font-size:10.5px">Enlaza neutro y tierra en el panel principal</span></div>
+  </div>
+  <div class="item" style="margin-top:6px"><span class="dot dot-blue"></span><span><b>Color:</b> Amarillo para conductor de protección. Blanco para neutro. Negro, azul o rojo para fases activas.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Secciones Mínimas (Tabla 1 — Conductor de Puesta a Tierra)</span>
+  <table class="tbl">
+    <tr><th>Sección acometida (mm²)</th><th>Conductor de tierra cobre (mm²)</th></tr>
+    <tr><td>35 o menor</td><td>10</td></tr>
+    <tr><td>50</td><td>16</td></tr>
+    <tr><td>70</td><td>25</td></tr>
+    <tr><td>95 a 185</td><td>35</td></tr>
+    <tr><td>240 a 300</td><td>50</td></tr>
+    <tr><td>400 a 500</td><td>70</td></tr>
+    <tr><td>Más de 500</td><td>95</td></tr>
+  </table>
+  <div class="warn">⚠️ La resistencia del pozo de tierra debe ser ≤ 25 Ohmios, certificada por ingeniero electricista o mecánico electricista.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Conservación y Continuidad</span>
+  <div class="item"><span class="dot dot-teal"></span><span>Toda instalación nueva o modificada debe ser inspeccionada y probada antes de puesta en servicio.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Probar continuidad del conductor de protección, puente de unión principal y puente de equipo.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Conductores protegidos contra deterioros mecánicos, químicos y esfuerzos electrodinámicos.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Las conexiones deben ser accesibles para verificación y ensayos (excepto cajas de relleno).</span></div>
+  <div class="exam">🎯 Examen: ¿Por qué el conductor de protección a tierra debe ser siempre de color amarillo y nunca de los mismos colores que los conductores de fase? Explique las consecuencias de una instalación sin código de colores correcto.</div>
+</div>
+
+<div class="sec-bar">📏 Capacidad de Corriente de Conductores — NTP 370.301</div>
+
+<div class="block s2">
+  <span class="bh bh-yellow">Temperaturas Máximas de Operación por Tipo de Aislamiento (Tabla 1)</span>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #ca8a04">
+      <b>PVC</b><br>
+      <span style="font-size:11px">70 °C en el conductor</span><br>
+      <span style="font-size:10.5px;color:var(--color-text-secondary)">Cloruro de polivinilo</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #16a34a">
+      <b>XLPE / EPR</b><br>
+      <span style="font-size:11px">90 °C en el conductor</span><br>
+      <span style="font-size:10.5px;color:var(--color-text-secondary)">Polietileno reticulado / caucho EPR</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #7c3aed">
+      <b>Mineral cubierto (PVC)</b><br>
+      <span style="font-size:11px">70 °C en la envoltura</span><br>
+      <span style="font-size:10.5px;color:var(--color-text-secondary)">Expuesto al contacto</span>
+    </div>
+  </div>
+  <hr class="divh">
+  <div class="item"><span class="dot dot-yellow"></span><span><b>Temperatura ambiente referencial (aire):</b> 30 °C. Si difiere, aplicar factores de corrección (Tabla 10 de NTP 370.301).</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><b>Temperatura ambiente referencial (tierra):</b> 20 °C. Factor de corrección por temperatura de suelo en Tabla 11.</span></div>
+  <div class="exam">🎯 Examen: Un cable PVC de 6 mm² está instalado en una zona donde la temperatura ambiente es de 45 °C. ¿Qué factor de corrección debe aplicarse y cómo afecta esto a la capacidad de corriente nominal del conductor?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Métodos de Instalación — Tabla 2 NTP 370.301</span>
+  <table class="tbl">
+    <tr><th>Método</th><th>Descripción</th></tr>
+    <tr><td><b>A1</b></td><td>Conductores en tubo empotrado en pared</td></tr>
+    <tr><td><b>A2</b></td><td>Cable multipolar en tubo empotrado en pared</td></tr>
+    <tr><td><b>B1</b></td><td>Conductores en tubo sobre pared de madera</td></tr>
+    <tr><td><b>B2</b></td><td>Cable multipolar en tubo sobre pared de madera</td></tr>
+    <tr><td><b>C</b></td><td>Cable uni/multipolar sobre pared de madera</td></tr>
+    <tr><td><b>D</b></td><td>Cable multipolar en ductos enterrados</td></tr>
+    <tr><td><b>E,F,G</b></td><td>Cables al aire libre (separados de pared)</td></tr>
+  </table>
+  <div class="warn">⚠️ El método de instalación determina directamente la capacidad de corriente admisible. Un cable A1 tiene menor capacidad que el mismo cable en método E por las condiciones de disipación de calor.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-blue">Capacidad de Corriente — Extracto Tabla 4 (PVC, 2 conductores, cobre, 70°C)</span>
+  <table class="tbl">
+    <tr><th>Sección (mm²)</th><th>A1 (A)</th><th>B1 (A)</th><th>C (A)</th><th>D (A)</th></tr>
+    <tr><td>1,5</td><td>14,5</td><td>17,5</td><td>19,5</td><td>22</td></tr>
+    <tr><td>2,5</td><td>19,5</td><td>24</td><td>27</td><td>29</td></tr>
+    <tr><td>4</td><td>26</td><td>32</td><td>36</td><td>38</td></tr>
+    <tr><td>6</td><td>34</td><td>41</td><td>46</td><td>47</td></tr>
+    <tr><td>10</td><td>46</td><td>57</td><td>63</td><td>63</td></tr>
+    <tr><td>16</td><td>61</td><td>76</td><td>85</td><td>81</td></tr>
+    <tr><td>25</td><td>80</td><td>101</td><td>112</td><td>104</td></tr>
+  </table>
+  <div class="rx">Corriente de diseño = I_nominal × F_temperatura × F_agrupamiento × F_método<br>Donde F = factores de corrección de Tablas 10–17 de NTP 370.301</div>
+  <div class="exam">🎯 Examen: Se instalan 4 cables PVC bipolares de cobre en un tubo empotrado en pared (Método A1), todos a temperatura de 30 °C. Explique por qué la capacidad de corriente de cada cable es menor que si estuviera solo, y cómo calcularía el factor de reducción por agrupamiento.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-pink">Factores de Agrupamiento — Tabla 13</span>
+  <div class="def def-purple">Cuando varios circuitos van juntos, el calor generado se acumula y reduce la capacidad individual de cada conductor.</div>
+  <table class="tbl">
+    <tr><th>Núm. circuitos</th><th>Agrupados en aire</th><th>En capa sobre pared</th></tr>
+    <tr><td>1</td><td>1,00</td><td>1,00</td></tr>
+    <tr><td>2</td><td>0,80</td><td>0,85</td></tr>
+    <tr><td>3</td><td>0,70</td><td>0,79</td></tr>
+    <tr><td>4</td><td>0,65</td><td>0,75</td></tr>
+    <tr><td>6</td><td>0,57</td><td>0,72</td></tr>
+    <tr><td>9</td><td>0,50</td><td>0,70</td></tr>
+  </table>
+</div>
+
+<div class="sec-bar">🔧 Mantenimiento y Guía de Inspección</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Guía de Inspección — Elementos Críticos (Anexo E NTP 370.310)</span>
+  <div class="two">
+    <div>
+      <div class="mini" style="border-left:3px solid #3b82f6"><b>Tablero General (Items 1.01–1.11)</b><br>Material aprobado, guardas, señalización de riesgo, directorio de circuitos, interruptores termomagnéticos y diferenciales correctos, barra de tierra conectada.</div>
+      <div class="mini" style="border-left:3px solid #16a34a"><b>Cableado y Canalizaciones (Items 3.01–3.10)</b><br>Tipo de conductor adecuado, empalmes en cajas de paso, cajas con tapa, conductores en ambientes húmedos de tipo adecuado, canalizaciones metálicas a tierra.</div>
+    </div>
+    <div>
+      <div class="mini" style="border-left:3px solid #f97316"><b>Tomacorrientes (Items 4.01–4.07)</b><br>Tipo normalizado con puesta a tierra, capacidad adecuada, tapas sin rajaduras. Tomacorrientes en baños/lavanderías a menos de 3 m del agua con interruptor diferencial.</div>
+      <div class="mini" style="border-left:3px solid #7c3aed"><b>Sistema de Tierra (Items 5.01–5.04)</b><br>Resistencia ≤ 25 Ohmios, certificado firmado por ingeniero electricista, estado de conservación del pozo adecuado.</div>
+    </div>
+  </div>
+  <div class="exam">🎯 Examen: Durante la inspección de un baño se encuentra un tomacorriente a 2 metros del lavatorio sin interruptor diferencial. ¿Qué tipo de defecto clasifica esto según la NTP 370.310 y qué acción correctiva se requiere?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-red">Mantenimiento Periódico</span>
+  <div class="def def-red">Las anormalidades constatadas o potenciales deben corregirse mediante reemplazo o reparación por personal calificado. La reparación debe restablecer totalmente las características originales.</div>
+  <div class="item"><span class="dot dot-red"></span><span>En reemplazo: usar solo materiales normalizados por NTP. Si no hay NTP, usar normas IEC.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span>Inspecciones periódicas según la entidad competente vigente.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span>Luminarias: firmemente instaladas, sin partes activas expuestas, partes conductoras a tierra.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span>Alumbrado de emergencia: luces operativas, tomacorrientes a ≤ 1,5 m del equipo.</span></div>
+</div>
+
+<div class="sec-bar">📊 Tabla Integradora — Resumen de Normas NTP y Sus Alcances</div>
+
+<div class="block s3">
+  <table class="tbl">
+    <tr>
+      <th>Norma</th>
+      <th>Tema central</th>
+      <th>Aplica a</th>
+      <th>Parámetro clave</th>
+      <th>Referencia base</th>
+    </tr>
+    <tr>
+      <td><b>NTP 370.310:2013</b></td>
+      <td>Certificación y mantenimiento de instalaciones</td>
+      <td>Viviendas unifam. y multifam.</td>
+      <td>Proceso de verificación + ensayos + calificación</td>
+      <td>IEC 60364-6 / NTP 370.304</td>
+    </tr>
+    <tr>
+      <td><b>NTP 370.301:2002</b></td>
+      <td>Capacidad de corriente en canalizaciones</td>
+      <td>Edificios residenciales, comerciales, públicos</td>
+      <td>Temperatura límite: 70°C (PVC), 90°C (XLPE/EPR)</td>
+      <td>IEC 60364-5-523:1999</td>
+    </tr>
+    <tr>
+      <td><b>NTP 370.053:1999</b></td>
+      <td>Conductores de protección de cobre</td>
+      <td>Instalaciones interiores de edificios</td>
+      <td>Sección mín. según acometida. Color: amarillo</td>
+      <td>UNE 20-460-5-54 / CNE</td>
+    </tr>
+    <tr>
+      <td><b>NTP 370.304:2011</b></td>
+      <td>Verificación inicial y periódica</td>
+      <td>Edificios de viviendas</td>
+      <td>Métodos de ensayo detallados (apt. 7.2–7.5)</td>
+      <td>IEC 60364-6</td>
+    </tr>
+    <tr>
+      <td><b>NTP 370.055:1999</b></td>
+      <td>Glosario sistema de puesta a tierra</td>
+      <td>Todas las instalaciones</td>
+      <td>Terminología base para las demás normas</td>
+      <td>IEC / CNE</td>
+    </tr>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ Dato integrador: La resistencia del pozo de tierra debe ser ≤ 25 Ohmios (CNE). Si la resistividad del suelo excede 2,5 K.m/W se debe reducir la capacidad de corriente de cables enterrados o mejorar el material circundante (NTP 370.301 cap. 7).</div>
+</div>
+
+<div class="block s3" id="quiz-section">
+  <div class="quiz-header">
+    <h2>Quiz de repaso — 10 preguntas de opción múltiple</h2>
+    <p>Marca tu respuesta y descubre si es correcta de inmediato</p>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+    <span style="font-size:12px;color:var(--color-text-secondary)" id="prog-text">Pregunta 0 de 10 respondidas — 0% de aciertos</span>
+    <div class="prog-wrap" style="flex:1"><div class="prog-fill" id="prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la resistencia máxima permitida para el pozo de puesta a tierra según la normativa peruana vigente?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) 10 Ohmios</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) 50 Ohmios</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) 25 Ohmios</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) 100 Ohmios</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Según la NTP 370.310, un defecto que "no supone peligro inmediato pero puede serlo al originarse una falla en la instalación" se clasifica como:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Defecto muy grave</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Defecto grave</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Defecto leve</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) No conformidad menor</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Un cable con aislamiento XLPE instalado al aire tiene una temperatura límite de operación de:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) 70 °C en el conductor</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) 105 °C en la envoltura</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) 75 °C en el conductor</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) 90 °C en el conductor</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">Según la NTP 370.053, ¿de qué color debe ser el conductor de protección a tierra cuando está aislado?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Verde</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Blanco</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Amarillo</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Negro</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Al instalar 6 circuitos agrupados en el aire (sin separación), ¿qué factor de reducción de capacidad de corriente se aplica según la NTP 370.301?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) 0,70</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) 0,57</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) 0,65</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) 0,50</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Cuál de los siguientes documentos NO es requerido por la NTP 370.310 para realizar la verificación de una instalación eléctrica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Diagrama unifilar</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Plano de ubicación de la vivienda</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) Contrato de suministro eléctrico con la distribuidora</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Planos de emplazamiento con ubicación de puesta a tierra</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Un cable PVC de 10 mm² con 2 conductores de carga, instalado en método B1 (tubo sobre pared de madera), tiene una capacidad nominal de corriente de 57 A a 30 °C. ¿Cuál afirmación es FALSA sobre este dato?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Si la temperatura sube a 45 °C hay que aplicar un factor de corrección menor a 1.</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Si se agregan más cables en el mismo tubo, la capacidad admisible disminuye.</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) La capacidad sería la misma si se instala en método A1 (empotrado en pared).</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) La temperatura límite del conductor PVC es 70 °C.</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Según la NTP 370.053, si la acometida principal tiene conductores de 70 mm², ¿cuál debe ser la sección mínima del conductor de puesta a tierra de cobre?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) 16 mm²</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) 25 mm²</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) 35 mm²</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) 10 mm²</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia correcta entre "inspección" y "prueba (ensayo)" según la NTP 370.310?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Inspección es más rigurosa que los ensayos, ya que usa instrumentos de medida.</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Son sinónimos; ambos términos se refieren al mismo proceso de verificación.</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Inspección usa los sentidos para verificar montaje; los ensayos usan instrumentos para medir valores que no se pueden determinar visualmente.</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Los ensayos son opcionales si la inspección visual resulta satisfactoria.</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">En el contexto del Código Nacional de Electricidad del Perú, los tomacorrientes ubicados en baños y lavanderías a una distancia de hasta 3 metros de la fuente de agua deben estar protegidos por:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Interruptores termomagnéticos de alta sensibilidad</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Fusibles de baja intensidad</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Interruptores de doble polo con protección de sobrecorriente</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) Interruptores diferenciales (de corriente residual)</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div class="result-panel" id="result-panel"></div>
+  <div style="text-align:center;margin-top:8px">
+    <button class="btn-reset" id="btn-reset" style="display:none">↺ Reiniciar quiz</button>
+  </div>
+</div>
+
+<div class="footer-bar">
+  <span class="ft">Referencias:</span>
+  <span class="fc">NTP 370.310:2013 — INDECOPI (2ª Ed., R.0045-2013/CNB-INDECOPI)</span>
+  <span class="fc">NTP 370.301:2002 — INDECOPI (1ª Ed., R.0103-2002/INDECOPI-CRT, basada en IEC 60364-5-523:1999)</span>
+  <span class="fc">NTP 370.053:1999 — INDECOPI (1ª Ed., R.0069-99/INDECOPI-CRT, basada en UNE 20-460-5-54)</span>
+  <span class="fc">Código Nacional de Electricidad — Tomo V: Sistema de Utilización</span>
+</div>
+
+</div>
+
+<script>
+var answered=0,correct=0;
+var feedbacks={
+  1:{ok:"Correcto. La NTP 370.310 y el CNE establecen que el pozo de puesta a tierra debe tener una resistencia ≤ 25 Ohmios, certificada por un ingeniero electricista.",err:"Incorrecto. La respuesta correcta es C) 25 Ohmios. Este valor está establecido en el Código Nacional de Electricidad y referenciado en la Guía de Inspección de la NTP 370.310 (ítem 5.04)."},
+  2:{ok:"Correcto. El defecto grave es aquel que no representa peligro inmediato, pero puede convertirse en uno si la instalación falla. Requiere calificación No conforme.",err:"Incorrecto. La respuesta correcta es B) Defecto grave. El defecto MUY grave implica peligro inmediato. El defecto LEVE no supone peligro en ningún caso."},
+  3:{ok:"Correcto. Según la Tabla 1 de la NTP 370.301, los cables con aislamiento XLPE (polietileno reticulado) y EPR tienen temperatura límite de 90 °C en el conductor.",err:"Incorrecto. La respuesta correcta es D) 90 °C en el conductor. El PVC tiene 70 °C; el mineral desnudo expuesto tiene 105 °C en la envoltura. XLPE/EPR = 90 °C."},
+  4:{ok:"Correcto. La NTP 370.053 establece que el conductor de protección a tierra debe ser de color AMARILLO para distinguirlo de los conductores activos (negro, azul, rojo) y del neutro (blanco).",err:"Incorrecto. La respuesta correcta es C) Amarillo. El verde no está especificado en esta norma peruana. El blanco es para el conductor neutro. El color amarillo es obligatorio para el conductor de protección."},
+  5:{ok:"Correcto. Según la Tabla 13 de NTP 370.301 (ítem 1: agrupados en aire), para 6 circuitos el factor de reducción es 0,57. Esto significa que cada conductor solo puede transportar el 57% de su capacidad nominal.",err:"Incorrecto. La respuesta correcta es B) 0,57. Para 3 circuitos sería 0,70; para 4 sería 0,65; para 9 circuitos bajaría a 0,50. Con 6 circuitos agrupados al aire, el factor es 0,57."},
+  6:{ok:"Correcto. La NTP 370.310 exige plano de ubicación, diagrama unifilar, planos de emplazamiento, tipo y composición de circuitos, características de protecciones y certificados anteriores. El contrato de suministro no figura como requisito.",err:"Incorrecto. La respuesta correcta es C). La NTP 370.310 lista documentos técnicos: planos, diagramas, certificados de inspecciones previas. El contrato comercial con la distribuidora no es parte de los requerimientos de verificación."},
+  7:{ok:"Correcto. La afirmación es FALSA porque el método A1 (empotrado en pared) tiene menor capacidad que B1 (sobre pared de madera). Según la Tabla 4, para 10 mm² PVC: A1=46A, B1=57A. El método afecta directamente la disipación de calor.",err:"Incorrecto. La respuesta correcta es C). Los valores de la Tabla 4 muestran que el método A1 para 10 mm² PVC da 46 A, mientras que B1 da 57 A. NO son iguales. El método de instalación es crítico para determinar la capacidad admisible."},
+  8:{ok:"Correcto. Según la Tabla Nº 1 de NTP 370.053, para acometida de 70 mm² el conductor de puesta a tierra de cobre debe tener sección mínima de 25 mm².",err:"Incorrecto. La respuesta correcta es B) 25 mm². Para acometida de 50 mm² corresponden 16 mm²; para 70 mm² corresponden 25 mm²; para 95-185 mm² corresponden 35 mm²."},
+  9:{ok:"Correcto. La inspección usa los sentidos (vista, tacto) para verificar montaje físico. Los ensayos usan instrumentos de medida para determinar valores numéricos (resistencia, impedancia) que no son detectables visualmente.",err:"Incorrecto. La respuesta correcta es C). La norma define claramente: inspección = examen sensorial del montaje; prueba/ensayo = medición instrumental. Los ensayos son OBLIGATORIOS, no opcionales."},
+  10:{ok:"Correcto. Según el ítem 4.07 de la Guía de Inspección (Anexo E de NTP 370.310), los tomacorrientes en baños y lavanderías a ≤ 3 m de la fuente de agua deben estar protegidos por interruptores diferenciales (de corriente residual), que detectan fugas hacia tierra.",err:"Incorrecto. La respuesta correcta es D) Interruptores diferenciales. El termomagnético protege contra sobrecorriente, pero no detecta fugas hacia tierra que son el peligro real en zonas húmedas. Solo el diferencial protege contra choques eléctricos por contacto indirecto."}
+};
+
+document.getElementById('quiz-section').addEventListener('click',function(e){
+  if(!e.target.classList.contains('qbtn'))return;
+  if(e.target.disabled)return;
+  var btn=e.target;
+  var q=btn.getAttribute('data-q');
+  var isCorrect=btn.getAttribute('data-correct')==='true';
+  var allBtns=document.querySelectorAll('[data-q="'+q+'"]');
+  allBtns.forEach(function(b){
+    b.disabled=true;
+    if(b.getAttribute('data-correct')==='true')b.classList.add('reveal-correct');
+  });
+  if(isCorrect){btn.classList.add('correct');}else{btn.classList.add('incorrect');}
+  answered++;
+  if(isCorrect)correct++;
+  var fb=document.getElementById('fb'+q);
+  fb.style.display='block';
+  fb.className='qfeedback '+(isCorrect?'fb-ok':'fb-err');
+  fb.innerHTML=isCorrect?('Correcto. '+feedbacks[parseInt(q)].ok):('Incorrecto. '+feedbacks[parseInt(q)].err);
+  var pct=Math.round(answered>0?correct/answered*100:0);
+  document.getElementById('prog-text').textContent='Pregunta '+answered+' de 10 respondidas — '+pct+'% de aciertos';
+  document.getElementById('prog-bar').style.width=(answered/10*100)+'%';
+  if(answered===10){
+    var rp=document.getElementById('result-panel');
+    rp.style.display='block';
+    var msg,bg,color;
+    if(correct<=4){bg='#fee2e2';color='#991b1b';msg='Necesitas repasar el material con más detalle.';}
+    else if(correct<=7){bg='#fef9c3';color='#713f12';msg='Buen avance, sigue repasando los puntos incorrectos.';}
+    else{bg='#dcfce7';color='#14532d';msg='Excelente dominio del tema.';}
+    rp.style.background=bg;
+    rp.style.color=color;
+    rp.style.border='1px solid '+color;
+    rp.innerHTML='<b>Resultado: '+correct+' / 10 correctas</b><br>'+msg;
+    document.getElementById('btn-reset').style.display='inline-block';
+  }
+});
+
+document.getElementById('btn-reset').addEventListener('click',function(){
+  answered=0;correct=0;
+  document.getElementById('prog-text').textContent='Pregunta 0 de 10 respondidas — 0% de aciertos';
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('result-panel').style.display='none';
+  document.getElementById('btn-reset').style.display='none';
+  for(var i=1;i<=10;i++){
+    var fb=document.getElementById('fb'+i);
+    fb.style.display='none';fb.className='qfeedback';fb.innerHTML='';
+    var btns=document.querySelectorAll('[data-q="'+i+'"]');
+    btns.forEach(function(b){
+      b.disabled=false;
+      b.classList.remove('correct','incorrect','reveal-correct');
+    });
+  }
+});
+</script>
