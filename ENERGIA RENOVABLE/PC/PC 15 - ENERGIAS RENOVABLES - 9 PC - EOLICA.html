@@ -1,0 +1,654 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<h2 class="sr-only">Canvas de resumen: EIA en Energías Renovables y Dimensionamiento de Miniaerogenerador — UNALM Ingeniería Agrícola</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.title-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;line-height:1.2}
+.title-bar p{font-size:11px;color:#94a3b8;margin-top:4px}
+.title-bar .tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;padding:2px 9px;border-radius:20px;background:#1e3a5f;color:#7dd3fc;font-family:'Oswald',sans-serif}
+.sec-bar{grid-column:1/-1;border-radius:8px;padding:7px 13px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.5px}
+.bh.blue{background:#dbeafe;color:#1e3a8a}
+.bh.green{background:#dcfce7;color:#14532d}
+.bh.yellow{background:#fef9c3;color:#713f12}
+.bh.orange{background:#ffedd5;color:#7c2d12}
+.bh.red{background:#fee2e2;color:#991b1b}
+.bh.purple{background:#ede9fe;color:#4c1d95}
+.bh.teal{background:#ccfbf1;color:#134e4a}
+.bh.gray{background:#f1f5f9;color:#334155}
+.bh.pink{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+.bh.blue{background:#1e3a5f;color:#93c5fd}
+.bh.green{background:#14532d;color:#86efac}
+.bh.yellow{background:#422006;color:#fef08a}
+.bh.orange{background:#431407;color:#fed7aa}
+.bh.red{background:#450a0a;color:#fca5a5}
+.bh.purple{background:#2e1065;color:#c4b5fd}
+.bh.teal{background:#042f2e;color:#5eead4}
+.bh.gray{background:#1e293b;color:#94a3b8}
+.bh.pink{background:#4a044e;color:#f0abfc}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin:6px 0;line-height:1.5}
+.def.blue{border-color:#3b82f6}
+.def.green{border-color:#22c55e}
+.def.yellow{border-color:#eab308}
+.def.orange{border-color:#f97316}
+.def.red{border-color:#ef4444}
+.def.purple{border-color:#a855f7}
+.def.teal{border-color:#14b8a6}
+.def.pink{border-color:#ec4899}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin:4px 0}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot.blue{background:#3b82f6}
+.dot.green{background:#22c55e}
+.dot.yellow{background:#eab308}
+.dot.orange{background:#f97316}
+.dot.red{background:#ef4444}
+.dot.purple{background:#a855f7}
+.dot.teal{background:#14b8a6}
+.dot.gray{background:#94a3b8}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:8px 12px;border-radius:7px;text-align:center;line-height:1.7;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:9px 11px;margin:8px 0;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#ca8a04}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:6px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:7px;font-size:11.5px;line-height:1.4}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-family:'Oswald',sans-serif;font-weight:500}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:10px;margin:4px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.sec-bar.blue{background:#dbeafe;color:#1e3a8a}
+.sec-bar.green{background:#dcfce7;color:#14532d}
+.sec-bar.yellow{background:#fef9c3;color:#713f12}
+.sec-bar.orange{background:#ffedd5;color:#7c2d12}
+.sec-bar.purple{background:#ede9fe;color:#4c1d95}
+@media(prefers-color-scheme:dark){
+.sec-bar.blue{background:#1e3a5f;color:#93c5fd}
+.sec-bar.green{background:#14532d;color:#86efac}
+.sec-bar.yellow{background:#422006;color:#fef08a}
+.sec-bar.orange{background:#431407;color:#fed7aa}
+.sec-bar.purple{background:#2e1065;color:#c4b5fd}
+}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+footer.cv-footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+/* QUIZ */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:0;overflow:hidden}
+.quiz-header{background:#0f1e3a;color:#fff;padding:13px 18px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.quiz-body{padding:14px 18px}
+.prog-row{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.prog-text{font-size:12px;color:var(--color-text-secondary);white-space:nowrap}
+.qcard{margin-bottom:18px;padding-bottom:14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qcard:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.qnum{font-size:10px;color:var(--color-text-secondary);font-family:'Oswald',sans-serif;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.qtext{font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin-bottom:8px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary);line-height:1.4}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.ko{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.qbtn.correct{background:#14532d;border-color:#16a34a;color:#86efac}
+.qbtn.incorrect{background:#450a0a;border-color:#dc2626;color:#fca5a5}
+.qfeedback.ok{background:#052e16;border-left-color:#16a34a;color:#86efac}
+.qfeedback.ko{background:#450a0a;border-left-color:#dc2626;color:#fca5a5}
+}
+#result-panel{display:none;border-radius:10px;padding:14px 16px;margin-top:12px;font-size:13px;line-height:1.6}
+#reset-btn{margin-top:10px;background:#0f1e3a;color:#7dd3fc;border:none;border-radius:8px;padding:8px 18px;font-size:12px;cursor:pointer;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:.5px}
+</style>
+
+<div class="cv">
+<!-- TITLE BAR -->
+<div class="title-bar">
+  <h1>🌬️ ENERGÍAS RENOVABLES — EIA, Situación, Desafíos y Dimensionamiento de Miniaerogenerador</h1>
+  <p>Facultad de Ingeniería Agrícola · Universidad Nacional Agraria La Molina · Mg. Sc. Kenyi Cavalcanti Cárdonas</p>
+  <div class="tags">
+    <span class="tag">EIA</span>
+    <span class="tag">Partes Interesadas</span>
+    <span class="tag">Ruido eólico</span>
+    <span class="tag">Energía eólica offshore</span>
+    <span class="tag">Miniaerogenerador</span>
+    <span class="tag">Dimensionamiento</span>
+    <span class="tag">Potencia en el viento</span>
+    <span class="tag">Selección tecnológica</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: EIA -->
+<div class="sec-bar blue">🔵 BLOQUE 1 — PROCESO DE EVALUACIÓN DE IMPACTO AMBIENTAL (EIA)</div>
+
+<!-- Bloque EIA propósito -->
+<div class="block">
+  <span class="bh blue">EIA — Propósito y Proceso (Diap. 4–5)</span>
+  <div class="def blue">La EIA es un proceso técnico-legal <strong>obligatorio</strong> para proyectos eólicos (especialmente los de gran escala). Su razón de ser es doble: anticipar consecuencias antes de que ocurran y abrir espacios de participación ciudadana real.</div>
+  <div class="item"><span class="dot blue"></span><span><strong>Evaluar riesgos y beneficios:</strong> La EIA analiza los efectos sociales (empleos, ruido, desplazamientos), económicos (inversión, costo-beneficio local) y ambientales (flora, fauna, paisaje) de todas las fases del proyecto.</span></div>
+  <div class="item"><span class="dot blue"></span><span><strong>Cubre todo el ciclo de vida:</strong> Planificación → Construcción → Operación → Desmantelamiento. Esto importa porque los impactos varían radicalmente por fase (ej.: el ruido de construcción es temporal, el operativo es permanente).</span></div>
+  <div class="item"><span class="dot blue"></span><span><strong>Involucrar al público:</strong> A través de audiencias donde las partes presentan preocupaciones y los comentarios ciudadanos deben incorporarse en los borradores, no ser ignorados.</span></div>
+  <div class="flow">
+    <div class="fbox">Planificación</div><span class="farrow">→</span>
+    <div class="fbox">Construcción</div><span class="farrow">→</span>
+    <div class="fbox">Operación</div><span class="farrow">→</span>
+    <div class="fbox">Desmantelamiento</div><span class="farrow">→</span>
+    <div class="fbox">EIA continua</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Pensar que la EIA es solo un trámite de papel al inicio del proyecto. Es un proceso iterativo donde los comentarios ciudadanos deben modificar efectivamente el diseño, no archivarse.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la evaluación de impacto ambiental de un parque eólico debe cubrir la fase de desmantelamiento y qué tipos de impactos específicos podría generar esta fase final.</div>
+</div>
+
+<!-- Bloque offshore -->
+<div class="block">
+  <span class="bh teal">Sitios Offshore y Planificación Marina (Diap. 6)</span>
+  <div class="def teal">Los parques eólicos marinos (offshore) presentan una complejidad especial: el mar es considerado "propiedad de la nación y el público", lo que multiplica el número de partes con derechos legítimos de participación.</div>
+  <div class="item"><span class="dot teal"></span><span><strong>Por qué el mar complica la EIA:</strong> A diferencia de tierra firme con propietarios definidos, el espacio marino es un bien común. Cualquier uso (turbinas) afecta a múltiples actividades preexistentes simultáneamente.</span></div>
+  <div class="item"><span class="dot teal"></span><span><strong>Ejemplo real:</strong> El parque Anholt Offshore Wind Site de DONG Energy (Dinamarca) requirió negociar con rutas navieras, pesqueros y zonas de conservación marina.</span></div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #14b8a6"><strong>Partes típicas offshore</strong><br>Compañías navieras, gestores pesqueros, defensores de mamíferos marinos, residentes costeros, navegantes recreativos</div>
+    <div class="mini" style="border-left:3px solid #3b82f6"><strong>Planificación espacial marina</strong><br>Herramienta para asignar zonas del mar a diferentes usos, minimizando conflictos entre energía, pesca y conservación</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué los proyectos eólicos offshore requieren una planificación espacial marina como parte del proceso de EIA? Mencione al menos tres tipos de partes interesadas que no aparecen en proyectos onshore.</div>
+</div>
+
+<!-- Bloque ruido -->
+<div class="block">
+  <span class="bh purple">Impactos de Ruido y Comunidades (Diap. 7)</span>
+  <div class="def purple">El ruido de los aerogeneradores es uno de los impactos más litigados en procesos de EIA, porque sus efectos son continuos, difíciles de mitigar una vez instalado el parque y subjetivamente variables entre personas.</div>
+  <div class="item"><span class="dot purple"></span><span><strong>Unidad de medida:</strong> El decibelio (dB), escala logarítmica de nivel de presión sonora. Duplicar la intensidad física solo añade ~3 dB, pero el oído humano percibe cada 10 dB como el doble de volumen.</span></div>
+  <div class="item"><span class="dot purple"></span><span><strong>Contratied setbacks:</strong> La EIA establece reglas de "retiro" mínimo (distancia) entre turbinas y zonas habitadas, usando modelos de propagación de ruido (ej.: software windPRO) para mapear "áreas sensibles al ruido".</span></div>
+  <div class="item"><span class="dot purple"></span><span><strong>Por qué no hay umbral universal:</strong> El mismo nivel de dB puede ser "aceptable" en zona industrial y "intolerable" en zona rural silenciosa. Por eso la EIA usa el concepto de ruido de fondo relativo.</span></div>
+  <div class="rx">Nivel de ruido percibido (dB) = escala logarítmica<br>Cada +10 dB ≈ doble volumen percibido<br>Ej.: 40 dB (campo silencioso) → 60 dB (conversación normal)</div>
+  <div class="warn">⚠️ Confundir intensidad sonora (W/m²) con nivel de presión sonora (dB) es un error grave. La EIA regula el dB, no vatios. Además, el ruido de baja frecuencia de turbinas (infra-sonido) puede no medirse en dB estándar pero sí generar molestias.</div>
+  <div class="exam">🎯 EXAMEN: Un aerogenerador genera 55 dB a 200 m y otro genera 58 dB a la misma distancia. ¿Cuántos dB produce la combinación de ambos en ese punto? Explique por qué la respuesta no es 113 dB.</div>
+</div>
+
+<!-- SECCIÓN 2: PARTES INTERESADAS -->
+<div class="sec-bar green">🟢 BLOQUE 2 — PARTES INTERESADAS, DESAFÍOS Y VALORES</div>
+
+<!-- Bloque tipos partes -->
+<div class="block">
+  <span class="bh green">Tipos de Partes Interesadas (Diap. 10)</span>
+  <div class="def green">Un "stakeholder" o parte interesada es cualquier actor —individual u organizacional— con capacidad para afectar o ser afectado por el proyecto eólico. La EIA debe identificarlos todos, aunque no todos tengan el mismo poder de veto.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e"><strong>🏛️ Sector público</strong><br>Ciudadanos locales, políticos locales, universidades, instituciones financieras públicas</div>
+    <div class="mini" style="border-top:3px solid #3b82f6"><strong>⚙️ Sector técnico</strong><br>Científicos, ingenieros, consultores, utilidades eléctricas</div>
+    <div class="mini" style="border-top:3px solid #a855f7"><strong>🌿 Sociedad civil</strong><br>ONG ambientalistas, asociaciones de consumidores, sindicatos, pescadores</div>
+  </div>
+  <div class="item"><span class="dot green"></span><span><strong>¿Por qué importa identificarlos bien?</strong> Un stakeholder no mapeado puede convertirse en opositor organizado durante la construcción (recurso de amparo, protestas) cuando ya es costoso cambiar el diseño.</span></div>
+  <div class="item"><span class="dot green"></span><span><strong>Contexto peruano:</strong> En proyectos como el parque eólico de Marcona (Ica) o Tres Hermanas, las comunidades campesinas y pescadores artesanales son stakeholders críticos con derechos de consulta previa bajo el Convenio 169 de la OIT.</span></div>
+  <div class="exam">🎯 EXAMEN: Enumere y caracterice al menos cinco tipos de partes interesadas que participarían en el proceso de EIA de un parque eólico onshore ubicado en la costa peruana, explicando el interés específico de cada grupo.</div>
+</div>
+
+<!-- Bloque desafíos onshore -->
+<div class="block">
+  <span class="bh orange">Desafíos de Emplazamiento en Tierra (Diap. 9)</span>
+  <div class="def orange">La localización de turbinas en tierra (onshore) enfrenta tensiones que normalmente quedan FUERA de la evaluación técnica de una EIA estándar, porque involucran valores subjetivos sobre identidad, equidad y comunidad.</div>
+  <div class="item"><span class="dot orange"></span><span><strong>Sentido de lugar:</strong> Las comunidades rurales tienen una relación identitaria con su paisaje. Una turbina de 120 m altera visualmente el horizonte de manera permanente — esto no tiene compensación económica directa.</span></div>
+  <div class="item"><span class="dot orange"></span><span><strong>Distribución justa:</strong> ¿Quién recibe los beneficios (empleo, renta de terreno) y quién soporta los costos (ruido, impacto visual)? Si los beneficios van a empresas externas y los costos quedan en la comunidad, hay un problema de equidad.</span></div>
+  <div class="item"><span class="dot orange"></span><span><strong>Modelos cooperativos:</strong> En Dinamarca, las comunidades pueden ser copropietarias de turbinas a través de cooperativas (community wind). Esto cambia radicalmente la aceptación social.</span></div>
+  <div class="item"><span class="dot orange"></span><span><strong>Participación bidireccional:</strong> No es suficiente "informar" a la comunidad. La participación debe ser real: la comunidad debe poder influir en dónde se ubica, cómo se diseña y qué beneficios recibe.</span></div>
+  <div class="warn">⚠️ Los desafíos de emplazamiento que no se abordan en la EIA formal (sentido de lugar, equidad, confianza social) son la principal causa de oposición local y retrasos en proyectos eólicos en todo el mundo.</div>
+  <div class="exam">🎯 EXAMEN: Un desarrollador propone un parque eólico en una comunidad rural andina peruana. El estudio de impacto ambiental muestra que los niveles de ruido y sombra parpadeante están dentro de los límites normativos. ¿Es suficiente esto para garantizar la aceptación social del proyecto? Fundamente su respuesta.</div>
+</div>
+
+<!-- Bloque valores subyacentes -->
+<div class="block">
+  <span class="bh pink">Valores Subyacentes no Abordados en EIA (Diap. 11)</span>
+  <div class="def pink">Existe un conjunto de valores éticos y sociales que las partes interesadas defienden pero que los instrumentos técnicos de la EIA estándar rara vez logran capturar ni medir.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #ec4899"><strong>🌊 Horizonte oceánico y estética</strong><br>El valor de un paisaje costero sin turbinas es real pero intangible para una EIA cuantitativa</div>
+    <div class="mini" style="border-left:3px solid #8b5cf6"><strong>⚖️ Igualdad y equidad</strong><br>¿Los beneficios compensan a quienes cargan los costos? La EIA no resuelve esto automáticamente</div>
+    <div class="mini" style="border-left:3px solid #22c55e"><strong>🌿 Protección de la naturaleza</strong><br>Más allá del cumplimiento normativo, algunas partes defienden un valor intrínseco de la biodiversidad</div>
+    <div class="mini" style="border-left:3px solid #f97316"><strong>🔮 Generaciones futuras</strong><br>La necesidad de viento para energía limpia conecta con el deber intergeneracional de mitigar el cambio climático</div>
+  </div>
+  <div class="item"><span class="dot pink"></span><span><strong>Confianza social:</strong> Si el gobierno o la empresa desarrolladora tiene un historial de promesas incumplidas, la comunidad no creerá en las garantías de la EIA, independientemente de su rigor técnico.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la "protección de las generaciones futuras" es a la vez un argumento A FAVOR de la energía eólica y una preocupación que puede estar AUSENTE de una EIA convencional. ¿Cómo se relaciona con la urgencia del cambio climático?</div>
+</div>
+
+<!-- SECCIÓN 3: RUTAS MARITIMAS -->
+<div class="sec-bar teal">🩵 BLOQUE 3 — RUTAS DE ENVÍO Y NEGOCIACIÓN CON REGULADORES</div>
+<div class="block s2">
+  <span class="bh teal">Rutas Marítimas como Parte de la EIA Offshore (Diap. 8)</span>
+  <div class="def teal">La instalación de turbinas offshore obliga a negociar con los entes reguladores de tráfico marítimo porque las estructuras pueden interferir con rutas establecidas de ferry, buques comerciales y embarcaciones menores.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot teal"></span><span><strong>Objetivos de seguridad:</strong> Las turbinas deben ser visibles (marcadores de luz), detectables por radar y estar suficientemente alejadas de las rutas para que las maniobras de emergencia sean posibles.</span></div>
+      <div class="item"><span class="dot teal"></span><span><strong>Compensación y limitaciones:</strong> En algunos casos, el desarrollador debe compensar económicamente a operadores de ferry por desvíos o pagar seguros especiales. Estas negociaciones forman parte del proceso de EIA.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot blue"></span><span><strong>Tipos de rutas afectadas:</strong> Tráfico de ferry (pasajeros), envío comercial (contenedores, graneles), embarcaciones de recreo y rutas de pesca artesanal.</span></div>
+      <div class="flow">
+        <div class="fbox">Mapeo de rutas</div><span class="farrow">→</span>
+        <div class="fbox">Negociación</div><span class="farrow">→</span>
+        <div class="fbox">Zonificación</div><span class="farrow">→</span>
+        <div class="fbox">Acuerdo EIA</div>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ En Perú, la Autoridad Marítima (DICAPI - Marina de Guerra) debe ser obligatoriamente consultada en cualquier EIA de proyecto eólico offshore. Su intervención puede modificar la disposición de las turbinas o exigir zonas de exclusión.</div>
+  <div class="exam">🎯 EXAMEN: Describa el proceso de negociación que debe realizarse con los reguladores marítimos durante la EIA de un parque eólico offshore, identificando qué aspectos técnicos de seguridad deben garantizarse.</div>
+</div>
+<div class="block">
+  <span class="bh gray">Resumen de Aprendizajes de la Conferencia (Diap. 12–13)</span>
+  <div class="item"><span class="dot blue"></span><span>El propósito de la EIA es <strong>doble</strong>: evaluar impactos técnicos Y involucrar ciudadanos.</span></div>
+  <div class="item"><span class="dot green"></span><span>Problemas abordados en EIA: rutas marítimas, efectos de ruido, impacto visual, biodiversidad.</span></div>
+  <div class="item"><span class="dot orange"></span><span>Problemas <em>no</em> abordados normalmente: equidad, sentido de lugar, confianza social, estética.</span></div>
+  <div class="item"><span class="dot purple"></span><span>La "protección de las generaciones futuras" vincula la energía eólica con la urgencia climática.</span></div>
+  <div class="item"><span class="dot pink"></span><span>La participación bidireccional de la comunidad es esencial en proyectos onshore.</span></div>
+</div>
+
+<!-- SECCIÓN 4: DIMENSIONAMIENTO MINIAEROGENERADOR -->
+<div class="sec-bar yellow">🟡 BLOQUE 4 — TAREA: DIMENSIONAMIENTO DE MINIAEROGENERADOR</div>
+
+<!-- Bloque objetivo -->
+<div class="block">
+  <span class="bh yellow">Objetivo y Alcance de la TE (Sección 1–2)</span>
+  <div class="def yellow">El trabajo consiste en calcular cuánta área de barrido (m²) necesita un mini aerogenerador para satisfacer 100% del consumo eléctrico anual de una vivienda real, y luego seleccionar un modelo comercial que cumpla ese requerimiento.</div>
+  <div class="item"><span class="dot yellow"></span><span><strong>¿Por qué "área de barrido"?</strong> La energía captada por el rotor depende del área que barre el viento, no del diámetro per se. Un rotor más grande intercepta más viento y genera más electricidad — la relación es cuadrática con el diámetro.</span></div>
+  <div class="item"><span class="dot yellow"></span><span><strong>Miniaerogenerador:</strong> Máquina de eje horizontal o vertical con potencia nominal típicamente entre 1 y 100 kW, diseñada para aplicaciones residenciales o rurales aisladas de la red.</span></div>
+  <div class="item"><span class="dot yellow"></span><span><strong>Variables clave a determinar:</strong> Consumo anual (kWh/año) de la vivienda, velocidad media anual del viento de la localidad, densidad del aire ρ, coeficiente de potencia Cp del aerogenerador, y eficiencias eléctricas.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el área de barrido del rotor es una variable más informativa que el diámetro al comparar distintos modelos de miniaerogeneradores comerciales.</div>
+</div>
+
+<!-- Bloque demanda -->
+<div class="block">
+  <span class="bh orange">a) Demanda Energética Anual de la Vivienda (Sección 3.3a)</span>
+  <div class="def orange">El primer paso es construir una tabla de consumo real de la vivienda: lista todos los aparatos, su potencia (W), horas de uso diario y factor de simultaneidad para obtener kWh/día → kWh/mes → kWh/año.</div>
+  <div class="rx">
+    Consumo diario (kWh/d) = Σ [P_i (W) × h_i (h/d)] / 1000<br>
+    Consumo anual (kWh/año) = Consumo diario × 365<br>
+    Ejemplo: 5 focos 10W × 5h/d + TV 100W × 4h/d = 650 Wh/d = 0.65 kWh/d
+  </div>
+  <div class="warn">⚠️ No confundir potencia (W) con energía (Wh o kWh). La potencia es la tasa de consumo; la energía es la potencia acumulada en el tiempo. Un calefactor de 2000 W usado 2h consume 4 kWh.</div>
+  <div class="exam">🎯 EXAMEN: Una vivienda tiene los siguientes equipos: 6 focos LED de 9W (6h/d), refrigeradora de 150W (24h/d), TV de 80W (4h/d), cargadores varios 50W (3h/d). Calcule el consumo diario en kWh y el consumo anual.</div>
+</div>
+
+<!-- Bloque recurso eólico -->
+<div class="block">
+  <span class="bh teal">b) Caracterización del Recurso Eólico (Sección 3.3b)</span>
+  <div class="def teal">La velocidad del viento es el parámetro más crítico del diseño porque la potencia disponible varía con el cubo de la velocidad. Duplicar la velocidad del viento multiplica por 8 la potencia disponible.</div>
+  <div class="item"><span class="dot teal"></span><span><strong>Fuentes en Perú:</strong> Atlas Eólico del Perú (MINEM), estaciones meteorológicas del SENAMHI, bases de datos globales como NASA POWER o Global Wind Atlas.</span></div>
+  <div class="item"><span class="dot teal"></span><span><strong>Densidad del aire ρ:</strong> A nivel del mar ρ ≈ 1.225 kg/m³. En Puno o Cusco (3500 m.s.n.m.) ρ ≈ 0.85 kg/m³ — esto reduce significativamente la potencia disponible. Siempre usar la densidad de la localidad elegida.</span></div>
+  <div class="rx">ρ(z) ≈ 1.225 × e^(-z/8500) [kg/m³]<br>z = altitud en metros<br>Ejemplo: z=3500m → ρ ≈ 0.87 kg/m³</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué se debe corregir la densidad del aire cuando se dimensiona un aerogenerador para una localidad de altura en Perú? ¿Qué efecto tiene en el área de barrido requerida?</div>
+</div>
+
+<!-- Bloque potencia -->
+<div class="block s2">
+  <span class="bh yellow">c–d) Potencia Disponible en el Viento y Eficiencia Global (Sección 3.3c–d)</span>
+  <div class="def yellow">La potencia cinética del viento que puede extraer un rotor está limitada físicamente por el Límite de Betz (59.3%) y en la práctica por el coeficiente de potencia real Cp, que en miniaerogeneradores comerciales suele estar entre 0.25 y 0.45.</div>
+  <div class="two">
+    <div>
+      <div class="rx">
+        P_viento = ½ × ρ × A × V³ [W]<br>
+        ρ = densidad del aire [kg/m³]<br>
+        A = área de barrido [m²]<br>
+        V = velocidad del viento [m/s]
+      </div>
+      <div class="rx">
+        P_eléctrica = Cp × η_mec × η_elec × P_viento<br>
+        Cp = coeficiente de potencia (máx. 0.593 — Betz)<br>
+        Eficiencia global típica: 25–40% de P_viento
+      </div>
+    </div>
+    <div>
+      <div class="item"><span class="dot yellow"></span><span><strong>Límite de Betz (1919):</strong> Albert Betz demostró matemáticamente que ningún rotor puede extraer más del 59.3% de la potencia cinética del viento, porque necesita dejar pasar el flujo de aire.</span></div>
+      <div class="item"><span class="dot yellow"></span><span><strong>Eficiencia global:</strong> Además del Cp, hay pérdidas mecánicas en la transmisión y eléctricas en el generador. La eficiencia total real suele estar entre 25% y 40% del potencial teórico del viento.</span></div>
+      <div class="item"><span class="dot orange"></span><span><strong>Factor de capacidad:</strong> Los aerogeneradores no operan a plena potencia todo el tiempo. El factor de capacidad (típico: 20–35%) relaciona la energía producida con la que produciría a potencia nominal las 8760 h del año.</span></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR CRÍTICO: Usar la fórmula P = ½ρAV³ sin aplicar el Cp equivale a suponer que el aerogenerador captura toda la energía del viento — imposible físicamente. El Cp y las eficiencias mecánicas/eléctricas son OBLIGATORIOS en el cálculo real.</div>
+  <div class="exam">🎯 EXAMEN: Un aerogenerador opera con V = 7 m/s, ρ = 1.2 kg/m³, A = 15 m², Cp = 0.38 y eficiencia eléctrica de 90%. Calcule la potencia eléctrica neta entregada. ¿Qué porcentaje del potencial teórico del viento representa?</div>
+</div>
+
+<!-- Bloque área y diámetro -->
+<div class="block">
+  <span class="bh blue">e–f) Área de Barrido y Diámetro del Rotor (Sección 3.3e–f)</span>
+  <div class="def blue">El proceso de dimensionamiento se invierte: a partir de la energía que necesitamos producir (kWh/año), calculamos la potencia promedio requerida y despejamos el área necesaria de la ecuación de potencia en el viento.</div>
+  <div class="rx">
+    Paso 1: P_requerida = E_anual / (8760 h × Factor_capacidad)<br>
+    Paso 2: A = P_requerida / (½ × ρ × V³ × Cp × η)<br>
+    Paso 3: D = √(4A/π) → Diámetro mínimo del rotor [m]
+  </div>
+  <div class="flow">
+    <div class="fbox">E_anual (kWh)</div><span class="farrow">→</span>
+    <div class="fbox">P_promedio (W)</div><span class="farrow">→</span>
+    <div class="fbox">Área A (m²)</div><span class="farrow">→</span>
+    <div class="fbox">Diámetro D (m)</div><span class="farrow">→</span>
+    <div class="fbox">Selección comercial</div>
+  </div>
+  <div class="item"><span class="dot blue"></span><span><strong>Por qué el factor de capacidad importa:</strong> Si usamos la velocidad media del viento para calcular, el aerogenerador solo producirá esa potencia "promedio" en condiciones ideales. El factor de capacidad integra la variabilidad del viento a lo largo del año.</span></div>
+  <div class="exam">🎯 EXAMEN: Determine el diámetro mínimo del rotor de un miniaerogenerador para una vivienda con consumo anual de 2190 kWh, ubicada donde V_media = 6 m/s, ρ = 1.2 kg/m³, Cp = 0.35 y η = 0.90.</div>
+</div>
+
+<!-- Bloque selección comercial -->
+<div class="block s2">
+  <span class="bh green">g–h) Selección de Miniaerogenerador Comercial (Sección 3.3g–h)</span>
+  <div class="def green">La selección técnica implica comparar al menos tres alternativas comerciales evaluando múltiples criterios simultáneos: capacidad de producción, adecuación al viento local, costo y facilidad de instalación.</div>
+  <div class="two">
+    <div>
+      <table class="tbl">
+        <tr><th>Criterio</th><th>Qué evaluar</th></tr>
+        <tr><td>Potencia nominal (kW)</td><td>Debe superar la P_requerida calculada</td></tr>
+        <tr><td>Diámetro rotor (m)</td><td>Debe ≥ D calculado; determina el área</td></tr>
+        <tr><td>Velocidad de arranque</td><td>Debe ser inferior a V_media local (cut-in)</td></tr>
+        <tr><td>Producción anual (kWh)</td><td>Debe cubrir demanda + pérdidas de sistema</td></tr>
+        <tr><td>Costo (USD)</td><td>LCOE: costo/kWh en vida útil del equipo</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="item"><span class="dot green"></span><span><strong>Velocidad de arranque (cut-in):</strong> Si el viento medio de la localidad es 5 m/s pero el aerogenerador arranca a 4 m/s, funcionará bien. Si arranca a 6 m/s, estará parado la mayor parte del tiempo.</span></div>
+      <div class="item"><span class="dot green"></span><span><strong>LCOE (Levelized Cost of Energy):</strong> Indicador que divide el costo total de vida útil del equipo (instalación + mantenimiento) entre la energía producida total. Permite comparar tecnologías de forma justa.</span></div>
+      <div class="item"><span class="dot green"></span><span><strong>Justificación técnica:</strong> El informe debe demostrar explícitamente que el equipo seleccionado SÍ cumple la demanda calculada, comparando producción anual estimada vs demanda anual.</span></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ Seleccionar el aerogenerador más potente o más barato sin verificar que su velocidad de arranque y curva de potencia son compatibles con el recurso eólico local es el error más común en estos informes.</div>
+  <div class="exam">🎯 EXAMEN: Explique qué es la velocidad de arranque (cut-in speed) de un aerogenerador y por qué es determinante en la selección tecnológica para una localidad con vientos medios bajos (3–5 m/s).</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="sec-bar gray">⚫ TABLA INTEGRADORA — Síntesis de Conceptos Clave para el Examen</div>
+<div class="block s3">
+  <span class="bh gray">Mapa Conceptual Integrado: EIA + Dimensionamiento</span>
+  <table class="tbl">
+    <tr>
+      <th>Concepto</th>
+      <th>Definición clave</th>
+      <th>Fórmula / Método</th>
+      <th>Limitación / Advertencia</th>
+      <th>Contexto Perú</th>
+    </tr>
+    <tr>
+      <td><strong>EIA</strong></td>
+      <td>Proceso obligatorio de evaluación de impactos sociales, económicos y ambientales en todas las fases del proyecto</td>
+      <td>No hay fórmula; es un proceso participativo con audiencias públicas y documentos técnicos</td>
+      <td>No aborda valores subjetivos como estética, sentido de lugar o equidad intergeneracional</td>
+      <td>SENACE (Servicio Nacional de Certificación Ambiental) administra las EIA en Perú para proyectos energéticos</td>
+    </tr>
+    <tr>
+      <td><strong>Partes interesadas</strong></td>
+      <td>Todo actor con capacidad de afectar o ser afectado por el proyecto (ciudadanos, ONG, industria, academia)</td>
+      <td>Mapeo de stakeholders, audiencias públicas, consulta previa (Convenio 169 OIT)</td>
+      <td>Un stakeholder no identificado puede bloquear el proyecto en etapas avanzadas</td>
+      <td>Comunidades campesinas y pesqueras tienen derecho a consulta previa bajo legislación peruana</td>
+    </tr>
+    <tr>
+      <td><strong>Ruido eólico</strong></td>
+      <td>Impacto acústico continuo de las turbinas, medido en dB, que varía con la distancia, topografía y velocidad del viento</td>
+      <td>Modelado con software (windPRO); mapas de isoruido; reglas de retiro mínimo</td>
+      <td>La escala dB es logarítmica; el ruido de dos fuentes no se suma aritméticamente</td>
+      <td>El DS 085-2003-PCM fija límites de ruido para zonas residenciales peruanas (60 dB día / 50 dB noche)</td>
+    </tr>
+    <tr>
+      <td><strong>P = ½ρAV³</strong></td>
+      <td>Potencia cinética disponible en el viento que atraviesa un área A a velocidad V con densidad ρ</td>
+      <td>P(W) = 0.5 × ρ(kg/m³) × A(m²) × V³(m/s)³</td>
+      <td>Esta es la potencia del viento, NO la eléctrica; debe multiplicarse por Cp × η</td>
+      <td>En zonas altoandinas (>3000 m), ρ cae ~30% respecto al nivel del mar, reduciendo la potencia disponible</td>
+    </tr>
+    <tr>
+      <td><strong>Coeficiente de Betz</strong></td>
+      <td>Límite físico máximo de extracción de energía del viento: 16/27 ≈ 0.593 (59.3%)</td>
+      <td>Cp_max = 16/27 ≈ 0.593; Cp_real (mini): 0.25–0.45</td>
+      <td>Ningún rotor puede superar 59.3%; asumir Cp=1 es un error físico grave</td>
+      <td>Los mini aerogeneradores comerciales disponibles en Perú suelen tener Cp entre 0.30 y 0.40</td>
+    </tr>
+    <tr>
+      <td><strong>Área de barrido A</strong></td>
+      <td>Superficie circular que barre el rotor al girar; determina cuánto viento intercepta la máquina</td>
+      <td>A = π × D² / 4 [m²]; D = √(4A/π)</td>
+      <td>El área crece con el cuadrado del diámetro; un rotor el doble de grande capta 4× más área</td>
+      <td>Los miniaerogeneradores más comunes en zonas rurales peruanas tienen D entre 1.5 y 5 m</td>
+    </tr>
+    <tr>
+      <td><strong>Selección tecnológica</strong></td>
+      <td>Elección del modelo comercial que satisface la demanda energética al menor costo en condiciones de viento local</td>
+      <td>Comparar ≥3 modelos por: potencia nominal, D, cut-in, producción anual, LCOE</td>
+      <td>Un equipo de alta potencia nominal no sirve si su velocidad de arranque supera V_media local</td>
+      <td>Marcas disponibles en Perú: Bornay (España), Aleko, Automaxx; también fabricación local artesanal en zonas rurales</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La ecuación P = ½ρAV³ conecta el recurso eólico local (V, ρ) con el diseño del rotor (A). Todo el proceso de dimensionamiento es despejar A a partir de la energía que la vivienda necesita. La EIA garantiza que ese rotor se instale en el lugar correcto con el consenso social necesario.</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta · Cubre EIA, partes interesadas y dimensionamiento</p>
+  </div>
+  <div class="quiz-body">
+    <div class="prog-row">
+      <span class="prog-text" id="prog-text">Pregunta 0 de 10 respondidas · Aciertos: 0/0</span>
+      <div class="stat-bar-wrap" style="flex:1"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a;transition:width .4s"></div></div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">¿Cuál es el propósito DOBLE de la Evaluación de Impacto Ambiental (EIA) en proyectos eólicos?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) Reducir costos de construcción y maximizar la producción de energía</button>
+        <button class="qbtn" data-q="1" data-correct="false">B) Cumplir trámites legales y obtener financiamiento bancario</button>
+        <button class="qbtn" data-q="1" data-correct="true">C) Evaluar riesgos y beneficios potenciales, e involucrar a ciudadanos y partes interesadas</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) Seleccionar la tecnología más eficiente y calcular el retorno de inversión</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">¿Por qué los proyectos eólicos offshore involucran un mayor número de partes interesadas que los onshore?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) Porque generan más electricidad y por tanto más controversia económica</button>
+        <button class="qbtn" data-q="2" data-correct="true">B) Porque el mar es "propiedad de la nación y el público", haciendo del espacio marino un bien común con múltiples usuarios legítimos</button>
+        <button class="qbtn" data-q="2" data-correct="false">C) Porque la normativa internacional exige más consultas para proyectos marinos</button>
+        <button class="qbtn" data-q="2" data-correct="false">D) Porque los proyectos offshore son siempre de mayor escala y requieren más permisos</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">¿Cuál de los siguientes valores subyacentes de las partes interesadas es mencionado en el curso como algo que NORMALMENTE NO SE ABORDA en una EIA convencional?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="false">A) Niveles de ruido en decibeles</button>
+        <button class="qbtn" data-q="3" data-correct="false">B) Efectos sobre la fauna marina</button>
+        <button class="qbtn" data-q="3" data-correct="false">C) Interferencia con rutas de envío</button>
+        <button class="qbtn" data-q="3" data-correct="true">D) Sentido de lugar y estética del horizonte oceánico</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">Un aerogenerador A genera 55 dB y un aerogenerador B genera 55 dB en el mismo punto. ¿Cuál es el nivel de ruido combinado aproximado?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="false">A) 110 dB (se suman directamente)</button>
+        <button class="qbtn" data-q="4" data-correct="true">B) 58 dB (escala logarítmica: igual intensidad suma ~3 dB)</button>
+        <button class="qbtn" data-q="4" data-correct="false">C) 55 dB (el nivel no cambia al haber dos fuentes iguales)</button>
+        <button class="qbtn" data-q="4" data-correct="false">D) 77.5 dB (promedio de las dos fuentes)</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">En el dimensionamiento de un miniaerogenerador, ¿qué representa el Coeficiente de Betz y cuál es su valor máximo teórico?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) La eficiencia del generador eléctrico; valor máximo 100%</button>
+        <button class="qbtn" data-q="5" data-correct="false">B) La relación entre potencia nominal y potencia de arranque; valor máximo 50%</button>
+        <button class="qbtn" data-q="5" data-correct="true">C) El límite físico máximo de extracción de energía del viento por cualquier rotor; valor ≈ 59.3%</button>
+        <button class="qbtn" data-q="5" data-correct="false">D) El factor de capacidad anual de un aerogenerador en condiciones ideales; valor máximo 80%</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">¿Cuál es la fórmula correcta para calcular el área de barrido A a partir del diámetro D del rotor?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="false">A) A = π × D</button>
+        <button class="qbtn" data-q="6" data-correct="true">B) A = π × D² / 4</button>
+        <button class="qbtn" data-q="6" data-correct="false">C) A = 2 × π × D</button>
+        <button class="qbtn" data-q="6" data-correct="false">D) A = D² / π</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">Si la velocidad del viento en una localidad se duplica (de 4 m/s a 8 m/s), ¿en cuánto se multiplica la potencia disponible en el viento, manteniendo el área de barrido constante?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="false">A) Se duplica (×2)</button>
+        <button class="qbtn" data-q="7" data-correct="false">B) Se cuadruplica (×4)</button>
+        <button class="qbtn" data-q="7" data-correct="true">C) Se multiplica por 8 (×8), porque la potencia varía con V³</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) Se multiplica por 16 (×16), porque la energía varía con V⁴</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">¿Por qué la densidad del aire (ρ) es un parámetro que debe ajustarse al dimensionar un aerogenerador para una vivienda ubicada en los Andes peruanos a 3500 m.s.n.m.?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="false">A) Porque a mayor altitud el viento es más turbulento y el Cp disminuye</button>
+        <button class="qbtn" data-q="8" data-correct="true">B) Porque la densidad del aire disminuye con la altitud, reduciendo la potencia disponible en el viento con el mismo rotor y velocidad</button>
+        <button class="qbtn" data-q="8" data-correct="false">C) Porque la normativa peruana exige usar densidades locales en los cálculos de EIA</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) Porque en altura el aire es más húmedo y eso afecta la lubricación del generador</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">Al evaluar tres miniaerogeneradores comerciales para seleccionar el más adecuado, ¿cuál de los siguientes criterios es más crítico si la localidad tiene una velocidad media de viento de solo 4.5 m/s?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="false">A) La potencia nominal máxima del equipo</button>
+        <button class="qbtn" data-q="9" data-correct="false">B) El costo inicial de adquisición</button>
+        <button class="qbtn" data-q="9" data-correct="true">C) La velocidad de arranque (cut-in speed), que debe ser ≤ 4.5 m/s para que el equipo opere</button>
+        <button class="qbtn" data-q="9" data-correct="false">D) El diámetro del rotor, que debe ser el mayor disponible en el mercado</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la participación comunitaria en proyectos eólicos es FALSA según el contenido del curso?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) La participación bidireccional de la comunidad es muy importante en proyectos onshore</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) Las cooperativas de propiedad comunitaria de turbinas pueden mejorar la aceptación social del proyecto</button>
+        <button class="qbtn" data-q="10" data-correct="true">C) Una vez que la EIA aprueba los niveles de ruido dentro de norma, la aceptación social del proyecto queda garantizada</button>
+        <button class="qbtn" data-q="10" data-correct="false">D) Los valores como sentido de lugar y equidad normalmente no se abordan en una EIA convencional</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div id="result-panel"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="cv-footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Cavalcanti Cárdonas, K. (2020). Localización de desafíos y participación de las partes interesadas en energías renovables. UNALM — Facultad de Ingeniería Agrícola.</span>
+  <span class="fc">Betz, A. (1919). Teoría del límite de extracción de energía del viento. Göttingen.</span>
+  <span class="fc">MINEM (2016). Atlas Eólico del Perú. Ministerio de Energía y Minas del Perú.</span>
+  <span class="fc">Ram, B. (Photo credits). Bonnie Ram / Delaware Sea Grant.</span>
+  <span class="fc">NASA POWER / Global Wind Atlas — fuentes de datos de viento para localidades peruanas.</span>
+</footer>
+</div>
+
+<script>
+const feedbacks = {
+  1:{c:"La EIA tiene un propósito dual explícito: evaluar riesgos y beneficios en todas las fases del proyecto (social, económico, ambiental) y a la vez abrir un canal real de participación ciudadana mediante audiencias públicas donde los comentarios deben incorporarse a los documentos.",k:"La EIA no es solo un trámite burocrático ni se limita a aspectos económicos. La respuesta correcta es C. La participación ciudadana no es opcional — es parte constitutiva del proceso."},
+  2:{c:"El mar es considerado propiedad colectiva de la nación. Esto implica que compañías navieras, pescadores, defensores de fauna marina, residentes costeros y navegantes recreativos tienen todos derechos legítimos de participación que no existen en proyectos terrestres donde hay propietarios privados definidos.",k:"La respuesta correcta es B. No es solo una cuestión de tamaño del proyecto ni de normativa internacional — es una cuestión de propiedad y derechos sobre el espacio marino."},
+  3:{c:"El sentido de lugar, la estética del horizonte y la equidad son valores que las partes interesadas defienden pero que la EIA convencional, centrada en impactos técnicos medibles, rara vez logra abordar o compensar. Esto genera conflictos sociales incluso cuando el proyecto cumple todos los límites normativos.",k:"La respuesta correcta es D. Las opciones A, B y C son todos impactos que SÍ se abordan técnicamente en una EIA estándar (ruido, fauna, navegación). Los valores subjetivos como el sentido de lugar quedan fuera."},
+  4:{c:"La escala de decibelios es logarítmica. Cuando dos fuentes de igual intensidad se combinan, el nivel resultante es el nivel individual + 10×log(2) ≈ +3 dB. Entonces 55 + 55 ≈ 58 dB, no 110 dB. Para sumar intensidades sonoras se usan antilogaritmos, no suma directa.",k:"La respuesta correcta es B. Este es el error más común: asumir que los dB se suman aritméticamente. La escala logarítmica hace que duplicar la potencia acústica solo añada ~3 dB."},
+  5:{c:"Albert Betz (1919) demostró que el máximo teórico de energía extraíble del viento por cualquier rotor es 16/27 ≈ 59.3% de la potencia cinética disponible. El aerogenerador necesita dejar pasar el viento — si lo frenara completamente, no habría flujo y tampoco energía. Los Cp reales son menores: 0.35–0.45 en buenos rotores.",k:"La respuesta correcta es C. El límite de Betz no es la eficiencia eléctrica ni el factor de capacidad — es un límite físico fundamental que ningún diseño puede superar, independientemente de la tecnología."},
+  6:{c:"El área de barrido del rotor es la superficie de un círculo de diámetro D: A = π×D²/4. Esta fórmula es crucial porque la potencia disponible (P = ½ρAV³) es directamente proporcional a A. Al despejar D = √(4A/π), obtenemos el diámetro mínimo que necesita el rotor.",k:"La respuesta correcta es B. Las demás opciones corresponden a perímetro (π×D), circunferencia (2π×D) o fórmulas incorrectas. El área del círculo siempre es π×r² = π×(D/2)² = πD²/4."},
+  7:{c:"La potencia disponible en el viento es P = ½ρAV³. La potencia varía con la TERCERA potencia de la velocidad. Si V se duplica: P_nueva = ½ρA(2V)³ = 8 × ½ρAV³ = 8 × P_original. Esto significa que pequeñas mejoras en la velocidad del viento tienen un impacto enorme en la producción energética.",k:"La respuesta correcta es C. Este es el resultado más importante de la ecuación de potencia eólica: la dependencia cúbica de V hace que el recurso eólico sea extraordinariamente sensible a la velocidad media anual del viento."},
+  8:{c:"La fórmula P = ½ρAV³ muestra que la potencia es proporcional a ρ. A 3500 m.s.n.m., la densidad del aire es aproximadamente ρ ≈ 1.225 × e^(-3500/8500) ≈ 0.87 kg/m³, un 29% menos que al nivel del mar. Si se usa ρ = 1.225 para el cálculo, se sobreestima la producción energética y el aerogenerador seleccionado puede quedar subdimensionado.",k:"La respuesta correcta es B. La turbulencia y la normativa no son la razón principal. Es la física directa: menos moléculas de aire por metro cúbico = menos masa = menos energía cinética en el mismo volumen de viento."},
+  9:{c:"La velocidad de arranque (cut-in speed) es la velocidad mínima a la que el aerogenerador comienza a generar electricidad. Si el viento medio es 4.5 m/s y el equipo tiene cut-in de 5 m/s, estará parado la mayor parte del tiempo y no cubrirá la demanda energética, independientemente de su potencia nominal o precio.",k:"La respuesta correcta es C. Seleccionar por potencia nominal máxima o precio sin verificar la compatibilidad con el viento local es el error más frecuente en estos proyectos. Un equipo potente que no arranca es inútil."},
+  10:{c:"Que los niveles de ruido estén dentro de norma es condición necesaria pero NO suficiente para garantizar la aceptación social. Los valores no cuantificables — sentido de lugar, equidad en la distribución de beneficios, confianza social hacia los desarrolladores — pueden generar oposición comunitaria aunque todos los indicadores técnicos estén en rango.",k:"La respuesta correcta es C. Esta es la afirmación falsa. El curso enfatiza explícitamente que hay valores subyacentes (estética, equidad, sentido de lugar) que la EIA no aborda y que son causas frecuentes de conflicto social incluso en proyectos técnicamente correctos."}
+};
+
+let answered=0,correct=0;
+document.getElementById('quiz-section').addEventListener('click',function(e){
+  const btn=e.target.closest('.qbtn');
+  if(!btn||btn.disabled)return;
+  const q=btn.dataset.q;
+  const isCorrect=btn.dataset.correct==='true';
+  const allBtns=document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.correct==='true'){b.classList.add('correct');b.textContent='✅ '+b.textContent;}
+  });
+  if(!isCorrect){btn.classList.add('incorrect');btn.textContent='❌ '+btn.textContent;}
+  answered++;
+  if(isCorrect)correct++;
+  const fb=document.getElementById('fb'+q);
+  if(isCorrect){
+    fb.className='qfeedback ok';
+    fb.innerHTML='✅ <strong>¡Correcto!</strong> '+feedbacks[q].c;
+  }else{
+    fb.className='qfeedback ko';
+    fb.innerHTML='❌ <strong>Incorrecto.</strong> '+feedbacks[q].k;
+  }
+  fb.style.display='block';
+  const pct=answered>0?Math.round((correct/answered)*100):0;
+  document.getElementById('prog-text').textContent=`Pregunta ${answered} de 10 respondidas · Aciertos: ${correct}/${answered}`;
+  document.getElementById('prog-bar').style.width=pct+'%';
+  if(answered===10){
+    const rp=document.getElementById('result-panel');
+    let msg,bg,color;
+    if(correct<=4){msg='Necesitas repasar el material con más detalle.';bg='#fee2e2';color='#991b1b';}
+    else if(correct<=7){msg='¡Buen avance! Sigue repasando los temas donde fallaste.';bg='#fef9c3';color='#713f12';}
+    else{msg='¡Excelente dominio del tema! Estás listo para el examen.';bg='#dcfce7';color='#14532d';}
+    rp.style.cssText=`display:block;background:${bg};color:${color};border-radius:10px;padding:14px 16px;margin-top:12px;font-size:13px;line-height:1.6`;
+    rp.innerHTML=`<strong>${correct}/10 correctas.</strong> ${msg}<br><button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>`;
+  }
+});
+
+function resetQuiz(){
+  answered=0;correct=0;
+  document.getElementById('prog-text').textContent='Pregunta 0 de 10 respondidas · Aciertos: 0/0';
+  document.getElementById('prog-bar').style.width='0%';
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.disabled=false;
+    b.classList.remove('correct','incorrect');
+    const txt=b.textContent.replace(/^[✅❌] /,'');
+    b.textContent=txt;
+  });
+  document.querySelectorAll('.qfeedback').forEach(f=>{f.style.display='none';f.className='qfeedback';});
+  document.getElementById('result-panel').style.display='none';
+}
+</script>

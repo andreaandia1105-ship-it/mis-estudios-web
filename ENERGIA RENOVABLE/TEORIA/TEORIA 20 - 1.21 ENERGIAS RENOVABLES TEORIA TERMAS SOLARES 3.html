@@ -1,0 +1,874 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:transparent}
+.cv{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:9px;
+  padding:12px;
+  background:var(--color-background-tertiary);
+  font-family:'Source Sans 3',sans-serif;
+}
+.cv .full{grid-column:1/-1}
+.cv .s2{grid-column:span 2}
+.cv .s3{grid-column:span 3}
+.title-bar{
+  grid-column:1/-1;
+  background:#0f1e3a;
+  color:#fff;
+  border-radius:12px;
+  padding:14px 18px;
+}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;letter-spacing:.5px;margin-bottom:4px}
+.title-bar .sub{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;padding:2px 9px;border-radius:20px;background:#1e3a5f;color:#93c5fd;font-family:'Oswald',sans-serif;font-weight:500}
+.section-bar{
+  grid-column:1/-1;
+  border-radius:8px;
+  padding:7px 14px;
+  font-family:'Oswald',sans-serif;
+  font-size:13px;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:.3px;
+}
+.sb-blue{background:#185FA5}
+.sb-green{background:#0F6E56}
+.sb-red{background:#A32D2D}
+.sb-amber{background:#854F0B}
+.sb-purple{background:#534AB7}
+.sb-teal{background:#0F6E56}
+.sb-gray{background:#5F5E5A}
+.sb-coral{background:#993C1D}
+
+.block{
+  background:var(--color-background-primary);
+  border:0.5px solid var(--color-border-tertiary);
+  border-radius:11px;
+  padding:12px 13px;
+}
+.bh{
+  font-family:'Oswald',sans-serif;
+  font-size:12px;
+  text-transform:uppercase;
+  padding:3px 9px;
+  border-radius:6px;
+  display:inline-block;
+  margin-bottom:8px;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-amber{background:#fef9c3;color:#713f12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-pink{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+  .bh-blue{background:#1e3a5f;color:#93c5fd}
+  .bh-green{background:#14532d;color:#86efac}
+  .bh-red{background:#450a0a;color:#fca5a5}
+  .bh-amber{background:#422006;color:#fef08a}
+  .bh-purple{background:#2e1065;color:#c4b5fd}
+  .bh-teal{background:#042f2e;color:#5eead4}
+  .bh-orange{background:#431407;color:#fed7aa}
+  .bh-gray{background:#1e293b;color:#94a3b8}
+  .bh-pink{background:#4a044e;color:#f0abfc}
+}
+.def{
+  border-radius:0 7px 7px 0;
+  padding:7px 10px;
+  font-size:12px;
+  margin-bottom:8px;
+  line-height:1.5;
+  background:var(--color-background-secondary);
+}
+.def-blue{border-left:3px solid #185FA5}
+.def-green{border-left:3px solid #0F6E56}
+.def-red{border-left:3px solid #A32D2D}
+.def-amber{border-left:3px solid #854F0B}
+.def-purple{border-left:3px solid #534AB7}
+.def-teal{border-left:3px solid #1D9E75}
+.def-orange{border-left:3px solid #993C1D}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#185FA5}
+.dot-green{background:#0F6E56}
+.dot-red{background:#A32D2D}
+.dot-amber{background:#854F0B}
+.dot-purple{background:#534AB7}
+.dot-teal{background:#1D9E75}
+.dot-orange{background:#993C1D}
+.rx{
+  background:#0f172a;
+  color:#7dd3fc;
+  font-family:monospace;
+  font-size:11px;
+  padding:7px 11px;
+  border-radius:7px;
+  text-align:center;
+  line-height:1.6;
+  margin:6px 0;
+}
+.warn{
+  background:#fff7ed;
+  border-left:3px solid #f97316;
+  border-radius:0 8px 8px 0;
+  font-size:11.5px;
+  color:#7c2d12;
+  padding:6px 10px;
+  margin:6px 0;
+  line-height:1.4;
+}
+@media(prefers-color-scheme:dark){
+  .warn{background:#431407;color:#fed7aa;border-left-color:#fb923c}
+}
+.exam{
+  background:#fefce8;
+  border:1px solid #facc15;
+  border-radius:8px;
+  font-size:11.5px;
+  color:#713f12;
+  padding:7px 10px;
+  margin-top:8px;
+  line-height:1.4;
+}
+@media(prefers-color-scheme:dark){
+  .exam{background:#422006;color:#fef08a;border-color:#ca8a04}
+}
+.exam strong{font-weight:600}
+.mini{
+  background:var(--color-background-secondary);
+  border-radius:8px;
+  padding:8px 10px;
+  font-size:11.5px;
+  line-height:1.4;
+}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:6px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{
+  background:var(--color-background-secondary);
+  border:0.5px solid var(--color-border-tertiary);
+  border-radius:6px;
+  padding:4px 8px;
+  font-size:11px;
+}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-family:'Oswald',sans-serif;font-size:11px}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.footer-bar{
+  grid-column:1/-1;
+  background:#0f1e3a;
+  color:#fff;
+  border-radius:10px;
+  padding:11px 18px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:flex-start;
+}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;margin-right:4px}
+.fc{font-size:11px;color:#94a3b8}
+
+/* QUIZ */
+#quiz-section{
+  grid-column:1/-1;
+  background:var(--color-background-primary);
+  border:0.5px solid var(--color-border-tertiary);
+  border-radius:14px;
+  padding:0 0 16px;
+  overflow:hidden;
+}
+.quiz-header{
+  background:#0f1e3a;
+  color:#fff;
+  padding:12px 18px;
+  margin-bottom:16px;
+}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.quiz-body{padding:0 16px}
+.progress-wrap{margin-bottom:14px}
+.progress-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:8px}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .3s}
+.qcard{border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+.qnum{font-size:10px;color:var(--color-text-secondary);font-family:'Oswald',sans-serif;margin-bottom:4px;text-transform:uppercase}
+.qtext{font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin-bottom:8px;line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{
+  background:var(--color-background-secondary);
+  border:1px solid var(--color-border-tertiary);
+  border-radius:8px;
+  padding:7px 11px;
+  font-size:12px;
+  text-align:left;
+  cursor:pointer;
+  width:100%;
+  transition:all .2s;
+  color:var(--color-text-primary);
+  font-family:'Source Sans 3',sans-serif;
+  line-height:1.4;
+}
+.qbtn:hover{background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7!important;border-color:#16a34a!important;color:#14532d!important}
+.qbtn.incorrect{background:#fee2e2!important;border-color:#dc2626!important;color:#991b1b!important}
+.qbtn:disabled{opacity:.65;cursor:not-allowed}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;line-height:1.4}
+.qfeedback.fb-correct{background:#f0fdf4;border-left:3px solid #16a34a;color:#166534}
+.qfeedback.fb-incorrect{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+  .qfeedback.fb-correct{background:#14532d;color:#86efac}
+  .qfeedback.fb-incorrect{background:#450a0a;color:#fca5a5}
+}
+#results-panel{display:none;border-radius:10px;padding:14px;text-align:center;margin-top:10px}
+#results-panel.r-bad{background:#fef2f2;border:1px solid #dc2626;color:#991b1b}
+#results-panel.r-ok{background:#fefce8;border:1px solid #ca8a04;color:#713f12}
+#results-panel.r-good{background:#f0fdf4;border:1px solid #16a34a;color:#166534}
+#results-panel h3{font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:4px}
+#results-panel p{font-size:12px;margin-bottom:10px}
+#reset-btn{
+  background:#0f1e3a;color:#fff;border:none;border-radius:8px;
+  padding:8px 20px;cursor:pointer;font-family:'Oswald',sans-serif;font-size:13px;
+  font-weight:700;transition:opacity .2s;
+}
+#reset-btn:hover{opacity:.85}
+h4{font-size:12.5px;font-weight:600;margin-bottom:6px;color:var(--color-text-primary)}
+</style>
+
+<div class="cv">
+
+<!-- ═══ TÍTULO ═══ -->
+<div class="title-bar">
+  <h1>Refrigeración Solar — Introducción y Oportunidades Iberoamericanas</h1>
+  <div class="sub">Jornada Iberoamericana sobre Enfriamiento Solar · Cartagena de Indias, Colombia · Mayo 2004</div>
+  <div class="tags">
+    <span class="tag">Impactos de refrigeración</span>
+    <span class="tag">Ciclos térmicos</span>
+    <span class="tag">Refrigerantes &amp; CFC/HCFC/HFC</span>
+    <span class="tag">Enfriamiento solar</span>
+    <span class="tag">Colectores CPC</span>
+    <span class="tag">Países en desarrollo</span>
+    <span class="tag">Cadena del frío</span>
+    <span class="tag">Estrategias ambientales</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-bar sb-blue">🔵 FUNDAMENTOS DE REFRIGERACIÓN — Impactos, Tipos y Compuestos</div>
+
+<!-- BLOQUE 1: Impactos globales -->
+<div class="block">
+  <div class="bh bh-blue">Impactos de refrigeración (Diap. 2–3)</div>
+  <div class="def def-blue">La refrigeración consume el <strong>15% de la energía mundial</strong> y emplea mayoritariamente freones (CFC). Su relevancia trasciende lo técnico: es un motor de salud pública, seguridad alimentaria y desarrollo económico en todas las regiones.</div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Sector alimentario:</strong> conservación desde captura/cosecha hasta el consumidor final; sin frío, el 31% de alimentos perecederos se pierde antes de ser consumido.</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Sector salud/biológico:</strong> vacunas, sangre, órganos y biológicos requieren cadena de frío ininterrumpida — la poliomelitis disminuyó 99% gracias a la refrigeración de vacunas (350 000 casos en 1988 → 3 500 en 2000).</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Sector industrial y servicios:</strong> ingeniería mecánica, plásticos, construcción, tratamiento de desechos y cuartos limpios dependen del frío industrial.</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><strong>Calidad de vida interior:</strong> aire acondicionado en oficinas, hoteles, vehículos y residencias determina la productividad humana en climas cálidos-húmedos.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "refrigeración" con solo "guardar alimentos". El dominio abarca entretenimiento (pistas de hielo, nieve artificial), criocirugía, biología reproductiva y transporte multimodal.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique por qué la refrigeración se considera una tecnología de desarrollo sostenible y no solo una comodidad. Incluya al menos dos sectores con datos cuantitativos que respalden su argumento.</div>
+</div>
+
+<!-- BLOQUE 2: Tipos de enfriamiento -->
+<div class="block">
+  <div class="bh bh-green">Tipos de Enfriamiento (Diap. 4)</div>
+  <div class="def def-green">Existen dos familias fundamentales: el <strong>enfriamiento natural</strong>, que aprovecha fenómenos físicos sin energía mecánica, y el <strong>enfriamiento artificial</strong>, que usa fluidos con propiedades termodinámicas especiales (refrigerantes) para extraer calor de forma continua y controlada.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #0F6E56">
+      <strong>Enfriamiento natural</strong><br>Radiativo: emisión de radiación infrarroja.<br>Conductivo: transferencia por contacto sólido.<br>Convectivo: circulación de fluido que transporta calor.<br>Efectos combinados: los tres coexisten en sistemas pasivos.
+    </div>
+    <div class="mini" style="border-top:3px solid #185FA5">
+      <strong>Enfriamiento artificial</strong><br>Usa <em>refrigerantes</em> — fluidos de alta capacidad calorífica. El ciclo extrae calor del espacio frío y lo descarga al entorno caliente. Requiere trabajo externo (mecánico o térmico).
+    </div>
+  </div>
+  <div class="warn">⚠️ No confundir enfriamiento natural (pasivo, sin refrigerante) con enfriamiento artificial solar: este último ES artificial, pero usa energía solar para conducirlo, combinando ambas lógicas.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Compare los mecanismos de enfriamiento radiativo y convectivo. ¿En qué circunstancias físicas predomina cada uno? ¿Cómo se aprovechan estos principios en climatización pasiva de edificios en zonas tropicales?</div>
+</div>
+
+<!-- BLOQUE 3: Sistemas y compuestos -->
+<div class="block">
+  <div class="bh bh-amber">Sistemas y Compuestos (Diap. 5–6)</div>
+  <div class="def def-amber">Dos paradigmas tecnológicos definen el mercado actual: los <strong>sistemas mecánicos</strong> (alta eficiencia, alto impacto ambiental) y los <strong>sistemas de absorción/adsorción</strong> (baja eficiencia, bajo impacto ambiental y compatible con energía solar).</div>
+  <h4>Sistemas mecánicos — eficiencia &gt; 0.5 (COP)</h4>
+  <div class="item"><div class="dot dot-amber"></div><div><strong>CFC</strong> (Clorofluorocarbonados): descubiertos 1930, usados masivamente hasta que Rowland y Molina (1974) demostraron su destrucción del ozono estratosférico → eliminación por Protocolo de Montreal.</div></div>
+  <div class="item"><div class="dot dot-amber"></div><div><strong>HCFC</strong>: transición; menor potencial destructor de ozono pero aún dañinos. <strong>HFC</strong>: no destruyen el ozono pero contribuyen al calentamiento global.</div></div>
+  <h4>Sistemas absorción/adsorción — eficiencia &lt; 0.35</h4>
+  <div class="item"><div class="dot dot-green"></div><div>No usan compresores; el "compresor químico" es una reacción de concentración. Pares de trabajo: amoniaco+agua (120°C), bromuro de litio+agua (120°C), carbono activado+metanol, cloruro de bario (57°C).</div></div>
+  <div class="rx">Absorción: 30% absorción química + 70% calor latente de evaporación/condensación</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Dado que la eficiencia de los sistemas de absorción (&lt;0.35) es menor que la de los mecánicos (&gt;0.5), ¿por qué se recomienda su uso en países en desarrollo con alta irradiación solar? Argumente desde criterios técnicos, ambientales y económicos.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-bar sb-teal">🩵 CICLOS TERMODINÁMICOS — Mecánico, Absorción y Adsorción</div>
+
+<!-- BLOQUE 4: Ciclo mecánico -->
+<div class="block">
+  <div class="bh bh-blue">Ciclo Mecánico por Compresión de Vapor (Diap. 7)</div>
+  <div class="def def-blue">El ciclo de compresión de vapor es el más difundido en refrigeración comercial. Un compresor eleva la presión del refrigerante gaseoso, que luego cede calor en el condensador, se expande y absorbe calor en el evaporador, cerrando el ciclo. Requiere trabajo mecánico (electricidad).</div>
+  <div class="flow">
+    <div class="fbox">Evaporador<br><span style="font-size:10px;color:var(--color-text-secondary)">Absorbe calor del espacio frío</span></div>
+    <div class="farrow">→</div>
+    <div class="fbox">Compresor<br><span style="font-size:10px;color:var(--color-text-secondary)">Eleva presión y temperatura</span></div>
+    <div class="farrow">→</div>
+    <div class="fbox">Condensador<br><span style="font-size:10px;color:var(--color-text-secondary)">Descarga calor al ambiente</span></div>
+    <div class="farrow">→</div>
+    <div class="fbox">Válvula de expansión<br><span style="font-size:10px;color:var(--color-text-secondary)">Reduce presión</span></div>
+  </div>
+  <div class="rx">COP_mec = Q_frío / W_compresor &gt; 0.5 (típicamente 2.5–3.8 en equipos modernos)</div>
+  <div class="warn">⚠️ El COP del ciclo de compresión (2.5 a 3.8) es superior al de absorción, PERO consume energía eléctrica de alta calidad. La absorción puede operar con calor de baja calidad (solar, residual), lo que cambia la ecuación de costo real.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> En el ciclo mecánico, ¿cuál es la función termodinámica del condensador y por qué su temperatura de operación afecta directamente el COP del sistema? Relacione con la 2ª ley de la termodinámica.</div>
+</div>
+
+<!-- BLOQUE 5: Ciclo absorción -->
+<div class="block">
+  <div class="bh bh-teal">Ciclo de Absorción — NH₃/H₂O y LiBr/H₂O (Diap. 8, 17–19)</div>
+  <div class="def def-teal">El ciclo de absorción <em>reemplaza el compresor mecánico por un "compresor térmico"</em>: el absorbedor capta el vapor de refrigerante a baja presión y el generador, calentado externamente (solar, gas), lo libera a alta presión. Solo necesita trabajo eléctrico menor de una bomba.</div>
+  <div class="flow">
+    <div class="fbox">Evaporador<br><small>Absorbe calor útil</small></div>
+    <div class="farrow">→</div>
+    <div class="fbox">Absorbedor<br><small>Disuelve vapor en solución</small></div>
+    <div class="farrow">→</div>
+    <div class="fbox">Bomba<br><small>Eleva presión (trabajo mínimo)</small></div>
+    <div class="farrow">→</div>
+    <div class="fbox">Generador<br><small>Calor solar/externo &gt;120°C</small></div>
+    <div class="farrow">→</div>
+    <div class="fbox">Condensador<br><small>Licúa vapor</small></div>
+  </div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #0F6E56">
+      <strong>NH₃ + H₂O</strong><br>T generación: 120°C. Permite refrigeración bajo 0°C (hielo, congelación). Compatible con colectores CPC y solares. Par preferido en zonas rurales y aplicaciones industriales.
+    </div>
+    <div class="mini" style="border-left:3px solid #185FA5">
+      <strong>LiBr + H₂O</strong><br>T generación: 75–100°C. Ideal para aire acondicionado (enfría agua a 8–10°C). Compatible con colectores planos de alta eficiencia. No sirve para temperaturas bajo 0°C.
+    </div>
+  </div>
+  <div class="rx">COP_absorción ≈ 0.6–0.8 (efecto simple) | hasta 1.4 con sistemas triple efecto (fuego directo)</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique por qué el sistema de absorción NH₃/H₂O es más adecuado que el LiBr/H₂O para la producción de hielo en comunidades pesqueras rurales de la Amazonía peruana. Considere temperaturas de operación y disponibilidad de colectores solares.</div>
+</div>
+
+<!-- BLOQUE 6: Ciclo adsorción -->
+<div class="block">
+  <div class="bh bh-purple">Ciclo de Adsorción — Carbón Activado + Metanol (Diap. 9)</div>
+  <div class="def def-purple">La adsorción difiere de la absorción: el refrigerante se <em>adhiere superficialmente</em> a un sólido poroso (adsorbente) en lugar de disolverse en un líquido. El ciclo es intermitente: durante el día el sol calienta el adsorbedor para regenerar el adsorbente; por la noche, la adsorción produce frío.</div>
+  <div class="item"><div class="dot dot-purple"></div><div><strong>Par carbón activado + metanol:</strong> el adsorbedor actúa simultáneamente como colector solar. El ciclo A→B→C→D en el diagrama P-T muestra: (A→B) calentamiento solar a volumen constante, (B→C) desorción a alta T/P, (C→D) enfriamiento nocturno, (D→A) adsorción con producción de frío.</div></div>
+  <div class="item"><div class="dot dot-purple"></div><div>No tiene partes móviles. Apropiado para zonas sin electricidad. Eficiencia COP ≈ 0.1–0.2, pero aprovecha energía solar de baja temperatura (60–100°C), sin necesidad de seguimiento solar.</div></div>
+  <div class="warn">⚠️ ERROR CONCEPTUAL: Adsorción ≠ absorción. En adsorción, el refrigerante se adhiere a la superficie del sólido (proceso físico superficial). En absorción, se disuelve en un líquido (proceso volumétrico). Esta diferencia determina el tipo de equipo y ciclo de operación.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué el ciclo de adsorción con carbón activado y metanol es especialmente adecuado para zonas rurales sin red eléctrica? Describa el ciclo diurno-nocturno y señale al menos una limitación técnica de este sistema.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-bar sb-amber">🟡 ENFRIAMIENTO SOLAR — Tecnologías, Colectores y Aplicaciones</div>
+
+<!-- BLOQUE 7: ¿Qué es el enfriamiento solar? -->
+<div class="block">
+  <div class="bh bh-amber">¿Qué es el Enfriamiento Solar? (Diap. 10–11, 56)</div>
+  <div class="def def-amber">El enfriamiento solar utiliza la energía del sol —vía conversión <strong>fototérmica</strong> (calor para absorción/adsorción) o <strong>fotovoltaica</strong> (electricidad para compresor mecánico)— para producir frío. Su motivación principal es ambiental y energética: reducir el consumo de energía convencional y eliminar refrigerantes contaminantes.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #854F0B">
+      <strong>Vía FV (fotovoltaico)</strong><br>Módulos FV → electricidad → compresor mecánico → refrigeración. Requiere mejor aislamiento, equipos más pequeños. Aplicación: vacunas en selva amazónica, OMS promueve para inmunización.
+    </div>
+    <div class="mini" style="border-top:3px solid #534AB7">
+      <strong>Vía fototérmica (calor)</strong><br>Colector CPC → calor &gt;120°C → generador en ciclo absorción o adsorción → refrigeración. 10–14 horas tiempo solar verdadero. Eficiencia colector CPC: 0.3–0.6. Aluminio anodizado como reflector.
+    </div>
+  </div>
+  <div class="item"><div class="dot dot-amber"></div><div>El CPC (Concentrador Parabólico Compuesto) alcanza temperaturas del orden de <strong>160°C</strong>, suficiente para ciclos de absorción NH₃/H₂O sin seguimiento solar activo.</div></div>
+  <div class="warn">⚠️ El problema NO está resuelto: se requieren tecnologías simples, económicas y robustas. Los sistemas existentes son funcionales pero costosos y de difícil mantenimiento en entornos rurales con baja capacidad técnica.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Compare la refrigeración solar fotovoltaica y la fototérmica en términos de temperatura de operación, tipo de ciclo utilizado y aplicación más adecuada para cada una en el contexto de países en desarrollo de Iberoamérica.</div>
+</div>
+
+<!-- BLOQUE 8: Colectores solares -->
+<div class="block s2">
+  <div class="bh bh-orange">Tecnologías de Colectores Solares para Refrigeración (Diap. 60)</div>
+  <div class="def def-orange">El tipo de colector solar determina el rango de temperatura de trabajo y, por tanto, qué ciclo de refrigeración puede impulsar. Seleccionar el colector correcto es crítico para el diseño del sistema.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #993C1D">
+      <strong>Colector placa plana básico</strong><br>T: 30–60°C<br>Solo ciclos de baja T o precalentamiento. Económico. No suficiente para absorción.
+    </div>
+    <div class="mini" style="border-top:3px solid #854F0B">
+      <strong>Placa plana c/doble vidrio selectivo</strong><br>T: 40–90°C<br>Absorción LiBr/H₂O (aire acond.). Bajo costo relativo, sin seguimiento solar.
+    </div>
+    <div class="mini" style="border-top:3px solid #0F6E56">
+      <strong>Placa plana al vacío</strong><br>T: 50–130°C<br>Absorción LiBr y NH₃. Mayor pérdidas, mayor costo. Sin seguimiento solar.
+    </div>
+    <div class="mini" style="border-top:3px solid #185FA5">
+      <strong>Placa plana c/panal</strong><br>T: 80–120°C<br>Reduce pérdidas convectivas. Rango amplio para absorción doble efecto.
+    </div>
+    <div class="mini" style="border-top:3px solid #534AB7">
+      <strong>CPC (Parabólico Compuesto)</strong><br>T: 80–150°C<br>El más adecuado para refrigeración solar. Sin seguimiento. COP 0.3–0.6. Aluminio anodizado.
+    </div>
+    <div class="mini" style="border-top:3px solid #A32D2D">
+      <strong>Canal parabólico</strong><br>T: 100–400°C<br>Máxima temperatura, requiere seguimiento solar. Para sistemas de alta capacidad o trigeneración.
+    </div>
+  </div>
+  <div class="rx">Zona ideal para energía solar: latitudes intertropicales (10°N–10°S del Ecuador)<br>Irradiación media: ~6 000 W·h/m²/día | Zonas ecuatoriales: 3 500–6 000 W·h/m²/día</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué el Concentrador Parabólico Compuesto (CPC) se considera el colector más adecuado para impulsar ciclos de absorción en refrigeración solar? Relacione sus características técnicas (temperatura, eficiencia, seguimiento) con los requisitos del ciclo de absorción NH₃/H₂O.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-bar sb-red">🔴 IMPACTO AMBIENTAL — Refrigerantes, CFC/HCFC/HFC y Estrategias</div>
+
+<!-- BLOQUE 9: Refrigerantes y ozono -->
+<div class="block">
+  <div class="bh bh-red">Emisiones de Gases Refrigerantes (Diap. 35–36)</div>
+  <div class="def def-red">Las fugas de refrigerantes en los sistemas de compresión de vapor son el principal impacto ambiental directo de la industria frigorífica. Los CFC y HCFC destruyen el ozono estratosférico; todos los refrigerantes fluorados contribuyen al efecto invernadero.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #A32D2D">
+      <strong>CFC — Clorofluorocarbonados</strong><br>Descubiertos 1930. Rowland y Molina (1974) demuestran destrucción de capa de ozono y calentamiento global. Hoy prohibidos por el Protocolo de Montreal.
+    </div>
+    <div class="mini" style="border-top:3px solid #854F0B">
+      <strong>HCFC — Hidroclorofluorocarbonados</strong><br>Sustituyen a CFC. Menor impacto sobre ozono, pero no nulo. Transición temporal; también en eliminación progresiva bajo el Protocolo.
+    </div>
+    <div class="mini" style="border-top:3px solid #185FA5">
+      <strong>HFC — Hidrofluorocarbonados</strong><br>No afectan el ozono. Alternativa a CFC/HCFC. Contribuyen al calentamiento global (Potencial de Calentamiento Global elevado). HFC-134a es refrigerante de vacunas (OMS).
+    </div>
+  </div>
+  <div class="item"><div class="dot dot-red"></div><div>Impactos indirectos: SO₂ y NO₂ de las plantas generadoras que alimentan los sistemas; desechos de aceites y componentes al final de vida útil de los equipos.</div></div>
+  <div class="warn">⚠️ Los HFC no destruyen el ozono, pero NO son inocuos para el clima. El Acuerdo de Kigali (2016) — posterior a esta presentación — los regula por su alto Potencial de Calentamiento Global (GWP). Las soluciones a largo plazo son los refrigerantes naturales (NH₃, CO₂, hidrocarbonos).</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique la diferencia entre el Potencial de Destrucción del Ozono (ODP) y el Potencial de Calentamiento Global (GWP) y cómo estos dos indicadores justifican la transición histórica de CFC → HCFC → HFC → refrigerantes naturales.</div>
+</div>
+
+<!-- BLOQUE 10: Acciones ambientales -->
+<div class="block">
+  <div class="bh bh-green">Acciones y Estrategias Ambientales (Diap. 38–39)</div>
+  <div class="def def-green">La industria frigorífica tiene el potencial de reducir sustancialmente su huella ambiental mediante un conjunto de acciones técnicas y de política que van desde el diseño hasta el fin de vida del equipo.</div>
+  <div class="item"><div class="dot dot-green"></div><div>Mejorar el diseño de plantas para usar <strong>menor cantidad de refrigerante</strong> (especialmente fluorocarbonados) y desarrollar sistemas con NH₃ para la industria alimentaria.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div>Implantar tecnologías de <strong>bajo consumo energético</strong>: el COP global mejoró de 2.5 (1960) → 3.3 (1990) → 3.8 (actual). Los refrigeradores americanos de 1997 consumen 48% menos que los de 1980.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div><strong>Recuperar, reciclar y regenerar</strong> los refrigerantes al mantenimiento. Desarrollar sistemas sin agua para condensación (sistemas enfriados por aire) para ahorrar agua dulce.</div></div>
+  <div class="item"><div class="dot dot-green"></div><div>Programas de entrenamiento a largo plazo para ingenieros y técnicos — clave en países en desarrollo donde la certificación es escasa.</div></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> La reducción de la intensidad energética en un 42% y el aumento de eficiencia del aire acondicionado en un 20% lograron evitar 10 millones de toneladas de CO₂. Analice qué mecanismos técnicos y regulatorios hicieron posible este resultado y cómo podrían replicarse en América Latina.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-bar sb-coral">🟠 CONTEXTO GLOBAL — Mercado, Países en Desarrollo y Cadena del Frío</div>
+
+<!-- BLOQUE 11: Mercado global -->
+<div class="block s2">
+  <div class="bh bh-orange">Mercado Global de Refrigeración (Diap. 31–34, 23–24)</div>
+  <div class="def def-orange">La industria de la refrigeración y el aire acondicionado mueve aproximadamente <strong>198.6 mil millones de USD anuales</strong> en ventas mundiales (datos IIR, 2002), con alrededor de 700–1000 millones de equipos domésticos en servicio. La brecha entre países industrializados y en desarrollo es enorme en términos de acceso, conocimiento y capacitación.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #993C1D">
+      <strong>Equipos en servicio (1998)</strong><br>
+      Refrigeración doméstica: 700–1000 M<br>
+      A/A en vehículos: 380 M<br>
+      A/A cuarto: 79 M | Splits: 55 M<br>
+      Bombas calor residenciales: 110 M<br>
+      Bodegas frigoríficas: 300 M m³<br>
+      Contenedores marinos: 410 000
+    </div>
+    <div class="mini" style="border-left:3px solid #185FA5">
+      <strong>Ventas anuales estimadas</strong><br>
+      Refrigeradores domésticos: $32.8 B<br>
+      Refrigeración comercial: $18.6 B<br>
+      A/A cuarto (29.9M u/año): $20.9 B<br>
+      A/A paquete (9.8M u/año): $15.7 B<br>
+      A/A automóviles: $27.9 B<br>
+      <strong>Total: ~$198.6 B USD</strong>
+    </div>
+  </div>
+  <div class="item"><div class="dot dot-orange"></div><div>En 1994, el 31% de los alimentos producidos mundialmente (1 413 de 4 561 millones de toneladas) requería conservación en frío. La disponibilidad global es 0.5 m³ de almacenamiento frigorífico por persona; México tenía solo 0.006 m³/hab, revelando el déficit de países en desarrollo.</div></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Analice la "brecha frigorífica" entre países industrializados y en desarrollo utilizando los datos cuantitativos disponibles (m³ de almacenamiento, unidades por habitante, ventas de equipo). ¿Qué consecuencias tiene esta brecha en la seguridad alimentaria y la salud pública de Iberoamérica?</div>
+</div>
+
+<!-- BLOQUE 12: Países en desarrollo -->
+<div class="block">
+  <div class="bh bh-pink">Refrigeración en Países en Desarrollo (Diap. 46–47, 51–53)</div>
+  <div class="def def-pink">En los países en desarrollo, el impacto potencial de la refrigeración es mayor que en los industrializados, pero la brecha de acceso, tecnología obsoleta y falta de recursos financieros impide aprovecharla. Solo una quinta parte de los alimentos perecederos es refrigerada.</div>
+  <div class="item"><div class="dot dot-purple"></div><div><strong>Cadena del frío deficiente:</strong> tecnologías obsoletas, alto consumo energético, transporte frigorífico inadecuado, escaso volumen de almacenaje, deficiencias en diseño y operación, y capacitación insuficiente. El personal calificado es escaso y generalmente no certificado.</div></div>
+  <div class="item"><div class="dot dot-purple"></div><div><strong>Acciones prioritarias:</strong> reducir pérdidas poscosecha, desarrollar cadenas del frío, transferir tecnología (normas, certificaciones), reforzar estructuras institucionales y capturar datos precisos de necesidades locales.</div></div>
+  <div class="item"><div class="dot dot-purple"></div><div><strong>Propuestas específicas:</strong> estudios de mercado para unidades de producción de hielo de 2–5 ton/día para comunidades pesqueras; infraestructura para colectores CPC; programas educativos y de entrenamiento en operación/mantenimiento de plantas solares.</div></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Proponga una estrategia integral para implementar refrigeración solar en una comunidad pesquera rural del norte del Perú. Incluya el tipo de sistema más adecuado, el colector solar recomendado, los requerimientos de capacitación y las fuentes de financiamiento posibles.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-bar sb-purple">🟣 TECNOLOGÍAS AVANZADAS — Absorción, Desecantes y Trigeneración</div>
+
+<!-- BLOQUE 13: Tecnologías avanzadas -->
+<div class="block s3">
+  <div class="bh bh-purple">Otras Tecnologías y Perspectivas (Diap. 48–50, 59, 62–65)</div>
+  <div class="def def-purple">Más allá de los ciclos convencionales, existen tecnologías emergentes que amplían las posibilidades del enfriamiento solar, combinando ciclos termodinámicos, materiales avanzados y fuentes energéticas renovables para maximizar la eficiencia y reducir el impacto ambiental.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #534AB7">
+      <strong>Enfriamiento con desecantes</strong><br>Silicagel, zeolita, aluminio activado o gel absorben vapor de agua del aire, deshumidificando y reduciendo la carga térmica. Integra ventilación natural + control de calidad de aire interior. Regenerable con calor solar de 60–80°C.
+    </div>
+    <div class="mini" style="border-top:3px solid #0F6E56">
+      <strong>Trigeneración (CCHP)</strong><br>Combinación simultánea de frío, calor y electricidad. Reutiliza el calor residual de generación eléctrica como entrada al ciclo de absorción. Mayor eficiencia global del sistema energético; reduce drasticamente emisiones de CO₂.
+    </div>
+    <div class="mini" style="border-top:3px solid #185FA5">
+      <strong>Ciclos avanzados de absorción</strong><br>Doble efecto (COP ≈ 1.0–1.3), triple efecto (COP ≈ 1.4, fuego directo, reduce CO₂ hasta 150 kg/MWh). Ciclos GAX con NH₃ para bombas de calor residenciales. Mayor eficiencia = mayor costo inicial (25–100% más que mecánico).
+    </div>
+    <div class="mini" style="border-top:3px solid #993C1D">
+      <strong>Sorción sólida termoquímica</strong><br>Reacciones sólido-gas (ej. SrCl₂-NH₃) para almacenamiento de frío o calor. Ciclos cerrados intermitentes. Alta densidad energética de almacenamiento, sin bombas. Investigación activa en Iberoamérica.
+    </div>
+    <div class="mini" style="border-top:3px solid #713f12">
+      <strong>Refrigeración eólica</strong><br>Turbina eólica → compresor → ciclo mecánico estándar. Alternativa en zonas con buen recurso eólico y sin red eléctrica. Complementaria a la solar en zonas costeras o de altura.
+    </div>
+    <div class="mini" style="border-top:3px solid #134e4a">
+      <strong>Fotovoltaica para vacunas (OMS)</strong><br>HFC-134a, T conservación: 0–8°C. 7 000 refrigeradores solares instalados globalmente (1997); solo 32/40 000 en India operaban con solar. Alto potencial, baja adopción real por costo y mantenimiento.
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> La investigación en refrigeración solar en Iberoamérica involucra más de 25 grupos de 9 países con ~100 investigadores. Identifique las tres líneas de investigación más prometedoras y justifique su relevancia para los países en desarrollo de la región.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-bar sb-gray">⚫ TABLA INTEGRADORA — Comparación General de Sistemas de Refrigeración</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="block s3">
+  <div class="bh bh-gray">Comparación Integrada de Sistemas de Refrigeración (Síntesis)</div>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Sistema</th>
+        <th>Fuente energía</th>
+        <th>Eficiencia (COP)</th>
+        <th>Refrigerante/par</th>
+        <th>T generación</th>
+        <th>Impacto ambiental</th>
+        <th>Aplicación clave</th>
+        <th>Países en desarrollo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Mecánico (compresor)</strong></td>
+        <td>Electricidad</td>
+        <td style="color:#14532d">&gt;0.5 (2.5–3.8)</td>
+        <td>CFC → HCFC → HFC</td>
+        <td>N/A (compresor)</td>
+        <td style="color:#991b1b">Alto (CFC/HFC, energía)</td>
+        <td>Doméstico, comercial, A/A</td>
+        <td>Accesible pero costoso en zonas rurales</td>
+      </tr>
+      <tr>
+        <td><strong>Absorción NH₃/H₂O</strong></td>
+        <td>Calor solar / gas</td>
+        <td style="color:#713f12">0.6–0.8 (simple)</td>
+        <td>NH₃ + H₂O</td>
+        <td>120°C</td>
+        <td style="color:#14532d">Bajo (sin CFC)</td>
+        <td>Producción de hielo, congelación</td>
+        <td>Ideal con CPC solar</td>
+      </tr>
+      <tr>
+        <td><strong>Absorción LiBr/H₂O</strong></td>
+        <td>Calor solar 75–100°C</td>
+        <td style="color:#713f12">0.6–0.8</td>
+        <td>LiBr + H₂O</td>
+        <td>75–100°C</td>
+        <td style="color:#14532d">Bajo</td>
+        <td>Aire acondicionado comercial</td>
+        <td>Grandes edificios en zonas cálidas</td>
+      </tr>
+      <tr>
+        <td><strong>Adsorción C-activo/MeOH</strong></td>
+        <td>Calor solar 60–100°C</td>
+        <td style="color:#991b1b">0.1–0.2</td>
+        <td>Carbón + metanol</td>
+        <td>60–100°C</td>
+        <td style="color:#14532d">Muy bajo</td>
+        <td>Frío nocturno sin electricidad</td>
+        <td>Comunidades sin red eléctrica</td>
+      </tr>
+      <tr>
+        <td><strong>FV + mecánico</strong></td>
+        <td>Energía solar FV</td>
+        <td style="color:#14532d">&gt;0.5</td>
+        <td>HFC-134a</td>
+        <td>N/A</td>
+        <td style="color:#713f12">Medio (HFC)</td>
+        <td>Vacunas rurales, pequeños fridges</td>
+        <td>OMS promueve para salud pública</td>
+      </tr>
+      <tr>
+        <td><strong>Desecantes</strong></td>
+        <td>Calor solar 60–80°C</td>
+        <td style="color:#713f12">Variable</td>
+        <td>Sílica gel, zeolita</td>
+        <td>60–80°C</td>
+        <td style="color:#14532d">Muy bajo</td>
+        <td>Deshumidificación + ventilación</td>
+        <td>Climatización tropical húmeda</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ DATO INTEGRADOR CLAVE: La elección del sistema no se decide solo por COP. En países en desarrollo, los criterios de acceso a energía eléctrica, disponibilidad de recurso solar, costo de mantenimiento, capacidad técnica local y temperatura requerida (hielo vs. refrigeración vs. A/A) son igualmente determinantes. El CPC solar + absorción NH₃/H₂O es la combinación de mayor potencial transformador para Iberoamérica.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-bar sb-blue">📝 QUIZ INTERACTIVO — Autoevaluación</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta. Retroalimentación inmediata al responder.</p>
+  </div>
+  <div class="quiz-body">
+    <div class="progress-wrap">
+      <div class="progress-labels">
+        <span id="progress-text">Pregunta 0 de 10 respondidas</span>
+        <span id="score-text">Aciertos: 0 / 0</span>
+      </div>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" id="progress-bar" style="width:0%"></div></div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">¿Qué porcentaje aproximado de la energía mundial consume la industria de la refrigeración, y cuál es el refrigerante más utilizado convencionalmente?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) 5% de la energía mundial; se usa mayormente dióxido de carbono (CO₂)</button>
+        <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) 25% de la energía mundial; se usa mayormente amoniaco (NH₃)</button>
+        <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) 15% de la energía mundial; se usa mayormente Freon (CFC y derivados)</button>
+        <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) 30% de la energía mundial; se usa mayormente agua como refrigerante</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">En el ciclo de absorción, ¿cuál es la función del absorbedor y por qué permite reemplazar al compresor mecánico?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) El absorbedor eleva mecánicamente la presión del refrigerante, igual que un compresor de pistón pero más silencioso</button>
+        <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) El absorbedor disuelve el vapor de refrigerante a baja presión en un líquido absorbente, creando un "compresor térmico" que solo requiere una pequeña bomba hidráulica</button>
+        <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) El absorbedor condensa el vapor del refrigerante directamente al ambiente, eliminando la necesidad del condensador</button>
+        <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) El absorbedor almacena el calor solar para liberarlo gradualmente durante la noche, actuando como batería térmica</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">¿Cuál es la principal diferencia técnica entre adsorción y absorción en sistemas de refrigeración?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) La adsorción usa líquidos como par de trabajo, mientras que la absorción usa sólidos porosos como carbón activado</button>
+        <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) La absorción es más eficiente (COP &gt; 0.5) mientras que la adsorción es menos eficiente (COP &lt; 0.35)</button>
+        <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Ambos procesos son idénticos termodinámicamente, pero difieren en el tipo de colector solar que utilizan</button>
+        <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) En adsorción el refrigerante se adhiere superficialmente a un sólido poroso (proceso físico superficial); en absorción se disuelve volumétricamente en un líquido</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">¿Por qué el par NH₃/H₂O se prefiere sobre LiBr/H₂O para la producción de hielo en comunidades pesqueras rurales de la Amazonía peruana?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Porque el LiBr/H₂O es más caro y corrosivo, por lo que está prohibido en zonas rurales por normas ambientales peruanas</button>
+        <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) Porque el NH₃/H₂O opera a temperaturas de evaporación por debajo de 0°C (hasta -30°C), lo cual es necesario para producir hielo; el LiBr/H₂O solo enfría agua a 8–10°C (aire acondicionado)</button>
+        <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Porque el NH₃/H₂O requiere menor temperatura de generación (60°C) frente a los 200°C del LiBr/H₂O, haciendo innecesario cualquier colector solar</button>
+        <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Porque el agua (H₂O) del par NH₃/H₂O actúa como refrigerante directamente, simplificando el ciclo y eliminando la necesidad de un evaporador separado</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">¿Cuál de las siguientes afirmaciones sobre los refrigerantes HFC es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Los HFC no destruyen la capa de ozono estratosférico (ODP ≈ 0)</button>
+        <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Los HFC son utilizados como alternativa a los CFC y HCFC en sistemas de compresión de vapor</button>
+        <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) Los HFC son completamente inocuos para el medio ambiente y no contribuyen al calentamiento global bajo ninguna circunstancia</button>
+        <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) El HFC-134a es utilizado en refrigeradores de vacunas según las normas de la OMS</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">¿Para qué rango de temperaturas de generación es más adecuado el Concentrador Parabólico Compuesto (CPC) y por qué no requiere seguimiento solar activo?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) 30–60°C; porque sus reflectores planos cubren un ángulo de aceptación de 360°, captando radiación desde todas las direcciones</button>
+        <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) 100–400°C; requiere seguimiento solar preciso pues es un colector de línea focal con concentración alta</button>
+        <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) 80–150°C; su geometría parabólica compuesta concentra la radiación en un rango angular amplio (no requiere seguimiento) y alcanza temperaturas suficientes para absorción NH₃/H₂O con aluminio anodizado como reflector</button>
+        <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) 200–300°C; opera con espejos fresnel de alta concentración y seguimiento de dos ejes para maximizar la captación en zonas ecuatoriales</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">Según los datos de la presentación, ¿cuántos refrigeradores solares estaban instalados globalmente a finales de 1997 y cuál era el problema de adopción en India?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) 15 000 refrigeradores; en India 5 000 de los 40 000 instalados operaban con energía solar (12.5%)</button>
+        <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) 3 700 refrigeradores; en India ninguno de los instalados funcionaba correctamente por falta de piezas de repuesto</button>
+        <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) 50 000 refrigeradores; en India el costo de mantenimiento era 10 veces mayor que en Africa, donde se concentraban las instalaciones</button>
+        <button class="qbtn" data-q="7" data-opt="d" data-correct="true">D) 7 000 refrigeradores; en India solo 32 de los 40 000 instalados operaban con energía solar, evidenciando la baja tasa de adopción real frente a las instalaciones nominales</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">La trigeneración es una tecnología especialmente eficiente porque:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-opt="a" data-correct="true">A) Combina producción simultánea de frío, calor y electricidad, aprovechando el calor residual de la generación eléctrica como entrada para el ciclo de refrigeración por absorción, reduciendo pérdidas energéticas globales</button>
+        <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Utiliza tres refrigerantes diferentes en cascada (CFC + HCFC + HFC) para cubrir todo el espectro de temperaturas de trabajo, desde -40°C hasta +20°C</button>
+        <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Genera electricidad a partir del frío producido en el evaporador mediante el efecto Peltier inverso, alcanzando COP superiores a 5</button>
+        <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Requiere tres fuentes de energía independientes (solar, eólica y geotérmica) operando en paralelo para garantizar continuidad de suministro energético</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">¿Cuál es la zona geográfica con mayor potencial para el uso de energía solar en refrigeración, y qué datos de irradiación la caracterizan?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Las zonas templadas del hemisferio norte (40°–60°N), con irradiación de 8 000–10 000 W·h/m²/día en verano por la mayor inclinación de los paneles</button>
+        <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Los desiertos polares de ambos hemisferios, donde la reflectividad del hielo (albedo) amplifica la energía solar disponible hasta 12 000 W·h/m²/día</button>
+        <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Las zonas intertropicales (±10° de los trópicos), con irradiación promedio de ~6 000 W·h/m²/día. Las zonas áridas tropicales (15°–35°) alcanzan 7 000–9 300 W·h/m²/día en verano</button>
+        <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Las mesetas andinas de Sudamérica (3 000–5 000 m.s.n.m.), donde la menor masa de aire atmosférico incrementa la irradiación solar directa hasta 15 000 W·h/m²/día</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">Según la presentación, la refrigeración de vacunas contribuyó a reducir los casos de poliomielitis en un 99%. ¿Qué datos concretos respaldan este impacto y qué temperatura de conservación se requiere?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) De 100 000 casos en 1975 a 1 000 en 2000 (99% reducción); temperatura de conservación: -20 a -30°C con congeladores de compresión estándar</button>
+        <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) De 1 millón de casos en 1960 a 10 000 en 2000 (99% reducción); temperatura de conservación: +15 a +20°C en refrigeración de ambiente controlado</button>
+        <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) De 350 000 casos en 1988 a 3 500 en 2000 (99% reducción); temperatura de conservación: -10 a 0°C con ciclos de adsorción carbón activado/metanol</button>
+        <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) De 350 000 casos en 1988 a 3 500 en 2000 (99% reducción); temperatura de conservación: 0 a 8°C usando refrigeradores de compresión de vapor con HFC-134a o refrigeradores fotovoltaicos promovidos por la OMS</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div id="results-panel">
+      <h3 id="results-score"></h3>
+      <p id="results-msg"></p>
+      <button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-bar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">• IIR (2002). <em>Industry as partner for sustainable development</em>. Instituto Internacional del Frío. &nbsp;|&nbsp; • Rowland, F.S. &amp; Molina, M. (1974). Destrucción estratosférica del ozono por CFC. <em>Nature</em>. &nbsp;|&nbsp; • OMS / WHO. Programas de Expansión de Inmunización (EPI); especificaciones de refrigeradores solares para uso médico. &nbsp;|&nbsp; • Red Iberoamericana de Refrigeración y Aire Acondicionado Solar — CYTED (25+ grupos, 9 países, ~100 investigadores). &nbsp;|&nbsp; • Jornada Iberoamericana sobre Enfriamiento Solar, AECI / Centro de Formación, Cartagena de Indias, Colombia, 17–21 mayo 2004.</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {
+    correct: "✅ ¡Correcto! La refrigeración consume el 15% de la energía mundial y utiliza mayoritariamente freones (derivados CFC). Este dato justifica por qué la eficiencia energética del sector tiene un impacto global significativo en emisiones de CO₂.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es C. La refrigeración consume el 15% de la energía mundial. Los freones (familia CFC y derivados) fueron el refrigerante dominante hasta la evidencia de su daño al ozono."
+  },
+  2: {
+    correct: "✅ ¡Correcto! El absorbedor disuelve el vapor del refrigerante en un líquido (p.ej. agua en el par NH₃/H₂O), creando gradiente de presión mediante diferencias de concentración. Solo se necesita una pequeña bomba de líquido —mucho menos costosa energéticamente que un compresor mecánico.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es B. El absorbedor reemplaza al compresor mediante un proceso químico: disuelve vapor de refrigerante en el absorbente líquido a baja presión. El generador luego usa calor (solar u otro) para liberar ese vapor a alta presión. El trabajo mecánico de la bomba es mínimo."
+  },
+  3: {
+    correct: "✅ ¡Correcto! Esta es la diferencia fundamental: adsorción = adherencia superficial en sólido poroso (proceso físico en la superficie); absorción = disolución volumétrica en líquido (proceso en todo el volumen). Esta diferencia determina la geometría del equipo, el tipo de par de trabajo y el modo de operación (la adsorción suele ser intermitente).",
+    incorrect: "❌ Incorrecto. La respuesta correcta es D. La adsorción es una interacción superficial: el metanol (refrigerante) se adhiere a la superficie del carbón activado (adsorbente sólido). La absorción es volumétrica: el NH₃ se disuelve en el agua líquida. Ambas son distintas en su mecanismo físico fundamental."
+  },
+  4: {
+    correct: "✅ ¡Correcto! El criterio determinante es la temperatura de evaporación. NH₃/H₂O puede alcanzar temperaturas de evaporación de -10°C a -30°C (necesario para producir hielo), mientras que LiBr/H₂O solo enfría agua a 8–10°C (adecuado para aire acondicionado pero no para producir hielo). Ambos requieren T de generación de ~120°C con colectores CPC.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es B. La clave es la temperatura de evaporación: el par NH₃/H₂O puede operar a temperaturas bajo 0°C (necesarias para producir hielo). El par LiBr/H₂O tiene como limitante que el agua (refrigerante) no puede bajar de 0°C sin congelarse, por lo que solo sirve para aires acondicionados."
+  },
+  5: {
+    correct: "✅ ¡Correcto! La afirmación falsa es C. Los HFC sí tienen impacto ambiental: aunque no afectan el ozono (ODP = 0), tienen un alto Potencial de Calentamiento Global (GWP). El HFC-134a, por ejemplo, tiene un GWP de ~1 430 veces el CO₂. El Acuerdo de Kigali (2016) regula su eliminación progresiva.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es C, que es la afirmación FALSA. Los HFC tienen ODP = 0 (no dañan el ozono) PERO tienen elevado GWP (Potencial de Calentamiento Global) y contribuyen al cambio climático. No son inocuos para el medio ambiente."
+  },
+  6: {
+    correct: "✅ ¡Correcto! El CPC opera en el rango 80–150°C, suficiente para absorción NH₃/H₂O (120°C). Su geometría parabólica compuesta tiene un ángulo de aceptación amplio, permitiendo capturar radiación solar directa y difusa sin necesidad de seguimiento activo. El aluminio anodizado le da alta reflectividad y durabilidad.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es C. El CPC opera en 80–150°C, lo que es suficiente para ciclos de absorción. Su diseño geométrico (parábola compuesta) permite aceptar luz solar en un ángulo amplio sin seguimiento solar activo, lo cual reduce enormemente la complejidad mecánica y el mantenimiento."
+  },
+  7: {
+    correct: "✅ ¡Correcto! A finales de 1997 se habían instalado 7 000 refrigeradores solares globalmente (600 en 1985, 3 700 en 1993). En India, de 40 000 instalados, solo 32 operaban con energía solar — una tasa de adopción real menor al 0.1%, evidenciando la brecha entre instalación nominal y uso efectivo.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es D. Los datos exactos son: 7 000 refrigeradores solares instalados globalmente al final de 1997. En India: 40 000 refrigeradores instalados, pero solo 32 (menos del 0.1%) operaban con energía solar, evidenciando un grave problema de adopción y mantenimiento."
+  },
+  8: {
+    correct: "✅ ¡Correcto! La trigeneración (también llamada CCHP: Combined Cooling, Heat and Power) aprovecha el calor residual de generación eléctrica —que normalmente se disipa al ambiente como desecho— como input del generador en un ciclo de absorción. Esto incrementa la eficiencia energética global del sistema al convertir 'pérdidas' en 'trabajo útil'.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es A. La trigeneración combina tres productos útiles: frío, calor y electricidad. Su ventaja clave es aprovechar el calor residual (normalmente desechado) de la generación eléctrica para impulsar un ciclo de absorción, mejorando drásticamente la eficiencia energética total del sistema."
+  },
+  9: {
+    correct: "✅ ¡Correcto! Las zonas intertropicales tienen la irradiación solar más constante y elevada del mundo. Las zonas tropicales áridas (15°–35° latitud) reciben 7 000–9 300 W·h/m²/día en verano. Perú se ubica en esta región, lo que explica el alto potencial para refrigeración solar en la costa norte y la selva amazónica.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es C. Las zonas intertropicales (entre 10°N y 10°S de los trópicos) tienen la mayor irradiación solar promedio: ~6 000 W·h/m²/día. Las zonas áridas tropicales pueden alcanzar 7 000–9 300 W·h/m²/día en verano. Iberoamérica, al estar en esta región, tiene potencial enorme para refrigeración solar."
+  },
+  10: {
+    correct: "✅ ¡Correcto! Los datos precisos del texto: 350 000 casos en 1988 → 3 500 en 2000 (reducción del 99%). La temperatura de conservación de vacunas es 0–8°C, lo que se logra con refrigeradores de compresión de vapor con HFC-134a. La OMS promueve específicamente los refrigeradores fotovoltaicos para el Programa Ampliado de Inmunización.",
+    incorrect: "❌ Incorrecto. La respuesta correcta es D. Datos exactos: de 350 000 casos de poliomielitis en 1988 a 3 500 en 2000 (99% de reducción). Temperatura: 0–8°C usando HFC-134a. La OMS ha publicado especificaciones para refrigeradores solares para uso médico y promueve activamente los fotovoltaicos."
+  }
+};
+
+let answered = 0;
+let correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') {
+      b.classList.add('correct');
+      b.textContent = '✅ ' + b.textContent;
+    }
+  });
+  if (!isCorrect) {
+    btn.classList.add('incorrect');
+  }
+  const fb = document.getElementById('fb' + q);
+  fb.style.display = 'block';
+  if (isCorrect) {
+    fb.className = 'qfeedback fb-correct';
+    fb.textContent = feedbacks[q].correct;
+    correct++;
+  } else {
+    fb.className = 'qfeedback fb-incorrect';
+    fb.textContent = feedbacks[q].incorrect;
+  }
+  answered++;
+  document.getElementById('progress-text').textContent = 'Pregunta ' + answered + ' de 10 respondidas';
+  document.getElementById('score-text').textContent = 'Aciertos: ' + correct + ' / ' + answered;
+  document.getElementById('progress-bar').style.width = (answered * 10) + '%';
+  if (answered === 10) {
+    const panel = document.getElementById('results-panel');
+    panel.style.display = 'block';
+    document.getElementById('results-score').textContent = correct + ' / 10 correctas';
+    let cls, msg;
+    if (correct <= 4) { cls = 'r-bad'; msg = '📚 Necesitas repasar el material. Revisa los bloques de ciclos termodinámicos y colectores solares.'; }
+    else if (correct <= 7) { cls = 'r-ok'; msg = '👍 ¡Buen avance! Sigue repasando los conceptos de refrigerantes y la comparación de sistemas.'; }
+    else { cls = 'r-good'; msg = '🎉 ¡Excelente dominio del tema! Estás listo/a para el examen de Refrigeración Solar.'; }
+    panel.className = 'r-' + cls.split('-')[1];
+    document.getElementById('results-msg').textContent = msg;
+  }
+});
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct','incorrect');
+    const txt = b.textContent.replace(/^[✅❌] /,'');
+    b.textContent = txt;
+  });
+  document.querySelectorAll('.qfeedback').forEach(f => { f.style.display = 'none'; f.textContent = ''; });
+  document.getElementById('results-panel').style.display = 'none';
+  document.getElementById('progress-text').textContent = 'Pregunta 0 de 10 respondidas';
+  document.getElementById('score-text').textContent = 'Aciertos: 0 / 0';
+  document.getElementById('progress-bar').style.width = '0%';
+}
+</script>

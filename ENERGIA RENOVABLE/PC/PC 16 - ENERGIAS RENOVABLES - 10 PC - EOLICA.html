@@ -1,0 +1,612 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.cv-title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:3px}
+.cv-title p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.cv-title .pills{display:flex;flex-wrap:wrap;gap:5px}
+.cv-title .pill{font-size:10px;padding:2px 9px;border-radius:20px;background:#1e3a5f;color:#93c5fd;display:inline-block}
+.sec{grid-column:1/-1;border-radius:8px;padding:7px 13px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px}
+.sec-blue{background:#dbeafe;color:#1e3a8a}.sec-green{background:#dcfce7;color:#14532d}.sec-yellow{background:#fef9c3;color:#713f12}.sec-teal{background:#ccfbf1;color:#134e4a}.sec-purple{background:#ede9fe;color:#4c1d95}.sec-gray{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){.sec-blue{background:#1e3a5f;color:#93c5fd}.sec-green{background:#14532d;color:#86efac}.sec-yellow{background:#422006;color:#fef08a}.sec-teal{background:#042f2e;color:#5eead4}.sec-purple{background:#2e1065;color:#c4b5fd}.sec-gray{background:#1e293b;color:#94a3b8}}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}.bh-green{background:#dcfce7;color:#14532d}.bh-yellow{background:#fef9c3;color:#713f12}.bh-teal{background:#ccfbf1;color:#134e4a}.bh-purple{background:#ede9fe;color:#4c1d95}.bh-orange{background:#ffedd5;color:#7c2d12}.bh-gray{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){.bh-blue{background:#1e3a5f;color:#93c5fd}.bh-green{background:#14532d;color:#86efac}.bh-yellow{background:#422006;color:#fef08a}.bh-teal{background:#042f2e;color:#5eead4}.bh-purple{background:#2e1065;color:#c4b5fd}.bh-orange{background:#431407;color:#fed7aa}.bh-gray{background:#1e293b;color:#94a3b8}}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);line-height:1.5;margin-bottom:8px}
+.def-blue{border-left:3px solid #3b82f6}.def-green{border-left:3px solid #16a34a}.def-yellow{border-left:3px solid #ca8a04}.def-teal{border-left:3px solid #0d9488}.def-purple{border-left:3px solid #7c3aed}.def-orange{border-left:3px solid #f97316}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}.dot-green{background:#16a34a}.dot-yellow{background:#ca8a04}.dot-teal{background:#0d9488}.dot-purple{background:#7c3aed}.dot-orange{background:#f97316}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:8px 11px;border-radius:7px;text-align:center;line-height:1.7;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:7px;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:7px;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;border-color:#eab308;color:#fef08a}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.mini-blue{border-top:3px solid #3b82f6}.mini-green{border-top:3px solid #16a34a}.mini-teal{border-top:3px solid #0d9488}.mini-yellow{border-top:3px solid #ca8a04}.mini-purple{border-top:3px solid #7c3aed}.mini-orange{border-top:3px solid #f97316}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:7px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:7px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 9px;border-radius:6px;font-size:11px;font-weight:600;color:var(--color-text-primary)}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);font-family:'Oswald',sans-serif;font-size:11px;text-align:left}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;line-height:1.4}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8;line-height:1.6}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:16px;flex-wrap:wrap}
+.bstats{margin:5px 0}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:10px;margin:3px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+h4{font-family:'Oswald',sans-serif;font-size:13px;margin-bottom:6px;color:var(--color-text-primary)}
+.quiz-wrap{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:0;overflow:hidden}
+.quiz-header{background:#0f1e3a;color:#fff;padding:13px 18px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.quiz-body{padding:14px 18px}
+.prog-wrap{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.prog-label{font-size:12px;color:var(--color-text-secondary);white-space:nowrap}
+.prog-bar-outer{flex:1;height:8px;background:var(--color-background-secondary);border-radius:10px}
+.prog-bar-inner{height:100%;border-radius:10px;background:#16a34a;width:0%;transition:width 0.3s}
+.prog-score{font-size:12px;font-weight:600;color:var(--color-text-secondary);white-space:nowrap;min-width:50px;text-align:right}
+.qcard{margin-bottom:14px;padding-bottom:14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qcard:last-of-type{border-bottom:none}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:3px;font-family:'Oswald',sans-serif}
+.qtext{font-size:13px;font-weight:600;margin-bottom:8px;color:var(--color-text-primary);line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;color:var(--color-text-primary);line-height:1.4}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary);border-color:var(--color-border-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:0.65;cursor:not-allowed}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){.qfeedback.ok{background:#052e16;color:#86efac}.qfeedback.fail{background:#450a0a;color:#fca5a5}}
+.result-panel{display:none;border-radius:10px;padding:14px 16px;margin-top:10px;font-size:13px}
+.result-panel h3{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:5px}
+.result-ok{background:#dcfce7;color:#14532d;border:1px solid #16a34a}
+.result-mid{background:#fef9c3;color:#713f12;border:1px solid #ca8a04}
+.result-low{background:#fee2e2;color:#991b1b;border:1px solid #dc2626}
+@media(prefers-color-scheme:dark){.result-ok{background:#052e16;color:#86efac}.result-mid{background:#422006;color:#fef08a}.result-low{background:#450a0a;color:#fca5a5}}
+.reset-btn{margin-top:10px;background:#0f1e3a;color:#7dd3fc;border:none;border-radius:8px;padding:8px 16px;font-size:12px;cursor:pointer;font-family:'Oswald',sans-serif}
+.reset-btn:hover{background:#1e3a5f}
+</style>
+
+<div class="cv">
+
+<div class="cv-title">
+  <h1>Energía Eólica — Conceptos y Evaluación de Recursos</h1>
+  <p>Energías Renovables · Prof. Kenyi Cavalcanti Cárdenas, Mg Sc. · Universidad Nacional Agraria La Molina · Facultad de Ingeniería Agrícola</p>
+  <div class="pills">
+    <span class="pill">Límite de Betz</span>
+    <span class="pill">HAWT / VAWT</span>
+    <span class="pill">Savonius</span>
+    <span class="pill">Darrieus</span>
+    <span class="pill">WAsP / Atlas Eólico</span>
+    <span class="pill">Rugosidad de terreno</span>
+    <span class="pill">Distribución Weibull</span>
+    <span class="pill">IBL</span>
+    <span class="pill">AEP</span>
+  </div>
+</div>
+
+<!-- ===== SECCIÓN 1: CONCEPTOS DE EXTRACCIÓN ===== -->
+<div class="sec sec-blue">🌀 Conceptos principales para la extracción de energía eólica (Diap. 4–8)</div>
+
+<div class="block">
+  <span class="bh bh-blue">Potencia mecánica del viento (Diap. 5)</span>
+  <div class="def def-blue">La potencia que puede extraer una turbina del flujo de aire depende de tres factores físicos simultáneos: la densidad del aire (masa por volumen), el área barrida por el rotor y, de forma cúbica, la velocidad del viento. Esta relación cúbica es el dato más importante del diseño eólico.</div>
+  <div class="rx">P = ½ · ρ · A · V³ · C<br><span style="font-size:10px">ρ = densidad del aire [kg/m³] | A = área barrida [m²]<br>V = velocidad del viento [m/s] | C = coeficiente de potencia [-]</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Dependencia cúbica de V:</strong> Si el viento aumenta solo un 10%, la potencia disponible sube un 33%. Esto explica por qué los aerogeneradores se instalan en zonas de vientos fuertes y persistentes, no solo frecuentes.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Área barrida (A):</strong> Para turbinas de eje horizontal es el círculo descrito por las palas (A = π·R²). Duplicar el radio cuadruplica el área y por tanto cuadruplica la potencia capturada, de allí la tendencia a construir turbinas cada vez más grandes.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Coeficiente de potencia C<sub>P</sub>:</strong> Fracción de la potencia del viento que realmente convierte la máquina. Ninguna máquina real puede alcanzar C<sub>P</sub> = 1 porque eso implicaría detener completamente el viento, lo cual es físicamente imposible.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la velocidad del viento entra al cubo en la fórmula de potencia eólica y qué implicación práctica tiene esto para la selección del sitio de instalación de una turbina.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Límite de Betz (Diap. 5)</span>
+  <div class="def def-yellow">El límite de Betz (≈ 59%) es el máximo teórico de potencia que cualquier turbina de viento puede extraer del flujo de aire, independientemente de su diseño. Deriva de la conservación de la cantidad de movimiento: si el rotor frena demasiado el viento, el flujo deja de pasar a través de él.</div>
+  <div class="rx">C<sub>P,máx</sub> = 16/27 ≈ 0.593 (59.3%)<br><span style="font-size:10px">Deducción: el viento aguas abajo V₂ debe ser ⅓ de V para máxima extracción</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>¿Por qué no se puede superar?</strong> Si el rotor extrajera el 100% de la energía cinética, el viento quedaría inmóvil detrás del rotor y el siguiente volumen de aire no podría entrar. La solución óptima implica que V₂ = V/3 tras el rotor.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Valor real:</strong> Las mejores turbinas HAWT modernas alcanzan C<sub>P</sub> ≈ 0.45–0.50, es decir, llegan al 75–85% del límite de Betz. Las pérdidas se deben a fricción, turbulencia en las palas y pérdidas en el generador.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir el "límite de Betz" con la eficiencia de la turbina. El límite aplica al concepto físico de extracción de energía del flujo; sobre ese 59% disponible, la turbina tiene su propia eficiencia adicional.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Máquinas de elevación — HAWT y VAWT (Diap. 6)</span>
+  <div class="def def-green">Las máquinas rotativas de elevación generan su par motor gracias a la fuerza de sustentación aerodinámica (lift) que actúa sobre perfiles alares, igual que el ala de un avión. Son el tipo dominante en generación eólica comercial por sus altos coeficientes de potencia.</div>
+  <div class="two">
+    <div class="mini mini-blue">
+      <strong>HAWT — Eje Horizontal</strong><br>
+      El rotor gira en un plano vertical perpendicular al viento. El perfil alar de las palas genera lift tangencial que produce torque. Las turbinas modernas tienen 3 palas, operan a tip speed ratios de 6–9 y pueden superar C<sub>P</sub> = 0.45. Requieren orientación activa (yaw) hacia el viento.
+    </div>
+    <div class="mini mini-teal">
+      <strong>VAWT — Eje Vertical (Darrieus)</strong><br>
+      El rotor gira en un plano horizontal con el eje vertical. No necesita orientación al viento. El perfil de tipo "batidora" o φ genera lift variable según la posición angular. C<sub>P</sub> típico ≈ 0.35. Ventaja: mantenimiento en tierra y operación omnidireccional.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Compare las turbinas de eje horizontal (HAWT) y eje vertical (VAWT) en términos de coeficiente de potencia, necesidad de orientación al viento y aplicaciones típicas.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Máquinas de arrastre — Savonius (Diap. 7)</span>
+  <div class="def def-orange">Las máquinas de arrastre (drag) funcionan porque el viento empuja físicamente las paletas. La diferencia de resistencia aerodinámica entre el lado cóncavo y convexo de los álabes genera un par neto. El ejemplo más típico es el rotor Savonius.</div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Mecanismo:</strong> El lado cóncavo de la pala captura más fuerza de arrastre que el lado convexo. Esta asimetría produce la rotación. A diferencia de las máquinas de elevación, la velocidad de la punta nunca puede superar la velocidad del viento (tip speed ratio &lt; 1).</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Coeficiente de potencia:</strong> El Savonius tiene C<sub>P</sub> ≈ 0.15–0.20, muy inferior al límite de Betz. Sin embargo, genera un par de arranque elevado desde velocidades muy bajas de viento, lo que lo hace útil para bombeo de agua o ventilación.</span></div>
+  <div class="warn">⚠️ Los rotores Savonius visualmente coloridos (como los decorativos en parques) son máquinas de arrastre con baja eficiencia energética. No confundir su uso ornamental/funcional con su capacidad de generación eléctrica.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Coeficientes de potencia comparados (Diap. 8)</span>
+  <div class="def def-teal">El gráfico de C<sub>P</sub> vs. Tip Speed Ratio (TSR = velocidad tangencial de la punta / velocidad del viento) permite comparar el rendimiento de todos los conceptos de turbina. El TSR óptimo varía según el tipo de máquina y determina la velocidad de operación ideal.</div>
+  <div class="three">
+    <div class="mini mini-blue">
+      <strong>HAWT rápido</strong><br>
+      TSR óptimo ≈ 6–9<br>C<sub>P</sub> ≈ 0.45–0.50<br>Turbinas modernas de 3 palas para generación eléctrica. Las palas son delgadas y altamente optimizadas.
+    </div>
+    <div class="mini mini-teal">
+      <strong>HAWT multipala lento</strong><br>
+      TSR óptimo ≈ 1–3<br>C<sub>P</sub> ≈ 0.20–0.30<br>Bombas de agua, molinos tradicionales. Muchas palas con alta solidez generan par alto a baja velocidad.
+    </div>
+    <div class="mini mini-yellow">
+      <strong>Savonius / Darrieus</strong><br>
+      Savonius: TSR &lt; 1, C<sub>P</sub> &lt; 0.20<br>Darrieus: TSR ≈ 4–5, C<sub>P</sub> ≈ 0.35<br>Máquinas de nicho. El Darrieus es la VAWT más eficiente pero no autoarranca.
+    </div>
+  </div>
+  <div class="flow">
+    <div class="fbox">HAWT rápido</div><span class="farrow">→</span>
+    <div class="fbox">Mayor C<sub>P</sub></div><span class="farrow">→</span>
+    <div class="fbox">Más generación</div><span class="farrow">→</span>
+    <div class="fbox">Mayor costo/complejidad</div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Savonius / Multipala</div><span class="farrow">→</span>
+    <div class="fbox">Menor C<sub>P</sub></div><span class="farrow">→</span>
+    <div class="fbox">Mayor par arranque</div><span class="farrow">→</span>
+    <div class="fbox">Aplicaciones mecánicas</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: En el gráfico de C<sub>P</sub> vs. TSR, ¿por qué las turbinas HAWT de alta velocidad tienen mayor eficiencia que los rotores Savonius? Relacione con el principio físico de extracción de energía (elevación vs. arrastre).</div>
+</div>
+
+<!-- ===== SECCIÓN 2: MÁQUINAS AVANZADAS ===== -->
+<div class="sec sec-purple">🪁 Conceptos avanzados — Máquinas voladoras e inducidas por flujo (Diap. 9–10)</div>
+
+<div class="block s2">
+  <span class="bh bh-purple">Máquinas voladoras basadas en elevación — Kite Power (Diap. 9)</span>
+  <div class="def def-purple">Los sistemas de energía de cometa (kite power) explotan el hecho de que a grandes altitudes (200–600 m) los vientos son más fuertes y constantes. Una cometa controlada describe trayectorias en "ochos" generando fuerza de tracción que se convierte en electricidad en tierra, o lleva rotores propios en el aire.</div>
+  <div class="two">
+    <div class="mini mini-purple">
+      <strong>Cometa de bombeo (pull kite)</strong><br>
+      La cometa sube generando tensión en el cable que mueve un generador en tierra. Luego la cometa baja con bajo arrastre y el ciclo se repite. El coeficiente de potencia se calcula respecto al área de la cometa, no al área barrida en tierra.
+    </div>
+    <div class="mini mini-blue">
+      <strong>Cometa con rotores (airborne wind)</strong><br>
+      Mini-generadores montados directamente en la cometa convierten el viento en electricidad que se transmite por el cable. Elimina la fricción del cable en movimiento. En desarrollo activo (TU Delft).
+    </div>
+  </div>
+  <div class="rx">C<sub>P,kite</sub> ≈ (4/27) · (A<sub>kite</sub>/A) · C<sub>L</sub> · G²<br><span style="font-size:10px">C<sub>L</sub> = coef. de sustentación ≈ 1 | G = relación planeo = 5–20<br>Un G alto (cometa eficiente) multiplica cuadráticamente el C<sub>P</sub></span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>Si G = 10 y C<sub>L</sub> = 1, el factor G² = 100 amplifica enormemente el C<sub>P</sub> relativo al área de referencia en tierra. Esto es lo que hace a estas máquinas teóricamente muy atractivas.</span></div>
+  <div class="exam">🎯 EXAMEN: En la fórmula del coeficiente de potencia para sistemas de cometas (kite), ¿qué representa la relación de planeo G y por qué aparece al cuadrado? ¿Qué diseño de cometa maximizaría la potencia extraída?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Máquinas por vibraciones inducidas por flujo (Diap. 10)</span>
+  <div class="def def-teal">Cuando un fluido fluye alrededor de un cuerpo flexible, puede inducir oscilaciones periódicas por el desprendimiento alternado de vórtices (efecto Kármán). Los "flutter energy harvesters" aprovechan estas vibraciones para generar electricidad mediante materiales piezoeléctricos o generadores lineales.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Potencia real muy baja:</strong> El ejemplo del PDF (Cornell LIMS) muestra P = 1.7 mW con A = 13.6×8 cm y V = 2.4 m/s, resultando en C<sub>P</sub> ≈ 0.02. Esto es solo el 3% del límite de Betz, muy ineficiente para generación a escala.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Aplicaciones potenciales:</strong> Sensores autónomos, monitoreo remoto, dispositivos IoT donde la potencia mínima y la durabilidad son prioritarias sobre la eficiencia energética.</span></div>
+  <div class="rx">C<sub>P</sub> = P / (½·ρ·A·V³) ≈ 0.02<br><span style="font-size:10px">Ejemplo Cornell: A=13.6×8cm, V=2.4m/s, P=1.7mW<br>(Bryant & Garcia, 2011, J. Vibrations and Acoustics)</span></div>
+  <div class="warn">⚠️ Las máquinas por vibración de flujo son un campo de investigación activo pero NO compiten con turbinas convencionales en generación eléctrica. Su nicho es captación de muy baja potencia en entornos no convencionales.</div>
+</div>
+
+<!-- ===== SECCIÓN 3: EVALUACIÓN DE RECURSOS ===== -->
+<div class="sec sec-green">🌍 Evaluación de recursos eólicos — Atlas Eólico y WAsP (Diap. 4–8, PDF2)</div>
+
+<div class="block">
+  <span class="bh bh-green">El problema clásico (Diap. 4, PDF2)</span>
+  <div class="def def-green">Evaluar el recurso eólico en un sitio específico es complejo porque los datos meteorológicos disponibles (estaciones existentes) raramente están justo donde se quiere instalar una turbina. Hay que "trasladar" el clima de viento desde donde se midió hasta donde se necesita, corrigiendo los efectos locales del terreno.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>El desafío central:</strong> El viento en un punto depende de la rugosidad del suelo (vegetación, edificios), la orografía (colinas, valles) y los obstáculos cercanos. Cambiar cualquiera de estos factores altera el perfil de velocidad vertical y la dirección del viento.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Referencia base:</strong> Troen & Petersen (1989) "European Wind Atlas" estableció la metodología que sigue siendo el estándar, implementada en el software WAsP (Wind Atlas Analysis and Application Program).</span></div>
+  <div class="flow">
+    <div class="fbox">Datos observados</div><span class="farrow">→</span>
+    <div class="fbox">Corrección obstáculos + rugosidad + orografía</div><span class="farrow">→</span>
+    <div class="fbox">Clima generalizado (altura libre)</div><span class="farrow">→</span>
+    <div class="fbox">Aplicar al sitio target</div><span class="farrow">→</span>
+    <div class="fbox">Clima previsto en turbina</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Explique el concepto de "clima de viento generalizado" en la metodología del Atlas Eólico. ¿Por qué es necesario este paso intermedio entre las observaciones y la predicción en el sitio de la turbina?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Variación costera — Interpolación lineal (Diap. 5, PDF2)</span>
+  <div class="def def-blue">La velocidad del viento varía significativamente con la distancia al mar porque la rugosidad de la superficie cambia drásticamente: el mar es casi liso (z₀ ≈ 0.0002 m) mientras que la tierra tiene vegetación, edificios y accidentes que frenan el viento.</div>
+  <div class="item"><span class="dot dot-blue"></span><span>El gráfico de Troen & Petersen muestra cómo a mayor distancia de la costa (0–6 km), la velocidad media del viento cae notoriamente dependiendo de la clase de rugosidad (Cl 0 = mar liso, hasta Cl 3 = terreno muy rugoso).</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>En el contexto peruano, la franja costera entre el Pacífico y la Cordillera Occidental presenta este fenómeno intensamente: vientos de 6–8 m/s en la costa sur (Ica, Arequipa) que se reducen con la distancia al mar y la altitud.</span></div>
+  <div class="warn">⚠️ La "interpolación lineal" mencionada en la diapositiva tiene límites: solo es válida para transiciones graduales. En zonas de rugosidad abrupta (borde de bosque, orilla de ciudad), se forma una capa límite interna (IBL) que invalida la interpolación simple.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Metodología WAsP — Análisis y Aplicación (Diap. 6, PDF2)</span>
+  <div class="def def-green">WAsP es el software de referencia mundial para evaluación eólica. Implementa la metodología del European Wind Atlas en dos fases complementarias: un análisis "ascendente" que elimina los efectos locales de donde se midió, y una aplicación "descendente" que los añade para el sitio objetivo.</div>
+  <div class="two">
+    <div class="mini mini-green">
+      <strong>Análisis ascendente (up-scaling)</strong><br>
+      Toma datos de la estación meteorológica existente y elimina los efectos de rugosidad, obstáculos y orografía local → produce el "Clima de Viento Generalizado" a gran altura, libre de influencias locales. Es la referencia universal.
+    </div>
+    <div class="mini mini-blue">
+      <strong>Aplicación descendente (down-scaling)</strong><br>
+      Parte del Clima Generalizado y añade los efectos locales específicos del sitio de la turbina: rugosidad del terreno circundante, obstáculos reales, elevación orográfica → produce el "Clima de Viento Previsto" en hub height.
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-green"></span><span>WAsP requiere mapas digitales de contornos de elevación y rugosidad en un radio de al menos 5–10 km alrededor de la turbina. A mayor detalle cartográfico, mayor precisión en la predicción.</span></div>
+  <div class="exam">🎯 EXAMEN: En el programa WAsP, ¿cuál es la diferencia entre el análisis ascendente y la aplicación descendente? Indique qué datos de entrada se requieren en cada fase.</div>
+</div>
+
+<!-- ===== SECCIÓN 4: MODELOS DE TERRENO ===== -->
+<div class="sec sec-teal">⛰️ Modelos de terreno — Obstáculos, Rugosidad y Orografía (Diap. 7–10, PDF2)</div>
+
+<div class="block">
+  <span class="bh bh-orange">Modelo para resguardar obstáculos (Diap. 7, PDF2)</span>
+  <div class="def def-orange">Los obstáculos cercanos (edificios, árboles, estructuras) generan una "estela" de viento perturbado aguas abajo que puede reducir significativamente la velocidad media y aumentar la turbulencia. El modelo WAsP cuantifica este porcentaje de reducción en función de la distancia al obstáculo y la altura relativa.</div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>¿Cómo opera?</strong> El gráfico de la diapositiva muestra que a 10 veces la altura del obstáculo de distancia, la reducción de velocidad puede superar el 40%. A 40 veces la altura, todavía puede haber 5–10% de reducción. La zona de mayor afectación está en las primeras 10 alturas de distancia.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Aplicación práctica:</strong> La regla general (rule of thumb) para turbinas es instalarlas a altura ≥ 2× la altura del obstáculo más alto en un radio de 500 m, o a una distancia ≥ 10× dicha altura. De ahí la importancia de torres altas.</span></div>
+  <div class="warn">⚠️ El modelo de obstáculos de WAsP asume obstáculos aislados de forma simple. Para complejos urbanos o bosques densos, se necesitan modelos CFD más sofisticados.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Modelo de rugosidad del terreno e IBL (Diap. 8, PDF2)</span>
+  <div class="def def-teal">Cuando el viento pasa de una superficie con una rugosidad a otra diferente (ej. del mar a la tierra), no se adapta instantáneamente. Se forma una Capa Límite Interna (IBL) que crece gradualmente desde el punto de cambio. Solo dentro de la IBL el perfil de viento refleja las nuevas condiciones de rugosidad.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>IBL superior e inferior:</strong> El gráfico muestra que con un cambio de rugosidad de 0.02 cm a 20 cm (por ejemplo, mar a bosque), la IBL superior crece lentamente durante kilómetros, mientras que la IBL inferior (donde el efecto es completo) es mucho más delgada.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Regla de pulgar (rule of thumb):</strong> La altura de la IBL ≈ 0.1 × distancia desde el cambio de rugosidad. Si una turbina está a 2 km de la costa, la IBL alcanza ≈ 200 m. Si el rotor está a 80 m de altura, probablemente aún opere en zona de transición.</span></div>
+  <div class="flow">
+    <div class="fbox">Cambio de rugosidad (z₀₁→z₀₂)</div><span class="farrow">→</span>
+    <div class="fbox">Formación IBL</div><span class="farrow">→</span>
+    <div class="fbox">Perfil en transición</div><span class="farrow">→</span>
+    <div class="fbox">Equilibrio con nueva rugosidad</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Qué es la Capa Límite Interna (IBL) y por qué su formación es relevante para la predicción de velocidades de viento en parques eólicos costeros? Explique qué ocurre con el perfil vertical de velocidad durante la transición.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Terreno montañoso y aceleración sobre colinas (Diap. 9–10, PDF2)</span>
+  <div class="def def-green">La orografía (relieve del terreno) puede tanto acelerar como desacelerar el viento. Las colinas y crestas bien formadas aceleran el flujo en su cima, lo que puede aumentar la velocidad del viento significativamente. Los valles y depresiones, en cambio, pueden generar separación del flujo y turbulencia.</div>
+  <div class="two">
+    <div class="mini mini-green">
+      <strong>Aceleración sobre colinas</strong><br>
+      El flujo de aire se comprime sobre la cima de una colina suave. La aceleración es máxima en el punto más alto y depende de la relación h/L (altura vs. semilongitud de la colina). Para colinas ideales, el incremento de velocidad puede ser 30–50%. Los parques eólicos peruanos en la costa utilizan esta ventaja (ej. Marcona, Ica).
+    </div>
+    <div class="mini mini-yellow">
+      <strong>Separación del flujo</strong><br>
+      En colinas empinadas o con pendientes abruptas, el flujo se separa de la superficie generando turbulencia aguas abajo. Esta zona de recirculación es altamente perjudicial para las turbinas: reduce la energía disponible y aumenta la fatiga estructural de las palas.
+    </div>
+  </div>
+  <div class="warn">⚠️ WAsP (modelo lineal) solo es válido para terrenos suaves (h/L &lt; 0.3). Para colinas empinadas o terrenos muy accidentados, el modelo sobreestima la aceleración y se requiere CFD.</div>
+</div>
+
+<!-- ===== SECCIÓN 5: ESTADÍSTICAS Y AEP ===== -->
+<div class="sec sec-yellow">📊 Series de tiempo, Distribución Weibull y Producción Anual (Diap. 11–13, PDF2)</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Observaciones de series de tiempo (Diap. 11, PDF2)</span>
+  <div class="def def-yellow">El viento es altamente variable en el tiempo. Las mediciones continuas (series de tiempo) muestran fluctuaciones a múltiples escalas: ráfagas de segundos, ciclos diurnos de horas y variaciones estacionales de meses. Para el diseño de parques eólicos se necesita al menos 1 año de datos para capturar la variabilidad estacional.</div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Efecto de la altura:</strong> El gráfico de la diapositiva compara vientos a 10 m y 100 m sobre terreno. A 100 m los vientos son significativamente más altos y menos variables porque están fuera de la capa de rugosidad superficial. Esto justifica las torres cada vez más altas (hoy en día 100–150 m).</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Ciclo diurno:</strong> En zonas costeras peruanas, los vientos son más fuertes por las tardes (convección térmica + brisa marina) y más débiles de noche. Este patrón afecta la complementariedad con la generación solar.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Distribución de Weibull (Diap. 12, PDF2)</span>
+  <div class="def def-blue">La distribución de Weibull es la función estadística estándar para describir la frecuencia de ocurrencia de distintas velocidades de viento en un sitio. Con solo dos parámetros (escala c y forma k), caracteriza el régimen eólico de un año completo en una ecuación manejable.</div>
+  <div class="rx">f(V) = (k/c) · (V/c)^(k-1) · exp[-(V/c)^k]<br><span style="font-size:10px">c = parámetro de escala [m/s] | k = parámetro de forma [-]<br>k ≈ 2 (Rayleigh) para sitios con viento moderado sin pico definido</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Parámetro k:</strong> Determina la forma del histograma. k &lt; 2 = distribución con cola larga (muchas ráfagas extremas); k = 2 (Rayleigh) = distribución simétrica suave; k &gt; 3 = vientos muy constantes. Sitios costeros peruanos tienen k ≈ 2.0–2.5.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Importancia para el AEP:</strong> La distribución de Weibull, combinada con la curva de potencia de la turbina (que incluye velocidades de arranque ~3 m/s y de corte ~25 m/s), permite calcular la producción anual esperada integrando la potencia sobre todas las velocidades posibles.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Para qué sirve la distribución de Weibull en la evaluación del recurso eólico? Explique qué información proporciona cada uno de sus dos parámetros (c y k) sobre el régimen de vientos de un sitio.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Producción de energía anual del parque eólico — AEP (Diap. 13, PDF2)</span>
+  <div class="def def-green">El AEP (Annual Energy Production) es el indicador clave de rentabilidad de un parque eólico. Se calcula integrando la curva de potencia de la turbina sobre la distribución de frecuencias de velocidad del viento, multiplicada por las horas del año. Los mapas de AEP permiten visualizar zonas óptimas de instalación.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Factores que reducen el AEP real:</strong> Pérdidas por estela entre turbinas (5–15%), disponibilidad mecánica (95–98%), pérdidas eléctricas en cables y transformadores (1–3%), turbulencia excesiva que obliga paradas. Un AEP "bruto" se convierte en AEP "neto" restando todas estas pérdidas.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Mapas de AEP en Perú:</strong> El MINEM publica atlas eólicos que muestran que las zonas de mayor AEP potencial son la costa sur (Ica, Arequipa, Tacna) con velocidades medias anuales de 7–9 m/s, y algunas zonas de la sierra sobre 4000 msnm.</span></div>
+  <div class="flow">
+    <div class="fbox">Distribución Weibull</div><span class="farrow">×</span>
+    <div class="fbox">Curva potencia turbina</div><span class="farrow">×</span>
+    <div class="fbox">8760 h/año</div><span class="farrow">×</span>
+    <div class="fbox">N° turbinas</div><span class="farrow">−</span>
+    <div class="fbox">Pérdidas</div><span class="farrow">=</span>
+    <div class="fbox">AEP neto [MWh/año]</div>
+  </div>
+</div>
+
+<!-- ===== TABLA INTEGRADORA ===== -->
+<div class="block s3">
+  <span class="bh bh-gray">Tabla Integradora — Comparación de Conceptos Eólicos y Parámetros de Evaluación</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Concepto / Parámetro</th>
+        <th>Tipo / Categoría</th>
+        <th>C<sub>P</sub> típico</th>
+        <th>TSR óptimo</th>
+        <th>Mecanismo físico</th>
+        <th>Aplicación principal</th>
+        <th>Limitación clave</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>HAWT 3 palas</strong></td><td>Elevación, eje horiz.</td><td>0.45–0.50</td><td>6–9</td><td>Lift en perfil alar → torque</td><td>Generación eléctrica a escala</td><td>Requiere yaw activo al viento</td></tr>
+      <tr><td><strong>Darrieus (VAWT)</strong></td><td>Elevación, eje vert.</td><td>0.30–0.35</td><td>4–5</td><td>Lift variable con posición angular</td><td>Zonas urbanas, offshore</td><td>No autoarranca; vibraciones</td></tr>
+      <tr><td><strong>HAWT multipala lento</strong></td><td>Elevación, alta solidez</td><td>0.20–0.30</td><td>1–3</td><td>Lift + alto par de arranque</td><td>Bombeo de agua</td><td>Ineficiente para electricidad</td></tr>
+      <tr><td><strong>Savonius</strong></td><td>Arrastre, eje vert.</td><td>0.15–0.20</td><td>&lt;1</td><td>Diferencia de arrastre cóncavo/convexo</td><td>Ventilación, señalización</td><td>Muy bajo C<sub>P</sub></td></tr>
+      <tr><td><strong>Kite power</strong></td><td>Elevación aerodinámica</td><td>Amplificado por G²</td><td>–</td><td>Lift cometa → tracción cable</td><td>Altitudes &gt;200 m (I+D)</td><td>Tecnología no madura</td></tr>
+      <tr><td><strong>Flutter harvester</strong></td><td>Vibración inducida</td><td>≈ 0.02</td><td>–</td><td>Vórtices de Kármán → piezoeléctrico</td><td>Sensores IoT autónomos</td><td>Potencia muy baja (mW)</td></tr>
+      <tr><td><strong>Límite de Betz</strong></td><td>Límite teórico universal</td><td>16/27 ≈ 0.593</td><td>–</td><td>Conservación de cantidad de movimiento</td><td>Referencia de máxima eficiencia</td><td>Insuperable físicamente</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La potencia disponible del viento escala con V³ (velocidad al cubo) y con A (área barrida). El coeficiente de potencia C<sub>P</sub> — limitado al 59% por Betz — determina qué fracción de esa potencia capta la máquina. La evaluación del recurso (WAsP, Weibull, modelos de terreno) busca predecir con precisión V en el hub de la turbina, porque un error del 10% en V implica un error del 33% en la estimación de la producción de energía.</div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="quiz-wrap">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="quiz-body">
+    <div class="prog-wrap">
+      <span class="prog-label" id="prog-text">Pregunta 0 de 10 respondidas</span>
+      <div class="prog-bar-outer"><div class="prog-bar-inner" id="prog-bar"></div></div>
+      <span class="prog-score" id="prog-score">0 / 10</span>
+    </div>
+
+    <!-- P1 -->
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">En la fórmula de potencia eólica P = ½ρAV³C, si la velocidad del viento aumenta de 6 m/s a 9 m/s (un 50% más), ¿en qué factor se multiplica la potencia disponible en el viento?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) 1.5 (aumenta un 50%, proporcional a la velocidad)</button>
+        <button class="qbtn" data-q="1" data-correct="false">B) 2.25 (aumenta al cuadrado de la velocidad)</button>
+        <button class="qbtn" data-q="1" data-correct="true">C) 3.375 (aumenta al cubo de la velocidad: 1.5³)</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) 4.5 (aumenta a la cuarta potencia de la velocidad)</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <!-- P2 -->
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">¿Cuál es el valor del límite de Betz y qué condición física del viento aguas abajo del rotor produce ese máximo teórico?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) 75%, cuando la velocidad aguas abajo es ½ de la velocidad inicial</button>
+        <button class="qbtn" data-q="2" data-correct="true">B) 59.3% (16/27), cuando la velocidad aguas abajo es ⅓ de la velocidad inicial</button>
+        <button class="qbtn" data-q="2" data-correct="false">C) 50%, cuando el viento queda completamente detenido aguas abajo</button>
+        <button class="qbtn" data-q="2" data-correct="false">D) 100%, en condiciones de viento ideal sin turbulencia</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <!-- P3 -->
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">¿Cuál es la diferencia fundamental entre una máquina eólica de elevación (lift) y una de arrastre (drag)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="false">A) Las máquinas de elevación usan ejes verticales y las de arrastre usan ejes horizontales</button>
+        <button class="qbtn" data-q="3" data-correct="false">B) Las máquinas de arrastre son siempre más eficientes porque usan toda la fuerza del viento</button>
+        <button class="qbtn" data-q="3" data-correct="true">C) Las de elevación generan par mediante sustentación aerodinámica (perfil alar), mientras que las de arrastre se impulsan por la diferencia de fuerza de empuje entre caras opuestas</button>
+        <button class="qbtn" data-q="3" data-correct="false">D) Las máquinas de elevación solo funcionan con vientos superiores a 10 m/s, las de arrastre desde cualquier velocidad</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <!-- P4 -->
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">En el gráfico de C<sub>P</sub> vs. Tip Speed Ratio (TSR), ¿cuál de los siguientes conceptos rotativos presenta el mayor coeficiente de potencia?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="false">A) Rotor Savonius con TSR óptimo cercano a 1</button>
+        <button class="qbtn" data-q="4" data-correct="false">B) Molino de viento multipala de accionamiento lento</button>
+        <button class="qbtn" data-q="4" data-correct="false">C) Turbina Darrieus de eje vertical</button>
+        <button class="qbtn" data-q="4" data-correct="true">D) HAWT de alta velocidad con TSR entre 6 y 9</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <!-- P5 -->
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">En la fórmula del coeficiente de potencia para sistemas de cometas (kite power), la relación de planeo G aparece al cuadrado. Si un diseño mejora G de 5 a 10 (lo duplica), ¿en qué factor aumenta el C<sub>P</sub>?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) Se duplica (factor 2), porque G aumenta al doble</button>
+        <button class="qbtn" data-q="5" data-correct="true">B) Se cuadruplica (factor 4), porque G entra al cuadrado en la fórmula</button>
+        <button class="qbtn" data-q="5" data-correct="false">C) Se mantiene igual, porque G solo afecta la dirección del vuelo</button>
+        <button class="qbtn" data-q="5" data-correct="false">D) Se incrementa en un 50%, proporcional al incremento lineal de G</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <!-- P6 -->
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">En la metodología del Atlas Eólico (WAsP), ¿qué representa el "Clima de Viento Generalizado" y por qué es necesario calcularlo?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="false">A) Es el promedio aritmético de todos los datos medidos en una estación meteorológica durante 10 años</button>
+        <button class="qbtn" data-q="6" data-correct="true">B) Es el régimen de vientos corregido y libre de los efectos locales del sitio de medición, que sirve como referencia universal para trasladar el clima a cualquier otro punto</button>
+        <button class="qbtn" data-q="6" data-correct="false">C) Es la velocidad del viento a 10 m de altura en condiciones de terreno plano y sin obstáculos, medida en el sitio de la turbina</button>
+        <button class="qbtn" data-q="6" data-correct="false">D) Es el modelo numérico de predicción meteorológica regional que alimenta el software WAsP</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <!-- P7 -->
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">¿Cuál afirmación sobre la Capa Límite Interna (IBL) es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="false">A) La IBL se forma cuando el viento pasa de una superficie con una rugosidad a otra diferente</button>
+        <button class="qbtn" data-q="7" data-correct="false">B) Dentro de la IBL, el perfil de viento está en transición entre las condiciones de la rugosidad anterior y la nueva</button>
+        <button class="qbtn" data-q="7" data-correct="true">C) La IBL alcanza su máxima altura justo en el punto de cambio de rugosidad y luego disminuye</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) A mayor distancia del cambio de rugosidad, mayor es la altura de la IBL</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <!-- P8 -->
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">¿Por qué el modelo lineal WAsP sobreestima la aceleración del viento sobre colinas empinadas?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="false">A) Porque WAsP no considera la densidad del aire, que es mayor en zonas montañosas</button>
+        <button class="qbtn" data-q="8" data-correct="false">B) Porque WAsP asume que el viento tiene velocidad constante a todas las alturas</button>
+        <button class="qbtn" data-q="8" data-correct="true">C) Porque WAsP es un modelo de flujo lineal válido solo para terrenos suaves (h/L &lt; 0.3); en pendientes fuertes el flujo se separa generando recirculación y turbulencia que el modelo no puede capturar</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) Porque WAsP fue desarrollado para Europa donde no hay montañas altas, por lo que no aplica en Perú</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <!-- P9 -->
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">En la distribución de Weibull para caracterizar el viento, ¿qué indica un parámetro de forma k elevado (por ejemplo, k = 4)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="true">A) Que los vientos son muy constantes, concentrados alrededor de la velocidad media, con pocas velocidades extremas</button>
+        <button class="qbtn" data-q="9" data-correct="false">B) Que los vientos son altamente variables, con frecuentes ráfagas muy por encima de la velocidad media</button>
+        <button class="qbtn" data-q="9" data-correct="false">C) Que la velocidad media anual es necesariamente superior a 8 m/s</button>
+        <button class="qbtn" data-q="9" data-correct="false">D) Que el sitio tiene régimen de vientos tipo monzónico con dos estaciones claramente diferenciadas</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <!-- P10 -->
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">Un ingeniero calcula el AEP (Producción Anual de Energía) de un parque eólico en la costa de Ica. Si comete un error del 10% en la estimación de la velocidad media del viento (por ejemplo, asume 8 m/s cuando en realidad es 7.27 m/s), ¿cuánto error aproximado comete en la estimación de la potencia disponible?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) 10% de error, porque la potencia es proporcional a la velocidad</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) 20% de error, porque la potencia escala con V²</button>
+        <button class="qbtn" data-q="10" data-correct="true">C) Aproximadamente 33% de error, porque la potencia escala con V³ y (1.1)³ ≈ 1.33</button>
+        <button class="qbtn" data-q="10" data-correct="false">D) 5% de error, porque la escala cúbica se amortigua por los demás factores de la fórmula</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div class="result-panel" id="result-panel">
+      <h3 id="result-title"></h3>
+      <p id="result-msg"></p>
+      <button class="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">
+    Troen, I. & Petersen, E.L. (1989). European Wind Atlas. Risø National Laboratory, Roskilde, Denmark. ·
+    Bryant, M. & Garcia, E. (2011). Modeling and Testing of a Novel Aeroelastic Flutter Energy Harvester. Journal of Vibrations and Acoustics, Vol 133. ·
+    Cavalcanti Cárdenas, K. (2020). Conceptos de la tecnología eólica y Evaluación de recursos. UNALM — Facultad de Ingeniería Agrícola. ·
+    MINEM Perú. Atlas Eólico del Perú.
+  </span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: { correct: "C) ¡Correcto! La potencia eólica escala con V³. Si la velocidad aumenta 1.5 veces, la potencia aumenta 1.5³ = 3.375 veces. Este es el principio más importante del diseño eólico: pequeños aumentos en velocidad producen grandes incrementos de potencia.", incorrect: "La respuesta correcta es C. La fórmula P = ½ρAV³C muestra que la velocidad entra al cubo. Por tanto, V×1.5 implica P×(1.5)³ = ×3.375. Esto explica por qué la selección del sitio es tan crítica: zonas con vientos algo mayores producen mucho más energía." },
+  2: { correct: "B) ¡Correcto! El límite de Betz es 16/27 ≈ 59.3%. Se obtiene cuando la velocidad aguas abajo del rotor es exactamente V/3 (un tercio de la velocidad inicial). Si fuera mayor, se extrae menos energía; si fuera menor (hasta cero), el flujo se bloquea.", incorrect: "La respuesta correcta es B. Betz demostró que la condición óptima es V₂ = V/3 aguas abajo, lo que resulta en C_P,máx = 16/27 ≈ 0.593. Si se intenta extraer más, el flujo de aire deja de pasar a través del rotor y la potencia cae." },
+  3: { correct: "C) ¡Correcto! Las máquinas de elevación (HAWT, Darrieus) usan perfiles aerodinámicos que generan sustentación (lift) perpendicular al flujo, lo que permite velocidades de punta mayores que el viento y altos C_P. Las de arrastre (Savonius) solo pueden girar a velocidades menores que el viento.", incorrect: "La respuesta correcta es C. El mecanismo es clave: elevación (lift) → alta eficiencia; arrastre (drag) → baja eficiencia pero alto par de arranque. Las turbinas de elevación pueden tener TSR > 1 porque la punta de la pala se mueve más rápido que el viento." },
+  4: { correct: "D) ¡Correcto! El HAWT de alta velocidad con TSR 6–9 alcanza C_P ≈ 0.45–0.50, el mayor entre los conceptos rotativos comerciales. Se acerca más al límite de Betz. El Darrieus alcanza ~0.35, el multipala lento ~0.25 y el Savonius solo ~0.15–0.20.", incorrect: "La respuesta correcta es D. El gráfico C_P vs. TSR muestra claramente que el HAWT rápido tiene el pico más alto. El Savonius es el menos eficiente (C_P ~0.15) porque opera por arrastre; el Darrieus es moderado (~0.35); el HAWT de 3 palas es el campeón de eficiencia." },
+  5: { correct: "B) ¡Correcto! En la fórmula C_P,kite ∝ G², si G se duplica de 5 a 10, el factor G² pasa de 25 a 100, es decir se cuadruplica. Por eso diseñar cometas con alta relación planeo (alta eficiencia aerodinámica) es el factor más crítico en estos sistemas.", incorrect: "La respuesta correcta es B. Como G aparece al cuadrado en la fórmula, duplicar G multiplica C_P por 4 (no por 2). Esta relación cuadrática hace que la calidad aerodinámica de la cometa sea el parámetro de diseño más crítico." },
+  6: { correct: "B) ¡Correcto! El Clima de Viento Generalizado es el régimen 'puro' del viento libre de obstáculos, libre de la rugosidad local del sitio de medición. Es la referencia que permite comparar y trasladar datos entre distintos puntos geográficos. Sin este paso, los datos de una estación no serían transferibles a otro sitio.", incorrect: "La respuesta correcta es B. El proceso de 'generalización' elimina los efectos locales (rugosidad, obstáculos, orografía) del lugar donde está la estación meteorológica. El resultado es un clima 'en aire libre' que puede luego 'aplicarse' al sitio de la turbina añadiendo sus propios efectos locales." },
+  7: { correct: "C) ¡Correcto! Esa afirmación es FALSA. La IBL crece progresivamente con la distancia desde el punto de cambio de rugosidad; no se forma completa en el punto de cambio ni disminuye después. Es exactamente al revés: comienza siendo muy delgada y va creciendo con la distancia.", incorrect: "La respuesta correcta es C (la afirmación falsa). La IBL crece con la distancia desde el cambio de rugosidad, no disminuye. La altura de la IBL ≈ 0.1 × distancia desde el cambio. Justo en el punto de cambio la IBL tiene altura casi cero." },
+  8: { correct: "C) ¡Correcto! WAsP es un modelo de flujo potencial lineal válido solo para pendientes suaves (h/L < 0.3). En colinas empinadas, el flujo se separa de la superficie y se forman zonas de recirculación — fenómenos altamente no lineales que WAsP ignora, sobreestimando la aceleración.", incorrect: "La respuesta correcta es C. El límite de WAsP es su naturaleza lineal. Para terrenos muy accidentados o colinas empinadas como los Andes peruanos, se necesitan modelos CFD (Computational Fluid Dynamics) como WindSim o OpenFOAM, que resuelven las ecuaciones de Navier-Stokes no lineales." },
+  9: { correct: "A) ¡Correcto! Un k elevado (k > 3) indica vientos más constantes y concentrados cerca de la velocidad media, con poca variabilidad extrema. Sitios con vientos alisios constantes (como algunas zonas de la costa peruana) pueden tener k ≈ 2.5–3.5. Mayor k no significa mayor velocidad, sino mayor consistencia.", incorrect: "La respuesta correcta es A. El parámetro de forma k describe la 'peakedness' de la distribución. k bajo (cercano a 1) = distribución dispersa con muchos vientos bajos y algunas ráfagas altas. k alto (> 3) = distribución estrecha, vientos constantes. El parámetro c (escala) es el que determina el nivel de velocidad media." },
+  10: { correct: "C) ¡Correcto! Un error del 10% en V (factor 1.1) se amplifica al cubo en la potencia: (1.1)³ ≈ 1.331, es decir ~33% de error. Este es el argumento técnico más poderoso para invertir en mediciones precisas de viento antes de instalar un parque eólico. Un año de medición detallada puede evitar errores de millones de dólares.", incorrect: "La respuesta correcta es C. La relación cúbica V³ hace que los errores en la estimación de velocidad se amplifiquen enormemente en la potencia. (1.10)³ = 1.331, es decir 33.1% de sobreestimación de potencia. Por eso se exigen al menos 12 meses de medición anemométrica en mástiles de la altura del hub antes de cualquier decisión de inversión." }
+};
+
+let answered = 0;
+let correct = 0;
+
+document.querySelector('.quiz-body').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') {
+      b.classList.add('correct');
+      b.textContent = '✅ ' + b.textContent;
+    }
+  });
+  
+  if (!isCorrect) {
+    btn.classList.remove('correct');
+    btn.classList.add('incorrect');
+    btn.textContent = btn.textContent.replace('✅ ', '❌ ');
+  }
+  
+  const fb = document.getElementById('fb' + q);
+  fb.style.display = 'block';
+  if (isCorrect) {
+    fb.className = 'qfeedback ok';
+    fb.innerHTML = '<strong>✅ ¡Correcto!</strong> ' + feedbacks[q].correct;
+    correct++;
+  } else {
+    fb.className = 'qfeedback fail';
+    fb.innerHTML = '<strong>❌ Incorrecto.</strong> ' + feedbacks[q].incorrect;
+  }
+  
+  answered++;
+  const pct = Math.round((correct / 10) * 100);
+  document.getElementById('prog-text').textContent = 'Pregunta ' + answered + ' de 10 respondidas';
+  document.getElementById('prog-bar').style.width = (answered / 10 * 100) + '%';
+  document.getElementById('prog-score').textContent = correct + ' / 10';
+  
+  if (answered === 10) {
+    const panel = document.getElementById('result-panel');
+    const title = document.getElementById('result-title');
+    const msg = document.getElementById('result-msg');
+    panel.style.display = 'block';
+    if (correct >= 8) {
+      panel.className = 'result-panel result-ok';
+      title.textContent = '🏆 ' + correct + '/10 — ¡Excelente dominio del tema!';
+      msg.textContent = 'Tienes un sólido entendimiento de los conceptos de energía eólica y evaluación de recursos. Estás muy bien preparado para el examen.';
+    } else if (correct >= 5) {
+      panel.className = 'result-panel result-mid';
+      title.textContent = '📚 ' + correct + '/10 — ¡Buen avance, sigue repasando!';
+      msg.textContent = 'Manejas los conceptos fundamentales, pero hay algunos temas que requieren refuerzo. Revisa especialmente los bloques con las preguntas que fallaste.';
+    } else {
+      panel.className = 'result-panel result-low';
+      title.textContent = '⚠️ ' + correct + '/10 — Necesitas repasar el material';
+      msg.textContent = 'Te recomendamos releer el canvas desde el inicio, prestando especial atención a los bloques de fórmulas y los cuadros de advertencia.';
+    }
+  }
+});
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('prog-text').textContent = 'Pregunta 0 de 10 respondidas';
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('prog-score').textContent = '0 / 10';
+  document.getElementById('result-panel').style.display = 'none';
+  
+  for (let i = 1; i <= 10; i++) {
+    const fb = document.getElementById('fb' + i);
+    fb.style.display = 'none';
+    fb.className = 'qfeedback';
+    fb.innerHTML = '';
+    document.querySelectorAll(`.qbtn[data-q="${i}"]`).forEach(btn => {
+      btn.disabled = false;
+      btn.classList.remove('correct', 'incorrect');
+      btn.textContent = btn.textContent.replace(/^[✅❌] /, '');
+    });
+  }
+}
+</script>

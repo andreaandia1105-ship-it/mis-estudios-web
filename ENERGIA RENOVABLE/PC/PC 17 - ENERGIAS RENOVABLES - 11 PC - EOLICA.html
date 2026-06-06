@@ -1,0 +1,602 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.cv-title h1{font-family:Oswald,sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.cv-title .sub{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.cv-title .tags{display:flex;flex-wrap:wrap;gap:5px}
+.cv-title .tag{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.12);color:#cbd5e1}
+.sec{grid-column:1/-1;background:var(--color-background-secondary);border-radius:8px;padding:7px 13px;font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:var(--color-text-primary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:Oswald,sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-pink{background:#fce7f3;color:#831843}
+.bh-gray{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd}
+.bh-green{background:#14532d;color:#86efac}
+.bh-teal{background:#042f2e;color:#5eead4}
+.bh-orange{background:#431407;color:#fed7aa}
+.bh-purple{background:#2e1065;color:#c4b5fd}
+.bh-red{background:#450a0a;color:#fca5a5}
+.bh-yellow{background:#422006;color:#fef08a}
+.bh-pink{background:#4a044e;color:#f0abfc}
+.bh-gray{background:#1e293b;color:#94a3b8}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#22c55e}
+.def-teal{border-color:#14b8a6}
+.def-orange{border-color:#f97316}
+.def-purple{border-color:#8b5cf6}
+.def-red{border-color:#ef4444}
+.def-yellow{border-color:#eab308}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-teal{background:#14b8a6}
+.dot-orange{background:#f97316}
+.dot-purple{background:#8b5cf6}
+.dot-red{background:#ef4444}
+.dot-yellow{background:#eab308}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:7px;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#854d0e}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-top:7px}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;line-height:1.4}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:3px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.ft-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:Oswald,sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+/* QUIZ */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:8px;padding:10px 14px;margin-bottom:14px}
+.quiz-header h2{font-family:Oswald,sans-serif;font-size:14px;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.qcard{background:var(--color-background-secondary);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.qnum{font-size:10px;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.qtext{font-size:13px;font-weight:500;margin-bottom:10px;color:var(--color-text-primary);line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;color:var(--color-text-primary);transition:all .2s;line-height:1.4}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.reveal{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:.7;cursor:not-allowed}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;display:none}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.qfeedback.ok{background:#052e16;color:#86efac}
+.qfeedback.bad{background:#450a0a;color:#fca5a5}
+.qbtn.correct{background:#052e16;border-color:#16a34a;color:#86efac}
+.qbtn.incorrect{background:#450a0a;border-color:#dc2626;color:#fca5a5}
+.qbtn.reveal{background:#052e16;border-color:#16a34a;color:#86efac}
+}
+.progress-wrap{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.progress-label{font-size:12px;color:var(--color-text-secondary);white-space:nowrap}
+.progress-bar-w{flex:1;background:var(--color-background-secondary);border-radius:20px;height:10px}
+.progress-bar-f{height:100%;border-radius:20px;background:#22c55e;transition:width .4s}
+.score-text{font-size:12px;font-weight:600;color:#16a34a;white-space:nowrap}
+.result-panel{display:none;border-radius:10px;padding:14px 16px;margin-top:12px;text-align:center}
+.result-panel h3{font-family:Oswald,sans-serif;font-size:16px;margin-bottom:4px}
+.result-panel p{font-size:12px;line-height:1.5}
+.reset-btn{margin-top:10px;background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;cursor:pointer;font-family:Oswald,sans-serif}
+</style>
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Canvas de resumen universitario: Energía Eólica en Perú — Avances, Retos y Perspectivas Futuras. Artículo científico Cacciuttolo et al., Sustainability 2024.</h2>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="cv-title">
+  <h1>⚡ ENERGÍA EÓLICA EN PERÚ — Avances, Retos y Perspectivas</h1>
+  <p class="sub">Artículo científico revisado por pares · Cacciuttolo, Cano, Guardia & Villicaña · Sustainability 2024, 16, 1589 · MDPI</p>
+  <div class="tags">
+    <span class="tag">Energía Renovable</span>
+    <span class="tag">On-Shore / Off-Shore</span>
+    <span class="tag">Parques Eólicos</span>
+    <span class="tag">Matriz Energética Perú</span>
+    <span class="tag">NDCs / ODS</span>
+    <span class="tag">GEI / CO₂eq</span>
+    <span class="tag">Capacidad Instalada</span>
+    <span class="tag">Factor de Capacidad</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1 -->
+<div class="sec">🌍 1 — CONTEXTO CLIMÁTICO Y COMPROMISOS INTERNACIONALES</div>
+
+<div class="block">
+  <span class="bh bh-blue">Marco Global y Acuerdo de París</span>
+  <div class="def def-blue">El Acuerdo de París (2016, 193 países + UE) estableció que los países deben limitar el calentamiento global a menos de 2 °C sobre niveles preindustriales (idealmente 1.5 °C). Esto obliga a cada nación a presentar <em>Contribuciones Determinadas a Nivel Nacional</em> (NDC), que son compromisos concretos de reducción de emisiones. Perú fue el <strong>primer país hispanohablante</strong> en ratificarlo (D.S. 058-2016-RE, 22 julio 2016).</div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>NDC de Perú:</strong> En 2019 las emisiones netas fueron 210.4 Mt CO₂eq; el 30% correspondió a generación eléctrica. La meta para 2030 es no superar 179 Mt CO₂eq (reducción del 40% respecto a lo proyectado).</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Objetivo renovable:</strong> Perú aspira a que al menos el 15% de la generación eléctrica nacional provenga de fuentes renovables no convencionales, pasando de 3.79 Mt CO₂eq mitigadas (base) a 7.00 Mt CO₂eq en 2030.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Logros 2014–2022:</strong> Los proyectos eólicos produjeron 11,640 GWh de energía limpia, mitigando 4.62 Mt CO₂eq. La producción eólica crece cada año, con el pico en invierno.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: El Acuerdo de París no elimina los combustibles fósiles de inmediato — establece una trayectoria de descarbonización gradual. Perú aún obtiene el 43% de su electricidad del gas natural térmico.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el Acuerdo de París es relevante para la política energética del Perú, citando su meta de NDC específica para 2030 y el porcentaje actual de emisiones de GEI provenientes del sector eléctrico.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Matriz Energética Peruana (2022)</span>
+  <div class="def def-orange">La matriz energética de un país describe la distribución porcentual de sus fuentes de generación eléctrica. En 2022, Perú generó 56,084 GWh totales, con capacidad instalada de 13,419.8 MW pero demanda máxima de solo 7,467.5 MW (55.6% del total), lo que revela un exceso de oferta explicado por retrasos en proyectos de minería e infraestructura — los principales consumidores esperados.</div>
+  <div class="two" style="margin-bottom:8px">
+    <div class="mini" style="border-top:3px solid #3b82f6"><strong>💧 Hidroeléctrica</strong><br>50.8% — Fuente dominante. Complementa perfectamente el viento: alta en verano (cuando el viento es menor) y baja en invierno (cuando el viento es mayor).</div>
+    <div class="mini" style="border-top:3px solid #f97316"><strong>🔥 Gas natural</strong><br>43.0% — Segunda fuente. Termoeléctricas de gas que seguirán siendo necesarias en la transición hasta que las renovables escalen suficientemente.</div>
+  </div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e"><strong>💨 Eólica</strong><br>3.4% del total (2022). Porcentaje aún bajo pero con potencial de crecer a ≥15%.</div>
+    <div class="mini" style="border-top:3px solid #fbbf24"><strong>☀️ Solar</strong><br>1.5% — Complementa al viento en horas diurnas sin viento.</div>
+    <div class="mini" style="border-top:3px solid #84cc16"><strong>🌿 Biomasa+Otros</strong><br>~1.3% entre biomasa, diesel y carbón.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué existe un excedente de capacidad instalada en el sistema eléctrico peruano en 2022, y qué implicancias tiene esto para la planificación de nuevas plantas de generación de energía renovable?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Crecimiento Global de la Energía Eólica</span>
+  <div class="def def-green">La energía eólica ha crecido a una tasa acumulativa promedio superior al 30% en los últimos 10 años según el Consejo Global de Energía Eólica (GWEC). Si esta trayectoria se mantiene, para 2050 podría generar casi un tercio de la demanda eléctrica mundial. Sus costos de generación han caído dramáticamente, acercándose a los de fuentes convencionales.</div>
+  <div class="flow">
+    <div class="fbox">Altos costos LCOE (2010)<br>~80–120 USD/MWh</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Economías de escala<br>+ I+D tecnológico</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Costos competitivos (2024)<br>30–50 USD/MWh on-shore</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Atractivo para inversores<br>en mercados emergentes</div>
+  </div>
+  <div class="item" style="margin-top:8px"><span class="dot dot-green"></span><span>En Perú, el costo nivelado (LCOE) de la 1ª subasta RER fue 80.4 USD/MWh (2010); en la 3ª subasta cayó a 37.7 USD/MWh — una reducción del 53% en pocos años.</span></div>
+  <div class="exam">🎯 EXAMEN: Analice la evolución del costo nivelado de electricidad (LCOE) de los proyectos eólicos en Perú a través de las subastas RER. ¿Qué factores explican esa reducción y qué significa para la competitividad de la energía eólica frente al gas natural?</div>
+</div>
+
+<!-- SECCIÓN 2 -->
+<div class="sec">🗺️ 2 — POTENCIAL EÓLICO DEL PERÚ: ON-SHORE Y OFF-SHORE</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Potencial Eólico On-Shore</span>
+  <div class="def def-teal">El potencial on-shore se cuantifica mediante el Atlas Eólico (2016) usando distribución probabilística de Weibull para velocidades de viento a diferentes alturas y el software WAsP. El <em>potencial total</em> es la suma del potencial aprovechable (apto para turbinas) más el excluido (zonas protegidas por ley). Perú tiene 28,395 MW totales, de los cuales solo 20,493 MW son aprovechables.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-teal"></span><span><strong>Criterios de selección de áreas:</strong> densidad de potencia >300 W/m² a 100 m, vientos favorables, pendiente ≤20%, proximidad a vías y subestaciones, altitud <3,500 msnm.</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span><strong>Regiones con mayor potencial (aprovechable):</strong> Lambayeque 7,017 MW, Piura 7,098 MW, Ica 2,280 MW — juntas concentran el 80% del total aprovechable.</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span><strong>Paradoja de Lambayeque/Piura:</strong> Siendo las regiones con mayor potencial, al 2023 tenían solo un parque en operación cada una, mientras Ica (menos potencial absoluto) operaba cuatro parques.</span></div>
+      <div class="item"><span class="dot dot-teal"></span><span><strong>Solo el 3% aprovechado:</strong> Con 668 MW instalados al 2023 frente a 20,500 MW aprovechables, Perú está en el inicio de su desarrollo eólico.</span></div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:600;margin-bottom:5px;color:var(--color-text-secondary)">POTENCIAL APROVECHABLE POR REGIÓN (MW)</div>
+      <div style="font-size:11px">
+        <div style="margin-bottom:4px">Lambayeque<div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:100%;background:#14b8a6"></div></div><span style="color:var(--color-text-secondary)">7,017 MW</span></div>
+        <div style="margin-bottom:4px">Piura<div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:99%;background:#14b8a6"></div></div><span style="color:var(--color-text-secondary)">7,098 MW</span></div>
+        <div style="margin-bottom:4px">Ica<div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:32%;background:#0ea5e9"></div></div><span style="color:var(--color-text-secondary)">2,280 MW</span></div>
+        <div style="margin-bottom:4px">Arequipa<div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:14%;background:#8b5cf6"></div></div><span style="color:var(--color-text-secondary)">1,020 MW</span></div>
+        <div style="margin-bottom:4px">La Libertad<div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:13%;background:#8b5cf6"></div></div><span style="color:var(--color-text-secondary)">921 MW</span></div>
+        <div style="margin-bottom:4px">Cajamarca<div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:12%;background:#8b5cf6"></div></div><span style="color:var(--color-text-secondary)">891 MW</span></div>
+        <div style="margin-bottom:4px">Ancash<div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:10%;background:#94a3b8"></div></div><span style="color:var(--color-text-secondary)">708 MW</span></div>
+        <div>Lima<div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:6%;background:#94a3b8"></div></div><span style="color:var(--color-text-secondary)">429 MW</span></div>
+      </div>
+    </div>
+  </div>
+  <hr class="divh">
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Perfil horario:</strong> Menor producción 01:00–08:00 h (madrugada). Mayor producción 13:00–19:00 h (tarde). Esto coincide con el pico de demanda, lo que le da valor económico adicional (reconocimiento de potencia firme).</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Estacionalidad:</strong> Producción máxima en invierno, mínima en verano — perfectamente complementaria a la hidroeléctrica (que produce más en verano).</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Clases IEC 61400-1:</strong> Las regiones costeras presentan vientos Clase I (10 m/s) y Clase II (8.5 m/s) a 80–100 m de altura, con factores de capacidad entre 43% y 55%.</span></div>
+  <div class="rx">CF (%) = Energía generada real (MWh/año) ÷ [Capacidad instalada (MW) × 8,760 h/año] × 100<br>Un CF de 0.55 significa que el parque opera al 55% de su capacidad máxima teórica anual</div>
+  <div class="exam">🎯 EXAMEN: El Atlas Eólico 2016 indica que Perú tiene un potencial on-shore aprovechable de 20.5 GW, pero al 2023 solo se utilizaba el 3%. Identifique y explique al menos tres criterios técnicos y dos restricciones legales que determinan la diferencia entre el potencial total y el aprovechable.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Potencial Eólico Off-Shore</span>
+  <div class="def def-purple">El potencial off-shore se refiere a turbinas instaladas en el mar. La costa peruana tiene una variabilidad anual de velocidad de viento del ~13% (muy estable). Sin embargo, su explotación enfrenta el reto de grandes profundidades del talud continental frente a Perú.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #3b82f6"><strong>Instalación fija (&lt;50 m prof.)</strong><br>Monopile, tri-pod o jacket. Zona: de Tumbes a Chimbote (norte). Potencial: 32 GW.</div>
+    <div class="mini" style="border-left:3px solid #8b5cf6"><strong>Instalación flotante (&gt;50 m)</strong><br>Spar-buoy, tension-leg, semi-sumergible. Zona: Tumbes hasta Arequipa. Potencial: 315 GW.</div>
+  </div>
+  <div class="item" style="margin-top:8px"><span class="dot dot-purple"></span><span><strong>Total off-shore:</strong> 347 GW — 17 veces el potencial on-shore aprovechable. Actualmente inexplotado.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Costo off-shore:</strong> Ha bajado de 100–200 USD/MWh a 50–100 USD/MWh en 10 años. Récord mundial: 50 USD/MWh (Reino Unido, 2019). Aún por encima de los costos peruanos actuales.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Instalación óptima:</strong> En las primeras 8.6 millas náuticas de la costa (menor impacto visual, menores pérdidas por cableado submarino).</span></div>
+  <div class="warn">⚠️ RETO CRÍTICO: La fosa Chile-Perú tiene profundidades extremas muy cerca de la costa, lo que hace inviables las fundaciones fijas en gran parte del litoral. Además, los tsunamis recurrentes (cada ~100 años) son una amenaza estructural adicional que requiere diseños especiales de resiliencia.</div>
+  <div class="exam">🎯 EXAMEN: Compare las tecnologías de instalación off-shore fija y flotante en términos de profundidad aplicable, tipos de estructuras y zonas geográficas donde aplicarían en la costa peruana. ¿Qué estudios previos son indispensables antes de instalar cualquier parque off-shore en Perú?</div>
+</div>
+
+<!-- SECCIÓN 3 -->
+<div class="sec">🏭 3 — PARQUES EÓLICOS EN OPERACIÓN (7 PLANTAS, 668 MW)</div>
+
+<div class="block s3">
+  <span class="bh bh-orange">Caracterización de los 7 Parques en Operación al 2023</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>#</th><th>Parque</th><th>Región</th><th>Concesionario</th><th>N° Turbinas</th><th>Modelo</th><th>Diám. (m)</th><th>MW/Turb.</th><th>Cap. Total (MW)</th><th>CF</th><th>Inicio Op.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Cupisnique</strong></td><td>La Libertad</td><td>Contour Global</td><td>45</td><td>Vestas 100/1800</td><td>100</td><td>1.8</td><td>81</td><td>0.42</td><td>2014</td></tr>
+      <tr><td>2</td><td><strong>Talara</strong></td><td>Piura</td><td>Contour Global</td><td>17</td><td>Vestas 100/1800</td><td>100</td><td>1.8</td><td>31</td><td>0.55</td><td>2014</td></tr>
+      <tr><td>3</td><td><strong>Duna y Huambos</strong></td><td>Cajamarca</td><td>Grenergy/CJR</td><td>14</td><td>Siemens-Gamesa SG 2.6-114</td><td>114</td><td>2.6</td><td>36</td><td>0.55</td><td>2020</td></tr>
+      <tr><td>4</td><td><strong>San Juan de Marcona</strong></td><td>Ica</td><td>Cobra Perú</td><td>12</td><td>Siemens SWT-2.5-108</td><td>108</td><td>2.5</td><td>32</td><td>0.60</td><td>2012</td></tr>
+      <tr><td>5</td><td><strong>Tres Hermanas</strong></td><td>Ica</td><td>Cobra Perú</td><td>33</td><td>Siemens SWT-2.9-108</td><td>108</td><td>2.9</td><td>96</td><td>0.60</td><td>2012</td></tr>
+      <tr><td>6</td><td><strong>Wayra I</strong></td><td>Ica</td><td>Enel Green Power</td><td>42</td><td>Acciona AW-3150/125</td><td>125</td><td>3.1</td><td>132</td><td>0.57</td><td>2018</td></tr>
+      <tr style="background:var(--color-background-info);font-weight:600"><td>7</td><td><strong>Punta Lomitas ★</strong></td><td>Ica</td><td>Engie Perú</td><td>50</td><td>SG 5.0-145</td><td>145</td><td>5.0</td><td>260</td><td>0.60</td><td>jul-2023</td></tr>
+      <tr style="background:var(--color-background-secondary)"><td colspan="8" style="text-align:right;font-weight:700">TOTAL INSTALADO</td><td colspan="3" style="font-weight:700;color:#16a34a">668 MW</td></tr>
+    </tbody>
+  </table>
+  <div class="three" style="margin-top:10px">
+    <div class="mini" style="border-top:3px solid #f97316"><strong>★ Punta Lomitas</strong><br>Mayor parque de Perú: 260 MW (39% del total instalado). Operado por Engie. Suministrará energía al 100% renovable para la mina Quellaveco. Proyecta 1,367 GWh/año en operación completa 2024.</div>
+    <div class="mini" style="border-top:3px solid #8b5cf6"><strong>Duna y Huambos (único andino)</strong><br>Único parque en los Andes (2,276 msnm), operado por Grenergy. Tiene ~5,000 h netas de viento/año pero su producción per cápita no supera a los costeros. Primer parque andino del Perú.</div>
+    <div class="mini" style="border-top:3px solid #14b8a6"><strong>Evolución tecnológica</strong><br>De turbinas de 1.8 MW (Vestas, 2012) a 5.0 MW (Siemens-Gamesa, 2023) — casi triplicación de la potencia unitaria en 11 años. El diámetro de rotor pasó de 100 m a 145 m.</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir "capacidad instalada" (MW) con "energía producida" (GWh). Un parque de 260 MW con CF=0.60 produce más energía que uno de 370 MW con CF=0.42. La capacidad indica el máximo teórico; la energía real depende del factor de capacidad.</div>
+  <div class="exam">🎯 EXAMEN: Compare los parques eólicos Cupisnique y Punta Lomitas en términos de capacidad instalada, factor de capacidad, tecnología de turbina y localización. ¿Qué explica la diferencia en sus factores de capacidad y cuál es la implicancia económica para el SEIN?</div>
+</div>
+
+<!-- SECCIÓN 4 -->
+<div class="sec">🔨 4 — PROYECTOS EN CONSTRUCCIÓN (2023) Y PIPELINE FUTURO</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Proyectos en Construcción (533 MW)</span>
+  <div class="def def-yellow">Proyectos que ya cuentan con EIA aprobado y están en plena fase de construcción al 2023. Representan la siguiente ola de capacidad eólica que entrará al SEIN próximamente.</div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Wayra II (Ica, 177 MW):</strong> 30 turbinas Acciona de 5.9 MW, torre de 180 m. Al sumarse a Wayra I (~310 MW juntos), será el mayor complejo eólico de Perú. Enel Green Power.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Caravelí (Arequipa, 220 MW):</strong> 36 turbinas Siemens-Gamesa SG 6.0-170, torre de 170 m, área de 2,800 ha. Primer proyecto de Ibereólica en Perú. A 320 msnm.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>San Juan de Marcona IV (Ica, 136 MW):</strong> 23 turbinas Nordex N163-5.9, torre de 148 m. CJR Renewables como EPC. Incluye 22 km de vías y 93 km de redes eléctricas MT.</span></div>
+  <div class="rx">533 MW en construcción + 668 MW operativos = 1,201 MW próximo total on-shore</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué los tres parques eólicos en construcción en 2023 están concentrados en el sur del país (Ica y Arequipa) y no en Lambayeque o Piura, que tienen el mayor potencial eólico? Discuta los factores técnicos, logísticos y de mercado.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Portfolio Futuro: 31 Proyectos — 7,429 MW (2023–2028)</span>
+  <div class="def def-green">El COES-SEIN proyecta la incorporación de 7,429 MW adicionales de energía eólica para 2028, lo que representaría más de 10 veces la capacidad actual. El 59% se concentraría en la zona norte (Piura, Lambayeque, Cajamarca), el 37% en la zona central (Ancash) y solo el 4% en el sur (Ica, Arequipa). Esto corrige el actual desbalance hacia el sur.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #14b8a6"><strong>Zona Norte (59% del plan)</strong><br>Piura: La Espinoza 475 MW, Cerro Chocán 422 MW, Vientos de Sechura 202 MW, Huascar 300 MW, Emma 72 MW, Vientos Negritos 150 MW, Violeta Eólica 452 MW.<br>Lambayeque: Quercus 452 MW, Rosa 400 MW, Ciclón 402 MW, Morrope 224 MW, Zapote 164 MW, Cherrepe 143 MW, Norteño 131 MW, etc.</div>
+    <div class="mini" style="border-top:3px solid #3b82f6"><strong>Zona Central (37%)</strong><br>Ancash: Colorado 180 MW, Huarmey 180 MW.<br>Mayor concentración de proyectos en Ica del sur: Cefiro 366 MW, Los Vientos 365 MW, Gurango 300 MW, Shougang 302 MW, Piletas 250 MW, Windica 150 MW, Torocco 112 MW.</div>
+    <div class="mini" style="border-top:3px solid #8b5cf6"><strong>Empresas inversoras clave</strong><br>IGNIS Partners (España): 4 proyectos — 1,468 MW<br>Kallpa Generación: 3 proyectos<br>Enel Green Power: 2 proyectos<br>Blaud Energy: 2 proyectos<br>Ibereólica: 2 proyectos<br>Gran predominio de capital europeo y latinoamericano.</div>
+  </div>
+  <div class="flow" style="margin-top:8px">
+    <div class="fbox">2023: 668 MW<br>en operación</div>
+    <div class="farrow">→</div>
+    <div class="fbox">+533 MW<br>en construcción</div>
+    <div class="farrow">→</div>
+    <div class="fbox">+7,429 MW<br>proyectos futuros</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Meta: ~8,630 MW<br>al ~2028</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Neutralidad<br>carbono 2050</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: El COES proyecta 7,429 MW adicionales de energía eólica para el período 2023-2028. Analice la distribución geográfica de estos proyectos y explique si esta distribución es coherente con el mapa de potencial eólico de Peru. ¿Qué retos de infraestructura implica esta expansión?</div>
+</div>
+
+<!-- SECCIÓN 5 -->
+<div class="sec">⚙️ 5 — VENTAJAS, DESVENTAJAS, RETOS Y PERSPECTIVAS FUTURAS</div>
+
+<div class="block">
+  <span class="bh bh-green">Ventajas de la Energía Eólica en Perú</span>
+  <div class="def def-green">Las ventajas del eólico en Perú se confirman con la experiencia práctica de los 7 parques en operación desde 2012, que han permitido construir capacidad institucional, técnica y de relacionamiento comunitario.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Fuente limpia y renovable:</strong> No emite GEI en operación ni requiere combustible. Cada GWh eólico evita ~0.4 t CO₂eq frente al gas natural.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Bajo impacto ambiental:</strong> Los parques costeros operan en zonas desérticas sin asentamientos humanos ni ecosistemas sensibles. La huella de carbono del ciclo de vida es mínima comparada con fósiles.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Producción en horas pico:</strong> El viento costero peruano sopla con mayor fuerza entre 13:00 y 19:00 h, coincidiendo con la demanda eléctrica máxima — esto le otorga un reconocimiento de "potencia firme" y una rentabilidad de ~7%.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Generación de empleo:</strong> Principalmente durante la fase de construcción. También estimula cadenas de proveedores locales.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Aprovechamiento de áreas áridas:</strong> Usa terrenos no cultivables en la costa desértica peruana.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Nexo minería-energía limpia:</strong> Punta Lomitas abastece al 100% con energía verde a la mina Quellaveco (Anglo American) — primer gran proyecto minero en Perú con energía 100% renovable.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique la relación entre la producción horaria de energía eólica on-shore en Perú y la demanda eléctrica del SEIN. ¿Cómo esta relación temporal le otorga un valor económico adicional al viento frente a otras fuentes renovables como la hidroeléctrica o la solar?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-red">Desventajas y Retos de Implementación</span>
+  <div class="def def-red">Las limitaciones del eólico son fundamentalmente la intermitencia (no almacenable, variable) y las restricciones territoriales. En Perú se agregan retos específicos de accesibilidad en los Andes y los fenómenos climáticos ENSO.</div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Fuente discontinua:</strong> La velocidad e intensidad del viento cambia súbitamente. Fluctuaciones pueden causar cortes o daños si no hay sistemas de respaldo adecuados.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>No almacenable directamente:</strong> Requiere respaldo de otras fuentes (gas, hidroeléctrica) o sistemas de almacenamiento (baterías, hidrógeno verde futuro) para garantizar el suministro continuo.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Restricciones territoriales:</strong> Incompatible con parques naturales, zonas arqueológicas, reservas naturales y áreas de patrimonio cultural (una limitante mayor en un país como Perú con alta densidad patrimonial).</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>El Niño / La Niña (ENSO):</strong> Modifica la velocidad promedio del viento en los años que ocurre, afectando la producción eléctrica y aumentando los costos marginales del sistema. Su estacionalidad es clave para el diseño y dimensionamiento de parques.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Retos Andinos:</strong> Alta altitud → menor densidad del aire → menor producción por turbina. Infraestructura vial deficiente → altos costos de capital (CAPEX) para redes de transmisión y acceso.</span></div>
+  <div class="warn">⚠️ DATO IMPORTANTE: El parque Duna y Huambos (Cajamarca, 2,276 msnm) tiene un factor de capacidad de 0.55 igual al Talara costero, pero su producción per cápita no supera a los parques costeros debido a las pérdidas por menor densidad de aire a gran altitud y los altos costos de transmisión.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el fenómeno El Niño/La Niña (ENSO) representa un desafío específico para el diseño y operación de parques eólicos en Perú? Explique cómo afecta la producción esperada y qué medidas técnicas se deben considerar para minimizar su impacto en la planificación energética.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Perspectivas Futuras</span>
+  <div class="def def-purple">Las perspectivas de la energía eólica en Perú son prometedoras a mediano y largo plazo, pero requieren políticas públicas específicas, mejores herramientas digitales, y un marco regulatorio que incentive tanto la escala industrial como la rural.</div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Electrificación rural:</strong> El eólico a pequeña escala puede llevar energía a comunidades remotas sin red eléctrica, promoviendo electrificación rural equitativa y no contaminante.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Alianza minería-renovables:</strong> La tendencia de empresas mineras hacia economías bajas en carbono impulsará más acuerdos tipo Quellaveco, mejorando la reputación socioambiental del sector.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Hidrógeno verde:</strong> La abundante energía eólica (y solar) puede alimentar electrolizadores para producir H₂ verde, complementando la estrategia de descarbonización nacional.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Herramientas digitales e IA:</strong> Se requieren plataformas unificadas con mayor poder de cómputo, datos climáticos históricos robustos (bankable data) y sistemas de IA para cuantificar y caracterizar el recurso eólico con mayor precisión.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Referentes regionales:</strong> México, Brasil, Uruguay, Argentina y Chile son modelos exitosos de expansión eólica en Latinoamérica que Perú debe analizar y adaptar a su contexto.</span></div>
+  <div class="exam">🎯 EXAMEN: Desde la perspectiva del artículo, ¿qué tipo de políticas públicas debería implementar el gobierno peruano para acelerar el desarrollo eólico? Considere tanto la escala industrial (grandes parques) como la pequeña escala (comunidades rurales) y el nexo con el sector minero.</div>
+</div>
+
+<!-- SECCIÓN 6 -->
+<div class="sec">📊 6 — TABLA INTEGRADORA: SÍNTESIS DE TODO EL ARTÍCULO</div>
+
+<div class="block s3">
+  <span class="bh bh-gray">Síntesis Comparativa y de Repaso Rápido</span>
+  <table class="tbl">
+    <thead>
+      <tr><th>Dimensión</th><th>Dato Clave</th><th>Contexto / Por qué importa</th><th>Limitación</th><th>Proyección</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Potencial on-shore</strong></td><td>20.5 GW aprovechable / 28.4 GW total</td><td>Mayor concentración en Piura y Lambayeque; mínima en Amazonía</td><td>Solo 3% utilizado (668 MW al 2023)</td><td>7.4 GW adicionales proyectados al 2028</td></tr>
+      <tr><td><strong>Potencial off-shore</strong></td><td>347 GW (32 GW fijo + 315 GW flotante)</td><td>17× el potencial on-shore; gran recurso sin explotar</td><td>Profundidad del talud, tsunamis, costos</td><td>Viabilidad económica a largo plazo</td></tr>
+      <tr><td><strong>Capacidad instalada</strong></td><td>668 MW (7 parques, 2023)</td><td>3.4% de la generación eléctrica nacional</td><td>Muy por debajo del potencial disponible</td><td>1,201 MW con proyectos en construcción</td></tr>
+      <tr><td><strong>Subastas RER</strong></td><td>4 subastas hasta 2016; LCOE cayó 53%</td><td>De 80.4 → 37.7 USD/MWh en 3 licitaciones</td><td>No se han realizado nuevas subastas desde 2016</td><td>Mecanismos de financiamiento para off-shore</td></tr>
+      <tr><td><strong>Factor de Capacidad</strong></td><td>0.42 (Cupisnique) a 0.60 (Punta Lomitas)</td><td>Productividad real vs. máximo teórico; ventaja en horas pico</td><td>ENSO y estacionalidad afectan valores esperados</td><td>Mejora con turbinas de mayor diámetro y altura</td></tr>
+      <tr><td><strong>GEI mitigados</strong></td><td>4.62 Mt CO₂eq (2014–2022)</td><td>11,640 GWh de energía limpia producidos</td><td>Meta NDC 2030: 7 Mt CO₂eq mitigadas por renovables</td><td>Necesita escalar 15× lo actual</td></tr>
+      <tr><td><strong>Reto ENSO</strong></td><td>El Niño/La Niña modifica velocidades</td><td>Afecta producción y costos marginales del SEIN</td><td>No hay suficientes datos históricos bankable</td><td>Necesidad de IA y sistemas georeferenciados</td></tr>
+      <tr><td><strong>Parque más grande</strong></td><td>Punta Lomitas: 260 MW (Ica, 2023)</td><td>50 turbinas SG 5.0-145, CF=0.60, Engie Perú</td><td>Solo 6 meses de operación en 2023</td><td>1,367 GWh/año en operación completa</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La complementariedad eólica-hidroeléctrica es la piedra angular de la matriz eléctrica peruana: el viento produce más en invierno (cuando hay menos agua) y durante horas pico (13–19h), mientras la hidro produce más en verano y es más estable. Esta sinergia reduce la necesidad de almacenamiento y de respaldo fósil.</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta. Retroalimentación explicativa inmediata.</p>
+  </div>
+  <div class="progress-wrap">
+    <span class="progress-label" id="prog-label">Respondidas: 0 / 10</span>
+    <div class="progress-bar-w"><div class="progress-bar-f" id="prog-bar" style="width:0%"></div></div>
+    <span class="score-text" id="score-text">0 / 10 ✓</span>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es el potencial eólico on-shore APROVECHABLE de Perú según el Atlas Eólico 2016, excluyendo zonas protegidas y arqueológicas?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) 28,395 MW</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) 7,902 MW</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) 20,493 MW</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) 668 MW</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Según los datos de 2022 del COES-SEIN, ¿qué fuente energética representó el mayor porcentaje de la generación eléctrica en Perú?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Gas natural térmico (43.0%)</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Hidroeléctrica (50.8%)</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Solar (1.5%)</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Eólica (3.4%)</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el perfil horario de producción eólica on-shore en Perú es CORRECTA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) La mayor producción ocurre entre las 01:00 y 08:00 horas</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) La producción es uniforme a lo largo del día</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) La producción máxima ocurre en verano, igual que la hidroeléctrica</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) La mayor producción ocurre entre las 13:00 y 19:00 h y es máxima en invierno, complementando la hidroeléctrica</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">El parque eólico Duna y Huambos en Cajamarca es significativo porque:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Es el parque con mayor capacidad instalada de Perú (260 MW)</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) Es el único parque eólico ubicado en la cordillera de los Andes (>2,276 msnm), siendo el primero de su tipo en esa zona</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Tiene el factor de capacidad más alto del país (0.60)</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Es el parque más antiguo en operación desde 2010</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Para instalar una turbina eólica off-shore en aguas con profundidad MENOR a 50 metros, la tecnología recomendada es:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Spar-buoy o tension-leg platform (flotantes)</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Semi-sumergible con anclas de succión</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) Monopile, tri-pod o jacket (base fija)</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Barcaza estabilizada con boyancía</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Cuál es el total de capacidad instalada de los 7 parques eólicos en operación en Perú al año 2023, y qué porcentaje representa del potencial aprovechable on-shore?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) 409 MW, equivalente al 2% del potencial aprovechable</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) 1,201 MW, equivalente al 6% del potencial aprovechable</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) 532 MW, equivalente al 2.6% del potencial aprovechable</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="true">D) 668 MW, equivalente al 3% del potencial aprovechable</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Perú ratificó el Acuerdo de París con la meta NDC de mantener sus emisiones de GEI por debajo de _____ Mt CO₂eq en el año 2030, lo que equivale a una reducción del ___% respecto a las proyecciones.</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="true">A) 179 Mt CO₂eq — reducción del 40%</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) 210 Mt CO₂eq — reducción del 30%</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) 150 Mt CO₂eq — reducción del 50%</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) 179 Mt CO₂eq — reducción del 15%</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre los proyectos futuros de energía eólica en Perú (2023–2028) es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) El COES proyecta 7,429 MW adicionales de capacidad eólica para 2028</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) El 59% de los proyectos futuros se concentrará en la zona norte (Piura, Lambayeque, Cajamarca)</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Los proyectos futuros incluirán tanto parques on-shore como off-shore operativos antes de 2028</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Los 31 proyectos futuros son todos de tipo on-shore</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">El costo nivelado de electricidad (LCOE) de los proyectos eólicos adjudicados en las subastas RER de Perú:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Se mantuvo estable alrededor de 80 USD/MWh en todas las subastas</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Aumentó de la 1ª a la 3ª subasta debido a mayores costos de materiales</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Cayó desde 80.4 USD/MWh (1ª subasta) hasta 37.7 USD/MWh (3ª subasta), una reducción del ~53%</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Bajó a 15 USD/MWh en la 4ª subasta, siendo ya más barato que el gas natural</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">El parque eólico Punta Lomitas (260 MW, Ica) es importante para el sector minero peruano porque:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Está ubicado dentro de las instalaciones de la mina Quellaveco</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Fue financiado en su totalidad por Anglo American para uso exclusivo de la minería</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Permitirá que el 50% de la energía de la mina Quellaveco provenga de fuentes renovables</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) Permitirá que la mina Quellaveco sea el primer gran proyecto minero de Perú en operar con 100% de energía verde</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <h3 id="result-title"></h3>
+    <p id="result-msg"></p>
+    <button class="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="ft-bar">
+  <span class="ft">REFERENCIAS CLAVE:</span>
+  <span class="fc">Cacciuttolo et al. (2024) Sustainability 16, 1589 · OSINERGMIN (2023) Proyectos CGENC · OSINERGMIN (2019) Energías Renovables Perú · Atlas Eólico Perú (2016) · GWEC Global Wind Report (2023) · MINAM NDCs Perú (2020) · ESMAP Off-Shore Wind (2019) · IEC 61400-1 (1999)</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: { correct: 'C', text: { ok: '✅ ¡Correcto! El potencial total es 28,395 MW, pero al descontar zonas arqueológicas, parques nacionales y reservas naturales, el aprovechable queda en 20,493 MW (~20.5 GW). Los 7,902 MW son el potencial excluido por ley.', bad: '❌ La respuesta correcta es C (20,493 MW). El dato de 28,395 MW es el potencial total (incluyendo zonas excluidas legalmente). Los 7,902 MW son el excluido. Los 668 MW son lo instalado actualmente — apenas el 3% del aprovechable.' } },
+  2: { correct: 'B', text: { ok: '✅ ¡Correcto! La hidroeléctrica representó el 50.8% de la generación en 2022, siendo la fuente dominante. Aunque el gas natural (43%) es la segunda fuente, la hidro aún lidera gracias a la infraestructura histórica de grandes represas en la vertiente del Pacífico.', bad: '❌ La respuesta correcta es B. La hidroeléctrica lidera con 50.8%. El gas natural, aunque muy presente (43%), ocupa el segundo lugar. La energía eólica solo representó el 3.4% en 2022.' } },
+  3: { correct: 'D', text: { ok: '✅ ¡Correcto! El viento costero peruano alcanza su pico entre las 13:00 y 19:00 h (coincidiendo con la demanda máxima del sistema) y es más intenso en invierno. Esto complementa perfectamente a la hidroeléctrica, que produce más en verano y con menor variabilidad horaria.', bad: '❌ La respuesta correcta es D. El viento produce más de tarde (13–19h) y en invierno. Esta complementariedad con la hidro (que produce más en verano) es una de las mayores ventajas estructurales de la energía eólica en la matriz peruana.' } },
+  4: { correct: 'B', text: { ok: '✅ ¡Correcto! Duna y Huambos (Cajamarca, 36 MW, Grenergy, 2020) es el primer y único parque eólico instalado en la cordillera andina peruana, a más de 2,276 msnm. Su factor de capacidad es 0.55, igual a Talara, pero los costos de transmisión reducen su rentabilidad.', bad: '❌ La respuesta correcta es B. Punta Lomitas es el mayor (260 MW). El CF más alto (0.60) lo comparten tres parques costeros. Y el parque más antiguo en operación es San Juan de Marcona (2012). La singularidad de Duna y Huambos es ser el único parque andino.' } },
+  5: { correct: 'C', text: { ok: '✅ ¡Correcto! Para profundidades menores a 50 m se usan estructuras de base fija: monopile (el más común), tri-pod o jacket. Para profundidades entre 50 y 200 m (mayores), se usan plataformas flotantes (spar-buoy, tension-leg, semi-submersibles). En Perú, las aguas poco profundas aptas para fija se encuentran principalmente en el norte (Tumbes a Chimbote).', bad: '❌ La respuesta correcta es C. Las estructuras flotantes (spar-buoy, tension-leg, semi-sumergible) se usan en profundidades >50 m. Para aguas poco profundas (<50 m), se prefieren las bases fijas (monopile, tri-pod, jacket) por ser más económicas y estables.' } },
+  6: { correct: 'D', text: { ok: '✅ ¡Correcto! Los 7 parques suman exactamente 668 MW (81+31+36+32+96+132+260). Eso equivale al 3% de los 20,493 MW aprovechables. Perú tiene un enorme espacio de crecimiento — todavía el 97% del potencial on-shore está sin explotar.', bad: '❌ La respuesta correcta es D. Los 7 parques suman: Cupisnique 81 + Talara 31 + Duna y Huambos 36 + San Juan de Marcona 32 + Tres Hermanas 96 + Wayra I 132 + Punta Lomitas 260 = 668 MW. Eso es el 3.26% de los 20,493 MW aprovechables.' } },
+  7: { correct: 'A', text: { ok: '✅ ¡Correcto! El NDC de Perú establece que las emisiones netas en 2030 no deben superar 179 Mt CO₂eq, equivalente a una reducción del 40% respecto a las emisiones proyectadas sin acción climática. Las emisiones en 2019 fueron 210.4 Mt CO₂eq.', bad: '❌ La respuesta correcta es A. La meta NDC es 179 Mt CO₂eq para 2030 (reducción del 40%). No confundir con las emisiones actuales (210.4 Mt en 2019) ni con el porcentaje de renovables (15% objetivo). El 30% mencionado en B corresponde al porcentaje de emisiones que provienen de la generación eléctrica.' } },
+  8: { correct: 'C', text: { ok: '✅ ¡Correcto! La afirmación FALSA es C. El artículo indica explícitamente que todos los 31 proyectos futuros son de tipo on-shore. El off-shore peruano enfrenta barreras de profundidad, costos y bathymetría que harán que su aparición "tenga que esperar más tiempo".', bad: '❌ La respuesta correcta es C (la afirmación FALSA). Todos los 31 proyectos futuros son on-shore, no incluyen off-shore. La energía off-shore en Perú aún no es económicamente viable y requerirá estudios adicionales antes de su implementación.' } },
+  9: { correct: 'C', text: { ok: '✅ ¡Correcto! El LCOE de las subastas RER cayó de 80.4 USD/MWh (1ª subasta) a 69 USD/MWh (2ª) y 37.7 USD/MWh (3ª), una reducción del ~53% en pocas licitaciones. Esto refleja el aprendizaje tecnológico, las economías de escala globales y la mayor competencia entre fabricantes.', bad: '❌ La respuesta correcta es C. El LCOE cayó de 80.4 a 37.7 USD/MWh (~53% de reducción). No se mantuvo estable ni aumentó. El valor de 15 USD/MWh en opción D no corresponde a ningún dato del artículo.' } },
+  10: { correct: 'D', text: { ok: '✅ ¡Correcto! Punta Lomitas (Engie, 260 MW) suministrará la demanda eléctrica de la mina Quellaveco (Anglo American) con energía 100% renovable, convirtiéndola en la primera gran operación minera de Perú en funcionar completamente con energía verde — un hito de sostenibilidad en la minería latinoamericana.', bad: '❌ La respuesta correcta es D. Punta Lomitas no está dentro de Quellaveco ni fue financiado por Anglo American — es un proyecto independiente de Engie Perú que vende su energía. El acuerdo busca que el 100% (no el 50%) de la energía de Quellaveco sea verde.' } }
+};
+
+let answered = 0;
+let correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('qbtn')) return;
+  const btn = e.target;
+  const q = btn.getAttribute('data-q');
+  const isCorrect = btn.getAttribute('data-correct') === 'true';
+  const allBtns = document.querySelectorAll('[data-q="' + q + '"]');
+  
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.getAttribute('data-correct') === 'true') b.classList.add('reveal');
+  });
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correct++;
+  } else {
+    btn.classList.add('incorrect');
+  }
+
+  const fb = document.getElementById('fb' + q);
+  fb.style.display = 'block';
+  const info = feedbacks[parseInt(q)];
+  if (isCorrect) {
+    fb.className = 'qfeedback ok';
+    fb.innerHTML = info.text.ok;
+  } else {
+    fb.className = 'qfeedback bad';
+    fb.innerHTML = info.text.bad;
+  }
+
+  answered++;
+  const pct = Math.round((answered / 10) * 100);
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('prog-label').textContent = 'Respondidas: ' + answered + ' / 10';
+  document.getElementById('score-text').textContent = correct + ' / 10 ✓';
+
+  if (answered === 10) showResult();
+});
+
+function showResult() {
+  const panel = document.getElementById('result-panel');
+  panel.style.display = 'block';
+  const title = document.getElementById('result-title');
+  const msg = document.getElementById('result-msg');
+  if (correct <= 4) {
+    panel.style.background = '#fee2e2';
+    panel.style.color = '#991b1b';
+    title.textContent = correct + ' / 10 — Necesitas repasar el material';
+    msg.textContent = 'Revisa los bloques de contenido del canvas, especialmente los datos cuantitativos de potencial eólico, los parques en operación y los compromisos NDC de Perú.';
+  } else if (correct <= 7) {
+    panel.style.background = '#fef9c3';
+    panel.style.color = '#713f12';
+    title.textContent = correct + ' / 10 — ¡Buen avance, sigue repasando!';
+    msg.textContent = 'Tienes una base sólida. Refuerza los conceptos de factor de capacidad, off-shore y la tabla comparativa de parques eólicos.';
+  } else {
+    panel.style.background = '#dcfce7';
+    panel.style.color = '#14532d';
+    title.textContent = correct + ' / 10 — ¡Excelente dominio del tema!';
+    msg.textContent = 'Dominas los conceptos clave del artículo: potencial eólico, parques en operación, política climática y retos tecnológicos del sector eólico peruano.';
+  }
+}
+
+function resetQuiz() {
+  answered = 0;
+  correct = 0;
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('prog-label').textContent = 'Respondidas: 0 / 10';
+  document.getElementById('score-text').textContent = '0 / 10 ✓';
+  document.getElementById('result-panel').style.display = 'none';
+  for (let i = 1; i <= 10; i++) {
+    const fb = document.getElementById('fb' + i);
+    fb.style.display = 'none';
+    fb.className = 'qfeedback';
+    const btns = document.querySelectorAll('[data-q="' + i + '"]');
+    btns.forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct','incorrect','reveal');
+    });
+  }
+}
+</script>
