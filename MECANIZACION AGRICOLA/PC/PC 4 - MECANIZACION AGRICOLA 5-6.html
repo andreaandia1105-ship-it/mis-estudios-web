@@ -1,0 +1,629 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px;}
+.cv-title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.cv-title p{font-size:11px;color:#94a3b8;margin-bottom:8px;}
+.cv-title .pills{display:flex;flex-wrap:wrap;gap:5px;}
+.cv-title .pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;background:#1e3a5f;color:#93c5fd;}
+.sec{grid-column:1/-1;background:linear-gradient(90deg,#1e293b 0%,#0f172a 100%);border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:#e2e8f0;letter-spacing:.5px;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:span 3;}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.55;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:7px;line-height:1.5;}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;line-height:1.5;}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:7px;}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:6px;font-size:11px;}
+.farrow{font-size:15px;color:var(--color-text-secondary);}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-top:7px;}
+.nb{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-right:4px;}
+.nb-b{background:#dbeafe;color:#1e3a8a;}
+.nb-g{background:#dcfce7;color:#14532d;}
+.nb-o{background:#ffedd5;color:#7c2d12;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);text-align:left;font-weight:600;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.ft-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;}
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px;}
+.quiz-head{background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px;}
+.quiz-head h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;}
+.quiz-head p{font-size:11px;color:#94a3b8;}
+.prog-wrap{margin-bottom:14px;}
+.prog-text{font-size:12px;color:var(--color-text-secondary);margin-bottom:5px;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .3s;}
+.qcard{margin-bottom:16px;padding:12px;background:var(--color-background-secondary);border-radius:10px;}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;}
+.qtext{font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin-bottom:9px;line-height:1.5;}
+.qopts{display:flex;flex-direction:column;gap:5px;}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary);}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn.reveal{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;display:none;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+#results-panel{display:none;border-radius:10px;padding:14px 16px;margin-top:12px;text-align:center;}
+#results-panel.low{background:#fee2e2;color:#991b1b;}
+#results-panel.mid{background:#fef9c3;color:#713f12;}
+#results-panel.high{background:#dcfce7;color:#14532d;}
+#results-panel h3{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:6px;}
+#results-panel p{font-size:12px;margin-bottom:10px;}
+#reset-btn{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;cursor:pointer;}
+@media(prefers-color-scheme:dark){
+.warn{background:#431407;color:#fed7aa;}
+.exam{background:#422006;border-color:#fef08a;color:#fef08a;}
+}
+</style>
+
+<div class="cv">
+
+<div class="cv-title">
+  <h1>🔧 MECANIZACIÓN AGRÍCOLA — 6TA CLASE</h1>
+  <p>Ing. Luis Alberto Altamirano Chunga · UNALM — Facultad de Ingeniería Agrícola</p>
+  <div class="pills">
+    <span class="pill">Motor y partes</span>
+    <span class="pill">Sistema de admisión</span>
+    <span class="pill">Sistema de alimentación</span>
+    <span class="pill">Motores 2T y 4T</span>
+    <span class="pill">Refrigeración</span>
+    <span class="pill">Lubricación</span>
+    <span class="pill">Mantenimiento</span>
+    <span class="pill">Sistema eléctrico</span>
+  </div>
+</div>
+
+<div class="sec">🔩 SECCIÓN 1 — ESTRUCTURA Y PARTES DEL MOTOR</div>
+
+<div class="block">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Partes principales</span>
+  <div class="def" style="border-left:3px solid #3b82f6;">El motor de combustión interna transforma energía química del combustible en energía mecánica. Sus tres grandes cuerpos estructurales son la culata (tapa superior), el monobloc (cuerpo intermedio) y el cárter (base inferior), y su correcta comprensión es el punto de partida de toda la mecanización.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6;">
+      <strong>Culata</strong><br>Tapa superior del motor donde se aloja la cámara de combustión. Se fija al bloque con pernos o espárragos. Aquí se instalan válvulas, bujías (gasolina) o boquillas inyectoras (diésel) y los canales de refrigeración.
+    </div>
+    <div class="mini" style="border-top:3px solid #818cf8;">
+      <strong>Monobloc / Block</strong><br>Cuerpo central situado entre culata y cárter. Contiene los cilindros donde se desplazan los pistones. También aloja conductos de agua y aceite. Se le llama indistintamente: bloque de cilindros, block o monoblock.
+    </div>
+  </div>
+  <div class="mini" style="border-top:3px solid #a78bfa;margin-top:7px;">
+    <strong>Cárter</strong><br>Tapa inferior del motor. Es el depósito del aceite lubricante y cierra el crank-case donde gira el cigüeñal. Actúa como sumidero de aceite que la bomba luego recircula al sistema.
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Muchos estudiantes confunden el "bloque" (estructura rígida con los cilindros) con el conjunto completo del motor. El bloque es solo una de las tres piezas estructurales grandes.</div>
+  <div class="exam">🎯 EXAMEN: Describa la función específica de cada una de las tres partes estructurales principales del motor (culata, monobloc y cárter) y explique por qué la empaquetadura de culata es un componente crítico en la unión culata-bloque.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#fef9c3;color:#713f12;">Partes internas y externas</span>
+  <div class="def" style="border-left:3px solid #eab308;">Las partes internas son las que convierten la energía térmica en movimiento rotativo: pistón, biela y cigüeñal forman el mecanismo de manivela que transforma el movimiento rectilíneo alternativo del pistón en rotación continua del cigüeñal.</div>
+  <div class="item"><span class="dot" style="background:#eab308;"></span><strong>Pistón y biela:</strong> el pistón recibe la presión de la combustión y la transmite vía biela al muñón del cigüeñal. Los anillos de compresión sellan los gases y los de aceite controlan la lubricación.</div>
+  <div class="item"><span class="dot" style="background:#f59e0b;"></span><strong>Cigüeñal:</strong> eje excéntrico que convierte el empuje lineal en par motor. Sus muñones de biela reciben la fuerza, sus muñones principales van apoyados en cojinetes del bloque, y sus contrapesos equilibran la inercia.</div>
+  <div class="item"><span class="dot" style="background:#d97706;"></span><strong>Árbol de levas:</strong> sincroniza la apertura y cierre de válvulas de admisión y escape mediante levas que actúan sobre balancines. Gira a la mitad de velocidad del cigüeñal en motores 4T.</div>
+  <div class="item"><span class="dot" style="background:#92400e;"></span><strong>Camisa:</strong> cilindro interno intercambiable que aloja al pistón. Su desgaste es mesurable y permite reconstruir el motor sustituyendo solo la camisa.</div>
+  <div class="exam">🎯 EXAMEN: Explique el mecanismo por el cual la biela transforma el movimiento rectilíneo del pistón en movimiento rotativo del cigüeñal. Incluya en su respuesta los conceptos de punto muerto superior (PMS) e inferior (PMI).</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d;">Configuraciones del block</span>
+  <div class="def" style="border-left:3px solid #16a34a;">La disposición geométrica de los cilindros en el bloque define el tipo de motor y afecta directamente al balance, compacidad y potencia. Los tractores agrícolas utilizan casi exclusivamente motores en línea (4 o 6 cilindros) por su simplicidad de mantenimiento.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #16a34a;">
+      <strong>Motor en línea</strong><br>Cilindros alineados en fila. Es el más simple de fabricar y mantener. Mayor longitud pero menor complejidad mecánica. Preferido en tractores.
+    </div>
+    <div class="mini" style="border-left:3px solid #0d9488;">
+      <strong>Motor en V</strong><br>Dos filas de cilindros formando una "V". Más compacto longitudinalmente, mayor número de cilindros posible. Usado en vehículos pesados y cosechadoras de alta potencia.
+    </div>
+    <div class="mini" style="border-left:3px solid #0284c7;">
+      <strong>Motor "VR"</strong><br>Configuración intermedia de VW: dos filas muy próximas. Compacto pero con eje de levas único. Poco frecuente en maquinaria agrícola actual.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué los tractores agrícolas de uso general prefieren el motor en línea frente al motor en V, considerando los contextos de campo y taller de campo peruano?</div>
+</div>
+
+<div class="sec">💨 SECCIÓN 2 — SISTEMA DE ADMISIÓN</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Sistema de admisión</span>
+  <div class="def" style="border-left:3px solid #3b82f6;">El sistema de admisión garantiza que el aire ingrese al motor limpio, en la cantidad correcta y a la temperatura óptima. Un filtro sucio reduce la potencia entre un 5–15 % y acelera el desgaste prematuro de cilindros y pistones.</div>
+  <div class="flow">
+    <div class="fbox">Aire exterior</div><span class="farrow">→</span>
+    <div class="fbox">Prefiltro / vaso decantador</div><span class="farrow">→</span>
+    <div class="fbox">Filtro primario (papel o aceite)</div><span class="farrow">→</span>
+    <div class="fbox">Turbocompresor</div><span class="farrow">→</span>
+    <div class="fbox">Pos-enfriador (intercooler)</div><span class="farrow">→</span>
+    <div class="fbox">Múltiple de admisión</div><span class="farrow">→</span>
+    <div class="fbox">Cilindros</div>
+  </div>
+  <div class="two" style="margin-top:10px;">
+    <div class="mini" style="border-top:3px solid #3b82f6;">
+      <strong>Filtro de baño en aceite</strong><br>El aire cambia de dirección bruscamente en la taza de aceite; las partículas pesadas quedan atrapadas en el aceite. Luego el aire pasa por malla metálica. Sistema robusto y adecuado para ambientes muy polvorientos (costas áridas del Perú, campos de Ica).
+    </div>
+    <div class="mini" style="border-top:3px solid #0ea5e9;">
+      <strong>Filtro de papel (seco)</strong><br>Elemento filtrante de fibra de papel plegada que retiene partículas finas. Más eficiente en filtración fina. Se limpia con aire comprimido (de adentro hacia afuera) y se reemplaza periódicamente. Estándar en maquinaria moderna.
+    </div>
+  </div>
+  <div class="mini" style="border-left:3px solid #8b5cf6;margin-top:8px;">
+    <strong>Turbocompresor (turbocargador)</strong><br>Dispositivo accionado por los gases de escape (turbina) que comprime el aire de admisión (compresor) antes de que ingrese al cilindro. Permite introducir más masa de aire y, por tanto, más combustible → mayor potencia sin aumentar cilindrada. El pos-enfriador (intercooler) reduce la temperatura del aire comprimido para densificarlo aún más antes de entrar.
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir el turbo con un compresor mecánico (supercharger). El turbo se acciona con energía de los gases de escape —sin costo energético adicional directo— mientras que el supercharger consume potencia del cigüeñal.</div>
+  <div class="exam">🎯 EXAMEN: Explique la cadena de conversión energética que ocurre en un turbocompresor y cuál es el beneficio termodinámico de añadir un pos-enfriador (intercooler) entre el turbo y el múltiple de admisión.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95;">Múltiple de admisión</span>
+  <div class="def" style="border-left:3px solid #8b5cf6;">El múltiple de admisión distribuye el aire filtrado de forma homogénea a todos los cilindros. Su geometría interna (longitud y diámetro de conductos) afecta el llenado de los cilindros a distintas rpm: conductos largos favorecen regímenes bajos, cortos favorecen altas rpm.</div>
+  <div class="item"><span class="dot" style="background:#8b5cf6;"></span>Los conductos de admisión del múltiple van sellados a los conductos de la culata para evitar entradas de aire sin filtrar que contaminarían el interior del motor.</div>
+  <div class="item"><span class="dot" style="background:#a78bfa;"></span>En motores diésel turboalimentados, entre el turbo y el múltiple se instala el intercooler. En motores naturalmente aspirados, el múltiple va directamente a la culata.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el motor diésel del tractor agrícola no requiere sistema de encendido por bujías, y cómo se inicia la combustión en su lugar?</div>
+</div>
+
+<div class="sec">⛽ SECCIÓN 3 — SISTEMA DE ALIMENTACIÓN DE COMBUSTIBLE</div>
+
+<div class="block">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12;">Sistema de alimentación</span>
+  <div class="def" style="border-left:3px solid #f97316;">El sistema de alimentación suministra combustible filtrado, a la presión exacta y en el momento preciso de la carrera de compresión. En motores diésel el sistema opera a altísimas presiones (200–2000 bar en common rail) para atomizar el combustible en finas partículas que se autoencienden.</div>
+  <div class="flow">
+    <div class="fbox">Depósito</div><span class="farrow">→</span>
+    <div class="fbox">Bomba alimentadora</div><span class="farrow">→</span>
+    <div class="fbox">Filtro primario + filtro final</div><span class="farrow">→</span>
+    <div class="fbox">Bomba inyección</div><span class="farrow">→</span>
+    <div class="fbox">Conductos alta presión</div><span class="farrow">→</span>
+    <div class="fbox">Inyectores</div><span class="farrow">→</span>
+    <div class="fbox">Cámara combustión</div>
+  </div>
+  <div class="item" style="margin-top:8px;"><span class="dot" style="background:#f97316;"></span><strong>Bomba de inyección en línea:</strong> tiene un elemento bombeador por cilindro, todos alojados en el mismo cuerpo. Suministra caudal fijo por embolada, el sobrante retorna al depósito. Muy robusta, estándar en tractores convencionales.</div>
+  <div class="item"><span class="dot" style="background:#ea580c;"></span><strong>Common Rail (CR):</strong> una bomba de alta presión (1500–2000 bar) llena un raíl acumulador común. Electroválvulas en cada inyector se controlan por la ECU con precisión de microsegundos. Permite múltiples inyecciones por ciclo → combustión más limpia y eficiente. Presente en tractores modernos.</div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir el filtro de combustible (limpia el gasóleo/diésel que va a los inyectores) con el filtro de aceite del sistema de lubricación. Cambiarlos en intervalos incorrectos ocasiona fallas graves en ambos sistemas.</div>
+  <div class="exam">🎯 EXAMEN: Compare el sistema de inyección en línea con el sistema Common Rail en cuanto a: presión de trabajo, número de inyecciones por ciclo y control electrónico. ¿Por qué el second genera menos emisiones?</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d;">Inyectores y filtros</span>
+  <div class="def" style="border-left:3px solid #16a34a;">El inyector atomiza el combustible en un spray de microgotas (diámetro 10–100 µm) que se mezclan con el aire caliente comprimido y se autoencienden. Un inyector sucio produce un patrón de spray irregular → combustión incompleta → humo negro y pérdida de potencia.</div>
+  <div class="item"><span class="dot" style="background:#16a34a;"></span><strong>Filtro blindado:</strong> carcasa metálica roscada que se cambia completa como unidad. Rápido de sustituir en campo.</div>
+  <div class="item"><span class="dot" style="background:#15803d;"></span><strong>Filtro cartucho:</strong> solo se reemplaza el elemento filtrante interno. Más económico a largo plazo pero requiere precaución para no contaminar el sistema al abrirlo.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la limpieza periódica de inyectores es crítica en zonas como la sierra peruana donde el diésel disponible puede contener mayor concentración de azufre e impurezas.</div>
+</div>
+
+<div class="sec">🔁 SECCIÓN 4 — MOTORES SEGÚN SUS TIEMPOS</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#fef9c3;color:#713f12;">Motor de 4 tiempos (4T)</span>
+  <div class="def" style="border-left:3px solid #eab308;">En un motor de 4 tiempos, el ciclo termodinámico completo requiere 4 carreras del pistón (2 revoluciones del cigüeñal). Solo 1 de las 4 carreras produce trabajo útil (expansión/explosión). Este diseño es el estándar universal en tractores agrícolas por su eficiencia, durabilidad y control de emisiones.</div>
+  <div class="four" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px;margin-top:8px;">
+    <div class="mini" style="border-top:3px solid #3b82f6;">
+      <strong>1° Admisión</strong><br>Pistón baja (PMS→PMI). Válvula de admisión abierta. Entra mezcla aire-combustible (gasolina) o solo aire (diésel). Cigüeñal da ½ revolución.
+    </div>
+    <div class="mini" style="border-top:3px solid #8b5cf6;">
+      <strong>2° Compresión</strong><br>Pistón sube (PMI→PMS). Ambas válvulas cerradas. Se comprime la carga: relación 8:1–12:1 en gasolina, 14:1–24:1 en diésel. Temperatura sube a 500–700 °C en diésel.
+    </div>
+    <div class="mini" style="border-top:3px solid #ef4444;">
+      <strong>3° Expansión</strong><br>Bujía chispa (gasolina) o autoencendido (diésel). Gases se expanden a 2000–2500 °C. El pistón baja empujando la biela → par motor. Carrera productiva.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e;">
+      <strong>4° Escape</strong><br>Pistón sube. Válvula de escape abierta. Los gases quemados son expulsados. Cigüeñal da ½ revolución. Ciclo completo = 2 rev. totales.
+    </div>
+  </div>
+  <div class="rx">Potencia efectiva → Solo carrera 3 (expansión) entrega trabajo<br>En motor 4T: 1 explosión cada 2 revoluciones del cigüeñal<br>Motor 6 cil. en línea: 1 explosión cada 120° = operación suave</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué en un motor diésel de 4 tiempos la relación de compresión debe ser mayor que en uno de gasolina, y qué consecuencias tiene esto sobre el diseño mecánico del bloque y el cigüeñal?</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ccfbf1;color:#134e4a;">Motor de 2 tiempos (2T)</span>
+  <div class="def" style="border-left:3px solid #14b8a6;">En el motor de 2 tiempos el ciclo se completa en 2 carreras (1 revolución del cigüeñal). Usa lumbreras (ventanas en el cilindro) en lugar de válvulas para controlar admisión y escape. Cada bajada-subida del pistón produce una explosión, lo que significa mayor frecuencia de potencia pero mayor consumo y emisiones.</div>
+  <div class="item"><span class="dot" style="background:#14b8a6;"></span>Al no tener árbol de levas ni válvulas, es mecánicamente más simple y liviano → aplicaciones en motosierras, motocultivogas, motores de bote pequeños.</div>
+  <div class="item"><span class="dot" style="background:#0d9488;"></span>El cárter actúa también como cámara de precompresión: mientras el pistón sube y comprime en el cilindro, abajo aspira mezcla nueva en el cárter.</div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que el motor 2T tiene el doble de potencia que uno 4T de igual cilindrada. En la práctica, el traslape de gases (escape e ingreso simultáneos) reduce la eficiencia volumétrica, por lo que la ventaja de potencia es menor de lo esperado y las emisiones son muy superiores.</div>
+  <div class="exam">🎯 EXAMEN: Señale dos ventajas y dos desventajas del motor de 2 tiempos frente al de 4 tiempos para aplicaciones de maquinaria agrícola ligera en condiciones de campo peruano.</div>
+</div>
+
+<div class="sec">❄️ SECCIÓN 5 — SISTEMA DE REFRIGERACIÓN</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Sistema de refrigeración por agua</span>
+  <div class="def" style="border-left:3px solid #3b82f6;">Solo el 30–35 % de la energía del combustible se convierte en trabajo útil; el resto se disipa como calor. Sin refrigeración, las temperaturas superarían 1000 °C y destruirían pistones, válvulas y cojinetes en minutos. El sistema mantiene el motor entre 80–95 °C, temperatura óptima de eficiencia.</div>
+  <div class="flow">
+    <div class="fbox">Bomba de agua</div><span class="farrow">→</span>
+    <div class="fbox">Camisas de agua (bloque + culata)</div><span class="farrow">→</span>
+    <div class="fbox">Termostato</div><span class="farrow">→</span>
+    <div class="fbox">Radiador (panal)</div><span class="farrow">→</span>
+    <div class="fbox">Ventilador</div><span class="farrow">→</span>
+    <div class="fbox">Retorno a bomba</div>
+  </div>
+  <div class="two" style="margin-top:9px;">
+    <div class="mini" style="border-top:3px solid #3b82f6;">
+      <strong>Termostato</strong><br>Válvula cera-dióxido: cerrada en frío (agua circula solo dentro del motor para calentarlo rápido), se abre al llegar a 80–85 °C enviando el agua al radiador. Si el termostato falla abierto: motor siempre frío, gasta combustible. Si falla cerrado: motor se sobrecalienta.
+    </div>
+    <div class="mini" style="border-top:3px solid #0ea5e9;">
+      <strong>Bomba de agua centrífuga</strong><br>Accionada por correa desde el cigüeñal (junto al ventilador). Su rodete impulsa el líquido refrigerante a través de todas las cámaras de agua. La bomba solo funciona mientras el motor gira → nunca dejar el motor en punto muerto por tiempo prolongado con alta carga térmica.
+    </div>
+  </div>
+  <div class="mini" style="border-left:3px solid #f97316;margin-top:7px;">
+    <strong>Radiador</strong><br>Intercambiador de calor de tubos y aletas que transfiere el calor del refrigerante al aire exterior. Un radiador sucio externamente (barro, residuos vegetales, chaff de cosechadora) puede reducir la transferencia de calor hasta un 40 %, causando recalentamiento. En Perú es frecuente en cosechadoras de arroz en La Libertad y Lambayeque.
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Añadir agua pura al circuito sin anticongelante-anticorrosión. El agua pura corroe el bloque de aluminio, favorece la formación de depósitos calcáreos y no protege por debajo de 0 °C (relevante en sierra peruana).</div>
+  <div class="exam">🎯 EXAMEN: Describa la función del termostato en el circuito de refrigeración y explique qué ocurre con la eficiencia del motor si este componente permanece permanentemente abierto desde el arranque en frío.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d;">Refrigeración por aire</span>
+  <div class="def" style="border-left:3px solid #16a34a;">En motores refrigerados por aire, aletas de enfriamiento mecanizadas en la culata y el bloque aumentan la superficie de disipación. Un ventilador dirigido fuerza el flujo de aire. Más simple (sin bomba, termostato ni radiador) pero menos eficaz en climas cálidos.</div>
+  <div class="item"><span class="dot" style="background:#16a34a;"></span>Usado en motores pequeños de motocultor, generadores portátiles y algunos tractores compactos de baja potencia (&lt;25 CV).</div>
+  <div class="exam">🎯 EXAMEN: Compare los sistemas de refrigeración por agua y por aire en cuanto a: complejidad, mantenimiento y adecuación para motores de alta potencia en condiciones tropicales como la costa norte peruana.</div>
+</div>
+
+<div class="sec">🛢️ SECCIÓN 6 — SISTEMA DE LUBRICACIÓN</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12;">Sistema de lubricación</span>
+  <div class="def" style="border-left:3px solid #f97316;">El aceite lubricante tiene cuatro funciones esenciales: lubricar (crear película entre superficies móviles), lavar (arrastrar partículas de desgaste), enfriar (absorber calor de pistones y cojinetes) y sellar (mejorar el contacto anillo-cilindro). Un motor sin aceite suficiente puede agarrotarse en menos de 60 segundos.</div>
+  <div class="flow">
+    <div class="fbox">Aceite en cárter</div><span class="farrow">→</span>
+    <div class="fbox">Rejilla de aspiración</div><span class="farrow">→</span>
+    <div class="fbox">Bomba de aceite</div><span class="farrow">→</span>
+    <div class="fbox">Filtro de aceite</div><span class="farrow">→</span>
+    <div class="fbox">Galería principal</div><span class="farrow">→</span>
+    <div class="fbox">Cojinetes, levas, pistones, turbo</div><span class="farrow">→</span>
+    <div class="fbox">Retorno al cárter</div>
+  </div>
+  <div class="two" style="margin-top:9px;">
+    <div class="mini" style="border-top:3px solid #f97316;">
+      <strong>Bomba de aceite</strong><br>Generalmente de tipo engranaje o de paletas, accionada mecánicamente por el cigüeñal o árbol de levas. Mantiene presión de 2.5–5 bar. La válvula limitadora de presión protege el sistema ante viscosidades excesivas en frío.
+    </div>
+    <div class="mini" style="border-top:3px solid #ea580c;">
+      <strong>Filtro de aceite</strong><br>Retiene partículas metálicas de desgaste y contaminantes. La válvula de by-pass se abre cuando el filtro está obstruido para no dejar el motor sin lubricación. Si la válvula by-pass actúa frecuentemente: señal de que el filtro no se cambia con suficiente frecuencia.
+    </div>
+  </div>
+  <div class="item" style="margin-top:8px;"><span class="dot" style="background:#f97316;"></span><strong>Válvula de refrigeración del pistón:</strong> se abre cuando el motor está en el ralentí superior para proyectar un chorro de aceite a la cara interna del pistón, extrayendo el calor de la corona.</div>
+  <div class="item"><span class="dot" style="background:#ea580c;"></span><strong>Enfriador de aceite:</strong> en motores de alta potencia, un intercambiador de calor aceite-refrigerante mantiene la temperatura del aceite dentro del rango óptimo de viscosidad (80–110 °C).</div>
+  <div class="warn">⚠️ ERROR COMÚN: Cambiar el aceite sin cambiar el filtro, o viceversa. El aceite nuevo que pasa por un filtro saturado queda inmediatamente contaminado; un filtro nuevo con aceite usado proporciona filtración deficiente desde el primer uso.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la viscosidad del aceite es crítica en motores que operan en la sierra peruana (altitudes &gt;3000 m, temperaturas de arranque de 2–5 °C) y qué especificación SAE sería adecuada.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95;">Funciones del lubricante</span>
+  <div class="def" style="border-left:3px solid #8b5cf6;">El sistema de lubricación también es crítico para el correcto funcionamiento de sistemas hidráulicos modernos (MDS, AFN, CVT/VVT) que dependen del mismo aceite del motor para dosificar presión y mantener flujo adecuado.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #8b5cf6;"><strong>Lubricar</strong><br>Película hidrodinámica que separa superficies metálicas → elimina fricción sólida y desgaste.</div>
+    <div class="mini" style="border-left:3px solid #7c3aed;"><strong>Lavar + enfriar</strong><br>Flujo continuo arrastra metales y carbón; aceite absorbe calor de pistones y cojinetes.</div>
+    <div class="mini" style="border-left:3px solid #6d28d9;"><strong>Sellar + proteger</strong><br>Rellena irregularidades anillo-cilindro; aditivos anticorrosión protegen en paradas prolongadas.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Qué indica el color negro intenso del aceite en el motor de un tractor después de solo 20 horas de trabajo? ¿Es siempre una señal de problema?</div>
+</div>
+
+<div class="sec">🔧 SECCIÓN 7 — MANTENIMIENTO DE MAQUINARIA AGRÍCOLA</div>
+
+<div class="block">
+  <span class="bh" style="background:#fee2e2;color:#991b1b;">Mantenimiento predictivo</span>
+  <div class="def" style="border-left:3px solid #ef4444;">El mantenimiento predictivo anticipa cuándo se producirá una falla, mediante el monitoreo continuo de la condición real del equipo, y programa una reparación antes de que ocurra la avería. Elimina el correctivo costoso y el preventivo innecesario.</div>
+  <div class="item"><span class="dot" style="background:#ef4444;"></span><strong>Técnicas:</strong> análisis de vibración (detecta desbalance, cojinetes desgastados), análisis de aceite (partículas metálicas, viscosidad, agua), termografía infrarroja (puntos calientes en cojinetes, inyectores), ultrasonido (fisuras, fugas).</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #16a34a;">
+      <strong>✅ Ventaja</strong><br>Mantenimiento solo cuando se necesita → reducción de costes de mano de obra y tiempo muerto no planificado. Basa decisiones en condición real, no en calendario fijo.
+    </div>
+    <div class="mini" style="border-top:3px solid #ef4444;">
+      <strong>❌ Desventaja</strong><br>Alta inversión inicial en equipos de medición y capacitación del personal. No rentable para activos de bajo valor o baja criticidad.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Una empresa agroindustrial en La Libertad considera implementar mantenimiento predictivo en su flota de 15 tractores. Evalúe la viabilidad económica y señale qué técnicas serían más apropiadas para detectar fallas en el sistema de lubricación.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#fef9c3;color:#713f12;">Mantenimiento preventivo</span>
+  <div class="def" style="border-left:3px solid #eab308;">El mantenimiento preventivo es cíclico y programado, independiente de la condición actual del activo. La frecuencia la establece el gestor con base en la vida útil estimada y las recomendaciones del fabricante (horas de trabajo, no días del calendario).</div>
+  <div class="item"><span class="dot" style="background:#eab308;"></span>Ejemplo agrícola: cambio de aceite y filtros cada 250 h, cambio de filtro de aire cada 500 h, revisión de correas cada 1000 h, regulación de válvulas cada 500 h.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #16a34a;">
+      <strong>✅ Ventaja</strong><br>Imprescindible en equipos de alta criticidad (tractor en plena campaña de siembra en la costa peruana): aumenta vida útil y reduce paradas inesperadas.
+    </div>
+    <div class="mini" style="border-top:3px solid #ef4444;">
+      <strong>❌ Desventaja</strong><br>Puede resultar en sustitución de piezas que todavía tienen vida útil → sobrecosto. Ineficiente en activos de baja prioridad.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Diseñe un plan básico de mantenimiento preventivo para un tractor de 80 CV en campaña de maíz en la costa peruana, indicando la frecuencia en horas de operación para los sistemas: lubricación, refrigeración, admisión y alimentación.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d;">Mantenimiento correctivo</span>
+  <div class="def" style="border-left:3px solid #16a34a;">También llamado mantenimiento reactivo. Se ejecuta después de producida la avería, con el objetivo de restaurar el activo a su condición operativa (mediante reparación o sustitución). Es el más costoso por unidad de trabajo y genera downtime no planificado.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #16a34a;">
+      <strong>✅ Cuándo es válido</strong><br>Equipos de baja prioridad o bajo costo donde el mantenimiento constante supera el costo de reparación (ej: una bombilla, una herramienta de mano).
+    </div>
+    <div class="mini" style="border-top:3px solid #ef4444;">
+      <strong>❌ Riesgo crítico</strong><br>Aplicado a tractores en campaña agrícola → parada inesperada en momento crítico, pérdida de cosecha, elevados costos de reparación de emergencia.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Compare los tres tipos de mantenimiento (predictivo, preventivo y correctivo) indicando para cada uno: base de decisión, costo relativo y un ejemplo concreto de aplicación en maquinaria agrícola peruana.</div>
+</div>
+
+<div class="sec">⚡ SECCIÓN 8 — SISTEMA ELÉCTRICO DEL TRACTOR</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Sistema eléctrico</span>
+  <div class="def" style="border-left:3px solid #3b82f6;">El sistema eléctrico del tractor agrícola es análogo al del automóvil. En tractores diésel es más sencillo porque no existe sistema de encendido por chispa (no necesita bobina ni distribuidor), pero sí incluye arranque, carga, alumbrado e instrumentación.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #3b82f6;">
+      <strong>Sistema de arranque</strong><br>Motor eléctrico (arrancador) accionado por la batería al girar la llave. El solenoide empuja el piñón Bendix para engranar con el volante de inercia. Una vez encendido el motor, el Bendix se retrae automáticamente por la rueda libre de acoplamiento.
+    </div>
+    <div class="mini" style="border-top:3px solid #0ea5e9;">
+      <strong>Sistema de carga</strong><br>Alternador accionado por correa del cigüeñal. Genera CA que los diodos rectificadores convierten en CC. El regulador de voltaje mantiene la salida en 13.8–14.5 V para cargar la batería sin sobrecargarla. La batería actúa como filtro y reserva de energía.
+    </div>
+    <div class="mini" style="border-top:3px solid #8b5cf6;">
+      <strong>Sistema de encendido (gasolina)</strong><br>Batería → interruptor → bobina (transforma 12V a 20,000V) → distribuidor → bujías. El ruptor (platinos) o sensor Hall corta la corriente primaria generando el pulso de alta tensión. En diésel: no existe este sistema.
+    </div>
+  </div>
+  <div class="item" style="margin-top:8px;"><span class="dot" style="background:#3b82f6;"></span><strong>Arrancador (motor de arranque):</strong> motor eléctrico de CC de alta corriente (150–400 A) y corta duración. El solenoid cumple dos funciones: cierra el circuito eléctrico del motor y empuja mecánicamente el piñón. El uso prolongado del arrancador lo sobrecalienta y daña sus escobillas.</div>
+  <div class="warn">⚠️ ERROR COMÚN: En tractores diésel, creer que la bujía es el componente de encendido. Los tractores diésel usan bujías de precalentamiento (calentadores) para calentar la cámara de combustión en arranques en frío, pero NO para el encendido. La combustión ocurre por autoencendido (temperatura de compresión).</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el sistema eléctrico de un tractor con motor diésel es más sencillo que el de un tractor con motor a gasolina. ¿Qué componente eléctrico específico sí existe en el diésel para facilitar el arranque en frío?</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#fce7f3;color:#831843;">Bujías y bujías de precalentamiento</span>
+  <div class="def" style="border-left:3px solid #ec4899;">Las bujías de encendido (gasolina) generan chispa eléctrica en el momento exacto de la carrera de compresión para inflamar la mezcla. Las bujías de precalentamiento (diésel) son resistencias calefactoras que elevan la temperatura de la pre-cámara o cámara principal antes y durante el arranque en frío.</div>
+  <div class="item"><span class="dot" style="background:#ec4899;"></span>Una bujía sucia en gasolina produce combustión parcial → traqueteo, pérdida de potencia, aumento de consumo. Intervalo de cambio: cada 20,000–30,000 km o según fabricante.</div>
+  <div class="item"><span class="dot" style="background:#db2777;"></span>Una bujía de precalentamiento defectuosa en diésel dificulta el arranque a temperaturas &lt;5 °C (frecuente en sierra andina). El testigo de precalentamiento en el tablero debe apagarse antes de intentar el arranque.</div>
+  <div class="exam">🎯 EXAMEN: Un tractor diésel en Cusco (3400 m de altitud, temperatura de madrugada: 3 °C) tiene dificultades para arrancar. Señale tres causas probables relacionadas con el sistema eléctrico y el sistema de alimentación.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#f1f5f9;color:#334155;">📊 TABLA INTEGRADORA — SISTEMAS DEL MOTOR DE TRACTOR AGRÍCOLA</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Sistema</th>
+        <th>Función principal</th>
+        <th>Componentes clave</th>
+        <th>Falla más común</th>
+        <th>Intervalo mantenimiento</th>
+        <th>Consecuencia sin mant.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Admisión</strong></td><td>Proveer aire limpio a cilindros</td><td>Prefiltro, filtro papel/aceite, turbo, intercooler, múltiple</td><td>Filtro obstruido</td><td>Inspección diaria, cambio c/500 h</td><td>Pérdida de potencia 5–15%, desgaste prematuro</td></tr>
+      <tr><td><strong>Alimentación</strong></td><td>Suministrar combustible filtrado a presión exacta</td><td>Depósito, bomba, filtro doble, bomba inyección / common rail, inyectores</td><td>Inyectores sucios, filtro saturado</td><td>Filtro c/250–500 h; inyectores c/1000–2000 h</td><td>Combustión incompleta, humo negro, pérdida de potencia</td></tr>
+      <tr><td><strong>Motor 4T</strong></td><td>Convertir energía química en mecánica (1 exp. / 2 rev.)</td><td>Pistón, biela, cigüeñal, árbol de levas, válvulas, camisa</td><td>Desgaste de anillos, holgura de válvulas</td><td>Ajuste válvulas c/500 h; anillos c/recondicionar</td><td>Pérdida de compresión, consumo elevado de aceite</td></tr>
+      <tr><td><strong>Refrigeración</strong></td><td>Mantener temperatura 80–95 °C</td><td>Bomba agua, termostato, radiador, ventilador, refrigerante</td><td>Termostato trabado, radiador sucio, fuga refrigerante</td><td>Cambio refrigerante c/2 años; limpieza radiador c/250 h</td><td>Recalentamiento, daño culata/empaque, agarrotamiento</td></tr>
+      <tr><td><strong>Lubricación</strong></td><td>Lubricar, lavar, enfriar y sellar</td><td>Bomba aceite, filtro, galería principal, by-pass, cárter</td><td>Nivel bajo, aceite envejecido, filtro obstruido</td><td>Aceite+filtro c/250 h; según condiciones de campo</td><td>Agarrotamiento en &lt;60 s sin aceite; desgaste acelerado</td></tr>
+      <tr><td><strong>Eléctrico</strong></td><td>Arranque, carga y encendido</td><td>Batería, arrancador, alternador, regulador, bobina (gaso.)</td><td>Batería descargada, alternador defectuoso</td><td>Batería c/2–3 años; correa alternador c/1000 h</td><td>Motor no arranca, descarga total de batería en campo</td></tr>
+      <tr><td><strong>Mantenimiento</strong></td><td>Preservar vida útil del activo</td><td>Plan preventivo, técnicas predictivas, registro de horas</td><td>No llevar bitácora de mantenimiento</td><td>Preventivo según manual; predictivo c/monitoreo continuo</td><td>Fallas inesperadas en campaña, pérdida de cosecha</td></tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px;">⚠️ DATO INTEGRADOR CLAVE: El 70–80 % de las fallas en motores de tractores agrícolas en Perú se atribuyen a negligencia en el mantenimiento de tres sistemas: lubricación (nivel y calidad del aceite), admisión (filtro de aire) y refrigeración (nivel y temperatura del refrigerante). Revisar estos tres sistemas diariamente antes de iniciar labores es la acción de mayor retorno en términos de vida útil del tractor.</div>
+</div>
+
+<div id="quiz-section">
+  <div class="quiz-head">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta · Sistemas del motor — Mecanización Agrícola 6ta Clase</p>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-text" id="prog-text">Pregunta 0 de 10 respondidas · Aciertos: 0/10</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes partes del motor actúa como depósito de aceite lubricante y cierra la parte inferior del motor donde gira el cigüeñal?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) La culata</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) El monobloc</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) El cárter</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) La camisa de cilindro</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">En el sistema de admisión, ¿cuál es el beneficio principal de añadir un pos-enfriador (intercooler) después del turbocompresor?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Aumentar la temperatura del aire para mejorar la combustión</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Reducir la temperatura del aire comprimido para densificarlo y meter más masa de aire al cilindro</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Filtrar las partículas de polvo que el turbo no retiene</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Regular la velocidad de giro del turbocompresor</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Un tractor diésel opera en zona de cosecha de arroz en Lambayeque. El operario nota que el motor pierde potencia progresivamente durante la jornada. ¿Cuál es la causa más probable?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Batería descargada por uso del arrancador</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Termostato atascado en posición abierta</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) Filtro de aire obstruido por partículas de paja y polvo del campo</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Alternador sobrecargando la batería</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuántas revoluciones del cigüeñal son necesarias para completar un ciclo termodinámico completo en un motor de 4 tiempos?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Media revolución (180°)</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Una revolución completa (360°)</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Dos revoluciones completas (720°)</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Cuatro revoluciones completas (1440°)</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">En el sistema de refrigeración, el termostato se encuentra cerrado (motor frío). ¿Cuál es el recorrido del líquido refrigerante en este estado?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Depósito → radiador → bomba → bloque → termostato cerrado → radiador</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) Bomba → camisas de agua del motor → termostato cerrado → retorno a bomba (circuito corto, sin pasar por el radiador)</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) El motor no circula refrigerante hasta que el termostato se abra</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) El ventilador se apaga para evitar el enfriamiento excesivo</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el sistema de lubricación es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) El aceite cumple funciones de lubricar, lavar, enfriar y sellar</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) La válvula de by-pass del filtro protege al motor de quedarse sin lubricación si el filtro está obstruido</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) Se puede cambiar el aceite sin cambiar el filtro sin consecuencias negativas, pues son circuitos independientes</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) La bomba de aceite es accionada mecánicamente por el cigüeñal o árbol de levas</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia fundamental entre el mantenimiento PREVENTIVO y el mantenimiento PREDICTIVO?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) El preventivo usa análisis de vibración; el predictivo usa calendarios fijos</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) El preventivo se aplica solo a motores; el predictivo a sistemas hidráulicos</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) El preventivo es más caro; el predictivo no requiere inversión</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="true">D) El preventivo se basa en calendario/horas de uso fijo; el predictivo se basa en la condición real del equipo medida con técnicas avanzadas</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">En el sistema eléctrico de un tractor con motor DIÉSEL, ¿cuál componente eléctrico no existe (a diferencia de un motor a gasolina)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Batería de arranque</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Motor de arranque (arrancador)</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Bobina de encendido y distribuidor de chispa</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Alternador y regulador de voltaje</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">En el motor de 2 tiempos, ¿cuál es la función del cárter durante el ciclo de trabajo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Almacenar el aceite lubricante que la bomba distribuye al motor</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) Actuar como cámara de precompresión de la mezcla fresca mientras el pistón comprime en el cilindro</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Contener el radiador de aceite del sistema de refrigeración</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Alojar el árbol de levas y controlar las válvulas de escape</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">Un tractor trabaja en una chacra de espárrago en Ica a plena carga. El operario observa humo negro denso por el escape. Aplicando conocimientos del sistema de alimentación, ¿cuál es la causa más probable?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) El termostato está atascado cerrado y el motor se sobrecalienta</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) La batería tiene baja carga y el alternador compensa con exceso</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) El cárter tiene exceso de aceite que se quema en los cilindros</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) Combustión incompleta por inyectores sucios o filtro de aire obstruido, con exceso de combustible sin quemar</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="results-panel">
+    <h3 id="results-score"></h3>
+    <p id="results-msg"></p>
+    <button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<div class="ft-bar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Altamirano Chunga, L.A. — Mecanización Agrícola, UNALM (Diaps. 1–61)</span>
+  <span class="fc">MAPA España — Mantenimiento Maquinaria Agrícola HD_2000_2108</span>
+  <span class="fc">Conaremo.blogspot.com — Monoblock nivel general</span>
+  <span class="fc">Instituto Politécnico FP Marítimo-Pesquero Canarias — Motores alternativos combustión interna</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: { correct: 'C', ok: 'Correcto. El cárter es la tapa inferior del motor y actúa como depósito del aceite lubricante. El cigüeñal gira en el espacio que el cárter cierra por debajo (crank-case). La culata es la tapa superior y el monobloc es el cuerpo central.', bad: 'Incorrecto. La respuesta correcta es C) El cárter. La culata cierra la parte superior (donde está la cámara de combustión) y el monobloc es el cuerpo central con los cilindros. El cárter es exclusivamente la tapa inferior y depósito de aceite.' },
+  2: { correct: 'B', ok: 'Correcto. El turbo comprime el aire aumentando su temperatura. El intercooler lo enfría antes de entrar al cilindro, lo que aumenta su densidad (más moléculas por dm³) y permite introducir más masa de aire con el mismo volumen → más oxígeno disponible → mayor potencia.', bad: 'Incorrecto. La respuesta correcta es B). El intercooler REDUCE la temperatura del aire comprimido. Aire más frío = aire más denso = más masa de O₂ por embolada = mayor potencia sin aumentar la cilindrada.' },
+  3: { correct: 'C', ok: 'Correcto. En cosecha de arroz, el ambiente está cargado de partículas de paja y polvo fino que colmatan el filtro de aire muy rápidamente. Un filtro obstruido restringe el flujo de aire, empobrece la mezcla y reduce la potencia entre 5–15 %, efecto que se acumula durante la jornada.', bad: 'Incorrecto. La respuesta correcta es C). La batería descargada afecta el arranque, no la potencia durante operación. El termostato abierto causaría motor frío (pérdida de eficiencia de otro tipo). El alternador sobrecargando causaría problemas eléctricos. El filtro de aire obstruido es la causa más directa de pérdida de potencia progresiva en cosecha.' },
+  4: { correct: 'C', ok: 'Correcto. En el motor 4T el ciclo completo requiere 4 carreras del pistón, y cada carrera equivale a media revolución del cigüeñal: 4 × ½ = 2 revoluciones completas (720°). Por eso en un motor 4T de 6 cilindros hay una explosión cada 120° → funcionamiento muy suave.', bad: 'Incorrecto. La respuesta correcta es C) dos revoluciones. Cuatro carreras (admisión, compresión, expansión, escape) × ½ revolución por carrera = 2 revoluciones completas = 720° de giro del cigüeñal.' },
+  5: { correct: 'B', ok: 'Correcto. Cuando el termostato está cerrado (motor frío), el refrigerante circula en circuito corto: bomba → camisas de agua del motor → de vuelta a la bomba, sin pasar por el radiador. Esto permite que el motor alcance temperatura de operación (80–85 °C) más rápidamente, reduciendo el desgaste por arranque en frío y el consumo de combustible.', bad: 'Incorrecto. La respuesta correcta es B). El motor sí circula refrigerante incluso con termostato cerrado; simplemente lo hace en circuito corto (sin radiador). El termostato es una válvula, no una bomba.' },
+  6: { correct: 'C', ok: 'Correcto, esa afirmación es FALSA. Aceite y filtro deben cambiarse juntos. El aceite nuevo que pasa por un filtro saturado queda inmediatamente contaminado con las partículas que el filtro viejo no puede retener más. Un filtro nuevo con aceite usado tiene exactamente el mismo problema a la inversa.', bad: 'Incorrecto. La afirmación FALSA es C). Las opciones A, B y D son todas verdaderas. Aceite y filtro son un sistema interdependiente que debe reemplazarse al mismo tiempo.' },
+  7: { correct: 'D', ok: 'Correcto. El preventivo opera con calendarios fijos (cada X horas o X meses) sin importar la condición real del equipo. El predictivo monitorea la condición real (vibración, análisis de aceite, termografía) y programa la intervención solo cuando los datos indican que la falla se aproxima.', bad: 'Incorrecto. La respuesta correcta es D). El preventivo usa calendarios y horas de uso fijas; el predictivo usa técnicas avanzadas de monitoreo de la condición real. Es exactamente al revés de lo que describe la opción A.' },
+  8: { correct: 'C', ok: 'Correcto. En un motor diésel no existe sistema de encendido por chispa: no hay bobina de encendido, distribuidor, platinos ni bujías de chispa. La combustión ocurre por autoencendido (el aire altamente comprimido a 700–900 °C enciende el diésel inyectado). Los tractores diésel sí tienen batería, arrancador, alternador y regulador.', bad: 'Incorrecto. La respuesta correcta es C). Batería, arrancador y alternador existen tanto en gasolina como en diésel. Lo que no existe en el motor diésel es el sistema de encendido por chispa: bobina, distribuidor y bujías de chispa.' },
+  9: { correct: 'B', ok: 'Correcto. En el motor 2T, el cárter no solo almacena aceite (como en el 4T) sino que actúa como cámara de precompresión. Mientras el pistón sube comprimiendo la mezcla en el cilindro, en el cárter se genera vacío que aspira la mezcla fresca. Cuando el pistón baja tras la explosión, la mezcla precomprimida del cárter ingresa al cilindro barriendo los gases quemados.', bad: 'Incorrecto. La respuesta correcta es B). Esta es la diferencia fundamental entre el 2T y el 4T: en el 2T el cárter participa activamente en el ciclo como cámara de precompresión, razón por la cual el motor 2T usa mezcla aceite-gasolina (el aceite va en el combustible, no separado en el cárter).' },
+  10: { correct: 'D', ok: 'Correcto. El humo negro denso indica combustión incompleta: exceso de combustible que no se oxida completamente. Puede deberse a inyectores sucios que atomicen mal el combustible, o a filtro de aire obstruido que limite el ingreso de oxígeno, generando una mezcla rica con carbono sin quemar.', bad: 'Incorrecto. La respuesta correcta es D). El sobrecalentamiento produce otros síntomas (vapor blanco, pérdida de potencia, alarma de temperatura). El humo negro es la señal clásica de combustión incompleta en diésel: exceso de combustible o déficit de aire.' }
+};
+
+let answered = 0, correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('reveal');
+  });
+  if (isCorrect) {
+    btn.classList.add('correct');
+    btn.textContent = '✅ ' + btn.textContent;
+  } else {
+    btn.classList.add('incorrect');
+    btn.textContent = '❌ ' + btn.textContent;
+    const correctBtn = document.querySelector(`.qbtn[data-q="${q}"][data-correct="true"]`);
+    if (correctBtn) correctBtn.textContent = '✅ ' + correctBtn.textContent;
+  }
+  const fb = document.getElementById('fb' + q);
+  const info = feedbacks[parseInt(q)];
+  fb.className = 'qfeedback ' + (isCorrect ? 'ok' : 'bad');
+  fb.style.display = 'block';
+  fb.textContent = isCorrect ? '✅ ¡Correcto! ' + info.ok : '❌ Incorrecto. ' + info.bad;
+  answered++;
+  if (isCorrect) correct++;
+  const pct = Math.round((correct / 10) * 100);
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('prog-text').textContent = `Pregunta ${answered} de 10 respondidas · Aciertos: ${correct}/10`;
+  if (answered === 10) {
+    const panel = document.getElementById('results-panel');
+    const score = document.getElementById('results-score');
+    const msg = document.getElementById('results-msg');
+    score.textContent = `Resultado: ${correct} / 10 correctas`;
+    if (correct <= 4) { panel.className = 'low'; msg.textContent = 'Necesitas repasar el material. Revisa las secciones de sistemas del motor y mantenimiento.'; }
+    else if (correct <= 7) { panel.className = 'mid'; msg.textContent = '¡Buen avance, sigue repasando! Refuerza los sistemas de admisión, alimentación y eléctrico.'; }
+    else { panel.className = 'high'; msg.textContent = '¡Excelente dominio del tema! Estás bien preparado para el examen de Mecanización Agrícola.'; }
+    panel.style.display = 'block';
+  }
+});
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('prog-text').textContent = 'Pregunta 0 de 10 respondidas · Aciertos: 0/10';
+  document.getElementById('results-panel').style.display = 'none';
+  for (let i = 1; i <= 10; i++) {
+    const fb = document.getElementById('fb' + i);
+    fb.style.display = 'none'; fb.className = 'qfeedback'; fb.textContent = '';
+    document.querySelectorAll(`.qbtn[data-q="${i}"]`).forEach(b => {
+      b.disabled = false;
+      b.className = 'qbtn';
+      const origText = b.textContent.replace(/^[✅❌] /,'');
+      b.textContent = origText;
+    });
+  }
+}
+</script>

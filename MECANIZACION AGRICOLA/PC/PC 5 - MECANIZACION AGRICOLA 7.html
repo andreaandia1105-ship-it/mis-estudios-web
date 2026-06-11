@@ -1,0 +1,631 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;}
+.title-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px;}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.title-bar p{font-size:11px;color:#94a3b8;margin-bottom:8px;}
+.tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(125,211,252,0.15);color:#7dd3fc;border:0.5px solid rgba(125,211,252,0.3);}
+.sec-bar{grid-column:1/-1;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:7px 13px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--color-text-primary);}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.bh-blue{background:#dbeafe;color:#1e3a8a;}
+.bh-green{background:#dcfce7;color:#14532d;}
+.bh-yellow{background:#fef9c3;color:#713f12;}
+.bh-teal{background:#ccfbf1;color:#134e4a;}
+.bh-purple{background:#ede9fe;color:#4c1d95;}
+.bh-orange{background:#ffedd5;color:#7c2d12;}
+.bh-red{background:#fee2e2;color:#991b1b;}
+.bh-gray{background:#f1f5f9;color:#334155;}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd;}
+.bh-green{background:#14532d;color:#86efac;}
+.bh-yellow{background:#422006;color:#fef08a;}
+.bh-teal{background:#042f2e;color:#5eead4;}
+.bh-purple{background:#2e1065;color:#c4b5fd;}
+.bh-orange{background:#431407;color:#fed7aa;}
+.bh-red{background:#450a0a;color:#fca5a5;}
+.bh-gray{background:#1e293b;color:#94a3b8;}
+}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5;}
+.def-blue{border-left:3px solid #3b82f6;}
+.def-green{border-left:3px solid #22c55e;}
+.def-yellow{border-left:3px solid #eab308;}
+.def-teal{border-left:3px solid #14b8a6;}
+.def-purple{border-left:3px solid #8b5cf6;}
+.def-orange{border-left:3px solid #f97316;}
+.def-red{border-left:3px solid #ef4444;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.dot-blue{background:#3b82f6;}
+.dot-green{background:#22c55e;}
+.dot-yellow{background:#eab308;}
+.dot-teal{background:#14b8a6;}
+.dot-purple{background:#8b5cf6;}
+.dot-orange{background:#f97316;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:6px;line-height:1.5;}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa;}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.5;}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#a16207;}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:6px;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:6px;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0;}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);text-align:left;font-weight:600;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;color:var(--color-text-primary);}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:3px 0;}
+.stat-bar-fill{height:100%;border-radius:20px;}
+.nb{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+.nb-b{background:#dbeafe;color:#1e3a8a;}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;line-height:1.6;}
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px;}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:8px;padding:10px 14px;margin-bottom:14px;}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;}
+.quiz-header p{font-size:11px;color:#94a3b8;}
+.qcard{margin-bottom:14px;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary);}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif;}
+.qtext{font-size:12.5px;color:var(--color-text-primary);margin-bottom:8px;font-weight:500;line-height:1.5;}
+.qopts{display:flex;flex-direction:column;gap:5px;}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif;}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary);}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn.show-correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+@media(prefers-color-scheme:dark){.qfeedback.ok{background:#14532d;color:#86efac;} .qfeedback.fail{background:#450a0a;color:#fca5a5;}}
+.progress-bar{margin-bottom:12px;}
+.progress-bar p{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;}
+#results-panel{display:none;border-radius:10px;padding:12px 14px;margin-top:12px;font-size:12px;line-height:1.5;}
+.results-red{background:#fee2e2;color:#991b1b;}
+.results-yellow{background:#fef9c3;color:#713f12;}
+.results-green{background:#dcfce7;color:#14532d;}
+@media(prefers-color-scheme:dark){.results-red{background:#450a0a;color:#fca5a5;} .results-yellow{background:#422006;color:#fef08a;} .results-green{background:#14532d;color:#86efac;}}
+#reset-btn{margin-top:8px;background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:12px;cursor:pointer;font-family:'Source Sans 3',sans-serif;}
+</style>
+
+<div class="cv">
+
+<div class="title-bar">
+  <h1>🚜 Sistema de Transmisión y Dimensiones del Tractor</h1>
+  <p>Mecanización Agrícola — Ing. Luis Alberto Altamirano Chunga · UNALM · Facultad de Ingeniería Agrícola</p>
+  <div class="tags">
+    <span class="tag">Sistema de Transmisión</span>
+    <span class="tag">Embrague</span>
+    <span class="tag">Caja de Cambios</span>
+    <span class="tag">Diferencial</span>
+    <span class="tag">TDF / PTO</span>
+    <span class="tag">Eje Cardán</span>
+    <span class="tag">Trocha y Batalla</span>
+    <span class="tag">Dimensiones del Tractor</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: FLUJO DE TRANSMISIÓN -->
+<div class="sec-bar">⚙️ Cadena de Transmisión: Del Motor a las Ruedas (Diap. 4–6, 17)</div>
+
+<div class="block s3">
+  <span class="bh bh-blue">Flujo de Potencia del Tractor</span>
+  <div class="flow">
+    <div class="fbox">🔥 Motor (cigüeñal)</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Volante de inercia</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Embrague</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Caja de cambios</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Diferencial</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Semipalier + Reducción final</div>
+    <span class="farrow">→</span>
+    <div class="fbox">🔵 Ruedas motrices</div>
+  </div>
+  <div class="def def-blue" style="margin-top:8px;">
+    El sistema de transmisión es el conjunto de mecanismos que toma la energía mecánica del motor (en forma de rotación del cigüeñal) y la transforma en movimiento útil en las ruedas. Cada componente cumple una función específica: adaptar velocidad, multiplicar torque y distribuir la potencia.
+  </div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Volante de inercia:</b> Almacena energía cinética para suavizar los impulsos irregulares del motor de combustión interna, garantizando una rotación más uniforme.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Eje primario de transmisión (n<sub>m</sub>):</b> Conduce la potencia del motor hacia la caja de cambios. Su velocidad es idéntica a la del motor cuando el embrague está acoplado.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Eje secundario (n<sub>b</sub>):</b> Salida de la caja de cambios hacia el grupo cónico-diferencial. Su velocidad varía según la marcha seleccionada.</span></div>
+</div>
+
+<!-- SECCIÓN 2: EMBRAGUE -->
+<div class="sec-bar">🔗 El Embrague (Diap. 7–10, 13)</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Función y Principio del Embrague</span>
+  <div class="def def-teal">
+    El embrague es el dispositivo que conecta o desconecta el movimiento del motor hacia la caja de cambios. Funciona por fricción: cuando el pedal NO está pisado, un resorte (o diafragma) presiona el disco contra el volante transmitiendo el par motor; al pisar el pedal, se separan y el motor gira en vacío.
+  </div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Disco de embrague:</b> Pieza con guarnición de fricción que se interpone entre el volante y el plato de presión. Es el componente más sometido a desgaste.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Plato de presión:</b> Ejerce fuerza sobre el disco mediante resortes o diafragma. Solidario al volante en rotación.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Collarín (cojinete de desembrague):</b> Al pisar el pedal, empuja las palancas de desembrague y libera la presión sobre el disco.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Muelles antivibración:</b> Amortiguan los choques torsionales en el disco, protegiendo la caja de cambios.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique la diferencia funcional entre el collarín de desembrague y el plato de presión, y describa qué ocurre mecánicamente cuando el operador pisa el pedal del embrague al iniciar el movimiento del tractor.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Tipos de Embrague (Diap. 10)</span>
+  <div class="def def-purple">Según el tipo de acoplamiento y su aplicación en el tractor, existen 6 tipos. La elección depende del uso: transmisión principal, TDF, tracción doble o alta potencia.</div>
+  <div class="three" style="margin-top:8px;">
+    <div class="mini" style="border-top:3px solid #8b5cf6;">
+      <b>Monodisco seco</b><br>El más común. Un solo disco de fricción operando en seco. Para transmisión principal estándar.
+    </div>
+    <div class="mini" style="border-top:3px solid #8b5cf6;">
+      <b>Doble disco seco</b><br>Permite manejar simultáneamente la transmisión principal y la TDF desde un solo mecanismo.
+    </div>
+    <div class="mini" style="border-top:3px solid #8b5cf6;">
+      <b>Discos múlt. húmedo</b><br>Disco(s) bañados en aceite. Mayor capacidad calorífica. Usado en orugas, doble tracción y TDF en tractores pesados.
+    </div>
+  </div>
+  <div class="two" style="margin-top:7px;">
+    <div class="mini" style="border-top:3px solid #8b5cf6;">
+      <b>Monodisco/Doble húmedo</b><br>Transmisión principal más TDF simultánea.
+    </div>
+    <div class="mini" style="border-top:3px solid #8b5cf6;">
+      <b>Embrague hidráulico</b><br>Tractores de alta potencia. Sin contacto mecánico directo, reduce desgaste.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "embrague húmedo" con "embrague hidráulico". El húmedo usa discos bañados en aceite por fricción; el hidráulico transmite potencia por fluido a presión, sin contacto directo entre discos.</div>
+</div>
+
+<!-- SECCIÓN 3: CAJA DE CAMBIOS -->
+<div class="sec-bar">⚡ Caja de Cambios (Diap. 11–12, 15)</div>
+
+<div class="block s2">
+  <span class="bh bh-yellow">Función y Tipos de Caja de Cambios</span>
+  <div class="def def-yellow">
+    La caja de cambios permite al operador seleccionar diferentes relaciones de velocidad entre el motor y las ruedas. En tractores agrícolas esto es crítico: distintas labores requieren velocidades muy distintas (0.5 mph para plantación de precisión hasta 25 mph para transporte).
+  </div>
+  <div class="item"><span class="dot dot-yellow"></span><span><b>Eje primario (motor):</b> Recibe el movimiento del embrague. Tiene piñones fijos que engrana con el eje secundario.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><b>Eje secundario:</b> Lleva piñones desplazables accionados por horquillas que se seleccionan con la palanca de cambios. Cada par de piñones da una relación de reducción distinta.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><b>Piñón de vacío (marcha atrás):</span> Piñón intermediario que invierte el sentido de giro del eje secundario, logrando la marcha reversa sin modificar el motor.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><b>Grupo reductor (largas-cortas):</span> Un bloque reductor adicional que multiplica el número de marchas disponibles, típico en tractores con 12+ velocidades.</span></div>
+  <div class="rx">Relación transmisión = n_motor / n_rueda = Z_corona / Z_piñón<br>Mayor relación → menor velocidad, mayor fuerza de tracción</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Datos de Diseño de Transmisión (Diap. 15)</span>
+  <p style="font-size:11px;color:var(--color-text-secondary);margin-bottom:6px;">Horas de operación según velocidad y % de carga máxima:</p>
+  <table class="tbl">
+    <tr><th>Velocidad</th><th>Rango (mph)</th><th>H. Totales</th></tr>
+    <tr><td>Baja</td><td>1.5 – 3</td><td>600</td></tr>
+    <tr><td>Despacio</td><td>3.0 – 5.0</td><td>5100</td></tr>
+    <tr><td>Media</td><td>5.0 – 9.0</td><td>2200</td></tr>
+    <tr><td>Alta</td><td>10 – 25</td><td>600</td></tr>
+    <tr><td>Reversa</td><td>0.5 – 5.0</td><td>300</td></tr>
+    <tr><td>Horas motor</td><td>—</td><td>10,000</td></tr>
+  </table>
+  <div class="warn">⚠️ La velocidad "Despacio" acumula 5,100h de las 10,000h totales (51%). Esto indica que la mayor parte del trabajo agrícola ocurre en labores lentas como labranza, siembra y cosecha. El diseño de la transmisión debe priorizar la durabilidad a bajas velocidades y alta carga.</div>
+  <div class="exam">🎯 EXAMEN: Un tractor opera 75% del tiempo a velocidad "despacio" con 95% de carga máxima. ¿Por qué esto condiciona el diseño de la caja de cambios y qué implicancias tiene para la selección del tipo de embrague más adecuado?</div>
+</div>
+
+<!-- SECCIÓN 4: DIFERENCIAL -->
+<div class="sec-bar">🔄 Diferencial y Reducción Final (Diap. 17–19)</div>
+
+<div class="block s2">
+  <span class="bh bh-green">El Diferencial: Piñón, Corona y Satélites</span>
+  <div class="def def-green">
+    El diferencial permite que las dos ruedas del mismo eje giren a velocidades diferentes al tomar una curva. Sin él, en una curva la rueda exterior (que recorre más camino) y la interior quedarían forzadas a girar igual, causando deslizamiento y desgaste excesivo del suelo agrícola.
+  </div>
+  <div class="flow">
+    <div class="fbox">Eje secundario (caja)</div><span class="farrow">→</span>
+    <div class="fbox">Piñón de ataque</div><span class="farrow">→</span>
+    <div class="fbox">Corona (bevel gear)</div><span class="farrow">→</span>
+    <div class="fbox">Satélites planetarios</div><span class="farrow">→</span>
+    <div class="fbox">Semiejes / Palieres</div><span class="farrow">→</span>
+    <div class="fbox">Ruedas</div>
+  </div>
+  <div class="item" style="margin-top:8px;"><span class="dot dot-green"></span><span><b>Piñón cónico (de ataque):</b> Recibe la potencia del eje secundario de la caja de cambios y transmite a la corona mediante engranaje cónico, cambiando 90° la dirección de rotación.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Corona:</b> Engranaje cónico de mayor diámetro que realiza la reducción final de velocidad antes de los semiejes.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Satélites:</b> Piñones dentro de la caja del diferencial que se reparten entre los dos palieres. Al ir en línea recta, no rotan sobre sí mismos; en curva, rotan para compensar velocidades.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Semiejes (palieres):</b> Transmiten finalmente el movimiento a cada rueda. En curva: rueda exterior = R+m; rueda interior = R−m (siendo R el radio de giro y m el semiancho de la trocha).</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Reducción Final y Pérdidas de Potencia</span>
+  <div class="def def-green">Cada par de engranajes genera pérdidas por fricción. Los coeficientes de transmisión determinan cuánta potencia del motor llega efectivamente a cada punto de trabajo.</div>
+  <p style="font-size:11px;color:var(--color-text-secondary);margin:6px 0 3px;">Eficiencia por punto de medición:</p>
+  <div class="item"><span class="dot dot-green"></span><span><b>Motor → TDF:</b> 0.87 – 0.90 × PM</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Motor → Transmisión:</b> 0.96 – 0.98</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Transmisión → Eje:</b> 0.85 – 0.89</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Motor → Barra de tiro:</b> 0.75 – 0.81 × PM</span></div>
+  <div class="rx">P_TDF = (0.87 – 0.90) × PM<br>P_Barra de Tiro = (0.75 – 0.81) × PM<br>Pérdida por par de engranajes: 3–4%</div>
+  <div class="warn">⚠️ La barra de tiro solo recibe 75–81% de la potencia del motor. Esto significa que un tractor de 100 HP entrega solo 75–81 HP al implemento. Por eso la potencia al freno (PM) no es el indicador operativo más importante: lo es la potencia a la barra de tiro.</div>
+  <div class="exam">🎯 EXAMEN: Si un tractor tiene una potencia de motor de 120 HP, ¿cuál es el rango de potencia esperado en la barra de tiro y en la TDF? Indique qué componentes del sistema de transmisión explican esas pérdidas.</div>
+</div>
+
+<!-- SECCIÓN 5: TDF -->
+<div class="sec-bar">🔌 Toma de Fuerza — TDF / PTO (Diap. 26–30, 34)</div>
+
+<div class="block s2">
+  <span class="bh bh-orange">Definición y Norma ASAE de la TDF</span>
+  <div class="def def-orange">
+    La Toma de Fuerza (TDF, o PTO en inglés — Power Take Off) es un eje estriado ubicado en la parte trasera del tractor que transmite la potencia del motor en forma de rotación directamente a los implementos agrícolas acoplados. Es el medio por el cual el tractor "alimenta" a las máquinas sembradoras, empacadoras, molinos, bombas de riego, etc.
+  </div>
+  <div class="item"><span class="dot dot-orange"></span><span><b>Norma ASAE S203.8:</b> Estandariza dimensiones y velocidades para garantizar compatibilidad universal entre tractor e implemento de cualquier fabricante.</span></div>
+  <div class="two" style="margin-top:6px;">
+    <div class="mini" style="border-left:3px solid #f97316;">
+      <b>TDF de 540 RPM</b><br>Eje con 6 estrías. Norma: 540 ± 10 rpm. Para implementos de baja a media potencia: segadoras, esparcidoras pequeñas.
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316;">
+      <b>TDF de 1000 RPM</b><br>Eje con 21 estrías. Norma: 1000 ± 25 rpm. Para implementos de mayor potencia: empacadoras grandes, bombas de alta capacidad.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir el número de estrías con la velocidad de trabajo. Son 6 estrías → 540 rpm y 21 estrías → 1000 rpm. Un implemento diseñado para 1000 rpm NO puede conectarse al eje de 6 estrías (el gorrón no encaja), y viceversa.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">TDF Independiente vs. Dependiente (Diap. 30)</span>
+  <div class="def def-orange">La diferencia crítica es si la TDF se detiene o no cuando se pisa el embrague para cambiar marcha o frenar el avance.</div>
+  <div class="mini" style="border-left:3px solid #22c55e;margin-top:6px;">
+    <b>TDF Independiente ✅</b><br>El eje TDF tiene su propio embrague (usa embrague de dos discos). Las rpm del TDF dependen solo de las rpm del motor, independientemente de la marcha o si el tractor está detenido. Ideal para bombas de riego y molinos estacionarios.
+  </div>
+  <div class="mini" style="border-left:3px solid #ef4444;margin-top:6px;">
+    <b>TDF Dependiente ⚠️</b><br>El eje TDF y el eje primario de la caja de cambios son accionados por el mismo disco de embrague único. Al pisar el pedal para cambiar marcha, la TDF también se detiene. Riesgo de pérdida de trabajo en implementos continuos.
+  </div>
+  <div class="exam">🎯 EXAMEN: Un agricultor necesita operar una empacadora de forraje que requiere rotación continua mientras el tractor avanza y se detiene frecuentemente. ¿Qué tipo de TDF debería tener el tractor y por qué? ¿Qué consecuencias tendría usar una TDF dependiente en esta situación?</div>
+</div>
+
+<!-- SECCIÓN 6: EJE CARDÁN -->
+<div class="sec-bar">🔩 Eje Cardán (Diap. 32–35)</div>
+
+<div class="block s2">
+  <span class="bh bh-purple">Función e Instalación Correcta del Cardán</span>
+  <div class="def def-purple">
+    El eje cardán (o árbol de transmisión con juntas universales) conecta la TDF del tractor con el implemento, permitiendo transmitir potencia incluso cuando ambos forman ángulos entre sí (por desniveles del terreno o maniobras de giro). Es el elemento de unión mecánica entre el tractor y la máquina acoplada.
+  </div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Junta cardán (universal):</b> Permite cambios de ángulo entre los ejes. Sin embargo, transmite velocidad angular NO uniforme cuando el ángulo no es 0°. Para compensar esto, se usan dos juntas en los extremos.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Regla de montaje (Fig. 7.76):</b> Las dos juntas cardán de los extremos del árbol de transmisión deben montarse "en fase" — los horquillas de ambos extremos deben estar en el mismo plano. El montaje incorrecto (fuera de fase) genera vibraciones, ruido y desgaste prematuro.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Capuchón protector:</b> La norma de seguridad exige que el eje cardán siempre opere con su capuchón protector colocado. El eje gira a 540–1000 rpm y puede causar accidentes graves.</span></div>
+  <div class="flow">
+    <div class="fbox">TDF del tractor</div><span class="farrow">→</span>
+    <div class="fbox">Junta cardán 1</div><span class="farrow">→</span>
+    <div class="fbox">Árbol telescópico</div><span class="farrow">→</span>
+    <div class="fbox">Junta cardán 2</div><span class="farrow">→</span>
+    <div class="fbox">Implemento</div>
+  </div>
+  <div class="warn">⚠️ Un cardán montado "MAL" (horquillas fuera de fase) genera velocidad angular variable en el eje de entrada del implemento, causando vibraciones que dañan engranajes y rodamientos. La figura 7.76 ilustra explícitamente el montaje correcto vs. incorrecto.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el eje cardán utiliza dos juntas universales en sus extremos y cuál es la condición de montaje que deben cumplir para garantizar velocidad angular uniforme en la transmisión de potencia al implemento.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Usos del Cardán y la TDF (Diap. 34)</span>
+  <div class="def def-purple">La TDF con eje cardán amplía enormemente las funciones del tractor más allá del simple desplazamiento.</div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Estacionario + TDF:</b> Tractor parado, TDF activa. Bombas de riego, molinos de piensos, generadores.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Estacionario + hidráulico:</b> Elevadores de grano mediante el sistema hidráulico del tractor.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Combinado (transporte + TDF):</b> Tractor en movimiento con TDF activa. Empacadoras, remolques distribuidores de estiércol. Es el uso más exigente para la TDF.</span></div>
+</div>
+
+<!-- SECCIÓN 7: DIMENSIONES Y TROCHA -->
+<div class="sec-bar">📐 Dimensiones del Tractor y Variación de Trocha (Diap. 21–25)</div>
+
+<div class="block">
+  <span class="bh bh-gray">Dimensiones del Tractor</span>
+  <div class="def def-blue">Las 6 dimensiones básicas del tractor definen su compatibilidad con el terreno, cultivos y equipos. Son determinantes para la selección del tractor adecuado en cada sistema de producción.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>A — Distancia entre ejes (Batalla):</b> Distancia entre el eje delantero y trasero. Afecta estabilidad y radio de giro.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>B — Alto total:</b> Relevante para trabajar bajo cultivos en espaldera o en galpones.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>C — Largo total:</b> Condiciona el radio de maniobra en cabeceras.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>D — Despeje:</b> Altura libre entre la parte más baja del tractor y el suelo. Fundamental para no dañar cultivos.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>E — Trocha delantera:</b> Separación entre centros de ruedas delanteras.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>F — Trocha trasera:</b> Separación entre centros de ruedas traseras. Ajustable en la mayoría de modelos.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Trocha y Batalla</span>
+  <div class="def def-teal"><b>Trocha:</b> Distancia entre los centros de las ruedas en un mismo eje. Puede ser fija o ajustable.</div>
+  <div class="def def-teal" style="margin-top:5px;"><b>Batalla:</b> Distancia entre el eje delantero y trasero del tractor.</div>
+  <div class="def def-blue" style="margin-top:5px;"><b>Despeje:</b> Distancia entre la parte más baja del tractor y el suelo (guarda con el suelo).</div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "trocha" con "batalla". La trocha es LATERAL (entre ruedas del mismo eje), la batalla es LONGITUDINAL (entre ejes). En cultivos en hilera como maíz o caña, la trocha debe coincidir con el espaciado entre surcos para evitar dañar las plantas.</div>
+  <div class="exam">🎯 EXAMEN: Un agricultor cultiva maíz con surcos separados 0.80 m. Explique qué dimensión del tractor debe ajustar para realizar labores de aporque sin dañar el cultivo, y describa el mecanismo que permite ese ajuste.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Variación de Trocha (Diap. 24–25)</span>
+  <div class="def def-teal">La trocha ajustable permite adaptar el tractor a distintos anchos de surco sin cambiar de máquina. Esto es clave en agricultura diversificada peruana donde se trabajan diferentes cultivos en la misma unidad.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Método por posición del disco en el aro:</b> Invirtiendo el disco de la rueda en el aro se obtienen hasta 8 posiciones distintas de trocha (Fig. 24 del PDF).</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Trocha 1 vs Trocha 2:</b> El ajuste cambia el ancho total del tractor, afectando estabilidad lateral (mayor trocha = mayor estabilidad pero mayor pisoteo de surcos).</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Semiejes extensibles:</b> Algunos tractores permiten deslizar el semieje para modificar trocha sin desmontar la rueda completa.</span></div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="sec-bar">📊 Tabla Integradora: Resumen de Todos los Componentes</div>
+
+<div class="block s3">
+  <span class="bh bh-gray">Vista Completa del Sistema de Transmisión</span>
+  <table class="tbl">
+    <tr>
+      <th>Componente</th>
+      <th>Función Principal</th>
+      <th>Tipos / Variantes</th>
+      <th>Parámetro Clave</th>
+      <th>Importancia Agronómica</th>
+    </tr>
+    <tr>
+      <td><b>Embrague</b></td>
+      <td>Conectar/desconectar motor de caja de cambios</td>
+      <td>Monodisco seco, doble disco, múltiple húmedo, hidráulico</td>
+      <td>Par de fricción máximo transmitido</td>
+      <td>Permite cambiar marchas sin detener el motor; protege la transmisión</td>
+    </tr>
+    <tr>
+      <td><b>Caja de Cambios</b></td>
+      <td>Seleccionar relación velocidad/fuerza</td>
+      <td>Sincronizada, con grupo reductor, creeper</td>
+      <td>N° de marchas; rango 0.5–25 mph</td>
+      <td>Adapta velocidad de avance a cada labor: labranza, siembra, transporte</td>
+    </tr>
+    <tr>
+      <td><b>Diferencial</b></td>
+      <td>Permitir velocidades distintas entre ruedas</td>
+      <td>Abierto, bloqueado (diff-lock), LSD</td>
+      <td>Radio de giro R ± m</td>
+      <td>Permite curvas en cabecera sin dañar suelo; diff-lock para barro</td>
+    </tr>
+    <tr>
+      <td><b>Reducción Final</b></td>
+      <td>Última multiplicación de torque</td>
+      <td>Por engranes cónicos (piñón + corona)</td>
+      <td>Eficiencia 0.92–0.93</td>
+      <td>Determina la fuerza de tracción disponible en las ruedas</td>
+    </tr>
+    <tr>
+      <td><b>TDF / PTO</b></td>
+      <td>Transmitir potencia a implementos</td>
+      <td>Independiente (2 discos), Dependiente (1 disco)</td>
+      <td>540 rpm (6 estrías) / 1000 rpm (21 estrías)</td>
+      <td>Acciona empacadoras, bombas, sembradoras de precisión</td>
+    </tr>
+    <tr>
+      <td><b>Eje Cardán</b></td>
+      <td>Conectar TDF al implemento con ángulo variable</td>
+      <td>Simple, doble, telescópico</td>
+      <td>Montaje en fase (horquillas alineadas)</td>
+      <td>Permite trabajo en terreno irregular sin desconectar implemento</td>
+    </tr>
+    <tr>
+      <td><b>Trocha</b></td>
+      <td>Ancho de vía entre ruedas del mismo eje</td>
+      <td>Fija, ajustable (8 posiciones)</td>
+      <td>Debe coincidir con espaciado de surcos</td>
+      <td>Adapta tractor al cultivo: maíz (80cm), caña, vid, papa</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La potencia disponible en cada punto disminuye progresivamente. De la PM del motor, solo 75–81% llega a la barra de tiro (transporte + tracción) y 87–90% a la TDF. Cada par de engranajes consume 3–4%. Por eso elegir el componente adecuado (tipo de embrague, caja, TDF) no es solo mecánico: define la eficiencia energética de toda la operación agrícola.</div>
+</div>
+
+<!-- QUIZ SECTION -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+
+  <div class="progress-bar">
+    <p id="progress-text">Respondidas: 0 / 10 &nbsp;|&nbsp; Aciertos: 0</p>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="progress-fill" style="width:0%;background:#22c55e;"></div></div>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la función principal del volante de inercia en el sistema de transmisión del tractor?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Multiplicar el par motor para las labores de labranza profunda</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) Conectar y desconectar el motor de la caja de cambios mediante fricción</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) Almacenar energía cinética y suavizar los impulsos irregulares del motor</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Cambiar la dirección de giro del eje para la marcha atrás</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Según la tabla de datos de diseño de transmisiones, ¿en qué rango de velocidad opera el tractor la mayor cantidad de horas totales (5,100 h)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) Velocidad baja (1.5–3 mph) para labores de labranza profunda</button>
+      <button class="qbtn" data-q="2" data-correct="true">B) Velocidad despacio (3.0–5.0 mph) para siembra, aporque y cosecha</button>
+      <button class="qbtn" data-q="2" data-correct="false">C) Velocidad media (5.0–9.0 mph) para labores de preparación superficial</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) Velocidad alta (10–25 mph) para transporte de productos al mercado</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Un tractor con embrague monodisco seco pisa el pedal del embrague para cambiar marcha. En ese instante, ¿qué ocurre con la TDF si el tractor tiene TDF dependiente?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) La TDF continúa girando a las mismas rpm porque tiene su propio circuito</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) La TDF aumenta sus rpm al liberarse del embrague principal</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) La TDF se detiene junto con la transmisión al usar el mismo embrague único</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) La TDF pasa automáticamente a modo estacionario a 540 rpm fijas</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">Según la norma ASAE S203.8, ¿qué combinación de número de estrías y velocidad de rotación corresponde a la TDF estándar de alta velocidad para implementos de mayor potencia?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) 6 estrías a 1000 ± 25 rpm</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) 21 estrías a 540 ± 10 rpm</button>
+      <button class="qbtn" data-q="4" data-correct="true">C) 21 estrías a 1000 ± 25 rpm</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) 6 estrías a 540 ± 25 rpm</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál es la condición de montaje CORRECTA del eje cardán con dos juntas universales para garantizar velocidad angular uniforme en el implemento?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Los ángulos de las dos juntas deben ser iguales pero en planos perpendiculares</button>
+      <button class="qbtn" data-q="5" data-correct="true">B) Las horquillas de ambos extremos deben estar en el mismo plano (montaje en fase)</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) La junta del lado del tractor debe tener mayor ángulo que la del implemento</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) El eje debe ser horizontal y sin ángulo en ambas juntas en todo momento</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el diferencial del tractor es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) Permite que la rueda exterior recorra más distancia que la interior en una curva</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) El piñón cónico cambia 90° la dirección de la transmisión de potencia</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) En línea recta, los satélites giran sobre sí mismos distribuyendo velocidades iguales</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Los satélites solo rotan sobre sí mismos cuando el tractor toma una curva</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Un agricultor en La Libertad cultiva espárrago en surcos separados 1.80 m. ¿Qué dimensión del tractor debe ajustar para realizar el aporque sin pisotear las plantas y cómo se llama esa dimensión?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Ajustar la batalla modificando la longitud del bastidor del tractor</button>
+      <button class="qbtn" data-q="7" data-correct="true">B) Ajustar la trocha trasera para que coincida con el espaciado entre surcos</button>
+      <button class="qbtn" data-q="7" data-correct="false">C) Reducir el despeje del tractor para mejorar la estabilidad lateral en surcos</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Ajustar el alto total del tractor para no dañar las plantas en crecimiento</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Si un tractor tiene una potencia de motor (PM) de 100 HP, ¿cuál es el rango esperado de potencia disponible en la barra de tiro según los coeficientes de pérdida del sistema?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) 96 – 98 HP, ya que la mayor parte se pierde en el diferencial</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) 87 – 90 HP, igual que la eficiencia de la TDF</button>
+      <button class="qbtn" data-q="8" data-correct="false">C) 85 – 89 HP, por pérdidas en la transmisión y eje juntos</button>
+      <button class="qbtn" data-q="8" data-correct="true">D) 75 – 81 HP, acumulando pérdidas en embrague, caja, diferencial y ruedas</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Por qué el embrague de discos múltiples húmedo es preferido frente al monodisco seco en tractores de orugas o de alta potencia?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Porque elimina completamente las pérdidas por fricción al no haber contacto físico</button>
+      <button class="qbtn" data-q="9" data-correct="true">B) Porque el aceite disipa el calor generado por la fricción, aumentando la vida útil en aplicaciones de alta carga y frenado continuo</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) Porque es más simple de fabricar y mantener que el monodisco seco estándar</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Porque solo puede usarse en tractores de ruedas, no en tractores de orugas</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia entre "trocha" y "batalla" en las dimensiones del tractor?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) La trocha es la distancia entre ejes y la batalla es la separación entre ruedas del mismo eje</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) La trocha es la altura libre del suelo y la batalla es el ancho total del tractor</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) La trocha es la distancia entre centros de ruedas del mismo eje; la batalla es la distancia entre el eje delantero y el trasero</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) Ambas son iguales en tractores de igual trocha delantera y trasera</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="results-panel"></div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">
+    Ortiz, D. (2009). Mecanización Agrícola. · 
+    ASAE Standard S203.8 — Dimensiones y velocidades TDF. · 
+    Altamirano Chunga, L.A. — Presentación 7ma: Sistema de Transmisión y Dimensiones del Tractor. UNALM, Facultad de Ingeniería Agrícola. · 
+    LearnEngineering.org — Diferenciales y embragues (material complementario).
+  </span>
+</div>
+
+</div>
+
+<script>
+const feedbackData = {
+  1:{correct:'C',ok:'El volante de inercia actúa como acumulador de energía cinética rotacional. Dado que los pistones del motor impulsan el cigüeñal de manera intermitente (cada vez que hay combustión), el volante almacena esa energía y la libera uniformemente, evitando que el motor "tirone".',fail:'Incorrecto. La función de multiplicar torque corresponde a la caja de cambios; conectar/desconectar corresponde al embrague; invertir giro lo hace el piñón intermediario de marcha atrás.'},
+  2:{correct:'B',ok:'La velocidad "despacio" (3–5 mph) acumula 5,100 h de las 10,000 h totales del tractor (51%). Esto refleja que la mayor parte del trabajo agrícola — siembra, aporque, cosecha mecanizada — ocurre a velocidades lentas y alta carga.',fail:'Incorrecto. La velocidad "Despacio" (3.0–5.0 mph) es la dominante con 5,100h totales, seguida de Velocidad Media (2,200h). Baja y Alta solo suman 600h cada una.'},
+  3:{correct:'C',ok:'En la TDF dependiente, el eje TDF y el eje primario de la caja de cambios comparten el mismo disco único del embrague. Al pisar el pedal para cambiar marcha, se interrumpe simultáneamente la transmisión Y la TDF. Esto es problemático en implementos de flujo continuo.',fail:'Incorrecto. Solo la TDF independiente puede mantener su rotación al cambiar marchas, pues tiene su propio embrague secundario accionado por palanca.'},
+  4:{correct:'C',ok:'Norma ASAE S203.8: ejes con 21 estrías giran a 1000 ± 25 rpm. El mayor número de estrías distribuye mejor el torque a alta velocidad. Los ejes de 6 estrías son para 540 ± 10 rpm, usados en implementos más ligeros.',fail:'Incorrecto. La norma ASAE establece claramente: 6 estrías = 540 rpm; 21 estrías = 1000 rpm. Son dos estándares distintos con gorrón diferente, no intercambiables.'},
+  5:{correct:'B',ok:'El principio de la doble junta cardán es que los errores angulares de velocidad de la primera junta se anulan exactamente con la segunda junta, pero solo si las horquillas de ambos extremos están en el mismo plano (en fase). Si están desfasadas, las fluctuaciones se suman en vez de cancelarse.',fail:'Incorrecto. La condición clave es el "montaje en fase": ambas horquillas alineadas en el mismo plano, independientemente del ángulo de trabajo. Solo así se logra velocidad angular uniforme en salida.'},
+  6:{correct:'C',ok:'En línea recta, los satélites NO giran sobre sí mismos — giran solidariamente con la caja del diferencial como una unidad rígida, transmitiendo igual velocidad a ambas ruedas. Solo cuando hay diferencia de resistencia (curva, barro) los satélites empiezan a rodar sobre los planetarios.',fail:'Incorrecto. La afirmación falsa es la C: en línea recta los satélites giran solidarios con la caja SIN rodar sobre sí mismos. Solo en curvas o con deslizamiento giran individualmente.'},
+  7:{correct:'B',ok:'La trocha trasera es la dimensión a ajustar para adaptar el tractor al espaciado entre surcos. En espárrago con 1.80 m entre surcos, la trocha trasera debe configurarse en ese valor o múltiplos. Se logra invirtiendo el disco en el aro o desplazando semiejes extensibles.',fail:'Incorrecto. La batalla es la dimensión longitudinal (entre ejes). El despeje es la altura libre del suelo. La trocha (dimensión lateral entre ruedas) es lo que determina si el tractor circula entre surcos sin pisarlos.'},
+  8:{correct:'D',ok:'La potencia en barra de tiro P_BT = (0.75–0.81) × PM. Para 100 HP: 75–81 HP. Esto acumula pérdidas en embrague (~2-4%), caja de cambios (8–15%), diferencial y reducción final (7–8%), y deslizamiento de ruedas. Cada par de engranajes consume 3–4%.',fail:'Incorrecto. La barra de tiro es el punto con mayor acumulación de pérdidas: P_BT = 0.75–0.81 × PM. La TDF tiene mejor eficiencia (0.87–0.90) porque el camino de transmisión es más corto.'},
+  9:{correct:'B',ok:'En tractores de orugas (giro por frenos de dirección) y alta potencia, el embrague trabaja bajo calor intenso y carga continua. El aceite actúa como refrigerante y lubricante, disipando el calor de fricción y evitando el desgaste prematuro de las guarniciones. También permite mayor superficie de contacto con múltiples discos.',fail:'Incorrecto. El embrague húmedo sí tiene contacto físico entre discos — lo que cambia es el medio (aceite en lugar de seco). No elimina fricción; la gestiona térmicamente. Y sí se usa en orugas.'},
+  10:{correct:'C',ok:'Trocha = distancia lateral entre centros de ruedas del mismo eje (delantera o trasera). Batalla = distancia longitudinal entre el eje delantero y el trasero. Son conceptos ortogonales: trocha define el ancho de vía; batalla define la longitud entre ejes.',fail:'Incorrecto. Trocha y batalla son dos dimensiones distintas y perpendiculares. Trocha es LATERAL (mismo eje); batalla es LONGITUDINAL (entre ejes). Esta distinción es fundamental en el diseño de cultivos en hileras.'}
+};
+
+let answered=0,correct=0;
+
+document.querySelectorAll('.qbtn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const q=this.dataset.q;
+    const card=document.getElementById('q'+q);
+    const btns=card.querySelectorAll('.qbtn');
+    const isCorrect=this.dataset.correct==='true';
+    const fd=document.getElementById('fb'+q);
+    btns.forEach(b=>{
+      b.disabled=true;
+      b.style.opacity='0.65';
+      b.style.cursor='not-allowed';
+      if(b.dataset.correct==='true'){b.classList.add('show-correct');b.style.opacity='1';}
+    });
+    if(isCorrect){
+      this.classList.add('correct');
+      this.textContent='✅ '+this.textContent;
+      fd.className='qfeedback ok';
+      fd.innerHTML='<b>✅ ¡Correcto!</b> '+feedbackData[q].ok;
+      correct++;
+    } else {
+      this.classList.add('incorrect');
+      this.textContent='❌ '+this.textContent;
+      const cLetter=feedbackData[q].correct;
+      fd.className='qfeedback fail';
+      fd.innerHTML='<b>❌ Incorrecto. La respuesta correcta es ('+cLetter+').</b> '+feedbackData[q].fail;
+    }
+    fd.style.display='block';
+    answered++;
+    document.getElementById('progress-text').textContent='Respondidas: '+answered+' / 10 | Aciertos: '+correct;
+    document.getElementById('progress-fill').style.width=(answered*10)+'%';
+    if(answered===10){
+      const rp=document.getElementById('results-panel');
+      rp.style.display='block';
+      let cls='results-yellow',msg='';
+      if(correct<=4){cls='results-red';msg='Necesitas repasar el material. Revisa especialmente los temas de embrague, TDF y diferencial.';}
+      else if(correct<=7){cls='results-yellow';msg='¡Buen avance, sigue repasando! Presta atención a los valores cuantitativos (eficiencias, rpm de TDF, posiciones de trocha).';}
+      else{cls='results-green';msg='¡Excelente dominio del tema! Estás listo para el examen de Mecanización Agrícola.';}
+      rp.className=cls;
+      rp.innerHTML='<b>Resultado: '+correct+' / 10 correctas</b><br>'+msg+'<br><button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>';
+    }
+  });
+});
+
+function resetQuiz(){
+  answered=0;correct=0;
+  document.getElementById('progress-text').textContent='Respondidas: 0 / 10 | Aciertos: 0';
+  document.getElementById('progress-fill').style.width='0%';
+  document.getElementById('results-panel').style.display='none';
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.disabled=false;
+    b.style.opacity='1';
+    b.style.cursor='pointer';
+    b.classList.remove('correct','incorrect','show-correct');
+    const orig=b.textContent.replace(/^[✅❌] /,'');
+    b.textContent=orig;
+  });
+  document.querySelectorAll('.qfeedback').forEach(f=>{f.style.display='none';f.innerHTML='';});
+}
+</script>

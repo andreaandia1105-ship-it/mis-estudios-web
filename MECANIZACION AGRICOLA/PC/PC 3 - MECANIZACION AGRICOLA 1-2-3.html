@@ -1,0 +1,557 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:transparent}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.span3{grid-column:1/-1}
+.span2{grid-column:span 2}
+.titlebar{background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titlebar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:11px;padding:2px 10px;border-radius:20px;background:#1e3a5f;color:#93c5fd;display:inline-block}
+.secbar{background:#1e293b;color:#e2e8f0;border-radius:8px;padding:8px 14px;grid-column:1/-1;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.5px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-gray{background:#f1f5f9;color:#334155}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#22c55e}
+.def-yellow{border-color:#eab308}
+.def-red{border-color:#ef4444}
+.def-purple{border-color:#8b5cf6}
+.def-teal{border-color:#14b8a6}
+.def-orange{border-color:#f97316}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-yellow{background:#eab308}
+.dot-red{background:#ef4444}
+.dot-purple{background:#8b5cf6}
+.dot-teal{background:#14b8a6}
+.dot-orange{background:#f97316}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:8px 12px;border-radius:7px;text-align:center;line-height:1.7;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.qcard{margin-bottom:18px;padding-bottom:12px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.qtext{font-size:13px;font-weight:500;margin-bottom:10px;color:var(--color-text-primary)}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover{background:var(--color-background-primary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px}
+.fb-ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.fb-no{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px 10px 0 0;padding:12px 16px;margin-bottom:14px}
+.quiz-header p{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header span{font-size:11px;color:#94a3b8}
+.prog-wrap{background:var(--color-background-secondary);border-radius:20px;height:11px;margin:10px 0}
+.prog-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .3s}
+.result-panel{display:none;border-radius:8px;padding:14px;text-align:center;margin-top:14px}
+@media(prefers-color-scheme:dark){
+  .warn{background:#431407;color:#fed7aa}
+  .bh-blue{background:#1e3a5f;color:#93c5fd}
+  .bh-green{background:#14532d;color:#86efac}
+  .bh-yellow{background:#422006;color:#fef08a}
+  .bh-red{background:#450a0a;color:#fca5a5}
+  .bh-purple{background:#2e1065;color:#c4b5fd}
+  .bh-teal{background:#042f2e;color:#5eead4}
+  .bh-orange{background:#431407;color:#fed7aa}
+  .bh-gray{background:#1e293b;color:#94a3b8}
+  .exam{background:#1c1a05;border-color:#854d0e;color:#fef08a}
+}
+</style>
+
+<div class="cv">
+
+<div class="titlebar span3">
+  <h1>MECANIZACIÓN AGRÍCOLA — CANVAS DE RESUMEN</h1>
+  <p>Ing. Luis Alberto Altamirano Chunga · Universidad Nacional Agraria La Molina · Clases 1, 2 y 3</p>
+  <div class="pills">
+    <span class="pill">Taller y herramientas</span>
+    <span class="pill">Máquinas herramienta</span>
+    <span class="pill">Soldadura</span>
+    <span class="pill">Materiales</span>
+    <span class="pill">Transmisiones</span>
+    <span class="pill">Tractores</span>
+  </div>
+</div>
+
+<div class="secbar span3">🔵 CLASE 1 — TALLER, HERRAMIENTAS, MÁQUINAS HERRAMIENTA Y MATERIALES</div>
+
+<div class="block">
+  <span class="bh bh-blue">El Taller</span>
+  <div class="def def-blue">Espacio físico equipado con máquinas herramienta, bancos de trabajo y herramientas manuales donde se fabrican, reparan y ajustan componentes de maquinaria agrícola.</div>
+  <div class="item"><span class="dot dot-blue"></span><span>El taller de mecanización es esencial porque en campo se requiere fabricar piezas a medida, adaptar implementos y realizar mantenimiento correctivo sin depender de talleres externos.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>Se organiza en zonas: tornos, fresadoras, taladros de banco y área de soldadura, cada una con su señalización de seguridad.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Describa la importancia estratégica del taller de mecanización en una explotación agrícola y explique por qué la organización por zonas funcionales reduce el riesgo de accidentes.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Herramientas Manuales</span>
+  <div class="def def-green">Instrumentos accionados por la fuerza humana que transmiten directamente esfuerzo a la pieza: llaves, destornilladores, martillos, alicates y calibres.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Llave de torque (torquímetro):</strong> mide el par de apriete aplicado a un tornillo. Crucial en motores donde un apriete excesivo deforma la culata y uno insuficiente causa fugas.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Calibre Pie de Rey:</strong> mide dimensiones externas, internas y profundidades con resolución de 0,05 mm (nonio 1/20) o 0,02 mm (nonio 1/50) mediante la escala Vernier.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Tipos de cabezas de destornillador:</strong> plana, Phillips, Torx (6 lóbulos), Robertson (cuadrado), Pozi, Hex Allen — cada geometría ofrece diferente área de contacto y resistencia al deslizamiento.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué el uso del torquímetro es obligatorio al ajustar tornillos de culata, y qué consecuencias produce no respetar el par especificado por el fabricante?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Máquinas Herramienta: Fresadora y Torno</span>
+  <div class="def def-yellow">Máquinas que transforman la energía eléctrica en movimiento de corte controlado para arrancar material (viruta) de una pieza y darle forma geométrica precisa.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong style="font-size:11px">Fresadora</strong><br>
+      <span>Herramienta rotativa multifilo (fresa) fija; la pieza avanza en X, Y, Z. Opera planos, escalones, ranuras y perfiles. Ejes: X paralelo mesa, Y perpendicular, Z vertical.</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong style="font-size:11px">Torno</strong><br>
+      <span>La pieza gira (eje Z) y la herramienta avanza linealmente. Operaciones: cilindrado, refrentado, taladrado, roscado, tronzado, cónico, moleteado.</span>
+    </div>
+  </div>
+  <div class="rx">Características Torno: eje Z (rotación pieza) | eje X (paralelo bancada) | eje Y (forma triedro rectángulo con X y Z)</div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir la fresadora con el torno. En la fresadora la herramienta gira y la pieza se desplaza; en el torno la pieza gira y la herramienta avanza. Intercambiar los roles implica configuración incorrecta y accidentes.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Compare los principios de funcionamiento de la fresadora y el torno indicando en cada caso cuál elemento gira, cuál avanza y qué tipos de geometrías puede producir cada máquina.</div>
+</div>
+
+<div class="block span2">
+  <span class="bh bh-red">Soldadura: Tipos, Equipos y Procesos</span>
+  <div class="def def-red">Proceso de unión permanente de metales mediante fusión localizada, con o sin material de aporte, aplicando calor, presión o ambas simultáneamente.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #64748b">
+      <strong style="font-size:11px">Soldadura Blanda</strong><br>
+      T &lt; 400°C. Soldador eléctrico. Aporte: aleación Sn-Pb. Usos: hojalata, electrónica.
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316">
+      <strong style="font-size:11px">Soldadura Fuerte</strong><br>
+      T ≈ 800°C. Soplete de gas. Aporte: latón o cobre. Usos: aleaciones de plata y cobre.
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <strong style="font-size:11px">Oxiacetilénica</strong><br>
+      T &gt; 3000°C. Mezcla O₂ + C₂H₂. Homogénea. Usos: acero, hierro lámina.
+    </div>
+  </div>
+  <hr class="divh">
+  <div class="item"><span class="dot dot-red"></span><span><strong>Soldadura TIG (GTAW):</strong> electrodo de tungsteno no consumible + gas inerte (Ar/He) + varilla de aporte separada. Produce cordones de alta calidad en aceros inox, aluminio y titanio.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Soldadura MIG/MAG:</strong> alambre continuo consumible alimentado automáticamente + gas protector. Equipo incluye: cilindro de gas protector, carrete de alambre, pistola de soldadura, regulador de flujo, máquina de soldar.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Soldadura por puntos (resistencia):</strong> dos electrodos de cobre comprimen las láminas y pasan corriente eléctrica; el calor de la resistencia eléctrica funde localmente. Usada en carrocería automotriz.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Polaridad invertida (DC+):</strong> electrodo conectado al polo positivo, pieza al negativo. Concentra más calor en el electrodo, útil para soldar materiales de alta conductividad.</span></div>
+  <div class="flow">
+    <span class="fbox">Fuente DC/AC</span><span class="farrow">→</span>
+    <span class="fbox">Electrodo (TIG: tungsteno)</span><span class="farrow">→</span>
+    <span class="fbox">Arco eléctrico</span><span class="farrow">→</span>
+    <span class="fbox">Baño de fusión</span><span class="farrow">→</span>
+    <span class="fbox">Cordón solidificado</span>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique por qué en la soldadura TIG se utiliza un electrodo de tungsteno no consumible y un gas inerte, y en qué situaciones esta técnica es preferible a la soldadura con electrodo revestido (SMAW).</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Materiales Metálicos: Ferrosos</span>
+  <div class="def def-purple">Los metales ferrosos tienen como componente principal el hierro (Fe); se caracterizan por alta resistencia a la tensión, dureza y susceptibilidad a la corrosión oxidativa.</div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Hierro dulce:</strong> bajo carbono (&lt;0.08% C), muy dúctil y maleable, se oxida fácilmente. Base para la fabricación de chapas y estructuras soldadas.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Acero:</strong> aleación Fe + C (0.05–2%). Excelentes propiedades mecánicas y bajo costo. Clasificación ISO: P (acero), M (inoxidable), K (fundición), N (aluminio), S (superaleaciones), H (material endurecido).</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Fundición:</strong> C &gt; 2%. Más fácil de mecanizar, más dura y frágil. Menor ductilidad que el acero. El análisis de chispas permite identificar el tipo: acero bajo carbono (chispas largas y ramificadas), fundición gris (chispas cortas y redondas).</span></div>
+  <div class="rx">Aceros principales: Barras para hormigón | Barras para molienda | Alambrón | Planchas gruesas | Rollos laminados en caliente/frío | Tubos soldados arco sumergido</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Un técnico debe identificar un material metálico sin datos de composición. Describa el método de la prueba de chispas y cómo difiere el patrón entre un acero de bajo carbono y una fundición gris.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Materiales No Ferrosos y No Metálicos</span>
+  <div class="def def-teal">Materiales sin hierro como componente principal (Al, Cu, Ni, Ti) y no metálicos (plásticos, cauchos, cerámicos, lubricantes). Elegidos por propiedades específicas que el acero no ofrece.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Cromo:</strong> formador de ferrita y carburo; principal responsable de la resistencia a la corrosión mediante formación de película de óxido pasivante (Cr₂O₃).</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Níquel:</strong> formador de austenita; mejora resistencia general, tenacidad y ductilidad; reduce conductividad térmica; facilita soldabilidad.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Molibdeno:</strong> mejora resistencia a alta temperatura y al creep; refuerza resistencia a corrosión en medios no oxidantes.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Plásticos:</strong> clasificados internacionalmente con número 1-7 en triángulo de reciclaje. PET (1): botellas; PEAD (2): bolsas; PVC (3): tuberías; PP (5): contenedores alimentarios.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>No metálicos estructurales:</strong> maderas, cerámicos, fibrosos (fibras textiles), celulósicos (papel/cartón), pétros (piedra), lubricantes sólidos/aceites/grasas.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique por qué en la fabricación de acero inoxidable austenítico se añaden tanto cromo como níquel, describiendo el rol específico de cada elemento en la microestructura y las propiedades resultantes.</div>
+</div>
+
+<div class="secbar span3">🟡 CLASE 2 — TRANSMISIONES: RÍGIDAS Y FLEXIBLES</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Transmisiones: Concepto General</span>
+  <div class="def def-yellow">Sistema mecánico que transfiere potencia desde una fuente motriz hasta el elemento de trabajo, modificando velocidad, par o dirección del movimiento según las necesidades de la tarea.</div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Transmisiones rígidas:</strong> poleas + correas, engranajes, barras o ejes. Contacto físico sólido entre elementos.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Transmisiones flexibles:</strong> cadenas, fajas (correas). Permiten separación entre ejes y absorben vibraciones.</span></div>
+  <div class="rx">POTENCIA = TRABAJO / TIEMPO = FUERZA × VELOCIDAD [W = F·v]</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Indique en qué situaciones se preferiría una transmisión por cadena frente a una transmisión por engranajes y cuáles son las ventajas y limitaciones de cada una.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-yellow">Poleas y Ley de Transmisión</span>
+  <div class="def def-yellow">Las poleas transmiten movimiento circular mediante correas. La ley fundamental establece que la velocidad tangencial en el punto de contacto es la misma en ambas poleas (cuando no hay deslizamiento).</div>
+  <div class="rx">N1 × D1 = N2 × D2
+Donde: N = velocidad de giro (RPM), D = diámetro de polea (mm o pulg)
+Relación de transmisión: i = D1/D2 = N2/N1</div>
+  <div class="item"><span class="dot dot-yellow"></span><span>Polea conductora (motriz): conectada al motor, tiene diámetro D1 y gira a N1 RPM.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span>Polea conducida: conectada al trabajo, tiene D2 y gira a N2. Si D2 &gt; D1 entonces N2 &lt; N1 (reducción de velocidad, aumento de par).</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir relación de transmisión i con eficiencia. Una i &gt; 1 significa reducción de velocidad (multiplicación de par), no pérdida de potencia. Las pérdidas reales son por fricción.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Una polea motriz de 200 mm gira a 1450 RPM y acciona una polea conducida de 100 mm. Calcule la velocidad de salida y la relación de transmisión. ¿Qué ocurre con el par disponible?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Engranajes: Relación de Transmisión</span>
+  <div class="def def-orange">Los engranajes transmiten movimiento por contacto directo de dientes. A diferencia de las poleas, garantizan sincronismo (sin deslizamiento) y las velocidades angulares tienen sentido contrario.</div>
+  <div class="rx">Ley: ωA × RA = ωB × RB (velocidades tangenciales iguales en contacto)
+RT = (ZA × ZC) / (ZB × ZD) para tren de engranajes compuesto
+D1 × N1 = D2 × N2 (también expresable en número de dientes)</div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Paso diametral (Pd):</strong> relación entre número de dientes (Z) y diámetro primitivo D. Pd = Z/D [dientes/pulgada o dientes/cm].</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Paso circunferencial (Pc):</strong> arco del círculo primitivo correspondiente a un diente. Pc = πD/Z. El producto Pc × Pd = π.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Caja de cambios:</strong> conjunto de engranajes con diferentes ratios seleccionables mediante palanca de cambios que desplaza piñones o selectores sobre ejes de toma constante.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Un tren de engranajes compuesto tiene ZA=12, ZB=60, ZC=15, ZD=45. Calcule la relación de transmisión total (NVs/NVe) y explique si es una reducción o multiplicación de velocidad.</div>
+</div>
+
+<div class="block span2">
+  <span class="bh bh-orange">Problema Resuelto: Máquina Elevadora con Reducción</span>
+  <div class="def def-orange">Aplicación de transmisiones compuestas para calcular la relación de reducción, la fuerza necesaria en la manivela y la velocidad de ascenso de una carga, considerando pérdidas por fricción.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-orange"></span><span>Sistema: piñón 12D → corona 60D (primera etapa), piñón 15D → corona 45D (segunda etapa). Tambor de 6 pulg de diámetro (radio = 3"). Manivela R = 18".</span></div>
+      <div class="rx">RT = (12/60) × (15/45) = 1/15
+Si manivela gira a 10 RPM → salida: 10 × (1/15) = 10/15 RPM</div>
+      <div class="item"><span class="dot dot-orange"></span><span>Velocidad de ascenso: VT = ω × R = (10/15) × π × (6/12) = <strong>1.05 pies/min</strong></span></div>
+    </div>
+    <div>
+      <div class="rx">Con 15% pérdida fricción:
+0.85 × FE × WE × RE = FS × WS × RS
+0.85 × FE × WE × 18" = 1500 × WS × 3"
+FE = (1500 × 3 × WS) / (0.85 × 18 × WE)
+FE ≈ 19.6 lb</div>
+      <div class="warn">⚠️ DATO CLAVE: En sistemas con pérdida por fricción, la potencia de entrada debe ser mayor: P_entrada = P_salida / η. Aquí η = 0.85 (85% eficiencia).</div>
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Un motor de 0.5 HP gira a 675 RPM con RT = 16/65. Sabiendo que la velocidad de salida es 166.15 RPM y la velocidad lineal del tambor 1.33 m/s elevando 15 kg, calcule el rendimiento del sistema.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Transmisiones Flexibles: Cadenas y Fajas</span>
+  <div class="def def-teal">Elementos de transmisión que unen dos ejes no necesariamente alineados mediante un elemento flexible intermedio (cadena o correa), absorbiendo vibraciones y permitiendo distancias mayores entre centros.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Cadenas:</strong> transmisión por enganche positivo de eslabones en piñones dentados. Sin deslizamiento. Requieren lubricación. Eficiencia ~98%.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Fajas planas:</strong> eficiencia 97-98%; pequeña carga en árboles; mejor para altas velocidades.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Fajas trapeciales (V):</strong> mayor fricción lateral; normalizada en longitud; eficiencia 96-97%.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Fajas dentadas (sincrónicas):</strong> enganche positivo sin deslizamiento; sincronismo garantizado; eficiencia 98-99%. Usadas en distribución de motores.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Fajas redondas:</strong> carga muy grande en árboles; diámetro reducido posible; eficiencia 96-95%.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué las fajas dentadas (sincrónicas) se utilizan en la distribución de motores de combustión interna en lugar de fajas trapeciales, y qué consecuencias tiene la rotura de la faja de distribución?</div>
+</div>
+
+<div class="secbar span3">🟢 CLASE 3 — TIPOS DE TRACTORES AGRÍCOLAS</div>
+
+<div class="block">
+  <span class="bh bh-green">¿Qué es un Tractor?</span>
+  <div class="def def-green">Máquina autopropulsada diseñada para generar fuerza de tracción (en la barra de tiro), potencia de accionamiento (toma de potencia o TDP) y fuerza hidráulica (sistema de levante), para mover implementos agrícolas y realizar labores del suelo.</div>
+  <div class="item"><span class="dot dot-green"></span><span>Criterios de clasificación: función, potencia, sistema de rodaje, tipo de tracción y combustible utilizado.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Enumere los cinco criterios de clasificación de los tractores agrícolas y explique por qué el criterio de tracción es el más determinante para elegir un tractor en suelos con alta humedad o pendiente pronunciada.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Clasificación por Función y Potencia</span>
+  <div class="def def-green">Un mismo tractor puede cumplir múltiples funciones según los implementos acoplados. La potencia determina qué labores puede realizar eficientemente sin sobrecargarse.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Por función:</strong> tractores frutícolas (chatos, para viñedos y huertas), de uso general, forestales, para ganadería (con pala frontal), cosechadoras autopropulsadas y motocultor (mono-eje, 1 rueda).</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Por potencia:</strong> microtractores (&lt;25 HP), pequeños (25-50 HP), medianos (50-100 HP), grandes (100-200 HP), muy grandes (&gt;200 HP). En Perú, la mayoría del parque agrícola está en el rango 50-100 HP por la escala de las parcelas.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Cuáles son las características de diseño que diferencian a un tractor frutícola de un tractor de uso general, y por qué estas diferencias son necesarias para trabajar en cultivos en hilera?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Sistema de Rodaje</span>
+  <div class="def def-green">El rodaje define cómo el tractor toma contacto con el suelo. Determina la compactación, la tracción disponible y la adaptabilidad a diferentes terrenos.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #22c55e">
+      <strong style="font-size:11px">Neumáticos</strong><br>
+      Ruedas con neumáticos de baja presión. Mayor velocidad en carretera. Compactación moderada. El más común en agricultura peruana.
+    </div>
+    <div class="mini" style="border-left:3px solid #14532d">
+      <strong style="font-size:11px">Orugas</strong><br>
+      Cadenas de acero o goma. Menor presión por cm² (menor compactación). Mayor tracción en suelos blandos. Menor velocidad desplazamiento.
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-green"></span><span>Existe una variante mixta: tractores con orugas de goma traseras y ruedas delanteras (half-track), que combina la baja compactación de la oruga con la maniobrabilidad de la rueda.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Compare el efecto sobre la compactación del suelo entre un tractor con neumáticos y uno con orugas. ¿En qué condiciones de cultivo y suelo sería imprescindible usar orugas en la costa peruana?</div>
+</div>
+
+<div class="block span2">
+  <span class="bh bh-blue">Clasificación por Tracción: Simple, Asistida y Doble</span>
+  <div class="def def-blue">El tipo de tracción determina cuánta potencia del motor se convierte efectivamente en fuerza de tiro. A mayor número de ejes motrices, mayor eficiencia tractiva y menor patinamiento.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong style="font-size:11px">Tracción simple (2WD trasero)</strong><br>
+      Solo eje posterior motriz. Peso adherente ≈ 70% del peso total sobre el eje trasero. Potencia en barra de tiro ≈ 60% de la toma de potencia (TDP). Eje delantero solo dirige.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong style="font-size:11px">Tracción asistida (MFWD)</strong><br>
+      Ambos ejes motrices; ruedas delanteras de menor diámetro y asisten al trasero. Peso: 40% anterior / 60% posterior. Potencia barra tiro: 65-69% TDP.
+    </div>
+    <div class="mini" style="border-top:3px solid #16a34a">
+      <strong style="font-size:11px">Doble tracción (4WD igual)</strong><br>
+      Cuatro ruedas del mismo diámetro. Alta eficiencia tractiva ≈ 75% TDP. Peso estático: 55% adelante / 45% atrás. Dirección por articulación del bastidor.
+    </div>
+  </div>
+  <div class="flow">
+    <span class="fbox">2WD: 60% TDP → barra tiro</span><span class="farrow">→</span>
+    <span class="fbox">MFWD: 65-69% TDP → barra tiro</span><span class="farrow">→</span>
+    <span class="fbox">4WD: ~75% TDP → barra tiro</span>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que la tracción doble (4WD) "tiene más potencia" que la tracción simple. La potencia del motor es la misma; lo que mejora es la EFICIENCIA en la transmisión de esa potencia al suelo, reduciendo el patinamiento.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> En condiciones de suelo húmedo con alta pendiente en la sierra peruana, justifique qué tipo de tracción seleccionaría para un tractor de 80 HP y explique por qué la doble tracción con articulación de bastidor es la solución para campos irregulares grandes.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-gray">Combustible y Tractores para Movimiento de Tierras</span>
+  <div class="def def-gray">Los tractores se clasifican también por el tipo de combustible (diésel, gasolina, GLP o eléctrico). Los tractores para movimiento de tierras son variantes especializadas no agrícolas pero derivadas de la misma plataforma mecánica.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Diésel:</strong> combustión por compresión; mayor par a bajas RPM; mayor eficiencia térmica (35-45%); dominante en tractores agrícolas &gt; 25 HP por su economía en consumo.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Gasolina:</strong> ignición por chispa; más velocidad a alta RPM; usado en motocultores pequeños y tractores de jardín.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Tractores para movimiento de tierras:</strong> bulldozer (oruga + hoja empujadora), cargador frontal (ruedas + cuchara), excavadora (oruga + brazo hidráulico), motoniveladora (6 ruedas + cuchilla central), retroexcavadora y volquetes mineros de gran tonelaje.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique por qué el motor diésel es el estándar en tractores agrícolas de trabajo pesado y no el motor de gasolina, considerando par motor, eficiencia y coste operativo en el contexto de la agricultura peruana.</div>
+</div>
+
+<div class="span3 block">
+  <span class="bh bh-gray">Tabla Integradora: Comparación de Máquinas, Materiales y Transmisiones</span>
+  <table class="tbl">
+    <thead>
+      <tr><th>Concepto</th><th>Tipo/Categoría</th><th>Principio de funcionamiento</th><th>Ventaja clave</th><th>Limitación</th><th>Aplicación en mecanización</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Fresadora</td><td>Máquina herramienta</td><td>Fresa rotativa multifilo; pieza avanza en X,Y,Z</td><td>Geometrías planas y complejas en una sola máquina</td><td>No apta para piezas de revolución</td><td>Fabricar ranuras en chavetas de implementos</td></tr>
+      <tr><td>Torno</td><td>Máquina herramienta</td><td>Pieza gira (eje Z); herramienta avanza linealmente</td><td>Piezas de revolución con alta precisión</td><td>No genera formas planas directamente</td><td>Reparar ejes de maquinaria agrícola</td></tr>
+      <tr><td>Soldadura TIG</td><td>Soldadura fusión eléctrica</td><td>Arco entre electrodo W no consumible + gas inerte</td><td>Cordón de alta calidad, mínima distorsión</td><td>Lenta; requiere alto nivel de operario</td><td>Acero inox en equipos de agroindustria</td></tr>
+      <tr><td>Soldadura MIG</td><td>Soldadura fusión eléctrica</td><td>Alambre continuo consumible + gas protector</td><td>Alta productividad; semiautomática</td><td>Equipo más costoso</td><td>Estructura de bastidores y marcos</td></tr>
+      <tr><td>Engranajes</td><td>Transmisión rígida</td><td>Enganche de dientes; ωA×RA = ωB×RB</td><td>Sin deslizamiento; alta precisión de relación</td><td>Ruido; necesitan lubricación</td><td>Caja de cambios del tractor</td></tr>
+      <tr><td>Poleas+correa</td><td>Transmisión flexible</td><td>Fricción entre correa y polea; N1×D1=N2×D2</td><td>Absorbe vibraciones; distancias grandes entre ejes</td><td>Deslizamiento posible; no sincrónica</td><td>Accionamiento de trilladoras</td></tr>
+      <tr><td>Tracción 4WD</td><td>Sistema de tracción</td><td>4 ruedas motrices; dirección por articulación</td><td>~75% TDP en barra de tiro; menos patinamiento</td><td>Mayor costo; mayor complejidad</td><td>Labranza en suelos húmedos andinos</td></tr>
+      <tr><td>Acero (ISO P)</td><td>Material ferroso</td><td>Aleación Fe + C &lt; 2%; estructura ferrítica/martensítica</td><td>Relación resistencia/costo insuperable</td><td>Corrosión sin tratamiento superficial</td><td>Estructura de marcos de implementos</td></tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: En la transmisión de potencia en maquinaria agrícola siempre existe una cadena: Motor → Transmisión (caja de cambios + engranajes) → Diferencial → Ruedas. Cada eslabón tiene pérdidas; por eso la potencia en la barra de tiro siempre es menor que la potencia del motor. En tractores 4WD el conjunto es más eficiente porque más ruedas tienen adherencia, no porque haya más potencia generada.</div>
+</div>
+
+<div id="quiz-section" class="span3 block">
+  <div class="quiz-header">
+    <p>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</p>
+    <span>Marca tu respuesta y descubre si es correcta</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <span style="font-size:13px;color:var(--color-text-secondary)" id="prog-text">Pregunta 0 de 10 respondidas | Aciertos: 0</span>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10 — Taller y Herramientas</p>
+    <p class="qtext">¿Para qué se utiliza específicamente el torquímetro (llave de torque) en el mantenimiento de maquinaria agrícola?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Para medir la dureza superficial de los materiales metálicos</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Para sujetar piezas en el banco de trabajo con fuerza controlada</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Para aplicar un par de apriete específico y controlado a tornillos y tuercas</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Para medir el diámetro interno de cilindros con alta precisión</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10 — Máquinas Herramienta</p>
+    <p class="qtext">En un torno, ¿cuál elemento gira y cuál elemento avanza durante el proceso de cilindrado?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="true">A) La pieza gira sobre el eje Z y la herramienta avanza linealmente</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) La herramienta gira y la pieza avanza en los ejes X, Y, Z</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Ambas giran simultáneamente en sentidos opuestos</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) La pieza avanza y la herramienta gira sobre el eje Y</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10 — Soldadura</p>
+    <p class="qtext">En la soldadura TIG, ¿cuál es la función del gas inerte (argón o helio) que rodea el electrodo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Aumentar la temperatura del arco eléctrico para fundir metales más gruesos</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Actuar como material de aporte junto al electrodo de tungsteno</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Enfriar rápidamente el cordón para aumentar la dureza del depósito</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) Proteger el baño de fusión y el electrodo de la oxidación atmosférica</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10 — Materiales</p>
+    <p class="qtext">¿Cuál es la diferencia fundamental entre el acero y la fundición en términos de contenido de carbono?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) El acero contiene más del 2% de C; la fundición menos del 2% de C</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) El acero contiene entre 0.05% y 2% de C; la fundición contiene más del 2% de C</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Ambos tienen el mismo contenido de C pero diferente contenido de hierro</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) La fundición tiene menos del 0.5% de C y es más dúctil que el acero</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10 — Transmisiones: Poleas</p>
+    <p class="qtext">Una polea motriz de 300 mm gira a 900 RPM y acciona mediante correa a una polea conducida de 150 mm. ¿Cuál es la velocidad de la polea conducida?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) 450 RPM (la polea mayor siempre gira más lento)</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) 900 RPM (la velocidad no cambia con el diámetro)</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) 1800 RPM, aplicando N1×D1 = N2×D2 → 900×300 = N2×150</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) 300 RPM (la relación es directamente proporcional al diámetro)</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10 — Engranajes</p>
+    <p class="qtext">¿Cuál es la principal ventaja de usar engranajes en lugar de correas para transmitir movimiento en una caja de cambios de tractor?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Los engranajes absorben mejor las vibraciones del motor que las correas</button>
+      <button class="qbtn" data-opt="b" data-q="6" data-correct="true">B) Los engranajes garantizan sincronismo exacto sin deslizamiento, con relaciones de transmisión precisas y constantes</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Los engranajes permiten mayor distancia entre ejes que las correas</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Los engranajes son más baratos y fáciles de reemplazar que las correas</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10 — Problemas de Transmisión</p>
+    <p class="qtext">En un sistema de transmisión con 15% de pérdida por fricción y razón de reducción 1/15, si la carga a elevar es 1500 lb y el radio del tambor es 3", ¿cuál afirmación es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) La eficiencia mecánica del sistema es del 85%</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) La fuerza necesaria en la manivela es aproximadamente 19.6 lb</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) Con más reducción de velocidad se necesita MAYOR fuerza en la manivela</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) La potencia de entrada debe ser mayor que la potencia de salida para compensar pérdidas</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10 — Tipos de Tractores: Tracción</p>
+    <p class="qtext">Un tractor de tracción asistida (MFWD) entrega en la barra de tiro aproximadamente el 65-69% de la potencia en la toma de potencia. ¿Por qué este porcentaje es mayor que el de la tracción simple (60%)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Porque el motor del MFWD tiene mayor cilindrada y genera más potencia bruta</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) Porque el eje delantero contribuye a la tracción reduciendo el patinamiento del eje trasero y aprovechando mejor el peso del tractor</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Porque las ruedas delanteras son más grandes y tienen mayor área de contacto con el suelo</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Porque la caja de cambios del MFWD tiene más marchas disponibles que la del 2WD</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10 — Materiales No Ferrosos</p>
+    <p class="qtext">¿Qué función cumple el cromo en el acero inoxidable que lo hace resistente a la corrosión?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Aumenta el contenido de carbono formando carburos que endurecen la superficie</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Actúa como formador de austenita mejorando la ductilidad a alta temperatura</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Forma una película pasivante de óxido de cromo (Cr₂O₃) en la superficie que impide la oxidación del hierro</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Reduce la conductividad térmica del acero dificultando la oxidación por calor</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10 — Tractores: Doble Tracción</p>
+    <p class="qtext">En un tractor de doble tracción (4WD igual), ¿cómo se realiza la dirección en la mayoría de los modelos?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Mediante el giro de las ruedas delanteras sobre un pivote central</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Mediante frenos diferenciales que frenan las ruedas de un lado para girar</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Mediante un sistema hidrostático que varía la velocidad de cada rueda individualmente</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) Mediante la articulación del bastidor en su parte central (chasis articulado)</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <p style="font-size:18px;font-weight:500" id="result-score"></p>
+    <p style="font-size:13px;margin-top:6px" id="result-msg"></p>
+    <button onclick="resetQuiz()" style="margin-top:12px;padding:8px 20px;border-radius:8px;border:1px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;font-size:13px">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<div class="footer span3">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Altamirano Chunga, L.A. — Diapositivas Mecanización Agrícola (Clases 1, 2 y 3), UNALM · Ingmecafenix.com — Operaciones de Torneado y Fresado · demaquinasyherramientas.com — Fresas: tipos y usos · Carlos Alvarado de la Portilla — Mecanismos de transmisión circular · UNALM Facultad de Ingeniería Agrícola</span>
+</div>
+
+</div>
+
+<script>
+var answered = 0, correct = 0;
+var feedbacks = {
+  1:{ok:"✅ ¡Correcto! El torquímetro mide y controla el par de apriete en N·m o lb·pie. En culatas de motor, el apriete excesivo puede deformar el bloque; el insuficiente provoca fugas de refrigerante o gases.",no:"❌ Incorrecto. La respuesta correcta es C. El torquímetro mide el par de apriete aplicado. El calibre pie de rey mide dimensiones lineales; la dureza se mide con el durómetro."},
+  2:{ok:"✅ ¡Correcto! En el torno la pieza gira sobre el eje Z (eje de la máquina) y la herramienta de corte avanza linealmente en X o Z para generar cilindros, conos y roscas.",no:"❌ Incorrecto. La respuesta correcta es A. En el torno la pieza gira; en la fresadora es la herramienta quien gira. Confundir este principio lleva a configuraciones incorrectas y riesgo de accidente."},
+  3:{ok:"✅ ¡Correcto! El gas inerte (Ar o He) crea una atmósfera protectora alrededor del baño de fusión que impide la reacción del metal fundido con el O₂ y N₂ del aire, evitando porosidad y fragilización.",no:"❌ Incorrecto. La respuesta correcta es D. El gas inerte protege de la oxidación. No aporta calor ni actúa como material de aporte; la varilla de aporte se añade separadamente por el operario."},
+  4:{ok:"✅ ¡Correcto! Esta es la distinción fundamental: acero = 0.05-2% C (dúctil, soldable); fundición = >2% C (más dura, frágil, mejor mecanizable, pero no soldable por métodos convencionales).",no:"❌ Incorrecto. La respuesta correcta es B. Mayor contenido de C reduce ductilidad y soldabilidad. La fundición con >2% C es más dura y frágil que el acero precisamente por eso."},
+  5:{ok:"✅ ¡Correcto! Aplicando N1×D1 = N2×D2: 900×300 = N2×150 → N2 = 270000/150 = 1800 RPM. Al reducir el diámetro a la mitad, la velocidad se duplica (y el par se reduce a la mitad).",no:"❌ Incorrecto. La respuesta correcta es C. La fórmula es N1×D1 = N2×D2. Polea pequeña → gira más rápido. La relación es inversamente proporcional al diámetro."},
+  6:{ok:"✅ ¡Correcto! Los engranajes tienen enganche positivo diente a diente, garantizando sincronismo exacto sin posibilidad de deslizamiento. Por eso son indispensables en cajas de cambios donde la relación de transmisión debe ser constante y precisa.",no:"❌ Incorrecto. La respuesta correcta es B. Las correas pueden deslizar; los engranajes no. Las correas absorben vibraciones (ventaja), pero a costa de perder sincronismo. Las cajas de cambios requieren sincronismo exacto."},
+  7:{ok:"✅ ¡Correcto! La afirmación C es FALSA. Mayor reducción de velocidad implica MENOR fuerza necesaria en la entrada (principio de ventaja mecánica). Si la reducción es 1/15, la fuerza se divide aproximadamente entre 15 (menos pérdidas por fricción).",no:"❌ Incorrecto. La respuesta correcta es C. Con mayor reducción de velocidad se amplifica el par y se necesita MENOR fuerza en la manivela. Mayor reducción = más ventaja mecánica."},
+  8:{ok:"✅ ¡Correcto! El MFWD reduce el patinamiento porque el eje delantero también empuja. Con menos patinamiento, más energía del motor se convierte en fuerza de avance real en lugar de calor y desgaste en los neumáticos.",no:"❌ Incorrecto. La respuesta correcta es B. La mejora no viene de más potencia del motor sino de menos pérdidas por patinamiento. Las ruedas delanteras del MFWD son deliberadamente más pequeñas para que giren ligeramente más rápido y asistan."},
+  9:{ok:"✅ ¡Correcto! El cromo (≥10.5%) forma una capa delgada e invisible de Cr₂O₃ en la superficie que es autorreparable: si se raya, se regenera espontáneamente en presencia de oxígeno. Este fenómeno se llama pasivación.",no:"❌ Incorrecto. La respuesta correcta es C. Esa es la función del níquel (formador de austenita). El cromo forma la película pasivante de óxido de cromo que protege al hierro de oxidarse."},
+  10:{ok:"✅ ¡Correcto! En el 4WD articulado el chasis tiene dos mitades unidas por una junta central. Los cilindros hidráulicos doblan el tractor en su mitad, permitiendo giros en un espacio reducido sin necesitar dirección en las ruedas.",no:"❌ Incorrecto. La respuesta correcta es D. El bastidor articulado es la solución usada porque con cuatro ruedas motrices del mismo tamaño es mecánicamente más sencillo articular el chasis que montar un sistema de dirección en las ruedas delanteras motrices."}
+};
+
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  var btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  var q = btn.dataset.q;
+  var isCorrect = btn.dataset.correct === 'true';
+  var btns = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  btns.forEach(function(b){
+    b.disabled = true;
+    if(b.dataset.correct === 'true') b.classList.add('correct');
+  });
+  if(!isCorrect) btn.classList.add('incorrect');
+  answered++;
+  if(isCorrect) correct++;
+  var fb = document.getElementById('fb'+q);
+  fb.className = 'qfeedback ' + (isCorrect ? 'fb-ok' : 'fb-no');
+  fb.innerHTML = isCorrect ? feedbacks[q].ok : feedbacks[q].no;
+  fb.style.display = 'block';
+  var pct = Math.round((answered/10)*100);
+  document.getElementById('prog-fill').style.width = pct+'%';
+  document.getElementById('prog-text').textContent = 'Pregunta '+answered+' de 10 respondidas | Aciertos: '+correct;
+  if(answered === 10){
+    var panel = document.getElementById('result-panel');
+    panel.style.display = 'block';
+    document.getElementById('result-score').textContent = correct + ' / 10 correctas';
+    var msg, bg;
+    if(correct <= 4){ bg='#fef2f2'; msg='Necesitas repasar el material con más detalle.'; }
+    else if(correct <= 7){ bg='#fefce8'; msg='¡Buen avance! Repasa los temas donde fallaste.'; }
+    else { bg='#f0fdf4'; msg='¡Excelente dominio del tema! Estás listo para el examen.'; }
+    panel.style.background = bg;
+    document.getElementById('result-msg').textContent = msg;
+  }
+});
+
+function resetQuiz(){
+  answered = 0; correct = 0;
+  document.getElementById('prog-fill').style.width = '0%';
+  document.getElementById('prog-text').textContent = 'Pregunta 0 de 10 respondidas | Aciertos: 0';
+  document.querySelectorAll('.qbtn').forEach(function(b){
+    b.disabled = false;
+    b.classList.remove('correct','incorrect');
+    var txt = b.textContent.replace(/^[✅❌] /,'');
+    b.textContent = txt;
+  });
+  document.querySelectorAll('.qfeedback').forEach(function(f){ f.style.display='none'; });
+  document.getElementById('result-panel').style.display = 'none';
+}
+</script>

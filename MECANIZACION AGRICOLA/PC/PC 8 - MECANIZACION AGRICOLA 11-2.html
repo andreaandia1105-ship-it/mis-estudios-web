@@ -1,0 +1,605 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;}
+.titbar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px;}
+.titbar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.titbar p{font-size:11px;color:#94a3b8;margin-bottom:8px;}
+.tagrow{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-size:10px;padding:2px 9px;border-radius:20px;background:#1e3a5f;color:#93c5fd;display:inline-block;}
+.secbar{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.secbar.blue{background:#1e3a5f;color:#93c5fd;}
+.secbar.green{background:#14532d;color:#86efac;}
+.secbar.yellow{background:#422006;color:#fef08a;}
+.secbar.teal{background:#042f2e;color:#5eead4;}
+.secbar.orange{background:#431407;color:#fed7aa;}
+.secbar.purple{background:#2e1065;color:#c4b5fd;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.bh.blue{background:#dbeafe;color:#1e3a8a;}
+.bh.green{background:#dcfce7;color:#14532d;}
+.bh.yellow{background:#fef9c3;color:#713f12;}
+.bh.teal{background:#ccfbf1;color:#134e4a;}
+.bh.orange{background:#ffedd5;color:#7c2d12;}
+.bh.purple{background:#ede9fe;color:#4c1d95;}
+.bh.red{background:#fee2e2;color:#991b1b;}
+.bh.gray{background:#f1f5f9;color:#334155;}
+@media(prefers-color-scheme:dark){
+.bh.blue{background:#1e3a5f;color:#93c5fd;}
+.bh.green{background:#14532d;color:#86efac;}
+.bh.yellow{background:#422006;color:#fef08a;}
+.bh.teal{background:#042f2e;color:#5eead4;}
+.bh.orange{background:#431407;color:#fed7aa;}
+.bh.purple{background:#2e1065;color:#c4b5fd;}
+.bh.red{background:#450a0a;color:#fca5a5;}
+.bh.gray{background:#1e293b;color:#94a3b8;}
+}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5;}
+.def.blue{border-left:3px solid #3b82f6;}
+.def.green{border-left:3px solid #22c55e;}
+.def.yellow{border-left:3px solid #eab308;}
+.def.teal{border-left:3px solid #14b8a6;}
+.def.orange{border-left:3px solid #f97316;}
+.def.purple{border-left:3px solid #8b5cf6;}
+.def.red{border-left:3px solid #ef4444;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.dot.blue{background:#3b82f6;}
+.dot.green{background:#22c55e;}
+.dot.yellow{background:#eab308;}
+.dot.teal{background:#14b8a6;}
+.dot.orange{background:#f97316;}
+.dot.purple{background:#8b5cf6;}
+.dot.red{background:#ef4444;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.8;margin:8px 0;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa;}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#ca8a04;}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;}
+.mini.b{border-top:3px solid #3b82f6;}
+.mini.g{border-top:3px solid #22c55e;}
+.mini.y{border-top:3px solid #eab308;}
+.mini.t{border-top:3px solid #14b8a6;}
+.mini.o{border-top:3px solid #f97316;}
+.mini.p{border-top:3px solid #8b5cf6;}
+.mini strong{font-size:12px;font-weight:600;display:block;margin-bottom:3px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:11.5px;margin:8px 0;}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;}
+.foot{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;}
+/* QUIZ */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px;}
+.quiz-head{background:#0f1e3a;color:#fff;border-radius:9px;padding:10px 14px;margin-bottom:14px;}
+.quiz-head h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px;}
+.quiz-head p{font-size:11px;color:#94a3b8;}
+.prog-wrap{margin-bottom:14px;}
+.prog-info{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px;display:flex;justify-content:space-between;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width 0.4s;}
+.qcard{margin-bottom:18px;padding-bottom:18px;border-bottom:0.5px solid var(--color-border-tertiary);}
+.qcard:last-of-type{border-bottom:none;}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:600;}
+.qtext{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:9px;line-height:1.5;}
+.qopts{display:flex;flex-direction:column;gap:5px;}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif;}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary);}
+.qbtn.correct{background:#dcfce7!important;border-color:#16a34a!important;color:#14532d!important;}
+.qbtn.wrong{background:#fee2e2!important;border-color:#dc2626!important;color:#991b1b!important;}
+.qbtn.show-correct{background:#dcfce7!important;border-color:#16a34a!important;color:#14532d!important;}
+.qbtn:disabled{opacity:0.65;cursor:not-allowed;}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.nok{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+@media(prefers-color-scheme:dark){
+.qfeedback.ok{background:#14532d;color:#86efac;}
+.qfeedback.nok{background:#450a0a;color:#fca5a5;}
+}
+#result-panel{display:none;margin-top:14px;padding:14px;border-radius:10px;font-size:13px;}
+#result-panel.low{background:#fee2e2;color:#991b1b;}
+#result-panel.mid{background:#fef9c3;color:#713f12;}
+#result-panel.high{background:#dcfce7;color:#14532d;}
+#reset-btn{margin-top:10px;padding:8px 16px;background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);border-radius:8px;cursor:pointer;font-size:12px;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif;}
+#reset-btn:hover{background:var(--color-background-tertiary);}
+</style>
+
+<div class="cv">
+
+<!-- TITLE BAR -->
+<div class="titbar">
+  <h1>🌱 Siembra y Mantenimiento de Cultivo</h1>
+  <p>Ing. Luis Alberto Altamirano Chunga · Ingeniería Agrícola · UNALM</p>
+  <div class="tagrow">
+    <span class="tag">Sembradoras monograno</span>
+    <span class="tag">Sembradora a chorrillo</span>
+    <span class="tag">Abonadora</span>
+    <span class="tag">Pulverizadoras</span>
+    <span class="tag">Cultivadores</span>
+    <span class="tag">Cosechadora</span>
+    <span class="tag">CTT / CET</span>
+    <span class="tag">Tracción empírica</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: SEMBRADORAS -->
+<div class="secbar blue">🌾 SEMBRADORAS MONOGRANO</div>
+
+<div class="block">
+  <span class="bh blue">Sembradora monograno (Diap. 3–6)</span>
+  <div class="def blue">Máquina diseñada para depositar <strong>un único grano por alveolo</strong> con espaciado preciso entre plantas. Es la base de la agricultura de precisión: permite densidades exactas y elimina el raleo manual.</div>
+  <div class="item"><span class="dot blue"></span><span>El <strong>dosificador</strong> es el corazón: puede ser mecánico (platos horizontal/vertical con alveolos) o neumático (vacío). El tipo determina la velocidad máxima posible sin "saltar" semillas.</span></div>
+  <div class="item"><span class="dot blue"></span><span>La <strong>reja sembradora</strong> abre el surco; los tipos (disco simple, doble, cincel, sable, bota) se eligen según el tipo de suelo y residuos en superficie.</span></div>
+  <div class="item"><span class="dot blue"></span><span>La <strong>rueda asentadora y rastras</strong> cierran el surco y aseguran contacto suelo-semilla, crítico para germinación homogénea.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir el radio del plato con el radio del alveolo. El radio del plato es el que entra en la fórmula de velocidad tangencial para calcular la velocidad de avance máxima.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la velocidad tangencial del plato dosificador limita la velocidad máxima de avance en una sembradora monograno mecánica y cómo se relacionan ambas mediante la ecuación de dosificación.</div>
+</div>
+
+<div class="block">
+  <span class="bh yellow">Problema tipo 1: velocidad de avance (Diap. 9)</span>
+  <div class="def yellow">La velocidad máxima de siembra depende de cuántos alveolos giran por unidad de tiempo y el espaciado entre semillas requerido. Vincular la velocidad tangencial del plato con la densidad de siembra.</div>
+  <div class="rx">
+    d entre semillas = 10 000 m²/ha ÷ (Población/ha × dist. hileras)<br>
+    ω (rad/s) = V_tang / R_plato<br>
+    N (rev/s) = ω / 2π<br>
+    V_avance_max = N × N_alveolos × d_semillas
+  </div>
+  <div class="item"><span class="dot yellow"></span><span>Ejemplo: 70 000 plantas/ha, hileras 0.7 m → d = 10 000/(70 000×0.7) = 0.204 m. Con V_tang=0.3 m/s, R=0.09 m, N_alv=24 → V_max ≈ 2.4 km/h.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué reducir el número de alveolos en el plato, manteniendo la misma velocidad tangencial, permite aumentar la velocidad de avance? Argumente en términos del espaciado entre semillas.</div>
+</div>
+
+<div class="block">
+  <span class="bh yellow">Problema tipo 2: transmisión y distancias (Diap. 10)</span>
+  <div class="def yellow">La transmisión por cadena y piñones convierte el giro de la rueda motriz en giro del disco de pinzas. La relación de transmisión determina cuántos metros avanza el tractor por cada depósito de semilla.</div>
+  <div class="rx">
+    d_siembra = (π × D_rueda × Z_conducido) / (Z_motriz × N_alveolos)<br>
+    D_rueda = 0.82 m, N_alv = 8
+  </div>
+  <div class="item"><span class="dot yellow"></span><span>Para Z1=23: d = (π×0.82×23)/(20×8) = <strong>3.71 m</strong>. Para Z2=16: d ≈ <strong>2.58 m</strong>. Para Z3=10: d ≈ <strong>1.61 m</strong>.</span></div>
+  <div class="warn">⚠️ El piñón Z3 solidario a Z4 actúa como etapa intermedia: la relación global es (Z0/Zx)×(Z4/Z5). Ignorar Z4 y Z5 da un resultado incorrecto.</div>
+</div>
+
+<!-- SECCIÓN 2: SEMBRADORA CHORRILLO -->
+<div class="secbar green">🟢 SEMBRADORA A CHORRILLO</div>
+
+<div class="block s2">
+  <span class="bh green">Sembradora de chorrillo — principio y tipología (Diap. 11–12)</span>
+  <div class="def green">Diseñada para "granos finos" (trigo, cebada, arroz, alfalfa): deposita semillas de forma continua en surcos de profundidad constante. A diferencia de la monograno, NO controla el espaciado individual entre semillas: controla la dosis (kg/ha).</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot green"></span><span><strong>Dosificador:</strong> cilindros acanalados o con dedos. El accionamiento es proporcional al avance (rueda motriz) por eso si el suelo es blando y la rueda patina, la dosis real cae.</span></div>
+      <div class="item"><span class="dot green"></span><span><strong>Capacidad tolva:</strong> 120–160 kg/m de anchura en siembra normal; 200–300 kg/m en siembra directa pesada.</span></div>
+      <div class="item"><span class="dot green"></span><span><strong>Anchura de trabajo:</strong> 2–7 m (hasta 10 m en equipos especiales). Se recomienda que sea múltiplo de 1.5 m para aprovechar el marcador.</span></div>
+    </div>
+    <div>
+      <div class="rx">
+        Calibración estacionaria:<br>
+        A_equiv = N_líneas × d_líneas<br>
+        L_calib = N_vueltas × 2π × r_carga<br>
+        Q_real = masa_recogida × (10 000 / (A_equiv × L_calib))
+      </div>
+      <div class="item"><span class="dot green"></span><span>Posición de palanca → si Q_real &lt; dosis objetivo, se desplaza para abrir más el paso; si Q_real &gt; dosis, se cierra.</span></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Usted calibra una sembradora a chorrillo de 18 líneas (20 cm entre sí) y en 50 vueltas de rueda (circunferencia 1.5 m) recoge 4.25 kg. La dosis objetivo es 170 kg/ha. Indique en qué sentido debe variar la palanca dosificadora y explique el razonamiento.</div>
+</div>
+
+<div class="block">
+  <span class="bh green">Tipos de siembra y parámetros por semilla (Diap. 14)</span>
+  <div class="def green">Cada cultivo tiene propiedades físicas (tamaño, densidad, ángulo de rozamiento) que determinan el diseño del dosificador y la profundidad óptima de siembra.</div>
+  <table class="tbl" style="margin-top:6px;">
+    <thead><tr><th>Cultivo</th><th>P/1000 gr (g)</th><th>Densidad kg/ha</th><th>Prof. (cm)</th></tr></thead>
+    <tbody>
+      <tr><td>Trigo</td><td>25–50</td><td>100–200</td><td>2.5–5</td></tr>
+      <tr><td>Maíz</td><td>100–200</td><td>50–80</td><td>4–8</td></tr>
+      <tr><td>Alfalfa</td><td>1.4–2.8</td><td>6–25</td><td>1–2</td></tr>
+      <tr><td>Remolacha</td><td>15–30</td><td>20–30</td><td>1.5–4</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">⚠️ El P/1000 semillas varía por variedad y año. Usar tablas genéricas sin verificar el lote real puede provocar sub o sobredosificación real del 20–30%.</div>
+</div>
+
+<!-- SECCIÓN 3: ABONADORA Y PULVERIZADORA -->
+<div class="secbar orange">🟠 ABONADORA Y PULVERIZADORA</div>
+
+<div class="block">
+  <span class="bh orange">Abonadora de estiércol — remolque distribuidor (Diap. 18–22)</span>
+  <div class="def orange">Máquina que distribuye materia orgánica sólida mediante una cadena de arrastre que avanza el material hacia los rotores fragmentadores traseros. La dosis aplicada depende de la velocidad de la cadena y la velocidad de avance del tractor.</div>
+  <div class="rx">
+    Dosis (T/ha) = (masa_carga / (A_util × L_parcela)) × nº_pasadas<br>
+    Relación de velocidades: V_cadena / V_tractor = constante para dosis dada
+  </div>
+  <div class="item"><span class="dot orange"></span><span>Para grandes extensiones se prefieren abonadoras remolcadas con fondo de banda móvil: menor presión sobre el suelo y mayor capacidad de carga.</span></div>
+  <div class="exam">🎯 EXAMEN: Un remolque distribuidor (2 T, anchura 1.25 m, longitud 2.5 m) debe aplicar 20 T/ha en parcelas de 60 m. Determine las velocidades de cadena y tractor compatibles con esta dosis, indicando si la velocidad de cadena hallada está dentro del rango regulable (0.2–1.5 m/min).</div>
+</div>
+
+<div class="block s2">
+  <span class="bh purple">Pulverizadoras — calibración y tamaño de gota (Diap. 23–29)</span>
+  <div class="def purple">Las pulverizadoras aplican fitosanitarios en caldo (mezcla agua+producto). Su eficacia depende del tamaño de gota: gotas muy finas derivan con el viento (deriva), gotas muy gruesas escurren. La clasificación por color es internacional (ISO 10625).</div>
+  <div class="two">
+    <div>
+      <table class="tbl">
+        <thead><tr><th>Clase</th><th>µm</th><th>Color</th></tr></thead>
+        <tbody>
+          <tr><td>Muy fina (VF)</td><td>&lt;100</td><td style="color:#ef4444;">●Rojo</td></tr>
+          <tr><td>Fina (F)</td><td>100–175</td><td style="color:#f97316;">●Naranja</td></tr>
+          <tr><td>Mediana (M)</td><td>175–250</td><td style="color:#eab308;">●Amarillo</td></tr>
+          <tr><td>Grande (C)</td><td>250–375</td><td style="color:#3b82f6;">●Azul</td></tr>
+          <tr><td>Muy grande (VC)</td><td>375–450</td><td style="color:#22c55e;">●Verde</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="mini p"><strong>Gotas/cm² necesarias por producto</strong>Herbicida contacto: 30–40 / sistémico: 20–30. Insecticida: 50–70. Fungicida: 50–70.</div>
+      <div class="rx" style="margin-top:6px;">
+        V (km/h) = dist(m)×3.6 / tiempo(s)<br>
+        Q_boquilla (L/min) = dist_boquillas×L/ha×km/h / 600<br>
+        P_nueva = (Q_nueva/Q_conocida)² × P_conocida
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: La presión no controla el caudal linealmente — el caudal es proporcional a la raíz cuadrada de la presión. Duplicar la presión solo aumenta el caudal ×1.41, no ×2.</div>
+  <div class="exam">🎯 EXAMEN: Una boquilla nueva 11006 tiene caudal de 2.27 L/min. Al medir 12 boquillas en campo se obtiene: 2.3, 2.2, 2.3, 2.5, 2.3, 2.5, 2.5, 2.4, 2.2, 2.6, 2.1, 2.3 L/min. ¿Cuáles deben sustituirse (criterio ±10%) y cuál es el gasto de caldo por hectárea con la velocidad de 50 m en 30 s y separación 0.5 m?</div>
+</div>
+
+<!-- SECCIÓN 4: CULTIVADORES Y COSECHADORA -->
+<div class="secbar teal">🔵 CULTIVADORES Y COSECHADORA</div>
+
+<div class="block">
+  <span class="bh teal">Cultivadores — tipos de reja (Diap. 30–35)</span>
+  <div class="def teal">El cultivador trabaja entre líneas del cultivo para destruir malezas, airear el suelo y romper costras. La reja se elige según la función específica: no todas cortan igual ni generan la misma fuerza de tiro.</div>
+  <div class="three">
+    <div class="mini t"><strong>Regeneradoras</strong>Estrechas y cortantes. Para praderas y suelos con residuos. Aireación sin laboreo profundo.</div>
+    <div class="mini t"><strong>Escarificadoras</strong>Robustas, 12–15 cm prof. Disgregan suelos compactados. Mayor demanda de potencia.</div>
+    <div class="mini t"><strong>Extirpadoras</strong>Anchas, cortan raíces de malas hierbas al ras del suelo. Muy eficaces en post-emergencia.</div>
+  </div>
+  <div class="rx" style="margin-top:8px;">
+    Fuerza total = N_púas × kgf/púa<br>
+    Potencia_barra (kW) = F(kgf) × V(m/s) / 102<br>
+    Potencia_motor = Potencia_barra / (1 – pérd_transmisión)
+  </div>
+  <div class="exam">🎯 EXAMEN: Un arado cincel de 18 púas trabaja a 6 km/h con 250 kgf/púa y pérdidas de transmisión del 35%. Calcule la fuerza total a la barra de tiro y la potencia del motor requerida en CV.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh teal">Cosechadora combinada — 5 operaciones (Diap. 36–42)</span>
+  <div class="def teal">La cosechadora integra en una sola pasada cinco operaciones secuenciales: el grano entra sucio por el frente y sale limpio por la tolva trasera. Comprender el flujo de material dentro de la máquina es clave para regular pérdidas.</div>
+  <div class="flow">
+    <span class="fbox">1 · Corte y Alimentación</span><span class="farrow">→</span>
+    <span class="fbox">2 · Trilla (cilindro-cóncavo)</span><span class="farrow">→</span>
+    <span class="fbox">3 · Separación (saca-pajas)</span><span class="farrow">→</span>
+    <span class="fbox">4 · Limpieza (zaranda+ventilador)</span><span class="farrow">→</span>
+    <span class="fbox">5 · Almacenaje y Descarga</span>
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot teal"></span><span><strong>Plataforma de corte:</strong> Rígida (arroz, sorgo, trigo) o flexible (soja, cultivos de clima frío). El molinete recoge las plantas; el caracol las centra hacia el canal alimentador.</span></div>
+      <div class="item"><span class="dot teal"></span><span><strong>Trilla:</strong> El cilindro rota y fuerza el material por la restricción cilindro-cóncavo. El roce separa el grano del tallo/espiga. Se regula la holgura y velocidad del cilindro según cultivo.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot teal"></span><span><strong>Separación:</strong> 90% ocurre en el cóncavo, 7% en batidor trasero, 3% en saca-pajas. Por eso el cóncavo correcto es decisivo para no sobrecargar la zaranda.</span></div>
+      <div class="item"><span class="dot teal"></span><span><strong>Limpieza:</strong> Ventilador + zaranda superior + zaranda inferior. Los granos mal trillados regresan al cilindro por el elevador de retrilla (circuito cerrado).</span></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el sistema de separación de la cosechadora distribuye sus funciones de forma porcentual (cóncavo 90%, batidor 7%, saca-pajas 3%) y qué consecuencias prácticas tiene usar un cóncavo inadecuado para el cultivo?</div>
+</div>
+
+<!-- SECCIÓN 5: CTT / CET / TRACCIÓN -->
+<div class="secbar yellow">📐 CAPACIDAD DE TRABAJO, POTENCIA Y TRACCIÓN</div>
+
+<div class="block">
+  <span class="bh yellow">CTT y CET — Capacidad teórica vs. efectiva (Diap. CTT 1–5)</span>
+  <div class="def yellow">La CTT asume que la máquina trabaja al 100% del ancho y velocidad nominal SIN interrupciones. La CET usa el ancho y velocidad reales, incluyendo pérdidas por giros, ajustes y transporte. La eficiencia de campo (EF) es su cociente.</div>
+  <div class="rx">
+    CTT (ha/h) = Ancho_nominal(m) × V_nominal(km/h) / 10<br>
+    CET (ha/h) = Ancho_real(m) × V_real(km/h) / 10<br>
+    EF (%) = CET / CTT × 100
+  </div>
+  <div class="item"><span class="dot yellow"></span><span>Ejemplo: CTT = 1.3×5.4/10 = <strong>0.702 ha/h</strong>; CET = 1.12×5.4/10 = <strong>0.605 ha/h</strong>; EF = 86.1%.</span></div>
+  <table class="tbl" style="margin-top:8px;">
+    <thead><tr><th>Apero</th><th>Velocidad km/h</th><th>EF típica %</th></tr></thead>
+    <tbody>
+      <tr><td>Arado de reja</td><td>5.6–7.5</td><td>74–90</td></tr>
+      <tr><td>Cincel</td><td>5.6–10</td><td>75–90</td></tr>
+      <tr><td>Rastra discos</td><td>6–10</td><td>70–90</td></tr>
+      <tr><td>Sembradora grano fino</td><td>–</td><td>45–150 kg/surco</td></tr>
+    </tbody>
+  </table>
+  <div class="exam">🎯 EXAMEN: Si la eficiencia de campo de un arado de disco es 78% y la CTT = 0.8 ha/h, ¿qué tiempo real demandará labrar 50 ha? Explique qué factores reducen la EF por debajo del valor teórico.</div>
+</div>
+
+<div class="block">
+  <span class="bh yellow">Fuerza de tiro y potencia (Diap. CTT 6–14)</span>
+  <div class="def yellow">La fuerza de tiro (tracción) depende del área de suelo trabajada y del coeficiente de labranza (CL), que representa la resistencia del suelo por unidad de área. La potencia es el producto fuerza × velocidad.</div>
+  <div class="rx">
+    Ft (kgf) = CL (kgf/dm²) × profundidad (dm) × ancho (dm)<br>
+    N_barra (CV) = Ft(kgf) × V(km/h) / 270<br>
+    1 CV = 75 kgf·m/s = 0.735 kW; 1 kW = 1.36 CV
+  </div>
+  <div class="two">
+    <div class="mini y"><strong>CL por tipo de suelo</strong>Suelto: 30–40 · Medio: 40–60 · Tendiendo a compact.: 60–80 · Compactado: 80–100 · Muy compact.: &gt;100 kgf/dm²</div>
+    <div class="mini y"><strong>CL por herramienta</strong>Arado rejas: 83–94 · Arado discos: 74–86 · Arado cincel: 37–43 (suelo arcilloso, 20% humedad)</div>
+  </div>
+  <div class="warn">⚠️ La potencia indica a qué velocidad máxima se puede realizar el trabajo. El PESO del tractor determina si puede o no realizar el trabajo. Confundirlos es el error más frecuente en examen.</div>
+  <div class="exam">🎯 EXAMEN: Calcule la fuerza de tiro, la potencia a la barra y la CTT de un arado de rejas de 4 cuerpos: velocidad 7.2 km/h, ancho de corte 35 cm/cuerpo, profundidad 20 cm, CL = 60 kgf/dm².</div>
+</div>
+
+<div class="block">
+  <span class="bh red">Tracción empírica y patinamiento (Diap. Tracción 1–3)</span>
+  <div class="def red">Las fórmulas empíricas del INTA (Ferrari y Ferrari) permiten dimensionar el tractor sin datos detallados del motor: sólo con el peso del tractor y el tipo de suelo se puede saber si el tractor puede traccionar una herramienta dada.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #ef4444;"><strong>Capacidad de tracción</strong>Simple: 50%·peso · Asistida: 65%·peso · Doble/articulado: 80%·peso · Oruga: 90%·peso</div>
+    <div class="mini" style="border-top:3px solid #ef4444;"><strong>kgf desde CV (por suelo)</strong>Arenoso: CV×20 · Franco: CV×22 · Arcilloso: CV×25 · Constante 270: 1CV=270 kg·km/h</div>
+    <div class="mini" style="border-top:3px solid #ef4444;"><strong>Patinamiento óptimo</strong>Entre 5% y 12%. Medir: 10 vueltas teóricas vs. reales. Si se cuentan 11 reales → 10% patinamiento.</div>
+  </div>
+  <div class="rx">
+    V_max (km/h) = [CV_tractor × 270] / kgf_necesarios<br>
+    Ahorro combustible posible si V_max/V_trabajo &gt; 1.3 (subir marcha y bajar RPM ~20% menos consumo)
+  </div>
+  <div class="exam">🎯 EXAMEN: Un tractor de tracción asistida pesa 6500 kg y tiene 125 CV. Una sembradora directa de granos gruesos requiere 120 CV en suelo arcilloso. ¿Puede el tractor traccionar la sembradora? ¿A qué velocidad máxima puede operar? Justifique numéricamente.</div>
+</div>
+
+<!-- TABLA INTEGRADORA FINAL -->
+<div class="secbar gray">📊 TABLA INTEGRADORA — VISIÓN GLOBAL DE TODOS LOS CONCEPTOS</div>
+
+<div class="block s3">
+  <span class="bh gray">Comparación de máquinas de siembra y mantenimiento</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Máquina</th>
+        <th>Función principal</th>
+        <th>Parámetro de regulación clave</th>
+        <th>Fórmula de calibración base</th>
+        <th>Cultivo típico Perú</th>
+        <th>Problema examen asociado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Sembradora monograno</strong></td><td>1 semilla/alveolo con espaciado preciso</td><td>Nº alveolos × velocidad tangencial</td><td>V_av = ω × R × N_alv × d_semilla</td><td>Maíz, papa, girasol</td><td>Vel. avance máxima (P1)</td></tr>
+      <tr><td><strong>Sembradora chorrillo</strong></td><td>Siembra continua en kg/ha</td><td>Posición de palanca dosificadora</td><td>Dosis = masa/(A_equiv×L_calibración)</td><td>Arroz, trigo, cebada</td><td>Calibración estacionaria (P4)</td></tr>
+      <tr><td><strong>Abonadora remolque</strong></td><td>Distribuir estiércol en T/ha</td><td>Relación V_cadena / V_tractor</td><td>Dosis = cap.(T)/(A×L) × ajuste velocidad</td><td>Cultivos hortícolas</td><td>Velocidades (P6 abonadora)</td></tr>
+      <tr><td><strong>Pulverizadora barra</strong></td><td>Aplicar fitosanitarios en L/ha</td><td>Presión + velocidad + boquilla</td><td>Q = dist_boquillas×L/ha×km/h / 600</td><td>Espárrago, papa, maíz</td><td>Calibración boquillas (P6 pulv.)</td></tr>
+      <tr><td><strong>Cultivador de cinceles</strong></td><td>Laboreo entre líneas/control malezas</td><td>Nº púas, profundidad, velocidad</td><td>Ft = N_púas×kgf/púa; N=Ft×V/270</td><td>Universal</td><td>Fuerza y potencia (P8)</td></tr>
+      <tr><td><strong>Cosechadora combinada</strong></td><td>Cosechar en 5 operaciones integradas</td><td>Holgura cilindro-cóncavo, zaranda</td><td>Flujo: corte→trilla→separación→limpieza</td><td>Arroz, maíz, trigo</td><td>Conceptual sistema separación</td></tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px;">⚠️ DATO INTEGRADOR CLAVE: En toda máquina agrícola, la potencia motor ≠ potencia barra de tiro. Las pérdidas en transmisión (30–35%), rodadura y patinamiento reducen la potencia útil disponible. Ignorar esto sobredimensiona la velocidad de trabajo o subdimensiona el tractor necesario.</div>
+</div>
+
+<!-- QUIZ INTERACTIVO -->
+<div id="quiz-section">
+  <div class="quiz-head">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-info">
+      <span id="prog-text">Respondidas: 0 / 10</span>
+      <span id="score-text">Aciertos: 0</span>
+    </div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">En una sembradora monograno mecánica, ¿qué componente es el responsable directo de individualizar y depositar cada semilla de forma precisa?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) La reja sembradora tipo cincel</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) La rueda compresora delantera</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) El dosificador (plato alveolado)</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) El separador de terrones</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Si el porcentaje de germinación de una semilla de maíz es 80% y se desea una población de 120 000 plantas/ha con hileras a 0.5 m, ¿cuál es la distancia entre semillas dentro del surco?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) 8.3 cm</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) 16.6 cm</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) 10.4 cm</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) 20.8 cm</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">En una sembradora a chorrillo, el dosificador aplica semilla proporcional al avance mediante una rueda motriz. ¿Qué consecuencia práctica tiene que la rueda motriz patine en suelo blando?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) La semilla se deposita más profunda de lo indicado</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) El cilindro dosificador gira más rápido y sobredosifica</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) La dosis real disminuye porque el dosificador gira menos vueltas por metro recorrido</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) La anchura de trabajo se reduce automáticamente</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿En cuál de las siguientes afirmaciones sobre la abonadora remolque es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) La dosis aplicada depende de la relación entre la velocidad de la cadena y la del tractor</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Para grandes extensiones se recomienda el modelo remolcado con banda móvil</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) El volumen de material distribuido es independiente de la velocidad de avance del tractor</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) La anchura útil y la capacidad de la tolva son parámetros de diseño que afectan la dosis</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">En pulverización agrícola, una gota clasificada como "Muy fina (VF)" tiene un diámetro menor a 100 µm. ¿Cuál es el principal riesgo asociado a este tamaño de gota?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Daña mecánicamente la hoja del cultivo al impactar</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) Alta susceptibilidad a la deriva por viento, contaminando áreas no objetivo</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Escurre por la hoja sin adherirse, reduciendo la cobertura</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Obstruye las boquillas por su alta densidad</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">La fórmula para ajuste de presión en una pulverizadora es P_nueva = (Q_nueva/Q_conocida)² × P_conocida. Si se quiere aumentar el caudal de 2.0 a 2.5 L/min y la presión actual es 3 bar, ¿cuál es la nueva presión necesaria?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) 3.75 bar</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) 5.0 bar</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) 4.69 bar</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) 6.25 bar</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">En la cosechadora combinada, ¿qué porcentaje aproximado de la separación grano-paja ocurre en el cóncavo (vs. batidor trasero y saca-pajas)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) 60%</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) 75%</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) 80%</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="true">D) 90%</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia fundamental entre la Capacidad Teórica de Trabajo (CTT) y la Capacidad Efectiva de Trabajo (CET)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) La CTT usa la profundidad de trabajo y la CET no</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) La CTT usa ancho y velocidad nominales; la CET usa ancho y velocidad reales (con pérdidas de campo)</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) La CET se calcula en hectáreas por día y la CTT en hectáreas por hora</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Son iguales cuando el campo no tiene pendiente</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">Según las fórmulas empíricas de tracción (INTA), un tractor de tracción asistida con 6 500 kg de peso tiene una capacidad de tracción de:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) 3 250 kg (50% del peso)</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) 4 225 kg (65% del peso)</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) 5 200 kg (80% del peso)</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) 6 500 kg (100% del peso)</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál es el rango de patinamiento óptimo recomendado para un tractor agrícola trabajando en campo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) 0 – 3% (mínimo posible)</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) 3 – 5%</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) 5 – 12%</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) 15 – 25%</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="result-panel"></div>
+  <button id="reset-btn" onclick="resetQuiz()" style="display:none">🔄 Reiniciar Quiz</button>
+</div>
+
+<!-- FOOTER -->
+<div class="foot">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Altamirano Chunga, L.A. — Siembra y Mantenimiento de Cultivo (UNALM). · Morrison et al. 1988 (elementos dosificadores). · Ferrari H. y Ferrari M.C. — Fórmulas Empíricas de Tracción (INTA EEA C. del Uruguay). · Las máquinas agrícolas y su aplicación (tablas de cultivadores). · FAO / INIA: parámetros de semillas.</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: { correct: "C", ok: "✅ ¡Correcto! El dosificador (plato alveolado) es el corazón de la sembradora monograno: cada alveolo captura exactamente una semilla y la libera en el surco al llegar a la posición de descarga, garantizando la densidad de siembra exacta.", nok: "❌ Incorrecto. La respuesta correcta es C. La reja abre el surco y las ruedas compresoras lo cierran, pero quien 'cuenta' y libera cada semilla individualmente es el dosificador con sus alveolos." },
+  2: { correct: "B", ok: "✅ ¡Correcto! 120 000 semillas/ha × 0.8 = 96 000 plantas/ha → 12 semillas/m² → 1/12 = 0.083 m²/semilla → 0.083/0.5 = 0.166 m ≈ 16.6 cm. Es el cálculo clásico de la diapositiva 8.", nok: "❌ Incorrecto. La respuesta correcta es B (16.6 cm). Recuerde: primero ajuste por germinación (120 000×0.8), luego calcule semillas/m², luego divida 1/(semillas/m²) para obtener m²/semilla, y finalmente divida entre la distancia entre hileras." },
+  3: { correct: "C", ok: "✅ ¡Correcto! El dosificador está mecánicamente ligado a la rueda motriz. Si la rueda patina, da menos vueltas efectivas por metro recorrido en campo → el dosificador libera menos semilla → la dosis real cae por debajo del objetivo.", nok: "❌ Incorrecto. La respuesta correcta es C. El dosificador no tiene sensor de velocidad real: sigue a la rueda. Si la rueda patina (da más vueltas que las que corresponden al avance real), el tractor avanza más metros por vuelta de rueda y la semilla se distribuye más dispersa." },
+  4: { correct: "C", ok: "✅ ¡Correcto! La afirmación falsa es C. La dosis SÍ depende de la velocidad del tractor: si el tractor avanza más rápido con la misma velocidad de cadena, el material se esparce sobre más metros lineales y la dosis por hectárea disminuye.", nok: "❌ Incorrecto. La respuesta correcta es C. La dosis (T/ha) en una abonadora depende de la relación V_cadena/V_tractor. Aumentar la velocidad del tractor sin cambiar la cadena reduce la dosis; disminuirla la aumenta." },
+  5: { correct: "B", ok: "✅ ¡Correcto! Las gotas menores de 100 µm tienen muy poca masa, por lo que la fuerza aerodinámica del viento las desplaza fácilmente. En aplicaciones a campo en Perú (costa con viento, sierra), esto implica riesgo de contaminación de cultivos vecinos y pérdida de eficacia.", nok: "❌ Incorrecto. La respuesta correcta es B. Las gotas muy finas no escurren (son demasiado pequeñas) ni obstruyen boquillas (son las que salen por ellas). Su problema es la deriva, que causa pérdidas económicas y ambientales." },
+  6: { correct: "C", ok: "✅ ¡Correcto! P_nueva = (2.5/2.0)² × 3 = 1.5625 × 3 = 4.69 bar. La relación cuadrática significa que pequeños aumentos de caudal requieren incrementos de presión proporcionalmente mayores — duplicar el caudal requeriría 4 veces la presión.", nok: "❌ Incorrecto. La respuesta correcta es C (4.69 bar). La fórmula es cuadrática: P_nueva = (Q_nueva/Q_conocida)² × P_conocida = (2.5/2.0)² × 3 = 1.5625 × 3 = 4.69 bar. No es una relación lineal." },
+  7: { correct: "D", ok: "✅ ¡Correcto! El 90% de la separación ocurre en el cóncavo; el 7% en el batidor trasero y el 3% restante en el saca-pajas. Por eso elegir el cóncavo adecuado (abertura y material) es la decisión más crítica al regular la cosechadora.", nok: "❌ Incorrecto. La respuesta correcta es D (90%). El cóncavo, por ser la primera etapa y la de mayor área de contacto, procesa la gran mayoría del grano. Los sistemas posteriores son complemento, no reemplazo." },
+  8: { correct: "B", ok: "✅ ¡Correcto! La CTT es una capacidad 'ideal' (ancho nominal × velocidad nominal), útil para comparar máquinas en catálogos. La CET refleja lo que realmente se trabaja en campo, que siempre es menor por giros, reposiciones, ajustes y patinamiento.", nok: "❌ Incorrecto. La respuesta correcta es B. Ambas se expresan en ha/h; la diferencia es que CTT usa parámetros de diseño y CET usa parámetros reales medidos en campo. Su cociente (EF%) cuantifica las pérdidas operativas." },
+  9: { correct: "B", ok: "✅ ¡Correcto! Tracción asistida = 65% × 6500 = 4225 kg. Esta es la capacidad de tracción disponible, que debe compararse con los kg que ejerce la herramienta a la barra de tiro para verificar si el tractor puede realizar el trabajo.", nok: "❌ Incorrecto. La respuesta correcta es B. La tabla INTA establece: simple 50%, asistida 65%, doble 80%, oruga 90%. Con 6500 kg y tracción asistida: 0.65 × 6500 = 4225 kg." },
+  10: { correct: "C", ok: "✅ ¡Correcto! El rango 5–12% es el óptimo según INTA (Ferrari). Menos del 5% indica que el tractor está subexigido (exceso de peso o tracción); más del 12% implica pérdida de tracción, degradación del suelo y mayor consumo de combustible.", nok: "❌ Incorrecto. La respuesta correcta es C (5–12%). Cero patinamiento no es deseable: indicaría que las ruedas no 'muerden' el suelo apropiadamente. El patinamiento en ese rango es necesario para una transmisión eficiente de la fuerza." }
+};
+
+let answered = 0, correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add(isCorrect ? 'correct' : 'show-correct');
+  });
+  if (!isCorrect) btn.classList.add('wrong');
+  const fb = document.getElementById('fb'+q);
+  fb.style.display = 'block';
+  if (isCorrect) {
+    fb.className = 'qfeedback ok';
+    fb.innerHTML = feedbacks[q].ok;
+    correct++;
+  } else {
+    fb.className = 'qfeedback nok';
+    fb.innerHTML = feedbacks[q].nok;
+  }
+  answered++;
+  document.getElementById('prog-text').textContent = 'Respondidas: '+answered+' / 10';
+  document.getElementById('score-text').textContent = 'Aciertos: '+correct;
+  document.getElementById('prog-bar').style.width = (answered*10)+'%';
+  if (answered === 10) showResult();
+});
+
+function showResult() {
+  const panel = document.getElementById('result-panel');
+  panel.style.display = 'block';
+  let cls, msg;
+  if (correct <= 4) { cls='low'; msg='😟 '+correct+'/10 — Necesitas repasar el material. Revisa especialmente las fórmulas de calibración y los conceptos de tracción.'; }
+  else if (correct <= 7) { cls='mid'; msg='👍 '+correct+'/10 — ¡Buen avance! Sigue repasando las relaciones entre CTT/CET/EF% y los cálculos de dosificación.'; }
+  else { cls='high'; msg='🎉 '+correct+'/10 — ¡Excelente dominio del tema! Estás preparado para el examen.'; }
+  panel.className = 'result-panel '+cls;
+  panel.innerHTML = '<strong>Resultado: '+msg+'</strong>';
+  document.getElementById('reset-btn').style.display = 'inline-block';
+}
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('prog-text').textContent = 'Respondidas: 0 / 10';
+  document.getElementById('score-text').textContent = 'Aciertos: 0';
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('result-panel').style.display = 'none';
+  document.getElementById('reset-btn').style.display = 'none';
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct','wrong','show-correct');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f => { f.style.display='none'; f.innerHTML=''; });
+}
+</script>
