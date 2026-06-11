@@ -1,0 +1,612 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;}
+.title-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px;}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.title-bar p{font-size:11px;opacity:.75;margin-bottom:8px;}
+.title-bar .tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(125,211,252,.18);color:#7dd3fc;font-family:'Oswald',sans-serif;}
+.sec{grid-column:1/-1;background:linear-gradient(90deg,rgba(15,30,58,.85),transparent);border-radius:8px;padding:6px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--color-text-primary);border-left:3px solid;}
+.sec.blue{border-color:#3b82f6;} .sec.green{border-color:#22c55e;} .sec.yellow{border-color:#eab308;} .sec.purple{border-color:#a855f7;} .sec.teal{border-color:#14b8a6;} .sec.orange{border-color:#f97316;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;font-size:12px;color:var(--color-text-primary);}
+.block.s2{grid-column:span 2;} .block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.bh.blue{background:#dbeafe;color:#1e3a8a;} .bh.green{background:#dcfce7;color:#14532d;} .bh.red{background:#fee2e2;color:#991b1b;} .bh.yellow{background:#fef9c3;color:#713f12;} .bh.purple{background:#ede9fe;color:#4c1d95;} .bh.teal{background:#ccfbf1;color:#134e4a;} .bh.orange{background:#ffedd5;color:#7c2d12;} .bh.gray{background:#f1f5f9;color:#334155;} .bh.pink{background:#fce7f3;color:#831843;}
+@media(prefers-color-scheme:dark){.bh.blue{background:#1e3a5f;color:#93c5fd;}.bh.green{background:#14532d;color:#86efac;}.bh.red{background:#450a0a;color:#fca5a5;}.bh.yellow{background:#422006;color:#fef08a;}.bh.purple{background:#2e1065;color:#c4b5fd;}.bh.teal{background:#042f2e;color:#5eead4;}.bh.orange{background:#431407;color:#fed7aa;}.bh.gray{background:#1e293b;color:#94a3b8;}.bh.pink{background:#4a044e;color:#f0abfc;}}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5;}
+.def.blue{border-color:#3b82f6;} .def.green{border-color:#22c55e;} .def.yellow{border-color:#eab308;} .def.purple{border-color:#a855f7;} .def.teal{border-color:#14b8a6;} .def.orange{border-color:#f97316;} .def.red{border-color:#ef4444;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.dot.blue{background:#3b82f6;} .dot.green{background:#22c55e;} .dot.yellow{background:#eab308;} .dot.purple{background:#a855f7;} .dot.teal{background:#14b8a6;} .dot.orange{background:#f97316;} .dot.red{background:#ef4444;} .dot.gray{background:#94a3b8;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0;}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa;}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#854d0e;}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:6px 0;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0;}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;font-weight:600;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase;color:var(--color-text-secondary);}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;}
+.stat-bar-fill{height:100%;border-radius:20px;transition:width .4s;}
+.qcard{background:var(--color-background-secondary);border-radius:10px;padding:12px;margin-bottom:10px;}
+.qnum{font-size:10px;color:var(--color-text-secondary);font-family:'Oswald',sans-serif;margin-bottom:4px;}
+.qtext{font-size:12px;font-weight:600;margin-bottom:8px;line-height:1.4;}
+.qopts{display:flex;flex-direction:column;gap:5px;}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary);}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn.show-correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn:disabled{opacity:0.7;cursor:not-allowed;pointer-events:none;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;border-left:3px solid;}
+.qfeedback.ok{background:#f0fdf4;border-color:#16a34a;color:#14532d;}
+.qfeedback.fail{background:#fef2f2;border-color:#dc2626;color:#991b1b;}
+@media(prefers-color-scheme:dark){.qfeedback.ok{background:#052e16;color:#86efac;}.qfeedback.fail{background:#450a0a;color:#fca5a5;}.qbtn.correct{background:#052e16;border-color:#16a34a;color:#86efac;}.qbtn.incorrect{background:#450a0a;border-color:#dc2626;color:#fca5a5;}.qbtn.show-correct{background:#052e16;border-color:#16a34a;color:#86efac;}}
+#result-panel{display:none;border-radius:10px;padding:14px;margin-top:12px;text-align:center;}
+#result-panel h3{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:6px;}
+#reset-btn{margin-top:10px;background:#0f1e3a;color:#7dd3fc;border:none;padding:8px 18px;border-radius:8px;cursor:pointer;font-family:'Oswald',sans-serif;font-size:13px;}
+</style>
+
+<div class="cv">
+
+<!-- TITLE BAR -->
+<div class="title-bar">
+  <h1>Unidad 4 — Modelos de Dispersión de Contaminantes Atmosféricos</h1>
+  <p>Energías Renovables · UNALM — Facultad de Ingeniería Agrícola · Prof. Kenyi Cavalcanti Cárdenas</p>
+  <div class="tags">
+    <span class="tag">Transporte & Dispersión</span><span class="tag">Difusión Molecular & Turbulenta</span><span class="tag">Variables Meteorológicas</span><span class="tag">Modelo Gaussiano</span><span class="tag">Celda Fija</span><span class="tag">Penachos</span><span class="tag">σy · σz</span><span class="tag">Aplicaciones Perú</span>
+  </div>
+</div>
+
+<!-- SECTION 1: FUNDAMENTOS -->
+<div class="sec blue">🔵 I. Fundamentos — Transporte, Dispersión y Deposición</div>
+
+<div class="block">
+  <span class="bh blue">Transporte vs. Dispersión (Diap. 4–9)</span>
+  <div class="def blue">Los contaminantes atmosféricos se mueven por tres mecanismos distintos. Entenderlos es clave porque determinan a qué distancia y en qué concentración llega el contaminante a una zona.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Transporte</strong><br>Movimiento advectivo dirigido por el viento promedio en el tiempo. Lleva la masa contaminada sotavento (downwind) como un todo. Depende de velocidad y dirección del viento.
+    </div>
+    <div class="mini" style="border-top:3px solid #a855f7">
+      <strong>Dispersión</strong><br>Esparcimiento por turbulencias locales o difusión molecular. Ocurre a escalas menores al tiempo de promediación del viento. Diluye el contaminante al mezclarlo con aire limpio.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <strong>Deposición</strong><br>Precipitación, barrido y sedimentación: devuelven los contaminantes a la superficie. Mecanismo de eliminación final. Incluye deposición seca (gravedad) y húmeda (lluvia).
+    </div>
+  </div>
+  <div class="flow">
+    <span class="fbox">Fuente emisora</span><span class="farrow">→</span><span class="fbox">Transporte (viento)</span><span class="farrow">→</span><span class="fbox">Dispersión (turbulencia)</span><span class="farrow">→</span><span class="fbox">Deposición (suelo)</span>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique por qué la dispersión y el transporte son procesos conceptualmente distintos, y qué parámetro meteorológico diferencia principalmente cuándo domina uno u otro.</div>
+</div>
+
+<div class="block">
+  <span class="bh purple">Difusión Molecular vs. Turbulenta (Diap. 5–7)</span>
+  <div class="def purple">Ambas son formas de dispersión pero operan a escalas radicalmente distintas. La difusión molecular es tan lenta que en la atmósfera exterior es despreciable; la turbulenta domina y es la base de todos los modelos de dispersión.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #a855f7">
+      <strong>Molecular (Ley de Fick)</strong><br>Escala microscópica. Movimiento Browniano. Extremadamente lento. Solo importante en aire muy quieto (interior de tuberías, zona muy próxima a fuente). Flujo ∝ gradiente de concentración.
+    </div>
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Turbulenta (difusividad de remolino)</strong><br>Escala macroscópica. Remolinos de viento. Mucho más rápida y eficaz. Domina la dispersión en exteriores urbanos. Afectada por viento, convección y topografía.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Asumir que ambas son igualmente importantes en el exterior. La difusión molecular es órdenes de magnitud más lenta y es prácticamente irrelevante fuera de espacios cerrados.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué los modelos de dispersión atmosférica utilizan el concepto de "difusividad de remolino" (K) en lugar de la constante de difusión molecular de Fick para estimar el transporte de contaminantes?</div>
+</div>
+
+<div class="block">
+  <span class="bh teal">Turbulencia: Mecánica y Térmica (Diap. 13–15)</span>
+  <div class="def teal">La turbulencia es el movimiento irregular del viento que crea remolinos a distintas escalas. Es el motor principal de la dispersión en la atmósfera. Richardson describió su naturaleza jerárquica: la energía fluye de remolinos grandes a pequeños hasta que la viscosidad la disipa.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <strong>Turbulencia Mecánica</strong><br>Generada cuando el flujo de aire roza objetos (edificios, árboles, colinas). Remolinos de tamaño más regular y constante. Predomina cerca del suelo en zonas de rugosidad alta.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>Turbulencia Térmica</strong><br>Generada por parcelas de aire sobrecalentado que ascienden (convección). Remolinos más grandes y de tamaño variable. Predomina en días soleados. Produce mayor dispersión vertical.
+    </div>
+  </div>
+  <div class="item"><span class="dot teal"></span><span>Los remolinos más eficaces para dispersar un penacho son aquellos de tamaño similar al propio penacho: los más pequeños solo erosionan los bordes; los más grandes lo transportan sin mezclarlo.</span></div>
+  <div class="item"><span class="dot teal"></span><span>La manifestación visible de los remolinos son las ráfagas, detectables en registros continuos de velocidad y temperatura del viento.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Dado un penacho de 50 m de diámetro emitido en un día estable con viento laminario, ¿qué tipo de turbulencia esperaría observar y cuál sería el tamaño de remolino más eficaz para su dispersión?</div>
+</div>
+
+<!-- SECTION 2: VARIABLES METEOROLÓGICAS -->
+<div class="sec green">🌬️ II. Variables Meteorológicas en la Dispersión</div>
+
+<div class="block">
+  <span class="bh green">Dirección del Viento (Diap. 11)</span>
+  <div class="def green">La dirección determina hacia dónde se transporta el penacho. Es el parámetro más sensible de las fuentes puntuales: un cambio pequeño de dirección puede desplazar el impacto de un área a otra completamente diferente.</div>
+  <div class="item"><span class="dot green"></span><span><strong>Cizalladura vertical:</strong> La dirección del viento cambia con la altura, especialmente cerca del suelo, debido a la fricción superficial que provoca viraje horario (veering) con la altura.</span></div>
+  <div class="item"><span class="dot green"></span><span><strong>Retroceso (backing):</strong> Advección de aire frío hace que el viento retroceda (gire antihorario) con la altura. Advección de aire cálido provoca viraje (giro horario).</span></div>
+  <div class="item"><span class="dot green"></span><span>En Lima, los vientos alisios dominantes del SO-S determinan que las emisiones de zonas industriales del Callao impacten el cono este de la ciudad con mayor frecuencia.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique el efecto de la cizalladura de dirección del viento en la dispersión vertical de un penacho emitido desde una chimenea alta y por qué puede resultar en que el penacho impacte a mayor altura que lo esperado.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh yellow">Velocidad del Viento — Ley de Potencia (Diap. 12–13)</span>
+  <div class="def yellow">La velocidad del viento aumenta con la altura y cumple dos funciones en la dispersión: (1) diluye los contaminantes al arrastrarlos continuamente desde la fuente, y (2) determina el tiempo de viaje hasta un receptor. A mayor velocidad, menor concentración cerca de la fuente pero también mayor alcance.</div>
+  <div class="rx">u(z) = u(z_a) · (z/z_a)^p<br>
+  u(z): velocidad a altura z | u(z_a): velocidad de referencia a z_a (normalmente 10 m)<br>
+  p: exponente entre 0.1–0.4 (depende de estabilidad atmosférica, rugosidad, profundidad de capa)<br>
+  Valor típico: p = 1/7 ≈ 0.143 (terreno abierto, condiciones neutras)</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #eab308">
+      <strong>Efecto dilución</strong><br>Una fuente continua emite Q g/s. A mayor velocidad u, el mismo Q se distribuye en mayor volumen por segundo → concentración ∝ Q/u. Duplicar el viento reduce la concentración a la mitad.
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316">
+      <strong>Efecto en fuentes flotantes</strong><br>El ascenso del penacho (plume rise) disminuye a mayor velocidad. Viento fuerte "aplana" el penacho: la flotabilidad térmica queda vencida por la fuerza del arrastre horizontal.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Pensar que "más viento = más contaminación". En realidad, mayor viento diluye más rápido. El peor escenario de concentración máxima ocurre con vientos débiles y estabilidad atmosférica alta (clase E–F).</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Una chimenea industrial en Lima opera con u=2 m/s. ¿Cómo cambiaría la concentración de SO₂ en un receptor a 1 km si el viento aumentara a 6 m/s, y cómo afectaría esto al ascenso del penacho?</div>
+</div>
+
+<!-- SECTION 3: MODELOS ATMOSFÉRICOS -->
+<div class="sec purple">📐 III. Tipos y Fundamentos de Modelos Atmosféricos</div>
+
+<div class="block">
+  <span class="bh purple">¿Qué es un Modelo Atmosférico? (Diap. 18–21)</span>
+  <div class="def purple">Un modelo de contaminación atmosférica es un protocolo matemático que estima la concentración de contaminantes en función de parámetros meteorológicos, de emisión y topográficos. Son simplificaciones de la realidad que permiten predecir impactos antes de que ocurran.</div>
+  <div class="item"><span class="dot purple"></span><span><strong>Parámetros de entrada:</strong> velocidad/dirección de viento, estabilidad atmosférica, altura de mezcla, cantidad emitida (Q), posición y altura de emisión, comportamiento químico (vida media, reacciones).</span></div>
+  <div class="item"><span class="dot purple"></span><span><strong>Salida:</strong> campo espacial de concentraciones c(x,y,z) para condiciones meteorológicas especificadas. Permite elaborar escenarios "what-if" (nueva chimenea, cambio de combustible).</span></div>
+  <div class="item"><span class="dot purple"></span><span><strong>Cita clave:</strong> "Todos los modelos son erróneos, pero algunos son interesantes" — los modelos permiten responder preguntas que serían imposibles o demasiado costosas de evaluar empíricamente (e.g. calidad del aire regional).</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Un nuevo proyecto minero en Ilo (Perú) debe obtener certificación ambiental. ¿Qué parámetros de entrada mínimos necesitaría un modelo de dispersión atmosférica para predecir las concentraciones de SO₂ en la ciudad?</div>
+</div>
+
+<div class="block s2">
+  <span class="bh gray">Enfoques Euleriano vs. Lagrangiano (Diap. 23–26)</span>
+  <div class="def gray">Los dos marcos conceptuales para describir el movimiento de fluidos (y contaminantes) difieren en si el observador está fijo en el espacio o si sigue al contaminante. Cada enfoque tiene ventajas computacionales y de aplicación específicas.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Euleriano</strong><br>Observa puntos fijos en el espacio (cuadrícula de "píxeles"). Resuelve ecuaciones diferenciales de advección-difusión en cada celda. Modelos: CMAQ, GEOS-Chem. Ideal para calidad del aire regional y largo plazo.<br><em>Limitación: alto costo computacional a alta resolución; dificultad para resolver escala fina de penachos.</em>
+    </div>
+    <div class="mini" style="border-top:3px solid #a855f7">
+      <strong>Lagrangiano</strong><br>Rastrea "parcelas" o "partículas" individuales de aire a medida que se mueven. Modelos: HYSPLIT, FLEXPART. Ideal para fuentes puntuales (fábricas, incendios), análisis fuente-receptor y eventos localizados.<br><em>Limitación: menos adecuado para escala regional sin usar muchas partículas.</em>
+    </div>
+  </div>
+  <div class="flow">
+    <span class="fbox">Celda fija estacionaria</span><span class="farrow">→</span><span class="fbox">Euleriano (CMAQ)</span><span class="farrow">·</span><span class="fbox">Penacho gaussiano</span><span class="farrow">→</span><span class="fbox">Lagrangiano (HYSPLIT)</span>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué el enfoque lagrangiano es más adecuado que el euleriano para modelar el impacto de una chimenea industrial puntual a distancias de 0–5 km? Justifique en términos de resolución espacial y costo computacional.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh orange">Tipos Principales de Modelos (Diap. 27–30)</span>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>Celda Fija Estacionaria</strong><br>Para emisiones difusas (ciudades enteras). Asume mezcla completa hasta altura H, concentración homogénea. Balance de materia simple. Output: concentración promedio c sobre la ciudad. Útil para estimaciones rápidas de impacto urbano.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>Gaussiano de Dispersión</strong><br>El más utilizado. Fuentes puntuales (chimeneas). Distribución normal de concentraciones en Y y Z. Relativamente sencillo de aplicar. Supone terreno plano, viento constante. Estima c a amplias distancias desde la fuente.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>Eulerianos, Lagrangianos, Híbridos y Terreno Complejo</strong><br>Para transporte a larga distancia, múltiples fuentes, topografía compleja (montañas, valles urbanos como Lima). Los híbridos combinan ventajas de varios enfoques para situaciones complejas donde actúan múltiples factores simultáneamente.
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Justifique por qué para modelar la dispersión de emisiones en el valle de Lima (topografía compleja con Andes y brisas de mar) un modelo gaussiano simple sería insuficiente, y qué tipo de modelo sería más apropiado.</div>
+</div>
+
+<!-- SECTION 4: CELDA FIJA ESTACIONARIA -->
+<div class="sec yellow">📦 IV. Modelo de Celda Fija Estacionaria</div>
+
+<div class="block">
+  <span class="bh yellow">Hipótesis y Geometría (Diap. 33–35)</span>
+  <div class="def yellow">El modelo de caja fija representa una ciudad como un rectángulo donde todos los contaminantes se mezclan perfectamente hasta una altura H (capa de mezcla). Es la simplificación más drástica pero útil para estimar concentraciones promedio urbanas de emisiones difusas (tráfico, calefacción residencial).</div>
+  <div class="item"><span class="dot yellow"></span><span>Ciudad = rectángulo W × L; L paralelo a la dirección del viento u. El viento entra por un lado con concentración de fondo b y sale por el lado opuesto con concentración c.</span></div>
+  <div class="item"><span class="dot yellow"></span><span>La turbulencia produce mezcla TOTAL y COMPLETA hasta H. Por encima no hay mezcla. Resultado: concentración c homogénea en todo el volumen W·L·H.</span></div>
+  <div class="item"><span class="dot yellow"></span><span>El índice de emisión areal q (g s⁻¹ m⁻²) se convierte en emisión total: Q = q·W·L (g/s).</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Enumere las 6 hipótesis esenciales del modelo de celda fija estacionaria y explique cuál de ellas es más difícil de cumplir en una ciudad real como Lima, y por qué.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh yellow">Deducción y Fórmula (Diap. 36–40)</span>
+  <div class="def yellow">Aplicando balance de materia en estado estacionario: lo que entra + lo que se emite = lo que sale. La derivada temporal es cero porque se asume equilibrio. El resultado es una ecuación sorprendentemente simple que muestra que la concentración crece linealmente con la longitud de la ciudad en la dirección del viento.</div>
+  <div class="rx">Balance: u·b·W·H + q·W·L − u·c·W·H = 0<br>
+  ↓ Despejando c:<br>
+  c = b + (q·L)/(u·H)<br>
+  c: concentración de contaminante [μg/m³ o g/m³]<br>
+  b: concentración de fondo [mismas unidades]<br>
+  q: emisión por unidad de área [g·s⁻¹·m⁻²]<br>
+  L: longitud de la ciudad en dir. viento [m]<br>
+  u: velocidad del viento [m/s]<br>
+  H: altura de mezcla [m]</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #eab308">
+      <strong>Interpretación física</strong><br>c aumenta con L (ciudad más larga → más tiempo de exposición al aire) pero es independiente de W (el ancho solo afecta Q total pero no c). Altura H actúa como "volumen de dilución": mayor H → menor c.
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <strong>Contaminante no estable</strong><br>Si el contaminante se destruye (tasa kD): c₀ = b + qL/(uH), luego c = c₀/(1 + kD·L/u). El denominador añade un factor de pérdida química. Aplica a contaminantes reactivos como NO o O₃.
+    </div>
+  </div>
+  <div class="warn">⚠️ Resultado clave: la concentración es independiente de W (ancho de ciudad). Aumentar la anchura no empeora la concentración promedio. Solo L importa en la dirección del viento. Este resultado contraintuitivo suele aparecer en exámenes.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Una ciudad tiene L=10 km, W=5 km, H=500 m, u=3 m/s, q=2×10⁻⁵ g s⁻¹ m⁻² y b=0. Calcule la concentración de equilibrio c. ¿Cómo cambiaría si el viento soplara perpendicular (L y W intercambiados)?</div>
+</div>
+
+<!-- SECTION 5: MODELO GAUSSIANO -->
+<div class="sec teal">🔔 V. Modelo Gaussiano de Dispersión (Pluma / Penacho)</div>
+
+<div class="block">
+  <span class="bh teal">Formación del Penacho y Suposiciones (Diap. 54–60)</span>
+  <div class="def teal">El modelo gaussiano es el más utilizado en la práctica profesional. Parte de la idea de que la concentración de contaminantes sigue una distribución normal (campana de Gauss) en las direcciones transversal (y) y vertical (z), mientras avanza a sotavento (x) con el viento medio.</div>
+  <div class="item"><span class="dot teal"></span><span><strong>Suposición a:</strong> La dispersión del contaminante tiene distribución gaussiana normal en y y z. El 68% de la masa queda dentro de ±1σ, el 95% en ±2σ, y el 99.7% en ±3σ del eje central del penacho.</span></div>
+  <div class="item"><span class="dot teal"></span><span><strong>Suposición b:</strong> La altura efectiva H varía según el momentum vertical del gas y la flotabilidad (gases calientes ascienden, aumentando la altura efectiva sobre la chimenea física).</span></div>
+  <div class="item"><span class="dot teal"></span><span><strong>Suposición c:</strong> c en cualquier punto depende de la tasa de emisión Q, las condiciones meteorológicas (u, estabilidad) y la distancia a la fuente (x).</span></div>
+  <div class="item"><span class="dot teal"></span><span><strong>Limitaciones:</strong> viento y emisiones constantes, terreno plano, deposición insignificante, penacho cónico. No aplica en valles complejos ni con meteorología muy variable.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explique físicamente por qué la distribución gaussiana es una aproximación razonable para la dispersión de un penacho continuo, y en qué condiciones esta aproximación falla.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh teal">Ecuación Básica de la Columna de Humo Gaussiana (Diap. 68–73)</span>
+  <div class="def teal">La ecuación gaussiana proviene de resolver la ecuación de difusión turbulenta en 3D, asumiendo que K (coeficiente de dispersión turbulenta) es constante e independiente de la dirección. La "columna de humo gaussiana" calcula el valor promedio de concentración, sin pretender describir valores instantáneos.</div>
+  <div class="rx">c(x, y, z, H) = [Q / (π · σy · σz · u)] · exp[−0.5·(y/σy)²] · exp[−0.5·((z−H)/σz)² + (z+H)/σz)²]<br>
+  Q: tasa de emisión [g/s]<br>
+  u: velocidad del viento a la altura de la chimenea [m/s]<br>
+  σy: coeficiente de dispersión horizontal [m]<br>
+  σz: coeficiente de dispersión vertical [m]<br>
+  H: altura efectiva de emisión [m]<br>
+  y: distancia transversal al eje del penacho [m]<br>
+  z: altura del receptor [m]</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Concentración al nivel del suelo (z=0)</strong><br>Los dos términos exponenciales en z se simplifican:<br>
+      c(x,0,0,H) = Q/(π·σy·σz·u) · exp[−0.5·(H/σz)²]<br>
+      En la línea central y=0, el término en y es 1. Esta es la fórmula más usada en ejercicios.
+    </div>
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Reflexión en el suelo</strong><br>El factor 2 que aparece al aplicar z=0 refleja que la concentración al nivel del suelo es el doble de la que predice la ecuación sin imagen (la mitad del penacho que iría hacia abajo "rebota" hacia arriba). Este resultado es general.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Olvidar que la velocidad del viento u en la ecuación gaussiana debe tomarse a la altura de la chimenea (no a 10 m). Usar u(z_chimney) calculado con la ley de potencia si solo se dispone de u a 10 m.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Derive cualitativamente por qué al sustituir z=0 en la ecuación gaussiana completa (con imagen del suelo) la concentración resulta exactamente el doble que sin el término de imagen.</div>
+</div>
+
+<div class="block">
+  <span class="bh yellow">Coeficientes σy y σz — Categorías de Estabilidad (Diap. 74–80)</span>
+  <div class="def yellow">Los coeficientes de dispersión σy (horizontal) y σz (vertical) son la clave práctica del modelo gaussiano. No son constantes: dependen de la distancia x a la fuente y de la estabilidad atmosférica (categorías de Pasquill-Gifford: A–F).</div>
+  <div class="item"><span class="dot yellow"></span><span><strong>Categorías A–C:</strong> condiciones inestables (mucho sol, viento débil). Mayor turbulencia → σy y σz crecen rápidamente con x. Penacho ancho y vertical.</span></div>
+  <div class="item"><span class="dot yellow"></span><span><strong>Categoría D:</strong> condición neutra (nublado o viento moderado). Crecimiento intermedio.</span></div>
+  <div class="item"><span class="dot yellow"></span><span><strong>Categorías E–F:</strong> condiciones estables (noche despejada, viento débil). Poco turbulencia → σy y σz crecen lentamente. Penacho estrecho, concentraciones máximas más altas cerca de la fuente.</span></div>
+  <div class="rx">σy ∝ x^a · f(estabilidad) — Aproximación: σy = a·x^b<br>
+  σz = c·x^d  (valores de a,b,c,d tabulados por categoría y rango de x)<br>
+  Ejemplo estabilidad C, x=0.5 km: σy ≈ 60 m, σz ≈ 32 m<br>
+  Ejemplo estabilidad B-D (inestable, x=2 km): σy ≈ 220 m, σz ≈ 290 m</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Una chimenea opera en un día brillante de verano con u>6 m/s en Lima. ¿Qué categoría de estabilidad le asignaría y cómo afectaría esto a los valores de σy y σz a 1 km de distancia respecto a una noche despejada con viento calmo?</div>
+</div>
+
+<div class="block s2">
+  <span class="bh orange">Ejemplo Resuelto — SO₂ en Ciudad (Diap. 86–91)</span>
+  <div class="def orange">Una chimenea emite Q=80 g/s de SO₂ con H_efectiva=100 m en día moderadamente inestable (categoría B). Viento u=4 m/s a 10 m de altura. Calcular c al nivel del suelo a 2 km de distancia.</div>
+  <div class="rx">Paso 1 — Ajustar u a la altura de la chimenea (100 m):<br>
+  u(100) = u(10) · (100/10)^(1/7) = 4 · (10)^0.143 ≈ 4 · 1.389 ≈ 5.56 m/s<br>
+  <br>
+  Paso 2 — Leer σy y σz de gráficas para estabilidad B, x=2 km:<br>
+  σy ≈ 220 m, σz ≈ 290 m (valores aproximados de Turner)<br>
+  <br>
+  Paso 3 — Concentración en línea central y=0, z=0:<br>
+  c(2000,0,0,100) = 80 / (π · 220 · 290 · 5.56) · exp[−0.5·(100/290)²]<br>
+  = 80 / (π · 220 · 290 · 5.56) · exp[−0.5·(0.345)²]<br>
+  ≈ 80 / 1,113,230 · exp(−0.0595)<br>
+  ≈ 7.19×10⁻⁵ · 0.942 ≈ 67.7 μg/m³</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #f97316">
+      <strong>Concentración fuera del eje (y=100 m)</strong><br>Multiplicar el resultado anterior por exp[−0.5·(100/220)²] = exp[−0.5·0.207] = exp(−0.103) ≈ 0.902. La concentración cae a ≈61 μg/m³. A mayor y, la concentración decrece según la gaussiana.
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <strong>Comparación con ECA Perú (SO₂)</strong><br>ECA Perú para SO₂: 250 μg/m³ (24h), 20 μg/m³ (anual). A 2 km la concentración es ~68 μg/m³, por debajo del ECA diario pero podría superar el anual con emisiones continuas, especialmente en condiciones estables nocturnas.
+    </div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> En el ejemplo anterior, ¿por qué la concentración máxima al nivel del suelo no ocurre necesariamente a 2 km, sino a una distancia x donde la combinación de σy·σz·exp(−H²/2σz²) es máxima? Explique cualitativamente cómo encontrar esa distancia.</div>
+</div>
+
+<!-- SECTION 6: APLICACIONES Y TABLA INTEGRADORA -->
+<div class="sec orange">🏭 VI. Tabla Integradora — Comparación de Modelos</div>
+
+<div class="block s3">
+  <span class="bh orange">Resumen Comparativo de Modelos de Dispersión</span>
+  <table class="tbl">
+    <tr>
+      <th>Modelo</th><th>Tipo de Fuente</th><th>Hipótesis Clave</th><th>Fórmula Central</th><th>Aplicación Típica</th><th>Limitación Principal</th>
+    </tr>
+    <tr>
+      <td><strong>Celda Fija</strong></td>
+      <td>Difusa (ciudad, área)</td>
+      <td>Mezcla completa hasta H; c homogénea en el volumen</td>
+      <td>c = b + qL/(uH)</td>
+      <td>Calidad del aire urbano promedio (Lima, smog)</td>
+      <td>No da resolución espacial; ignora variabilidad meteorológica</td>
+    </tr>
+    <tr>
+      <td><strong>Gaussiano</strong></td>
+      <td>Puntual (chimeneas, escapes)</td>
+      <td>Distribución normal en y,z; terreno plano; viento y Q constantes</td>
+      <td>c = Q/(π·σy·σz·u)·exp[−y²/(2σy²)]·exp[…z…H…]</td>
+      <td>EIA de plantas industriales (La Oroya, Ilo, Camisea)</td>
+      <td>Falla en terreno complejo, viento variable, reacciones químicas</td>
+    </tr>
+    <tr>
+      <td><strong>Lagrangiano</strong></td>
+      <td>Puntual o lineal</td>
+      <td>Parcelas de aire como "partículas" rastreadas por campos de viento</td>
+      <td>Simulación de trayectorias + estadística</td>
+      <td>Análisis de origen de masas de aire, accidentes industriales</td>
+      <td>Requiere muchas partículas para escala regional; mayor costo</td>
+    </tr>
+    <tr>
+      <td><strong>Euleriano (CMAQ)</strong></td>
+      <td>Múltiples / área</td>
+      <td>Cuadrícula fija; advección-difusión en cada celda</td>
+      <td>∂c/∂t = −u·∂c/∂x + K∇²c + S − R</td>
+      <td>Calidad del aire regional/nacional; inventarios de emisiones</td>
+      <td>Alto costo computacional; dificultad a escala fina</td>
+    </tr>
+    <tr>
+      <td><strong>Terreno Complejo</strong></td>
+      <td>Cualquiera</td>
+      <td>Modifica campos de viento por topografía (montañas, valles)</td>
+      <td>Modifica σy,σz según flujo orográfico</td>
+      <td>Andes, Lima (brisa mar-tierra), La Oroya (valle andino)</td>
+      <td>Requiere DEM detallado y datos meteorológicos en varios puntos</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: En Perú, los dos modelos más utilizados en EIAs son el gaussiano (AERMOD/ISCST3) para fuentes puntuales y el euleriano (CMAQ) para evaluaciones regionales. La elección depende del tipo de fuente, la escala del estudio y la topografía del área.</div>
+</div>
+
+<!-- QUIZ SECTION -->
+<div class="block s3" id="quiz-section">
+  <div style="background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:12px;">
+    <p style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</p>
+    <p style="font-size:11px;opacity:.75;">Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div style="margin-bottom:12px;">
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;">
+      <span id="q-progress">Respondidas: 0 / 10</span><span id="q-score">Aciertos: 0</span>
+    </div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="q-bar" style="width:0%;background:#22c55e;"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál de los siguientes mecanismos describe CORRECTAMENTE el proceso de dispersión atmosférica de contaminantes?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) El movimiento direccional del contaminante causado por el flujo de viento promedio</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) La eliminación de contaminantes mediante precipitación y sedimentación</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) El esparcimiento del contaminante desde zonas de alta a baja concentración mediante turbulencias locales</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) El ascenso vertical del penacho por flotabilidad térmica</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">En condiciones de viento moderado en Lima, ¿qué tipo de difusión domina la dispersión de contaminantes emitidos por el tráfico vehicular?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Difusión molecular, por el movimiento Browniano de las partículas</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Difusión turbulenta, por remolinos de viento a escala macroscópica</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Ambas contribuyen por igual en condiciones urbanas</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Difusión molecular, porque es más rápida que la turbulenta en el exterior</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">En el modelo de celda fija estacionaria, la concentración de equilibrio c = b + qL/(uH) muestra que la concentración es independiente de:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) La longitud L de la ciudad en la dirección del viento</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) El ancho W de la ciudad perpendicular al viento</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) La altura de mezcla H</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) La velocidad del viento u</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el modelo gaussiano de dispersión es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Supone que la distribución de concentraciones en y y z sigue una curva normal</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Es el modelo de dispersión más utilizado en la práctica profesional</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Puede modelar con precisión la dispersión en terrenos complejos con montañas y valles</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Requiere conocer los coeficientes σy y σz según la estabilidad atmosférica</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Una chimenea emite contaminantes en un día brillante de verano con viento mayor a 6 m/s. Según la clasificación de Pasquill-Gifford, ¿qué categoría de estabilidad corresponde y qué implica para los coeficientes σ?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Categoría F (muy estable): σy y σz crecen lentamente, penacho estrecho y concentrado</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Categoría A (muy inestable): radiación fuerte + viento alto produce máxima turbulencia</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) Categoría C (inestable moderada): radiación fuerte pero viento alto reduce algo la inestabilidad</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Categoría D (neutral): viento alto neutraliza el efecto de la radiación solar</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Al calcular la concentración al nivel del suelo (z=0) con el modelo gaussiano con imagen reflejada, ¿en cuánto difiere el resultado respecto a ignorar el efecto del suelo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) La concentración es la misma; el suelo no afecta al modelo gaussiano básico</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) La concentración con imagen es 1.5 veces mayor</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) La concentración con imagen es exactamente el doble, porque el penacho reflejado se suma al directo</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Depende de H: solo cuando H=σz la concentración es el doble</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Cuál es la principal diferencia entre el enfoque euleriano y el lagrangiano en la modelización de contaminantes atmosféricos?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) El euleriano rastrea partículas individuales; el lagrangiano analiza puntos fijos en el espacio</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) El euleriano analiza puntos fijos en el espacio; el lagrangiano rastrea parcelas de aire en movimiento</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) El euleriano solo funciona para fuentes puntuales; el lagrangiano para fuentes difusas</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Ambos enfoques son equivalentes y producen los mismos resultados siempre</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">En la ley de potencia de perfil vertical del viento u(z) = u(za)·(z/za)^p, ¿qué tipo de condición atmosférica corresponde a un exponente p más alto (cercano a 0.4)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Condiciones muy inestables (clase A) con gran convección y mezcla</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Terreno marino liso con fricción mínima</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Condiciones estables (clase E-F) con alta rugosidad superficial o baja mezcla</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Condiciones neutras (clase D) independientemente de la rugosidad</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cuál es la ventaja fundamental de los modelos atmosféricos sobre el monitoreo de calidad del aire mediante sensores en campo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Los modelos son siempre más precisos que las mediciones reales</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Los modelos no requieren datos meteorológicos para funcionar</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Los modelos pueden medir concentraciones en tiempo real sin incertidumbre</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="true">D) Los modelos permiten evaluar escenarios hipotéticos y futuros antes de que ocurran, a costo mucho menor</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">En el modelo gaussiano, ¿en qué dirección (x, y o z) es generalmente mayor el coeficiente de dispersión σ, y qué implicación tiene esto para la forma del penacho?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) σz > σy: el penacho se expande más verticalmente que horizontalmente, con forma elíptica de eje mayor vertical</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) σy > σz: el penacho se expande más horizontalmente que verticalmente, con forma elíptica de eje mayor horizontal</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) σy = σz siempre: el penacho tiene sección circular perfecta en todas las condiciones</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Depende únicamente de Q; a mayor tasa de emisión σy aumenta y σz disminuye</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <!-- Result panel -->
+  <div id="result-panel">
+    <h3 id="result-title"></h3>
+    <p id="result-msg" style="font-size:12px;margin-top:5px;"></p>
+    <button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">De Nevers, N. — <em>Ingeniería de Control de la Contaminación del Aire</em> (Cap. 6). McGraw-Hill. · Turner, D.B. — <em>Workbook of Atmospheric Dispersion Estimates</em>. EPA. · Irwin, J.S. (1979). Atmos. Environ. 13, 191–194 (perfil vertical de viento). · Foszcz et al. (2021). <em>Models of Air Pollution Propagation</em>. Atmosphere 12, 695. · Pasquill-Gifford — Categorías de estabilidad atmosférica A–F. · EPA — AERMOD / ISCST3 Model Documentation.</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {c:'c', ok:'¡Correcto! La dispersión es el esparcimiento del contaminante desde alta a baja concentración por turbulencias locales o difusión. El transporte es el movimiento direccional por el viento. La deposición es la eliminación hacia el suelo. Son tres mecanismos distintos.', fail:'La respuesta correcta es C. La dispersión se distingue del transporte (movimiento dirigido por el viento) y de la deposición (eliminación hacia el suelo). La dispersión implica mezcla y dilución por turbulencias locales.'},
+  2: {c:'b', ok:'¡Correcto! En exteriores con viento, la difusión turbulenta (escala macroscópica, remolinos de viento) domina completamente sobre la difusión molecular (escala microscópica, movimiento Browniano). La molecular es órdenes de magnitud más lenta.', fail:'La respuesta correcta es B. La difusión molecular es extremadamente lenta y solo relevante en espacios cerrados o muy próximos a fuentes. En el exterior, la turbulencia del viento domina la dispersión.'},
+  3: {c:'b', ok:'¡Correcto! c = b + qL/(uH) no contiene W en ningún término. El ancho de la ciudad es irrelevante para la concentración de equilibrio. Intuitivamente, W afecta la emisión total Q=qWL, pero también el flujo de aire que entra (uWH), y ambos se cancelan.', fail:'La respuesta correcta es B. El ancho W no aparece en la fórmula c = b + qL/(uH). Aunque W afecta la emisión total (Q=qWL), también multiplica el flujo de entrada de aire (uWH), cancelándose algebraicamente.'},
+  4: {c:'c', ok:'¡Correcto! El modelo gaussiano básico SUPONE terreno plano. En terrenos complejos con montañas, valles o edificaciones, los campos de viento se distorsionan y la distribución gaussiana falla. Para esos casos se requieren modelos de terreno complejo.', fail:'La respuesta correcta es C. El modelo gaussiano asume explícitamente terreno plano como una de sus hipótesis fundamentales. Para topografía compleja (como los valles andinos o el área costera de Lima) se requieren modelos más sofisticados.'},
+  5: {c:'c', ok:'¡Correcto! Día brillante de verano (radiación fuerte) + viento >6 m/s corresponde a categoría C (inestable moderada) según la tabla de Pasquill. La categoría A requiere viento débil (<2 m/s) con radiación fuerte. Con viento alto, la categoría se desplaza hacia la neutral.', fail:'La respuesta correcta es C. La tabla de estabilidad de Pasquill-Gifford combina la insolación y la velocidad del viento. Día muy soleado con viento alto cae en C (no A, que requiere viento calmo). El viento alto tiende a mezclar y neutralizar la estabilidad.'},
+  6: {c:'c', ok:'¡Correcto! Cuando z=0, los dos términos exponenciales en z de la ecuación gaussiana con imagen son idénticos (cada uno igual al valor sin imagen). La suma duplica exactamente el resultado. Este es un resultado general: c(z=0) = 2·c_sin_imagen(z=0).', fail:'La respuesta correcta es C. Al sustituir z=0 en la ecuación gaussiana con reflexión de suelo, los dos términos exponenciales en z resultan idénticos y se suman, dando exactamente el doble del valor sin imagen. Este resultado es general e independiente de H y σz.'},
+  7: {c:'b', ok:'¡Correcto! El euleriano observa puntos fijos (cuadrícula en el espacio), como cámaras de seguridad. El lagrangiano sigue parcelas de aire en movimiento, como rastrear globos. Modelos eulerianos: CMAQ. Modelos lagrangianos: HYSPLIT, FLEXPART.', fail:'La respuesta correcta es B. El euleriano es el del "punto fijo" (piense en estaciones meteorológicas en puntos del mapa). El lagrangiano sigue el fluido (piense en globos meteorológicos que viajan con el viento). Esta distinción es fundamental en mecánica de fluidos.'},
+  8: {c:'c', ok:'¡Correcto! p alto (cerca de 0.4) significa que la velocidad del viento crece muy rápidamente con la altura, lo que ocurre en condiciones estables o con alta rugosidad superficial donde el efecto de la fricción superficial se extiende más alto. p ≈ 0.1 corresponde a terrenos lisos o condiciones inestables.', fail:'La respuesta correcta es C. p alto indica un fuerte gradiente vertical de velocidad (el viento en altura es mucho mayor que en superficie). Esto ocurre en condiciones estables (poca mezcla, la fricción superficial "frena" más las capas bajas) o en terrenos de alta rugosidad.'},
+  9: {c:'d', ok:'¡Correcto! La mayor ventaja de los modelos es la capacidad predictiva: permiten evaluar escenarios hipotéticos futuros (nueva chimenea, cambio de combustible, nueva carretera) antes de que existan, a un costo fraccional del monitoreo en campo extensivo.', fail:'La respuesta correcta es D. Los modelos no son más precisos que las mediciones reales (de hecho, son menos precisos), pero tienen una ventaja única: permiten evaluar situaciones antes de que ocurran. Esto es crítico para estudios de impacto ambiental y planificación urbana.'},
+  10: {c:'b', ok:'¡Correcto! En la mayoría de condiciones, σy > σz: el penacho se expande más en dirección horizontal que vertical. El suelo limita la expansión vertical hacia abajo, mientras que horizontalmente no hay barrera. El contorno de concentración constante tiene forma de elipse con eje mayor horizontal.', fail:'La respuesta correcta es B. La presencia del suelo limita la expansión vertical del penacho (solo puede ir hacia arriba), mientras que horizontalmente se expande libremente. Por eso σy > σz en la mayoría de condiciones, dando al penacho una sección elíptica con eje mayor horizontal.'}
+};
+
+let answered = 0, correct = 0;
+
+document.querySelector('.cv').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const fb = document.getElementById('fb' + q);
+  const allBtns = document.querySelectorAll('.qbtn[data-q="' + q + '"]');
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('show-correct');
+  });
+  if (isCorrect) {
+    btn.classList.add('correct');
+    btn.textContent = '✅ ' + btn.textContent;
+    fb.className = 'qfeedback ok';
+    fb.innerHTML = '<strong>✅ ¡Correcto!</strong> ' + feedbacks[parseInt(q)].ok;
+    correct++;
+  } else {
+    btn.classList.add('incorrect');
+    btn.textContent = '❌ ' + btn.textContent;
+    fb.className = 'qfeedback fail';
+    fb.innerHTML = '<strong>❌ Incorrecto.</strong> ' + feedbacks[parseInt(q)].fail;
+  }
+  fb.style.display = 'block';
+  answered++;
+  document.getElementById('q-progress').textContent = 'Respondidas: ' + answered + ' / 10';
+  document.getElementById('q-score').textContent = 'Aciertos: ' + correct;
+  document.getElementById('q-bar').style.width = (correct / 10 * 100) + '%';
+  if (answered === 10) showResult();
+});
+
+function showResult() {
+  const panel = document.getElementById('result-panel');
+  const title = document.getElementById('result-title');
+  const msg = document.getElementById('result-msg');
+  panel.style.display = 'block';
+  if (correct <= 4) {
+    panel.style.background = '#fee2e2'; panel.style.color = '#991b1b';
+    title.textContent = correct + ' / 10 — Necesitas repasar el material';
+    msg.textContent = 'Revisa especialmente los fundamentos de transporte/dispersión y la ecuación gaussiana.';
+  } else if (correct <= 7) {
+    panel.style.background = '#fef9c3'; panel.style.color = '#713f12';
+    title.textContent = correct + ' / 10 — ¡Buen avance, sigue repasando!';
+    msg.textContent = 'Tienes una buena base. Refuerza los coeficientes σ y las categorías de estabilidad.';
+  } else {
+    panel.style.background = '#dcfce7'; panel.style.color = '#14532d';
+    title.textContent = correct + ' / 10 — ¡Excelente dominio del tema!';
+    msg.textContent = '¡Muy bien! Dominas los modelos de dispersión atmosférica.';
+  }
+}
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('q-progress').textContent = 'Respondidas: 0 / 10';
+  document.getElementById('q-score').textContent = 'Aciertos: 0';
+  document.getElementById('q-bar').style.width = '0%';
+  document.getElementById('result-panel').style.display = 'none';
+  for (let i = 1; i <= 10; i++) {
+    const allBtns = document.querySelectorAll('.qbtn[data-q="' + i + '"]');
+    allBtns.forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct','incorrect','show-correct');
+      b.textContent = b.textContent.replace(/^[✅❌] /,'');
+    });
+    const fb = document.getElementById('fb' + i);
+    fb.style.display = 'none';
+    fb.className = 'qfeedback';
+  }
+}
+</script>

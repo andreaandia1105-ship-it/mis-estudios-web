@@ -1,0 +1,700 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px;}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.titlebar p{font-size:11px;color:#94a3b8;margin-bottom:8px;}
+.tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-size:10px;padding:2px 8px;border-radius:20px;background:#1e3a5f;color:#93c5fd;}
+.secbar{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.bh-blue{background:#dbeafe;color:#1e3a8a;}
+.bh-green{background:#dcfce7;color:#14532d;}
+.bh-amber{background:#fef9c3;color:#713f12;}
+.bh-teal{background:#ccfbf1;color:#134e4a;}
+.bh-purple{background:#ede9fe;color:#4c1d95;}
+.bh-orange{background:#ffedd5;color:#7c2d12;}
+.bh-red{background:#fee2e2;color:#991b1b;}
+.bh-gray{background:#f1f5f9;color:#334155;}
+.bh-pink{background:#fce7f3;color:#831843;}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;}
+.def-blue{border-left:3px solid #3b82f6;}
+.def-green{border-left:3px solid #22c55e;}
+.def-amber{border-left:3px solid #f59e0b;}
+.def-teal{border-left:3px solid #14b8a6;}
+.def-purple{border-left:3px solid #8b5cf6;}
+.def-orange{border-left:3px solid #f97316;}
+.def-red{border-left:3px solid #ef4444;}
+.def-gray{border-left:3px solid #64748b;}
+.def-pink{border-left:3px solid #ec4899;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.dot-blue{background:#3b82f6;}
+.dot-green{background:#22c55e;}
+.dot-amber{background:#f59e0b;}
+.dot-teal{background:#14b8a6;}
+.dot-purple{background:#8b5cf6;}
+.dot-orange{background:#f97316;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0;}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa;}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#854d0e;}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0;}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:3px 0;}
+.stat-bar-fill{height:100%;border-radius:20px;}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;}
+.quiz-wrap{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px;}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px;}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;}
+.quiz-header p{font-size:11px;color:#94a3b8;margin-top:3px;}
+.prog-wrap{margin-bottom:14px;}
+.prog-txt{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px;}
+.qcard{background:var(--color-background-secondary);border-radius:10px;padding:12px 14px;margin-bottom:12px;}
+.qnum{font-size:11px;color:var(--color-text-secondary);font-family:'Oswald',sans-serif;margin-bottom:4px;}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:10px;color:var(--color-text-primary);}
+.qopts{display:flex;flex-direction:column;gap:5px;}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif;}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary);}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn:disabled{opacity:0.65;cursor:not-allowed;pointer-events:none;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+.result-panel{display:none;border-radius:10px;padding:14px;margin-top:12px;text-align:center;}
+.result-panel h3{font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px;}
+.result-panel p{font-size:12px;margin-bottom:10px;}
+.reset-btn{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 20px;font-size:12px;cursor:pointer;font-family:'Source Sans 3',sans-serif;}
+.reset-btn:hover{background:#1e3a5f;}
+</style>
+
+<div class="cv">
+
+<div class="titlebar">
+  <h1>ENERGÍAS RENOVABLES — TEMA N°3</h1>
+  <p>Recursos Naturales del Perú · UNALM · 2026</p>
+  <div class="tags">
+    <span class="tag">Hidroeléctrica</span>
+    <span class="tag">Eólica</span>
+    <span class="tag">Solar</span>
+    <span class="tag">Geotérmica</span>
+    <span class="tag">Mareomotriz</span>
+    <span class="tag">Biomasa</span>
+    <span class="tag">Dendroenergía</span>
+    <span class="tag">Marco Legal</span>
+  </div>
+</div>
+
+<div class="secbar" style="background:#dbeafe;color:#1e3a8a;">🌊 DEFINICIÓN Y FUNDAMENTOS</div>
+
+<div class="block s3">
+  <span class="bh bh-blue">Definición de Energía Renovable (Diap. 5)</span>
+  <div class="def def-blue">La energía renovable es aquella que proviene de fuentes naturales prácticamente inagotables: o bien porque contienen cantidades inmensas de energía (como el sol o el viento), o porque se regeneran por procesos naturales en tiempos humanos. A diferencia de los combustibles fósiles, que tardan millones de años en formarse, estas fuentes se renuevan constantemente.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #3b82f6;">
+      <strong style="font-size:11.5px;">¿Por qué "inagotable"?</strong><br>
+      El sol irradia energía por ~5,000 millones de años más. El viento se regenera diariamente por diferencias térmicas. El agua sigue el ciclo hidrológico. Son inagotables en escala humana, aunque no en sentido físico absoluto.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e;">
+      <strong style="font-size:11.5px;">Importancia ambiental</strong><br>
+      Reducen las emisiones de GEI (gases de efecto invernadero). Al reemplazar carbón y petróleo, disminuyen el CO₂ atmosférico y frenan el calentamiento global, preservando ecosistemas.
+    </div>
+    <div class="mini" style="border-top:3px solid #f59e0b;">
+      <strong style="font-size:11.5px;">Importancia socioeconómica</strong><br>
+      Generan empleo en instalación y mantenimiento. Reducen la dependencia energética externa. Permiten electrificar zonas rurales remotas donde la red eléctrica convencional no llega.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir "renovable" con "limpia" en todos los casos. La biomasa por combustión directa es renovable pero emite CO₂. La diferencia con los fósiles es que ese CO₂ fue previamente capturado en la fotosíntesis (ciclo cerrado de carbono).</div>
+  <div class="exam">🎯 EXAMEN: Explica por qué las fuentes de energía renovable se consideran "inagotables" y analiza las diferencias entre sus dimensiones de importancia económica, social y ambiental para un país en vías de desarrollo como el Perú.</div>
+</div>
+
+<div class="secbar" style="background:#ccfbf1;color:#134e4a;">💧 ENERGÍA HIDRÁULICA</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Energía Hidráulica — Fundamentos (Diap. 6–7)</span>
+  <div class="def def-teal">La energía hidráulica aprovecha la energía potencial del agua almacenada en altura (un embalse o desnivel natural) y la convierte en energía cinética al caer, moviendo turbinas que generan electricidad. Es la fuente renovable más utilizada cuantitativamente en el Perú.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Principio físico:</strong> Ep = m·g·h. El agua acumulada en un embalse a altura h tiene energía potencial que al liberarse se transforma en energía cinética y luego en energía eléctrica mediante turbinas y generadores.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Dependencia climática:</strong> La generación depende de las precipitaciones. En años de sequía (fenómeno El Niño), la producción puede caer significativamente. Este es el principal riesgo de este tipo de energía.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Costo de combustible nulo:</strong> Una vez construida la infraestructura, el agua es gratis. Esto hace que el costo operativo sea muy bajo, aunque la inversión inicial en represas y turbinas es muy alta.</span></div>
+  <div class="flow">
+    <div class="fbox">Precipitación → Embalse</div><span class="farrow">→</span>
+    <div class="fbox">Caída de agua (turbina)</div><span class="farrow">→</span>
+    <div class="fbox">Generador eléctrico</div><span class="farrow">→</span>
+    <div class="fbox">Red eléctrica (SEIN)</div>
+  </div>
+  <div class="rx">Ep = m × g × h<br>P(MW) = ρ × Q × g × h × η<br>ρ=densidad agua (1000 kg/m³) · Q=caudal (m³/s) · h=altura (m) · η=eficiencia</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Centrales en el Perú (Diap. 7–8)</span>
+  <div class="def def-teal">El Perú produce ~20,000 GWh/año de energía hidroeléctrica. Su geografía andina con grandes desniveles y ríos caudalosos le otorga un potencial enorme. El Complejo Mantaro es la central más importante del país.</div>
+  <table class="tbl" style="margin-bottom:8px;">
+    <tr><th>Central</th><th>Generación/Año</th><th>Dato técnico</th></tr>
+    <tr><td><strong>Mantaro</strong></td><td>>7,000 GWh</td><td>35% del total nacional</td></tr>
+    <tr><td>Huinco</td><td>1,158 GWh</td><td>Caudal: 25 m³/s · Altura: 1,293 m</td></tr>
+    <tr><td>Cañón del Pato</td><td>~950 GWh</td><td>Río Santa, Áncash</td></tr>
+    <tr><td>Machu Picchu</td><td>~450 GWh</td><td>Río Vilcanota, Cusco</td></tr>
+  </table>
+  <div class="rx">1 GWh = 10⁹ Wh = energía generada/consumida por 1 GW durante 1 hora</div>
+  <div class="exam">🎯 EXAMEN: La Central Hidroeléctrica de Huinco opera con un caudal de 25 m³/s y una altura de caída de 1,293 m. Explica qué factores determinan su capacidad de generación y por qué la dependencia de la precipitación es su principal vulnerabilidad.</div>
+</div>
+
+<div class="secbar" style="background:#fef9c3;color:#713f12;">💨 ENERGÍA EÓLICA</div>
+
+<div class="block">
+  <span class="bh bh-amber">Fundamentos Eólicos (Diap. 9–10)</span>
+  <div class="def def-amber">La energía eólica aprovecha la energía cinética de las masas de aire en movimiento. Los vientos se originan por el calentamiento diferencial de la superficie terrestre: los continentes se calientan más que los océanos, generando gradientes de presión que mueven el aire de zonas de alta a baja presión.</div>
+  <div class="item"><span class="dot dot-amber"></span><span><strong>Origen solar:</strong> Entre el 1–2% de la energía solar se convierte en energía cinética del viento. Los aerogeneradores capturan parte de esa energía cinética.</span></div>
+  <div class="item"><span class="dot dot-amber"></span><span><strong>Mecanismo:</strong> El aire caliente (continental, menos denso) sube → el aire frío marítimo ocupa su lugar → se genera viento. Por eso los mejores recursos eólicos están en costas.</span></div>
+  <div class="item"><span class="dot dot-amber"></span><span><strong>Variabilidad:</strong> Para aprovecharla eficientemente se deben conocer las variaciones diurnas, nocturnas, estacionales y el perfil vertical del viento (la velocidad aumenta con la altura).</span></div>
+  <div class="rx">P = ½ × ρ × A × v³<br>ρ=densidad aire · A=área rotor (m²) · v=velocidad viento (m/s)<br>⚡ Duplicar la velocidad multiplica la potencia por 8</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-amber">Eólica en el Perú (Diap. 10–11)</span>
+  <div class="def def-amber">El Perú tiene un potencial eólico de ~22,450 MW (MEM), pero solo aprovecha 239 MW — apenas el 1% del potencial total. Desde 2014 operan 4 parques eólicos conectados al SEIN.</div>
+  <div class="two" style="margin:6px 0;">
+    <div class="mini" style="border-left:3px solid #f59e0b;">
+      <strong>Marcona</strong> (Ica)<br>
+      <span style="font-size:10.5px;color:var(--color-text-secondary);">Costa sur, vientos Patagónicos</span>
+    </div>
+    <div class="mini" style="border-left:3px solid #f59e0b;">
+      <strong>Cupisnique</strong> (La Libertad)<br>
+      <span style="font-size:10.5px;color:var(--color-text-secondary);">Costa norte, vientos alisios</span>
+    </div>
+    <div class="mini" style="border-left:3px solid #f59e0b;">
+      <strong>Talara</strong> (Piura)<br>
+      <span style="font-size:10.5px;color:var(--color-text-secondary);">Extremo norte, muy ventoso</span>
+    </div>
+    <div class="mini" style="border-left:3px solid #f59e0b;">
+      <strong>Tres Hermanas</strong> (Ica)<br>
+      <span style="font-size:10.5px;color:var(--color-text-secondary);">Operación posterior a 2014</span>
+    </div>
+  </div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:1%;background:#f59e0b;"></div></div>
+  <p style="font-size:10.5px;color:var(--color-text-secondary);">239 MW aprovechados / 22,450 MW potencial total ≈ 1%</p>
+  <div class="exam">🎯 EXAMEN: El Perú aprovecha únicamente el 1% de su potencial eólico. Identifica y analiza los factores técnicos, económicos y regulatorios que podrían explicar esta brecha entre potencial y aprovechamiento real.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-amber">Ventajas y Limitaciones (Diap. 9)</span>
+  <div class="item"><span class="dot dot-amber"></span><span><strong>Sin emisiones:</strong> No emite GEI en operación. Reemplaza centrales a diésel o carbón del SEIN, reduciendo la huella de carbono del sistema eléctrico.</span></div>
+  <div class="item"><span class="dot dot-amber"></span><span><strong>Costo decreciente:</strong> Los parques eólicos son cada vez más económicos y competitivos globalmente. El costo nivelado de energía (LCOE) bajó >70% en la última década.</span></div>
+  <div class="item"><span class="dot dot-amber"></span><span><strong>Impacto visual y fauna:</strong> Principal impacto ambiental. Las turbinas afectan aves y murciélagos y generan impacto paisajístico. Requieren estudios de impacto ambiental.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir el potencial eólico con el potencial instalado. El potencial es lo que existe en la naturaleza; lo instalado es lo que se aprovecha hoy. En el Perú esta brecha es enorme (22,450 vs 239 MW).</div>
+</div>
+
+<div class="secbar" style="background:#fef9c3;color:#713f12;">☀️ ENERGÍA SOLAR</div>
+
+<div class="block s2">
+  <span class="bh bh-amber">Energía Solar — Fundamentos (Diap. 12–13)</span>
+  <div class="def def-amber">La energía solar es la fuente primaria de casi toda la energía en la Tierra. La radiación solar que llega anualmente a nuestro planeta equivale a miles de veces el consumo energético total de la humanidad. Se puede aprovechar de dos formas tecnológicamente distintas: conversión térmica y conversión fotovoltaica.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #f59e0b;">
+      <strong>Solar térmica (colectores)</strong><br>
+      La radiación calienta un fluido (agua, aceite). Ese calor se usa para calefacción, agua caliente sanitaria o para accionar turbinas de vapor en centrales termosolares. No genera electricidad directamente (salvo en centrales CSP).
+    </div>
+    <div class="mini" style="border-top:3px solid #f59e0b;">
+      <strong>Fotovoltaica (paneles FV)</strong><br>
+      El efecto fotoeléctrico convierte fotones en electrones. Los paneles de silicio generan corriente continua (CC) que un inversor convierte en corriente alterna (CA) para la red. No emite contaminantes ni GEI.
+    </div>
+  </div>
+  <div class="item" style="margin-top:8px;"><span class="dot dot-amber"></span><span><strong>Ventaja climática:</strong> No emite sustancias tóxicas al aire ni al agua durante la operación. No contribuye al calentamiento global. Es una de las tecnologías más eficientes contra el cambio climático.</span></div>
+  <div class="item"><span class="dot dot-amber"></span><span><strong>Muro Trombe:</strong> El D.U. 019-2008 declaró de interés nacional el "Sistema pasivo de recolección de energía solar de forma indirecta" (Muro Trombe), para calefacción en zonas altoandinas del Perú.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-amber">Solar en el Perú (Diap. 14–15)</span>
+  <div class="def def-amber">Perú cuenta con 7 plantas fotovoltaicas operativas conectadas al SEIN con 1,088 MWp instalados. Las plantas se concentran en el sur árido (Arequipa, Moquegua, Tacna), zona con la mayor irradiación solar del planeta.</div>
+  <table class="tbl">
+    <tr><th>Planta</th><th>Región</th></tr>
+    <tr><td>Majes Solar + Solar Repartición</td><td>Arequipa</td></tr>
+    <tr><td>Panamericana Solar + Moquegua FV + Rubí + Intipampa</td><td>Moquegua</td></tr>
+    <tr><td>Tacna Solar</td><td>Tacna</td></tr>
+    <tr><td>Illa (proyectado)</td><td>396 MWp adicionales</td></tr>
+  </table>
+  <div class="rx">Total instalado: 1,088 MWp<br>MWp = Megavatios de potencia pico (condiciones estándar de prueba)</div>
+  <div class="exam">🎯 EXAMEN: Las plantas fotovoltaicas del Perú se concentran en las regiones de Arequipa, Moquegua y Tacna. Explica la razón técnica y geográfica de esta concentración y compare las ventajas de la energía solar fotovoltaica frente a la solar térmica.</div>
+</div>
+
+<div class="secbar" style="background:#ede9fe;color:#4c1d95;">🌋 ENERGÍA GEOTÉRMICA</div>
+
+<div class="block s2">
+  <span class="bh bh-purple">Energía Geotérmica — Fundamentos (Diap. 16–17)</span>
+  <div class="def def-purple">La energía geotérmica aprovecha el calor del interior de la Tierra (núcleo a ~5,000°C), que fluye hacia la corteza. En zonas volcánicamente activas este calor es accesible a profundidades relativamente superficiales, permitiendo que aguas subterráneas alcancen la ebullición y accionen turbinas.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-purple"></span><span><strong>Gradiente geotérmico:</strong> La temperatura aumenta ~30°C por km de profundidad en promedio. En zonas volcánicas puede ser mucho mayor.</span></div>
+      <div class="item"><span class="dot dot-purple"></span><span><strong>Calor radiogénico:</strong> Parte del calor interno proviene de la desintegración de isótopos radioactivos (uranio, torio, potasio-40) en el manto y corteza.</span></div>
+      <div class="item"><span class="dot dot-purple"></span><span><strong>Manifestaciones:</strong> Volcanes, aguas termales, fumarolas y géiseres son las expresiones superficiales del calor geotérmico.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot dot-purple"></span><span><strong>Potencial del Perú:</strong> >3,000 MW, equivalente al 50% de la electricidad que el país produce actualmente. Sin embargo, el aprovechamiento actual es casi nulo.</span></div>
+      <div class="item"><span class="dot dot-purple"></span><span><strong>Cinturón de Fuego:</strong> Perú se ubica en el borde de las Placas Nazca y Sudamericana, lo que genera actividad volcánica y geotérmica intensa en la cordillera.</span></div>
+      <div class="item"><span class="dot dot-purple"></span><span><strong>Zonas con potencial (INGEMMET):</strong> Cailloma, Pinaya, Chivay-Pinchollo, Ccollo Titire, Calacoa Putina, Ulucán — todas en la Cordillera Volcánica del sur.</span></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir agua termal (uso turístico/terapéutico) con aprovechamiento geotérmico para generar electricidad. El primero usa aguas a baja temperatura; el segundo requiere aguas o vapor a >150°C para accionar turbinas.</div>
+  <div class="exam">🎯 EXAMEN: El Perú posee un potencial geotérmico de más de 3,000 MW pero casi no lo aprovecha. Explica por qué el país tiene este potencial (relacionando con su ubicación geotectónica) y analiza qué factores podrían estar limitando su desarrollo.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Marco legal geotérmico</span>
+  <div class="def def-purple">La Ley N°26848 (1997) es la Ley Orgánica de Recursos Geotérmicos, que regula la exploración y explotación de recursos geotérmicos en el Perú. INGEMMET es el ente técnico que evalúa el potencial.</div>
+  <div class="flow">
+    <div class="fbox">Calor interno Tierra</div><span class="farrow">→</span>
+    <div class="fbox">Agua subterránea caliente</div><span class="farrow">→</span>
+    <div class="fbox">Vapor → Turbina</div><span class="farrow">→</span>
+    <div class="fbox">Generador eléctrico</div>
+  </div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:1.5%;background:#8b5cf6;"></div></div>
+  <p style="font-size:10.5px;color:var(--color-text-secondary);">Aprovechamiento actual: muy limitado / Potencial: >3,000 MW</p>
+</div>
+
+<div class="secbar" style="background:#ccfbf1;color:#134e4a;">🌊 ENERGÍA MAREOMOTRIZ</div>
+
+<div class="block s3">
+  <span class="bh bh-teal">Energía Marina — Tipos y Funcionamiento (Diap. 18–19)</span>
+  <div class="def def-teal">La energía marina aprovecha el movimiento del agua oceánica en sus diversas formas: olas, mareas, corrientes, gradientes de temperatura y salinidad. Los océanos almacenan un vasto depósito de energía cinética y térmica que puede convertirse en electricidad.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #14b8a6;">
+      <strong>Undimotriz (olas)</strong><br>
+      Aprovecha la energía cinética de las olas. Dispositivos oscilantes en la superficie o en el fondo capturan el movimiento ondulatorio. Tecnología aún en fase de desarrollo comercial a gran escala.
+    </div>
+    <div class="mini" style="border-top:3px solid #14b8a6;">
+      <strong>Mareomotriz (mareas)</strong><br>
+      Las mareas generan diferencias de nivel periódicas. Plantas de barrera acumulan agua en la pleamar y la liberan en bajamar a través de turbinas. Requiere diferencias de marea >5 m. Ejemplo: La Rance (Francia).
+    </div>
+    <div class="mini" style="border-top:3px solid #14b8a6;">
+      <strong>Corrientes marinas</strong><br>
+      Turbinas submarinas (como aerogeneradores sumergidos) aprovechan la energía cinética de corrientes oceánicas constantes (ej. Corriente del Golfo). Más predecibles que el viento.
+    </div>
+    <div class="mini" style="border-top:3px solid #0d9488;">
+      <strong>Maremotérmica (OTEC)</strong><br>
+      Aprovecha la diferencia de temperatura entre aguas superficiales (~25°C) y profundas (~5°C). Requiere gradiente ≥20°C. Usa el Ciclo de Rankine: foco caliente = agua superficial, foco frío = aguas profundas.
+    </div>
+    <div class="mini" style="border-top:3px solid #0d9488;">
+      <strong>Osmótica (gradiente salino)</strong><br>
+      Genera energía de la diferencia de salinidad entre agua dulce (río) y agua de mar. La ósmosis empuja agua dulce a través de membranas semipermeables hacia el lado salado, generando presión que mueve turbinas.
+    </div>
+    <div class="mini" style="border-top:3px solid #0d9488;">
+      <strong>Potencial en el Perú</strong><br>
+      La costa peruana tiene más de 3,000 km con olas del Pacífico. La Corriente Peruana (Humboldt) ofrece potencial de corrientes. Sin embargo, no hay proyectos operativos a la fecha. Está en etapa de estudio.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir energía "mareomotriz" (que abarca mareas) con "energía marina" (término amplio que incluye olas, corrientes, OTEC y osmótica). La primera es un subtipo de la segunda.</div>
+  <div class="exam">🎯 EXAMEN: Describe el principio de funcionamiento de la energía maremotérmica (OTEC) y explica por qué requiere un gradiente térmico de al menos 20°C. ¿En qué zonas del Perú podría tener potencial de aplicación esta tecnología?</div>
+</div>
+
+<div class="secbar" style="background:#dcfce7;color:#14532d;">🌿 BIOMASA, BIOGÁS Y DENDROENERGÍA</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Energía de la Biomasa (Diap. 20–25)</span>
+  <div class="def def-green">La biomasa es materia orgánica de origen biológico que almacena energía solar capturada mediante fotosíntesis. Al quemarla o transformarla, libera esa energía. Su gran ventaja sobre los fósiles es que el CO₂ que emite fue previamente capturado por las plantas, cerrando el ciclo del carbono.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Fotosíntesis:</strong> CO₂ + H₂O + luz → glucosa + O₂. Las plantas convierten minerales sin valor energético en compuestos orgánicos de alto contenido energético. La biomasa es energía solar almacenada en carbono a corto plazo.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Fuentes:</strong> Residuos forestales (podas, aserrín), ganaderos (estiércol/bosta), agrícolas (bagazo, cáscara) y cultivos energéticos (caña, girasol, soya). Cada fuente tiene diferente potencial energético.</span></div>
+  <hr class="divh">
+  <strong style="font-size:12px;">Clasificación de la Biomasa (Diap. 22)</strong>
+  <div class="two" style="margin-top:6px;">
+    <div class="mini" style="border-left:3px solid #22c55e;"><strong>Natural</strong> — Vegetación silvestre no cultivada. Alta disponibilidad pero baja concentración espacial.</div>
+    <div class="mini" style="border-left:3px solid #22c55e;"><strong>Residual seca</strong> — Subproductos industriales (aserrín, cáscara). Fácil compactación en briquetas/pellets.</div>
+    <div class="mini" style="border-left:3px solid #22c55e;"><strong>Residual húmeda</strong> — Aguas residuales, estiércol. Ideal para digestión anaeróbica → biogás.</div>
+    <div class="mini" style="border-left:3px solid #22c55e;"><strong>Cultivos energéticos</strong> — Girasol, soya, caña. Producen biodiésel, bioetanol. Compiten con alimentos.</div>
+    <div class="mini" style="border-left:3px solid #22c55e;"><strong>Biocarburantes</strong> — Biodiesel, bioetanol. Productos finales de transformación para uso en transporte.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Explica el ciclo del carbono en la biomasa y por qué se la considera una fuente de energía renovable a pesar de que emite CO₂ al combustionarse. ¿En qué condiciones podría considerarse que NO es carbono-neutral?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Procesos de Transformación (Diap. 25)</span>
+  <div class="def def-green">La biomasa residual se puede transformar en biocombustibles de segunda generación mediante tres grupos de procesos: bioquímicos, termoquímicos y fisicoquímicos. Cada proceso produce distintos productos finales.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Bioquímicos:</strong> Fermentación → bioetanol, biobutanol. Digestión anaeróbica → biogás, gas de síntesis. Usa microorganismos a temperatura ambiente.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Termoquímicos:</strong> Pirolisis, gasificación, torrefacción a altas temperaturas → biocarbón, diesel BTL, gasolina BTL. No requiere agua.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Fisicoquímicos:</strong> Extracción y transesterificación → bioaceites, biojet, diesel renovable (HDRD). Para oleaginosas como girasol y soya.</span></div>
+  <div class="rx">Digestión anaeróbica:<br>Materia orgánica + bacterias → CH₄ (biogás) + CO₂ + digestato (fertilizante)<br>Biogás: 50–70% metano (CH₄)</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-green">Biogás y Biodigestor (Diap. 24)</span>
+  <div class="def def-green">El biodigestor es un sistema de digestión anaeróbica (sin oxígeno) que descompone materia orgánica mediante bacterias metanogénicas. Produce biogás (mezcla de CH₄ y CO₂) para generar electricidad, y digestato líquido que sirve de fertilizante orgánico. Es especialmente útil en zonas rurales del Perú con actividad ganadera.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e;">
+      <strong>Entrada</strong><br>
+      Sustrato líquido con biomasa (estiércol, residuos de cocina, aguas residuales). En el Perú: bosta de vacuno/camélidos, residuos de granjas porcinas.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e;">
+      <strong>Proceso (digestor)</strong><br>
+      Bacterias metanogénicas en ausencia de O₂ descomponen la materia orgánica. La membrana de PVC (800 micrones) retiene el biogás producido bajo presión.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e;">
+      <strong>Salidas</strong><br>
+      Biogás → biogenerador → electricidad. Digestato líquido → fertilizante orgánico para jardines, suelos erosionados o parcelas agrícolas.
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Dendroenergía — Astillas (Diap. 26)</span>
+  <div class="def def-green">La dendroenergía es la energía obtenida de la madera y residuos madereros. Es la forma más antigua de uso energético humano y sigue siendo relevante en zonas rurales. Las astillas son fragmentos irregulares de madera producidos al triturar residuos madereros (ramas, troncos, subproductos de aserraderos).</div>
+  <div class="item"><span class="dot dot-green"></span><span>Las astillas se usan en calderas industriales para generar vapor o calor de proceso. Su bajo costo y abundancia en zonas forestales las hace atractivas para plantas de generación próximas a bosques.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span>En el Perú, la Amazonía tiene un enorme potencial de residuos forestales de aprovechamiento maderero que podrían convertirse en astillas para bioenergía.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Dendroenergía — Briquetas (Diap. 27)</span>
+  <div class="def def-green">Las briquetas son bloques compactados de biomasa residual seca (aserrín, viruta, chips, residuos de poda). Las de mejor calidad usan biomasa natural sin aglomerante, aprovechando la lignina propia de la madera como pegamento natural.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Especificaciones:</strong> Densidad 800–1,300 kg/m³ · Longitud 5–30 cm · Diámetro 5–13 cm. Alta densidad energética: más energía por unidad de volumen que la leña suelta.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Materia prima:</strong> Biomasa natural (aserraderos), biomasa residual agrícola o carbón vegetal. Las de mayor calidad usan solo aserrín natural compactado.</span></div>
+  <div class="warn">⚠️ Las briquetas con aglomerantes sintéticos emiten compuestos tóxicos al quemarse. Las mejores usan solo lignina natural como ligante.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Dendroenergía — Pellets (Diap. 28)</span>
+  <div class="def def-green">Los pellets son pequeñas porciones cilindricas de material vegetal comprimido, más pequeños que las briquetas. Son el combustible de biomasa más estandarizado y el más utilizado en calderas domésticas e industriales en Europa.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Especificaciones:</strong> Densidad 1,000–1,200 kg/m³ · Longitud 10–30 mm · Diámetro 6–12 mm. Más pequeños y uniformes que las briquetas → mayor automatización en quemadores.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Ventaja operativa:</strong> Su uniformidad permite sistemas de alimentación automática (tornillos sinfín) en calderas. Mayor poder calorífico que la leña por unidad de peso.</span></div>
+  <table class="tbl" style="margin-top:6px;">
+    <tr><th>Producto</th><th>Densidad</th><th>Tamaño</th></tr>
+    <tr><td>Astillas</td><td>Baja</td><td>Irregular</td></tr>
+    <tr><td>Briquetas</td><td>800–1,300 kg/m³</td><td>5–30 cm × 5–13 cm</td></tr>
+    <tr><td>Pellets</td><td>1,000–1,200 kg/m³</td><td>10–30 mm × 6–12 mm</td></tr>
+  </table>
+  <div class="exam">🎯 EXAMEN: Compara las briquetas y los pellets como formas de dendroenergía, considerando su materia prima, proceso de producción, especificaciones técnicas y aplicaciones. ¿Cuál tiene mayor potencial de desarrollo en el contexto forestal peruano?</div>
+</div>
+
+<div class="secbar" style="background:#f1f5f9;color:#334155;">⚖️ MARCO LEGAL E INSTITUCIONAL</div>
+
+<div class="block s2">
+  <span class="bh bh-gray">Instituciones Reguladoras (Diap. 29)</span>
+  <div class="def def-gray">El marco institucional peruano para energías renovables involucra tres actores principales: el ministerio sectorial (MEM), el organismo regulador autónomo (OSINERGMIN) y el órgano técnico normativo (DGEE). Cada uno tiene roles distintos y complementarios.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #64748b;">
+      <strong>MINEM</strong><br>
+      Ministerio de Energía y Minas. Ente rector del sector. Coordina la distribución equitativa de energía. Formula políticas energéticas. Adscrito al Poder Ejecutivo.
+    </div>
+    <div class="mini" style="border-top:3px solid #64748b;">
+      <strong>OSINERGMIN</strong><br>
+      Organismo Supervisor de la Inversión en Energía y Minería. Organismo regulador autónomo, adscrito a la PCM. Supervisa el cumplimiento de normas técnicas, contractuales y de seguridad.
+    </div>
+    <div class="mini" style="border-top:3px solid #64748b;">
+      <strong>DGEE</strong><br>
+      Dirección General de Eficiencia Energética (dentro del MINEM). Propone y evalúa políticas de eficiencia energética y RER no convencionales. Depende del Viceministro de Energía.
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <span class="bh bh-gray">Normas Clave (Diap. 30)</span>
+  <div class="item"><span class="dot" style="background:#64748b;"></span><span><strong>D. Leg. 1002 (2008):</strong> Ley de promoción de inversión para generación con RER. Crea el sistema de subastas RER.</span></div>
+  <div class="item"><span class="dot" style="background:#64748b;"></span><span><strong>D.S. 012-2011-EM:</strong> Reglamento de generación eléctrica con energías renovables.</span></div>
+  <div class="item"><span class="dot" style="background:#64748b;"></span><span><strong>D.S. 056-2009-EM:</strong> Delega en Gobiernos Regionales la concesión de generación con RER.</span></div>
+  <div class="item"><span class="dot" style="background:#64748b;"></span><span><strong>D.U. 019-2008:</strong> Declara de interés nacional el "Muro Trombe" (calefacción solar pasiva en zonas altoandinas).</span></div>
+  <div class="item"><span class="dot" style="background:#64748b;"></span><span><strong>Ley N°26848 (1997):</strong> Ley Orgánica de Recursos Geotérmicos.</span></div>
+  <div class="item"><span class="dot" style="background:#64748b;"></span><span><strong>D.S. 020-2013-EM:</strong> Promoción de inversión en áreas no conectadas a red.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia de roles entre el MINEM, OSINERGMIN y la DGEE en la gestión de energías renovables en el Perú? ¿Por qué es necesario que existan estas tres instituciones con funciones diferenciadas?</div>
+</div>
+
+<div class="secbar" style="background:#f1f5f9;color:#334155;">📊 TABLA COMPARATIVA INTEGRADORA</div>
+
+<div class="block s3">
+  <span class="bh bh-gray">Resumen Comparativo de Fuentes Renovables (Tabla Integradora)</span>
+  <table class="tbl">
+    <tr>
+      <th>Fuente</th>
+      <th>Principio</th>
+      <th>Potencial Perú</th>
+      <th>Aprovechamiento actual</th>
+      <th>Norma/Institución clave</th>
+      <th>Limitación principal</th>
+    </tr>
+    <tr>
+      <td><strong>Hidráulica</strong></td>
+      <td>Energía potencial del agua</td>
+      <td>Muy alto (cuencas andinas)</td>
+      <td>~20,000 GWh/año · Base del SEIN</td>
+      <td>Concesiones eléctricas / MEM</td>
+      <td>Dependencia de precipitaciones</td>
+    </tr>
+    <tr>
+      <td><strong>Eólica</strong></td>
+      <td>Energía cinética del viento</td>
+      <td>22,450 MW</td>
+      <td>239 MW (1%) · 4 parques</td>
+      <td>D.Leg 1002 · Subastas RER</td>
+      <td>Variabilidad, solo 1% aprovechado</td>
+    </tr>
+    <tr>
+      <td><strong>Solar FV</strong></td>
+      <td>Efecto fotoeléctrico</td>
+      <td>Muy alto (sur árido)</td>
+      <td>1,088 MWp · 7 plantas</td>
+      <td>D.S. 012-2011-EM</td>
+      <td>Intermitencia (día/noche, nubes)</td>
+    </tr>
+    <tr>
+      <td><strong>Geotérmica</strong></td>
+      <td>Calor interno terrestre</td>
+      <td>>3,000 MW (Cinturón de Fuego)</td>
+      <td>Casi nulo</td>
+      <td>Ley N°26848 · INGEMMET</td>
+      <td>Alta inversión inicial, riesgo geológico</td>
+    </tr>
+    <tr>
+      <td><strong>Mareomotriz</strong></td>
+      <td>Olas, mareas, corrientes, OTEC</td>
+      <td>Costa pacífica >3,000 km</td>
+      <td>Sin proyectos operativos</td>
+      <td>En estudio</td>
+      <td>Tecnología incipiente, alto costo</td>
+    </tr>
+    <tr>
+      <td><strong>Biomasa/Biogás</strong></td>
+      <td>Fotosíntesis → materia orgánica</td>
+      <td>Alto (Amazonía, ganadería)</td>
+      <td>Uso rural (leña), proyectos limitados</td>
+      <td>D.Leg 1002</td>
+      <td>Competencia con alimentos (cultivos)</td>
+    </tr>
+    <tr>
+      <td><strong>Dendroenergía</strong></td>
+      <td>Combustión/compactación madera</td>
+      <td>Alto (residuos forestales)</td>
+      <td>Uso doméstico informal</td>
+      <td>SERFOR / MEM</td>
+      <td>Riesgo de deforestación si no es sostenible</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: El Perú tiene potencial en TODAS las fuentes renovables, pero el aprovechamiento real es desigual. La hidráulica domina (~60% de la matriz eléctrica), mientras que las demás fuentes (solar, eólica, geotérmica) tienen brechas enormes entre potencial y aprovechamiento. La política pública (D.Leg 1002 y subastas RER) es el mecanismo clave para reducir esas brechas.</div>
+</div>
+
+<div class="quiz-wrap" id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta. Cubre todo el material del Tema N°3.</p>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-txt" id="prog-txt">Pregunta 0 de 10 respondidas · Aciertos: 0/0</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a;transition:width 0.4s;"></div></div>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones define correctamente una energía renovable?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Energía que no emite CO₂ bajo ninguna circunstancia durante su uso.</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) Energía de origen nuclear, ya que el uranio tarda millones de años en agotarse.</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) Energía obtenida de fuentes naturales inagotables, ya sea por su enorme cantidad o por regenerarse naturalmente.</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Energía que puede almacenarse indefinidamente sin pérdidas en baterías convencionales.</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">El Complejo Mantaro aporta más de 7,000 GWh anuales respecto a los ~20,000 GWh de generación hidroeléctrica nacional. ¿Cuál es la principal vulnerabilidad de esta fuente de energía?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) Su alto costo de combustible para operar las turbinas.</button>
+      <button class="qbtn" data-q="2" data-correct="true">B) Su dependencia de las condiciones climatológicas, especialmente de la precipitación.</button>
+      <button class="qbtn" data-q="2" data-correct="false">C) La emisión de grandes cantidades de gases de efecto invernadero durante la operación.</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) La imposibilidad de conectarse al Sistema Eléctrico Interconectado Nacional (SEIN).</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">En física, la potencia generada por un aerogenerador es proporcional al cubo de la velocidad del viento (P ∝ v³). Si la velocidad del viento se duplica, ¿en qué factor se multiplica la potencia disponible?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) Se duplica (factor 2).</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) Se cuadruplica (factor 4).</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) Se multiplica por 8 (factor 2³).</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Se multiplica por 16 (factor 2⁴).</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál de los siguientes parques eólicos peruanos se ubica en la región de La Libertad?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Marcona</button>
+      <button class="qbtn" data-q="4" data-correct="true">B) Cupisnique</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) Tres Hermanas</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Talara</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Respecto a la energía solar en el Perú, ¿cuál afirmación es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Las plantas fotovoltaicas peruanas se concentran en el sur árido del país.</button>
+      <button class="qbtn" data-q="5" data-correct="false">B) La capacidad total instalada de plantas fotovoltaicas conectadas al SEIN es de 1,088 MWp.</button>
+      <button class="qbtn" data-q="5" data-correct="true">C) La energía solar fotovoltaica funciona mediante colectores que calientan un fluido para mover turbinas de vapor.</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) La planta Rubí se ubica en la región de Moquegua.</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">El Perú posee un potencial geotérmico de más de 3,000 MW. ¿Cuál es la razón geotectónica que explica este potencial?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) El Perú se encuentra en la zona de confluencia de los ríos Amazon y Orinoco, con alta actividad hidrotermal.</button>
+      <button class="qbtn" data-q="6" data-correct="true">B) El Perú se ubica en el Cinturón de Fuego del Pacífico, en el borde de las Placas de Nazca y Sudamericana.</button>
+      <button class="qbtn" data-q="6" data-correct="false">C) La Cordillera de los Andes genera fricción tectónica entre las placas Caribe y Nazca.</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) El calor radiogénico del granito amazónico es excepcionalmente alto comparado con otras regiones.</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">La energía maremotérmica (OTEC) basa su funcionamiento en el ciclo de Rankine. ¿Qué requisito mínimo debe cumplirse para que sea viable?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Un gradiente de salinidad de al menos 20 PSU entre aguas superficiales y profundas.</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) Una diferencia de presión oceánica de al menos 20 atmósferas entre la superficie y el fondo.</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) Un gradiente térmico de al menos 20°C entre aguas superficiales y aguas profundas.</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Una velocidad de corriente marina mínima de 20 nudos para accionar las turbinas.</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Por qué la biomasa se considera una fuente de energía renovable "carbono-neutral" en su ciclo completo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Porque al quemarse no emite ningún tipo de gas, ya que el carbono queda atrapado en las cenizas.</button>
+      <button class="qbtn" data-q="8" data-correct="true">B) Porque el CO₂ emitido al combustionarse fue previamente capturado de la atmósfera por la fotosíntesis, cerrando el ciclo del carbono.</button>
+      <button class="qbtn" data-q="8" data-correct="false">C) Porque su combustión produce más oxígeno que dióxido de carbono, resultando en un balance positivo.</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Porque solo emite vapor de agua, que no es un gas de efecto invernadero significativo.</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia técnica principal entre briquetas y pellets como formas de dendroenergía?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Las briquetas usan aglomerantes sintéticos, mientras que los pellets son 100% orgánicos sin ligante.</button>
+      <button class="qbtn" data-q="9" data-correct="true">B) Los pellets son más pequeños y uniformes (6–12 mm diámetro) que las briquetas (5–13 cm), lo que permite sistemas de alimentación automática.</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) Las briquetas tienen menor densidad energética que los pellets porque contienen más humedad.</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Los pellets solo se fabrican con carbón vegetal, mientras que las briquetas usan madera fresca.</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál instrumento legal del Perú declara de interés nacional la implementación del "Muro Trombe" como tecnología de calefacción solar pasiva?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) Decreto Legislativo N°1002 (mayo 2008)</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) Ley N°26848 — Ley Orgánica de Recursos Geotérmicos</button>
+      <button class="qbtn" data-q="10" data-correct="false">C) Decreto Supremo N°012-2011-EM</button>
+      <button class="qbtn" data-q="10" data-correct="true">D) Decreto de Urgencia 019-2008</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <h3 id="result-score"></h3>
+    <p id="result-msg"></p>
+    <button class="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Ministerio de Energía y Minas del Perú (MEM) · INGEMMET — Instituto Geológico Minero y Metalúrgico · OSINERGMIN — Marco Legal de Energías Renovables en el Perú · Decreto Legislativo N°1002 (2008) · Ley N°26848 Ley Orgánica de Recursos Geotérmicos (1997) · Decreto Supremo N°012-2011-EM · UNALM — Recursos Naturales del Perú, Tema 3: Energías Renovables 2026</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1:{correct:"✅ ¡Correcto! La definición técnica de energía renovable se basa en la inexhaustibilidad de la fuente (por cantidad o por regeneración natural), no en la ausencia de emisiones. La biomasa, por ejemplo, emite CO₂ pero es renovable.",fail:"❌ Incorrecto. La respuesta correcta es C. Renovable no significa necesariamente sin emisiones: la biomasa emite CO₂ al quemarse. La clave es que la fuente se regenera naturalmente o es prácticamente inagotable en escala humana."},
+  2:{correct:"✅ ¡Correcto! La energía hidráulica depende de las precipitaciones para mantener el caudal de los ríos y los embalses. En años de sequía (como durante fenómenos El Niño intensos), la generación hidroeléctrica puede caer drásticamente.",fail:"❌ Incorrecto. La respuesta correcta es B. Una característica clave de la hidroeléctrica es el costo NULO de combustible. La vulnerabilidad está en la dependencia climática: si no hay lluvia, no hay agua y no se genera electricidad."},
+  3:{correct:"✅ ¡Correcto! Si P = ½ρAv³, al duplicar v: P₂ = ½ρA(2v)³ = ½ρA·8v³ = 8P₁. La relación cúbica hace que la velocidad del viento sea el factor más crítico en la selección de emplazamientos para parques eólicos.",fail:"❌ Incorrecto. La respuesta correcta es C. La potencia varía con el cubo de la velocidad (v³). Si v se duplica: (2)³ = 8. Esta es la razón por la que los aerogeneradores se instalan a grandes alturas donde el viento es más rápido."},
+  4:{correct:"✅ ¡Correcto! Cupisnique se ubica en La Libertad. Los 4 parques que aportan 239 MW al SEIN son: Marcona (Ica), Cupisnique (La Libertad), Talara (Piura) y Tres Hermanas (Ica), todos operativos desde 2014.",fail:"❌ Incorrecto. La respuesta correcta es B. Cupisnique está en La Libertad. Marcona y Tres Hermanas están en Ica, y Talara está en Piura. Los cuatro parques juntos aportan 239 MW al SEIN."},
+  5:{correct:"✅ ¡Correcto! Esa descripción corresponde a la energía solar TÉRMICA (colectores que calientan fluidos) o a centrales termosolares CSP, no a la fotovoltaica. Los paneles FV convierten directamente la luz en electricidad mediante el efecto fotoeléctrico.",fail:"❌ Incorrecto. La respuesta correcta es C. Calentar un fluido con colectores para mover turbinas de vapor es energía solar TÉRMICA o termosolar (CSP), no fotovoltaica. Los paneles FV funcionan mediante el efecto fotoeléctrico: fotones → electrones → corriente eléctrica directa."},
+  6:{correct:"✅ ¡Correcto! Perú se ubica sobre el Cinturón de Fuego del Pacífico, en el borde de subducción entre la Placa de Nazca (oceánica) y la Placa Sudamericana (continental). Esta fricción genera vulcanismo y actividad geotérmica intensa en la cordillera andina del sur del país.",fail:"❌ Incorrecto. La respuesta correcta es B. El Cinturón de Fuego del Pacífico rodea el océano Pacífico y concentra ~75% de los volcanes activos del mundo. Perú, al estar en el borde de las placas Nazca y Sudamericana, tiene acceso privilegiado a recursos geotérmicos."},
+  7:{correct:"✅ ¡Correcto! La maremotérmica (OTEC) requiere un gradiente térmico mínimo de 20°C entre aguas superficiales cálidas y aguas profundas frías para que el ciclo termodinámico de Rankine sea energéticamente viable. Sin esa diferencia, el rendimiento es demasiado bajo.",fail:"❌ Incorrecto. La respuesta correcta es C. El requisito de OTEC es un gradiente de TEMPERATURA de al menos 20°C. Las opciones A y D confunden el principio de OTEC con el de la energía osmótica (salinidad) y la energía de corrientes, respectivamente."},
+  8:{correct:"✅ ¡Correcto! La biomasa almacena a corto plazo el CO₂ que las plantas capturaron de la atmósfera mediante fotosíntesis. Al combustionarse, ese CO₂ vuelve a la atmósfera. El ciclo neto es neutro, a diferencia de los combustibles fósiles que liberan carbono secuestrado por millones de años.",fail:"❌ Incorrecto. La respuesta correcta es B. La biomasa sí emite CO₂ al quemarse, pero ese CO₂ fue previamente capturado por fotosíntesis: es un ciclo cerrado de carbono. Los combustibles fósiles, en cambio, liberan carbono que estaba secuestrado desde hace millones de años, aumentando el CO₂ atmosférico neto."},
+  9:{correct:"✅ ¡Correcto! Los pellets (6–12 mm de diámetro, 10–30 mm de longitud) son mucho más pequeños y uniformes que las briquetas (5–13 cm de diámetro, 5–30 cm de longitud). Esa uniformidad permite alimentadores automáticos en calderas modernas, haciéndolos más versátiles.",fail:"❌ Incorrecto. La respuesta correcta es B. Las briquetas de mejor calidad NO usan aglomerantes sintéticos: usan la lignina natural de la madera. La diferencia clave es el TAMAÑO: los pellets son mucho más pequeños y permiten automatización en sistemas de alimentación."},
+  10:{correct:"✅ ¡Correcto! El Decreto de Urgencia 019-2008 declara de interés nacional el 'Sistema pasivo de recolección de energía solar de forma indirecta' denominado Muro Trombe, tecnología relevante para calefacción en zonas altoandinas del Perú.",fail:"❌ Incorrecto. La respuesta correcta es D. El D.U. 019-2008 es específico para el Muro Trombe. El D.Leg 1002 regula la generación eléctrica con RER en general, la Ley 26848 es de recursos geotérmicos, y el DS 012-2011-EM reglamenta la generación con RER."}
+};
+
+let answered=0,correct=0;
+
+document.getElementById('quiz-section').addEventListener('click',function(e){
+  if(!e.target.classList.contains('qbtn'))return;
+  const btn=e.target;
+  const q=btn.dataset.q;
+  const isCorrect=btn.dataset.correct==='true';
+  const allBtns=document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.correct==='true'){b.classList.add('correct');b.textContent='✅ '+b.textContent;}
+  });
+  if(!isCorrect){btn.classList.add('incorrect');btn.textContent='❌ '+btn.textContent.replace('✅ ','');}
+  const fb=document.getElementById('fb'+q);
+  fb.style.display='block';
+  fb.className='qfeedback '+(isCorrect?'ok':'fail');
+  fb.innerHTML=isCorrect?feedbacks[q].correct:feedbacks[q].fail;
+  answered++;
+  if(isCorrect)correct++;
+  document.getElementById('prog-txt').textContent=`Pregunta ${answered} de 10 respondidas · Aciertos: ${correct}/${answered}`;
+  document.getElementById('prog-bar').style.width=(answered*10)+'%';
+  if(answered===10){
+    const rp=document.getElementById('result-panel');
+    rp.style.display='block';
+    document.getElementById('result-score').textContent=`${correct} / 10 correctas`;
+    let msg='',bg='';
+    if(correct<=4){msg='Necesitas repasar el material. Vuelve al canvas y repasa los bloques donde fallaste.';bg='#fee2e2';}
+    else if(correct<=7){msg='¡Buen avance! Estás en camino. Repasa los conceptos donde dudaste.';bg='#fef9c3';}
+    else{msg='¡Excelente dominio del tema! Estás bien preparado para el examen.';bg='#dcfce7';}
+    rp.style.background=bg;
+    rp.style.padding='14px';
+    rp.style.borderRadius='10px';
+    document.getElementById('result-msg').textContent=msg;
+  }
+});
+
+function resetQuiz(){
+  answered=0;correct=0;
+  document.getElementById('prog-txt').textContent='Pregunta 0 de 10 respondidas · Aciertos: 0/0';
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('result-panel').style.display='none';
+  for(let i=1;i<=10;i++){
+    const btns=document.querySelectorAll(`.qbtn[data-q="${i}"]`);
+    btns.forEach(b=>{
+      b.disabled=false;
+      b.classList.remove('correct','incorrect');
+      b.textContent=b.textContent.replace('✅ ','').replace('❌ ','');
+    });
+    const fb=document.getElementById('fb'+i);
+    fb.style.display='none';
+    fb.className='qfeedback';
+    fb.innerHTML='';
+  }
+}
+</script>

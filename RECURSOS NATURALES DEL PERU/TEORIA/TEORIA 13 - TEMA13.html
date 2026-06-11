@@ -1,0 +1,762 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:transparent}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titlebar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,0.1);color:#cbd5e1}
+.secbar{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px}
+.secbar.green{background:#dcfce7;color:#14532d}
+.secbar.blue{background:#dbeafe;color:#1e3a8a}
+.secbar.orange{background:#ffedd5;color:#7c2d12}
+.secbar.red{background:#fee2e2;color:#991b1b}
+.secbar.purple{background:#ede9fe;color:#4c1d95}
+.secbar.teal{background:#ccfbf1;color:#134e4a}
+@media(prefers-color-scheme:dark){
+.secbar.green{background:#14532d;color:#86efac}
+.secbar.blue{background:#1e3a5f;color:#93c5fd}
+.secbar.orange{background:#431407;color:#fed7aa}
+.secbar.red{background:#450a0a;color:#fca5a5}
+.secbar.purple{background:#2e1065;color:#c4b5fd}
+.secbar.teal{background:#042f2e;color:#5eead4}
+}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh.blue{background:#dbeafe;color:#1e3a8a}
+.bh.green{background:#dcfce7;color:#14532d}
+.bh.orange{background:#ffedd5;color:#7c2d12}
+.bh.red{background:#fee2e2;color:#991b1b}
+.bh.purple{background:#ede9fe;color:#4c1d95}
+.bh.yellow{background:#fef9c3;color:#713f12}
+.bh.teal{background:#ccfbf1;color:#134e4a}
+.bh.gray{background:#f1f5f9;color:#334155}
+.bh.pink{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+.bh.blue{background:#1e3a5f;color:#93c5fd}
+.bh.green{background:#14532d;color:#86efac}
+.bh.orange{background:#431407;color:#fed7aa}
+.bh.red{background:#450a0a;color:#fca5a5}
+.bh.purple{background:#2e1065;color:#c4b5fd}
+.bh.yellow{background:#422006;color:#fef08a}
+.bh.teal{background:#042f2e;color:#5eead4}
+.bh.gray{background:#1e293b;color:#94a3b8}
+.bh.pink{background:#4a044e;color:#f0abfc}
+}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.def.blue{border-left:3px solid #3b82f6}
+.def.green{border-left:3px solid #22c55e}
+.def.orange{border-left:3px solid #f97316}
+.def.red{border-left:3px solid #ef4444}
+.def.purple{border-left:3px solid #8b5cf6}
+.def.yellow{border-left:3px solid #eab308}
+.def.teal{border-left:3px solid #14b8a6}
+.def.pink{border-left:3px solid #ec4899}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot.blue{background:#3b82f6}
+.dot.green{background:#22c55e}
+.dot.orange{background:#f97316}
+.dot.red{background:#ef4444}
+.dot.purple{background:#8b5cf6}
+.dot.teal{background:#14b8a6}
+.dot.yellow{background:#eab308}
+.dot.pink{background:#ec4899}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin-bottom:8px}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#ca8a04}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:8px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.fbox{background:var(--color-background-secondary);padding:4px 9px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin-top:3px;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:20px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+
+/* QUIZ */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 16px;margin-bottom:12px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.qcard{margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qcard:last-of-type{border-bottom:none}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.qtext{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary)}
+.qbtn:hover{background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;display:none}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.qfeedback.ok{background:#14532d;color:#86efac}
+.qfeedback.fail{background:#450a0a;color:#fca5a5}
+}
+.progress-wrap{margin-bottom:12px}
+.progress-text{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+#results{display:none;border-radius:10px;padding:14px;margin-top:12px;font-size:13px;line-height:1.6}
+#results.bad{background:#fee2e2;color:#991b1b}
+#results.ok{background:#fef9c3;color:#713f12}
+#results.good{background:#dcfce7;color:#14532d}
+@media(prefers-color-scheme:dark){
+#results.bad{background:#450a0a;color:#fca5a5}
+#results.ok{background:#422006;color:#fef08a}
+#results.good{background:#14532d;color:#86efac}
+}
+#reset-btn{margin-top:10px;padding:8px 18px;border-radius:8px;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);cursor:pointer;font-size:12px;color:var(--color-text-primary);display:none}
+#reset-btn:hover{background:var(--color-background-tertiary)}
+</style>
+
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="titlebar">
+  <h1>🌿 TEMA N°11: RECURSO FORESTAL DEL PERÚ</h1>
+  <p>Curso: Recursos Naturales del Perú · Universidad Nacional Agraria La Molina (UNALM) · 2026</p>
+  <div class="tags">
+    <span class="tag">Bosques · Ley 29763</span>
+    <span class="tag">Tipos de bosques</span>
+    <span class="tag">Plantaciones forestales</span>
+    <span class="tag">Concesiones forestales</span>
+    <span class="tag">Deforestación</span>
+    <span class="tag">Tala ilegal</span>
+    <span class="tag">Manejo comunitario</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1 -->
+<div class="secbar green">🌳 PRODUCCIÓN FORESTAL Y MARCO LEGAL</div>
+
+<!-- Producción forestal Perú -->
+<div class="block">
+  <span class="bh green">Producción forestal · Perú</span>
+  <div class="def green">El Perú es la segunda potencia forestal de América Latina, con 73 millones de hectáreas de bosques que equivalen al 60% del territorio nacional. Sin embargo, la brecha entre el potencial y el aprovechamiento efectivo es enorme, reflejando una gestión todavía incipiente.</div>
+  <div class="item"><span class="dot green"></span><span><b>Aporte al PBI:</b> Los bosques contribuyen con 1.1% del PBI (aprox. US$ 1,700 millones), pero reciben solo el <b>0.01% de inversión extranjera directa</b> — una desproporción que evidencia la subvaloración del recurso forestal.</span></div>
+  <div class="item"><span class="dot green"></span><span><b>Potencial subutilizado:</b> De 17.78 millones de ha disponibles para producción, solo 7.4 millones han sido destinadas al aprovechamiento. De 600 especies maderables estudiadas, apenas se aprovechan 195.</span></div>
+  <div class="item"><span class="dot red"></span><span><b>Deforestación 2023:</b> se perdieron 200,000 hectáreas de bosque — una cifra que supera países enteros de superficie forestal.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir la superficie con bosques (73.3 M ha) con la superficie habilitada para aprovechamiento (7.4 M ha). El resto está bajo protección, en comunidades o sin zonificación activa.</div>
+</div>
+
+<!-- Definición Legal de Recurso Forestal -->
+<div class="block">
+  <span class="bh blue">Ley N° 29763 — Art. 5: Recursos Forestales</span>
+  <div class="def blue">La Ley Forestal y de Fauna Silvestre define qué cuenta como recurso forestal, independientemente de su ubicación en el territorio nacional. Esta definición amplía el concepto más allá de los árboles, reconociendo componentes genéticos y tierras con vocación forestal aunque carezcan de cobertura arbórea.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #22c55e"><b>a. Bosques naturales</b><br>Ecosistemas de origen no antrópico con vegetación predominantemente arbórea.</div>
+    <div class="mini" style="border-top:3px solid #3b82f6"><b>b. Plantaciones forestales</b><br>Ecosistemas establecidos mediante intervención humana con una o más especies.</div>
+    <div class="mini" style="border-top:3px solid #f97316"><b>c. Tierras CUM forestal</b><br>Terrenos con capacidad de uso mayor forestal o de protección, con o sin árboles.</div>
+    <div class="mini" style="border-top:3px solid #8b5cf6"><b>d. Flora silvestre</b><br>Componentes silvestres de flora terrestre y acuática, incluyendo su diversidad genética.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el Artículo 5 de la Ley N° 29763 incluye tierras "sin cobertura arbórea" como recurso forestal. ¿Qué implicancias tiene esto para la gestión territorial?</div>
+</div>
+
+<!-- Qué es un bosque -->
+<div class="block">
+  <span class="bh teal">¿Qué es un bosque?</span>
+  <div class="def teal">Un bosque es un ecosistema donde predominan las especies arbóreas en cualquier estado de desarrollo, cuya cobertura de copa supera el 10% en zonas áridas o el 25% en circunstancias favorables (Reglamento Ley 29763, 2015). Es un sistema complejo e integrado: suelo, agua, plantas, fauna y microorganismos funcionan en conjunto de manera autosostenible.</div>
+  <div class="item"><span class="dot teal"></span><span><b>Superficie mínima:</b> Al menos 0.5 hectáreas con cobertura de copa ≥10% (SERFOR, 2017). Esto excluye árboles aislados o pequeños huertos.</span></div>
+  <div class="item"><span class="dot teal"></span><span><b>Ley 27308 (2000):</b> Bosque natural = "ecosistema nativo con predominancia arbórea o arbustiva, capaz de regenerarse por sucesión natural" — destaca la capacidad de auto-recuperación.</span></div>
+  <div class="item"><span class="dot teal"></span><span><b>Funcionalidad:</b> Un bosque provee bienes (madera, resinas, frutos) y servicios (regulación hídrica, captura de carbono, hábitat), de forma simultánea y sostenida.</span></div>
+  <div class="exam">🎯 EXAMEN: Compare las definiciones de bosque según la Ley 27308 (2000) y el Reglamento de la Ley 29763 (2015). ¿En qué criterio clave difieren y cuál resulta más operativo para la gestión forestal?</div>
+</div>
+
+<!-- SECCIÓN 2 -->
+<div class="secbar blue">🗺️ TIPOS DE BOSQUES EN EL PERÚ</div>
+
+<!-- Distribución nacional -->
+<div class="block">
+  <span class="bh blue">Distribución de bosques por región</span>
+  <div class="def blue">Los 73.3 millones de hectáreas de bosques peruanos están distribuidos en las tres regiones naturales, con una concentración abrumadora en la selva. Esta asimetría explica por qué la política forestal peruana se enfoca principalmente en la Amazonía.</div>
+  <div class="item"><span class="dot green"></span><span><b>Selva:</b> 69'250,253 ha — el 94.5% del total forestal. Incluye los bosques amazónicos de selva alta y baja.</span></div>
+  <div class="item"><span class="dot blue"></span><span><b>Costa:</b> 2'778,250 ha — bosques secos ecuatoriales de Tumbes, Piura, Lambayeque y La Libertad.</span></div>
+  <div class="item"><span class="dot orange"></span><span><b>Sierra:</b> 1'841,200 ha — bosques interandinos, montanos nublados y altoandinos (relictos).</span></div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:94.5%;background:#22c55e"></div></div>
+  <p style="font-size:10px;color:var(--color-text-secondary);margin-top:2px">94.5% en selva · 3.8% en costa · 2.5% en sierra</p>
+  <div class="item"><span class="dot teal"></span><span>Perú es el <b>2° país de América Latina</b> con mayor extensión de bosques tropicales, después de Brasil (Fuente: MINAM, 2014).</span></div>
+</div>
+
+<!-- Bosque Seco Ecuatorial -->
+<div class="block">
+  <span class="bh orange">Bosque Seco Ecuatorial (Costa norte)</span>
+  <div class="def orange">Se extiende por Tumbes, Piura, Lambayeque y norte de La Libertad, y por el piso inferior del valle del Marañón. Las bajas precipitaciones son consecuencia del "efecto de sombra pluviométrica" de la Cordillera Andina, que bloquea el paso de nubes húmedas del Atlántico.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #f97316"><b>Bosque seco</b><br>Árboles caducifolios: ceibo, guayacán, hualtaco, papelillo. Depende de lluvias estacionales.</div>
+    <div class="mini" style="border-left:3px solid #eab308"><b>Sabana</b><br>Sapote, faique, algarrobo. Se desarrolla en planicies con agua subterránea accesible.</div>
+    <div class="mini" style="border-left:3px solid #14b8a6"><b>Bosque de galería</b><br>Algarrobo, sauce, caña brava. Depende de aguas subterráneas a lo largo de cursos de agua.</div>
+  </div>
+  <div class="item"><span class="dot orange"></span><span><b>Bosques de algarrobo:</b> especie clave porque frena el avance de los desiertos y dunas, enriquece el suelo con nitrógeno (fijación biológica) y provee alimento al ganado y poblaciones locales.</span></div>
+</div>
+
+<!-- Bosque Interandino / Altoandino / Montano -->
+<div class="block">
+  <span class="bh purple">Bosques de Sierra: Interandino, Montano y Altoandino</span>
+  <div class="def purple">Los bosques de sierra son ecosistemas que persisten en condiciones climáticas extremas — entre valles secos y cumbres nevadas. Su importancia ecológica es desproporcionada respecto a su superficie: regulan el agua de las cuencas andinas y albergan biodiversidad endémica irreemplazable.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #8b5cf6">
+      <b>Interandino</b><br>
+      Altitud: 1800–3000 msnm<br>
+      Precip: 400–1000 mm/año<br>
+      Temp: 6–24°C<br>
+      Cajamarca, Amazonas, Mantaro, Apurímac.
+    </div>
+    <div class="mini" style="border-top:3px solid #ec4899">
+      <b>Montano nublado</b><br>
+      Altitud: 1500–3500 msnm<br>
+      Alta humedad por neblinas persistentes.<br>
+      Gran biodiversidad de flora y aves.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <b>Altoandino</b><br>
+      Altitud: 3000–4800 msnm<br>
+      Precip: 1000–4000 mm/año<br>
+      Temp: 6–12°C<br>
+      Solo sobreviven como <b>relictos</b>.
+    </div>
+  </div>
+  <div class="warn">⚠️ CRÍTICO: Los bosques altoandinos existen hoy como "relictos" — fragmentos aislados de lo que fue una cobertura continua. Su destrucción afecta directamente la recarga hídrica de las cuencas abastecedoras de ciudades andinas como Lima (cuenca del Rímac).</div>
+</div>
+
+<!-- Selva Baja -->
+<div class="block">
+  <span class="bh green">Bosque Amazónico de Selva Baja</span>
+  <div class="def green">La selva baja abarca la llanura amazónica y constituye la mayor extensión boscosa del país. Es el bioma más biodiverso del planeta por unidad de superficie: alberga más especies de plantas, insectos y aves que cualquier otro ecosistema terrestre.</div>
+  <div class="item"><span class="dot green"></span><span><b>Altitud:</b> 0 a 600 msnm. Precipitaciones: 3,000–6,000 mm/año. Temperatura: 22–33°C (MINAM, 2014). Condiciones de alta humedad y calor constante permiten múltiples estratos de vegetación (dosel, sotobosque, herbáceo).</span></div>
+  <div class="item"><span class="dot blue"></span><span><b>Drenaje:</b> Se distingue entre bosques de tierra firme (no inundables) y bosques de várzea o igapó (inundables periódicamente por ríos). Los de várzea tienen flora especializada para la inundación.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el bosque amazónico de selva baja presenta la mayor riqueza de especies del país y compare sus condiciones climáticas con las del bosque altoandino.</div>
+</div>
+
+<!-- SECCIÓN 3 -->
+<div class="secbar green">🌱 BOSQUES PRIMARIOS, SECUNDARIOS Y POR ORIGEN</div>
+
+<!-- Primarios vs Secundarios -->
+<div class="block s2">
+  <span class="bh green">Bosques Primarios vs. Secundarios</span>
+  <div class="def green">La distinción entre bosque primario y secundario no es simplemente de "antigüedad" sino de su historia de perturbación. El primario nunca ha sido alterado significativamente por el hombre (o solo de forma temporal). El secundario se regeneró después de una perturbación intensa — principalmente de origen antrópico — que destruyó la vegetación original (Smith et al., 1997).</div>
+  <table class="tbl">
+    <tr><th>Característica</th><th>Bosque Primario</th><th>Bosque Secundario</th></tr>
+    <tr><td>Diversidad de especies</td><td>Alta: 40 a +80 spp/ha</td><td>Baja: menos especies</td></tr>
+    <tr><td>Heterogeneidad estructural</td><td>Alta (diámetros y alturas variados)</td><td>Baja (homogéneo en edad y talla)</td></tr>
+    <tr><td>Dosel superior</td><td>Árboles gruesos, especies pioneras longevas</td><td>Árboles delgados, especies oportunistas</td></tr>
+    <tr><td>Volumen maderable</td><td>0–20 m³/ha con valor comercial (Louman, 1990)</td><td>Área basal y volumen relativamente bajos</td></tr>
+    <tr><td>Velocidad de regeneración</td><td>Lenta (>60 años; FAO: 60–80 años)</td><td>Rápida; crecimiento inicial acelerado</td></tr>
+    <tr><td>Autosostenibilidad</td><td>Alta; relaciones funcionales complejas</td><td>En recuperación; depende de fuentes semilleras</td></tr>
+  </table>
+  <div class="warn">⚠️ PARADOJA DEL BOSQUE PRIMARIO: Aunque tiene más biodiversidad, produce menos madera comercial por hectárea (solo 20% de especies tienen valor maderero, con 0–20 m³/ha). Un bosque secundario bien manejado puede producir mucho más volumen maderable útil.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la velocidad de recuperación de un bosque secundario depende "de la duración e intensidad del uso anterior" del terreno? Dé un ejemplo concreto con cultivos agrícolas vs. pastos.</div>
+</div>
+
+<!-- Natural vs Artificial -->
+<div class="block">
+  <span class="bh orange">Bosques por origen: Natural vs. Artificial</span>
+  <div class="def orange">Esta clasificación se basa en si hubo o no intervención humana directa en el establecimiento del bosque. El origen determina las características estructurales y el tipo de manejo aplicable.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <b>Natural</b><br>
+      Sin acción directa del hombre. Regeneración propia. Ventaja: selección natural garantiza plantas adaptadas a su ambiente (resistentes a sequías, vientos, plagas, derrumbes).<br>
+      Ej: bosque montano de Chanchamayo.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <b>Artificial (Plantación)</b><br>
+      Establecimiento por acción antrópica. Ventaja: permite elegir especies, espaciamientos uniformes, y crear bosques donde antes no los había.<br>
+      Ej: pinos de Porcón, Cajamarca.
+    </div>
+  </div>
+  <div class="item"><span class="dot orange"></span><span><b>Plantación Forestal (Ley 29763, Art.11):</b> Ecosistemas forestales establecidos con fines de producción, protección, restauración, recreación o servicios ambientales. Los cultivos agroindustriales y agroenergéticos NO son plantaciones forestales.</span></div>
+</div>
+
+<!-- Plantaciones Perú -->
+<div class="block s2">
+  <span class="bh yellow">Plantaciones Forestales en el Perú</span>
+  <div class="def yellow">Perú tiene 1 millón de hectáreas de plantaciones forestales, frente a un potencial de 10.5 millones de ha aptas para reforestar. Solo se ha aprovechado el 10% del potencial — una brecha de 9.4 millones de ha que representa una de las mayores oportunidades de desarrollo forestal sostenible de la región.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot yellow"></span><span><b>Incremento en Sierra:</b> 5–7 m³/ha/año. Con semillas mejoradas puede triplicarse.</span></div>
+      <div class="item"><span class="dot green"></span><span><b>Incremento en Selva:</b> 15–20 m³/ha/año. Con clones mejorados: hasta 30–45 m³/ha/año.</span></div>
+      <div class="item"><span class="dot orange"></span><span><b>Caso Granja Porcón (Cajamarca):</b> 11,000 ha de pino, eucalipto y ciprés. Único proyecto de reforestación a gran escala del país. Apoyado por CICAFOR/ADEFOR y cooperación internacional.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot blue"></span><span><b>Principal actor:</b> comunidades campesinas (mayor parte de las áreas plantadas). Predios promedio: <100 ha, lo que explica la escala pequeña.</span></div>
+      <div class="item"><span class="dot purple"></span><span><b>Finalidades:</b> económica (madera, leña), social (economía familiar/comunitaria) y ecológica (protección de suelos, captación hídrica).</span></div>
+      <div class="item"><span class="dot teal"></span><span><b>Departamento con mayor potencial:</b> Cusco (1'414,582 ha aptas), seguido de Junín y Puno (SERFOR, 2017).</span></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el único proyecto de reforestación a gran escala en Perú se realizó en Cajamarca y no en la selva, donde el potencial maderable es mayor? ¿Qué factores socioeconómicos e institucionales explican esta paradoja?</div>
+</div>
+
+<!-- SECCIÓN 4 -->
+<div class="secbar blue">📋 BOSQUES DE PRODUCCIÓN Y PROTECCIÓN</div>
+
+<!-- Producción vs Protección -->
+<div class="block">
+  <span class="bh blue">Bosque de Producción vs. Bosque de Protección</span>
+  <div class="flow">
+    <div class="fbox" style="background:#dbeafe;color:#1e3a8a"><b>Bosque de Producción</b></div>
+    <span class="farrow">→</span>
+    <div class="fbox">Apto para bienes/servicios permanentes</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Madera, látex, resinas, taninos, plantas medicinales</div>
+  </div>
+  <div class="flow">
+    <div class="fbox" style="background:#fee2e2;color:#991b1b"><b>Bosque de Protección</b></div>
+    <span class="farrow">→</span>
+    <div class="fbox">Ecosistema frágil</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Protege cuencas, suelos, captura carbono, investigación científica</div>
+  </div>
+  <div class="item"><span class="dot blue"></span><span><b>BPP:</b> Los Bosques de Producción Permanente son áreas de bosque natural primario puestas a disposición de particulares mediante resolución ministerial (MINAGRI), creados desde el año 2000. El mapa BPP muestra su concentración en Loreto, Ucayali y Madre de Dios.</span></div>
+</div>
+
+<!-- Concesiones - tipos -->
+<div class="block s2">
+  <span class="bh purple">Concesiones Forestales — Ley 29763, Art. 51</span>
+  <div class="def purple">Mediante la concesión forestal, el Estado (a través de gobiernos regionales) otorga en áreas de dominio público el derecho para el aprovechamiento sostenible de recursos forestales. La concesión es un bien incorporal registrable — puede ser objeto de hipoteca, cesión o disposición — lo que le da valor patrimonial más allá del uso inmediato.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #3b82f6">
+      <b>1. Fines Maderables (Art. 56)</b><br>
+      En BPP primarios o secundarios. Dos tamaños:<br>
+      • 5,000–10,000 ha: hasta 40 años renovables<br>
+      • 10,001–40,000 ha: hasta 40 años renovables<br>
+      Asignadas por <b>concurso público.</b>
+    </div>
+    <div class="mini" style="border-left:3px solid #ec4899">
+      <b>2. PFNM (Art. 57)</b><br>
+      Frutos, látex, resinas, flores, plantas medicinales, fibras — <b>sin retiro de cobertura boscosa.</b><br>
+      Hasta 10,000 ha, vigencia 40 años renovables.<br>
+      Se permite en categoría III.
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316">
+      <b>3. Ecoturismo (Art. 58)</b><br>
+      Máximo 10,000 ha. Hasta 40 años renovables.<br>
+      Solicitud requiere: plano perimétrico en UTM + proyecto de desarrollo + pago de trámite (TUPA).
+    </div>
+    <div class="mini" style="border-left:3px solid #22c55e">
+      <b>4. Conservación (Art. 59)</b><br>
+      Objetivo: protección de flora y fauna.<br>
+      <b>Sin límite de extensión.</b> Sin pago de derecho (salvo turismo, colecta comercial). No se otorga en BPP. 21 concesiones existentes (SERFOR, 2013).
+    </div>
+  </div>
+  <div class="warn">⚠️ DIFERENCIA CLAVE: La concesión para PFNM <b>excepcionalmente</b> puede incluir extracción maderable, pero solo si está previsto en el plan de manejo y no desnaturaliza el objeto principal. La de conservación <b>nunca</b> permite aprovechamiento maderable.</div>
+  <div class="exam">🎯 EXAMEN: La Ley 29763 establece que la concesión para conservación "no requiere pago de derecho de aprovechamiento". Explique la lógica económica y de política pública detrás de esta disposición. ¿Qué tipo de externalidades positivas justifican este subsidio implícito del Estado?</div>
+</div>
+
+<!-- Madera aserrada por dpto -->
+<div class="block">
+  <span class="bh gray">Top 5: Producción de madera aserrada (2017)</span>
+  <div class="def gray">La producción maderera está altamente concentrada en los departamentos amazónicos — Loreto, Madre de Dios y Ucayali generan el 74% del total nacional. Esta concentración refleja la ubicación de los BPP y las concesiones maderables.</div>
+  <div style="margin-top:6px">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Loreto: 164,872 m³</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:100%;background:#3b82f6"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin:3px 0">Madre de Dios: 97,102 m³</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:59%;background:#22c55e"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin:3px 0">Ucayali: 96,786 m³</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:59%;background:#f97316"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin:3px 0">Junín: 45,363 m³</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:28%;background:#8b5cf6"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin:3px 0">Pasco: 44,177 m³</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:27%;background:#14b8a6"></div></div>
+    <p style="font-size:10px;color:var(--color-text-secondary);margin-top:4px">Total nacional: 482,320 m³ · Fuente: SERFOR 2017</p>
+  </div>
+</div>
+
+<!-- SECCIÓN 5 -->
+<div class="secbar red">🔥 DEFORESTACIÓN Y TALA ILEGAL</div>
+
+<!-- Deforestación -->
+<div class="block s2">
+  <span class="bh red">Deforestación</span>
+  <div class="def red">La deforestación es la eliminación permanente de la cobertura forestal y su conversión a otros usos (agricultura, pastos, reservas de agua, áreas urbanas) como consecuencia directa de actividades humanas (Ressources Naturelles Canada, 2014). La palabra clave es "permanente" — el aprovechamiento forestal donde el bosque se regenerará <b>no</b> cuenta como deforestación (FAO, 2010).</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot red"></span><span><b>Tendencia alarmante:</b> La deforestación en Perú pasó de 74,499 ha (2006) a 203,272 ha (2020), alcanzando su pico histórico récord. En 2023 se registraron 200,000 ha perdidas.</span></div>
+      <div class="item"><span class="dot orange"></span><span><b>A escala mundial:</b> Se destruyen 13 millones de ha/año. De 1990 a 2005 el mundo perdió 3% de su cobertura forestal total (Banco Mundial, 2016).</span></div>
+      <div class="item"><span class="dot red"></span><span><b>Top 5 países en bosques:</b> Rusia, Brasil, Canadá, EE.UU. y China concentran más de la mitad de la superficie forestal global (4,000 M ha totales = 30% de la superficie terrestre).</span></div>
+    </div>
+    <div>
+      <p style="font-size:12px;font-weight:600;margin-bottom:6px">Agentes de la deforestación:</p>
+      <div class="flow">
+        <span class="pill" style="background:#fee2e2;color:#991b1b">Agricultura migratoria</span>
+        <span class="pill" style="background:#ffedd5;color:#7c2d12">Ganadería</span>
+        <span class="pill" style="background:#dbeafe;color:#1e3a8a">Extracción madera</span>
+        <span class="pill" style="background:#ede9fe;color:#4c1d95">Minería/hidrocarburos</span>
+        <span class="pill" style="background:#fce7f3;color:#831843">Leña</span>
+        <span class="pill" style="background:#f1f5f9;color:#334155">Infraestructura</span>
+        <span class="pill" style="background:#fef9c3;color:#713f12">Agricultura comercial</span>
+        <span class="pill" style="background:#dcfce7;color:#14532d">Narcotráfico</span>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir deforestación (cambio de uso permanente) con degradación forestal (el bosque persiste pero con menor calidad). La tala selectiva en concesiones legales, si el bosque se regenera, no es deforestación.</div>
+  <div class="exam">🎯 EXAMEN: Analice por qué la agricultura migratoria es considerada el principal agente de deforestación en la Amazonía peruana. ¿Qué mecanismo causal la vincula con la pobreza rural y qué políticas podrían interrumpir ese ciclo?</div>
+</div>
+
+<!-- Tala ilegal -->
+<div class="block">
+  <span class="bh red">Tala Ilegal y DMC</span>
+  <div class="def red">La tala ilegal es cualquier afectación del bosque sin autorización o fuera de un régimen regulado. Se presenta en tres formas: (1) cultivos de supervivencia, (2) asociada a narcotráfico y minería ilegal, y (3) tala comercial ilegal. Su impacto trasciende lo ecológico: distorsiona el mercado maderero y desincentiva a los concesionarios legales.</div>
+  <div class="item"><span class="dot red"></span><span><b>Diámetro Mínimo de Corta (DMC):</b> La ley establece que no se pueden talar árboles por debajo de cierto DAP (diámetro a la altura del pecho). Para cedro (<i>Cedrela odorata</i>): 65 cm DAP. Para caoba (<i>Swietenia macrophylla</i>): 75 cm DAP. Para demás especies de selva: 41 cm. Para especies costeras (guayacán, hualtaco, algarrobo, etc.): 25–30 cm.</span></div>
+  <div class="item"><span class="dot orange"></span><span><b>Otras formas de ilegalidad:</b> consignación de info falsa en planes de manejo, aserrío con motosierra sin excepción legal, extracción de especies vedadas o amenazadas, volúmenes superiores a los autorizados.</span></div>
+  <div class="item"><span class="dot red"></span><span><b>Cadena del ilícito:</b> el delito no solo involucra al talador — motoristas, transportistas, aserraderos y compradores que adquieren madera ilegal son igualmente responsables.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique el concepto de Diámetro Mínimo de Corta (DMC) y su fundamento ecológico. ¿Por qué la caoba tiene el DMC más alto (75 cm) entre las especies de selva reguladas en Perú?</div>
+</div>
+
+<!-- SECCIÓN 6 -->
+<div class="secbar teal">👥 MANEJO FORESTAL COMUNITARIO</div>
+
+<!-- MFC -->
+<div class="block s3">
+  <span class="bh teal">Manejo Forestal Comunitario (MFC)</span>
+  <div class="def teal">El MFC es el conjunto de actividades orientadas al aprovechamiento sostenible y la conservación de los ecosistemas forestales, realizadas por pueblos indígenas, comunidades nativas y campesinas y poblaciones locales. Es una alternativa al modelo concesionario privado, que combina conservación con desarrollo local (SERFOR).</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot teal"></span><span><b>Escala:</b> 13 millones de ha de bosques están dentro de comunidades nativas y 24 millones dentro de comunidades campesinas — en total más del 50% de los bosques peruanos están en manos de comunidades.</span></div>
+      <div class="item"><span class="dot green"></span><span><b>Funciones del MFC:</b> conservación de biodiversidad, defensa del territorio comunal frente a invasores y madereros ilegales, dinamización de la economía local, fortalecimiento de identidad y saberes ancestrales.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot orange"></span><span><b>Caso CN Callería (Ucayali):</b> Comunidad Shipibo-Conibo de 71 familias (330 personas). Total: 4,035 ha, de las cuales 2,528 ha (63%) en MFC. Bosque de restingas medias. Especies comerciales: quinilla y capirona. Mercado principal: Pucallpa (transporte fluvial).</span></div>
+      <div class="item"><span class="dot purple"></span><span><b>Pueblos indígenas en Perú:</b> 16 familias etnolingüísticas (Arawak, Pano, Jíbaro, Quechua, etc.) con 68 grupos étnicos identificados. Su territorialidad ancestral coincide con zonas de alta biodiversidad forestal.</span></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Compare el modelo de concesión forestal privada con el de Manejo Forestal Comunitario. ¿Bajo qué condiciones el MFC puede ser más efectivo para la conservación y el desarrollo sostenible que una concesión maderable convencional?</div>
+</div>
+
+<!-- TABLA INTEGRADORA FINAL -->
+<div class="secbar gray">📊 TABLA INTEGRADORA: TIPOS DE CONCESIONES FORESTALES</div>
+<div class="block s3">
+  <span class="bh gray">Síntesis comparativa — Concesiones Forestales (Ley 29763)</span>
+  <table class="tbl">
+    <tr>
+      <th>Tipo de Concesión</th>
+      <th>Artículo</th>
+      <th>Extensión máxima</th>
+      <th>Vigencia</th>
+      <th>Objetivo principal</th>
+      <th>Derecho de aprovechamiento</th>
+      <th>Modalidad de otorgamiento</th>
+    </tr>
+    <tr>
+      <td><b>Maderable (Unidad A)</b></td>
+      <td>Art. 56</td>
+      <td>5,000–10,000 ha</td>
+      <td>Hasta 40 años renovables</td>
+      <td>Producción de madera</td>
+      <td>Sí (paga derecho)</td>
+      <td>Concurso público</td>
+    </tr>
+    <tr>
+      <td><b>Maderable (Unidad B)</b></td>
+      <td>Art. 56</td>
+      <td>10,001–40,000 ha</td>
+      <td>Hasta 40 años renovables</td>
+      <td>Producción de madera a escala</td>
+      <td>Sí (paga derecho)</td>
+      <td>Concurso público</td>
+    </tr>
+    <tr>
+      <td><b>PFNM</b></td>
+      <td>Art. 57</td>
+      <td>Hasta 10,000 ha</td>
+      <td>Hasta 40 años renovables</td>
+      <td>Frutos, látex, plantas medicinales, fibras</td>
+      <td>Sí (paga derecho)</td>
+      <td>Solicitud directa</td>
+    </tr>
+    <tr>
+      <td><b>Ecoturismo</b></td>
+      <td>Art. 58</td>
+      <td>Hasta 10,000 ha</td>
+      <td>Hasta 40 años renovables</td>
+      <td>Actividades turísticas sostenibles</td>
+      <td>Sí (paga derecho)</td>
+      <td>Solicitud + TUPA</td>
+    </tr>
+    <tr>
+      <td><b>Conservación</b></td>
+      <td>Art. 59</td>
+      <td><b>Sin límite</b></td>
+      <td>Hasta 40 años renovables</td>
+      <td>Protección de flora, fauna y servicios ecosistémicos</td>
+      <td><b>No paga</b> (salvo excepciones)</td>
+      <td>Solicitud + compromiso de inversión</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La única concesión sin límite de extensión y sin pago de derecho es la de <b>conservación</b>. Esto refleja que el Estado reconoce que conservar la biodiversidad genera externalidades positivas para toda la sociedad (secuestro de carbono, provisión hídrica, investigación), por lo que subsidia implícitamente esta actividad.</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta · Cubre todo el material del tema</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-text" id="prog-text">Pregunta 0 de 10 respondidas · Aciertos: 0</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#22c55e;transition:width .3s"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10 — Definición legal</p>
+    <p class="qtext">Según la Ley N° 29763 (Art. 5), ¿cuál de los siguientes NO está incluido como recurso forestal?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Las plantaciones forestales establecidas por acción humana</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Las tierras con capacidad de uso mayor forestal sin cobertura arbórea</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Los cultivos agroindustriales en tierras de aptitud forestal</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Los componentes silvestres de la flora acuática emergente</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10 — Datos cuantitativos</p>
+    <p class="qtext">¿Qué porcentaje del territorio nacional peruano está cubierto por bosques y cuántas hectáreas representan aproximadamente?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) 45% del territorio, equivalente a unos 58 millones de hectáreas</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) 60% del territorio, equivalente a 73.3 millones de hectáreas</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) 70% del territorio, equivalente a 90 millones de hectáreas</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) 55% del territorio, equivalente a 70 millones de hectáreas</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10 — Tipos de bosques</p>
+    <p class="qtext">El bosque altoandino peruano actualmente solo sobrevive en forma de "relictos". ¿A qué altitud se ubica y cuál es el rango de precipitaciones que lo caracteriza?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) 1,500–3,000 msnm; precipitaciones de 200–400 mm/año</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) 2,500–4,000 msnm; precipitaciones de 500–1,000 mm/año</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) 3,000–4,800 msnm; precipitaciones de 1,000–4,000 mm/año</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) 4,000–5,500 msnm; precipitaciones de 400–800 mm/año</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10 — Bosques primarios</p>
+    <p class="qtext">¿Cuál es el volumen de madera utilizable comercialmente en un bosque primario según Louman (1990), y qué conclusión práctica se desprende de ello?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) 50–80 m³/ha; los bosques primarios son altamente rentables para la extracción masiva</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) 0–20 m³/ha; solo el 20% de las especies tienen valor comercial, lo que hace poco eficiente la extracción intensiva</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) 20–40 m³/ha; la mitad de las especies son comercializables con tecnología adecuada</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) 100–150 m³/ha; la alta densidad de árboles gruesos garantiza alta producción maderable</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10 — Plantaciones forestales</p>
+    <p class="qtext">Según datos de SERFOR (2017), ¿cuántas hectáreas son aptas para reforestación en todo el Perú y cuántas se han forestado hasta esa fecha?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) 5 millones de ha aptas; 500,000 ha forestadas</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) 7 millones de ha aptas; 2 millones de ha forestadas</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) 10.5 millones de ha aptas; aproximadamente 1.07 millones de ha forestadas</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) 15 millones de ha aptas; 3 millones de ha forestadas</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10 — Concesiones forestales</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre las concesiones para conservación (Art. 59, Ley 29763) es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) No se permite el aprovechamiento forestal maderable en estas concesiones</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) Solo se otorgan en bosques de producción permanente (BPP)</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) No tienen límite de extensión y tienen vigencia de hasta 40 años renovables</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) No se paga derecho de aprovechamiento por constituir aporte a la conservación de la biodiversidad</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10 — Deforestación</p>
+    <p class="qtext">Según la definición de la FAO (2010), ¿cuál de los siguientes casos NO se considera deforestación?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Conversión de bosque a pasturas para ganadería extensiva</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Tala de bosque para establecer un cultivo de palma aceitera</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) Construcción de una carretera que elimina permanentemente la cobertura forestal</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="true">D) Aprovechamiento forestal bajo concesión donde el bosque se regenerará naturalmente</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10 — Tala ilegal y DMC</p>
+    <p class="qtext">El Diámetro Mínimo de Corta (DMC) para la caoba (<i>Swietenia macrophylla</i>) en Perú es de 75 cm DAP. ¿Por qué esta especie tiene el DMC más alto entre las especies de selva reguladas?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Porque la caoba crece muy rápido y necesita más tiempo para alcanzar tamaño comercial</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Porque la madera de caoba es demasiado dura para ser procesada en árboles pequeños</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Porque la caoba es una especie de crecimiento lento, altamente amenazada y en peligro de extinción comercial, por lo que necesita mayor protección para llegar a la madurez reproductiva</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Porque la regulación del DMC sigue criterios de peso de la madera, y la caoba es la más pesada</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10 — Manejo comunitario</p>
+    <p class="qtext">En la Comunidad Nativa Callería (Ucayali), ¿qué porcentaje de su superficie total está destinado al manejo forestal comunitario y a qué pueblo indígena pertenece?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) 40% de 4,035 ha; pertenece al pueblo Asháninka</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) 63% de 4,035 ha (2,528 ha); pertenece al pueblo Shipibo-Conibo</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) 80% de 4,035 ha; pertenece al pueblo Awajún</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) 50% de 6,000 ha; pertenece al pueblo Matsiguenka</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10 — Integración y análisis</p>
+    <p class="qtext">Un ingeniero forestal evalúa un bosque en Loreto con las siguientes características: 55 especies/ha, árboles gruesos en el dosel superior, cobertura de copa >25%, y sin evidencia de intervención humana en los últimos 80 años. ¿Cuál es la clasificación correcta de este bosque y cuánto volumen maderable comercial se puede esperar?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Bosque secundario avanzado; volumen comercial de 40–60 m³/ha</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Plantación forestal envejecida; volumen comercial de 20–30 m³/ha</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) Bosque primario natural; volumen maderable comercial de 0–20 m³/ha (solo ~20% de especies con valor)</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Bosque de producción secundaria; volumen comercial de 25–35 m³/ha</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="results"></div>
+  <button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">
+    Ley Forestal y de Fauna Silvestre N° 29763 (2015) ·
+    SERFOR (2017). Anuario Forestal y de Fauna Silvestre ·
+    SERFOR (2017). Nuestros Bosques en números ·
+    MINAM (2014). Tipos de Bosques del Perú ·
+    Louman B. et al. (2001). Silvicultura de bosques latifoliados. CATIE ·
+    Smith et al. (1997). Silvicultura en los trópicos ·
+    Gaviria & Sabogal (2013). MFC en Amazonía Peruana. FAO ·
+    Cárdenas-Torres M.A. (2014). Colombia Forestal ·
+    Banco Mundial (2016). Superficie forestal mundial
+  </span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: { correct: "C", text: "✅ ¡Correcto! La Ley 29763 excluye expresamente los cultivos agroindustriales y agroenergéticos de la categoría de 'plantaciones forestales' (Art. 11). Los tres primeros ítems (A, B, D) sí están listados en el Art. 5 como recursos forestales." },
+  2: { correct: "B", text: "✅ ¡Correcto! El Perú cuenta con 73.3 millones de ha de bosques (60% del territorio = 128.5 M ha totales). La distribución es: 69.25 M ha en selva, 2.78 M ha en costa, 1.84 M ha en sierra. Somos el 2° país de América Latina en bosques tropicales." },
+  3: { correct: "C", text: "✅ ¡Correcto! Los bosques altoandinos se ubican de 3,000 a 4,800 msnm con precipitaciones de 1,000–4,000 mm/año y temperaturas de 6–12°C (MINAM, 2014). Solo subsisten como relictos, con mayor extensión en el tercio central y sur del país." },
+  4: { correct: "B", text: "✅ ¡Correcto! Según Louman (1990), solo el 0–20% de las especies en bosque primario tienen valor comercial maderable, produciendo 0–20 m³/ha aprovechables. Esto explica la paradoja: más biodiversidad pero menos madera comercial por hectárea." },
+  5: { correct: "C", text: "✅ ¡Correcto! Según SERFOR 2017, hay 10.5 millones de ha aptas para reforestar en todo el Perú, de las cuales solo se habían forestado 1,069,768 ha (aprox. 1.07 M ha) hasta ese año. Quedan 9.4 millones de ha sin plantar — una brecha enorme." },
+  6: { correct: "B", text: "✅ ¡Correcto! El Art. 59 establece que las concesiones para conservación se otorgan en 'cualquier categoría de zonificación forestal, con EXCEPCIÓN de los bosques de producción permanente (BPP)'. La afirmación B es FALSA: precisamente se excluyen los BPP para que los recursos productivos no queden fuera de aprovechamiento." },
+  7: { correct: "D", text: "✅ ¡Correcto! La FAO (2010) precisa que no es deforestación el aprovechamiento forestal donde se espera regeneración natural o mediante silvicultura. Las opciones A, B y C implican cambio permanente de uso de suelo — eso sí es deforestación." },
+  8: { correct: "C", text: "✅ ¡Correcto! La caoba tiene el DMC más alto porque es una especie de muy lento crecimiento (tarda décadas en alcanzar 75 cm DAP), con maderas de alta demanda internacional que la han llevado al borde de la extinción comercial. El alto DMC busca garantizar que los árboles lleguen a reproducirse antes de ser cortados." },
+  9: { correct: "B", text: "✅ ¡Correcto! La CN Callería pertenece al pueblo Shipibo-Conibo, tiene 4,035 ha totales, y 2,528 ha (63%) están destinadas al MFC de bosques de restingas medias. Sus especies comerciales principales son la quinilla y la capirona, y el mercado es Pucallpa (Fuente: FAO/AIDER)." },
+  10: { correct: "C", text: "✅ ¡Correcto! Las características (55 spp/ha, árboles gruesos, sin intervención en 80+ años) corresponden exactamente a un bosque primario. Su volumen maderable comercial es bajo (0–20 m³/ha) porque solo el ~20% de especies tienen valor comercial. Esto ilustra la paradoja del bosque primario: alta biodiversidad ≠ alta producción maderable." }
+};
+
+let answered = 0;
+let correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  if(!e.target.classList.contains('qbtn')) return;
+  const btn = e.target;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const fb = document.getElementById('fb'+q);
+  if(fb.style.display === 'block') return;
+
+  // Disable all buttons for this question
+  document.querySelectorAll('.qbtn[data-q="'+q+'"]').forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true') {
+      b.classList.add('correct');
+      b.textContent = '✅ ' + b.textContent;
+    }
+  });
+
+  if(!isCorrect) {
+    btn.classList.add('incorrect');
+    btn.textContent = '❌ ' + btn.textContent;
+  }
+
+  // Feedback
+  const fd = feedbacks[q];
+  if(isCorrect) {
+    fb.className = 'qfeedback ok';
+    fb.textContent = fd.text;
+  } else {
+    fb.className = 'qfeedback fail';
+    fb.textContent = '❌ Incorrecto. La respuesta correcta es la opción ' + fd.correct + '. ' + fd.text.replace('✅ ¡Correcto! ','');
+  }
+  fb.style.display = 'block';
+
+  answered++;
+  if(isCorrect) correct++;
+
+  // Update progress
+  const pct = Math.round((answered/10)*100);
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('prog-text').textContent = 'Pregunta ' + answered + ' de 10 respondidas · Aciertos: ' + correct;
+
+  // Final results
+  if(answered === 10) {
+    const r = document.getElementById('results');
+    r.style.display = 'block';
+    if(correct <= 4) {
+      r.className = 'bad';
+      r.innerHTML = '<b>Puntaje: ' + correct + ' / 10</b> — Necesitas repasar el material. Revisa especialmente los tipos de bosques, las concesiones forestales y la definición de deforestación.';
+    } else if(correct <= 7) {
+      r.className = 'ok';
+      r.innerHTML = '<b>Puntaje: ' + correct + ' / 10</b> — ¡Buen avance, sigue repasando! Refuerza los datos cuantitativos (superficies, DMC) y el marco legal (artículos de la Ley 29763).';
+    } else {
+      r.className = 'good';
+      r.innerHTML = '<b>Puntaje: ' + correct + ' / 10</b> — ¡Excelente dominio del tema! Tienes un sólido manejo del recurso forestal peruano, su marco legal y problemática.';
+    }
+    document.getElementById('reset-btn').style.display = 'inline-block';
+  }
+});
+
+function resetQuiz(){
+  answered = 0; correct = 0;
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('prog-text').textContent = 'Pregunta 0 de 10 respondidas · Aciertos: 0';
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('reset-btn').style.display = 'none';
+  for(let i=1;i<=10;i++){
+    const fb = document.getElementById('fb'+i);
+    fb.style.display = 'none';
+    fb.className = 'qfeedback';
+    fb.textContent = '';
+    document.querySelectorAll('.qbtn[data-q="'+i+'"]').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct','incorrect');
+      b.textContent = b.textContent.replace('✅ ','').replace('❌ ','');
+    });
+  }
+}
+</script>

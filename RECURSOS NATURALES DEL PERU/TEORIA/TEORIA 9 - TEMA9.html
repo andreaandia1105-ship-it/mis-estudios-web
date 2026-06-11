@@ -1,0 +1,562 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-pink{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd}
+.bh-green{background:#14532d;color:#86efac}
+.bh-orange{background:#431407;color:#fed7aa}
+.bh-purple{background:#2e1065;color:#c4b5fd}
+.bh-teal{background:#042f2e;color:#5eead4}
+.bh-red{background:#450a0a;color:#fca5a5}
+.bh-yellow{background:#422006;color:#fef08a}
+.bh-gray{background:#1e293b;color:#94a3b8}
+.bh-pink{background:#4a044e;color:#f0abfc}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def-blue{border-color:#1e3a8a}
+.def-green{border-color:#14532d}
+.def-orange{border-color:#7c2d12}
+.def-purple{border-color:#4c1d95}
+.def-teal{border-color:#134e4a}
+.def-red{border-color:#991b1b}
+.def-yellow{border-color:#713f12}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#1e3a8a}
+.dot-green{background:#14532d}
+.dot-orange{background:#7c2d12}
+.dot-purple{background:#4c1d95}
+.dot-teal{background:#134e4a}
+.dot-red{background:#991b1b}
+.dot-yellow{background:#ca8a04}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#ca8a04}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:6px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:6px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-top:6px}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-family:'Oswald',sans-serif;font-size:11px}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.title-bar{grid-column:1/-1;background:#0f1e3a;color:white;border-radius:12px;padding:14px 18px}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.title-bar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:#1e3a5f;color:#93c5fd}
+.sec{grid-column:1/-1;background:var(--color-background-secondary);border-radius:8px;padding:7px 12px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--color-text-primary)}
+.num-badge{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-o{background:#ffedd5;color:#7c2d12}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin-top:4px}
+.stat-bar-fill{height:100%;border-radius:20px}
+.footer{grid-column:1/-1;background:#0f1e3a;color:white;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;flex-shrink:0}
+.fc{font-size:11px;color:#94a3b8}
+#quiz-section{grid-column:1/-1}
+.quiz-header{background:#0f1e3a;color:white;border-radius:10px 10px 0 0;padding:12px 16px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.quiz-body{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-top:none;border-radius:0 0 14px 14px;padding:16px 18px}
+.qcard{margin-bottom:20px;padding-bottom:16px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qcard:last-of-type{border-bottom:none;margin-bottom:0}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif;line-height:1.4}
+.qbtn:hover:not([disabled]){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn[disabled]{opacity:0.65;cursor:not-allowed}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none}
+.qfeedback.fb-correct{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fb-incorrect{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.qfeedback.fb-correct{background:#14532d;color:#86efac}
+.qfeedback.fb-incorrect{background:#450a0a;color:#fca5a5}
+}
+.progress-bar-wrap{background:var(--color-background-secondary);border-radius:20px;height:10px;margin:8px 0}
+.progress-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width 0.4s}
+.results-panel{border-radius:8px;padding:14px;margin-top:16px;font-size:13px;display:none}
+.results-panel.show{display:block}
+.rp-green{background:#dcfce7;color:#14532d}
+.rp-yellow{background:#fef9c3;color:#713f12}
+.rp-red{background:#fee2e2;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.rp-green{background:#14532d;color:#86efac}
+.rp-yellow{background:#422006;color:#fef08a}
+.rp-red{background:#450a0a;color:#fca5a5}
+}
+.reset-btn{margin-top:10px;background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.reset-btn:hover{background:var(--color-background-tertiary)}
+</style>
+
+<div class="cv">
+
+<div class="title-bar">
+  <h1>🌿 Áreas Naturales Protegidas del Perú — Tema 7</h1>
+  <p>Curso: Recursos Naturales del Perú · UNALM · 2025</p>
+  <div>
+    <span class="pill">Ley N° 26834</span>
+    <span class="pill">SINANPE</span>
+    <span class="pill">SERNANP</span>
+    <span class="pill">10 categorías ANP</span>
+    <span class="pill">77 ANP nacionales</span>
+    <span class="pill">ACR y ACP</span>
+    <span class="pill">30M+ hectáreas</span>
+  </div>
+</div>
+
+<div class="sec">🏛️ Marco Legal y Definiciones Fundamentales</div>
+
+<div class="block s2">
+  <span class="bh bh-blue">Definición ANP · Diap. 3</span>
+  <div class="def def-blue">Las ANP son espacios continentales y/o marinos reconocidos y protegidos legalmente por el Estado, debido a su importancia para conservar la diversidad biológica, los valores culturales, científicos y paisajísticos, y por su aporte al desarrollo sostenible. Son <strong>patrimonio de la Nación</strong> y deben mantenerse a perpetuidad.</div>
+  <div class="item"><span class="dot dot-blue"></span><span>El sustento constitucional está en el <strong>Art. 68°</strong> de la Constitución Política: el Estado está obligado a promover la conservación de la biodiversidad y las ANP. Esto convierte la conservación en una obligación del Estado, no una opción política.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>La definición de la Ley N° 26834 exige que el ANP esté <strong>geográficamente delimitada</strong> con instrumento legal, lo que diferencia a un área protegida de una mera zona de interés ambiental sin respaldo jurídico.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>El <strong>Art. 3°</strong> establece que solo el Congreso puede reducir o modificar legalmente un ANP del SINANPE. Esto protege las áreas de presiones políticas o económicas coyunturales.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>El <strong>Art. 4°</strong> prohíbe adjudicar en propiedad las ANP (salvo ACP). Si una propiedad privada queda dentro de una ANP, el Estado puede restringir su uso y aplicar medidas compensatorias.</span></div>
+  <div class="exam">🎯 EXAMEN: Explica las implicancias jurídicas del Art. 3° de la Ley N° 26834 para la gestión de las ANP. ¿Por qué se requiere una Ley del Congreso para reducir la extensión de un ANP del SINANPE, y qué implicaría omitir este requisito?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Características ANP · Diap. 4</span>
+  <div class="def def-green">Las ANP no son simplemente "zonas protegidas en el mapa": deben estar designadas y manejadas con planes de gestión, con límites físicos demarcados en terreno, y orientadas a objetivos de conservación específicos a largo plazo.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Área geográficamente definida:</strong> Límites establecidos mediante instrumento legal y demarcados en terreno. Sin esto, el ANP es inoperable en la práctica.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Designada y manejada:</strong> Requiere planes de manejo que regulen los usos. Un ANP sin plan de manejo no tiene mecanismo para controlar actividades dentro de ella.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Muestra representativa:</strong> Las ANP no protegen solo lo prístino; deben representar los distintos tipos de comunidades naturales, paisajes y formas fisiográficas únicas del país.</span></div>
+  <div class="flow">
+    <span class="fbox">Delimitación legal</span><span class="farrow">→</span>
+    <span class="fbox">Plan de manejo</span><span class="farrow">→</span>
+    <span class="fbox">Objetivos de conservación</span><span class="farrow">→</span>
+    <span class="fbox">Servicios ecosistémicos</span>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué un espacio natural de gran valor biológico que no ha sido formalmente declarado mediante instrumento legal NO puede considerarse un Área Natural Protegida según la Ley N° 26834?</div>
+</div>
+
+<div class="sec">🏢 Sistema SINANPE y Ente Rector SERNANP</div>
+
+<div class="block">
+  <span class="bh bh-purple">SERNANP · Diap. 7</span>
+  <div class="def def-purple">SERNANP (Servicio Nacional de Áreas Naturales Protegidas por el Estado) es el ente rector del SINANPE. Es la autoridad técnico-normativa responsable de la gestión de las ANP de administración nacional, en coordinación con gobiernos regionales, locales y propietarios de ACP.</div>
+  <div class="item"><span class="dot dot-purple"></span><span>Su finalidad dual: conservar la biodiversidad del Perú <em>y</em> acercar las ANP a la población para el aprovechamiento sostenible. Esto refleja que la conservación no excluye el uso, sino que lo regula.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>SERNANP actúa en coordinación multiactor: no gestiona solo. La articulación con gobiernos regionales es clave porque las ACR dependen de ellos, aunque complementan al SINANPE.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: SERNANP no administra las ACR ni las ACP directamente. Las ACR son administradas por Gobiernos Regionales y las ACP por sus titulares privados. SERNANP las coordina y reconoce, pero no las gestiona.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh bh-orange">Números del Sistema · Diap. 5, 10, 64</span>
+  <div class="def def-orange">Perú posee uno de los sistemas de áreas protegidas más extensos de América del Sur. Al 2025, la cobertura total de ANP (nacional + regional + privada) alcanza más de 30 millones de hectáreas, equivalentes al 18.15% del territorio terrestre nacional.</div>
+  <div class="three" style="margin-top:8px">
+    <div class="mini" style="border-top:3px solid #1e3a8a">
+      <div style="font-weight:600;font-size:12px;color:var(--color-text-primary)">ANP Nacionales (SINANPE)</div>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px"><strong>77 áreas</strong><br>25'799,780.85 ha<br>Administración nacional</div>
+    </div>
+    <div class="mini" style="border-top:3px solid #14532d">
+      <div style="font-weight:600;font-size:12px;color:var(--color-text-primary)">ACR — Regionales</div>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px"><strong>35 áreas</strong><br>3'915,925.22 ha<br>Gobiernos Regionales</div>
+    </div>
+    <div class="mini" style="border-top:3px solid #7c2d12">
+      <div style="font-weight:600;font-size:12px;color:var(--color-text-primary)">ACP — Privadas</div>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:3px"><strong>141 áreas</strong><br>396,391.71 ha<br>Personas/entidades privadas</div>
+    </div>
+  </div>
+  <div style="margin-top:10px">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Superficie terrestre protegida: 18.15% del territorio nacional</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:18.15%;background:#1e3a8a"></div></div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-top:6px;margin-bottom:3px">Superficie marina protegida: 7.89% del dominio marítimo</div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:7.89%;background:#0f766e"></div></div>
+  </div>
+  <div style="font-size:11px;color:var(--color-text-secondary);margin-top:6px">Total superficial ANP (terrestre + marina): <strong>30'086,193.10 ha</strong> · Territorio total Perú: 128'521,560 ha</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la suma simple de hectáreas de ANP nacionales + ACR + ACP no equivale exactamente al total de 30'086,193.10 ha reportado para el Perú? ¿Qué fenómeno cartográfico/jurídico explica la diferencia de 25,904.68 ha?</div>
+</div>
+
+<div class="sec">🌿 Categorías de Uso Indirecto: Parques y Santuarios</div>
+
+<div class="block">
+  <span class="bh bh-green">1. Parque Nacional · Diap. 12–15</span>
+  <div class="def def-green">El Parque Nacional es la categoría de mayor restricción: zonas sin intervención humana directa donde se protegen múltiples ecosistemas y todos sus procesos ecológicos y evolutivos. Solo se permiten usos indirectos (investigación, educación, turismo, recreación).</div>
+  <div class="item"><span class="dot dot-green"></span><span>Son las ANP más grandes del Perú: <strong>15 parques con 10'394,644.34 ha</strong>. El mayor es el PN Alto Purús (2'510,694 ha, Ucayali/Madre de Dios).</span></div>
+  <div class="item"><span class="dot dot-green"></span><span>El primer Parque Nacional del Perú fue el <strong>PN Cutervo</strong> (Cajamarca, 08.09.1961), creado gracias al biólogo y diputado Salomón Vílchez. Hoy tiene solo 8,214.23 ha y enfrenta invasión ganadera y degradación del bosque de neblina.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span>El <strong>PN del Manu</strong> (Cusco/Madre de Dios, 1'716,295 ha) es Reserva de Biosfera de la UNESCO y uno de los lugares con mayor biodiversidad del planeta por unidad de área.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Los Parques Nacionales admiten turismo regulado. No son zonas "intocables absolutas". Lo que está prohibido es el uso extractivo directo (caza, pesca, agricultura, minería).</div>
+  <div class="exam">🎯 EXAMEN: El Parque Nacional Cutervo fue creado en 1961 pero hoy enfrenta grave degradación. Analiza los factores que han limitado la efectividad de su manejo y explica qué instrumentos jurídicos y de gestión podrían fortalecer su conservación.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">2. Santuario Nacional · Diap. 16–19</span>
+  <div class="def def-teal">Los Santuarios Nacionales protegen hábitats específicos de una especie o comunidad biótica particular, así como formaciones naturales únicas de interés científico o paisajístico. Se distinguen de los Parques Nacionales en que el enfoque es más puntual: una especie o formación específica, no un ecosistema completo.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>9 santuarios con 317,366.47 ha.</strong> El SN Megantoni (Cusco, 215,868.96 ha) es el más extenso.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>El <strong>SN de Huayllay</strong> (Pasco) protege el "bosque de piedras", una formación kárstica de roca caliza única en el mundo. El <strong>SN de Pampa Hermosa</strong> (Junín) protege gigantescos árboles de ramin del bosque nublado.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Son frecuentes los endemismos: el SN de Calipuy (La Libertad) es uno de los últimos refugios del guanaco en la costa peruana.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿En qué se diferencia un Santuario Nacional de un Parque Nacional? Ejemplifica con dos casos concretos peruanos cómo cada categoría responde a diferentes necesidades de conservación.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-pink">3. Santuario Histórico · Diap. 20–22</span>
+  <div class="def def-pink">Los Santuarios Históricos son la única categoría de uso indirecto que combina explícitamente conservación natural con patrimonio cultural: protegen tanto ecosistemas como monumentos arqueológicos o escenarios de hechos históricos relevantes. Son ANP con doble dimensión: natural e histórico-cultural.</div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>4 santuarios con 41,279.38 ha.</strong> El SH de Machu Picchu (Cusco, 32,592 ha) es el más extenso y el más visitado del Perú.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>El <strong>SH de la Pampa de Ayacucho</strong> (300 ha) conmemora la batalla del 9 de diciembre de 1824, que selló la independencia sudamericana. El <strong>SH de Chacamarca</strong> (Junín) recuerda la batalla de Junín (1824).</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>El <strong>SH Bosque de Pómac</strong> (Lambayeque) protege el bosque seco más grande de algarrobos del mundo y restos del reino Sicán (Lambayeque).</span></div>
+  <div class="exam">🎯 EXAMEN: El Santuario Histórico de Machu Picchu enfrenta la presión del turismo masivo. ¿Qué instrumentos de gestión permite la Ley de ANP para regular el turismo en áreas de uso indirecto sin desvirtuar el objetivo de conservación?</div>
+</div>
+
+<div class="sec">🌊 Categorías de Uso Directo: Reservas y Zonas de Manejo</div>
+
+<div class="block s2">
+  <span class="bh bh-orange">4. Reserva Nacional · Diap. 24–35</span>
+  <div class="def def-orange">Las Reservas Nacionales permiten el uso directo y sostenible de la biodiversidad, incluyendo comercialización de flora y fauna. Se gestionan mediante planes de manejo. La única actividad expresamente prohibida es el aprovechamiento forestal maderero comercial.</div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>18 reservas con 11'044,283.97 ha</strong> — es la categoría con mayor superficie total en el SINANPE. Destaca la RN Dorsal de Nasca (6'239,205.75 ha marina), creada el 05.06.2021, que representa el 8% de la superficie marina protegida peruana.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span>La <strong>RN Pacaya Samiria</strong> (Loreto, 2'080,000 ha) es el área protegida más grande del Perú en territorio amazónico. Permite manejo comunitario de tortugas acuáticas, peces (paiche, arahuana) y palmeras (aguaje: 58 sacos/familia/mes según Plan de Manejo).</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span>La <strong>RN Sistema de Islas, Islotes y Puntas Guaneras</strong> (RN N°13) protege 22 islas, 11 puntas y múltiples islotes a lo largo del litoral. En 2023, AGRORURAL censó 4'007,848 aves guaneras: Guanay (2'677,570), Piquero (1'695,764) y Pelícano (129,188).</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span>La <strong>RN Pampa Galeras–Bárbara D'Achille</strong> (Ayacucho) produce el 30% de la fibra nacional de vicuña mediante manejo comunitario con chaku regulado.</span></div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #7c2d12">
+      <strong style="font-size:11.5px">Isla vs. Islote vs. Punta</strong>
+      <div style="font-size:11px;margin-top:4px;color:var(--color-text-secondary)"><strong>Isla:</strong> territorio extenso rodeado de agua, habitable.<br><strong>Islote:</strong> isla de tamaño reducido, no habitable.<br><strong>Punta:</strong> lengua de tierra baja que penetra en el océano.</div>
+    </div>
+    <div class="mini" style="border-left:3px solid #7c2d12">
+      <strong style="font-size:11.5px">RN Mar Tropical de Grau</strong>
+      <div style="font-size:11px;margin-top:4px;color:var(--color-text-secondary)">Última creada: 26.04.2024 (Piura, marina). Comprende Isla Foca, Cabo Blanco–El Ñuro, Arrecifes de Punta Sal y Banco de Máncora. Total: 115,675.89 ha.</div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: En las Reservas Nacionales SÍ está permitido el uso comercial de fauna silvestre y recursos hidrobiológicos. Lo que está prohibido es específicamente el aprovechamiento forestal maderero comercial, no toda extracción.</div>
+  <div class="exam">🎯 EXAMEN: Compara el modelo de manejo de la RN Pacaya Samiria con el de la RN Pampa Galeras–Bárbara D'Achille. ¿Cómo aplica cada una el principio de "uso sostenible con planes de manejo" según su contexto ecológico y sociocultural?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">5. Refugio de Vida Silvestre · Diap. 36–38</span>
+  <div class="def def-teal">Los Refugios de Vida Silvestre protegen especies raras, amenazadas o migratorias en sitios clave de reproducción o concentración. Admiten intervención activa del hábitat (manejo) para recuperar o mantener poblaciones. Es la única categoría de uso directo orientada explícitamente a recuperar especies.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>3 refugios con 20,775.11 ha.</strong> Los <strong>Pantanos de Villa</strong> (Lima, 263.27 ha) son el único humedal costero protegido de Lima Metropolitana, refugio de aves migratorias del hemisferio norte.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>El RVS Bosques Nublados de Udima (Cajamarca, 12,183.20 ha) protege hábitats críticos para especies de aves endémicas de la vertiente occidental andina.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el Refugio de Vida Silvestre Pantanos de Villa (Lima) tiene una importancia desproporcionada a su pequeña extensión (263.27 ha)? Explica en términos de servicios ecosistémicos y biodiversidad urbana.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">6. Reserva Paisajística · Diap. 39–41</span>
+  <div class="def def-purple">Las Reservas Paisajísticas protegen zonas donde la relación armoniosa entre el ser humano y la naturaleza ha generado un paisaje de alta integridad. Son la única categoría de uso directo que permite explícitamente asentamientos humanos y usos tradicionales como agricultura y vivienda.</div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>2 reservas con 711,818.48 ha.</strong> La <strong>RP Nor Yauyos–Cochas</strong> (Lima/Junín, 221,268.48 ha) es un mosaico de andenes, pueblos, lagunas y bosques de puya. La <strong>RP Subcuenca del Cotahuasi</strong> (Arequipa, 490,550 ha) alberga el cañón más profundo del mundo.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Cómo justifica el concepto de "relación armoniosa entre el hombre y la naturaleza" la permisión de asentamientos humanos dentro de una Reserva Paisajística, categoría que en otras áreas estaría prohibida?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">7. Reserva Comunal · Diap. 42–44</span>
+  <div class="def def-green">Las Reservas Comunales son áreas de uso directo gestionadas preferentemente por las comunidades rurales vecinas, que tienen prioridad en el aprovechamiento de recursos. Son la categoría que mejor encarna la integración entre conservación y derechos de los pueblos indígenas.</div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>10 reservas con 2'166,588.44 ha.</strong> La RC El Sira (Huanuco/Pasco/Ucayali, 616,413.41 ha) es la más extensa. Beneficia a pueblos Asháninka y Yánesha.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span>Está prohibido: nuevos asentamientos, expansión agrícola/pecuaria y extracción forestal maderera. Los usos permitidos deben estar en planes de manejo aprobados y supervisados.</span></div>
+  <div class="exam">🎯 EXAMEN: Analiza la diferencia entre una Reserva Comunal y una Reserva Nacional en términos de quién puede acceder a los recursos y bajo qué condiciones. ¿Qué rol juegan las comunidades indígenas en la gobernanza de las Reservas Comunales?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">8. Bosque de Protección · Diap. 45–47</span>
+  <div class="def def-blue">Los Bosques de Protección son ANP orientadas a proteger cuencas hidrográficas, riberas y tierras frágiles contra la erosión. Son la única categoría cuyo objetivo principal es la regulación hidrológica y la estabilidad del suelo, no la biodiversidad en sí misma.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>6 bosques con 389,986.99 ha.</strong> El <strong>BP Alto Mayo</strong> (San Martín, 182,000 ha) es el más grande. Protege la cuenca del río Mayo, fuente hídrica de la ciudad de Moyobamba.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span>Se permite el aprovechamiento de fauna silvestre y productos forestales no maderables. Se prohíbe lo que afecte cobertura vegetal, suelos frágiles o cursos de agua.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué los Bosques de Protección permiten algunos usos directos que los Parques Nacionales prohíben? Analiza cómo el objetivo de manejo hidrológico justifica un régimen de uso diferente.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-red">9. Coto de Caza · Diap. 48–51</span>
+  <div class="def def-red">Los Cotos de Caza son la categoría más inusual del SINANPE: el uso directo principal es la caza deportiva regulada de fauna silvestre mediante planes de manejo. La caza, lejos de contradecir la conservación, actúa como herramienta de manejo poblacional cuando está bien regulada.</div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>2 cotos con 124,735 ha.</strong> El <strong>CC El Angolo</strong> (Piura, 65,000 ha) permite caza deportiva de venado cola blanca (<em>Odocoileus virginianus</em>): hasta 100 machos de 6 puntas por año (aprox. 48 cazados en 2023). Temporada: 1 mayo–31 noviembre.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span>El CC El Angolo también conserva el bosque seco ecuatorial con <em>Ceiba trischistandra</em> y <em>Bursera graveolens</em>, y alberga 177 especies de aves y 600–700 individuos de venado.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: El Coto de Caza no es un área donde se "caza libremente". Tiene Plan de Manejo, cuotas estrictas, especies definidas, temporada regulada y supervisión. La caza fuera de estos parámetros es ilegal.</div>
+  <div class="exam">🎯 EXAMEN: Explica la paradoja aparente de que un Coto de Caza sea una Área Natural Protegida. ¿Cómo puede la caza deportiva regulada ser un instrumento de conservación de la fauna silvestre?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-gray">10. Zona Reservada · Diap. 52–54</span>
+  <div class="def" style="border-left:3px solid #334155;background:var(--color-background-secondary)">Las Zonas Reservadas son ANP de carácter transitorio: áreas que cumplen los requisitos para ser ANP definitiva, pero que aún requieren estudios complementarios para determinar su extensión exacta, categoría y viabilidad de gestión.</div>
+  <div class="item"><span class="dot" style="background:#334155"></span><span><strong>8 zonas con 588,302.67 ha.</strong> La ZR Santiago–Comaina (Amazonas/Loreto, 398,449.44 ha) es la más extensa. La ZR Bosque de Zárate (Lima, 545.75 ha) es la más pequeña.</span></div>
+  <div class="item"><span class="dot" style="background:#334155"></span><span>Una Zona Reservada puede convertirse en cualquiera de las 9 categorías definitivas tras los estudios. La ZR Cordillera Huayhuash, por ejemplo, se superpone con 3 ACP, lo que genera 25,904.68 ha que deben descontarse del total nacional para evitar doble contabilización.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Qué protección jurídica efectiva tiene una Zona Reservada mientras se realizan los estudios para su categorización definitiva? ¿Puede reducirse o eliminarse sin seguir el procedimiento del Art. 3° de la Ley N° 26834?</div>
+</div>
+
+<div class="sec">🌎 Áreas de Administración Regional y Privada</div>
+
+<div class="block s2">
+  <span class="bh bh-teal">Áreas de Conservación Regional (ACR) · Diap. 56–58</span>
+  <div class="def def-teal">Las ACR conservan biodiversidad de interés regional y local, manteniendo procesos ecológicos y servicios ambientales. Son administradas por los Gobiernos Regionales y complementan al SINANPE, siendo consideradas de igual jerarquía que las ANP nacionales (no son ANP "de segundo grado").</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>35 ACR con 3'915,925.44 ha.</strong> Son patrimonio de la Nación y se establecen mediante Decreto Supremo refrendado por el MINAM.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Son áreas de <strong>uso directo</strong> — a diferencia de los Parques Nacionales que son de uso indirecto. Esto permite actividades reguladas compatibles con la conservación.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>Ejemplos recientes: ACR Bosque Montano de Carpish (Huánuco, 2020, 50,559.21 ha); ACR Sistema de Lomas de Lima (Lima, 2019, 13,475.74 ha); ACR Humedales de Ventanilla (Callao, 2006, 275.45 ha).</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: El principio de complementariedad no significa que las ACR sean "menores" o "secundarias". La ley reconoce expresamente que no hay áreas "de segundo grado" en el sistema. Una ACR tiene la misma importancia legal que un ANP nacional.</div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia entre una Área de Conservación Regional y un Parque Nacional en términos de entidad administradora, instrumento de creación y tipo de uso permitido?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">ACP — Privadas · Diap. 59–62</span>
+  <div class="def def-orange">Las ACP son predios privados cuyos propietarios voluntariamente los destinan a conservar ecosistemas representativos. Son reconocidas por el MINAM mediante Resolución Ministerial. Su gestión y financiamiento dependen exclusivamente del titular privado.</div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>141 ACP con 396,391.71 ha</strong> (noviembre 2025). El reconocimiento mínimo es de <strong>10 años</strong> renovables, pero puede ser a perpetuidad.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span>La <strong>ACP Chaparrí</strong> (Lambayeque/Cajamarca, 2001) fue la primera del Perú. Comunidad de Santa Catalina de Chongoyape solicitó renovación a perpetuidad tras vencer sus 10 años.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span>Las ACP son la única categoría de ANP que puede ser establecida con carácter no definitivo (temporal). Las condiciones de uso se inscriben como cargas en la partida registral del predio.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué las Áreas de Conservación Privada son la única categoría de ANP que puede tener carácter temporal (10 años mínimo), mientras que todas las demás ANP se establecen con carácter definitivo?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-pink">Guardaparques · Diap. 65</span>
+  <div class="def" style="border-left:3px solid #831843;background:var(--color-background-secondary)">El guardaparque es el actor clave en la gestión cotidiana de las ANP: protege, monitorea, atiende al público, apoya la investigación y crea lazos con las comunidades locales. Sin guardaparques, las ANP son solo líneas en un mapa.</div>
+  <div class="item"><span class="dot" style="background:#831843"></span><span>En Perú hay aproximadamente <strong>800 guardaparques</strong>: ~700 hombres y ~110 mujeres. Considerando que el SINANPE protege 25.8 millones de hectáreas, cada guardaparque cubre en promedio más de 32,000 ha — una ratio insuficiente para una vigilancia efectiva.</span></div>
+  <div class="exam">🎯 EXAMEN: Analiza la brecha entre la extensión de las ANP del SINANPE (25.8 millones de ha) y el número de guardaparques disponibles (~800). ¿Qué estrategias de gestión pueden compensar esta limitación de capacidad de vigilancia?</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-gray">Tabla Integradora: Las 10 Categorías del SINANPE en una Vista</span>
+  <table class="tbl">
+    <tr>
+      <th>Categoría</th>
+      <th>Tipo de uso</th>
+      <th>N° en Perú</th>
+      <th>Hectáreas totales</th>
+      <th>Uso forestal maderable</th>
+      <th>Ejemplo clave</th>
+    </tr>
+    <tr><td><strong>Parque Nacional</strong></td><td>Indirecto</td><td>15</td><td>10'394,644.34</td><td>Prohibido</td><td>PN Manu (Cusco/Madre de Dios)</td></tr>
+    <tr><td><strong>Santuario Nacional</strong></td><td>Indirecto</td><td>9</td><td>317,366.47</td><td>Prohibido</td><td>SN Huayllay (Pasco) — bosque de piedras</td></tr>
+    <tr><td><strong>Santuario Histórico</strong></td><td>Indirecto</td><td>4</td><td>41,279.38</td><td>Prohibido</td><td>SH Machu Picchu (Cusco)</td></tr>
+    <tr><td><strong>Reserva Nacional</strong></td><td>Directo</td><td>18</td><td>11'044,283.97</td><td>Prohibido</td><td>RN Pacaya Samiria (Loreto)</td></tr>
+    <tr><td><strong>Refugio de Vida Silvestre</strong></td><td>Directo</td><td>3</td><td>20,775.11</td><td>Restringido</td><td>RVS Pantanos de Villa (Lima)</td></tr>
+    <tr><td><strong>Reserva Paisajística</strong></td><td>Directo</td><td>2</td><td>711,818.48</td><td>Restringido</td><td>RP Subcuenca del Cotahuasi (Arequipa)</td></tr>
+    <tr><td><strong>Reserva Comunal</strong></td><td>Directo</td><td>10</td><td>2'166,588.44</td><td>Prohibido</td><td>RC El Sira (Huánuco/Pasco/Ucayali)</td></tr>
+    <tr><td><strong>Bosque de Protección</strong></td><td>Directo</td><td>6</td><td>389,986.99</td><td>Prohibido</td><td>BP Alto Mayo (San Martín)</td></tr>
+    <tr><td><strong>Coto de Caza</strong></td><td>Directo</td><td>2</td><td>124,735.00</td><td>Restringido</td><td>CC El Angolo (Piura)</td></tr>
+    <tr><td><strong>Zona Reservada</strong></td><td>Transitorio</td><td>8</td><td>588,302.67</td><td>Condicional</td><td>ZR Santiago–Comaina (Amazonas/Loreto)</td></tr>
+    <tr style="background:var(--color-background-secondary)"><td><strong>TOTAL SINANPE</strong></td><td>—</td><td><strong>77</strong></td><td><strong>25'799,780.85</strong></td><td>—</td><td>—</td></tr>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: Las únicas categorías que prohíben explícitamente el uso forestal maderero comercial son: Parques Nacionales, Santuarios, Reservas Nacionales y Reservas Comunales. Los Bosques de Protección permiten productos forestales no maderables (PFNM). El Coto de Caza y la Reserva Paisajística admiten usos según plan de manejo. La Zona Reservada aplica restricciones provisionales hasta su categorización definitiva.</div>
+</div>
+
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 Quiz de Repaso — 10 Preguntas de Opción Múltiple</h2>
+    <p>Marca tu respuesta y descubre si es correcta. Retroalimentación inmediata en cada pregunta.</p>
+  </div>
+  <div class="quiz-body">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <span id="prog-text" style="font-size:12px;color:var(--color-text-secondary);white-space:nowrap">0 / 10 respondidas · 0 correctas</span>
+      <div class="progress-bar-wrap" style="flex:1"><div class="progress-bar-fill" id="prog-bar" style="width:0%"></div></div>
+      <span id="pct-text" style="font-size:12px;color:var(--color-text-secondary)">0%</span>
+    </div>
+
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">¿Qué instrumento legal se requiere para reducir físicamente la extensión de un ANP perteneciente al SINANPE, según el Art. 3° de la Ley N° 26834?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Decreto Supremo del Poder Ejecutivo</button>
+        <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Resolución Ministerial del MINAM</button>
+        <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Ley aprobada por el Congreso de la República</button>
+        <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Ordenanza Regional del gobierno regional correspondiente</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">El primer Parque Nacional del Perú fue el PN Cutervo (1961). ¿Cuál es el principal problema de gestión que enfrenta actualmente?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Sobreturismo que degrada sus ecosistemas de bosque nublado</button>
+        <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Invasión por ganaderos y extractores madereros, con pérdida del bosque de neblina</button>
+        <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Falta de biodiversidad relevante que justifique su mantenimiento como ANP</button>
+        <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Conflicto con comunidades indígenas por acceso al agua</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">¿Cuál de las siguientes actividades está expresamente PROHIBIDA en una Reserva Nacional del Perú?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Extracción de peces ornamentales bajo plan de manejo</button>
+        <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Caza regulada de aves guaneras para consumo local</button>
+        <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Aprovechamiento de palmeras (aguaje) con cuotas familiares</button>
+        <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) Aprovechamiento forestal maderero comercial</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">¿En qué se diferencia fundamentalmente un Santuario Nacional de un Parque Nacional?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) El Santuario Nacional permite usos directos como la pesca artesanal</button>
+        <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) El Santuario Nacional protege hábitats o comunidades específicas (a veces una sola especie o formación), mientras el Parque Nacional protege múltiples ecosistemas completos</button>
+        <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) El Parque Nacional tiene menor restricción de uso que el Santuario Nacional</button>
+        <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) El Santuario Nacional incluye obligatoriamente patrimonio arqueológico</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">La Reserva Nacional Dorsal de Nasca (creada el 05.06.2021) es notable por ser una ANP netamente marina. ¿Cuántas hectáreas comprende y a qué porcentaje aproximado de la superficie marina peruana equivale?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) 2'080,000 ha, equivalente al 15% de la superficie marina</button>
+        <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) 335,000 ha, equivalente al 3% de la superficie marina</button>
+        <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) 6'239,205.75 ha, equivalente al 8% de la superficie marina protegida peruana</button>
+        <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) 140,833.47 ha, equivalente al 1% de la superficie marina</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">¿Cuál es la diferencia clave entre las Áreas de Conservación Regional (ACR) y las Áreas de Conservación Privada (ACP) en cuanto a su carácter temporal?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Las ACR son temporales (mínimo 5 años) y las ACP son definitivas</button>
+        <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Ambas se establecen con carácter temporal de 10 años renovables</button>
+        <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) Las ACR se establecen con carácter definitivo mediante Decreto Supremo; las ACP pueden ser temporales (mínimo 10 años) o a perpetuidad</button>
+        <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Las ACP son definitivas porque están inscritas en la partida registral del predio</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">El Coto de Caza El Angolo (Piura) permite la caza deportiva del venado cola blanca. ¿Cuál afirmación sobre su manejo es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Tiene temporada definida: del 1 de mayo al 31 de noviembre</button>
+        <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Solo se permiten cazar machos de 6 puntas, hasta 100 por año</button>
+        <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) Está administrado por el Club de Caza Pesca y Turismo Piura bajo contrato</button>
+        <button class="qbtn" data-q="7" data-opt="d" data-correct="true">D) No tiene plan de manejo porque la caza deportiva es una actividad libre en zonas rurales</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">¿Qué porcentaje del territorio terrestre del Perú está protegido como ANP (incluyendo SINANPE, ACR y ACP)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) 7.89%</button>
+        <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) 12.50%</button>
+        <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) 18.15%</button>
+        <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) 23.40%</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">Una Zona Reservada se diferencia de las demás categorías del SINANPE principalmente porque:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Es administrada por los Gobiernos Regionales, no por el Estado nacional</button>
+        <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Permite todos los usos que sean económicamente rentables mientras se estudia</button>
+        <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Solo protege zonas marinas pendientes de clasificación</button>
+        <button class="qbtn" data-q="9" data-opt="d" data-correct="true">D) Es de carácter transitorio: cumple condiciones para ser ANP, pero requiere estudios adicionales para determinar categoría y extensión definitivas</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">Según el censo de AGRORURAL 2023, ¿cuántas aves guaneras existen en el Perú, y cuál es la especie más abundante?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) 1'695,764 aves; el Piquero (Sula variegata)</button>
+        <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) 6'000,000 aves; el Pelícano peruano (Pelecanus thagus)</button>
+        <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) 4'007,848 aves; el Guanay (Phalacrocorax bougainvillii) con 2'677,570 individuos</button>
+        <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) 2'500,000 aves; el Piquero con mayor abundancia relativa</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div id="results-panel" class="results-panel">
+      <strong id="results-score" style="font-size:16px"></strong>
+      <p id="results-msg" style="margin-top:6px;font-size:12px"></p>
+      <button class="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Ley N° 26834 — Áreas Naturales Protegidas del Perú · Constitución Política del Perú, Art. 68° · SERNANP (2025): Estadísticas ANP Perú · AGRORURAL (2023): Censo de Aves Guaneras · Decreto Supremo N° 038-2001-AG (Reglamento de ANP) · Solano, P. (2020): Historia de la conservación en el Perú · Vásquez Rueda, P.G. (2021): Conservación del venado cola blanca en el Perú — UNALM</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {correct:'C', text:'Correcto. El Art. 3° de la Ley N° 26834 establece explícitamente que la reducción o modificación legal de ANP del SINANPE "solo podrá ser aprobada por Ley". Un Decreto Supremo o Resolución Ministerial no tienen rango suficiente para modificar lo que el Congreso ha protegido mediante ley.'},
+  2: {correct:'B', text:'Correcto. Desde su establecimiento en 1961, el PN Cutervo ha sufrido invasión de ganaderos y extractores madereros. Hoy apenas quedan parches de bosque de neblina en las entradas a las cuevas. La inaccessibilidad inicial fue paradójicamente un factor que facilitó la invasión al reducir el control.'},
+  3: {correct:'D', text:'Correcto. El Art. sobre Reservas Nacionales en la Ley N° 26834 establece explícitamente la prohibición del "aprovechamiento forestal comercial con fines maderables". Las otras actividades mencionadas están permitidas bajo planes de manejo en las Reservas Nacionales.'},
+  4: {correct:'B', text:'Correcto. El Parque Nacional protege grandes unidades ecológicas con múltiples ecosistemas. El Santuario Nacional enfoca su protección en hábitats de una especie o comunidad específica, o en formaciones geológicas únicas. Ambos son de uso indirecto, pero difieren en el objeto de conservación.'},
+  5: {correct:'C', text:'Correcto. La RN Dorsal de Nasca (creada el 05.06.2021) comprende 6\'239,205.75 ha de cordillera submarina frente a la región Ica, aproximadamente a 105 km de la costa. Con su creación, el Perú protegió el 8% de su superficie marina, acercándose al compromiso internacional del 10%.'},
+  6: {correct:'C', text:'Correcto. Las ACR se crean con carácter definitivo mediante Decreto Supremo refrendado por el MINAM (no pueden eliminarse fácilmente). Las ACP pueden ser temporales con un mínimo de 10 años renovables, o establecerse a perpetuidad. El caso de la ACP Chaparrí ilustra esta transición de temporal a perpetua.'},
+  7: {correct:'D', text:'Correcto, esa afirmación es FALSA. El Coto de Caza El Angolo tiene un Plan de Manejo de venado cola blanca que regula cuotas (100 machos de 6 puntas/año), temporada (1 mayo–31 noviembre) y la especie específica (Odocoileus virginianus). La caza libre o sin plan de manejo sería ilegal e incompatible con su condición de ANP.'},
+  8: {correct:'C', text:'Correcto. El 18.15% corresponde a la superficie terrestre protegida como ANP en el Perú (23\'327,395.59 ha de las 128\'521,560 ha totales del territorio). El 7.89% corresponde al dominio marino. Ambos porcentajes son inferiores a la meta internacional del 30% para 2030 (Acuerdo Kunming-Montreal).'},
+  9: {correct:'D', text:'Correcto. La Zona Reservada es la única categoría transitoria del SINANPE. No es que el área no merezca protección — al contrario, ya cumple los requisitos para ser ANP — sino que aún faltan estudios para determinar su extensión exacta y la categoría más apropiada entre las 9 definitivas del sistema.'},
+  10: {correct:'C', text:'Correcto. Según el censo de AGRORURAL 2023, hay 4\'007,848 aves guaneras en el Perú. La más abundante es el Guanay (Phalacrocorax bougainvillii) con 2\'677,570 individuos, seguido por el Piquero (Sula variegata) con 1\'695,764, y el Pelícano peruano (Pelecanus thagus) con 129,188.'}
+};
+
+let answered = 0;
+let correct = 0;
+
+document.querySelector('.quiz-body').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true') b.classList.add('correct');
+  });
+  if(!isCorrect) btn.classList.add('incorrect');
+  answered++;
+  if(isCorrect) correct++;
+  const fb = document.getElementById('fb'+q);
+  const info = feedbacks[parseInt(q)];
+  fb.className = 'qfeedback ' + (isCorrect ? 'fb-correct' : 'fb-incorrect');
+  fb.innerHTML = (isCorrect ? '✅ ¡Correcto! ' : '❌ Incorrecto. La respuesta correcta es ' + info.correct + '. ') + info.text;
+  fb.style.display = 'block';
+  const pct = Math.round((answered/10)*100);
+  document.getElementById('prog-bar').style.width = pct+'%';
+  document.getElementById('prog-text').textContent = answered+' / 10 respondidas · '+correct+' correctas';
+  document.getElementById('pct-text').textContent = Math.round((correct/answered)*100)+'%';
+  if(answered === 10){
+    const panel = document.getElementById('results-panel');
+    panel.style.display = 'block';
+    document.getElementById('results-score').textContent = correct+' / 10 correctas';
+    let cls, msg;
+    if(correct <= 4){ cls='rp-red'; msg='Necesitas repasar el material. Vuelve a leer las definiciones de cada categoría y sus características distintivas.'; }
+    else if(correct <= 7){ cls='rp-yellow'; msg='¡Buen avance, sigue repasando! Enfócate en las diferencias entre uso directo e indirecto, y los casos específicos de cada categoría.'; }
+    else{ cls='rp-green'; msg='¡Excelente dominio del tema! Estás preparado para el examen sobre Áreas Naturales Protegidas del Perú.'; }
+    panel.className = 'results-panel show '+cls;
+    document.getElementById('results-msg').textContent = msg;
+  }
+});
+
+function resetQuiz(){
+  answered = 0; correct = 0;
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('prog-text').textContent='0 / 10 respondidas · 0 correctas';
+  document.getElementById('pct-text').textContent='0%';
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.disabled=false;
+    b.classList.remove('correct','incorrect');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f=>{ f.style.display='none'; f.innerHTML=''; });
+  const p=document.getElementById('results-panel');
+  p.style.display='none';
+  p.className='results-panel';
+}
+</script>
