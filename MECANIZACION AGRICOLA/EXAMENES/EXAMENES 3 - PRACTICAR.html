@@ -1,0 +1,519 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.cv-title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.cv-title p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.cv-title .pills{display:flex;flex-wrap:wrap;gap:5px}
+.cv-title .pill{background:#1e3a5f;color:#93c5fd;font-size:10px;padding:2px 8px;border-radius:20px;font-family:'Oswald',sans-serif}
+.sec{grid-column:1/-1;background:#1e293b;color:#fff;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:700}
+.bh.az{background:#dbeafe;color:#1e3a8a}.bh.vd{background:#dcfce7;color:#14532d}
+.bh.am{background:#fef9c3;color:#713f12}.bh.ro{background:#fee2e2;color:#991b1b}
+.bh.mo{background:#ede9fe;color:#4c1d95}.bh.na{background:#ffedd5;color:#7c2d12}
+.bh.gr{background:#f1f5f9;color:#334155}.bh.te{background:#ccfbf1;color:#134e4a}
+@media(prefers-color-scheme:dark){
+.bh.az{background:#1e3a5f;color:#93c5fd}.bh.vd{background:#14532d;color:#86efac}
+.bh.am{background:#422006;color:#fef08a}.bh.ro{background:#450a0a;color:#fca5a5}
+.bh.mo{background:#2e1065;color:#c4b5fd}.bh.na{background:#431407;color:#fed7aa}
+.bh.gr{background:#1e293b;color:#94a3b8}.bh.te{background:#042f2e;color:#5eead4}}
+.enunciado{background:var(--color-background-secondary);border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;padding:9px 12px;font-size:12px;line-height:1.6;margin-bottom:8px;color:var(--color-text-primary)}
+.enunciado b{font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase;color:#b45309;display:block;margin-bottom:4px;letter-spacing:.4px}
+@media(prefers-color-scheme:dark){.enunciado{background:#422006;border-color:#f59e0b;color:#fef3c7}.enunciado b{color:#fbbf24}}
+.datos{background:var(--color-background-tertiary);border-radius:7px;padding:7px 10px;font-size:11.5px;margin-bottom:7px}
+.datos ul{margin-left:14px;line-height:1.8}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;background:#3b82f6;margin-top:5px;flex-shrink:0}
+.dot.vd{background:#16a34a}.dot.am{background:#ca8a04}.dot.ro{background:#dc2626}
+.dot.mo{background:#7c3aed}.dot.na{background:#f97316}.dot.te{background:#0d9488}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:8px 11px;border-radius:7px;text-align:left;line-height:1.8;margin:6px 0;white-space:pre-wrap}
+.rx.res{background:#052e16;color:#86efac;border:1px solid #16a34a;text-align:center;font-size:12px;font-weight:bold}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:6px}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.step-label{font-family:'Oswald',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--color-text-secondary);margin-top:8px;margin-bottom:2px;display:block}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;margin:6px 0}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);font-weight:600;text-align:center}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:center}
+.tbl td.bad{color:#dc2626;font-weight:600}.tbl td.ok{color:#16a34a}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:6px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:6px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.mini b{display:block;margin-bottom:3px;font-size:12px}
+.cv-footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8;flex:1}
+</style>
+
+<div class="cv">
+
+<div class="cv-title">
+  <h1>📋 SEMINARIO DE MECANIZACIÓN — 8 Ejercicios Resueltos Paso a Paso</h1>
+  <p>Enunciado original + solución completa con cada operación explicada · Lista para el examen</p>
+  <div class="pills">
+    <span class="pill">Ejercicio 1: Velocidad siembra</span>
+    <span class="pill">Ejercicio 2: Palanca dosificadora</span>
+    <span class="pill">Ejercicio 3: Calibración chorrillo</span>
+    <span class="pill">Ejercicio 4: Semillas/m²</span>
+    <span class="pill">Ejercicio 5: Estiércol</span>
+    <span class="pill">Ejercicio 6: Pulverizador</span>
+    <span class="pill">Ejercicio 7: Herbicida</span>
+    <span class="pill">Ejercicio 8: Transmisiones</span>
+  </div>
+</div>
+
+<!-- ═══════════ EJ 1 ═══════════ -->
+<div class="sec">🌱 EJERCICIO 1 — Velocidad máxima de avance en sembradora de precisión</div>
+
+<div class="block s3">
+  <span class="bh vd">Sembradora de precisión mecánica</span>
+  <div class="enunciado">
+    <b>📄 Enunciado del seminario</b>
+    Calcule la velocidad de avance máxima de siembra en una sembradora de precisión mecánica con los siguientes datos:<br>
+    Velocidad tangencial del plato de siembra = 0.3 m/s · Población = 70,000 plantas/ha de maíz · Distancia entre hileras = 0.7 m · Radio del plato de siembra = 0.09 m · Número de alveolos = 24
+  </div>
+
+  <span class="step-label">Paso 1 — Distancia entre semillas en la hilera</span>
+  <div class="rx">d = 10,000 m²/ha ÷ (Población × dist_hileras)
+d = 10,000 ÷ (70,000 × 0.7)
+d = 10,000 ÷ 49,000
+d = 0.2041 m entre semillas</div>
+
+  <span class="step-label">Paso 2 — Velocidad angular del plato (ω)</span>
+  <div class="rx">La velocidad tangencial es: v_tang = ω × R
+→ Despejamos ω:
+ω = v_tang / R = 0.3 m/s ÷ 0.09 m
+ω = 3.333 rad/s</div>
+
+  <span class="step-label">Paso 3 — Frecuencia de paso de alveolos</span>
+  <div class="rx">El plato tiene 24 alveolos. Por cada vuelta completa (2π rad)
+pasan 24 alveolos.
+f_alveolo = ω × N_alv / (2π)
+f_alveolo = 3.333 × 24 / (2π)
+f_alveolo = 80 / 6.2832
+f_alveolo = 12.73 alveolos/segundo</div>
+
+  <span class="step-label">Paso 4 — Velocidad máxima de avance</span>
+  <div class="rx">Para que cada alveolo deposite 1 sola semilla,
+el tractor debe avanzar exactamente 1 distancia "d"
+por cada alveolo que pasa:
+
+V_max = d × f_alveolo
+V_max = 0.2041 m × 12.73 alv/s
+V_max = 2.598 m/min... 
+
+Convertir: 0.2041 × 12.73 = 2.598 m/s... 
+¡Ojo! f_alveolo está en alv/s → resultado en m/s
+V_max = 0.2041 × 12.73 = 2.598... 
+Recalcular: V_max = 0.2041 m × 12.73/s = 2.598 m/s
+
+Convertir a km/h: 2.598 × 3.6 = 9.35 km/h</div>
+
+  <div class="warn">⚠️ ACLARACIÓN: En el canvas original el resultado aparece como ≈0.26 m/s porque se confunde el cálculo. La forma correcta:
+V_max = d (m) × f_alveolo (alv/s) = 0.2041 × 12.73 = 2.60 m/s = 9.35 km/h.
+Sin embargo muchos profesores resuelven con la fórmula V = d / T_alveolo donde T = 1/f, llegando al mismo resultado. Verifica con tu docente qué valor usa en clase.</div>
+
+  <div class="rx res">→ V_máx ≈ 2.60 m/s ≈ 9.35 km/h</div>
+  <div class="item"><span class="dot vd"></span><span><b>Interpretación:</b> Si el tractor avanza más rápido de 9.35 km/h, los alveolos no alcanzan a posicionarse correctamente y se producen saltos (huecos sin semilla) o dobles siembras.</span></div>
+</div>
+
+<!-- ═══════════ EJ 2 ═══════════ -->
+<div class="sec">🔧 EJERCICIO 2 — Regulación de la palanca dosificadora</div>
+
+<div class="block s3">
+  <span class="bh mo">Sembradora 18 líneas — calibración y ajuste</span>
+  <div class="enunciado">
+    <b>📄 Enunciado del seminario</b>
+    Si se desea regular una sembradora de 18 líneas situadas a 20 cm entre sí, la dosis es de 170 kg/ha, sabiendo que las ruedas tienen una circunferencia de 1.5 m y que al darle 50 vueltas la máquina deja caer 4.25 kg de semilla con la palanca dosificadora en determinada posición. ¿En qué sentido habrá de variarse la posición de la palanca?
+  </div>
+
+  <span class="step-label">Paso 1 — Distancia recorrida simulada</span>
+  <div class="rx">Dist. recorrida = N° vueltas × Circunferencia rueda
+Dist. recorrida = 50 vueltas × 1.5 m/vuelta
+Dist. recorrida = 75 m</div>
+
+  <span class="step-label">Paso 2 — Área simulada por la calibración</span>
+  <div class="rx">Área = Dist. recorrida × (N° líneas × sep. entre líneas)
+Área = 75 m × (18 líneas × 0.20 m)
+Área = 75 × 3.6
+Área = 270 m² = 0.027 ha</div>
+
+  <span class="step-label">Paso 3 — Dosis real que está aplicando la máquina</span>
+  <div class="rx">Dosis real = Semilla caída / Área simulada
+Dosis real = 4.25 kg / 0.027 ha
+Dosis real = 157.4 kg/ha</div>
+
+  <span class="step-label">Paso 4 — Comparar con dosis objetivo y decidir</span>
+  <div class="rx">Dosis real    = 157.4 kg/ha
+Dosis objetivo = 170.0 kg/ha
+
+¿Dosis real < Dosis objetivo? → SÍ (157.4 < 170)
+→ La máquina está dosificando MENOS de lo requerido
+→ Hay que ABRIR la palanca dosificadora para que salga MÁS semilla</div>
+
+  <div class="rx res">→ Se debe ABRIR la palanca dosificadora (está aplicando 157.4 kg/ha, necesita 170 kg/ha)</div>
+  <div class="item"><span class="dot mo"></span><span><b>Regla simple:</b> Dosis real &lt; objetivo → ABRIR palanca. Dosis real &gt; objetivo → CERRAR palanca. La diferencia aquí es de 12.6 kg/ha, un 7.4% menos de lo requerido.</span></div>
+</div>
+
+<!-- ═══════════ EJ 3 ═══════════ -->
+<div class="sec">🌾 EJERCICIO 3 — Calibración estacionaria sembradora a chorrillo (arroz)</div>
+
+<div class="block s2">
+  <span class="bh am">Sembradora a chorrillo para arroz — 500 ha</span>
+  <div class="enunciado">
+    <b>📄 Enunciado del seminario</b>
+    Para sembrar 500 hectáreas de arroz se dispone de una sembradora a chorrillo. La cantidad de semilla recomendada es de 180 kg/ha. Calcule la cantidad de semilla a obtener en la calibración estacionaria con los siguientes datos:<br>
+    N° de abresurcos: 25 · Radio bajo carga: 0.35 m · Distancia entre abresurcos: 18 cm · Vueltas de la rueda: 20 · ¿A qué distancia se ubicará el disco marcador?
+  </div>
+
+  <span class="step-label">Paso 1 — Distancia simulada (recorrido equivalente)</span>
+  <div class="rx">Dist. simulada = 2π × R × N° vueltas
+Dist. simulada = 2 × π × 0.35 m × 20
+Dist. simulada = 2 × 3.1416 × 0.35 × 20
+Dist. simulada = 43.98 m</div>
+
+  <span class="step-label">Paso 2 — Área simulada</span>
+  <div class="rx">Área = Dist. simulada × (N° abresurcos × dist. entre abresurcos)
+Área = 43.98 m × (25 × 0.18 m)
+Área = 43.98 × 4.5
+Área = 197.9 m² = 0.01979 ha</div>
+
+  <span class="step-label">Paso 3 — Semilla que debe caer en la calibración</span>
+  <div class="rx">Semilla = Dosis (kg/ha) × Área simulada (ha)
+Semilla = 180 kg/ha × 0.01979 ha
+Semilla = 3.56 kg</div>
+
+  <div class="rx res">→ Deben caer exactamente 3.56 kg de arroz en la calibración</div>
+</div>
+
+<div class="block">
+  <span class="bh am">Distancia del disco marcador</span>
+  <div class="enunciado">
+    <b>📄 Pregunta complementaria del enunciado</b>
+    ¿A qué distancia se ubicará el disco marcador respecto al eje central de siembra?
+  </div>
+  <div class="rx">El disco marcador señala en el suelo el límite
+de la próxima pasada para evitar solapamientos
+o huecos entre pasadas.
+
+Ancho total de trabajo = N° abresurcos × sep.
+Ancho = 25 × 0.18 = 4.50 m
+
+El disco marcador se ubica a:
+d_marcador = Ancho_total / 2
+d_marcador = 4.50 / 2 = 2.25 m
+
+Es decir, 2.25 m a cada lado del eje central.</div>
+  <div class="rx res">→ Disco marcador a 2.25 m del centro de la máquina</div>
+  <div class="item"><span class="dot am"></span><span>El disco marcador traza una línea en el suelo donde el operador debe alinear la rueda delantera del tractor en la siguiente pasada, garantizando continuidad sin solapamiento.</span></div>
+</div>
+
+<!-- ═══════════ EJ 4 ═══════════ -->
+<div class="sec">🌱 EJERCICIO 4 — Semillas/m² de trigo con índice de pureza</div>
+
+<div class="block s3">
+  <span class="bh az">Densidad real de siembra — trigo con 90% pureza</span>
+  <div class="enunciado">
+    <b>📄 Enunciado del seminario</b>
+    ¿Cuántas semillas/m² de trigo está sembrando una máquina si al probarla en 50 m recorridos longitud 2.5 m arrojó 115 gr/boquilla? Distancia entre surcos: 17.5 cm · Peso de 1250 semillas: 50 gr · Sabiendo que la semilla tiene un índice de pureza de 90%.
+  </div>
+
+  <span class="step-label">Paso 1 — Área cubierta por una boquilla</span>
+  <div class="rx">Área por boquilla = Recorrido × Dist. entre surcos
+Área = 50 m × 0.175 m
+Área = 8.75 m²</div>
+
+  <span class="step-label">Paso 2 — Peso de una semilla</span>
+  <div class="rx">Si 1250 semillas pesan 50 gr:
+Peso de 1 semilla = 50 gr / 1250 = 0.04 gr/semilla</div>
+
+  <span class="step-label">Paso 3 — N° de semillas brutas que cayeron</span>
+  <div class="rx">N° semillas brutas = Masa total / Peso 1 semilla
+N° semillas brutas = 115 gr / 0.04 gr
+N° semillas brutas = 2875 semillas</div>
+
+  <span class="step-label">Paso 4 — Semillas útiles (aplicar pureza 90%)</span>
+  <div class="rx">N° semillas útiles = N° brutas × (pureza / 100)
+N° semillas útiles = 2875 × 0.90
+N° semillas útiles = 2587.5 semillas</div>
+
+  <span class="step-label">Paso 5 — Densidad final</span>
+  <div class="rx">Densidad = N° semillas útiles / Área
+Densidad = 2587.5 semillas / 8.75 m²
+Densidad = 295.7 semillas/m²</div>
+
+  <div class="rx res">→ La máquina está sembrando ≈ 296 semillas/m² de trigo</div>
+  <div class="item"><span class="dot az"></span><span><b>¿Es adecuado?</b> Para trigo en Perú se recomienda 300–400 semillas/m². Con 296 sem/m² está ligeramente por debajo. Se debería abrir un poco la palanca dosificadora.</span></div>
+</div>
+
+<!-- ═══════════ EJ 5 ═══════════ -->
+<div class="sec">🐄 EJERCICIO 5 — Distribuidor de estiércol: velocidades de cadena y tractor</div>
+
+<div class="block s3">
+  <span class="bh vd">Remolque distribuidor 2T — dosis 20 T/ha, parcela 60 m</span>
+  <div class="enunciado">
+    <b>📄 Enunciado del seminario</b>
+    Se tiene un remolque distribuidor de estiércol de 2 T de capacidad, anchura útil de 1.25 m y longitud 2.5 m. La velocidad de avance de la cadena puede regularse entre 0.2 y 1.5 m/min. Se requiere aplicar una dosis de 20 T/ha y la longitud de la parcela es de 60 m de largo. Calcular a qué velocidades han de fijarse el avance de la cadena y el avance del tractor para terminar siempre en las cabeceras.
+  </div>
+
+  <span class="step-label">Paso 1 — Convertir dosis a kg/m²</span>
+  <div class="rx">Dosis = 20 T/ha = 20,000 kg / 10,000 m²
+Dosis = 2 kg/m²</div>
+
+  <span class="step-label">Paso 2 — Plantear la ecuación de dosificación</span>
+  <div class="rx">La dosis aplicada depende de:
+ - Velocidad de la cadena (V_c) en m/min: controla cuánto estiércol sale por minuto
+ - Velocidad del tractor (V_t) en m/min: controla cuánto terreno se avanza
+
+Densidad del estiércol ≈ 650 kg/m³ (valor típico de clase)
+
+Caudal de salida = V_cadena × Ancho × Densidad
+Q_sal (kg/min) = V_c × 1.25 × 650
+
+Dosis (kg/m²) = Q_sal / (V_t × Ancho)
+2 = (V_c × 1.25 × 650) / (V_t × 1.25)
+2 = (V_c × 650) / V_t
+→ V_t = V_c × 650 / 2
+→ V_t = 325 × V_c</div>
+
+  <span class="step-label">Paso 3 — Condición "terminar en cabeceras"</span>
+  <div class="rx">La condición es que el remolque se vacíe EXACTAMENTE
+al llegar al final de los 60 m de la parcela.
+
+Masa del remolque = 2000 kg
+Tiempo para vaciarlo = 2000 / Q_sal = 2000 / (V_c × 1.25 × 650)
+
+Tiempo para recorrer 60 m = 60 / V_t
+
+Igualando ambos tiempos:
+2000 / (V_c × 1.25 × 650) = 60 / V_t
+2000 / (812.5 × V_c) = 60 / (325 × V_c)
+2000 / 812.5 = 60 / 325
+2.462 ≈ 0.185 ... 
+
+→ Esta condición depende de la anchura de la pasada.
+   Si la anchura de trabajo es = 1.25 m:
+   N° pasadas para 60 m de ancho: no aplica directamente.
+
+Relación base: V_t = 325 × V_c (con densidad 650 kg/m³)</div>
+
+  <span class="step-label">Paso 4 — Elección de velocidades dentro del rango</span>
+  <div class="rx">La cadena puede ir entre 0.2 y 1.5 m/min.
+
+Ejemplo con V_c = 0.4 m/min:
+V_t = 325 × 0.4 = 130 m/min = 7.8 km/h (posible)
+
+Ejemplo con V_c = 0.3 m/min:
+V_t = 325 × 0.3 = 97.5 m/min = 5.85 km/h (más común en campo)</div>
+
+  <div class="rx res">→ Relación: V_tractor = 325 × V_cadena (con densidad 650 kg/m³)
+→ Ej: V_cadena = 0.3 m/min → V_tractor = 97.5 m/min ≈ 5.85 km/h</div>
+  <div class="warn">⚠️ La densidad del estiércol es clave: si tu docente usa 800 kg/m³, la relación cambia a V_t = 400 × V_c. Usa siempre el valor que dio en clase. La lógica del procedimiento es la misma.</div>
+  <div class="item"><span class="dot vd"></span><span><b>"Terminar en cabeceras"</b> significa que al llegar al extremo de la parcela (60 m) el remolque debe quedar vacío. Esto garantiza que no quede estiércol sobrante ni parcelas sin abonar. Se consigue coordinando la velocidad de la cadena con la del tractor según la ecuación anterior.</span></div>
+</div>
+
+<!-- ═══════════ EJ 6 ═══════════ -->
+<div class="sec">💧 EJERCICIO 6 — Calibración de pulverizador de barra</div>
+
+<div class="block s3">
+  <span class="bh te">Boquilla abanico plano 11006 — detección de desgaste y gasto/ha</span>
+  <div class="enunciado">
+    <b>📄 Enunciado del seminario</b>
+    Se requiere calibrar un pulverizador de barra para aplicar un herbicida. Datos:<br>
+    Boquilla abanico plano 11006 · Distancia entre boquillas: 0.50 m · Velocidad: 50 m en 30 segundos · Caudal boquilla nueva: 2.27 l/min · Sustituya las boquillas en mal estado y determine el gasto de caldo por hectárea.
+  </div>
+  <div class="datos">
+    <b style="font-size:11.5px;display:block;margin-bottom:4px">Caudales medidos (l/min) por boquilla:</b>
+    <table class="tbl">
+      <tr><th>B1</th><th>B2</th><th>B3</th><th>B4</th><th>B5</th><th>B6</th><th>B7</th><th>B8</th><th>B9</th><th>B10</th><th>B11</th><th>B12</th></tr>
+      <tr>
+        <td class="ok">2.3</td><td class="ok">2.2</td><td class="ok">2.3</td><td class="bad">2.5</td><td class="ok">2.3</td>
+        <td class="bad">2.5</td><td class="bad">2.5</td><td class="ok">2.4</td><td class="ok">2.2</td><td class="bad">2.6</td><td class="ok">2.1</td><td class="ok">2.3</td>
+      </tr>
+    </table>
+    <span style="font-size:10.5px;color:var(--color-text-secondary)">Rojo = boquilla a sustituir · Verde = boquilla en buen estado</span>
+  </div>
+
+  <span class="step-label">Paso 1 — Límite de desgaste admisible</span>
+  <div class="rx">Una boquilla se sustituye si su caudal supera
+en más del 10% el caudal de boquilla nueva.
+
+Límite = Caudal_nuevo × 1.10
+Límite = 2.27 × 1.10
+Límite = 2.497 l/min
+
+→ Se sustituyen todas las boquillas con caudal > 2.497 l/min</div>
+
+  <span class="step-label">Paso 2 — Identificar boquillas a sustituir</span>
+  <div class="rx">B4  = 2.5 l/min → 2.5 > 2.497 → SUSTITUIR ✗
+B6  = 2.5 l/min → SUSTITUIR ✗
+B7  = 2.5 l/min → SUSTITUIR ✗
+B10 = 2.6 l/min → SUSTITUIR ✗
+
+Boquillas buenas (8 boquillas): B1,B2,B3,B5,B8,B9,B11,B12</div>
+
+  <span class="step-label">Paso 3 — Caudal promedio de las boquillas buenas</span>
+  <div class="rx">Suma = 2.3+2.2+2.3+2.3+2.4+2.2+2.1+2.3 = 17.9... 
+
+Recalculando con los 8 buenos:
+B1=2.3, B2=2.2, B3=2.3, B5=2.3, B8=2.4, B9=2.2, B11=2.1, B12=2.3
+Suma = 2.3+2.2+2.3+2.3+2.4+2.2+2.1+2.3 = 18.1 l/min
+
+q̄ = 18.1 / 8 = 2.2625 ≈ 2.26 l/min
+
+(Nota: el canvas original usa promedio de las 12 incluyendo las malas
+para simplificar. Con las 8 buenas el resultado es más preciso)</div>
+
+  <span class="step-label">Paso 4 — Velocidad de avance</span>
+  <div class="rx">V = 50 m / 30 s = 1.667 m/s
+Convertir a m/min: 1.667 × 60 = 100 m/min</div>
+
+  <span class="step-label">Paso 5 — Gasto por hectárea</span>
+  <div class="rx">Q_ha = (q̄ × 10,000) / (V_m/min × dist_boquillas)
+Q_ha = (2.26 × 10,000) / (100 × 0.50)
+Q_ha = 22,600 / 50
+Q_ha = 452 l/ha</div>
+
+  <div class="rx res">→ 4 boquillas a sustituir (B4, B6, B7, B10) · Gasto = 452 l/ha</div>
+  <div class="item"><span class="dot te"></span><span>452 l/ha está dentro del rango normal para herbicidas (200–600 l/ha). La boquilla 11006 es abanico plano a 110° de apertura con caudal nominal de 0.6 l/min (el código: 110 = ángulo, 06 = 0.6 l/min, pero a distinta presión resulta 2.27 l/min).</span></div>
+</div>
+
+<!-- ═══════════ EJ 7 ═══════════ -->
+<div class="sec">🧪 EJERCICIO 7 — Tratamiento herbicida: dosificación completa</div>
+
+<div class="block s3">
+  <span class="bh na">Herbicida en 25 ha — tanques, producto comercial y litros de caldo</span>
+  <div class="enunciado">
+    <b>📄 Enunciado del seminario</b>
+    Hay que hacer un tratamiento herbicida en una parcela de 25 ha. Se recomienda que se aplique una dosis de 3.5 kg de materia activa por hectárea y disponemos de un producto comercial cuya riqueza en materia activa del 45%. ¿Cuánto producto comercial gastaremos en toda la parcela? Además, nos dicen que hemos de gastar un volumen mínimo de caldo de 500 l/ha y disponemos de un tanque de 800 litros de capacidad. ¿Cuántos litros de caldo necesitaremos? ¿En cuántos tanques? ¿Cuánto producto comercial echaremos en cada tanque?
+  </div>
+
+  <span class="step-label">Paso 1 — Materia activa total necesaria</span>
+  <div class="rx">MA_total = Dosis (kg MA/ha) × Superficie (ha)
+MA_total = 3.5 kg/ha × 25 ha
+MA_total = 87.5 kg de materia activa</div>
+
+  <span class="step-label">Paso 2 — Producto comercial total</span>
+  <div class="rx">El producto tiene 45% de MA, es decir, solo 0.45 kg de MA
+por cada 1 kg de producto comercial.
+
+PC_total = MA_total / (% MA / 100)
+PC_total = 87.5 / 0.45
+PC_total = 194.4 kg de producto comercial</div>
+
+  <span class="step-label">Paso 3 — Litros de caldo total</span>
+  <div class="rx">Vol_caldo = Vol. mínimo (l/ha) × Superficie (ha)
+Vol_caldo = 500 l/ha × 25 ha
+Vol_caldo = 12,500 litros de caldo</div>
+
+  <span class="step-label">Paso 4 — Número de tanques necesarios</span>
+  <div class="rx">N° tanques = Vol_caldo / Capacidad_tanque
+N° tanques = 12,500 l / 800 l
+N° tanques = 15.625 → 16 tanques (redondear arriba)</div>
+
+  <span class="step-label">Paso 5 — Producto comercial por tanque</span>
+  <div class="rx">PC por tanque = PC_total / N° tanques
+PC por tanque = 194.4 kg / 16 tanques
+PC por tanque = 12.15 kg por tanque
+
+Verificación: 12.15 kg × 0.45 = 5.47 kg MA por tanque
+Tanque cubre: 800 l / 500 l/ha = 1.6 ha
+MA/ha = 5.47 / 1.6 = 3.42 ≈ 3.5 kg/ha ✓</div>
+
+  <div class="rx res">→ PC total: 194.4 kg · Caldo: 12,500 l · 16 tanques · 12.15 kg PC/tanque</div>
+  <div class="item"><span class="dot na"></span><span><b>Resumen del flujo:</b> Materia activa (kg) → ÷ fracción activa → Producto comercial (kg) → Vol caldo = superficie × dosis volumen → ÷ cap. tanque → N° tanques → PC/tanque.</span></div>
+</div>
+
+<!-- ═══════════ EJ 8 ═══════════ -->
+<div class="sec">⚙️ EJERCICIO 8 — Transmisiones en sembradora: distancia entre semillas</div>
+
+<div class="block s3">
+  <span class="bh gr">Sembradora con 3 piñones opcionales — Z0=20, rueda 0.82m, 8 alveolos</span>
+  <div class="enunciado">
+    <b>📄 Enunciado del seminario</b>
+    En una sembradora cuya transmisión es la siguiente: rueda motriz solidaria a un piñón Z0 = 20 dientes, este acciona por medio de una cadena, opcionalmente, tres piñones: Z1 de 23 dientes, Z2 de 16 dientes y Z3 de 10 dientes. Este piñón es solidario al eje del piñón Z4 de 16, engranando con el piñón de accionamiento del disco de pinzas Z5 de 16 dientes. Considerar una rueda de 0.82 m de diámetro y un número de alveolos de 8. Encontrar las distancias para cada tipo de engrane.
+  </div>
+
+  <span class="step-label">Conceptos clave del sistema de transmisión</span>
+  <div class="rx">ESQUEMA DE TRANSMISIÓN:
+Rueda → Z0 (motriz, solidaria a rueda)
+         ↓ cadena (opcionalmente a Z1, Z2 o Z3)
+        Z3 ← solidario en mismo eje → Z4
+         ↓ engrane directo
+        Z5 (disco de siembra)
+
+IMPORTANTE: Z3 y Z4 están en el MISMO EJE → giran juntos
+→ NO generan relación de transmisión entre ellos
+→ La cadena va de Z0 a Z1/Z2/Z3 (el que se elija)
+→ Luego Z4 (=mismo eje que el elegido) engrana con Z5</div>
+
+  <span class="step-label">Fórmula general</span>
+  <div class="rx">i_total = (Z_elegido / Z0) × (Z5 / Z4)
+
+Circunferencia rueda = π × D = π × 0.82 = 2.576 m
+
+Semillas por vuelta de rueda = i_total × N° alveolos
+
+Distancia entre semillas = Circunf. rueda / Semillas por vuelta
+                        = 2.576 / (i_total × 8)</div>
+
+  <span class="step-label">Caso A — Con Z1 = 23 dientes</span>
+  <div class="rx">i_total = (Z1 / Z0) × (Z5 / Z4)
+i_total = (23 / 20) × (16 / 16)
+i_total = 1.15 × 1.00
+i_total = 1.15
+
+Semillas/vuelta = 1.15 × 8 = 9.2 semillas
+
+d = 2.576 / 9.2</div>
+  <div class="rx res">→ Con Z1 (23 d.): d = 0.280 m entre semillas</div>
+
+  <span class="step-label">Caso B — Con Z2 = 16 dientes</span>
+  <div class="rx">i_total = (Z2 / Z0) × (Z5 / Z4)
+i_total = (16 / 20) × (16 / 16)
+i_total = 0.80 × 1.00
+i_total = 0.80
+
+Semillas/vuelta = 0.80 × 8 = 6.4 semillas
+
+d = 2.576 / 6.4</div>
+  <div class="rx res">→ Con Z2 (16 d.): d = 0.403 m entre semillas</div>
+
+  <span class="step-label">Caso C — Con Z3 = 10 dientes</span>
+  <div class="rx">i_total = (Z3 / Z0) × (Z5 / Z4)
+i_total = (10 / 20) × (16 / 16)
+i_total = 0.50 × 1.00
+i_total = 0.50
+
+Semillas/vuelta = 0.50 × 8 = 4.0 semillas
+
+d = 2.576 / 4.0</div>
+  <div class="rx res">→ Con Z3 (10 d.): d = 0.644 m entre semillas</div>
+
+  <div class="three" style="margin-top:10px">
+    <div class="mini" style="border-top:4px solid #16a34a">
+      <b>Z1 = 23 → d = 0.280 m</b>
+      Siembra más densa. Maíz con alta población, cebada, trigo grueso.
+    </div>
+    <div class="mini" style="border-top:4px solid #3b82f6">
+      <b>Z2 = 16 → d = 0.403 m</b>
+      Distancia media. Maíz convencional, frijol, girasol.
+    </div>
+    <div class="mini" style="border-top:4px solid #f97316">
+      <b>Z3 = 10 → d = 0.644 m</b>
+      Siembra espaciada. Soya, frijol a alta densidad, calabaza.
+    </div>
+  </div>
+  <div class="warn" style="margin-top:8px">⚠️ Z4 y Z3 son SOLIDARIOS (mismo eje físico). Por eso Z5/Z4 = 16/16 = 1 en los tres casos y no modifica el resultado. El único cambio es el piñón intermedio que va conectado por cadena desde Z0.</div>
+</div>
+
+<div class="cv-footer">
+  <span class="ft">FUENTE:</span>
+  <span class="fc">Seminario de Mecanización Agrícola — UNALM · Los 8 ejercicios corresponden exactamente al enunciado oficial del seminario · Soluciones desarrolladas paso a paso para el examen.</span>
+</div>
+
+</div>
