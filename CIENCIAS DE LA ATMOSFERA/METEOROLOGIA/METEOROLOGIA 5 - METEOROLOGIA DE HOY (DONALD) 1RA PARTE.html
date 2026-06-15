@@ -1,0 +1,658 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titlebar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10px;padding:2px 8px;border-radius:20px;background:#1e3a5f;color:#93c5fd}
+.secbar{grid-column:1/-1;padding:7px 12px;border-radius:8px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:#fff}
+.sb-blue{background:#1e3a5f}
+.sb-green{background:#14532d}
+.sb-teal{background:#042f2e}
+.sb-purple{background:#2e1065}
+.sb-amber{background:#422006}
+.sb-red{background:#450a0a}
+.sb-pink{background:#4a044e}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}.bh-green{background:#dcfce7;color:#14532d}.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-purple{background:#ede9fe;color:#4c1d95}.bh-amber{background:#fef9c3;color:#713f12}.bh-red{background:#fee2e2;color:#991b1b}
+.bh-orange{background:#ffedd5;color:#7c2d12}.bh-gray{background:#f1f5f9;color:#334155}.bh-pink{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+.bh-blue{background:#1e3a5f;color:#93c5fd}.bh-green{background:#14532d;color:#86efac}.bh-teal{background:#042f2e;color:#5eead4}
+.bh-purple{background:#2e1065;color:#c4b5fd}.bh-amber{background:#422006;color:#fef08a}.bh-red{background:#450a0a;color:#fca5a5}
+.bh-orange{background:#431407;color:#fed7aa}.bh-gray{background:#1e293b;color:#94a3b8}.bh-pink{background:#4a044e;color:#f0abfc}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.def-blue{border-color:#3b82f6}.def-green{border-color:#22c55e}.def-teal{border-color:#14b8a6}.def-purple{border-color:#8b5cf6}
+.def-amber{border-color:#f59e0b}.def-red{border-color:#ef4444}.def-orange{border-color:#f97316}.def-pink{border-color:#ec4899}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}.dot-green{background:#22c55e}.dot-teal{background:#14b8a6}.dot-purple{background:#8b5cf6}
+.dot-amber{background:#f59e0b}.dot-red{background:#ef4444}.dot-orange{background:#f97316}.dot-pink{background:#ec4899}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#d97706}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:7px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:7px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;line-height:1.4}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.pill-blue{background:#dbeafe;color:#1e3a8a}.pill-green{background:#dcfce7;color:#14532d}.pill-amber{background:#fef9c3;color:#713f12}
+@media(prefers-color-scheme:dark){.pill-blue{background:#1e3a5f;color:#93c5fd}.pill-green{background:#14532d;color:#86efac}.pill-amber{background:#422006;color:#fef08a}}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:4px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.num-badge{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}.nb-g{background:#dcfce7;color:#14532d}.nb-r{background:#fee2e2;color:#991b1b}.nb-a{background:#fef9c3;color:#713f12}
+.quiz-wrap{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-head{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:14px}
+.quiz-head h2{font-family:'Oswald',sans-serif;font-size:14px;margin-bottom:2px}
+.quiz-head p{font-size:11px;color:#94a3b8}
+.progress-row{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.progress-label{font-size:12px;color:var(--color-text-secondary);white-space:nowrap}
+.qcard{background:var(--color-background-secondary);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:13px;font-weight:500;margin-bottom:10px;line-height:1.5;color:var(--color-text-primary)}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif;line-height:1.4}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.show-correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:0.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.wrong{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){.qfeedback.ok{background:#14532d;color:#86efac}.qfeedback.wrong{background:#450a0a;color:#fca5a5}}
+.result-panel{display:none;border-radius:10px;padding:14px;text-align:center;margin-top:14px}
+.result-panel h3{font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px}
+.result-panel p{font-size:13px;margin-bottom:12px}
+.reset-btn{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer;font-family:'Source Sans 3',sans-serif}
+.reset-btn:hover{background:#1e3a5f}
+</style>
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden">Canvas de resumen interactivo de Meteorology Today, 9ª edición, C. Donald Ahrens — 19 capítulos con quiz de repaso</h2>
+<div class="cv">
+
+<div class="titlebar">
+  <h1>📚 Meteorology Today — Edición 9</h1>
+  <p>C. Donald Ahrens · Brooks/Cole, Cengage Learning · Introducción al Tiempo, Clima y el Medioambiente · 19 Capítulos</p>
+  <div class="tags">
+    <span class="tag">Atmósfera</span><span class="tag">Energía Solar</span><span class="tag">Temperatura</span><span class="tag">Humedad</span>
+    <span class="tag">Nubes y Precipitación</span><span class="tag">Vientos</span><span class="tag">Ciclones</span><span class="tag">Huracanes</span>
+    <span class="tag">Cambio Climático</span><span class="tag">Contaminación del Aire</span><span class="tag">Óptica Atmosférica</span>
+  </div>
+</div>
+
+<div class="secbar sb-blue">🌍 PARTE I — LA ATMÓSFERA: ESTRUCTURA Y COMPOSICIÓN (Cap. 1)</div>
+
+<div class="block">
+  <span class="bh bh-blue">Composición del Aire (Cap. 1)</span>
+  <div class="def def-blue">El aire seco en la superficie es ~78% N₂ y ~21% O₂. El 1% restante incluye gases traza como CO₂ (0.038%), vapor de agua (0–4%) y ozono (O₃). Aunque minoritarios, estos gases traza controlan el clima y protegen la vida.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>N₂ y O₂</strong> permanecen constantes hasta ~80 km de altitud gracias a la mezcla turbulenta (homosfera).</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Vapor de agua</strong> es el gas más variable: hasta 4% en trópicos, cerca de 0% en el Ártico. Es el principal gas de efecto invernadero por su abundancia.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>CO₂</strong> alcanzó ~385 ppm en 2008 (vs. 280 ppm preindustrial). Aumenta ~1.9 ppm/año por combustibles fósiles y deforestación.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>O₃ troposférico</strong> → contaminante. <strong>O₃ estratosférico</strong> → escudo contra UV. Mismo gas, efectos opuestos según altitud.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: "Más calor = más vapor de agua en el aire". Correcto en términos de capacidad, pero el vapor de agua varía por lugar, no solo temperatura. El desierto caliente puede tener MÁS vapor que el polo frío, pero MENOR humedad relativa.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el CO₂ y el vapor de agua se denominan "gases de efecto invernadero" y distinga su mecanismo de acción del ozono estratosférico.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Capas de la Atmósfera (Cap. 1)</span>
+  <div class="def def-teal">La atmósfera se divide en capas según el perfil vertical de temperatura. La troposfera (0–11 km) contiene todo el tiempo meteorológico. La estratosfera (11–50 km) tiene el ozono. La mesosfera (50–85 km) es la capa más fría. La termosfera (85–500+ km) es la más caliente.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #3b82f6"><strong style="font-size:11px">Troposfera</strong><br>0–11 km. Lapse rate promedio: 6.5°C/1000m. Todo el clima ocurre aquí. Temperatura decrece con altura.</div>
+    <div class="mini" style="border-top:3px solid #14b8a6"><strong style="font-size:11px">Estratosfera</strong><br>11–50 km. Temperatura AUMENTA (inversión) por absorción de UV del ozono. Stratiﬁcada, sin convección vertical.</div>
+    <div class="mini" style="border-top:3px solid #8b5cf6"><strong style="font-size:11px">Mesosfera/Termosfera</strong><br>Mesosfera: −90°C en tope (~85 km). Termosfera: temp. aumenta enormemente. Ionosfera dentro de la termosfera.</div>
+  </div>
+  <div class="rx">Presión estándar al nivel del mar: 1013.25 mb = 29.92 in Hg<br>Presión ≈ 500 mb a 5.5 km (mitad de la atmósfera)<br>Lapse rate promedio = 6.5°C / 1000 m</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la temperatura aumenta con la altitud en la estratosfera pero decrece en la troposfera y la mesosfera? Relacione su respuesta con el papel del ozono.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Tiempo, Clima e Ionosfera (Cap. 1)</span>
+  <div class="def def-purple">Tiempo = condición atmosférica en un lugar y momento. Clima = promedio y extremos del tiempo durante décadas. La ionosfera es la región cargada eléctricamente (60 km–tope) donde los iones reflejan ondas de radio AM de noche.</div>
+  <div class="flow">
+    <div class="fbox">Radiación Solar</div><span class="farrow">→</span>
+    <div class="fbox">Calienta superficie</div><span class="farrow">→</span>
+    <div class="fbox">Convección</div><span class="farrow">→</span>
+    <div class="fbox">Tiempo meteorológico</div><span class="farrow">→</span>
+    <div class="fbox">Clima a largo plazo</div>
+  </div>
+  <div class="item"><span class="dot dot-purple"></span><span>Elementos del tiempo: temperatura, presión, humedad, nubes, precipitación, visibilidad, viento.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>Primer satélite meteorológico: Tiros I (1960). Primer radar Doppler: reemplazó radares convencionales en los 1990s.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿En qué se diferencia "tiempo" de "clima"? Dé un ejemplo de cómo el cambio climático puede alterar los patrones de tiempo sin cambiar el tiempo en un día específico.</div>
+</div>
+
+<div class="secbar sb-amber">☀️ PARTE II — ENERGÍA, TEMPERATURA Y HUMEDAD (Cap. 2–4)</div>
+
+<div class="block">
+  <span class="bh bh-amber">Energía y Calor (Cap. 2)</span>
+  <div class="def def-amber">La energía es la capacidad de hacer trabajo. El calor es energía que se transfiere por diferencia de temperatura. El calor latente es la energía "oculta" liberada o absorbida cuando el agua cambia de fase — sin cambiar temperatura.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #f59e0b"><strong style="font-size:11px">Conducción</strong><br>Transferencia molécula-a-molécula. Lenta en aire. Importante en la capa límite justo sobre el suelo.</div>
+    <div class="mini" style="border-left:3px solid #f59e0b"><strong style="font-size:11px">Convección</strong><br>Movimiento masivo de aire. El mecanismo principal de transferencia de calor en la troposfera. Produce nubes cumuliformes.</div>
+    <div class="mini" style="border-left:3px solid #f59e0b"><strong style="font-size:11px">Radiación</strong><br>Ondas electromagnéticas. No requiere medio. El sol calienta la tierra por radiación de onda corta (UV/visible).</div>
+  </div>
+  <div class="rx">Ley de Stefan-Boltzmann: E = σT⁴<br>E = energía emitida por unidad de área, T = temperatura absoluta (K)<br>Cuerpos más calientes emiten MUCHO más energía</div>
+  <div class="def def-amber"><strong>Efecto Invernadero:</strong> El suelo emite IR de onda larga; CO₂ y H₂O lo absorben y re-emiten en todas direcciones, calentando la troposfera. Sin este efecto, la T promedio sería −18°C en lugar de +15°C.</div>
+  <div class="exam">🎯 EXAMEN: Compare conducción, convección y radiación como mecanismos de transferencia de calor en la atmósfera. ¿Cuál domina en cada capa de la atmósfera y por qué?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Temperaturas Estacionales y Diarias (Cap. 3)</span>
+  <div class="def def-green">Las estaciones se deben principalmente a la inclinación del eje terrestre (23.5°), NO a la distancia al sol. En verano boreal, el hemisferio norte recibe rayos más directos y días más largos — ambos factores aumentan la energía recibida.</div>
+  <div class="item"><span class="dot dot-green"></span><span>En enero, la Tierra está más CERCA del sol (perihelio, 147 millones km) pero es invierno en el hemisferio norte: la inclinación importa más que la distancia.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><strong>Inversión de radiación nocturna:</strong> El suelo emite calor toda la noche → el aire superficial se enfría más que el aire superior → temperatura aumenta con altura → inversión térmica.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span>Temperatura máxima diaria ~2–3 horas después del mediodía solar (no al mediodía) porque el suelo sigue ganando calor aun después del cenit solar.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: "En enero estamos lejos del sol, por eso hace frío en el hemisferio norte." ¡Falso! En enero estamos MÁS CERCA del sol. El frío se debe al ángulo bajo de incidencia solar y los días cortos.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué las costas experimentan menores rangos de temperatura diaria y estacional que los interiores continentales. ¿Qué propiedad del agua explica esto?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Humedad Atmosférica (Cap. 4)</span>
+  <div class="def def-blue">La humedad describe el contenido de vapor de agua en el aire. La humedad relativa (HR) es la razón del vapor actual al máximo posible a esa temperatura. La temperatura de rocío (Td) indica el punto al que el aire se satura al enfriarse.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong style="font-size:11px">Humedad Relativa</strong><br>
+      HR = (e / es) × 100%<br>
+      e = presión de vapor actual<br>
+      es = presión de vapor de saturación<br>
+      Varía con temperatura aunque el vapor no cambie.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <strong style="font-size:11px">Punto de Rocío (Td)</strong><br>
+      Temperatura a la que el aire se satura (HR=100%) sin agregar vapor. Indica la cantidad real de vapor. Td cercano a T → alta HR. Gap grande → baja HR.
+    </div>
+  </div>
+  <div class="rx">Ciclo Hidrológico: Evaporación (océanos 85%) → Transporte → Condensación → Precipitación → Escorrentía → Océano<br>El agua puede existir como gas, líquido y sólido en condiciones atmosféricas normales</div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Calor húmedo vs. seco:</strong> Con HR alta, la sudoración no enfría eficientemente → sensación de más calor. El índice de calor (heat index) captura esto.</span></div>
+  <div class="exam">🎯 EXAMEN: En un día caluroso la HR matutina es 90% y al mediodía es 40%, aunque no llovió. ¿Qué explica este cambio? ¿Cambió la cantidad de vapor de agua?</div>
+</div>
+
+<div class="secbar sb-teal">☁️ PARTE III — NUBES, PRECIPITACIÓN Y ESTABILIDAD (Cap. 5–7)</div>
+
+<div class="block">
+  <span class="bh bh-teal">Condensación: Rocío, Niebla y Nubes (Cap. 5)</span>
+  <div class="def def-teal">El rocío se forma cuando superficies frías enfrían el aire a su punto de rocío. Las nubes son masas de gotitas de agua líquida y/o cristales de hielo suspendidos. Requieren núcleos de condensación (polvo, sal, humo) para formarse.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #14b8a6"><strong style="font-size:11px">Tipos de Niebla</strong><br>• Radiación: enfriamiento nocturno del suelo<br>• Advección: aire cálido sobre superficie fría<br>• Ladera (upslope): enfriamiento adiabático<br>• Mezcla: dos masas de aire distintas</div>
+    <div class="mini" style="border-left:3px solid #14b8a6"><strong style="font-size:11px">Clasificación de Nubes</strong><br>• Altas (cirrus, cirrocumulus, cirrostratus) &gt;6 km<br>• Medias (altocumulus, altostratus) 2–6 km<br>• Bajas (stratus, stratocumulus, nimbostratus)<br>• Verticales (cumulus, cumulonimbus)</div>
+  </div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Cumulonimbus:</strong> la nube más violenta. Se extiende desde la troposfera baja hasta la tropopausa (~12 km). Asociada a tormentas eléctricas, granizo y tornados.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que "hielo = blanco" y "agua = azul" en nubes. En realidad las nubes son blancas porque sus partículas dispersan igualmente todas las longitudes de onda de luz visible (dispersión de Mie).</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué se necesitan núcleos de condensación para que se formen nubes? ¿Qué ocurriría si el aire estuviera perfectamente puro y libre de partículas?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Estabilidad Atmosférica (Cap. 6)</span>
+  <div class="def def-purple">La estabilidad atmosférica determina si una parcela de aire que se desplaza vertical tenderá a regresar (estable), seguir moviéndose (inestable) o ambas según condiciones (condicionalmente inestable). Controla el tipo de nube que se forma.</div>
+  <div class="rx">Tasa adiabática SECA (DALR) = 10°C / 1000 m (aire no saturado)<br>Tasa adiabática HÚMEDA (MALR) ≈ 6°C / 1000 m (aire saturado, variable)<br>Si lapse rate ambiental &gt; DALR → inestable | &lt; MALR → estable</div>
+  <div class="flow">
+    <div class="fbox">Suelo calienta aire</div><span class="farrow">→</span>
+    <div class="fbox">Parcela asciende</div><span class="farrow">→</span>
+    <div class="fbox">Se enfría a DALR</div><span class="farrow">→</span>
+    <div class="fbox">Alcanza Td → satura</div><span class="farrow">→</span>
+    <div class="fbox">Nube forma (base)</div><span class="farrow">→</span>
+    <div class="fbox">Enfría a MALR (cumb.)</div>
+  </div>
+  <div class="item"><span class="dot dot-purple"></span><span><strong>Inversión de subsidencia:</strong> capa de aire cálido sobre aire frío crea "tapa" que impide el ascenso — favorece la contaminación atmosférica y nubes estratificadas.</span></div>
+  <div class="exam">🎯 EXAMEN: Una parcela de aire a 20°C y punto de rocío 12°C sube desde el nivel del mar. ¿A qué altitud aproximada se forma la nube? Use la tasa adiabática seca (10°C/1000 m) y la regla del punto de rocío.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Precipitación (Cap. 7)</span>
+  <div class="def def-green">Las gotitas de nube (≈20 µm) son demasiado pequeñas para caer. La precipitación requiere que crezcan hasta ≈2 mm (goutas de lluvia). Dos procesos principales: coalescencia (trópicos) y proceso de Bergeron-cristal de hielo (latitudes medias).</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #22c55e"><strong style="font-size:11px">Coalescencia (Proceso Cálido)</strong><br>Gotitas grandes caen más rápido y colisionan con las pequeñas → crecen. Dominante en nubes tropicales cálidas donde no hay hielo.</div>
+    <div class="mini" style="border-top:3px solid #14b8a6"><strong style="font-size:11px">Proceso Bergeron (Frío)</strong><br>En nubes mixtas, la presión de vapor sobre el hielo es menor que sobre el agua líquida → el vapor migra del agua al hielo → cristales crecen y caen como nieve.</div>
+  </div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #3b82f6"><strong style="font-size:10px">Lluvia</strong><br>Gotas &gt;0.5 mm. Forma esférica achatada (NO lágrima).</div>
+    <div class="mini" style="border-left:3px solid #8b5cf6"><strong style="font-size:10px">Nieve/Aguanieve</strong><br>Aguanieve: gotas que se congelan al caer. Lluvia helada: gotitas superenfriadas.</div>
+    <div class="mini" style="border-left:3px solid #ef4444"><strong style="font-size:10px">Granizo</strong><br>Forma en cumulonimbus con corrientes verticales fuertes. Capas de hielo. Ocurre en verano.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: El granizo grande solo cae en verano a pesar de necesitar hielo para formarse. Explique esta paradoja: ¿cómo puede haber granizo cuando hace calor?</div>
+</div>
+
+<div class="secbar sb-blue">💨 PARTE IV — VIENTOS Y SISTEMAS DE PRESIÓN (Cap. 8–10)</div>
+
+<div class="block s2">
+  <span class="bh bh-blue">Presión Atmosférica y Vientos (Cap. 8)</span>
+  <div class="def def-blue">El viento es movimiento horizontal de aire causado por diferencias de presión. La fuerza de gradiente de presión (PGF) empuja el aire de alta a baja presión. La fuerza de Coriolis (deflexión por rotación terrestre) desvía el aire hacia la derecha en el hemisferio norte, hacia la izquierda en el sur.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-blue"></span><span><strong>Viento geostrófico (aire libre):</strong> PGF equilibrada por Coriolis → viento paralelo a isobaras. Fluye con baja presión a la izquierda (HN).</span></div>
+      <div class="item"><span class="dot dot-blue"></span><span><strong>En baja presión (ciclón):</strong> convergencia → ascenso → nubes → lluvia. Vientos: antihorario en HN.</span></div>
+      <div class="item"><span class="dot dot-blue"></span><span><strong>En alta presión (anticiclón):</strong> subsidencia → despeje. Vientos: horario en HN.</span></div>
+    </div>
+    <div>
+      <div class="rx">PGF = −(1/ρ) × (ΔP/Δn)<br>ρ = densidad del aire<br>ΔP/Δn = gradiente de presión<br><br>Presión normal mar: 1013 mb<br>Baja fuerte: &lt;990 mb<br>Alta fuerte: &gt;1030 mb</div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: "La fuerza de Coriolis mueve el agua en espiral en el baño." FALSO. En escalas tan pequeñas, Coriolis es insignificante. Solo importa en escalas de cientos de km o más (huracanes, ciclones, circulación general).</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué en el hemisferio norte los vientos circulan en sentido antihorario alrededor de un sistema de baja presión, pero horario en el hemisferio sur? Explique el papel de la fuerza de Coriolis.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Vientos Locales y Globales (Cap. 9–10)</span>
+  <div class="def def-teal">Los vientos locales emergen de diferencias de temperatura a escala regional. Los vientos globales son la circulación general atmosférica producida por el gradiente de calor ecuador-polo, modificada por Coriolis y la distribución tierra-océano.</div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Brisa marina/terrestre:</strong> Día → tierra más caliente → brisa del mar. Noche → tierra más fría → brisa de tierra. Causada por diferente calor específico del agua.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Viento Chinook (Foehn):</strong> Aire que desciende por sotavento de montaña. Se calienta a la tasa adiabática seca (más rápida) durante el descenso → air más caliente y seco que al ascender.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Circulación de 3 celdas:</strong> Hadley (ecuador a 30°), Ferrel (30–60°), Polar (60–90°). Produce los vientos alisios, los westerlies y los vientos del este polares.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Corriente en chorro (Jet Stream):</strong> vientos de 100+ nudos a ~10 km de altitud. Separa masas de aire frío y cálido. Guía a los ciclones de latitudes medias.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>El Niño/ENSO:</strong> Calentamiento del Pacífico tropical este → debilita los alisios → altera patrones de lluvia globalmente cada 3–7 años.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué los vientos alisios soplan del este hacia el oeste en la zona tropical. ¿Qué ocurre con estos vientos durante un episodio de El Niño?</div>
+</div>
+
+<div class="secbar sb-red">⛈️ PARTE V — MASAS DE AIRE, FRENTES Y TORMENTAS (Cap. 11–15)</div>
+
+<div class="block">
+  <span class="bh bh-red">Masas de Aire y Frentes (Cap. 11)</span>
+  <div class="def def-red">Una masa de aire es un gran volumen de aire con temperatura y humedad relativamente uniformes. Se clasifica por su región fuente: continental (c) o marítima (m) y polar (P), ártica (A) o tropical (T). Los frentes son límites entre masas de aire.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <strong style="font-size:11px">Masas principales N. América</strong><br>
+      <span class="pill pill-blue">cP</span> Continental Polar: frío y seco<br>
+      <span class="pill pill-blue">mP</span> Marítimo Polar: frío y húmedo<br>
+      <span class="pill pill-amber">mT</span> Marítimo Tropical: cálido y húmedo<br>
+      <span class="pill pill-amber">cT</span> Continental Tropical: caliente y seco
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <strong style="font-size:11px">Tipos de Frentes</strong><br>
+      🔵 Frente Frío: aire frío avanza. Tiempo violento, paso rápido, pasaje → aclarado<br>
+      🔴 Frente Cálido: aire cálido avanza. Lluvia continua gradual<br>
+      🟣 Frente Ocluido: frente frío alcanza al cálido
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que los frentes fríos siempre traen tormentas fuertes. En realidad la violencia depende de la inestabilidad del aire cálido desplazado: si es estable y húmedo → lluvia continua; si es inestable → tormentas severas.</div>
+  <div class="exam">🎯 EXAMEN: Compare el tiempo meteorológico antes, durante y después del paso de un frente frío vs. un frente cálido en las latitudes medias del hemisferio norte.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-red">Ciclones de Latitudes Medias (Cap. 12–13)</span>
+  <div class="def def-red">Los ciclones extratropicales (borrascas) se forman en la zona frontal polar, donde chocan masas de aire frío y cálido. Son los sistemas de tiempo más grandes e influyentes en latitudes medias. Se desarrollan, maduran y disipan en días.</div>
+  <div class="flow">
+    <div class="fbox">Ondulación frontal</div><span class="farrow">→</span>
+    <div class="fbox">Baja de superficie</div><span class="farrow">→</span>
+    <div class="fbox">Divergencia en altura</div><span class="farrow">→</span>
+    <div class="fbox">Ascenso → nubes</div><span class="farrow">→</span>
+    <div class="fbox">Oclusión frontal</div><span class="farrow">→</span>
+    <div class="fbox">Disipación</div>
+  </div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Pronóstico meteorológico:</strong> modelos numéricos (NWP) calculan ecuaciones físicas de la atmósfera. Los errores crecen exponencialmente: más de ~10 días de antelación el pronóstico pierde fiabilidad significativa.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Corriente en chorro y ciclones:</strong> la divergencia en los "jet streaks" de la corriente en chorro genera el ascenso necesario para profundizar una depresión. Es el motor de energía del ciclón.</span></div>
+  <div class="exam">🎯 EXAMEN: Describa el ciclo de vida de un ciclón de latitudes medias según la teoría del frente polar. ¿Qué papel juega la corriente en chorro en su desarrollo y trayectoria?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Tormentas Eléctricas y Tornados (Cap. 14)</span>
+  <div class="def def-orange">Una tormenta eléctrica es una nube cumulonimbus con relámpagos y truenos. Hay tres tipos: celda ordinaria, multicelda y supercelda. Los tornados son las columnas giratorias más violentas, que descienden de tormentas superceldas con mesociclones.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #f97316"><strong style="font-size:10px">Celda Ordinaria</strong><br>Corta duración (~1 h). Un ciclo: acumulación → madura → disipación. Lluvia/granizo intensa pero breve.</div>
+    <div class="mini" style="border-top:3px solid #f97316"><strong style="font-size:10px">Multicelda</strong><br>Grupo de celdas en distintas etapas. Más duraderas. El frente de racha (gust front) inicia nuevas celdas.</div>
+    <div class="mini" style="border-top:3px solid #f97316"><strong style="font-size:10px">Supercelda</strong><br>La más peligrosa. Mesociclón rotante. Produce tornados F2–F5, granizo grande, vientos destructivos.</div>
+  </div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Escala Fujita (F):</strong> F0 (vientos 64–116 km/h) a F5 (+509 km/h). Los F4 y F5 son raros pero devastadores.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Relámpago:</strong> descarga eléctrica entre regiones de carga opuesta. La nube superior tiene carga + y la base −. ~100 rayos/segundo en el mundo. ~80 muertes/año en EE.UU.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Qué condiciones atmosféricas son necesarias para la formación de un tornado supercelda? ¿Por qué la región central de EE.UU. ("Tornado Alley") es particularmente propensa a estos fenómenos?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-pink">Huracanes (Cap. 15)</span>
+  <div class="def def-pink">Un huracán (ciclón tropical) es un sistema de baja presión de origen tropical con vientos sostenidos ≥119 km/h. Se alimenta del calor del océano cálido (≥26°C). Tiene un ojo central de calma y una pared del ojo de vientos máximos.</div>
+  <div class="flow">
+    <div class="fbox">Perturbación tropical</div><span class="farrow">→</span>
+    <div class="fbox">Depresión (v &lt;62 km/h)</div><span class="farrow">→</span>
+    <div class="fbox">Tormenta tropical</div><span class="farrow">→</span>
+    <div class="fbox">Huracán Cat 1 (≥119)</div><span class="farrow">→</span>
+    <div class="fbox">Cat 5 (&gt;250 km/h)</div>
+  </div>
+  <div class="item"><span class="dot dot-pink"></span><span><strong>Marejada ciclónica (storm surge):</strong> el peligro más letal. El bajo nivel de presión "levanta" el océano hasta 6+ metros. Katrina (2005) devastó Nueva Orleans principalmente por esto.</span></div>
+  <div class="item"><span class="dot dot-pink"></span><span><strong>Disipación:</strong> al tocar tierra (falta de calor oceánico) o aguas frías. Los huracanes no pueden cruzar el ecuador (Coriolis = 0 allí).</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: "El ojo es la parte más peligrosa del huracán." FALSO. El ojo es tranquilo. Los vientos más fuertes y lluvias más intensas están en la PARED DEL OJO, inmediatamente fuera del ojo.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué los huracanes se intensifican sobre aguas cálidas y se debilitan al tocar tierra. ¿Qué rol cumple el calor latente del vapor de agua en la energía del huracán?</div>
+</div>
+
+<div class="secbar sb-green">🌡️ PARTE VI — CLIMA Y MEDIOAMBIENTE (Cap. 16–18)</div>
+
+<div class="block">
+  <span class="bh bh-green">Cambio Climático (Cap. 16)</span>
+  <div class="def def-green">El clima cambia por causas naturales (variaciones orbitales de Milankovitch, tectonismo, erupciones volcánicas, variabilidad solar) y por causas humanas (gases de efecto invernadero, deforestación, cambios de uso del suelo). El calentamiento reciente es atribuible principalmente al CO₂ antropogénico.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e"><strong style="font-size:10px">Ciclos de Milankovitch</strong><br>Excentricidad orbital (100,000 años), oblicuidad axial (41,000 años), precesión (23,000 años) → glaciaciones.</div>
+    <div class="mini" style="border-top:3px solid #22c55e"><strong style="font-size:10px">Retroalimentaciones</strong><br>+ Albedo del hielo/nieve: menos hielo → menos reflexión → más calentamiento. + Vapor de agua: más T → más vapor → más GEI.</div>
+    <div class="mini" style="border-top:3px solid #22c55e"><strong style="font-size:10px">Proyecciones IPCC 2007</strong><br>Si CO₂ sigue aumentando → +3°C para 2100. Consecuencias: aumento nivel del mar, derretimiento polar, eventos extremos más frecuentes.</div>
+  </div>
+  <div class="item"><span class="dot dot-green"></span><span>Temperatura promedio global ha subido ~0.8°C en 100 años. 11 de los 12 años más calurosos (hasta 2008) ocurrieron entre 1995-2007.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique cómo las retroalimentaciones positivas (vapor de agua, albedo del hielo) amplifican el calentamiento inicial causado por el aumento de CO₂. ¿Por qué las retroalimentaciones positivas no llevan necesariamente a un clima "descontrolado"?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">Climas Globales (Cap. 17)</span>
+  <div class="def def-teal">El sistema de Köppen clasifica los climas en 5 grupos (A–E) según temperatura y precipitación. Los controles climáticos son: latitud, altitud, masas de agua, corrientes oceánicas, topografía y circulación general. Ningún factor actúa solo.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong style="font-size:11px">Climas de Köppen</strong><br>
+      <span class="pill pill-green">A</span> Tropical húmedo (selvas)<br>
+      <span class="pill pill-amber">B</span> Árido (desiertos)<br>
+      <span class="pill pill-blue">C</span> Subtropical húmedo<br>
+      <span class="pill pill-blue">D</span> Continental húmedo<br>
+      <span class="pill pill-blue">E</span> Polar / tundra
+    </div>
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong style="font-size:11px">Corrientes Oceánicas</strong><br>
+      Las corrientes cálidas (Corriente del Golfo) moderan el clima de Europa. Las corrientes frías (Humboldt/Perú en la costa sudamericana del Pacífico) producen desiertos costeros y niebla persistente.
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Corriente de Humboldt:</strong> agua fría frente a Perú → clima árido en la costa → una de las pesquerías más ricas del mundo. El Niño calienta estas aguas → colapso pesquero.</span></div>
+  <div class="exam">🎯 EXAMEN: Lima (Perú) es una ciudad costera tropical pero tiene clima desértico con neblina persistente. Usando los conceptos de corrientes oceánicas, inversión de subsidencia y estabilidad, explique esta aparente paradoja.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-orange">Contaminación del Aire (Cap. 18)</span>
+  <div class="def def-orange">La contaminación del aire incluye contaminantes primarios (emitidos directamente) y secundarios (formados por reacciones químicas en la atmósfera). La meteorología controla la dispersión: el viento, la estabilidad y la topografía determinan cuándo una ciudad sufre un episodio grave.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #f97316"><strong style="font-size:10px">Smog Fotoquímico</strong><br>NOx + HC + luz solar → O₃ troposférico + PAN. Típico de ciudades como Los Ángeles. Se agrava con inversión térmica.</div>
+    <div class="mini" style="border-top:3px solid #f97316"><strong style="font-size:10px">Inversión y Contaminación</strong><br>Inversión de subsidencia "tapa" los contaminantes. Valles montañosos acumulan smog. Lima y Arequipa sufren este problema.</div>
+    <div class="mini" style="border-top:3px solid #f97316"><strong style="font-size:10px">Lluvia Ácida</strong><br>SO₂ + H₂O → H₂SO₄. NO₂ + H₂O → HNO₃. Daña ecosistemas, corroe metales y edificios. Se deposita lejos de la fuente.</div>
+  </div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Episodio de Donora (1948):</strong> 5 días de inversión + contaminación industrial en Pennsylvania → 20 muertos, 6000 enfermos. Punto de inflexión en la regulación ambiental de EE.UU.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Ozono estratosférico:</strong> CFCs liberan Cl en la estratosfera → destruye O₃. El Protocolo de Montreal (1987) redujo exitosamente las emisiones de CFCs.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué Lima (Perú) registra altos niveles de contaminación atmosférica a pesar de tener vientos costeros. ¿Qué condiciones meteorológicas agravan el problema en invierno?</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-purple">Óptica Atmosférica (Cap. 19)</span>
+  <div class="def def-purple">Los fenómenos ópticos resultan de la interacción de la luz solar con las partículas atmosféricas (dispersión, refracción, reflexión y difracción). El color azul del cielo, los arcoíris, los halos y los espejismos tienen explicaciones físicas precisas.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #8b5cf6"><strong style="font-size:11px">Dispersión de Rayleigh</strong><br>Partículas pequeñas (moléculas) dispersan la luz de onda corta (azul) mucho más eficientemente → cielo azul de día. Al atardecer, el sol bajo pasa por más atmósfera → solo rojo llega → cielos rojos y naranjas.</div>
+    <div class="mini" style="border-top:3px solid #8b5cf6"><strong style="font-size:11px">Arcoíris</strong><br>Refracción + reflexión interna + dispersión dentro de gotas de lluvia. El arcoíris primario tiene rojo afuera (42°) y violeta adentro (40°). El secundario (más tenue) invierte los colores.</div>
+    <div class="mini" style="border-top:3px solid #8b5cf6"><strong style="font-size:11px">Halos y Espejismos</strong><br>Halos de 22°: refracción en cristales de hielo hexagonales. Espejismo inferior: refracción en capa de aire caliente → imagen invertida del cielo pareciendo "agua".</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: "Los espejismos son alucinaciones." FALSO. Son fenómenos ópticos reales: luz que se refracta por gradientes de temperatura. Son fotografiables y físicamente explicables.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-gray">📊 TABLA INTEGRADORA — Resumen Comparativo por Capítulos</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Tema</th><th>Capítulo</th><th>Concepto Central</th><th>Fórmula/Regla Clave</th><th>Fenómeno Vinculado</th><th>Escala Temporal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="pill pill-blue">Atmósfera</span></td><td>1</td><td>Composición y capas atmosféricas</td><td>78% N₂, 21% O₂, &lt;4% H₂O</td><td>Inversión térmica, Ionosfera</td><td>Geológica (millones de años)</td></tr>
+      <tr><td><span class="pill pill-amber">Energía</span></td><td>2</td><td>Efecto invernadero y balance energético</td><td>E = σT⁴ (Stefan-Boltzmann)</td><td>Aurora boreal, calentamiento global</td><td>Diaria / climática</td></tr>
+      <tr><td><span class="pill pill-green">Temperatura</span></td><td>3</td><td>Estaciones por inclinación axial (23.5°)</td><td>Ángulo de incidencia solar</td><td>Inversión de radiación, olas de calor</td><td>Estacional</td></tr>
+      <tr><td><span class="pill pill-blue">Humedad</span></td><td>4</td><td>HR y punto de rocío controlan condensación</td><td>HR = (e/es) × 100%</td><td>Niebla, tormentas, disconfort</td><td>Horaria</td></tr>
+      <tr><td><span class="pill pill-blue">Nubes</span></td><td>5</td><td>Núcleos de condensación esenciales</td><td>T superficie → punto de rocío</td><td>Tipos de niebla, lluvia ácida</td><td>Minutos–horas</td></tr>
+      <tr><td><span class="pill pill-purple">Estabilidad</span></td><td>6</td><td>DALR vs. lapse rate ambiental</td><td>DALR=10°C/km, MALR≈6°C/km</td><td>Tormentas, inversiones, smog</td><td>Horas</td></tr>
+      <tr><td><span class="pill pill-green">Precipitación</span></td><td>7</td><td>Coalescencia vs. Bergeron</td><td>Gotita 20 µm → gota 2 mm</td><td>Lluvia, nieve, granizo, aguanieve</td><td>Horas</td></tr>
+      <tr><td><span class="pill pill-blue">Presión/Viento</span></td><td>8</td><td>PGF + Coriolis = flujo geostrófico</td><td>Viento ∝ gradiente de presión</td><td>Ciclones, anticiclones</td><td>Días</td></tr>
+      <tr><td><span class="pill pill-teal">Vientos Locales</span></td><td>9</td><td>Brisas, Chinook, Santa Ana</td><td>Diferencia de calor específico</td><td>Incendios, niebla, confort</td><td>Horas–días</td></tr>
+      <tr><td><span class="pill pill-teal">Circulación Global</span></td><td>10</td><td>Celdas Hadley/Ferrel/Polar + ENSO</td><td>Alisios, westerlies, polares</td><td>El Niño, NAO, Jet Stream</td><td>Estacional–decadal</td></tr>
+      <tr><td><span class="pill pill-blue">Masas de Aire</span></td><td>11</td><td>4 tipos: cP, mP, mT, cT</td><td>Frentes fríos/cálidos/ocluidos</td><td>Nevadas, olas de calor, lluvias</td><td>Días</td></tr>
+      <tr><td><span class="pill pill-red">Ciclones Extrat.</span></td><td>12–13</td><td>Teoría del frente polar</td><td>Divergencia aloft → ascenso</td><td>Nevadas fuertes, tormentas invernales</td><td>3–7 días</td></tr>
+      <tr><td><span class="pill pill-amber">Tormentas/Tornados</span></td><td>14</td><td>Superceldas con mesociclón</td><td>Escala Fujita F0–F5</td><td>Granizo, flash floods, tornados</td><td>Minutos–horas</td></tr>
+      <tr><td><span class="pill pill-pink">Huracanes</span></td><td>15</td><td>Motor termodinámico oceánico</td><td>Escala Saffir-Simpson Cat 1–5</td><td>Marejada, inundaciones, vientos</td><td>Días–semanas</td></tr>
+      <tr><td><span class="pill pill-green">Cambio Climático</span></td><td>16</td><td>Forzamiento radiativo por GEI</td><td>CO₂ actual ~385 ppm (2008)</td><td>Glaciaciones, calentamiento global</td><td>Décadas–milenios</td></tr>
+      <tr><td><span class="pill pill-teal">Clima Global</span></td><td>17</td><td>Clasificación Köppen A–E</td><td>Controles: latitud, altitud, mar</td><td>Desiertos costeros, monzones</td><td>Decadal–centenial</td></tr>
+      <tr><td><span class="pill pill-orange">Contaminación</span></td><td>18</td><td>Smog, inversiones, lluvia ácida</td><td>NOx + HC + UV → O₃ (tropos.)</td><td>Episodios de smog, salud pública</td><td>Horas–días</td></tr>
+      <tr><td><span class="pill pill-purple">Óptica Atmos.</span></td><td>19</td><td>Dispersión Rayleigh y refracción</td><td>λ⁻⁴ (dispersión ∝ 1/λ⁴)</td><td>Arcoíris, halos, espejismos</td><td>Instantáneo</td></tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: La atmósfera opera en escalas de tiempo que van desde microsegundos (relámpago) hasta millones de años (evolución de la composición atmosférica). Entender QUÉ PROCESO domina a QUÉ ESCALA es la clave para el pronóstico meteorológico y la comprensión climática.</div>
+</div>
+
+<div class="quiz-wrap" id="quiz-section">
+  <div class="quiz-head">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Cubre todos los capítulos del libro · Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="progress-row">
+    <span class="progress-label" id="prog-text">Respondidas: 0 / 10</span>
+    <div class="stat-bar-wrap" style="flex:1"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a;transition:width 0.3s"></div></div>
+    <span class="progress-label" id="score-text">Correctas: 0</span>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál de los siguientes gases ocupa aproximadamente el 21% del volumen del aire seco en la superficie terrestre?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Nitrógeno (N₂)</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Dióxido de carbono (CO₂)</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Oxígeno (O₂)</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Vapor de agua (H₂O)</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">¿Por qué el hemisferio norte experimenta invierno en enero aunque la Tierra esté más cerca del Sol en ese mes (perihelio)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Porque el Sol emite menos energía en enero</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Porque el eje terrestre está inclinado alejando al hemisferio norte del Sol, con rayos más oblicuos y días más cortos</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Porque la órbita elíptica reduce significativamente la energía recibida en enero</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Porque en enero la mayor parte del agua oceánica absorbe más calor solar</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Una parcela de aire no saturado asciende 2000 m. Si su temperatura inicial era 25°C, ¿cuál será su temperatura aproximada tras el ascenso?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) 13°C</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) 5°C</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) 19°C</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) 25°C (no cambia porque el calor latente compensa)</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">En el proceso de Bergeron-Findeisen (proceso del cristal de hielo), ¿por qué los cristales de hielo crecen a expensas de las gotitas de agua líquida en una nube mixta?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Porque el hielo es más denso y "atrae" las moléculas de agua por gravedad</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Porque las gotitas de agua líquida se evaporan al congelarse espontáneamente</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Porque la presión de vapor de saturación sobre el hielo es menor que sobre el agua líquida, creando un gradiente que mueve el vapor del agua al hielo</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Porque el hielo tiene mayor temperatura superficial y acelera la evaporación de las gotitas cercanas</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la fuerza de Coriolis es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Desvía el viento hacia la derecha en el hemisferio norte</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Es máxima en los polos y nula en el ecuador</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Es la causa de que los ciclones giren en sentido antihorario en el hemisferio norte</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="true">D) Provoca que el agua gire en espiral en el sentido antihorario en los desagües del hemisferio norte</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Por qué el granizo se forma principalmente durante los meses de verano, aunque requiere temperaturas bajo cero para desarrollarse?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) En verano las tormentas generan mayor cantidad de núcleos de condensación</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) El calor del verano produce las fuertes corrientes verticales en los cumulonimbus que mantienen el granizo suspendido mientras crece en la parte alta fría de la nube</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) En verano hay más vapor de agua disponible que alimenta directamente los cristales de hielo</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Las bajas temperaturas veraniegas en las capas medias de la atmósfera favorecen la congelación</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Qué distingue a una tormenta supercelda de una tormenta multicelda y por qué la supercelda produce tornados con mayor frecuencia?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) La supercelda es simplemente más grande, lo que genera más precipitación y más tornados por área</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) La supercelda ocurre solo en invierno, cuando hay mayor contraste entre masas de aire</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) La supercelda tiene un mesociclón — núcleo de rotación sostenida dentro de la nube — que proporciona la vorticidad necesaria para generar tornados</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) La supercelda se caracteriza por tener múltiples celdas en distintas etapas, incluyendo siempre al menos una con rotación</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Lima (Perú) es una ciudad costera tropical, pero tiene un clima árido con niebla persistente en invierno. ¿Cuál es la principal causa de esta condición paradójica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) La cordillera de los Andes bloquea la humedad del Atlántico hacia Lima</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Lima se ubica muy lejos del ecuador, lo que reduce las lluvias convectivas tropicales</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) La Corriente de Humboldt enfría las aguas costeras, creando una inversión de subsidencia que estabiliza la atmósfera e impide lluvias, pero permite la formación de niebla baja</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) El monzón del Pacífico Sur bloquea el flujo de humedad hacia la costa peruana en los meses de invierno</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes describe correctamente el mecanismo del smog fotoquímico típico de ciudades como Lima o Los Ángeles?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) SO₂ + agua → H₂SO₄ → niebla ácida que reacciona con el polvo en suspensión</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) CO₂ + N₂ → smog bajo inversión térmica nocturna que se disipa al amanecer</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) NOx + hidrocarburos + luz solar → ozono troposférico + PAN y otros oxidantes; la inversión térmica atrapa estos productos</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Partículas de polvo + vapor de agua + CO → humo marrón que se mantiene en la capa límite por falta de viento</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Por qué el cielo es azul durante el día pero adquiere colores rojo-naranja al amanecer y atardecer?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Al amanecer y atardecer las nubes en el horizonte reflejan el calor acumulado en el suelo, enrojeciendo la luz</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) La dispersión de Rayleigh dispersa la luz azul (λ corta) en todas direcciones durante el día; al amanecer/atardecer los rayos viajan por más atmósfera, dispersando todo el azul y dejando pasar solo el rojo</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Los aerosoles y el vapor de agua al atardecer absorben las longitudes de onda cortas y emiten en longitudes de onda rojas</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) El efecto Doppler del movimiento de la Tierra aleja la longitud de onda de la luz solar hacia el rojo en las horas extremas del día</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <h3 id="result-score">–</h3>
+    <p id="result-msg">–</p>
+    <button class="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Ahrens, C.D. (2009). Meteorology Today: An Introduction to Weather, Climate, and the Environment (9th ed.). Brooks/Cole, Cengage Learning. ISBN 978-0-495-55573-5.</span>
+  <span class="fc">| IPCC Fourth Assessment Report (AR4), 2007.</span>
+  <span class="fc">| NOAA/National Weather Service operational guidelines.</span>
+</div>
+
+</div>
+
+<script>
+var answered = 0, correct = 0;
+var feedbacks = {
+  '1': {c:'C', ok:'Correcto. El O₂ ocupa ~21% del aire seco. El gas más abundante es el N₂ (~78%). El CO₂ representa solo 0.038% y el vapor de agua varía entre 0-4% pero no es constante como componente de "aire seco".', wrong:'Incorrecto. La respuesta correcta es C (O₂ ~21%). El N₂ es el más abundante con ~78%. El CO₂ es solo 0.038% y el vapor de agua varía mucho (0-4%) y no se incluye en el "aire seco".'},
+  '2': {c:'B', ok:'Correcto. Las estaciones dependen del ángulo de incidencia solar y la duración del día, ambos controlados por la inclinación axial (23.5°). En enero, el HN tiene días cortos y rayos oblicuos. La distancia al sol (perihelio) solo varía la energía un ~3.5% — insuficiente para crear las estaciones.', wrong:'Incorrecto. La respuesta correcta es B. La inclinación del eje terrestre (23.5°) controla las estaciones: en enero el HN tiene ángulo solar bajo y días cortos. En realidad en enero estamos MÁS CERCA del Sol (perihelio) pero igual hace frío.'},
+  '3': {c:'B', ok:'Correcto. La tasa adiabática seca (DALR) es 10°C por cada 1000 m. Ascendiendo 2000 m: 25°C − (10°C × 2) = 5°C. Este enfriamiento ocurre sin intercambio de calor con el entorno (proceso adiabático) y se debe a la expansión del aire al disminuir la presión.', wrong:'Incorrecto. La respuesta correcta es B (5°C). Usa DALR = 10°C/1000 m para aire no saturado: 25°C − 10°C/km × 2 km = 5°C. Si el aire estuviera saturado, usaríamos la tasa húmeda (≈6°C/km) y la temperatura sería mayor.'},
+  '4': {c:'C', ok:'Correcto. La clave está en la diferencia de presiones de vapor de saturación: sobre el hielo es MENOR que sobre el agua líquida a la misma temperatura. Esto crea un gradiente donde el vapor migra desde el agua (alta presión de vapor) hacia el hielo (baja presión), haciendo que el hielo crezca y el agua se evapore.', wrong:'Incorrecto. La respuesta correcta es C. El proceso de Bergeron se basa en que la presión de vapor de saturación sobre el hielo es menor que sobre el agua líquida → el vapor "fluye" del agua hacia el hielo → los cristales crecen y las gotitas de agua se evaporan.'},
+  '5': {c:'D', ok:'Correcto (afirmación FALSA). El efecto Coriolis es insignificante a la escala de un lavabo o baño. Solo importa en sistemas de cientos de kilómetros (ciclones, anticiclones). El sentido del remolino en un desagüe depende de la forma del recipiente y cómo se llenó el agua, no de Coriolis.', wrong:'Incorrecto. La afirmación FALSA es D. El efecto Coriolis es despreciable a la escala de un desagüe doméstico — su influencia solo es significativa en sistemas meteorológicos de escala sinóptica (cientos de km). Las demás afirmaciones (A, B, C) son correctas.'},
+  '6': {c:'B', ok:'Correcto. El granizo requiere dos condiciones: (1) temperaturas bajo cero en la parte alta de la nube (siempre disponibles en cumulonimbus, incluso en verano), y (2) fuertes corrientes ascendentes que mantengan el granizo suspendido mientras acumula capas de hielo. El calor del verano genera la inestabilidad necesaria para estas corrientes verticales intensas.', wrong:'Incorrecto. La respuesta correcta es B. El granizo crece en la zona fría superior del cumulonimbus, suspendido por fuertes corrientes ascendentes (updrafts). El calor del verano genera la inestabilidad atmosférica que produce estas corrientes intensas. En invierno hay menos inestabilidad → menos updrafts → menos granizo.'},
+  '7': {c:'C', ok:'Correcto. La característica definitoria de una supercelda es su mesociclón: una región de rotación vertical persistente dentro de la nube, generada por el cizallamiento del viento (cambio de dirección y velocidad del viento con la altura). Esta rotación preexistente es la que eventualmente produce tornados al intensificarse.', wrong:'Incorrecto. La respuesta correcta es C. La supercelda se distingue por tener un mesociclón — columna de aire en rotación dentro del cumulonimbus — producido por el cizallamiento del viento en altura. Este mesociclón es el "semillero" de los tornados, que se forman cuando la rotación se extiende hacia abajo.'},
+  '8': {c:'C', ok:'Correcto. La Corriente de Humboldt (también llamada Corriente del Perú) trae aguas frías del sur a lo largo de la costa peruana. Estas aguas frías crean una inversión de temperatura (el aire sobre el agua fría es más frío que el aire superior), lo que estabiliza la columna atmosférica, impide la convección y las lluvias, pero permite la formación de niebla y garúa a baja altitud.', wrong:'Incorrecto. La respuesta correcta es C. La Corriente de Humboldt enfría las aguas costeras → inversión de subsidencia → atmósfera estable → sin lluvias convectivas, pero con niebla persistente. Los Andes también contribuyen bloqueando la humedad amazónica, pero el mecanismo principal es la corriente oceánica fría.'},
+  '9': {c:'C', ok:'Correcto. El smog fotoquímico clásico sigue esta cadena: los vehículos emiten NOx e hidrocarburos → la radiación UV solar cataliza reacciones → se forma O₃ troposférico, PAN (peroxiacetilnitrato) y otros oxidantes. Una inversión térmica (como la de Lima en invierno) atrapa estos contaminantes cerca del suelo, concentrándolos.', wrong:'Incorrecto. La respuesta correcta es C. El smog fotoquímico requiere: precursores (NOx + hidrocarburos, principalmente de vehículos), luz solar como catalizador, y condiciones de inversión térmica para atrapar los productos. El SO₂ produce smog industrial (tipo Londres), distinto del fotoquímico (tipo LA/Lima).'},
+  '10': {c:'B', ok:'Correcto. La dispersión de Rayleigh establece que la dispersión es inversamente proporcional a λ⁴: la luz azul (longitud de onda corta) se dispersa ~10 veces más que la roja. Al mediodía, el azul dispersado llena el cielo. Al amanecer/atardecer, los rayos recorren un camino mucho más largo a través de la atmósfera, dispersando todo el azul antes de llegar y dejando pasar solo el naranja-rojo.', wrong:'Incorrecto. La respuesta correcta es B. La dispersión de Rayleigh (proporcional a 1/λ⁴) hace que la luz de onda corta (azul) se disperse mucho más. Al amanecer/atardecer, el camino óptico es más largo → todo el azul se dispersa antes de llegar al observador → solo el rojo y naranja llegan.'}
+};
+
+document.querySelector('.quiz-wrap').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('qbtn') || e.target.disabled) return;
+  var btn = e.target;
+  var qNum = btn.dataset.q;
+  var isCorrect = btn.dataset.correct === 'true';
+  var card = document.getElementById('q' + qNum);
+  var fb = document.getElementById('fb' + qNum);
+  var allBtns = card.querySelectorAll('.qbtn');
+  
+  allBtns.forEach(function(b) {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('show-correct');
+  });
+  
+  if (isCorrect) {
+    btn.classList.add('correct');
+    btn.textContent = '✅ ' + btn.textContent;
+    fb.className = 'qfeedback ok';
+    fb.innerHTML = '✅ <strong>¡Correcto!</strong> ' + feedbacks[qNum].ok;
+    correct++;
+  } else {
+    btn.classList.add('incorrect');
+    btn.textContent = '❌ ' + btn.textContent;
+    fb.className = 'qfeedback wrong';
+    fb.innerHTML = '❌ <strong>Incorrecto.</strong> La respuesta correcta es ' + feedbacks[qNum].c + '. ' + feedbacks[qNum].wrong;
+    card.querySelector('[data-correct="true"]').textContent = '✅ ' + card.querySelector('[data-correct="true"]').textContent;
+  }
+  fb.style.display = 'block';
+  answered++;
+  
+  var pct = Math.round(answered / 10 * 100);
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('prog-text').textContent = 'Respondidas: ' + answered + ' / 10';
+  document.getElementById('score-text').textContent = 'Correctas: ' + correct;
+  
+  if (answered === 10) {
+    var panel = document.getElementById('result-panel');
+    panel.style.display = 'block';
+    document.getElementById('result-score').textContent = correct + ' / 10 correctas';
+    var msg, bg;
+    if (correct <= 4) { msg = '📖 Necesitas repasar el material. Vuelve a los capítulos con las preguntas que fallaste.'; bg = '#fef2f2'; }
+    else if (correct <= 7) { msg = '👍 ¡Buen avance! Sigue repasando los temas donde fallaste.'; bg = '#fefce8'; }
+    else { msg = '🏆 ¡Excelente dominio del tema! Dominas los conceptos fundamentales de meteorología.'; bg = '#f0fdf4'; }
+    document.getElementById('result-msg').textContent = msg;
+    panel.style.background = bg;
+    panel.style.borderRadius = '10px';
+    panel.style.padding = '16px';
+    panel.style.border = '0.5px solid var(--color-border-tertiary)';
+  }
+});
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('prog-text').textContent = 'Respondidas: 0 / 10';
+  document.getElementById('score-text').textContent = 'Correctas: 0';
+  document.getElementById('result-panel').style.display = 'none';
+  
+  for (var i = 1; i <= 10; i++) {
+    var card = document.getElementById('q' + i);
+    var fb = document.getElementById('fb' + i);
+    fb.style.display = 'none';
+    fb.className = 'qfeedback';
+    var btns = card.querySelectorAll('.qbtn');
+    btns.forEach(function(b) {
+      b.disabled = false;
+      b.className = 'qbtn';
+      var txt = b.textContent;
+      b.textContent = txt.replace(/^[✅❌] /, '');
+    });
+  }
+}
+</script>

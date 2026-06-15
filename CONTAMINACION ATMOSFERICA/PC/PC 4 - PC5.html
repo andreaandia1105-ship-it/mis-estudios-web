@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-size:13px;background:var(--color-background-tertiary)}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.fc1{grid-column:1/-1}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.s2{grid-column:span 2}
+.s3{grid-column:span 3}
+.secbar{grid-column:1/-1;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--color-text-primary);letter-spacing:.3px}
+.titlebar{grid-column:1/-1;background:#0f1e3a;border-radius:12px;padding:14px 18px;color:#fff}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titlebar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.pill{font-size:10px;padding:2px 9px;border-radius:20px;display:inline-block}
+.pb{background:#1e3a5f;color:#93c5fd}
+.pg{background:#14532d;color:#86efac}
+.py{background:#422006;color:#fef08a}
+.pp{background:#2e1065;color:#c4b5fd}
+.pt{background:#042f2e;color:#5eead4}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:700}
+.bh-b{background:#dbeafe;color:#1e3a8a}.bh-g{background:#dcfce7;color:#14532d}
+.bh-y{background:#fef9c3;color:#713f12}.bh-p{background:#ede9fe;color:#4c1d95}
+.bh-t{background:#ccfbf1;color:#134e4a}.bh-o{background:#ffedd5;color:#7c2d12}
+.bh-r{background:#fee2e2;color:#991b1b}.bh-gr{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){
+.bh-b{background:#1e3a5f;color:#93c5fd}.bh-g{background:#14532d;color:#86efac}
+.bh-y{background:#422006;color:#fef08a}.bh-p{background:#2e1065;color:#c4b5fd}
+.bh-t{background:#042f2e;color:#5eead4}.bh-o{background:#431407;color:#fed7aa}
+.bh-r{background:#450a0a;color:#fca5a5}.bh-gr{background:#1e293b;color:#94a3b8}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;line-height:1.5}
+.def-b{border-color:#3b82f6}.def-g{border-color:#22c55e}.def-y{border-color:#eab308}
+.def-p{border-color:#8b5cf6}.def-t{border-color:#14b8a6}.def-o{border-color:#f97316}
+.def-r{border-color:#ef4444}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;color:var(--color-text-primary)}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-b{background:#3b82f6}.dot-g{background:#22c55e}.dot-y{background:#eab308}
+.dot-p{background:#8b5cf6}.dot-t{background:#14b8a6}.dot-o{background:#f97316}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0;line-height:1.5}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.5}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#eab308}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:6px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);font-family:'Oswald',sans-serif;text-align:left;font-size:11px}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;color:var(--color-text-primary)}
+.footer-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;min-width:100px}
+.fc{font-size:11px;color:#94a3b8;line-height:1.7}
+/* IMAGE PLACEHOLDER */
+.img-placeholder{border:2px dashed var(--color-border-secondary);border-radius:8px;background:var(--color-background-secondary);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;min-height:100px;margin:6px 0;color:var(--color-text-secondary);font-size:11px}
+.img-placeholder strong{font-family:'Oswald',sans-serif;font-size:12px;color:var(--color-text-primary);margin-bottom:4px}
+.img-placeholder code{font-size:10px;background:var(--color-background-primary);padding:2px 6px;border-radius:4px;margin-top:4px;display:block;word-break:break-all}
+/* QUIZ */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:0 0 16px 0;overflow:hidden}
+.quiz-header{background:#0f1e3a;color:#fff;padding:14px 18px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.quiz-body{padding:14px 18px}
+.progress-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:8px 0}
+.progress-bar-fill{height:100%;border-radius:20px;background:#22c55e;transition:width .3s}
+.progress-text{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.qcard{margin-bottom:18px;padding-bottom:18px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qcard:last-of-type{border-bottom:none}
+.qnum{font-size:11px;color:var(--color-text-secondary);font-family:'Oswald',sans-serif;margin-bottom:3px}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;color:var(--color-text-primary);line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-primary);border-color:var(--color-border-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.show-correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:.7;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;display:none}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.qfeedback.ok{background:#14532d;color:#86efac}
+.qfeedback.fail{background:#450a0a;color:#fca5a5}
+}
+#results-panel{display:none;margin:12px 18px 0;border-radius:10px;padding:14px 16px;font-size:13px}
+.res-r{background:#fee2e2;color:#991b1b}.res-y{background:#fef9c3;color:#713f12}.res-g{background:#dcfce7;color:#14532d}
+@media(prefers-color-scheme:dark){.res-r{background:#450a0a;color:#fca5a5}.res-y{background:#422006;color:#fef08a}.res-g{background:#14532d;color:#86efac}}
+#results-panel h3{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:6px}
+#reset-btn{margin-top:10px;background:#0f1e3a;color:#7dd3fc;border:none;border-radius:8px;padding:7px 16px;cursor:pointer;font-size:12px;font-family:'Source Sans 3',sans-serif}
+</style>
+
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="titlebar">
+  <h1>🌬️ Meteorología y Dispersión Atmosférica de Contaminantes</h1>
+  <p>Ingeniería Ambiental · Capítulos 9-7 al 9-10 · Davis &amp; Masten (2009)</p>
+  <div class="pills">
+    <span class="pill pb">Estabilidad Atmosférica</span>
+    <span class="pill pg">Plumas de Dispersión</span>
+    <span class="pill py">Modelo Gaussiano</span>
+    <span class="pill pp">Inversión Térmica</span>
+    <span class="pill pt">Calidad del Aire Interior</span>
+    <span class="pill pb">Control de Emisiones</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: METEOROLOGÍA -->
+<div class="secbar">🌡️ SECCIÓN 1 — METEOROLOGÍA DEL AIRE: PRESIÓN, VIENTO Y TURBULENCIA</div>
+
+<!-- Bloque: La Atmósfera como Motor -->
+<div class="block s2">
+  <span class="bh bh-b">La Atmósfera como Motor (p. 623–624)</span>
+  <div class="def def-b">La atmósfera funciona como un motor térmico impulsado por el sol: expande y comprime gases, intercambia calor y genera circulación global. La diferencia de calentamiento entre el ecuador y los polos genera la circulación general; la rotación terrestre produce los climas regionales.</div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Altas y bajas presiones:</strong> Las altas (anticiclones) son zonas de mayor presión → cielos despejados y estabilidad. Las bajas (ciclones) son zonas de menor presión → tiempo tormentoso. Las isobaras (líneas de igual presión) muestran la "topografía" de presión; cuanto más juntas, mayor el gradiente y más fuerte el viento.</span></div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>Efecto Coriolis:</strong> La rotación terrestre desvía el viento. En el hemisferio norte, el aire gira en sentido horario alrededor de los anticiclones y antihorario alrededor de los ciclones. Sin Coriolis, el viento iría perpendicular a las isobaras; con él, sigue una trayectoria curvada.</span></div>
+  <div class="flow">
+    <span class="fbox">☀️ Radiación solar diferencial</span>
+    <span class="farrow">→</span>
+    <span class="fbox">Gradiente de presión</span>
+    <span class="farrow">→</span>
+    <span class="fbox">Viento básico</span>
+    <span class="farrow">+</span>
+    <span class="fbox">Coriolis</span>
+    <span class="farrow">→</span>
+    <span class="fbox">Patrón real del viento</span>
+  </div>
+  <div class="exam">🎯 EXAMEN: Explica por qué los anticiclones se asocian con buen tiempo y condiciones de estabilidad atmosférica, mientras que los ciclones se asocian con mal tiempo e inestabilidad. ¿Cómo influye el efecto Coriolis en la dirección del viento en el hemisferio norte?</div>
+</div>
+
+<!-- Bloque: Turbulencia -->
+<div class="block">
+  <span class="bh bh-p">Turbulencia Atmosférica (p. 624)</span>
+  <div class="def def-p">La turbulencia son fluctuaciones aleatorias de velocidad y dirección del viento que se superponen al viento medio. Cuanta más turbulencia, mayor la dilución y dispersión de contaminantes. Hay dos tipos fundamentales.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #8b5cf6">
+      <strong>Turbulencia Mecánica</strong><br>
+      Causada por el <em>corte de velocidad</em> del viento: velocidad = 0 en superficie y aumenta con la altura. Este gradiente genera remolinos (eddies) que alimentan otros más grandes. A mayor velocidad media del viento → mayor turbulencia mecánica → mayor dispersión.
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316">
+      <strong>Turbulencia Térmica</strong><br>
+      Causada por el calentamiento diferencial del suelo, igual que calentar el fondo de un beaker genera corrientes de densidad. Los pilotos de planeadores aprovechan estas "térmicas". En noches claras ocurre lo opuesto: el suelo enfría el aire → corriente descendente.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir turbulencia mecánica con turbulencia térmica. La mecánica depende principalmente de la velocidad del viento; la térmica, del diferencial de temperatura suelo-aire. Ambas actúan simultáneamente.</div>
+</div>
+
+<!-- SECCIÓN 2: ESTABILIDAD -->
+<div class="secbar">📊 SECCIÓN 2 — ESTABILIDAD ATMOSFÉRICA Y TASA DE LAPSO</div>
+
+<!-- Bloque: Tasa de Lapso y Estabilidad -->
+<div class="block s2">
+  <span class="bh bh-y">Estabilidad Atmosférica y Tasa de Lapso (p. 625–627)</span>
+  <div class="def def-y">La estabilidad es la tendencia de la atmósfera a resistir o amplificar el movimiento vertical. Se determina comparando la tasa de lapso ambiental (cómo cae la temperatura real con la altura) con la tasa adiabática seca Γ ≈ 1°C/100 m (la tasa a la que se enfría un volumen de aire seco que asciende sin intercambio de calor).</div>
+  <div class="rx">Tasa de lapso ambiental = −ΔT/Δz (°C/100 m)<br>
+Si lapso &gt; Γ → SUPERADIABÁTICO → <span style="color:#fca5a5">INESTABLE</span><br>
+Si lapso = Γ → <span style="color:#fef08a">NEUTRAL</span><br>
+Si lapso &lt; Γ → SUBADIABÁTICO → <span style="color:#86efac">ESTABLE</span></div>
+
+  <!-- IMAGEN: Figura 9-17 -->
+  <div class="img-placeholder">
+    <strong>📸 IMAGEN RECOMENDADA: Figura 9-17</strong>
+    <span>Diagrama de tasa de lapso y volumen de aire desplazado (neutral, inestable, estable)</span>
+    <code>Reemplaza este bloque con: &lt;img src="TU_URL_AQUÍ" alt="Figura 9-17 tasa de lapso" style="width:100%;border-radius:6px;"&gt;</code>
+  </div>
+
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <strong>🟢 Neutral</strong><br>
+      Lapso ambiental = Γ. Un globo de aire desplazado vuelve a su posición original. La turbulencia mecánica no se amplifica ni se inhibe. Ocurre con cielos nublados, día o noche.
+    </div>
+    <div class="mini" style="border-top:3px solid #ef4444">
+      <strong>🔴 Inestable</strong><br>
+      Lapso &gt; Γ (superadiabático). Un globo que sube queda más caliente que el ambiente → sigue subiendo solo. Gran dilución de contaminantes. Asociado a ciclones y días soleados con vientos ligeros.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>🔵 Estable</strong><br>
+      Lapso &lt; Γ (subadiabático). Un globo desplazado queda más frío que el ambiente → regresa. Inhibe la dispersión vertical. Caso extremo: inversión térmica (T aumenta con altura). Asociado a anticiclones.
+    </div>
+  </div>
+  <div class="rx">Ejemplo 9-4: ΔT/ΔZ = (11.13 − 14.35) / (324 − 2) = −0.01°C/m = −1.00°C/100 m<br>
+Como −1.00 = −Γ → Atmósfera NEUTRAL</div>
+  <div class="exam">🎯 EXAMEN: A las 3 PM de un día de verano soleado, con viento de 3 m/s, se miden las siguientes temperaturas: 20.5°C a 10 m y 17.3°C a 330 m. Calcula la tasa de lapso ambiental e indica si la atmósfera es estable, neutral o inestable. Justifica tu respuesta comparando con Γ.</div>
+</div>
+
+<!-- Bloque: Tipos de Pluma -->
+<div class="block">
+  <span class="bh bh-t">Tipos de Pluma (p. 628)</span>
+  <div class="def def-t">El tipo de pluma que emite una chimenea refleja la estabilidad de la atmósfera en distintas capas. Hay 6 tipos clásicos; cada uno tiene implicaciones diferentes para la concentración en suelo.</div>
+
+  <!-- IMAGEN: Figura 9-18 -->
+  <div class="img-placeholder">
+    <strong>📸 IMAGEN RECOMENDADA: Figura 9-18</strong>
+    <span>Los 6 tipos de pluma: looping, coning, fanning, fumigation, trapping, lofting</span>
+    <code>Reemplaza con: &lt;img src="TU_URL_AQUÍ" alt="6 tipos de pluma" style="width:100%;border-radius:6px;"&gt;</code>
+  </div>
+
+  <div class="item"><span class="dot dot-t"></span><span><strong>Looping</strong> (lazo): lapso fuerte → inestable → grandes ondulaciones, puede traer contaminantes al suelo cerca de la fuente.</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Coning</strong> (cono): lapso débil → ligeramente inestable → dispersión uniforme en cono. La más común.</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Fanning</strong> (abanico): inversión → muy estable → pluma se extiende horizontalmente sin dispersión vertical. Peligrosa a gran distancia.</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Fumigation</strong> (fumigación): lapso bajo, inversión encima → la pluma queda atrapada y cae al suelo. Situación MÁS PELIGROSA para concentración a nivel de suelo.</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Trapping</strong> (atrapamiento): lapso débil bajo, inversión arriba → dispersión limitada entre suelo e inversión.</span></div>
+  <div class="item"><span class="dot dot-t"></span><span><strong>Lofting</strong> (elevación): inversión bajo la chimenea, lapso arriba → la pluma sube sin tocar el suelo. La más benigna para calidad de aire en superficie.</span></div>
+  <div class="warn">⚠️ La fumigación ocurre típicamente al amanecer, cuando el sol destruye la inversión nocturna desde abajo pero aún existe arriba. Es el escenario de mayor riesgo para comunidades cercanas a industrias, como en ciertas temporadas en Lima.</div>
+  <div class="exam">🎯 EXAMEN: Explica por qué la pluma tipo "fumigation" es la más peligrosa para la calidad del aire a nivel de suelo. ¿En qué condiciones meteorológicas y en qué momento del día es más probable que ocurra?</div>
+</div>
+
+<!-- SECCIÓN 3: EFECTOS DE TERRENO -->
+<div class="secbar">🏙️ SECCIÓN 3 — EFECTOS DE TERRENO: ISLAS DE CALOR, BRISAS Y VALLES</div>
+
+<div class="block">
+  <span class="bh bh-o">Isla de Calor Urbana (p. 629)</span>
+  <div class="def def-o">Una isla de calor surge cuando una masa de material (ciudad, complejo industrial) absorbe y re-irradia más calor que su entorno, generando convección vertical moderada sobre ella. Lima Metropolitana es un caso clásico de isla de calor que modifica la dispersión de contaminantes vehiculares.</div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Efecto positivo:</strong> Para fuentes de superficie (autos), la inestabilidad local aumenta el volumen de dilución → menos concentración a nivel de suelo.</span></div>
+  <div class="item"><span class="dot dot-o"></span><span><strong>Efecto negativo:</strong> Las plumas de chimeneas altas que normalmente se dispersarían sobre el campo abierto son traídas a nivel de suelo por la inestabilidad de la isla de calor.</span></div>
+  <div class="exam">🎯 EXAMEN: En una ciudad como Lima, ¿cómo afecta el efecto de isla de calor a la concentración de contaminantes provenientes del tráfico vehicular versus los provenientes de chimeneas industriales altas? Explica el mecanismo en cada caso.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-t">Brisas Mar/Tierra y Valles (p. 629–631)</span>
+  <div class="def def-t">Las brisas locales crean patrones de dispersión complejos que pueden superponer inversiones a la capa superficial, generando fumigaciones a varios kilómetros de la costa.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Brisa de Mar (diurna)</strong><br>
+      El suelo calienta más rápido que el agua → aire sobre tierra sube → aire frío del mar lo reemplaza. Impone una inversión superficial: las plumas de chimeneas costeras hacen fanning cerca, luego fumigación tierra adentro.
+    </div>
+    <div class="mini" style="border-left:3px solid #f97316">
+      <strong>Valles y Montañas</strong><br>
+      De día: paredes del valle se calientan → aire sube. De noche: paredes enfrían → aire baja. Los valles N-S son más susceptibles a inversiones nocturnas persistentes (paredes bloquean el sol matutino). Caso crítico: La Oroya, Perú.
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 4: MODELO GAUSSIANO -->
+<div class="secbar">🧮 SECCIÓN 4 — DISPERSIÓN ATMOSFÉRICA: MODELO GAUSSIANO DE PLUMA (p. 632–643)</div>
+
+<!-- Bloque principal: Modelo Gaussiano -->
+<div class="block s3">
+  <span class="bh bh-y">Modelo de Dispersión Gaussiana de Punto Fuente — Explicación Profunda</span>
+  <div class="def def-y">El modelo gaussiano describe cómo un contaminante emitido por una chimenea se dispersa en el espacio formando una distribución normal (campana de Gauss) tanto en dirección horizontal como vertical. Es la herramienta fundamental de la ingeniería ambiental para estimar concentraciones de contaminantes en puntos específicos bajo el viento.</div>
+
+  <!-- IMAGEN: Figura 9-23 -->
+  <div class="img-placeholder" style="margin-bottom:10px">
+    <strong>📸 IMAGEN RECOMENDADA: Figura 9-23</strong>
+    <span>Sistema de coordenadas de dispersión de pluma (Turner, 1967): ejes X, Y, Z con la chimenea en origen, H = altura efectiva</span>
+    <code>Reemplaza con: &lt;img src="TU_URL_AQUÍ" alt="Sistema coordenadas pluma gaussiana" style="width:100%;border-radius:6px;"&gt;</code>
+  </div>
+
+  <div class="two">
+    <div>
+      <div class="rx" style="text-align:left;line-height:2">
+        <strong style="color:#fef08a;font-size:12px">χ(x,y,0,H) = ECUACIÓN GAUSSIANA COMPLETA</strong><br><br>
+        χ = <u>___E___</u> · exp[−½(y/σy)²] · exp[−½(H/σz)²]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;π·σy·σz·u<br><br>
+        <span style="font-size:10px;color:#93c5fd">
+        χ = concentración en suelo [g/m³]<br>
+        E = tasa de emisión [g/s]<br>
+        σy = desviación estándar horizontal [m]<br>
+        σz = desviación estándar vertical [m]<br>
+        u = velocidad del viento en H [m/s]<br>
+        y = distancia lateral al eje [m]<br>
+        H = altura efectiva de chimenea [m]
+        </span>
+      </div>
+    </div>
+    <div>
+      <div class="rx" style="text-align:left;line-height:2">
+        <strong style="color:#fef08a;font-size:12px">ALTURA EFECTIVA DE CHIMENEA</strong><br><br>
+        H = h + ΔH<br><br>
+        <span style="font-size:10px;color:#93c5fd">h = altura física de la chimenea [m]<br>
+        ΔH = "plume rise" (elevación de la pluma)</span><br><br>
+        <strong style="color:#fef08a;font-size:12px">FÓRMULA DE HOLLAND para ΔH:</strong><br><br>
+        ΔH = (vs·d/u) · [1.5 + 2.68×10⁻²·P·(Ts−Ta)/Ts·d]<br><br>
+        <span style="font-size:10px;color:#93c5fd">
+        vs = velocidad de salida de gas [m/s]<br>
+        d = diámetro de chimenea [m]<br>
+        P = presión atmosférica [kPa]<br>
+        Ts = temperatura del gas en chimenea [K]<br>
+        Ta = temperatura del aire ambiente [K]
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divh"></div>
+  <strong style="font-size:12px;color:var(--color-text-primary)">¿POR QUÉ LA DISTRIBUCIÓN ES GAUSSIANA?</strong>
+  <div class="item" style="margin-top:5px"><span class="dot dot-y"></span><span>La difusión turbulenta es un proceso aleatorio. Los choques al azar de moléculas de contaminante con el aire producen una distribución estadísticamente normal (campana de Gauss), igual que cualquier fenómeno aleatorio con muchos eventos independientes.</span></div>
+  <div class="item"><span class="dot dot-y"></span><span>El término exp[−½(y/σy)²] es la distribución gaussiana horizontal: la mayor concentración está en el eje central (y=0) y decrece simétricamente a los lados.</span></div>
+  <div class="item"><span class="dot dot-y"></span><span>El término exp[−½(H/σz)²] es la distribución vertical, con el factor 2 implícito que simula la <strong>reflexión en el suelo</strong> (el contaminante que llegaría al subsuelo "rebota" hacia arriba, como la luz en un espejo).</span></div>
+  <div class="item"><span class="dot dot-y"></span><span>El denominador π·σy·σz·u expresa que la concentración es <em>inversamente proporcional</em> a la velocidad del viento (más viento = más dilución) y al área de dispersión de la pluma (σy·σz).</span></div>
+
+  <div class="divh"></div>
+  <strong style="font-size:12px;color:var(--color-text-primary)">COEFICIENTES DE DISPERSIÓN σy y σz — CLAVE PARA EL MODELO</strong>
+  <div class="item" style="margin-top:5px"><span class="dot dot-y"></span><span>No son constantes: dependen de la <strong>distancia X sotavento</strong> y de la <strong>clase de estabilidad atmosférica</strong> (A=muy inestable → F=muy estable, según Turner 1967).</span></div>
+
+  <!-- IMAGEN: Figuras 9-24 y 9-25 -->
+  <div class="two" style="margin-top:8px">
+    <div class="img-placeholder">
+      <strong>📸 IMAGEN: Figura 9-24</strong>
+      <span>Coeficiente de dispersión horizontal σy vs distancia (curvas A-F)</span>
+      <code>&lt;img src="TU_URL" alt="sigma_y Turner" style="width:100%;border-radius:6px;"&gt;</code>
+    </div>
+    <div class="img-placeholder">
+      <strong>📸 IMAGEN: Figura 9-25</strong>
+      <span>Coeficiente de dispersión vertical σz vs distancia (curvas A-F)</span>
+      <code>&lt;img src="TU_URL" alt="sigma_z Turner" style="width:100%;border-radius:6px;"&gt;</code>
+    </div>
+  </div>
+
+  <div class="rx" style="text-align:left;margin-top:8px">
+    <strong style="color:#fef08a">ECUACIONES ALTERNATIVAS DE MARTIN (1976) — para cálculo computacional:</strong><br>
+    σy = a · x^0.894 (x en km, σy en m)<br>
+    σz = c · x^d + f<br>
+    <span style="font-size:10px;color:#93c5fd">donde a, c, d, f dependen de la clase de estabilidad (Tabla 9-14).<br>
+    Clase D (neutral): a=68, c=44.5, d=0.516, f=−13.0 (x&gt;1 km)</span>
+  </div>
+
+  <div class="rx" style="text-align:left">
+    <strong style="color:#fef08a">CORRECCIÓN DE VELOCIDAD DE VIENTO CON LA ALTURA (Ley de Potencia):</strong><br>
+    u₂ = u₁ · (z₂/z₁)^p<br>
+    <span style="font-size:10px;color:#93c5fd">p = exponente que depende de estabilidad y tipo de terreno (rural/urbano)<br>
+    Ejemplo: Clase D rural: p=0.15 | Clase D urbano: p=0.25</span>
+  </div>
+
+  <div class="divh"></div>
+  <strong style="font-size:12px;color:var(--color-text-primary)">EJEMPLO RESUELTO — Ejemplo 9-5 (SO₂ de planta carboeléctrica)</strong>
+  <div class="rx" style="text-align:left">
+    E=1,656.2 g/s · h=120m · d=1.20m · vs=10 m/s · Ts=315°C=588K · Ta=25°C=298K · P=95kPa · u=4.50 m/s<br>
+    Estabilidad: Nublado → Clase D (neutral)<br><br>
+    ΔH = (10×1.2/4.50)×[1.5 + 2.68×10⁻²×95×(588−298)/588×1.2]<br>
+    ΔH ≈ 8.0 m → H = 120 + 8 = <strong style="color:#fef08a">128 m</strong><br><br>
+    σy = 68×(3)^0.894 = 181.6 m<br>
+    σz = 44.5×(3)^0.516 − 13 = 65.4 m<br><br>
+    χ = [1656.2/(π×181.6×65.4×4.50)] × exp(0) × exp[−½(128/65.4)²]<br>
+    χ ≈ <strong style="color:#fef08a">1.5×10⁻³ g/m³ ≈ 0.56 ppm SO₂</strong>
+  </div>
+
+  <div class="warn">⚠️ LÍMITES DEL MODELO: Los coeficientes σy y σz de Turner se basaron en mediciones en campo abierto con muestreo de 10 minutos. NO deben usarse para terreno urbano complejo, terreno rugoso o períodos de tiempo largos sin correcciones. El modelo es una estimación, no una predicción exacta.</div>
+  <div class="exam">🎯 EXAMEN: Una chimenea de 80 m de altura emite SO₂ a 800 g/s. En un día soleado de verano con viento de 3 m/s, calcula la concentración a nivel de suelo a 2 km sotavento en el eje de la pluma (y=0), asumiendo ΔH=20 m. Usa estabilidad clase B y las ecuaciones de Martin para x&lt;1 km y x&gt;1 km según corresponda.</div>
+</div>
+
+<!-- SECCIÓN 5: MODELOS ESPECIALES -->
+<div class="secbar">🔬 SECCIÓN 5 — MODELOS ESPECIALES: INVERSIÓN ALOFT, CONCENTRACIÓN MÁXIMA Y FUENTE LINEAL</div>
+
+<div class="block">
+  <span class="bh bh-r">Inversión en Altura (p. 639–640)</span>
+  <div class="def def-r">Cuando existe una inversión térmica por encima de la chimenea, actúa como "tapa" que impide la dispersión vertical. El modelo gaussiano básico debe modificarse: la pluma primero sigue la ecuación estándar, luego se mezcla completamente hasta la base de la inversión y la concentración se estima con la "forma corta".</div>
+  <div class="rx" style="text-align:left">
+    <strong style="color:#fca5a5">DISTANCIA DE CONTACTO xL:</strong><br>
+    σz = 0.47(L − H) → usar gráfico 9-25 para encontrar xL<br>
+    (L = altura base de inversión [m], H = altura efectiva chimenea)<br><br>
+    <strong style="color:#fca5a5">PARA x ≥ 2·xL (mezcla completa):</strong><br>
+    χ = E / [(2π)^0.5 · σy · u · L]<br>
+    <span style="font-size:10px;color:#e9b4b4">σy calculado con la estabilidad de la capa BAJO la inversión</span>
+  </div>
+  <div class="exam">🎯 EXAMEN: Con altura efectiva H=50 m e inversión base a L=350 m con viento de 7.3 m/s y estabilidad C, ¿a qué distancia mínima sotavento debes usar la "forma corta" de dispersión? Muestra el procedimiento completo.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-g">Fuente Lineal Continua (p. 642–643)</span>
+  <div class="def def-g">Una autopista con tráfico continuo, una fila de chimeneas o el borde de un campo en llamas se modelan como fuente lineal infinita perpendicular al viento. La dilución horizontal es infinita (fuente extendida), solo importa la dispersión vertical.</div>
+  <div class="rx" style="text-align:left">
+    χ = 2·E_línea / [(2π)^0.5 · σz · u] · exp[−½(H/σz)²]<br>
+    <span style="font-size:10px;color:#86efac">E_línea = tasa de emisión por unidad de longitud [g/(m·s)]<br>
+    Si la fuente está en suelo (H=0): el exponencial = 1</span>
+  </div>
+  <div class="rx" style="text-align:left">
+    <strong style="color:#bbf7d0">Ejemplo 9-8 (hidrocarburos NMHC en autopista):</strong><br>
+    8000 veh/h × (1h/3600s) = 2.22 veh/s<br>
+    E_línea = 0.25 g/mi × 2.22 veh/s × (1mi/1609m) = 3.45×10⁻⁴ g/(s·m)<br>
+    Estabilidad D, x=0.3 km → σz=12.17 m<br>
+    χ = 2×3.45×10⁻⁴ / (2.507×12.17×4) = 5.65×10⁻⁶ g/m³ NMHC
+  </div>
+  <div class="warn">⚠️ La ecuación de fuente lineal solo es válida cuando el ángulo entre el viento y la fuente es ≥ 45°. Si es menor, el resultado pierde precisión y la ecuación no debe aplicarse.</div>
+</div>
+
+<!-- SECCIÓN 6: CALIDAD DEL AIRE INTERIOR -->
+<div class="secbar">🏠 SECCIÓN 6 — MODELO DE CALIDAD DEL AIRE INTERIOR (p. 643–647)</div>
+
+<div class="block s2">
+  <span class="bh bh-p">Balance de Masa para Espacios Interiores (p. 643–647)</span>
+  <div class="def def-p">Un recinto (vivienda, oficina) se modela como una caja bien mezclada donde el contaminante entra desde el exterior, se genera internamente y se pierde por ventilación y reacción química. Es esencial para evaluar exposición a formaldehído, CO de calentadores, radón, etc.</div>
+
+  <!-- IMAGEN: Figura 9-28 -->
+  <div class="img-placeholder">
+    <strong>📸 IMAGEN RECOMENDADA: Figura 9-28</strong>
+    <span>Modelo de caja para calidad del aire interior: Q, Ca, E, k, C</span>
+    <code>&lt;img src="TU_URL" alt="Modelo caja calidad aire interior" style="width:100%;border-radius:6px;"&gt;</code>
+  </div>
+
+  <div class="rx" style="text-align:left">
+    <strong style="color:#c4b5fd">ECUACIÓN DIFERENCIAL (balance de masa):</strong><br>
+    V·dC/dt = Q·Ca + E − Q·C − k·C·V<br><br>
+    <strong style="color:#c4b5fd">SOLUCIÓN GENERAL:</strong><br>
+    Ct = {(E/V + Ca·Q/V)/(Q/V + k)} × [1 − exp(−(Q/V+k)·t)] + Co·exp(−(Q/V+k)·t)<br><br>
+    <strong style="color:#c4b5fd">ESTADO ESTACIONARIO (dC/dt=0):</strong><br>
+    C_ss = (Q·Ca + E) / (Q + k·V)<br><br>
+    <span style="font-size:10px;color:#e9d5ff">
+    V = volumen [m³] | C = concentración [g/m³] | Q = tasa ventilación [m³/s]<br>
+    Ca = conc. exterior | E = tasa emisión interior [g/s] | k = coef. decaimiento [s⁻¹]
+    </span>
+  </div>
+
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #8b5cf6">
+      <strong>Fuentes interiores importantes:</strong><br>
+      • Calentadores de kerosene → SO₂, NO₂<br>
+      • Maderas aglomeradas (MDF) → Formaldehído (hasta 55,000 mg/día·m²)<br>
+      • Pinturas base solvente → COVs (decano, nonano)<br>
+      • Fotocopiadoras → xilenos, estireno<br>
+      • Alfombras sintéticas → tolueno, TVOC
+    </div>
+    <div class="mini" style="border-left:3px solid #a855f7">
+      <strong>Ejemplo 9-9 (calentador kerosene):</strong><br>
+      V=200 m³, E=50 mg/s, Ca=Co=100 μg/m³<br>
+      Q=0.05 m³/s, k(SO₂)=6.39×10⁻⁵ s⁻¹<br>
+      t=1h=3600s<br>
+      Ct = 876.08(1−0.323)+100(0.323)<br>
+      <strong>Ct ≈ 625 μg/m³</strong> (vs 100 inicial)
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Explica por qué el radón es especialmente peligroso en edificios con baja ventilación. Usando la ecuación de estado estacionario del modelo de caja interior, describe cómo aumentar Q afecta la concentración en el interior y cuál es el límite teórico si Q → ∞.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-b">Control de Contaminantes Gaseosos — Absorción (p. 647)</span>
+  <div class="def def-b">La absorción transfiere el contaminante de fase gaseosa a fase líquida (lavado). Es un proceso de transferencia de masa por difusión desde zonas de alta concentración a baja concentración. El contaminante puede o no reaccionar con el líquido.</div>
+  <div class="flow">
+    <span class="fbox">Difusión del gas → superficie del líquido</span>
+    <span class="farrow">→</span>
+    <span class="fbox">Transferencia interfaz gas/líquido (disolución)</span>
+    <span class="farrow">→</span>
+    <span class="fbox">Difusión en el líquido hacia el interior</span>
+  </div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #3b82f6"><strong>Cámaras de aspersión</strong><br>Gotas de líquido absorben el gas contaminante. Equipos compactos, buen contacto gas-líquido. Generan lodo que debe tratarse.</div>
+    <div class="mini" style="border-left:3px solid #6366f1"><strong>Torres de absorción</strong><br>Película delgada de líquido como medio absorbente. Mayor área de contacto. Más eficientes para gases muy solubles (SO₂, HCl, NH₃).</div>
+  </div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="block s3">
+  <span class="bh bh-gr">Tabla Integradora: Resumen General del Tema</span>
+  <table class="tbl">
+    <tr>
+      <th>Concepto</th>
+      <th>Definición clave</th>
+      <th>Condición crítica</th>
+      <th>Fórmula/Herramienta</th>
+      <th>Implicación práctica</th>
+    </tr>
+    <tr>
+      <td>Estabilidad atmosférica</td>
+      <td>Resistencia al movimiento vertical del aire</td>
+      <td>Inversión térmica = máxima estabilidad</td>
+      <td>Comparar lapso ambiental vs Γ=1°C/100m</td>
+      <td>Determina clase A-F → σy, σz → χ</td>
+    </tr>
+    <tr>
+      <td>Pluma looping</td>
+      <td>Lapso superadiabático, inestable</td>
+      <td>Alta turbulencia, día soleado</td>
+      <td>Clase A-B en Tabla 9-13</td>
+      <td>Contaminante puede llegar al suelo cerca</td>
+    </tr>
+    <tr>
+      <td>Pluma fanning</td>
+      <td>Inversión, muy estable</td>
+      <td>Noche clara, viento ligero</td>
+      <td>Clase E-F en Tabla 9-13</td>
+      <td>Sin dispersión vertical, peligro a distancia</td>
+    </tr>
+    <tr>
+      <td>Fumigación</td>
+      <td>Lapso bajo + inversión arriba</td>
+      <td>Amanecer tras noche de inversión</td>
+      <td>Figura 9-18 (pluma 4)</td>
+      <td>Mayor concentración a nivel del suelo</td>
+    </tr>
+    <tr>
+      <td>Modelo Gaussiano</td>
+      <td>Dispersión normal en y y z</td>
+      <td>Terreno plano, fuente puntual</td>
+      <td>χ = E/(π·σy·σz·u)·exp(…)</td>
+      <td>Estima χ en cualquier punto (x,y,0)</td>
+    </tr>
+    <tr>
+      <td>Inversión aloft</td>
+      <td>Techo a altura L que limita σz</td>
+      <td>L - H debe ser positivo</td>
+      <td>σz=0.47(L−H) → forma corta para x≥2xL</td>
+      <td>χ deja de decrecer pasada xL</td>
+    </tr>
+    <tr>
+      <td>Fuente lineal</td>
+      <td>Emisión extendida (autopistas)</td>
+      <td>Viento ⊥ a la fuente (≥45°)</td>
+      <td>χ = 2E_lin/[(2π)^0.5·σz·u]·exp(…)</td>
+      <td>No hay factor σy (dilución lateral ∞)</td>
+    </tr>
+    <tr>
+      <td>Modelo interior</td>
+      <td>Caja bien mezclada con Q, E, k</td>
+      <td>k=0 para CO (no se degrada)</td>
+      <td>C_ss=(Q·Ca+E)/(Q+kV)</td>
+      <td>Ventilación = control principal indoors</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La clase de estabilidad atmosférica (determinada por radiación solar y velocidad del viento, Tabla 9-13) es el parámetro que conecta TODOS los subsistemas: determina σy y σz, que determinan la concentración χ, que determina si se superan los estándares NAAQS. Sin determinar correctamente la clase de estabilidad, todo el cálculo de dispersión es inválido.</div>
+</div>
+
+<!-- QUIZ INTERACTIVO -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="quiz-body">
+    <div class="progress-text" id="prog-text">Pregunta 0 de 10 respondidas · Aciertos: 0 / 0</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="prog-fill" style="width:0%"></div></div>
+
+    <!-- Q1 -->
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">¿Cuál de las siguientes condiciones atmosféricas genera la MAYOR dispersión y dilución de contaminantes emitidos por una chimenea?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Inversión térmica con viento de 1 m/s</button>
+        <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) Atmósfera estable (subadiabática) con cielo despejado nocturno</button>
+        <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) Atmósfera inestable (superadiabática) con fuerte radiación solar y vientos moderados</button>
+        <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Condición isotérmica (sin cambio de temperatura con la altura)</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">En el modelo gaussiano de dispersión χ(x,y,0,H), si la velocidad del viento u se duplica (manteniendo todo lo demás constante), ¿qué ocurre con la concentración a nivel de suelo?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) La concentración se duplica porque la pluma se dobla más rápido</button>
+        <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) La concentración disminuye aproximadamente a la mitad, porque χ es inversamente proporcional a u</button>
+        <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) La concentración no cambia porque σy y σz compensan el efecto</button>
+        <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) La concentración aumenta porque la pluma sube más y tarda más en llegar al suelo</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">¿Cuál es la diferencia fundamental entre la tasa de lapso adiabática seca (Γ) y la tasa de lapso ambiental (ALR)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Γ describe cómo cambia la temperatura real de la atmósfera con la altura; la ALR describe un proceso teórico</button>
+        <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Γ y ALR son equivalentes; solo difieren en las unidades de medición usadas</button>
+        <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) Γ es la tasa teórica de enfriamiento de un volumen de aire seco que asciende adiabáticamente (≈1°C/100 m); la ALR es la temperatura real medida en la atmósfera en ese momento</button>
+        <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) La ALR siempre es mayor que Γ porque la humedad libera calor latente durante el ascenso</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">Una ciudad industrial andina peruana (similar a La Oroya) está ubicada en un valle de orientación norte-sur. Durante noches claras de invierno con vientos débiles, ¿cuál tipo de pluma es más probable y por qué es riesgoso?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Looping, porque los valles generan turbulencia mecánica intensa que provoca loops en la pluma</button>
+        <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Lofting, porque en noches claras la pluma siempre asciende por encima de la inversión</button>
+        <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Coning, porque la condición neutral es la más común en cualquier tipo de terreno</button>
+        <button class="qbtn" data-q="4" data-opt="d" data-correct="true">D) Fanning o fumigation, porque las paredes del valle bloquean el calentamiento diurno y favorecen inversiones persistentes que atrapan los contaminantes</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">Para calcular la concentración de SO₂ a 5 km sotavento de una chimenea con inversión aloft a L=200 m y H=60 m, con estabilidad C, se determina que xL=3 km. ¿Qué ecuación y valor de σz debes usar?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) La ecuación gaussiana estándar con σz calculado a 5 km de distancia</button>
+        <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) La ecuación gaussiana estándar con σz = 0.47(200−60) = 65.8 m</button>
+        <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) La forma corta: χ = E/[(2π)^0.5 · σy · u · L], con σy calculado a 5 km, porque 5 km ≥ 2·xL = 6 km... en realidad 5&lt;6, entonces se usa la gaussiana estándar</button>
+        <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Ninguna ecuación es aplicable porque la inversión aloft invalida todo el modelo</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">En el modelo de calidad del aire interior (caja bien mezclada), ¿cuál es la concentración de estado estacionario de CO (k=0) en una habitación de 50 m³ con ventilación Q=0.01 m³/s, sin CO exterior (Ca=0), con una estufa que emite E=0.5 mg/s?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) C = 0, porque el CO no decae y eventualmente la ventilación lo elimina completamente</button>
+        <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) C = E/Q = 0.5 mg/s ÷ 0.01 m³/s = 50 mg/m³</button>
+        <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) C = E/(Q + kV) = E/Q = 50 mg/m³, pero solo si k=0 y Ca=0, lo cual es el mismo resultado por diferentes caminos</button>
+        <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) C = E·V/Q = 2500 mg/m³ porque el volumen del cuarto amplifica la concentración</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la "altura efectiva de chimenea" (H) es FALSA?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) H = h + ΔH, donde h es la altura física y ΔH es el plume rise</button>
+        <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Aumentar la temperatura del gas de salida incrementa ΔH y por tanto H</button>
+        <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) A mayor velocidad del viento, mayor ΔH, porque el viento empuja la pluma hacia arriba</button>
+        <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Mayor velocidad de salida del gas (vs) produce mayor ΔH</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">¿En qué se diferencia el efecto de una isla de calor urbana sobre fuentes de superficie (autos) versus fuentes elevadas (chimeneas)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) La isla de calor siempre es beneficiosa porque aumenta la turbulencia y dilución para todos los tipos de fuentes</button>
+        <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) La isla de calor es siempre perjudicial porque concentra todos los contaminantes en la capa superficial</button>
+        <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Beneficiosa para fuentes de superficie (mayor volumen de mezcla) pero perjudicial para chimeneas altas (mezcla la pluma que normalmente evadiría el suelo hacia la zona respirada)</button>
+        <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Solo afecta a fuentes de superficie; las chimeneas son suficientemente altas para estar sobre la isla de calor</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">Al calcular concentraciones con la ecuación lineal de fuente (Ec. 9-33) para una autopista, ¿por qué NO aparece el término exp[−½(y/σy)²] que sí existe en la ecuación de punto fuente?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Porque las autopistas no tienen dispersión lateral y toda la masa va en dirección Y=0</button>
+        <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Porque el viento siempre es perpendicular a la autopista y cancela el factor Y</button>
+        <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Porque una fuente infinita extendida en la dirección Y produce una concentración uniforme en Y: al integrar la distribución gaussiana de −∞ a +∞ en Y, el resultado es √(2π)·σy, que se cancela con el denominador y desaparece de la ecuación</button>
+        <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Porque la ecuación lineal solo aplica para contaminantes conservativos que no se difunden lateralmente</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">A las 2:30 PM de un día de verano con cielo parcialmente nublado (5/8 de nubes en capa media) y viento a 4 m/s, ¿qué clase de estabilidad debes asignar según la Tabla de Turner?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Clase A (muy inestable), porque es de tarde y hace calor en verano</button>
+        <button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) Clase C (ligeramente inestable), porque 5/8 de nubes en capa media reduce la radiación fuerte a moderada, y con 4 m/s y radiación moderada corresponde B-C ≈ C</button>
+        <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Clase D (neutral), porque cualquier nubosidad mayor a 4/8 implica condición neutral automáticamente</button>
+        <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Clase F (muy estable), porque el viento de 4 m/s no es suficiente para crear inestabilidad en verano</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+    <div id="results-panel">
+      <h3 id="results-score"></h3>
+      <p id="results-msg"></p>
+      <button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-bar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">
+    Davis, M.L. &amp; Masten, S.J. (2009). <em>Introduction to Environmental Engineering</em>, 4th ed. McGraw-Hill. Cap. 9, pp. 623–647. ·
+    Turner, D.B. (1967). Workbook of Atmospheric Dispersion Estimates. USEPA. ·
+    Holland, J.Z. (1953). A Meteorological Survey of the Oak Ridge Area. USAEC. ·
+    Martin, D.O. (1976). Atmos. Env., 10(4):393-394. ·
+    U.S. EPA (1995). User's Guide to AERMOD. ·
+    Traynor, G.W. et al. (1982). Indoor Air Pollution from Portable Kerosene-fired Space Heaters.
+  </span>
+</div>
+
+</div><!-- .cv -->
+
+<script>
+const feedbacks = {
+  1: { correct: 'b', wrong: 'b',
+    ok: '✅ ¡Correcto! La atmósfera superadiabática es la más inestable: la turbulencia mecánica (vientos moderados) se amplifica por la térmica (fuerte radiación). Los coeficientes σy y σz son máximos (clase A), generando la mayor dilución.',
+    fail: '❌ Incorrecto. La respuesta correcta es C. Una atmósfera inestable/superadiabática maximiza tanto la turbulencia mecánica como la térmica. Las inversiones y condiciones estables (A, B, D) reducen drásticamente la dispersión vertical.'
+  },
+  2: { correct: 'b',
+    ok: '✅ ¡Correcto! En la ecuación gaussiana χ = E/(π·σy·σz·u), la concentración es inversamente proporcional a u. Sin embargo, nota que σy y σz también cambian ligeramente con el wind speed (vía el plume rise ΔH), pero el efecto neto primario es la reducción por factor ~2.',
+    fail: '❌ Incorrecto. La respuesta correcta es B. El viento aparece en el denominador de la ecuación gaussiana: χ ∝ 1/u. Más viento = más dilución longitudinal = menor concentración a sotavento.'
+  },
+  3: { correct: 'c',
+    ok: '✅ ¡Correcto! Γ (tasa adiabática seca ≈ 1°C/100 m) es un valor teórico constante derivado de la termodinámica del aire seco. La ALR es lo que realmente mide un radiosondeo en ese momento. La comparación entre ambas define la estabilidad.',
+    fail: '❌ Incorrecto. La respuesta correcta es C. Γ es teórico y constante; la ALR varía con el tiempo y lugar. La opción D confunde la tasa saturada (moist adiabatic) con la seca.'
+  },
+  4: { correct: 'd',
+    ok: '✅ ¡Correcto! Los valles N-S permiten poca insolación en las paredes durante el amanecer, pero el suelo irradia libremente al cielo nocturno. Esto favorece inversiones nocturnas persistentes. La Oroya (Perú) sufre exactamente este problema con emisiones de la fundición Doe Run.',
+    fail: '❌ Incorrecto. La respuesta correcta es D. Los valles orientados N-S son especialmente susceptibles a inversiones persistentes porque sus paredes bloquean la radiación solar matutina que destruiría la inversión nocturna.'
+  },
+  5: { correct: 'c',
+    ok: '✅ Bien detectado. Como 5 km < 2·xL = 6 km, aún NO hemos alcanzado la mezcla completa bajo la inversión. Por tanto se usa la ecuación gaussiana estándar con σz calculado a 5 km (no el valor de la inversión). La forma corta se reserva para x ≥ 2·xL.',
+    fail: '❌ Incorrecto. La respuesta correcta es C por la razón correcta: 5 km < 2×3 = 6 km, por tanto la mezcla no es completa y se usa la gaussiana estándar. La forma corta aplica para x ≥ 6 km en este caso.'
+  },
+  6: { correct: 'b',
+    ok: '✅ ¡Correcto! Con k=0 (CO no decae) y Ca=0 (sin CO exterior), la ecuación de estado estacionario se reduce a C = E/Q = 0.5/0.01 = 50 mg/m³. Nótese que el volumen V no aparece en el estado estacionario, solo en la dinámica transitoria.',
+    fail: '❌ Incorrecto. La respuesta correcta es B. Con k=0 y Ca=0: C_ss = E/(Q + 0) = E/Q. El volumen V solo afecta la velocidad con que se alcanza el estado estacionario (tiempo de respuesta ≈ V/Q), no el valor final.'
+  },
+  7: { correct: 'c',
+    ok: '✅ ¡Correcto! Esta afirmación es FALSA. Mayor viento DISMINUYE ΔH porque dobla la pluma más rápidamente (el término vs·d/u en la fórmula de Holland: mayor u → menor ΔH). El viento compite con la inercia vertical y la flotabilidad de la pluma.',
+    fail: '❌ Incorrecto. La afirmación falsa es C. En la fórmula de Holland, ΔH = (vs·d/u)×[…]: a mayor u, menor ΔH, porque el viento dobla la pluma más rápido. Las demás afirmaciones (A, B, D) son correctas.'
+  },
+  8: { correct: 'c',
+    ok: '✅ ¡Correcto! El efecto de isla de calor es dual: para autos y fuentes bajas, la capa inestable aumenta el volumen de mezcla (bueno). Para chimeneas altas, la misma inestabilidad mezcla hacia abajo plumas que en campo abierto se mantendrían elevadas (malo para quienes viven cerca).',
+    fail: '❌ Incorrecto. La respuesta correcta es C. La isla de calor tiene efectos opuestos según la altura de la fuente: beneficia a fuentes de superficie (mayor mezcla) pero perjudica a fuentes elevadas (mezcla hacia el suelo plumas que de otro modo pasarían sobre las zonas habitadas).'
+  },
+  9: { correct: 'c',
+    ok: '✅ ¡Excelente comprensión matemática! Una fuente puntual emite en un solo punto → necesita el factor gaussiano en Y. Una fuente lineal infinita emite uniformemente en toda la dirección Y → al integrar, la distribución gaussian en Y se cancela. Solo queda la dispersión vertical (σz) como proceso limitante.',
+    fail: '❌ Incorrecto. La respuesta correcta es C. El factor exp[−½(y/σy)²] desaparece porque al integrar una fuente lineal de −∞ a +∞ en Y, la integral gaussiana completa ∫exp[−½(y/σy)²]dy = √(2π)·σy cancela exactamente el σy del denominador.'
+  },
+  10: { correct: 'b',
+    ok: '✅ ¡Correcto! Según la nota de la Tabla 9-13 de Turner: 5/8 de nubes en capa media reduce la radiación de "fuerte" a "moderada". Con 4 m/s y radiación moderada, la tabla da clase B-C, que se interpola como C. No es automáticamente D (eso requiere nubosidad total, no parcial).',
+    fail: '❌ Incorrecto. La respuesta correcta es B. La Tabla 9-13 establece que nubosidad media parcial (5/8 a 7/8) reduce la radiación de fuerte a moderada. Con 4 m/s y radiación moderada → clase B-C ≈ C. La clase D neutral solo aplica con nubosidad total (overcast).'
+  }
+};
+
+let answered = 0, correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const fb = feedbacks[parseInt(q)];
+
+  // disable all buttons in this question
+  const card = document.getElementById('q'+q);
+  card.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true') b.classList.add('show-correct');
+  });
+
+  // mark chosen
+  if(isCorrect){
+    btn.classList.add('correct');
+    btn.textContent = '✅ ' + btn.textContent;
+  } else {
+    btn.classList.add('incorrect');
+    btn.textContent = '❌ ' + btn.textContent;
+  }
+
+  // show feedback
+  const fbEl = document.getElementById('fb'+q);
+  fbEl.style.display = 'block';
+  if(isCorrect){
+    fbEl.className = 'qfeedback ok';
+    fbEl.innerHTML = fb.ok;
+    correct++;
+  } else {
+    fbEl.className = 'qfeedback fail';
+    fbEl.innerHTML = fb.fail;
+  }
+
+  answered++;
+  updateProgress();
+  if(answered === 10) showResults();
+});
+
+function updateProgress(){
+  document.getElementById('prog-text').textContent = `Pregunta ${answered} de 10 respondidas · Aciertos: ${correct} / ${answered}`;
+  document.getElementById('prog-fill').style.width = (answered === 0 ? 0 : Math.round(correct/answered*100))+'%';
+}
+
+function showResults(){
+  const panel = document.getElementById('results-panel');
+  panel.style.display = 'block';
+  const scoreEl = document.getElementById('results-score');
+  const msgEl = document.getElementById('results-msg');
+  scoreEl.textContent = `Resultado: ${correct} / 10 correctas`;
+  if(correct <= 4){
+    panel.className = 'res-r';
+    msgEl.textContent = '📖 Necesitas repasar el material. Vuelve a los bloques de tasa de lapso, modelo gaussiano y tipos de pluma.';
+  } else if(correct <= 7){
+    panel.className = 'res-y';
+    msgEl.textContent = '📚 ¡Buen avance, sigue repasando! Refuerza los conceptos de inversión aloft y el modelo de calidad del aire interior.';
+  } else {
+    panel.className = 'res-g';
+    msgEl.textContent = '🎓 ¡Excelente dominio del tema! Estás listo para el examen de meteorología y dispersión atmosférica.';
+  }
+}
+
+function resetQuiz(){
+  answered = 0; correct = 0;
+  updateProgress();
+  document.getElementById('results-panel').style.display = 'none';
+  for(let i=1;i<=10;i++){
+    const card = document.getElementById('q'+i);
+    card.querySelectorAll('.qbtn').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct','incorrect','show-correct');
+      b.textContent = b.textContent.replace(/^[✅❌] /,'');
+    });
+    const fb = document.getElementById('fb'+i);
+    fb.style.display = 'none';
+    fb.className = 'qfeedback';
+  }
+}
+</script>
+</html>

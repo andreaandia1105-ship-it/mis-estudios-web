@@ -1,0 +1,720 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.titbar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titbar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;letter-spacing:.5px}
+.titbar p{font-size:11px;color:#94a3b8;margin-top:3px}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.pill{font-size:10px;padding:2px 8px;border-radius:20px;background:#1e3a5f;color:#7dd3fc;display:inline-block}
+.secbar{grid-column:1/-1;border-radius:9px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.3px}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.5px}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;line-height:1.5;background:var(--color-background-secondary);margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;line-height:1.4}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.3px}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.nb{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-r{background:#fee2e2;color:#991b1b}
+.nb-y{background:#fef9c3;color:#713f12}
+.nb-p{background:#ede9fe;color:#4c1d95}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:10px;margin:3px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;white-space:nowrap;padding-top:2px}
+.fc{font-size:11px;color:#94a3b8}
+/* quiz */
+.qcard{margin-bottom:16px;border-bottom:0.5px solid var(--color-border-tertiary);padding-bottom:14px}
+.qnum{font-family:'Oswald',sans-serif;font-size:11px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.qtext{font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin-bottom:8px;line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+#quiz-progress{margin-bottom:14px}
+#quiz-result{display:none;border-radius:10px;padding:14px;margin-top:10px;text-align:center;font-size:13px}
+#reiniciar-btn{display:none;margin:10px auto 0;padding:8px 20px;border-radius:8px;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);cursor:pointer;font-size:12px;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary)}
+@media(prefers-color-scheme:dark){
+.warn{background:#431407;color:#fed7aa;border-left-color:#f97316}
+.exam{background:#422006;color:#fef08a;border-color:#f59e0b}
+}
+</style>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="titbar">
+  <h1>📋 REGLAMENTO DE TESIS — GUÍA COMPLETA PARA EL TESISTA</h1>
+  <p>Universidad Nacional Agraria La Molina · Resolución N.° 0398-2025-CU-UNALM · Vigente desde octubre 2025</p>
+  <div class="pills">
+    <span class="pill">Título Profesional</span>
+    <span class="pill">Maestría</span>
+    <span class="pill">Doctorado</span>
+    <span class="pill">Proyecto de tesis</span>
+    <span class="pill">Sustentación</span>
+    <span class="pill">IA y similitud</span>
+    <span class="pill">Repositorio BAN</span>
+    <span class="pill">Ética científica</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1 -->
+<div class="secbar" style="background:#dbeafe;color:#1e3a8a">📌 SECCIÓN I — CONCEPTOS CLAVE Y MARCO GENERAL</div>
+
+<div class="block">
+  <div class="bh" style="background:#dbeafe;color:#1e3a8a">¿Qué es una tesis? (Art. 1.3)</div>
+  <div class="def" style="border-left:3px solid #3b82f6">Una tesis es una investigación <strong>original, individual e inédita</strong> que desarrollas dentro de un área académica. No es un resumen ni una monografía: implica ejecutar investigación real, redactar un documento y defenderlo públicamente ante un jurado.</div>
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div><strong>Experimental:</strong> manipulas variables para determinar relaciones causales (ej. dosis de fertilizante vs rendimiento de cultivo).</div></div>
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div><strong>No experimental:</strong> observas y mides fenómenos sin intervenir (ej. análisis de calidad de agua en cuencas del Perú).</div></div>
+  <div class="item"><div class="dot" style="background:#ef4444"></div><div><strong>¡Importante!</strong> La UNALM NO reconoce trabajos monográficos o de revisión bibliográfica como tesis.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia fundamental entre una tesis experimental y una no experimental según el Reglamento 2025 de la UNALM? Dé un ejemplo de cada tipo aplicado al campo de la ingeniería agrícola.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#dbeafe;color:#1e3a8a">Tipos de grado y requisitos (Arts. 1.3–1.4)</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong style="font-size:12px">🎓 Título Profesional</strong>
+      <hr class="divh">
+      <div class="item"><div class="dot" style="background:#3b82f6"></div><div>Requiere grado de Bachiller</div></div>
+      <div class="item"><div class="dot" style="background:#3b82f6"></div><div>Tesis o Trabajo de Suficiencia Profesional</div></div>
+      <div class="item"><div class="dot" style="background:#3b82f6"></div><div>Art. publicado en Latindex catálogo o mayor (si formato artículo)</div></div>
+    </div>
+    <div class="mini" style="border-top:3px solid #7c3aed">
+      <strong style="font-size:12px">🔬 Maestría</strong>
+      <hr class="divh">
+      <div class="item"><div class="dot" style="background:#7c3aed"></div><div>Bachiller + mín. 48 créditos (2 semestres)</div></div>
+      <div class="item"><div class="dot" style="background:#7c3aed"></div><div>Dominio de 1 idioma extranjero o lengua nativa</div></div>
+      <div class="item"><div class="dot" style="background:#7c3aed"></div><div>Art. en SCIELO o mayor (si formato artículo)</div></div>
+    </div>
+    <div class="mini" style="border-top:3px solid #0f766e">
+      <strong style="font-size:12px">🏛️ Doctorado</strong>
+      <hr class="divh">
+      <div class="item"><div class="dot" style="background:#0f766e"></div><div>Grado de Maestro + mín. 64 créditos (6 semestres)</div></div>
+      <div class="item"><div class="dot" style="background:#0f766e"></div><div>Dominio de 2 idiomas extranjeros (uno puede ser lengua nativa)</div></div>
+      <div class="item"><div class="dot" style="background:#0f766e"></div><div>2 arts. en SCOPUS/WoS (uno puede ser SCIELO) — como primer autor</div></div>
+    </div>
+    <div class="mini" style="border-top:3px solid #b45309">
+      <strong style="font-size:12px">📰 Formato artículo</strong>
+      <hr class="divh">
+      <div class="item"><div class="dot" style="background:#b45309"></div><div>Aplica a todos los niveles</div></div>
+      <div class="item"><div class="dot" style="background:#b45309"></div><div>Publicación POSTERIOR a la aprobación del proyecto</div></div>
+      <div class="item"><div class="dot" style="background:#b45309"></div><div>Debes ser primer autor con filiación UNALM</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#fef9c3;color:#713f12">⚠️ IA y Similitud (Arts. 1.10)</div>
+  <div class="def" style="border-left:3px solid #f59e0b;background:#fefce8">Dos límites numéricos que debes respetar SIEMPRE. Superarlos significa que tu tesis es devuelta para corrección. El asesor debe certificar bajo declaración jurada el cumplimiento de ambos.</div>
+  <div class="two" style="margin:6px 0">
+    <div class="mini" style="border-left:4px solid #f97316;border-radius:0 8px 8px 0">
+      <span style="font-size:20px;font-weight:700;color:#c2410c">20%</span><br>
+      <strong style="font-size:11px">Índice de similitud</strong><br>
+      <span style="font-size:11px;color:var(--color-text-secondary)">Detectado por software oficial del VRI. Se excluyen citas, referencias, anexos y frases &lt;15 palabras.</span>
+    </div>
+    <div class="mini" style="border-left:4px solid #8b5cf6;border-radius:0 8px 8px 0">
+      <span style="font-size:20px;font-weight:700;color:#6d28d9">20%</span><br>
+      <strong style="font-size:11px">Texto generado por IA</strong><br>
+      <span style="font-size:11px;color:var(--color-text-secondary)">La IA solo puede ayudar en redacción, edición, estilo, bibliografía o traducción. NUNCA en análisis, resultados, discusión ni conclusiones.</span>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Usar IA para redactar la sección de Resultados o Discusión creyendo que si está "bien escrito" no se detectará. Los detectores actuales identifican patrones de escritura generativa. Si se supera el 20%, la tesis regresa al tesista.</div>
+  <div class="item"><div class="dot" style="background:#10b981"></div><div><strong>Usos válidos de IA:</strong> corrección de ortografía y gramática, búsqueda bibliográfica, traducción de textos, formato de referencias.</div></div>
+  <div class="item"><div class="dot" style="background:#ef4444"></div><div><strong>Usos prohibidos de IA:</strong> generar hipótesis, analizar resultados, interpretar datos, redactar conclusiones originales.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Qué actividades relacionadas al proceso de elaboración de la tesis SÍ permite el Reglamento 2025 que sean apoyadas por herramientas de IA generativa, y cuáles están expresamente prohibidas? Fundamente su respuesta.</div>
+</div>
+
+<!-- SECCIÓN 2 -->
+<div class="secbar" style="background:#dcfce7;color:#14532d">🏗️ SECCIÓN II — PROCESO PARA TÍTULO PROFESIONAL: PASO A PASO</div>
+
+<div class="block s3">
+  <div class="bh" style="background:#dcfce7;color:#14532d">Flujo completo — 8 pasos (Arts. 2.1–2.34 + Tabla 1)</div>
+  <div style="overflow-x:auto">
+  <table class="tbl">
+    <tr>
+      <th>Paso</th><th>Actor</th><th>Acción</th><th>Documentos requeridos</th><th>Plazo</th><th>¿Qué pasa si no cumples?</th>
+    </tr>
+    <tr>
+      <td><span class="nb nb-b">1</span></td>
+      <td><strong>Asesor + Tesista</strong></td>
+      <td>Registrar Proyecto de Tesis en plataforma</td>
+      <td>Proyecto (&lt;2Mb) · Declaración Integridad (Anexo 1.1) · Reporte IA (Anexo 1.5) · Matriz consistencia (Anexo 1.7) · Comité ética si aplica (Anexo 1.2) · Confidencialidad si aplica (Anexo 1.3)</td>
+      <td>60 días</td>
+      <td>Alerta de abandono → 20 días adicionales → cierre automático</td>
+    </tr>
+    <tr>
+      <td><span class="nb nb-g">2</span></td>
+      <td><strong>Unidad de Investigación</strong></td>
+      <td>Propone jurado de tesis (presidente + 2 miembros)</td>
+      <td>Acta designación jurado (Anexo 2.3) · Solicitud comité ética si aplica</td>
+      <td>7 días hábiles</td>
+      <td>Si hay metodologías con riesgo a humanos/animales/plantas → derivar a Comité de Ética obligatoriamente</td>
+    </tr>
+    <tr>
+      <td><span class="nb nb-b">3</span></td>
+      <td><strong>Decanato Facultad</strong></td>
+      <td>Ratifica y aprueba jurado. Emite resolución de designación</td>
+      <td>Resolución de designación de jurado</td>
+      <td>30 días</td>
+      <td>Sin resolución no hay proceso oficial. La resolución llega por correo automático a todos los actores.</td>
+    </tr>
+    <tr>
+      <td><span class="nb nb-y">4</span></td>
+      <td><strong>Jurado de Tesis</strong></td>
+      <td>Revisa proyecto → formula observaciones → tesista levanta → jurado aprueba</td>
+      <td>Informe aprobación proyecto (Anexo 2.4) · Proyecto aprobado (&lt;2Mb)</td>
+      <td>15 d (obs.) + 20 d (levantamiento) + 20 d (pronunciamiento) = ~55 d</td>
+      <td>Jurado incumple → alerta → 30 días adicionales → cambio de jurado + carta de amonestación</td>
+    </tr>
+    <tr>
+      <td><span class="nb nb-b">5</span></td>
+      <td><strong>Decanato</strong></td>
+      <td>Emite resolución de aprobación del proyecto. Vigencia: 2 años (prorrogable 1 año más)</td>
+      <td>Resolución decanal</td>
+      <td>30 días</td>
+      <td>Vencidos 2 años sin sustentación → proyecto anulado de oficio automáticamente</td>
+    </tr>
+    <tr>
+      <td><span class="nb nb-g">6</span></td>
+      <td><strong>Asesor + Tesista</strong></td>
+      <td>Ejecuta investigación y registra borrador completo de tesis</td>
+      <td>Borrador (&lt;5Mb) · Diploma de Bachiller · Reporte similitud 1° (Anexo 1.4) · Confidencialidad si aplica · Informe Comité Ética si aplica</td>
+      <td>Dentro de los 2 años de vigencia del proyecto</td>
+      <td>Abandono → alerta → 40 días hábiles → cierre automático</td>
+    </tr>
+    <tr>
+      <td><span class="nb nb-y">7</span></td>
+      <td><strong>Jurado</strong></td>
+      <td>Revisa borrador → observaciones → tesista levanta → jurado aprueba (nota &gt;10.5)</td>
+      <td>Tesis aprobada · Reporte similitud 2° · Acta aprobación doc. (Anexo 2.10) · Rúbricas evaluación (Anexo 2.9) · Lugar/fecha sustentación</td>
+      <td>20 d (obs.) + 20 d (levantamiento) + 20 d (revisión) = ~60 d</td>
+      <td>Igual que paso 4. Nota mínima para pasar a sustentación: &gt;10.5 puntos</td>
+    </tr>
+    <tr>
+      <td><span class="nb nb-p">8</span></td>
+      <td><strong>Decanato + Tesista</strong></td>
+      <td>Sustentación pública → calificación → publicación en BAN → Título</td>
+      <td>Tesis final (&lt;5Mb) · Acta sustentación (Anexo 2.12) · Rúbricas sustentación (Anexo 2.11) · Publicación BAN (DOI, ORCID, Handle) · Título profesional</td>
+      <td>30 días para publicación. Máx. 6 meses + prórroga de 12 meses para entregar versión final.</td>
+      <td>Si no publica en plazo → asesor puede publicar resultados con co-autoría del tesista</td>
+    </tr>
+  </table>
+  </div>
+  <div class="warn" style="margin-top:8px">⚠️ DATO CLAVE: Puedes iniciar tu proyecto de tesis siendo todavía estudiante, pero solo si has aprobado MÁS DE 140 CRÉDITOS de tu plan de estudios. Para SUSTENTAR debes tener el Grado de Bachiller. Sin él, no puedes subir al estrado.</div>
+</div>
+
+<!-- SECCIÓN 3 -->
+<div class="secbar" style="background:#ede9fe;color:#4c1d95">⚙️ SECCIÓN III — ROLES, JURADO Y RESPONSABILIDADES</div>
+
+<div class="block">
+  <div class="bh" style="background:#ede9fe;color:#4c1d95">El Asesor (Arts. 2.3, 2.6)</div>
+  <div class="def" style="border-left:3px solid #7c3aed">El asesor no es solo un corrector de tu tesis. Es el responsable de <strong>crear el registro en la plataforma</strong>, coordinar con el jurado, certificar bajo declaración jurada la originalidad y los límites de IA, y guiarte desde el proyecto hasta la publicación.</div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div>Debe ser docente ordinario o contratado por concurso público de la UNALM.</div></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div>Puede pertenecer a otra Facultad diferente a la tuya.</div></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div>Puede haber un <strong>co-asesor</strong> interno o externo a la UNALM (incluso un jefe de práctica puede ser co-asesor).</div></div>
+  <div class="item"><div class="dot" style="background:#ef4444"></div><div>El asesor no vota en la calificación durante la sustentación, aunque sí puede participar en la deliberación previa.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Puede un profesional externo a la UNALM ser asesor principal de una tesis de Título Profesional? Fundamente legalmente según el Reglamento 2025.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ede9fe;color:#4c1d95">El Jurado de Tesis (Arts. 2.9–2.13)</div>
+  <div class="def" style="border-left:3px solid #7c3aed">El jurado es el órgano académico que evalúa tu proyecto, revisa el borrador y califica tu sustentación. Está compuesto por <strong>un Presidente y dos Miembros</strong>. Sus plazos son legalmente obligatorios.</div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div><strong>Funciones del Presidente:</strong> presenta el informe de aprobación del proyecto, coordina las reuniones previas y dirige la sustentación.</div></div>
+  <div class="item"><div class="dot" style="background:#7c3aed"></div><div>Para iniciar la sustentación son imprescindibles: el Presidente, el tesista, el asesor y al menos un miembro del jurado.</div></div>
+  <div class="item"><div class="dot" style="background:#3b82f6"></div><div>Si el jurado incumple los plazos: 1°) Alerta automática + 30 días más. 2°) Cambio de jurado. 3°) Carta de llamada de atención en el legajo; si hay reincidencia, amonestación formal.</div></div>
+  <div class="warn">⚠️ Un miembro del jurado solo puede faltar a la sustentación si es un impase de última hora. Si ya sabía que no podría asistir con anticipación, NO puede ausentarse sin consecuencias.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#dcfce7;color:#14532d">La Sustentación en detalle (Arts. 2.24–2.30)</div>
+  <div class="flow">
+    <div class="fbox"><strong>Requisito:</strong> Grado de Bachiller</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Exposición 20–30 min</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Preguntas jurado + asesor</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Preguntas del público</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Deliberación privada</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Calificativo final</div>
+  </div>
+  <div class="three" style="margin:6px 0">
+    <div class="mini" style="border-top:3px solid #16a34a">
+      <strong>⭐⭐⭐ Sobresaliente</strong><br>
+      <span style="font-size:18px;font-weight:700;color:#15803d">17.1–20</span><br>
+      <span style="font-size:11px;color:var(--color-text-secondary)">pts</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #2563eb">
+      <strong>⭐⭐ Muy bueno</strong><br>
+      <span style="font-size:18px;font-weight:700;color:#1d4ed8">14.1–17</span><br>
+      <span style="font-size:11px;color:var(--color-text-secondary)">pts</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #b45309">
+      <strong>⭐ Buena</strong><br>
+      <span style="font-size:18px;font-weight:700;color:#92400e">11.0–14.0</span><br>
+      <span style="font-size:11px;color:var(--color-text-secondary)">pts</span>
+    </div>
+  </div>
+  <div class="item"><div class="dot" style="background:#6366f1"></div><div><strong>Modalidad:</strong> Presencial obligatorio. Híbrida solo en casos debidamente justificados y aprobados por el jurado.</div></div>
+  <div class="item"><div class="dot" style="background:#6366f1"></div><div><strong>Tesis confidencial:</strong> No es acto público. Se aplica cuando DITT-VRI emite informe de confidencialidad.</div></div>
+  <div class="item"><div class="dot" style="background:#6366f1"></div><div>El público interesado solo puede asistir de forma <strong>presencial</strong>.</div></div>
+  <div class="exam">🎯 EXAMEN: Un tesista sustenta su tesis y obtiene 10.2 puntos en la evaluación del documento previo a la sustentación. ¿Puede proceder a sustentar? Justifique su respuesta con referencia al artículo correspondiente.</div>
+</div>
+
+<!-- SECCIÓN 4 -->
+<div class="secbar" style="background:#ffedd5;color:#7c2d12">📝 SECCIÓN IV — DOCUMENTOS QUE DEBES PREPARAR (Formatos y Anexos)</div>
+
+<div class="block s2">
+  <div class="bh" style="background:#ffedd5;color:#7c2d12">Checklist de documentos — Título Profesional</div>
+  <div class="two">
+    <div>
+      <strong style="font-size:12px;color:var(--color-text-secondary)">FASE 1: Registro del Proyecto</strong>
+      <hr class="divh">
+      <div class="item"><span class="nb nb-b">✓</span><div><strong>Anexo 2.1</strong> — Formato del proyecto de tesis</div></div>
+      <div class="item"><span class="nb nb-b">✓</span><div><strong>Anexo 2.2</strong> — Guía de redacción del proyecto</div></div>
+      <div class="item"><span class="nb nb-g">✓</span><div><strong>Anexo 1.1</strong> — Declaración de Integridad Científica (OBLIGATORIO)</div></div>
+      <div class="item"><span class="nb nb-g">✓</span><div><strong>Anexo 1.5</strong> — Reporte de escritura por IA (OBLIGATORIO)</div></div>
+      <div class="item"><span class="nb nb-g">✓</span><div><strong>Anexo 1.7</strong> — Matriz de consistencia de tesis</div></div>
+      <div class="item"><span class="nb nb-y">○</span><div><strong>Anexo 1.2</strong> — Solicitud Comité de Ética (si aplica: humanos, animales, genética, encuestas, etc.)</div></div>
+      <div class="item"><span class="nb nb-y">○</span><div><strong>Anexo 1.3A</strong> — Solicitud de confidencialidad — Proyecto (si aplica)</div></div>
+      <hr class="divh">
+      <strong style="font-size:12px;color:var(--color-text-secondary)">FASE 2: Designación de Jurado</strong>
+      <hr class="divh">
+      <div class="item"><span class="nb nb-p">✓</span><div><strong>Anexo 2.3</strong> — Acta de designación de jurado de proyecto</div></div>
+      <div class="item"><span class="nb nb-p">✓</span><div><strong>Anexo 2.4</strong> — Informe de aprobación del proyecto de tesis</div></div>
+    </div>
+    <div>
+      <strong style="font-size:12px;color:var(--color-text-secondary)">FASE 3: Borrador de Tesis</strong>
+      <hr class="divh">
+      <div class="item"><span class="nb nb-b">✓</span><div><strong>Anexo 2.5</strong> — Formato de la tesis (Título)</div></div>
+      <div class="item"><span class="nb nb-b">✓</span><div><strong>Anexo 2.6</strong> — Guía de redacción de la tesis</div></div>
+      <div class="item"><span class="nb nb-b">✓</span><div><strong>Anexo 1.4</strong> — Reporte de similitud (1er reporte)</div></div>
+      <div class="item"><span class="nb nb-y">○</span><div><strong>Anexo 1.2</strong> — Informe favorable Comité Ética (si aplica)</div></div>
+      <div class="item"><span class="nb nb-y">○</span><div><strong>Anexo 1.3B</strong> — Solicitud confidencialidad — Borrador (si aplica)</div></div>
+      <hr class="divh">
+      <strong style="font-size:12px;color:var(--color-text-secondary)">FASE 4: Sustentación y Publicación</strong>
+      <hr class="divh">
+      <div class="item"><span class="nb nb-g">✓</span><div><strong>Anexo 2.9</strong> — Rúbrica evaluación del documento (3 jurados)</div></div>
+      <div class="item"><span class="nb nb-g">✓</span><div><strong>Anexo 2.10</strong> — Acta aprobación del documento (nota &gt;10.5)</div></div>
+      <div class="item"><span class="nb nb-g">✓</span><div><strong>Anexo 2.11</strong> — Rúbrica de evaluación de sustentación</div></div>
+      <div class="item"><span class="nb nb-g">✓</span><div><strong>Anexo 2.12</strong> — Acta de aprobación de tesis (doc + sustentación)</div></div>
+      <div class="item"><span class="nb nb-g">✓</span><div><strong>Anexo 1.4</strong> — Reporte de similitud (2do reporte — tesis aprobada)</div></div>
+      <div class="item"><span class="nb nb-g">✓</span><div><strong>Anexo 1.6</strong> — Autorización publicación electrónica a la BAN</div></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ Los anexos marcados con ✓ son OBLIGATORIOS siempre. Los marcados con ○ son obligatorios solo si aplica a tu investigación. El acceso a todos los formatos es: <strong>https://acortar.link/DlzB52</strong></div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ffedd5;color:#7c2d12">Propiedad intelectual y derechos (Arts. 1.7–1.9)</div>
+  <div class="def" style="border-left:3px solid #f97316">Los <strong>derechos morales</strong> (autoría) son siempre tuyos. Los <strong>derechos patrimoniales</strong> (explotación económica) pertenecen a la UNALM cuando se usaron sus recursos, instalaciones o fondos.</div>
+  <div class="item"><div class="dot" style="background:#f97316"></div><div>Si la tesis usó recursos UNALM, debes incluir en la primera página: <em>"La Universidad Nacional Agraria La Molina es titular de los derechos patrimoniales de la presente investigación."</em></div></div>
+  <div class="item"><div class="dot" style="background:#f97316"></div><div>Si quieres proteger tu investigación antes de publicarla (empresa, patente, revista), puedes solicitar <strong>Declaración de Confidencialidad</strong> al VRI desde el proyecto hasta antes de la aprobación final.</div></div>
+  <div class="item"><div class="dot" style="background:#10b981"></div><div>La BAN difunde tu tesis en acceso abierto con licencia <strong>Creative Commons Attribution (CC BY)</strong> y le asigna un DOI.</div></div>
+  <div class="item"><div class="dot" style="background:#10b981"></div><div>La UNALM reporta tu tesis a SUNEDU-RENATI y a ALICIA (repositorio nacional de CTI).</div></div>
+  <div class="exam">🎯 EXAMEN: Un egresado de Ingeniería Agrícola desarrolló su tesis en colaboración con una empresa privada que financió todos los equipos y materiales. ¿A quién corresponden los derechos patrimoniales? ¿Qué instancia debe resolver esa titularidad según el Reglamento 2025?</div>
+</div>
+
+<!-- SECCIÓN 5 -->
+<div class="secbar" style="background:#ccfbf1;color:#134e4a">🔬 SECCIÓN V — MAESTRÍA Y DOCTORADO: DIFERENCIAS CLAVE</div>
+
+<div class="block s3">
+  <div class="bh" style="background:#ccfbf1;color:#134e4a">Comparación: Título Profesional vs Maestría vs Doctorado</div>
+  <table class="tbl">
+    <tr>
+      <th>Aspecto</th><th>Título Profesional</th><th>Maestría</th><th>Doctorado</th>
+    </tr>
+    <tr><td><strong>Requisito previo</strong></td><td>Grado de Bachiller</td><td>Grado de Bachiller</td><td>Grado de Maestro</td></tr>
+    <tr><td><strong>Quién gestiona</strong></td><td>Facultad / Unidad de Investigación</td><td>Escuela de Posgrado (EPG) / Unidad de Posgrado</td><td>Escuela de Posgrado (EPG)</td></tr>
+    <tr><td><strong>Plazo proyecto</strong></td><td>Vigencia 2 años (+ 1 año prórroga)</td><td>Vigencia 2 años (+ 1 año prórroga)</td><td>Vigencia 3 años (+ 1 año prórroga)</td></tr>
+    <tr><td><strong>Plazo obs. jurado → proyecto</strong></td><td>15 d (obs.) + 20 d (levant.) + 20 d (pronuncia.)</td><td>20 d (obs.) + 30 d (levant.) + 20 d (pronuncia.)</td><td>20 d (obs.) + 30 d (levant.) + 20 d (pronuncia.)</td></tr>
+    <tr><td><strong>Plazo obs. jurado → borrador</strong></td><td>20 d + 20 d + 20 d</td><td>30 d + 30 d + 20 d</td><td>30 d + 30 d + 20 d</td></tr>
+    <tr><td><strong>Nota mínima doc.</strong></td><td>&gt;10.5 puntos</td><td>&gt;14 puntos</td><td>&gt;14 puntos</td></tr>
+    <tr><td><strong>Jurado</strong></td><td>Presidente + 2 miembros</td><td>Presidente (adscrito EPG) + 2 miembros</td><td>Presidente + 2 miembros + 1 miembro externo UNALM</td></tr>
+    <tr><td><strong>Tiempo exposición</strong></td><td>20–30 minutos</td><td>Máx. 40 minutos</td><td>Máx. 40 minutos</td></tr>
+    <tr><td><strong>Escala calificativa</strong></td><td>Sobresaliente 17.1–20 / Muy bueno 14.1–17 / Buena 11–14</td><td>Sobresaliente 18.1–20 / Muy buena 16.1–18 / Buena 14.1–16</td><td>Igual que Maestría</td></tr>
+    <tr><td><strong>Plazo publicación BAN</strong></td><td>6 meses + prórroga de 12 meses</td><td>6 meses + prórroga de 6 meses</td><td>6 meses + prórroga de 6 meses</td></tr>
+    <tr><td><strong>Artículo científico</strong></td><td>Latindex catálogo o mayor</td><td>SCIELO o mayor</td><td>2 en SCOPUS/WoS (uno puede ser SCIELO)</td></tr>
+    <tr><td><strong>Ética — cuándo citar</strong></td><td>Art. 1.8: humanos, animales, plantas, genética, encuestas, etc.</td><td>Igual</td><td>Igual</td></tr>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ PARA DOCTORADO: El asesor debe proponer un miembro externo a la UNALM. Ese miembro externo DEBE tener publicaciones científicas en el área de la tesis y participar en la sustentación (presencial o virtual). La EPG emite resolución confirmando al jurado de 4 miembros + asesor.</div>
+</div>
+
+<!-- SECCIÓN 6 -->
+<div class="secbar" style="background:#fce7f3;color:#831843">🔐 SECCIÓN VI — INTEGRIDAD CIENTÍFICA Y ÉTICA</div>
+
+<div class="block">
+  <div class="bh" style="background:#fce7f3;color:#831843">Principios de integridad (Art. 1.5–1.6)</div>
+  <div class="def" style="border-left:3px solid #ec4899">El Código Nacional de Integridad Científica (Res. N.° 028-2024-CONCYTEC-P) rige toda investigación de la UNALM. El tesista, asesor y jurado son responsables en TODAS las etapas.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #db2777">
+      <strong>🧭 Honestidad</strong><br>
+      <span style="font-size:11px">Presentar los datos tal como son. No inventar, falsificar ni manipular resultados.</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #9333ea">
+      <strong>🔍 Transparencia</strong><br>
+      <span style="font-size:11px">Declarar métodos, fuentes y conflictos de interés. La fecha de sustentación se difunde con antelación.</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #0891b2">
+      <strong>⚖️ Imparcialidad</strong><br>
+      <span style="font-size:11px">Declarar conflictos de interés (familiar, económico, profesional). Inhibirse si corresponde.</span>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#fce7f3;color:#831843">¿Cuándo necesitas Comité de Ética? (Art. 1.8)</div>
+  <div class="def" style="border-left:3px solid #ec4899">Si tu investigación involucra alguno de los siguientes elementos, el informe favorable del Comité de Ética de la UNALM es un REQUISITO para entregar el borrador final.</div>
+  <div class="item"><div class="dot" style="background:#ec4899"></div><div>Seres humanos como sujetos de estudio</div></div>
+  <div class="item"><div class="dot" style="background:#ec4899"></div><div>Recursos genéticos de la biodiversidad peruana</div></div>
+  <div class="item"><div class="dot" style="background:#ec4899"></div><div>Colecta, uso o sacrificio de animales</div></div>
+  <div class="item"><div class="dot" style="background:#ec4899"></div><div>Organismos de riesgo biológico nivel 3 o 4 (BSL 3 y 4)</div></div>
+  <div class="item"><div class="dot" style="background:#ec4899"></div><div>Manipulación genética de organismos</div></div>
+  <div class="item"><div class="dot" style="background:#ec4899"></div><div>Conocimientos tradicionales de pueblos indígenas</div></div>
+  <div class="item"><div class="dot" style="background:#ec4899"></div><div>Técnicas de biología sintética</div></div>
+  <div class="item"><div class="dot" style="background:#ec4899"></div><div>Encuestas o entrevistas a grupos humanos</div></div>
+  <div class="exam">🎯 EXAMEN: Una estudiante de Agronomía realiza su tesis evaluando el efecto de un bioinsecticida sobre una especie de insecto plaga. ¿Requiere aprobación del Comité de Ética? ¿En qué momento del proceso debe obtener ese informe? Justifique según el Reglamento 2025.</div>
+</div>
+
+<div class="block">
+  <div class="bh" style="background:#ccfbf1;color:#134e4a">Repositorio BAN y Ciencia Abierta (Art. 1.11)</div>
+  <div class="flow">
+    <div class="fbox">Sustentación aprobada</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Versión final a Facultad/EPG</div>
+    <div class="farrow">→</div>
+    <div class="fbox">BAN recibe + verifica</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Repositorio UNALM (CC BY + DOI)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">RENATI-SUNEDU y ALICIA</div>
+  </div>
+  <div class="item"><div class="dot" style="background:#0f766e"></div><div>La BAN asigna DOI, vincula tu ORCID y gestiona el Handle para identificación persistente.</div></div>
+  <div class="item"><div class="dot" style="background:#0f766e"></div><div>Además de la tesis, también deben depositarse los <strong>datos primarios y secundarios</strong> en el Repositorio Institucional de Datos.</div></div>
+  <div class="item"><div class="dot" style="background:#ef4444"></div><div>La BAN puede devolver la tesis si: no cumple el formato, falta firma del jurado, similitud &gt;20%, o IA &gt;20%. Las correcciones deben ser visadas por asesor y jurado.</div></div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="secbar" style="background:#f1f5f9;color:#334155">📊 TABLA INTEGRADORA — RESUMEN RÁPIDO PRE-EXAMEN</div>
+
+<div class="block s3">
+  <div class="bh" style="background:#f1f5f9;color:#334155">Todos los plazos y umbrales clave en una sola vista</div>
+  <table class="tbl">
+    <tr>
+      <th>Concepto</th><th>Valor / Plazo</th><th>Consecuencia de incumplimiento</th><th>Referencia</th><th>¿Aplica a?</th>
+    </tr>
+    <tr><td>Créditos mínimos para presentar proyecto (siendo estudiante)</td><td><strong>&gt;140 créditos</strong></td><td>No puede presentar proyecto</td><td>Art. 2.2</td><td>Título</td></tr>
+    <tr><td>Índice máximo de similitud</td><td><strong>20%</strong></td><td>Tesis devuelta para corrección</td><td>Art. 1.10</td><td>Todos</td></tr>
+    <tr><td>Máximo texto generado por IA</td><td><strong>20%</strong></td><td>Tesis devuelta para reformulación</td><td>Art. 1.10</td><td>Todos</td></tr>
+    <tr><td>Vigencia del proyecto aprobado</td><td><strong>2 años</strong> (+ 1 prórroga) / Doctorado: 3 años (+ 1)</td><td>Anulación automática de oficio</td><td>Arts. 2.14, 3.14</td><td>Todos</td></tr>
+    <tr><td>Nota mínima para pasar a sustentación</td><td><strong>&gt;10.5</strong> (Título) / <strong>&gt;14</strong> (Maestría/Doc.)</td><td>No se fija fecha de sustentación</td><td>Arts. 2.21, 3.22</td><td>Todos</td></tr>
+    <tr><td>Tiempo de exposición en sustentación</td><td><strong>20–30 min</strong> (Título) / <strong>máx. 40 min</strong> (posgrado)</td><td>—</td><td>Arts. 2.28, 3.28</td><td>Todos</td></tr>
+    <tr><td>Calificativo mínimo aprobatorio</td><td><strong>11.0</strong> (Título) / <strong>14.1</strong> (Maestría/Doc.)</td><td>Desaprobación de la sustentación</td><td>Arts. 2.29, 3.29</td><td>Todos</td></tr>
+    <tr><td>Plazo para publicar versión final en BAN</td><td><strong>6 meses</strong> + prórroga 12 meses (Título) / 6 meses (posgrado)</td><td>Asesor puede publicar con co-autoría</td><td>Arts. 2.32, 3.32</td><td>Todos</td></tr>
+    <tr><td>Propuesta de jurado por Unidad de Investigación</td><td><strong>7 días hábiles</strong> (Título) / <strong>10 días calendario</strong> (Posgrado)</td><td>Retraso en el proceso</td><td>Arts. 2.7, 3.7</td><td>Todos</td></tr>
+    <tr><td>Alerta por abandono (tesista)</td><td>Plazo excepcional <strong>20 d hábiles</strong> (proyecto) / <strong>40 d hábiles</strong> (borrador)</td><td>Cierre automático del expediente</td><td>Arts. 2.13, 2.22</td><td>Título</td></tr>
+    <tr><td>Difusión pública de la sustentación</td><td><strong>7 días de anticipación</strong> (correo + web)</td><td>La facultad debe garantizarlo</td><td>Art. 2.23</td><td>Título</td></tr>
+    <tr><td>Miembro externo en jurado de Doctorado</td><td>Obligatorio. Debe tener publicaciones en el área de la tesis</td><td>No puede realizarse la sustentación</td><td>Art. 3.20</td><td>Doctorado</td></tr>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ DATO INTEGRADOR: El sistema de plataforma de Gestión de Investigación de la UNALM es automatizado. Genera alertas, cierra expedientes y registra amonestaciones sin intervención manual. Esto significa que si no cumples los plazos, el sistema actúa automáticamente aunque nadie te lo haya dicho personalmente.</div>
+</div>
+
+<!-- QUIZ -->
+<div class="block s3" id="quiz-section">
+  <div style="background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px">
+    <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:700">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+    <div style="font-size:11.5px;color:#94a3b8;margin-top:2px">Marca tu respuesta y descubre si es correcta. Cubre todo el Reglamento de Tesis UNALM 2025.</div>
+  </div>
+  <div id="quiz-progress">
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--color-text-secondary);margin-bottom:5px">
+      <span id="prog-text">Pregunta 0 de 10 respondidas</span>
+      <span id="score-text">Aciertos: 0/0</span>
+    </div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="background:#16a34a;width:0%"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuántos créditos aprobados mínimos debe tener un estudiante para poder presentar su proyecto de tesis siendo aún estudiante en la UNALM?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Más de 120 créditos</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) Exactamente 140 créditos</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) Más de 140 créditos</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Haber culminado todos los créditos del plan de estudios</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Una tesista de Maestría entregó su borrador al jurado. ¿Cuántos días calendario tiene el jurado para formular observaciones?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) 15 días hábiles</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) 20 días hábiles</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) 30 días calendario</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) 20 días calendario</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Cuál es el uso de Inteligencia Artificial que el Reglamento 2025 de la UNALM sí permite explícitamente en la redacción de la tesis?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) Generar el análisis de resultados de los datos de campo</button>
+      <button class="qbtn" data-q="3" data-correct="true">B) Corrección de estilo y edición lingüística del texto</button>
+      <button class="qbtn" data-q="3" data-correct="false">C) Redactar las conclusiones de la investigación</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Generar hipótesis originales para el proyecto</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">Un tesista de Título Profesional sustentó exitosamente su tesis. ¿Cuánto tiempo tiene como plazo máximo para entregar la versión final al repositorio de la BAN?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) 3 meses sin posibilidad de prórroga</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) 6 meses sin posibilidad de prórroga</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) 6 meses más prórroga de 6 meses adicionales</button>
+      <button class="qbtn" data-q="4" data-correct="true">D) 6 meses más prórroga de hasta 12 meses adicionales</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el jurado de tesis para Título Profesional es FALSA según el Reglamento 2025?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) El jurado puede incluir a un profesional externo a la UNALM como miembro.</button>
+      <button class="qbtn" data-q="5" data-correct="false">B) El presidente del jurado puede convocar reuniones previas a la sustentación.</button>
+      <button class="qbtn" data-q="5" data-correct="true">C) El asesor tiene voto en la calificación final durante la deliberación privada.</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) El jurado puede estar conformado por docentes de distintas facultades de la UNALM.</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Una tesis de Título Profesional obtuvo un índice de similitud de 22% en el software oficial de la UNALM. Las citas y referencias ya fueron excluidas del análisis. ¿Qué debe ocurrir?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) El jurado puede aprobarla si el contenido es de calidad científica suficiente.</button>
+      <button class="qbtn" data-q="6" data-correct="true">B) La tesis es observada y devuelta al tesista para su corrección.</button>
+      <button class="qbtn" data-q="6" data-correct="false">C) Se aplica automáticamente una sanción disciplinaria al tesista y al asesor.</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) El asesor puede solicitar una excepción al Vicerrectorado de Investigación.</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Un estudiante de la Facultad de Ingeniería Agrícola realiza su tesis sobre el efecto de una hormona vegetal en el crecimiento de raíces usando encuestas a agricultores de la sierra peruana. ¿Requiere autorización del Comité de Ética?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) No, porque el estudio principal es sobre plantas, no sobre personas.</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) No, si los agricultores solo responden preguntas anónimas.</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) Sí, porque incluye encuestas a grupos humanos.</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Solo si involucra a comunidades indígenas con conocimientos tradicionales.</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Cuál es la nota mínima del documento de tesis (evaluación previa a la sustentación) para que un candidato a Maestro pueda proceder a la sustentación?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Mayor a 10.5 puntos</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Mayor a 11.0 puntos</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Mayor a 14 puntos</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Mayor a 16 puntos</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">Un egresado de la UNALM desarrolló su tesis y quiere publicarla en formato de artículo científico para obtener su Título Profesional. ¿En qué base de datos debe estar indizada la revista donde publique?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) SCOPUS o Web of Science obligatoriamente</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) SciELO o cualquier base de datos de acceso abierto</button>
+      <button class="qbtn" data-q="9" data-correct="true">C) Latindex catálogo o una base de datos de mayor nivel</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Cualquier revista con ISSN, sin importar la base de datos</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">El proyecto de tesis de un candidato a Doctor fue aprobado en marzo de 2025. ¿Hasta cuándo tiene vigencia ese proyecto sin solicitar prórroga?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) Marzo de 2026 (1 año)</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) Marzo de 2027 (2 años)</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) Marzo de 2028 (3 años)</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) Marzo de 2030 (5 años)</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="quiz-result"></div>
+  <button id="reiniciar-btn" onclick="reiniciarQuiz()">🔄 Reiniciar Quiz</button>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Resolución N.° 0398-2025-CU-UNALM, 16 oct. 2025 · Ley Universitaria N.° 30220 · Res. 033-2016-SUNEDU/CD (RENATI) · Res. N.° 028-2024-CONCYTEC-P (Código Nacional de Integridad Científica) · D.Leg. N.° 822 – Ley sobre Derecho de Autor · Ley N.° 29733 – Protección de Datos Personales · Formatos: https://acortar.link/DlzB52</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {
+    correct: "✅ ¡Correcto! El Art. 2.2 establece que el tesista puede presentar su proyecto 'siempre que haya aprobado más de 140 créditos'. La preposición 'más de' excluye exactamente 140; debe ser 141 o más.",
+    incorrect: "❌ La respuesta correcta es C. El Art. 2.2 dice 'más de 140 créditos', lo que excluye exactamente 140. No es ningún otro umbral. Además, no es necesario haber culminado todos los créditos."
+  },
+  2: {
+    correct: "✅ ¡Correcto! Para Maestría, el Art. 3.21 establece que el jurado tiene hasta 30 días CALENDARIO (no hábiles) para formular observaciones al borrador completo de tesis.",
+    incorrect: "❌ La respuesta correcta es C. Para Maestría y Doctorado, el Art. 3.21 establece 30 días CALENDARIO, no hábiles. Para Título Profesional el plazo es 20 días hábiles (Art. 2.20). ¡Cuidado con esta distinción!"
+  },
+  3: {
+    correct: "✅ ¡Correcto! El Art. 1.10 permite usar IA únicamente como apoyo en 'redacción, edición lingüística, corrección de estilo, búsqueda bibliográfica o traducción'. Nada que involucre generar contenido original de investigación.",
+    incorrect: "❌ La respuesta correcta es B. El Art. 1.10 restringe la IA a labores de apoyo: corrección de estilo, edición lingüística, búsqueda bibliográfica y traducción. Está expresamente prohibido usar IA para generar análisis, resultados, discusión o conclusiones."
+  },
+  4: {
+    correct: "✅ ¡Correcto! El Art. 2.32 establece que para Título Profesional el plazo inicial es 6 meses, y se puede solicitar una prórroga de hasta 12 meses adicionales (por única vez). En Maestría/Doctorado la prórroga es de solo 6 meses.",
+    incorrect: "❌ La respuesta correcta es D. El Art. 2.32 otorga 6 meses iniciales más una prórroga de hasta 12 meses para Título Profesional. Importante: para Maestría y Doctorado (Art. 3.32) la prórroga es solo de 6 meses."
+  },
+  5: {
+    correct: "✅ ¡Correcto! El Art. 2.29 es claro: 'El asesor podrá participar en la deliberación, pero NO en la calificación.' El asesor puede opinar, pero no tiene voto en el puntaje final.",
+    incorrect: "❌ La respuesta correcta es C. El Art. 2.29 establece que el asesor participa en la deliberación pero no en la calificación. No tiene voto. Las demás afirmaciones son verdaderas: puede haber jurado externo, reuniones previas y jurado de distintas facultades."
+  },
+  6: {
+    correct: "✅ ¡Correcto! El Art. 1.10 es inequívoco: 'En caso de superar este umbral [20%], la tesis será observada y devuelta al tesista para su corrección.' El incumplimiento reiterado puede causar desaprobación del documento.",
+    incorrect: "❌ La respuesta correcta es B. El Art. 1.10 no admite excepciones por calidad del contenido ni por solicitud al VRI: si supera el 20% de similitud, la tesis se observa y devuelve. La sanción disciplinaria se aplica solo si hay incumplimiento reiterado."
+  },
+  7: {
+    correct: "✅ ¡Correcto! El Art. 1.8, inciso h, exige autorización del Comité de Ética para investigaciones que 'obtengan información mediante encuestas o entrevistas a grupos humanos', independientemente de que el objeto de estudio principal sean plantas.",
+    incorrect: "❌ La respuesta correcta es C. El Art. 1.8 inciso h establece que cualquier investigación que 'obtenga información mediante encuestas o entrevistas a grupos humanos' requiere aprobación del Comité de Ética. No importa que el objeto primario de estudio sean las plantas."
+  },
+  8: {
+    correct: "✅ ¡Correcto! El Art. 3.22 establece que para Maestría y Doctorado la nota del documento de tesis debe ser 'mayor a 14 puntos' para proceder a la sustentación. Para Título Profesional el umbral es más de 10.5 (Art. 2.21).",
+    incorrect: "❌ La respuesta correcta es C. El Art. 3.22 fija el umbral en mayor a 14 puntos para Maestría/Doctorado. El umbral de 10.5 corresponde al Título Profesional (Art. 2.21). La diferencia refleja la mayor rigurosidad exigida en posgrado."
+  },
+  9: {
+    correct: "✅ ¡Correcto! El Art. 1.12 establece que para Título Profesional en formato artículo, la revista debe estar indizada en 'Latindex catálogo u otro de mayor nivel'. Para Maestría se exige SCIELO o mayor, y para Doctorado SCOPUS/WoS.",
+    incorrect: "❌ La respuesta correcta es C. El Art. 1.12 escala los requisitos de indexación según el nivel académico: Latindex catálogo para Título, SCIELO para Maestría, SCOPUS/WoS para Doctorado. Tener ISSN no es suficiente."
+  },
+  10: {
+    correct: "✅ ¡Correcto! El Art. 3.14 establece que para Doctorado el proyecto aprobado tiene vigencia de 3 años. Aprobado en marzo 2025, vence en marzo 2028. Puede solicitar 1 año adicional de prórroga antes de que expire.",
+    incorrect: "❌ La respuesta correcta es C. El Art. 3.14 diferencia plazos: 2 años para Maestría y 3 años para Doctorado. No confundir con el plazo de 2 años para Título Profesional (Art. 2.14). El proyecto de doctorado aprobado en marzo 2025 vence en marzo 2028."
+  }
+};
+
+let respondidas = 0;
+let aciertos = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn || btn.disabled) return;
+  
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('correct');
+  });
+  
+  if (!isCorrect) btn.classList.add('incorrect');
+  else aciertos++;
+  
+  respondidas++;
+  
+  const fb = document.getElementById('fb' + q);
+  fb.style.display = 'block';
+  if (isCorrect) {
+    fb.className = 'qfeedback ok';
+    fb.innerHTML = feedbacks[q].correct;
+  } else {
+    fb.className = 'qfeedback fail';
+    fb.innerHTML = feedbacks[q].incorrect;
+  }
+  
+  const pct = Math.round((respondidas / 10) * 100);
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('prog-text').textContent = 'Pregunta ' + respondidas + ' de 10 respondidas';
+  document.getElementById('score-text').textContent = 'Aciertos: ' + aciertos + '/' + respondidas;
+  
+  if (respondidas === 10) {
+    const result = document.getElementById('quiz-result');
+    result.style.display = 'block';
+    if (aciertos <= 4) {
+      result.style.background = '#fee2e2';
+      result.style.color = '#991b1b';
+      result.innerHTML = '<strong>Puntaje: ' + aciertos + '/10</strong><br>Necesitas repasar el Reglamento con más detalle. ¡Vuelve a leer las secciones que fallaste!';
+    } else if (aciertos <= 7) {
+      result.style.background = '#fef9c3';
+      result.style.color = '#713f12';
+      result.innerHTML = '<strong>Puntaje: ' + aciertos + '/10</strong><br>¡Buen avance! Dominas los conceptos principales pero repasa los plazos específicos y los umbrales numéricos.';
+    } else {
+      result.style.background = '#dcfce7';
+      result.style.color = '#14532d';
+      result.innerHTML = '<strong>Puntaje: ' + aciertos + '/10 🏆</strong><br>¡Excelente dominio del Reglamento de Tesis UNALM 2025! Estás listo para el proceso.';
+    }
+    document.getElementById('reiniciar-btn').style.display = 'block';
+  }
+});
+
+function reiniciarQuiz() {
+  respondidas = 0;
+  aciertos = 0;
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct','incorrect');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f => {
+    f.style.display = 'none';
+    f.className = 'qfeedback';
+  });
+  document.getElementById('prog-bar').style.width = '0%';
+  document.getElementById('prog-text').textContent = 'Pregunta 0 de 10 respondidas';
+  document.getElementById('score-text').textContent = 'Aciertos: 0/0';
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('reiniciar-btn').style.display = 'none';
+}
+</script>

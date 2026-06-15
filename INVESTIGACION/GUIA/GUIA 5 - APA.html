@@ -1,0 +1,646 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin:0 0 4px}
+.titlebar p{font-size:11px;margin:0 0 8px;color:#cbd5e1}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:#1e3a5f;color:#93c5fd}
+.secbar{grid-column:1/-1;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:8px}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.def{padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:6px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:8px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:11.5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:6px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;font-size:11px}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.qcard{background:var(--color-background-secondary);border-radius:10px;padding:12px;margin-bottom:10px}
+.qnum{font-family:'Oswald',sans-serif;font-size:11px;color:var(--color-text-secondary);margin:0 0 4px}
+.qtext{font-size:12.5px;font-weight:600;margin:0 0 8px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;display:block;color:var(--color-text-primary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.disabled{opacity:.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none}
+.qfeedback.correct{background:#f0fdf4;border-left:3px solid #16a34a;display:block}
+.qfeedback.incorrect{background:#fef2f2;border-left:3px solid #dc2626;display:block}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;margin:8px 0}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s}
+@media(prefers-color-scheme:dark){
+  .block{background:var(--color-background-primary)}
+  .pill{background:#1e3a5f;color:#93c5fd}
+}
+</style>
+
+<div class="cv">
+
+<div class="titlebar">
+  <h1>Guía basada en las Normas APA - UNALM</h1>
+  <p>Trabajos de Investigación y Tesis | UNALM, La Molina, Lima - Perú | Abril 2019 | Base: APA 6ta ed. inglés / 3ra ed. español</p>
+  <span class="pill">Formato de texto</span>
+  <span class="pill">Tablas y figuras</span>
+  <span class="pill">Tipos de citas</span>
+  <span class="pill">Referencias</span>
+  <span class="pill">Alfabetización</span>
+</div>
+
+<div class="secbar" style="background:#dbeafe;color:#1e3a8a">🔵 FUNDAMENTOS Y FORMATO DEL TEXTO (Diap. 5-9)</div>
+
+<div class="block">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a">¿Qué son y por qué usar APA? (Diap. 5)</span>
+  <div class="def" style="border-left:3px solid #1e3a8a">APA no es solo un "estilo de citado": es un sistema de normas creado por la American Psychological Association para estandarizar la forma en que se redactan, citan y presentan los trabajos científicos, garantizando ética académica (dar crédito a las ideas ajenas) y comunicación clara entre investigadores.</div>
+  <div class="item"><span class="dot" style="background:#1e3a8a"></span>El motivo principal NO es "evitar el plagio" como único fin, sino permitir que cualquier lector pueda rastrear de dónde viene cada idea y verificarla, lo cual es la base del método científico.</div>
+  <div class="item"><span class="dot" style="background:#1e3a8a"></span>La guía UNALM es una ADAPTACIÓN práctica de la 6ta edición en inglés / 3ra en español del Manual APA, ajustada a los requisitos de pregrado y posgrado de la universidad.</div>
+  <div class="item"><span class="dot" style="background:#1e3a8a"></span>Se ocupa de uniformar 4 elementos clave: encabezados, citas de referencia, puntuación y abreviaturas. Cada uno tiene reglas específicas que veremos en los siguientes bloques.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la utilización de un sistema de citación como APA constituye, según la guía, "un ejercicio ético" y no únicamente un requisito de formato.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a">Formato del texto para tesis UNALM (Diap. 5-6)</span>
+  <div class="def" style="border-left:3px solid #1e3a8a">Estas son las reglas de "apariencia física" del documento de tesis: tipografía, espaciado, alineación y ubicación de la numeración. Son obligatorias para que tu tesis sea aceptada formalmente por la universidad.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #1e3a8a">
+      <strong>Tipografía y tamaño</strong><br>
+      Times New Roman, 12 puntos en todo el cuerpo del texto. Esto asegura legibilidad uniforme y es el estándar que usan los jurados para evaluar extensión de capítulos.
+    </div>
+    <div class="mini" style="border-top:3px solid #1e3a8a">
+      <strong>Alineación</strong><br>
+      Justificada a ambos márgenes, EXCEPTO los títulos de capítulo, que van centrados. El justificado da una apariencia "editorial" formal frente al alineado solo a la izquierda.
+    </div>
+    <div class="mini" style="border-top:3px solid #1e3a8a">
+      <strong>Interlineado</strong><br>
+      1.5 líneas DENTRO de un párrafo, pero 2.0 líneas ENTRE párrafos. Este detalle se olvida frecuentemente: no es el mismo espaciado para ambos casos.
+    </div>
+    <div class="mini" style="border-top:3px solid #1e3a8a">
+      <strong>Paginación</strong><br>
+      Empieza en la primera página del capítulo de INTRODUCCIÓN (no en la portada ni índice), ubicada en la parte inferior central, a 1.5 cm del borde de la hoja.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Aplicar el mismo interlineado (por ejemplo, 1.5 en todo) sin diferenciar "dentro del párrafo" vs "entre párrafos". También es común numerar desde la portada, cuando la numeración real inicia en el capítulo de Introducción.</div>
+  <div class="exam">🎯 EXAMEN: Un estudiante entrega su tesis con interlineado 2.0 en todo el documento y numeración desde la carátula. Identifique los dos errores de formato según la Guía UNALM y corríjalos.</div>
+</div>
+
+<div class="secbar" style="background:#fef9c3;color:#713f12">🟡 ORGANIZACIÓN DEL TEXTO: ENCABEZADOS, SERIACIÓN Y MAYÚSCULAS (Diap. 6-8)</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#fef9c3;color:#713f12">Niveles de encabezados APA (Diap. 6)</span>
+  <div class="def" style="border-left:3px solid #713f12">Los encabezados son la "jerarquía visual" del documento: indican al lector qué tan importante o general es cada sección. APA define 5 niveles, cada uno con un formato visual distinto, que se usan de forma anidada (Nivel 1 contiene Nivel 2, que contiene Nivel 3, etc.).</div>
+  <table class="tbl">
+    <tr><th>Nivel</th><th>Formato</th><th>Uso típico en tesis</th></tr>
+    <tr><td>1</td><td>Centrado, negritas, mayúsculas y minúsculas</td><td>Título de capítulo (ej. "Marco Teórico")</td></tr>
+    <tr><td>2</td><td>Alineado a la izquierda, negritas, mayúsc/minúsc</td><td>Subtema principal del capítulo</td></tr>
+    <tr><td>3</td><td>Párrafo con sangría, negritas, minúsculas, punto final</td><td>Sub-subtema dentro del texto</td></tr>
+    <tr><td>4</td><td>Párrafo con sangría, negritas, cursivas, minúsc., punto final</td><td>Detalle muy específico</td></tr>
+    <tr><td>5</td><td>Párrafo con sangría, cursivas, minúsculas, punto final</td><td>Nivel más profundo, raro en tesis de pregrado</td></tr>
+  </table>
+  <div class="item"><span class="dot" style="background:#713f12"></span>La mayoría de tesis de pregrado en UNALM solo necesitan usar los Niveles 1, 2 y 3. Los niveles 4 y 5 se reservan para documentos muy extensos (tesis doctorales, libros).</div>
+  <div class="item"><span class="dot" style="background:#713f12"></span>Un error de jerarquía (ej. usar Nivel 2 para un capítulo completo) confunde al lector sobre la estructura lógica del documento y es señalado frecuentemente por los jurados.</div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir Nivel 3 (negritas + sangría, SIN cursiva) con Nivel 4 (negritas + sangría + CURSIVA). La diferencia es sutil pero cambia el nivel jerárquico que se comunica.</div>
+  <div class="exam">🎯 EXAMEN: Su tesis tiene la estructura: Capítulo (Introducción) → Sección (Planteamiento del problema) → Subsección (Formulación del problema). Asigne el nivel de encabezado APA correspondiente a cada uno y justifique.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#fef9c3;color:#713f12">Seriación: listas y enumeraciones (Diap. 6-8)</span>
+  <div class="def" style="border-left:3px solid #713f12">La "seriación" es cómo se presentan ideas en serie (listas). APA distingue entre listas que SÍ implican orden/secuencia (numeradas) y las que NO (con viñetas), porque usar números donde no hay jerarquía induce al lector a pensar que existe un orden de importancia que en realidad no existe.</div>
+  <div class="mini" style="border-left:3px solid #713f12;margin-bottom:6px"><strong>Números arábigos + punto:</strong> Para pasos de un procedimiento o conclusiones desglosadas donde el orden SÍ importa (ej. "1. Se recolectó la muestra. 2. Se filtró el aire...").</div>
+  <div class="mini" style="border-left:3px solid #713f12;margin-bottom:6px"><strong>Viñetas:</strong> Cuando se quiere el mismo efecto de lista pero SIN implicar orden cronológico o de importancia (ej. tipos de contaminantes, sin que uno sea "más importante" que otro).</div>
+  <div class="mini" style="border-left:3px solid #713f12;margin-bottom:6px"><strong>Letras minúsculas en paréntesis:</strong> Para enumerar elementos DENTRO de una misma oración, sin romper el párrafo (ej. "las opciones fueron (a) trabajar solo, (b) en equipo").</div>
+  <div class="warn">⚠️ ERROR COMÚN: Usar lista numerada (1, 2, 3...) para enumerar, por ejemplo, "tipos de fuentes de PM2.5 en Lima" cuando no existe un orden de importancia entre ellas — debería ser con viñetas.</div>
+  <div class="exam">🎯 EXAMEN: Tiene tres tipos de estaciones de monitoreo de calidad del aire (fijas, móviles, pasivas) sin orden de prioridad entre ellas, y luego los 4 pasos del protocolo de calibración de un equipo. Indique qué tipo de seriación usaría para cada caso y por qué.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#fef9c3;color:#713f12">Uso de mayúsculas (Diap. 8-9)</span>
+  <div class="def" style="border-left:3px solid #713f12">APA tiene reglas muy específicas sobre CUÁNDO usar mayúscula inicial, que van más allá de la gramática básica del español: aplican a títulos, departamentos académicos, nombres propios y, de forma contraria a la intuición, a las teorías y modelos (que NO llevan mayúscula).</div>
+  <div class="item"><span class="dot" style="background:#713f12"></span><strong>SÍ con mayúscula:</strong> primera palabra de oración, títulos y encabezados, nombres propios, departamentos universitarios específicos (ej. "Departamento de Recursos Hídricos de la UNALM") y nombres completos de cursos académicos.</div>
+  <div class="item"><span class="dot" style="background:#713f12"></span><strong>NO con mayúscula:</strong> nombres de leyes, teorías, modelos y procedimientos (ej. "modelo de dispersión gaussiano", no "Modelo de Dispersión Gaussiano"), ni nombres de grupos experimentales/de control.</div>
+  <div class="item"><span class="dot" style="background:#713f12"></span><strong>Regla de los dos puntos:</strong> si después de los dos puntos sigue una oración independiente (con sentido propio), la siguiente palabra va con mayúscula. Si es solo una frase dependiente, va con minúscula.</div>
+  <div class="rx">"Los resultados mostraron lo siguiente: La concentración..."
+(mayúscula porque es oración independiente)
+
+"Se identificaron tres factores: emisiones vehiculares..."
+(minúscula porque es frase dependiente)</div>
+  <div class="warn">⚠️ ERROR COMÚN: Escribir "el Modelo de Regresión Lineal Múltiple" con mayúsculas en cada palabra, cuando APA indica que los nombres de modelos estadísticos van en minúsculas: "el modelo de regresión lineal múltiple".</div>
+  <div class="exam">🎯 EXAMEN: Reescriba correctamente la siguiente oración aplicando las reglas de mayúsculas de APA: "el Modelo de Dispersión AERMOD fue aplicado en la estación de Santa Anita, los resultados Indicaron lo siguiente: las concentraciones superaron el ECA".</div>
+</div>
+
+<div class="secbar" style="background:#f1f5f9;color:#334155">⚫ TABLAS: COMPONENTES, FORMATO Y NOTAS (Diap. 9-22)</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#f1f5f9;color:#334155">Propósitos de la visualización de datos (Diap. 9)</span>
+  <div class="def" style="border-left:3px solid #334155">Antes de construir una tabla o figura, hay que tener claro PARA QUÉ se está visualizando: no toda visualización cumple el mismo rol, y elegir el propósito equivocado puede hacer que una tabla sea innecesaria o que falte una figura donde realmente se necesita.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #334155"><strong>Exploración</strong><br>Los datos "tienen un mensaje" que el investigador aún no conoce; se usa para descubrir patrones, no para comunicarlos.</div>
+    <div class="mini" style="border-top:3px solid #334155"><strong>Comunicación</strong><br>Ya se descubrió el significado y se quiere transmitir al lector. Es el propósito de la MAYORÍA de tablas/figuras en artículos científicos — el más relevante para tu tesis.</div>
+    <div class="mini" style="border-top:3px solid #334155"><strong>Cálculo</strong><br>La visualización permite calcular un estadístico o función a partir de los datos (ej. leer un valor de una curva de calibración).</div>
+    <div class="mini" style="border-top:3px solid #334155"><strong>Almacenamiento</strong><br>Se usa para guardar datos de forma organizada y recuperarlos después (ej. una tabla maestra de datos crudos en anexos).</div>
+    <div class="mini" style="border-top:3px solid #334155"><strong>Decoración</strong><br>Hace el manuscrito más atractivo visualmente. Es el propósito MENOS relevante académicamente y no debe ser la razón principal de incluir una figura.</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Incluir tablas o figuras en la tesis cuyo único propósito real es "decoración" (verse bien), sin que aporten a la comunicación de resultados — los jurados las consideran relleno innecesario.</div>
+  <div class="exam">🎯 EXAMEN: Usted tiene una base de datos horaria de PM2.5 de 5 estaciones de Lima durante un año. Indique qué propósito de visualización (de los 5 descritos) aplicaría para: (a) un gráfico de series de tiempo en el capítulo de resultados, y (b) una tabla con todos los datos horarios en un anexo.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#f1f5f9;color:#334155">Componentes y reglas básicas de una tabla (Diap. 10-12)</span>
+  <div class="def" style="border-left:3px solid #334155">Una tabla APA no es solo "una grilla con números": tiene componentes obligatorios con reglas de formato específicas (numeración, título, encabezados, líneas, notas) que la diferencian de una tabla genérica de Word o Excel.</div>
+  <div class="item"><span class="dot" style="background:#334155"></span><strong>Numeración y título:</strong> se numeran correlativamente según orden de aparición (Tabla 1, Tabla 2...), nunca con sufijos (5a, 5b). El título va ARRIBA de la tabla, en negrita, formato de oración (solo primera letra mayúscula), sin punto final, precedido por "Tabla X:". Nunca se usa la palabra "Cuadro".</div>
+  <div class="item"><span class="dot" style="background:#334155"></span><strong>Líneas (filetes):</strong> se limitan a líneas HORIZONTALES, evitando verticales. Esto da una apariencia más limpia y es el estándar de revistas científicas (a diferencia de las tablas con bordes completos de Excel por defecto).</div>
+  <div class="item"><span class="dot" style="background:#334155"></span><strong>Encabezados de columna:</strong> deben ser breves (no exceder el ancho de su columna), pueden usar abreviaturas estándar (% , núm.) sin necesidad de explicación adicional si son de uso común.</div>
+  <div class="item"><span class="dot" style="background:#334155"></span><strong>Letra:</strong> el título, cuerpo y notas de tablas/figuras van en tamaño 10 (más pequeño que el cuerpo del texto en 12).</div>
+  <div class="warn">⚠️ ERROR COMÚN: Usar la palabra "Cuadro X" en vez de "Tabla X" (común en redacción peruana/latinoamericana, pero incorrecto según APA), y dejar bordes verticales completos como en una hoja de cálculo sin editar.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué APA prefiere líneas horizontales sobre verticales en las tablas, y qué relación tiene esto con el principio de "concisión" mencionado en el cuerpo de tablas.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#f1f5f9;color:#334155">Títulos, subdivisiones y repetición de palabras (Diap. 12-13)</span>
+  <div class="def" style="border-left:3px solid #334155">Estas reglas evitan tablas "redundantes" donde una misma palabra se repite innecesariamente en varios encabezados de columna, lo cual desperdicia espacio y dificulta la lectura rápida.</div>
+  <div class="item"><span class="dot" style="background:#334155"></span>Toda columna debe tener título, INCLUYENDO la columna izquierda (la que suele listar las categorías o variables). Si esa columna tiene subdivisiones, se presentan con sangría en lugar de crear una columna nueva.</div>
+  <div class="item"><span class="dot" style="background:#334155"></span><strong>Título simple (fragmentado):</strong> técnica para evitar repetir palabras como "Lóbulo temporal" en cada encabezado — se pone "Lóbulo temporal" como título mayor que abarca dos columnas "Izquierdo" y "Derecho" debajo.</div>
+  <div class="flow">
+    <div class="fbox">Incorrecto: "Lóbulo temporal: Izquierdo / Derecho"</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Correcto: título "Lóbulo temporal" arriba, columnas "Izquierdo" / "Derecho" debajo</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Tiene una tabla con concentraciones de PM2.5 y PM10 medidas en "estación seca" y "estación húmeda" para 3 estaciones de monitoreo. Diseñe los encabezados de columna aplicando la técnica del título simple/fragmentado para evitar repetición.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#f1f5f9;color:#334155">Cuerpo de tabla: decimales y celdillas vacías (Diap. 13-14)</span>
+  <div class="def" style="border-left:3px solid #334155">El "cuerpo" es donde van los datos numéricos. APA exige consistencia en la precisión decimal y define qué hacer cuando una celda no tiene dato — esto es CRÍTICO en tu tesis de PM2.5/PM10, donde manejarás muchas cifras decimales de concentraciones.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #334155"><strong>Valores decimales</strong><br>Use el número de decimales que justifique la precisión real del instrumento de medición, y mantenga el MISMO número de decimales en toda la columna para permitir comparación visual directa.</div>
+    <div class="mini" style="border-top:3px solid #334155"><strong>Celdillas vacías</strong><br>Si el dato NO APLICA, deje la celda en blanco. Si el dato debería existir pero NO se obtuvo/informó, use una raya (—) y explíquela en la nota general. Son dos situaciones distintas que se representan diferente.</div>
+  </div>
+  <div class="rx">Ejemplo aplicado a calidad del aire:
+Estación A: PM2.5 = 24.3 µg/m³ (3 cifras sig.)
+Estación B: PM2.5 = 18.7 µg/m³ (mismo n° decimales)
+Estación C: PM2.5 = —  (dato no disponible, ver Nota)</div>
+  <div class="warn">⚠️ ERROR COMÚN: Mezclar 24.32, 18.7 y 19 (distinto número de decimales) en la misma columna, lo que dificulta comparar valores y sugiere falsa precisión en algunos datos.</div>
+  <div class="exam">🎯 EXAMEN: Su instrumento de monitoreo reporta PM2.5 con 1 decimal de precisión (ej. 24.3 µg/m³), pero para 2 de las 12 estaciones de Lima no se cuenta con datos del mes de febrero por falla del equipo. Explique cómo representaría esto en su tabla siguiendo las normas de "cuerpo de tablas" y "celdillas vacías".</div>
+</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#f1f5f9;color:#334155">Notas de tabla: general, específica y de probabilidad (Diap. 14-17)</span>
+  <div class="def" style="border-left:3px solid #334155">Las "notas" son la forma en que una tabla se vuelve autosuficiente: un lector debe poder entender la tabla completa sin necesidad de leer el texto del documento. Existen 3 tipos de notas, cada una con un propósito y formato distintos, y se ordenan en una secuencia fija (general → específica → probabilidad).</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #334155"><strong>Nota general</strong><br>Se refiere a TODA la tabla. Explica abreviaturas, da crédito si la tabla viene de otra fuente, y aclara el significado de símbolos como la raya (—). Se escribe con la palabra "Nota:" en cursiva, seguida de dos puntos.</div>
+    <div class="mini" style="border-left:3px solid #334155"><strong>Nota específica</strong><br>Se refiere a una columna, fila o celda concreta. Se marca con subíndices en minúscula (a, b, c...), ordenados de izquierda a derecha y de arriba hacia abajo, empezando en "a" en la esquina superior izquierda.</div>
+    <div class="mini" style="border-left:3px solid #334155"><strong>Nota de probabilidad</strong><br>Indica qué significan los asteriscos (*) u otros símbolos asociados a valores p de pruebas de hipótesis estadísticas (ej. *p &lt; .05, **p &lt; .01). Se coloca DESPUÉS de las notas específicas.</div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Nota general (Nota: ...)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Nota específica (ᵃ, ᵇ, ᶜ...)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Nota de probabilidad (*p &lt; .05)</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir una nota específica (que aplica solo a UNA celda/columna marcada con subíndice) con una nota general (que aplica a toda la tabla) — colocando información específica de una sola fila como si fuera general para toda la tabla, generando ambigüedad.</div>
+  <div class="exam">🎯 EXAMEN: Diseñe el pie de una tabla de "Concentraciones promedio anuales de PM2.5 y PM10 por estación de monitoreo de Lima Metropolitana, 2023" que incluya: (a) una nota general explicando que los datos de SENAMHI tienen validación de calidad, (b) una nota específica indicando que una estación tuvo menos del 75% de datos válidos, y (c) una nota de probabilidad para una comparación estadística entre zonas.</div>
+</div>
+
+<div class="secbar" style="background:#dcfce7;color:#14532d">🟢 FIGURAS: TIPOS, LEYENDAS Y BUENAS PRÁCTICAS (Diap. 19-22)</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#dcfce7;color:#14532d">Tipos de figuras y cuándo usar cada una (Diap. 19, 24, 26)</span>
+  <div class="def" style="border-left:3px solid #14532d">APA clasifica las "figuras" en 5 tipos según el tipo de información que representan. Elegir el tipo correcto no es estético: cada uno comunica una relación distinta entre variables, y usar el tipo equivocado puede hacer que el lector interprete mal tus resultados.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #14532d"><strong>Gráficas (charts)</strong><br>Muestran relación entre 2 índices cuantitativos, o entre una variable continua (eje Y) y grupos de sujetos (eje X). Ideal para series de tiempo de PM2.5 por estación.</div>
+    <div class="mini" style="border-top:3px solid #14532d"><strong>Diagramas</strong><br>Muestran información NO cuantitativa, como el flujo de elementos a través de un proceso (diagramas de flujo). Útil para representar tu metodología de muestreo o análisis.</div>
+    <div class="mini" style="border-top:3px solid #14532d"><strong>Mapas</strong><br>Despliegan información espacial. Esencial para mostrar la ubicación geográfica de las estaciones de monitoreo de Lima Metropolitana y zonas de mayor concentración.</div>
+    <div class="mini" style="border-top:3px solid #14532d"><strong>Dibujos</strong><br>Muestran información de manera gráfica/esquemática (no fotográfica), como un esquema de instrumento o protocolo.</div>
+  </div>
+  <div class="item"><span class="dot" style="background:#14532d"></span><strong>Fotografías:</strong> representaciones visuales directas (5to tipo). Se numeran igual que las demás figuras, también con número arábigo correlativo.</div>
+  <div class="item"><span class="dot" style="background:#14532d"></span><strong>Tipos avanzados:</strong> figuras tipo "modelo" o "árbol de procesamiento" se usan para formular o representar gráficamente una TEORÍA o modelo conceptual completo — más relevante en marcos teóricos complejos que en presentación de datos.</div>
+  <div class="exam">🎯 EXAMEN: Para su investigación sobre PM2.5/PM10 en Lima, indique qué tipo de figura (de los 5 descritos) usaría para: (a) mostrar la tendencia mensual de PM2.5 en 2023, (b) ubicar geográficamente las 10 estaciones de monitoreo, y (c) representar el proceso metodológico desde la toma de muestra hasta el análisis estadístico.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d">Numeración y reglas generales de figuras (Diap. 19)</span>
+  <div class="def" style="border-left:3px solid #14532d">Igual que las tablas, las figuras tienen reglas estrictas de numeración y ubicación del título que las diferencian de un "gráfico insertado sin más" en Word.</div>
+  <div class="item"><span class="dot" style="background:#14532d"></span>Se numeran correlativamente con números arábigos, según orden de APARICIÓN en el texto (no según el orden en que se crearon).</div>
+  <div class="item"><span class="dot" style="background:#14532d"></span>El título va en la parte INFERIOR de la figura (a diferencia de las tablas, cuyo título va arriba), junto con la fuente bibliográfica si corresponde.</div>
+  <div class="item"><span class="dot" style="background:#14532d"></span>Las figuras de autoría PROPIA (elaboradas por el investigador) NO llevan fuente bibliográfica — solo las adaptadas de otros autores la requieren.</div>
+  <div class="item"><span class="dot" style="background:#14532d"></span>Nunca se usa la palabra "Gráfico" como sustituto de "Figura".</div>
+  <div class="warn">⚠️ ERROR COMÚN: Colocar el título de la figura ARRIBA (como se hace con las tablas), cuando la regla APA es exactamente lo opuesto: tablas = título arriba, figuras = título/pie abajo.</div>
+  <div class="exam">🎯 EXAMEN: Usted elabora un mapa de calor (heatmap) propio con datos de PM10 de las estaciones de Lima Metropolitana usando QGIS. Indique: (a) si requiere fuente bibliográfica, (b) dónde debe ubicarse el título, y (c) cómo debe llamarse ("Figura" o "Gráfico").</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d">Leyendas y pies de figura (Diap. 19)</span>
+  <div class="def" style="border-left:3px solid #14532d">El "pie de figura" cumple doble función: es el título Y la explicación de la figura al mismo tiempo. Un pie demasiado breve obliga al lector a "adivinar" qué representa la figura, mientras que uno bien redactado hace que la figura se entienda sin necesidad de leer el texto completo.</div>
+  <div class="mini" style="border-left:3px solid #ef4444;margin-bottom:6px"><strong style="color:#991b1b">Demasiado breve:</strong> "Figura 3: Duración de la fijación" — no indica QUÉ variables se relacionan ni en QUÉ contexto.</div>
+  <div class="mini" style="border-left:3px solid #16a34a"><strong style="color:#14532d">Suficientemente descriptivo:</strong> "Figura 3: La duración de la fijación como una función del retraso entre el comienzo de la fijación ocular y el inicio del estímulo en el Experimento 1" — especifica variable dependiente, independiente y contexto experimental.</div>
+  <div class="exam">🎯 EXAMEN: Redacte un pie de figura "suficientemente descriptivo" (siguiendo el ejemplo de la guía) para una figura que muestra la variación horaria de PM2.5 durante un episodio de alta contaminación en la estación de Campo de Marte, enero 2023.</div>
+</div>
+
+<div class="secbar" style="background:#ede9fe;color:#4c1d95">🟣 CITAS: TIPOS, FORMATO Y PARÁFRASIS (Diap. 23-26)</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95">Tipos de citas: textuales breves, extensas y paráfrasis (Diap. 23-24)</span>
+  <div class="def" style="border-left:3px solid #4c1d95">Existen 3 formas de incorporar la idea de otro autor a tu texto, y la elección depende principalmente de la LONGITUD de la cita textual (el límite mágico es 40 palabras) y de si necesitas las palabras EXACTAS del autor o solo su idea.</div>
+  <div class="mini" style="border-left:3px solid #4c1d95;margin-bottom:6px">
+    <strong>Cita textual breve (&lt;40 palabras)</strong><br>
+    Va DENTRO del párrafo, entre comillas. Si la cita está en medio de la oración, la fuente (Autor, año) va inmediatamente después de cerrar comillas y la oración continúa. Si está al final, se cierra con comillas, fuente entre paréntesis, y luego el punto final.
+  </div>
+  <div class="mini" style="border-left:3px solid #4c1d95;margin-bottom:6px">
+    <strong>Cita textual extensa (≥40 palabras)</strong><br>
+    Va en BLOQUE INDEPENDIENTE, SIN comillas, con sangría izquierda de ~2.54 cm (como un nuevo párrafo), a doble espacio. Si hay varios párrafos dentro de la cita, cada uno lleva una sangría adicional de 0.5 cm. La fuente y página/párrafo van en paréntesis DESPUÉS del punto final del bloque.
+  </div>
+  <div class="mini" style="border-left:3px solid #4c1d95">
+    <strong>Paráfrasis</strong><br>
+    También llamada cita de referencia, indirecta o contextual. Consiste en reformular la idea del autor con TUS PROPIAS PALABRAS, manteniendo la idea central. Se da crédito con (Apellido, año) — SIN número de página (a diferencia de las citas textuales).
+  </div>
+  <div class="rx">Breve (&lt;40 palabras), al final de oración:
+..."contribuyendo con un clima de absoluta
+negatividad" (Robbins et al., 2003).
+
+Extensa (40+ palabras): bloque con sangría
+2.54 cm, sin comillas, doble espacio,
+fuente al final: (Purcell, 1997, p. 111-112).</div>
+  <div class="warn">⚠️ ERROR COMÚN: Usar comillas en una cita de 45 palabras (debería ir en bloque sin comillas) o, al contrario, poner una cita de 20 palabras en bloque con sangría (debería ir entre comillas dentro del párrafo). El límite de 40 palabras determina el formato, no el "criterio del autor".</div>
+  <div class="exam">🎯 EXAMEN: Tiene un párrafo de un artículo científico de 52 palabras cuya redacción exacta es esencial para su argumento, y otra frase de 12 palabras que también quiere citar textualmente. Indique el formato correcto (con comillas/sin comillas, sangría, ubicación de la fuente) para cada caso.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95">Paráfrasis en profundidad (Diap. 24-25)</span>
+  <div class="def" style="border-left:3px solid #4c1d95">Parafrasear NO es simplemente cambiar algunas palabras de la cita original (eso se llama "parafraseo encubierto" y sigue siendo plagio). Es reformular la IDEA con tu propia estructura de oración y vocabulario, demostrando que comprendiste el concepto.</div>
+  <div class="flow">
+    <div class="fbox">Cita textual: "Un periódico chicha es [...] informativamente sensacionalista..." (Gargurevich, 2002, p. 251)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Paráfrasis: Los periódicos chicha son diarios de presentación menor al estándar, con información llamativa... (Gargurevich, 2002)</div>
+  </div>
+  <div class="item"><span class="dot" style="background:#4c1d95"></span>Nota cómo la paráfrasis NO lleva número de página — esto es porque se está citando la IDEA general del autor, no un fragmento textual específico ubicable en una página exacta.</div>
+  <div class="item"><span class="dot" style="background:#4c1d95"></span>Para tu tesis sobre PM2.5/PM10, la paráfrasis será tu herramienta principal: la mayoría de tu marco teórico debe ser paráfrasis con cita (Apellido, año), reservando las citas textuales para definiciones normativas exactas (ej. límites del ECA-Aire) donde la redacción exacta importa legalmente.</div>
+  <div class="exam">🎯 EXAMEN: Explique la diferencia entre "paráfrasis" y "parafraseo encubierto (plagio)", y por qué la paráfrasis correcta no requiere número de página mientras que la cita textual sí.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95">Cita dentro de la cita textual (Diap. 25)</span>
+  <div class="def" style="border-left:3px solid #4c1d95">A veces, el autor que estás citando textualmente YA incluye, dentro de su propio texto, una cita de OTRO autor. APA tiene una regla específica para no perder esa referencia anidada sin necesidad de buscar la fuente original.</div>
+  <div class="item"><span class="dot" style="background:#4c1d95"></span>NO se debe omitir la cita interna que aparece dentro del material que estás citando textualmente — debe conservarse tal como aparece en el original.</div>
+  <div class="item"><span class="dot" style="background:#4c1d95"></span>Sin embargo, ese autor citado "dentro" NO debe aparecer en tu lista de referencias final, A MENOS que tú mismo lo hayas consultado directamente como fuente primaria en otra parte de tu trabajo.</div>
+  <div class="rx">"En Estados Unidos la American Cancer Society (2007)
+calculó que en 2007 se diagnosticarán cerca de 1 millón
+de casos..." (Miller et al., 2009).
+
+→ "American Cancer Society (2007)" NO va en tus
+  referencias (a menos que la hayas consultado tú mismo).
+→ "Miller et al. (2009)" SÍ va en tus referencias
+  (es la fuente que tú consultaste directamente).</div>
+  <div class="warn">⚠️ ERROR COMÚN: Agregar a la lista de referencias TODOS los autores mencionados dentro de una cita textual (incluyendo citas anidadas que no consultaste directamente), inflando artificialmente la bibliografía con fuentes que nunca leíste.</div>
+  <div class="exam">🎯 EXAMEN: Encuentra en un artículo de SENAMHI una cita textual que a su vez menciona un estudio de la OMS (2018) que usted no ha leído directamente. ¿Debe incluir "OMS (2018)" en su lista de referencias? Justifique según la regla de "cita dentro de la cita textual".</div>
+</div>
+
+<div class="secbar" style="background:#ffedd5;color:#7c2d12">🟠 REFERENCIAS: ALFABETIZACIÓN Y ELEMENTOS (Diap. 26-29)</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12">Alfabetización de nombres: reglas de orden (Diap. 26-27)</span>
+  <div class="def" style="border-left:3px solid #7c2d12">Ordenar la lista de referencias no es simplemente "A-Z por apellido": existen reglas específicas para casos especiales (apellidos compuestos, mismo autor con varias obras, autores corporativos) que, si se ignoran, generan una lista de referencias desordenada según el criterio APA, aunque "parezca" alfabética.</div>
+  <div class="item"><span class="dot" style="background:#7c2d12"></span><strong>Orden básico:</strong> por apellido paterno + iniciales del nombre. Apellidos compuestos o con prefijos (de, van, Ibn) se alfabetizan considerando el apellido completo tal como se escribe.</div>
+  <div class="item"><span class="dot" style="background:#7c2d12"></span><strong>Mismo autor, varias obras:</strong> se ordenan por AÑO de publicación, el más antiguo primero. Las obras de UN SOLO autor preceden a las de autoría múltiple con el mismo primer apellido, sin importar la fecha.</div>
+  <div class="item"><span class="dot" style="background:#7c2d12"></span><strong>Mismo autor, mismo año:</strong> se ordenan alfabéticamente por TÍTULO (ignorando artículos como "el/la/un/una") y se agregan letras "a", "b", "c"... después del año: (2013a), (2013b).</div>
+  <div class="item"><span class="dot" style="background:#7c2d12"></span><strong>Autores corporativos:</strong> se ordenan por el NOMBRE OFICIAL COMPLETO, nunca por sigla. Ejemplo: "Universidad Nacional Agraria La Molina", NO "UNALM" — esto es directamente relevante para tu tesis si citas a tu propia universidad o a SENAMHI/MINAM como autores corporativos.</div>
+  <div class="warn">⚠️ ERROR COMÚN: Alfabetizar "SENAMHI" por la sigla, cuando debería ordenarse por su nombre oficial completo: "Servicio Nacional de Meteorología e Hidrología del Perú".</div>
+  <div class="exam">🎯 EXAMEN: Ordene alfabéticamente las siguientes referencias según las reglas APA-UNALM: Menacho, R. (2013). Las nuevas estructuras...; SENAMHI (2020).; Menacho, R. (2013). Las melodías...; Allende, R.L. & Reyes, A.J. (1999).; Allende, R.L. (2001).</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12">Casos especiales con autores (Diap. 27-28)</span>
+  <div class="def" style="border-left:3px solid #7c2d12">Más allá del orden alfabético, existen reglas sobre CÓMO ESCRIBIR la lista de autores cuando hay 8+ autores, autores con apellidos/iniciales idénticas, o cuando una obra simplemente no tiene autor identificable.</div>
+  <div class="item"><span class="dot" style="background:#7c2d12"></span><strong>8 o más autores:</strong> se listan los primeros 6, luego puntos suspensivos (...), y finalmente el ÚLTIMO autor. NO se omiten autores intermedios sin indicarlo con "...".</div>
+  <div class="item"><span class="dot" style="background:#7c2d12"></span><strong>Apellido e inicial idénticos:</strong> se agrega el nombre de pila completo entre corchetes para diferenciarlos, tanto en referencias como en citas en texto: "(Patricia Gutiérrez, 2015)" vs "(Pedro Gutiérrez, 2015)".</div>
+  <div class="item"><span class="dot" style="background:#7c2d12"></span><strong>Obra sin autor:</strong> el TÍTULO se desplaza a la posición del autor, antes de la fecha (ej. "La vida política en medio de la crisis. (2004). Lima: Caterva.").</div>
+  <div class="exam">🎯 EXAMEN: Un informe técnico del MINAM sobre calidad del aire en Lima fue elaborado por 9 autores y no indica un autor corporativo. Redacte cómo aparecería la lista de autores en su referencia, aplicando la regla de "8 o más autores".</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12">Fecha de publicación y URL vs. DOI (Diap. 28-29)</span>
+  <div class="def" style="border-left:3px solid #7c2d12">Estos dos elementos —fecha y enlace de acceso— son los que más cambian según el TIPO de fuente (revista vs. periódico vs. página web), y elegir DOI sobre URL cuando está disponible mejora la durabilidad de tu lista de referencias.</div>
+  <div class="item"><span class="dot" style="background:#7c2d12"></span><strong>Revistas/periódicos:</strong> requieren año Y fecha exacta si aplica (ej. "(18 de setiembre de 2015)"). Si no hay fecha disponible, se escribe "(s.f.)" — sin fecha.</div>
+  <div class="item"><span class="dot" style="background:#7c2d12"></span><strong>DOI (Identificador de Objeto Digital):</strong> a diferencia de la URL, el DOI NO cambia aunque el artículo se reubique — lleva los metadatos incorporados. SIEMPRE se prefiere el DOI sobre la URL cuando ambos están disponibles.</div>
+  <div class="item"><span class="dot" style="background:#7c2d12"></span><strong>URL:</strong> se usa solo cuando NO existe DOI. El riesgo es que los enlaces se "rompan" (contenido movido/borrado) con el tiempo — algo común con reportes de entidades públicas peruanas que reorganizan sus sitios web.</div>
+  <div class="rx">Con DOI (preferido):
+...doi: 10.1016/j.rlp.2015.09.010
+
+Sin DOI (alternativa):
+...Recuperado de http://ojs.lib.swin.edu.au/...</div>
+  <div class="exam">🎯 EXAMEN: Encontró un artículo científico sobre morbilidad respiratoria asociada a PM2.5 que tiene tanto un DOI como una URL de acceso. ¿Cuál debe priorizar en su referencia y por qué, según la guía?</div>
+</div>
+
+<div class="secbar" style="background:#fce7f3;color:#831843">🩷 TIPOS DE FUENTES PARA REFERENCIAS (Diap. 29-37)</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#fce7f3;color:#831843">Publicaciones periódicas: revistas y periódicos (Diap. 29-31)</span>
+  <div class="def" style="border-left:3px solid #831843">Las "publicaciones periódicas" son la categoría más usada en una tesis científica: artículos de revistas indexadas. El formato varía según si el artículo tiene DOI, si es de acceso anticipado en línea, o si proviene de un periódico (no revista científica).</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #831843"><strong>Artículo con DOI</strong><br>
+      Formato: Autor, A.A.; Autor, B.B. (año). Título del artículo. Título de la revista, vol(núm): pp-pp. doi: xx.xxxx<br>
+      Es el formato MÁS COMÚN y deseable para tu bibliografía de tesis sobre contaminación atmosférica (revistas como Atmospheric Environment, Environmental Pollution, etc.).
+    </div>
+    <div class="mini" style="border-left:3px solid #831843"><strong>Artículo sin DOI</strong><br>
+      Mismo formato, pero terminando en "Recuperado de [URL]" en lugar de "doi:". Se usa cuando la revista no tiene DOI asignado (común en revistas latinoamericanas más pequeñas).
+    </div>
+    <div class="mini" style="border-left:3px solid #831843"><strong>Publicación anticipada en línea</strong><br>
+      Cuando un artículo ya está disponible en línea pero aún no se le ha asignado volumen/número/páginas definitivos. Se indica "Publicación anticipada en línea" en lugar de los datos de volumen.
+    </div>
+    <div class="mini" style="border-left:3px solid #831843"><strong>Artículo de periódico (no revista)</strong><br>
+      Para periódicos de circulación general (ej. El Comercio, La República). Incluye fecha completa (día, mes, año) y número de página(s), ej. "p. 8-9". Si es en línea, se agrega "Recuperado de [URL]".
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Citar un reporte de un periódico (ej. "La República informó que...") con el mismo formato que un artículo de revista científica con DOI — son categorías distintas con formatos distintos.</div>
+  <div class="exam">🎯 EXAMEN: Tiene 3 fuentes: (1) un artículo de la revista "Atmospheric Environment" con DOI, (2) un artículo de la misma revista sin DOI asignado aún (en prensa), y (3) una noticia de El Comercio sobre un episodio de contaminación. Redacte el formato de referencia que usaría para cada una.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#fce7f3;color:#831843">Libros y capítulos de libro (Diap. 31-32)</span>
+  <div class="def" style="border-left:3px solid #831843">Para libros, el factor decisivo es si citas el libro COMPLETO o solo un CAPÍTULO específico dentro de un libro editado (con varios autores de capítulos y un editor general) — esto cambia completamente el formato de la referencia.</div>
+  <div class="item"><span class="dot" style="background:#831843"></span><strong>Libro completo:</strong> Autor, A.A. (año). Título del libro. Lugar: Editorial. Si es versión electrónica, se agrega "Recuperado de [URL]" o "doi:" según corresponda.</div>
+  <div class="item"><span class="dot" style="background:#831843"></span><strong>Capítulo de libro editado:</strong> Autor del CAPÍTULO, A.A. (año). Título del capítulo. En A. Editor (Ed.), Título del libro (p. xx-xx). Lugar: Editorial. — Nota que el "Editor" del libro completo aparece DESPUÉS de "En", no al inicio.</div>
+  <div class="item"><span class="dot" style="background:#831843"></span><strong>Edición a partir de la 2da:</strong> se indica entre paréntesis después del título, ej. "(6° ed.)" — la primera edición NO necesita esta indicación.</div>
+  <div class="exam">🎯 EXAMEN: Está citando un capítulo titulado "Contaminación atmosférica en zonas urbanas andinas", escrito por un autor X, que forma parte de un libro editado por Y y Z titulado "Calidad del aire en Latinoamérica" (2da edición), publicado en Lima por una editorial. Redacte la referencia completa en formato APA-UNALM.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#fce7f3;color:#831843">Tesis y trabajos académicos (Diap. 34)</span>
+  <div class="def" style="border-left:3px solid #831843">Esta sección es DIRECTAMENTE relevante para ti: define cómo citar OTRAS tesis (antecedentes de tu investigación) y, por extensión, cómo deberá citarse TU PROPIA tesis cuando otros la usen como antecedente en el futuro.</div>
+  <div class="item"><span class="dot" style="background:#831843"></span><strong>Tesis en base de datos por suscripción:</strong> Autor (año). Título (Tesis doctoral o de maestría). Recuperada de [Nombre de la base de datos]. (Acceso o Solicitud No.)</div>
+  <div class="item"><span class="dot" style="background:#831843"></span><strong>Tesis física o inédita:</strong> Autor (año). Título (Tesis de [tipo] inédita). Nombre de la Institución, Lugar. — Esta es la más relevante si consultas tesis impresas de la biblioteca UNALM no digitalizadas.</div>
+  <div class="item"><span class="dot" style="background:#831843"></span><strong>Tesis en repositorio institucional (más común hoy):</strong> Autor (año). Título (Tesis de [tipo], Universidad X). Recuperada de [URL del repositorio]. — Este es el formato que probablemente usarás para citar tesis previas de UNALM sobre calidad del aire, disponibles en Cybertesis.</div>
+  <div class="exam">🎯 EXAMEN: Encontró una tesis de maestría de la UNMSM sobre morbilidad respiratoria y PM10, disponible en su repositorio institucional Cybertesis con URL de acceso directo. Redacte la referencia completa siguiendo el formato de "tesis en una base de datos institucional".</div>
+</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#fce7f3;color:#831843">Medios audiovisuales, mapas y fuentes en línea (Diap. 34-37)</span>
+  <div class="def" style="border-left:3px solid #831843">Estas categorías son menos frecuentes en una tesis técnica, pero pueden aparecer si usas mapas oficiales (ej. de SENAMHI/MINAM), videos institucionales, o si necesitas referenciar discusiones técnicas de foros especializados sobre monitoreo ambiental.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #831843"><strong>Mapas recuperados en línea</strong><br>
+      Formato: Entidad (Cartógrafo). (año). Título del mapa [Mapa demográfico/temático]. Recuperado de [URL]. Aplica directamente si usas, por ejemplo, un mapa de zonificación de calidad del aire de Lima publicado por una entidad oficial.
+    </div>
+    <div class="mini" style="border-top:3px solid #831843"><strong>Videos / medios audiovisuales</strong><br>
+      Formato: Entidad (Productor). (año). Título [DVD/Video]. Recuperado de [URL]. Útil si citas un video explicativo institucional sobre protocolos de monitoreo.
+    </div>
+    <div class="mini" style="border-top:3px solid #831843"><strong>Foros y comunidades en línea</strong><br>
+      Formato: Autor (día, mes, año). Título del mensaje [Comentario en foro en línea]. Recuperado de [URL]. Generalmente de BAJA jerarquía académica — usar con extrema cautela en una tesis, preferiblemente solo como contexto, nunca como fuente principal.
+    </div>
+    <div class="mini" style="border-top:3px solid #831843"><strong>Mensajes en listas de correo / blogs</strong><br>
+      Formato similar a foros: Autor (fecha). Título del mensaje [Mensaje en un blog/lista de correo]. Recuperado de [URL]. Misma precaución académica que los foros.
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Citar un blog o foro en línea con el mismo "peso" académico que un artículo revisado por pares — la guía los incluye por completitud del formato, pero su uso en una tesis debe ser mínimo y nunca como sustento de afirmaciones centrales.</div>
+  <div class="exam">🎯 EXAMEN: Usted utiliza un mapa de isoconcentraciones de PM2.5 para Lima Metropolitana, publicado en el sitio web del SENAMHI, como Figura en su tesis. Redacte tanto la referencia bibliográfica de ese mapa (lista de referencias) como el pie de figura correspondiente (recordando si requiere o no fuente, según las reglas de figuras).</div>
+</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a">TABLA INTEGRADORA: Resumen de formatos clave APA-UNALM para tu tesis</span>
+  <table class="tbl">
+    <tr><th>Elemento</th><th>Ubicación del título/nota</th><th>Numeración</th><th>Formato de cita asociado</th><th>Aplicación en tu tesis PM2.5/PM10</th></tr>
+    <tr><td>Tabla</td><td>Título ARRIBA, negrita, "Tabla X:"</td><td>Arábigo correlativo, sin sufijos (1, 2, 3...)</td><td>Notas: general → específica → probabilidad</td><td>Concentraciones por estación, resultados de regresión PM2.5 vs. morbilidad</td></tr>
+    <tr><td>Figura</td><td>Título/pie ABAJO, con fuente si no es propia</td><td>Arábigo correlativo, propio orden</td><td>Pie descriptivo (variable dep./indep./contexto)</td><td>Series de tiempo, mapas de estaciones, diagrama metodológico</td></tr>
+    <tr><td>Cita textual breve</td><td>Dentro del párrafo, entre comillas</td><td>N/A</td><td>(Autor, año, p. xx)</td><td>Definiciones normativas exactas (ECA-Aire)</td></tr>
+    <tr><td>Cita textual extensa</td><td>Bloque independiente, sangría 2.54 cm</td><td>N/A</td><td>(Autor, p. xx-xx) al final del bloque</td><td>Definiciones legales extensas de normativa ambiental</td></tr>
+    <tr><td>Paráfrasis</td><td>Integrada en el párrafo, sin comillas</td><td>N/A</td><td>(Autor, año) — sin página</td><td>Mayoría del marco teórico y antecedentes</td></tr>
+    <tr><td>Referencia (artículo)</td><td>Lista final, orden alfabético, sangría francesa</td><td>N/A</td><td>doi (preferido) o "Recuperado de [URL]"</td><td>Artículos sobre PM2.5/PM10 y salud respiratoria</td></tr>
+    <tr><td>Referencia (tesis)</td><td>Lista final, mismo orden alfabético</td><td>N/A</td><td>Repositorio institucional + URL</td><td>Antecedentes de tesis previas UNALM/UNMSM sobre calidad del aire</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La regla más transversal de toda la guía es la DIFERENCIA TABLA vs. FIGURA en la ubicación del título (arriba vs. abajo) y el límite de 40 PALABRAS que decide si una cita textual va entre comillas dentro del párrafo o en bloque con sangría — estos dos puntos son los errores de formato más comunes detectados por jurados de tesis en UNALM, y deben verificarse en CADA tabla, figura y cita antes de la entrega final.</div>
+</div>
+
+<div class="block s3" id="quiz-section">
+  <div style="background:#0f1e3a;color:#fff;border-radius:8px;padding:10px 14px;margin-bottom:10px">
+    <p style="font-family:'Oswald',sans-serif;font-size:14px;margin:0">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</p>
+    <p style="font-size:11px;margin:4px 0 0;color:#cbd5e1">Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <p style="font-size:12px;margin:0 0 4px" id="quiz-progress-text">Pregunta 0 de 10 respondidas — 0% de aciertos</p>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" id="quiz-progress-bar"></div></div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">Según la Guía APA-UNALM, ¿cuál es el motivo PRINCIPAL para utilizar las normas APA en un trabajo de investigación?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Cumplir un requisito administrativo de la universidad sin mayor implicancia académica</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) Permitir comunicación ética en el ámbito académico, citando adecuadamente las fuentes</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) Hacer que el documento se vea más profesional y ordenado visualmente</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Reducir la cantidad de páginas del trabajo de investigación</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Según el formato del texto para tesis UNALM, ¿cuál es el interlineado correcto?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) 2.0 líneas dentro del párrafo y 1.5 líneas entre párrafos</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) 1.0 línea dentro del párrafo y 1.5 líneas entre párrafos</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="true">C) 1.5 líneas dentro del párrafo y 2.0 líneas entre párrafos</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) 2.0 líneas tanto dentro del párrafo como entre párrafos</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Un investigador necesita listar 3 tipos de fuentes de PM2.5 en Lima sin que exista un orden de importancia entre ellas. Según las reglas de seriación, ¿qué tipo de lista debe usar?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Lista numerada con números arábigos (1, 2, 3)</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) Lista con viñetas, sin implicar orden cronológico ni de importancia</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Letras minúsculas entre paréntesis dentro de una sola oración</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Números romanos (I, II, III)</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el uso de mayúsculas según APA es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Los nombres completos de cursos académicos específicos van con mayúscula inicial</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) Los nombres de modelos y teorías estadísticas (ej. "modelo de regresión lineal") deben escribirse con mayúscula en cada palabra principal</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Los nombres de los grupos experimental y de control NO van con mayúscula inicial</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Después de dos puntos, si sigue una oración independiente, la palabra siguiente va con mayúscula</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">En una tabla con datos de concentración de PM10, una estación no reportó datos para el mes de marzo por falla del equipo (el dato debería existir pero no se obtuvo). Según la guía, ¿cómo debe representarse esa celda?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Se deja la celda completamente en blanco, sin ninguna marca</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Se escribe "N/A" sin ninguna explicación adicional</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) Se inserta una raya (—) en la celda y se explica su significado en una nota general de la tabla</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Se elimina la fila completa de la tabla para evitar mostrar datos faltantes</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿En qué se diferencia principalmente una "nota general" de una "nota específica" en una tabla APA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) La nota general va en cursiva y la específica en negrita, sin diferencia de alcance</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) La nota general aplica a toda la tabla, mientras que la nota específica se refiere a una columna, fila o celda concreta mediante subíndices</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) La nota general se usa solo para tablas con valores p, y la específica para el resto</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) No existe diferencia real, son términos intercambiables según la guía</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Un investigador elabora un mapa de isoconcentraciones de PM2.5 para Lima usando QGIS con datos propios. ¿Dónde debe ubicarse el título de esta figura y necesita fuente bibliográfica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Título arriba del mapa, y SÍ requiere fuente bibliográfica siempre</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) Título/pie en la parte inferior del mapa, y NO requiere fuente porque es elaboración propia del autor</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) Título arriba como en las tablas, y no requiere fuente porque es un "Gráfico"</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) El título puede ir en cualquier posición, lo importante es que diga "Gráfico X"</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Tiene una cita textual de exactamente 52 palabras que necesita incluir tal cual en su tesis. ¿Cuál es el formato correcto según APA-UNALM?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Incluirla entre comillas dentro del párrafo normal, con (Autor, año, p. xx) al final</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) Presentarla en un bloque independiente, sin comillas, con sangría izquierda de aprox. 2.54 cm y a doble espacio, citando la fuente y página al final del bloque</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Resumirla obligatoriamente a menos de 40 palabras antes de citarla</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Convertirla automáticamente en paráfrasis, ya que las citas de más de 40 palabras no están permitidas</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cómo debe alfabetizarse en la lista de referencias una entidad como "SENAMHI" (Servicio Nacional de Meteorología e Hidrología del Perú), según la regla de autores corporativos?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Por la sigla "SENAMHI", ya que es como se conoce comúnmente a la entidad</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Al final de la lista de referencias, independientemente del orden alfabético, por ser una entidad pública</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Por su nombre oficial completo: "Servicio Nacional de Meteorología e Hidrología del Perú"</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Por el nombre del director o titular de la institución en el año de publicación</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">Encontró un artículo científico sobre PM2.5 y morbilidad respiratoria que tiene asignado tanto un DOI como una URL de acceso directo. Según la guía, ¿cuál debe priorizar en la referencia?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) La URL, porque es más fácil de copiar y pegar para el lector</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) El DOI, porque no cambia con el tiempo y permite ubicar el artículo aunque se reubique en otra dirección</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Ambos deben incluirse siempre, uno junto al otro, sin preferencia</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Ninguno; basta con citar el nombre de la revista y el año</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="quiz-results" style="display:none;border-radius:10px;padding:14px;margin-top:8px;text-align:center">
+    <p style="font-family:'Oswald',sans-serif;font-size:14px;margin:0 0 4px" id="quiz-results-score"></p>
+    <p style="font-size:12px;margin:0 0 10px" id="quiz-results-msg"></p>
+    <button class="qbtn" style="width:auto;display:inline-block" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Asociación Psicológica Americana (2010). Manual de publicaciones de la APA (6a ed. en español). México D.F.: El Manual Moderno. | UNALM, Vicerrectorado de Investigación (2019). Normas de presentación de los trabajos de investigación y tesis. | Centro de escritura Javeriano (2013). Normas APA. Cali: PUJ.</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {correct:"✅ ¡Correcto! La esencia de APA es la ética académica: dar crédito adecuado a las ideas de otros y permitir que cualquier lector rastree y verifique las fuentes — eso es lo que sostiene el método científico.", incorrect:"❌ Incorrecto. La respuesta correcta es B. APA no es solo estética ni un trámite: su función central es permitir comunicación ética, dando crédito apropiado a las fuentes consultadas."},
+  2: {correct:"✅ ¡Correcto! 1.5 dentro del párrafo y 2.0 entre párrafos — esta diferenciación es un error común que los jurados de tesis UNALM revisan con frecuencia.", incorrect:"❌ Incorrecto. La respuesta correcta es C: 1.5 líneas DENTRO del párrafo, 2.0 líneas ENTRE párrafos. Son espaciados distintos para cada caso, no el mismo valor."},
+  3: {correct:"✅ ¡Correcto! Las viñetas se usan precisamente cuando se quiere enumerar elementos SIN implicar un orden cronológico o de importancia entre ellos, a diferencia de las listas numeradas.", incorrect:"❌ Incorrecto. La respuesta correcta es B. Usar números (1, 2, 3) connotaría una jerarquía u orden que no existe entre los tipos de fuentes; las viñetas evitan esa implicación."},
+  4: {correct:"✅ ¡Correcto! Esta es la afirmación FALSA. APA indica que los nombres de teorías, modelos y procedimientos (como 'modelo de regresión lineal') NO van con mayúscula inicial en cada palabra — se escriben en minúsculas.", incorrect:"❌ Incorrecto. La respuesta correcta es B. Las demás afirmaciones son verdaderas según la guía; la B es FALSA porque los nombres de modelos y teorías van en minúsculas, no con mayúscula en cada palabra principal."},
+  5: {correct:"✅ ¡Correcto! Cuando el dato debería existir pero no se obtuvo o no se informó, se usa una raya (—) y se explica su significado en la nota general — esto es distinto de dejar la celda en blanco (que es para datos 'no aplicables').", incorrect:"❌ Incorrecto. La respuesta correcta es C. La celda en blanco es para cuando el dato NO APLICA; cuando el dato debería existir pero falta, se usa una raya (—) explicada en la nota general."},
+  6: {correct:"✅ ¡Correcto! La nota general califica/explica TODA la tabla (incluye créditos y abreviaturas), mientras que la nota específica se refiere a un elemento puntual (columna, fila o celda) mediante subíndices ordenados de izquierda a derecha y de arriba hacia abajo.", incorrect:"❌ Incorrecto. La respuesta correcta es B. La diferencia clave es el ALCANCE: la nota general cubre toda la tabla, la específica apunta a un elemento puntual mediante subíndices (a, b, c...)."},
+  7: {correct:"✅ ¡Correcto! En figuras (a diferencia de tablas), el título/pie va ABAJO, y las figuras de autoría PROPIA no requieren fuente bibliográfica — solo las adaptadas de otros autores la necesitan.", incorrect:"❌ Incorrecto. La respuesta correcta es B. Recuerda la regla transversal: tablas = título arriba; figuras = título/pie abajo. Y las figuras de elaboración propia no llevan fuente bibliográfica."},
+  8: {correct:"✅ ¡Correcto! Al ser 40 palabras o más, la cita es 'extensa': va en bloque independiente, sin comillas, con sangría izquierda de ~2.54 cm, a doble espacio, y la fuente (con página) se coloca después del punto final del bloque.", incorrect:"❌ Incorrecto. La respuesta correcta es B. El límite de 40 palabras determina el formato: 52 palabras supera ese umbral, por lo que corresponde el formato de cita textual EXTENSA en bloque, no entre comillas ni resumida."},
+  9: {correct:"✅ ¡Correcto! Los autores corporativos se alfabetizan por su NOMBRE OFICIAL COMPLETO, nunca por la sigla. 'Servicio Nacional de Meteorología e Hidrología del Perú' se ordenaría por la 'S', no junto a otras entradas que empiecen con 'SE' por sigla.", incorrect:"❌ Incorrecto. La respuesta correcta es C. La guía especifica explícitamente (con el ejemplo de UNALM vs. 'Universidad Nacional Agraria La Molina') que los autores corporativos se alfabetizan por su nombre oficial completo, no por la sigla."},
+  10: {correct:"✅ ¡Correcto! El DOI es preferido porque es un identificador permanente que no cambia aunque el artículo se reubique en otra dirección web — a diferencia de la URL, que puede 'romperse' con el tiempo.", incorrect:"❌ Incorrecto. La respuesta correcta es B. La guía indica que, a diferencia de la URL (que puede volverse un enlace roto), el sistema DOI no cambia con el tiempo y siempre permite encontrar el artículo."}
+};
+
+let answered = 0;
+let correctCount = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  if(!e.target.classList.contains('qbtn')) return;
+  const btn = e.target;
+  if(btn.classList.contains('disabled')) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+
+  allBtns.forEach(b => {
+    b.classList.add('disabled');
+    if(b.dataset.correct === 'true'){
+      b.classList.add('correct');
+      if(b.textContent.indexOf('✅') === -1) b.textContent = '✅ ' + b.textContent.trim();
+    }
+    if(b === btn && b.dataset.correct === 'false'){
+      b.classList.add('incorrect');
+      if(b.textContent.indexOf('❌') === -1) b.textContent = '❌ ' + b.textContent.trim();
+    }
+  });
+
+  const fb = document.getElementById('fb'+q);
+  fb.classList.remove('correct','incorrect');
+  if(isCorrect){
+    fb.classList.add('correct');
+    fb.textContent = feedbacks[q].correct;
+    correctCount++;
+  } else {
+    fb.classList.add('incorrect');
+    fb.textContent = feedbacks[q].incorrect;
+  }
+  fb.style.display = 'block';
+
+  answered++;
+  const pct = Math.round((correctCount/answered)*100);
+  document.getElementById('quiz-progress-text').textContent = 'Pregunta '+answered+' de 10 respondidas — '+pct+'% de aciertos';
+  document.getElementById('quiz-progress-bar').style.width = (answered*10)+'%';
+
+  if(answered === 10){
+    const results = document.getElementById('quiz-results');
+    results.style.display = 'block';
+    document.getElementById('quiz-results-score').textContent = correctCount + ' / 10 correctas';
+    let msg = '';
+    if(correctCount <= 4){ results.style.background = '#fee2e2'; msg = 'Necesitas repasar el material'; }
+    else if(correctCount <= 7){ results.style.background = '#fef9c3'; msg = '¡Buen avance, sigue repasando!'; }
+    else { results.style.background = '#dcfce7'; msg = '¡Excelente dominio del tema!'; }
+    document.getElementById('quiz-results-msg').textContent = msg;
+  }
+});
+
+function resetQuiz(){
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.classList.remove('disabled','correct','incorrect');
+    b.textContent = b.textContent.replace('✅ ','').replace('❌ ','');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f => {
+    f.style.display = 'none';
+    f.classList.remove('correct','incorrect');
+  });
+  answered = 0;
+  correctCount = 0;
+  document.getElementById('quiz-progress-text').textContent = 'Pregunta 0 de 10 respondidas — 0% de aciertos';
+  document.getElementById('quiz-progress-bar').style.width = '0%';
+  document.getElementById('quiz-results').style.display = 'none';
+}
+</script>
