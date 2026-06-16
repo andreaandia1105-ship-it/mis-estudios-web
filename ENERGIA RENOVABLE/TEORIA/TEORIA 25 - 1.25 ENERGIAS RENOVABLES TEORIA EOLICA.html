@@ -1,0 +1,592 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;}
+.cv *{box-sizing:border-box;}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px;}
+.titlebar h1{font-family:Oswald;font-weight:700;font-size:20px;margin:0 0 4px;}
+.titlebar p{font-size:11px;margin:0 0 8px;color:#cbd5e1;}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px 4px 0 0;background:#1e3a5f;color:#93c5fd;}
+.sectionbar{grid-column:1/-1;font-family:Oswald;font-size:13px;font-weight:700;padding:7px 13px;border-radius:9px;display:flex;align-items:center;gap:8px;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:1/-1;}
+.bh{font-family:Oswald;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.def{border-left:3px solid #1e3a8a;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:8px 0;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:11.5px;}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:6px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;}
+.ft{font-family:Oswald;font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;}
+.statbarwrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;}
+.statbarfill{height:100%;border-radius:20px;background:#16a34a;transition:width .3s;}
+.qcard{background:var(--color-background-secondary);border-radius:10px;padding:10px 12px;margin-bottom:10px;}
+.qnum{font-family:Oswald;font-size:11px;color:var(--color-text-secondary);margin:0 0 4px;}
+.qtext{font-size:12.5px;font-weight:600;margin:0 0 8px;}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;display:block;color:var(--color-text-primary);}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn.disabled{opacity:.6;cursor:not-allowed;pointer-events:none;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;}
+.qfeedback.correct{background:#f0fdf4;border-left:3px solid #16a34a;}
+.qfeedback.incorrect{background:#fef2f2;border-left:3px solid #dc2626;}
+.resultpanel{border-radius:10px;padding:12px;text-align:center;font-size:13px;font-weight:600;margin-top:10px;}
+.resultpanel.low{background:#fee2e2;color:#991b1b;}
+.resultpanel.mid{background:#fef9c3;color:#713f12;}
+.resultpanel.high{background:#dcfce7;color:#14532d;}
+.resetbtn{background:#0f172a;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;cursor:pointer;margin-top:10px;font-family:'Source Sans 3',sans-serif;}
+@media(prefers-color-scheme:dark){
+  .c-blue-l{background:#1e3a5f;color:#93c5fd;} .c-green-l{background:#14532d;color:#86efac;}
+  .c-red-l{background:#450a0a;color:#fca5a5;} .c-yellow-l{background:#422006;color:#fef08a;}
+  .c-purple-l{background:#2e1065;color:#c4b5fd;} .c-teal-l{background:#042f2e;color:#5eead4;}
+  .c-orange-l{background:#431407;color:#fed7aa;} .c-gray-l{background:#1e293b;color:#94a3b8;}
+  .c-pink-l{background:#4a044e;color:#f0abfc;}
+  .def{border-left-color:#93c5fd;}
+  .qbtn{color:var(--color-text-primary);}
+}
+@media(prefers-color-scheme:light){
+  .c-blue-l{background:#dbeafe;color:#1e3a8a;} .c-green-l{background:#dcfce7;color:#14532d;}
+  .c-red-l{background:#fee2e2;color:#991b1b;} .c-yellow-l{background:#fef9c3;color:#713f12;}
+  .c-purple-l{background:#ede9fe;color:#4c1d95;} .c-teal-l{background:#ccfbf1;color:#134e4a;}
+  .c-orange-l{background:#ffedd5;color:#7c2d12;} .c-gray-l{background:#f1f5f9;color:#334155;}
+  .c-pink-l{background:#fce7f3;color:#831843;}
+}
+.dot-blue{background:#3b82f6;} .dot-green{background:#22c55e;} .dot-red{background:#ef4444;}
+.dot-yellow{background:#eab308;} .dot-purple{background:#a855f7;} .dot-teal{background:#14b8a6;}
+.dot-orange{background:#f97316;} .dot-gray{background:#64748b;} .dot-pink{background:#ec4899;}
+</style>
+
+<div class="cv">
+
+<div class="titlebar">
+  <h1>Energía Eólica: Teoría del Viento, Aerogeneradores e Inserción en Redes</h1>
+  <p>Curso: Energía Renovable (UNALM) — Fuentes: Boletín Energético N°13 (Mastrángelo et al.), Aplicación Ecuación de Weibull (Tunja-Colombia), Problema Numérico Aerogenerador</p>
+  <span class="pill">Origen del viento</span><span class="pill">Aerodinámica/Betz</span><span class="pill">Curvas de potencia</span><span class="pill">Weibull</span><span class="pill">Integración a la red</span><span class="pill">Caso numérico</span>
+</div>
+
+<!-- SECCIÓN 1 -->
+<div class="sectionbar c-blue-l">🔵 ORIGEN Y CARACTERIZACIÓN DEL VIENTO</div>
+
+<div class="block s2">
+  <span class="bh c-blue-l">Origen del viento (p.3-12)</span>
+  <div class="def">El viento es <b>aire en movimiento</b> causado por diferencias de presión atmosférica, que a su vez nacen del calentamiento desigual de la superficie terrestre por el sol. Es un vector con dirección, sentido e intensidad, y a veces componente vertical (vector 3D).</div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>¿Por qué importa?</b> Toda la energía eólica viene de esta cadena: radiación solar → calentamiento diferencial → gradiente de presión → viento. Por eso la eólica se considera energía solar indirecta (1-2% de la energía solar incidente se convierte en viento, según el documento del problema numérico).</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>Convección:</b> transporte de calor por movimiento de partículas de aire. El aire caliente, menos denso, asciende; el aire frío y denso desciende, generando circulación (brisa de mar/tierra, brisas de valle-montaña).</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>Fuerza de Coriolis:</b> por la rotación terrestre, el viento se desvía hacia la izquierda en el Hemisferio Sur (donde está Perú) y hacia la derecha en el Hemisferio Norte. Esto explica por qué el viento no va directo de alta a baja presión, sino que tiende a ser paralelo a las isobaras (viento geostrófico).</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>Fricción superficial:</b> por debajo de 100 m, la rugosidad del terreno reduce la velocidad y desvía el viento hacia las bajas presiones (desvío de ~20° en el mar). Esto es clave para definir la altura óptima de instalación de un aerogenerador.</div></div>
+  <div class="flow">
+    <div class="fbox">Radiación solar</div><div class="farrow">→</div>
+    <div class="fbox">Calentamiento diferencial</div><div class="farrow">→</div>
+    <div class="fbox">Gradiente de presión</div><div class="farrow">→</div>
+    <div class="fbox">Viento (+ Coriolis + fricción)</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: confundir <b>convección</b> (transporte vertical de calor por movimiento de aire) con <b>advección</b> (transporte horizontal de calor). Ambos ocurren en la atmósfera pero describen direcciones distintas del flujo de energía.</div>
+  <div class="exam">🎯 EXAMEN: Explique la cadena causal completa desde la radiación solar hasta la formación del viento, indicando el rol de la fuerza de Coriolis en el Hemisferio Sur (caso Perú).</div>
+</div>
+
+<div class="block">
+  <span class="bh c-teal-l">Circulación atmosférica (p.12)</span>
+  <div class="def">Patrón global de movimiento del aire en la <b>troposfera</b> (7 km en polos, 17 km en el ecuador), determinado por la radiación solar (factor principal) y la rotación terrestre.</div>
+  <div class="item"><div class="dot dot-teal"></div><div>Se distinguen 3 núcleos por hemisferio: <b>tropical</b>, <b>templado</b> y <b>polar</b>, separados por zonas de calmas ecuatoriales, altas presiones subtropicales y depresiones cerca de 60° de latitud.</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div>El esquema es idealizado; el relieve, los océanos y las estaciones lo deforman — relevante para entender por qué los mapas eólicos del Perú (costa, sierra, selva) muestran patrones tan distintos entre regiones.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el esquema de circulación general "no es perfecto" en la práctica? Mencione dos factores que lo deforman.</div>
+</div>
+
+<div class="block">
+  <span class="bh c-purple-l">Vientos locales: brisas (p.4-7,15)</span>
+  <div class="mini" style="margin-bottom:6px;"><b>Brisa de mar/tierra:</b> de día, el continente se calienta más rápido (menor calor específico) → viento del mar a tierra. De noche se invierte. Visible hasta 50 km de la costa — relevante para la costa peruana.</div>
+  <div class="mini"><b>Brisa de valle-montaña:</b> de día el viento sube de valle a montaña (los montes se calientan antes); de noche se invierte. Aplica directamente a valles andinos peruanos.</div>
+  <div class="exam">🎯 EXAMEN: Un parque eólico se ubica en un valle andino. Explique cómo cambiará la dirección dominante del viento entre el día y la noche, y por qué.</div>
+</div>
+
+<!-- SECCIÓN 2: MEDICIÓN -->
+<div class="sectionbar c-green-l">🟢 MEDICIÓN Y VARIABILIDAD DEL VIENTO</div>
+
+<div class="block s2">
+  <span class="bh c-green-l">Anemómetros y escala Beaufort (p.8-11)</span>
+  <div class="def">La <b>velocidad del viento</b> se mide con anemómetros. Los de rotación (cucharas Papillon-Robinson) son los más comunes en estaciones meteorológicas, pero son <b>insensibles por debajo de 1 m/s</b>. El de Richard es muy sensible pero solo de laboratorio.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #14b8a6;border-radius:0 8px 8px 0;"><b>Anemómetros de rotación</b><br>Cucharas (Papillon-Robinson), aletas oblicuas (Jules Richard), canalones (Ailleret). Los más usados operativamente.</div>
+    <div class="mini" style="border-left:3px solid #14b8a6;border-radius:0 8px 8px 0;"><b>Anemómetros de presión</b><br>Bola y cuadrante, tubo de Pitot, Best Romani (registros casi instantáneos, &lt;0.1s).</div>
+  </div>
+  <div class="item" style="margin-top:6px;"><div class="dot dot-green"></div><div><b>Escala de Beaufort:</b> clasifica el viento en 17 categorías (0-17 en grados extendidos) según efectos observables en tierra y mar, no solo por velocidad. Por ejemplo, grado 0 = "el humo se eleva verticalmente" (calma); grado 6 = "vibran los hilos eléctricos, difícil usar el paraguas" (viento fuerte, 39-49 km/h).</div></div>
+  <div class="rx">p = 0.13 · V² &nbsp;[daN/m²]<br>V = velocidad media de 5 min, en m/s<br>p = presión sobre superficie plana perpendicular al viento</div>
+  <div class="item"><div class="dot dot-green"></div><div><b>Ejemplo:</b> con V = 20 m/s, p = 0.13 × 20² = 52 daN/m² — esta presión es la base para calcular cargas estructurales sobre palas y torres.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: la escala Beaufort original llega a grado 12 (huracán); el documento extiende hasta 17 para clasificar ciclones extremos, pero los valores de m/s aumentan de forma <b>no lineal</b> entre grados — no se puede interpolar linealmente.</div>
+  <div class="exam">🎯 EXAMEN: Calcule la presión sobre una superficie plana perpendicular a un viento de 15 m/s usando la fórmula de Mastrángelo, e indique a qué grado Beaufort corresponde aproximadamente.</div>
+</div>
+
+<div class="block">
+  <span class="bh c-yellow-l">Rosa de vientos y variación cíclica (p.6,13-14)</span>
+  <div class="def">El <b>diagrama polar (rosa de vientos)</b> muestra el porcentaje de tiempo que el viento sopla desde cada dirección, con vectores cuya longitud es proporcional a la velocidad media en esa dirección.</div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Variación estacional:</b> la velocidad cambia mes a mes según coeficientes (ej. Aeroparque: 1.12 en enero, 0.90 en julio). Como la energía es proporcional al <b>cubo</b> de la velocidad, (1.15)³ = 1.52 mientras (0.85)³ = 0.61 — la diferencia energética entre meses es mucho mayor que la diferencia de velocidad.</div></div>
+  <div class="rx">P ∝ V³ &nbsp;→&nbsp; coef. 1.15 da 1.52× energía<br>coef. 0.85 da 0.61× energía<br>razón ≈ 2.5× entre el mes "bueno" y el "malo"</div>
+  <div class="exam">🎯 EXAMEN: Si un mes tiene un coeficiente de velocidad de 1.10 respecto a la media anual, ¿en qué factor aumenta la energía eólica disponible ese mes respecto al promedio?</div>
+</div>
+
+<div class="block">
+  <span class="bh c-orange-l">Turbulencia y perfil vertical (p.14-17)</span>
+  <div class="def">La <b>turbulencia</b> es la relación entre el desvío típico de velocidad y la velocidad máxima (10-12% en hemisferio norte, &gt;17% en Comodoro Rivadavia). La velocidad del viento <b>aumenta con la altura</b> debido a la reducción de fricción.</div>
+  <div class="rx">V / Vo = (H / Ho)ⁿ &nbsp;&nbsp;(ley potencial)<br>V/Vo = ln(H/zo) / ln(Ho/zo) &nbsp;(ley logarítmica)<br>n = 0.04·ln(zo) + 0.003·(ln zo)² + 0.24</div>
+  <div class="item"><div class="dot dot-orange"></div><div><b>zo</b> = longitud de rugosidad del suelo. Terrenos lisos (mar, nieve): zo=0.001-0.02, n=0.10-0.13. Terrenos muy rugosos (ciudades): zo=2-10, n=0.27-0.40.</div></div>
+  <div class="rx">E / Eo = (H / Ho)^(3n) &nbsp;&nbsp;con 0.30 &lt; 3n &lt; 1.20</div>
+  <div class="item"><div class="dot dot-orange"></div><div>Como la energía depende del <b>cubo</b> de la velocidad, pequeños incrementos de altura producen ganancias energéticas significativas → <b>de ahí la importancia de torres altas</b>.</div></div>
+  <div class="exam">🎯 EXAMEN: Un terreno tiene n=0.20 (bosques). Si Vo=5 m/s a Ho=10m, calcule V a H=50m usando la ley potencial, y luego determine cuántas veces mayor es la energía disponible a 50m respecto a 10m.</div>
+</div>
+
+<!-- SECCIÓN 3: TEORÍA DE BETZ -->
+<div class="sectionbar c-red-l">🔴 TEORÍA DE BETZ Y POTENCIA DEL AEROGENERADOR</div>
+
+<div class="block s3">
+  <span class="bh c-red-l">Teoría de Betz — límite teórico (p.23-26)</span>
+  <div class="def">La teoría de <b>Betz</b> (alemán) establece el <b>máximo teórico de energía</b> que un aerogenerador de eje horizontal puede extraer del viento: <b>16/27 ≈ 59.26%</b>. Esto ocurre cuando V₂ = V₁/3 (velocidad detrás de la hélice = 1/3 de la velocidad incidente).</div>
+  <div class="item"><div class="dot dot-red"></div><div><b>¿Por qué hay un límite?</b> Si toda la energía cinética se extrajera (V₂=0), el aire no podría salir del rotor, deteniendo el flujo entrante. Por incompresibilidad, el área de la "vena de aire" se ensancha cuando V₂&lt;V₁, lo que limita la extracción posible.</div></div>
+  <div class="rx">P₀ = (8/27)·ρ·S·V₁³ &nbsp;(potencia máxima de Betz)<br>(P/P₀) = ½·(1-(V₂/V₁)²)·(1+V₂/V₁)<br>Máximo en V₂/V₁ = 1/3 → P/P₀ = 0.5926 = 16/27</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #ef4444;"><b>Ecuaciones base de Betz</b><br>F = ρ·S·V₁·(V₁-V₂) (fuerza, Euler)<br>P = F·V = ρ·S·V·V₁·(V₁-V₂)<br>donde V = (V₁+V₂)/2 (velocidad en el rotor)</div>
+    <div class="mini" style="border-top:3px solid #ef4444;"><b>Eficiencia real</b><br>El límite de Betz (59%) es teórico. Máquinas avanzadas reducen esto a ~30% de eficiencia real, debido a pérdidas aerodinámicas, mecánicas y eléctricas adicionales.</div>
+  </div>
+  <div class="rx">Fórmula empírica moderna (2 palas):<br>P = 0.10 · D² · V³ &nbsp;[P en kW, D en m, V en m/s]<br>(coeficiente puede llegar a 0.13 para D&gt;60 m)</div>
+  <div class="warn">⚠️ ERROR COMÚN: confundir el <b>límite de Betz (59.26%)</b> —que es el máximo de la energía cinética del viento convertible a energía mecánica del rotor— con la <b>eficiencia global del sistema</b>, que incluye además pérdidas en caja reductora, generador y cojinetes (cadena completa ≈ 28% según el diagrama de pérdidas del Boletín: Betz 59% → aerodinámicas 65% → caja 96% → generador 85% → 28% final).</div>
+  <div class="exam">🎯 EXAMEN: Demuestre matemáticamente por qué el máximo de P/P₀ ocurre cuando V₂/V₁ = 1/3, partiendo de la expresión (P/P₀) = ½(1-(V₂/V₁)²)(1+V₂/V₁) y derivando respecto a V₂.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh c-coral-l c-orange-l">Cadena de pérdidas de eficiencia (p.27)</span>
+  <div class="def">Del 100% de energía cinética del aire incidente, solo el <b>28%</b> se convierte finalmente en energía eléctrica aprovechable, debido a pérdidas sucesivas en cada etapa de conversión.</div>
+  <div class="flow">
+    <div class="fbox">100% E. cinética del aire</div><div class="farrow">→</div>
+    <div class="fbox">Betz: 59% (límite aerodinámico teórico)</div><div class="farrow">→</div>
+    <div class="fbox">Pérd. aerodinámicas reales: η_aer=65%</div>
+  </div>
+  <div class="flow" style="margin-top:6px;">
+    <div class="fbox">Pérd. caja (4%)</div><div class="farrow">→</div>
+    <div class="fbox">Pérd. cojinetes (0.5%)</div><div class="farrow">→</div>
+    <div class="fbox">Pérd. generador η_gen=85% (5.5%)</div><div class="farrow">→</div>
+    <div class="fbox" style="background:#dcfce7;font-weight:600;">28% Energía eléctrica útil</div>
+  </div>
+  <div class="item" style="margin-top:6px;"><div class="dot dot-orange"></div><div>Por esto, "<b>colocar los generadores lo más alto posible</b>" (p.16) es una recomendación crítica: ganar velocidad de viento con altura compensa parcialmente esta cascada de pérdidas, ya que la energía disponible crece con V³.</div></div>
+  <div class="exam">🎯 EXAMEN: Si el viento incidente transporta 1000 kW de energía cinética, calcule la potencia eléctrica final aprovechable aplicando la cascada completa de eficiencias (Betz 59%, aerodinámica 65%, caja 96%, generador 85%, cojinetes 99.5%).</div>
+</div>
+
+<!-- SECCIÓN 4: CLASIFICACIÓN Y CURVAS -->
+<div class="sectionbar c-purple-l">🟣 MÁQUINAS EÓLICAS Y CURVAS DE POTENCIA</div>
+
+<div class="block s2">
+  <span class="bh c-purple-l">Clasificación de máquinas eólicas (p.23-29)</span>
+  <div class="def">Las máquinas eólicas se clasifican según el <b>eje de rotación</b>: <b>eje horizontal</b> (las más usadas tradicionalmente, a las que aplica directamente la teoría de Betz) y <b>eje vertical</b> (ventaja: no requieren reorientarse con el viento y el generador puede ir a nivel del suelo, simplificando mantenimiento).</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #a855f7;"><b>Multipala lenta</b><br>Velocidad de arranque baja (2-5 m/s, ej. Savonius desde 2 m/s). Útil para bombeo de agua o molienda, pero baja eficiencia para generar electricidad.</div>
+    <div class="mini" style="border-top:3px solid #a855f7;"><b>Pocas palas, rápida</b><br>Una máquina de 2-3 palas con viento de 10 m/s entrega "más del quíntuple" de potencia que un molino multipala lento al mismo viento — preferida para generación eléctrica.</div>
+    <div class="mini" style="border-top:3px solid #a855f7;"><b>Granjas eólicas modernas</b><br>Aerogeneradores de 300-7000 kW son los de mejor relación costo-beneficio. Costos de instalación: 1000-1200 US$/kW; costo de generación: 0.045-0.055 US$/kWh.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué una máquina multipala lenta, a pesar de arrancar con vientos muy débiles, no es adecuada para la generación eléctrica a gran escala? Relacione su respuesta con la velocidad de rotación y la eficiencia.</div>
+</div>
+
+<div class="block">
+  <span class="bh c-pink-l">Curva de potencia: 4 regiones (p.33)</span>
+  <table class="tbl">
+    <tr><th>Región</th><th>Vel. [m/s]</th><th>Comportamiento</th></tr>
+    <tr><td>1</td><td>0-4</td><td>Sin producción (viento débil)</td></tr>
+    <tr><td>2</td><td>4-12</td><td>Producción creciente con V</td></tr>
+    <tr><td>3</td><td>12-20</td><td>Potencia constante (valor de placa)</td></tr>
+    <tr><td>4</td><td>20-25</td><td>Turbina parada (riesgo estructural)</td></tr>
+  </table>
+  <div class="item" style="margin-top:6px;"><div class="dot dot-pink"></div><div>Velocidad de arranque típica: 4-5 m/s. Potencia nominal a 15-16 m/s. Velocidad máxima admisible: 20-25 m/s (luego se detiene la turbina por seguridad).</div></div>
+  <div class="exam">🎯 EXAMEN: Un aerogenerador opera con viento de 18 m/s. Según la curva de potencia típica de 4 regiones, ¿en qué región se encuentra y qué significa esto para la potencia entregada?</div>
+</div>
+
+<!-- SECCIÓN 5: FACTOR DE CARGA Y PRODUCCIÓN -->
+<div class="sectionbar c-teal-l">🩵 FACTOR DE CARGA, DISPONIBILIDAD Y GPE</div>
+
+<div class="block">
+  <span class="bh c-teal-l">Factor de Carga - FC (p.36)</span>
+  <div class="def">El <b>Factor de Carga</b> mide la productividad real de un parque comparando la energía producida con la máxima energía teórica posible (a potencia nominal continua).</div>
+  <div class="rx">FC = Energía producida / (Potencia nominal × horas)</div>
+  <div class="item"><div class="dot dot-teal"></div><div>Valores mundialmente "muy buenos": <b>24-30%</b>. En la zona sur de Argentina se han verificado valores muy superiores (Rada Tilly, Comodoro Rivadavia ~40%).</div></div>
+  <div class="item"><div class="dot dot-teal"></div><div><b>Caso peruano:</b> el factor de capacidad bajo (0.2-0.4) es inherente a la naturaleza intermitente del viento, comparado con sistemas convencionales que pueden mantener FC mucho más altos.</div></div>
+  <div class="exam">🎯 EXAMEN: Un parque eólico de 50 MW de potencia nominal produce 105,000 MWh en un año. Calcule su Factor de Carga e indique si es un valor "muy bueno" según los estándares internacionales.</div>
+</div>
+
+<div class="block">
+  <span class="bh c-green-l">Disponibilidad y confiabilidad (p.35)</span>
+  <div class="rx">DT = Horas capaces de generar / horas totales<br>DO = Horas reales de operación / horas con<br>viento dentro del rango operativo</div>
+  <div class="item"><div class="dot dot-green"></div><div>Índices de confiabilidad modernos: ~98%. En proyectos argentinos, DO varía de 84.7% (Buratovich) a 99.5% (Coagua) — diferencias atribuibles a mantenimiento, calidad del equipo y condiciones del sitio.</div></div>
+  <div class="exam">🎯 EXAMEN: Distinga entre Disponibilidad Total (DT) y Disponibilidad Operativa (DO). ¿Puede DO ser mayor que DT? Justifique.</div>
+</div>
+
+<div class="block">
+  <span class="bh c-amber-l c-yellow-l">Grado de Penetración Eólica - GPE (p.35)</span>
+  <div class="rx">GPE = P. Eólica / (P. Eólica + P. Convencional)</div>
+  <div class="item"><div class="dot dot-yellow"></div><div>Consenso internacional: <b>7%</b> es un GPE aceptable; algunos sistemas operan hasta 10-15% (EUA acepta hasta 15%). Más allá de esto, la <b>variabilidad del viento</b> empieza a comprometer la calidad y estabilidad de la red.</div></div>
+  <div class="exam">🎯 EXAMEN: En el contexto del SEIN (Sistema Eléctrico Interconectado Nacional del Perú), ¿qué implicaría operativamente que la generación eólica supere el GPE de referencia del 7%?</div>
+</div>
+
+<!-- SECCIÓN 6: INTEGRACIÓN A LA RED -->
+<div class="sectionbar c-pink-l">🩷 INTEGRACIÓN A LA RED Y CALIDAD DE POTENCIA</div>
+
+<div class="block s2">
+  <span class="bh c-pink-l">Generador asíncrono / de inducción (p.42-46)</span>
+  <div class="def">La mayoría de los generadores eólicos son <b>asíncronos (de inducción)</b>: máquinas robustas y económicas que no requieren sincronización exacta con la red para arrancar, pero <b>no son autoexcitables</b> — necesitan que la red les suministre corriente magnetizante (reactivo).</div>
+  <div class="item"><div class="dot dot-pink"></div><div><b>Excitación por condensadores:</b> permite operación autónoma (autoexcitada) similar a las máquinas de corriente continua autoexcitadas, usada en aplicaciones aisladas como el "Girobus" de Oerlikon.</div></div>
+  <div class="rx">E₂s = 4.44·k₂·s·f₁·N₂·Φ &nbsp;(fem inducida en el rotor)<br>P(m-g) = m·U₁·I₁·cosφ &nbsp;(potencia activa)<br>Q(m-g) = m·U₁·I₁·senφ &nbsp;(potencia reactiva, siempre absorbida)</div>
+  <div class="warn">⚠️ ERROR COMÚN: pensar que un generador asíncrono puede operar de forma <b>completamente autónoma</b> sin compensación reactiva. La máquina asíncrona siempre absorbe reactivo para mantener su campo magnético, sea funcionando como motor o como generador.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué un generador de inducción "no es autoexcitable" y qué solución tecnológica permite revertir esa limitación (mencione el ejemplo del Girobus).</div>
+</div>
+
+<div class="block">
+  <span class="bh c-red-l">Problemas de calidad de potencia (p.45-51)</span>
+  <div class="mini" style="margin-bottom:5px;"><b>Flicker:</b> fluctuaciones de tensión (0.5-25 Hz) visibles como parpadeo de luces, causadas por ráfagas de viento y corrientes de magnetización al conectar el generador.</div>
+  <div class="mini" style="margin-bottom:5px;"><b>Armónicas:</b> los convertidores antiguos (tiristores de 6 pulsos) generaban armónicas de bajo orden; los modernos cumplen IEEE.</div>
+  <div class="mini"><b>Arranque suave:</b> tiristores conectan/desconectan gradualmente el generador para evitar caídas de tensión (brownout) en redes débiles.</div>
+  <div class="exam">🎯 EXAMEN: Una turbina eólica se conecta a una red débil sin "arranque suave". ¿Qué fenómeno experimentarán los usuarios cercanos y por qué ocurre?</div>
+</div>
+
+<div class="block s3">
+  <span class="bh c-blue-l">Pronóstico y predespacho (p.39-41)</span>
+  <div class="def">Como la potencia varía con el <b>cubo de la velocidad</b>, un error del 5% en el pronóstico del viento se traduce en un error del orden del <b>16% en la potencia producida</b>.</div>
+  <div class="rx">Error en V (5%) → Error en P ≈ (1.05)³-1 ≈ 0.1576 ≈ 16%</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #ef4444;border-radius:0 8px 8px 0;"><b>Pronóstico optimista (viento previsto &gt; real)</b><br>La potencia eólica real es menor a la calculada → margen de reserva insuficiente → riesgo de baja confiabilidad.</div>
+    <div class="mini" style="border-left:3px solid #f97316;border-radius:0 8px 8px 0;"><b>Pronóstico pesimista (viento previsto &lt; real)</b><br>Exceso de capacidad rotante predespachada → no es un problema de confiabilidad, pero incrementa costos operacionales innecesarios.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Si el pronóstico de viento tiene un error del 8%, estime el error porcentual aproximado en la potencia eólica resultante y explique las consecuencias de un pronóstico optimista vs. uno pesimista para el operador del sistema.</div>
+</div>
+
+<!-- SECCIÓN 7: WEIBULL -->
+<div class="sectionbar c-amber-l c-yellow-l">🟡 DISTRIBUCIÓN DE WEIBULL — POTENCIAL EÓLICO</div>
+
+<div class="block s2">
+  <span class="bh c-yellow-l">Función de Weibull y sus parámetros (Tunja-Colombia, p.4-5)</span>
+  <div class="def">La <b>distribución de Weibull</b> es la herramienta estadística estándar para caracterizar la frecuencia con que ocurren distintas velocidades de viento en un sitio. Depende de dos parámetros: <b>k</b> (factor de forma, dispersión) y <b>c</b> (factor de escala, relacionado con la velocidad media).</div>
+  <div class="rx">p(v) = (k/c)·(v/c)^(k-1)·e^(-(v/c)^k)</div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Ecuación de probabilidad acumulada:</b> p(v≤vi) = 1 - e^[-(vi/c)^k] — permite calcular qué fracción del tiempo el viento está por debajo (o por encima) de un valor de referencia, clave para evaluar si se supera la velocidad de arranque del aerogenerador.</div></div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Linealización (método de Touré, 2005):</b> tomando logaritmos dos veces se obtiene una recta y = a + b·x, donde la pendiente b = k (factor de forma) y a = -k·ln(c), de donde c = e^(-a/k).</div></div>
+  <div class="rx">yi = ln[-ln(1-pi)]&nbsp;&nbsp;&nbsp;xi = ln(vi)<br>a = -k·ln(c)&nbsp;&nbsp;&nbsp;b = k&nbsp;&nbsp;&nbsp;c = e^(-a/k)</div>
+  <div class="item"><div class="dot dot-yellow"></div><div><b>Caso Tunja:</b> ajuste y=0.4891x-0.4755 (R²=0.9787) → <b>k=0.4891</b>, <b>c=2.6437 m/s</b>. Un k cercano a 0.5 indica un perfil de vientos muy disperso y débil; si k fuera ≈2, se usaría la distribución de Rayleigh en su lugar.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: confundir <b>k</b> (forma de la distribución — qué tan "dispersos" están los datos alrededor del valor típico) con <b>c</b> (escala — directamente relacionado con la magnitud de la velocidad media). Un k bajo (≈0.5) NO significa viento fuerte; significa alta variabilidad relativa con muchos valores bajos.</div>
+  <div class="exam">🎯 EXAMEN: A partir de una regresión lineal y=0.65x-0.30, determine los parámetros k y c de Weibull, y explique qué representa cada uno físicamente para la caracterización del recurso eólico.</div>
+</div>
+
+<div class="block">
+  <span class="bh c-orange-l">Aplicación: potencial eólico (Tunja, p.6-7)</span>
+  <div class="rx">Potencial eólico = ½·ρ·c³·π·L²<br>ρ = 0.887 kg/m³ (a 2782 msnm, 13°C)<br>c = 2.6437 m/s; L = radio (2 m)</div>
+  <div class="item"><div class="dot dot-orange"></div><div><b>Resultado Tunja:</b> Potencial = 102.97 W con aerogenerador BORNAY 6000 (4 hélices, D≈4m). La velocidad promedio (2.64 m/s) está muy por debajo de la velocidad de arranque típica de 3 m/s.</div></div>
+  <div class="item"><div class="dot dot-orange"></div><div><b>Probabilidad de superar 3 m/s (arranque):</b> solo 26.29% del tiempo — el aerogenerador estaría operativo menos de 12 horas/día (≈48% del tiempo según el comportamiento diario observado).</div></div>
+  <div class="rx">P(v≥3) = 1 - e^[-(3/2.6437)^0.4891] = 0.2629</div>
+  <div class="warn">⚠️ ERROR COMÚN: aplicar la fórmula del "potencial eólico" Potencial=½ρc³πL² usando la velocidad <b>nominal de placa</b> del aerogenerador en vez del factor de escala <b>c</b> de Weibull obtenido del sitio. El potencial debe calcularse con datos reales del recurso local, no con datos del fabricante.</div>
+  <div class="exam">🎯 EXAMEN: Calcule el potencial eólico para un sitio con c=5 m/s y un aerogenerador de radio 1.5 m, usando ρ=1.225 kg/m³ (nivel del mar). Compare con el resultado de Tunja (102.97 W) y explique la diferencia.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh c-gray-l">Metodología de toma de datos (Tunja, p.2-3)</span>
+  <div class="def">Se instaló una <b>estación meteorológica Davis Vantage Pro 2</b> durante 8 meses, registrando 5289 datos. Se descartaron los registros de <b>calma (0 m/s)</b> porque no aportan energía cinética aprovechable.</div>
+  <table class="tbl">
+    <tr><th>Escala (m/s)</th><th>N° de datos</th><th>Frecuencia (%)</th></tr>
+    <tr><td>0.5</td><td>1957</td><td>37.00</td></tr>
+    <tr><td>1.0</td><td>397</td><td>7.51</td></tr>
+    <tr><td>1.5</td><td>386</td><td>7.30</td></tr>
+    <tr><td>2.0</td><td>341</td><td>6.45</td></tr>
+    <tr><td>2.5</td><td>302</td><td>5.71</td></tr>
+    <tr><td>3.0</td><td>1906</td><td>36.04</td></tr>
+  </table>
+  <div class="item" style="margin-top:6px;"><div class="dot dot-gray"></div><div>La distribución es <b>bimodal</b> en apariencia (picos en 0.5 y ≥3.0 m/s), lo cual explica el k bajo (0.4891): hay mucha frecuencia tanto en velocidades muy bajas como relativamente altas, generando alta dispersión relativa.</div></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué es metodológicamente correcto excluir los registros de velocidad de calma (0 m/s) antes de ajustar la distribución de Weibull? ¿Qué efecto tendría incluirlos?</div>
+</div>
+
+<!-- SECCIÓN 8: CASO NUMÉRICO -->
+<div class="sectionbar c-blue-l">🔵 CASO NUMÉRICO RESUELTO — AEROGENERADOR DE 3 ASPAS</div>
+
+<div class="block s3">
+  <span class="bh c-blue-l">Problema integrador: potencia, rendimiento y RPM (p.1-6)</span>
+  <div class="def">Aerogenerador de 60 toneladas, 3 aspas de fibra de vidrio (L=15 m, 1 ton cada una), viento de 12 m/s, densidad del aire ρ=1.18 kg/m³, potencia eléctrica entregada = 288 kW (50% de la energía cinética de las aspas).</div>
+  <div class="rx">P_viento = ½·ρ·π·L²·V³<br>= ½·(1.18)·π·(15)²·(12)³<br>= 720,656 W ≈ 721 kW</div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>a) Potencia del viento:</b> se modela un cilindro de aire de radio = longitud de aspa (L), que "atraviesa" el plano del rotor a velocidad V en un tiempo t. La masa de ese cilindro M=ρ·π·L²·V·t, y su energía cinética dividida por t da la potencia: <b>721 kW</b> disponibles en el viento.</div></div>
+  <div class="rx">R_eléctrico = P_eléctrica / P_viento = 288/721 = 0.399 ≈ 40%</div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>b) Rendimiento total ≈ 40%.</b> Si la potencia cinética de las aspas es el 200% de la eléctrica (576 kW), el rendimiento de transmisión viento→aspas es R'=576/721=0.80 (80%), y el resto (de aspas a electricidad) es 50% — producto: 0.80×0.50=0.40, consistente.</div></div>
+  <div class="rx">I = (1/3)·m·L² = (1/3)·1000·15² = 225,000 kg·m²<br>Ec_rot = ½·I·ω² = 576,000 J/s → ω = 2.26 rad/s<br>v_extremo = ω·L = 2.26 × 15 = 33.9 m/s ≈ 122 km/h</div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>c) Velocidad lineal del extremo del aspa ≈ 33.9 m/s (122 km/h)</b>, calculada a partir del momento de inercia de las 3 aspas (tratadas como varillas rotando por un extremo, I=(1/3)mL²) y la energía cinética de rotación (576 kJ/s = 2× la potencia eléctrica).</div></div>
+  <div class="rx">Para 1000 MW: n° aerogeneradores = 1,000,000/288 ≈ 3472<br>Con 100 aerog./parque → ≈ 35 parques eólicos</div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>d)</b> Se necesitan <b>~3472 aerogeneradores</b> (35 parques de 100) para igualar 1000 MW de una central térmica de gas. A 24 m/s, la potencia no aumenta proporcionalmente (la turbina ya está en Región 3, potencia constante) — el número de parques sube a ~40, no disminuye drásticamente, porque el equipo opera limitado por su potencia nominal.</div></div>
+  <div class="item"><div class="dot dot-blue"></div><div><b>e) Si cesa el viento por 10h:</b> los 28,800 kW del parque (100 unidades) deben ser cubiertos por una <b>central térmica de respaldo</b> (preferiblemente ciclo combinado, por su rapidez de respuesta) — ilustración directa de por qué la eólica "no es autosuficiente" y requiere reserva convencional.</div></div>
+  <div class="warn">⚠️ ERROR COMÚN: asumir que duplicar la velocidad del viento duplica la potencia eléctrica. Como P∝V³, duplicar V multiplicaría la potencia <b>del viento</b> por 8 — pero la potencia <b>entregada por el aerogenerador</b> está limitada por su curva de potencia (Región 3, valor de placa), por lo que el aumento real es mucho menor o nulo.</div>
+  <div class="exam">🎯 EXAMEN: Un aerogenerador con aspas de 20 m de longitud opera con viento de 10 m/s y ρ=1.225 kg/m³. Calcule la potencia disponible del viento usando P=½ρπL²V³, y si el rendimiento global del sistema es 35%, determine la potencia eléctrica entregada.</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="sectionbar c-gray-l">⚫ TABLA INTEGRADORA DE REPASO</div>
+
+<div class="block s3">
+  <table class="tbl">
+    <tr><th>Concepto</th><th>Fórmula clave</th><th>Valor de referencia</th><th>Aplicación</th><th>Fuente / Caso</th></tr>
+    <tr><td>Potencia del viento</td><td>P = ½ρπL²V³</td><td>721 kW (V=12, L=15, ρ=1.18)</td><td>Dimensionamiento de rotor</td><td>Problema numérico</td></tr>
+    <tr><td>Límite de Betz</td><td>P/P₀ máx = 16/27 (V₂/V₁=1/3)</td><td>59.26%</td><td>Eficiencia aerodinámica máxima teórica</td><td>Boletín N°13</td></tr>
+    <tr><td>Eficiencia global real</td><td>Betz×ηaer×ηcaja×ηgen</td><td>≈28%</td><td>Energía eléctrica final útil</td><td>Boletín N°13</td></tr>
+    <tr><td>Factor de Carga (FC)</td><td>FC = E_prod/(P_nom·h)</td><td>24-30% (bueno)</td><td>Evaluación de productividad de parque</td><td>Boletín N°13</td></tr>
+    <tr><td>Grado de Penetración (GPE)</td><td>GPE = Peól/(Peól+Pconv)</td><td>7% (consenso); 15% (EUA)</td><td>Límite de integración a la red</td><td>Boletín N°13</td></tr>
+    <tr><td>Distribución de Weibull</td><td>p(v)=(k/c)(v/c)^(k-1)e^(-(v/c)^k)</td><td>k=0.4891, c=2.6437 m/s (Tunja)</td><td>Caracterización estadística del recurso</td><td>Weibull Tunja</td></tr>
+    <tr><td>Error de pronóstico</td><td>ΔP ≈ 3·ΔV (relación cúbica)</td><td>5% en V → ~16% en P</td><td>Predespacho y reserva rotante</td><td>Boletín N°13</td></tr>
+    <tr><td>Perfil vertical del viento</td><td>V/Vo=(H/Ho)ⁿ ; E/Eo=(H/Ho)^3n</td><td>n=0.10-0.40 según rugosidad</td><td>Altura óptima de torre</td><td>Boletín N°13</td></tr>
+  </table>
+  <div class="warn" style="margin-top:8px;">⚠️ <b>DATO INTEGRADOR CLAVE:</b> Toda la cadena —desde la formación del viento hasta la energía eléctrica entregada— está gobernada por la relación <b>P ∝ V³</b>. Esta dependencia cúbica explica simultáneamente: por qué la altura de la torre es crítica (perfil vertical), por qué pequeños errores de pronóstico generan grandes errores de potencia (16% por 5%), por qué la variación estacional de velocidad amplifica la variación de energía (1.52× vs 0.61×), y por qué el límite de Betz se calcula sobre el cubo de la velocidad incidente. Quien domina esta relación puede resolver la mayoría de los problemas cuantitativos del curso.</div>
+</div>
+
+<!-- QUIZ -->
+<div class="block s3" id="quiz-section">
+  <div style="background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:10px;">
+    <div style="font-family:Oswald;font-size:14px;font-weight:700;">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+    <div style="font-size:11px;color:#cbd5e1;margin-top:2px;">Marca tu respuesta y descubre si es correcta</div>
+  </div>
+  <div style="margin-bottom:12px;">
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;">
+      <span id="qprogress">Pregunta 0 de 10 respondidas</span>
+      <span id="qpercent">0% aciertos</span>
+    </div>
+    <div class="statbarwrap"><div class="statbarfill" id="qbar" style="width:0%;"></div></div>
+  </div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la causa fundamental que origina el viento, según la teoría presentada?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) La rotación de la Tierra exclusivamente</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) Las diferencias de presión atmosférica causadas por calentamiento no uniforme del suelo</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) La fuerza de Coriolis actuando sobre masas de aire en reposo</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) La humedad relativa del aire en distintas regiones</button>
+    </div>
+    <div class="qfeedback" id="fb1" style="display:none;"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Si el anemómetro de una estación es de tipo "cucharas Papillon-Robinson", ¿qué limitación importante presenta?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Solo funciona en laboratorios</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) Mide solo dirección, no velocidad</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="true">C) Es insensible a velocidades menores a 1 m/s</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Solo registra velocidades por encima de 20 m/s</button>
+    </div>
+    <div class="qfeedback" id="fb2" style="display:none;"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Según la teoría de Betz, ¿cuál es la fracción máxima de la energía cinética del viento que un aerogenerador de eje horizontal puede convertir en energía mecánica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) 100%, si el rotor está bien diseñado</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) 28%, igual a la eficiencia eléctrica final</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) 30%, valor típico de máquinas avanzadas</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) 16/27 ≈ 59.26%, cuando V₂/V₁ = 1/3</button>
+    </div>
+    <div class="qfeedback" id="fb3" style="display:none;"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">Un aerogenerador opera con viento de 22 m/s. Según el modelo de 4 regiones de la curva de potencia, ¿qué describe mejor su comportamiento?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Produce su potencia nominal máxima de forma estable</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Comienza a producir electricidad por primera vez</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) La turbina permanece parada porque el viento es demasiado energético (Región 4)</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) La producción crece linealmente con la velocidad</button>
+    </div>
+    <div class="qfeedback" id="fb4" style="display:none;"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el generador asíncrono (de inducción) usado en aerogeneradores es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) No requiere sincronización exacta para arrancar como motor</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) Es completamente autoexcitable sin necesidad de reactivo externo en cualquier condición</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Absorbe permanentemente potencia reactiva para sostener su campo magnético</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Puede excitarse con condensadores para operación autónoma (ej. Girobus)</button>
+    </div>
+    <div class="qfeedback" id="fb5" style="display:none;"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">En la distribución de Weibull aplicada al caso de Tunja-Colombia, se obtuvo k=0.4891 y c=2.6437 m/s. ¿Qué representa cada parámetro?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) k es la velocidad máxima registrada y c es la velocidad mínima</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) k es el factor de forma (dispersión de los datos) y c es el factor de escala (relacionado a la velocidad promedio)</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) k es la potencia nominal y c es la altura del anemómetro</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) k y c representan lo mismo, son intercambiables</button>
+    </div>
+    <div class="qfeedback" id="fb6" style="display:none;"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Si la velocidad del viento aumenta de 8 m/s a 10 m/s (un incremento del 25%), ¿aproximadamente en qué factor aumenta la potencia disponible del viento (que es proporcional a V³)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Aumenta también un 25%, de forma lineal</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Aumenta un 50%</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) Aumenta cerca de un 95% (casi se duplica), porque (10/8)³ ≈ 1.95</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Se mantiene igual porque la potencia no depende de la velocidad</button>
+    </div>
+    <div class="qfeedback" id="fb7" style="display:none;"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia clave entre la Disponibilidad Total (DT) y la Disponibilidad Operativa (DO) de un generador eólico?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) DT mide la energía y DO mide la potencia instantánea</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) DT compara con las horas totales del periodo, mientras DO compara con las horas en que el viento estuvo dentro del rango operativo</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Son sinónimos y se calculan igual</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) DT solo aplica a parques eólicos y DO solo a turbinas individuales</button>
+    </div>
+    <div class="qfeedback" id="fb8" style="display:none;"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">En el problema numérico del aerogenerador de 3 aspas (V=12 m/s, L=15 m), la potencia eléctrica producida (288 kW) representa aproximadamente el 40% de la potencia del viento (721 kW). ¿Cómo se interpreta este 40%?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Es el límite de Betz aplicado directamente sin pérdidas adicionales</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) Es el rendimiento global del sistema, resultado de combinar la eficiencia de transmisión viento-aspas (≈80%) con la eficiencia aspas-electricidad (50%)</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Es un error de medición que debería ser 100% en condiciones ideales</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Representa la fracción de tiempo que el aerogenerador estuvo operativo</button>
+    </div>
+    <div class="qfeedback" id="fb9" style="display:none;"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">Un sistema eléctrico tiene un pronóstico de viento "optimista" (la velocidad prevista es mayor que la real). ¿Qué consecuencia operativa principal tiene esto?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Ninguna, porque el error en la potencia es despreciable frente al error en la velocidad</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Se genera un exceso de reserva rotante, aumentando innecesariamente los costos</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) La potencia eólica real obtenida es menor a la calculada, el margen de reserva resulta insuficiente y disminuye la confiabilidad del sistema</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Las turbinas se desconectan automáticamente por sobretensión</button>
+    </div>
+    <div class="qfeedback" id="fb10" style="display:none;"></div>
+  </div>
+
+  <div id="resultpanel" style="display:none;"></div>
+  <button class="resetbtn" id="resetbtn" style="display:none;" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Mastrángelo, S., Iannini, R. & Gonzalez, J. — Boletín Energético N°13: Energía Eólica, Teoría y Características de Instalaciones</span>
+  <span class="fc">|</span>
+  <span class="fc">Álvarez Castañeda, W.F. et al. (2013) — Aplicación de la Ecuación de Weibull para Determinar Potencial Eólico en Tunja-Colombia, XX Simposio Peruano de Energía Solar</span>
+  <span class="fc">|</span>
+  <span class="fc">Problema numérico: Energía Eléctrica - Central Eólica (aerogenerador de 3 aspas)</span>
+</div>
+
+</div>
+
+<script>
+(function(){
+  const total = 10;
+  const correctCount = {value: 0};
+  const answered = new Set();
+
+  const feedbackText = {
+    1: {correct: "La cadena causal completa es: radiación solar desigual → calentamiento diferencial del suelo → diferencias de presión → aceleración del aire (viento). La rotación terrestre y Coriolis modifican la dirección, pero no son la causa原始 del movimiento.", 
+        wrong: "La causa raíz es el calentamiento no uniforme del suelo por la radiación solar, que genera diferencias de presión. Coriolis y la rotación solo desvían el viento ya existente."},
+    2: {correct: "Los anemómetros de rotación de cucharas (Papillon-Robinson) son robustos y están en casi todas las estaciones meteorológicas, pero no detectan velocidades inferiores a 1 m/s, lo cual debe considerarse al clasificar 'periodos de calma'.",
+        wrong: "La limitación documentada es la insensibilidad por debajo de 1 m/s. El de Richard, en cambio, es muy sensible pero de uso exclusivo en laboratorio."},
+    3: {correct: "El límite de Betz es 16/27 ≈ 0.5926, alcanzado cuando V₂=V₁/3. Este es el techo teórico ANTES de considerar pérdidas mecánicas, de caja y de generador, que reducen el aprovechamiento final a ~28%.",
+        wrong: "El valor correcto es 16/27 ≈ 59.26%, el límite teórico de Betz. El 30% es la eficiencia típica de máquinas avanzadas (post-Betz), y el 28% es la eficiencia eléctrica final tras toda la cadena de pérdidas."},
+    4: {correct: "Con 22 m/s la turbina está en Región 4 (20-25 m/s): el viento es demasiado energético, justifica detener la máquina para evitar daños estructurales y costos de sobredimensionamiento por pocas horas al año de operación.",
+        wrong: "22 m/s cae en Región 4 (20-25 m/s), donde la turbina se detiene por seguridad. La Región 3 (12-20 m/s) es donde se mantiene potencia constante a valor de placa."},
+    5: {correct: "La afirmación B es FALSA: el generador asíncrono SIEMPRE absorbe reactivo de la red para mantener su campo magnético (no es autoexcitable por naturaleza). Solo puede operar autónomamente si se le añaden condensadores que sustituyan ese reactivo, como en el Girobus.",
+        wrong: "La opción correcta es la B, que es falsa: el generador de inducción NO es autoexcitable de forma natural. Requiere reactivo de la red o de condensadores (caso Girobus) para mantener su campo magnético."},
+    6: {correct: "k (factor de forma) describe cuán disperso está el conjunto de velocidades alrededor de su valor típico; c (factor de escala) está directamente relacionado con la velocidad media del lugar. Un k bajo como 0.4891 indica alta dispersión relativa.",
+        wrong: "k es el factor de forma (dispersión de los datos) y c es el factor de escala (relacionado a la velocidad media, c=2.64 m/s en Tunja). No son intercambiables ni representan velocidades extremas directamente."},
+    7: {correct: "Como P∝V³, (10/8)³ = 1.953, es decir, la potencia casi se duplica (+95%) ante un aumento de solo 25% en la velocidad. Esta relación cúbica es la razón por la cual pequeños cambios de viento generan grandes cambios de energía disponible.",
+        wrong: "La relación es cúbica (P∝V³), no lineal. (10/8)³≈1.95, por lo que la potencia aumenta casi un 95%, mucho más que el 25% de aumento en la velocidad."},
+    8: {correct: "DT (Disponibilidad Total) = horas que la turbina PUEDE generar / horas totales del periodo. DO (Disponibilidad Operativa) = horas reales de operación / horas en que el viento estuvo dentro del rango operativo. DO aísla el efecto de fallas técnicas del efecto de la falta de viento.",
+        wrong: "DT se refiere a la capacidad de generación frente al tiempo total, mientras DO se refiere a la operación real frente al tiempo en que había viento útil disponible. Son métricas complementarias, no sinónimos."},
+    9: {correct: "El 40% global = eficiencia viento→aspas (≈80%, dado que la energía cinética de las aspas es 576 kW de los 721 kW del viento) × eficiencia aspas→electricidad (50%, dato del problema) = 0.80×0.50=0.40. Es la composición de dos eficiencias de etapas distintas.",
+        wrong: "El 40% resulta de multiplicar dos eficiencias en cadena: ≈80% de transmisión del viento a las aspas (energía cinética de rotación) y 50% de conversión de esa energía cinética a electricidad. No es el límite de Betz ni un dato de disponibilidad temporal."},
+    10: {correct: "Un pronóstico optimista sobrestima el viento real, por lo que la potencia eólica efectiva resulta menor que la planificada. Esto deja un margen de reserva insuficiente, lo que puede comprometer la confiabilidad del sistema eléctrico.",
+         wrong: "Un pronóstico optimista (viento previsto > real) produce MENOS potencia eólica de la esperada, dejando una reserva insuficiente y reduciendo la confiabilidad. El caso pesimista, en cambio, genera exceso de reserva y mayores costos (pero no problemas de confiabilidad)."}
+  };
+
+  document.querySelectorAll('.qbtn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const q = this.dataset.q;
+      if (answered.has(q)) return;
+      answered.add(q);
+
+      const isCorrect = this.dataset.correct === 'true';
+      const group = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+      group.forEach(b => {
+        b.classList.add('disabled');
+        if (b.dataset.correct === 'true') {
+          b.classList.add('correct');
+          if (!b.textContent.trim().startsWith('✅')) b.textContent = '✅ ' + b.textContent.trim();
+        } else if (b === this) {
+          b.classList.add('incorrect');
+          if (!b.textContent.trim().startsWith('❌')) b.textContent = '❌ ' + b.textContent.trim();
+        }
+      });
+
+      const fb = document.getElementById('fb'+q);
+      fb.style.display = 'block';
+      if (isCorrect) {
+        fb.className = 'qfeedback correct';
+        fb.innerHTML = '✅ ¡Correcto! ' + feedbackText[q].correct;
+        correctCount.value++;
+      } else {
+        const correctLetter = Array.from(group).find(b=>b.dataset.correct==='true').dataset.opt.toUpperCase();
+        fb.className = 'qfeedback incorrect';
+        fb.innerHTML = '❌ Incorrecto. La respuesta correcta es ' + correctLetter + '. ' + feedbackText[q].wrong;
+      }
+
+      const pct = Math.round((correctCount.value/answered.size)*100);
+      document.getElementById('qprogress').textContent = 'Pregunta '+answered.size+' de '+total+' respondidas';
+      document.getElementById('qpercent').textContent = pct+'% aciertos';
+      document.getElementById('qbar').style.width = Math.round((answered.size/total)*100)+'%';
+
+      if (answered.size === total) {
+        const panel = document.getElementById('resultpanel');
+        panel.style.display = 'block';
+        const score = correctCount.value;
+        let cls, msg;
+        if (score <= 4) { cls='low'; msg='Necesitas repasar el material'; }
+        else if (score <= 7) { cls='mid'; msg='¡Buen avance, sigue repasando!'; }
+        else { cls='high'; msg='¡Excelente dominio del tema!'; }
+        panel.className = 'resultpanel '+cls;
+        panel.innerHTML = score+' / 10 correctas — '+msg;
+        document.getElementById('resetbtn').style.display = 'inline-block';
+      }
+    });
+  });
+
+  window.resetQuiz = function(){
+    answered.clear();
+    correctCount.value = 0;
+    document.querySelectorAll('.qbtn').forEach(b => {
+      b.classList.remove('correct','incorrect','disabled');
+      b.textContent = b.textContent.replace(/^✅ |^❌ /, '');
+    });
+    document.querySelectorAll('.qfeedback').forEach(f => { f.style.display='none'; });
+    document.getElementById('resultpanel').style.display = 'none';
+    document.getElementById('resetbtn').style.display = 'none';
+    document.getElementById('qprogress').textContent = 'Pregunta 0 de 10 respondidas';
+    document.getElementById('qpercent').textContent = '0% aciertos';
+    document.getElementById('qbar').style.width = '0%';
+  };
+})();
+</script>

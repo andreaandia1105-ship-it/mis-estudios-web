@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--color-background-tertiary);color:var(--color-text-primary)}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px}
+.cv-title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.cv-title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.cv-title p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:#1e3a5f;color:#93c5fd}
+.sec{grid-column:1/-1;background:#1e3a5f;color:#93c5fd;border-radius:8px;padding:7px 13px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh.az{background:#dbeafe;color:#1e3a8a} .bh.vd{background:#dcfce7;color:#14532d} .bh.am{background:#fef9c3;color:#713f12} .bh.mo{background:#ede9fe;color:#4c1d95} .bh.tl{background:#ccfbf1;color:#134e4a} .bh.na{background:#ffedd5;color:#7c2d12} .bh.ro{background:#fee2e2;color:#991b1b} .bh.rs{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){.bh.az{background:#1e3a5f;color:#93c5fd}.bh.vd{background:#14532d;color:#86efac}.bh.am{background:#422006;color:#fef08a}.bh.mo{background:#2e1065;color:#c4b5fd}.bh.tl{background:#042f2e;color:#5eead4}.bh.na{background:#431407;color:#fed7aa}.bh.ro{background:#450a0a;color:#fca5a5}.bh.rs{background:#4a044e;color:#f0abfc}}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def.az{border-left:3px solid #3b82f6}.def.vd{border-left:3px solid #16a34a}.def.am{border-left:3px solid #ca8a04}.def.mo{border-left:3px solid #7c3aed}.def.tl{border-left:3px solid #0d9488}.def.na{border-left:3px solid #ea580c}.def.ro{border-left:3px solid #dc2626}.def.rs{border-left:3px solid #db2777}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot.az{background:#3b82f6}.dot.vd{background:#16a34a}.dot.am{background:#ca8a04}.dot.mo{background:#7c3aed}.dot.tl{background:#0d9488}.dot.na{background:#ea580c}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#854f0b}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.num-badge{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-right:4px;flex-shrink:0}
+.nb-b{background:#1e3a5f;color:#93c5fd}.nb-g{background:#14532d;color:#86efac}.nb-v{background:#2e1065;color:#c4b5fd}
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700}
+.quiz-header p{font-size:11px;color:#94a3b8;margin-top:2px}
+.progress-wrap{margin-bottom:14px}
+.progress-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px;display:flex;justify-content:space-between}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width 0.3s}
+.qcard{border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px 14px;margin-bottom:10px;transition:opacity 0.2s}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary)}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.reveal{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:0.6;cursor:not-allowed}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){.qfeedback.ok{background:#052e16;color:#86efac}.qfeedback.fail{background:#450a0a;color:#fca5a5}}
+#result-panel{border-radius:10px;padding:14px;margin-top:12px;display:none;font-size:13px;text-align:center}
+#result-panel h3{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:4px}
+.btn-reset{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 20px;font-size:12px;cursor:pointer;margin-top:10px;font-family:'Source Sans 3',sans-serif}
+.btn-reset:hover{background:#1e3a5f}
+</style>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="cv-title">
+  <h1>🌬️ ENERGÍA EÓLICA — COMPENDIO DE INNOVACIONES TECNOLÓGICAS (CAP. 2)</h1>
+  <p>Laboratorio de Energías Renovables · PhD. José Luis Calle &amp; Jean Marco Gozme · Renovables UNALM</p>
+  <span class="pill">Aerogeneradores</span><span class="pill">Offshore</span><span class="pill">Impacto Ambiental</span><span class="pill">Almacenamiento</span><span class="pill">Latinoamérica</span><span class="pill">Materiales</span><span class="pill">Mercado Eólico</span>
+</div>
+
+<!-- SECCIÓN 1: EVOLUCIÓN Y POTENCIA -->
+<div class="sec">⚡ EVOLUCIÓN TECNOLÓGICA Y POTENCIA DE AEROGENERADORES</div>
+
+<div class="block">
+  <span class="bh az">Evolución de Potencia (Arts. 1.1 y 1.22)</span>
+  <div class="def az">La potencia de los aerogeneradores modernos se ha multiplicado por 300 en 36 años: del prototipo Ecotécnia 12/15 de <strong>15 kW</strong> instalado en Girona en 1984, a los SG 4.5-145 de <strong>4.500 kW</strong> (4,5 MW) de Siemens Gamesa en 2020.</div>
+  <div class="item"><span class="dot az"></span><span>El aerogenerador Ecotécnia 12/15 fue el primero conectado legalmente a la red en España. Su heredero, el SG 4.5-145, irá al Complejo Eólico de Herrera en Burgos (63 MW totales de 3 parques).</span></div>
+  <div class="item"><span class="dot az"></span><span>El parque de Miñón (Vimianzo, La Coruña) tiene los aerogeneradores terrestres más grandes de España al 2020: 6 máquinas de 4 MW cada una.</span></div>
+  <div class="rx">Potencia: 15 kW (1984) → 4.500 kW (2020) · Factor de aumento: ×300 en 36 años</div>
+  <div class="warn">⚠️ ERROR COMÚN: No confundir la potencia nominal (kW) con la energía generada (kWh). Un aerogenerador de 4,5 MW genera 4,5 MWh por hora solo si opera al 100% de su factor de capacidad, lo cual raramente ocurre (el viento es variable).</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el incremento de la potencia nominal de los aerogeneradores no se traduce proporcionalmente en el mismo incremento de energía anual generada. ¿Qué factor limita esta proporcionalidad?</div>
+</div>
+
+<div class="block">
+  <span class="bh vd">Palas: Tamaño y Biomimética (Arts. 1.6 y 1.11)</span>
+  <div class="def vd">Las palas son el componente que define la capacidad de captura de viento. GE desarrolló las palas LM 73,5 m para su turbina Haliade™ 150-6MW, diseñadas especialmente para entornos offshore. Paralelo a esto, la Sorbona de París estudió cómo las alas de insectos pueden hacer las palas un 35% más eficientes.</div>
+  <div class="item"><span class="dot vd"></span><span><strong>Haliade™ 150-6MW:</strong> palas de 150 m de longitud, 66 turbinas en el parque Merkur (Alemania), 396 MW totales, a 35 km de la isla de Borkum. Ahorra hasta 21.000 t CO₂/año.</span></div>
+  <div class="item"><span class="dot vd"></span><span><strong>Biomimética insectos:</strong> palas moderadamente flexibles superan en 35% la potencia de palas rígidas. La clave: las alas de insectos dirigen la carga aerodinámica en la dirección del vuelo y se doblan para minimizar resistencia.</span></div>
+  <div class="item"><span class="dot vd"></span><span><strong>¿Por qué no muy flexibles?</strong> En pruebas de túnel de viento, palas excesivamente flexibles resultaron demasiado flácidas y produjeron menos energía que las rígidas. El equilibrio óptimo está en la flexibilidad moderada.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: La eficiencia no se logra haciendo girar el rotor lo más rápido posible. A altas velocidades, las palas se comportan como una pared sólida que impide el flujo de viento. La cantidad óptima de energía se obtiene a tasas de rotación intermedias con el "ángulo de inclinación" correcto.</div>
+  <div class="exam">🎯 EXAMEN: Un investigador propone fabricar palas completamente flexibles inspiradas en alas de libélula. ¿Es correcta esta afirmación? Justifique con los datos del experimento de la Sorbona de París.</div>
+</div>
+
+<div class="block">
+  <span class="bh am">Generadores Offshore Innovadores (Art. 1.12)</span>
+  <div class="def am">El generador marino de multiplicación magnética elimina el sistema de multiplicación mecánica —componente propenso a desgaste costoso— incorporando dos rotores e imanes permanentes en una configuración que alcanza densidad de potencia superior.</div>
+  <div class="item"><span class="dot am"></span><span>El mantenimiento de aerogeneradores marinos es crítico: el acceso es difícil y costoso. Eliminar engranajes mecánicos reduce significativamente las intervenciones necesarias.</span></div>
+  <div class="item"><span class="dot am"></span><span>La multiplicación magnética logra el mismo efecto que la caja de engranajes (aumentar RPM para el generador) sin partes móviles en contacto físico, reduciendo desgaste.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la eliminación del sistema de multiplicación mecánica tiene mayor relevancia en la eólica marina que en la terrestre?</div>
+</div>
+
+<!-- SECCIÓN 2: PARQUES OFFSHORE Y PLATAFORMAS FLOTANTES -->
+<div class="sec">🌊 EÓLICA MARINA: PARQUES OFFSHORE Y PLATAFORMAS FLOTANTES</div>
+
+<div class="block s2">
+  <span class="bh tl">Grandes Parques Offshore (Arts. 1.5, 1.19, 1.30)</span>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #0d9488">
+      <strong>Hornsea One (UK)</strong><br>
+      Mar del Norte, 75 millas de Yorkshire. 174 turbinas Siemens Gamesa 7 MW · 1,2 GW total · Alimenta 1 millón de hogares. Primera fase: 50 turbinas, 287.000 hogares (2019).
+    </div>
+    <div class="mini" style="border-top:3px solid #0d9488">
+      <strong>Walney Extension (UK)</strong><br>
+      659 MW · 87 aerogeneradores en 145 km² del Mar de Irlanda. Mezcla MHI Vestas 8 MW (47 unid.) + Siemens Gamesa 7 MW (40 unid.). Abastece 600.000 hogares. Inaugurado 2018 por Ørsted.
+    </div>
+    <div class="mini" style="border-top:3px solid #0d9488">
+      <strong>Gwynt y Môr (UK)</strong><br>
+      576 MW · 160 aerogeneradores Siemens en 80+ km². Aguas de 28 m de profundidad. Monopilotes de acero de hasta 700 t. Turbinas a 150 m sobre el mar. Cubre 400.000 hogares.
+    </div>
+  </div>
+  <div class="flow"><span class="fbox">Viento marino</span><span class="farrow">→</span><span class="fbox">Turbinas offshore</span><span class="farrow">→</span><span class="fbox">Subestación marina</span><span class="farrow">→</span><span class="fbox">Cable submarino</span><span class="farrow">→</span><span class="fbox">Red eléctrica</span></div>
+  <div class="warn">⚠️ DATO CLAVE: El parque marino de última generación (80 turbinas Siemens D6) genera 53 millones MWh en su vida útil y ahorra 45 millones t CO₂. Las emisiones equivalen a solo 7 gCO₂/kWh, frente a 865 gCO₂/kWh de combustibles fósiles.</div>
+  <div class="exam">🎯 EXAMEN: Calcule cuántos kilómetros cuadrados de bosque durante 25 años equivaldrían a la reducción de CO₂ lograda por el parque Walney Extension (659 MW) si se aplica la misma proporción que el parque de 80 turbinas Siemens D6 que ahorra 45 Mt CO₂ equivalentes a un bosque de 1.286 km².</div>
+</div>
+
+<div class="block">
+  <span class="bh mo">Plataformas Flotantes (Arts. 1.2, 1.23, 1.29)</span>
+  <div class="def mo">Las plataformas flotantes permiten instalar aerogeneradores en aguas profundas donde la cimentación fija en el fondo marino es inviable económicamente. Tres enfoques distintos han sido desarrollados.</div>
+  <div class="item"><span class="dot mo"></span><span><strong>PivotBuoy (Canarias):</strong> Plataforma con sistema de amarre por punto único (Single Point Mooring). Sostendrá aerogenerador Vestas V29. Fabricado en Santander por Degima, instalado en otoño 2020.</span></div>
+  <div class="item"><span class="dot mo"></span><span><strong>WindCrete (UPC Barcelona):</strong> Estructura cilíndrica de hormigón con flotador y lastre en base (auto-estabilidad). Monolítica sin juntas. Reduce 60% el coste de construcción frente al acero.</span></div>
+  <div class="item"><span class="dot mo"></span><span><strong>SATH© (Saitec, Bizkaia):</strong> Dos cascos de hormigón unidos a un rodamiento en punto único, permite girar al viento. Single Point Mooring tomado de la industria petrolera.</span></div>
+  <div class="exam">🎯 EXAMEN: Compare las ventajas de las plataformas flotantes de hormigón (WindCrete, SATH) frente a las de acero convencional en términos de coste, mantenimiento y estabilidad.</div>
+</div>
+
+<!-- SECCIÓN 3: IMPACTO AMBIENTAL Y PROTECCIÓN FAUNA -->
+<div class="sec">🦅 IMPACTO AMBIENTAL: PROTECCIÓN DE AVES Y MURCIÉLAGOS</div>
+
+<div class="block">
+  <span class="bh ro">Impacto sobre Fauna (Arts. 1.4, 1.10)</span>
+  <div class="def ro">Las palas en rotación representan un riesgo de colisión letal para aves y murciélagos. Más de 240 especies de murciélagos están amenazadas según la UICN. Los murciélagos son esenciales para ecosistemas: controlan insectos, polinizan flores y dispersan semillas.</div>
+  <div class="item"><span class="dot ro"></span><span><strong>Sistema NRG (con Vestas):</strong> 5 paneles acústicos instalados en góndola. Instalación de medio día por panel. Integrado en SCADA del parque. Disuade murciélagos y reduce pérdidas de producción asociadas a su actividad.</span></div>
+  <div class="item"><span class="dot ro"></span><span><strong>Aerogenerador sin palas (empresa española):</strong> Genera energía por vibración resonante, sin palas giratorias. Elimina el riesgo de colisión directa con aves. Convenio con SEO/BirdLife anunciado en Día Mundial de Aves Migratorias 2015.</span></div>
+  <div class="exam">🎯 EXAMEN: Las "energías no solo deben ser renovables, sino también responsables" (SEO/BirdLife). Analice qué impactos ambientales negativos puede generar un parque eólico y qué tecnologías existen para mitigarlos.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh rs">Sistema DTBird® (Arts. 1.13, 1.26, 1.27, 2.5)</span>
+  <div class="def rs">DTBird® es un sistema automático de detección y disuasión de aves que monitoriza la avifauna en tiempo real, emite sonidos disuasorios y puede provocar la parada automática del aerogenerador si el riesgo de colisión es inminente.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #db2777">
+      <strong>Módulo V4D4</strong> (rapaces/águilas reales)<br>
+      Probado en parque Manzana, California (2016). Usó UAVs con 2 m de envergadura simulando águilas. Resultados excelentes: detección efectiva y comportamiento de evasión demostrado.
+    </div>
+    <div class="mini" style="border-left:3px solid #db2777">
+      <strong>Módulo V8D10</strong> (grandes aerogeneradores offshore)<br>
+      8 cámaras HD que detectan aves a 600 m en ángulo 360°. 10 altavoces en 2 alturas para cobertura completa del área de barrido del rotor. Instalado en Austria.
+    </div>
+  </div>
+  <div class="item"><span class="dot ro"></span><span><strong>DTBat®:</strong> Sistema equivalente específico para murciélagos, con 2 módulos. Funciona en parques terrestres y marinos. Participó en proyecto Life sobre buenas prácticas en Grecia.</span></div>
+  <div class="item"><span class="dot ro"></span><span><strong>Resultado en CalandaWind (Suiza):</strong> 4,1 vuelos/día detectados. Con sonido emitido: 0 vuelos de riesgo &lt;25 m (vs. 8 sin sonido). Tiempo promedio en zona de barrido bajó de 17,8 s a 5,4 s.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique el fundamento biológico del sistema DTBird®: ¿por qué las aves se acercan a los aerogeneradores si estos no las atraen activamente?</div>
+</div>
+
+<!-- SECCIÓN 4: ALMACENAMIENTO E INNOVACIONES ASOCIADAS -->
+<div class="sec">🔋 ALMACENAMIENTO DE ENERGÍA E INNOVACIONES COMPLEMENTARIAS</div>
+
+<div class="block">
+  <span class="bh am">Almacenamiento Offshore - Remora (Art. 1.8)</span>
+  <div class="def am">Remora (Segula Technologies) almacena energía sobreproducida en parques offshore mediante aire comprimido en tanques submarinos, usando un sistema hidráulico agua-aire. Primer piloto de 10 kW planificado para julio 2019.</div>
+  <div class="flow"><span class="fbox">Exceso eólico</span><span class="farrow">→</span><span class="fbox">Plataforma flotante</span><span class="farrow">→</span><span class="fbox">Compresor de aire</span><span class="farrow">→</span><span class="fbox">Tanques submarinos</span><span class="farrow">→</span><span class="fbox">Energía recuperable</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Qué ventaja tiene almacenar energía como aire comprimido en el fondo marino frente a baterías en la plataforma? Considere factores como presión hidrostática, temperatura y acceso para mantenimiento.</div>
+</div>
+
+<div class="block">
+  <span class="bh vd">Baterías Li-Ion + Eólica (Art. 1.20)</span>
+  <div class="def vd">Vestas y Northvolt se aliaron para desarrollar soluciones de almacenamiento de electricidad renovable. Northvolt construye la mayor fábrica de baterías de Europa (32 GWh/año de capacidad), con mínima huella de carbono y máxima reciclabilidad.</div>
+  <div class="item"><span class="dot vd"></span><span>El objetivo principal es acelerar la transición energética. Las baterías son consideradas la clave de dicha transición ya que resuelven la intermitencia del viento.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué las baterías son consideradas "la clave de la transición energética" y no simplemente un complemento de los sistemas eólicos?</div>
+</div>
+
+<div class="block">
+  <span class="bh tl">El Hierro: 100% Renovable (Art. 1.28)</span>
+  <div class="def tl">La Central Hidroeólica de Gorona del Viento en El Hierro (Islas Canarias) logró el 100% de abastecimiento eléctrico renovable en febrero 2016: primer sistema aislado del mundo en conseguirlo. Combina parque eólico + generación hidráulica (almacenamiento en cráter natural "La Caldera").</div>
+  <div class="item"><span class="dot tl"></span><span>Demanda de la isla: ~5 MW. La parada de motores diésel equivale a un ahorro de 1,5 t/hora. El sistema mantiene estabilidad con combinación eólica-hidráulica.</span></div>
+  <div class="exam">🎯 EXAMEN: Describa cómo funciona el sistema hidroeólico de El Hierro como solución de almacenamiento y explique por qué este modelo no es directamente replicable en sistemas de mayor escala.</div>
+</div>
+
+<!-- SECCIÓN 5: MATERIALES, RUIDO Y CONDICIONES EXTREMAS -->
+<div class="sec">🔧 MATERIALES, RUIDO Y CONDICIONES EXTREMAS</div>
+
+<div class="block s2">
+  <span class="bh mo">Protección en Climas Extremos - AeroExtreme (Art. 1.15)</span>
+  <div class="def mo">Los aerogeneradores enfrentan condiciones extremas: temperaturas muy altas/bajas, UV intenso, partículas de polvo a alta velocidad y microorganismos. El proyecto AeroExtreme (liderado por Siemens Gamesa, con ITC de Universitat Jaume I) desarrolla materiales y recubrimientos de nueva generación.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #7c3aed">
+      <strong>Problema: Erosión de palas</strong><br>
+      El polvo suspendido, la suciedad acumulada y los microorganismos deterioran el perfil aerodinámico, reduciendo significativamente la eficiencia energética. Cada % de degradación aerodinámica implica pérdida directa de producción.
+    </div>
+    <div class="mini" style="border-top:3px solid #7c3aed">
+      <strong>Solución: Recubrimientos avanzados</strong><br>
+      Material con resistencia a erosión muy superior al actual + recubrimientos fotocatalíticos (auto-limpiantes con luz UV) + recubrimientos antifouling (anti-organismos) de alta durabilidad. Soluciones pasivas y activas para palas y nacelle.
+    </div>
+  </div>
+  <div class="warn">⚠️ NO CONFUNDIR: Las soluciones "pasivas" (recubrimientos resistentes) actúan sin consumir energía ni requerir acción externa. Las soluciones "activas" requieren energía o acción controlada (ej: calefacción anticongelante). AeroExtreme estudia ambas.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el desgaste aerodinámico de las palas de aerogeneradores es especialmente crítico en zonas desérticas o con alta carga de polvo como las costas peruanas.</div>
+</div>
+
+<div class="block">
+  <span class="bh az">Aerogeneradores Low Noise (Art. 1.25)</span>
+  <div class="def az">Siemens desarrolló el modelo SWT-3.3-130LN (Low Noise), con accesorios aerodinámicos en las palas que reducen el ruido a 104,9 dB (2 dB menos que su antecesor). Produce 11 GWh/año a vientos de 6,5 m/s y 16 GWh/año a 8,5 m/s.</div>
+  <div class="item"><span class="dot az"></span><span>La reducción de 2 dB puede parecer pequeña, pero en la escala logarítmica de decibelios implica una reducción de aproximadamente el 37% en la intensidad acústica percibida.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la reducción de ruido es un factor relevante para la viabilidad de parques eólicos terrestres en comparación con los offshore?</div>
+</div>
+
+<!-- SECCIÓN 6: DESALACIÓN, TRANSPORTE Y PREDICCIÓN IA -->
+<div class="sec">🤖 DESALACIÓN, TRANSPORTE EÓLICO E INTELIGENCIA ARTIFICIAL</div>
+
+<div class="block">
+  <span class="bh tl">Desalación con Energía Mecánica (Art. 1.16)</span>
+  <div class="def tl">El proyecto Life Windro propone una instalación autosuficiente de desalación por ósmosis inversa alimentada directamente con la energía mecánica del aerogenerador (sin conversión a electricidad), transmitida a bombas de alta presión.</div>
+  <div class="flow"><span class="fbox">Viento</span><span class="farrow">→</span><span class="fbox">Rotor eólico</span><span class="farrow">→</span><span class="fbox">Transmisión mecánica</span><span class="farrow">→</span><span class="fbox">Bomba alta presión</span><span class="farrow">→</span><span class="fbox">Membrana O.I.</span><span class="farrow">→</span><span class="fbox">Agua dulce</span></div>
+  <div class="warn">⚠️ INNOVACIÓN CLAVE: La mayoría de sistemas eólicos de desalación convierten primero el viento en electricidad y luego la electricidad en presión hidráulica. Life Windro elimina esa conversión intermedia, ganando eficiencia global al usar la energía mecánica directamente.</div>
+  <div class="exam">🎯 EXAMEN: En regiones costeras áridas de Perú (Ica, Arequipa), ¿qué ventajas tendría un sistema Life Windro respecto a una planta de desalación convencional conectada a la red eléctrica?</div>
+</div>
+
+<div class="block">
+  <span class="bh na">Transporte Marítimo Eólico (Arts. 1.7 y 1.24)</span>
+  <div class="def na">Dos innovaciones aplican la energía del viento al transporte marítimo, reduciendo combustible y emisiones sin depender exclusivamente del viento.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #ea580c">
+      <strong>E-Ship 1 (Enercon)</strong><br>
+      4 rotores Flettner de 25 m × 4 m de diámetro + 7 generadores diésel-eléctricos. Superestructura aerodinámica, hélice eficiente, timón sobredimensionado. El calor de los gases de escape calienta el interior. Tecnología Flettner (años 30) recuperada.
+    </div>
+    <div class="mini" style="border-left:3px solid #ea580c">
+      <strong>Vindskip (Noruega)</strong><br>
+      Buque de 46 m de altura cuyo casco actúa como "ala" capturando el viento. Propulsión de gas natural licuado de apoyo. Velocidad: 18-19 nudos. Consume 60% menos combustible y emite 80% menos CO₂ que buques convencionales.
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: El rotor Flettner utiliza el "efecto Magnus". ¿Qué principio físico subyace a este efecto y cómo genera fuerza propulsora en el E-Ship 1?</div>
+</div>
+
+<div class="block">
+  <span class="bh az">Redes Neuronales para Predicción (Art. 1.3)</span>
+  <div class="def az">Investigadores desarrollaron un sistema de predicción de producción eólica basado en Spiking Neural Networks (SNN, redes neuronales de 3ª generación) que estima la energía que generará una turbina en la próxima hora, considerando intensidad y dirección del viento en horas anteriores.</div>
+  <div class="item"><span class="dot az"></span><span>Aplicado en parque eólico de 28 turbinas y 3 torres anemométricas en Vizzini, Catania (Italia), en zona de 30 km² con orografía compleja. La predicción precisa permite optimizar la integración a la red y reducir reservas de respaldo.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la predicción de la producción eólica es importante para la estabilidad del sistema eléctrico? ¿Qué riesgo operativo reduce un buen modelo predictivo?</div>
+</div>
+
+<!-- SECCIÓN 7: LATINOAMÉRICA Y PERÚ -->
+<div class="sec">🌎 LATINOAMÉRICA Y PERÚ: PANORAMA EÓLICO REGIONAL</div>
+
+<div class="block s2">
+  <span class="bh na">Brasil: Potencia Regional (Arts. 2.1, 2.3, 2.4, 2.7, 2.11)</span>
+  <div class="def na">Brasil es la potencia eólica de Latinoamérica: al 2019 tenía 15 GW instalados (2ª fuente eléctrica), más de 7.000 aerogeneradores en 601 parques en 12 estados, con el 86% en la región noreste. Creció de 1 GW (2011) a 15 GW (2019) en solo 8 años.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot na"></span><span><strong>Vestas V150-4.2MW:</strong> Fábrica en Aquiraz, Ceará. 624 aerogeneradores pedidos. Parque Serra do Mel (Rio Grande do Norte): 24 unidades = 101 MW, genera 520 GWh/año, equivalente a 900.000 personas y 50.200 t CO₂ ahorradas.</span></div>
+      <div class="item"><span class="dot na"></span><span><strong>Complexo Eólico Oitis (Neoenergia/Iberdrola):</strong> 12 parques, 566 MW total. Factor de capacidad promedio 50%. Inversión: 1.900 M reales (415 M €). Operaciones desde mediados 2022.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot na"></span><span><strong>Acciona AW3000:</strong> Fábrica en Bahía inaugurada 2015. Plataforma de 3 MW con 116 y 125 m de diámetro en torres de hormigón de 100-120 m. 210 MW en operación + 201 MW en construcción + 609 MW pendientes.</span></div>
+      <div class="item"><span class="dot na"></span><span><strong>Proyección 2023:</strong> Con proyectos contratados o en construcción, Brasil alcanzaría al menos 19,7 GW instalados al cierre de 2023.</span></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Analice por qué el 86% de la capacidad eólica instalada en Brasil se concentra en la región noreste del país. ¿Qué factores geográficos y meteorológicos explican esta distribución?</div>
+</div>
+
+<div class="block">
+  <span class="bh mo">Colombia, Argentina y Chile (Arts. 2.6, 2.10, 2.13, 2.14)</span>
+  <div class="def mo">Tres países sudamericanos muestran avances eólicos significativos con características propias.</div>
+  <div class="item"><span class="dot mo"></span><span><strong>Colombia:</strong> Subasta "Cargo por Confiabilidad" asignó 1.398 MW renovables: 1.160 MW eólicos en La Guajira + 238 MW solar en Cesar. Motivación: diversificar matriz ante riesgos hidroclimatológicos.</span></div>
+  <div class="item"><span class="dot mo"></span><span><strong>Argentina (Genneia):</strong> Parque Madryn (70 MW, 20 turbinas Vestas V126-3,6 MW). Factor de capacidad: 49%. Genera 300.000 MWh/año = 100.000 hogares. Vientos promedio: 8,6 m/s. Meta: 800 MW para 2021.</span></div>
+  <div class="item"><span class="dot mo"></span><span><strong>Chile (Cabo Leones III):</strong> 22 aerogeneradores G132-3,55 MW = 78,1 MW. Gestacur acumula &gt;500 MW construidos en Sudamérica. Ubicado en Freirina, Atacama.</span></div>
+  <div class="exam">🎯 EXAMEN: Colombia justifica su inversión eólica en diversificación ante "riesgos hidroclimatológicos". Explique qué vulnerabilidad específica de su matriz energética motiva esta política.</div>
+</div>
+
+<div class="block">
+  <span class="bh tl">México, Cuba y El Caribe (Arts. 2.2, 2.8, 2.9, 2.12)</span>
+  <div class="def tl">América Central y el Caribe también muestran avances eólicos relevantes, muchos con participación de empresas españolas.</div>
+  <div class="item"><span class="dot tl"></span><span><strong>México (Oaxaca):</strong> Parque Energía Eólica del Sur: 132 aerogeneradores, 396 MW en 5.000 ha del istmo de Tehuantepec. El más grande por número de turbinas en AL. Evita 567.000 t CO₂/año.</span></div>
+  <div class="item"><span class="dot tl"></span><span><strong>Cuba (Rev. Eólica):</strong> 68,7% de su producción eólica será desarrollada por empresas españolas. Complejo LH1+LH2: 101 MW con turbinas chinas (Goldwing 1,5 MW y Dong Fang 2,5 MW). Meta: 24% de electricidad de renovables. 633 MW planificados en 13 parques.</span></div>
+  <div class="item"><span class="dot tl"></span><span><strong>Rep. Dominicana (Larimar):</strong> 15 aerogeneradores Vestas V112-3,3 MW. 49,5 MW, 200.000 MWh/año. Duplicó la producción eólica del país al instalarse.</span></div>
+  <div class="exam">🎯 EXAMEN: Compare el perfil tecnológico de los aerogeneradores del complejo cubano LH1 vs LH2 (fabricante, potencia, altura de buje, longitud de palas) y explique qué implicancias tiene esta diferencia en la generación anual.</div>
+</div>
+
+<!-- SECCIÓN 8: ECONOMÍA -->
+<div class="sec">💡 ENERGÍA EÓLICA Y PRECIO DE LA ELECTRICIDAD</div>
+
+<div class="block s3">
+  <span class="bh az">Por qué la Eólica Baja el Precio de la Luz</span>
+  <div class="def az">El costo de la energía eléctrica en el mercado mayorista (pool) se fija por la oferta-demanda. Como el costo marginal del viento es cero, los productores eólicos pueden ofertar a precio casi nulo, desplazando tecnologías más caras (gas, carbón) y bajando el precio de mercado.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Costes Regulados</strong><br>
+      Transporte, distribución, deuda del sistema, interrumpibilidad (incentivos a industria por reducir consumo), pagos por capacidad a convencionales, incentivos a renovables y cogeneración.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Coste de Generación (Pool)</strong><br>
+      Mercado competitivo. Cada fuente oferta precio para cubrir la demanda. El viento oferta casi a 0€/MWh. Los días de mucho viento, el precio spot del pool baja al desplazar gas/carbón.
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Tiempo de Retorno Energético</strong><br>
+      Un parque eólico terrestre (8,5 m/s) recupera la energía invertida en su fabricación en solo 4,5 meses. El parque offshore de 80 turbinas Siemens D6 genera 53 M MWh en su vida útil.
+    </div>
+  </div>
+  <div class="rx">Emisiones eólica: 7 gCO₂/kWh · Emisiones combustibles fósiles: 865 gCO₂/kWh · Ratio: ×124 mayor impacto climático de los fósiles</div>
+  <div class="exam">🎯 EXAMEN: Un gestor de red eléctrica argumenta que la energía eólica es "gratis pero inútil" sin almacenamiento. ¿Es correcta esta afirmación? ¿Cómo afecta la variabilidad eólica al precio spot del pool eléctrico?</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="block s3">
+  <span class="bh az">Tabla Integradora: Innovaciones Clave en Energía Eólica</span>
+  <table class="tbl">
+    <tr><th>Innovación</th><th>Institución/País</th><th>Dato Clave</th><th>Beneficio Principal</th><th>Limitación/Desafío</th></tr>
+    <tr><td>SG 4.5-145 (tierra)</td><td>Siemens Gamesa / España</td><td>4,5 MW/unidad · ×300 vs 1984</td><td>Máxima potencia terrestre en España</td><td>Logística de transporte de palas largas</td></tr>
+    <tr><td>Haliade™ 150-6MW</td><td>GE Renewable / Alemania</td><td>Palas 150 m · 21.000 t CO₂ ahorradas/año</td><td>Mayor generación por turbina offshore</td><td>Solo viable en entorno marino</td></tr>
+    <tr><td>Palas biomiméticas</td><td>Sorbona de París / Francia</td><td>+35% potencia (flexibilidad moderada)</td><td>Mayor eficiencia en gama amplia de vientos</td><td>Fabricación más compleja que palas rígidas</td></tr>
+    <tr><td>Plataforma PivotBuoy</td><td>PLOCAN / Canarias</td><td>Amarre en punto único</td><td>Eólica flotante en aguas profundas</td><td>Costo de instalación y mantenimiento marino</td></tr>
+    <tr><td>DTBird® V8D10</td><td>DTBird / España</td><td>8 cámaras, detección a 600 m, 360°</td><td>Protección de aves rapaces</td><td>Costo adicional por turbina</td></tr>
+    <tr><td>Remora (aire comprimido)</td><td>Segula Technologies / Francia</td><td>Piloto 10 kW (2019)</td><td>Almacenamiento sin baterías en offshore</td><td>Tecnología en fase piloto</td></tr>
+    <tr><td>SNN predicción eólica</td><td>Vizzini, Italia</td><td>28 turbinas, predicción 1 hora</td><td>Reducción de reservas de respaldo</td><td>Orografía compleja afecta precisión</td></tr>
+    <tr><td>Vestas V150-4.2MW</td><td>Vestas / Brasil</td><td>Factor capacidad 50% · 520 GWh/año</td><td>Mayor producción en mercado brasileño</td><td>Fabricación local limitada al mercado interno</td></tr>
+    <tr><td>El Hierro Hidroeólica</td><td>Gorona del Viento / España</td><td>100% renovable · Demanda ~5 MW</td><td>Sistema aislado sin combustible fósil</td><td>Solo replicable en sistemas pequeños y aislados</td></tr>
+    <tr><td>Life Windro (desalación)</td><td>España-Europa</td><td>Energía mecánica directa a O.I.</td><td>Sin conversión eléctrica → mayor eficiencia</td><td>Variabilidad del viento afecta presión de O.I.</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La energía eólica emite solo 7 gCO₂/kWh frente a 865 gCO₂/kWh de combustibles fósiles, y recupera la energía de su fabricación en apenas 4,5 meses (parque terrestre a 8,5 m/s). Sin embargo, su variabilidad intrínseca hace que el almacenamiento (baterías, aire comprimido, bombeo hidráulico) sea la clave de la transición energética.</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span id="prog-text">Pregunta 0 de 10 respondidas</span><span id="score-text">Aciertos: 0/10</span></div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿En cuánto se multiplicó la potencia de los aerogeneradores españoles entre 1984 y 2020?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) 30 veces — de 500 kW a 15 MW</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) 100 veces — de 45 kW a 4.500 kW</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) 300 veces — de 15 kW (Ecotécnia 12/15) a 4.500 kW (SG 4.5-145)</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) 600 veces — de 7,5 kW a 4.500 kW</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Según la investigación de la Sorbona de París, ¿qué tipo de palas ofrece el mejor rendimiento en aerogeneradores?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) Palas completamente rígidas, porque maximizan la transferencia de par al generador</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) Palas muy flexibles, porque se doblan completamente con el viento y minimizan resistencia</button>
+      <button class="qbtn" data-q="2" data-correct="true">C) Palas moderadamente flexibles, que superan en 35% la potencia de las rígidas</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) Palas segmentadas, que se pliegan automáticamente según la velocidad del viento</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">El sistema DTBird® V8D10 está específicamente diseñado para grandes aerogeneradores y cuenta con:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) 4 cámaras infrarrojas y 5 paneles acústicos integrados en la góndola</button>
+      <button class="qbtn" data-q="3" data-correct="true">B) 8 cámaras HD que detectan aves a 600 m en 360° y 10 altavoces en 2 alturas</button>
+      <button class="qbtn" data-q="3" data-correct="false">C) 3 módulos láser y un sistema de parada automática por GPS</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) 12 sensores de ultrasonido y una red de malla electromagnética perimetral</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál es la innovación principal del generador marino de "multiplicación magnética" (Art. 1.12) frente a los generadores convencionales?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Utiliza superconductores para reducir pérdidas eléctricas en un 80%</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) Elimina completamente el rotor y usa oscilación de fluido para generar corriente</button>
+      <button class="qbtn" data-q="4" data-correct="true">C) Reemplaza la multiplicación mecánica (caja de engranajes) con dos rotores e imanes permanentes, eliminando desgaste mecánico</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) Incorpora un tercer rotor que gira en sentido contrario para cancelar vibraciones</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál afirmación sobre el parque eólico marino Hornsea One es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Se ubica en el Mar del Norte, a unas 75 millas de las costas de Yorkshire</button>
+      <button class="qbtn" data-q="5" data-correct="false">B) Una vez completado tendrá 1,2 GW de capacidad total con 174 turbinas</button>
+      <button class="qbtn" data-q="5" data-correct="true">C) Utiliza aerogeneradores MHI Vestas de 8 MW exclusivamente en toda la instalación</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) Su primera fase (50 turbinas Siemens Gamesa 7 MW) alimenta a 287.000 hogares</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">El sistema de almacenamiento Remora (Segula Technologies) almacena la energía sobreproducida de un parque eólico marino mediante:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) Baterías de flujo de vanadio instaladas en la base de cada aerogenerador</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) Bombeo de agua de mar a un depósito elevado en la plataforma flotante</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) Aire comprimido almacenado en tanques submarinos usando un sistema hidráulico agua-aire</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Hidrógeno producido por electrólisis del agua de mar y almacenado en cápsulas de titanio</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">En el contexto de América Latina, ¿qué dato describe correctamente la situación eólica de Brasil al 2019?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Es la tercera fuente eléctrica por capacidad, con 8 GW instalados concentrados en el sur del país</button>
+      <button class="qbtn" data-q="7" data-correct="true">B) Es la segunda fuente eléctrica por capacidad (15 GW), con el 86% de la capacidad en el noreste y más de 7.000 aerogeneradores en 601 parques</button>
+      <button class="qbtn" data-q="7" data-correct="false">C) Tiene 5 GW instalados y acaba de superar a la hidráulica como primera fuente renovable</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Es el primer país en capacidad eólica de Sudamérica con 20 GW instalados al 2019</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">La Central Hidroeólica de Gorona del Viento en El Hierro (Islas Canarias) es históricamente relevante porque:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Es la primera central eólica offshore de España con más de 100 MW de capacidad</button>
+      <button class="qbtn" data-q="8" data-correct="false">B) Fue el primer parque eólico flotante en aguas del Atlántico conectado a una red terrestre</button>
+      <button class="qbtn" data-q="8" data-correct="true">C) Fue el primer sistema eléctrico totalmente aislado del mundo capaz de autoabastecerse al 100% con fuentes renovables</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Almacena energía en el mayor banco de baterías de litio de Europa construido bajo el nivel del mar</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Por qué la energía eólica contribuye a bajar el precio de la electricidad en el mercado mayorista (pool)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Porque el Estado subsidia directamente cada kWh eólico generado, reduciéndolo del precio final</button>
+      <button class="qbtn" data-q="9" data-correct="true">B) Porque el costo marginal del viento es cero, por lo que los productores eólicos ofertan a precio muy bajo, desplazando tecnologías con combustibles más caros y reduciendo el precio de mercado</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) Porque los aerogeneradores modernos tienen factores de capacidad superiores al 90%, garantizando oferta constante</button>
+      <button class="qbtn" data-q="9" data-correct="false">D) Porque la energía eólica no paga impuestos de CO₂, lo que reduce su precio final al consumidor</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">Comparando las emisiones de CO₂ de la energía eólica con los combustibles fósiles según el Análisis de Ciclo de Vida (ACV) de Siemens, ¿cuál es la diferencia correcta?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) La eólica emite 50 gCO₂/kWh frente a 500 gCO₂/kWh de los fósiles (diferencia ×10)</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) La eólica emite 25 gCO₂/kWh frente a 250 gCO₂/kWh de los fósiles (diferencia ×10)</button>
+      <button class="qbtn" data-q="10" data-correct="false">C) La eólica emite prácticamente 0 gCO₂/kWh ya que no usa combustión en ninguna fase de su operación</button>
+      <button class="qbtn" data-q="10" data-correct="true">D) La eólica emite solo 7 gCO₂/kWh frente a 865 gCO₂/kWh de los fósiles (diferencia ×124)</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="result-panel"></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">· Calle, J.L. &amp; Gozme, J.M. — Compendio de Innovaciones Tecnológicas de Energías Renovables, Cap. 2: Energía Eólica. Laboratorio de Energías Renovables UNALM.</span>
+  <span class="fc">· Arts. 1.1–1.31 (Actualidad Mundial) y 2.1–2.14 (Latinoamérica y Perú). Fuentes citadas en cada artículo (Siemens Gamesa, Vestas, GE, Ørsted, Acciona, Neoenergia, Genneia, DTBird, Segula Technologies, SEO/BirdLife, entre otras).</span>
+  <span class="fc">· Curso: Energías Renovables · Docente: PhD. Kenyi Cavalcanti Cárdenas · UNALM — Facultad de Ingeniería Agrícola</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1:{correct:"✅ ¡Correcto! El aerogenerador Ecotécnia 12/15 instalado en Girona en 1984 tenía 15 kW de potencia nominal, y los SG 4.5-145 de Siemens Gamesa (2020) tienen 4.500 kW. La relación 4.500/15 = 300 veces. Este salto tecnológico en 36 años es uno de los datos más emblemáticos del compendio.", wrong:"❌ Incorrecto. La respuesta correcta es C. El aerogenerador inicial (Ecotécnia 12/15, 1984) tenía 15 kW. El moderno (SG 4.5-145, 2020) tiene 4.500 kW. Ratio: 4.500 / 15 = 300 veces. No confundir con otros valores de potencia del compendio."},
+  2:{correct:"✅ ¡Correcto! El experimento con tres tipos de palas demostró que las moderadamente flexibles —fabricadas con tereftalato de polietileno— superaron a las rígidas en 35% de potencia y funcionaron en mayor rango de condiciones. Las muy flexibles fueron demasiado flácidas y rindieron menos que las rígidas.", wrong:"❌ Incorrecto. La respuesta correcta es C. Ni la rigidez total ni la flexibilidad extrema son óptimas. Las palas moderadamente flexibles (material: tereftalato de polietileno) superaron a las rígidas en 35% de potencia en pruebas de túnel de viento (Sorbona de París)."},
+  3:{correct:"✅ ¡Correcto! El DTBirdV8D10 fue diseñado específicamente para grandes aerogeneradores (y turbinas offshore). Sus 8 cámaras HD permiten detectar aves a 600 m en los 360° del perímetro, y sus 10 altavoces en 2 alturas cubren toda el área de barrido del rotor con sonidos disuasorios.", wrong:"❌ Incorrecto. La respuesta correcta es B. El modelo V8D10 tiene 8 cámaras (no 4 ni 12) y 10 altavoces en dos alturas. Detecta aves a 600 m en ángulo de 360°. El sistema V4D4 (Art. 1.13) es diferente: orientado a rapaces como águilas reales, probado en California con UAVs."},
+  4:{correct:"✅ ¡Correcto! El sistema de multiplicación mecánica (caja de engranajes) es el componente más propenso a desgaste en aerogeneradores, especialmente en el entorno marino donde el acceso para mantenimiento es costoso y difícil. Este generador lo reemplaza con dos rotores e imanes permanentes, logrando multiplicación magnética sin piezas en contacto físico.", wrong:"❌ Incorrecto. La respuesta correcta es C. La innovación es la sustitución de la caja de engranajes (multiplicación mecánica) por un concepto de multiplicación magnética con dos rotores e imanes permanentes. Esto es crítico en eólica marina donde el mantenimiento mecánico es especialmente costoso."},
+  5:{correct:"✅ ¡Correcto! La afirmación falsa es C. Hornsea One usa turbinas Siemens Gamesa de 7 MW en su primera fase (50 turbinas). Las turbinas MHI Vestas de 8 MW corresponden al parque Walney Extension (659 MW, 47 máquinas MHI Vestas 8 MW + 40 Siemens Gamesa 7 MW), no a Hornsea One.", wrong:"❌ Incorrecto. La respuesta correcta es C. Hornsea One utiliza exclusivamente turbinas Siemens Gamesa de 7 MW (no MHI Vestas de 8 MW). Las MHI Vestas de 8 MW pertenecen al parque Walney Extension (Ørsted). No confundir estos dos parques del Mar del Norte."},
+  6:{correct:"✅ ¡Correcto! Remora usa un sistema hidráulico agua-aire para comprimir aire con la electricidad sobreproducida del parque eólico y almacenarlo en tanques en el fondo marino. La presión hidrostática del agua a profundidad facilita mantener la energía almacenada de manera eficiente.", wrong:"❌ Incorrecto. La respuesta correcta es C. Remora (Segula Technologies) usa aire comprimido almacenado en tanques submarinos. No usa baterías, ni bombeo a altura, ni hidrógeno. El sistema es de Energía Comprimida en Almacenamiento Submarino (UCES - Underwater Compressed Energy Storage)."},
+  7:{correct:"✅ ¡Correcto! Al 2019, Brasil alcanzó 15 GW de capacidad eólica instalada, convirtiéndose en la segunda fuente eléctrica por capacidad en el país. Con más de 7.000 aerogeneradores en 601 parques eólicos en 12 estados, el 86% de la capacidad se ubica en la región noreste, favorecida por los vientos alisios del Atlántico.", wrong:"❌ Incorrecto. La respuesta correcta es B. Brasil llegó a 15 GW de capacidad eólica en 2019 (segunda fuente eléctrica, no tercera ni primera). El 86% está en el noreste (no en el sur). Creció de 1 GW en 2011 a 15 GW en 2019, con proyección de 19,7 GW para 2023."},
+  8:{correct:"✅ ¡Correcto! El 5 de febrero de 2016, la Central Hidroeólica de Gorona del Viento en El Hierro logró cubrir el 100% de la demanda eléctrica de la isla (~5 MW) únicamente con fuentes renovables (parque eólico + generación hidráulica con reservorio en cráter natural 'La Caldera'). Es el primer sistema aislado del mundo en lograrlo.", wrong:"❌ Incorrecto. La respuesta correcta es C. El Hierro es el primer sistema eléctrico AISLADO (isla) capaz de abastecerse 100% con renovables. Combina eólica con almacenamiento hidráulico (bombeo a La Caldera). No tiene almacenamiento en baterías ni es parque flotante."},
+  9:{correct:"✅ ¡Correcto! En el mercado pool, cada generador oferta el precio mínimo al que está dispuesto a producir. Como el viento no tiene costo de combustible, el costo marginal de la eólica es prácticamente cero. Los días de mucho viento, las plantas eólicas ofertan a casi 0€/MWh, desplazando a las plantas de gas o carbón (que ofertan más caro), bajando así el precio de mercado.", wrong:"❌ Incorrecto. La respuesta correcta es B. La eólica baja los precios porque su COSTO MARGINAL es cero (el viento no se paga). No se trata de subsidios directos al kWh, ni de factores de capacidad del 90% (que son irreales para la eólica). El mecanismo es el desplazamiento de tecnologías más caras en el pool."},
+  10:{correct:"✅ ¡Correcto! Según el Análisis del Ciclo de Vida (ACV) de Siemens Wind Power and Renewables, un parque offshore de 80 turbinas Siemens D6 emite solo 7 gCO₂/kWh durante toda su vida útil, frente a los 865 gCO₂/kWh de la media global de generación con combustibles fósiles. Esto supone una reducción de ×124 en el impacto climático.", wrong:"❌ Incorrecto. La respuesta correcta es D. Los valores exactos del compendio son: 7 gCO₂/kWh (eólica offshore, ACV Siemens) vs. 865 gCO₂/kWh (combustibles fósiles, media global). Nota: la eólica SÍ emite CO₂ en fabricación, transporte e instalación, pero distribuido en toda la vida útil, el resultado es mínimo."}
+};
+
+let answered = 0, correct_count = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true') b.classList.add('reveal');
+  });
+  if(isCorrect){
+    btn.classList.add('correct');
+    correct_count++;
+  } else {
+    btn.classList.add('incorrect');
+  }
+  const fb = document.getElementById('fb'+q);
+  if(fb){
+    fb.textContent = isCorrect ? feedbacks[parseInt(q)].correct : feedbacks[parseInt(q)].wrong;
+    fb.className = 'qfeedback ' + (isCorrect ? 'ok' : 'fail');
+    fb.style.display = 'block';
+  }
+  answered++;
+  document.getElementById('prog-text').textContent = `Pregunta ${answered} de 10 respondidas`;
+  document.getElementById('score-text').textContent = `Aciertos: ${correct_count}/10`;
+  document.getElementById('prog-bar').style.width = (answered/10*100)+'%';
+  if(answered === 10) showResult();
+});
+
+function showResult(){
+  const panel = document.getElementById('result-panel');
+  let bg,msg;
+  if(correct_count<=4){bg='#fee2e2';msg='Necesitas repasar el material con más detenimiento.'}
+  else if(correct_count<=7){bg='#fef9c3';msg='¡Buen avance! Repasa las preguntas incorrectas.'}
+  else{bg='#dcfce7';msg='¡Excelente dominio del tema!'}
+  panel.style.background=bg;
+  panel.innerHTML=`<h3>Resultado: ${correct_count} / 10 correctas</h3><p style="font-size:12px;margin:4px 0">${msg}</p><button class="btn-reset" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>`;
+  panel.style.display='block';
+}
+
+function resetQuiz(){
+  answered=0;correct_count=0;
+  document.getElementById('prog-text').textContent='Pregunta 0 de 10 respondidas';
+  document.getElementById('score-text').textContent='Aciertos: 0/10';
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('result-panel').style.display='none';
+  for(let i=1;i<=10;i++){
+    document.querySelectorAll(`.qbtn[data-q="${i}"]`).forEach(b=>{
+      b.disabled=false;
+      b.classList.remove('correct','incorrect','reveal');
+    });
+    const fb=document.getElementById('fb'+i);
+    if(fb){fb.style.display='none';fb.textContent='';fb.className='qfeedback';}
+  }
+}
+</script>
+</html>

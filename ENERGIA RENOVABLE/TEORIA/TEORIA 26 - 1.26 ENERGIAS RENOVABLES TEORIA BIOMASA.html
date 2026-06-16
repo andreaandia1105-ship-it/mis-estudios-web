@@ -1,0 +1,631 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--color-background-tertiary);color:var(--color-text-primary)}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;letter-spacing:.5px}
+.titlebar p{font-size:11px;color:#94a3b8;margin-top:4px}
+.titlebar .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tag{font-size:10px;background:rgba(255,255,255,.1);color:#7dd3fc;border-radius:20px;padding:2px 9px;font-family:'Oswald',sans-serif}
+.secbar{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.3px}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh.az{background:#dbeafe;color:#1e3a8a}
+.bh.vd{background:#dcfce7;color:#14532d}
+.bh.am{background:#fef9c3;color:#713f12}
+.bh.mo{background:#ede9fe;color:#4c1d95}
+.bh.na{background:#ffedd5;color:#7c2d12}
+.bh.gr{background:#f1f5f9;color:#334155}
+.bh.ro{background:#fce7f3;color:#831843}
+.bh.te{background:#ccfbf1;color:#134e4a}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:7px;border-radius:0 7px 7px 0}
+.def.az{border-color:#3b82f6}
+.def.am{border-color:#eab308}
+.def.vd{border-color:#22c55e}
+.def.mo{border-color:#8b5cf6}
+.def.na{border-color:#f97316}
+.def.ro{border-color:#ec4899}
+.def.te{border-color:#14b8a6}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot.az{background:#3b82f6}
+.dot.am{background:#eab308}
+.dot.vd{background:#22c55e}
+.dot.mo{background:#8b5cf6}
+.dot.na{background:#f97316}
+.dot.ro{background:#ec4899}
+.dot.te{background:#14b8a6}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.7;margin:6px 0;white-space:pre-line}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{font-size:15px;color:var(--color-text-secondary)}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);text-align:left;font-family:'Oswald',sans-serif;font-size:11px}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;white-space:nowrap}
+.fc{font-size:11px;color:#94a3b8}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:4px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-head{background:#0f1e3a;color:#fff;border-radius:9px;padding:10px 14px;margin-bottom:12px}
+.quiz-head h3{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700}
+.quiz-head p{font-size:11px;color:#94a3b8;margin-top:3px}
+.qcard{background:var(--color-background-secondary);border-radius:10px;padding:12px;margin-bottom:10px}
+.qnum{font-size:10px;color:var(--color-text-secondary);font-family:'Oswald',sans-serif;text-transform:uppercase;margin-bottom:4px}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;line-height:1.4}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-secondary);border-radius:8px;padding:7px 11px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7!important;border-color:#16a34a!important;color:#14532d!important}
+.qbtn.wrong{background:#fee2e2!important;border-color:#dc2626!important;color:#991b1b!important}
+.qbtn:disabled{opacity:.7;cursor:not-allowed}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.quiz-progress{margin-bottom:10px;font-size:12px;color:var(--color-text-secondary)}
+#resultado{border-radius:10px;padding:12px;font-size:13px;text-align:center;display:none;margin-top:10px}
+#btn-reiniciar{display:none;background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;cursor:pointer;font-size:13px;margin-top:10px;font-family:'Source Sans 3',sans-serif}
+@media(prefers-color-scheme:dark){
+  .bh.az{background:#1e3a5f;color:#93c5fd}
+  .bh.vd{background:#14532d;color:#86efac}
+  .bh.am{background:#422006;color:#fef08a}
+  .bh.mo{background:#2e1065;color:#c4b5fd}
+  .bh.na{background:#431407;color:#fed7aa}
+  .bh.gr{background:#1e293b;color:#94a3b8}
+  .bh.ro{background:#4a044e;color:#f0abfc}
+  .bh.te{background:#042f2e;color:#5eead4}
+  .warn{background:#431407;color:#fed7aa}
+  .exam{background:#422006;border-color:#ca8a04;color:#fef08a}
+}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="titlebar">
+  <h1>BIOMASA — CÁLCULOS ENERGÉTICOS</h1>
+  <p>Energías Renovables · UNALM · Prof. Kenyi Cavalcanti Cárdenas, Mg. Sc. · Laboratorio de Energías Renovables</p>
+  <div class="tags">
+    <span class="tag">Conversión de unidades</span>
+    <span class="tag">Densidad energética</span>
+    <span class="tag">PCI / PCS</span>
+    <span class="tag">Consumo de biomasa</span>
+    <span class="tag">Costo-amortización</span>
+    <span class="tag">TGA701</span>
+    <span class="tag">Balance CO₂</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1 -->
+<div class="secbar" style="background:#dbeafe;color:#1e3a8a">⚡ UNIDADES DE ENERGÍA Y CONVERSIÓN</div>
+
+<!-- Bloque 1: kWh -->
+<div class="block">
+  <span class="bh az">kWh — Unidad base (Diap. 3)</span>
+  <div class="def az">El <strong>kilovatio-hora (kWh)</strong> es la energía que entrega una potencia de 1 kW durante 1 hora. Es la unidad práctica más usada para facturar energía eléctrica y medir consumos térmicos en biomasa.</div>
+  <div class="item"><span class="dot az"></span><span><strong>1 kWh = 860 kcal</strong> — equivalente térmico, fundamental para convertir demanda eléctrica a consumo de combustible.</span></div>
+  <div class="item"><span class="dot az"></span><span><strong>1 kWh = 3.6 MJ</strong> — unidad SI, usada en cálculos científicos y normativas europeas.</span></div>
+  <div class="item"><span class="dot az"></span><span><strong>1 MJ = 239 kcal = 0.28 kWh</strong> — conversión inversa, útil cuando el PCI viene en MJ/kg.</span></div>
+  <div class="item"><span class="dot az"></span><span><strong>1 th = 1000 kcal = 1.16 kWh = 4.18 MJ</strong> — termia, unidad antigua pero frecuente en calderas industriales.</span></div>
+  <div class="rx">
+PCI [kWh/kg] = PCI [kcal/kg] ÷ 860
+PCI [MJ/kg]  = PCI [kcal/kg] × 0.004184
+PCI [kcal/kg] = PCI [kWh/kg] × 860</div>
+  <div class="warn">⚠️ ERROR COMÚN: dividir kcal entre 3.6 en vez de 860. Recuerda: 1 kWh = 860 kcal (térmico), no 3600 kJ en kcal. El factor 3600 es para pasar kJ→J, no para kcal.</div>
+  <div class="exam">🎯 EXAMEN: El PCI de una briqueta de pino es 4426.33 kcal/kg. Exprese ese valor en kWh/kg y en MJ/kg, mostrando cada factor de conversión.</div>
+</div>
+
+<!-- Bloque 2: PCI vs PCS -->
+<div class="block">
+  <span class="bh mo">PCI vs PCS — Tabla UNALM</span>
+  <div class="def mo">El <strong>PCS (Poder Calorífico Superior)</strong> incluye el calor de condensación del agua formada en la combustión. El <strong>PCI (Poder Calorífico Inferior)</strong> lo excluye, pues en la práctica los gases de escape salen calientes y el agua no condensa. El PCI es el que se usa para diseñar calderas.</div>
+  <div class="two" style="margin:7px 0">
+    <div class="mini" style="border-top:3px solid #8b5cf6">
+      <strong>PCS — Base seca</strong><br>
+      Mide energía total con agua condensada. Siempre mayor. Ej: Aserrín pino PCS = 10 281 Cal/g
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <strong>PCI — Base húmeda</strong><br>
+      Energía aprovechable real. Se usa en diseño. Ej: Briqueta pino PCI = 4 426 Cal/g
+    </div>
+  </div>
+  <div class="item"><span class="dot vd"></span><span><strong>Carbón vegetal Shihuahuaco PCS 9441 Cal/g</strong> — el más energético del listado UNALM, comparable al carbón mineral.</span></div>
+  <div class="item"><span class="dot vd"></span><span><strong>Biochar de bambú PCI 6761 Cal/g</strong> — residuo carbonizado con alta densidad energética, ideal para cocinas mejoradas.</span></div>
+  <div class="item"><span class="dot ro"></span><span><strong>Estiércol de porcino PCI 1127 Cal/g</strong> — el más bajo, confirma que la humedad y ceniza reducen drásticamente el PCI.</span></div>
+  <div class="warn">⚠️ La tabla UNALM reporta Cal/g = kcal/kg. 1 Cal = 1 kcal. No confundir con cal (caloría pequeña).</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el PCI de "Lodo antes del secado Térmico" (566.63 Cal/g) es tan bajo comparado con "Lodo después del secado Térmico" (2198.67 Cal/g)? Explique el efecto del contenido de humedad sobre el PCI.</div>
+</div>
+
+<!-- Bloque 3: Conversión rápida -->
+<div class="block">
+  <span class="bh am">Tabla de conversión rápida</span>
+  <table class="tbl">
+    <tr><th>Unidad</th><th>kcal</th><th>kWh</th><th>MJ</th></tr>
+    <tr><td>1 kWh</td><td>860</td><td>1</td><td>3.6</td></tr>
+    <tr><td>1 MJ</td><td>239</td><td>0.278</td><td>1</td></tr>
+    <tr><td>1 kcal</td><td>1</td><td>0.00116</td><td>0.00418</td></tr>
+    <tr><td>1 th</td><td>1000</td><td>1.16</td><td>4.18</td></tr>
+  </table>
+  <div class="item" style="margin-top:7px"><span class="dot am"></span><span>PCI briqueta pino: 4426.33 kcal/kg ÷ 860 = <strong>5.147 kWh/kg</strong> · Verificar: 5.147 × 860 = 4426 ✓</span></div>
+  <div class="exam">🎯 EXAMEN: Un combustible tiene PCI = 18.5 MJ/kg. ¿Cuántos kWh/kg equivale? ¿Y en kcal/kg?</div>
+</div>
+
+<!-- SECCIÓN 2 -->
+<div class="secbar" style="background:#dcfce7;color:#14532d">🔥 DENSIDAD ENERGÉTICA DE LA BIOMASA</div>
+
+<!-- Bloque 4 -->
+<div class="block s2">
+  <span class="bh vd">Densidad energética — Ejercicio Briqueta (Diap. 4–5)</span>
+  <div class="def vd">La <strong>densidad energética volumétrica</strong> indica cuánta energía (kcal o kWh) contiene 1 m³ de biomasa. Es clave para dimensionar silos, camiones y almacenes. Depende de dos factores: la <em>densidad aparente</em> (kg/m³) y el <em>PCI en base seca</em> (kcal/kg).</div>
+  <div class="flow">
+    <div class="fbox">Densidad aparente húmeda (kg/m³)</div><div class="farrow">→</div>
+    <div class="fbox">Corrección por humedad: × (1 − H%)</div><div class="farrow">→</div>
+    <div class="fbox">Densidad seca (kg/m³)</div><div class="farrow">→</div>
+    <div class="fbox">× PCI seco (kcal/kg)</div><div class="farrow">→</div>
+    <div class="fbox">Densidad energética (kcal/m³)</div>
+  </div>
+  <div class="rx">
+ρ_seco = ρ_húmedo × (1 − H%)
+DE = ρ_seco × PCI_seco        [kcal/m³]
+DE [kWh/m³] = DE [kcal/m³] ÷ 860
+
+CASO H=10%: ρ_seco = 150 × (1−0.10) = 135 kg/m³
+DE = 135 × 4426 = 597 419 kcal/m³ → 694.67 kWh/m³
+
+CASO H=30%: ρ_seco = 150 × (1−0.30) = 105 kg/m³
+DE = 105 × 4426 = 464 765 kcal/m³ → 540.42 kWh/m³</div>
+  <div class="item"><span class="dot vd"></span><span>Al pasar de 10% a 30% de humedad, la densidad energética cae un <strong>22%</strong> (de 694.67 a 540.42 kWh/m³). La humedad "diluye" la energía disponible por volumen.</span></div>
+  <div class="item"><span class="dot vd"></span><span>El PCI en base seca se mantiene constante; lo que cambia es cuánta materia seca real cabe en cada m³.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: usar el PCI húmedo sin corregir la densidad. La densidad aparente (150 kg/m³) es del material húmedo; si el PCI está en base seca, primero hay que extraer la fracción seca de la densidad.</div>
+  <div class="exam">🎯 EXAMEN: Una biomasa tiene densidad aparente de 200 kg/m³ con 20% de humedad y PCI (base seca) de 3500 kcal/kg. Calcule la densidad energética en kWh/m³ y compare con la de la briqueta de pino al 10% de humedad del ejercicio de clase.</div>
+</div>
+
+<!-- Bloque 5: TGA701 -->
+<div class="block">
+  <span class="bh gr">TGA701 — Analizador Termogravimétrico (Ficha técnica)</span>
+  <div class="def gr">El <strong>TGA701 (LECO)</strong> determina humedad, volátiles y cenizas en biomasa midiendo la pérdida de masa en función de la temperatura. Sus resultados son la base para calcular el PCI real de cada muestra.</div>
+  <div class="item"><span class="dot gr"></span><span><strong>Capacidad:</strong> 19 muestras + 1 referencia en paralelo (carrusel automatizado). Permite procesar un lote completo en una sola corrida.</span></div>
+  <div class="item"><span class="dot gr"></span><span><strong>Rango temperatura:</strong> 100°C a 1000°C. Rampa máx. 50°C/min (sobre 104°C). Cubre pirolisis, combustión y calcinación de cenizas.</span></div>
+  <div class="item"><span class="dot gr"></span><span><strong>Balance:</strong> resolución 0.0001 g (0.1 mg). Precisión 0.02% RSD con 1 g de muestra inerte.</span></div>
+  <div class="item"><span class="dot gr"></span><span><strong>Gases:</strong> aire seco libre de aceite (45 psi), N₂ 99.9% (35 psi), O₂ 99.5% (35 psi). La atmósfera controla si hay pirolisis (N₂) o combustión (aire/O₂).</span></div>
+  <div class="item"><span class="dot gr"></span><span><strong>Lo que hay que revisar en la ficha:</strong> flujo de gas (3.5–10 lpm), temperatura de operación ambiente 15–35°C, potencia 230V / 25A, dimensiones 52×61×56 cm, peso 88 kg.</span></div>
+  <div class="flow">
+    <div class="fbox">Muestra ~1g en crisol</div><div class="farrow">→</div>
+    <div class="fbox">Carrusel TGA701</div><div class="farrow">→</div>
+    <div class="fbox">Rampa T°C + atmósfera</div><div class="farrow">→</div>
+    <div class="fbox">Pérdida de masa %</div><div class="farrow">→</div>
+    <div class="fbox">% Humedad / Volátiles / Ceniza</div>
+  </div>
+  <div class="rx">
+Con TGA701:
+%Humedad   → pérdida de masa hasta ~110°C en N₂
+%Volátiles → pérdida adicional hasta ~900°C en N₂
+%Ceniza    → masa restante tras combustión en aire
+%C_fijo    = 100 − %H − %V − %Ceniza</div>
+  <div class="exam">🎯 EXAMEN: Describe al menos 3 parámetros de la ficha técnica del TGA701 que debes verificar antes de usarlo en el laboratorio de biomasa de UNALM, y explica por qué cada uno es crítico para obtener resultados confiables.</div>
+</div>
+
+<!-- SECCIÓN 3 -->
+<div class="secbar" style="background:#fef9c3;color:#713f12">🧮 CÁLCULO DEL CONSUMO DE BIOMASA</div>
+
+<!-- Bloque 6 -->
+<div class="block s2">
+  <span class="bh am">Consumo de biomasa en caldera — Metodología (Diap. 6–8)</span>
+  <div class="def am">Para calcular cuánto combustible consume una caldera se parte de la <strong>potencia útil demandada</strong>, se corrige por el <strong>rendimiento (η)</strong> para obtener la potencia que debe aportar el combustible, y finalmente se divide entre el <strong>PCI</strong> del combustible. El efecto de la humedad sobre el PCI se calcula proporcionalmente.</div>
+  <div class="rx">
+1. Potencia combustible:  C = D / η        [kW]
+2. Demanda energética:    Ec= C × t        [kWh/h → kcal/h si × 860]
+3. Consumo de biomasa:    Bc= Ec / PCI     [kg/h]
+
+PCI a humedad X% = PCI_seco × (1−X%) / (1−H_ref%)
+Ej: PCI al 30% = (0.7/0.9) × 4426.33 = 3442.7 kcal/kg</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #eab308">
+      <strong>η = 85%, H = 10%</strong><br>
+      C = 150/0.85 = 176.47 kW<br>
+      Ec = 176.47 × 860 = 151 764.7 kcal/h<br>
+      Bc = 151 764.7 / 4426.33 = <strong>34.29 kg/h</strong>
+    </div>
+    <div class="mini" style="border-left:3px solid #16a34a">
+      <strong>η = 95%, H = 8%</strong><br>
+      C = 150/0.95 = 157.89 kW<br>
+      Ec = 157.89 × 860 = 135 789.5 kcal/h<br>
+      Bc = 135 789.5 / 4426.33 = <strong>30.67 kg/h</strong>
+    </div>
+  </div>
+  <div class="item"><span class="dot am"></span><span>Al 30% de humedad con η=95%: PCI = 3442.7 kcal/kg → Bc = 135 789.5 / 3442.7 = <strong>39.44 kg/h</strong>. El mayor consumo refleja menor calidad del combustible.</span></div>
+  <div class="warn">⚠️ El rendimiento η representa pérdidas por gases calientes, radiación y conducción. Una caldera de η=95% aprovecha casi toda la energía del combustible; una de η=85% desperdicia un 15%. El costo energético real es inversamente proporcional a η.</div>
+  <div class="exam">🎯 EXAMEN: Una instalación de 200 kW con rendimiento del 90% usa pellets con PCI de 4300 kcal/kg y 12% de humedad. ¿Cuál es el consumo horario en kg/h? Si la humedad sube a 25%, ¿cuánto más combustible se necesita por hora?</div>
+</div>
+
+<!-- Bloque 7 -->
+<div class="block">
+  <span class="bh am">Análisis costo-amortización (Diap. 9–10)</span>
+  <div class="def am">El análisis económico compara dos opciones de caldera (η diferente, costo inicial diferente) calculando el <strong>costo anual de combustible</strong> y el <strong>tiempo de amortización</strong> del mayor costo inicial frente al ahorro en combustible.</div>
+  <div class="rx">
+Costo anual = Bc [kg/h] × horas/año × precio [$/kg]
+Amortiz. = ΔCosto_caldera / ΔAhorro_anual [años]
+
+η=85%, H=15%:
+ 34.29 kg/h × 2920 h × 0.045 $/kg = $4505.7/año
+η=95%, H=8%:
+ 30.67 kg/h × 2920 h × 0.060 $/kg = $5373.4/año
+
+ΔCosto caldera = $20000 − $15000 = $5000
+ΔAhorro  ← en este caso la η=95% cuesta MÁS en combustible
+→ Se prefiere η=85% pues su combustible más barato compensa</div>
+  <div class="item"><span class="dot am"></span><span>Conclusión del ejercicio: aunque η=95% consume menos cantidad de biomasa, el precio mayor de la biomasa al 8% humedad eleva el costo anual. La caldera de η=85% resulta más económica en operación.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Qué factores adicionales al precio del combustible y el rendimiento deberían considerarse para una decisión real de inversión en calderas de biomasa?</div>
+</div>
+
+<!-- SECCIÓN 4 -->
+<div class="secbar" style="background:#ccfbf1;color:#134e4a">🏡 CASO VIVIENDA UNIFAMILIAR Y RESIDENCIA DE ANCIANOS</div>
+
+<!-- Bloque 8 -->
+<div class="block s2">
+  <span class="bh te">Caldera doméstica 20 kW — Resolución completa (Diap. 11–15)</span>
+  <div class="def te">Problema de diseño integral: dada una caldera de biomasa para vivienda, se calculan energía útil, consumo de combustible, comparación con gasóleo y ahorro económico. Integra todas las fórmulas anteriores.</div>
+  <div class="rx">
+Datos: P=20 kW, η=90%, PCI=4003 kcal/kg, 150 días × 8 h/día = 1200 h/año
+
+1. HORAS ANUALES: 150 × 8 = 1200 h/año
+2. PCI en kWh/kg: 4003/860 = 4.654 kWh/kg
+3. ENERGÍA ÚTIL: E = P × t = 20 kW × 1200 h = 24 000 kWh/año
+4. ENERGÍA COMBUSTIBLE: C = E/η = 24000/0.90 = 26 667 kWh/año
+5. CONSUMO BIOMASA: Bc = 26667/4.654 = 5734.84 kg/año
+                    Bc_diario = 5734.84/150 = 38.23 kg/día
+6. GASÓLEO (PCI=9.643 kWh/kg):
+   Bc_gasóleo = 26667/9.643 = 2765.43 kg/año
+   1 litro gasóleo = 0.832 kg → 2765.43/0.832 = 3323 litros/año
+7. COSTOS:
+   Biomasa: 5734.84 × 0.048 €/kg = 275.27 €/año
+   Gasóleo: 3323 litros × 0.50 €/litro = 1661.50 €/año
+   AHORRO = 1661.50 − 275.27 = 1386.23 €/año</div>
+  <div class="item"><span class="dot te"></span><span>El sistema de biomasa ahorra <strong>1386 €/año</strong> respecto al gasóleo, a pesar de consumir casi el doble de masa de combustible, porque el precio por kWh de la biomasa es mucho menor.</span></div>
+  <div class="warn">⚠️ No confundir consumo en kg con consumo en litros para el gasóleo. La densidad del gasóleo C es ~0.832 kg/litro. Siempre verificar la unidad de precio (€/kg vs €/litro).</div>
+  <div class="exam">🎯 EXAMEN: En el caso de la vivienda unifamiliar, si el precio de la biomasa subiera de 0.048 €/kg a 0.12 €/kg, ¿seguiría siendo más económica que el gasóleo? Justifique con cálculo.</div>
+</div>
+
+<!-- Bloque 9 -->
+<div class="block">
+  <span class="bh te">Residencia de ancianos — Sistema y silo (Diap. 16–19)</span>
+  <div class="def te">Caso de mayor escala: residencia con demanda de 212.4 kW, η=92%, PCI=5 kWh/kg, densidad=675 kg/m³. Se calcula desde el consumo energético hasta la autonomía del silo.</div>
+  <div class="rx">
+C = D/η = 212.4/0.92 = 230.9 kW (pleno funcionamiento)
+Ec = C × t = 230.9 × 12 h = 2771 kWh/día
+Bc = Ec/PCI = 2771/5 = 555 kg/día
+
+VOLUMEN DIARIO:
+VB = Bc/densidad = 555/675 = 0.82 m³/día
+
+AUTONOMÍA DEL SILO (Vu = 25.24 m³):
+A = Vu/VB = 25.24/0.82 = 30 días
+→ Pedido cada 14 días (15 días de suministro + margen)</div>
+  <div class="item"><span class="dot te"></span><span>La autonomía de 30 días es un colchón generoso. Con 15 días de lead time del proveedor, se debe pedir al día 14 para no quedarse sin biomasa.</span></div>
+  <div class="exam">🎯 EXAMEN: Si la densidad de la biomasa bajara a 500 kg/m³ (material menos compacto), ¿cambiaría la frecuencia de pedido? ¿Cuántos días duraría el silo?</div>
+</div>
+
+<!-- SECCIÓN 5 -->
+<div class="secbar" style="background:#fce7f3;color:#831843">🌿 BALANCE DE EMISIONES DE CO₂</div>
+
+<!-- Bloque 10 -->
+<div class="block s3">
+  <span class="bh ro">Toneladas de CO₂ evitadas — Factores de emisión (Diap. 20–23)</span>
+  <div class="def ro">Sustituir gasóleo por biomasa reduce drásticamente las emisiones de CO₂. El <strong>factor de emisión</strong> de la biomasa es 0.018 kg CO₂/kWh (carbono biogénico, ciclo cerrado), mientras que el del gasóleo es 0.311 kg CO₂/kWh. La diferencia es el ahorro real.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #ec4899">
+      <strong>Gasóleo calefacción</strong><br>
+      Factor: 0.311 kg CO₂/kWh<br>
+      CO₂/año = 203 904 × 0.311 = 63 414 kg/año<br>
+      Vida útil 20 años: <strong>1268.3 t CO₂</strong>
+    </div>
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Gas natural</strong><br>
+      Factor: 0.252 kg CO₂/kWh<br>
+      CO₂/año = 51 384 kg/año<br>
+      Vida útil 20 años: <strong>1027.7 t CO₂</strong>
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <strong>Biomasa / Pellets densificados</strong><br>
+      Factor: 0.018 kg CO₂/kWh<br>
+      CO₂/año = 3670 kg/año<br>
+      Vida útil 20 años: <strong>73.4 t CO₂</strong>
+    </div>
+  </div>
+  <div class="rx">
+Energía anual residencia: E = 212.4 kW × 960 h/año = 203 904 kWh/año
+
+CO₂ evitado = E × (F_gasóleo − F_biomasa)
+             = 203 904 × (0.311 − 0.018)
+             = 203 904 × 0.293 = 59 744 kg CO₂/año
+
+En 20 años: 59 744 × 20 = 1 194 882 kg ≈ 1194.9 t CO₂ evitadas</div>
+  <div class="item"><span class="dot ro"></span><span>La tabla de factores de emisión IDAE/MITRE usada clasifica la electricidad convencional nacional (0.399 kg CO₂/kWh) como más contaminante que el propio gasóleo (0.311), mientras la biomasa es 17 veces menos emisora.</span></div>
+  <div class="warn">⚠️ La biomasa se considera "carbono neutro" solo si la tasa de reforestación iguala la de extracción. Si hay deforestación neta, el factor real supera 0.018. En Perú, el control de procedencia de la madera es clave para esta neutralidad.</div>
+  <div class="exam">🎯 EXAMEN: Si en lugar de gasóleo se comparara biomasa vs gas natural, ¿cuántas toneladas de CO₂ se evitarían en 20 años en la residencia de ancianos? Use los datos de la Tabla 24.</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="secbar" style="background:#f1f5f9;color:#334155">📊 TABLA INTEGRADORA — RESUMEN DE CASOS</div>
+<div class="block s3">
+  <span class="bh gr">Resumen de todos los ejercicios (Diap. 4–23)</span>
+  <table class="tbl">
+    <tr>
+      <th>Ejercicio</th>
+      <th>Sistema</th>
+      <th>Potencia (kW)</th>
+      <th>η (%)</th>
+      <th>PCI (kcal/kg)</th>
+      <th>Consumo</th>
+      <th>Resultado clave</th>
+    </tr>
+    <tr><td>Densidad energética H=10%</td><td>Briqueta pino</td><td>—</td><td>—</td><td>4426.33</td><td>—</td><td><strong>694.67 kWh/m³</strong></td></tr>
+    <tr><td>Densidad energética H=30%</td><td>Briqueta pino</td><td>—</td><td>—</td><td>4426.33</td><td>—</td><td><strong>540.42 kWh/m³</strong></td></tr>
+    <tr><td>Consumo caldera η=85%</td><td>Briqueta pino H=10%</td><td>150</td><td>85</td><td>4426.33</td><td>34.29 kg/h</td><td>Costo $4506/año</td></tr>
+    <tr><td>Consumo caldera η=95%</td><td>Briqueta pino H=8%</td><td>150</td><td>95</td><td>4426.33</td><td>30.67 kg/h</td><td>Costo $5373/año</td></tr>
+    <tr><td>Vivienda unifamiliar</td><td>Biomasa vs gasóleo</td><td>20</td><td>90</td><td>4003</td><td>5734.84 kg/año</td><td><strong>Ahorro 1386 €/año</strong></td></tr>
+    <tr><td>Residencia ancianos — sistema</td><td>PCI=5 kWh/kg</td><td>212.4</td><td>92</td><td>4300 (≈5 kWh)</td><td>555 kg/día</td><td>Autonomía silo <strong>30 días</strong></td></tr>
+    <tr><td>Balance CO₂ (20 años)</td><td>Biomasa vs gasóleo</td><td>212.4</td><td>—</td><td>—</td><td>—</td><td><strong>1194.9 t CO₂ evitadas</strong></td></tr>
+  </table>
+  <div class="warn" style="margin-top:9px">⚠️ DATO INTEGRADOR: El factor que más impacta en todos los cálculos es la HUMEDAD. Un aumento del 20% de humedad (de 10% a 30%) reduce el PCI efectivo un ~22%, aumenta el consumo en kg/h, y reduce la densidad energética volumétrica. Siempre secar la biomasa antes de usarla.</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-head">
+    <h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="quiz-progress">
+    Respondidas: <span id="resp-count">0</span>/10 &nbsp;|&nbsp; Aciertos: <span id="ok-count">0</span>/10
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuántos kWh equivalen a 1000 kcal (1 th)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) 0.86 kWh</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) 4.18 kWh</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) 1.16 kWh</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) 3.6 kWh</button>
+    </div>
+    <div class="qfeedback" id="fb1" style="display:none"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Una briqueta de pino tiene PCI en base seca de 4777.57 Cal/g. Expresado en kWh/kg, este valor es aproximadamente:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) 41.12 kWh/kg</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) 5.55 kWh/kg</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) 19.98 kWh/kg</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) 0.86 kWh/kg</button>
+    </div>
+    <div class="qfeedback" id="fb2" style="display:none"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Por qué la densidad energética volumétrica (kWh/m³) disminuye al aumentar la humedad de la biomasa, aunque el PCI base seca se mantenga igual?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Porque el agua aporta energía negativa al combustible.</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Porque el PCI en base húmeda siempre supera al de base seca.</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) Porque hay menos masa seca real por m³, reduciéndose la energía aprovechable por volumen.</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Porque la humedad aumenta la densidad aparente, haciendo más pesado cada m³.</button>
+    </div>
+    <div class="qfeedback" id="fb3" style="display:none"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">En el laboratorio de UNALM, el TGA701 reporta resultados de pérdida de masa en función de la temperatura. ¿Qué parámetro de la ficha técnica es crítico para garantizar que el instrumento opere correctamente en cuanto a seguridad de gases?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) El peso del equipo (88 kg) para calcular la carga del mesón.</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) La resolución de la balanza (0.0001 g) para muestras pesadas.</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) El número de muestras (19+1) para optimizar el tiempo de análisis.</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="true">D) La ventilación requerida (70–160 ft³/min) y el ducto de escape (4 in / 10 cm) para evacuar gases de combustión.</button>
+    </div>
+    <div class="qfeedback" id="fb4" style="display:none"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Una caldera de 150 kW con η=85% usa briquetas (PCI=4426.33 kcal/kg). ¿Cuál es el consumo horario de biomasa en kg/h?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) 29.15 kg/h</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) 34.29 kg/h</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) 40.12 kg/h</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) 27.08 kg/h</button>
+    </div>
+    <div class="qfeedback" id="fb5" style="display:none"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Al calcular el PCI de una biomasa al 30% de humedad usando como referencia el PCI base seca (humedad=10%), la fórmula correcta es:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) PCI₃₀% = PCI_seco × (1 − 0.30)</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) PCI₃₀% = PCI_seco × (0.30 / 0.10)</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) PCI₃₀% = PCI_seco × (1 − 0.30) / (1 − 0.10) = PCI_seco × (0.70/0.90)</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) PCI₃₀% = PCI_seco − 30% × PCI_seco</button>
+    </div>
+    <div class="qfeedback" id="fb6" style="display:none"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">En el caso de la vivienda unifamiliar (20 kW, η=90%, 1200 h/año), el ahorro anual al usar biomasa (0.048 €/kg) frente al gasóleo (0.50 €/litro) fue de:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) 275.27 €/año</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) 1661.50 €/año</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) 2000.00 €/año</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="true">D) 1386.23 €/año</button>
+    </div>
+    <div class="qfeedback" id="fb7" style="display:none"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">La residencia de ancianos tiene un silo de 25.24 m³ y consume 0.82 m³/día de biomasa. El proveedor tarda 15 días en entregar. ¿Cuándo debe realizarse el pedido como máximo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Al día 25 del suministro actual.</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Al día 20 del suministro actual.</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Al día 14 del suministro actual.</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Al día 30 del suministro actual.</button>
+    </div>
+    <div class="qfeedback" id="fb8" style="display:none"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">Según la tabla de resultados de poder calorífico de UNALM, ¿cuál de las siguientes biomasas tiene el MAYOR PCS en base seca?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Briqueta de Pino (4777.57 Cal/g)</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Carbón vegetal Algarrobo (8717.90 Cal/g)</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Carbón vegetal Shihuahuaco (9441.13 Cal/g)</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Aserrín de Eucalipto (10491.49 Cal/g)</button>
+    </div>
+    <div class="qfeedback" id="fb9" style="display:none"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">En la residencia de ancianos (212.4 kW, 960 h/año), ¿cuántas toneladas de CO₂ se evitan a lo largo de 20 años al sustituir gasóleo (factor 0.311 kg CO₂/kWh) por biomasa (factor 0.018 kg CO₂/kWh)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) 73.4 t CO₂</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) 1268.3 t CO₂</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) 63 414 t CO₂</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) 1194.9 t CO₂</button>
+    </div>
+    <div class="qfeedback" id="fb10" style="display:none"></div>
+  </div>
+
+  <div id="resultado"></div>
+  <button id="btn-reiniciar" onclick="reiniciarQuiz()">🔄 Reiniciar Quiz</button>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-bar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Diapositivas UNALM — Biomasa Cálculos (2020) · Prof. Kenyi Cavalcanti Cárdenas, Mg. Sc. · Resultados de Poder Calorífico PCS-PCI, Laboratorio de Energías Renovables UNALM · TGA701 Thermogravimetric Analyzer Specification Sheet, LECO Corporation (Rev. 10/16) · IDAE/MITRE — Factores de emisión de CO₂ por fuente de energía.</span>
+</div>
+
+</div><!-- fin .cv -->
+
+<script>
+const feedbacks = {
+  1:{c:"✅ ¡Correcto! 1 th = 1000 kcal = 1.16 kWh. El factor es kcal÷860 = kWh, y 1000÷860 ≈ 1.163 kWh. No confundir con 3.6 kWh (eso es para 1 kWh→kJ, no kcal→kWh).", w:"❌ Incorrecto. La respuesta correcta es C (1.16 kWh). 1 th = 1000 kcal ÷ 860 kcal/kWh = 1.163 kWh. El factor 860 convierte kcal a kWh térmicos."},
+  2:{c:"✅ ¡Correcto! 4777.57 kcal/kg ÷ 860 kcal/kWh = 5.555 kWh/kg ≈ 5.55 kWh/kg. Siempre dividir entre 860 para pasar kcal a kWh.", w:"❌ Incorrecto. La respuesta es B (5.55 kWh/kg). PCI[kWh/kg] = PCI[kcal/kg] ÷ 860. Dividir 4777.57 ÷ 860 = 5.555 kWh/kg."},
+  3:{c:"✅ ¡Correcto! Al haber más agua en la biomasa, hay menos materia seca por m³. Como la energía solo proviene de la materia seca, menos kg secos por m³ = menos kWh por m³. El PCI seco no cambia, pero hay menos 'portadores' de energía por volumen.", w:"❌ Incorrecto. La respuesta es C. La humedad no aporta energía; simplemente ocupa espacio y masa dentro del m³. Menos materia seca por m³ significa menos energía disponible por m³."},
+  4:{c:"✅ ¡Correcto! El TGA701 requiere ventilación forzada de 70–160 ft³/min y un ducto de escape de 4 in (10 cm) para evacuar CO, CO₂ y otros gases de combustión. Sin ventilación adecuada hay riesgo de intoxicación y daño al equipo.", w:"❌ Incorrecto. La respuesta es D. Aunque el peso y la resolución importan, el parámetro de SEGURIDAD crítico es la ventilación y el ducto de escape para los gases generados durante el análisis de biomasa."},
+  5:{c:"✅ ¡Correcto! C = 150/0.85 = 176.47 kW → 176.47 × 860 = 151 764.7 kcal/h → 151 764.7/4426.33 = 34.29 kg/h. Tres pasos: corregir por rendimiento, convertir a kcal/h, dividir por PCI.", w:"❌ Incorrecto. La respuesta es B (34.29 kg/h). Pasos: C = 150÷0.85 = 176.47 kW × 860 kcal/kWh = 151 764.7 kcal/h ÷ 4426.33 kcal/kg = 34.29 kg/h."},
+  6:{c:"✅ ¡Correcto! La fórmula relaciona la fracción seca real a cada humedad. Con H=10%, la fracción seca es 0.90; con H=30%, es 0.70. El ratio (0.70/0.90) ajusta el PCI proporcionalmente a la materia seca disponible.", w:"❌ Incorrecto. La respuesta es C. No basta restar el % de humedad directo del PCI porque el PCI base seca se midió con 10% de humedad residual. La corrección es: PCI_nuevo = PCI_ref × (1−H_nueva)/(1−H_ref)."},
+  7:{c:"✅ ¡Correcto! Biomasa: 5734.84 kg × 0.048 €/kg = 275.27 €. Gasóleo: 3323 litros × 0.50 €/litro = 1661.50 €. Ahorro = 1661.50 − 275.27 = 1386.23 €/año.", w:"❌ Incorrecto. La respuesta es D (1386.23 €/año). Costo biomasa = 275.27 €, costo gasóleo = 1661.50 €, diferencia = 1386.23 €/año a favor de la biomasa."},
+  8:{c:"✅ ¡Correcto! Autonomía = 25.24 m³ ÷ 0.82 m³/día = 30 días. Si el proveedor tarda 15 días, el pedido debe hacerse al día 30−15 = 15 días, pero 'como máximo al día 14' para tener margen de seguridad.", w:"❌ Incorrecto. La respuesta es C (día 14). Autonomía del silo = 30 días. Lead time proveedor = 15 días. Momento máximo de pedido = 30 − 15 − 1 = día 14 del ciclo."},
+  9:{c:"✅ ¡Correcto! El Carbón vegetal Shihuahuaco tiene PCS = 9441.13 Cal/g en base seca, el más alto de toda la tabla UNALM. El aserrín de eucalipto tiene un PCS mayor (10 491.49 Cal/g) pero es el segundo en la lista — ¡trampa! Releer bien: Shihuahuaco SÍ es el carbón vegetal más energético.", w:"❌ Incorrecto. La respuesta es C. El Carbón vegetal Shihuahuaco tiene PCS = 9441.13 Cal/g, el mayor de todos los carbones vegetales. Nota: el Aserrín de Eucalipto (10491.49) supera a todos si se incluyen todos los materiales, pero entre carbones vegetales, Shihuahuaco es el más alto. Revisar bien la tabla."},
+  10:{c:"✅ ¡Correcto! CO₂/año = 203 904 kWh × (0.311 − 0.018) = 203 904 × 0.293 = 59 744 kg CO₂. En 20 años: 59 744 × 20 = 1 194 880 kg ≈ 1194.9 t CO₂ evitadas.", w:"❌ Incorrecto. La respuesta es D (1194.9 t CO₂). Se calcula la diferencia de factores: (0.311 − 0.018) = 0.293 kg CO₂/kWh, se multiplica por la energía anual (203 904 kWh) y por 20 años."}
+};
+
+let respondidas = 0, aciertos = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const correct = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true'){
+      b.classList.add('correct');
+      b.textContent = '✅ ' + b.textContent;
+    }
+  });
+  
+  if(!correct){
+    btn.classList.add('wrong');
+    if(!btn.textContent.startsWith('✅')) btn.textContent = '❌ ' + btn.textContent;
+  }
+  
+  const fb = document.getElementById('fb'+q);
+  fb.style.display = 'block';
+  if(correct){
+    fb.className = 'qfeedback ok';
+    fb.textContent = feedbacks[q].c;
+    aciertos++;
+  } else {
+    fb.className = 'qfeedback fail';
+    fb.textContent = feedbacks[q].w;
+  }
+  
+  respondidas++;
+  document.getElementById('resp-count').textContent = respondidas;
+  document.getElementById('ok-count').textContent = aciertos;
+  document.getElementById('prog-bar').style.width = (respondidas*10)+'%';
+  
+  if(respondidas === 10){
+    const res = document.getElementById('resultado');
+    res.style.display = 'block';
+    const pct = aciertos;
+    if(pct <= 4){
+      res.style.background = '#fee2e2'; res.style.color='#991b1b';
+      res.innerHTML = `<strong>Puntaje: ${aciertos}/10</strong><br>Necesitas repasar el material. Vuelve a revisar las fórmulas de conversión y los ejercicios de consumo.`;
+    } else if(pct <= 7){
+      res.style.background = '#fef9c3'; res.style.color='#713f12';
+      res.innerHTML = `<strong>Puntaje: ${aciertos}/10</strong><br>¡Buen avance, sigue repasando! Refuerza el balance de CO₂ y la tabla de poder calorífico UNALM.`;
+    } else {
+      res.style.background = '#dcfce7'; res.style.color='#14532d';
+      res.innerHTML = `<strong>Puntaje: ${aciertos}/10</strong><br>¡Excelente dominio del tema! Estás listo para el examen de Biomasa - Cálculos.`;
+    }
+    document.getElementById('btn-reiniciar').style.display='inline-block';
+  }
+});
+
+function reiniciarQuiz(){
+  respondidas=0; aciertos=0;
+  document.getElementById('resp-count').textContent='0';
+  document.getElementById('ok-count').textContent='0';
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('resultado').style.display='none';
+  document.getElementById('btn-reiniciar').style.display='none';
+  for(let i=1;i<=10;i++){
+    const fb=document.getElementById('fb'+i);
+    fb.style.display='none'; fb.textContent=''; fb.className='qfeedback';
+    document.querySelectorAll(`.qbtn[data-q="${i}"]`).forEach(b=>{
+      b.disabled=false;
+      b.classList.remove('correct','wrong');
+      b.textContent=b.textContent.replace(/^[✅❌] /,'');
+    });
+  }
+}
+</script>
+</body>
+</html>

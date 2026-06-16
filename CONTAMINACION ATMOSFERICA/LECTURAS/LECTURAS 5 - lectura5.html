@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--color-background-tertiary);padding:10px}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.titbar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 20px}
+.titbar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titbar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pill{font-size:10px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:#1e3a5f;color:#93c5fd}
+.secbar{grid-column:1/-1;padding:8px 14px;border-radius:8px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.bh{font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:700}
+.bh.az{background:#dbeafe;color:#1e3a8a}.bh.vd{background:#dcfce7;color:#14532d}.bh.ro{background:#fee2e2;color:#991b1b}
+.bh.am{background:#fef9c3;color:#713f12}.bh.mo{background:#ede9fe;color:#4c1d95}.bh.te{background:#ccfbf1;color:#134e4a}
+.bh.na{background:#ffedd5;color:#7c2d12}.bh.gr{background:#f1f5f9;color:#334155}.bh.rs{background:#fce7f3;color:#831843}
+@media(prefers-color-scheme:dark){
+.bh.az{background:#1e3a5f;color:#93c5fd}.bh.vd{background:#14532d;color:#86efac}.bh.ro{background:#450a0a;color:#fca5a5}
+.bh.am{background:#422006;color:#fef08a}.bh.mo{background:#2e1065;color:#c4b5fd}.bh.te{background:#042f2e;color:#5eead4}
+.bh.na{background:#431407;color:#fed7aa}.bh.gr{background:#1e293b;color:#94a3b8}.bh.rs{background:#4a044e;color:#f0abfc}}
+.def{border-left:3px solid #3b82f6;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def.vd{border-color:#16a34a}.def.ro{border-color:#dc2626}.def.am{border-color:#ca8a04}.def.mo{border-color:#7c3aed}
+.def.te{border-color:#0d9488}.def.na{border-color:#ea580c}.def.rs{border-color:#db2777}.def.gr{border-color:#64748b}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot.az{background:#3b82f6}.dot.vd{background:#16a34a}.dot.ro{background:#dc2626}.dot.am{background:#ca8a04}
+.dot.mo{background:#7c3aed}.dot.te{background:#0d9488}.dot.na{background:#ea580c}.dot.rs{background:#db2777}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#a16207}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);font-weight:600;text-align:left}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:4px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+h3{font-size:13px;font-weight:600;margin-bottom:6px;color:var(--color-text-primary)}
+/* QUIZ */
+#quiz-section{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px;grid-column:1/-1}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 16px;margin-bottom:14px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.qcard{margin-bottom:16px;padding:12px;background:var(--color-background-secondary);border-radius:10px}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;color:var(--color-text-primary)}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;color:var(--color-text-primary);font-family:inherit}
+.qbtn:hover{background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.show-correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:0.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;padding:8px 11px;border-radius:0 8px 8px 0;font-size:11.5px;margin-top:8px}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){
+.qfeedback.ok{background:#14532d;color:#86efac}
+.qfeedback.fail{background:#450a0a;color:#fca5a5}
+.qbtn.correct{background:#14532d;border-color:#16a34a;color:#86efac}
+.qbtn.incorrect{background:#450a0a;border-color:#dc2626;color:#fca5a5}
+.qbtn.show-correct{background:#14532d;border-color:#16a34a;color:#86efac}}
+.prog-wrap{margin-bottom:12px}
+.prog-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+#result-panel{display:none;margin-top:14px;padding:12px 16px;border-radius:10px;text-align:center}
+#result-panel h3{font-size:16px;margin-bottom:4px}
+#result-panel p{font-size:12px}
+#restart-btn{margin-top:10px;background:#0f1e3a;color:#fff;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:'Oswald',sans-serif;font-size:13px}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="titbar">
+<h1>🔊 Ruido del tráfico rodado e impacto en la salud</h1>
+<p>Arregi et al. (2024) · Environmental Science and Pollution Research · DOI: 10.1007/s11356-024-33973-9</p>
+<div>
+<span class="pill">Eje HPA</span><span class="pill">Estrés oxidativo</span><span class="pill">Inflamación crónica</span>
+<span class="pill">Disfunción vascular</span><span class="pill">Microbioma</span><span class="pill">Ritmo circadiano</span>
+<span class="pill">Neurodegeneración</span><span class="pill">Salud mental</span>
+</div>
+</div>
+
+<!-- SECCIÓN 1: CONTEXTO Y MODELO -->
+<div class="secbar" style="background:#dbeafe;color:#1e3a8a">🌍 Contexto global y modelo de reacción al ruido</div>
+
+<div class="block">
+<span class="bh az">Epidemiología del ruido</span>
+<div class="def">El ruido ambiental es el <strong>segundo factor de riesgo ambiental más grave en Europa</strong>, después de la contaminación atmosférica. Más de 113 millones de personas están expuestas al ruido del tráfico por encima de los límites recomendados.</div>
+<div class="item"><span class="dot az"></span><span>La Directiva 2002/49/CE define como nocivos los niveles &gt;55 dB(A) en periodos diurno, vespertino y nocturno. El ruido del tráfico rodado es la fuente predominante en Europa.</span></div>
+<div class="item"><span class="dot az"></span><span>Consecuencias anuales en Europa: 12 000 muertes prematuras, 48 000 casos de cardiopatía isquémica (CI), 6,5 millones con trastornos crónicos del sueño y 12 500 escolares con dificultades de aprendizaje.</span></div>
+<div class="item"><span class="dot az"></span><span>El 55% de la población mundial vive en ciudades (cifra que alcanzará el 68% en 2050), lo que hace crítico mitigar el impacto del ruido urbano.</span></div>
+<div class="warn">⚠️ ERROR COMÚN: El ruido no es solo una molestia auditiva. Sus efectos "no auditivos" —cardiovasculares, metabólicos, cognitivos— son independientes de la pérdida de audición y ocurren a niveles relativamente bajos (&lt;85 dB).</div>
+<div class="exam">🎯 EXAMEN: Según la Directiva europea 2002/49/CE, ¿a partir de qué nivel de ruido del tráfico rodado se consideran nocivos sus efectos, y cuáles son las tres consecuencias epidemiológicas cuantificadas más importantes en Europa?</div>
+</div>
+
+<div class="block">
+<span class="bh mo">Modelo de reacción al ruido (Babisch, 2003)</span>
+<div class="def">Este modelo explica cómo el ruido daña la salud a través de <strong>dos vías</strong>: una directa (pérdida auditiva a &gt;85 dB) y una indirecta (estrés crónico a niveles más bajos). La vía indirecta es la más relevante para la salud pública.</div>
+<div class="flow">
+<span class="fbox">Ruido &gt;85 dB</span><span class="farrow">→</span><span class="fbox">Daño directo auditivo</span>
+</div>
+<div class="flow">
+<span class="fbox">Ruido &lt;85 dB</span><span class="farrow">→</span><span class="fbox">Percepción cognitiva</span><span class="farrow">→</span><span class="fbox">Molestia / Ansiedad</span><span class="farrow">→</span><span class="fbox">Activación HPA + SNS</span><span class="farrow">→</span><span class="fbox">Hormonas estrés</span>
+</div>
+<div class="item"><span class="dot mo"></span><span><strong>Habituación psicológica:</strong> Con exposición crónica, la corteza prefrontal aísla el ruido de la conciencia, reduciendo la molestia subjetiva. Sin embargo, la respuesta fisiológica (estrés) <em>persiste</em> aunque uno "se acostumbre".</span></div>
+<div class="item"><span class="dot mo"></span><span>Ejemplo clínico: el síndrome de Takotsubo (miocardiopatía por estrés) se ha asociado con exposición nocturna al ruido de aviones, evidenciando la potencia de la vía indirecta.</span></div>
+<div class="exam">🎯 EXAMEN: Explica por qué una persona que "ya no escucha" el ruido del tráfico frente a su casa sigue teniendo riesgo cardiovascular elevado. ¿Qué mecanismo fisiológico subyace a este fenómeno?</div>
+</div>
+
+<div class="block s3">
+<span class="bh az">Eje hipotálamo-hipófisis-suprarrenal (HPA) — mecanismo central</span>
+<div class="two">
+<div>
+<div class="def">El eje HPA es el sistema neuroendocrino que coordina la respuesta al estrés. Regula la liberación de cortisol, el principal glucocorticoide humano, mediante un circuito de retroalimentación negativa. Cuando el ruido crónico lo disfuncionaliza, el sistema pierde capacidad de "apagarse".</div>
+<div class="flow">
+<span class="fbox">Ruido → Hipotálamo</span><span class="farrow">→</span><span class="fbox">CRH</span><span class="farrow">→</span><span class="fbox">Hipófisis → ACTH</span><span class="farrow">→</span><span class="fbox">Corteza adrenal → Cortisol</span>
+</div>
+<div class="item"><span class="dot am"></span><span><strong>Retroalimentación negativa:</strong> Los niveles elevados de cortisol suprimen la liberación de CRH y ACTH, restaurando el equilibrio basal. En estrés crónico por ruido, esta retroalimentación falla → <em>carga alostática</em>.</span></div>
+<div class="item"><span class="dot am"></span><span><strong>Carga alostática (McEwen, 1998):</strong> Acumulación de "desgaste" fisiológico por activación crónica del sistema de estrés. Se asocia con daño cardiovascular, metabólico e inmunológico.</span></div>
+</div>
+<div>
+<h3>Medición del cortisol en investigación</h3>
+<div class="mini" style="border-top:3px solid #3b82f6"><strong>Cortisol salival/urinario</strong><br>Mide niveles agudos (horas). La mayoría de estudios sobre ruido de aviones muestran cortisol elevado. Los resultados con ruido vial son inconsistentes.</div>
+<div class="mini" style="border-top:3px solid #0d9488"><strong>Cortisol capilar (piloso)</strong><br>Refleja niveles crónicos (semanas/meses). Herramienta más válida para evaluar estrés crónico por ruido. Solo 1 estudio disponible: no halló asociación en adolescentes.</div>
+<div class="mini" style="border-top:3px solid #ca8a04"><strong>SNS — catecolaminas</strong><br>Adrenalina y noradrenalina. Se liberan junto al cortisol. Provocan vasoconstricción, taquicardia y elevación de la presión arterial de forma aguda.</div>
+<div class="warn">⚠️ La falta de asociación en algunos estudios de cortisol salival NO significa ausencia de efecto: el diseño transversal y la habituación psicológica confunden los resultados.</div>
+</div>
+</div>
+</div>
+
+<!-- SECCIÓN 2: INFLAMACIÓN Y ESTRÉS OXIDATIVO -->
+<div class="secbar" style="background:#fee2e2;color:#991b1b">🔥 Inflamación crónica y estrés oxidativo</div>
+
+<div class="block s2">
+<span class="bh ro">Inflamación: aguda vs. crónica sistémica (SCI)</span>
+<div class="def ro">La inflamación es la respuesta protectora del organismo ante amenazas. Es adaptativa cuando es aguda y temporal. Se vuelve patológica cuando es crónica y sistémica, dañando los propios tejidos.</div>
+<div class="two">
+<div>
+<h3>Inflamación AGUDA (saludable)</h3>
+<div class="item"><span class="dot vd"></span><span>Respuesta temporal (días), controlada y regulada</span></div>
+<div class="item"><span class="dot vd"></span><span>Células mieloides eliminan el patógeno/daño</span></div>
+<div class="item"><span class="dot vd"></span><span>Finaliza cuando desaparece la amenaza</span></div>
+<div class="item"><span class="dot vd"></span><span>No produce daño tisular excesivo</span></div>
+</div>
+<div>
+<h3>Inflamación CRÓNICA (patológica)</h3>
+<div class="item"><span class="dot ro"></span><span>Infiltración de monocitos, macrófagos, linfocitos</span></div>
+<div class="item"><span class="dot ro"></span><span>Destrucción tisular y fibrosis</span></div>
+<div class="item"><span class="dot ro"></span><span>Asociada a ECV, cáncer, diabetes, neurodegeneración</span></div>
+<div class="item"><span class="dot ro"></span><span>Inducida por el ruido crónico vía eje HPA</span></div>
+</div>
+</div>
+<div class="divh"></div>
+<h3>Vías moleculares inflamatorias activadas por el ruido</h3>
+<div class="three">
+<div class="mini" style="border-left:3px solid #dc2626"><strong>NF-κB</strong><br>Factor nuclear κB. Transcribe citocinas proinflamatorias (IL-6, IL-12). Activado por ROS y estrés.</div>
+<div class="mini" style="border-left:3px solid #7c3aed"><strong>MAPK</strong><br>Proteínas quinasas activadas por mitógenos. Median señales inflamatorias y apoptóticas.</div>
+<div class="mini" style="border-left:3px solid #0d9488"><strong>NRF2 (protector)</strong><br>Factor antiinflamatorio y antioxidante. El ruido lo activa como mecanismo protector. Su deficiencia exacerba el daño por ruido.</div>
+</div>
+<div class="exam">🎯 EXAMEN: ¿Por qué el factor NRF2 tiene un papel paradójico en la exposición al ruido? Explica su función protectora y qué ocurre cuando está deficiente en modelos animales.</div>
+</div>
+
+<div class="block">
+<span class="bh ro">Estrés oxidativo y ROS</span>
+<div class="def ro">El estrés oxidativo ocurre cuando la producción de Especies Reactivas de Oxígeno (ROS) supera las defensas antioxidantes del organismo. Es el nexo molecular entre el ruido y el daño tisular sistémico.</div>
+<div class="rx">ROS ↑↑ → Desequilibrio Redox → Daño lipídico/proteico/ADN → Muerte celular<br>H₂O₂ • O₂•⁻ • OH• → Peroxidación lipídica → Mutaciones genómicas</div>
+<div class="item"><span class="dot ro"></span><span><strong>ROS fisiológicas (normales):</strong> esenciales para diferenciación celular, proliferación y señalización antioxidante. El problema es el exceso.</span></div>
+<div class="item"><span class="dot ro"></span><span><strong>Sistemas afectados:</strong> sistema nervioso, riñones, hígado y sistema cardiovascular. El ruido induce ROS especialmente en vasculatura y cerebro.</span></div>
+<div class="item"><span class="dot am"></span><span><strong>NOX-2 (NADPH oxidasa):</strong> enzima clave que genera superóxido. Su expresión aumenta con la exposición al ruido. Los ratones knockout para Nox2 están protegidos de la disfunción vascular y neuroinflamación por ruido.</span></div>
+<div class="warn">⚠️ ERROR COMÚN: No confundir ROS fisiológicas (señalización normal) con estrés oxidativo patológico (exceso). Las células necesitan ROS en cantidades controladas; es el desequilibrio el que daña.</div>
+</div>
+
+<!-- SECCIÓN 3: EFECTOS SOBRE LA SALUD -->
+<div class="secbar" style="background:#dcfce7;color:#14532d">💊 Efectos sobre la salud no auditivos inducidos por el ruido</div>
+
+<div class="block">
+<span class="bh vd">Disfunción cardiovascular</span>
+<div class="def vd">El ruido del tráfico rodado eleva significativamente el riesgo de cardiopatía isquémica (CI). Hay evidencia de alta calidad (OMS, 2018) que establece una relación dosis-respuesta cuantificable.</div>
+<div class="rx">Por cada +10 dB en ruido vial:<br>RR de CI = 1.08 (IC 95%: 1.01–1.15)<br>(Meta-análisis de 7 estudios longitudinales, van Kempen et al. 2018)</div>
+<div class="item"><span class="dot vd"></span><span><strong>Mecanismo clave — desacoplamiento eNOS:</strong> El ruido reduce la biodisponibilidad de óxido nítrico (NO), vasodilatador endotelial. El ROS generado por NOX-2 reacciona con NO formando peroxinitrito (ONOO⁻), que "desacopla" la eNOS, amplificando el estrés oxidativo.</span></div>
+<div class="item"><span class="dot vd"></span><span><strong>Amígdala activada:</strong> Personas expuestas a ruido vial alto muestran mayor actividad de la amígdala (sistema límbico), vinculada a mayor inflamación aterosclerótica y riesgo de MACE (eventos cardiovasculares adversos graves).</span></div>
+<div class="flow">
+<span class="fbox">Ruido crónico</span><span class="farrow">→</span><span class="fbox">NOX-2 ↑ / ROS ↑</span><span class="farrow">→</span><span class="fbox">eNOS desacoplada</span><span class="farrow">→</span><span class="fbox">NO biodisponibilidad ↓</span><span class="farrow">→</span><span class="fbox">Vasoconstricción / Hipertensión</span>
+</div>
+<div class="exam">🎯 EXAMEN: Explica el mecanismo molecular por el cual la exposición crónica al ruido del tráfico rodado conduce a disfunción endotelial, mencionando el papel de la eNOS, el NO, el superóxido y el BH4.</div>
+</div>
+
+<div class="block">
+<span class="bh te">Disfunción cerebrovascular y cognición</span>
+<div class="def te">El hipocampo es la región cerebral más vulnerable al daño por ruido —más que la propia corteza auditiva—. Esto explica por qué el ruido daña la memoria y el aprendizaje antes que la audición.</div>
+<div class="item"><span class="dot te"></span><span><strong>nNOS cerebral:</strong> La exposición al ruido reduce la expresión y desacopla la nNOS (óxido nítrico sintasa neuronal) en el tejido cerebral. Esto reduce el NO cerebral, desencadenando neuroinflamación, regulación negativa de FOXO3 y estrés oxidativo.</span></div>
+<div class="item"><span class="dot te"></span><span><strong>En niños:</strong> +10 dB de ruido vial → OR 1.11 de hiperactividad/falta de atención (TDAH) y OR 1.09 de dificultades generales (Schubert et al. 2019). El deterioro cognitivo en escolares por ruido de aviones tiene evidencia sustancial (OMS).</span></div>
+<div class="item"><span class="dot te"></span><span><strong>Estudios animales:</strong> Reducción del recuento de dendritas hipocampales, aumento de estrés oxidativo en corteza frontal, deterioro del aprendizaje, memoria y coordinación motora.</span></div>
+<div class="warn">⚠️ Los estudios con animales usan ruido de alta intensidad (similar al de aviones, 85-100 dB), no al ruido vial real (más constante y de menor intensidad). Esto limita la extrapolación directa a humanos.</div>
+<div class="exam">🎯 EXAMEN: ¿Por qué el hipocampo es particularmente susceptible al daño inducido por el ruido? Relaciona esta vulnerabilidad con los efectos sobre la memoria y la cognición en humanos.</div>
+</div>
+
+<div class="block">
+<span class="bh am">Alteraciones metabólicas y diabetes</span>
+<div class="def am">El ruido perturba la homeostasis metabólica a través del cortisol y los trastornos del sueño, favoreciendo la resistencia a la insulina y el riesgo de diabetes mellitus tipo 2 (DM2).</div>
+<div class="item"><span class="dot am"></span><span><strong>Mecanismo metabólico:</strong> El cortisol eleva la glucemia al promover la gluconeogénesis hepática, disminuir la captación periférica de glucosa y favorecer la lipólisis en adipocitos. El resultado es resistencia a la insulina.</span></div>
+<div class="item"><span class="dot am"></span><span>Estudios recientes muestran asociación positiva entre ruido vial y DM2 (Ohlwein et al. 2019; Liu et al. 2023). La evidencia aún es moderada, pero la ruta mecánica (HPA → cortisol → metabolismo glucosa) es biológicamente plausible.</span></div>
+<div class="item"><span class="dot am"></span><span>Las alteraciones metabólicas (dislipidemia, resistencia a insulina) son a su vez factores de riesgo cardiovascular, creando un círculo vicioso.</span></div>
+<div class="exam">🎯 EXAMEN: Traza la cadena causal por la cual el ruido nocturno del tráfico podría aumentar el riesgo de diabetes mellitus tipo 2, indicando al menos 3 eslabones moleculares o fisiológicos.</div>
+</div>
+
+<div class="block">
+<span class="bh mo">Microbioma intestinal</span>
+<div class="def mo">El estrés inducido por el ruido altera el eje intestino-cerebro-microbiota. Los glucocorticoides y catecolaminas circulantes modulan el crecimiento de microorganismos gastrointestinales, creando un círculo inflamatorio vicioso.</div>
+<div class="item"><span class="dot mo"></span><span><strong>Evidencia animal (Cui et al. 2016–2018):</strong> Ratones expuestos a ruido (400–3600 Hz, 4h/día, 30 días) mostraron disminución de la diversidad de la microbiota intestinal y alteraciones en su composición.</span></div>
+<div class="item"><span class="dot mo"></span><span><strong>Eje microbiota-intestino-cerebro:</strong> Las alteraciones en la microbiota se asociaron con desequilibrio redox, reducción de proteínas de uniones estrechas intestinales e hipocampales, e inflamación sistémica.</span></div>
+<div class="item"><span class="dot mo"></span><span><strong>Intervención con probióticos (Hadizadeh et al. 2019; Li et al. 2023):</strong> La suplementación con probióticos o <em>Lactobacillus rhamnosus</em> GG restauró el eje HPA y mejoró la cognición en ratas expuestas al ruido. Prometedor para futuras terapias.</span></div>
+<div class="warn">⚠️ Todos los estudios sobre ruido y microbioma son en modelos animales. La extrapolación a humanos es incierta. Se necesita investigación clínica urgente.</div>
+</div>
+
+<div class="block">
+<span class="bh rs">Salud mental</span>
+<div class="def rs">El ruido del tráfico se asocia con ansiedad, depresión, trastorno bipolar y deterioro de la calidad de vida. El mecanismo involucra citocinas inflamatorias y reducción de NO en circuitos neuronales del estado de ánimo.</div>
+<div class="item"><span class="dot rs"></span><span><strong>Citocinas y depresión:</strong> Las citocinas inflamatorias (IL-6, hsCRP elevadas por el ruido) alteran la función de los ganglios basales y la dopamina, contribuyendo a síntomas depresivos.</span></div>
+<div class="item"><span class="dot rs"></span><span><strong>NO y neurotransmisores:</strong> El NO regula norepinefrina, serotonina, dopamina y glutamato. La reducción de NO vascular inducida por ruido puede afectar estos sistemas del estado de ánimo.</span></div>
+<div class="item"><span class="dot rs"></span><span><strong>REDD1 y estrés crónico:</strong> En estrés crónico, el factor REDD1 altera la síntesis de proteínas neuronales y la plasticidad sináptica (vía mTORC1), predisponiendo a trastornos psiquiátricos.</span></div>
+<div class="item"><span class="dot rs"></span><span>Un estudio reciente halló asociación entre ruido vial y riesgo de muerte por suicidio (Wicki et al. 2023). La evidencia general es de calidad baja-moderada; se necesitan más estudios longitudinales.</span></div>
+<div class="exam">🎯 EXAMEN: Mediante qué mecanismos moleculares el estrés oxidativo inducido por el ruido del tráfico podría contribuir al desarrollo de síntomas depresivos. Menciona al menos dos rutas distintas.</div>
+</div>
+
+<div class="block">
+<span class="bh na">Desregulación del ritmo circadiano</span>
+<div class="def na">El ruido nocturno perturba el reloj biológico central (núcleo supraquiasmático) a través de trastornos del sueño y cambios redox que alteran la expresión de genes circadianos.</div>
+<div class="item"><span class="dot na"></span><span><strong>Genes del reloj:</strong> El ruido altera &gt;30 genes circadianos. En ratones: reducción de PER1 y FOXO3, y regulación al alza de BMAL1 y CRY1. Estas alteraciones solo ocurren con ruido nocturno, no diurno.</span></div>
+<div class="item"><span class="dot na"></span><span><strong>Reloj ↔ Redox (bidireccionalidad):</strong> El estado redox celular altera el reloj circadiano, y el reloj controla la expresión de genes antioxidantes (NRF2). El ruido rompe este equilibrio en ambas direcciones.</span></div>
+<div class="item"><span class="dot na"></span><span><strong>Variante genética MTNR1B:</strong> El estudio SAPALDIA identificó interacción entre ruido nocturno y el receptor de melatonina 1B rs10830963, ligado a diabetes. Esto revela susceptibilidad genética diferencial al ruido.</span></div>
+<div class="flow">
+<span class="fbox">Ruido nocturno</span><span class="farrow">→</span><span class="fbox">Fragmentación sueño</span><span class="farrow">→</span><span class="fbox">CLOCK/BMAL1 ↓</span><span class="farrow">→</span><span class="fbox">PER/CRY alterados</span><span class="farrow">→</span><span class="fbox">Desincronización circadiana</span>
+</div>
+<div class="exam">🎯 EXAMEN: Explica la relación bidireccional entre el estrés oxidativo y el reloj circadiano, y cómo la exposición al ruido nocturno del tráfico puede amplificar este ciclo patológico.</div>
+</div>
+
+<div class="block">
+<span class="bh gr">Envejecimiento acelerado y neurodegeneración</span>
+<div class="def gr">El ruido puede acelerar el envejecimiento biológico y favorecer la aparición de enfermedades neurodegenerativas como el Alzheimer (EA), a través de la acumulación de proteínas tóxicas (Aβ y tau hiperfosforilada).</div>
+<div class="item"><span class="dot gr"></span><span><strong>Beta-amiloide (Aβ) y tau:</strong> En ratas, 30 días de ruido aumentaron la fosforilación de tau en el hipocampo y la sobreproducción de Aβ. En ratones SAMP8 (modelo de envejecimiento acelerado), el ruido crónico reprodujo el fenotipo de EA avanzada.</span></div>
+<div class="item"><span class="dot gr"></span><span><strong>Vía Wnt:</strong> El ruido crónico inhibe la señalización Wnt, que tiene efectos neuroprotectores frente a la toxicidad del Aβ. Su desregulación podría contribuir a la patogénesis de la EA.</span></div>
+<div class="item"><span class="dot gr"></span><span>Estudios en humanos: el ruido vial se asocia con mayor riesgo de demencia y EA (Fuks et al. 2019; Cantuaria et al. 2021), aunque otros estudios no encuentran asociación. La evidencia es aún inconsistente.</span></div>
+<div class="item"><span class="dot gr"></span><span>El ruido también se ha asociado recientemente con mayor riesgo de cáncer (colon, mama), aunque la evidencia es preliminar.</span></div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="secbar" style="background:#f1f5f9;color:#334155">📋 Tabla integradora — Resumen de efectos, mecanismos y calidad de evidencia</div>
+
+<div class="block s3">
+<table class="tbl">
+<thead>
+<tr>
+<th>Efecto sobre la salud</th>
+<th>Vía principal</th>
+<th>Mediadores clave</th>
+<th>Evidencia humanos</th>
+<th>Calidad OMS</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>Cardiopatía isquémica</strong></td><td>HPA → ROS → eNOS desacoplada → NO ↓</td><td>NOX-2, ROS, cortisol, endotelina-1</td><td>RR 1.08/10 dB (meta-análisis 7 estudios)</td><td style="color:#14532d"><strong>ALTA ✓</strong></td></tr>
+<tr><td><strong>Trastornos del sueño</strong></td><td>Activación cortical directa + HPA</td><td>Cortisol, melatonina alterada</td><td>Amplia evidencia longitudinal</td><td style="color:#14532d"><strong>ALTA ✓</strong></td></tr>
+<tr><td><strong>Deterioro cognitivo / TDAH</strong></td><td>nNOS ↓ → NO cerebral ↓ → Neuroinflamación</td><td>nNOS, FOXO3, NOX-2, ROS</td><td>OR 1.11 hiperactividad/10 dB</td><td style="color:#ca8a04"><strong>MODERADA</strong></td></tr>
+<tr><td><strong>Diabetes mellitus tipo 2</strong></td><td>HPA → Cortisol → Gluconeogénesis ↑</td><td>Cortisol, insulina, adipocinas</td><td>Asociación positiva en varios estudios</td><td style="color:#ca8a04"><strong>BAJA-MODERADA</strong></td></tr>
+<tr><td><strong>Hipertensión / Ictus</strong></td><td>Vasoconstrictores ↑ (noradrenalina, angiotensina II)</td><td>eNOS, NO, endotelina-1, cortisol</td><td>Resultados mixtos en estudios longitudinales</td><td style="color:#dc2626"><strong>BAJA</strong></td></tr>
+<tr><td><strong>Salud mental (ansiedad/depresión)</strong></td><td>Inflamación → Citocinas → DA/5-HT ↓</td><td>IL-6, hsCRP, REDD1, NO</td><td>Vínculos positivos; estudios transversales</td><td style="color:#dc2626"><strong>BAJA</strong></td></tr>
+<tr><td><strong>Alteración circadiana</strong></td><td>Redox → genes PER/BMAL/CRY alterados</td><td>Melatonina, CLOCK, NRF2</td><td>SAPALDIA: alteraciones genes circadianos</td><td style="color:#dc2626"><strong>INDIRECTA</strong></td></tr>
+<tr><td><strong>Microbioma intestinal</strong></td><td>Glucocorticoides → microbiota alterada</td><td>Cortisol, catecolaminas, citocinas</td><td>Solo estudios animales disponibles</td><td style="color:#991b1b"><strong>MUY BAJA</strong></td></tr>
+<tr><td><strong>Enfermedad de Alzheimer</strong></td><td>ROS → Aβ ↑ → Tau hiperfosforilada</td><td>CRF, ROS, Wnt inhibida</td><td>Algunos estudios de cohorte positivos</td><td style="color:#dc2626"><strong>BAJA-INCONSISTENTE</strong></td></tr>
+</tbody>
+</table>
+<div class="warn">⚠️ DATO INTEGRADOR CLAVE: Todos estos efectos son interdependientes y crean un efecto en cascada. La desregulación circadiana agrava el metabolismo, que agrava la inflamación, que agrava la disfunción vascular, que agrava la neurodegeneración. El enfoque debe ser siempre HOLÍSTICO, no por sistema aislado.</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+<div class="quiz-header">
+<h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+<p>Marca tu respuesta y descubre si es correcta</p>
+</div>
+
+<div class="prog-wrap">
+<div class="prog-label" id="prog-label">Pregunta 0 de 10 respondidas · Aciertos: 0/0</div>
+<div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a"></div></div>
+</div>
+
+<!-- Q1 -->
+<div class="qcard" id="q1">
+<p class="qnum">Pregunta 1 / 10</p>
+<p class="qtext">Según la Directiva 2002/49/CE, los niveles de ruido considerados nocivos para la salud son superiores a:</p>
+<div class="qopts">
+<button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) 45 dB(A)</button>
+<button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) 65 dB(A)</button>
+<button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) 55 dB(A)</button>
+<button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) 75 dB(A)</button>
+</div>
+<div class="qfeedback" id="fb1"></div>
+</div>
+
+<!-- Q2 -->
+<div class="qcard" id="q2">
+<p class="qnum">Pregunta 2 / 10</p>
+<p class="qtext">En el modelo de reacción al ruido (Babisch, 2003), ¿cuál es la diferencia fundamental entre la vía directa y la vía indirecta?</p>
+<div class="qopts">
+<button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) La vía directa solo afecta al corazón; la indirecta, al cerebro</button>
+<button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) La vía directa opera a niveles &gt;85 dB causando daño auditivo; la indirecta opera a niveles más bajos via estrés cognitivo y respuesta HPA</button>
+<button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) La vía directa involucra al eje HPA; la indirecta involucra el daño auditivo</button>
+<button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Ambas vías son idénticas en sus mecanismos, solo difieren en la intensidad del sonido</button>
+</div>
+<div class="qfeedback" id="fb2"></div>
+</div>
+
+<!-- Q3 -->
+<div class="qcard" id="q3">
+<p class="qnum">Pregunta 3 / 10</p>
+<p class="qtext">Un paciente habitante de una avenida muy transitada en Lima "ya no escucha" el ruido porque se ha habituado. ¿Cuál es la consecuencia fisiológica más importante de esta "habituación"?</p>
+<div class="qopts">
+<button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) El eje HPA se regula negativamente y deja de secretar cortisol</button>
+<button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Los niveles de ROS disminuyen porque el organismo se adapta</button>
+<button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) La habituación es psicológica (corteza prefrontal), pero la respuesta fisiológica del eje HPA y el SNS persiste, manteniendo niveles elevados de hormonas del estrés</button>
+<button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) El sistema nervioso autónomo se desensibiliza y no produce más catecolaminas</button>
+</div>
+<div class="qfeedback" id="fb3"></div>
+</div>
+
+<!-- Q4 -->
+<div class="qcard" id="q4">
+<p class="qnum">Pregunta 4 / 10</p>
+<p class="qtext">¿Qué ocurre con la enzima eNOS (óxido nítrico sintasa endotelial) bajo condiciones de estrés oxidativo inducido por el ruido?</p>
+<div class="qopts">
+<button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Se sobreexpresa y produce exceso de NO, causando vasodilatación excesiva</button>
+<button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Se inhibe completamente y no produce ni NO ni ROS</button>
+<button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Aumenta su actividad protectora sintetizando más BH4</button>
+<button class="qbtn" data-q="4" data-opt="d" data-correct="true">D) Se "desacopla": en lugar de producir NO, produce superóxido (O₂•⁻), que reacciona con el NO restante para formar peroxinitrito, reduciendo la biodisponibilidad vascular de NO</button>
+</div>
+<div class="qfeedback" id="fb4"></div>
+</div>
+
+<!-- Q5 -->
+<div class="qcard" id="q5">
+<p class="qnum">Pregunta 5 / 10</p>
+<p class="qtext">En estudios con ratones knockout para NOX-2 expuestos a ruido de aviones, ¿qué resultado se observó en comparación con ratones normales?</p>
+<div class="qopts">
+<button class="qbtn" data-q="5" data-opt="a" data-correct="true">A) Se evitaron la neuroinflamación, el estrés oxidativo cerebral y la desregulación circadiana, lo que confirma el papel central de NOX-2 en los efectos del ruido</button>
+<button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Los ratones knockout sufrieron mayor daño, sugiriendo que NOX-2 es protector</button>
+<button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) No hubo diferencia, indicando que NOX-2 no tiene relación con el ruido</button>
+<button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Los ratones knockout solo estaban protegidos del daño auditivo, no del vascular</button>
+</div>
+<div class="qfeedback" id="fb5"></div>
+</div>
+
+<!-- Q6 -->
+<div class="qcard" id="q6">
+<p class="qnum">Pregunta 6 / 10</p>
+<p class="qtext">¿Cuál de las siguientes afirmaciones sobre el ruido y el microbioma intestinal es CORRECTA según la revisión de Arregi et al. (2024)?</p>
+<div class="qopts">
+<button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Hay múltiples estudios en humanos que demuestran que el ruido vial reduce la diversidad del microbioma intestinal</button>
+<button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Los antibióticos revierten completamente los efectos del ruido sobre la microbiota</button>
+<button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) Toda la evidencia sobre ruido y microbioma proviene de estudios en animales; los glucocorticoides y catecolaminas modulan el crecimiento microbiano; los probióticos han mostrado efectos prometedores en ratas</button>
+<button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) El ruido aumenta la diversidad del microbioma como mecanismo adaptativo</button>
+</div>
+<div class="qfeedback" id="fb6"></div>
+</div>
+
+<!-- Q7 -->
+<div class="qcard" id="q7">
+<p class="qnum">Pregunta 7 / 10</p>
+<p class="qtext">La relación entre el ruido nocturno del tráfico y la desregulación circadiana fue identificada en el estudio SAPALDIA (Suiza). ¿Qué hallazgo genético específico reforzó esta asociación?</p>
+<div class="qopts">
+<button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Variante en el gen CLOCK que reduce la producción de melatonina durante el día</button>
+<button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Mutación en NRF2 que exacerba el estrés oxidativo nocturno</button>
+<button class="qbtn" data-opt="c" data-correct="true" data-q="7">C) Interacción con el receptor de melatonina 1B (MTNR1B, variante rs10830963), un factor de riesgo conocido para diabetes, vinculando el ruido nocturno con el desequilibrio del perfil de melatonina</button>
+<button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Polimorfismo en el gen BMAL2 que aumenta la sensibilidad auditiva nocturna</button>
+</div>
+<div class="qfeedback" id="fb7"></div>
+</div>
+
+<!-- Q8 -->
+<div class="qcard" id="q8">
+<p class="qnum">Pregunta 8 / 10</p>
+<p class="qtext">¿Por qué los experimentos con animales sobre ruido y salud tienen limitaciones importantes para extrapolar sus resultados a humanos?</p>
+<div class="qopts">
+<button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Porque los animales no tienen eje HPA ni producen cortisol</button>
+<button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) Porque usan niveles de ruido extremadamente altos e intermitentes (similares al ruido de aviones, ~85-100 dB), que no reflejan las características del ruido vial real (más constante y de menor intensidad)</button>
+<button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Porque los roedores son insensibles al ruido de alta frecuencia</button>
+<button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Porque se usan especies marinas que no están expuestas al tráfico urbano</button>
+</div>
+<div class="qfeedback" id="fb8"></div>
+</div>
+
+<!-- Q9 -->
+<div class="qcard" id="q9">
+<p class="qnum">Pregunta 9 / 10</p>
+<p class="qtext">¿Cuál es el mecanismo propuesto por el cual el ruido crónico podría contribuir al desarrollo de la Enfermedad de Alzheimer (EA)?</p>
+<div class="qopts">
+<button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) El ruido destruye directamente las neuronas de la corteza auditiva, que luego migran al hipocampo causando EA</button>
+<button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) El ruido aumenta la producción de acetilcolina, que en exceso es neurotóxica</button>
+<button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) El ruido eleva el pH cerebral, lo que precipita el beta-amiloide</button>
+<button class="qbtn" data-q="9" data-opt="d" data-correct="true">D) El estrés crónico por ruido eleva los mediadores proinflamatorios, reduce los factores antiinflamatorios, acumula beta-amiloide (Aβ) e hiperfosforila la proteína tau en hipocampo y corteza prefrontal, e inhibe la vía neuroprotectora Wnt</button>
+</div>
+<div class="qfeedback" id="fb9"></div>
+</div>
+
+<!-- Q10 -->
+<div class="qcard" id="q10">
+<p class="qnum">Pregunta 10 / 10</p>
+<p class="qtext">En el contexto de una ciudad como Lima, con alto tráfico vehicular constante, ¿cuál de los siguientes grupos sería el MÁS vulnerable a los efectos no auditivos del ruido, según los mecanismos revisados en el artículo?</p>
+<div class="qopts">
+<button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Adultos jóvenes (20-30 años) que usan auriculares frecuentemente</button>
+<button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Personas con trabajos sedentarios en oficinas alejadas de avenidas</button>
+<button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) Niños escolares y adultos mayores residentes en zonas de alto tráfico nocturno, por su mayor susceptibilidad a la desregulación circadiana, el deterioro cognitivo hipocampal y la acumulación de proteínas neurodegenerativas</button>
+<button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Atletas de alto rendimiento, porque el ejercicio aumenta la sensibilidad al cortisol</button>
+</div>
+<div class="qfeedback" id="fb10"></div>
+</div>
+
+<div id="result-panel"></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+<span class="ft">REFERENCIAS:</span>
+<span class="fc">Arregi et al. (2024) Environ. Sci. Pollut. Res. 31:46820–46839 · Babisch (2003) Noise Health · van Kempen et al. (2018) WHO Review · Münzel et al. (2017) Eur. Heart J. · Kröller-Schön et al. (2018) Eur. Heart J. · Daiber et al. (2019, 2020, 2022) BioFactors/Redox Biol · Cui et al. (2015–2018) Sci. Rep./J. Neuroinflammation · Eze et al. (2017, 2020) SAPALDIA Cohort · OMS (2018) Environmental Noise Guidelines for the European Region</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {correct:'c', fb:'El umbral de 55 dB(A) está establecido por la Directiva 2002/49/CE como el nivel a partir del cual los niveles de ruido diurnos, vespertinos y nocturnos se consideran nocivos para la salud. Por encima de este valor, el ruido del tráfico rodado es la fuente predominante de exposición en Europa.'},
+  2: {correct:'b', fb:'La vía directa opera a niveles muy altos (&gt;85 dB) causando daño auditivo. La vía indirecta es la más relevante en salud pública: el ruido a niveles moderados activa la corteza cerebral, genera molestia crónica y estimula el eje HPA y el sistema nervioso simpático, produciendo hormonas del estrés con consecuencias sistémicas.'},
+  3: {correct:'c', fb:'La habituación psicológica ocurre en la corteza prefrontal, que aprende a "filtrar" el ruido de la conciencia. Sin embargo, los centros subcorticales (amígdala, hipotálamo) siguen procesando el ruido y activando el eje HPA y el SNS. Esto explica por qué la "costumbre" subjetiva no protege del daño fisiológico cardiovascular e inflamatorio.'},
+  4: {correct:'d', fb:'El desacoplamiento de la eNOS es el mecanismo molecular central de la disfunción vascular por ruido. En condiciones normales, la eNOS produce NO vasodilatador. Cuando el superóxido (generado por NOX-2 activada por el ruido) reacciona con el NO, forma peroxinitrito (ONOO⁻), reduciendo el NO disponible. Además, la oxidación del cofactor BH4 agrava el desacoplamiento.'},
+  5: {correct:'a', fb:'Los ratones knockout para Nox2 están protegidos de los efectos del ruido sobre el sistema cardiovascular y el cerebro. Esto confirma que NOX-2 (NADPH oxidasa) es la fuente principal de ROS inducida por el ruido, y que estas ROS son el nexo causal entre la exposición acústica y la inflamación, la disfunción vascular y la neuroinflamación.'},
+  6: {correct:'c', fb:'Toda la evidencia disponible sobre el eje ruido-microbioma proviene de estudios en modelos animales (ratones/ratas). El mecanismo propuesto es que las hormonas del estrés (glucocorticoides y catecolaminas) modulan directamente el crecimiento microbiano gastrointestinal. Los probióticos han revertido efectos en ratas, pero aún no hay estudios en humanos.'},
+  7: {correct:'c', fb:'El estudio SAPALDIA identificó que las personas expuestas al ruido nocturno del tráfico y portadoras de la variante rs10830963 del receptor de melatonina 1B (MTNR1B) mostraban mayor desequilibrio en el perfil de melatonina. Esta variante genética es un factor de riesgo conocido para diabetes, vinculando el ruido nocturno con la desregulación metabólica a través del sistema circadiano.'},
+  8: {correct:'b', fb:'El principal problema metodológico es que los estudios animales usan ruido de alta intensidad, corta duración e intermitente (replicando el ruido de aviones, ~85-100 dB), que es cualitativamente diferente al ruido vial real (más constante, de menor intensidad pero continuo). Además, los roedores no siempre predicen de forma fiable las respuestas humanas, como señalan Bracken (2009) y los propios autores.'},
+  9: {correct:'d', fb:'La hipótesis ruido-Alzheimer es una cascada inflamatoria y redox. El estrés crónico eleva el factor CRF y los mediadores proinflamatorios, que estimulan la producción de Aβ e inhiben su eliminación. La hiperfosforilación de tau es facilitada por el estrés oxidativo y el cortisol elevado. La inhibición de la vía Wnt elimina el freno neuroprotector, acelerando la progresión de la patología tipo EA.'},
+  10: {correct:'c', fb:'Los niños son especialmente vulnerables porque sus sistemas de desarrollo cognitivo (hipocampo) son más susceptibles al daño oxidativo inducido por el ruido. Los adultos mayores tienen menor capacidad antioxidante y mayor tendencia a acumular Aβ y tau. La exposición nocturna es crítica en ambos grupos porque interrumpe el sueño reparador y desincroniza los genes circadianos, amplificando todos los efectos metabólicos y neuroinflamatorios.'}
+};
+
+let answered = 0, correct = 0;
+
+document.querySelector('#quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true') b.classList.add('show-correct');
+  });
+  if(isCorrect) {
+    btn.classList.add('correct');
+    btn.textContent = '✅ ' + btn.textContent;
+    correct++;
+  } else {
+    btn.classList.add('incorrect');
+    btn.textContent = '❌ ' + btn.textContent;
+    const correctBtn = document.querySelector(`.qbtn[data-q="${q}"][data-correct="true"]`);
+    if(correctBtn) correctBtn.textContent = '✅ ' + correctBtn.textContent;
+  }
+  answered++;
+  const fb = document.getElementById('fb'+q);
+  const info = feedbacks[parseInt(q)];
+  if(isCorrect){
+    fb.className = 'qfeedback ok';
+    fb.innerHTML = '<strong>✅ ¡Correcto!</strong> ' + info.fb;
+  } else {
+    const correctLetter = info.correct.toUpperCase();
+    fb.className = 'qfeedback fail';
+    fb.innerHTML = `<strong>❌ Incorrecto.</strong> La respuesta correcta es <strong>${correctLetter}</strong>. ${info.fb}`;
+  }
+  fb.style.display = 'block';
+  const pct = answered > 0 ? Math.round((correct/answered)*100) : 0;
+  document.getElementById('prog-label').textContent = `Pregunta ${answered} de 10 respondidas · Aciertos: ${correct}/${answered}`;
+  document.getElementById('prog-bar').style.width = (answered/10*100)+'%';
+  if(answered === 10){
+    const rp = document.getElementById('result-panel');
+    rp.style.display = 'block';
+    let bg, msg;
+    if(correct <= 4){bg='#fef2f2';msg='Necesitas repasar el material. Vuelve a los bloques sobre el eje HPA y los mecanismos moleculares.';}
+    else if(correct <= 7){bg='#fefce8';msg='¡Buen avance! Sigue repasando los mecanismos moleculares y la evidencia epidemiológica.';}
+    else{bg='#f0fdf4';msg='¡Excelente dominio del tema! Estás listo/a para el examen.';}
+    rp.style.background = bg;
+    rp.innerHTML = `<h3 style="color:#334155">${correct} / 10 correctas</h3><p style="color:#334155;margin-top:4px">${msg}</p><button id="restart-btn" onclick="restartQuiz()">🔄 Reiniciar Quiz</button>`;
+  }
+});
+
+function restartQuiz(){
+  answered = 0; correct = 0;
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.disabled = false;
+    b.classList.remove('correct','incorrect','show-correct');
+    const orig = b.textContent.replace(/^[✅❌]\s/,'');
+    b.textContent = orig;
+  });
+  document.querySelectorAll('.qfeedback').forEach(f=>{ f.style.display='none'; f.className='qfeedback'; });
+  document.getElementById('result-panel').style.display = 'none';
+  document.getElementById('prog-label').textContent = 'Pregunta 0 de 10 respondidas · Aciertos: 0/0';
+  document.getElementById('prog-bar').style.width = '0%';
+}
+</script>
+</body>
+</html>

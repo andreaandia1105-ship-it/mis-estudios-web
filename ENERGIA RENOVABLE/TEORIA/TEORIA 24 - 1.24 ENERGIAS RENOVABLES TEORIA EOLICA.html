@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--color-background-tertiary,#f1f0ea);font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary,#f1f0ea)}
+.title-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.title-bar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.tag{background:rgba(125,211,252,.15);color:#7dd3fc;font-size:10px;padding:2px 8px;border-radius:20px;font-family:'Oswald',sans-serif}
+.sec-bar{grid-column:1/-1;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px}
+.sec-blue{background:#1e3a5f;color:#93c5fd}
+.sec-green{background:#14532d;color:#86efac}
+.sec-orange{background:#431407;color:#fed7aa}
+.sec-teal{background:#042f2e;color:#5eead4}
+.sec-yellow{background:#422006;color:#fef08a}
+.block{background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15));border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.3px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-yellow{background:#fef9c3;color:#713f12}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-gray{background:#f1f5f9;color:#334155}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary,#f8f7f2);margin-bottom:8px;line-height:1.5}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#22c55e}
+.def-yellow{border-color:#eab308}
+.def-orange{border-color:#f97316}
+.def-teal{border-color:#14b8a6}
+.def-red{border-color:#ef4444}
+.def-purple{border-color:#a855f7}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-yellow{background:#eab308}
+.dot-orange{background:#f97316}
+.dot-teal{background:#14b8a6}
+.dot-red{background:#ef4444}
+.dot-purple{background:#a855f7}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0}
+.rx small{color:#94a3b8;font-size:10px}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0;line-height:1.5}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px;line-height:1.5}
+.exam strong{font-weight:600}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:6px 0}
+.mini{background:var(--color-background-secondary,#f8f7f2);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.mini strong{font-size:12px;display:block;margin-bottom:3px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary,#f8f7f2);padding:4px 8px;border-radius:6px;font-size:11px;line-height:1.4}
+.farrow{color:var(--color-text-secondary,#73726c);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15));margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary,#f8f7f2);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15));text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15));vertical-align:top}
+.num-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;margin-right:4px}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-o{background:#ffedd5;color:#7c2d12}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary,#f8f7f2);border-radius:20px;height:11px;margin:3px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+/* QUIZ STYLES */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15));border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:14px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;color:#94a3b8}
+.quiz-progress{margin-bottom:14px}
+.quiz-progress-text{font-size:12px;color:var(--color-text-secondary,#73726c);margin-bottom:4px;display:flex;justify-content:space-between}
+.qcard{margin-bottom:14px;padding-bottom:12px;border-bottom:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.15))}
+.qcard:last-child{border-bottom:none;margin-bottom:0}
+.qnum{font-size:11px;color:var(--color-text-secondary,#73726c);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:12.5px;font-weight:600;color:var(--color-text-primary,#2c2c2a);margin-bottom:8px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary,#f8f7f2);border:1px solid var(--color-border-tertiary,rgba(0,0,0,.15));border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;color:var(--color-text-primary,#2c2c2a);font-family:'Source Sans 3',sans-serif;line-height:1.4}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary,#f1f0ea)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.wrong{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.quiz-result{display:none;border-radius:10px;padding:14px;margin-top:14px;text-align:center}
+.quiz-result h3{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:5px}
+.quiz-result p{font-size:12px}
+.quiz-result.low{background:#fee2e2;color:#991b1b}
+.quiz-result.mid{background:#fef9c3;color:#713f12}
+.quiz-result.high{background:#dcfce7;color:#14532d}
+.btn-reset{background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;cursor:pointer;margin-top:10px;font-family:'Oswald',sans-serif;font-weight:500}
+.btn-reset:hover{background:#1e3a5f}
+@media(prefers-color-scheme:dark){
+  .bh-blue{background:#1e3a5f;color:#93c5fd}
+  .bh-green{background:#14532d;color:#86efac}
+  .bh-yellow{background:#422006;color:#fef08a}
+  .bh-orange{background:#431407;color:#fed7aa}
+  .bh-teal{background:#042f2e;color:#5eead4}
+  .bh-red{background:#450a0a;color:#fca5a5}
+  .bh-purple{background:#2e1065;color:#c4b5fd}
+  .bh-gray{background:#1e293b;color:#94a3b8}
+  .warn{background:#431407;color:#fed7aa}
+  .exam{background:#422006;border-color:#eab308;color:#fef08a}
+  .nb-b{background:#1e3a5f;color:#93c5fd}
+  .nb-g{background:#14532d;color:#86efac}
+  .nb-o{background:#431407;color:#fed7aa}
+}
+</style>
+
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="title-bar">
+  <h1>🌬️ Unidad 4: Energía Eólica</h1>
+  <p>Ingeniería en Energías Renovables · Recursos Eólicos y Máquinas Aerogeneradoras</p>
+  <div class="tags">
+    <span class="tag">Recurso Eólico</span>
+    <span class="tag">Anemometría</span>
+    <span class="tag">Potencia del Viento</span>
+    <span class="tag">Límite de Betz</span>
+    <span class="tag">Aerogeneradores</span>
+    <span class="tag">Sistemas Conectados a Red</span>
+    <span class="tag">Bombeo Eólico</span>
+    <span class="tag">Perú — Malabrigo / Marcona</span>
+  </div>
+</div>
+
+<!-- ===== SECCIÓN 1: FUNDAMENTOS ===== -->
+<div class="sec-bar sec-blue">🔵 SECCIÓN 1 — FUNDAMENTOS Y ORIGEN DE LA ENERGÍA EÓLICA</div>
+
+<!-- Bloque: ¿Qué es la energía eólica? -->
+<div class="block s2">
+  <span class="bh bh-blue">¿Qué es la Energía Eólica? (§4.1)</span>
+  <div class="def def-blue">La energía eólica es energía cinética de masas de aire en movimiento. Proviene <strong>indirectamente del Sol</strong>: el calentamiento diferencial de la superficie terrestre genera gradientes de presión que desplazan el aire. Solo entre el <strong>1–2%</strong> de la radiación solar se convierte en energía eólica, lo que equivale a 50–100 veces la energía que toda la biomasa terrestre capta.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Gradiente de presión:</strong> Las zonas tropicales reciben más radiación y se calientan más; el aire caliente asciende y crea zonas de baja presión que el aire frío polar tiende a rellenar. Este movimiento es el viento.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><strong>Efecto Coriolis:</strong> La rotación terrestre desvía las masas de aire hacia la derecha en el hemisferio norte y hacia la izquierda en el sur, generando los patrones globales de vientos (alisios, vientos del oeste, etc.).</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Aleatoriedad y variación local:</strong> El recurso eólico es mucho más variable en espacio y tiempo que el solar. Dos casas contiguas pueden tener potenciales eólicos radicalmente distintos si una está en un promontorio o mejor orientada al viento dominante.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Confundir "energía eólica = energía solar". Si bien su origen es solar, en la práctica son recursos distintos: el viento depende de factores locales de relieve y orografía que el recurso solar no.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explica por qué la energía eólica se considera derivada del Sol y discute por qué su variación local es mayor que la de la energía solar fotovoltaica en un mismo territorio.</div>
+</div>
+
+<!-- Bloque: Antecedentes históricos -->
+<div class="block">
+  <span class="bh bh-teal">Antecedentes Históricos (§4.1)</span>
+  <div class="def def-teal">El aprovechamiento eólico es milenario. Su evolución tecnológica refleja el dominio humano sobre materiales y electromagnetismo.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <strong>Molinos persas (s.VII a.C.)</strong>
+      Eje vertical, velas simples. Baja eficiencia pero pioneros en bombeo/molienda.
+    </div>
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <strong>Molinos europeos (s.XIII–XVII)</strong>
+      Eje horizontal desde el s. XIII. Holanda los usó para drenaje. En s.XVII apareció el control de orientación.
+    </div>
+    <div class="mini" style="border-top:3px solid #14b8a6">
+      <strong>Multipala americano (s.XIX)</strong>
+      Robusto y fácil de reparar. Se fabricaron más de <strong>6 millones</strong> de unidades para bombeo.
+    </div>
+  </div>
+  <hr class="divh">
+  <div class="flow">
+    <div class="fbox">Lacour (Dinamarca, 1890s)<br><small>1er aerogenerador eléctrico, 25 kW</small></div>
+    <span class="farrow">→</span>
+    <div class="fbox">Perfiles aerodinámicos<br><small>desde 1927: más eficiencia</small></div>
+    <span class="farrow">→</span>
+    <div class="fbox">Crisis petróleo 1973<br><small>Impulso definitivo: hasta 3,2 MW</small></div>
+    <span class="farrow">→</span>
+    <div class="fbox">Industria actual<br><small>600–900 kW típicos; paso fijo/variable</small></div>
+  </div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Describe las dos innovaciones tecnológicas clave del siglo XX que transformaron la eficiencia de los aerogeneradores y explica por qué la crisis del petróleo de 1973 aceleró su desarrollo.</div>
+</div>
+
+<!-- ===== SECCIÓN 2: MEDICIÓN Y RECURSO ===== -->
+<div class="sec-bar sec-teal">🩵 SECCIÓN 2 — MEDICIÓN DE LA VELOCIDAD Y RECURSO EÓLICO</div>
+
+<!-- Bloque: Anemómetros -->
+<div class="block">
+  <span class="bh bh-teal">Instrumentos de Medición (§4.2.1)</span>
+  <div class="def def-teal">La velocidad del viento se mide con un <strong>anemómetro</strong> y su dirección con una <strong>veleta</strong>. La medición es crítica porque la energía disponible depende del <em>cubo</em> de la velocidad.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Anemómetro de cazoleta ⭐</strong>
+      El más usado: 3 cazoletas en un eje giran proporcionalmente al viento. Genera señal eléctrica por un encoder o generador.
+    </div>
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Otros tipos</strong>
+      Ultrasónico (sin partes móviles), láser (gran alcance), hélice (direccional). Cada uno para aplicaciones específicas.
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Veleta:</strong> Elemento móvil + potenciómetro. La tensión de salida es proporcional al ángulo de orientación → indica dirección del viento.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Datalogger:</strong> Almacena datos durante meses. Registra también temperatura, presión, humedad, radiación solar.</span></div>
+  <div class="warn">⚠️ CRÍTICO: Como E ∝ V³, un error de solo el 5% en la velocidad media genera un error del ~16% en la estimación energética. La precisión de la medición es capital.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> ¿Por qué pequeños errores en la medición de velocidad del viento tienen un impacto desproporcionado en la estimación del potencial energético de un emplazamiento?</div>
+</div>
+
+<!-- Bloque: Rosa de vientos y distribución -->
+<div class="block">
+  <span class="bh bh-teal">Rosa de Vientos y Distribución (§4.2.1)</span>
+  <div class="def def-teal">Con los datos de velocidad se construyen dos herramientas clave para evaluar el emplazamiento: la <strong>rosa de vientos</strong> y el <strong>histograma de distribución de velocidades</strong>.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #0d9488">
+      <strong>Rosa azul (frecuencia)</strong>
+      Indica la probabilidad de que el viento sople en cada dirección. Muestra el rumbo dominante del emplazamiento.
+    </div>
+    <div class="mini" style="border-top:3px solid #0d9488">
+      <strong>Rosa roja (velocidad media)</strong>
+      Velocidad media por dirección. Si coincide el pico de velocidad con el de frecuencia, el potencial es óptimo.
+    </div>
+  </div>
+  <hr class="divh">
+  <div class="item"><span class="dot dot-teal"></span><span><strong>Histograma de distribución:</strong> Muestra cuántas horas al año se tiene cada velocidad (m/s). Es el insumo principal para estimar producción anual de energía multiplicando potencia × horas.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span>En el <strong>Ejemplo 7</strong> del material, un emplazamiento con pico de frecuencia entre 4–6 m/s y un aerogenerador de 10 kW produjeron <strong>16,514 kWh/año</strong>, suficiente para abastecer 7–10 viviendas.</span></div>
+</div>
+
+<!-- Bloque: Variación con la altura -->
+<div class="block">
+  <span class="bh bh-yellow">Variación de V con la Altura (§4.2.2)</span>
+  <div class="def def-yellow">Al acercarse al suelo, la fricción reduce la velocidad del viento. Esta variación sigue una ley de potencia exponencial, lo que obliga a extrapolar desde la altura de medición hasta la altura del buje del aerogenerador.</div>
+  <div class="rx">
+    <strong>V_h = V_o · (h / h_o)^a</strong><br>
+    <small>V_h: velocidad a altura h [m/s] | V_o: velocidad medida a h_o [m/s]</small><br>
+    <small>a: coeficiente de rugosidad (0.1–0.3 según terreno)</small>
+  </div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #eab308">
+      <strong>a = 0.14–0.34</strong>
+      Terreno llano, océano o praderas. La velocidad varía poco con la altura.
+    </div>
+    <div class="mini" style="border-left:3px solid #eab308">
+      <strong>a = 0.6–0.8</strong>
+      Terreno urbano o boscoso. Fuerte freno por rugosidad; la velocidad crece mucho con altura.
+    </div>
+  </div>
+  <div class="warn">⚠️ NO confundir: el coeficiente 'a' NO es el de Betz. 'a' mide rugosidad del suelo; 0.5926 (Betz) es el límite teórico de eficiencia de la turbina.</div>
+</div>
+
+<!-- ===== SECCIÓN 3: POTENCIA Y EFICIENCIA ===== -->
+<div class="sec-bar sec-yellow">🟡 SECCIÓN 3 — POTENCIA DEL VIENTO Y COEFICIENTE DE BETZ</div>
+
+<!-- Bloque: Fórmulas de potencia -->
+<div class="block s2">
+  <span class="bh bh-yellow">Potencia del Viento y Rendimiento (§4.2.3)</span>
+  <div class="def def-yellow">La potencia disponible en el flujo de aire que atraviesa el rotor depende de la densidad del aire, el área barrida y —de forma decisiva— el <strong>cubo de la velocidad</strong>.</div>
+  <div class="two">
+    <div>
+      <div class="rx">
+        E_c = ½ · m · V²<br>
+        <small>Energía cinética de una masa de aire m [J]</small>
+      </div>
+      <div class="rx">
+        P = (ρ · A · V³) / 2<br>
+        <small>ρ = 1.225 kg/m³ | A = área barrida [m²] | V = velocidad [m/s]</small>
+      </div>
+    </div>
+    <div>
+      <div class="rx">
+        C_P = Energía captada / P_disponible<br>
+        <small>C_P ≤ 0.5926 (Límite de Betz)</small>
+      </div>
+      <div class="rx">
+        P_extraída = C_P · P<br>
+        <small>C_P típico en turbinas modernas: 0.35–0.45</small>
+      </div>
+    </div>
+  </div>
+  <hr class="divh">
+  <div style="font-size:12px;font-weight:600;margin-bottom:5px">📐 Ejemplo 6 resuelto (del material):</div>
+  <div class="flow">
+    <div class="fbox">V₅=6 m/s, h₀=5m, h=10m, a=0.2</div>
+    <span class="farrow">→</span>
+    <div class="fbox">V₁₀ = 6·(10/5)^0.2 = 6·2^0.2 ≈ <strong>6.89 m/s</strong></div>
+    <span class="farrow">→</span>
+    <div class="fbox">A = π·(2)²/4 = <strong>3.14 m²</strong></div>
+    <span class="farrow">→</span>
+    <div class="fbox">P_total = ½·1.225·3.14·6.89³ ≈ <strong>629 W</strong></div>
+    <span class="farrow">→</span>
+    <div class="fbox">P_extraída = 0.35·629 ≈ <strong>220 W</strong></div>
+  </div>
+  <div class="warn">⚠️ IMPLICACIÓN CLAVE: duplicar la velocidad del viento multiplica la potencia disponible por 8. Por eso la ubicación en altura es estratégica: +10% de velocidad = +33% de energía.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Enuncia el Límite de Betz y explica por qué ninguna turbina eólica puede superar ese valor teórico, independientemente de su diseño. ¿Qué sucedería físicamente si el C_P fuera igual a 1?</div>
+</div>
+
+<!-- Bloque: Curva de potencia -->
+<div class="block">
+  <span class="bh bh-yellow">Curva de Potencia y Energía Anual (§4.5.1)</span>
+  <div class="def def-yellow">La curva de potencia del fabricante indica los kW generados para cada velocidad. Multiplicando por las horas anuales de esa velocidad (del histograma) y sumando, se obtiene la energía anual del emplazamiento.</div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Vel. de arranque (cut-in):</strong> Velocidad mínima para girar (típicamente 3–5 m/s). Por debajo, la turbina no genera.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Vel. nominal:</strong> A partir de aquí la potencia se limita activamente (paso variable o stall) para no sobrecargar el generador.</span></div>
+  <div class="item"><span class="dot dot-yellow"></span><span><strong>Vel. de parada (cut-out):</strong> Vientos superiores a ~25 m/s → la turbina se para para protegerse.</span></div>
+  <div class="rx">E_año = Σ [P(V_i) · h_i]<br><small>P(V_i): potencia a velocidad V_i [kW] | h_i: horas anuales con V_i</small></div>
+</div>
+
+<!-- ===== SECCIÓN 4: MÁQUINAS EÓLICAS ===== -->
+<div class="sec-bar sec-orange">🟠 SECCIÓN 4 — COMPONENTES Y TIPOS DE MÁQUINAS EÓLICAS</div>
+
+<!-- Bloque: Torre y rotor -->
+<div class="block">
+  <span class="bh bh-orange">Torre y Rotor (§4.3.1)</span>
+  <div class="def def-orange">Los grandes aerogeneradores se componen de <strong>torre, rotor/turbina</strong> y <strong>góndola</strong>. La torre es la columna vertebral estructural; el rotor es el convertidor de energía cinética → mecánica.</div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Torre de acero:</strong> ~50 m para 600 kW. Secciones modulares unidas con tornillos. La sección superior puede llevar arena anti-vibración. Aloja el sistema de control y transformación.</span></div>
+  <div class="item"><span class="dot dot-orange"></span><span><strong>Rotor tripala:</strong> 3 palas en poliéster reforzado con fibra de carbono. El número 3 es el equilibrio óptimo entre costo y balance de fuerzas en el eje. Puede ser de paso fijo o variable.</span></div>
+  <div class="warn">⚠️ Paso fijo vs. variable: el paso fijo es más simple y barato, pero el variable permite adaptar el ángulo de ataque al viento, extrayendo más energía en un rango mayor de velocidades.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Explica por qué los aerogeneradores modernos de gran potencia utilizan 3 palas y no 2 o 4, considerando aspectos aerodinámicos, estructurales y económicos.</div>
+</div>
+
+<!-- Bloque: Góndola y componentes internos -->
+<div class="block">
+  <span class="bh bh-orange">Góndola: Multiplicador, Generador y Orientación (§4.3.1)</span>
+  <div class="def def-orange">La góndola es la cabina en lo alto de la torre donde se instalan los subsistemas de conversión y control. Es el corazón electromecánico del aerogenerador.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>Multiplicador</strong>
+      Eleva la velocidad de 20–30 rpm (turbina) a 1000–1500 rpm (generador). No se usa en turbinas de velocidad variable con generador síncrono de imanes permanentes.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>3 tipos de generadores</strong>
+      • Asíncrono jaula de ardilla: simple, barato, problemas a V variable.<br>
+      • Asíncrono rotor bobinado: mejor a V variable.<br>
+      • Síncrono imanes permanentes: sin multiplicador.
+    </div>
+    <div class="mini" style="border-top:3px solid #f97316">
+      <strong>Sistema de orientación (yaw)</strong>
+      Motores hidráulicos girar la góndola para enfrentar el viento, guiados por veleta. Mantiene la turbina perpendicular al viento dominante.
+    </div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Viento → Palas</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Rotor (20–30 rpm)</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Multiplicador</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Generador (1000–1500 rpm)</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Energía eléctrica</div>
+  </div>
+</div>
+
+<!-- Bloque: Perú -->
+<div class="block">
+  <span class="bh bh-red">Contexto Peruano (§4.3.1 / §4.3.3)</span>
+  <div class="def def-red">Perú cuenta con proyectos eólicos de distintas escalas, desde grandes generadores en la costa norte hasta molinos de bombeo artesanales en Piura.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <strong>Malabrigo (La Libertad)</strong>
+      250 kW. Zona de alta densidad eólica en la costa norte. Vientos alisios constantes del sur permiten alta disponibilidad.
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <strong>Marcona (Ica)</strong>
+      450 kW. Zona desértica con vientos potentes. Actualmente la región es clave para expansión eólica industrial.
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-red"></span><span><strong>Molinos de Piura:</strong> Ejemplo de tecnología autóctona. Madera y fibras locales, excepto eje de acero. Rotor fijo orientado a brisas marinas. Bombean agua de pozos para riego a pequeña escala.</span></div>
+</div>
+
+<!-- Bloque: Pequeños aerogeneradores -->
+<div class="block">
+  <span class="bh bh-purple">Pequeños Aerogeneradores (§4.3.2)</span>
+  <div class="def def-purple">Diseñados para abastecer viviendas, granjas o núcleos rurales aislados. Potencia: 100 W – 10 kW. Más simples que los grandes generadores.</div>
+  <div class="item"><span class="dot dot-purple"></span><span>Turbina de 2–3 palas en fibra de vidrio y carbono.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>Generador de imanes permanentes <strong>acoplado directamente</strong> a la turbina (sin multiplicador).</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>Orientación mediante cola (sistema pasivo, sin motor).</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>Salida en CC (12/24 V) o CA según necesidades del usuario.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span>Torre tubular o de celosía.</span></div>
+</div>
+
+<!-- Bloque: Máquinas de bombeo -->
+<div class="block">
+  <span class="bh bh-teal">Máquinas de Bombeo (§4.3.3)</span>
+  <div class="def def-teal">No convierten en electricidad: la energía mecánica impulsa directamente el agua. Históricamente la primera aplicación eólica.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Vía eléctrica</strong>
+      Pequeño aerogenerador → energía eléctrica → bomba eléctrica sumergible. Más flexible en cuanto a ubicación.
+    </div>
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Vía mecánica directa</strong>
+      Molino multipala lento → eje → bomba de pistón. El clásico "molino americano". Más simple y sin electrónica.
+    </div>
+  </div>
+  <div class="rx">
+    Q_bombeo = Q_diario / Horas_equivalentes<br>
+    <small>Horas equivalentes de funcionamiento: 4–5 h/día según zona</small>
+  </div>
+  <div class="item"><span class="dot dot-teal"></span><span>Altura de torre: 4.5 m sobre obstáculos en radio de 120 m.</span></div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Una granja necesita abastecer 20 vacas lecheras (140 l/día c/u) y 50 pollos (15 l/día por 100). Si la zona tiene 4 h equivalentes de viento y el agua está a 15 m, determina el caudal requerido y describe el proceso de selección del molino.</div>
+</div>
+
+<!-- ===== SECCIÓN 5: SISTEMAS DE APROVECHAMIENTO ===== -->
+<div class="sec-bar sec-green">🟢 SECCIÓN 5 — APROVECHAMIENTO Y CONEXIÓN A RED</div>
+
+<!-- Bloque: Sistemas conectados a red -->
+<div class="block s2">
+  <span class="bh bh-green">Sistemas Conectados a Red (§4.4.1)</span>
+  <div class="def def-green">Los grandes generadores inyectan toda su producción a la red de transporte eléctrico directamente, sin almacenamiento. Sin embargo, hay una limitación técnica en la penetración eólica.</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-green"></span><span><strong>Ventaja principal:</strong> No se necesita sistema de baterías. Toda la energía producida se vende a la compañía eléctrica.</span></div>
+      <div class="item"><span class="dot dot-green"></span><span><strong>Limitación — Variabilidad:</strong> El viento es impredecible a corto plazo. Inyecciones fluctuantes alteran la frecuencia de red.</span></div>
+      <div class="item"><span class="dot dot-green"></span><span><strong>Limitación — Tipo de generador:</strong> Las máquinas asíncronas no pueden fijar la frecuencia de red por sí solas, lo que limita su penetración.</span></div>
+    </div>
+    <div>
+      <div class="rx">
+        P_máx eólica = 5% · P_cortocircuito<br>
+        <small>Límite de penetración eólica segura en un nodo de red</small>
+      </div>
+      <div class="flow">
+        <div class="fbox">Aerogenerador</div>
+        <span class="farrow">→</span>
+        <div class="fbox">Centro transform.</div>
+        <span class="farrow">→</span>
+        <div class="fbox">Red de transporte</div>
+        <span class="farrow">→</span>
+        <div class="fbox">Consumidores</div>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ La potencia máxima eólica que puede conectarse en un punto es el 5% de la potencia de cortocircuito de la red en ese nodo. Superar este límite sin compensación puede causar inestabilidades graves de frecuencia.</div>
+  <div class="exam"><strong>🎯 EXAMEN:</strong> Analiza las dos razones principales por las que existe un límite en la cantidad de potencia eólica que puede conectarse a una red convencional. ¿Qué tecnologías permiten superar parcialmente estas limitaciones?</div>
+</div>
+
+<!-- Bloque: Sistemas aislados -->
+<div class="block">
+  <span class="bh bh-green">Sistemas Aislados (§4.4.2)</span>
+  <div class="def def-green">En zonas sin acceso a la red eléctrica (rurales, islas), el sistema eólico aislado necesita almacenamiento de energía para desacoplar la generación del consumo.</div>
+  <div class="flow">
+    <div class="fbox">Aerogenerador</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Regulador de carga</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Baterías (almacén)</div>
+    <span class="farrow">→</span>
+    <div class="fbox">CC 12/24 V</div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Baterías</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Inversor CC→CA</div>
+    <span class="farrow">→</span>
+    <div class="fbox">CA 220 V</div>
+    <span class="farrow">→</span>
+    <div class="fbox">Electrodomésticos</div>
+  </div>
+  <div class="item"><span class="dot dot-green"></span><span>El regulador protege las baterías de sobrecarga y sobredescarga.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span>El inversor convierte la CC almacenada en CA de 220 V para uso doméstico convencional.</span></div>
+</div>
+
+<!-- ===== TABLA INTEGRADORA ===== -->
+<div class="sec-bar sec-blue">📊 TABLA INTEGRADORA — RESUMEN COMPARATIVO DE SISTEMAS EÓLICOS</div>
+
+<div class="block s3">
+  <span class="bh bh-blue">Comparativa General de Sistemas Eólicos</span>
+  <table class="tbl">
+    <tr>
+      <th>Tipo de Sistema</th>
+      <th>Potencia típica</th>
+      <th>Aplicación</th>
+      <th>Almacenamiento</th>
+      <th>Generador</th>
+      <th>Multiplicador</th>
+      <th>Ejemplo Perú</th>
+    </tr>
+    <tr>
+      <td><strong>Gran generador</strong></td>
+      <td>600–900 kW (hasta 3.2 MW)</td>
+      <td>Red eléctrica nacional</td>
+      <td>No (inyección directa)</td>
+      <td>Asíncrono jaula / bobinado</td>
+      <td>Sí (20–30 → 1000–1500 rpm)</td>
+      <td>Malabrigo 250 kW, Marcona 450 kW</td>
+    </tr>
+    <tr>
+      <td><strong>Pequeño aerogenerador</strong></td>
+      <td>100 W – 10 kW</td>
+      <td>Vivienda / granja aislada</td>
+      <td>Baterías CC 12/24 V</td>
+      <td>Imanes permanentes (directo)</td>
+      <td>No</td>
+      <td>Comunidades rurales sierra/selva</td>
+    </tr>
+    <tr>
+      <td><strong>Máquina de bombeo (mecánica)</strong></td>
+      <td>Variable (kW mecánicos)</td>
+      <td>Riego, abastecimiento agua</td>
+      <td>No eléctrico (depósito agua)</td>
+      <td>Sin generador eléctrico</td>
+      <td>No</td>
+      <td>Molinos artesanales en Piura</td>
+    </tr>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: La relación P ∝ V³ es el hilo conductor de todo el diseño eólico — rige la selección del emplazamiento (medir bien la velocidad), la extrapolación en altura (la ley exponencial), el cálculo de potencia disponible y el límite de Betz que acota la eficiencia máxima alcanzable.</div>
+</div>
+
+<!-- ===== QUIZ INTERACTIVO ===== -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta · Energía Eólica Completa</p>
+  </div>
+  <div class="quiz-progress">
+    <div class="quiz-progress-text">
+      <span id="prog-text">Respondidas: 0 / 10</span>
+      <span id="score-text">Aciertos: 0</span>
+    </div>
+    <div class="stat-bar-wrap">
+      <div class="stat-bar-fill" id="progress-bar" style="width:0%;background:#16a34a;transition:width .4s"></div>
+    </div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es el origen primario de la energía eólica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) El movimiento de rotación terrestre, que genera los vientos alisios de forma autónoma.</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="false">B) La diferencia de temperatura entre el núcleo terrestre y la superficie.</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="true">C) La radiación solar, que calienta la Tierra de forma desigual y genera gradientes de presión atmosférica.</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) La atracción gravitacional entre la Luna y la atmósfera terrestre.</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">El primer aerogenerador eléctrico moderno fue diseñado por el profesor Lacour en Dinamarca a finales del siglo XIX. ¿Qué dos innovaciones del siglo XX transformaron radicalmente la eficiencia de los aerogeneradores?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) La introducción de materiales de fibra de carbono y el control automático de voltaje.</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) La aplicación de perfiles aerodinámicos a las palas (desde 1927) y los sistemas de paso de pala variable.</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) El uso de torres de hormigón y el desarrollo de generadores síncronos de gran potencia.</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) El invento de los multiplicadores de velocidad y la conexión a redes eléctricas de corriente alterna.</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Si la velocidad del viento medida a 10 m de altura es de 8 m/s y el coeficiente de rugosidad del terreno es a = 0.25, ¿cuál es la velocidad aproximada a 40 m de altura?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) 8.5 m/s, ya que la variación con la altura es casi despreciable en terrenos poco rugosos.</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) 12.4 m/s, multiplicando por el doble del coeficiente de rugosidad.</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) Aproximadamente 10.6 m/s, usando V_h = 8·(40/10)^0.25 = 8·4^0.25 ≈ 8·1.414 ≈ 11.3 m/s.</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) 16 m/s, porque la velocidad se duplica cada vez que se duplica la altura.</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el Límite de Betz es CORRECTA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Es el coeficiente de rugosidad máximo del terreno que permite instalar un aerogenerador eficiente.</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Es el rendimiento mínimo que debe tener un aerogenerador para ser rentable comercialmente.</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Es el 100% de la energía cinética del viento que puede extraer teóricamente una turbina perfecta.</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="true">D) Es el valor máximo teórico del coeficiente de potencia C_P = 0.5926, que ninguna turbina puede superar porque el viento no puede detenerse completamente.</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Un aerogenerador de 10 kW de potencia nominal está instalado en un emplazamiento donde el viento sopla a 8 m/s durante 658 horas al año y la curva de potencia del fabricante indica 4.5 kW a esa velocidad. ¿Cuántos kWh produce a esa velocidad en el año?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) 6,580 kWh, multiplicando las 658 horas por la potencia nominal de 10 kW.</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) 2,961 kWh, multiplicando 4.5 kW (potencia real a 8 m/s) por 658 horas.</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) 1,462 kWh, porque a la energía bruta se le descuenta el 50% de pérdidas mecánicas.</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) 29,610 kWh, ya que la potencia nominal de 10 kW representa la energía por hora, no la potencia.</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Por qué los aerogeneradores de gran potencia utilizan típicamente tres palas en lugar de dos o cuatro?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Porque con tres palas el aerogenerador puede operar a mayor velocidad de giro, lo que reduce la necesidad del multiplicador.</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Porque los fabricantes normalizaron el diseño tripala para reducir los costos de certificación internacional.</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) Por el compromiso entre costo de fabricación (menos palas = más barato) y el equilibrio de fuerzas dinámicas en el eje (dos palas generan vibración asimétrica). Tres es el óptimo.</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Porque el límite de Betz solo se puede alcanzar con exactamente tres palas, según las ecuaciones de teoría de flujo actuador.</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">En el contexto del Perú, los molinos de viento de Piura son un ejemplo de tecnología eólica local. ¿Cuál de las siguientes características los distingue de los aerogeneradores industriales modernos?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Utilizan sistemas de paso de pala variable para maximizar la extracción de energía según las brisas marinas estacionales.</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Están conectados a la red eléctrica nacional mediante inversores de alta potencia fabricados localmente.</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) Son de construcción artesanal con madera y fibras locales, rotor fijo orientado a las brisas marinas y accionan directamente bombas de pistón para riego.</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Generan electricidad en corriente continua de 24 V que se almacena en baterías de plomo-ácido importadas.</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia fundamental entre un sistema eólico conectado a red y uno aislado?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) El sistema aislado utiliza siempre un generador asíncrono de jaula de ardilla, mientras que el conectado a red usa imanes permanentes.</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) El sistema aislado necesita almacenamiento de energía (baterías) para adaptar la generación al consumo, mientras que el conectado a red inyecta directamente sin almacenamiento.</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) El conectado a red requiere un multiplicador de velocidad, mientras que el aislado funciona con generador acoplado directo.</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) No hay diferencia técnica; la distinción es solo regulatoria, según si el propietario tiene contrato con la distribuidora eléctrica.</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">Para diseñar una instalación de bombeo eólico que abastezca una granja con consumo diario de 3,000 litros y una zona con 5 horas equivalentes de viento, ¿cuál es el caudal de bomba requerido?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) 3,000 litros/hora, porque el caudal de bombeo es igual al consumo diario total.</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) 15,000 litros/hora, multiplicando el consumo por las horas equivalentes.</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) 600 litros/hora, dividiendo los 3,000 litros diarios entre las 5 horas equivalentes de funcionamiento.</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) 1,500 litros/hora, aplicando un factor de seguridad del 50% al caudal total.</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál es la limitación principal que determina la máxima penetración de potencia eólica en un nodo de red eléctrica convencional?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) El límite de Betz, que restringe la eficiencia de cada aerogenerador conectado y obliga a instalar más unidades.</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) La altura máxima de las torres permitida por la legislación aeronáutica peruana y europea.</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) La capacidad de las baterías de almacenamiento disponibles en el mercado para absorber los excedentes de producción.</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) La variabilidad eólica y el tipo de generador asíncrono (que no fija la frecuencia de red), por lo que la potencia máxima eólica en un nodo no debe superar el 5% de la potencia de cortocircuito.</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <!-- Panel de resultados -->
+  <div class="quiz-result" id="quiz-result">
+    <h3 id="result-title"></h3>
+    <p id="result-msg"></p>
+    <br>
+    <button class="btn-reset" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">• Material de cátedra Unidad 4 — Energía Eólica (base del canvas)<br>
+  • J. Bornay Aerogeneradores — Tabla de consumos hídricos (Tabla 9)<br>
+  • Asociación Danesa de la Industria Eólica — Datos de multiplicadores<br>
+  • NORDEX GmbH (2000) — Aerogenerador 2.5 MW<br>
+  • Museo de Electricidad de Bjerringbro, Dinamarca — Aerogenerador de Gedser (J. Juul, 1957)<br>
+  • Poul La Cour Museet — Aerogeneradores experimentales 1897</span>
+</div>
+
+</div><!-- .cv -->
+
+<script>
+const feedbacks = {
+  1: { correct: 'c', ok: '✅ ¡Correcto! La energía eólica es energía solar indirecta: el Sol calienta la Tierra de modo desigual, creando gradientes de presión que mueven el aire. Entre el 1 y 2% de la energía solar se convierte en viento.', wrong: '❌ Incorrecto. La respuesta correcta es C. Aunque la rotación terrestre influye en la dirección del viento (efecto Coriolis), el origen energético es el calentamiento solar diferencial de la superficie.' },
+  2: { correct: 'b', ok: '✅ ¡Correcto! Los perfiles aerodinámicos (desde 1927) aumentaron drásticamente la sustentación de las palas, y el paso variable permite regular la potencia captada modificando el ángulo de ataque, ampliando el rango de velocidades útiles.', wrong: '❌ Incorrecto. La respuesta correcta es B. Aunque las mejoras de materiales y generadores son importantes, las innovaciones que transformaron la eficiencia en el siglo XX fueron los perfiles aerodinámicos y el paso variable de pala.' },
+  3: { correct: 'c', ok: '✅ ¡Correcto! Aplicando V_h = V_o·(h/h_o)^a: V_40 = 8·(40/10)^0.25 = 8·4^0.25 = 8·√2 ≈ 11.3 m/s. La respuesta C aproxima bien el resultado.', wrong: '❌ Incorrecto. La respuesta correcta es C. La ley de potencia exponencial V_h = V_o·(h/h_o)^a da V_40 ≈ 11.3 m/s. La velocidad NO se duplica al duplicar la altura; el crecimiento es suave y depende del coeficiente de rugosidad.' },
+  4: { correct: 'd', ok: '✅ ¡Correcto! El Límite de Betz (C_P = 0.5926) es el máximo teórico de eficiencia. Si una turbina extrajera el 100% de la energía, el viento se detendría completamente, creando una "pared de aire" que impediría el flujo siguiente. Por eso siempre debe haber viento aguas abajo.', wrong: '❌ Incorrecto. La respuesta correcta es D. El Límite de Betz no tiene nada que ver con la rugosidad del terreno ni con la rentabilidad: es el techo físico del coeficiente de potencia aerodinámico de cualquier turbina de eje horizontal.' },
+  5: { correct: 'b', ok: '✅ ¡Correcto! Energía = Potencia × Tiempo = 4.5 kW × 658 h = 2,961 kWh. Siempre se usa la potencia REAL de la curva del fabricante a esa velocidad, no la potencia nominal del aerogenerador.', wrong: '❌ Incorrecto. La respuesta correcta es B. El error clásico es usar la potencia nominal (10 kW) en lugar de la potencia real a esa velocidad (4.5 kW según la curva del fabricante). Energía = 4.5 × 658 = 2,961 kWh.' },
+  6: { correct: 'c', ok: '✅ ¡Correcto! Tres palas es el equilibrio óptimo: con dos palas la masa se concentra en un eje, generando vibración asimétrica al girar (inestabilidad giroscópica); con cuatro o más el costo aumenta sin ganancia proporcional de eficiencia. Tres da estabilidad y relación costo-eficiencia óptima.', wrong: '❌ Incorrecto. La respuesta correcta es C. El diseño tripala no está relacionado con el Límite de Betz ni con la velocidad de giro, sino con el compromiso entre estabilidad dinámica del rotor y costo de fabricación.' },
+  7: { correct: 'c', ok: '✅ ¡Correcto! Los molinos de Piura son tecnología autóctona: construidos con madera y fibras locales (solo eje de acero y tubos metálicos para la bomba), rotor fijo orientado permanentemente hacia las brisas marinas, y accionamiento mecánico directo de bomba de pistón.', wrong: '❌ Incorrecto. La respuesta correcta es C. Los molinos de Piura no están conectados a la red ni usan baterías. Son ejemplos de aprovechamiento directo de energía mecánica eólica para bombeo de agua a pequeña escala con materiales locales.' },
+  8: { correct: 'b', ok: '✅ ¡Correcto! La diferencia clave es el almacenamiento: en un sistema aislado, la energía se genera de forma variable pero el consumo es constante, por lo que se necesitan baterías como buffer. En red, cualquier excedente o déficit lo absorbe la propia red.', wrong: '❌ Incorrecto. La respuesta correcta es B. El tipo de generador o multiplicador no define si el sistema es aislado o conectado a red. Lo determinante es la presencia de almacenamiento energético (baterías) para desacoplar generación y consumo.' },
+  9: { correct: 'c', ok: '✅ ¡Correcto! Q_bombeo = Q_diario / Horas_equivalentes = 3,000 litros ÷ 5 h = 600 litros/hora. Este valor indica el caudal mínimo que debe tener la bomba para satisfacer la demanda diaria durante las horas de viento útil.', wrong: '❌ Incorrecto. La respuesta correcta es C. La fórmula es: Q_bombeo = Q_diario / Horas_equivalentes = 3,000 / 5 = 600 l/h. No se multiplica por las horas ni se aplica factor de seguridad; se divide para concentrar el bombeo en las horas de viento.' },
+  10: { correct: 'd', ok: '✅ ¡Correcto! Los dos factores limitantes son: (1) la variabilidad del viento hace difícil predecir la inyección, alterando el balance oferta-demanda de la red; (2) los generadores asíncronos no pueden fijar la frecuencia. Por eso la penetración eólica se limita al 5% de la potencia de cortocircuito del nodo.', wrong: '❌ Incorrecto. La respuesta correcta es D. El Límite de Betz afecta la eficiencia de cada turbina, no la penetración en red. La limitación de red se debe a la variabilidad eólica y al tipo de generador asíncrono utilizado.' }
+};
+
+let answered = 0;
+let correct = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const fb = feedbacks[q];
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') {
+      b.classList.add('correct');
+      b.textContent = '✅ ' + b.textContent;
+    } else if (b === btn && !isCorrect) {
+      b.classList.add('incorrect');
+      b.textContent = '❌ ' + b.textContent;
+    }
+  });
+  const fbEl = document.getElementById('fb' + q);
+  if (isCorrect) {
+    fbEl.className = 'qfeedback ok';
+    fbEl.innerHTML = fb.ok;
+    correct++;
+  } else {
+    fbEl.className = 'qfeedback wrong';
+    fbEl.innerHTML = fb.wrong;
+  }
+  fbEl.style.display = 'block';
+  answered++;
+  document.getElementById('prog-text').textContent = `Respondidas: ${answered} / 10`;
+  document.getElementById('score-text').textContent = `Aciertos: ${correct}`;
+  document.getElementById('progress-bar').style.width = (answered * 10) + '%';
+  if (answered === 10) {
+    const res = document.getElementById('quiz-result');
+    const t = document.getElementById('result-title');
+    const m = document.getElementById('result-msg');
+    res.style.display = 'block';
+    if (correct <= 4) {
+      res.className = 'quiz-result low';
+      t.textContent = `Puntaje: ${correct} / 10`;
+      m.textContent = '📖 Necesitas repasar el material. Vuelve a revisar las secciones de potencia, Betz y componentes.';
+    } else if (correct <= 7) {
+      res.className = 'quiz-result mid';
+      t.textContent = `Puntaje: ${correct} / 10`;
+      m.textContent = '📚 ¡Buen avance! Refuerza los cálculos de velocidad con altura y los sistemas de aprovechamiento.';
+    } else {
+      res.className = 'quiz-result high';
+      t.textContent = `Puntaje: ${correct} / 10`;
+      m.textContent = '🎓 ¡Excelente dominio del tema! Estás preparado/a para el examen.';
+    }
+  }
+});
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('prog-text').textContent = 'Respondidas: 0 / 10';
+  document.getElementById('score-text').textContent = 'Aciertos: 0';
+  document.getElementById('progress-bar').style.width = '0%';
+  document.getElementById('quiz-result').style.display = 'none';
+  for (let i = 1; i <= 10; i++) {
+    const fb = document.getElementById('fb' + i);
+    fb.style.display = 'none';
+    fb.className = 'qfeedback';
+    document.querySelectorAll(`.qbtn[data-q="${i}"]`).forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct', 'incorrect');
+      const orig = b.textContent.replace(/^[✅❌]\s/, '');
+      b.textContent = orig;
+    });
+  }
+}
+</script>

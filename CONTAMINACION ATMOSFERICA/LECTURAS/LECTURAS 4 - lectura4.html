@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--color-background-tertiary)}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:white;border-radius:12px;padding:14px 20px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.titlebar p{font-size:11px;opacity:.75;margin-bottom:8px}
+.pill{font-size:10px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:rgba(255,255,255,.15);color:white}
+.sectionbar{grid-column:1/-1;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;padding:7px 14px;border-radius:8px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh.blue{background:#dbeafe;color:#1e3a8a}
+.bh.green{background:#dcfce7;color:#14532d}
+.bh.red{background:#fee2e2;color:#991b1b}
+.bh.yellow{background:#fef9c3;color:#713f12}
+.bh.purple{background:#ede9fe;color:#4c1d95}
+.bh.teal{background:#ccfbf1;color:#134e4a}
+.bh.orange{background:#ffedd5;color:#7c2d12}
+.bh.gray{background:#f1f5f9;color:#334155}
+.bh.pink{background:#fce7f3;color:#831843}
+.def{border-radius:0 7px 7px 0;padding:7px 10px;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def.blue{border-left:3px solid #3b82f6}
+.def.green{border-left:3px solid #22c55e}
+.def.red{border-left:3px solid #ef4444}
+.def.yellow{border-left:3px solid #eab308}
+.def.purple{border-left:3px solid #8b5cf6}
+.def.teal{border-left:3px solid #14b8a6}
+.def.orange{border-left:3px solid #f97316}
+.def.gray{border-left:3px solid #94a3b8}
+.def.pink{border-left:3px solid #ec4899}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot.blue{background:#3b82f6}
+.dot.green{background:#22c55e}
+.dot.red{background:#ef4444}
+.dot.yellow{background:#eab308}
+.dot.purple{background:#8b5cf6}
+.dot.teal{background:#14b8a6}
+.dot.orange{background:#f97316}
+.dot.gray{background:#94a3b8}
+.dot.pink{background:#ec4899}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:8px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:8px 0}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:9px 11px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.mini strong{display:block;margin-bottom:3px;font-size:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:8px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:4px 8px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0f1e3a;color:white;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;min-width:90px}
+.fc{font-size:11px;color:#94a3b8;line-height:1.6}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:4px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+
+/* QUIZ */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.quiz-header{background:#0f1e3a;color:white;border-radius:10px;padding:11px 16px;margin-bottom:14px}
+.quiz-header h2{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.quiz-header p{font-size:11px;opacity:.75}
+.quiz-progress{margin-bottom:14px}
+.quiz-progress p{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.qcard{margin-bottom:14px;padding:12px;background:var(--color-background-secondary);border-radius:10px}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:600}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:8px;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .2s;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary)}
+.qbtn:hover:not(:disabled){background:var(--color-background-secondary)}
+.qbtn.correct{background:#dcfce7!important;border-color:#16a34a!important;color:#14532d!important}
+.qbtn.incorrect{background:#fee2e2!important;border-color:#dc2626!important;color:#991b1b!important}
+.qbtn:disabled{opacity:.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a}
+.qfeedback.ko{background:#fef2f2;border-left:3px solid #dc2626}
+#result-panel{display:none;background:var(--color-background-secondary);border-radius:10px;padding:16px;text-align:center;margin-top:10px}
+#result-panel h3{font-family:'Oswald',sans-serif;font-size:18px;margin-bottom:6px}
+#result-panel p{font-size:12.5px;margin-bottom:12px}
+#restart-btn{background:#0f1e3a;color:white;border:none;border-radius:8px;padding:9px 20px;font-size:13px;cursor:pointer;font-family:'Oswald',sans-serif;font-weight:500}
+
+@media(prefers-color-scheme:dark){
+  .bh.blue{background:#1e3a5f;color:#93c5fd}
+  .bh.green{background:#14532d;color:#86efac}
+  .bh.red{background:#450a0a;color:#fca5a5}
+  .bh.yellow{background:#422006;color:#fef08a}
+  .bh.purple{background:#2e1065;color:#c4b5fd}
+  .bh.teal{background:#042f2e;color:#5eead4}
+  .bh.orange{background:#431407;color:#fed7aa}
+  .bh.gray{background:#1e293b;color:#94a3b8}
+  .bh.pink{background:#4a044e;color:#f0abfc}
+  .warn{background:#431407;color:#fed7aa;border-color:#f97316}
+  .exam{background:#422006;color:#fef08a;border-color:#ca8a04}
+}
+</style>
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="titlebar">
+  <h1>Evaluación Cuantitativa de Exposición a Nicotina y PM₂.₅ por Tabaquismo Pasivo</h1>
+  <p>Hoshino et al. (2024) · Air Quality, Atmosphere & Health · Universidad de Shizuoka, Japón · DOI: 10.1007/s11869-024-01591-6</p>
+  <span class="pill">Tabaquismo pasivo</span>
+  <span class="pill">Muestreador pasivo</span>
+  <span class="pill">PM₂.₅</span>
+  <span class="pill">LC-MS/MS</span>
+  <span class="pill">Nicotina como biomarcador</span>
+  <span class="pill">Exposición personal</span>
+  <span class="pill">258 sujetos · Japón 2022</span>
+</div>
+
+<!-- SECCIÓN 1 -->
+<div class="sectionbar">🔵 FUNDAMENTOS: Humo de Tabaco Ambiental (HTA) y el Reto de Medición</div>
+
+<div class="block s2">
+  <span class="bh blue">¿Qué es el HTA y por qué es difícil medirlo?</span>
+  <div class="def blue">El Humo de Tabaco Ambiental (HTA) es la mezcla compleja de gases y partículas que se libera al quemar un cigarrillo. El problema central para evaluarlo es que los mismos contaminantes provienen de múltiples fuentes (cocina, tráfico, quema de biomasa), lo que contamina la señal y dificulta aislar la contribución específica del tabaco.</div>
+  <div class="item"><span class="dot blue"></span><span><strong>COV (Compuestos Orgánicos Volátiles):</strong> Van de 14 µg/cig (m-cresol) hasta 2,390 µg/cig (isopreno). Son altamente volátiles y ubicuos en el ambiente urbano, lo que los hace malos marcadores exclusivos de tabaco.</span></div>
+  <div class="item"><span class="dot blue"></span><span><strong>HAP (Hidrocarburos Aromáticos Policíclicos):</strong> Rango 16.1–2,526 µg/cig. Generados también por motores y quema de biomasa — no son específicos del tabaco.</span></div>
+  <div class="item"><span class="dot blue"></span><span><strong>PM₂.₅:</strong> ~15.6 mg/cig. Partículas de diámetro aerodinámico &lt;2.5 µm. Penetran profundo en el pulmón pero tienen muchas fuentes: cocina, tráfico, industria.</span></div>
+  <div class="item"><span class="dot blue"></span><span><strong>Nicotina:</strong> 1,660 µg/cig. Es 3–18 veces más abundante en el HTA que otros alcaloides específicos del tabaco (miosmina, 3-etilenilpiridina), lo que la convierte en el <em>marcador ideal</em> para cuantificar exposición a HTA en concentraciones bajas.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Pensar que medir PM₂.₅ es suficiente para evaluar tabaquismo pasivo. La nicotina es el marcador específico del HTA porque NO proviene de otras fuentes habituales de contaminación. Cuando PM₂.₅ sube en un hogar puede deberse a cocinar; cuando sube la nicotina, el origen es tabaco.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la nicotina se considera el marcador ideal del Humo de Tabaco Ambiental (HTA) para evaluar el tabaquismo pasivo, a diferencia de otros contaminantes como los COV o las PM₂.₅.</div>
+</div>
+
+<div class="block">
+  <span class="bh orange">Contexto regulatorio y prevalencia (Japón)</span>
+  <div class="def orange">La prevalencia del tabaquismo en Japón ha caído drásticamente en tres décadas, pero eso no eliminó automáticamente el riesgo para no fumadores. Las leyes limitan espacios de fumado pero el tabaquismo pasivo al aire libre puede aumentar paradójicamente al expulsar a fumadores de interiores.</div>
+  <div class="flow">
+    <div class="fbox">Hombres fumadores: 60% (1992)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">27.1% (2019)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">Mujeres: 13% → 7.6%</div>
+  </div>
+  <div class="item"><span class="dot orange"></span><span>Encuesta en 132 países: 30–87% de jóvenes expuestos a HTA en el hogar; 53–98% en lugares públicos (OMS 2007).</span></div>
+  <div class="item"><span class="dot orange"></span><span><strong>Ley de Promoción de la Salud 2020 (Japón):</strong> prohíbe fumar en interiores de espacios públicos y universidades, regula exterior e interior. Resultado esperado: reducción del riesgo de tabaquismo pasivo.</span></div>
+  <div class="item"><span class="dot orange"></span><span>El benceno del HTA aporta 14–50 µg/día a la ingesta diaria — un 20% de la exposición personal total a este cancerígeno (Nazaroff & Singer, 2004).</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué una reducción en la prevalencia del tabaquismo activo NO garantiza una reducción proporcional del riesgo de tabaquismo pasivo al aire libre? Desarrolle el argumento con evidencia del contexto japonés.</div>
+</div>
+
+<!-- SECCIÓN 2 -->
+<div class="sectionbar">🟡 MATERIALES Y MÉTODOS: Diseño del Estudio e Instrumentación</div>
+
+<div class="block">
+  <span class="bh yellow">Diseño del estudio y muestra</span>
+  <div class="def yellow">Se seleccionaron 258 no fumadores de una base de 5,390 contactados mediante cuestionario en línea (Oct–Dic 2022). El diseño buscó equilibrio por sexo, edad y ocupación para minimizar sesgos sistemáticos.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #3b82f6">
+      <strong>Distribución por sexo y edad</strong>
+      Hombres 20–79 años: 60 personas (10–14 por grupo etario). Mujeres 20–79 años: 72 personas (12–18 por grupo). Equilibrado para evitar sesgo demográfico.
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <strong>Ocupaciones representadas</strong>
+      Personal de oficina (65), Ingenieros (39), Empleadas domésticas (36), Desempleados (30), Servicios (21), Gestión (18), Ventas (17)... Total 14 categorías.
+    </div>
+  </div>
+  <div class="item"><span class="dot yellow"></span><span>Los sujetos portaron los instrumentos durante <strong>24 horas</strong> y reportaron mediante autoinforme: lugar y hora de cada episodio de exposición al HTA.</span></div>
+  <div class="item"><span class="dot yellow"></span><span>Cuatro grupos de exposición: (N) sin tabaquismo pasivo, (I) solo interior, (O) solo exterior, (IO) ambos.</span></div>
+  <div class="exam">🎯 EXAMEN: Identifique y discuta las principales limitaciones del método de autoinforme para clasificar la exposición al tabaquismo pasivo en este estudio. ¿Qué sesgos podrían introducir?</div>
+</div>
+
+<div class="block">
+  <span class="bh purple">Muestreador pasivo de nicotina</span>
+  <div class="def purple">El muestreador pasivo es un dispositivo portátil que absorbe nicotina del aire circundante sin necesidad de bomba activa, capturando tanto la fracción gaseosa como la particulada. Fue desarrollado específicamente para este tipo de monitoreo de baja concentración.</div>
+  <div class="item"><span class="dot purple"></span><span><strong>Tamaño:</strong> 36×70×30 mm, 30 g — diseñado para ser llevado en el cuerpo como clip.</span></div>
+  <div class="item"><span class="dot purple"></span><span><strong>Principio:</strong> Filtro impregnado con hidrogenosulfato de sodio (adsorbente) + cubierta perforada que minimiza efecto del viento en la tasa de muestreo.</span></div>
+  <div class="rx">Tasa de muestreo = (1.17 ± 0.05) × 10⁻⁶ m³/min<br>Válida tanto para nicotina gaseosa como particulada<br>Sensibilidad ≫ muestreadores convencionales</div>
+  <div class="item"><span class="dot purple"></span><span><strong>Extracción:</strong> 5 mL de solución nicotina-d₃ (patrón interno) + irradiación ultrasónica 10 min → centrifugación → análisis por LC-MS/MS.</span></div>
+  <div class="item"><span class="dot purple"></span><span>Límite de detección bajo: 89% de muestras detectables — el 11% restante (28/258) estuvo por debajo del LOD, implicando exposición nula o mínima.</span></div>
+  <div class="exam">🎯 EXAMEN: Compare las ventajas y desventajas de un muestreador pasivo frente a un muestreador activo (con bomba) para estudios de exposición personal a nicotina en poblaciones grandes.</div>
+</div>
+
+<div class="block">
+  <span class="bh teal">Sensor de PM₂.₅ y análisis LC-MS/MS</span>
+  <div class="def teal">El sensor de PM₂.₅ usa dispersión de luz láser para contar y estimar la masa de partículas en tiempo real. La cromatografía líquida acoplada a espectrometría de masas en tándem (LC-MS/MS) es el estándar de oro para cuantificación selectiva de nicotina a concentraciones traza.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <strong>Sensor PM₂.₅ Monitor Pro</strong>
+      80×40×30 mm, 67g. Láser + fotodiodo + ventilador + codificador USB. Adquisición: 6 veces/min. Rango: 0–999 µg m⁻³. Batería y registrador integrados.
+    </div>
+    <div class="mini" style="border-left:3px solid #8b5cf6">
+      <strong>LC-MS/MS (Cromatografía)</strong>
+      UltiMate 3000 + TSQ Endura (ESI). Columna catiónica ZORBAX 300-SCX (2.1×150mm). Curva lineal: 0.01–10 µg/L, R²&gt;0.99. Inyección 100 µL. Nicotina-d₃ como patrón interno.
+    </div>
+  </div>
+  <div class="warn">⚠️ LIMITACIÓN TÉCNICA: Algunos monitores de PM₂.₅ fallaron durante el muestreo, por lo que solo se obtuvieron 194 de las 258 muestras posibles. Esto reduce la potencia estadística del análisis de PM₂.₅ respecto al de nicotina.</div>
+  <div class="exam">🎯 EXAMEN: Explique la función del patrón interno nicotina-d₃ en el análisis por LC-MS/MS. ¿Qué tipo de errores corrige este procedimiento y por qué es crítico para la exactitud de los resultados?</div>
+</div>
+
+<!-- SECCIÓN 3 -->
+<div class="sectionbar">🟢 RESULTADOS I: Concentraciones Generales de Nicotina y PM₂.₅</div>
+
+<div class="block s2">
+  <span class="bh green">Distribución de concentraciones: nicotina</span>
+  <div class="def green">Las concentraciones individuales de nicotina siguieron una distribución log-normal, lo que es típico de contaminantes ambientales con alta variabilidad entre individuos. La mediana (0.065 µg m⁻³) es baja pero supera el valor de zonas para no fumadores (0.05 µg m⁻³), lo que confirma que el tabaquismo pasivo incrementó la carga de HTA.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <strong>Mediana nicotina</strong>
+      0.065 µg m⁻³<br>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:13%;background:#22c55e"></div></div>
+      vs 0.05 en zonas no fumadores (+30% sobre basal)
+    </div>
+    <div class="mini" style="border-top:3px solid #eab308">
+      <strong>Media ± DE</strong>
+      0.228 ± 0.600 µg m⁻³<br>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:45%;background:#eab308"></div></div>
+      Alta DE indica gran variabilidad individual
+    </div>
+    <div class="mini" style="border-top:3px solid #ef4444">
+      <strong>Máximo detectado</strong>
+      6.16 µg m⁻³<br>
+      <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:95%;background:#ef4444"></div></div>
+      Comparable a entornos de restauración (0.06–37)
+    </div>
+  </div>
+  <div class="item"><span class="dot green"></span><span>Sin diferencias significativas por edad, sexo u ocupación — descarta sesgos sistemáticos entre grupos de sujetos.</span></div>
+  <div class="item"><span class="dot green"></span><span>Distribución log-normal confirmada (Figura 1) — consistente con estudios previos (Wallace 1986). Esto implica que la media es mayor que la mediana y está desplazada hacia valores altos por observaciones extremas.</span></div>
+  <div class="item"><span class="dot green"></span><span>64% de las concentraciones superaron el valor basal de zonas para no fumadores — evidencia directa de que el tabaquismo pasivo incrementó la inhalación de HTA en la mayoría de los sujetos (IARC 2004).</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué se espera que los datos de exposición personal a contaminantes ambientales sigan una distribución log-normal? Explique las implicaciones estadísticas de usar la mediana vs la media como medida de tendencia central en estos estudios.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh pink">Concentraciones de PM₂.₅</span>
+  <div class="def pink">A diferencia de la nicotina, las PM₂.₅ no mostraron diferencias significativas entre ningún grupo de exposición al tabaquismo pasivo. Esto sugiere que el PM₂.₅ no es un marcador sensible del tabaquismo pasivo en concentraciones bajas porque su señal queda enmascarada por otras fuentes.</div>
+  <div class="item"><span class="dot pink"></span><span><strong>Mediana PM₂.₅:</strong> 7.5 µg m⁻³ — por debajo del estándar interior de 12 µg m⁻³ (USEPA 2023).</span></div>
+  <div class="item"><span class="dot pink"></span><span><strong>Media ± DE:</strong> 11.1 ± 14.3 µg m⁻³. Máximo: 136 µg m⁻³ (casos extremos incluidos por su escaso número).</span></div>
+  <div class="item"><span class="dot pink"></span><span>Lectura sistemáticamente &gt;0 en todos los monitores — la PM₂.₅ siempre estuvo presente (fuentes omnipresentes: cocina, tráfico, polvo interior).</span></div>
+  <div class="warn">⚠️ ERROR CONCEPTUAL: Interpretar la ausencia de diferencias significativas en PM₂.₅ entre grupos como "el tabaco no genera partículas". El HTA sí emite PM₂.₅, pero la exposición simultánea a otras fuentes hace imposible detectar la señal del tabaco con este diseño.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué diferencia metodológica fundamental explica que la nicotina sí mostrara diferencias significativas entre grupos de exposición mientras que PM₂.₅ no lo hizo en este estudio?</div>
+</div>
+
+<!-- SECCIÓN 4 -->
+<div class="sectionbar">🟠 RESULTADOS II: Exposición Interior vs Exterior y Tabaquismo Doméstico</div>
+
+<div class="block s2">
+  <span class="bh orange">Interior vs Exterior: Nicotina</span>
+  <div class="def orange">El tabaquismo pasivo en interiores eleva significativamente la concentración de nicotina en el aire respecto a no estar expuesto (Grupo I &gt; Grupo N, p&lt;0.005), pero las exposiciones en exterior (O) y combinada interior+exterior (IO) no difieren significativamente del grupo sin exposición (N). Esto revela que el confinamiento del espacio es el factor determinante de la acumulación de HTA.</div>
+  <div class="flow">
+    <div class="fbox" style="border:2px solid #f97316;background:#fff7ed">N: Sin exposición (basal)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">O: Solo exterior (ns)</div>
+    <div class="farrow">→</div>
+    <div class="fbox">IO: Interior+Exterior (ns)</div>
+    <div class="farrow">→</div>
+    <div class="fbox" style="border:2px solid #ef4444;background:#fee2e2">I: Solo Interior (**p&lt;0.005)</div>
+  </div>
+  <div class="item"><span class="dot orange"></span><span><strong>¿Por qué el interior es crítico?</strong> En espacios cerrados, la ventilación es limitada. La nicotina gaseosa se acumula y además se adsorbe en superficies (paredes, muebles, textiles), creando una fuente residual persistente incluso horas después de que el fumador se haya ido.</span></div>
+  <div class="item"><span class="dot orange"></span><span><strong>¿Por qué el exterior no importa tanto?</strong> La dilución atmosférica es enorme. A poca distancia de la fuente, la concentración cae varias órdenes de magnitud. Por eso la exposición promedio de 24h en exterior no supera estadísticamente el basal.</span></div>
+  <div class="item"><span class="dot orange"></span><span>Las PM₂.₅ NO mostraron diferencias entre los grupos I, O, IO y N — confirmando que son insensibles como marcadores de tabaquismo pasivo en este contexto.</span></div>
+  <div class="exam">🎯 EXAMEN: A partir de los resultados sobre exposición interior y exterior, ¿qué recomendación de política pública se puede derivar para la protección de no fumadores? Justifique con los datos cuantitativos del estudio.</div>
+</div>
+
+<div class="block">
+  <span class="bh red">Tabaquismo pasivo doméstico</span>
+  <div class="def red">23 participantes vivían con una pareja fumadora activa en el domicilio compartido. Este subgrupo permite aislar la exposición crónica en entorno doméstico (la más difícil de evitar) del resto de exposiciones. La nicotina doméstica fue el doble que la no doméstica, por razones tanto conductuales como físico-químicas.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #ef4444">
+      <strong>Nicotina no doméstica</strong>
+      Mediana: 0.068 µg m⁻³<br>
+      Línea de base para comparar exposición en trabajo, restaurantes, transporte, etc.
+    </div>
+    <div class="mini" style="border-top:3px solid #991b1b">
+      <strong>Nicotina doméstica</strong>
+      Mediana: 0.136 µg m⁻³ (×2)<br>
+      Significativamente mayor (p&lt;0.005). Exposición prolongada + nicotina residual en superficies.
+    </div>
+  </div>
+  <div class="item"><span class="dot red"></span><span><strong>Mecanismo del doble:</strong> El hogar implica horas acumuladas de coexistencia con el fumador. Además, la nicotina se deposita en paredes, muebles y textiles y se revaporiza lentamente — este fenómeno se llama <em>thirdhand smoke</em> (humo de tercera mano) y eleva la exposición basal incluso cuando el fumador no está fumando activamente.</span></div>
+  <div class="item"><span class="dot red"></span><span><strong>PM₂.₅ doméstica (8.3) vs no doméstica (7.1):</strong> Solo 1.2 veces diferente y sin significancia estadística. Los fumadores domésticos se comportaban consideradamente (ventiladores, balcones), lo que reduciría PM₂.₅ pero no la nicotina residual en superficies.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que si un fumador sale al balcón o usa ventilador, el no fumador que convive con él no está expuesto. La nicotina residual en superficies interiores puede generar exposición continua incluso en ausencia del fumador.</div>
+  <div class="exam">🎯 EXAMEN: Explique el mecanismo por el cual la exposición a nicotina en el hogar doméstico fue el doble que en entornos no domésticos, siendo que las PM₂.₅ no mostraron diferencia significativa entre ambos contextos.</div>
+</div>
+
+<!-- SECCIÓN 5 -->
+<div class="sectionbar">🟣 RESULTADOS III: Cuantificación de la Ingesta y Equivalencia con Tabaquismo Activo</div>
+
+<div class="block s3">
+  <span class="bh purple">Fórmula de ingesta diaria de nicotina (DIn)</span>
+  <div class="def purple">A partir de la concentración atmosférica de nicotina medida, se puede calcular cuánta nicotina inhala realmente un no fumador por día. Esto permite comparar cuantitativamente el riesgo del tabaquismo pasivo con el del tabaquismo activo y expresarlo en términos de "cigarrillos equivalentes".</div>
+  <div class="rx">
+    DI_n (µg d⁻¹) = C_n × V<br><br>
+    Donde:<br>
+    DI_n = ingesta diaria de nicotina (µg por día)<br>
+    C_n = concentración media de nicotina (µg m⁻³)<br>
+    V = tasa de inhalación = 17.3 m³/día (USEPA 2011, adulto estándar)<br><br>
+    Emisión de nicotina por cigarrillo = 1,660 µg/cig (Singer et al. 2003)<br><br>
+    DI_n (promedio, grupo interior) = 3.9 µg/día<br>
+    Equivalente tabaquismo activo = 3.9 µg/día ÷ 1,660 µg/cig = <strong>2.4 × 10⁻³ cigarrillos/día</strong>
+  </div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot purple"></span><span><strong>Interpretación:</strong> El tabaquismo pasivo equivale a fumar ~0.0024 cigarrillos/día, es decir, un cigarrillo cada 416 días. Esto refleja un efecto <em>modesto</em> bajo las regulaciones actuales japonesas.</span></div>
+      <div class="item"><span class="dot purple"></span><span><strong>Por qué usar V=17.3 m³/día:</strong> Es el factor de exposición estándar de la EPA para adultos. Asume ventilación pulmonar promedio de ~12 m³ en descanso/actividad ligera durante 24h. Variará con actividad física.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="dot purple"></span><span><strong>Limitación del cálculo:</strong> Asume que toda la nicotina inhalada proviene del HTA. No distingue nicotina gaseosa (que puede perderse antes de llegar al alvéolo) de la particulada (más biodisponible).</span></div>
+      <div class="item"><span class="dot purple"></span><span><strong>Contexto global:</strong> En países sin regulaciones estrictas, este equivalente puede ser órdenes de magnitud mayor — la comparación permite diseñar metas regulatorias cuantitativas.</span></div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Usando la fórmula DIn = Cn × V, calcule la ingesta diaria de nicotina de una persona no fumadora con concentración media de 0.228 µg m⁻³ y una tasa de inhalación de 17.3 m³/día. Exprese el resultado en equivalentes de cigarrillos por día (emisión = 1,660 µg/cig) y discuta qué significa este valor para la evaluación de riesgos.</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="sectionbar">⚫ TABLA INTEGRADORA: Síntesis de Todos los Hallazgos</div>
+
+<div class="block s3">
+  <span class="bh gray">Resumen Comparativo: Nicotina y PM₂.₅ por Condición de Exposición</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Parámetro / Condición</th>
+        <th>Nicotina (µg m⁻³)</th>
+        <th>PM₂.₅ (µg m⁻³)</th>
+        <th>Diferencia significativa</th>
+        <th>Interpretación clave</th>
+        <th>Implicación práctica</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Mediana general (n=258)</strong></td><td>0.065</td><td>7.5</td><td>—</td><td>Exposición baja bajo regulación actual</td><td>Regulaciones japonesas son efectivas</td></tr>
+      <tr><td><strong>Zona para no fumadores (ref.)</strong></td><td>0.05</td><td>≈12 (estándar)</td><td>—</td><td>Valor basal comparativo</td><td>El 64% de los sujetos supera este basal</td></tr>
+      <tr><td><strong>Grupo I (solo interior)</strong></td><td>&gt;&gt; Grupo N</td><td>= Grupo N</td><td>Nicotina: SÍ (p&lt;0.005) / PM₂.₅: NO</td><td>Interior acumula nicotina, no discrimina PM₂.₅</td><td>Regular espacios interiores es crítico</td></tr>
+      <tr><td><strong>Grupo O (solo exterior)</strong></td><td>= Grupo N</td><td>= Grupo N</td><td>NO</td><td>Dilución atmosférica eficaz en exterior</td><td>Fumar al exterior protege al no fumador</td></tr>
+      <tr><td><strong>Grupo IO (interior+exterior)</strong></td><td>= Grupo N</td><td>= Grupo N</td><td>NO</td><td>Efecto interior diluido al promediar 24h</td><td>Clasificar solo por autopercepción tiene limitaciones</td></tr>
+      <tr><td><strong>Doméstico (pareja fumadora)</strong></td><td>0.136 (×2)</td><td>8.3 (×1.2)</td><td>Nicotina: SÍ / PM₂.₅: NO</td><td>Humo residual en superficies domésticas</td><td>Mayor riesgo en hogar que en espacio público</td></tr>
+      <tr><td><strong>No doméstico</strong></td><td>0.068</td><td>7.1</td><td>Referencia</td><td>Exposición en trabajo/transporte/restaurantes</td><td>Regulación pública exitosa en Japón</td></tr>
+      <tr><td><strong>Equivalente tabaquismo activo</strong></td><td colspan="2">DIn promedio = 3.9 µg/día</td><td>—</td><td>= 2.4 × 10⁻³ cigarrillos/día</td><td>Riesgo muy bajo pero no cero</td></tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: En este estudio, la nicotina y las PM₂.₅ responden de forma opuesta al tabaquismo pasivo: la nicotina sí diferencia entre grupos de exposición (especialmente interior) mientras que PM₂.₅ permanece insensible. Esto se debe a que PM₂.₅ tiene demasiadas fuentes concurrentes que enmascaran la señal del HTA. La lección metodológica: solo un marcador específico (nicotina) permite medir con precisión la exposición al HTA en concentraciones bajas, típicas de entornos con regulación vigente.</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-header">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta. Retroalimentación inmediata explicativa.</p>
+  </div>
+  <div class="quiz-progress">
+    <p id="prog-text">Preguntas respondidas: 0 / 10 &nbsp;|&nbsp; Aciertos: 0</p>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="prog-bar" style="width:0%;background:#16a34a;transition:width .3s"></div></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Cuál es la razón principal por la que la nicotina es considerada el marcador ideal del Humo de Tabaco Ambiental (HTA) para evaluar tabaquismo pasivo, a diferencia de los COV o el PM₂.₅?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Porque la nicotina se mide más fácilmente con sensores electrónicos portátiles</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) Porque los COV son inodoros y no pueden detectarse en el ambiente</button>
+      <button class="qbtn" data-q="1" data-correct="true">C) Porque es específica del tabaco y 3–18 veces más abundante en el HTA que otros alcaloides tabáquicos, sin fuentes significativas alternas</button>
+      <button class="qbtn" data-q="1" data-correct="false">D) Porque las regulaciones internacionales la definen como el único marcador válido de calidad de aire interior</button>
+    </div>
+    <div class="qfeedback" id="fb1" style="display:none"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">En este estudio, ¿cuál fue la concentración mediana de nicotina registrada en los 258 sujetos no fumadores y qué implica respecto al valor de referencia de zonas para no fumadores?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="false">A) 0.05 µg m⁻³, idéntica al valor de referencia, lo que sugiere ausencia total de exposición</button>
+      <button class="qbtn" data-q="2" data-correct="true">B) 0.065 µg m⁻³, ligeramente superior al valor de referencia (0.05 µg m⁻³), lo que indica exposición modesta pero real al HTA</button>
+      <button class="qbtn" data-q="2" data-correct="false">C) 0.228 µg m⁻³, coincidente con la media aritmética, lo que confirma distribución normal</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) 6.16 µg m⁻³, el valor máximo registrado, representativo del conjunto de sujetos</button>
+    </div>
+    <div class="qfeedback" id="fb2" style="display:none"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">El muestreador pasivo de nicotina utilizado en este estudio empleó hidrogenosulfato de sodio como adsorbente. ¿Cuál de las siguientes afirmaciones sobre su principio de funcionamiento es CORRECTA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) Requiere una bomba de vacío para forzar el paso de aire a través del filtro a caudal constante</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) Solo captura la fracción gaseosa de la nicotina, no la particulada</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) Captura nicotina tanto gaseosa como particulada por difusión pasiva, con cubierta perforada que minimiza el efecto del viento en la tasa de muestreo</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Mide la concentración en tiempo real mediante un sensor electroquímico integrado sin necesidad de análisis posterior</button>
+    </div>
+    <div class="qfeedback" id="fb3" style="display:none"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">Al comparar los cuatro grupos de exposición (N, I, O, IO) en concentraciones de nicotina, ¿qué patrón encontraron los autores y cuál es su explicación mecanicista?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Todos los grupos mostraron concentraciones significativamente distintas entre sí, lo que refleja efectos acumulativos de exposición mixta</button>
+      <button class="qbtn" data-q="4" data-correct="false">B) Solo el Grupo O (exterior) mostró concentraciones significativamente mayores, porque los fumadores se desplazan al exterior</button>
+      <button class="qbtn" data-q="4" data-correct="true">C) Solo el Grupo I (interior) mostró concentraciones significativamente mayores que N, porque la ventilación limitada permite acumulación de nicotina en espacios cerrados</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) El Grupo IO mostró las concentraciones más altas porque acumula exposición en ambos entornos simultáneamente</button>
+    </div>
+    <div class="qfeedback" id="fb4" style="display:none"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Aplicando la fórmula DIn = Cn × V, con una concentración media de nicotina de 0.228 µg m⁻³ y V = 17.3 m³/día, ¿cuál es la ingesta diaria aproximada de nicotina y su equivalente en cigarrillos (emisión = 1,660 µg/cig)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) 0.228 µg/día, equivalente a 1.37 × 10⁻⁴ cigarrillos/día</button>
+      <button class="qbtn" data-q="5" data-correct="true">B) 3.94 µg/día, equivalente a aproximadamente 2.4 × 10⁻³ cigarrillos/día</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) 39.4 µg/día, equivalente a 0.024 cigarrillos/día</button>
+      <button class="qbtn" data-q="5" data-correct="false">D) 394 µg/día, equivalente a 0.24 cigarrillos/día</button>
+    </div>
+    <div class="qfeedback" id="fb5" style="display:none"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Por qué la concentración de PM₂.₅ en el tabaquismo pasivo doméstico (mediana 8.3 µg m⁻³) fue solo 1.2 veces mayor que en el no doméstico (7.1 µg m⁻³) y sin diferencia significativa, a pesar de que la nicotina doméstica fue el doble?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="false">A) Porque el sensor de PM₂.₅ es menos sensible que el muestreador de nicotina y no puede detectar diferencias pequeñas</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) Porque las PM₂.₅ del HTA se filtran en los tejidos nasales antes de llegar al ambiente interior</button>
+      <button class="qbtn" data-q="6" data-correct="true">C) Porque los fumadores domésticos adoptaron conductas más consideradas (ventiladores, balcones) que reducen PM₂.₅ libre, mientras que la nicotina residual persiste en superficies interiores generando exposición continua</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Porque los estándares de PM₂.₅ interior son más laxos que los de nicotina, lo que hace estadísticamente difícil detectar diferencias</button>
+    </div>
+    <div class="qfeedback" id="fb6" style="display:none"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la distribución log-normal de los datos de exposición a nicotina es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Es consistente con la distribución esperada para contaminantes ambientales con alta variabilidad individual</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) Implica que la mediana es un estimador más robusto que la media para describir la exposición típica</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) Indica que la mayoría de los sujetos tiene concentraciones cercanas a la media aritmética (0.228 µg m⁻³)</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) Significa que el logaritmo de las concentraciones sigue una distribución aproximadamente normal</button>
+    </div>
+    <div class="qfeedback" id="fb7" style="display:none"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">El patrón interno nicotina-d₃ se utilizó en el análisis por LC-MS/MS. ¿Qué tipo de errores corrige principalmente su uso en la cuantificación de nicotina?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) Errores de muestreo causados por la variación en la tasa de captación pasiva del muestreador</button>
+      <button class="qbtn" data-q="8" data-correct="true">B) Pérdidas y variaciones en la recuperación durante la extracción y preparación de la muestra, así como variaciones en la eficiencia de ionización en el detector de masas</button>
+      <button class="qbtn" data-q="8" data-correct="false">C) Interferencias de PM₂.₅ que coelluyen con la nicotina en la columna cromatográfica</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) Variaciones en la temperatura ambiente durante el periodo de muestreo de 24 horas</button>
+    </div>
+    <div class="qfeedback" id="fb8" style="display:none"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">A partir de los resultados sobre tabaquismo pasivo doméstico, ¿qué mecanismo físico-químico explica que las concentraciones de nicotina en hogares con fumadores sean persistentemente elevadas incluso cuando el fumador no está fumando activamente?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) La nicotina se convierte en CO₂ y vapor de agua al reaccionar con el oxígeno del aire interior</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) Los no fumadores exhalan la nicotina inhalada, contribuyendo a mantener la concentración ambiental</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) Los ventiladores y sistemas de climatización redistribuyen la nicotina de forma uniforme en todos los ambientes del hogar</button>
+      <button class="qbtn" data-q="9" data-correct="true">D) La nicotina se adsorbe en superficies de materiales interiores (paredes, muebles, textiles) y se revaporiza gradualmente, creando una fuente residual persistente denominada "humo de tercera mano"</button>
+    </div>
+    <div class="qfeedback" id="fb9" style="display:none"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">Los autores concluyen que los bajos niveles de HTA observados en el estudio se deben en parte a la eficacia de la Ley de Promoción de la Salud de Japón (2020). ¿Cuál de las siguientes afirmaciones representa una limitación válida de esta conclusión?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="false">A) La ley solo aplica a espacios exteriores, por lo que no puede haber influido en los resultados interiores del estudio</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) Los instrumentos usados (muestreador pasivo y sensor PM₂.₅) no son lo suficientemente precisos para detectar efectos de regulación</button>
+      <button class="qbtn" data-q="10" data-correct="true">C) El estudio no incluyó grupo de control de un período anterior a la ley ni de regiones sin regulación similar, por lo que no puede atribuirse causalmente la reducción a la ley</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) Japón es el único país con esta regulación, por lo que los resultados no son generalizables internacionalmente</button>
+    </div>
+    <div class="qfeedback" id="fb10" style="display:none"></div>
+  </div>
+
+  <div id="result-panel">
+    <h3 id="result-score"></h3>
+    <p id="result-msg"></p>
+    <button id="restart-btn" onclick="restartQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ft">REFERENCIA PRINCIPAL:</span>
+  <span class="fc">Hoshino S, Noro K, Moriya M, Komatsu A, Wang Q, Miyake Y, Amagai T (2024). Evaluación cuantitativa de la exposición a la nicotina y a las partículas en suspensión de fumadores pasivos mediante muestreador pasivo y sensor PM₂.₅. <em>Air Quality, Atmosphere &amp; Health</em> 17:2767–2773. DOI: 10.1007/s11869-024-01591-6 | Noro et al. (2023) Microchem J 190:108735 | Singer et al. (2003) Atmos Environ 37:5551 | USEPA (2011, 2023) | IARC (2004) | OMS (2007)</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {
+    ok: "✅ ¡Correcto! La nicotina es específica del tabaco y se encuentra en concentraciones mucho mayores en el HTA que sus compuestos hermanos (miosmina, 3-etilenilpiridina). Otras fuentes como cocina, tráfico o quema de biomasa no la producen, lo que la hace ideal para aislar la señal del tabaquismo pasivo.",
+    ko: "❌ Incorrecto. La respuesta correcta es C. La clave está en la especificidad: la nicotina proviene casi exclusivamente del tabaco, mientras que COV y PM₂.₅ tienen decenas de fuentes alternativas que contaminan la señal. Además, es 3–18 veces más abundante que otros alcaloides tabáquicos en el HTA."
+  },
+  2: {
+    ok: "✅ ¡Correcto! La mediana de 0.065 µg m⁻³ superó en un 30% al valor de zonas para no fumadores (0.05 µg m⁻³). Esto indica exposición modesta pero estadísticamente real. El uso de la mediana (no la media) es apropiado en distribuciones log-normales para representar el valor central sin distorsión por extremos.",
+    ko: "❌ Incorrecto. La respuesta correcta es B. La mediana fue 0.065 µg m⁻³, ligeramente mayor al basal de 0.05 µg m⁻³ para zonas de no fumadores. La media (0.228) está sesgada por valores altos extremos; la mediana es el estadístico representativo en distribuciones log-normales."
+  },
+  3: {
+    ok: "✅ ¡Correcto! El muestreador pasivo opera por difusión: la nicotina del aire difunde espontáneamente hacia el adsorbente. La cubierta perforada estabiliza la capa límite de difusión, minimizando que el viento acelere o desacelere la captación artificialmente. Captura tanto la fracción gaseosa como la asociada a partículas.",
+    ko: "❌ Incorrecto. La respuesta correcta es C. El muestreador es PASIVO, es decir, no requiere bomba. La difusión natural mueve la nicotina desde el aire hacia el filtro adsorbente. Captura ambas fracciones (gas + particulada) con una tasa de muestreo calibrada de 1.17×10⁻⁶ m³/min."
+  },
+  4: {
+    ok: "✅ ¡Correcto! Solo el Grupo I (interior) fue significativamente mayor que el N (sin exposición). En interiores, la ventilación limitada permite que la nicotina se acumule y además se adsorba en superficies, elevando la concentración promedio de 24h. En exterior, la dilución atmosférica es tan eficaz que la exposición promedio no supera estadísticamente el basal.",
+    ko: "❌ Incorrecto. La respuesta correcta es C. La clave mecanicista es el confinamiento: en espacios cerrados, la nicotina se acumula porque no puede disiparse. En exterior, la dilución es enorme. Los grupos O e IO no difirieron de N porque el tiempo en exterior con alta dilución compensó cualquier exposición adicional al promediar las 24h."
+  },
+  5: {
+    ok: "✅ ¡Correcto! DIn = 0.228 µg m⁻³ × 17.3 m³/día = 3.94 µg/día. Equivalentes = 3.94 ÷ 1,660 = 2.37 × 10⁻³ cigarrillos/día ≈ 2.4 × 10⁻³. Esto significa que el tabaquismo pasivo en estas condiciones equivale a fumar un cigarrillo cada ~416 días — un efecto muy modesto bajo la regulación japonesa vigente.",
+    ko: "❌ Incorrecto. La respuesta correcta es B. El cálculo es: C_n × V = 0.228 × 17.3 = 3.94 µg/día. Luego 3.94 ÷ 1,660 µg/cig = 2.37 × 10⁻³ cigarrillos/día. Cuidado con los órdenes de magnitud: multiplicar por V (17.3, no 0.173 ni 173)."
+  },
+  6: {
+    ok: "✅ ¡Correcto! Los fumadores domésticos adoptaron conductas consideradas (fumar en balcones, cerca de ventiladores), lo que dispersa eficientemente las PM₂.₅ recién emitidas. Sin embargo, la nicotina gaseosa se adsorbe en paredes, muebles y textiles y se revaporiza lentamente (humo de tercera mano), elevando la exposición crónica a nicotina sin que haya PM₂.₅ visible en el aire.",
+    ko: "❌ Incorrecto. La respuesta correcta es C. El mecanismo es la asimetría entre nicotina y PM₂.₅ en términos de persistencia: la nicotina queda atrapada en superficies y se libera gradualmente, mientras que las PM₂.₅ emitidas al fumar en el balcón se dispersan al exterior. No es un problema de sensibilidad instrumental."
+  },
+  7: {
+    ok: "✅ ¡Correcto! La afirmación C es FALSA. En una distribución log-normal, la mayoría de los valores se concentra en la cola izquierda (valores bajos), mientras que la media aritmética es desplazada hacia arriba por unos pocos valores muy altos. Por eso la mediana (0.065) es mucho menor que la media (0.228): la mayoría de sujetos tiene concentraciones cercanas a la mediana, no a la media.",
+    ko: "❌ Incorrecto. La respuesta correcta es C. En distribución log-normal, la media aritmética NO es representativa de la mayoría: está inflada por valores extremos. La mayoría de los sujetos tiene concentraciones cercanas a la mediana (0.065 µg m⁻³), no a la media (0.228). Esto es precisamente por qué se reportan ambas."
+  },
+  8: {
+    ok: "✅ ¡Correcto! El patrón interno isotópico (nicotina-d₃) es idéntico químicamente a la nicotina natural pero distinguible por masa. Corrije variaciones en recuperación durante extracción, pérdidas por adsorción a materiales, y fluctuaciones en la ionización electrospray (ESI) del espectrómetro. Al calcular la relación señal-muestra / señal-patrón, estos errores se cancelan.",
+    ko: "❌ Incorrecto. La respuesta correcta es B. El patrón interno isotópico se añade antes de la extracción y 'viaja' junto a la nicotina en todos los pasos del procesamiento. Cualquier pérdida de nicotina durante extracción o variación en ionización afecta igualmente al patrón, permitiendo una corrección matemática del rendimiento real."
+  },
+  9: {
+    ok: "✅ ¡Correcto! Este fenómeno se llama 'humo de tercera mano' (thirdhand smoke). La nicotina se deposita sobre superficies porosas (paredes, tapicería, ropa, pelo) durante los episodios de fumado y luego se desorbe lentamente al aire durante horas o días, manteniendo la exposición incluso cuando no hay nadie fumando activamente.",
+    ko: "❌ Incorrecto. La respuesta correcta es D. El mecanismo es la adsorción de nicotina en superficies interiores y su lenta revaporización posterior — denominado 'humo de tercera mano'. Es la explicación de por qué habitaciones donde se fumó anteriormente pueden tener concentraciones detectables de nicotina días después."
+  },
+  10: {
+    ok: "✅ ¡Correcto! Esta es una limitación de diseño transversal clásica: sin un grupo de comparación antes-después de la ley o con-sin regulación, no se puede establecer causalidad. Los bajos niveles observados podrían deberse a otros factores (menor prevalencia de tabaquismo, cambios culturales, temporada del estudio). La ley podría ser causa o correlato.",
+    ko: "❌ Incorrecto. La respuesta correcta es C. La limitación metodológica es la ausencia de comparación temporal (antes vs después de la ley) o espacial (regiones con vs sin regulación). Sin este contrafactual, la atribución causal a la ley es una inferencia plausible pero no demostrada estadísticamente."
+  }
+};
+
+let answered = 0, correct = 0;
+const total = 10;
+
+document.getElementById('quiz-section').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('qbtn')) return;
+  const btn = e.target;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  if (btn.disabled) return;
+
+  const allBtns = document.querySelectorAll(`.qbtn[data-q="${q}"]`);
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') {
+      b.classList.add('correct');
+      b.textContent = '✅ ' + b.textContent;
+    }
+  });
+
+  if (!isCorrect) {
+    btn.classList.remove('correct');
+    btn.classList.add('incorrect');
+    const t = btn.textContent.replace('✅ ','');
+    btn.textContent = '❌ ' + t;
+  }
+
+  const fb = document.getElementById('fb' + q);
+  fb.style.display = 'block';
+  fb.className = 'qfeedback ' + (isCorrect ? 'ok' : 'ko');
+  fb.textContent = isCorrect ? feedbacks[q].ok : feedbacks[q].ko;
+
+  answered++;
+  if (isCorrect) correct++;
+  updateProgress();
+
+  if (answered === total) showResult();
+});
+
+function updateProgress() {
+  document.getElementById('prog-text').textContent = `Preguntas respondidas: ${answered} / ${total}  |  Aciertos: ${correct}`;
+  document.getElementById('prog-bar').style.width = Math.round((correct / total) * 100) + '%';
+}
+
+function showResult() {
+  const panel = document.getElementById('result-panel');
+  panel.style.display = 'block';
+  document.getElementById('result-score').textContent = `${correct} / ${total} correctas`;
+  const msg = document.getElementById('result-msg');
+  if (correct <= 4) {
+    panel.style.background = '#fee2e2';
+    msg.textContent = 'Necesitas repasar el material. Revisa los bloques sobre marcadores de HTA, métodos de medición y análisis estadístico.';
+  } else if (correct <= 7) {
+    panel.style.background = '#fef9c3';
+    msg.textContent = '¡Buen avance! Repasa los temas donde fallaste, especialmente la fórmula de ingesta diaria y el mecanismo del humo de tercera mano.';
+  } else {
+    panel.style.background = '#dcfce7';
+    msg.textContent = '¡Excelente dominio del tema! Comprendes los fundamentos metodológicos y los hallazgos principales del estudio.';
+  }
+}
+
+function restartQuiz() {
+  answered = 0; correct = 0;
+  updateProgress();
+  document.getElementById('result-panel').style.display = 'none';
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct','incorrect');
+    b.textContent = b.textContent.replace(/^[✅❌] /,'');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f => f.style.display = 'none');
+}
+</script>
