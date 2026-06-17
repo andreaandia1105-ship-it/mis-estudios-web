@@ -1,0 +1,627 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary)}
+.title-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.title-bar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.title-bar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{background:rgba(255,255,255,0.12);color:#e2e8f0;font-size:10px;padding:2px 8px;border-radius:20px}
+.sec{grid-column:1/-1;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;padding:7px 12px;border-radius:8px;margin-top:2px}
+.sec-blue{background:#dbeafe;color:#1e3a8a}
+.sec-green{background:#dcfce7;color:#14532d}
+.sec-amber{background:#fef9c3;color:#713f12}
+.sec-teal{background:#ccfbf1;color:#134e4a}
+.sec-purple{background:#ede9fe;color:#4c1d95}
+.sec-red{background:#fee2e2;color:#991b1b}
+@media(prefers-color-scheme:dark){
+  .sec-blue{background:#1e3a5f;color:#93c5fd}
+  .sec-green{background:#14532d;color:#86efac}
+  .sec-amber{background:#422006;color:#fef08a}
+  .sec-teal{background:#042f2e;color:#5eead4}
+  .sec-purple{background:#2e1065;color:#c4b5fd}
+  .sec-red{background:#450a0a;color:#fca5a5}
+}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;font-size:12px;line-height:1.5;color:var(--color-text-primary)}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-blue{background:#dbeafe;color:#1e3a8a}
+.bh-green{background:#dcfce7;color:#14532d}
+.bh-amber{background:#fef9c3;color:#713f12}
+.bh-teal{background:#ccfbf1;color:#134e4a}
+.bh-purple{background:#ede9fe;color:#4c1d95}
+.bh-red{background:#fee2e2;color:#991b1b}
+.bh-gray{background:#f1f5f9;color:#334155}
+.bh-pink{background:#fce7f3;color:#831843}
+.bh-orange{background:#ffedd5;color:#7c2d12}
+@media(prefers-color-scheme:dark){
+  .bh-blue{background:#1e3a5f;color:#93c5fd}
+  .bh-green{background:#14532d;color:#86efac}
+  .bh-amber{background:#422006;color:#fef08a}
+  .bh-teal{background:#042f2e;color:#5eead4}
+  .bh-purple{background:#2e1065;color:#c4b5fd}
+  .bh-red{background:#450a0a;color:#fca5a5}
+  .bh-gray{background:#1e293b;color:#94a3b8}
+  .bh-pink{background:#4a044e;color:#f0abfc}
+  .bh-orange{background:#431407;color:#fed7aa}
+}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def-blue{border-color:#3b82f6}
+.def-green{border-color:#22c55e}
+.def-amber{border-color:#f59e0b}
+.def-teal{border-color:#14b8a6}
+.def-purple{border-color:#8b5cf6}
+.def-red{border-color:#ef4444}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#22c55e}
+.dot-amber{background:#f59e0b}
+.dot-teal{background:#14b8a6}
+.dot-purple{background:#8b5cf6}
+.dot-red{background:#ef4444}
+.dot-gray{background:#94a3b8}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:7px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:7px}
+@media(prefers-color-scheme:dark){.warn{background:#431407;color:#fed7aa}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px}
+@media(prefers-color-scheme:dark){.exam{background:#422006;color:#fef08a;border-color:#f59e0b}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:7px 0}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:7px 0}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 8px;border-radius:6px;font-size:11px;font-weight:600}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);font-weight:600;text-align:left}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:3px 0}
+.stat-bar-fill{height:100%;border-radius:20px}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.footer-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.num-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
+.nb-b{background:#dbeafe;color:#1e3a8a}
+.nb-g{background:#dcfce7;color:#14532d}
+.nb-r{background:#fee2e2;color:#991b1b}
+.nb-a{background:#fef9c3;color:#713f12}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.qcard{margin-bottom:18px;padding-bottom:14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--color-text-primary)}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all 0.2s;color:var(--color-text-primary);font-family:'Source Sans 3',sans-serif}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.show-correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:0.7;cursor:not-allowed}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.err{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.prog-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:8px;margin:8px 0}
+.prog-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width 0.4s}
+.result-panel{display:none;border-radius:12px;padding:16px;text-align:center;margin-top:14px}
+.result-panel h3{font-family:'Oswald',sans-serif;font-size:16px;margin-bottom:6px}
+.btn-reset{background:#0f1e3a;color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;cursor:pointer;margin-top:10px;font-family:'Source Sans 3',sans-serif}
+</style>
+
+<div class="cv">
+
+<div class="title-bar">
+  <h1>Bioaerosoles Interiores en Hospitales: HVAC, LAF y Filtros HEPA</h1>
+  <p>Revisión Sistemática y Metaanálisis · Dai et al. (2021) · PLoS ONE 16(12) · Universidad Médica China de Zhejiang</p>
+  <div class="tags">
+    <span class="tag">Bioaerosoles</span><span class="tag">HVAC</span><span class="tag">Filtros HEPA</span>
+    <span class="tag">Flujo Laminar LAF</span><span class="tag">UFC/m³</span><span class="tag">Metaanálisis</span>
+    <span class="tag">Calidad del Aire Interior (IAQ)</span><span class="tag">Infecciones Nosocomiales</span>
+  </div>
+</div>
+
+<div class="sec sec-blue">🔵 BLOQUE 1 — FUNDAMENTOS CONCEPTUALES</div>
+
+<div class="block">
+  <span class="bh bh-blue">Bioaerosoles: Definición</span>
+  <div class="def def-blue">Partículas transportadas por el aire, líquidas o volátiles, que contienen organismos vivos o se han liberado de ellos. Incluyen bacterias, hongos, virus y pólenes. Su importancia reside en que a mayor concentración, mayor infectividad, sensibilización y toxicidad para los pacientes hospitalizados.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>¿Por qué importa en hospitales?</b> Pacientes internados tienen defensas comprometidas; incluso concentraciones bajas de patógenos oportunistas (ej. Aspergillus) pueden causar infecciones graves o mortales.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Unidad de medida:</b> UFC/m³ (Unidades Formadoras de Colonias por metro cúbico). Se obtiene capturando aire en medios de cultivo e incubando para contar colonias visibles.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Método activo vs. pasivo:</b> Este estudio solo incluyó muestreo <i>activo</i> (impactadores, ciclones) porque cuantifica el volumen de aire y permite calcular UFC/m³ con precisión; el método pasivo (placas de sedimentación) no lo permite.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la unidad UFC/m³ es más informativa que el simple recuento de colonias en una placa de sedimentación para evaluar la calidad microbiológica del aire hospitalario.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-blue">Sistema HVAC: Qué es y por qué se usa</span>
+  <div class="def def-blue">HVAC = Heating, Ventilation and Air Conditioning (calefacción, ventilación y aire acondicionado). En hospitales cumple tres funciones críticas: mantener confort térmico, aliviar síntomas relacionados con temperatura y <b>eliminar bioaerosoles del aire</b>.</div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Preocupación COVID-19:</b> SARS-CoV-2 es viable en aerosoles; un HVAC mal diseñado puede acelerar o desviar el flujo de aire y aumentar el riesgo de transmisión. Por eso estudiar HVAC y bioaerosoles tiene urgencia pandémica.</span></div>
+  <div class="item"><span class="dot dot-blue"></span><span><b>Clasificación usada en el estudio:</b> (1) Sin HVAC / ventilación natural — solo puertas y ventanas; (2) HVAC convencional — sin LAF, filtración ≤95% ó ACH &lt;15; (3) HVAC mejorado — con LAF, filtración &gt;95% ó ACH &gt;15.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: No es lo mismo "sin HVAC" que "HVAC apagado". Habitaciones sin sistema HVAC tienen arquitectura diferente (ventilación natural estructural); las que tienen el AA apagado pueden tener recirculación parcial.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-teal">ACH: Cambio de Aire por Hora</span>
+  <div class="def def-teal">ACH (Air Change per Hour) mide cuántas veces el volumen completo de aire de una sala es renovado en una hora. A mayor ACH, mayor dilución de contaminantes. Es uno de los parámetros que define si un HVAC es "convencional" o "mejorado".</div>
+  <div class="rx">ACH = (Caudal de ventilación en m³/h) ÷ (Volumen del local en m³)</div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Umbral clave:</b> ACH ≥ 15 = HVAC mejorado. ACH &lt; 15 = convencional. Las UCI y quirófanos modernos típicamente operan entre 15–25 ACH; salas convencionales operan a 6 ACH.</span></div>
+  <div class="item"><span class="dot dot-teal"></span><span><b>Efecto en hongos vs. bacterias:</b> ACH alta redujo significativamente hongos (p &lt; 0.05) pero NO mostró diferencia significativa en bacterias (p = 0.175). Esto sugiere que el mecanismo de remoción de bacterias depende más del filtrado que de la dilución por volumen.</span></div>
+  <div class="exam">🎯 EXAMEN: Un quirófano tiene un flujo de 3,000 m³/h y un volumen de 200 m³. ¿Cuál es su ACH y cómo clasificaría su sistema HVAC según los criterios del estudio de Dai et al. (2021)?</div>
+</div>
+
+<div class="sec sec-green">🟢 BLOQUE 2 — METODOLOGÍA DE LA REVISIÓN SISTEMÁTICA</div>
+
+<div class="block s2">
+  <span class="bh bh-green">Diseño metodológico PRISMA</span>
+  <div class="def def-green">Revisión sistemática y metaanálisis según guías PRISMA (Preferred Reporting Items for Systematic Reviews and Meta-Analyses). Se buscaron 5 bases de datos (Embase, PubMed, Cochrane, MEDLINE, Web of Science) desde 2000 hasta 2020, obteniendo 27,610 registros iniciales.</div>
+  <div class="flow">
+    <span class="fbox">27,610 identificados</span><span class="farrow">→</span>
+    <span class="fbox">−3,492 duplicados</span><span class="farrow">→</span>
+    <span class="fbox">24,164 evaluados</span><span class="farrow">→</span>
+    <span class="fbox">101 texto completo</span><span class="farrow">→</span>
+    <span class="fbox">30 descripción estadística</span><span class="farrow">→</span>
+    <span class="fbox">11 metaanálisis</span>
+  </div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <b>Criterios de inclusión</b><br>
+      Publicados 2000–2020 · en inglés · muestreo activo en hospital · HVAC descrito · resultados en UFC/m³
+    </div>
+    <div class="mini" style="border-top:3px solid #ef4444">
+      <b>Criterios de exclusión</b><br>
+      Microorganismo único (ej. solo Legionella) · revisiones · simulaciones CFD · muestreo de superficies · sin media/DE calculable
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Calidad metodológica:</b> Lista de 11 ítems (AHRQ para estudios transversales/prevalencia). Puntuaciones de 3 a 7/11. El 100% describió origen de datos, pero 0% usó evaluadores ciegos y 0% describió seguimiento adecuado — limitación importante.</span></div>
+  <div class="item"><span class="dot dot-green"></span><span><b>Análisis estadístico:</b> SPSS 26 (prueba de Wilcoxon) para comparaciones descriptivas; Stata/MP 14.0 para metaanálisis con modelo de efectos aleatorios (heterogeneidad esperada alta entre estudios). Prueba de Begg para sesgo de publicación.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el estudio eligió un modelo de efectos aleatorios en lugar de efectos fijos para el metaanálisis, considerando el tipo de estudios incluidos y la heterogeneidad observada (I² = 87–99%).</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-green">Áreas hospitalarias clasificadas</span>
+  <div class="def def-green">Los sitios de muestreo se categorizan en 3 tipos según el nivel de restricción de acceso. La clasificación importa porque la gestión del aire varía enormemente entre ellas.</div>
+  <div class="three">
+    <div class="mini" style="border-left:3px solid #3b82f6">
+      <b>Acceso público</b><br>
+      Pasillos, recepción, salas de espera. Sistema HVAC convencional. Solo muestras fúngicas disponibles (n=575).
+    </div>
+    <div class="mini" style="border-left:3px solid #f59e0b">
+      <b>Hospitalización</b><br>
+      Habitaciones de pacientes internados. Representa el 76.7% de muestras fúngicas (n=4,015).
+    </div>
+    <div class="mini" style="border-left:3px solid #ef4444">
+      <b>Áreas restringidas</b><br>
+      Quirófanos, UCI, hemodiálisis. Requieren EPP. 91.2% de muestras bacterianas (n=3,739).
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: Asumir que áreas restringidas SIEMPRE tienen menor concentración de bioaerosoles. En hospitales sin HVAC mejorado, las áreas restringidas mostraron MAYOR recuento bacteriano que hospitalización (387.5 vs 356.5 UFC/m³), posiblemente por mayor actividad microbiana durante procedimientos.</div>
+</div>
+
+<div class="sec sec-amber">🟡 BLOQUE 3 — RESULTADOS CUANTITATIVOS CLAVE</div>
+
+<div class="block s3">
+  <span class="bh bh-amber">Concentraciones de Bacterias y Hongos según tipo de HVAC (UFC/m³)</span>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #ef4444">
+      <b>Sin HVAC (ventilación natural)</b><br>
+      Bacterias: 360.82 ± 164.40 UFC/m³<br>
+      Hongos: 38.17 ± 101.36 UFC/m³<br>
+      <span style="color:#991b1b;font-size:11px">Línea de base más alta → mayor riesgo</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #f59e0b">
+      <b>HVAC convencional</b><br>
+      Bacterias: 217.69 ± 116.69 UFC/m³<br>
+      Hongos: 37.33 ± 82.78 UFC/m³<br>
+      <span style="color:#713f12;font-size:11px">Reducción moderada respecto a sin HVAC</span>
+    </div>
+    <div class="mini" style="border-top:3px solid #22c55e">
+      <b>HVAC mejorado</b><br>
+      Bacterias: 35.94 ± 39.55 UFC/m³<br>
+      Hongos: 9.46 ± 9.63 UFC/m³<br>
+      <span style="color:#14532d;font-size:11px">Reducción marcada — diferencia estadísticamente significativa</span>
+    </div>
+  </div>
+  <hr class="divh">
+  <div style="font-size:11.5px;color:var(--color-text-secondary);margin-bottom:6px"><b>Reducción bacteriana relativa al progresar en el sistema de ventilación:</b></div>
+  <div style="margin-bottom:4px;font-size:11.5px">Sin HVAC → HVAC conv. (–40%)</div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:40%;background:#f59e0b"></div></div>
+  <div style="margin-bottom:4px;font-size:11.5px">Sin HVAC → HVAC mejorado (–90%)</div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:90%;background:#22c55e"></div></div>
+  <div style="margin-bottom:4px;font-size:11.5px">HVAC conv. → HVAC mejorado (–83%)</div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:83%;background:#14b8a6"></div></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-amber">Filtros HEPA: Eficacia</span>
+  <div class="def def-amber">HEPA (High Efficiency Particulate Air): filtros que eliminan el 99.97% de partículas ≥ 0.3 µm. Esto incluye la mayoría de bacterias y esporas fúngicas. El filtrado convencional solo elimina 80–97% de partículas &gt;5 µm — una diferencia enorme en partículas pequeñas infecciosas.</div>
+  <div class="rx">Reducción bacteriana con HEPA: −113.14 UFC/m³ (IC 95%: −197.89 a −28.38)
+Reducción fúngica con HEPA: −6.53 UFC/m³ (IC 95%: −10.50 a −2.55)
+I² = 99.8% (bacterias) y 87.4% (hongos) → heterogeneidad muy alta</div>
+  <div class="item"><span class="dot dot-amber"></span><span><b>Efecto en hongos dependiente de temperatura:</b> A 25°C de incubación, reducción de 22.15 UFC/m³; a 30°C solo 3.32 UFC/m³; a 35–37°C el IC cruza la línea de no efecto (–6.52, +0.24). Esto no significa que HEPA falle, sino que la temperatura de cultivo post-muestreo sesga el resultado.</span></div>
+  <div class="item"><span class="dot dot-amber"></span><span><b>Implicación práctica:</b> HEPA es más económico y más eficaz que instalar un sistema LAF completo. Para zonas con ventilación insuficiente, un filtro HEPA portable es una alternativa costo-efectiva validada por este metaanálisis.</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la efectividad del filtro HEPA para reducir hongos varió según la temperatura de incubación post-muestreo? ¿Qué implicaciones tiene esto para interpretar estudios que comparan concentraciones fúngicas en aire hospitalario?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-amber">LAF vs. TAF: Flujo Laminar vs. Turbulento</span>
+  <div class="def def-amber">LAF (Laminar Air Flow): flujo unidireccional que arrastra partículas desde el campo operatorio hacia el suelo. TAF (Turbulent Air Flow): flujo multidireccional convencional que mezcla el aire. El LAF se usa en cirugías de alto riesgo séptico/aséptico.</div>
+  <div class="item"><span class="dot dot-amber"></span><span><b>Resultado bacteriano LAF:</b> Reducción de 40.05 UFC/m³ (IC 95%: –55.52, –24.58) vs. TAF convencional. Pero OJO: esta reducción es MENOR que la del filtro HEPA solo (113 UFC/m³). Esto sugiere que el LAF no agrega valor más allá del HEPA.</span></div>
+  <div class="item"><span class="dot dot-amber"></span><span><b>Paradoja fúngica:</b> Las salas con LAF mostraron MAYOR concentración de hongos (5.46 vs. 0.09 UFC/m³ en TAF). El flujo unidireccional altera la dinámica de sedimentación fúngica o crea zonas de turbulencia secundaria.</span></div>
+  <div class="warn">⚠️ ERROR COMÚN: Creer que LAF = "sala más limpia siempre". Los datos muestran que el LAF puede debilitar el efecto del filtro HEPA al alterar el flujo de aire. La OMS (2016) ya no recomienda LAF para prevenir SSI en artroplastias totales.</div>
+</div>
+
+<div class="sec sec-purple">🟣 BLOQUE 4 — SISTEMAS LAF: ANÁLISIS PROFUNDO</div>
+
+<div class="block">
+  <span class="bh bh-purple">¿Por qué el LAF puede no funcionar?</span>
+  <div class="def def-purple">El sistema LAF presenta problemas estructurales que comprometen su efectividad. La sala quirúrgica es un "sistema complejo" donde pequeños fallos se amplifican — personas, equipos y técnicas interactúan de modo que el flujo laminar ideal se distorsiona fácilmente.</div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Tamaño inadecuado del plenum:</b> Si la cubierta LAF es demasiado pequeña, el flujo unidireccional no cubre toda la mesa operatoria y crea zonas sin protección.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Mesa de instrumentos mal posicionada:</b> Debe estar COMPLETAMENTE bajo la cubierta LAF. Si sobresale, queda fuera de la protección laminar.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Hipotermia localizada:</b> El flujo frío puede enfriar el área de la herida, causando hipotermia tisular — paradójicamente dando a los cirujanos falsa sensación de esterilidad mientras hay contaminación no detectada.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Fenómenos transitorios:</b> Apertura de puertas, movimiento de personal y ropa quirúrgica alteran el flujo laminar momentáneamente; esas turbulencias transitorias son suficientes para contaminar el campo.</span></div>
+  <div class="exam">🎯 EXAMEN: Con base en los resultados del metaanálisis de Dai et al. (2021), ¿qué recomendaría para una sala de operaciones de artroplastia total de cadera que necesita mejorar su calidad de aire sin triplicar el presupuesto de mantenimiento?</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">Factores confundentes en quirófanos</span>
+  <div class="def def-purple">La concentración de bioaerosoles en quirófanos no depende solo del sistema de ventilación. Múltiples factores humanos y operativos generan variabilidad que dificulta atribuir resultados únicamente al HVAC.</div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #8b5cf6">
+      <b>Factores humanos</b><br>
+      Número de personas en sala · frecuencia de apertura de puertas · movimiento de personal · tipo y material de ropa quirúrgica
+    </div>
+    <div class="mini" style="border-left:3px solid #14b8a6">
+      <b>Factores operativos</b><br>
+      Tipo de operación (séptica vs. aséptica) · medio de cultivo utilizado · temperatura de incubación · ciclo de reemplazo del filtro
+    </div>
+  </div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Discrepancia entre estudios:</b> Andersson et al. halló que más personas = mayor contaminación; Alsved et al. encontró que ni el número de personas ni la apertura de puertas se correlacionaba con bioaerosoles. Esta contradición refleja la complejidad del sistema quirúrgico.</span></div>
+</div>
+
+<div class="block">
+  <span class="bh bh-purple">COVID-19 y sistemas HVAC</span>
+  <div class="def def-purple">La pandemia generó alarma sobre si los HVAC diseminan SARS-CoV-2. Este metaanálisis aporta evidencia indirecta pero relevante: los HVAC funcionando correctamente REDUCEN bioaerosoles, lo cual contradice la hipótesis de que son vectores de diseminación cuando operan adecuadamente.</div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>SARS-CoV-2 en aerosoles:</b> Es viable en aerosoles hasta horas; el problema ocurre con HVAC que recirculan aire sin filtrar adecuadamente (sin HEPA) o que alteran el flujo hacia zonas de ocupación.</span></div>
+  <div class="item"><span class="dot dot-purple"></span><span><b>Conclusión aplicada:</b> HVAC con filtros HEPA reduce riesgo de COVID-19 nosocomial. Usar AA normalmente durante pandemia es seguro si el filtro es adecuado. Los filtros HEPA portátiles son una opción eficaz para áreas sin ventilación centralizada.</span></div>
+</div>
+
+<div class="sec sec-red">🔴 BLOQUE 5 — LIMITACIONES Y ANÁLISIS CRÍTICO</div>
+
+<div class="block s2">
+  <span class="bh bh-red">Limitaciones del estudio</span>
+  <div class="two">
+    <div>
+      <div class="item"><span class="num-badge nb-r">1</span><span><b>Estudios observacionales:</b> Sin asignación aleatoria, hay factores no controlados (frecuencia de limpieza, número de personas, tipo de desinfección) que contribuyen a la heterogeneidad muy alta (I²=96–99%).</span></div>
+      <div class="item"><span class="num-badge nb-r">2</span><span><b>Temperatura de incubación:</b> Sesga los recuentos fúngicos. Sin estandarización entre estudios, comparar UFC es problemático — los hongos crecen diferente a 25°C, 30°C ó 37°C.</span></div>
+      <div class="item"><span class="num-badge nb-r">3</span><span><b>No se estudiaron especies específicas:</b> El recuento total de colonias es menos significativo epidemiológicamente que identificar patógenos específicos (Aspergillus, MRSA, Klebsiella). No se usaron técnicas moleculares.</span></div>
+    </div>
+    <div>
+      <div class="item"><span class="num-badge nb-r">4</span><span><b>Calidad metodológica variable:</b> 63.6% de estudios no explicaron muestras descartadas; 90.9% no describió manejo de datos faltantes; 0% usó evaluadores ciegos.</span></div>
+      <div class="item"><span class="num-badge nb-r">5</span><span><b>No incluye especies raras/difíciles de cultivar:</b> Patógenos como hongos dimórficos o micobacterias requieren condiciones especiales; sus concentraciones no están representadas.</span></div>
+      <div class="item"><span class="num-badge nb-r">6</span><span><b>No evalúa eficiencia energética:</b> Filtros HEPA y ACH altas tienen alto consumo; el análisis costo-beneficio energético queda fuera del alcance pero es clave en decisiones hospitalarias reales.</span></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: La alta heterogeneidad (I²&gt;87% en todos los metaanálisis) significa que los resultados numéricos deben interpretarse con cautela. La dirección del efecto (HEPA reduce bioaerosoles) es robusta, pero la magnitud exacta varía enormemente entre hospitales, países y condiciones operativas.</div>
+  <div class="exam">🎯 EXAMEN: Dos hospitales implementan filtros HEPA pero reportan diferencias de 200 UFC/m³ en sus resultados. Usando el marco del estudio de Dai et al. (2021), identifique al menos 4 factores metodológicos que podrían explicar esta discrepancia.</div>
+</div>
+
+<div class="block">
+  <span class="bh bh-red">Implicaciones prácticas y costo-beneficio</span>
+  <div class="def def-red">La decisión entre LAF completo vs. filtro HEPA en sistema convencional tiene implicaciones económicas enormes. El LAF cuesta más de instalar, mantener y operar, y este estudio sugiere que no supera en efectividad al HEPA solo.</div>
+  <div class="item"><span class="dot dot-red"></span><span><b>Filtros HEPA:</b> Deben reemplazarse regularmente (vida útil limitada). Con uso prolongado, el material filtrante puede saturarse y reducir su eficiencia de captura. Representan la inversión más costo-efectiva según este estudio.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><b>Sala LAF completa:</b> Requiere construcción especializada, mantenimiento técnico continuo, alta energía. Su efecto bactericida adicional al HEPA es cuestionable — puede incluso reducir la efectividad del HEPA.</span></div>
+  <div class="item"><span class="dot dot-red"></span><span><b>Recomendación del estudio:</b> Para nuevas construcciones de quirófano, elegir HVAC mejorado con HEPA de alta eficiencia sobre LAF. Para áreas existentes con ventilación insuficiente, purificadores HEPA portátiles son opción eficaz.</span></div>
+</div>
+
+<div class="sec sec-teal">🩵 BLOQUE 6 — TABLA INTEGRADORA FINAL</div>
+
+<div class="block s3">
+  <span class="bh bh-teal">Resumen comparativo: Sistemas de ventilación en hospitales</span>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Sistema</th>
+        <th>Bacterias promedio (UFC/m³)</th>
+        <th>Hongos promedio (UFC/m³)</th>
+        <th>Reducción bacteriana vs. sin HVAC</th>
+        <th>Costo / complejidad</th>
+        <th>Evidencia metaanálisis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:var(--color-background-secondary)">
+        <td><b>Sin HVAC (natural)</b></td><td>360.82</td><td>38.17</td><td>—</td><td>Mínimo</td><td>Línea de base</td>
+      </tr>
+      <tr>
+        <td><b>HVAC convencional</b></td><td>217.69</td><td>37.33</td><td>–40%</td><td>Bajo-Medio</td><td>Estadísticamente significativa</td>
+      </tr>
+      <tr style="background:var(--color-background-secondary)">
+        <td><b>HVAC mejorado (general)</b></td><td>35.94</td><td>9.46</td><td>–90%</td><td>Medio-Alto</td><td>Altamente significativa</td>
+      </tr>
+      <tr>
+        <td><b>HEPA vs. otros filtros</b></td><td>36.90 vs 57.83</td><td>9.46 vs 12.21</td><td>–113 UFC/m³ (IC: −198, −28)</td><td>Medio</td><td>Meta: sí efectivo</td>
+      </tr>
+      <tr style="background:var(--color-background-secondary)">
+        <td><b>LAF vs. TAF (con HEPA)</b></td><td>26.28 vs 36.13</td><td>5.46 vs 0.09</td><td>–40 UFC/m³ (IC: −56, −25)</td><td>Muy alto</td><td>Meta: LAF reduce bacterias pero aumenta hongos</td>
+      </tr>
+      <tr>
+        <td><b>ACH alta (&gt;15) vs. baja</b></td><td>53.45 vs 58.05</td><td>22.96 vs 22.96</td><td>No significativa (p=0.175)</td><td>Alto (energía)</td><td>Solo eficaz para hongos</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="warn" style="margin-top:10px">⚠️ DATO INTEGRADOR CLAVE: El filtro HEPA es el componente más efectivo del sistema HVAC mejorado. El LAF no agrega beneficio significativo más allá del HEPA, y puede incluso debilitar su efecto al alterar el flujo de aire. Para maximizar la relación costo-efectividad, priorizar HVAC convencional + HEPA sobre sistemas LAF completos.</div>
+</div>
+
+<div class="sec sec-blue">📝 QUIZ INTERACTIVO DE REPASO</div>
+
+<div class="block s3" id="quiz-section">
+  <div style="background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px">
+    <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:700">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+    <div style="font-size:11px;color:#94a3b8;margin-top:4px">Marca tu respuesta y descubre si es correcta</div>
+  </div>
+  <div id="quiz-progress-text" style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">Pregunta 0 de 10 respondidas · Aciertos: 0/0</div>
+  <div class="prog-bar-wrap"><div class="prog-bar-fill" id="quiz-prog-fill" style="width:0%"></div></div>
+
+  <div id="quiz-container" style="margin-top:14px">
+
+    <div class="qcard" id="q1">
+      <p class="qnum">Pregunta 1 / 10</p>
+      <p class="qtext">¿Cuál es la definición correcta de bioaerosol según este artículo?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="1" data-correct="false">A) Partículas sólidas inorgánicas suspendidas en el aire de hospitales</button>
+        <button class="qbtn" data-q="1" data-correct="true">B) Partículas transportadas por el aire, líquidas o volátiles, que contienen organismos vivos o fueron liberadas de ellos</button>
+        <button class="qbtn" data-q="1" data-correct="false">C) Únicamente virus y bacterias que se transmiten por contacto directo</button>
+        <button class="qbtn" data-q="1" data-correct="false">D) Compuestos químicos volátiles generados por equipos hospitalarios</button>
+      </div>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+
+    <div class="qcard" id="q2">
+      <p class="qnum">Pregunta 2 / 10</p>
+      <p class="qtext">Según los criterios del estudio, un sistema HVAC se clasifica como "mejorado" si cumple al menos una de las siguientes condiciones. ¿Cuál es correcta?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="2" data-correct="false">A) Tiene una tasa de filtración entre 65% y 80% y ACH de 6</button>
+        <button class="qbtn" data-q="2" data-correct="false">B) No utiliza ningún filtro pero mantiene alta presión positiva</button>
+        <button class="qbtn" data-q="2" data-correct="true">C) Está equipado con LAF, tiene filtración &gt;95%, o tiene ACH &gt;15 cambios por hora</button>
+        <button class="qbtn" data-q="2" data-correct="false">D) Usa ventilación natural con apertura programada de ventanas cada 2 horas</button>
+      </div>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <div class="qcard" id="q3">
+      <p class="qnum">Pregunta 3 / 10</p>
+      <p class="qtext">El metaanálisis encontró que el uso de filtros HEPA redujo la concentración bacteriana en:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="3" data-correct="false">A) 6.53 UFC/m³ (IC 95%: −10.50, −2.55)</button>
+        <button class="qbtn" data-q="3" data-correct="false">B) 40.05 UFC/m³ (IC 95%: −55.52, −24.58)</button>
+        <button class="qbtn" data-q="3" data-correct="true">C) 113.14 UFC/m³ (IC 95%: −197.89, −28.38)</button>
+        <button class="qbtn" data-q="3" data-correct="false">D) 217.69 UFC/m³ (IC 95%: −300, −100)</button>
+      </div>
+      <div class="qfeedback" id="fb3"></div>
+    </div>
+
+    <div class="qcard" id="q4">
+      <p class="qnum">Pregunta 4 / 10</p>
+      <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el sistema LAF es FALSA según los resultados del estudio?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="4" data-correct="false">A) El LAF redujo la concentración bacteriana en 40.05 UFC/m³ comparado con HVAC convencional</button>
+        <button class="qbtn" data-q="4" data-correct="true">B) El sistema LAF es siempre superior al filtro HEPA solo para eliminar bacterias y hongos</button>
+        <button class="qbtn" data-q="4" data-correct="false">C) Las salas LAF mostraron mayor concentración de hongos que las salas TAF</button>
+        <button class="qbtn" data-q="4" data-correct="false">D) La OMS (2016) no recomienda LAF para reducir infecciones de sitio quirúrgico en artroplastias</button>
+      </div>
+      <div class="qfeedback" id="fb4"></div>
+    </div>
+
+    <div class="qcard" id="q5">
+      <p class="qnum">Pregunta 5 / 10</p>
+      <p class="qtext">¿Por qué la efectividad del filtro HEPA para reducir hongos varió según la temperatura de incubación post-muestreo?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="5" data-correct="false">A) Porque los filtros HEPA deterioran el ADN fúngico a temperaturas altas</button>
+        <button class="qbtn" data-q="5" data-correct="true">B) Porque las colonias fúngicas no crecen adecuadamente a temperaturas fuera de su óptimo, alterando los recuentos de UFC obtenidos</button>
+        <button class="qbtn" data-q="5" data-correct="false">C) Porque a mayor temperatura el aire circula más rápido y el HEPA pierde eficiencia de captura</button>
+        <button class="qbtn" data-q="5" data-correct="false">D) Porque los hongos se desactivan en el filtro HEPA solo a temperaturas superiores a 35°C</button>
+      </div>
+      <div class="qfeedback" id="fb5"></div>
+    </div>
+
+    <div class="qcard" id="q6">
+      <p class="qnum">Pregunta 6 / 10</p>
+      <p class="qtext">En el metaanálisis, el modelo estadístico seleccionado fue de efectos aleatorios. ¿Cuál es la principal razón que justifica esta elección?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="6" data-correct="false">A) Porque todos los estudios usaron el mismo protocolo de muestreo y los resultados fueron homogéneos</button>
+        <button class="qbtn" data-q="6" data-correct="true">B) Porque se esperaba heterogeneidad entre estudios provenientes de distintos países, áreas hospitalarias y condiciones metodológicas</button>
+        <button class="qbtn" data-q="6" data-correct="false">C) Porque el modelo de efectos fijos no está aprobado por las guías PRISMA</button>
+        <button class="qbtn" data-q="6" data-correct="false">D) Porque todos los estudios incluidos eran ensayos clínicos aleatorizados</button>
+      </div>
+      <div class="qfeedback" id="fb6"></div>
+    </div>
+
+    <div class="qcard" id="q7">
+      <p class="qnum">Pregunta 7 / 10</p>
+      <p class="qtext">El ACH alto (&gt;15 cambios/hora) fue eficaz para reducir significativamente:</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="7" data-correct="false">A) Solo bacterias (p &lt; 0.05), no hongos</button>
+        <button class="qbtn" data-q="7" data-correct="true">B) Solo hongos (p &lt; 0.05), no bacterias (p = 0.175)</button>
+        <button class="qbtn" data-q="7" data-correct="false">C) Tanto bacterias como hongos con igual significancia estadística</button>
+        <button class="qbtn" data-q="7" data-correct="false">D) Ninguno de los dos — el ACH no mostró ningún efecto significativo</button>
+      </div>
+      <div class="qfeedback" id="fb7"></div>
+    </div>
+
+    <div class="qcard" id="q8">
+      <p class="qnum">Pregunta 8 / 10</p>
+      <p class="qtext">¿Qué porcentaje de las muestras bacterianas del estudio provinieron de áreas restringidas (quirófanos, UCI)?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="8" data-correct="false">A) 76.68%</button>
+        <button class="qbtn" data-q="8" data-correct="false">B) 58.20%</button>
+        <button class="qbtn" data-q="8" data-correct="true">C) 91.20%</button>
+        <button class="qbtn" data-q="8" data-correct="false">D) 63.60%</button>
+      </div>
+      <div class="qfeedback" id="fb8"></div>
+    </div>
+
+    <div class="qcard" id="q9">
+      <p class="qnum">Pregunta 9 / 10</p>
+      <p class="qtext">Si un hospital de recursos limitados necesita mejorar la calidad del aire en su área de hospitalización con presupuesto reducido, ¿qué recomendaría con base en las conclusiones del estudio?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="9" data-correct="false">A) Instalar un sistema LAF completo con flujo unidireccional en todas las habitaciones</button>
+        <button class="qbtn" data-q="9" data-correct="true">B) Incorporar filtros HEPA al sistema HVAC existente o usar purificadores HEPA portátiles</button>
+        <button class="qbtn" data-q="9" data-correct="false">C) Aumentar la apertura de ventanas para lograr ventilación natural con mayor ACH</button>
+        <button class="qbtn" data-q="9" data-correct="false">D) Reemplazar el sistema HVAC convencional por uno sin filtros pero con ACH de 20</button>
+      </div>
+      <div class="qfeedback" id="fb9"></div>
+    </div>
+
+    <div class="qcard" id="q10">
+      <p class="qnum">Pregunta 10 / 10</p>
+      <p class="qtext">¿Cuál es la principal fortaleza metodológica declarada por los autores de este estudio?</p>
+      <div class="qopts">
+        <button class="qbtn" data-q="10" data-correct="false">A) Fue el primer estudio en incluir técnicas moleculares para identificar patógenos específicos en el aire hospitalario</button>
+        <button class="qbtn" data-q="10" data-correct="false">B) Incluyó ensayos clínicos aleatorizados de alta calidad de múltiples países europeos</button>
+        <button class="qbtn" data-q="10" data-correct="true">C) Fue el primer metaanálisis en evaluar el efecto de sistemas HVAC sobre bioaerosoles mediante conteo de incubación microbiana, demostrando que HVAC reduce concentraciones generales y que HEPA es más efectivo que el sistema LAF completo</button>
+        <button class="qbtn" data-q="10" data-correct="false">D) Estudió todas las especies microbianas posibles incluyendo virus, pólenes y micobacterias con métodos estandarizados internacionalmente</button>
+      </div>
+      <div class="qfeedback" id="fb10"></div>
+    </div>
+
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <h3 id="result-title"></h3>
+    <p id="result-msg" style="font-size:13px;margin-bottom:8px"></p>
+    <p id="result-score" style="font-size:22px;font-weight:700;font-family:'Oswald',sans-serif"></p>
+    <button class="btn-reset" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<div class="footer-bar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Dai R, Liu S, Li Q, Wu H, Wu L, Ji C (2021). Una revisión sistemática y metaanálisis de bioaerosoles interiores en hospitales: la influencia de la calefacción, ventilación y aire acondicionado. PLoS ONE 16(12): e0259996. DOI: 10.1371/journal.pone.0259996 · Universidad Médica China de Zhejiang, Hangzhou, China · Bases de datos: Embase, PubMed, Cochrane, MEDLINE, Web of Science (2000–2020)</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {correct: 'B', text: {
+    B: '✅ ¡Correcto! Los bioaerosoles se definen como partículas transportadas por el aire de compuestos líquidos o volátiles que contienen organismos vivos o se han liberado de ellos. Incluyen bacterias, hongos, virus y pólenes. La clave es que involucran organismos biológicos en suspensión aérea.',
+    default: '❌ Incorrecto. La respuesta correcta es B. Los bioaerosoles son específicamente partículas que contienen o provienen de organismos vivos — no son partículas inorgánicas ni exclusivamente de transmisión por contacto. La distinción biológica es fundamental.'
+  }},
+  2: {correct: 'C', text: {
+    C: '✅ ¡Correcto! Un HVAC se clasifica como "mejorado" cuando cumple al menos una de: equipado con LAF, filtración >95%, o ACH >15 cambios/hora. Esto lo diferencia del convencional que opera sin LAF, ≤95% filtración y <15 ACH.',
+    default: '❌ Incorrecto. La respuesta correcta es C. El umbral es ACH >15 o filtración >95% o LAF. La ventilación natural (ventanas) no califica como HVAC mejorado; es una categoría separada en el estudio.'
+  }},
+  3: {correct: 'C', text: {
+    C: '✅ ¡Correcto! La reducción bacteriana con HEPA fue de 113.14 UFC/m³ (IC 95%: −197.89, −28.38). Este es el dato cuantitativo más importante del metaanálisis sobre HEPA y bacterias. Los 6.53 UFC/m³ corresponden a hongos; los 40.05 a la diferencia LAF vs. sin LAF.',
+    default: '❌ Incorrecto. La respuesta correcta es C (113.14 UFC/m³ para bacterias). Los 6.53 UFC/m³ corresponden a la reducción fúngica con HEPA; los 40.05 UFC/m³ a la reducción bacteriana del sistema LAF vs. convencional. Es esencial no confundir estos tres valores del metaanálisis.'
+  }},
+  4: {correct: 'B', text: {
+    B: '✅ ¡Correcto! La afirmación FALSA es que el LAF siempre supera al filtro HEPA. El metaanálisis demostró lo contrario: el HEPA redujo 113 UFC/m³ de bacterias mientras que el LAF solo redujo 40 UFC/m³. Además, el LAF mostró mayor concentración de hongos que el TAF.',
+    default: '❌ Incorrecto. La respuesta correcta es B. El LAF NO supera al HEPA — en bacterias redujo solo 40 UFC/m³ vs. 113 UFC/m³ del HEPA, y paradójicamente incrementó hongos. Las otras opciones (A, C, D) son afirmaciones VERDADERAS según el estudio.'
+  }},
+  5: {correct: 'B', text: {
+    B: '✅ ¡Correcto! La temperatura de incubación post-muestreo afecta el crecimiento de colonias fúngicas. A 35–37°C, muchos hongos ambientales (que crecen mejor a 25°C) no desarrollan colonias visibles, subestimando la concentración real y haciendo que el efecto del HEPA parezca no significativo.',
+    default: '❌ Incorrecto. La respuesta correcta es B. El problema no es el filtro en sí, sino cómo se cuenta después. Las esporas fúngicas capturadas en el medio de cultivo no formarán colonias si la temperatura de incubación no es óptima para esa especie. Esto sesga el cálculo de UFC/m³.'
+  }},
+  6: {correct: 'B', text: {
+    B: '✅ ¡Correcto! El modelo de efectos aleatorios se usa cuando se asume que los estudios difieren en poblaciones, métodos y contextos — es decir, cuando hay heterogeneidad "verdadera" entre ellos. Aquí I²=87–99%, confirmando heterogeneidad muy alta, lo cual valida la elección del modelo.',
+    default: '❌ Incorrecto. La respuesta correcta es B. El modelo de efectos aleatorios asume que el "efecto verdadero" varía entre estudios (por diferencias en hospitales, países, protocolos). El I² extremadamente alto (96–99%) confirmó esta heterogeneidad a posteriori. El modelo de efectos fijos asumiría un único efecto verdadero compartido — incorrecto aquí.'
+  }},
+  7: {correct: 'B', text: {
+    B: '✅ ¡Correcto! ACH alto redujo significativamente hongos pero no bacterias (p=0.175 para bacterias). Esto sugiere que la dilución por volumen de aire renovado es más efectiva para partículas fúngicas, mientras que las bacterias requieren filtrado activo (HEPA) para ser removidas significativamente.',
+    default: '❌ Incorrecto. La respuesta correcta es B. Este resultado contraintuitivo es clave: aumentar el número de renovaciones de aire (ACH) ayuda con hongos pero no con bacterias. Para bacterias, lo que marca la diferencia es el tipo de filtro (HEPA vs. convencional), no cuánto aire se mueve.'
+  }},
+  8: {correct: 'C', text: {
+    C: '✅ ¡Correcto! El 91.20% (n=3,739) de las muestras bacterianas provino de áreas restringidas. Esto refleja que la mayoría de la investigación sobre bioaerosoles bacterianos se concentra en quirófanos y UCI, donde el control microbiológico es crítico para prevenir infecciones postoperatorias.',
+    default: '❌ Incorrecto. La respuesta correcta es C (91.20%). El 76.68% corresponde a muestras fúngicas en instalaciones de hospitalización. Esta distribución desigual de muestras es una limitación: los resultados son representativos de áreas restringidas para bacterias, no de todo el hospital.'
+  }},
+  9: {correct: 'B', text: {
+    B: '✅ ¡Correcto! El estudio concluye que los filtros HEPA son más costo-efectivos que el sistema LAF completo. Para recursos limitados, incorporar HEPA al sistema existente o usar purificadores portátiles HEPA es la estrategia con mejor evidencia de reducción de bioaerosoles sin el costo del LAF.',
+    default: '❌ Incorrecto. La respuesta correcta es B. El LAF completo (A) es caro y el estudio no demostró que supere al HEPA. Ventilación natural (C) es menos efectiva que HVAC. HVAC sin filtros y solo ACH alto (D) no reduce bacterias significativamente. HEPA es la intervención clave según la evidencia.'
+  }},
+  10: {correct: 'C', text: {
+    C: '✅ ¡Correcto! Los propios autores declaran que su fortaleza principal es ser el PRIMER metaanálisis en evaluar el efecto de HVAC sobre bioaerosoles mediante conteo de incubación microbiana, y haber demostrado que otros componentes del LAF además del HEPA no son efectivos para eliminar microorganismos.',
+    default: '❌ Incorrecto. La respuesta correcta es C. El estudio NO usó técnicas moleculares (A), NO incluyó ECAs (B), y NO estudió todas las especies (D). Su fortaleza es metodológica: primer metaanálisis de este tipo con evidencia cuantitativa sobre el papel específico del HEPA vs. LAF.'
+  }}
+};
+
+let answered = 0;
+let correct = 0;
+
+document.getElementById('quiz-container').addEventListener('click', function(e) {
+  const btn = e.target.closest('.qbtn');
+  if (!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const card = document.getElementById('q' + q);
+  const fb = document.getElementById('fb' + q);
+  const allBtns = card.querySelectorAll('.qbtn');
+
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === 'true') b.classList.add('show-correct');
+  });
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correct++;
+    const correctLetter = feedbacks[q].correct;
+    fb.innerHTML = '<b>' + feedbacks[q].text[correctLetter] + '</b>';
+    fb.className = 'qfeedback ok';
+  } else {
+    btn.classList.add('wrong');
+    const correctLetter = feedbacks[q].correct;
+    const fbText = feedbacks[q].text.default;
+    fb.innerHTML = fbText;
+    fb.className = 'qfeedback err';
+  }
+  fb.style.display = 'block';
+  answered++;
+
+  const pct = Math.round((answered / 10) * 100);
+  document.getElementById('quiz-prog-fill').style.width = pct + '%';
+  document.getElementById('quiz-progress-text').textContent = 'Pregunta ' + answered + ' de 10 respondidas · Aciertos: ' + correct + '/' + answered;
+
+  if (answered === 10) showResult();
+});
+
+function showResult() {
+  const panel = document.getElementById('result-panel');
+  const title = document.getElementById('result-title');
+  const msg = document.getElementById('result-msg');
+  const score = document.getElementById('result-score');
+  score.textContent = correct + ' / 10 correctas';
+  if (correct <= 4) {
+    panel.style.background = '#fee2e2'; title.style.color='#991b1b';
+    title.textContent = '📚 Necesitas repasar el material';
+    msg.textContent = 'Revisa especialmente los conceptos de HEPA, LAF, ACH y los valores numéricos del metaanálisis.';
+  } else if (correct <= 7) {
+    panel.style.background = '#fef9c3'; title.style.color='#713f12';
+    title.textContent = '📖 ¡Buen avance, sigue repasando!';
+    msg.textContent = 'Tienes buena base. Refuerza los detalles cuantitativos y las limitaciones del estudio.';
+  } else {
+    panel.style.background = '#dcfce7'; title.style.color='#14532d';
+    title.textContent = '🏆 ¡Excelente dominio del tema!';
+    msg.textContent = 'Dominás los conceptos clave de bioaerosoles, sistemas HVAC, HEPA y LAF a nivel universitario.';
+  }
+  panel.style.display = 'block';
+}
+
+function resetQuiz() {
+  answered = 0; correct = 0;
+  document.getElementById('quiz-prog-fill').style.width = '0%';
+  document.getElementById('quiz-progress-text').textContent = 'Pregunta 0 de 10 respondidas · Aciertos: 0/0';
+  document.getElementById('result-panel').style.display = 'none';
+  for (let q = 1; q <= 10; q++) {
+    const card = document.getElementById('q' + q);
+    card.querySelectorAll('.qbtn').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct', 'wrong', 'show-correct');
+    });
+    const fb = document.getElementById('fb' + q);
+    fb.style.display = 'none';
+    fb.className = 'qfeedback';
+  }
+}
+</script>
