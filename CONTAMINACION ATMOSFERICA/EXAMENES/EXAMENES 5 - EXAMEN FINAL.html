@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Repaso Examen Final - Contaminación Atmosférica - UNALM</title>
+<style>
+:root{
+  --bg:#0f1115; --card:#181b22; --card2:#1e222b; --border:#2a2f3a; --border2:#3a4150;
+  --text:#e8eaed; --text2:#9aa3b2; --text3:#6b7280;
+  --accent:#5b8def; --accent2:#3a6bc7;
+  --teal:#2dd4bf; --tealD:#0f3d38; --tealT:#0a2622;
+  --amber:#f5b942; --amberD:#4a3712; --amberT:#332507;
+  --coral:#f0997b; --coralD:#4a2415; --coralT:#33170d;
+  --pink:#ed93b1; --pinkD:#4b1528; --pinkT:#33101b;
+  --purple:#7f77dd; --purpleD:#26215c; --purpleT:#1a1740;
+  --green:#97c459; --greenD:#173404; --greenT:#0e2102;
+  --blue:#85b7eb; --blueD:#042c53; --blueT:#031d37;
+  --red:#e24b4a; --redD:#501313; --redT:#330c0c;
+  --gray:#b4b2a9; --grayD:#2c2c2a; --grayT:#1c1c1a;
+  --radius:14px; --radiusS:10px;
+  --maxw:980px;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:18px 16px 60px;}
+.hero{
+  background:linear-gradient(135deg,var(--purpleT),var(--tealT));
+  border:1px solid var(--border2); border-radius:var(--radius);
+  padding:22px 22px 18px; margin-bottom:18px;
+}
+.hero h1{margin:0 0 6px; font-size:21px; font-weight:700; letter-spacing:-0.2px;}
+.hero p{margin:0; color:var(--text2); font-size:13.5px;}
+.hero .meta{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;}
+.tag{
+  font-size:11.5px; padding:4px 10px; border-radius:999px;
+  background:rgba(255,255,255,0.06); border:1px solid var(--border2); color:var(--text2);
+}
+.progress-bar{
+  margin-top:14px; height:8px; border-radius:999px; background:rgba(255,255,255,0.08);
+  overflow:hidden; position:relative;
+}
+.progress-fill{
+  height:100%; background:linear-gradient(90deg,var(--teal),var(--accent));
+  width:0%; transition:width .4s ease; border-radius:999px;
+}
+.progress-label{font-size:11.5px; color:var(--text3); margin-top:6px; display:flex; justify-content:space-between;}
+
+.navtabs{
+  display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; margin-bottom:18px;
+  scrollbar-width:thin;
+}
+.navtab{
+  flex:0 0 auto; padding:9px 14px; border-radius:10px; border:1px solid var(--border);
+  background:var(--card); color:var(--text2); font-size:13px; cursor:pointer; white-space:nowrap;
+  transition:.15s;
+}
+.navtab:hover{border-color:var(--border2); color:var(--text);}
+.navtab.active{background:var(--accent2); color:#fff; border-color:var(--accent);}
+
+section.block{display:none;}
+section.block.active{display:block; animation:fadeIn .25s ease;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+
+.section-title{
+  display:flex; align-items:center; gap:10px; margin:28px 0 14px;
+}
+.section-title:first-child{margin-top:4px;}
+.section-title .num{
+  width:26px; height:26px; border-radius:8px; background:var(--accent2); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex:0 0 auto;
+}
+.section-title h2{margin:0; font-size:17px; font-weight:700;}
+
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:16px 18px; margin-bottom:14px;
+}
+.card h3{margin:0 0 8px; font-size:14.5px; font-weight:700; color:var(--text);}
+.card p{margin:0 0 8px; font-size:13.5px; color:var(--text2);}
+.card p:last-child{margin-bottom:0;}
+
+.callout{
+  border-radius:var(--radiusS); padding:12px 14px; margin:10px 0; font-size:13px;
+  border-left:3px solid;
+}
+.callout.warn{background:var(--amberT); border-color:var(--amber); color:#f3dcab;}
+.callout.danger{background:var(--redT); border-color:var(--red); color:#f3c2c2;}
+.callout.exam{background:var(--tealT); border-color:var(--teal); color:#b6ebe2;}
+.callout strong{display:block; margin-bottom:3px; font-size:12px; text-transform:uppercase; letter-spacing:.4px;}
+
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;}
+@media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+.minicard{
+  background:var(--card2); border:1px solid var(--border); border-radius:var(--radiusS);
+  padding:12px 14px;
+}
+.minicard h4{margin:0 0 5px; font-size:13px; font-weight:700;}
+.minicard p{margin:0; font-size:12.5px; color:var(--text2);}
+
+.formula{
+  background:#0a0c10; border:1px solid var(--border2); border-radius:var(--radiusS);
+  padding:12px 14px; font-family:"SF Mono",Consolas,Menlo,monospace; font-size:13.5px;
+  color:#d8e6ff; margin:10px 0; overflow-x:auto; white-space:pre;
+}
+
+table.datatable{width:100%; border-collapse:collapse; font-size:12.5px; margin:10px 0;}
+table.datatable th{
+  background:var(--card2); color:var(--text2); font-weight:700; text-align:left;
+  padding:8px 10px; border-bottom:2px solid var(--border2); font-size:11.5px; text-transform:uppercase; letter-spacing:.3px;
+}
+table.datatable td{padding:8px 10px; border-bottom:1px solid var(--border);}
+table.datatable tr:last-child td{border-bottom:none;}
+table.datatable .num-cell{font-family:"SF Mono",Consolas,monospace; color:var(--teal);}
+
+.badge{display:inline-block; font-size:10.5px; padding:2px 8px; border-radius:999px; font-weight:700;}
+.badge.b-teal{background:var(--tealD); color:#9fe1cb;}
+.badge.b-coral{background:var(--coralD); color:#f0997b;}
+.badge.b-amber{background:var(--amberD); color:#fac775;}
+.badge.b-purple{background:var(--purpleD); color:#afa9ec;}
+.badge.b-pink{background:var(--pinkD); color:#ed93b1;}
+
+.quiz-q{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:16px 18px; margin-bottom:14px;
+}
+.quiz-q .qhead{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; gap:10px;}
+.quiz-q .qnum{font-size:11px; color:var(--text3); font-weight:700; text-transform:uppercase; letter-spacing:.4px;}
+.quiz-q .qpts{font-size:11px; color:var(--text3);}
+.quiz-q .qtext{font-size:14px; margin-bottom:12px; color:var(--text);}
+.opts{display:flex; flex-direction:column; gap:8px;}
+.opt-btn{
+  text-align:left; padding:10px 14px; border-radius:var(--radiusS); border:1px solid var(--border2);
+  background:var(--card2); color:var(--text); font-size:13.5px; cursor:pointer; transition:.15s;
+}
+.opt-btn:hover{border-color:var(--accent);}
+.opt-btn.vf{display:inline-block; min-width:90px; text-align:center; margin-right:8px;}
+.vf-row{display:flex; gap:8px;}
+.opt-btn.correct{background:var(--tealT); border-color:var(--teal); color:#b6ebe2;}
+.opt-btn.incorrect{background:var(--redT); border-color:var(--red); color:#f3c2c2;}
+.opt-btn.disabled{cursor:default; opacity:0.85;}
+.opt-btn.reveal-correct{border-color:var(--teal); box-shadow:inset 0 0 0 1px var(--teal);}
+.feedback{
+  margin-top:10px; padding:10px 12px; border-radius:var(--radiusS); font-size:13px; display:none;
+}
+.feedback.show{display:block;}
+.feedback.ok{background:var(--tealT); color:#b6ebe2; border:1px solid var(--teal);}
+.feedback.bad{background:var(--redT); color:#f3c2c2; border:1px solid var(--red);}
+.fill-row{display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:8px;}
+.fill-row label{font-size:13px; color:var(--text2); min-width:170px;}
+.fill-row input{
+  flex:1; min-width:140px; background:var(--card2); border:1px solid var(--border2); border-radius:8px;
+  color:var(--text); padding:8px 10px; font-size:13.5px;
+}
+.fill-row input:focus{outline:none; border-color:var(--accent);}
+.check-btn{
+  background:var(--accent2); color:#fff; border:none; border-radius:8px; padding:9px 18px;
+  font-size:13.5px; cursor:pointer; font-weight:600; margin-top:6px;
+}
+.check-btn:hover{background:var(--accent);}
+.answer-key{
+  margin-top:10px; padding:12px 14px; border-radius:var(--radiusS); background:var(--card2);
+  border:1px solid var(--border2); font-size:13px; color:var(--text2); display:none;
+}
+.answer-key.show{display:block;}
+.answer-key strong{color:var(--teal);}
+
+footer-spacer{display:block; height:1px;}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+
+<div class="hero">
+  <h1>Repaso integral · Examen final de Contaminación Atmosférica</h1>
+  <p>UNALM · Basado en exámenes finales reales (jul. 2023, dic. 2024) y los 4 bloques teóricos del curso. No es un examen idéntico — es una guía de estudio con la misma estructura y nivel de dificultad.</p>
+  <div class="meta">
+    <span class="tag">Micrometeorología y modelos</span>
+    <span class="tag">Calidad del aire interior</span>
+    <span class="tag">Ruido ambiental</span>
+    <span class="tag">Contaminantes prioritarios</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label"><span id="progressText">0 de 30 preguntas de quiz respondidas</span><span id="progressScore">0 aciertos</span></div>
+</div>
+
+<div class="navtabs" id="navtabs"></div>
+
+<div id="blocks">
+
+<section class="block active" id="meteo">
+
+<div class="section-title"><div class="num">1</div><h2>Micrometeorología, estabilidad y modelos de dispersión</h2></div>
+
+<div class="card">
+<h3>Capa límite planetaria (PBL) y turbulencia</h3>
+<p>La PBL es la parte más baja de la troposfera (1–3 km), directamente influenciada por la superficie. Ahí se emiten, mezclan y eliminan los contaminantes. La turbulencia (no la difusión molecular) es la responsable real de la dispersión en exteriores.</p>
+<div class="grid2">
+<div class="minicard"><h4>Turbulencia mecánica</h4><p>Fricción del viento contra el suelo, edificios, vegetación. Domina cerca del suelo y en terrenos rugosos. Genera remolinos de tamaño más regular.</p></div>
+<div class="minicard"><h4>Turbulencia térmica</h4><p>Convección por calentamiento solar desigual del suelo. Domina en días soleados. Produce mayor dispersión vertical, remolinos más grandes.</p></div>
+</div>
+<div class="callout warn"><strong>Error común</strong>Pensar que la difusión molecular importa en exteriores. Es ~10⁶ veces más lenta que la turbulenta y solo relevante en aire muy quieto (tuberías, capa muy próxima a la fuente).</div>
+</div>
+
+<div class="card">
+<h3>Estabilidad atmosférica — gradientes y número de Richardson</h3>
+<p>La estabilidad se determina comparando el gradiente ambiental real (ELR) con los gradientes adiabáticos de una parcela de aire.</p>
+<div class="formula">DALR (aire seco) = 9.8 °C/km  (constante)
+SALR (aire saturado) = 4-9 °C/km, media ≈ 5 °C/km
+ELR &lt; DALR  →  atmósfera ESTABLE
+ELR = DALR  →  atmósfera NEUTRA
+ELR &gt; DALR  →  atmósfera INESTABLE</div>
+<div class="formula">Ri = (g/T) · (∂θ/∂z) / (∂u/∂z)²
+
+Ri muy negativo  → convección dominante, penacho se dispersa rápido (inestable)
+Ri ≈ 0           → turbulencia mecánica domina (neutro)
+Ri &gt; 0.25-0.5    → la turbulencia se amortigua/desaparece (estable, contaminantes se acumulan)</div>
+</div>
+
+<div class="card">
+<h3>Clases de estabilidad de Pasquill-Gifford (A-F)</h3>
+<table class="datatable">
+<tr><th>Clase</th><th>Condición</th><th>Efecto en σy, σz</th></tr>
+<tr><td><span class="badge b-coral">A-C</span></td><td>Inestable — sol fuerte, viento débil</td><td>Crecen rápido con x → penacho ancho, dispersión alta</td></tr>
+<tr><td><span class="badge b-amber">D</span></td><td>Neutra — nublado o viento moderado</td><td>Crecimiento intermedio</td></tr>
+<tr><td><span class="badge b-purple">E-F</span></td><td>Estable — noche despejada, calma</td><td>Crecen lento → penacho estrecho, concentraciones máximas más altas cerca de la fuente</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Inversión térmica y los 6 tipos de penacho</h3>
+<p>Inversión = la temperatura AUMENTA con la altura (lo opuesto al gradiente normal), actuando como "tapa" que impide la mezcla vertical. En Lima, la inversión costera (subsidencia + corriente de Humboldt) es crónica.</p>
+<div class="grid3">
+<div class="minicard"><h4>Looping (bucle)</h4><p>Atmósfera inestable (A/B). Sube y baja con los remolinos convectivos.</p></div>
+<div class="minicard"><h4>Coning (cónico)</h4><p>Neutra o ligeramente inestable (C/D). Expansión simétrica moderada.</p></div>
+<div class="minicard"><h4>Fanning (abanico)</h4><p>Estable (E/F). Se extiende horizontalmente, sin mezcla vertical. Mañanas.</p></div>
+<div class="minicard"><h4>Lofting (ascendente)</h4><p>Inversión abajo, inestable arriba. Lo emitido sobre la inversión se dispersa bien.</p></div>
+<div class="minicard"><h4>Fumigation (fumigación)</h4><p>Penacho justo bajo inversión que se erosiona al amanecer. El más peligroso: concentraciones altas súbitas.</p></div>
+<div class="minicard"><h4>Trapping (atrapante)</h4><p>Confinado entre inversión superficial y de subsidencia. Concentraciones muy altas en la capa intermedia.</p></div>
+</div>
+</div>
+
+<div class="card">
+<h3>Elevación de la pluma: momentum y flotabilidad</h3>
+<p>Las dos características que determinan cuánto se eleva el penacho sobre la chimenea física.</p>
+<div class="grid2">
+<div class="minicard"><h4>Momentum</h4><p>Relacionado a la velocidad de emisión del gas en la chimenea (componente inercial/vertical de salida).</p></div>
+<div class="minicard"><h4>Flotabilidad (buoyancy)</h4><p>Relacionado a la diferencia de temperatura entre el gas de la pluma (Ts) y el aire ambiente (Ta), y a la densidad de la pluma. A mayor (Ts−Ta), mayor flotabilidad y mayor elevación.</p></div>
+</div>
+<div class="callout exam"><strong>Pregunta típica de examen</strong>Mencione y defina las dos características físicas que influyen en la elevación de la pluma (2 ptos) — aparece literal en el examen de jul. 2023.</div>
+</div>
+
+<div class="card">
+<h3>Enfoques de modelado: Euleriano vs. Lagrangiano</h3>
+<table class="datatable">
+<tr><th></th><th>Euleriano</th><th>Lagrangiano</th></tr>
+<tr><td>Marco de referencia</td><td>Puntos fijos en el espacio (cuadrícula)</td><td>Sigue parcelas/partículas de aire en movimiento</td></tr>
+<tr><td>Modelos típicos</td><td>CMAQ, GEOS-Chem</td><td>HYSPLIT, FLEXPART</td></tr>
+<tr><td>Mejor para</td><td>Calidad del aire regional, largo plazo</td><td>Fuentes puntuales, terrenos complejos, análisis fuente-receptor</td></tr>
+<tr><td>Limitación</td><td>Alto costo computacional a alta resolución</td><td>Requiere muchas partículas para escala regional</td></tr>
+</table>
+<div class="callout warn"><strong>Cuidado en el examen</strong>"Todos los modelos se basan en balances de energía" es FALSO — se basan en balances de materia/masa, no de energía.</div>
+</div>
+
+<div class="card">
+<h3>Modelo de celda fija estacionaria (balance de materia)</h3>
+<p>Representa una ciudad como una caja W×L×H con mezcla completa y homogénea. Útil para emisiones difusas (tráfico, calefacción residencial).</p>
+<div class="formula">Balance:  u·b·W·H + q·W·L − u·c·W·H = 0
+                entra              sale
+
+Despejando c:   c = b + (q·L)/(u·H)
+
+c: concentración [μg/m³]   b: concentración de fondo
+q: emisión por área [g·s⁻¹·m⁻²]   L: longitud en dirección del viento [m]
+u: velocidad del viento [m/s]   H: altura de mezcla [m]</div>
+<div class="callout danger"><strong>Resultado contraintuitivo (clave en examen)</strong>c es INDEPENDIENTE del ancho W de la ciudad. Solo L (longitud en la dirección del viento) importa. Aumentar el ancho no empeora la concentración promedio.</div>
+</div>
+
+<div class="card">
+<h3>Modelo gaussiano de dispersión (penacho de chimeneas)</h3>
+<p>El más usado en la práctica profesional para fuentes puntuales. Asume distribución normal de concentraciones en y (transversal) y z (vertical).</p>
+<div class="formula">c(x,0,0,H) = Q / (π·σy·σz·u) · exp[−0.5·(H/σz)²]
+
+Q: tasa de emisión [g/s]      u: velocidad del viento a la altura de chimenea [m/s]
+σy, σz: coeficientes de dispersión [m] (dependen de x y estabilidad)
+H: altura efectiva de emisión [m]</div>
+<div class="callout warn"><strong>Error común</strong>Usar la velocidad del viento medida a 10 m directamente en la fórmula. Hay que ajustarla a la altura de la chimenea con la ley de potencia: u(z) = u(za)·(z/za)^p, con p ≈ 1/7 en condiciones neutras.</div>
+<div class="callout exam"><strong>Supuestos del modelo gaussiano (pregunta típica "marque la incorrecta")</strong>Asume: viento y emisión constantes, terreno PLANO (no accidentado), deposición insignificante, penacho de forma cónica. "El terreno es accidentado" es la opción FALSA tipo trampa.</div>
+</div>
+
+</section>
+
+<section class="block" id="interior">
+
+<div class="section-title"><div class="num">2</div><h2>Calidad del aire en interiores</h2></div>
+
+<div class="card">
+<h3>¿Por qué importa más que el exterior?</h3>
+<p>Pasamos 80-90% del tiempo en interiores. Las concentraciones pueden ser 2 a 5 veces (hasta 100 veces) más altas que en exteriores por el confinamiento sin dilución suficiente.</p>
+</div>
+
+<div class="card">
+<h3>Humo de tabaco: segunda y tercera mano</h3>
+<div class="grid2">
+<div class="minicard"><h4>Segunda mano (ETS)</h4><p>Humo que se produce por la combustión de un cigarrillo y se respira directamente en un ambiente cerrado mientras alguien fuma. Carcinógeno Grupo 1 de la OMS — no existe nivel seguro.</p></div>
+<div class="minicard"><h4>Tercera mano</h4><p>Residuos tóxicos que se depositan en superficies, ropa y muebles tras fumar, y se re-emiten o reaccionan con otros compuestos en entornos amplios incluso después de que el humo visible desapareció.</p></div>
+</div>
+<p style="margin-top:10px;">La corriente lateral (humo que emana directamente del cigarrillo) tiene concentraciones más altas de tóxicos que la corriente principal inhalada por el fumador.</p>
+</div>
+
+<div class="card">
+<h3>Gas radón (Rn-222)</h3>
+<p>Gas noble radiactivo, incoloro e inodoro, producido por descomposición del uranio-238 del suelo. El daño lo causan sus productos de descomposición sólidos (polonio-218, etc.), no el radón en sí mismo.</p>
+<div class="grid2">
+<div class="minicard"><h4>Ventilación wind-driven</h4><p>Impulsada por el viento. Favorece el transporte de radón hacia el exterior — reduce su concentración interior.</p></div>
+<div class="minicard"><h4>Ventilación stack-driven</h4><p>Impulsada por efecto chimenea (diferencias de temperatura/densidad dentro de la vivienda). Puede hacer que el radón asciende y se concentre en pisos superiores.</p></div>
+</div>
+<p style="margin-top:10px;">Nivel de acción EPA: 4 pCi/L. Es la 2ª causa de cáncer de pulmón en EE.UU. después del tabaco — y el riesgo se multiplica (no se suma) en fumadores expuestos a radón.</p>
+</div>
+
+<div class="card">
+<h3>Monóxido de carbono (CO) — "el asesino silencioso"</h3>
+<p>Gas incoloro e inodoro de combustión incompleta. Su afinidad por la hemoglobina es 240 veces mayor que la del O₂, formando carboxihemoglobina (COHb) y produciendo hipoxia celular.</p>
+<div class="callout danger"><strong>Contexto peruano</strong>Los calentadores de agua a gas (terma de paso) sin ventilación adecuada en baños pequeños son la causa más frecuente de intoxicación por CO en Lima.</div>
+</div>
+
+<div class="card">
+<h3>Síndrome del Edificio Enfermo (SEE)</h3>
+<p>Al menos el 20% de los ocupantes presenta síntomas crónicos (dolor de cabeza, fatiga, irritación de garganta y ojos) que mejoran al salir del edificio, sin causa específica única identificable.</p>
+<h3 style="margin-top:14px;">Tres causas principales (pregunta frecuente en examen)</h3>
+<table class="datatable">
+<tr><th>Causa</th><th>Detalle</th></tr>
+<tr><td>Fuentes de emisión</td><td>VOCs de mobiliario, vapores de limpieza, gases de combustión, PM en suspensión</td></tr>
+<tr><td>Ventilación inadecuada</td><td>Edificios sellados para eficiencia energética que reciclan aire contaminado (no cumplen ASHRAE 62.1)</td></tr>
+<tr><td>Filtración inadecuada</td><td>Sistemas HVAC sin mantenimiento, filtros deficientes que no retienen contaminantes ni bioaerosoles</td></tr>
+</table>
+<div class="callout warn"><strong>No confundir</strong>El SEE es distinto de la "Enfermedad relacionada con el edificio" (BRI), que sí tiene una causa específica identificable (ej. legionelosis).</div>
+</div>
+
+<div class="card">
+<h3>Contaminantes biológicos (bioaerosoles)</h3>
+<div class="grid3">
+<div class="minicard"><h4>Alérgicas</h4><p>Rinitis, asma, neumonitis. Ácaros, caspa de mascotas, cucarachas.</p></div>
+<div class="minicard"><h4>Infecciosas</h4><p>Gripe, tuberculosis. Transmisión aérea en espacios confinados mal ventilados.</p></div>
+<div class="minicard"><h4>Tóxicas</h4><p>Micotoxinas de moho (Stachybotrys), fiebre por humidificador (endotoxinas bacterianas).</p></div>
+</div>
+<p style="margin-top:10px;">Control clave: humedad relativa 30-60%. Sobre 60% favorece exponencialmente el moho.</p>
+</div>
+
+<div class="card">
+<h3>Contaminación del aire doméstico (CAD) — biomasa</h3>
+<p>2,300 millones de personas cocinan con biomasa o combustibles contaminantes. En 2020: 3.2 millones de muertes atribuibles, 237,000 en menores de 5 años. En Perú es crítico en Puno, Cusco y Huancavelica (leña y bosta de vaca).</p>
+<p>Las cocinas mejoradas a leña (CML) reducen el consumo de leña 50-70% y canalizan el humo al exterior. La UNALM tiene un laboratorio de certificación de cocinas mejoradas.</p>
+</div>
+
+<div class="card">
+<h3>Jerarquía de control de la calidad del aire interior</h3>
+<div class="formula">1. Control de fuente (más efectivo)  →  eliminar o sustituir el material contaminante
+2. Ventilación mejorada               →  aumentar tasa de intercambio de aire (ACH)
+3. Purificación / filtración (último recurso)  →  filtros HEPA (≥0.3 µm, 99.97%), carbón activado, UV-C</div>
+</div>
+
+</section>
+
+<section class="block" id="ruido">
+
+<div class="section-title"><div class="num">3</div><h2>Ruido ambiental</h2></div>
+
+<div class="card">
+<h3>Magnitudes acústicas fundamentales</h3>
+<div class="formula">Nivel de Potencia Sonora (de la fuente):
+Lw = 10·log(W / W₀)  [dB]    W₀ = 10⁻¹² W
+
+Nivel de Intensidad (del medio):
+LI = 10·log(I / I₀)  [dB]    I₀ = 10⁻¹² W/m²    donde  I = W / (4π·r²)
+
+Nivel de Presión Sonora (del receptor):
+Lp = 10·log(p² / p₀²)  [dB]    p₀ = 2×10⁻⁵ Pa
+
+En campo libre: LI = Lp</div>
+<div class="callout warn"><strong>Error común</strong>Confundir potencia sonora (W — característica fija de la fuente) con intensidad sonora (W/m² — depende de la distancia r al receptor, ley del cuadrado inverso).</div>
+</div>
+
+<div class="card">
+<h3>Suma logarítmica de fuentes (NO es suma aritmética)</h3>
+<div class="formula">NPS_total = 10·log( Σ 10^(NPSᵢ/10) )   [dB]
+
+Para aislar una fuente (método de sustracción):
+NPS_fuente = 10·log( 10^(L_total/10) − 10^(L_sin_fuente/10) )</div>
+<div class="callout danger"><strong>Trampa clásica</strong>Dos fuentes de 85 dB juntas NO dan 170 dB. Dan ≈88 dB (10·log(2×10^8.5)).</div>
+</div>
+
+<div class="card">
+<h3>Nivel continuo equivalente — LAeq,T</h3>
+<p>Nivel de ruido constante hipotético que contendría la misma energía sonora que el ruido fluctuante real durante el período T. Es el indicador normativo fundamental.</p>
+<div class="formula">LAeq,T = 10·log[ (1/T) · Σ tᵢ·10^(Lᵢ/10) ]   [dBA]</div>
+</div>
+
+<div class="card">
+<h3>Normativa peruana — D.S. 085-2003-PCM (ECA Ruido)</h3>
+<table class="datatable">
+<tr><th>Zonificación</th><th>Diurno</th><th>Nocturno</th></tr>
+<tr><td>Zona especial (hospitales, colegios)</td><td class="num-cell">50 dBA</td><td class="num-cell">40 dBA</td></tr>
+<tr><td>Zona residencial</td><td class="num-cell">60 dBA</td><td class="num-cell">50 dBA</td></tr>
+<tr><td>Zona comercial</td><td class="num-cell">70 dBA</td><td class="num-cell">60 dBA</td></tr>
+<tr><td>Zona industrial</td><td class="num-cell">80 dBA</td><td class="num-cell">70 dBA</td></tr>
+</table>
+<p>Medido en LAeq, ponderación A, modo Fast, sonómetro clase 2 mínimo.</p>
+</div>
+
+<div class="card">
+<h3>Propagación: temperatura, viento y obstáculos</h3>
+<div class="grid2">
+<div class="minicard"><h4>Inversión térmica (Lima de noche)</h4><p>La temperatura aumenta con la altura → el sonido se refracta hacia abajo → mayor alcance del ruido a nivel del suelo durante la noche.</p></div>
+<div class="minicard"><h4>Efecto viento</h4><p>A favor del viento: el sonido se curva hacia el suelo (más exposición). Contra el viento: se curva hacia arriba (zona de sombra acústica).</p></div>
+</div>
+<div class="callout warn"><strong>Error común</strong>Asumir que una barrera acústica siempre funciona. Si la fuente es de baja frecuencia (λ grande), la onda difracta fácilmente sobre y alrededor de la barrera — la protección es mínima.</div>
+</div>
+
+<div class="card">
+<h3>Efectos en salud por nivel (dBA)</h3>
+<table class="datatable">
+<tr><th>Rango dBA</th><th>Efecto</th></tr>
+<tr><td>0-30</td><td>Sin efectos negativos</td></tr>
+<tr><td>30-50</td><td>Dificultad para conciliar el sueño</td></tr>
+<tr><td>60-70</td><td>Molestia y trastorno del habla</td></tr>
+<tr><td>80-90</td><td>Riesgo auditivo con exposición prolongada</td></tr>
+<tr><td>90-110</td><td>Daño auditivo seguro (PAIR — umbral &gt;85 dBA × 8h/día)</td></tr>
+<tr><td>&gt;130</td><td>Rotura timpánica, lesiones físicas inmediatas</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Mitigación — tres niveles de control</h3>
+<div class="formula">1. Control en la FUENTE        →  motores silenciosos, silenciadores, mantenimiento
+2. Control en la TRANSMISIÓN   →  barreras acústicas, pantallas vegetales, distancia de retiro
+3. Protección del RECEPTOR     →  EPP auditivo, ventanas dobles (último recurso, menos deseable en salud pública)</div>
+</div>
+
+</section>
+
+<section class="block" id="contam">
+
+<div class="section-title"><div class="num">4</div><h2>Contaminantes atmosféricos prioritarios</h2></div>
+
+<div class="card">
+<p>Esta tabla aparece, en alguna versión, en <strong>todos</strong> los exámenes finales revisados (jul. 2023 y dic. 2024): causa de formación, fuente principal, y periodo-valor del ECA Perú. Es la sección con más puntos (6.0 de 25 en los exámenes recientes) — domínala bien.</p>
+</div>
+
+<div class="card">
+<h3>Tabla integradora — causa, fuente y ECA Perú</h3>
+<table class="datatable">
+<tr><th>Contaminante</th><th>Causa de formación</th><th>Fuente principal</th><th>ECA Perú (periodo / valor)</th></tr>
+<tr><td><strong>O₃</strong></td><td>COV + NOx + energía solar (radiación UV) — contaminante secundario</td><td>Reacción fotoquímica en la atmósfera a partir de precursores de tráfico vehicular</td><td class="num-cell">8h / 100 µg/m³</td></tr>
+<tr><td><strong>CO</strong></td><td>Combustión incompleta de combustibles fósiles</td><td>Vehículos, industrias</td><td class="num-cell">1h / 30,000 µg/m³</td></tr>
+<tr><td><strong>NOx</strong></td><td>Reacción de N₂ + O₂ a alta temperatura (combustión)</td><td>Industrias, fertilizantes, vehículos</td><td class="num-cell">1h / 200 µg/m³ (NO₂)</td></tr>
+<tr><td><strong>SOx</strong></td><td>Quema de cualquier combustible que contenga azufre en su interior</td><td>Calderas, hornos industriales</td><td class="num-cell">24h / 250 µg/m³</td></tr>
+<tr><td><strong>PM₁₀</strong></td><td>Quema de combustión, trituración, procesos mecánicos</td><td>Calderas de centrales eléctricas, canteras, construcción</td><td class="num-cell">24h / 100 µg/m³</td></tr>
+<tr><td><strong>PM₂.₅</strong></td><td>Combustión incompleta, procesos secundarios (igual que O₃)</td><td>Vehículos diésel, quema de biomasa</td><td class="num-cell">24h / 50 µg/m³</td></tr>
+</table>
+<div class="callout exam"><strong>Cómo memorizar la causa de cada uno</strong>O₃ es SECUNDARIO (se forma en el aire, no se emite directo) — necesita luz solar + precursores. SOx siempre se asocia a "azufre EN el combustible". NOx siempre a "alta temperatura de combustión" (N₂ del aire reacciona con O₂).</div>
+</div>
+
+<div class="card">
+<h3>Métodos de monitoreo según tecnología</h3>
+<table class="datatable">
+<tr><th>Parámetro</th><th>Periodo típico</th><th>Método de referencia</th></tr>
+<tr><td>NO₂</td><td>1h</td><td>Quimioluminiscencia</td></tr>
+<tr><td>O₃</td><td>1h</td><td>Fotometría UV (radiación ultravioleta)</td></tr>
+<tr><td>SO₂</td><td>24h</td><td>Fluorescencia UV</td></tr>
+<tr><td>CO</td><td>1h</td><td>Espectroscopía infrarroja no dispersiva (NDIR)</td></tr>
+<tr><td>PM₁₀ / PM₂.₅</td><td>24h</td><td>Muestreador de alto volumen (gravimétrico) o métodos beta-atenuación</td></tr>
+</table>
+<div class="callout warn"><strong>Cuidado</strong>No mezclar el método de referencia de O₃ (fotometría/radiación UV) con el de NO₂ (quimioluminiscencia) — es un error frecuente en los exámenes que revisé.</div>
+</div>
+
+<div class="card">
+<h3>Métodos de monitoreo por grado de exactitud</h3>
+<table class="datatable">
+<tr><th>Parámetro</th><th>Tipo de método</th><th>Denominación genérica</th></tr>
+<tr><td>PM₁₀</td><td>Referencia</td><td>Muestreador de alto volumen (gravimétrico)</td></tr>
+<tr><td>CO</td><td>Referencia</td><td>Analizador NDIR / tren de muestreo de gases</td></tr>
+<tr><td>Gases en general</td><td>Equivalente</td><td>Sensores electroquímicos calibrados contra el método de referencia</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Procesos de revisión de los Estándares Nacionales de Calidad de Aire</h3>
+<table class="datatable">
+<tr><th>Proceso</th><th>Qué evalúa</th></tr>
+<tr><td>Planificación</td><td>Define alcance y cronograma de la revisión del estándar</td></tr>
+<tr><td>Evaluación científica integrada</td><td>Revisión de evidencia toxicológica y epidemiológica más reciente</td></tr>
+<tr><td>Evaluación de riesgo / exposición</td><td>Cuantifica el riesgo poblacional a distintos niveles de concentración</td></tr>
+<tr><td>Evaluación de políticas</td><td>Analiza alternativas regulatorias y su factibilidad de implementación</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Métodos de monitoreo de calidad de aire (definición general, examen jul. 2023)</h3>
+<p>Determinación de parámetros físicos, químicos o biológicos presentes en el aire que están dentro del rango permitido para no afectar a la persona expuesta ni al ambiente.</p>
+</div>
+
+</section>
+
+<section class="block" id="ejercicios">
+
+<div class="section-title"><div class="num">5</div><h2>Ejercicios numéricos resueltos paso a paso</h2></div>
+
+<div class="card">
+<h3>Tipo A — Celda fija estacionaria: deducción de la fórmula</h3>
+<p>Este ejercicio (deducir c a partir del balance de materia) salió en el examen de dic. 2024 y vale 2 puntos. La clave es identificar qué entra y qué sale de la caja de control.</p>
+<div class="formula">Balance de materia en estado estacionario (dC/dt = 0):
+
+  [entra]                    [sale]
+u·b·W·H  +  q·W·L     −     u·c·W·H   =  0
+(viento     (emisión          (viento
+ trae        de la           se lleva
+ fondo)      ciudad)         contaminante)
+
+Dividiendo todo entre u·H:
+
+  b  +  (q·L)/(u·H)  −  c  =  0
+
+Despejando:
+
+  c = b + (q·L)/(u·H)</div>
+<div class="callout exam"><strong>Cómo no perder puntos aquí</strong>El error más común (visto en una de las fotos) es dividir mal los términos o no simplificar W (se cancela en los tres términos). Escribe cada paso explícitamente — los profesores dan puntaje parcial por pasos intermedios correctos.</div>
+</div>
+
+<div class="card">
+<h3>Tipo A — Aplicación numérica</h3>
+<p>Una ciudad tiene L=10 km, W=5 km, H=500 m, u=3 m/s, q=2×10⁻⁵ g·s⁻¹·m⁻² y b=0. Calcule c.</p>
+<div class="formula">c = b + (q·L)/(u·H)
+c = 0 + (2×10⁻⁵ g/s/m² × 10,000 m) / (3 m/s × 500 m)
+c = (0.2 g/s/m) / (1500 m²/s)
+c = 1.33×10⁻⁴ g/m³ = 133 µg/m³
+
+Si el viento soplara perpendicular (L y W se intercambian, L=5km):
+c = (2×10⁻⁵ × 5,000) / (3 × 500) = 0.1/1500 = 6.67×10⁻⁵ g/m³ = 66.7 µg/m³
+
+→ La concentración CAMBIA porque ahora L (la dirección del viento) es más corta.
+   Confirma que c depende de L, no de W per se — depende de cuál de los dos lados
+   queda alineado con el viento.</div>
+</div>
+
+<div class="card">
+<h3>Tipo B — Ruido: nivel de potencia, intensidad y presión sonora</h3>
+<p>Una segadora emite una potencia acústica de 0.02 W. El receptor está a 15 m. Calcule Lw, LI (y Lp en campo libre).</p>
+<div class="formula">a) Nivel de potencia sonora (Lw) — NO depende de la distancia:
+   Lw = 10·log(0.02 / 10⁻¹²) = 10·log(2×10¹⁰)
+   Lw = 103.01 dB
+
+b) Intensidad a 15 m:
+   I = W / (2π·r²)   [semiesfera, fuente sobre el suelo]
+   I = 0.02 / (2×3.1416×15²) = 0.02 / 1,413.7
+   I = 1.415×10⁻⁵ W/m²
+
+   LI = 10·log(1.415×10⁻⁵ / 10⁻¹²) = 10·log(1.415×10⁷)
+   LI = 71.51 dB
+
+c) En campo libre, Lp ≈ LI = 71.51 dBA</div>
+<div class="callout warn"><strong>Ojo con la geometría</strong>Si la fuente irradia en todas direcciones (esfera completa): I = W/(4π·r²). Si la fuente está sobre el suelo y solo irradia hacia el semiespacio superior (caso típico de maquinaria en el piso, como esta segadora): I = W/(2π·r²). Revisa cuál asume tu profesor — en el examen de dic. 2024 se usó 2π.</div>
+</div>
+
+<div class="card">
+<h3>Tipo C — Aislar la contribución de una fuente (sustracción logarítmica)</h3>
+<p>Tres equipos (bomba, generador, segadora) suenan juntos a 91.51 dB. Sin la bomba: 91.19 dB. Sin la segadora: 90.41 dB. Halle el nivel de cada equipo por separado.</p>
+<div class="formula">L1+L2+L3 = 91.51 dB   (I)      [los tres]
+L2+L3     = 91.19 dB   (II)     [sin bomba → aporte de la bomba = I - II]
+L1+L2     = 90.41 dB   (III)    [sin segadora → aporte de segadora = I - III]
+
+Bomba (L1) = 10·log( 10^(91.51/10) − 10^(91.19/10) )
+           = 10·log( 1.4151×10⁹ − 1.3161×10⁹ )
+           = 10·log( 9.90×10⁷ )
+L1 ≈ 80.02 dB
+
+Segadora (L3) = 10·log( 10^(91.51/10) − 10^(90.41/10) )
+              = 10·log( 1.4151×10⁹ − 1.0985×10⁹ )
+              = 10·log( 3.166×10⁸ )
+L3 ≈ 85.01 dB
+
+Generador (L2) se obtiene de (II): L2 = 10·log(10^(91.19/10) − 10^(L3/10))</div>
+<div class="callout exam"><strong>Estrategia para este tipo de problema</strong>Siempre arma primero tus tres ecuaciones (total, total-menos-cada-equipo) ANTES de calcular. Resta exponenciales (10^(L/10)), nunca restes los dB directamente — esa es la trampa principal de este ejercicio.</div>
+</div>
+
+</section>
+
+<section class="block" id="quiz1">
+
+<div class="section-title"><div class="num">I</div><h2>Quiz — Parte I: marcar la alternativa correcta (estilo V/F y opción múltiple)</h2></div>
+<div class="card"><p>Igual que en los exámenes reales: algunas son opción múltiple, otras Verdadero/Falso. Haz clic en tu respuesta para ver el feedback inmediato.</p></div>
+
+<div id="quiz1-container"></div>
+
+</section>
+
+<section class="block" id="quiz2">
+
+<div class="section-title"><div class="num">II</div><h2>Quiz — Parte II: completar enunciados</h2></div>
+<div class="card"><p>Escribe tu respuesta y pulsa "comparar con la clave". No hay corrector automático de texto libre — la idea es que practiques redactar y luego te autoevalúes contra la respuesta modelo.</p></div>
+
+<div id="quiz2-container"></div>
+
+</section>
+
+<section class="block" id="quiz3">
+
+<div class="section-title"><div class="num">III</div><h2>Quiz — Parte III: resolver ejercicios</h2></div>
+<div class="card"><p>Ejercicios de cálculo nuevos (distintos números a los ya resueltos en la sección 5), para que practiques el procedimiento completo tú mismo antes de revisar la solución.</p></div>
+
+<div id="quiz3-container"></div>
+
+</section>
+
+</div>
+</div>
+<script>
+const TABS = [
+  {id:'meteo', label:'1. Micrometeorología y modelos'},
+  {id:'interior', label:'2. Calidad del aire interior'},
+  {id:'ruido', label:'3. Ruido ambiental'},
+  {id:'contam', label:'4. Contaminantes prioritarios'},
+  {id:'ejercicios', label:'5. Ejercicios resueltos'},
+  {id:'quiz1', label:'Quiz parte I (V/F)'},
+  {id:'quiz2', label:'Quiz parte II (enunciados)'},
+  {id:'quiz3', label:'Quiz parte III (cálculo)'}
+];
+
+const navtabs = document.getElementById('navtabs');
+TABS.forEach((t,i)=>{
+  const b = document.createElement('div');
+  b.className = 'navtab' + (i===0?' active':'');
+  b.textContent = t.label;
+  b.dataset.id = t.id;
+  b.onclick = ()=> showBlock(t.id);
+  navtabs.appendChild(b);
+});
+
+function showBlock(id){
+  document.querySelectorAll('section.block').forEach(s=>s.classList.toggle('active', s.id===id));
+  document.querySelectorAll('.navtab').forEach(b=>b.classList.toggle('active', b.dataset.id===id));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+let totalAnswered = 0;
+let totalCorrect = 0;
+let totalQuestions = 0;
+
+function registerQuestion(){ totalQuestions++; updateProgress(); }
+function recordAnswer(wasCorrect, alreadyAnswered){
+  if(!alreadyAnswered){ totalAnswered++; if(wasCorrect) totalCorrect++; }
+  updateProgress();
+}
+function updateProgress(){
+  const pct = totalQuestions ? Math.round((totalAnswered/totalQuestions)*100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = totalAnswered + ' de ' + totalQuestions + ' preguntas de quiz respondidas';
+  document.getElementById('progressScore').textContent = totalCorrect + ' aciertos';
+}
+
+const Q1 = [
+  {
+    type:'mc', pts:'0.5 pto',
+    text:'¿Cuál de los siguientes modelos simula el transporte y la química atmosférica generando concentraciones horarias para cada celda del dominio de simulación?',
+    opts:['Modelos eulerianos','Modelos lagrangianos','Modelos gaussianos','Todas son verdaderas'],
+    correct:0,
+    note:'Los modelos eulerianos (ej. CMAQ) resuelven la química y el transporte en una cuadrícula fija celda por celda, generando series horarias de concentración.'
+  },
+  {
+    type:'mc', pts:'0.5 pto',
+    text:'El modelo gaussiano supone que (marque la opción INCORRECTA):',
+    opts:['La velocidad y dirección del viento son constantes','Las tasas de emisión son constantes','El terreno es accidentado','La deposición es insignificante'],
+    correct:2,
+    note:'El modelo gaussiano supone terreno PLANO, no accidentado. Esta es la opción falsa que se repite en ambos exámenes de dic. 2024 revisados.'
+  },
+  {
+    type:'vf', pts:'0.5 pto',
+    text:'El Modelo gaussiano considera el transporte por dos causas: viento y turbulencia atmosférica.',
+    correct:true,
+    note:'Verdadero. El transporte es por el viento medio; la dispersión es por turbulencia. El modelo gaussiano integra ambos efectos en su formulación.'
+  },
+  {
+    type:'vf', pts:'0.5 pto',
+    text:'Modelos de celda fija estacionaria pueden estimar concentraciones de contaminantes en una ciudad.',
+    correct:true,
+    note:'Verdadero. Es justamente su aplicación principal: estimar c promedio de emisiones difusas urbanas (ver sección 1, balance de materia).'
+  },
+  {
+    type:'vf', pts:'0.5 pto',
+    text:'Todos los modelos que estiman concentración de contaminantes están basados en balances de energía en el interior de un volumen de aire determinado.',
+    correct:false,
+    note:'Falso. Se basan en BALANCES DE MATERIA (masa), no de energía. Es un distractor muy frecuente en los exámenes revisados.'
+  },
+  {
+    type:'vf', pts:'0.5 pto',
+    text:'Los modelos lagrangianos son muy adecuados para estudiar la dispersión de contaminantes en distancias largas y para analizar el impacto de terrenos complejos en el transporte de contaminantes.',
+    correct:true,
+    note:'Verdadero. Al rastrear parcelas de aire individuales, los modelos lagrangianos (HYSPLIT, FLEXPART) manejan mejor topografías complejas y trayectorias largas que un modelo gaussiano simple.'
+  },
+  {
+    type:'vf', pts:'0.5 pto',
+    text:'En los modelos de celda fija estacionaria la concentración es tanto más alta cuanto más larga sea la ciudad en la dirección del viento, y es dependiente de la anchura.',
+    correct:false,
+    note:'Falso en la segunda parte: c SÍ depende de L (verdadero), pero NO depende de la anchura W (falso). Por eso el enunciado completo es falso — hay que leer ambas cláusulas.'
+  },
+  {
+    type:'vf', pts:'0.5 pto',
+    text:'En un modelo gaussiano la concentración más alta se encuentra en la línea central (eje del penacho, y=0).',
+    correct:true,
+    note:'Verdadero. El término exp[-0.5(y/σy)²] es máximo (=1) cuando y=0, así que la concentración siempre es máxima en la línea central del penacho.'
+  },
+  {
+    type:'vf', pts:'0.5 pto',
+    text:'Los términos σy y σz se basan en coeficientes de estabilidad atmosférica, en los que valores mayores (normalmente a distancias mayores de la fuente) representan un penacho con amplia dispersión y un pico bajo, y viceversa.',
+    correct:true,
+    note:'Verdadero. A mayor distancia de la fuente, σy y σz crecen, el penacho se ensancha y la concentración pico (en el eje) disminuye — son inversamente proporcionales a la altura del pico.'
+  },
+  {
+    type:'vf', pts:'0.5 pto',
+    text:'El enfoque de la columna de humo gaussiana trata de calcular sólo los valores instantáneos de concentraciones.',
+    correct:false,
+    note:'Falso. La columna de humo gaussiana calcula el valor PROMEDIO de concentración (típicamente promedios de 10 min a 1 hora), no valores instantáneos.'
+  },
+  {
+    type:'mc', pts:'1 pto',
+    text:'Una chimenea opera en un día brillante de verano con viento mayor a 6 m/s en Lima. ¿Qué categoría de estabilidad de Pasquill-Gifford corresponde?',
+    opts:['F (muy estable)','A (muy inestable)','C (inestable moderada, porque el viento alto modera algo la inestabilidad)','D (neutral, el viento alto neutraliza la radiación)'],
+    correct:2,
+    note:'Con radiación solar fuerte pero viento ya considerable (>6 m/s), la inestabilidad se modera: corresponde a la categoría C, no A (que requiere viento débil) ni D (que requiere condiciones neutras sin tanta insolación).'
+  },
+  {
+    type:'mc', pts:'1 pto',
+    text:'¿Cuál es la principal diferencia entre el enfoque euleriano y el lagrangiano?',
+    opts:['El euleriano rastrea partículas; el lagrangiano analiza puntos fijos','El euleriano analiza puntos fijos en el espacio; el lagrangiano rastrea parcelas de aire en movimiento','El euleriano solo funciona para fuentes puntuales','Ambos son equivalentes y dan siempre los mismos resultados'],
+    correct:1,
+    note:'El euleriano usa una cuadrícula fija (observador estático); el lagrangiano sigue el movimiento de las parcelas de aire (observador que viaja con el fluido).'
+  }
+];
+
+function renderQ1(){
+  const c = document.getElementById('quiz1-container');
+  Q1.forEach((q,i)=>{
+    registerQuestion();
+    const div = document.createElement('div');
+    div.className = 'quiz-q';
+    let optsHtml = '';
+    if(q.type === 'vf'){
+      optsHtml = '<div class="vf-row">' +
+        '<button class="opt-btn vf" data-val="true">Verdadero</button>' +
+        '<button class="opt-btn vf" data-val="false">Falso</button>' +
+        '</div>';
+    } else {
+      optsHtml = '<div class="opts">' + q.opts.map((o,j)=>
+        '<button class="opt-btn" data-val="'+j+'">'+String.fromCharCode(97+j)+') '+o+'</button>'
+      ).join('') + '</div>';
+    }
+    div.innerHTML =
+      '<div class="qhead"><span class="qnum">Pregunta '+(i+1)+'</span><span class="qpts">'+q.pts+'</span></div>'+
+      '<div class="qtext">'+q.text+'</div>'+
+      optsHtml+
+      '<div class="feedback" id="fb-q1-'+i+'"></div>';
+    c.appendChild(div);
+    let answered = false;
+    div.querySelectorAll('.opt-btn').forEach(btn=>{
+      btn.onclick = ()=>{
+        if(answered) return;
+        answered = true;
+        const val = btn.dataset.val;
+        const isCorrect = (q.type==='vf') ? (val === String(q.correct)) : (parseInt(val) === q.correct);
+        div.querySelectorAll('.opt-btn').forEach(b=>{
+          b.classList.add('disabled');
+          const bval = b.dataset.val;
+          const bIsCorrect = (q.type==='vf') ? (bval === String(q.correct)) : (parseInt(bval) === q.correct);
+          if(bIsCorrect) b.classList.add('correct');
+          else if(b===btn) b.classList.add('incorrect');
+        });
+        const fb = document.getElementById('fb-q1-'+i);
+        fb.className = 'feedback show ' + (isCorrect ? 'ok' : 'bad');
+        fb.textContent = (isCorrect ? 'Correcto. ' : 'Incorrecto. ') + q.note;
+        recordAnswer(isCorrect, false);
+      };
+    });
+  });
+}
+renderQ1();
+
+const Q2 = [
+  {
+    pts:'1.5 ptos',
+    text:'¿Cuáles son las tres principales causas del Síndrome del Edificio Enfermo?',
+    key:'(1) Fuentes de emisión interiores: VOCs de mobiliario, vapores de productos de limpieza, gases de combustión y material particulado en suspensión. (2) Ventilación inadecuada: edificios sellados que no renuevan suficiente aire exterior y reciclan aire contaminado. (3) Filtración inadecuada: sistemas HVAC sin mantenimiento que no retienen contaminantes ni bioaerosoles.'
+  },
+  {
+    pts:'2.0 ptos',
+    text:'¿Cuáles son los procesos de revisión de los Estándares Nacionales de Calidad de Aire?',
+    key:'Planificación (define alcance y cronograma), evaluación científica integrada (revisión de evidencia toxicológica/epidemiológica), evaluación de riesgo/exposición (cuantifica el riesgo poblacional), y evaluación de políticas (analiza alternativas regulatorias factibles).'
+  },
+  {
+    pts:'2.0 ptos',
+    text:'Mencione y defina las dos principales características físicas que influyen en la elevación de la pluma.',
+    key:'Momentum: relacionado a la velocidad de emisión del gas en la chimenea (impulso vertical de salida). Flotabilidad (buoyancy): relacionado a la diferencia de temperatura entre el gas de la pluma y el aire ambiente, y a la densidad de la pluma — a mayor diferencia de temperatura, mayor flotabilidad y mayor elevación de la pluma.'
+  },
+  {
+    pts:'0.5 pto',
+    text:'¿Cuál es la diferencia entre el humo de tabaco de segunda y de tercera mano?',
+    key:'El humo de segunda mano se produce por la combustión directa de un cigarrillo y se respira en el momento, por un no fumador, en un ambiente cerrado mientras alguien fuma. El de tercera mano son los residuos tóxicos que quedan depositados en superficies, ropa y muebles después de fumar, y pueden re-emitirse o reaccionar con otros compuestos del ambiente incluso en espacios más amplios y tiempo después.'
+  },
+  {
+    pts:'1 pto',
+    text:'Explique cómo los fenómenos de ventilación impulsada por el viento (wind-driven) y la ventilación por efecto chimenea (stack-driven) influyen en el movimiento y concentración de radón dentro de una vivienda.',
+    key:'Wind-driven: la presión del viento sobre la edificación favorece el intercambio de aire interior-exterior, ayudando a transportar el radón acumulado hacia afuera y reduciendo su concentración interior. Stack-driven: las diferencias de temperatura y densidad del aire dentro de la vivienda generan un flujo ascendente (efecto chimenea) que puede hacer que el radón, infiltrado desde el suelo, ascienda y se concentre en los pisos superiores de la vivienda.'
+  },
+  {
+    pts:'2 ptos',
+    text:'Mencione las dos principales actividades humanas que emiten mayor CO₂ en Perú.',
+    key:'Energía (generación eléctrica y uso de combustibles fósiles) y uso de suelo, cambio de uso de suelo y silvicultura — deforestación de la Amazonía peruana (UTCUTS: Uso de Tierra, Cambio de Uso de Tierra y Silvicultura). Esta última fue la respuesta que el estudiante de la foto intentó recordar y no completó del todo bien.'
+  }
+];
+
+function renderQ2(){
+  const c = document.getElementById('quiz2-container');
+  Q2.forEach((q,i)=>{
+    registerQuestion();
+    const div = document.createElement('div');
+    div.className = 'quiz-q';
+    div.innerHTML =
+      '<div class="qhead"><span class="qnum">Pregunta '+(i+1)+'</span><span class="qpts">'+q.pts+'</span></div>'+
+      '<div class="qtext">'+q.text+'</div>'+
+      '<textarea id="ta-q2-'+i+'" rows="3" style="width:100%; background:var(--card2); border:1px solid var(--border2); border-radius:8px; color:var(--text); padding:10px; font-size:13.5px; font-family:inherit; resize:vertical;" placeholder="Escribe tu respuesta aquí..."></textarea>'+
+      '<button class="check-btn" id="btn-q2-'+i+'">Comparar con la clave</button>'+
+      '<div class="answer-key" id="key-q2-'+i+'"><strong>Respuesta modelo:</strong><br>'+q.key+'</div>';
+    c.appendChild(div);
+    let answered = false;
+    document.getElementById('btn-q2-'+i).onclick = ()=>{
+      document.getElementById('key-q2-'+i).classList.add('show');
+      if(!answered){ answered = true; recordAnswer(true, false); }
+    };
+  });
+}
+renderQ2();
+
+const Q3 = [
+  {
+    pts:'2 ptos',
+    text:'Una ciudad tiene L = 8 km (dirección del viento), W = 4 km, H = 400 m, u = 2.5 m/s, q = 1.5×10⁻⁵ g·s⁻¹·m⁻², concentración de fondo b = 5 µg/m³. Calcule la concentración de equilibrio c.',
+    key:'c = b + (q·L)/(u·H) = 5×10⁻⁶ g/m³ + (1.5×10⁻⁵ × 8,000)/(2.5 × 400) = 5×10⁻⁶ + (0.12)/(1000) = 5×10⁻⁶ + 1.2×10⁻⁴ g/m³ = 1.25×10⁻⁴ g/m³ ≈ 125 µg/m³ (el aporte de fondo de 5 µg/m³ es pequeño frente al término q·L/(u·H)).'
+  },
+  {
+    pts:'3 ptos',
+    text:'Un generador emite una potencia acústica de 0.05 W. Un receptor se ubica a 10 m de distancia, asumiendo radiación hemisférica (I = W/(2π·r²)). Calcule: a) el nivel de potencia sonora Lw, b) el nivel de intensidad LI a 10 m.',
+    key:'a) Lw = 10·log(0.05/10⁻¹²) = 10·log(5×10¹⁰) = 106.99 dB. b) I = 0.05/(2π×10²) = 0.05/628.3 = 7.96×10⁻⁵ W/m². LI = 10·log(7.96×10⁻⁵/10⁻¹²) = 10·log(7.96×10⁷) = 78.99 dB ≈ 79 dB.'
+  },
+  {
+    pts:'3 ptos',
+    text:'Dos máquinas operan juntas y se mide un NPS total de 92.0 dB. Al apagar la máquina A se mide 89.5 dB (solo máquina B). Calcule el NPS de la máquina A.',
+    key:'L_A = 10·log(10^(92.0/10) − 10^(89.5/10)) = 10·log(1.585×10⁹ − 8.91×10⁸) = 10·log(6.94×10⁸) ≈ 88.41 dB. Verificación: 10·log(10^8.841 + 10^8.95) = 10·log(6.94×10⁸+8.91×10⁸)=10·log(1.585×10⁹)=92.0 dB ✓.'
+  }
+];
+
+function renderQ3(){
+  const c = document.getElementById('quiz3-container');
+  Q3.forEach((q,i)=>{
+    registerQuestion();
+    const div = document.createElement('div');
+    div.className = 'quiz-q';
+    div.innerHTML =
+      '<div class="qhead"><span class="qnum">Ejercicio '+(i+1)+'</span><span class="qpts">'+q.pts+'</span></div>'+
+      '<div class="qtext">'+q.text+'</div>'+
+      '<textarea id="ta-q3-'+i+'" rows="4" style="width:100%; background:var(--card2); border:1px solid var(--border2); border-radius:8px; color:var(--text); padding:10px; font-size:13.5px; font-family:inherit; resize:vertical;" placeholder="Desarrolla tu solución aquí..."></textarea>'+
+      '<button class="check-btn" id="btn-q3-'+i+'">Ver solución paso a paso</button>'+
+      '<div class="answer-key" id="key-q3-'+i+'"><strong>Solución:</strong><br>'+q.key+'</div>';
+    c.appendChild(div);
+    let answered = false;
+    document.getElementById('btn-q3-'+i).onclick = ()=>{
+      document.getElementById('key-q3-'+i).classList.add('show');
+      if(!answered){ answered = true; recordAnswer(true, false); }
+    };
+  });
+}
+renderQ3();
+</script>
+</body>
+</html>
