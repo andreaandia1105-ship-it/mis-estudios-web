@@ -1,0 +1,749 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--color-text-primary)}
+.cv .s1{grid-column:span 1}.cv .s2{grid-column:span 2}.cv .s3{grid-column:1/-1}
+.cv .block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.bh-b{background:#dbeafe;color:#1e3a8a}.bh-g{background:#dcfce7;color:#14532d}.bh-y{background:#fef9c3;color:#713f12}
+.bh-p{background:#ede9fe;color:#4c1d95}.bh-t{background:#ccfbf1;color:#134e4a}.bh-o{background:#ffedd5;color:#7c2d12}
+.bh-r{background:#fee2e2;color:#991b1b}.bh-gr{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){
+.bh-b{background:#1e3a5f;color:#93c5fd}.bh-g{background:#14532d;color:#86efac}.bh-y{background:#422006;color:#fef08a}
+.bh-p{background:#2e1065;color:#c4b5fd}.bh-t{background:#042f2e;color:#5eead4}.bh-o{background:#431407;color:#fed7aa}
+.bh-r{background:#450a0a;color:#fca5a5}.bh-gr{background:#1e293b;color:#94a3b8}}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.def-b{border-color:#3b82f6}.def-g{border-color:#22c55e}.def-y{border-color:#eab308}.def-p{border-color:#8b5cf6}.def-t{border-color:#14b8a6}.def-o{border-color:#f97316}.def-r{border-color:#ef4444}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-b{background:#3b82f6}.dot-g{background:#22c55e}.dot-y{background:#eab308}.dot-p{background:#8b5cf6}.dot-t{background:#14b8a6}.dot-o{background:#f97316}.dot-r{background:#ef4444}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.8;margin:6px 0}
+.rx2{background:#0f172a;color:#a5f3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;line-height:1.8;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:6px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:6px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--color-background-secondary);padding:4px 9px;border-radius:6px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);font-weight:600;font-family:'Oswald',sans-serif;font-size:11px}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.section-bar{grid-column:1/-1;background:var(--color-background-secondary);border-radius:8px;padding:6px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;border-left:4px solid}
+.step{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start}
+.step-num{min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.nb-b{background:#dbeafe;color:#1e3a8a}.nb-g{background:#dcfce7;color:#14532d}.nb-y{background:#fef9c3;color:#713f12}.nb-p{background:#ede9fe;color:#4c1d95}.nb-o{background:#ffedd5;color:#7c2d12}
+.solved{background:#0f172a;color:#e2e8f0;border-radius:9px;padding:10px 13px;font-family:monospace;font-size:10.5px;line-height:1.9;margin:6px 0}
+.solved .c1{color:#7dd3fc}.solved .c2{color:#86efac}.solved .c3{color:#fde68a}.solved .c4{color:#f9a8d4}.solved .ok{color:#4ade80;font-weight:700}
+/* QUIZ */
+#quiz-section{grid-column:1/-1}
+.qcard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 14px;margin-bottom:10px}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-family:'Oswald',sans-serif}
+.qtext{font-size:12.5px;font-weight:600;margin-bottom:9px;line-height:1.5}
+.qbtn{display:block;width:100%;background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;margin-bottom:5px;transition:all 0.2s;color:var(--color-text-primary)}
+.qbtn:hover:not(:disabled){background:var(--color-background-tertiary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.show-correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn:disabled{opacity:0.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;padding:8px 11px;border-radius:0 8px 8px 0;font-size:11.5px;margin-top:8px;line-height:1.5}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a}
+.qfeedback.fail{background:#fef2f2;border-left:3px solid #dc2626}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;margin:6px 0}
+.stat-bar-fill{height:100%;border-radius:20px;background:#22c55e;transition:width 0.4s}
+#quiz-result{display:none;padding:14px;border-radius:10px;margin-top:10px;text-align:center;font-size:13px}
+#reset-btn{background:#0f1e3a;color:white;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;font-size:12px;margin-top:10px;font-family:'Oswald',sans-serif}
+</style>
+
+<div class="cv">
+
+<!-- TÍTULO -->
+<div class="block s3" style="background:#0f1e3a;color:white;border-radius:12px;padding:14px 18px">
+  <div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px">🌬️ DISPERSIÓN DE CONTAMINANTES — MODELO GAUSSIANO & ELEVACIÓN DE PLUMA</div>
+  <div style="font-size:11px;opacity:0.75;margin-bottom:8px">Contaminación Atmosférica · UNALM · Clase 19/06/26</div>
+  <div>
+    <span class="pill" style="background:#1e3a5f;color:#93c5fd">Modelo Gaussiano</span>
+    <span class="pill" style="background:#1e3a5f;color:#93c5fd">Elevación de pluma Δh</span>
+    <span class="pill" style="background:#1e3a5f;color:#93c5fd">Fuerza de empuje F</span>
+    <span class="pill" style="background:#1e3a5f;color:#93c5fd">Perfil de viento</span>
+    <span class="pill" style="background:#1e3a5f;color:#93c5fd">Estabilidad atmosférica</span>
+    <span class="pill" style="background:#1e3a5f;color:#93c5fd">Ejercicios SO₂ y CO</span>
+  </div>
+</div>
+
+<!-- SECCIÓN 1 -->
+<div class="section-bar" style="border-color:#3b82f6">🏗️ PARTE 1: ELEVACIÓN DE PLUMA (Δh)</div>
+
+<!-- BLOQUE: QUÉ ES Δh -->
+<div class="block s2">
+  <span class="bh bh-b">¿Qué es la elevación de pluma?</span>
+  <div class="def def-b">La pluma que sale de una chimenea no viaja horizontalmente desde la boca del tubo: asciende un trecho adicional Δh antes de ser arrastrada por el viento. Esa distancia adicional es la <strong>elevación de pluma</strong>. La altura efectiva de emisión es H = h + Δh, donde h es la altura física de la chimenea.</div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>¿Por qué asciende?</strong> Dos fuerzas lo empujan hacia arriba: (1) la <em>cantidad de movimiento</em> de los gases al salir por la boca (velocidad de salida vs), y (2) la <em>flotabilidad</em> porque los gases están más calientes que el aire ambiente y pesan menos.</span></div>
+  <div class="item"><span class="dot dot-b"></span><span><strong>¿Por qué importa H?</strong> Cuanto mayor sea H, los contaminantes se dispersan más antes de tocar el suelo y la concentración superficial disminuye. Por eso las chimeneas industriales altas reducen la contaminación local aunque no eliminen las emisiones totales.</span></div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la altura efectiva H de la chimenea es mayor que su altura física h y qué dos mecanismos físicos explican esta diferencia.</div>
+</div>
+
+<!-- BLOQUE: Fórmula F -->
+<div class="block s1">
+  <span class="bh bh-y">Fuerza de empuje F (flotabilidad)</span>
+  <div class="def def-y">F cuantifica el "empuje hacia arriba" que reciben los gases calientes por ser menos densos que el aire. Depende de la temperatura del gas vs la del ambiente y del caudal volumétrico.</div>
+  <div class="rx">F = g · r² · Vs · (1 − Tₐ/Tₛ)</div>
+  <div class="item"><span class="dot dot-y"></span><span><strong>g</strong> = 9.81 m/s²</span></div>
+  <div class="item"><span class="dot dot-y"></span><span><strong>r</strong> = radio interior de la chimenea (m)</span></div>
+  <div class="item"><span class="dot dot-y"></span><span><strong>Vs</strong> = velocidad de salida del gas (m/s)</span></div>
+  <div class="item"><span class="dot dot-y"></span><span><strong>Tₐ</strong> = temp. ambiente (K) · <strong>Tₛ</strong> = temp. del gas (K)</span></div>
+  <div class="warn">⚠️ Tₐ y Tₛ DEBEN estar en Kelvin (K = °C + 273). Si las metes en °C el resultado es físicamente incorrecto. El enunciado siempre las da en °C — convierte antes de operar.</div>
+</div>
+
+<!-- SECCIÓN: Distancia de fusión Xf -->
+<div class="block s3">
+  <span class="bh bh-p">Distancia de fusión Xf — ¿hasta dónde asciende la pluma?</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px">
+    <div>
+      <div class="def def-p">Xf es la distancia horizontal desde la chimenea hasta donde la pluma deja de subir y se "fusiona" con la atmósfera. Depende del tamaño de F.</div>
+      <div class="item"><span class="dot dot-p"></span><span>Si F es grande (gases muy calientes o chimenea gruesa), la pluma sube más lejos antes de estabilizarse → mayor Xf.</span></div>
+    </div>
+    <div>
+      <div class="rx">Si F ≥ 55 m⁴/s³:<br/>Xf = 120 × F⁰·⁴</div>
+      <div class="rx" style="margin-top:8px">Si F &lt; 55 m⁴/s³:<br/>Xf = 50 × F⁵/⁸</div>
+    </div>
+    <div>
+      <div class="mini" style="border-top:3px solid #8b5cf6">
+        <strong>Xf en la práctica</strong><br/>Xf define cuál fórmula de Δh usar:<br/>• Si el receptor está antes de Xf → pluma aún asciende → usar fórmulas de ascenso<br/>• Si está después → pluma estabilizada → usar fórmula con Xf
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 2: Fórmulas Δh según estabilidad -->
+<div class="section-bar" style="border-color:#14b8a6">📐 PARTE 2: FÓRMULAS Δh SEGÚN ESTABILIDAD ATMOSFÉRICA</div>
+
+<div class="block s3">
+  <span class="bh bh-t">Dos regímenes: Inestable/Neutro vs Estable</span>
+  <p style="font-size:12px;margin-bottom:10px">La condición atmosférica (diagrama de Pasquill) define qué fórmula usar. El enunciado suele dar la condición directamente o dejar que la infieran del gradiente térmico γ y la velocidad del viento.</p>
+  <div class="two">
+    <div>
+      <div class="mini" style="border-left:3px solid #22c55e">
+        <strong style="color:#14532d">🌤 CONDICIONES INESTABLES Y NEUTRAS (A–D)</strong><br/>Ocurre de día con viento moderado o noche nublada. La atmósfera mezcla activamente la pluma.<br/><br/>
+        <div class="rx">Δh = (1.6 · F¹/³ · Xf²/³) / Ūh</div>
+        <div style="font-size:11px;margin-top:5px"><em>Ūh</em> = velocidad del viento a la altura de la chimenea (m/s)</div>
+      </div>
+    </div>
+    <div>
+      <div class="mini" style="border-left:3px solid #3b82f6">
+        <strong style="color:#1e3a8a">🌙 CONDICIONES ESTABLES (E–F)</strong><br/>Ocurre de noche despejada o madrugada. La atmósfera resiste la mezcla vertical.<br/><br/>
+        <div class="rx">Δh = 2.6 · (F / (Ūh · S))¹/³</div>
+        <div style="font-size:11px;margin-top:5px"><em>S</em> = parámetro de estabilidad (ver abajo)</div>
+      </div>
+    </div>
+  </div>
+  <hr class="divh"/>
+  <div class="two" style="margin-top:8px">
+    <div>
+      <span class="bh bh-y" style="font-size:11px">Parámetro de estabilidad S</span>
+      <div class="rx">S = (g/Tₐ) · (∂Tₛ/∂Z + 0.01 °C/m)</div>
+      <div class="item"><span class="dot dot-y"></span><span>∂Tₛ/∂Z = gradiente de temperatura del gas (°C/m)</span></div>
+      <div class="item"><span class="dot dot-y"></span><span>0.01 °C/m = gradiente adiabático seco (constante)</span></div>
+      <div class="item"><span class="dot dot-y"></span><span>Evaluado a 25°C y 1 atm como condición estándar</span></div>
+    </div>
+    <div>
+      <span class="bh bh-o" style="font-size:11px">¿Cómo decidir la condición?</span>
+      <div class="flow">
+        <span class="fbox">Leer γ (°C/km)</span><span class="farrow">→</span>
+        <span class="fbox">γ &lt; gradiente adiabático</span><span class="farrow">→</span>
+        <span class="fbox">Estable</span>
+      </div>
+      <div class="flow">
+        <span class="fbox">γ &gt; gradiente adiabático</span><span class="farrow">→</span>
+        <span class="fbox">Inestable</span>
+      </div>
+      <div class="item"><span class="dot dot-o"></span><span>El enunciado también puede decir directamente "noche nublada" (neutro/D), "noche despejada" (estable/F) o "día soleado" (inestable/A-B).</span></div>
+      <div class="warn">⚠️ En el Ej. 02 de tu clase: γ = -0.0035°C/m → "mayor, estable" → usar fórmula estable Δh = 2.6(F/ŪhS)^1/3</div>
+    </div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Dado un gradiente ambiental γ = -12°C/km y viento u₁₀m = 4 m/s, determine si la condición es estable, inestable o neutra y justifique qué fórmula de Δh utilizaría.</div>
+</div>
+
+<!-- SECCIÓN 3: Perfil de viento -->
+<div class="section-bar" style="border-color:#8b5cf6">💨 PARTE 3: PERFIL VERTICAL DE VIENTO — LEY POTENCIAL</div>
+
+<div class="block s2">
+  <span class="bh bh-p">¿Por qué la velocidad del viento varía con la altura?</span>
+  <div class="def def-p">El viento es frenado por la rugosidad del suelo (edificios, árboles, montañas). Cuanto más se aleja del suelo, menos fricción → más velocidad. Por eso necesitamos extrapolar la velocidad medida a 10 m (u₁₀, dato estándar de estaciones) hasta la altura de la chimenea Uh.</div>
+  <div class="rx">Uz = U₀ · (z/z₀)ᵐ</div>
+  <div class="two">
+    <div>
+      <div class="item"><span class="dot dot-p"></span><span><strong>Uz</strong> = velocidad a altura z (m/s) — lo que buscamos</span></div>
+      <div class="item"><span class="dot dot-p"></span><span><strong>U₀</strong> = velocidad conocida a altura z₀ (m/s) — dato inicial</span></div>
+      <div class="item"><span class="dot dot-p"></span><span><strong>z₀</strong> = altura de referencia donde se conoce U (m)</span></div>
+      <div class="item"><span class="dot dot-p"></span><span><strong>m</strong> = exponente de rugosidad (varía según estabilidad y terreno, típico 0.1–0.35)</span></div>
+    </div>
+    <div>
+      <div class="mini" style="border-top:3px solid #8b5cf6">
+        <strong>Ejemplo de tu cuaderno:</strong><br/>
+        U₁₀₀m = 4.6 m/s (dato medido)<br/>
+        U₅₀m = 3.7 m/s (lo dan)<br/>
+        Queremos Uh a H=140m<br/><br/>
+        Tabla construida con Uz = U₀·(z/z₀)ᵐ:<br/>
+        z=10→2.7, z=50→3.7, z=100→4.6, z=140→Uh
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ El problema puede no dar Uh directamente. Debes calcularlo usando la ley potencial con los datos disponibles. La "velocidad a la altura de la chimenea" es Uh, no u₁₀.</div>
+</div>
+
+<div class="block s1">
+  <span class="bh bh-gr">Ejercicio: hallar H con datos dados</span>
+  <div class="def def-gr">De tu cuaderno (imagen 4): halla H dados g=9.81, γ=-12°C/km, Ta=18°C, Vs=15m/s, r=1.2m, Ts=85°C, h=250m, Uh=5.6m/s</div>
+  <div class="step">
+    <span class="step-num nb-y">1</span>
+    <span><strong>Calcular F:</strong><br/>F = 9.81 × (1.2)² × 15 × (1 - 291/358) = 9.81 × 1.44 × 15 × 0.187 = <strong>39.7 m⁴/s³</strong></span>
+  </div>
+  <div class="step">
+    <span class="step-num nb-y">2</span>
+    <span><strong>¿F &lt; 55?</strong> → Sí → Xf = 50 × (39.7)^5/8 = 50 × 15.9 ≈ <strong>795 m</strong></span>
+  </div>
+  <div class="step">
+    <span class="step-num nb-y">3</span>
+    <span><strong>Condición:</strong> γ=-12°C/km → inestable → fórmula inestable</span>
+  </div>
+  <div class="step">
+    <span class="step-num nb-y">4</span>
+    <span><strong>Δh = 1.6×F^(1/3)×Xf^(2/3)/Ūh</strong><br/>= 1.6×3.42×82.9/5.6 ≈ <strong>81 m</strong></span>
+  </div>
+  <div class="step">
+    <span class="step-num nb-b">5</span>
+    <span><strong>H = h + Δh = 250 + 81 = 331 m</strong></span>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿En qué situación no es necesario calcular Xf para obtener Δh en condiciones estables?</div>
+</div>
+
+<!-- SECCIÓN 4: Modelo Gaussiano -->
+<div class="section-bar" style="border-color:#f97316">📊 PARTE 4: MODELO GAUSSIANO DE DISPERSIÓN C(x,y,z)</div>
+
+<div class="block s3">
+  <span class="bh bh-o">La fórmula general de concentración</span>
+  <div class="def def-o">El modelo gaussiano describe cómo se distribuye la concentración de un contaminante en el espacio tridimensional aguas abajo de una fuente puntual. La distribución es "gaussiana" (campana de Gauss) tanto en la dirección horizontal y como en la vertical z. Esta ecuación es el núcleo de toda la clase de hoy.</div>
+  <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:12px">
+    <div>
+      <div class="rx2" style="font-size:12px;text-align:left">
+C(x,y,z) = Q/(2π·Ū·σy·σz) ×<br/>
+exp[−½·(y/σy)²] ×<br/>
+{ exp[−½·((z−H)/σz)²] + exp[−½·((z+H)/σz)²] }
+      </div>
+      <div class="two" style="margin-top:8px">
+        <div>
+          <div class="item"><span class="dot dot-o"></span><span><strong>Q</strong> = tasa de emisión (g/s)</span></div>
+          <div class="item"><span class="dot dot-o"></span><span><strong>Ū</strong> = vel. viento a altura H (m/s)</span></div>
+          <div class="item"><span class="dot dot-o"></span><span><strong>σy</strong> = dispersión horizontal (m)</span></div>
+          <div class="item"><span class="dot dot-o"></span><span><strong>σz</strong> = dispersión vertical (m)</span></div>
+        </div>
+        <div>
+          <div class="item"><span class="dot dot-o"></span><span><strong>H</strong> = altura efectiva (h+Δh)</span></div>
+          <div class="item"><span class="dot dot-o"></span><span><strong>x</strong> = dist. downwind (m)</span></div>
+          <div class="item"><span class="dot dot-o"></span><span><strong>y</strong> = distancia lateral (m)</span></div>
+          <div class="item"><span class="dot dot-o"></span><span><strong>z</strong> = altura receptor (m)</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="mini" style="border-top:3px solid #f97316">
+        <strong>Los dos términos del corchete</strong><br/><br/>
+        <span style="color:#f97316">exp[−½((z−H)/σz)²]</span> → pluma directa bajando desde H<br/><br/>
+        <span style="color:#3b82f6">exp[−½((z+H)/σz)²]</span> → <em>imagen especular</em>: simula que el suelo "refleja" la pluma como si hubiera una fuente virtual a −H bajo tierra.<br/><br/>
+        Sin el segundo término la fórmula ignoraría que el contaminante no puede irse bajo suelo → subestimaría la concentración superficial.
+      </div>
+      <div class="mini" style="border-top:3px solid #22c55e;margin-top:7px">
+        <strong>Caso z = 0 (nivel del suelo)</strong><br/>
+        Los dos exponenciales se igualan, la fórmula se simplifica:<br/>
+        <span style="font-family:monospace;font-size:11px">C = Q/(π·Ū·σy·σz) · exp[−½(y/σy)²] · exp[−½(H/σz)²]</span>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: usar la velocidad u₁₀ en lugar de Uh (velocidad a la altura efectiva H). La fórmula requiere Ū a la altura de emisión, no al nivel del suelo.</div>
+  <div class="exam">🎯 EXAMEN: Explique físicamente por qué la ecuación gaussiana tiene dos términos exponenciales en z y qué pasaría con la predicción de concentración superficial si se omite el segundo término.</div>
+</div>
+
+<!-- Sigmas -->
+<div class="block s2">
+  <span class="bh bh-t">Cálculo de σy y σz — curvas de dispersión de Pasquill</span>
+  <div class="def def-t">σy y σz no son constantes: crecen con la distancia x aguas abajo. Cuanto más lejos de la chimenea, más se ha dispersado la pluma. Se calculan con expresiones empíricas tipo ley potencial ajustadas según la clase de estabilidad de Pasquill-Gifford (A–F).</div>
+  <div class="two">
+    <div>
+      <div class="rx">σy = a · x^b (m)<br/>σz = c · x^d + f (m)</div>
+      <div class="item"><span class="dot dot-t"></span><span>a, b, c, d, f = coeficientes tabulados por clase de estabilidad (dados en tablas del curso)</span></div>
+      <div class="item"><span class="dot dot-t"></span><span>x en la fórmula σy generalmente en km (cuidado con las unidades)</span></div>
+    </div>
+    <div>
+      <div class="mini" style="border-top:3px solid #14b8a6">
+        <strong>Del Ej. 01 de tu cuaderno (SO₂):</strong><br/>
+        x = 1400 m = 1.4 km, clase D (noche nublada → neutra)<br/><br/>
+        σy = 68 × (1.4)^0.894 = <strong>91.86 m</strong><br/>
+        σz = 44.5 × (1.4)^0.516 + F(13) = <strong>39.94 m</strong><br/><br/>
+        Los coeficientes 68, 0.894, 44.5, 0.516 salen de la tabla de Pasquill para clase D.
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ El problema de tu cuaderno usa clase D (neutro) porque dice "noche nublada" = categoría O (neutro/cero en el diagrama de Pasquill). Noche despejada sería clase F (muy estable). Esta distinción es pregunta típica de examen.</div>
+</div>
+
+<div class="block s1">
+  <span class="bh bh-b">Velocidad del viento a altura H — caso Ej. 01</span>
+  <div class="def def-b">Para usar la fórmula gaussiana necesitas Ū a la altura efectiva H = 240 m. Pero sólo te dan U₁₀₀m = 4.6 m/s. Debes extrapolar con la ley potencial.</div>
+  <div class="solved">
+<span class="c1">Datos conocidos:</span>
+z₀ = 100 m → U₀ = 4.6 m/s
+z₁₀ = 10 m → U₁₀ = 2.7 m/s
+z₅₀ = 50 m → U₅₀ = 3.7 m/s
+H = 240 m → Uh = ?
+
+<span class="c2">Usar:</span> Uz = U₀(z/z₀)ᵐ
+con z₀=100, U₀=4.6:
+
+<span class="c3">U₁₈₀</span> = 4.6(180/100)^m = Uh
+<span class="c3">U₂₄₀</span> = 4.6(240/100)^m = UH
+
+<span class="c4">Tabla del cuaderno:</span>
+10 m → U₁
+100 m → U₂ = 4.6
+180 m → U₃ = Uh
+240 m → UH
+  </div>
+  <div class="item"><span class="dot dot-b"></span><span>En el Ej. 01 la pregunta da u₁₀₀m=4.6 y u₁₀m=2.7, y el problema indica noche nublada → U usado en la fórmula es U=6.5 m/s (valor a H=240m calculado con la ley potencial)</span></div>
+</div>
+
+<!-- SECCIÓN 5: Ejercicios resueltos -->
+<div class="section-bar" style="border-color:#22c55e">🔢 PARTE 5: EJERCICIOS RESUELTOS DE CLASE</div>
+
+<div class="block s3">
+  <span class="bh bh-g">Ejercicio 01 — Concentración de SO₂ a 1400 m (noche nublada)</span>
+  <div class="def def-g"><strong>Enunciado:</strong> Halle la concentración de SO₂ según el modelo gaussiano a una distancia de 1400 m desde la fuente de emisión, sobre la línea central de la fuente. Se evalúa la [SO₂] en una noche nublada. Datos: Q=1.2 g/s (SO₂), z=3.5 m, h=180 m, Δh=60 m, U₁₀₀m=5.5 m/s, Uh=6.5 m/s.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:8px">
+    <div>
+      <strong style="font-size:11.5px;display:block;margin-bottom:5px">📌 Datos organizados</strong>
+      <div class="solved">
+<span class="c1">x = 1400 m = 1.4 km</span>
+<span class="c1">y = 0</span> (línea central
+<span class="c1">z = 3.5 m</span>
+<span class="c2">H = h + Δh = 180+60 = 240 m</span>
+<span class="c2">U = 6.5 m/s</span> (a altura H)
+<span class="c3">Q = 1.2 g/s (SO₂)</span>
+<span class="c4">Clase D (noche nublada)</span>
+      </div>
+    </div>
+    <div>
+      <strong style="font-size:11.5px;display:block;margin-bottom:5px">📐 Cálculo σy y σz</strong>
+      <div class="solved">
+<span class="c2">Clase D, x=1.4 km:</span>
+
+σy = a·x^b
+= 68·(1.4)^0.894
+<span class="ok">σy = 91.86 m</span>
+
+σz = c·x^d + f(13)
+= 44.5·(1.4)^0.516 + F(13)
+<span class="ok">σz = 39.94 m</span>
+
+<span class="c4">El término F(13) es el
+factor tabulado para
+clase D a esa distancia.</span>
+      </div>
+    </div>
+    <div>
+      <strong style="font-size:11.5px;display:block;margin-bottom:5px">🧮 Resultado C(x,0,z)</strong>
+      <div class="solved">
+<span class="c1">y=0 → exp(y/σy)=1</span>
+
+<span class="c2">C = Q/(2π·U·σy·σz) ×</span>
+<span class="c2">{ exp[-½((z-H)/σz)²]</span>
+<span class="c2">+ exp[-½((z+H)/σz)²] }</span>
+
+<span class="c3">Sustituir valores:</span>
+Num: 2π×6.5×91.86×39.94
+= <span class="ok">149,800 (aprox)</span>
+
+<span class="c4">Calcular cada exp y sumar
+→ C en μg/m³ o g/m³</span>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ El cuaderno muestra que el docente preguntó: ¿usar 5.5 m/s (a 100m) o 6.5 m/s (a H=240m)? La respuesta correcta es <strong>6.5 m/s</strong> porque la fórmula requiere la velocidad a la altura efectiva H. "Noche nublada" → clase O/D (neutra), no estable.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-o">Ejercicio 02 — Concentración de CO con elevación de pluma (noche clara)</span>
+  <div class="def def-o"><strong>Enunciado:</strong> Con los siguientes datos, determine la concentración de CO y la elevación de pluma. Q=1.4 μg/min, z=4m, y=0, x=0.8km, γ=-0.0035°C/m, Ta=18°C, Vs=24m/s, r=2.2m, Ts=85°C, H=140m, UH=5.6m/s, U₁₀m=2.7m/s y noche clara.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:8px">
+    <div>
+      <strong style="font-size:11.5px;display:block;margin-bottom:5px">🔎 Determinar estabilidad</strong>
+      <div class="solved">
+<span class="c1">γ = -0.0035°C/m</span>
+Convertir: -3.5°C/km
+
+Gradiente adiabático seco:
+-10°C/km (referencia)
+
+γ_amb &gt; gradiente adiabático
+→ <span class="ok">CONDICIÓN ESTABLE</span>
+→ Clase E o F
+→ "noche clara" → F
+
+<span class="c4">Usar fórmula ESTABLE:
+Δh = 2.6(F/ŪhS)^1/3</span>
+      </div>
+    </div>
+    <div>
+      <strong style="font-size:11.5px;display:block;margin-bottom:5px">🔥 Calcular F y Δh</strong>
+      <div class="solved">
+<span class="c2">F = g·r²·Vs·(1-Ta/Ts)</span>
+Ta = 18+273 = 291K
+Ts = 85+273 = 358K
+
+F = 9.81×(2.2)²×24×(1-291/358)
+= 9.81×4.84×24×0.187
+<span class="ok">F ≈ 214.5 m⁴/s³</span>
+
+<span class="c3">Calcular S:</span>
+S = (g/Ta)·(∂T/∂z + 0.01)
+S = (9.81/291)·(-0.0035+0.01)
+<span class="ok">S ≈ 0.000218</span>
+      </div>
+    </div>
+    <div>
+      <strong style="font-size:11.5px;display:block;margin-bottom:5px">📊 Δh y concentración CO</strong>
+      <div class="solved">
+<span class="c2">Δh = 2.6(F/ŪhS)^1/3</span>
+= 2.6(214.5/(5.6×0.000218))^1/3
+= 2.6(214.5/0.00122)^1/3
+= 2.6(175,819)^1/3
+<span class="ok">Δh ≈ considerable (m)</span>
+
+<span class="c3">H_efect = 140+Δh</span>
+
+Luego aplicar modelo
+gaussiano con:
+- x=0.8km, y=0, z=4m
+- U=UH=5.6m/s
+- σy, σz para clase F
+<span class="c4">→ C en μg/m³</span>
+      </div>
+    </div>
+  </div>
+  <div class="warn">⚠️ El cuaderno señala: "γ=-0.0035°C/m → mayor (estable) → condiciones estables". El truco está en comparar el gradiente ambiental con -10°C/km (adiabático seco). Si |γ_amb| &lt; 10°C/km → estable. "Noche clara" confirma clase F.</div>
+  <div class="exam">🎯 EXAMEN: En el ejercicio 02, ¿por qué se usa la fórmula de condiciones estables para calcular Δh si el gradiente γ=-0.0035°C/m? Explique el criterio de estabilidad utilizado.</div>
+</div>
+
+<!-- TABLA INTEGRADORA -->
+<div class="section-bar" style="border-color:#334155">📋 TABLA INTEGRADORA — RESUMEN DE FÓRMULAS</div>
+
+<div class="block s3">
+  <table class="tbl">
+    <tr>
+      <th>Parámetro</th>
+      <th>Fórmula / Expresión</th>
+      <th>Variables clave</th>
+      <th>Condición de uso</th>
+      <th>Error común</th>
+    </tr>
+    <tr>
+      <td><strong>Fuerza de empuje F</strong></td>
+      <td style="font-family:monospace;font-size:10px">F = g·r²·Vs·(1−Tₐ/Tₛ)</td>
+      <td>g=9.81, r(m), Vs(m/s), T en Kelvin</td>
+      <td>Siempre, como paso previo a Δh</td>
+      <td>Usar °C en lugar de K → resultado incorrecto</td>
+    </tr>
+    <tr>
+      <td><strong>Xf (F≥55)</strong></td>
+      <td style="font-family:monospace;font-size:10px">Xf = 120 × F^0.4</td>
+      <td>F en m⁴/s³</td>
+      <td>F ≥ 55 m⁴/s³</td>
+      <td>Confundir el umbral (55 vs 50)</td>
+    </tr>
+    <tr>
+      <td><strong>Xf (F&lt;55)</strong></td>
+      <td style="font-family:monospace;font-size:10px">Xf = 50 × F^(5/8)</td>
+      <td>F en m⁴/s³</td>
+      <td>F &lt; 55 m⁴/s³</td>
+      <td>Usar mal el exponente (0.4 vs 5/8)</td>
+    </tr>
+    <tr>
+      <td><strong>Δh inestable/neutro</strong></td>
+      <td style="font-family:monospace;font-size:10px">Δh = 1.6·F^(1/3)·Xf^(2/3)/Ūh</td>
+      <td>Ūh = vel. a la altura h</td>
+      <td>Clases A, B, C, D (inest./neutro)</td>
+      <td>Usar U₁₀ en vez de Uh</td>
+    </tr>
+    <tr>
+      <td><strong>Δh estable</strong></td>
+      <td style="font-family:monospace;font-size:10px">Δh = 2.6·(F/Ūh·S)^(1/3)</td>
+      <td>S = parámetro de estabilidad</td>
+      <td>Clases E, F (estable)</td>
+      <td>Olvidar calcular S antes</td>
+    </tr>
+    <tr>
+      <td><strong>Parámetro S</strong></td>
+      <td style="font-family:monospace;font-size:10px">S = (g/Tₐ)·(∂T/∂z + 0.01)</td>
+      <td>Tₐ en K, ∂T/∂z en °C/m</td>
+      <td>Condiciones estables</td>
+      <td>Olvidar sumar 0.01 al gradiente</td>
+    </tr>
+    <tr>
+      <td><strong>Perfil de viento</strong></td>
+      <td style="font-family:monospace;font-size:10px">Uz = U₀·(z/z₀)^m</td>
+      <td>m = exponente rugosidad</td>
+      <td>Extrapolar a cualquier altura</td>
+      <td>Confundir z₀ con z</td>
+    </tr>
+    <tr>
+      <td><strong>Modelo Gaussiano C</strong></td>
+      <td style="font-family:monospace;font-size:10px">C = Q/(2π·U·σy·σz)·exp(y)·{exp(z-H)+exp(z+H)}</td>
+      <td>Q(g/s), σy σz por Pasquill, H=h+Δh</td>
+      <td>Fuente puntual elevada</td>
+      <td>No usar imagen especular; usar H=h sin Δh</td>
+    </tr>
+  </table>
+  <div class="warn" style="margin-top:8px">⚠️ DATO INTEGRADOR CLAVE: Todo el proceso es secuencial: (1) Clasificar estabilidad → (2) Calcular F → (3) Calcular Xf si condición inestable → (4) Calcular Δh → (5) H=h+Δh → (6) Extrapolar Uh con ley potencial → (7) Calcular σy, σz con clase de Pasquill → (8) Aplicar fórmula gaussiana.</div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-section">
+  <div class="block s3" style="padding:0">
+    <div style="background:#0f1e3a;color:white;border-radius:11px 11px 0 0;padding:12px 18px">
+      <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:700">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+      <div style="font-size:11px;opacity:0.75;margin-top:3px">Marca tu respuesta y descubre si es correcta</div>
+    </div>
+    <div style="padding:14px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <span style="font-size:12px;color:var(--color-text-secondary)" id="prog-text">Pregunta 0 de 10 respondidas · Aciertos: 0/0</span>
+        <div class="stat-bar-wrap" style="flex:1"><div class="stat-bar-fill" id="prog-bar" style="width:0%"></div></div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="qcard" id="q1">
+        <p class="qnum">Pregunta 1 / 10</p>
+        <p class="qtext">¿Qué representa la "altura efectiva H" de una chimenea en el modelo gaussiano?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) La altura física de la chimenea medida desde el suelo</button>
+          <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) La suma de la altura física h más la elevación de pluma Δh</button>
+          <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) La altura a la que se mide la velocidad del viento de referencia</button>
+          <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) La altura máxima que alcanza el contaminante en la atmósfera</button>
+        </div>
+        <div class="qfeedback" id="fb1"></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="qcard" id="q2">
+        <p class="qnum">Pregunta 2 / 10</p>
+        <p class="qtext">Al calcular la fuerza de empuje F = g·r²·Vs·(1 − Tₐ/Tₛ), ¿en qué unidades deben estar Tₐ y Tₛ?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Celsius (°C), ya que las diferencias de temperatura son iguales en °C y K</button>
+          <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) Fahrenheit (°F) cuando se trabaja con unidades del sistema inglés</button>
+          <button class="qbtn" data-q="2" data-opt="c" data-correct="true">C) Kelvin (K), porque la expresión (1 − Tₐ/Tₛ) requiere temperaturas absolutas</button>
+          <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Cualquier unidad, ya que al dividir Tₐ/Tₛ las unidades se cancelan igualmente</button>
+        </div>
+        <div class="qfeedback" id="fb2"></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="qcard" id="q3">
+        <p class="qnum">Pregunta 3 / 10</p>
+        <p class="qtext">Una chimenea emite gases con F = 30 m⁴/s³. ¿Cuál es la fórmula correcta para calcular la distancia de fusión Xf?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Xf = 120 × F⁰·⁴, porque siempre se usa esta expresión independientemente de F</button>
+          <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) No es necesario calcular Xf cuando la condición es estable</button>
+          <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Xf = 50 × F⁰·⁴, combinando ambas fórmulas</button>
+          <button class="qbtn" data-q="3" data-opt="d" data-correct="true">D) Xf = 50 × F^(5/8), porque F = 30 m⁴/s³ &lt; 55 m⁴/s³</button>
+        </div>
+        <div class="qfeedback" id="fb3"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="qcard" id="q4">
+        <p class="qnum">Pregunta 4 / 10</p>
+        <p class="qtext">Un problema indica "noche nublada". ¿Qué clase de estabilidad de Pasquill corresponde y qué fórmula de Δh debe usarse?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Clase A (muy inestable) → fórmula inestable Δh = 1.6·F^(1/3)·Xf^(2/3)/Ūh</button>
+          <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) Clase D (neutra) → fórmula inestable/neutra Δh = 1.6·F^(1/3)·Xf^(2/3)/Ūh</button>
+          <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Clase F (muy estable) → fórmula estable Δh = 2.6·(F/Ūh·S)^(1/3)</button>
+          <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Clase C (ligeramente inestable) → promedio de ambas fórmulas</button>
+        </div>
+        <div class="qfeedback" id="fb4"></div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="qcard" id="q5">
+        <p class="qnum">Pregunta 5 / 10</p>
+        <p class="qtext">En la ley potencial del viento Uz = U₀·(z/z₀)^m, ¿qué representa físicamente el exponente m?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) La masa molar del contaminante emitido por la chimenea</button>
+          <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) La constante de decaimiento del viento con la altura, igual a 0.1 en todos los casos</button>
+          <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) El grado de rugosidad del terreno y la estabilidad atmosférica, que controlan cómo cambia el perfil de viento con la altura</button>
+          <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) La altura de la capa límite atmosférica sobre el sitio de estudio</button>
+        </div>
+        <div class="qfeedback" id="fb5"></div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="qcard" id="q6">
+        <p class="qnum">Pregunta 6 / 10</p>
+        <p class="qtext">¿Por qué la ecuación gaussiana incluye el término de "imagen especular" exp[−½·((z+H)/σz)²]?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Para corregir el efecto de la turbulencia urbana que amplifica la dispersión horizontal</button>
+          <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Porque en la realidad siempre existen dos fuentes simétricas de emisión</button>
+          <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Para modelar la reflexión de la pluma en la cima de la capa de mezcla</button>
+          <button class="qbtn" data-q="6" data-opt="d" data-correct="true">D) Para simular que el suelo actúa como espejo reflejando la pluma, impidiendo que el contaminante se vaya bajo tierra y aumentando la concentración superficial</button>
+        </div>
+        <div class="qfeedback" id="fb6"></div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="qcard" id="q7">
+        <p class="qnum">Pregunta 7 / 10</p>
+        <p class="qtext">Para calcular la concentración de SO₂ en el Ejercicio 01 (noche nublada, U₁₀₀m=5.5 m/s, UH=6.5 m/s), ¿qué valor de velocidad del viento debe usarse en la fórmula gaussiana?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) U = 5.5 m/s, por ser la velocidad medida más cercana a la altura de la chimenea</button>
+          <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) U = promedio de 5.5 y 6.5 = 6.0 m/s para minimizar el error</button>
+          <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) U = 6.5 m/s, porque la fórmula requiere la velocidad a la altura efectiva de emisión H</button>
+          <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) U = 10 m/s, que es la velocidad estándar de referencia en todos los modelos</button>
+        </div>
+        <div class="qfeedback" id="fb7"></div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="qcard" id="q8">
+        <p class="qnum">Pregunta 8 / 10</p>
+        <p class="qtext">En el Ejercicio 02, el gradiente ambiental es γ = -0.0035°C/m. ¿Por qué esto indica condición estable?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Porque el gradiente es negativo, lo que siempre indica estabilidad</button>
+          <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Porque -0.0035°C/m es mayor que el gradiente adiabático húmedo de -6°C/km</button>
+          <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Porque |γ_ambiental| = 3.5°C/km &lt; 10°C/km (gradiente adiabático seco), indicando que la atmósfera resiste el ascenso de aire → estable</button>
+          <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Porque en noches claras siempre se usa la condición estable sin importar el gradiente</button>
+        </div>
+        <div class="qfeedback" id="fb8"></div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="qcard" id="q9">
+        <p class="qnum">Pregunta 9 / 10</p>
+        <p class="qtext">Si en la línea central de la pluma (y = 0) y al nivel del suelo (z = 0), ¿cómo se simplifica la fórmula gaussiana?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) C = Q/(2π·U·σy·σz) · exp[−H²/σz²], desaparecen todos los términos de y</button>
+          <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) C = Q/(π·U·σy·σz) · exp[−½·(H/σz)²], el denominador pierde el 2 y los dos exponenciales en z se igualan y se suman</button>
+          <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) C = Q/(2π·U·σy·σz), todos los exponenciales valen 1 porque z=0 y y=0</button>
+          <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) C = 0, porque al nivel del suelo la pluma gaussiana tiene concentración mínima</button>
+        </div>
+        <div class="qfeedback" id="fb9"></div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="qcard" id="q10">
+        <p class="qnum">Pregunta 10 / 10</p>
+        <p class="qtext">¿Cuál es el orden correcto de pasos para calcular la concentración C en un punto receptor usando el modelo gaussiano con elevación de pluma?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) σy y σz → F → Δh → H → C</button>
+          <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) H = h+Δh → F → Xf → σy,σz → C con U₁₀</button>
+          <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) F → Δh → σy,σz → H → Uh con ley potencial → C</button>
+          <button class="qbtn" data-q="10" data-opt="d" data-correct="true">D) Clasificar estabilidad → F → Xf (si aplica) → Δh → H=h+Δh → Uh extrapolada → σy,σz → C</button>
+        </div>
+        <div class="qfeedback" id="fb10"></div>
+      </div>
+
+      <div id="quiz-result"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="block s3" style="background:#0f1e3a;color:white;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start">
+  <span style="font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc">REFERENCIAS:</span>
+  <span style="font-size:11px;color:#94a3b8">Pasquill, F. (1961). The estimation of the dispersion of windborne material. · Turner, D.B. (1994). Workbook of Atmospheric Dispersion Estimates. EPA. · Apuntes de clase Contaminación Atmosférica UNALM, 19/06/26 · Briggs, G.A. (1969). Plume Rise. USAEC.</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1: {ok:"La altura efectiva H = h + Δh combina la altura física de la chimenea con la elevación adicional que ganan los gases calientes al salir. H es lo que define desde qué punto del espacio empieza a dispersarse el contaminante en el modelo gaussiano.", fail:"La respuesta es B. H = h + Δh. La altura física de la chimenea es solo h; la elevación de pluma Δh se agrega porque los gases calientes continúan subiendo tras salir de la boca de la chimenea."},
+  2: {ok:"La expresión (1 − Tₐ/Tₛ) mide la diferencia relativa de densidad entre el gas emitido y el aire ambiente. Si usas °C, la temperatura cero no representa ausencia de energía térmica, lo que hace que el cociente sea físicamente incorrecto. En Kelvin, 0 K = ausencia total de movimiento molecular.", fail:"La respuesta es C: Kelvin. La razón Tₐ/Tₛ solo tiene significado físico con temperaturas absolutas. En °C, el 'cero' es arbitrario; en K el cero es absoluto, por eso el cociente refleja correctamente la flotabilidad relativa."},
+  3: {ok:"Correcto. El umbral es 55 m⁴/s³. Como F=30 < 55, se usa Xf = 50 × F^(5/8). Si F fuera ≥ 55 usaríamos Xf = 120 × F^0.4.", fail:"La respuesta es D. El criterio clave: F=30 < 55 m⁴/s³ → Xf = 50 × F^(5/8). Si F ≥ 55 entonces Xf = 120 × F^0.4. El umbral 55 m⁴/s³ es fijo en el modelo de Briggs."},
+  4: {ok:"Correcto. 'Noche nublada' corresponde a clase D (neutra) en Pasquill porque la cobertura de nubes impide el enfriamiento radiativo nocturno. Con nubes = clase D o neutra → se usa la fórmula inestable/neutra con Xf.", fail:"La respuesta es B. 'Noche nublada' → clase D (neutra). 'Noche clara/despejada' → clase F (muy estable). La clave: nubes de noche impiden inversión térmica → condición neutra, no estable."},
+  5: {ok:"Exacto. m depende del tipo de terreno (liso/rugoso) y la estabilidad atmosférica. Sobre el mar m ≈ 0.1; sobre ciudad m puede llegar a 0.33–0.40. Cuanto mayor m, más pronunciado es el cambio de viento con la altura.", fail:"La respuesta es C. m = exponente de rugosidad, refleja cuánto frena el terreno al viento en capas bajas. En terreno liso m es pequeño (perfil casi uniforme); en ciudad m es grande (gradiente pronunciado). No es constante."},
+  6: {ok:"Correcto. El suelo físico impide que el contaminante descienda bajo tierra. Matemáticamente se modela colocando una 'fuente imagen' a profundidad −H bajo el suelo emitiendo la misma cantidad Q. Su pluma suma a la real y representa la reflexión en superficie.", fail:"La respuesta es D. La imagen especular simula que el suelo 'rebota' la pluma. Sin este término la fórmula dejaría que el contaminante 'se pierda' bajo tierra, subestimando la concentración real en z=0."},
+  7: {ok:"Correcto. La fórmula gaussiana usa la velocidad del viento a la altura donde se produce la emisión, que es H (la altura efectiva). Usar U₁₀ o U₁₀₀ subestimaría la dispersión porque el viento es menor más abajo.", fail:"La respuesta es C: U=6.5 m/s. La fórmula gaussiana requiere la velocidad a la altura H de emisión, no a 10 m ni a 100 m. En el Ej. 01, Uh=6.5 m/s corresponde a H=240 m, que es la altura efectiva real."},
+  8: {ok:"Exacto. El criterio: si el gradiente ambiental en valor absoluto es menor que el gradiente adiabático seco (10°C/km), la atmósfera es estable. Aquí |γ|=3.5°C/km < 10°C/km → estable. Además 'noche clara' confirma clase F.", fail:"La respuesta es C. Estabilidad no viene solo del signo del gradiente: viene de comparar γ_amb con el gradiente adiabático seco (-10°C/km). Si |γ_amb| < 10°C/km → estable. El gradiente negativo solo indica que la temperatura disminuye con altura (normal); la magnitud define la estabilidad."},
+  9: {ok:"Correcto. Cuando z=0 y y=0: exp(y²/σy²)=1 y los dos términos del corchete dan exp[−½(H/σz)²] cada uno. Al sumarlos = 2·exp[−½(H/σz)²]. El 2 del numerador cancela el 2π del denominador dejando π → C = Q/(π·U·σy·σz)·exp[−½(H/σz)²].", fail:"La respuesta es B. El truco: z=0 hace que los dos exponenciales en z sean iguales (exp[−½(H/σz)²] cada uno). Al sumarlos doblas el numerador y el '2' cancela uno de los factores del denominador '2π', resultando en π."},
+  10: {ok:"Correcto. El orden es fundamental: primero clasificar la estabilidad (define qué fórmulas usar), luego calcular F (parámetro de flotabilidad), después Xf si la condición lo requiere, calcular Δh, obtener H total, extrapolar Uh al nivel H, calcular σy y σz según la clase, y finalmente aplicar la fórmula gaussiana.", fail:"La respuesta es D. El orden correcto: (1) estabilidad → (2) F → (3) Xf si inestable/neutro → (4) Δh → (5) H=h+Δh → (6) Uh extrapolado → (7) σy, σz → (8) C. Saltarse pasos o reordenarlos lleva a errores en cadena."}
+};
+
+let answered = 0, correct = 0;
+
+document.querySelector('.cv').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const card = document.getElementById('q'+q);
+  const fb = document.getElementById('fb'+q);
+  if(fb.style.display === 'block') return;
+
+  const btns = card.querySelectorAll('.qbtn');
+  btns.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true') b.classList.add('show-correct');
+  });
+
+  if(isCorrect){
+    btn.classList.add('correct');
+    btn.textContent = '✅ ' + btn.textContent;
+    fb.className = 'qfeedback ok';
+    fb.innerHTML = '<strong>✅ ¡Correcto!</strong> ' + feedbacks[q].ok;
+    correct++;
+  } else {
+    btn.classList.add('wrong');
+    btn.textContent = '❌ ' + btn.textContent;
+    fb.className = 'qfeedback fail';
+    fb.innerHTML = '<strong>❌ Incorrecto.</strong> ' + feedbacks[q].fail;
+  }
+  fb.style.display = 'block';
+  answered++;
+
+  const pct = Math.round((correct/answered)*100);
+  document.getElementById('prog-text').textContent = `Pregunta ${answered} de 10 respondidas · Aciertos: ${correct}/${answered} (${pct}%)`;
+  document.getElementById('prog-bar').style.width = (answered/10*100)+'%';
+
+  if(answered === 10){
+    const res = document.getElementById('quiz-result');
+    let bg, msg;
+    if(correct <= 4){ bg='#fee2e2'; msg='📚 Necesitas repasar el material. Revisa especialmente las fórmulas de Δh y el criterio de estabilidad.'; }
+    else if(correct <= 7){ bg='#fef9c3'; msg='🙂 ¡Buen avance! Sigue repasando los casos especiales y el orden de los pasos.'; }
+    else{ bg='#dcfce7'; msg='🎉 ¡Excelente dominio del tema! Estás bien preparado para el examen.'; }
+    res.style.display='block';
+    res.style.background=bg;
+    res.style.padding='14px';
+    res.style.borderRadius='10px';
+    res.innerHTML=`<strong>Resultado final: ${correct}/10</strong><br/>${msg}<br/><button id="reset-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>`;
+  }
+});
+
+function resetQuiz(){
+  answered=0; correct=0;
+  document.getElementById('prog-text').textContent='Pregunta 0 de 10 respondidas · Aciertos: 0/0';
+  document.getElementById('prog-bar').style.width='0%';
+  document.getElementById('quiz-result').style.display='none';
+  for(let i=1;i<=10;i++){
+    const card=document.getElementById('q'+i);
+    const fb=document.getElementById('fb'+i);
+    fb.style.display='none';
+    fb.className='qfeedback';
+    card.querySelectorAll('.qbtn').forEach(b=>{
+      b.disabled=false;
+      b.classList.remove('correct','wrong','show-correct');
+      b.textContent=b.textContent.replace(/^[✅❌] /,'');
+    });
+  }
+}
+</script>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Solución PC2 — Contaminación Atmosférica</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;font-size:13px;background:#eef1f5;color:#1a1a1a}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:18px;max-width:1100px;margin:0 auto}
+.block{background:#ffffff;border:0.5px solid #d8dce2;border-radius:11px;padding:12px 13px}
+.s2{grid-column:span 2}.s3{grid-column:span 3}
+.secbar{grid-column:1/-1;background:#e7eaef;border:0.5px solid #d8dce2;border-radius:8px;padding:7px 14px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:#1a1a1a;letter-spacing:.3px}
+.titlebar{grid-column:1/-1;background:#0f1e3a;border-radius:12px;padding:14px 18px;color:#fff}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:19px;font-weight:700;margin-bottom:4px}
+.titlebar p{font-size:11px;color:#94a3b8;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.pill{font-size:10px;padding:2px 9px;border-radius:20px;display:inline-block}
+.pb{background:#1e3a5f;color:#93c5fd}.po{background:#431407;color:#fed7aa}
+.pt{background:#042f2e;color:#5eead4}.pp{background:#2e1065;color:#c4b5fd}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:700}
+.bh-b{background:#dbeafe;color:#1e3a8a}.bh-o{background:#ffedd5;color:#7c2d12}
+.bh-t{background:#ccfbf1;color:#134e4a}.bh-p{background:#ede9fe;color:#4c1d95}
+.bh-gr{background:#f1f5f9;color:#334155}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:#f6f7f9;margin-bottom:6px;line-height:1.55}
+.def-b{border-color:#3b82f6}.def-o{border-color:#f97316}.def-t{border-color:#14b8a6}.def-p{border-color:#8b5cf6}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;color:#1a1a1a}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-b{background:#3b82f6}.dot-o{background:#f97316}.dot-t{background:#14b8a6}.dot-p{background:#8b5cf6}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.7;margin:6px 0;white-space:pre-line}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:6px 0;line-height:1.5}
+.mini{background:#f6f7f9;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5;margin:6px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;margin:6px 0}
+.tbl th{background:#f6f7f9;padding:5px 7px;border-bottom:0.5px solid #d8dce2;font-family:'Oswald',sans-serif;text-align:left;font-size:11px}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid #d8dce2;vertical-align:top;color:#1a1a1a}
+.footer-bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;min-width:100px}
+.fc{font-size:11px;color:#94a3b8;line-height:1.7}
+@media print{body{background:#fff}.cv{max-width:100%}}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<div class="titlebar">
+  <h1>🧮 Solución — 2da Práctica Calificada de Contaminación Atmosférica</h1>
+  <p>Prof. Victor Ñavincopa Muñoz · Prácticas · Ciclos 2024-I y 2024-II</p>
+  <div class="pills">
+    <span class="pill pb">Modelo de caja (IAQ)</span>
+    <span class="pill po">Factores de emisión</span>
+    <span class="pill pt">Elevación de pluma (Holland)</span>
+    <span class="pill pp">Niveles de sonido (Leq)</span>
+  </div>
+</div>
+
+<div class="secbar">🔵 PROBLEMA 1 — Calidad de aire interior: modelo de caja con decaimiento e infiltración (6.5 ptos.)</div>
+
+<div class="block s3">
+  <span class="bh bh-gr">Enunciado completo</span>
+  <div class="def def-b">Una cocina a gas dentro de un compartimiento de 250 m³ emite NO₂ a una razón de 160 mg/h. Las concentraciones de NO₂ dentro y fuera del departamento son 0.041 ppmv y 0.052 ppmv respectivamente. La razón de decaimiento del NO₂ es de 6.39×10⁻⁵ s⁻¹, y la razón de infiltración es de 0.75 h⁻¹. (PA(N)=14 uma, PA(O)=16 uma)
+  <br>a) Halle la concentración máxima de NO₂ en µg/m³ a la cual una persona dentro del departamento está expuesta. (2 ptos.)
+  <br>b) Halle la concentración de NO₂ en µg/m³ dentro del departamento luego de tres cuartos de hora. (2.5 ptos.)
+  <br>c) Halle el tiempo en el cual se llega al 70% de la concentración estable de NO₂ dentro del compartimiento. (2 ptos.)</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-b">Modelo y datos de partida</span>
+  <div class="item"><span class="dot dot-b"></span>Este es el modelo de caja (mass balance) de calidad de aire interior de Davis &amp; Cornwell: V·dC/dt = (S + Ca·n·V) − C·n·V − K·C·V, cuya solución cerrada es la que entrega el formulario. S es la fuente, Ca la concentración exterior, n la infiltración (renovaciones de aire/h) y K el decaimiento químico del contaminante.</div>
+  <div class="rx">C(t) = [(S/V + Ca·n)/(n+K)]·[1 − e^(−(n+K)t)] + C(0)·e^(−(n+K)t)
+C_ss (estado estable, t→∞) = (S/V + Ca·n)/(n+K)</div>
+  <div class="two">
+    <div class="mini"><b>Conversión ppmv → µg/m³</b><br>MW(NO₂) = 14+2(16) = 46 g/mol. A 25°C y 1 atm, 1 mol ocupa 24.45 L, luego:<br>C[µg/m³] = ppmv × (MW×1000/24.45) = ppmv × 1881.39</div>
+    <div class="mini"><b>Datos convertidos a base horaria</b><br>S = 160 mg/h = 160 000 µg/h · V = 250 m³<br>K = 6.39×10⁻⁵ s⁻¹ × 3600 = 0.230 h⁻¹<br>n = 0.75 h⁻¹ → n+K = 0.980 h⁻¹</div>
+  </div>
+  <div class="two">
+    <div class="mini"><b>C(0), interior</b> = 0.041 ppmv × 1881.39 = <b>77.137 µg/m³</b></div>
+    <div class="mini"><b>Ca, exterior</b> = 0.052 ppmv × 1881.39 = <b>97.832 µg/m³</b></div>
+  </div>
+  <div class="warn">⚠️ El problema da la concentración exterior (Ca) más alta que la interior (C0) — es solo el dato inicial de la fuente exterior, no un error: el ambiente urbano alrededor del departamento ya tiene NO₂ de tránsito vehicular, mayor que el aire recién renovado dentro del compartimiento.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-b">a) Concentración máxima de exposición (C_ss)</span>
+  <div class="item"><span class="dot dot-b"></span>Como C(0)=77.14 &lt; C_ss, la concentración crece monótonamente hacia el estado estable; por tanto el techo de exposición de la persona es exactamente C_ss.</div>
+  <div class="rx">S/V = 160 000/250 = 640 µg·m⁻³·h⁻¹
+Ca·n = 97.832×0.75 = 73.374 µg·m⁻³·h⁻¹
+C_ss = (640+73.374)/0.980 = 713.374/0.980</div>
+  <div class="mini" style="border-left:3px solid #3b82f6"><b>Respuesta (a): C_ss ≈ 727.900 µg/m³</b></div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-b">b) Concentración a los 45 minutos (3/4 h)</span>
+  <div class="item"><span class="dot dot-b"></span>Se evalúa la solución transitoria completa en t=0.75 h, usando C_ss=727.900 y C(0)=77.137.</div>
+  <div class="rx">(n+K)·t = 0.980×0.75 = 0.735
+e^(−0.735) = 0.4797
+C(0.75h) = 727.900×(1−0.4797) + 77.137×0.4797
+= 378.73 + 37.01</div>
+  <div class="mini" style="border-left:3px solid #3b82f6"><b>Respuesta (b): C(45 min) ≈ 415.730 µg/m³</b></div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-b">c) Tiempo para alcanzar el 70% de C_ss</span>
+  <div class="item"><span class="dot dot-b"></span>Se despeja t de la misma solución transitoria, fijando C(t) = 0.70×C_ss.</div>
+  <div class="rx">0.7·C_ss = C_ss − (C_ss−C0)·e^(−mt) ;  m=n+K
+e^(−mt) = 0.3·C_ss/(C_ss−C0) = 218.37/650.76 = 0.3356
+t = −ln(0.3356)/0.980 = 1.0919/0.980</div>
+  <div class="mini" style="border-left:3px solid #3b82f6"><b>Respuesta (c): t ≈ 1.114 h ≈ 66.8 minutos (≈1 h 6.8 min)</b></div>
+  <div class="warn">⚠️ Error común: olvidar que el "70% de la concentración estable" se mide respecto al recorrido completo desde C(0) hasta C_ss, no desde cero. Si C(0) fuera 0, el tiempo sería distinto (más corto, porque toda la subida sería relativa al mismo C_ss).</div>
+</div>
+
+<div class="secbar">🟠 PROBLEMA 2 — Factores de emisión: azufre y material particulado de una termoeléctrica a carbón (4 ptos.)</div>
+
+<div class="block s3">
+  <span class="bh bh-gr">Enunciado completo</span>
+  <div class="def def-o">Una planta termoeléctrica quema carbón a razón de 21.25 tn/h. El contenido de S en carbón es de 9%, mientras que el porcentaje de ceniza es de 6% de la masa total del carbón. (FEazufre = 18S y FEpm = 6PM). Considere control de emisión de 90%. (4 puntos)
+  <br>a) Determinar la emisión del azufre.
+  <br>b) Determinar la emisión del PM.</div>
+  <div class="warn">⚠️ El enunciado original dice "...6% de la masa total de S dentro del carbón", lo cual no es dimensionalmente compatible con la fórmula FEpm=6·PM (que necesita un porcentaje de ceniza sobre el carbón, no sobre el azufre). Se interpreta como una errata de transcripción y se resuelve con: ceniza = 6% de la masa de carbón, igual que el S=9% de la masa de carbón — es la lectura estándar de este tipo de factor de emisión AP-42.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-o">a) Emisión de azufre (como SO₂)</span>
+  <div class="item"><span class="dot dot-o"></span>FE_azufre = 18×S(%) es un factor de emisión tipo AP-42 (equivalente métrico de 38 lb SO₂/ton de carbón), expresado en kg SO₂ por tonelada de carbón quemada, asumiendo conversión estequiométrica completa de S a SO₂.</div>
+  <div class="rx">FE_SO2 = 18×9 = 162 kg SO₂ / tn carbón
+E_sin_control = 162 × 21.25 tn/h = 3 442.500 kg/h
+Con 90% de control (queda 10%): E = 3 442.500 × 0.10</div>
+  <div class="mini" style="border-left:3px solid #f97316"><b>Respuesta (a): E_SO2,sin control = 3 442.500 kg/h &nbsp;→&nbsp; E_SO2,controlado = 344.250 kg/h</b></div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-o">b) Emisión de material particulado (PM)</span>
+  <div class="item"><span class="dot dot-o"></span>FE_PM = 6×Ceniza(%) en kg PM/tonelada de carbón (versión reducida del factor AP-42 de calderas pulverizadas, que también depende de la eficiencia de captura de cenizas del diseño del hogar).</div>
+  <div class="rx">FE_PM = 6×6 = 36 kg PM / tn carbón
+E_sin_control = 36 × 21.25 tn/h = 765.000 kg/h
+Con 90% de control: E = 765.000 × 0.10</div>
+  <div class="mini" style="border-left:3px solid #f97316"><b>Respuesta (b): E_PM,sin control = 765.000 kg/h &nbsp;→&nbsp; E_PM,controlado = 76.500 kg/h</b></div>
+  <div class="warn">⚠️ No confundir "Emisión" (E, kg/h, una razón de masa) con "Factor de emisión" (FE, kg/tonelada, una propiedad del combustible/proceso). E = FE × (flujo de combustible). El control de 90% se aplica multiplicando por (1−0.90), nunca restando 90 unidades.</div>
+</div>
+
+<div class="secbar">🩵 PROBLEMA 3 — Elevación de pluma (Holland/Briggs) y altura efectiva de chimenea (4 ptos.)</div>
+
+<div class="block s3">
+  <span class="bh bh-gr">Enunciado completo</span>
+  <div class="def def-t">Una termoeléctrica tiene una chimenea cuya altura efectiva es de 450 m para un determinado instante. Se conoce además que el diámetro de la boca interior de la chimenea es 2.3 m, que el contaminante se emite a una temperatura de 175°C y a una velocidad de 16 m/s. La temperatura de ambiente es de 24°C y la velocidad de viento a la altura de chimenea es de 3.2 m/s; la velocidad a 100 metros es de 2.6 m/s. Halle la altura de chimenea para un día de fuerte brillo solar y una velocidad de viento a 10 m de 3.4 m/s, y determine la razón de emisión a 6 metros de altura. Considere gradiente adiabático 2°C/km. (4 ptos.)</div>
+  <div class="warn">⚠️ El tramo final ("razón de emisión a 6 metros de altura") es ambiguo en el documento reconstruido: no se entrega ninguna concentración medida para despejar un caudal de emisión Q, y "6 metros" no calza con ninguna altura de receptor típica del modelo gaussiano de este formulario. La lectura más consistente con los datos disponibles es que se pide la <b>velocidad del viento extrapolada a 6 m</b> usando el mismo perfil de potencia hallado en este problema (ver Paso 4). Verifica la redacción exacta con tu profesor; aquí se resuelve todo lo demás de forma íntegra y se deja ese último cálculo con la interpretación más razonable.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-t">Paso 1 — Elevación de pluma (Δh₁) y altura física real de la chimenea (h)</span>
+  <div class="item"><span class="dot dot-t"></span>La altura efectiva dada (450 m) es H = h + Δh. Para hallar la altura física h, primero se calcula Δh con la ecuación de Holland, usando el viento YA dado a la altura de chimenea (u_h=3.2 m/s).</div>
+  <div class="rx">r = d/2 = 1.15 m ; Ts=175+273=448 K ; Ta=24+273=297 K
+F = g·r²·vs·(1−Ta/Ts) = 9.81×1.15²×16×(1−297/448)
+F = 9.81×1.3225×16×0.337 ≈ 69.960 m⁴/s³ (≥55 → usar xf=120F^0.4)
+xf = 120×(69.96)^0.4 ≈ 656.290 m
+Δh₁ = 1.6·F^(1/3)·xf^(2/3)/u_h = 1.6×4.120×75.52/3.2 ≈ 155.590 m</div>
+  <div class="mini" style="border-left:3px solid #14b8a6"><b>h = H − Δh₁ = 450 − 155.590 ≈ 294.410 m</b> (altura física real de la chimenea, constante en ambos escenarios del problema)</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-t">Paso 2 — Perfil de viento: exponente de la ley de potencia (p)</span>
+  <div class="item"><span class="dot dot-t"></span>El dato "velocidad a 100 m = 2.6 m/s" sirve para caracterizar el perfil de viento del sitio (rugosidad), combinándolo con u_h=3.2 m/s a h=294.41 m, mediante la ley de potencia u(z)=u_ref(z/z_ref)^p.</div>
+  <div class="rx">u_h/u_100 = (h/100)^p
+3.2/2.6 = (294.41/100)^p → 1.2308 = 2.9441^p
+p = ln(1.2308)/ln(2.9441) = 0.2076/1.0798</div>
+  <div class="mini" style="border-left:3px solid #14b8a6"><b>p ≈ 0.192</b> (exponente de rugosidad del sitio, se asume igual en el segundo escenario)</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-t">Paso 3 — Nueva condición meteorológica: estabilidad y nueva altura efectiva</span>
+  <div class="item"><span class="dot dot-t"></span>"Día de fuerte brillo solar" = columna "Strong" de la tabla de Pasquill-Turner. Con viento a 10 m = 3.4 m/s (rango 3–5 m/s, columna Strong) → <b>Clase de estabilidad B</b>.</div>
+  <div class="item"><span class="dot dot-t"></span>Se extrapola el viento de 10 m a la altura física h=294.41 m con el mismo p hallado en el Paso 2, y se recalcula Δh con ese nuevo u_h (F y xf no cambian porque no dependen del viento).</div>
+  <div class="rx">u_h2 = u_10×(h/10)^p = 3.4×(29.441)^0.192 ≈ 3.4×1.9167 ≈ 6.517 m/s
+Δh₂ = 1.6·F^(1/3)·xf^(2/3)/u_h2 = 497.880/6.517 ≈ 76.420 m
+H₂ = h + Δh₂ = 294.410 + 76.420</div>
+  <div class="mini" style="border-left:3px solid #14b8a6"><b>Respuesta — Nueva altura efectiva: H₂ ≈ 370.830 m</b> (menor que los 450 m iniciales: a mayor velocidad de viento, la pluma se "acuesta" más rápido y se eleva menos)</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-t">Paso 4 — Velocidad de viento extrapolada a 6 m (interpretación del tramo ambiguo)</span>
+  <div class="rx">u_6 = u_10×(6/10)^p = 3.4×(0.6)^0.192 = 3.4×0.9063</div>
+  <div class="mini" style="border-left:3px solid #14b8a6"><b>u_6 ≈ 3.082 m/s</b> a 6 m sobre el suelo, en el día de estabilidad B</div>
+</div>
+
+<div class="secbar">🟣 PROBLEMAS 4 y 5 — Suma y promedio de niveles de sonido (existen dos versiones del enunciado en tus archivos)</div>
+
+<div class="block s3">
+  <span class="bh bh-gr">Enunciado completo (ambas versiones)</span>
+  <div class="def def-p">4. Halle la suma total de las fuentes de sonido. &nbsp; 5. Halle el promedio de las fuentes de sonido.</div>
+  <table class="tbl">
+    <tr><th>Fuente</th><th>Nivel (dB)</th><th>Tiempo — versión 2024-II</th></tr>
+    <tr><td>1</td><td>86.4</td><td>3 min</td></tr>
+    <tr><td>2</td><td>84.1</td><td>1.2 min</td></tr>
+    <tr><td>3</td><td>80.3</td><td>4.5 min</td></tr>
+    <tr><td>4</td><td>82.1</td><td>2 min</td></tr>
+    <tr><td>5</td><td>85.4</td><td>1 min</td></tr>
+  </table>
+  <div class="warn">⚠️ Los niveles en decibeles NUNCA se suman ni promedian de forma aritmética: el dB es una escala logarítmica de energía. Siempre hay que pasar cada nivel a su "intensidad relativa" 10^(L/10), operar esa suma/promedio en escala lineal, y recién al final volver a aplicar 10·log₁₀.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-p">Problema 4 — Suma total (nivel combinado simultáneo)</span>
+  <div class="item"><span class="dot dot-p"></span>Si las 5 fuentes actúan al mismo tiempo en un punto, el nivel resultante se obtiene sumando las intensidades relativas de cada una (válido en ambas versiones del examen, no depende del tiempo de exposición).</div>
+  <div class="rx">L_total = 10·log₁₀(Σ 10^(Li/10))
+Σ10^(Li/10) = 10^8.64+10^8.41+10^8.03+10^8.21+10^8.54
+= (4.365+2.571+1.072+1.622+3.467)×10⁸ = 13.096×10⁸</div>
+  <div class="mini" style="border-left:3px solid #8b5cf6"><b>Respuesta (4): L_total = 10·log₁₀(1.3096×10⁹) ≈ 91.170 dB</b></div>
+</div>
+
+<div class="block s3">
+  <span class="bh bh-p">Problema 5 — Promedio (dos lecturas posibles según la versión del examen)</span>
+  <div class="item"><span class="dot dot-p"></span><b>Versión sin tiempo (examen 2024-I):</b> "promedio" energético simple, tratando las 5 fuentes con igual peso.</div>
+  <div class="rx">L_avg = 10·log₁₀[(1/5)·Σ10^(Li/10)] = 10·log₁₀(2.6193×10⁸)</div>
+  <div class="mini" style="border-left:3px solid #8b5cf6"><b>L_avg ≈ 84.180 dB</b></div>
+  <div class="item"><span class="dot dot-p"></span><b>Versión con tiempo (examen 2024-II):</b> "promedio" ponderado por duración = nivel equivalente continuo Leq sobre el periodo total T=11.7 min.</div>
+  <div class="rx">Leq = 10·log₁₀[(1/T)·Σ ti·10^(Li/10)]
+Σ ti·10^(Li/10) = 13.096+3.085+4.822+3.243+3.467 (×10⁸) = 27.713×10⁸
+Leq = 10·log₁₀(27.713×10⁸/11.7) = 10·log₁₀(2.3686×10⁸)</div>
+  <div class="mini" style="border-left:3px solid #8b5cf6"><b>Leq ≈ 83.740 dB</b></div>
+  <div class="warn">⚠️ Error común que el profesor suele penalizar: promediar aritméticamente los dB directos: (86.4+84.1+80.3+82.1+85.4)/5 = 83.660 dB. Es un valor parecido pero conceptualmente incorrecto — subestima siempre el aporte real de las fuentes más ruidosas porque ignora que la energía crece exponencialmente con el dB, no linealmente.</div>
+</div>
+
+<div class="secbar">📊 TABLA INTEGRADORA FINAL</div>
+
+<div class="block s3">
+  <table class="tbl">
+    <tr><th>Problema</th><th>Sub-pregunta</th><th>Resultado</th><th>Unidad</th></tr>
+    <tr><td>1</td><td>a) C_ss (máx. exposición)</td><td>727.900</td><td>µg/m³</td></tr>
+    <tr><td>1</td><td>b) C(45 min)</td><td>415.730</td><td>µg/m³</td></tr>
+    <tr><td>1</td><td>c) t para 70% C_ss</td><td>1.114 (≈66.8 min)</td><td>h</td></tr>
+    <tr><td>2</td><td>a) Emisión SO₂ (controlada)</td><td>344.250</td><td>kg/h</td></tr>
+    <tr><td>2</td><td>b) Emisión PM (controlada)</td><td>76.500</td><td>kg/h</td></tr>
+    <tr><td>3</td><td>Altura física real (h)</td><td>294.410</td><td>m</td></tr>
+    <tr><td>3</td><td>Exponente de viento (p)</td><td>0.192</td><td>—</td></tr>
+    <tr><td>3</td><td>Nueva altura efectiva (H₂)</td><td>370.830</td><td>m</td></tr>
+    <tr><td>3</td><td>Viento extrapolado a 6 m</td><td>3.082</td><td>m/s</td></tr>
+    <tr><td>4</td><td>Suma total (L_total)</td><td>91.170</td><td>dB</td></tr>
+    <tr><td>5</td><td>Promedio simple / Leq</td><td>84.180 / 83.740</td><td>dB</td></tr>
+  </table>
+  <div class="warn">⚠️ Dato integrador clave: los tres tipos de cálculo de este examen (caja de mezcla, factor de emisión, dispersión gaussiana/Holland, y combinación de dB) comparten una misma lógica de balance: nunca se "promedia" lo que entra y lo que sale por intuición — siempre se plantea la ecuación física correcta (balance de masa, estequiometría, o suma de energías) y se despeja la incógnita pedida.</div>
+</div>
+
+<div class="footer-bar">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Davis, M.L. &amp; Cornwell, D.A. — Introduction to Environmental Engineering (modelo de caja IAQ, factores de emisión AP-42, niveles de sonido)<br>Holland, J.Z. (1953) / Briggs (ecuación de elevación de pluma)<br>Turner, D.B. (1970) — Workbook of Atmospheric Dispersion Estimates (clases de estabilidad de Pasquill)</span>
+</div>
+
+</div>
+</body>
+</html>
