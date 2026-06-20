@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas de Aprendizaje Profundo</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; padding: 20px; background: #e2e8f0; font-family: 'Source Sans 3', sans-serif; }
+  .cv {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f8fafc;
+    --color-background-tertiary: #e2e8f0;
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-border-tertiary: #cbd5e1;
+    --color-border-secondary: #94a3b8;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+    padding: 12px;
+    background: var(--color-background-tertiary);
+    color: var(--color-text-primary);
+    border-radius: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media(prefers-color-scheme: dark) {
+    body { background: #020617; }
+    .cv {
+      --color-background-primary: #0f172a;
+      --color-background-secondary: #1e293b;
+      --color-background-tertiary: #020617;
+      --color-text-primary: #f8fafc;
+      --color-text-secondary: #cbd5e1;
+      --color-border-tertiary: #334155;
+      --color-border-secondary: #475569;
+    }
+  }
+  .cv-title-bar { grid-column: 1 / -1; background: #0f1e3a; color: #ffffff; border-radius: 12px; padding: 16px; }
+  .cv-title { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; margin: 0 0 5px 0; }
+  .cv-subtitle { font-size: 11px; opacity: 0.8; margin-bottom: 10px; }
+  .cv-pill { display: inline-block; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 12px; font-size: 11px; margin-right: 5px; margin-bottom: 5px;}
+  .cv-radio { grid-column: 1 / -1; background: #0f1e3a; color: #ffffff; border-radius: 12px; padding: 16px; font-size: 13px; }
+  .cv-radio-row { display: flex; margin-bottom: 6px; }
+  .cv-radio-label { font-weight: bold; width: 220px; flex-shrink: 0; }
+  .section-bar { grid-column: 1 / -1; font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: bold; margin-top: 10px; padding: 5px 10px; border-radius: 8px; }
+  .bg-blue { background: #dbeafe; color: #1e3a8a; }
+  .bg-green { background: #dcfce7; color: #14532d; }
+  .bg-purple { background: #ede9fe; color: #4c1d95; }
+  .bg-teal { background: #ccfbf1; color: #134e4a; }
+  @media(prefers-color-scheme: dark) {
+    .bg-blue { background: #1e3a5f; color: #93c5fd; }
+    .bg-green { background: #14532d; color: #86efac; }
+    .bg-purple { background: #2e1065; color: #c4b5fd; }
+    .bg-teal { background: #042f2e; color: #5eead4; }
+  }
+  .block { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 11px; padding: 12px 13px; grid-column: span 1; display: flex; flex-direction: column; gap: 8px; }
+  .block.s2 { grid-column: span 2; }
+  .block.s3 { grid-column: 1 / -1; }
+  .bh { font-family: 'Oswald', sans-serif; font-size: 12px; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; display: inline-block; font-weight: 600; width: fit-content;}
+  .def { border-left: 3px solid #3b82f6; padding: 7px 10px; border-radius: 0 7px 7px 0; font-size: 12px; background: var(--color-background-secondary); }
+  .item { display: flex; gap: 7px; font-size: 12px; line-height: 1.5; }
+  .item .dot { width: 6px; height: 6px; background: var(--color-text-secondary); border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+  .rx { background: #0f172a; color: #7dd3fc; font-family: monospace; font-size: 11px; padding: 7px 11px; border-radius: 7px; text-align: center; line-height: 1.6; }
+  .warn { background: #fff7ed; border-left: 3px solid #f97316; border-radius: 0 8px 8px 0; padding: 8px 10px; font-size: 11.5px; color: #7c2d12; }
+  .exam { background: #fefce8; border: 1px solid #facc15; border-radius: 8px; padding: 8px 10px; font-size: 11.5px; color: #713f12; }
+  .caso { background: #f0f9ff; border-left: 3px solid #0ea5e9; border-radius: 0 9px 9px 0; padding: 8px 11px; font-size: 12px; color: #0c4a6e; }
+  .apply { background: var(--color-background-secondary); border-left: 3px solid #6366f1; border-radius: 0 9px 9px 0; padding: 8px 11px; font-size: 12px; }
+  @media(prefers-color-scheme: dark) {
+    .warn { background: #431407; color: #fed7aa; }
+    .exam { background: #422006; color: #fef08a; }
+    .caso { background: #0c1f2e; color: #7dd3fc; }
+  }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .mini { background: var(--color-background-secondary); border-radius: 8px; padding: 8px 10px; font-size: 11.5px; border-top: 3px solid var(--color-border-secondary); }
+  .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 11px; }
+  .fbox { background: var(--color-background-secondary); padding: 5px 8px; border-radius: 6px; border: 1px solid var(--color-border-tertiary); }
+  .farrow { color: var(--color-border-secondary); font-size: 15px; font-weight: bold; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 11px; text-align: left; }
+  .tbl th { background: var(--color-background-secondary); padding: 6px 8px; border-bottom: 1px solid var(--color-border-tertiary); }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--color-border-tertiary); vertical-align: top; }
+  #quiz-section { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 14px; padding: 16px 18px; grid-column: 1 / -1; }
+  .quiz-header { background: #0f1e3a; color: #ffffff; padding: 12px; border-radius: 8px; margin-bottom: 15px; }
+  .quiz-header h3 { font-family: 'Oswald', sans-serif; margin: 0; font-size: 14px; }
+  .quiz-header p { margin: 2px 0 0 0; font-size: 11px; opacity: 0.8; }
+  .stat-bar-wrap { width: 100%; background: var(--color-background-tertiary); height: 8px; border-radius: 4px; margin-bottom: 15px; overflow: hidden; }
+  .stat-bar-fill { height: 100%; background: #16a34a; width: 0%; transition: width 0.3s ease; }
+  .qcard { display: none; margin-bottom: 15px; }
+  .qcard.active { display: block; }
+  .qnum { font-size: 11px; font-weight: bold; color: var(--color-text-secondary); margin-bottom: 5px; text-transform: uppercase; }
+  .qtext { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+  .qbtn { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); color: var(--color-text-primary); border-radius: 8px; padding: 10px 12px; font-size: 12px; text-align: left; cursor: pointer; width: 100%; margin-bottom: 6px; transition: all 0.2s; }
+  .qbtn:hover:not(:disabled) { background: var(--color-background-tertiary); }
+  .qbtn.correct { background: #dcfce7 !important; border-color: #16a34a !important; color: #14532d !important; }
+  .qbtn.incorrect { background: #fee2e2 !important; border-color: #dc2626 !important; color: #991b1b !important; }
+  .qbtn:disabled { opacity: 0.7; cursor: not-allowed; }
+  .qfeedback { margin-top: 10px; border-radius: 0 8px 8px 0; padding: 10px; font-size: 12px; display: none; }
+  .qfeedback.correct { background: #f0fdf4; border-left: 3px solid #16a34a; color: #14532d; }
+  .qfeedback.incorrect { background: #fef2f2; border-left: 3px solid #dc2626; color: #991b1b; }
+  #quiz-results { display: none; padding: 20px; border-radius: 12px; text-align: center; color: var(--color-text-primary);}
+</style>
+</head>
+<body>
+
+<div class="cv">
+  <div class="cv-title-bar">
+    <h1 class="cv-title">INGENIERÍA AEROESPACIAL Y EFECTOS VISUALES</h1>
+    <div class="cv-subtitle">Canvas de Aprendizaje Profundo · Junio 2026</div>
+    <span class="cv-pill">🚀 Trajes Espaciales (EMU)</span>
+    <span class="cv-pill">🎬 Cinematografía 0G</span>
+    <span class="cv-pill">🌍 Soporte Vital</span>
+    <span class="cv-pill" style="background: #3b82f6;">📄 Fuente: Especificaciones Técnicas NASA/ESA (Simuladas)</span>
+  </div>
+
+  <div class="cv-radio">
+    <div class="cv-radio-row">
+      <span class="cv-radio-label">📋 Tipo de documento:</span>
+      <span>Base de datos técnica consolidada y manuales de operaciones de la NASA/ESA (Adaptado para esta sesión).</span>
+    </div>
+    <div class="cv-radio-row">
+      <span class="cv-radio-label">🏛️ Emisor / Autor:</span>
+      <span>Agencias Espaciales Internacionales e Industria Cinematográfica.</span>
+    </div>
+    <div class="cv-radio-row">
+      <span class="cv-radio-label">📅 Fecha / Vigencia:</span>
+      <span>Estándares actuales (2026) incluyendo la transición a contratos comerciales (Programa Artemis).</span>
+    </div>
+    <div class="cv-radio-row">
+      <span class="cv-radio-label">🎯 Propósito central:</span>
+      <span>Definir la arquitectura de supervivencia humana en el vacío y los métodos de replicación física en medios audiovisuales.</span>
+    </div>
+    <div class="cv-radio-row">
+      <span class="cv-radio-label">⚠️ Lo que NO cubre:</span>
+      <span>No es un manual de entrenamiento físico. La conexión con tu preparación física y ciencias del entorno (atmósfera/océano) la añadiremos analíticamente.</span>
+    </div>
+  </div>
+
+  <div class="block s3">
+    <div class="bh bg-blue">🗺️ MAPA DEL TEMA</div>
+    <div class="flow">
+      <span class="fbox">1. Anatomía del Traje (EMU) 📄</span>
+      <span class="farrow">→</span>
+      <span class="fbox">2. Soporte Vital (PLSS) 📄</span>
+      <span class="farrow">→</span>
+      <span class="fbox">3. Cine: Microgravedad Simulada 🌐</span>
+      <span class="farrow">→</span>
+      <span class="fbox">4. Cine: Gravedad Cero Real 🌐</span>
+    </div>
+  </div>
+
+  <div class="section-bar bg-blue">👨‍🚀 1. EL TRAJE COMO NAVE AUTÓNOMA (EMU)</div>
+
+  <div class="block s2">
+    <div class="bh bg-blue">CONCEPTOS CLAVE</div>
+    <div class="def">📄 <b>EMU (Extravehicular Mobility Unit):</b> No es ropa, es un vehículo espacial antropomórfico de una sola plaza. Provee presión, protección térmica y contra micrometeoritos.</div>
+    <div class="item"><div class="dot"></div><span><b>Presurización controlada:</b> El traje opera a baja presión (aprox. 4.3 psi) usando 100% de oxígeno puro. Esto mantiene la flexibilidad de las articulaciones de poliuretano y nylon.</span></div>
+    <div class="item"><div class="dot"></div><span><b>Capas protectoras:</b> Contiene hasta 14 capas de materiales como Mylar aluminizado (aislamiento térmico) y Kevlar.</span></div>
+    <div class="apply">⚡ <b>APLÍCALO HOY:</b> Analiza la presurización del EMU como una versión inversa de la presión submarina en tus futuras expediciones científicas marinas. El reto de presiones diferenciales comparte principios termodinámicos directos.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh bg-blue">ESTRUCTURA & CASOS</div>
+    <div class="caso">🌐 <b>CASO REAL: Contratación Pública</b><br>La NASA adjudicó un contrato de hasta USD 3,500 millones a Axiom Space y Collins Aerospace para los nuevos trajes lunares. Muestra cómo la industria se mueve hacia concesiones.</div>
+    <div class="rx">Fórmula Clave: P = F / A<br>Presión Interna EMU: ~4.3 psi<br>(29.6 kPa, 100% O2)</div>
+  </div>
+
+  <div class="section-bar bg-teal">🫁 2. SISTEMA DE SOPORTE VITAL (PLSS)</div>
+
+  <div class="block">
+    <div class="bh bg-teal">EL CICLO ECOLÓGICO CERRADO</div>
+    <div class="mini" style="border-top-color: #134e4a;">
+      <b>Sublimador</b><br>Rechaza el calor. El agua se congela y pasa directamente a gas en el vacío.
+    </div>
+    <div class="mini" style="border-top-color: #134e4a;">
+      <b>Filtros de LiOH</b><br>Remueven el dióxido de carbono mortal del aire exhalado.
+    </div>
+  </div>
+
+  <div class="block s2">
+    <div class="bh bg-teal">FUNCIONAMIENTO EN EL VACÍO</div>
+    <div class="def">📄 <b>PLSS (Primary Life Support Subsystem):</b> La mochila del astronauta. Un sistema hiper-eficiente modelado como un ciclo hídrico y atmosférico cerrado.</div>
+    <div class="flow" style="margin-top:10px;">
+      <span class="fbox">Calor corporal</span> <span class="farrow">→</span>
+      <span class="fbox">Agua absorbe</span> <span class="farrow">→</span>
+      <span class="fbox">Pasa al Sublimador</span> <span class="farrow">→</span>
+      <span class="fbox">Hielo sublima al vacío</span>
+    </div>
+    <div class="caso">🌐 <b>CASO REAL: Apolo 13 (1970)</b><br>Tuvieron que construir un adaptador improvisado para los filtros de CO2 incompatibles y evitar morir envenenados por su propia respiración.</div>
+  </div>
+
+  <div class="section-bar bg-purple">🎬 3. MICROGRAVEDAD SIMULADA EN TIERRA</div>
+
+  <div class="block s2">
+    <div class="bh bg-purple">TÉCNICAS DE RODAJE</div>
+    <div class="item"><div class="dot"></div><span><b>Flotabilidad Neutra:</b> Se graba a los actores sumergidos en el agua. La NASA usa este método en su NBL en Houston.</span></div>
+    <div class="item"><div class="dot"></div><span><b>Método "Gravity":</b> Inmovilizar al actor y mover brazos robóticos con cámaras alrededor a alta velocidad.</span></div>
+    <div class="apply">⚡ <b>APLÍCALO HOY:</b> La próxima vez que nades, exhala todo tu aire en el fondo para experimentar "flotabilidad neutra negativa". Analiza biomecánicamente por qué los astronautas se agotan en el NBL.</div>
+  </div>
+
+  <div class="block">
+    <div class="bh bg-purple">EL LÍMITE FÍSICO</div>
+    <div class="warn">⚠️ <b>ERROR FRECUENTE:</b> Grabar bajo el agua y pensar que se ve real. El agua genera arrastre hidrodinámico y burbujas. En el espacio real no hay fricción.</div>
+  </div>
+
+  <div class="section-bar bg-green">🚀 4. GRAVEDAD CERO REAL EN CINE</div>
+
+  <div class="block">
+    <div class="bh bg-green">LA FÍSICA APLICADA</div>
+    <div class="def">🌐 <b>Vuelos Parabólicos:</b> Aviones que vuelan en trayectorias elípticas precisas para igualar la aceleración de la gravedad hacia abajo, creando ingravidez temporal.</div>
+  </div>
+
+  <div class="block s2">
+    <div class="bh bg-green">DE LA SIMULACIÓN A LA ÓRBITA</div>
+    <div class="caso">🌐 <b>CASO REAL: El Desafío (ISS)</b><br>En 2023, la película rusa "Vyzov" (The Challenge) se convirtió en el primer largometraje grabado a bordo de la Estación Espacial Internacional (ISS), un hito en la comercialización del espacio.</div>
+    <div class="apply">⚡ <b>APLÍCALO HOY:</b> Observa cómo las grandes agencias monetizan sus activos a través de contratos con productoras. Estudia estos pliegos para inspirar tus propuestas al estado.</div>
+  </div>
+
+  <div id="quiz-section">
+    <div class="quiz-header">
+      <h3>📝 QUIZ RÁPIDO DE REPASO</h3>
+      <p>Comprueba lo aprendido haciendo clic en las opciones.</p>
+    </div>
+    
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" id="stat-fill"></div></div>
+    
+    <div class="qcard active" id="qc1">
+      <p class="qtext">1. ¿Por qué el traje opera a una presión baja (4.3 psi)?</p>
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">Para ahorrar peso en los tanques.</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">Para permitir la movilidad de las articulaciones sin inflarse como un globo.</button>
+      <div class="qfeedback" id="fb1"></div>
+    </div>
+    
+    <div class="qcard" id="qc2">
+      <p class="qtext">2. ¿Qué falla causó el mayor riesgo ambiental cerrado en el Apolo 13?</p>
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="true">Incompatibilidad de los filtros purificadores de CO2.</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="false">Exceso de presión atmosférica en cabina.</button>
+      <div class="qfeedback" id="fb2"></div>
+    </div>
+
+    <div id="quiz-results">
+      <h2 style="font-family: Oswald; margin:0;">¡Quiz Completado!</h2>
+      <button id="qr-retry" style="background:#0f1e3a; color:white; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; font-weight:bold; margin-top:10px;">🔄 Intentar de nuevo</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  let currentAnswers = 0;
+  const totalQuestions = 2;
+  const explanations = {
+    "1": "La baja presión evita que el traje se infle rígidamente, permitiendo al astronauta doblar brazos y piernas.",
+    "2": "Los cartuchos de LiOH de los módulos no eran compatibles, lo que casi provoca envenenamiento por dióxido de carbono."
+  };
+
+  const wrap = document.getElementById('quiz-section');
+  wrap.addEventListener('click', function(e) {
+    if(!e.target.classList.contains('qbtn')) return;
+    const btn = e.target;
+    const qNum = btn.getAttribute('data-q');
+    const isCorrect = btn.getAttribute('data-correct') === 'true';
+    const card = document.getElementById('qc' + qNum);
+    
+    card.querySelectorAll('.qbtn').forEach(b => {
+      b.disabled = true;
+      if(b.getAttribute('data-correct') === 'true') b.classList.add('correct');
+    });
+    
+    if(!isCorrect) btn.classList.add('incorrect');
+    
+    const fb = document.getElementById('fb' + qNum);
+    fb.style.display = 'block';
+    fb.className = 'qfeedback ' + (isCorrect ? 'correct' : 'incorrect');
+    fb.innerHTML = (isCorrect ? '✅ ¡Exacto! ' : '❌ Incorrecto. ') + explanations[qNum];
+    
+    currentAnswers++;
+    document.getElementById('stat-fill').style.width = ((currentAnswers / totalQuestions) * 100) + '%';
+    
+    setTimeout(() => {
+      card.classList.remove('active');
+      if(currentAnswers < totalQuestions) {
+        document.getElementById('qc' + (currentAnswers + 1)).classList.add('active');
+      } else {
+        document.getElementById('quiz-results').style.display = 'block';
+      }
+    }, 1500);
+  });
+
+  document.getElementById('qr-retry').addEventListener('click', function() {
+    currentAnswers = 0;
+    document.getElementById('stat-fill').style.width = '0%';
+    document.getElementById('quiz-results').style.display = 'none';
+    for(let i=1; i<=totalQuestions; i++) {
+      const card = document.getElementById('qc' + i);
+      const fb = document.getElementById('fb' + i);
+      card.classList.remove('active');
+      fb.style.display = 'none';
+      card.querySelectorAll('.qbtn').forEach(b => { b.disabled = false; b.classList.remove('correct', 'incorrect'); });
+    }
+    document.getElementById('qc1').classList.add('active');
+  });
+})();
+</script>
+</body>
+</html>
