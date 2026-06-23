@@ -1,0 +1,218 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.header { padding: 1.5rem 0 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 1rem; }
+.header h2 { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+.header p { font-size: 13px; color: var(--color-text-secondary); margin-top: 4px; }
+.controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+.tab-btn { font-size: 12px; padding: 5px 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; transition: all 0.15s; }
+.tab-btn:hover { background: var(--color-background-secondary); }
+.tab-btn.active { background: #CECBF6; border-color: #AFA9EC; color: #3C3489; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1rem; }
+.stat { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; text-align: center; }
+.stat-n { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.stat-l { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+.q-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; cursor: pointer; transition: border-color 0.15s; }
+.q-card:hover { border-color: var(--color-border-secondary); }
+.q-card.open { border-color: #AFA9EC; }
+.q-top { display: flex; align-items: flex-start; gap: 10px; }
+.q-badge { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: var(--border-radius-md); white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.badge-def { background: #E6F1FB; color: #0C447C; }
+.badge-comp { background: #EAF3DE; color: #27500A; }
+.badge-calc { background: #FAEEDA; color: #633806; }
+.badge-err { background: #FCEBEB; color: #791F1F; }
+.badge-id { background: #EEEDFE; color: #3C3489; }
+.badge-app { background: #E1F5EE; color: #085041; }
+.q-tema { font-size: 11px; color: var(--color-text-secondary); margin-left: auto; white-space: nowrap; }
+.q-text { font-size: 14px; color: var(--color-text-primary); line-height: 1.5; margin-top: 6px; }
+.q-ans { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--color-border-tertiary); display: none; }
+.q-ans.show { display: block; }
+.q-ans strong { color: var(--color-text-primary); font-weight: 500; }
+.chevron { font-size: 14px; color: var(--color-text-secondary); margin-left: auto; flex-shrink: 0; transition: transform 0.2s; }
+.q-card.open .chevron { transform: rotate(180deg); }
+.score-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.score-row span { font-size: 13px; color: var(--color-text-secondary); }
+.btn-main { font-size: 13px; padding: 6px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); cursor: pointer; }
+.btn-main:hover { background: var(--color-background-secondary); }
+.progress { flex: 1; height: 4px; background: var(--color-background-secondary); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: #7F77DD; border-radius: 2px; transition: width 0.3s; }
+</style>
+
+<div class="header">
+  <h2>Banco de preguntas — Maquinaria y mecanización agrícola</h2>
+  <p>10 temas · 30 preguntas · haz clic en cada una para ver la respuesta guía</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n" id="s-total">30</div><div class="stat-l">Preguntas</div></div>
+  <div class="stat"><div class="stat-n" id="s-vis">0</div><div class="stat-l">Revisadas</div></div>
+  <div class="stat"><div class="stat-n" id="s-temas">10</div><div class="stat-l">Temas</div></div>
+  <div class="stat"><div class="stat-n" id="s-tipos">6</div><div class="stat-l">Tipos</div></div>
+</div>
+
+<div class="score-row">
+  <span id="prog-label">0 / 30 revisadas</span>
+  <div class="progress"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+  <button class="btn-main" onclick="resetAll()">Reiniciar</button>
+</div>
+
+<div class="controls" id="filter-btns">
+  <button class="tab-btn active" onclick="filter('all',this)">Todas</button>
+  <button class="tab-btn" onclick="filter('T1',this)">T1 Conceptos</button>
+  <button class="tab-btn" onclick="filter('T2',this)">T2 Materiales</button>
+  <button class="tab-btn" onclick="filter('T3',this)">T3 Transmisión</button>
+  <button class="tab-btn" onclick="filter('T4',this)">T4 Energía</button>
+  <button class="tab-btn" onclick="filter('T5',this)">T5 Labranza</button>
+  <button class="tab-btn" onclick="filter('T6',this)">T6 Tubérculos</button>
+  <button class="tab-btn" onclick="filter('T7',this)">T7 Cosechadoras</button>
+  <button class="tab-btn" onclick="filter('T8',this)">T8 Forraje</button>
+  <button class="tab-btn" onclick="filter('T9',this)">T9 Mantenimiento</button>
+  <button class="tab-btn" onclick="filter('T10',this)">T10 Siembra</button>
+</div>
+
+<div id="q-list"></div>
+
+<script>
+const QUESTIONS = [
+  { id:1, tema:'T1', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'¿Qué es la mecanización agrícola y por qué se la considera un "proceso de desarrollo tecnológico" y no simplemente la compra de maquinaria? Mencione al menos tres componentes del proceso.',
+    a:'La mecanización agrícola es el proceso tecnológico orientado a <strong>diseñar, fabricar y operar</strong> maquinaria para elevar la productividad del campo. Va más allá de adquirir equipos porque abarca: (1) fabricación y diseño de herramientas, (2) operación y mantenimiento de maquinaria, y (3) transformación de materias primas de origen vegetal y animal. Su finalidad es reducir costos unitarios y elevar la competitividad del sector.' },
+  { id:2, tema:'T1', tipo:'comp', badge:'badge-comp', label:'Comparación',
+    q:'Compare las tecnologías tradicional, intermedia y moderna en términos de uso de energía, impacto ambiental y requerimientos de capital. ¿En qué contextos productivos peruanos es más viable cada una?',
+    a:'<strong>Tradicional:</strong> tracción animal, riego por gravedad; bajo capital, alta mano de obra, mayor erosión potencial → viable en comunidades campesinas de sierra. <strong>Intermedia:</strong> labranza mínima, riego presurizado; capital moderado, menor erosión → adecuada para medianos agricultores de costa. <strong>Moderna:</strong> GPS, drones, automatización; alto capital, mínima mano de obra, mayor precisión en uso de insumos → viable en grandes agroexportadoras de la costa.' },
+  { id:3, tema:'T1', tipo:'err', badge:'badge-err', label:'Error común',
+    q:'Un estudiante afirma: "labranza mínima y siembra directa son lo mismo porque en ambas se reduce la remoción del suelo." ¿Es correcta esta afirmación? Justifique.',
+    a:'<strong>Incorrecta.</strong> En labranza mínima (tecnología intermedia) sí se remueve parcialmente el suelo, solo se reduce la intensidad respecto a la labranza convencional. La siembra directa (tecnología moderna) implica cero remoción: la semilla se coloca directamente en suelo sin disturbar. Son dos categorías tecnológicas distintas con impactos edáficos diferentes.' },
+  { id:4, tema:'T2', tipo:'err', badge:'badge-err', label:'Error común',
+    q:'Explique la diferencia entre oxidación y corrosión, e indique cuál representa mayor riesgo para una reja de arado de acero al carbono en suelos con alta humedad.',
+    a:'<strong>Oxidación</strong> es una reacción química específica del material con oxígeno (Fe + O₂ → Fe₂O₃). <strong>Corrosión</strong> es un proceso más general de deterioro que puede incluir ataques ácidos, electroquímicos, biológicos, etc. En suelos húmedos con agroquímicos, la <strong>corrosión electroquímica</strong> representa mayor riesgo porque combina humedad, iones del fertilizante y diferencias de potencial eléctrico en el metal, acelerando la pérdida de material más allá de la simple oxidación.' },
+  { id:5, tema:'T2', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'Distinga entre maleabilidad y ductilidad con ejemplos de aplicación en maquinaria agrícola. ¿Puede un material ser maleable pero poco dúctil?',
+    a:'<strong>Maleabilidad:</strong> capacidad de laminarse en hojas sin romperse (deformación biaxial). Ejemplo: chapas de aluminio en carrocería de tractores. <strong>Ductilidad:</strong> capacidad de estirarse en hilos sin fracturar (deformación uniaxial, medida en % de elongación). Ejemplo: cobre en cableado eléctrico del tractor. Sí, un material puede ser maleable pero poco dúctil: el <strong>plomo</strong> se lamina fácilmente pero no se estira sin romperse.' },
+  { id:6, tema:'T2', tipo:'id', badge:'badge-id', label:'Identificación',
+    q:'Un eje de tractor se deforma permanentemente bajo carga y no recupera su forma al retirarla. ¿Qué propiedad mecánica está evidenciando y qué consecuencias operativas tiene?',
+    a:'Evidencia <strong>plasticidad</strong> (deformación permanente más allá del límite elástico). Consecuencias: el eje ya no está alineado con su geometría original, genera vibración anormal, puede provocar falla de rodamientos por excentricidad, y si continúa en servicio, la fatiga del material en la zona deformada accelerará la fractura. Debe reemplazarse inmediatamente.' },
+  { id:7, tema:'T3', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'¿Por qué los engranajes garantizan una relación de transmisión exacta mientras que las poleas con faja no lo hacen? ¿En qué situaciones industriales se preferiría cada sistema?',
+    a:'Los engranajes transmiten movimiento por <strong>contacto directo diente a diente</strong> sin deslizamiento, por lo que cada revolución del piñón mueve exactamente N dientes de la rueda. Las fajas dependen de fricción y pueden deslizarse bajo carga o vibraciones, alterando la relación. <strong>Engranajes</strong> se prefieren donde la sincronización es crítica (reloj, caja de velocidades). <strong>Fajas</strong> son preferidas donde se busca amortiguación de golpes, bajo costo y distancias largas entre ejes.' },
+  { id:8, tema:'T3', tipo:'calc', badge:'badge-calc', label:'Cálculo',
+    q:'Un tren de engranajes tiene piñón conductor con Z₁=20 dientes a 900 rpm y rueda conducida con Z₂=60 dientes. Calcule: (a) razón de transmisión, (b) velocidad de la rueda conducida, (c) ¿sube o baja la velocidad?',
+    a:'(a) Razón de transmisión: i = Z₂/Z₁ = 60/20 = <strong>3</strong>. (b) n₂ = n₁ / i = 900/3 = <strong>300 rpm</strong>. (c) La velocidad <strong>baja</strong> (es un reductor): al aumentar la relación de transmisión, la velocidad angular disminuye y el torque aumenta proporcionalmente (sin considerar pérdidas por fricción).' },
+  { id:9, tema:'T3', tipo:'err', badge:'badge-err', label:'Error común',
+    q:'Un estudiante dice que los engranajes helicoidales siempre conectan ejes paralelos. ¿Es correcto? Explique las dos configuraciones posibles.',
+    a:'<strong>Incorrecto.</strong> Los engranajes helicoidales existen en dos configuraciones: (1) <strong>Ejes paralelos</strong>: los dientes se inclinan respecto al eje de rotación generando engrane progresivo y menos ruido; (2) <strong>Ejes cruzados (oblicuos)</strong>: los ejes están en planos diferentes y no se intersectan; el contacto es puntual y se usan para bajas cargas. Tienen el mismo nombre pero geometría y capacidad de carga completamente distintas.' },
+  { id:10, tema:'T4', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'Explique el concepto de "balance energético" en la agricultura y por qué es fundamental que la energía empleada sea menor a la obtenida en cosechas útiles.',
+    a:'El balance energético agrícola es la relación entre la <strong>energía total invertida</strong> (combustible, mano de obra, abonos, riego) y la <strong>energía contenida en la cosecha</strong> obtenida. Si la energía gastada supera la producida, el sistema colapsa económicamente: el productor gasta más de lo que obtiene, haciendo inviable la actividad. Es el principio de viabilidad energética y económica de toda explotación agrícola.' },
+  { id:11, tema:'T4', tipo:'id', badge:'badge-id', label:'Identificación',
+    q:'Clasifique las siguientes fuentes como renovable o no renovable, justificando: energía solar, gas natural, biomasa, carbón mineral, energía nuclear.',
+    a:'<strong>Renovables:</strong> energía solar (flujo continuo del sol, inagotable en escala humana), biomasa (recurso biológico regenerable). <strong>No renovables:</strong> gas natural (hidrocarburo fósil finito), carbón mineral (fósil, no se regenera en escala humana), energía nuclear (el uranio es un mineral limitado que se agota). <strong>Clave:</strong> "limpia" ≠ "renovable"; la nuclear no emite CO₂ pero consume un recurso finito.' },
+  { id:12, tema:'T4', tipo:'calc', badge:'badge-calc', label:'Cálculo',
+    q:'Un agricultor consume 3,200 Kcal/día con eficiencia muscular del 25%. Si trabaja 8 horas a razón de 4 Kcal/min, ¿cuántas Kcal de trabajo útil produce por día de labor? ¿Agota su ración diaria?',
+    a:'Trabajo en 8 h: 8 × 60 min × 4 Kcal/min = <strong>1,920 Kcal gastadas</strong> en labor. Trabajo útil (25%): 1,920 × 0.25 = <strong>480 Kcal útiles</strong>. Ración diaria: 3,200 Kcal. Como 1,920 < 3,200, <strong>no agota</strong> la ración diaria (quedan ~1,280 Kcal para metabolismo basal, actividades no laborales, etc.). El rendimiento es bajo pero el valor humano es la inteligencia aplicada al trabajo.' },
+  { id:13, tema:'T5', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'¿Cuál es el objetivo principal de las operaciones de labranza sobre el suelo agrícola y qué propiedad física busca modificar prioritariamente? Mencione el costo energético relativo.',
+    a:'La labranza busca <strong>modificar la estructura del suelo</strong> (porosidad, densidad aparente) para crear condiciones favorables a la germinación y el desarrollo radicular. Prioritariamente busca reducir la resistencia mecánica del suelo para que la raíz crezca con mínimo gasto energético. Costo energético: representa entre el <strong>30–50% del combustible total</strong> de la campaña agrícola, siendo la operación de mayor consumo energético en la preparación del terreno.' },
+  { id:14, tema:'T5', tipo:'comp', badge:'badge-comp', label:'Comparación',
+    q:'Compare la labranza primaria y secundaria en términos de profundidad de trabajo, objetivo e implementos asociados.',
+    a:'<strong>Labranza primaria:</strong> primera operación del ciclo, 15–60 cm de profundidad, rompe y voltea suelo sin disturbar desde el ciclo anterior, corta raíces, fragmenta capas compactadas. Implementos: arado de vertedera, discos, cincel, subsolador. <strong>Labranza secundaria:</strong> operaciones complementarias superficiales (5–15 cm), afina el suelo ya trabajado en la primaria. Incluye rastreo, nivelación, surcado. <strong>Nota:</strong> "primaria" se refiere al orden temporal, no a su importancia.' },
+  { id:15, tema:'T5', tipo:'id', badge:'badge-id', label:'Identificación',
+    q:'Identifique qué tipo de arado usaría para cada situación: (a) suelo muy compactado que necesita romper capas profundas sin voltear, (b) suelo blando donde se requiere volteo y aireación, (c) suelo pedregoso de ladera con riesgo de erosión.',
+    a:'(a) <strong>Arado cincel o subsolador:</strong> fractura en profundidad sin voltear el perfil, descompacta capas profundas preservando los residuos superficiales. (b) <strong>Arado de vertedera:</strong> corta, levanta y voltea la capa arable, incorpora rastrojos y airea el perfil. (c) <strong>Arado de discos:</strong> trabaja mejor en suelos pedregosos o con mucho rastrojo porque los discos giran ante los obstáculos en lugar de trabarse como la vertedera.' },
+  { id:16, tema:'T6', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'¿Por qué es crítico regular correctamente la profundidad del arado patatero antes de la cosecha de tubérculos? ¿Qué ocurre si se regula muy superficial o muy profunda?',
+    a:'El arado patatero afloja el suelo del camellón antes del arranque. Si la profundidad es <strong>muy superficial</strong>: los tubérculos más profundos quedan sin aflojar → mayor resistencia al arranque → daños mecánicos en la cosechadora y en los tubérculos. Si es <strong>muy profunda</strong>: se incorpora exceso de tierra a los elevadores → sobrecargan los sistemas de separación, reducen eficiencia y aumentan riesgo de atasco. La regulación óptima trabaja justo por debajo del tubérculo más profundo.' },
+  { id:17, tema:'T6', tipo:'comp', badge:'badge-comp', label:'Comparación',
+    q:'Compare la reja triangular y la reja plana de cosechadora de tubérculos en cuanto a perfil, suelos de aplicación y tipo de penetración.',
+    a:'<strong>Reja triangular:</strong> perfil en "V", presión localizada en la punta, mayor penetración en suelos compactos o húmedos donde se necesita fuerza concentrada para ingresar bajo el camellón. <strong>Reja plana:</strong> perfil horizontal ancho, mayor volumen de tierra por pasada, preferible en suelos sueltos o arenosos donde la penetración no es el problema sino la cobertura. La elección depende principalmente de la textura y estado hídrico del suelo.' },
+  { id:18, tema:'T6', tipo:'err', badge:'badge-err', label:'Error común',
+    q:'¿Cuál es la diferencia entre la desbrozadora y la cosechadora de tubérculos? ¿Por qué no confundirlas tiene importancia práctica?',
+    a:'<strong>Desbrozadora:</strong> tritura el follaje aéreo (matas) de la planta, 2–3 semanas <em>antes</em> del arranque. No toca los tubérculos. Permite el endurecimiento de la piel del tubérculo. <strong>Cosechadora:</strong> arranca los tubérculos del suelo semanas después. Confundirlas tiene importancia porque si no se aplica la desbrozadora antes, los tallos se enrollan en las cadenas de la cosechadora, provocando atascos graves, tiempo perdido y daños mecánicos en los tubérculos durante el arranque.' },
+  { id:19, tema:'T7', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'Describa el recorrido del grano desde que la barra de corte lo sega hasta que ingresa a la tolva de la cosechadora de granos, identificando cada subsistema.',
+    a:'(1) <strong>Barra de corte</strong> (plataforma/cabezal): secciona los tallos con cuchillas reciprocantes. (2) <strong>Molinete</strong>: empuja las espigas hacia el caracol. (3) <strong>Sinfín alimentador</strong>: concentra el material hacia el centro. (4) <strong>Elevador de mies</strong>: lleva el material al cilindro. (5) <strong>Cilindro trillador + cóncavo</strong>: separa el grano de la espiga por impacto/fricción. (6) <strong>Sacudidores</strong>: recuperan grano que escapó mezclado en la paja. (7) <strong>Zarandas + ventilador</strong>: limpian impurezas. (8) <strong>Tolva</strong>: almacena el grano limpio.' },
+  { id:20, tema:'T7', tipo:'comp', badge:'badge-comp', label:'Comparación',
+    q:'Explique por qué la capacidad de procesamiento de una cosechadora NO se optimiza mejorando únicamente la potencia del motor. Mencione al menos 4 factores que interactúan.',
+    a:'La capacidad está limitada por el <strong>componente más restrictivo</strong> del sistema: (1) <strong>Área de trilla</strong> (cilindro+cóncavo): limita cuánto grano se desgrana por pasada. (2) <strong>Tamaño del cabezal</strong>: un cabezal sobredimensionado supera la capacidad de trilla → pérdidas. (3) <strong>Capacidad de la tolva</strong>: obliga a paradas frecuentes. (4) <strong>Tipo de cilindro</strong>: barras o raspadores, cada uno óptimo para un cultivo específico. Más potencia con cóncavo pequeño no mejora el resultado.' },
+  { id:21, tema:'T7', tipo:'err', badge:'badge-err', label:'Error común',
+    q:'Un operario confunde la etapa de "trilla" con la de "separación" en una cosechadora. Explique la diferencia precisa entre ambas etapas.',
+    a:'<strong>Trilla</strong> (cilindro + cóncavo): es el proceso de separar el grano de la espiga mediante impacto o fricción. El grano libre cae directamente por el cóncavo. <strong>Separación</strong> (sacudidores): etapa posterior que recupera el grano que NO cayó por el cóncavo y quedó atrapado mezclado en la paja larga. Son etapas secuenciales: primero trillo, luego recupero lo que escapó. Sin la separación, se pierden granos valiosos que el cilindro ya había desgranado.' },
+  { id:22, tema:'T8', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'¿Qué innovación introdujo George Berry en el desarrollo de la cosechadora y qué ventaja operativa representó?',
+    a:'George Berry (Stockton, California) introdujo el uso de la <strong>paja residual como combustible para la caldera</strong> de vapor de la cosechadora. Esto representó <strong>autosuficiencia energética</strong>: la máquina se alimentaba de su propio subproducto, eliminando la necesidad de transportar combustible externo al campo. Con cabezal de 40 pies (~12 m), podía cosechar más de 100 acres/día, una capacidad revolucionaria para la época.' },
+  { id:23, tema:'T8', tipo:'comp', badge:'badge-comp', label:'Comparación',
+    q:'¿Por qué se recomienda la acondicionadora de rodillos estriados para alfalfa y no la de barras con dedos? Relacione con la composición nutritiva del forraje.',
+    a:'La alfalfa es una <strong>leguminosa</strong> cuyo valor nutritivo está concentrado en las <strong>hojas</strong> (ricas en proteína y minerales), mientras que el tallo es leñoso. Los <strong>rodillos estriados</strong> aplastan el tallo suavemente sin dañar las hojas → se conserva el valor nutritivo. Las <strong>barras con dedos</strong> rasgan la cutícula más agresivamente, ideal para gramíneas de tallo duro, pero en alfalfa fragmentan las hojas → pérdida de fracción más nutritiva → menor calidad del heno.' },
+  { id:24, tema:'T8', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'Explique por qué la distribución uniforme de paja y granza es considerada una función propia de la cosechadora y no un subproducto accidental.',
+    a:'Es una función deliberada porque una distribución uniforme de los residuos: (1) <strong>Facilita su descomposición</strong> homogénea → mejora la materia orgánica del suelo. (2) <strong>Evita camellones de paja</strong> que dificultarían la siguiente siembra o labor. (3) Permite la <strong>fertilización natural</strong> equilibrada del lote. Si la paja se concentra en franjas, las zonas sin cobertura quedan expuestas a erosión. La cosechadora incorpora sistemas específicos (distribuidores de paja) para lograr este resultado, lo que confirma que es intencional.' },
+  { id:25, tema:'T9', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'Explique por qué los abonos fosfatados y potásicos no pueden aplicarse siempre en superficie como los nitrogenados nítricos, y describa las alternativas correctas.',
+    a:'Los <strong>abonos nitrogenados nítricos</strong> son altamente solubles → se disuelven con el riego o lluvia y migran hacia la zona radicular → pueden aplicarse en superficie. Los <strong>fosfatados y potásicos</strong> se <strong>fijan al suelo</strong> (baja movilidad hídrica) → si quedan en superficie no llegan a la profundidad radicular. Alternativas: (1) <strong>Incorporarlos con labranza</strong> previa a la siembra a la profundidad requerida, o (2) aplicarlos con <strong>abonadoras localizadas</strong> que los depositan directamente junto a la semilla o raíz.' },
+  { id:26, tema:'T9', tipo:'id', badge:'badge-id', label:'Identificación',
+    q:'Describa el principio de funcionamiento de la abonadora centrífuga, indicando el papel del agitador, el dosificador y el distribuidor.',
+    a:'La abonadora centrífuga funciona así: (1) El abono en la <strong>tolva</strong> cae por gravedad. (2) El <strong>agitador</strong> evita atascos y puentes en la tolva, manteniendo flujo continuo del abono. (3) El <strong>dosificador</strong> regula la cantidad de abono que sale de la tolva por unidad de tiempo (controla la tasa de aplicación en kg/ha). (4) El <strong>distribuidor</strong> (par cónico + paletas giratorias) recibe el abono y lo proyecta en arco amplio sobre el terreno. El ancho de trabajo varía según la velocidad de giro y el tipo de paleta.' },
+  { id:27, tema:'T9', tipo:'comp', badge:'badge-comp', label:'Comparación',
+    q:'Compare la abonadora centrífuga con la pendular en cuanto a mecanismo de distribución, precisión lateral y ancho de trabajo.',
+    a:'<strong>Centrífuga:</strong> distribuye mediante paletas giratorias que proyectan el abono en abanico amplio → cubre gran superficie por pasada pero con menor precisión en los bordes laterales (distribución irregular en extremos). <strong>Pendular:</strong> usa un tubo oscilante (péndulo) que distribuye el abono de lado a lado → distribución más uniforme en franjas angostas y mejor precisión lateral. La centrífuga es preferida para grandes superficies; la pendular donde se requiere mayor uniformidad y se trabaja en franjas delimitadas.' },
+  { id:28, tema:'T10', tipo:'def', badge:'badge-def', label:'Definición',
+    q:'¿Cuál es la diferencia entre plúmula, radícula y cotiledón en la semilla? ¿Cuál cumple la función de reserva nutritiva durante la germinación?',
+    a:'<strong>Radícula:</strong> embrión de la raíz principal; es lo primero que emerge en la germinación, absorbiendo agua y anclando la plántula. <strong>Plúmula:</strong> embrión del tallo y las primeras hojas; emerge después de la radícula y busca la luz. <strong>Cotiledón:</strong> hoja embrionaria que <strong>almacena los nutrientes</strong> (carbohidratos, proteínas, lípidos) que alimentan al embrión hasta que la plántula puede realizar fotosíntesis de forma autónoma. El cotiledón es la "despensa" de la semilla.' },
+  { id:29, tema:'T10', tipo:'calc', badge:'badge-calc', label:'Cálculo',
+    q:'Un lote de semillas de trigo tiene poder germinativo del 70%. Si se quiere lograr una densidad de 200 plantas/m², ¿cuántas semillas/m² deben sembrarse para compensar las que no germinarán?',
+    a:'Si el 70% de las semillas germina, se necesitan más semillas que plantas deseadas. Semillas necesarias = plantas deseadas / poder germinativo = 200 / 0.70 = <strong>≈ 286 semillas/m²</strong>. Es decir, por cada 100 semillas sembradas solo 70 producirán planta, por eso se siembra un 43% más de lo que se quiere lograr. Esto justifica medir el poder germinativo antes de sembrar y ajustar la densidad de siembra de la máquina.' },
+  { id:30, tema:'T10', tipo:'app', badge:'badge-app', label:'Aplicación',
+    q:'¿Qué condición previa es indispensable para que el acto de sembrar sea efectivo? Mencione las condiciones de la semilla y del ambiente que determinan el éxito de la germinación.',
+    a:'Condición previa indispensable: el <strong>terreno debe estar preparado</strong> (labranza previa) para garantizar la estructura adecuada. <strong>Condiciones de la semilla:</strong> conformación (forma y tamaño para el dosificador), madurez (embrión con energía acumulada), sanidad (ausencia de patógenos), y poder germinativo elevado (% de semillas que germinan). <strong>Condiciones ambientales:</strong> temperatura óptima por especie, humedad suficiente para activar la imbibición por el micrópilo, aireación adecuada y luz (fotoperiodo). Si falla alguna condición, la semilla no germina aunque sea de alta calidad.' },
+];
+
+let opened = new Set();
+let currentFilter = 'all';
+
+function render() {
+  const list = document.getElementById('q-list');
+  const filtered = currentFilter === 'all' ? QUESTIONS : QUESTIONS.filter(q => q.tema === currentFilter);
+  list.innerHTML = filtered.map(q => `
+    <div class="q-card ${opened.has(q.id) ? 'open' : ''}" onclick="toggle(${q.id}, this)" id="qc-${q.id}">
+      <div class="q-top">
+        <span class="q-badge ${q.badge}">${q.label}</span>
+        <div style="flex:1; min-width:0;">
+          <div class="q-text">${q.q}</div>
+          <div class="q-ans ${opened.has(q.id) ? 'show' : ''}"><strong>Respuesta guía:</strong><br>${q.a}</div>
+        </div>
+        <span class="q-tema">${q.tema}</span>
+        <span class="chevron"><i class="ti ti-chevron-down"></i></span>
+      </div>
+    </div>
+  `).join('');
+  updateStats();
+}
+
+function toggle(id, el) {
+  if (opened.has(id)) { opened.delete(id); el.classList.remove('open'); el.querySelector('.q-ans').classList.remove('show'); }
+  else { opened.add(id); el.classList.add('open'); el.querySelector('.q-ans').classList.add('show'); }
+  updateStats();
+}
+
+function updateStats() {
+  const vis = opened.size;
+  document.getElementById('s-vis').textContent = vis;
+  document.getElementById('prog-label').textContent = `${vis} / 30 revisadas`;
+  document.getElementById('prog-fill').style.width = Math.round(vis/30*100) + '%';
+}
+
+function filter(tema, btn) {
+  currentFilter = tema;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function resetAll() {
+  opened.clear();
+  render();
+}
+
+render();
+</script>
