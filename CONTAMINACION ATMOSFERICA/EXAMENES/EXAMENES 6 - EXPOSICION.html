@@ -1,0 +1,189 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.container { padding: 1.5rem 0; max-width: 680px; }
+.progress-bar { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.prog-dot { flex: 1; min-width: 30px; height: 4px; background: var(--color-border-tertiary); border-radius: 2px; transition: background 0.3s; }
+.prog-dot.done { background: #1D9E75; }
+.prog-dot.active { background: #7F77DD; }
+.section-label { font-size: 12px; color: var(--color-text-tertiary); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 6px; }
+.section-title { font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 1rem; }
+.tip-box { background: var(--color-background-secondary); border-left: 3px solid #7F77DD; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 10px 14px; margin-bottom: 1rem; font-size: 13px; color: var(--color-text-secondary); }
+.speech-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.5rem; margin-bottom: 1rem; font-size: 16px; line-height: 1.85; color: var(--color-text-primary); }
+.speech-card .highlight { background: #EEEDFE; color: #3C3489; padding: 1px 5px; border-radius: 4px; font-weight: 500; }
+.speech-card .data { background: #E1F5EE; color: #0F6E56; padding: 1px 5px; border-radius: 4px; font-weight: 500; }
+.speech-card .warn { background: #FAEEDA; color: #854F0B; padding: 1px 5px; border-radius: 4px; font-weight: 500; }
+.explain-box { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px 16px; margin-bottom: 1rem; }
+.explain-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.explain-body { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
+.nav { display: flex; gap: 10px; margin-top: 1rem; }
+.nav button { flex: 1; padding: 10px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); font-size: 15px; cursor: pointer; transition: background 0.15s; }
+.nav button:hover { background: var(--color-background-secondary); }
+.nav button:disabled { opacity: 0.3; cursor: default; }
+.btn-next { background: var(--color-background-secondary) !important; font-weight: 500; }
+.counter { text-align: center; font-size: 13px; color: var(--color-text-tertiary); margin-top: 10px; }
+.time-badge { display: inline-block; background: var(--color-background-info); color: var(--color-text-info); font-size: 12px; padding: 3px 10px; border-radius: 20px; margin-left: 8px; vertical-align: middle; }
+</style>
+
+<div class="container">
+<h2 class="sr-only">Speech interactivo para exposición de PM2.5 y morbilidad respiratoria en Lima Metropolitana 2025</h2>
+<div class="progress-bar" id="progressBar"></div>
+<div id="content"></div>
+<div class="nav">
+  <button id="btnPrev" onclick="navigate(-1)">← Anterior</button>
+  <button id="btnNext" class="btn-next" onclick="navigate(1)">Siguiente →</button>
+</div>
+<div class="counter" id="counter"></div>
+</div>
+
+<script>
+const sections = [
+{
+  label: "Sección 1 de 7 · Introducción",
+  title: "Presentación del equipo y tema",
+  time: "~1 min",
+  tip: "Saluda con confianza. Tú no tienes que saber estadística para exponer bien — solo tienes que entender QUÉ hicieron y POR QUÉ importa.",
+  speech: `Buenas [tardes/días], somos el grupo conformado por Andrea Andia, Jorge Castro, Julio Mercado, Karoline Vilcahuaman, Flavia Villegas y Nilton Yep, de la Facultad de Ciencias de la UNALM.<br><br>
+Nuestro trabajo se titula: <span class="highlight">«PM2.5 y morbilidad respiratoria aguda en Lima Metropolitana 2025»</span>.<br><br>
+La pregunta central es sencilla: <strong>¿Cuándo sube la contaminación del aire en Lima, ¿también suben los casos de enfermedades respiratorias?</strong><br><br>
+Y si la respuesta es sí, ¿cuánto más riesgo implica cada microgramo adicional de contaminante?`,
+  explain: {
+    title: "¿Qué es PM2.5 en términos simples?",
+    body: "Son partículas microscópicas — 30 veces más delgadas que un cabello humano — que flotan en el aire por el smog vehicular, polvo y otras fuentes. Son tan pequeñas que pasan por la nariz y llegan hasta lo más profundo de los pulmones."
+  }
+},
+{
+  label: "Sección 2 de 7 · Contexto",
+  title: "Por qué Lima y por qué 2025",
+  time: "~1.5 min",
+  tip: "Aquí pones el escenario. Habla despacio. Este bloque conecta al jurado con el problema real.",
+  speech: `Lima tiene un problema particular: durante el invierno — de <span class="data">mayo a octubre</span> — se forma lo que se llama <span class="highlight">inversión térmica</span>: una capa de aire frío queda atrapada abajo y no deja que los contaminantes suban ni se dispersen. A eso se suma la garúa y el viento muy lento.<br><br>
+El resultado: la contaminación se acumula cerca de donde respiramos, y en esos mismos meses, los reportes de infecciones respiratorias agudas — lo que en el sistema de salud se llama <span class="highlight">IRA</span> — se disparan.<br><br>
+Nosotros analizamos <span class="data">cinco distritos</span> durante las <span class="data">53 semanas epidemiológicas de 2025</span>: San Martín de Porres, Santa Anita, Jesús María (Campo de Marte), San Borja y San Juan de Lurigancho.`,
+  explain: {
+    title: "¿Qué son las IRA (infecciones respiratorias agudas)?",
+    body: "Son enfermedades como resfriados, faringitis, laringitis o bronquitis. En el sistema de salud están registradas con los códigos J00–J06. El MINSA las monitorea semana a semana a través de su sistema NOTIWEB."
+  }
+},
+{
+  label: "Sección 3 de 7 · Datos y métodos",
+  title: "Cómo lo hicimos (sin tecnicismos)",
+  time: "~2 min",
+  tip: "No tienes que explicar las fórmulas. Solo explica QUÉ midieron, DE DÓNDE vienen los datos, y QUÉ herramientas usaron para analizar. El jurado ya sabe estadística — tú solo guíalos.",
+  speech: `Usamos tres fuentes de datos oficiales.<br><br>
+Primero, <span class="highlight">SENAMHI</span>: nos dio las mediciones horarias de PM2.5 en las cinco estaciones. Las promediamos por semana.<br><br>
+Segundo, <span class="highlight">MINSA a través de NOTIWEB</span>: nos dio los casos semanales de IRA por distrito durante todo el año.<br><br>
+Tercero, <span class="highlight">INEI</span>: nos dio las proyecciones de población por distrito para 2025, lo cual usamos para calcular tasas — es decir, casos por cada 10 000 habitantes — y así poder comparar distritos con poblaciones muy distintas.<br><br>
+Para el análisis estadístico hicimos tres cosas: <br>
+— Primero, describimos cómo varía el PM2.5 a lo largo del año.<br>
+— Segundo, medimos si hay correlación entre el PM2.5 de una semana y las enfermedades respiratorias de esa misma semana y de la semana siguiente.<br>
+— Tercero, construimos un <span class="highlight">modelo de regresión Binomial Negativa</span> que nos permite calcular cuánto aumenta el riesgo de IRA por cada microgramo adicional de PM2.5, controlando el efecto de la temperatura.`,
+  explain: {
+    title: "¿Por qué Binomial Negativa y no otra regresión?",
+    body: "Cuando se cuentan eventos raros como casos de enfermedad por semana, los datos suelen tener mucha variabilidad — más de la que un modelo simple (Poisson) puede manejar. Eso se llama 'sobredispersión'. La Binomial Negativa es simplemente un modelo más flexible que acepta esa variabilidad. Probamos Poisson primero, detectamos sobredispersión, y cambiamos."
+  }
+},
+{
+  label: "Sección 4 de 7 · Resultados PM2.5",
+  title: "¿Cómo estaba la contaminación?",
+  time: "~1.5 min",
+  tip: "Aquí menciona los números clave. No leas todos — solo los que más impactan. Santa Anita es tu número estrella.",
+  speech: `El panorama de contaminación en Lima 2025 es preocupante. El estándar nacional — llamado <span class="highlight">ECA</span> — establece que el promedio diario de PM2.5 no debe superar los <span class="data">25 µg/m³</span>.<br><br>
+<strong>Santa Anita</strong> fue el distrito más afectado: registró una concentración media anual de <span class="warn">33.5 µg/m³</span> y superó el ECA el <span class="warn">59.2 % de los días del año</span>. Es decir, más de la mitad del año respiraron aire contaminado por encima del límite legal.<br><br>
+Le siguieron San Juan de Lurigancho con <span class="warn">58.3 %</span> de días en excedencia, y San Borja con <span class="warn">50.1 %</span>.<br><br>
+El distrito con mejores cifras fue <strong>Jesús María</strong> (Campo de Marte), con una media de <span class="data">20.5 µg/m³</span> y solo <span class="data">25.6 %</span> de días en excedencia.<br><br>
+El patrón es claro en los gráficos: los picos se concentran en invierno, especialmente entre mayo y septiembre, cuando la inversión térmica atrapa los contaminantes.`,
+  explain: {
+    title: "¿Qué significa µg/m³?",
+    body: "Microgramos por metro cúbico — es cuántos microgramos de partículas finas hay en cada metro cúbico de aire que respiras. El estándar de la OMS es 15 µg/m³; el de Perú es 25 µg/m³. Santa Anita promedió 33.5 — casi el doble del estándar de la OMS."
+  }
+},
+{
+  label: "Sección 5 de 7 · Resultados asociación",
+  title: "¿Hay relación entre contaminación y enfermedades?",
+  time: "~2 min",
+  tip: "Este es el corazón del trabajo. Explica la correlación primero (es intuitiva), luego el IRR (es el número más importante). Usa la analogía del porcentaje de aumento.",
+  speech: `Sí, hay una asociación clara y estadísticamente significativa en los cinco distritos.<br><br>
+Primero lo medimos con <span class="highlight">correlación de Spearman</span> — que básicamente nos dice: cuando sube el PM2.5, ¿también sube la tasa de IRA? Un valor de 1 sería correlación perfecta; un valor de 0 sería ninguna relación.<br><br>
+Los resultados van de <span class="data">ρ = 0.498</span> en San Martín de Porres hasta <span class="data">ρ = 0.814</span> en Santa Anita — todos con un nivel de confianza muy alto (p menor a 0.001). Además, esta correlación se mantiene e incluso mejora levemente cuando miramos la semana siguiente, lo que sugiere un <span class="highlight">efecto rezagado</span>: la contaminación de hoy tiene consecuencias en salud también la próxima semana.<br><br>
+Pero el número más importante es el <span class="highlight">IRR — razón de tasas de incidencia</span>. Este número nos dice: <em>por cada 1 µg/m³ adicional de PM2.5, ¿cuánto aumentan los casos esperados de IRA?</em><br><br>
+En cuatro de los cinco distritos el IRR ajustado fue mayor a 1 y estadísticamente significativo:<br>
+— <strong>Jesús María</strong>: <span class="warn">IRR = 1.029</span> → 2.9 % más casos por µg/m³<br>
+— <strong>San Juan de Lurigancho</strong>: <span class="warn">IRR = 1.023</span> → 2.3 % más casos<br>
+— <strong>San Martín de Porres</strong>: <span class="warn">IRR = 1.011</span> → 1.1 % más casos<br>
+— <strong>Santa Anita</strong>: <span class="warn">IRR = 1.008</span> → 0.8 % más casos<br><br>
+La excepción fue <strong>San Borja</strong>: su IRR ajustado fue 1.003 y no fue estadísticamente significativo. ¿Por qué? Porque al controlar la temperatura, la asociación desaparece. Esto sugiere que en San Borja la covariación estacional — el frío del invierno — explica mejor el aumento de IRA que el PM2.5 por sí solo.`,
+  explain: {
+    title: "¿Cómo explicar el IRR sin tecnicismos?",
+    body: "Imagina que en una semana típica se esperan 100 casos de gripe. Con un IRR de 1.023, si el PM2.5 sube 10 µg/m³, se esperarían 123 casos en lugar de 100 — un 23 % más. El IRR es simplemente ese multiplicador."
+  }
+},
+{
+  label: "Sección 6 de 7 · Limitaciones y discusión",
+  title: "Qué no podemos concluir y por qué",
+  time: "~1.5 min",
+  tip: "Mencionar las limitaciones te hace ver más serio y confiable. El jurado siempre las pregunta — si tú las dices primero, demuestras dominio.",
+  speech: `Como todo estudio, el nuestro tiene limitaciones importantes que debemos reconocer.<br><br>
+La primera y más fundamental es que se trata de un <span class="highlight">diseño ecológico</span>: analizamos datos agregados por distrito y por semana. Eso significa que el IRR que calculamos describe una asociación a nivel de población, <strong>no a nivel individual</strong>. No podemos decir «si una persona específica respira más PM2.5, enfermará». Eso se llama la <span class="highlight">falacia ecológica</span> y es un límite conceptual del diseño.<br><br>
+La segunda limitación es que no controlamos la <span class="highlight">circulación viral estacional</span> — influenza, virus respiratorio sincicial — que también aumentan en invierno y podrían estar inflando la asociación.<br><br>
+Tercero, no modelamos la <span class="highlight">dependencia temporal entre semanas</span> consecutivas, lo que significa que los intervalos de confianza deben interpretarse con cautela.<br><br>
+Dicho esto, nuestros resultados son consistentes con la literatura internacional: estudios globales reportan incrementos del 1 al 5 % en morbilidad respiratoria por cada 10 µg/m³ adicionales de PM2.5, y nuestros valores se encuentran dentro de ese rango.`,
+  explain: {
+    title: "¿Qué es la falacia ecológica?",
+    body: "Si un barrio contaminado tiene más enfermos, no significa que los vecinos más expuestos individualmente sean los que enfermaron. Quizás los enfermos son los que se quedan en casa con ventanas cerradas. Para saber eso necesitas datos individuales — encuestas, historiales clínicos — no datos agregados."
+  }
+},
+{
+  label: "Sección 7 de 7 · Conclusiones y propuestas",
+  title: "Qué concluimos y qué proponemos",
+  time: "~2 min",
+  tip: "Termina fuerte. Las conclusiones deben sonar contundentes pero honestas. Las propuestas concretas le dan valor aplicado al trabajo — eso impresiona al jurado.",
+  speech: `Para cerrar, resumimos en cinco puntos.<br><br>
+<strong>Primero</strong>: Lima tiene un problema real de contaminación por PM2.5, especialmente en el este de la ciudad. Santa Anita y San Juan de Lurigancho superan el ECA más de la mitad del año.<br><br>
+<strong>Segundo</strong>: existe una asociación positiva y significativa entre PM2.5 semanal y morbilidad por IRA en cuatro de cinco distritos. La relación no solo es simultánea — también persiste con un rezago de una semana.<br><br>
+<strong>Tercero</strong>: San Borja es una excepción relevante que nos enseña algo importante — en ese distrito la temperatura explica mejor la variación de casos que el PM2.5 solo, lo que nos recuerda la importancia de controlar por variables de confusión.<br><br>
+<strong>Cuarto</strong>: los resultados no implican causalidad individual, pero sí justifican intervenciones a nivel poblacional, especialmente preventivas.<br><br>
+<strong>Quinto</strong>: proponemos cuatro líneas de acción: <span class="highlight">campañas de salud preventiva</span> en invierno dirigidas a grupos vulnerables; <span class="highlight">regulación vehicular</span> más estricta en las zonas Este y Norte-Este; <span class="highlight">infraestructura verde</span> como arborización y techos verdes; y <span class="highlight">filtros HEPA</span> en colegios y centros de salud de los distritos con mayor IRR ajustado.<br><br>
+Muchas gracias. Quedamos a disposición para sus preguntas.`,
+  explain: {
+    title: "Tip para las preguntas del jurado",
+    body: "Si te preguntan por qué usaron Binomial Negativa: 'Detectamos sobredispersión en todos los distritos al probar Poisson, por lo que cambiamos al modelo Binomial Negativa que maneja esa variabilidad adicional.' — Si preguntan por San Borja: 'La temperatura actúa como confusor en ese distrito: explica tanto el PM2.5 como las IRA, por lo que al controlarla, la asociación cruda desaparece.'"
+  }
+}
+];
+
+let current = 0;
+
+function render() {
+  const s = sections[current];
+  const bar = document.getElementById('progressBar');
+  bar.innerHTML = sections.map((_, i) =>
+    `<div class="prog-dot ${i < current ? 'done' : i === current ? 'active' : ''}"></div>`
+  ).join('');
+
+  document.getElementById('content').innerHTML = `
+    <div class="section-label">${s.label} <span class="time-badge">⏱ ${s.time}</span></div>
+    <div class="section-title">${s.title}</div>
+    <div class="tip-box">💡 <strong>Tip de exposición:</strong> ${s.tip}</div>
+    <div class="speech-card">${s.speech}</div>
+    <div class="explain-box">
+      <div class="explain-title">📖 Para entender si te preguntan: ${s.explain.title}</div>
+      <div class="explain-body">${s.explain.body}</div>
+    </div>
+  `;
+
+  document.getElementById('btnPrev').disabled = current === 0;
+  document.getElementById('btnNext').disabled = current === sections.length - 1;
+  document.getElementById('btnNext').textContent = current === sections.length - 1 ? '✓ Fin' : 'Siguiente →';
+  document.getElementById('counter').textContent = `Sección ${current + 1} de ${sections.length}`;
+}
+
+function navigate(dir) {
+  current = Math.max(0, Math.min(sections.length - 1, current + dir));
+  render();
+  document.querySelector('.container').scrollTop = 0;
+}
+
+render();
+</script>
