@@ -1,0 +1,376 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--surface-1);font-family:'Source Sans 3',sans-serif;color:var(--text-primary)}
+.title{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.title h1{font-family:Oswald;font-size:20px;font-weight:700;margin:0 0 4px}
+.title p{font-size:11px;margin:0 0 8px;color:#c7d2e8}
+.sec{grid-column:1/-1;font-family:Oswald;font-size:13px;font-weight:700;padding:6px 4px;margin-top:4px}
+.block{background:var(--surface-2);border:0.5px solid var(--border);border-radius:11px;padding:12px 13px}
+.s2{grid-column:span 2}.s3{grid-column:1/-1}
+.bh{font-family:Oswald;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--surface-1);margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:6px}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:7px 10px;margin-top:8px}
+.mini{background:var(--surface-1);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:11.5px}
+.fbox{background:var(--surface-1);padding:5px 9px;border-radius:6px}
+.farrow{color:var(--text-secondary);font-size:14px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--surface-1);padding:5px 7px;border-bottom:0.5px solid var(--border);text-align:left}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--border);vertical-align:top}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:Oswald;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.qwrap{grid-column:1/-1;background:var(--surface-2);border:0.5px solid var(--border);border-radius:14px;padding:16px 18px}
+.qhead{background:#0f1e3a;color:#fff;border-radius:8px;padding:10px 14px;margin-bottom:12px}
+.qhead h3{font-family:Oswald;font-size:14px;margin:0 0 3px}
+.qhead p{font-size:11px;margin:0;color:#c7d2e8}
+.progwrap{width:100%;background:var(--surface-1);border-radius:20px;height:11px;margin-bottom:14px}
+.progfill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s}
+.qcard{margin-bottom:14px;padding-bottom:10px;border-bottom:0.5px solid var(--border)}
+.qnum{font-size:10.5px;color:var(--text-secondary);margin:0 0 3px}
+.qtext{font-size:12.5px;font-weight:600;margin:0 0 8px}
+.qbtn{background:var(--surface-1);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;display:block;color:var(--text-primary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.disabled{opacity:0.6;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:4px;display:none}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626}
+#result{display:none;border-radius:8px;padding:12px 14px;font-size:13px;font-weight:600;text-align:center;margin-top:6px}
+#resetBtn{margin-top:10px;background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:11.5px;cursor:pointer;display:none}
+</style>
+
+<div class="cv">
+
+<div class="title">
+<h1>PredicTHOR Energy — Keraunos / ADR</h1>
+<p>Gestión de riesgo eléctrico por rayos y tiempo severo · Sistemas de transmisión y distribución de energía</p>
+<span class="pill" style="background:#1e3a5f;color:#93c5fd">Detección de rayos</span>
+<span class="pill" style="background:#14532d;color:#86efac">Diagnóstico de fallas</span>
+<span class="pill" style="background:#422006;color:#fef08a">Indicadores de confiabilidad</span>
+</div>
+
+<div class="sec" style="background:#dbeafe;color:#1e3a8a">🔵 1. LA RED DE DETECCIÓN DE RAYOS (hardware)</div>
+
+<div class="block s2">
+<span class="bh" style="background:#dbeafe;color:#1e3a8a">Cómo funciona</span>
+<div class="def" style="border-color:#1e3a8a">Es una red de estaciones sensoras distribuidas geográficamente (ver mapas Colombia/Perú) que detectan la onda electromagnética que emite cada descarga atmosférica. No es un solo sensor: es la triangulación entre varios lo que permite calcular ubicación exacta.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Cada estación tiene una antena de campo que capta la señal magnética del rayo y un receptor GPS que sincroniza el instante exacto en que llegó esa señal.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>La "sensor processing unit" de cada estación pre-procesa la señal localmente (triggering, timestamps, sin deadtime) y la envía por red (IAF-NET) a una unidad de procesamiento central.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>La unidad central corre el algoritmo de detección de rayos: compara los tiempos de llegada a distintas estaciones (mínimo 4) y calcula la posición del rayo por diferencia de tiempo de arribo (TDOA).</div>
+<div class="flow">
+<div class="fbox">Antena capta onda EM</div><div class="farrow">→</div>
+<div class="fbox">GPS marca tiempo (100 ns)</div><div class="farrow">→</div>
+<div class="fbox">≥4 estaciones envían dato</div><div class="farrow">→</div>
+<div class="fbox">Algoritmo triangula ubicación</div>
+</div>
+<div class="exam">🎯 EXAMEN: ¿Por qué se requiere un mínimo de 4 estaciones para ubicar un rayo, y qué papel cumple la precisión de 100 ns del GPS en ese cálculo?</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#dbeafe;color:#1e3a8a">Datos que entrega cada rayo</span>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Ubicación: latitud y longitud</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Tiempo con precisión de 100 ns</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Tipo: nube-tierra (CG) o intranube (IC)</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Amplitud de la corriente de retorno (kA)</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Polaridad (+/-)</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Altura de emisión (solo para IC)</div>
+</div>
+
+<div class="sec" style="background:#fef9c3;color:#713f12">🟡 2. CG vs IC — DOS TIPOS DE RAYO</div>
+
+<div class="block">
+<span class="bh" style="background:#fef9c3;color:#713f12">CG — Nube-Tierra</span>
+<div class="mini" style="border-top:3px solid #ca8a04">El canal de descarga llega hasta el suelo o una estructura. Es el que impacta directamente torres, líneas y conductores — el más relevante para daño físico a la red eléctrica.</div>
+</div>
+<div class="block">
+<span class="bh" style="background:#fef9c3;color:#713f12">IC — Intranube</span>
+<div class="mini" style="border-top:3px solid #ca8a04">La descarga ocurre entre cargas dentro de la misma nube o entre nubes, sin tocar tierra. No daña físicamente la línea, pero es indicador de intensidad de la tormenta y de riesgo inminente de CG.</div>
+</div>
+<div class="block">
+<span class="bh" style="background:#fef9c3;color:#713f12">Polaridad</span>
+<div class="mini" style="border-top:3px solid #ca8a04">Indica si la carga transferida a tierra es positiva o negativa. Los rayos positivos son menos frecuentes pero suelen transportar corrientes de retorno más altas — mayor severidad potencial.</div>
+</div>
+<div class="warn">⚠️ ERROR COMÚN: No todo IC es "inofensivo" para la red — una alta tasa de IC en poco tiempo suele preceder el estallido de CG, por eso el sistema usa ambos para anticipar riesgo, no solo para contar impactos directos.</div>
+<div class="exam">🎯 EXAMEN: Explica por qué un sistema de alerta temprana para líneas eléctricas necesita monitorear también los rayos intranube (IC) y no solo los nube-tierra (CG).</div>
+
+<div class="sec" style="background:#ede9fe;color:#4c1d95">🟣 3. JERARQUÍA DE ACTIVOS EN LA PLATAFORMA</div>
+
+<div class="block s3">
+<span class="bh" style="background:#ede9fe;color:#4c1d95">Para qué sirve organizar así</span>
+<div class="def" style="border-color:#4c1d95">Antes de poder decir "esta línea fue afectada por un rayo", el sistema necesita saber qué líneas existen y cómo se agrupan. Por eso cada rayo detectado se cruza contra un árbol de infraestructura del cliente (la empresa prestadora del servicio eléctrico, "Epsa").</div>
+<div class="flow">
+<div class="fbox">Epsa (empresa)</div><div class="farrow">→</div>
+<div class="fbox">Sistema (Alta Tensión / Distribución)</div><div class="farrow">→</div>
+<div class="fbox">Zona (Centro, Norte, Sur...)</div><div class="farrow">→</div>
+<div class="fbox">Circuito / línea específica</div>
+</div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span>Esta jerarquía es lo que permite luego generar rankings como "Cartago-Zarzal: 227 rayos" — el sistema ya sabe a qué zona y sistema pertenece esa línea.</div>
+</div>
+
+<div class="sec" style="background:#dcfce7;color:#14532d">🟢 4. LOS 4 MÓDULOS OPERATIVOS DE LA PLATAFORMA</div>
+
+<div class="block">
+<span class="bh" style="background:#dcfce7;color:#14532d">Tiempo Real</span>
+<div class="def" style="border-color:#14532d">Mapa en vivo de rayos recientes. Es la vista de "está pasando ahora mismo".</div>
+<div class="item"><span class="dot" style="background:#14532d"></span>Color por antigüedad: rojo &lt;10 min, hasta verde ~60 min — así el operador ve si la tormenta se acerca o se aleja.</div>
+<div class="item"><span class="dot" style="background:#14532d"></span>Semáforo de riesgo por zona: sin riesgo / baja / media / máxima.</div>
+<div class="item"><span class="dot" style="background:#14532d"></span>Al hacer clic en un rayo puntual se ve su ficha: fecha, hora, lat/lon, corriente (kA), tipo, error de localización (km).</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#dcfce7;color:#14532d">Diagnóstico de Fallas</span>
+<div class="def" style="border-color:#14532d">Vista forense: dado un evento reportado por el operador (una línea que se disparó), consulta qué actividad de rayos hubo cerca en ese momento exacto.</div>
+<div class="item"><span class="dot" style="background:#14532d"></span>Se ingresa fecha/hora del disparo + ventana de minutos antes/después.</div>
+<div class="item"><span class="dot" style="background:#14532d"></span>Rankea líneas por "actividad de rayos a 1 km acumulada" — así se correlaciona causa (rayo) con efecto (falla reportada).</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#dcfce7;color:#14532d">Indicadores de Afectación</span>
+<div class="def" style="border-color:#14532d">Vista analítica histórica: agrega datos por rango de fechas para ver patrones, no eventos individuales.</div>
+<div class="item"><span class="dot" style="background:#14532d"></span>Ranking de líneas más golpeadas por rayos en el período.</div>
+<div class="item"><span class="dot" style="background:#14532d"></span>Gráfico "indicadores por sistema": barras de rayos + línea de tasa Fallas/Rayos ×100% + usuarios afectados.</div>
+<div class="item"><span class="dot" style="background:#14532d"></span>Mapa de fondo con densidad de rayos/km² sobre el trazado real de las líneas.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#dcfce7;color:#14532d">El indicador clave: Fallas/Rayos × 100%</span>
+<div class="rx">Fallas/Rayos (%) = (N° de fallas reportadas en la línea / N° de rayos detectados cerca de esa línea) × 100</div>
+<div class="item"><span class="dot" style="background:#14532d"></span>No mide cuántos rayos cayeron, sino qué tan vulnerable es esa línea específica: dos líneas con el mismo número de rayos pueden tener tasas de falla muy distintas por diseño, blindaje o mantenimiento.</div>
+<div class="warn">⚠️ ERROR COMÚN: confundir "más rayos" con "más riesgo". El ranking de rayos (imagen 6/19) y la tasa Fallas/Rayos son dos cosas distintas — una línea puede recibir muchos rayos y fallar poco (buen blindaje) o pocos rayos y fallar mucho (línea vulnerable).</div>
+</div>
+<div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia funcional entre el módulo "Diagnóstico de Fallas" y "Indicadores de Afectación"? Explica en qué momento del proceso usaría un operador cada uno.</div>
+
+<div class="sec" style="background:#ccfbf1;color:#134e4a">🩵 5. LIGHTNING POWER RELIABILITY MANAGER — RIESGO DE DISEÑO</div>
+
+<div class="block s2">
+<span class="bh" style="background:#ccfbf1;color:#134e4a">Para qué sirve</span>
+<div class="def" style="border-color:#134e4a">A diferencia de los módulos anteriores (operación día a día), esta herramienta es para planeación: evalúa el riesgo estructural de una línea ANTES de que ocurra cualquier falla, cruzando longitud de línea con densidad de rayos histórica de la zona.</div>
+<div class="item"><span class="dot" style="background:#134e4a"></span>Gráfico de riesgo: eje X = DDT (densidad de descargas a tierra, rayos/km²/año), eje Y = longitud de la línea (km). Cada punto es una línea; la zona roja indica combinación de alto riesgo.</div>
+<div class="item"><span class="dot" style="background:#134e4a"></span>N en el gráfico representa el número esperado de impactos por año — a más longitud y más DDT, más N.</div>
+<div class="item"><span class="dot" style="background:#134e4a"></span>Mapa de calor de DDT superpuesto sobre topografía: la altitud influye en la densidad de rayos (las crestas montañosas suelen concentrar más actividad).</div>
+</div>
+<div class="block">
+<span class="bh" style="background:#ccfbf1;color:#134e4a">Fórmula base: DDT</span>
+<div class="rx">DDT [rayos/km²·año]<br>N esperado = DDT × Longitud línea × Ancho efectivo de corredor</div>
+<div class="item"><span class="dot" style="background:#134e4a"></span>Es la misma lógica que usa la normativa IEEE 1243 / IEC 62305 para dimensionar apantallamiento de líneas.</div>
+</div>
+<div class="exam">🎯 EXAMEN: ¿Por qué la longitud de la línea multiplicada por la DDT es un mejor predictor de riesgo que la DDT sola? Da un ejemplo con dos líneas hipotéticas.</div>
+
+<div class="sec" style="background:#ffedd5;color:#7c2d12">🟠 6. CONSULTORÍA ESPECIALIZADA Y PRONÓSTICO</div>
+
+<div class="block">
+<span class="bh" style="background:#ffedd5;color:#7c2d12">Consultoría (análisis de transitorios)</span>
+<div class="mini" style="border-top:3px solid #c2410c">Análisis puntual de una línea específica (ej. Casanare-Meta): simula corrientes tras recierre de interruptores, comparando línea en vacío vs. energizada — esto es ingeniería de transitorios electromagnéticos, no meteorología.</div>
+</div>
+<div class="block">
+<span class="bh" style="background:#ffedd5;color:#7c2d12">Pronóstico de Fallas</span>
+<div class="mini" style="border-top:3px solid #c2410c">Modelo predictivo 3D (torre × tiempo × densidad de descarga) que anticipa en qué torre y minuto es más probable una falla, antes de que ocurra — usando la tendencia de actividad eléctrica de la tormenta que se aproxima.</div>
+</div>
+<div class="block">
+<span class="bh" style="background:#ffedd5;color:#7c2d12">Sobre "condiciones climáticas"</span>
+<div class="mini" style="border-top:3px solid #c2410c">Las funcionalidades listadas mencionan explícitamente "identificación de tiempo severo" además de rayos — pero en las capturas disponibles no hay un módulo desplegado de viento/precipitación; solo íconos que sugieren ese alcance ampliado del servicio.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#f1f5f9;color:#334155">Tabla integradora — repaso rápido</span>
+<table class="tbl">
+<tr><th>Módulo</th><th>Pregunta que responde</th><th>Momento de uso</th><th>Dato clave</th><th>Salida</th></tr>
+<tr><td>Tiempo Real</td><td>¿Dónde están cayendo rayos ahora?</td><td>Durante la tormenta</td><td>Color por antigüedad</td><td>Mapa + alertas</td></tr>
+<tr><td>Diagnóstico de Fallas</td><td>¿Qué rayo causó esta falla puntual?</td><td>Después del disparo</td><td>Actividad a 1 km</td><td>Ranking de líneas</td></tr>
+<tr><td>Indicadores de Afectación</td><td>¿Qué líneas fallan más históricamente?</td><td>Análisis mensual</td><td>Fallas/Rayos ×100%</td><td>Gráficos + CSV</td></tr>
+<tr><td>Reliability Manager</td><td>¿Qué línea nueva es más riesgosa?</td><td>Diseño/planeación</td><td>DDT × longitud</td><td>Mapa de riesgo</td></tr>
+<tr><td>Pronóstico de Fallas</td><td>¿Dónde fallará en los próximos minutos?</td><td>Antes del evento</td><td>Tendencia 3D</td><td>Alerta predictiva</td></tr>
+</table>
+<div class="warn">⚠️ DATO INTEGRADOR CLAVE: todos los módulos comparten la misma fuente de datos (la red de sensores GPS-sincronizada), lo único que cambia es la ventana temporal de análisis: pasado histórico (Indicadores), presente (Tiempo Real), evento puntual pasado (Diagnóstico) o futuro inmediato (Pronóstico).</div>
+</div>
+
+<div class="qwrap" id="quiz-section">
+<div class="qhead"><h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3><p>Marca tu respuesta y descubre si es correcta</p></div>
+<div class="progwrap"><div class="progfill" id="progfill"></div></div>
+<p style="font-size:11px;color:var(--text-secondary);margin:0 0 12px" id="progtext">0 de 10 respondidas · 0 aciertos</p>
+
+<div class="qcard" id="q1">
+<p class="qnum">Pregunta 1/10</p><p class="qtext">¿Cuál es el número mínimo de estaciones sensoras necesarias para triangular la ubicación de un rayo?</p>
+<div class="qopts">
+<button class="qbtn" data-q="1" data-correct="false">A) 1</button>
+<button class="qbtn" data-q="1" data-correct="false">B) 2</button>
+<button class="qbtn" data-q="1" data-correct="true">C) 4</button>
+<button class="qbtn" data-q="1" data-correct="false">D) 10</button>
+</div>
+<div class="qfeedback" id="fb1"></div></div>
+
+<div class="qcard" id="q2">
+<p class="qnum">Pregunta 2/10</p><p class="qtext">Un rayo intranube (IC) se diferencia de uno nube-tierra (CG) porque:</p>
+<div class="qopts">
+<button class="qbtn" data-q="2" data-correct="true">A) No llega a tocar el suelo o una estructura</button>
+<button class="qbtn" data-q="2" data-correct="false">B) Siempre tiene polaridad positiva</button>
+<button class="qbtn" data-q="2" data-correct="false">C) Nunca precede a un rayo CG</button>
+<button class="qbtn" data-q="2" data-correct="false">D) Solo ocurre de noche</button>
+</div>
+<div class="qfeedback" id="fb2"></div></div>
+
+<div class="qcard" id="q3">
+<p class="qnum">Pregunta 3/10</p><p class="qtext">La precisión temporal de 100 ns del GPS en cada estación sirve principalmente para:</p>
+<div class="qopts">
+<button class="qbtn" data-q="3" data-correct="false">A) Medir la corriente de retorno del rayo</button>
+<button class="qbtn" data-q="3" data-correct="true">B) Calcular la ubicación por diferencia de tiempo de llegada de la señal (TDOA)</button>
+<button class="qbtn" data-q="3" data-correct="false">C) Determinar el tipo de nube</button>
+<button class="qbtn" data-q="3" data-correct="false">D) Sincronizar solo el reloj del webserver</button>
+</div>
+<div class="qfeedback" id="fb3"></div></div>
+
+<div class="qcard" id="q4">
+<p class="qnum">Pregunta 4/10</p><p class="qtext">En la jerarquía de infraestructura de la plataforma, el orden correcto de mayor a menor nivel es:</p>
+<div class="qopts">
+<button class="qbtn" data-q="4" data-correct="false">A) Circuito → Zona → Sistema → Epsa</button>
+<button class="qbtn" data-q="4" data-correct="true">B) Epsa → Sistema → Zona → Circuito</button>
+<button class="qbtn" data-q="4" data-correct="false">C) Sistema → Epsa → Circuito → Zona</button>
+<button class="qbtn" data-q="4" data-correct="false">D) Zona → Circuito → Epsa → Sistema</button>
+</div>
+<div class="qfeedback" id="fb4"></div></div>
+
+<div class="qcard" id="q5">
+<p class="qnum">Pregunta 5/10</p><p class="qtext">Si un operador quiere saber qué rayo causó el disparo de una línea específica ocurrido ayer a las 15:55, ¿qué módulo debe usar?</p>
+<div class="qopts">
+<button class="qbtn" data-q="5" data-correct="false">A) Tiempo Real</button>
+<button class="qbtn" data-q="5" data-correct="true">B) Diagnóstico de Fallas</button>
+<button class="qbtn" data-q="5" data-correct="false">C) Indicadores de Afectación</button>
+<button class="qbtn" data-q="5" data-correct="false">D) Reliability Manager</button>
+</div>
+<div class="qfeedback" id="fb5"></div></div>
+
+<div class="qcard" id="q6">
+<p class="qnum">Pregunta 6/10</p><p class="qtext">El indicador "Fallas/Rayos × 100%" mide principalmente:</p>
+<div class="qopts">
+<button class="qbtn" data-q="6" data-correct="false">A) La cantidad total de rayos en la zona</button>
+<button class="qbtn" data-q="6" data-correct="true">B) Qué tan vulnerable es una línea específica frente a los rayos que recibe</button>
+<button class="qbtn" data-q="6" data-correct="false">C) La velocidad de propagación del rayo</button>
+<button class="qbtn" data-q="6" data-correct="false">D) El número de usuarios conectados</button>
+</div>
+<div class="qfeedback" id="fb6"></div></div>
+
+<div class="qcard" id="q7">
+<p class="qnum">Pregunta 7/10</p><p class="qtext">¿Cuál afirmación es FALSA respecto a la densidad de descargas a tierra (DDT)?</p>
+<div class="qopts">
+<button class="qbtn" data-q="7" data-correct="false">A) Se mide en rayos/km²/año</button>
+<button class="qbtn" data-q="7" data-correct="false">B) Se usa junto con la longitud de línea para estimar impactos esperados</button>
+<button class="qbtn" data-q="7" data-correct="true">C) Es igual en toda la topografía, sin relación con la altitud</button>
+<button class="qbtn" data-q="7" data-correct="false">D) Es la base de normas como IEEE 1243 para apantallamiento</button>
+</div>
+<div class="qfeedback" id="fb7"></div></div>
+
+<div class="qcard" id="q8">
+<p class="qnum">Pregunta 8/10</p><p class="qtext">Dos líneas reciben el mismo número de rayos, pero la línea A falla mucho más que la línea B. Esto indica que:</p>
+<div class="qopts">
+<button class="qbtn" data-q="8" data-correct="false">A) Los sensores de la línea A están mal calibrados</button>
+<button class="qbtn" data-q="8" data-correct="true">B) La línea A es estructuralmente más vulnerable (peor blindaje/mantenimiento)</button>
+<button class="qbtn" data-q="8" data-correct="false">C) La línea A tiene mayor DDT</button>
+<button class="qbtn" data-q="8" data-correct="false">D) Es imposible, deben fallar igual</button>
+</div>
+<div class="qfeedback" id="fb8"></div></div>
+
+<div class="qcard" id="q9">
+<p class="qnum">Pregunta 9/10</p><p class="qtext">El módulo "Pronóstico de Fallas" se diferencia de "Diagnóstico de Fallas" porque:</p>
+<div class="qopts">
+<button class="qbtn" data-q="9" data-correct="true">A) Pronóstico anticipa fallas futuras; Diagnóstico analiza un evento ya ocurrido</button>
+<button class="qbtn" data-q="9" data-correct="false">B) Ambos hacen exactamente lo mismo</button>
+<button class="qbtn" data-q="9" data-correct="false">C) Pronóstico solo funciona de noche</button>
+<button class="qbtn" data-q="9" data-correct="false">D) Diagnóstico no usa datos de rayos</button>
+</div>
+<div class="qfeedback" id="fb9"></div></div>
+
+<div class="qcard" id="q10">
+<p class="qnum">Pregunta 10/10</p><p class="qtext">Todos los módulos de la plataforma (Tiempo Real, Diagnóstico, Indicadores, Pronóstico) comparten:</p>
+<div class="qopts">
+<button class="qbtn" data-q="10" data-correct="true">A) La misma red de sensores GPS-sincronizada como fuente de datos</button>
+<button class="qbtn" data-q="10" data-correct="false">B) Un algoritmo distinto de detección cada uno</button>
+<button class="qbtn" data-q="10" data-correct="false">C) Ninguna base de datos común</button>
+<button class="qbtn" data-q="10" data-correct="false">D) Solo se usan en Colombia</button>
+</div>
+<div class="qfeedback" id="fb10"></div></div>
+
+<div id="result"></div>
+<button id="resetBtn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+</div>
+
+<div class="footer">
+<span class="ft">REFERENCIAS:</span>
+<span class="fc">Presentaciones ADR/Keraunos — PredicTHOR Energy · Red Colombiana de Detección Total de Rayos · Lightning Power Reliability Manager</span>
+</div>
+
+</div>
+
+<script>
+let answered=0, correct=0;
+const feedbackTexts={
+1:{ok:"Con solo 3 estaciones habría múltiples soluciones geométricas posibles; la cuarta estación resuelve la ambigüedad y permite validar el error de localización."},
+2:{ok:"El IC ocurre entre celdas de carga dentro de la nube o entre nubes, sin canal hasta tierra."},
+3:{ok:"Sin sincronización a nivel de nanosegundos, el cálculo de TDOA (diferencia de tiempo de arribo) entre estaciones sería impreciso y la ubicación calculada tendría gran error."},
+4:{ok:"Epsa es la empresa completa; dentro de ella hay sistemas (alta tensión/distribución), dentro de estos zonas, y dentro de zonas los circuitos individuales."},
+5:{ok:"Diagnóstico de Fallas está diseñado justamente para consultar un evento puntual pasado con fecha/hora específica."},
+6:{ok:"Al dividir fallas reales entre rayos recibidos, se aísla la vulnerabilidad propia de la línea del volumen de actividad eléctrica de la zona."},
+7:{ok:"La DDT sí varía con la topografía — las zonas montañosas suelen concentrar más actividad de rayos que las llanas, como muestran los mapas de calor sobre altitud."},
+8:{ok:"Con igual exposición a rayos, la diferencia de tasa de falla se explica por factores propios de la línea: apantallamiento, puesta a tierra, mantenimiento."},
+9:{ok:"Pronóstico usa la tendencia de la tormenta para proyectar hacia adelante en el tiempo; Diagnóstico mira hacia atrás, a un evento ya registrado."},
+10:{ok:"Todos consumen la misma base de datos de rayos detectados por la red de sensores; solo cambia la ventana temporal y el tipo de análisis aplicado."}
+};
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn) return;
+  const q = btn.dataset.q;
+  const card = document.getElementById('q'+q);
+  if(card.dataset.done) return;
+  card.dataset.done = "1";
+  const isCorrect = btn.dataset.correct === "true";
+  card.querySelectorAll('.qbtn').forEach(b=>{
+    b.classList.add('disabled');
+    if(b.dataset.correct==="true") b.classList.add('correct');
+    else if(b===btn) b.classList.add('incorrect');
+  });
+  const fb = document.getElementById('fb'+q);
+  fb.style.display='block';
+  if(isCorrect){
+    correct++;
+    fb.className='qfeedback ok';
+    fb.innerHTML='✅ ¡Correcto! '+feedbackTexts[q].ok;
+  } else {
+    fb.className='qfeedback bad';
+    fb.innerHTML='❌ Incorrecto. '+feedbackTexts[q].ok;
+  }
+  answered++;
+  document.getElementById('progfill').style.width=(answered*10)+'%';
+  document.getElementById('progtext').textContent=answered+' de 10 respondidas · '+correct+' aciertos';
+  if(answered===10){
+    const r=document.getElementById('result');
+    r.style.display='block';
+    let msg, bg, col;
+    if(correct<=4){bg='#fee2e2';col='#991b1b';msg='Necesitas repasar el material';}
+    else if(correct<=7){bg='#fef9c3';col='#713f12';msg='¡Buen avance, sigue repasando!';}
+    else {bg='#dcfce7';col='#14532d';msg='¡Excelente dominio del tema!';}
+    r.style.background=bg; r.style.color=col;
+    r.innerHTML=correct+' / 10 correctas — '+msg;
+    document.getElementById('resetBtn').style.display='inline-block';
+  }
+});
+function resetQuiz(){
+  answered=0; correct=0;
+  document.querySelectorAll('.qcard').forEach(c=>{
+    delete c.dataset.done;
+    c.querySelectorAll('.qbtn').forEach(b=>b.className='qbtn');
+    const fb=c.querySelector('.qfeedback');
+    fb.style.display='none'; fb.className='qfeedback';
+  });
+  document.getElementById('progfill').style.width='0%';
+  document.getElementById('progtext').textContent='0 de 10 respondidas · 0 aciertos';
+  document.getElementById('result').style.display='none';
+  document.getElementById('resetBtn').style.display='none';
+}
+</script>

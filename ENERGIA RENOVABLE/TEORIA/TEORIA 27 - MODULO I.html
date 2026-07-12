@@ -1,0 +1,392 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+.cv *{box-sizing:border-box;font-family:'Source Sans 3',sans-serif;}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--surface-0);border-radius:12px;}
+.osw{font-family:'Oswald',sans-serif;}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px;}
+.titlebar h1{font-size:20px;font-weight:700;margin:0 0 4px;}
+.titlebar p{font-size:11px;color:#a9c2e8;margin:0 0 8px;}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px 4px 0 0;background:rgba(255,255,255,.12);color:#dbe8ff;}
+.secbar{grid-column:1/-1;font-size:13px;font-weight:700;padding:7px 12px;border-radius:8px;margin-top:4px;}
+.block{background:var(--surface-2);border:0.5px solid var(--border);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:span 3;}
+.bh{font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:700;}
+.def{border-left:3px solid #1e3a8a;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--surface-1);margin-bottom:8px;color:var(--text-primary);}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:6px;color:var(--text-primary);}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:8px 0;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:8px 11px;margin:8px 0;}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;}
+.mini{background:var(--surface-1);border-radius:8px;padding:8px 10px;font-size:11.5px;color:var(--text-primary);}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:11.5px;margin:6px 0;}
+.fbox{background:var(--surface-1);padding:5px 9px;border-radius:6px;color:var(--text-primary);}
+.farrow{color:var(--text-secondary);font-size:15px;}
+.divh{border:none;border-top:0.5px solid var(--border);margin:9px 0;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--surface-1);padding:6px 7px;border-bottom:0.5px solid var(--border);text-align:left;color:var(--text-primary);}
+.tbl td{padding:6px 7px;border-bottom:0.5px solid var(--border);vertical-align:top;color:var(--text-primary);}
+.footerbar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;font-weight:500;}
+.fc{font-size:11px;color:#94a3b8;}
+.quizwrap{grid-column:1/-1;background:var(--surface-2);border:0.5px solid var(--border);border-radius:14px;padding:16px 18px;}
+.quizhead{background:#0f1e3a;color:#fff;border-radius:8px;padding:10px 14px;margin-bottom:10px;}
+.quizhead h3{font-family:'Oswald',sans-serif;font-size:14px;margin:0 0 3px;}
+.quizhead p{font-size:11px;color:#a9c2e8;margin:0;}
+.stat-bar-wrap{width:100%;background:var(--surface-1);border-radius:20px;height:11px;overflow:hidden;margin:6px 0 12px;}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s;}
+.qcard{border:0.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:10px;background:var(--surface-1);}
+.qnum{font-size:11px;color:var(--text-secondary);margin:0 0 4px;font-weight:600;}
+.qtext{font-size:12.5px;margin:0 0 9px;color:var(--text-primary);font-weight:600;}
+.qbtn{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--text-primary);display:block;}
+.qbtn:hover:not(:disabled){border-color:var(--border-strong);}
+.qbtn.correctpick{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.wrongpick{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn:disabled{opacity:.75;cursor:not-allowed;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+.results{display:none;border-radius:10px;padding:14px;margin-top:6px;font-size:13px;text-align:center;}
+.res-low{background:#fee2e2;color:#991b1b;}
+.res-mid{background:#fef9c3;color:#713f12;}
+.res-high{background:#dcfce7;color:#14532d;}
+.rbtn{margin-top:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:12px;cursor:pointer;color:var(--text-primary);}
+@media(prefers-color-scheme:dark){
+.def{background:var(--surface-1);}
+.warn{background:#2a1206;color:#fed7aa;border-left-color:#fb923c;}
+.exam{background:#2a2306;color:#fef08a;border-color:#a16207;}
+.qfeedback.ok{background:#0a1f10;color:#86efac;}
+.qfeedback.bad{background:#2a0a0a;color:#fca5a5;}
+.res-low{background:#2a0a0a;color:#fca5a5;}
+.res-mid{background:#2a2306;color:#fef08a;}
+.res-high{background:#0a1f10;color:#86efac;}
+}
+</style>
+<div class="cv">
+
+<div class="titlebar">
+  <h1 class="osw">Módulo 1 · Energías renovables y eficiencia energética</h1>
+  <p>Introducción a las energías renovables con IA — matriz energética peruana, marco normativo y principios eléctricos</p>
+  <span class="pill">Matriz energética</span><span class="pill">Tipos de renovables</span><span class="pill">Ley N°27345</span><span class="pill">Electricidad</span><span class="pill">Casos Perú</span>
+</div>
+
+<div class="secbar osw" style="background:#dbeafe;color:#1e3a8a;">🔵 ¿Qué son las energías renovables?</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Definición y matriz energética peruana</span>
+  <div class="def" style="border-left-color:#1e3a8a;">Las energías renovables son fuentes de energía primaria que se regeneran de forma continua a escala humana (sol, viento, agua, biomasa, calor terrestre). En Perú, la matriz eléctrica está dominada por hidroenergía (renovable) y gas natural (no renovable), que juntos cubren más del 85% de la generación.</div>
+  <div class="item"><span class="dot" style="background:#1e3a8a;"></span>La hidroenergía aporta entre 50-53% de la electricidad gracias a centrales como la del Mantaro, aprovechando los grandes caudales andinos.</div>
+  <div class="item"><span class="dot" style="background:#1e3a8a;"></span>El gas natural (proyecto Camisea, operativo desde 2004) aporta cerca de 36-40%, y explica por qué Perú tiene una matriz "limpia" pese a depender de un fósil.</div>
+  <div class="item"><span class="dot" style="background:#1e3a8a;"></span>Las renovables no convencionales (eólica+solar) siguen siendo minoritarias: la meta oficial es llegar a 20% en 2030, pero datos de 2025-2026 muestran una penetración real de apenas 8-10%.</div>
+  <div class="warn">⚠️ ERROR COMÚN: pensar que "matriz limpia" equivale a "matriz diversificada". Perú es limpia por la hidroenergía, pero sigue dependiendo fuertemente de un solo fósil (gas), lo cual es un riesgo si las reservas de Camisea se agotan (~13 años de reservas desarrolladas según estimaciones a 2025).</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué una matriz eléctrica puede considerarse "baja en carbono" y aun así ser vulnerable energéticamente. Use el caso peruano.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Compromiso climático histórico</span>
+  <div class="item"><span class="dot" style="background:#1e3a8a;"></span>Perú ha sido tradicionalmente bajo en emisiones eléctricas por su base hidroeléctrica, incluso tras el aumento del gas natural desde 2004.</div>
+  <div class="item"><span class="dot" style="background:#1e3a8a;"></span>Comparado con la región, Perú tiene una matriz más diversificada que países como Brasil o Paraguay, que dependen en más del 60% de una sola fuente hidroeléctrica.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué riesgo de concentración de fuentes evita Perú al combinar hidroenergía, gas natural y renovables no convencionales?</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#dcfce7;color:#14532d;">Características clave</span>
+  <div class="item"><span class="dot" style="background:#16a34a;"></span><b>Inagotables a escala humana:</b> el sol, el viento o el agua no se agotan con el uso humano, a diferencia del petróleo o el gas.</div>
+  <div class="item"><span class="dot" style="background:#16a34a;"></span><b>Bajas o nulas emisiones GEI:</b> no queman combustible para generar electricidad (excepto biomasa, que sí libera CO2 pero de ciclo corto).</div>
+  <div class="item"><span class="dot" style="background:#16a34a;"></span><b>Acceso local y descentralizado:</b> permiten generación cerca del consumo, clave para electrificación rural sin líneas de transmisión largas.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el acceso descentralizado es especialmente relevante para la electrificación rural en el Perú?</div>
+</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#fef9c3;color:#713f12;">Tipos principales de renovables</span>
+  <table class="tbl">
+    <tr><th>Tipo</th><th>Fuente natural</th><th>Aplicación común</th><th>Situación en Perú</th></tr>
+    <tr><td>Solar</td><td>Radiación del sol</td><td>Electricidad, agua caliente</td><td>Capacidad creciendo de 476 MW (2023) a ~2 250 MW proyectados en 2026</td></tr>
+    <tr><td>Eólica</td><td>Movimiento del viento</td><td>Generación eléctrica</td><td>Parques en Ica, La Libertad y Piura; potencial de 22 000+ MW</td></tr>
+    <tr><td>Hidroeléctrica</td><td>Corrientes de agua</td><td>Centrales hidroeléctricas</td><td>Domina la matriz (~50-53%)</td></tr>
+    <tr><td>Biomasa</td><td>Residuos orgánicos</td><td>Biogás, combustión para calor</td><td>Minoritaria, pocas centrales conectadas al SEIN</td></tr>
+    <tr><td>Geotérmica</td><td>Calor de la Tierra</td><td>Calefacción, electricidad</td><td>Potencial andino prácticamente sin desarrollar</td></tr>
+  </table>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la geotérmica, pese a su potencial en la zona andina, es la renovable menos desarrollada en el Perú?</div>
+</div>
+
+<div class="secbar osw" style="background:#dcfce7;color:#14532d;">🟢 ¿Por qué utilizar las energías renovables?</div>
+
+<div class="block">
+  <span class="bh" style="background:#dbeafe;color:#1e3a8a;">Mitigación del calentamiento global</span>
+  <div class="def" style="border-left-color:#1e3a8a;">Las renovables son la herramienta más efectiva para mantener el aumento de temperatura global por debajo de 1.5°C, meta del Acuerdo de París.</div>
+  <div class="item"><span class="dot" style="background:#1e3a8a;"></span>Perú se comprometió (NDC) a reducir 40% sus emisiones GEI para 2030, con 37 de 62 medidas de mitigación ligadas al sector energético.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué relación existe entre las NDC del Perú y la expansión de renovables no convencionales?</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ffedd5;color:#7c2d12;">Casos reales de impacto</span>
+  <div class="item"><span class="dot" style="background:#c2410c;"></span>Usar renovables reduce drásticamente las emisiones de CO2, garantiza suministro inagotable, reduce costos por la caída de precios de tecnología limpia, crea empleo verde y reduce la dependencia de combustibles importados.</div>
+  <table class="tbl">
+    <tr><th>Ubicación</th><th>Proyecto</th><th>Impacto medible</th></tr>
+    <tr><td>Galena, Alaska (EE.UU.)</td><td>Solar 1.5 MW + biomasa</td><td>Ahorro de 100 000 gal/año de diésel</td></tr>
+    <tr><td>Marcona, Ica (Perú)</td><td>Parque eólico Wayra I, 132 MW</td><td>Abastece ~480 000 hogares, evita ~288 000 t CO2/año</td></tr>
+    <tr><td>Bahía, Brasil</td><td>Planta solar 475 MW</td><td>Tarifa 35% menor que gas-flex; 1 600 empleos</td></tr>
+  </table>
+  <div class="warn">⚠️ CORRECCIÓN: el material original de tu curso atribuye estas cifras (480 000 hogares, 185 MW) a un parque eólico en <b>Piura</b>. Al verificarlo, esos datos corresponden en realidad al parque <b>Wayra I</b>, ubicado en Marcona (Ica), con 132 MW de capacidad instalada. Piura sí tiene parques eólicos reales (Talara, 30 MW), pero con cifras distintas.</div>
+  <div class="exam">🎯 EXAMEN: Mencione tres beneficios económicos (no solo ambientales) de invertir en energías renovables, con un ejemplo real de cada uno.</div>
+</div>
+
+<div class="secbar osw" style="background:#ede9fe;color:#4c1d95;">🟣 Marco normativo: eficiencia y ahorro energético</div>
+
+<div class="block">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95;">Ley N°27345</span>
+  <div class="def" style="border-left-color:#4c1d95;">La Ley N°27345 declara de interés nacional el uso eficiente de la energía y distingue "eficiencia energética" y "ahorro energético" como estrategias complementarias, no como sinónimos.</div>
+  <div class="item"><span class="dot" style="background:#4c1d95;"></span><b>Eficiencia energética:</b> lograr el mismo servicio consumiendo menos energía, mediante tecnología (equipos LED, motores eficientes).</div>
+  <div class="item"><span class="dot" style="background:#4c1d95;"></span><b>Ahorro energético:</b> reducir el consumo mediante cambios de conducta y cultura de uso responsable, sin necesariamente cambiar tecnología.</div>
+  <div class="exam">🎯 EXAMEN: Dé un ejemplo de una medida que sea "eficiencia energética" y otra que sea "ahorro energético" para una vivienda típica.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ede9fe;color:#4c1d95;">Tipos de medidas de ahorro y eficiencia</span>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #7f77dd;"><b>Tecnológicas</b><br>Eficiencia energética y sustitución de fuentes contaminantes (ej: cambiar calderas a diésel por sistemas solares térmicos).</div>
+    <div class="mini" style="border-top:3px solid #d4537e;"><b>Consumo responsable</b><br>Cultura y pautas de ahorro: apagar equipos en desuso, aprovechar luz natural, horarios de uso.</div>
+    <div class="mini" style="border-top:3px solid #ef9f27;"><b>Instrumentales</b><br>Medidas económicas, normativas, fiscales y de gestión: subsidios, etiquetado energético, normas técnicas obligatorias.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Clasifique estas tres medidas: (1) impuesto a equipos ineficientes, (2) reemplazo de motores industriales por unos de mayor eficiencia, (3) campaña de "apaga la luz al salir".</div>
+</div>
+
+<div class="secbar osw" style="background:#ccfbf1;color:#134e4a;">🩵 Principios de electricidad y fuentes</div>
+
+<div class="block s2">
+  <span class="bh" style="background:#ccfbf1;color:#134e4a;">Principios de electricidad</span>
+  <div class="def" style="border-left-color:#134e4a;">Comprender voltaje, corriente, Ley de Ohm, potencia y energía es fundamental para diseñar y operar cada eslabón de una instalación renovable, desde el módulo fotovoltaico hasta la conexión a la red.</div>
+  <div class="rx">Ley de Ohm: I = V / R<br>V = voltaje (volts) · I = corriente (amperios) · R = resistencia (ohmios)</div>
+  <div class="item"><span class="dot" style="background:#134e4a;"></span>Si el voltaje es constante y la resistencia sube, la corriente baja de forma inversamente proporcional: clave para dimensionar cables e inversores.</div>
+  <div class="rx">Potencia: P = V × I (watts)<br>Energía: E = P × t (Wh, si t está en horas)</div>
+  <div class="warn">⚠️ ERROR COMÚN: confundir potencia (W, instantánea) con energía (Wh, acumulada en el tiempo). Un panel de 300W no "produce 300Wh"; produce 300Wh solo si opera 1 hora a plena potencia.</div>
+  <div class="exam">🎯 EXAMEN: Calcule la corriente que circula por un panel solar de 300W operando a 24V. Explique qué pasaría si la resistencia del cableado aumentara por un cable muy delgado.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:#ccfbf1;color:#134e4a;">Fuentes de electricidad</span>
+  <div class="item"><span class="dot" style="background:#134e4a;"></span>La electricidad es una <b>fuente secundaria</b>: no existe "en la naturaleza" lista para usar, se produce a partir de fuentes primarias.</div>
+  <div class="item"><span class="dot" style="background:#134e4a;"></span><b>Inducción electromagnética:</b> turbinas eólicas, hidráulicas, a vapor o gas — el movimiento mecánico genera corriente.</div>
+  <div class="item"><span class="dot" style="background:#134e4a;"></span><b>Luz:</b> el efecto fotovoltaico convierte fotones directamente en electricidad, sin partes móviles.</div>
+  <div class="item"><span class="dot" style="background:#134e4a;"></span><b>Química:</b> baterías y celdas de combustible liberan electricidad mediante reacciones químicas.</div>
+  <div class="flow"><span class="fbox">Fuente primaria</span><span class="farrow">→</span><span class="fbox">Conversión (turbina, celda FV, reacción química)</span><span class="farrow">→</span><span class="fbox">Electricidad</span></div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué se dice que la electricidad "nunca es la fuente original" de energía?</div>
+</div>
+
+<div class="block s3">
+  <span class="bh" style="background:#f1f5f9;color:#334155;">Tabla integradora final</span>
+  <table class="tbl">
+    <tr><th>Tipo</th><th>Fuente natural</th><th>Aplicación</th><th>Estado en Perú</th><th>Dato clave</th></tr>
+    <tr><td>Solar</td><td>Sol</td><td>Electricidad, agua caliente</td><td>Crecimiento acelerado</td><td>476 MW → ~2 250 MW (2023→2026 proy.)</td></tr>
+    <tr><td>Eólica</td><td>Viento</td><td>Generación eléctrica</td><td>~400+ MW instalados</td><td>Wayra I: 132 MW, 480 000 hogares</td></tr>
+    <tr><td>Hidroeléctrica</td><td>Agua</td><td>Centrales hidroeléctricas</td><td>Domina la matriz</td><td>~50-53% de la electricidad</td></tr>
+    <tr><td>Gas natural (no renov.)</td><td>Yacimientos (Camisea)</td><td>Centrales térmicas</td><td>Segunda fuente principal</td><td>~36-40% de la electricidad</td></tr>
+    <tr><td>Eficiencia energética</td><td>—</td><td>Tecnología</td><td>Ley N°27345 vigente</td><td>Reduce consumo sin perder servicio</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: una matriz "limpia" (dominada por hidroenergía) no es lo mismo que una matriz "diversificada". Perú necesita acelerar solar y eólica —hoy en apenas 8-10%, lejos de la meta de 20% al 2030— para reducir su dependencia del gas natural, cuyas reservas desarrolladas cubrirían solo ~13 años más según estimaciones a 2025.</div>
+</div>
+
+<div class="quizwrap">
+  <div class="quizhead">
+    <h3>📝 Quiz de repaso — 10 preguntas de opción múltiple</h3>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div id="qprogress" style="font-size:12px;color:var(--text-secondary);">Pregunta 0 de 10 · 0% de aciertos</div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" id="qbar"></div></div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Qué caracteriza principalmente a las energías renovables?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-correct="false">A) Provienen exclusivamente de yacimientos fósiles</button>
+      <button class="qbtn" data-q="1" data-correct="false">B) Generan más emisiones que el carbón mineral</button>
+      <button class="qbtn" data-q="1" data-correct="false">C) Requieren subsidio estatal permanente para funcionar</button>
+      <button class="qbtn" data-q="1" data-correct="true">D) Provienen de fuentes naturales que se regeneran continuamente a escala humana</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">¿Qué combinación domina actualmente la matriz de generación eléctrica del Perú?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-correct="true">A) Hidroenergía y gas natural</button>
+      <button class="qbtn" data-q="2" data-correct="false">B) Energía solar y eólica</button>
+      <button class="qbtn" data-q="2" data-correct="false">C) Carbón y petróleo</button>
+      <button class="qbtn" data-q="2" data-correct="false">D) Biomasa y geotermia</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Una comunidad rural aislada de la red eléctrica, sin acceso regular a diésel, necesita electricidad confiable. Según la característica de "acceso local y descentralizado" de las renovables, ¿qué opción es más adecuada?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-correct="false">A) Esperar la extensión de una línea de transmisión del SEIN</button>
+      <button class="qbtn" data-q="3" data-correct="false">B) Instalar una central térmica a gas natural</button>
+      <button class="qbtn" data-q="3" data-correct="true">C) Instalar un sistema solar fotovoltaico aislado</button>
+      <button class="qbtn" data-q="3" data-correct="false">D) Importar electricidad desde una ciudad cercana con cables improvisados</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">Según la Ley N°27345, ¿en qué se diferencian "eficiencia energética" y "ahorro energético"?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-correct="false">A) Son sinónimos exactos, sin distinción técnica</button>
+      <button class="qbtn" data-q="4" data-correct="true">B) La eficiencia usa tecnología para el mismo servicio con menos energía; el ahorro se basa en cambios de conducta</button>
+      <button class="qbtn" data-q="4" data-correct="false">C) El ahorro energético solo aplica al sector minero</button>
+      <button class="qbtn" data-q="4" data-correct="false">D) La eficiencia energética está prohibida por ley</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Si en un circuito el voltaje se mantiene constante y la resistencia aumenta, ¿qué ocurre con la corriente según la Ley de Ohm (I = V/R)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-correct="false">A) Aumenta proporcionalmente a la resistencia</button>
+      <button class="qbtn" data-q="5" data-correct="false">B) Se vuelve negativa</button>
+      <button class="qbtn" data-q="5" data-correct="false">C) Permanece constante sin importar la resistencia</button>
+      <button class="qbtn" data-q="5" data-correct="true">D) Disminuye de forma inversamente proporcional</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la electricidad es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-correct="true">A) La electricidad es una fuente de energía primaria e inagotable en sí misma</button>
+      <button class="qbtn" data-q="6" data-correct="false">B) La electricidad es una fuente de energía secundaria</button>
+      <button class="qbtn" data-q="6" data-correct="false">C) Puede producirse por inducción electromagnética</button>
+      <button class="qbtn" data-q="6" data-correct="false">D) Las celdas fotovoltaicas convierten luz en electricidad</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Las diapositivas del curso indican que un parque eólico en Piura de 185 MW abastece a ~480 000 hogares y evitó 450 kt de CO2 desde 2021. Al corroborar estos datos con fuentes externas, ¿qué se encuentra?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-correct="false">A) Los datos son exactos y coinciden con fuentes oficiales del MINEM</button>
+      <button class="qbtn" data-q="7" data-correct="false">B) Piura nunca ha tenido proyectos eólicos; el dato está inventado por completo</button>
+      <button class="qbtn" data-q="7" data-correct="true">C) Esa cifra corresponde en realidad al parque eólico Wayra I, en Marcona (Ica), de 132 MW, no a un parque de 185 MW en Piura</button>
+      <button class="qbtn" data-q="7" data-correct="false">D) 185 MW es una subestimación; la capacidad real supera los 600 MW</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Un hogar reemplaza una lámpara incandescente de 60W por una LED equivalente de 9W, usada 5 horas diarias. ¿Cuánta energía se ahorra por día?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-correct="false">A) 45 Wh/día</button>
+      <button class="qbtn" data-q="8" data-correct="true">B) 255 Wh/día</button>
+      <button class="qbtn" data-q="8" data-correct="false">C) 300 Wh/día</button>
+      <button class="qbtn" data-q="8" data-correct="false">D) 51 Wh/día</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cuál de los siguientes pares fuente natural–aplicación común es CORRECTO?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-correct="false">A) Eólica – calor de la Tierra para calefacción</button>
+      <button class="qbtn" data-q="9" data-correct="false">B) Biomasa – radiación solar directa para electricidad</button>
+      <button class="qbtn" data-q="9" data-correct="false">C) Hidroeléctrica – residuos orgánicos para biogás</button>
+      <button class="qbtn" data-q="9" data-correct="true">D) Geotérmica – calor de la Tierra para calefacción y generación eléctrica</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">Perú se planteó como meta que las renovables no convencionales alcancen el 20% de la matriz eléctrica para 2030. ¿Qué corrobora la evidencia reciente sobre este avance?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-correct="true">A) La meta sigue vigente, pero datos de 2025-2026 muestran una penetración real de apenas 8-10%</button>
+      <button class="qbtn" data-q="10" data-correct="false">B) La meta ya se superó ampliamente y hoy representa más del 50%</button>
+      <button class="qbtn" data-q="10" data-correct="false">C) La meta fue eliminada por el Congreso peruano</button>
+      <button class="qbtn" data-q="10" data-correct="false">D) No existe ninguna meta oficial relacionada a renovables en Perú</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div class="results" id="qresults"></div>
+</div>
+
+<div class="footerbar">
+  <div class="ft">REFERENCIAS:</div>
+  <div class="fc">Capturas del curso Módulo 1 · Ley N°27345 · COES / OSINERGMIN · SPR (Asociación Peruana de Energías Renovables) · ESAN Conexión · Low-Carbon Power · Infobae (2025-2026)</div>
+</div>
+
+</div>
+
+<script>
+const feedback = {
+  1: {ok:"Las renovables se definen por ser inagotables a escala humana (sol, viento, agua, biomasa, calor terrestre), a diferencia de los fósiles que tardan millones de años en formarse.", bad:"La respuesta correcta es D. Las renovables provienen de fuentes naturales que se regeneran continuamente, con bajas o nulas emisiones."},
+  2: {ok:"La hidroenergía (~50-53%) y el gas natural (Camisea, ~36-40%) concentran más del 85% de la generación eléctrica peruana; las renovables no convencionales rondan solo 8-10%.", bad:"La respuesta correcta es A. Hidroenergía y gas natural combinadas superan el 85% de la generación en Perú."},
+  3: {ok:"Un sistema solar aislado permite generación local sin depender de redes de transmisión ni combustibles importados, aprovechando la naturaleza descentralizada de las renovables.", bad:"La respuesta correcta es C. Un sistema solar aislado aprovecha la característica de acceso local y descentralizado de las renovables."},
+  4: {ok:"Las medidas tecnológicas (equipos eficientes) corresponden a 'eficiencia energética', mientras las medidas de conducta corresponden a 'ahorro energético'; la ley las declara complementarias.", bad:"La respuesta correcta es B. La eficiencia usa tecnología para el mismo servicio con menos consumo; el ahorro depende de la conducta del usuario."},
+  5: {ok:"Por Ley de Ohm (I=V/R), a voltaje constante, un aumento de resistencia produce una disminución inversamente proporcional de la corriente. Clave para dimensionar cables e inversores.", bad:"La respuesta correcta es D. A voltaje constante, la corriente disminuye de forma inversamente proporcional a la resistencia."},
+  6: {ok:"Es FALSA: la electricidad es una fuente secundaria, se produce a partir de otras fuentes primarias (sol, viento, agua), no existe de forma primaria e inagotable por sí misma.", bad:"La respuesta FALSA es A. La electricidad es secundaria; se produce a partir de fuentes primarias."},
+  7: {ok:"Buen ejercicio de verificación: los ~480 000 hogares y las toneladas de CO2 evitadas corresponden al parque eólico Wayra I (Enel Green Power) en Marcona, Ica, de 132 MW — no a un parque de 185 MW en Piura.", bad:"La respuesta correcta es C. Esos datos pertenecen al parque eólico Wayra I en Marcona, Ica (132 MW), no a Piura."},
+  8: {ok:"(60W − 9W) × 5 horas = 51W × 5h = 255 Wh/día de ahorro. Este tipo de sustitución es una 'medida de carácter tecnológico' de eficiencia energética.", bad:"La respuesta correcta es B. El ahorro se calcula como (60W − 9W) × 5 horas = 255 Wh por día."},
+  9: {ok:"La geotérmica aprovecha el calor interno de la Tierra tanto para calefacción como para generar electricidad. Los otros pares mezclan fuente y aplicación de tipos distintos de renovables.", bad:"La respuesta correcta es D. La geotérmica usa el calor de la Tierra para calefacción y electricidad; los demás pares combinan mal fuente y aplicación."},
+  10: {ok:"La meta de 20% al 2030 sigue vigente, pero fuentes como OSINERGMIN e Infobae (2025-2026) señalan que la penetración real de renovables no convencionales es de apenas 8-10%.", bad:"La respuesta correcta es A. La meta sigue vigente pero la penetración real ronda 8-10%, lejos de lo proyectado."}
+};
+let answered = 0, correct = 0;
+document.querySelectorAll('.qbtn').forEach(btn => {
+  btn.addEventListener('click', function(){
+    const q = this.dataset.q;
+    const group = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+    const isCorrect = this.dataset.correct === 'true';
+    group.forEach(b => {
+      b.disabled = true;
+      if(b.dataset.correct === 'true'){ b.classList.add('correctpick'); }
+      else if(b === this){ b.classList.add('wrongpick'); }
+    });
+    const fb = document.getElementById('fb'+q);
+    fb.style.display = 'block';
+    if(isCorrect){
+      fb.className = 'qfeedback ok';
+      fb.textContent = '✅ ¡Correcto! ' + feedback[q].ok;
+      correct++;
+    } else {
+      fb.className = 'qfeedback bad';
+      fb.textContent = '❌ Incorrecto. ' + feedback[q].bad;
+    }
+    answered++;
+    const pct = answered > 0 ? Math.round((correct/answered)*100) : 0;
+    document.getElementById('qprogress').textContent = 'Pregunta ' + answered + ' de 10 · ' + pct + '% de aciertos';
+    document.getElementById('qbar').style.width = pct + '%';
+    if(answered === 10){
+      const res = document.getElementById('qresults');
+      res.style.display = 'block';
+      let cls, msg;
+      if(correct <= 4){ cls = 'res-low'; msg = 'Necesitas repasar el material'; }
+      else if(correct <= 7){ cls = 'res-mid'; msg = '¡Buen avance, sigue repasando!'; }
+      else { cls = 'res-high'; msg = '¡Excelente dominio del tema!'; }
+      res.className = 'results ' + cls;
+      res.innerHTML = '<b>' + correct + ' / 10 correctas</b><br>' + msg + '<br><button class="rbtn" onclick="resetQuiz()">🔄 Reiniciar quiz</button>';
+    }
+  });
+});
+function resetQuiz(){
+  answered = 0; correct = 0;
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correctpick','wrongpick');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f => { f.style.display = 'none'; });
+  document.getElementById('qresults').style.display = 'none';
+  document.getElementById('qprogress').textContent = 'Pregunta 0 de 10 · 0% de aciertos';
+  document.getElementById('qbar').style.width = '0%';
+}
+</script>

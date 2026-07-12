@@ -1,0 +1,519 @@
+<h2 class="sr-only">Canvas de repaso del Módulo II del curso de Energías Renovables: fundamentos, energía solar (incluyendo arquitectura bioclimática), situación en Perú, inteligencia artificial aplicada, cambio climático y marco ambiental peruano (SNGA/SEIA), con quiz de 10 preguntas</h2>
+<style>
+.cv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:4px 0 0}
+.block{background:var(--surface-2);border:0.5px solid var(--border);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-size:11px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;font-weight:500}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--surface-1);margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:4px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;background:var(--text-muted)}
+.rx{background:#0f172a;color:#7dd3fc;font-family:var(--font-mono);font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.warn{background:var(--bg-warning);border-left:3px solid var(--border-warning);border-radius:0 8px 8px 0;font-size:11.5px;color:var(--text-warning);padding:7px 10px;margin-top:6px}
+.exam{background:var(--bg-warning);border:1px solid var(--border-warning);border-radius:8px;font-size:11.5px;color:var(--text-warning);padding:8px 10px;margin-top:8px}
+.mini{background:var(--surface-1);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.mini b{display:block;margin-bottom:3px;font-weight:500}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.fbox{background:var(--surface-1);padding:6px 10px;border-radius:8px;font-size:11.5px}
+.farrow{color:var(--text-muted);font-size:14px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:rgba(255,255,255,.15);color:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--surface-1);padding:5px 7px;border-bottom:0.5px solid var(--border);text-align:left;font-weight:500}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--border);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--border);margin:7px 0}
+.sechead{grid-column:1/-1;font-size:12px;font-weight:500;padding:8px 14px;border-radius:8px;text-transform:uppercase}
+.bar{background:#0f1e3a;color:#fff;border-radius:12px}
+.qcard{border-top:0.5px solid var(--border);padding-top:12px;margin-top:12px}
+.qcard:first-of-type{border-top:none;margin-top:0;padding-top:0}
+.qnum{font-size:11px;color:var(--text-muted);margin:0 0 4px}
+.qtext{font-size:13px;font-weight:500;margin:0 0 8px}
+.qopts{display:flex;flex-direction:column;gap:5px}
+.qbtn{background:var(--surface-1);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;transition:all .15s;color:var(--text-primary)}
+.qbtn.correct{background:var(--bg-success);border-color:var(--border-success);color:var(--text-success)}
+.qbtn.incorrect{background:var(--bg-danger);border-color:var(--border-danger);color:var(--text-danger)}
+.qbtn:disabled{opacity:.75;cursor:not-allowed}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px}
+.qfeedback.ok{background:var(--bg-success);border-left:3px solid var(--border-success);color:var(--text-success)}
+.qfeedback.bad{background:var(--bg-danger);border-left:3px solid var(--border-danger);color:var(--text-danger)}
+.stat-bar-wrap{width:100%;background:var(--surface-1);border-radius:20px;height:10px;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:20px;background:var(--fill-success);width:0%;transition:width .3s}
+.resetbtn{margin-top:12px;background:var(--surface-1);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer;color:var(--text-primary)}
+</style>
+
+<div class="cv">
+
+<div class="bar" style="grid-column:1/-1;padding:14px 18px">
+  <div style="font-size:19px;font-weight:500">Energías renovables · Módulo II</div>
+  <div style="font-size:11px;opacity:.75;margin-top:2px">Programa de Especialización en Energías Renovables y Eficiencia Energética con IA · Ponente: Ing. Jilder Castillo Cabrera</div>
+  <div style="margin-top:8px">
+    <span class="pill">Solar</span><span class="pill">Eólica</span><span class="pill">Hidráulica</span><span class="pill">Geotérmica</span><span class="pill">Marina</span><span class="pill">Biomasa</span><span class="pill">Arquitectura bioclimática</span><span class="pill">IA aplicada</span><span class="pill">Perú</span><span class="pill">SEIA / SNGA</span>
+  </div>
+</div>
+
+<div class="sechead c-blue">Fundamentos de las energías renovables</div>
+
+<div class="block c-blue" style="background:var(--surface-2)">
+  <div class="bh c-blue">Definición</div>
+  <div class="def" style="border-color:var(--border-accent);color:var(--text-primary)">Según la Agencia Internacional de Energías Renovables (IRENA), son toda forma de energía producida a partir de fuentes que se regeneran de forma natural más rápido de lo que se consumen, de manera sostenible.</div>
+  <div class="item"><span class="dot"></span>No se agotan a escala humana: el sol, el viento y el agua se renuevan constantemente.</div>
+  <div class="item"><span class="dot"></span>Su huella de carbono en operación es prácticamente nula, a diferencia de los combustibles fósiles.</div>
+  <div class="exam">🎯 Examen: explique por qué una fuente puede ser "renovable" y aun así tener un impacto ambiental que debe evaluarse.</div>
+</div>
+
+<div class="block s2">
+  <div class="bh c-teal">Tipos principales</div>
+  <div class="three">
+    <div class="mini"><b>Solar</b>Radiación electromagnética del sol, aprovechada como calor o electricidad.</div>
+    <div class="mini"><b>Eólica</b>Energía cinética del viento que mueve las palas de un aerogenerador.</div>
+    <div class="mini"><b>Hidráulica</b>Energía cinética y potencial del agua en saltos, ríos o embalses.</div>
+    <div class="mini"><b>Geotérmica</b>Calor almacenado en el interior de la corteza terrestre.</div>
+    <div class="mini"><b>Mareomotriz / undimotriz</b>Fuerza de las mareas (mareomotriz) o de las olas (undimotriz); no son lo mismo.</div>
+    <div class="mini"><b>Biomasa y biogás</b>Restos orgánicos (madera, serrín, desechos agrícolas) usados como combustible.</div>
+  </div>
+  <div class="warn">⚠️ Error común: confundir energía mareomotriz (mareas) con undimotriz (olas); son mecanismos físicos distintos aunque ambas provienen del mar.</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-green">Ventajas</div>
+  <div class="two">
+    <div class="mini"><b>Ambiental</b>No emiten CO₂ ni contaminan el aire; ayudan a frenar el cambio climático.</div>
+    <div class="mini"><b>Económico y social</b>Bajos costos operativos, ahorro a largo plazo, generación de empleo verde, electrificación de zonas aisladas y mejora de la salud pública.</div>
+  </div>
+  <div class="divh"></div>
+  <div class="bh c-red">Desventajas / desafíos</div>
+  <div class="two">
+    <div class="mini"><b>Variabilidad</b>Dependen del clima (sol, viento); requieren respaldo o almacenamiento.</div>
+    <div class="mini"><b>Costo e infraestructura</b>Alta inversión inicial, redes de distribución adaptadas y grandes extensiones de terreno en algunas tecnologías.</div>
+  </div>
+  <div class="exam">🎯 Examen: si un proyecto renovable depende del clima, ¿qué estrategias técnicas permiten mitigar esa variabilidad?</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-gray">Comparativa renovables vs. no renovables</div>
+  <table class="tbl">
+    <tr><th>Característica</th><th>Renovables</th><th>No renovables</th></tr>
+    <tr><td>Disponibilidad</td><td>Inagotables</td><td>Limitadas</td></tr>
+    <tr><td>Emisiones contaminantes</td><td>Muy bajas o nulas</td><td>Muy altas</td></tr>
+    <tr><td>Costo a largo plazo</td><td>Disminuye con el tiempo</td><td>Aumenta por escasez y carbono</td></tr>
+    <tr><td>Impacto ambiental</td><td>Bajo</td><td>Alto</td></tr>
+    <tr><td>Desarrollo tecnológico</td><td>En crecimiento continuo</td><td>Estancado en muchas regiones</td></tr>
+  </table>
+</div>
+
+<div class="sechead c-amber">Tema 1 del Módulo II: energía solar</div>
+
+<div class="block c-amber">
+  <div class="bh c-amber">¿Qué es la energía solar?</div>
+  <div class="def" style="border-color:var(--border-warning)">La superficie del sol está a unos 5500°C. Cada año proyecta sobre la Tierra una cantidad de energía cuatro mil veces mayor que la que la humanidad necesita para su consumo.</div>
+  <div class="item"><span class="dot"></span>Se obtiene captando la radiación existente para usarla como energía térmica o eléctrica.</div>
+  <div class="item"><span class="dot"></span>Existen diversas tecnologías de captación según el uso final que se le quiera dar a esa energía.</div>
+</div>
+
+<div class="block s2">
+  <div class="bh c-purple">Tres formas de aprovechar la energía solar</div>
+  <div class="three">
+    <div class="mini"><b>Fotovoltaica</b>Obtención directa de energía eléctrica a partir de la radiación, mediante paneles solares fotovoltaicos.</div>
+    <div class="mini"><b>Térmica</b>Obtención de calor a partir de la radiación, para calentar fluidos como agua o aire, de forma directa o indirecta.</div>
+    <div class="mini"><b>Pasiva</b>Aprovecha las cualidades lumínicas y calóricas del sol en la propia edificación, bajo arquitectura bioclimática (ver bloque siguiente).</div>
+  </div>
+  <div class="warn">⚠️ Error común: pensar que "energía solar" es un único proceso. La fotovoltaica genera electricidad directamente; la térmica genera calor; la pasiva ni siquiera transforma la energía, solo aprovecha el diseño del edificio para captarla o rechazarla.</div>
+</div>
+
+<div class="block">
+  <div class="bh c-green">Características fundamentales</div>
+  <div class="item"><span class="dot"></span><b style="font-weight:500">Inagotable</b> a escala humana.</div>
+  <div class="item"><span class="dot"></span><b style="font-weight:500">Limpia:</b> no genera gases de efecto invernadero ni ruido.</div>
+  <div class="item"><span class="dot"></span><b style="font-weight:500">Larga vida útil:</b> más de 30 años, con bajo mantenimiento.</div>
+  <div class="item"><span class="dot"></span><b style="font-weight:500">Costos decrecientes</b> a medida que avanza la tecnología.</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-green">Energía solar pasiva: arquitectura bioclimática o sostenible</div>
+  <div class="def" style="border-color:var(--border-success)">Consiste en diseñar el edificio (orientación, ventanas, aislamiento, materiales) para captar o rechazar la radiación solar sin necesidad de paneles ni equipos activos, reduciendo el consumo de calefacción, refrigeración e iluminación.</div>
+  <div class="item"><span class="dot"></span>Se estima que el 30% de toda la energía que se consume en el mundo se emplea en calefacción, iluminación y refrigeración de edificaciones.</div>
+  <div class="item"><span class="dot"></span>Ejemplo citado en el curso: si en España se construyera con materiales aislantes adecuados y se orientaran ventanas, fachadas y tejados buscando la ganancia solar, se podría ahorrar más del 15% de la energía usada en calefacción y refrigeración.</div>
+  <div class="flow">
+    <div class="fbox">Sol de mañana (bajo, este)</div><span class="farrow">→</span>
+    <div class="fbox">Entra luz y calor suave</div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Sol de tarde (alto)</div><span class="farrow">→</span>
+    <div class="fbox">Aislamiento en techo lo bloquea</div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Aire fresco + vegetación</div><span class="farrow">→</span>
+    <div class="fbox">Ventila el interior</div><span class="farrow">→</span>
+    <div class="fbox">Aire caliente sale por lo alto</div>
+  </div>
+  <div class="item"><span class="dot"></span>Elementos clave del diseño: aislamiento térmico en la envolvente, ventilación cruzada (entra aire fresco por un lado, sale aire caliente por otro), árboles y vegetación que dan sombra (paisaje), y orientación de ventanas según la trayectoria del sol a lo largo del día.</div>
+  <div class="warn">⚠️ Error común: la arquitectura bioclimática no "genera" energía como un panel fotovoltaico; su ahorro viene de necesitar menos energía externa gracias al diseño pasivo del edificio.</div>
+  <div class="exam">🎯 Examen: proponga dos decisiones de diseño arquitectónico (distintas a instalar paneles) que reduzcan el consumo de climatización de una vivienda en la costa peruana.</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-amber">Energía solar térmica: clasificación por temperatura</div>
+  <table class="tbl">
+    <tr><th>Tipo</th><th>Rango</th><th>Aplicaciones</th></tr>
+    <tr><td>Baja temperatura</td><td>0–100°C</td><td>Consumo doméstico (agua caliente)</td></tr>
+    <tr><td>Media temperatura</td><td>100–250°C</td><td>Vapor para procesos industriales, generación eléctrica en centrales pequeñas de 30 a 2000 kW</td></tr>
+    <tr><td>Alta temperatura</td><td>&gt;250°C</td><td>Generación eléctrica a gran escala (plantas CSP)</td></tr>
+  </table>
+  <div style="font-size:10.5px;color:var(--text-muted);margin-top:4px">Fuente: Peláez y Espinoza (2015)</div>
+</div>
+
+<div class="block s2">
+  <div class="bh c-amber">Plantas termosolares de concentración (CSP)</div>
+  <div class="def" style="border-color:var(--border-warning)">Un conjunto de tecnologías que, tras recibir la radiación solar, calientan un fluido y mediante un ciclo termodinámico producen el vapor necesario para mover una turbina conectada a un generador.</div>
+  <div class="two">
+    <div class="mini"><b>Torre central</b>Un campo de heliostatos concentra la radiación en un receptor central sobre una torre.</div>
+    <div class="mini"><b>Disco Stirling</b>Un reflector parabólico concentra la radiación en un receptor/motor Stirling en su foco.</div>
+    <div class="mini"><b>Concentración lineal de Fresnel</b>Espejos curvados en línea concentran la radiación en un tubo absorbedor central.</div>
+    <div class="mini"><b>Canal cilindro parabólico</b>Canales reflectores concentran la radiación en un tubo absorbedor a lo largo de la tubería del campo solar.</div>
+  </div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-purple">Energía solar fotovoltaica: cómo funciona</div>
+  <div class="def" style="border-color:var(--border-accent)">Consiste en transformar la radiación solar en energía eléctrica mediante materiales semiconductores (células fotovoltaicas), generalmente fabricados con silicio, uno de los metaloides más abundantes del mundo.</div>
+  <div class="item"><span class="dot"></span>Los fotones de la luz solar impactan una de las caras de la célula y liberan electrones, generando una corriente eléctrica.</div>
+  <div class="item"><span class="dot"></span>Esa corriente se multiplica según la cantidad de celdas que tenga cada módulo o panel.</div>
+  <div class="flow">
+    <div class="fbox">Panel solar (CC 12/24/48V)</div><span class="farrow">→</span>
+    <div class="fbox">Inversor</div><span class="farrow">→</span>
+    <div class="fbox">Corriente alterna (220V/50Hz)</div><span class="farrow">→</span>
+    <div class="fbox">Red o vivienda</div>
+  </div>
+  <div class="item"><span class="dot"></span>Usos: electrificación rural y bombeo de agua tradicionalmente; hoy también señalización, alumbrado público, generación distribuida en viviendas e industria, y parques solares que inyectan a la red de media o baja tensión.</div>
+  <div class="exam">🎯 Examen: explique la diferencia física entre la generación fotovoltaica y la generación termosolar (CSP), aunque ambas partan del mismo recurso: la radiación solar.</div>
+</div>
+
+<div class="sechead c-coral">Situación mundial y en el Perú</div>
+
+<div class="block">
+  <div class="bh c-coral">Situación mundial</div>
+  <div class="item"><span class="dot"></span>Más del 30% de la electricidad mundial ya es renovable.</div>
+  <div class="item"><span class="dot"></span>Crecimiento acelerado en solar y eólica, especialmente en Asia emergente, donde se concentra el mayor incremento de demanda eléctrica global (2015–2024).</div>
+</div>
+
+<div class="block">
+  <div class="bh c-coral">Situación en el Perú</div>
+  <div class="item"><span class="dot"></span>Más del 50% de la electricidad proviene de hidroeléctricas.</div>
+  <div class="item"><span class="dot"></span>Solar y eólica en crecimiento, aún por debajo del 10%.</div>
+  <div class="item"><span class="dot"></span>Gran potencial no aprovechado: solar en la sierra, eólico en la costa.</div>
+</div>
+
+<div class="block">
+  <div class="bh c-coral">Potencial eólico aprovechable (MW)</div>
+  <table class="tbl">
+    <tr><th>Departamento</th><th>Aprovechable</th></tr>
+    <tr><td>Lambayeque</td><td>7017</td></tr>
+    <tr><td>Ica</td><td>2280</td></tr>
+    <tr><td>Arequipa</td><td>1020</td></tr>
+    <tr><td>Cajamarca</td><td>891</td></tr>
+    <tr><td>La Libertad</td><td>921</td></tr>
+    <tr><td>Áncash</td><td>708</td></tr>
+  </table>
+  <div style="font-size:10.5px;color:var(--text-muted);margin-top:4px">Fuente: Anexo 4, libro Energías renovables: experiencia y perspectivas en la ruta del Perú hacia la transición energética</div>
+</div>
+
+<div class="sechead c-pink">Inteligencia artificial aplicada a energías renovables</div>
+
+<div class="block s3">
+  <div class="bh c-pink">Automatizar sin domótica: gestión de activos con IA</div>
+  <div class="def" style="border-color:var(--border-pro)">La IA no solo controla dispositivos: analiza datos históricos y en tiempo real para anticipar pérdidas y optimizar el desempeño de los equipos de generación renovable.</div>
+  <div class="two">
+    <div class="mini"><b>Predicción</b>Modelos que usan irradiancia, viento o caudal para anticipar la producción esperada y detectar desviaciones antes de que generen pérdidas.</div>
+    <div class="mini"><b>Detección</b>Comparan el comportamiento esperado vs. real de un panel o aerogenerador (termografía, vibración, corriente) para hallar fallas incipientes.</div>
+    <div class="mini"><b>Mantenimiento predictivo</b>En vez de mantenimiento por calendario, se interviene justo antes de que un componente falle, reduciendo paradas y costos.</div>
+    <div class="mini"><b>Gestión y optimización</b>Sistemas de gestión de energía (EMS) que despachan generación, almacenamiento y consumo en tiempo real para minimizar pérdidas.</div>
+  </div>
+  <div class="exam">🎯 Examen: proponga un caso en el que un modelo de detección de anomalías evite una pérdida económica en una planta fotovoltaica.</div>
+</div>
+
+<div class="sechead c-blue">Cambio climático, Acuerdo de París y NDC</div>
+
+<div class="block s2">
+  <div class="bh c-blue">¿Por qué son clave frente al cambio climático?</div>
+  <div class="item"><span class="dot"></span>Las energías renovables reemplazan a los combustibles fósiles, la principal fuente de emisiones de CO₂.</div>
+  <div class="item"><span class="dot"></span>Son fundamentales para cumplir los objetivos del Acuerdo de París, y podrían reducir más del 60% de las emisiones globales si se adoptan masivamente.</div>
+  <div style="margin-top:6px">
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-secondary);margin-bottom:3px"><span>Reducción potencial de emisiones</span><span>60%</span></div>
+    <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:60%"></div></div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="bh c-blue">NDC del Perú</div>
+  <div class="def" style="border-color:var(--border-accent)">Las NDC (Contribuciones Determinadas a Nivel Nacional) son los compromisos que cada país presenta ante la CMNUCC dentro del Acuerdo de París, indicando cuánto reducirá sus emisiones y cómo se adaptará al cambio climático.</div>
+  <div class="item"><span class="dot"></span>En las NDC del Perú, el crecimiento de la energía solar y eólica es uno de los ejes centrales de mitigación.</div>
+</div>
+
+<div class="sechead c-gray">Marco ambiental peruano: SNGA y SEIA</div>
+
+<div class="block s3">
+  <div class="bh c-gray">Sistema Nacional de Gestión Ambiental (SNGA): 5 sistemas funcionales</div>
+  <div class="two">
+    <div class="mini"><b>SEIA</b>Sistema Nacional de Evaluación de Impacto Ambiental (MINAM).</div>
+    <div class="mini"><b>SINIA</b>Sistema Nacional de Información Ambiental (MINAM).</div>
+    <div class="mini"><b>SINEFA</b>Sistema Nacional de Evaluación y Fiscalización Ambiental (ente rector: OEFA).</div>
+    <div class="mini"><b>SINANPE</b>Sistema Nacional de Áreas Naturales Protegidas por el Estado (SERNANP).</div>
+  </div>
+  <div class="mini" style="margin-top:7px"><b>SNGRH</b>Sistema Nacional de Gestión de Recursos Hídricos (Autoridad Nacional del Agua, ANA).</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-blue">SEIA: las dos caras de la moneda</div>
+  <div class="two">
+    <div class="mini"><b>Cara 1 · Políticas, planes y programas</b>Se evalúan mediante la Evaluación Ambiental Estratégica (EAE), que incorpora la variable ambiental desde el diseño de la política, antes de que existan proyectos concretos.</div>
+    <div class="mini"><b>Cara 2 · Proyectos de inversión</b>Se clasifican según el nivel de impacto negativo previsto, y esa categoría determina el instrumento de gestión ambiental exigido.</div>
+  </div>
+  <div class="divh"></div>
+  <table class="tbl">
+    <tr><th>Categoría</th><th>Impacto previsto</th><th>Instrumento</th><th>Autoridad típica</th></tr>
+    <tr><td>I</td><td>Leve</td><td>DIA</td><td>Sector / gobierno regional o local (delegación)</td></tr>
+    <tr><td>II</td><td>Moderado</td><td>EIA-sd</td><td>SENACE o sector, según transferencia</td></tr>
+    <tr><td>III</td><td>Alto / significativo</td><td>EIA-d</td><td>SENACE, en sectores minería, energía, hidrocarburos, transportes, agricultura y residuos sólidos</td></tr>
+  </table>
+  <div class="warn">⚠️ Todo proyecto que pueda generar un impacto ambiental negativo debe pasar por el filtro del SEIA: si no tiene clasificación anticipada por sector, el titular presenta una Evaluación Preliminar (EVAP) para que la autoridad competente lo clasifique.</div>
+  <div class="exam">🎯 Examen: si un proyecto de energía renovable en la costa peruana genera impactos moderados sobre un ecosistema costero, ¿qué instrumento de gestión ambiental le correspondería y quién lo evaluaría?</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-gray">Tabla integradora: tipos de energía renovable</div>
+  <table class="tbl">
+    <tr><th>Tipo</th><th>Mecanismo</th><th>Ventaja principal</th><th>Reto principal</th><th>Aplicación en Perú</th></tr>
+    <tr><td>Solar (fotovoltaica/térmica/pasiva)</td><td>Radiación → calor, electricidad o diseño pasivo</td><td>Recurso casi ilimitado, bajo mantenimiento</td><td>Intermitencia día/noche y clima</td><td>Potencial alto en la sierra, aún poco aprovechado</td></tr>
+    <tr><td>Eólica</td><td>Energía cinética del viento</td><td>Sin emisiones, bajo costo operativo</td><td>Variabilidad del viento, uso de espacio</td><td>Potencial alto en la costa (Ica, Lambayeque)</td></tr>
+    <tr><td>Hidráulica</td><td>Energía cinética/potencial del agua</td><td>Generación estable y a gran escala</td><td>Impacto en ecosistemas fluviales</td><td>Más del 50% de la matriz eléctrica</td></tr>
+    <tr><td>Geotérmica</td><td>Calor de la corteza terrestre</td><td>Disponible las 24 horas</td><td>Costos de exploración altos</td><td>Potencial en zona volcánica del sur</td></tr>
+    <tr><td>Mareomotriz / undimotriz</td><td>Mareas / oleaje</td><td>Muy predecible</td><td>Tecnología poco madura</td><td>Incipiente</td></tr>
+    <tr><td>Biomasa y biogás</td><td>Combustión de restos orgánicos</td><td>Aprovecha residuos, desarrollo rural</td><td>Requiere gestión sostenible de la biomasa</td><td>Uso agrícola y rural</td></tr>
+  </table>
+  <div class="warn">⚠️ Dato integrador clave: la diversificación de la matriz peruana (hoy dominada por la hidroeléctrica) hacia solar y eólica, sumada a un diseño arquitectónico bioclimático que reduzca la demanda, ataca el problema por los dos lados: más oferta limpia y menos consumo innecesario.</div>
+</div>
+
+<div class="block s3" id="quiz-section" style="padding:0;overflow:hidden">
+  <div class="bar" style="padding:12px 16px;border-radius:11px 11px 0 0">
+    <div style="font-size:14px;font-weight:500">Quiz de repaso — 10 preguntas de opción múltiple</div>
+    <div style="font-size:11px;opacity:.75;margin-top:2px">Marca tu respuesta y descubre si es correcta</div>
+  </div>
+  <div style="padding:14px 16px">
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-secondary);margin-bottom:4px">
+      <span id="quiz-progress-label">Pregunta 0 de 10 respondidas</span><span id="quiz-score-label">0% de aciertos</span>
+    </div>
+    <div class="stat-bar-wrap" style="margin-bottom:14px"><div class="stat-bar-fill" id="quiz-progress-bar" style="width:0%"></div></div>
+
+    <div id="quiz-container">
+
+      <div class="qcard" id="q1">
+        <p class="qnum">Pregunta 1 / 10</p>
+        <p class="qtext">¿Qué caracteriza principalmente a una fuente de energía renovable?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Que su instalación no requiere inversión inicial</button>
+          <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) Que se regenera naturalmente más rápido de lo que se consume</button>
+          <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) Que siempre genera energía de forma constante, sin variabilidad</button>
+          <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Que no requiere ningún tipo de certificación ambiental</button>
+        </div>
+        <div class="qfeedback" id="fb1"></div>
+      </div>
+
+      <div class="qcard" id="q2">
+        <p class="qnum">Pregunta 2 / 10</p>
+        <p class="qtext">¿Cuál de las siguientes describe mejor la energía solar pasiva, usada en la arquitectura bioclimática?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Paneles fotovoltaicos instalados en el techo para generar electricidad</button>
+          <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) Colectores que calientan agua mediante un fluido circulante</button>
+          <button class="qbtn" data-q="2" data-opt="c" data-correct="true">C) El diseño del edificio (orientación, aislamiento, ventilación) para aprovechar o rechazar el sol sin equipos activos</button>
+          <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Una batería que almacena energía solar para la noche</button>
+        </div>
+        <div class="qfeedback" id="fb2"></div>
+      </div>
+
+      <div class="qcard" id="q3">
+        <p class="qnum">Pregunta 3 / 10</p>
+        <p class="qtext">¿En qué se diferencia principalmente la energía solar térmica de la fotovoltaica?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) La térmica solo funciona de noche</button>
+          <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) La fotovoltaica solo se usa en zonas rurales</button>
+          <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) La térmica convierte la radiación en calor; la fotovoltaica la convierte directamente en electricidad</button>
+          <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) No hay diferencia, son el mismo proceso con distinto nombre</button>
+        </div>
+        <div class="qfeedback" id="fb3"></div>
+      </div>
+
+      <div class="qcard" id="q4">
+        <p class="qnum">Pregunta 4 / 10</p>
+        <p class="qtext">¿Cuál de las siguientes NO es una tecnología de concentración solar (CSP)?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Torre central con heliostatos</button>
+          <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Disco Stirling</button>
+          <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Panel fotovoltaico plano montado en techo</button>
+          <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Canal cilindro parabólico</button>
+        </div>
+        <div class="qfeedback" id="fb4"></div>
+      </div>
+
+      <div class="qcard" id="q5">
+        <p class="qnum">Pregunta 5 / 10</p>
+        <p class="qtext">Según el ejemplo citado en el curso sobre España, ¿qué porcentaje de ahorro energético en calefacción y refrigeración se podría lograr con un buen diseño bioclimático (aislamiento y orientación adecuados)?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Más del 80%</button>
+          <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) Más del 15%</button>
+          <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Exactamente el 50%</button>
+          <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) No hay ahorro medible, solo confort</button>
+        </div>
+        <div class="qfeedback" id="fb5"></div>
+      </div>
+
+      <div class="qcard" id="q6">
+        <p class="qnum">Pregunta 6 / 10</p>
+        <p class="qtext">Según los datos presentados en el curso, ¿de dónde proviene más del 50% de la electricidad del Perú?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Energía solar fotovoltaica</button>
+          <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Energía eólica</button>
+          <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Centrales térmicas a gas</button>
+          <button class="qbtn" data-q="6" data-opt="d" data-correct="true">D) Centrales hidroeléctricas</button>
+        </div>
+        <div class="qfeedback" id="fb6"></div>
+      </div>
+
+      <div class="qcard" id="q7">
+        <p class="qnum">Pregunta 7 / 10</p>
+        <p class="qtext">¿Cuál de las siguientes es un ejemplo correcto de mantenimiento predictivo con inteligencia artificial en una planta renovable?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Revisar todos los paneles cada primer día del mes, sin excepción</button>
+          <button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) Estimar, a partir de datos de vibración y temperatura, cuándo un componente probablemente fallará e intervenir antes</button>
+          <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) Esperar a que el equipo deje de funcionar para repararlo</button>
+          <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Aumentar la potencia del inversor sin análisis previo</button>
+        </div>
+        <div class="qfeedback" id="fb7"></div>
+      </div>
+
+      <div class="qcard" id="q8">
+        <p class="qnum">Pregunta 8 / 10</p>
+        <p class="qtext">¿Qué son las NDC dentro del Acuerdo de París?</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Normas de Diseño de Centrales eléctricas</button>
+          <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Un tipo de panel fotovoltaico de alta eficiencia</button>
+          <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Los compromisos que cada país presenta para reducir emisiones y adaptarse al cambio climático</button>
+          <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Un organismo internacional que reemplaza a la ONU en temas climáticos</button>
+        </div>
+        <div class="qfeedback" id="fb8"></div>
+      </div>
+
+      <div class="qcard" id="q9">
+        <p class="qnum">Pregunta 9 / 10</p>
+        <p class="qtext">Un proyecto de inversión que, según su Evaluación Preliminar, generará impactos ambientales negativos significativos, requerirá...</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Una Declaración de Impacto Ambiental (DIA)</button>
+          <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Ningún instrumento, porque las renovables están exoneradas</button>
+          <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Un Estudio de Impacto Ambiental Detallado (EIA-d), evaluado normalmente por SENACE</button>
+          <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Solo una autorización municipal</button>
+        </div>
+        <div class="qfeedback" id="fb9"></div>
+      </div>
+
+      <div class="qcard" id="q10">
+        <p class="qnum">Pregunta 10 / 10</p>
+        <p class="qtext">La Evaluación Ambiental Estratégica (EAE), dentro del SEIA, se aplica principalmente a...</p>
+        <div class="qopts">
+          <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Proyectos de inversión ya construidos</button>
+          <button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) Políticas, planes y programas, antes de que existan proyectos concretos</button>
+          <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Únicamente a los EIA-d del sector minero</button>
+          <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Los reclamos de la ciudadanía tras la aprobación de un proyecto</button>
+        </div>
+        <div class="qfeedback" id="fb10"></div>
+      </div>
+
+    </div>
+
+    <div id="quiz-results" style="display:none;margin-top:14px;padding:12px 14px;border-radius:8px;font-size:13px"></div>
+    <button class="resetbtn" onclick="resetQuiz()"><i class="ti ti-refresh" style="font-size:14px;vertical-align:-2px;margin-right:5px" aria-hidden="true"></i>Reiniciar quiz</button>
+  </div>
+</div>
+
+<div class="bar" style="grid-column:1/-1;padding:11px 18px;display:flex;gap:14px;flex-wrap:wrap;font-size:11px">
+  <span style="font-weight:500;color:#7dd3fc">Referencias:</span>
+  <span style="color:#94a3b8">IRENA · Ing. Jilder Castillo Cabrera, Programa Energías Renovables y Eficiencia Energética con IA · Peláez y Espinoza (2015) · Anexo 4, Energías renovables: experiencia y perspectivas en la ruta del Perú hacia la transición energética · MINAM, SENACE (marco SEIA/SNGA) · IEA, Electricity Market Report (2022)</span>
+</div>
+
+</div>
+
+<script>
+const feedbackText = {
+  1: {ok:"Correcto. La clave del concepto es la regeneración natural del recurso a un ritmo igual o mayor al de consumo, no la ausencia de costos o de intermitencia.", bad:"La respuesta correcta es B. Lo que define a una energía renovable es que su fuente se regenera naturalmente, no que sea gratuita o perfectamente constante."},
+  2: {ok:"Correcto. La energía solar pasiva no transforma la radiación con equipos: usa el propio diseño arquitectónico (orientación, aislamiento, ventilación cruzada) para regular la temperatura interior.", bad:"La respuesta correcta es C. La pasiva no usa paneles ni colectores activos; es el diseño del edificio el que aprovecha o bloquea el sol."},
+  3: {ok:"Correcto. La térmica calienta un fluido (agua, aire); la fotovoltaica genera electricidad directamente al liberar electrones en la célula solar.", bad:"La respuesta correcta es C. Son dos mecanismos físicos distintos: uno produce calor y el otro produce corriente eléctrica directamente."},
+  4: {ok:"Correcto. Las tecnologías CSP concentran la radiación mediante espejos o reflectores para generar calor y mover una turbina; un panel fotovoltaico plano convierte la luz directamente en electricidad, sin concentración ni ciclo termodinámico.", bad:"La respuesta correcta es C. Torre central, disco Stirling y cilindro parabólico son formas de concentración solar (CSP); el panel fotovoltaico plano no concentra radiación, la convierte directamente en electricidad."},
+  5: {ok:"Correcto. El curso cita que, con materiales aislantes adecuados y buena orientación de ventanas, fachadas y tejados, se podrían lograr ahorros de más del 15% de la energía usada en calefacción y refrigeración.", bad:"La respuesta correcta es B. El dato citado en el curso es un ahorro potencial de más del 15% en calefacción y refrigeración, no un porcentaje mayor ni un valor fijo del 50%."},
+  6: {ok:"Correcto. Más del 50% de la matriz eléctrica peruana proviene de centrales hidroeléctricas, mientras que solar y eólica aún están por debajo del 10%.", bad:"La respuesta correcta es D. Según los datos del curso, la hidroeléctrica supera el 50% de la generación eléctrica en el Perú."},
+  7: {ok:"Correcto. El mantenimiento predictivo usa datos de sensores para anticipar fallas antes de que ocurran, en vez de esperar la avería o seguir un calendario fijo.", bad:"La respuesta correcta es B. El mantenimiento predictivo se basa en anticipar la falla a partir de datos reales del equipo, no en calendarios fijos ni en esperar a que falle."},
+  8: {ok:"Correcto. Las NDC son los compromisos nacionales de mitigación y adaptación que cada país presenta dentro del Acuerdo de París.", bad:"La respuesta correcta es C. Las NDC (Contribuciones Determinadas a Nivel Nacional) son los compromisos climáticos de cada país ante la CMNUCC."},
+  9: {ok:"Correcto. La Categoría III, con impactos altos o significativos, exige un EIA-d, evaluado por SENACE en los sectores donde tiene competencia transferida.", bad:"La respuesta correcta es C. Un impacto significativo corresponde a la Categoría III y requiere un EIA-d, que en la mayoría de sectores estratégicos evalúa SENACE."},
+  10: {ok:"Correcto. La EAE evalúa políticas, planes y programas, incorporando la variable ambiental antes de que se traduzcan en proyectos concretos.", bad:"La respuesta correcta es B. La EAE es el instrumento de la 'cara de políticas' del SEIA; los proyectos concretos se evalúan con DIA, EIA-sd o EIA-d."}
+};
+
+let answered = 0;
+let correctCount = 0;
+
+document.getElementById('quiz-container').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  const group = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  const isCorrect = btn.dataset.correct === 'true';
+
+  group.forEach(b => {
+    b.disabled = true;
+    if(b.dataset.correct === 'true'){
+      b.classList.add('correct');
+    } else if(b === btn){
+      b.classList.add('incorrect');
+    }
+  });
+
+  const fb = document.getElementById('fb'+q);
+  fb.style.display = 'block';
+  if(isCorrect){
+    fb.className = 'qfeedback ok';
+    fb.textContent = '✅ ¡Correcto! ' + feedbackText[q].ok;
+    correctCount++;
+  } else {
+    fb.className = 'qfeedback bad';
+    fb.textContent = '❌ Incorrecto. ' + feedbackText[q].bad;
+  }
+
+  answered++;
+  document.getElementById('quiz-progress-label').textContent = 'Pregunta ' + answered + ' de 10 respondidas';
+  const pct = Math.round((correctCount/answered)*100);
+  document.getElementById('quiz-score-label').textContent = pct + '% de aciertos';
+  document.getElementById('quiz-progress-bar').style.width = Math.round((answered/10)*100) + '%';
+
+  if(answered === 10){
+    const results = document.getElementById('quiz-results');
+    results.style.display = 'block';
+    let msg, bg;
+    if(correctCount <= 4){ msg = 'Necesitas repasar el material.'; bg='var(--bg-danger)'; }
+    else if(correctCount <= 7){ msg = '¡Buen avance, sigue repasando!'; bg='var(--bg-warning)'; }
+    else { msg = '¡Excelente dominio del tema!'; bg='var(--bg-success)'; }
+    results.style.background = bg;
+    results.innerHTML = '<b>' + correctCount + ' / 10 correctas</b><br>' + msg;
+  }
+});
+
+function resetQuiz(){
+  document.querySelectorAll('.qbtn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct','incorrect');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f => { f.style.display='none'; });
+  document.getElementById('quiz-results').style.display = 'none';
+  answered = 0;
+  correctCount = 0;
+  document.getElementById('quiz-progress-label').textContent = 'Pregunta 0 de 10 respondidas';
+  document.getElementById('quiz-score-label').textContent = '0% de aciertos';
+  document.getElementById('quiz-progress-bar').style.width = '0%';
+}
+</script>

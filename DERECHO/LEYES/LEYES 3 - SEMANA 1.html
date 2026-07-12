@@ -1,0 +1,382 @@
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary,#f1f5f9);font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary,#1e293b)}
+.cv *{box-sizing:border-box}
+.bar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px}
+.bar h1{font-family:Oswald;font-weight:700;font-size:20px;margin:0 0 4px}
+.bar p{font-size:11px;margin:0 0 8px;color:#cbd5e1}
+.pillrow{display:flex;flex-wrap:wrap;gap:6px}
+.tagpill{font-size:10px;background:rgba(255,255,255,.12);padding:3px 9px;border-radius:20px}
+.secbar{grid-column:1/-1;font-family:Oswald;font-weight:700;font-size:13px;padding:8px 12px;border-radius:8px;margin-top:4px}
+.block{background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-tertiary,#e2e8f0);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+.bh{font-family:Oswald;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary,#f8fafc);margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary,#f8fafc);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.mini b{display:block;margin-bottom:3px;font-size:11.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary,#f8fafc);padding:6px 10px;border-radius:8px;font-size:11px;border:0.5px solid var(--color-border-tertiary,#e2e8f0)}
+.farrow{color:var(--color-text-secondary,#64748b);font-size:15px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.tbl{width:100%;border-collapse:collapse;font-size:10.5px}
+.tbl th{background:var(--color-background-secondary,#f8fafc);padding:5px 6px;border-bottom:0.5px solid var(--color-border-tertiary,#e2e8f0);text-align:left}
+.tbl td{padding:5px 6px;border-bottom:0.5px solid var(--color-border-tertiary,#e2e8f0);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary,#e2e8f0);margin:7px 0}
+.quizwrap{grid-column:1/-1;background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-tertiary,#e2e8f0);border-radius:14px;padding:16px 18px}
+.qhead{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;font-family:Oswald;font-size:14px;margin-bottom:6px}
+.qhead span{display:block;font-family:'Source Sans 3';font-weight:300;font-size:11px;color:#cbd5e1;margin-top:2px}
+.progwrap{display:flex;align-items:center;gap:10px;margin:10px 0}
+.stat-bar-wrap{flex:1;background:var(--color-background-secondary,#f1f5f9);border-radius:20px;height:11px;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s}
+.progtxt{font-size:11px;color:var(--color-text-secondary,#64748b);white-space:nowrap}
+.qcard{border:0.5px solid var(--color-border-tertiary,#e2e8f0);border-radius:10px;padding:11px 13px;margin-bottom:10px}
+.qnum{font-size:10.5px;color:var(--color-text-secondary,#64748b);margin:0 0 3px;font-weight:600}
+.qtext{font-size:12.5px;margin:0 0 8px;font-weight:600}
+.qbtn{background:var(--color-background-secondary,#f8fafc);border:1px solid var(--color-border-tertiary,#e2e8f0);border-radius:8px;padding:8px 12px;font-size:11.5px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;display:block;color:var(--color-text-primary,#1e293b)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:6px}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626}
+.qresult{display:none;border-radius:10px;padding:14px;margin-top:10px;text-align:center;font-size:13px}
+.qresult button{margin-top:8px;background:#0f1e3a;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;cursor:pointer}
+.foot{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:Oswald;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+@media(prefers-color-scheme:dark){
+.cv{background:#0b1220;color:#e2e8f0}
+.block{background:#141b2d;border-color:#243147}
+.def{background:#1b2438}
+.mini{background:#1b2438}
+.fbox{background:#1b2438;border-color:#243147}
+.tbl th,.tbl td{border-color:#243147}
+.tbl th{background:#1b2438}
+.qbtn{background:#1b2438;border-color:#243147;color:#e2e8f0}
+.stat-bar-wrap{background:#1b2438}
+.qcard{border-color:#243147}
+}
+</style>
+
+<div class="cv">
+<div class="bar">
+<h1>Semana 1 — Mapa mental del sistema de contrataciones públicas</h1>
+<p>Perú · Ley N.° 32069 · Actualizado julio 2026</p>
+<div class="pillrow">
+<span class="tagpill">OECE / OSCE</span><span class="tagpill">SEACE</span><span class="tagpill">RNP</span><span class="tagpill">Perú Compras</span><span class="tagpill">Ciclo de contratación</span>
+</div>
+</div>
+
+<div class="secbar" style="background:#dbeafe;color:#1e3a8a">🏛️ Organismos rectores y de control</div>
+
+<div class="block s2">
+<span class="bh" style="background:#dbeafe;color:#1e3a8a">Definición base</span>
+<div class="def" style="border-color:#1e3a8a"><b>OECE</b> (antes OSCE) es el organismo técnico especializado, adscrito al MEF, que administra todo el ecosistema de contrataciones: dicta lineamientos, opera el RNP y el SEACE, capacita a compradores y proveedores, y resuelve controversias mediante su Tribunal de Contrataciones Públicas (TCP).</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Antes se llamaba OSCE y su rol era casi solo de <b>supervisor y sancionador</b>. Desde la Ley 32069 (abr-2025) su enfoque cambió a <b>asistencia técnica y gestión eficiente</b>, sin dejar de sancionar cuando corresponde.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Es clave entenderlo como el "dueño del sistema": si una plataforma, un registro o un tribunal aparece en un proceso de compra, casi siempre depende del OECE.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Está <b>adscrito al MEF</b> (no es independiente): el Ministerio de Economía y Finanzas es quien fija el marco presupuestal (UIT, umbrales anuales) dentro del cual opera el OECE.</div>
+<div class="warn">⚠️ ERROR COMÚN: pensar que "OSCE" y "OECE" son dos entidades distintas que coexisten. Es la MISMA entidad renombrada — toda mención a OSCE en material anterior a abril 2025 se lee hoy como OECE.</div>
+<div class="exam">🎯 EXAMEN: Explique el cambio de enfoque institucional entre el OSCE (Ley 30225) y el OECE (Ley 32069), citando al menos dos funciones nuevas o reforzadas.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#ede9fe;color:#4c1d95">Control y disputas</span>
+<div class="two">
+<div class="mini" style="border-top:3px solid #4c1d95"><b>Contraloría</b>Órgano de control externo: audita el uso de recursos y puede observar procesos, sobre todo en obras.</div>
+<div class="mini" style="border-top:3px solid #4c1d95"><b>TCP (OECE)</b>Resuelve apelaciones contra la Buena Pro antes de firmar contrato.</div>
+<div class="mini" style="border-top:3px solid #4c1d95"><b>INDECOPI</b>Sanciona colusión entre postores (acuerdos ilegales de precio).</div>
+<div class="mini" style="border-top:3px solid #4c1d95"><b>Arbitraje / JPRD</b>Resuelven disputas durante la ejecución, ya con contrato firmado.</div>
+</div>
+<div class="exam" style="margin-top:8px">🎯 EXAMEN: ¿En qué momento del proceso interviene cada uno: TCP, Contraloría, INDECOPI y un Dispute Board?</div>
+</div>
+
+<div class="secbar" style="background:#ccfbf1;color:#134e4a">💻 Plataformas digitales del sistema</div>
+
+<div class="block s2">
+<span class="bh" style="background:#ccfbf1;color:#134e4a">SEACE — el corazón operativo</span>
+<div class="def" style="border-color:#134e4a">El <b>Sistema Electrónico de Contrataciones del Estado</b> es donde ocurre TODO lo visible del proceso: se publica el Plan Anual de Contrataciones (PAC), se convocan procesos, se presentan ofertas y se registran contratos y órdenes de compra.</div>
+<div class="item"><span class="dot" style="background:#134e4a"></span>Para <b>consultar</b> procesos activos no necesitas RNP ni cuenta — es de acceso libre y gratuito.</div>
+<div class="item"><span class="dot" style="background:#134e4a"></span>Para <b>ofertar</b> (presentar una propuesta real) sí necesitas RNP vigente en la categoría correcta.</div>
+<div class="item"><span class="dot" style="background:#134e4a"></span>El <b>CUBSO</b> (Catálogo Único de Bienes, Servicios y Obras) vive dentro del SEACE y estandariza cómo se describe cada ítem que el Estado compra.</div>
+<div class="flow">
+<span class="fbox">Entidad publica PAC</span><span class="farrow">→</span>
+<span class="fbox">Convocatoria en SEACE</span><span class="farrow">→</span>
+<span class="fbox">Consultas / Bases</span><span class="farrow">→</span>
+<span class="fbox">Ofertas de proveedores</span><span class="farrow">→</span>
+<span class="fbox">Buena Pro</span><span class="farrow">→</span>
+<span class="fbox">Contrato</span>
+</div>
+<div class="exam">🎯 EXAMEN: Diferencie qué se puede hacer en SEACE sin RNP y qué requiere RNP vigente, y explique por qué esa separación tiene sentido.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#dcfce7;color:#14532d">Herramientas de acceso</span>
+<div class="mini" style="border-left:3px solid #14532d;margin-bottom:6px"><b>PLADICOP</b>Plataforma nueva que va reemplazando al SEACE de forma progresiva: contratos menores, trazabilidad y evidencia de desempeño.</div>
+<div class="mini" style="border-left:3px solid #14532d;margin-bottom:6px"><b>RNP</b>Registro obligatorio para vender al Estado. Vigencia indefinida desde 2017 — no se renueva cada año, solo se actualiza.</div>
+<div class="mini" style="border-left:3px solid #14532d"><b>Aula Virtual OECE</b>Capacitación gratuita: MOOC, videoconferencias y webinars sobre la Ley 32069.</div>
+<div class="warn">⚠️ ERROR COMÚN: creer que el RNP "vence cada año" como un carnet. Desde 2017 es de vigencia indefinida mientras tu RUC esté activo en SUNAT.</div>
+</div>
+
+<div class="secbar" style="background:#ffedd5;color:#7c2d12">🟠 Compra directa: Perú Compras y los Acuerdos Marco</div>
+
+<div class="block s3">
+<span class="bh" style="background:#ffedd5;color:#7c2d12">Perú Compras — la vía rápida para bienes estandarizados</span>
+<div class="def" style="border-color:#7c2d12">Administra <b>41 catálogos electrónicos (Acuerdos Marco)</b>. Una vez que tu empresa califica en un catálogo, las entidades te compran DIRECTAMENTE, sin competir proceso por proceso cada vez.</div>
+<div class="two">
+<div class="item"><span class="dot" style="background:#7c2d12"></span>Muy relevante si tienes un <b>producto o servicio estandarizable</b> (no un proyecto a medida como una licitación de pronóstico hidrológico).</div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span>Reduce drásticamente el tiempo entre "calificar" y "vender", ideal para <b>MYPEs</b> con oferta repetible.</div>
+</div>
+<div class="exam">🎯 EXAMEN: Explique por qué un Acuerdo Marco reduce la competencia "proceso por proceso" y qué tipo de proveedor se beneficia más de este mecanismo.</div>
+</div>
+
+<div class="secbar" style="background:#f1f5f9;color:#334155">📖 Vocabulario clave del ciclo de contratación</div>
+
+<div class="block">
+<span class="bh" style="background:#fef9c3;color:#713f12">Documentos y actos</span>
+<div class="mini" style="border-left:3px solid #713f12;margin-bottom:5px"><b>Bases</b>El "reglamento" del proceso: fija requisitos, plazos y criterios de evaluación.</div>
+<div class="mini" style="border-left:3px solid #713f12;margin-bottom:5px"><b>PAC</b>Lista anual de todo lo que la entidad planea comprar, publicada en SEACE.</div>
+<div class="mini" style="border-left:3px solid #713f12;margin-bottom:5px"><b>Valor referencial</b>Precio de mercado que calcula la entidad ANTES de convocar; define el tipo de procedimiento.</div>
+<div class="mini" style="border-left:3px solid #713f12"><b>Integración de Bases</b>Versión final tras responder consultas/observaciones. Ya no se puede cuestionar después.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#fee2e2;color:#991b1b">Riesgos y sanciones</span>
+<div class="mini" style="border-left:3px solid #991b1b;margin-bottom:5px"><b>Impedimento</b>Causal legal (ej. funcionario público, sancionado) que prohíbe participar.</div>
+<div class="mini" style="border-left:3px solid #991b1b;margin-bottom:5px"><b>Colusión</b>Acuerdo ilegal entre postores para fijar precio; lo sanciona INDECOPI.</div>
+<div class="mini" style="border-left:3px solid #991b1b"><b>Nulidad del contrato</b>Deja sin efecto el contrato por vicios graves en el proceso que lo originó.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#ede9fe;color:#4c1d95">Ejecución y garantías</span>
+<div class="mini" style="border-left:3px solid #4c1d95;margin-bottom:5px"><b>Garantía de fiel cumplimiento</b>Carta fianza/retención que asegura que el contratista cumpla; se devuelve al final.</div>
+<div class="mini" style="border-left:3px solid #4c1d95;margin-bottom:5px"><b>Adicional de obra</b>Trabajo no previsto pero necesario, que amplía alcance y monto.</div>
+<div class="mini" style="border-left:3px solid #4c1d95"><b>Buena Pro</b>Acto formal que anuncia al ganador del proceso.</div>
+</div>
+
+<div class="divh" style="grid-column:1/-1"></div>
+
+<div class="block s3">
+<span class="bh" style="background:#f1f5f9;color:#334155">Tabla integradora — quién hace qué, con qué herramienta</span>
+<table class="tbl">
+<tr><th>Entidad / Plataforma</th><th>Tipo</th><th>Rol en el ciclo</th><th>¿Necesitas cuenta?</th><th>Momento del proceso</th></tr>
+<tr><td>OECE</td><td>Organismo rector</td><td>Dicta reglas, capacita, resuelve apelaciones</td><td>No para consultar</td><td>Todo el ciclo</td></tr>
+<tr><td>SEACE</td><td>Plataforma</td><td>Publica y gestiona el proceso completo</td><td>Sí para ofertar</td><td>Selección y ejecución</td></tr>
+<tr><td>RNP</td><td>Registro</td><td>Habilita legalmente para vender al Estado</td><td>Sí, obligatorio</td><td>Antes de ofertar</td></tr>
+<tr><td>Perú Compras</td><td>Central de compras</td><td>Acuerdos Marco / catálogos</td><td>Sí para calificar</td><td>Alternativa a competir</td></tr>
+<tr><td>Contraloría</td><td>Control externo</td><td>Audita uso de recursos</td><td>No</td><td>Durante y después</td></tr>
+<tr><td>TCP</td><td>Tribunal</td><td>Resuelve apelaciones a la Buena Pro</td><td>No para consultar</td><td>Tras la Buena Pro</td></tr>
+</table>
+<div class="warn">⚠️ Dato integrador clave: si memorizas solo una secuencia, que sea esta — <b>OECE fija las reglas → SEACE las ejecuta → RNP te habilita para participar → TCP resuelve si algo se disputa</b>. Todo lo demás del sistema orbita alrededor de esos cuatro puntos.</div>
+</div>
+
+<div class="quizwrap" id="quiz-section">
+<div class="qhead">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE<span>Marca tu respuesta y descubre si es correcta</span></div>
+<div class="progwrap"><div class="stat-bar-wrap"><div class="stat-bar-fill" id="qbar"></div></div><div class="progtxt" id="qprog">Pregunta 0 de 10 · 0% aciertos</div></div>
+
+<div class="qcard" id="q1">
+<p class="qnum">Pregunta 1 / 10</p>
+<p class="qtext">¿Qué cambió realmente cuando el OSCE pasó a llamarse OECE?</p>
+<div class="qopts">
+<button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Solo el nombre; ninguna función cambió</button>
+<button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) El enfoque pasó de supervisión estricta a asistencia técnica y eficiencia, sin perder su rol sancionador</button>
+<button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) El OECE dejó de administrar el RNP y el SEACE</button>
+<button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) El OECE se independizó del MEF</button>
+</div>
+<div class="qfeedback" id="fb1"></div>
+</div>
+
+<div class="qcard" id="q2">
+<p class="qnum">Pregunta 2 / 10</p>
+<p class="qtext">Quieres solo revisar procesos activos en SEACE, sin presentar oferta. ¿Qué necesitas?</p>
+<div class="qopts">
+<button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) RNP vigente y usuario del OECE</button>
+<button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Nada — la consulta pública es libre y gratuita</button>
+<button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Certificación SICAN nivel avanzado</button>
+<button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Autorización previa de la Contraloría</button>
+</div>
+<div class="qfeedback" id="fb2"></div>
+</div>
+
+<div class="qcard" id="q3">
+<p class="qnum">Pregunta 3 / 10</p>
+<p class="qtext">¿Cuál de estas afirmaciones sobre el RNP es FALSA?</p>
+<div class="qopts">
+<button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Es obligatorio para presentar ofertas en procesos competitivos</button>
+<button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) Tiene categorías distintas: bienes, servicios, consultoría de obras, ejecución de obras</button>
+<button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) Debe renovarse cada 12 meses como un carnet</button>
+<button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Es de vigencia indefinida desde 2017, mientras el RUC esté activo</button>
+</div>
+<div class="qfeedback" id="fb3"></div>
+</div>
+
+<div class="qcard" id="q4">
+<p class="qnum">Pregunta 4 / 10</p>
+<p class="qtext">Una empresa fabrica un bien estandarizado y quiere venderle al Estado sin competir proceso por proceso cada vez. ¿Qué mecanismo le conviene explorar primero?</p>
+<div class="qopts">
+<button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Contratación Directa</button>
+<button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Arbitraje</button>
+<button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Calificar a un catálogo (Acuerdo Marco) de Perú Compras</button>
+<button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Apelación ante el TCP</button>
+</div>
+<div class="qfeedback" id="fb4"></div>
+</div>
+
+<div class="qcard" id="q5">
+<p class="qnum">Pregunta 5 / 10</p>
+<p class="qtext">¿Qué es el "valor referencial" y cuándo se calcula?</p>
+<div class="qopts">
+<button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) El monto final que paga la entidad después de firmar el contrato</button>
+<button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) El precio de mercado que la entidad estima ANTES de convocar, y que define qué procedimiento corresponde</button>
+<button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) El monto de la garantía de fiel cumplimiento</button>
+<button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) El valor de la UIT vigente ese año</button>
+</div>
+<div class="qfeedback" id="fb5"></div>
+</div>
+
+<div class="qcard" id="q6">
+<p class="qnum">Pregunta 6 / 10</p>
+<p class="qtext">Después de la Integración de Bases, un postor nota un requisito que le parece injusto. ¿Qué puede hacer?</p>
+<div class="qopts">
+<button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Presentar una nueva consulta u observación como si el proceso siguiera abierto a eso</button>
+<button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Pedir a la Contraloría que anule las Bases de inmediato</button>
+<button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) Cumplir el requisito o no postular, salvo que existan vías de impugnación específicas ya fuera de la etapa de consultas</button>
+<button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Ignorarlo, porque las Bases integradas no son vinculantes</button>
+</div>
+<div class="qfeedback" id="fb6"></div>
+</div>
+
+<div class="qcard" id="q7">
+<p class="qnum">Pregunta 7 / 10</p>
+<p class="qtext">¿Qué diferencia principal hay entre el Tribunal de Contrataciones Públicas (TCP) y un arbitraje o Dispute Board (JPRD)?</p>
+<div class="qopts">
+<button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Son exactamente lo mismo con distinto nombre</button>
+<button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) El TCP resuelve apelaciones ANTES de firmar el contrato (durante la selección); el arbitraje/JPRD resuelve disputas DURANTE la ejecución, ya con contrato firmado</button>
+<button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) El TCP solo actúa en procesos municipales</button>
+<button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) El arbitraje reemplazó por completo al TCP desde 2025</button>
+</div>
+<div class="qfeedback" id="fb7"></div>
+</div>
+
+<div class="qcard" id="q8">
+<p class="qnum">Pregunta 8 / 10</p>
+<p class="qtext">Dos empresas competidoras se ponen de acuerdo en privado para repartirse procesos y fijar precios. ¿Qué entidad sanciona esa conducta?</p>
+<div class="qopts">
+<button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) El MEF</button>
+<button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) La Aula Virtual OECE</button>
+<button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) INDECOPI, por colusión</button>
+<button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) PLADICOP</button>
+</div>
+<div class="qfeedback" id="fb8"></div>
+</div>
+
+<div class="qcard" id="q9">
+<p class="qnum">Pregunta 9 / 10</p>
+<p class="qtext">¿Cuál es la función principal del PAC (Plan Anual de Contrataciones)?</p>
+<div class="qopts">
+<button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Registrar las multas aplicadas a un contratista</button>
+<button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) Listar, con anticipación, todo lo que una entidad planea comprar durante el año</button>
+<button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Certificar a los compradores públicos por niveles</button>
+<button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Fijar el valor anual de la UIT</button>
+</div>
+<div class="qfeedback" id="fb9"></div>
+</div>
+
+<div class="qcard" id="q10">
+<p class="qnum">Pregunta 10 / 10</p>
+<p class="qtext">Ordena correctamente la secuencia lógica del sistema según la tabla integradora de esta unidad.</p>
+<div class="qopts">
+<button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) SEACE fija las reglas → OECE las ejecuta → TCP te habilita para participar</button>
+<button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) OECE fija las reglas → SEACE las ejecuta → RNP te habilita para participar → TCP resuelve disputas</button>
+<button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) RNP fija las reglas → Contraloría las ejecuta → OECE te habilita para participar</button>
+<button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) INDECOPI fija las reglas → PLADICOP las ejecuta → SEACE resuelve disputas</button>
+</div>
+<div class="qfeedback" id="fb10"></div>
+</div>
+
+<div class="qresult" id="qresult">
+<p id="qresulttext"></p>
+<button onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+</div>
+</div>
+
+<div class="foot">
+<span class="ft">REFERENCIAS:</span>
+<span class="fc">Ley N.° 32069 · gob.pe/oece · SEACE (prod4.seace.gob.pe) · RNP (apps.osce.gob.pe) · Aula Virtual OECE · Perú Compras</span>
+</div>
+</div>
+
+<script>
+(function(){
+var explanations={
+q1:{ok:"✅ ¡Correcto! El OECE conserva y amplía las funciones del OSCE (RNP, SEACE, sanciones) pero con un mandato explícito de eficiencia y asistencia técnica preventiva, no solo control punitivo.",
+     bad:"❌ Incorrecto. La respuesta correcta es B. El OECE mantiene TODAS las funciones del OSCE (incluida la sanción), pero suma un rol activo de asistencia técnica y sigue adscrito al MEF."},
+q2:{ok:"✅ ¡Correcto! El buscador de SEACE es de acceso público y gratuito para consultar procesos; el RNP solo es obligatorio cuando vas a presentar una oferta real.",
+    bad:"❌ Incorrecto. La respuesta correcta es B. Consultar procesos en SEACE no requiere RNP, cuenta ni certificación — esas exigencias aplican solo al momento de ofertar."},
+q3:{ok:"✅ ¡Correcto! Esa afirmación es la falsa: desde 2017 el RNP es de vigencia indefinida, no se renueva anualmente.",
+    bad:"❌ Incorrecto. La respuesta correcta es C — esa es la afirmación FALSA. El RNP no vence cada año; se mantiene vigente mientras el RUC esté activo en SUNAT."},
+q4:{ok:"✅ ¡Correcto! Los Acuerdos Marco de Perú Compras están hechos justo para bienes/servicios estandarizados, evitando competir proceso por proceso.",
+    bad:"❌ Incorrecto. La respuesta correcta es C. Contratación Directa es una excepción legal tasada (no aplica por conveniencia), y arbitraje/TCP son mecanismos de disputa, no de venta."},
+q5:{ok:"✅ ¡Correcto! El valor referencial se calcula antes de convocar y es el que determina si corresponde una Adjudicación Simplificada, una Licitación Pública, etc.",
+    bad:"❌ Incorrecto. La respuesta correcta es B. El valor referencial es una estimación previa de precio de mercado, no un pago posterior ni una garantía."},
+q6:{ok:"✅ ¡Correcto! Tras la Integración de Bases, la etapa de consultas ya cerró: solo queda cumplir el requisito, no postular, o usar vías de impugnación específicas si existen.",
+    bad:"❌ Incorrecto. La respuesta correcta es C. La etapa de Consultas y Observaciones es ANTES de la Integración de Bases; después de integradas, ya son vinculantes."},
+q7:{ok:"✅ ¡Correcto! El TCP actúa en la etapa de selección (antes del contrato); el arbitraje y los Dispute Boards actúan durante la ejecución del contrato ya firmado.",
+    bad:"❌ Incorrecto. La respuesta correcta es B. Son mecanismos distintos que operan en momentos distintos del ciclo de contratación."},
+q8:{ok:"✅ ¡Correcto! INDECOPI es la autoridad de libre competencia y sanciona la colusión entre postores.",
+    bad:"❌ Incorrecto. La respuesta correcta es C. Ni el MEF, ni el Aula Virtual, ni PLADICOP tienen función sancionadora de competencia; esa es tarea de INDECOPI."},
+q9:{ok:"✅ ¡Correcto! El PAC es la planificación anual de compras de una entidad, publicada en SEACE, y permite a los proveedores anticipar oportunidades.",
+    bad:"❌ Incorrecto. La respuesta correcta es B. El PAC no registra multas ni certifica compradores; es un instrumento de planificación."},
+q10:{ok:"✅ ¡Correcto! Esa es la cadena lógica central del sistema: quién dicta la norma, quién la ejecuta, quién te habilita y quién resuelve el conflicto.",
+     bad:"❌ Incorrecto. La respuesta correcta es B. OECE fija las reglas → SEACE las ejecuta → RNP te habilita → TCP resuelve disputas. Las demás opciones invierten los roles."}
+};
+var answered=0, correct=0;
+document.querySelectorAll('.qbtn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var q = btn.getAttribute('data-q');
+    var group = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+    var isCorrect = btn.getAttribute('data-correct') === 'true';
+    group.forEach(function(b){
+      b.classList.add('disabled');
+      if(b.getAttribute('data-correct')==='true'){ b.classList.add('correct'); }
+      else if(b===btn){ b.classList.add('incorrect'); }
+    });
+    var fb = document.getElementById('fb'+q);
+    fb.style.display='block';
+    fb.className = 'qfeedback ' + (isCorrect?'ok':'bad');
+    fb.textContent = isCorrect ? explanations['q'+q].ok : explanations['q'+q].bad;
+    answered++;
+    if(isCorrect) correct++;
+    var pct = Math.round((correct/answered)*100);
+    document.getElementById('qbar').style.width = pct+'%';
+    document.getElementById('qprog').textContent = 'Pregunta '+answered+' de 10 · '+pct+'% aciertos';
+    if(answered===10){
+      var res = document.getElementById('qresult');
+      var txt = document.getElementById('qresulttext');
+      res.style.display='block';
+      var msg = correct+' / 10 correctas. ';
+      if(correct<=4){ res.style.background='#fee2e2'; msg += '📚 Necesitas repasar el material.'; }
+      else if(correct<=7){ res.style.background='#fef9c3'; msg += '👍 ¡Buen avance, sigue repasando!'; }
+      else { res.style.background='#dcfce7'; msg += '🎉 ¡Excelente dominio del tema!'; }
+      txt.textContent = msg;
+    }
+  });
+});
+window.resetQuiz = function(){
+  document.querySelectorAll('.qbtn').forEach(function(b){
+    b.classList.remove('correct','incorrect','disabled');
+  });
+  document.querySelectorAll('.qfeedback').forEach(function(f){ f.style.display='none'; });
+  document.getElementById('qresult').style.display='none';
+  document.getElementById('qbar').style.width='0%';
+  document.getElementById('qprog').textContent='Pregunta 0 de 10 · 0% aciertos';
+  answered=0; correct=0;
+};
+})();
+</script>
