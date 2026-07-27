@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Python para el Procesamiento de Datos Meteorológicos — Sesión 01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-background-primary:#ffffff;
+  --color-background-secondary:#f4f5f7;
+  --color-background-tertiary:#e8eaee;
+  --color-text-primary:#1a1a1a;
+  --color-text-secondary:#5b5f66;
+  --color-border-tertiary:#c9cdd4;
+  --color-border-secondary:#b0b5bd;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --color-background-primary:#1b1f2a;
+    --color-background-secondary:#141822;
+    --color-background-tertiary:#10131b;
+    --color-text-primary:#e8e9ec;
+    --color-text-secondary:#a3a8b3;
+    --color-border-tertiary:#333947;
+    --color-border-secondary:#454c5c;
+  }
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Source Sans 3',sans-serif;background:var(--color-background-tertiary);color:var(--color-text-primary);}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:16px 20px;}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin:0 0 4px;}
+.titlebar .sub{font-size:11px;color:#b8c4dd;margin:0 0 8px;}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:rgba(255,255,255,.12);color:#c8d6f0;}
+.sbar{grid-column:1/-1;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border-radius:8px;margin-top:4px;}
+.block{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.def{border-left:3px solid #185fa5;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:6px;}
+.dot{width:6px;height:6px;min-width:6px;border-radius:50%;margin-top:5px;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;}
+@media(prefers-color-scheme:dark){.warn{background:#3a1f0a;color:#fed7aa;}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 11px;margin-top:8px;}
+@media(prefers-color-scheme:dark){.exam{background:#2a2405;color:#fef08a;border-color:#a16207;}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0;}
+.fbox{background:var(--color-background-secondary);padding:6px 10px;border-radius:7px;font-size:11.5px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);text-align:left;}
+.tbl td{padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);vertical-align:top;}
+.divh{border:none;border-top:.5px solid var(--color-border-tertiary);margin:7px 0;}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;}
+/* colores por tema */
+.azul{background:#dbeafe;color:#1e3a8a;} @media(prefers-color-scheme:dark){.azul{background:#1e3a5f;color:#93c5fd;}}
+.verde{background:#dcfce7;color:#14532d;} @media(prefers-color-scheme:dark){.verde{background:#14532d;color:#86efac;}}
+.rojo{background:#fee2e2;color:#991b1b;} @media(prefers-color-scheme:dark){.rojo{background:#450a0a;color:#fca5a5;}}
+.amarillo{background:#fef9c3;color:#713f12;} @media(prefers-color-scheme:dark){.amarillo{background:#422006;color:#fef08a;}}
+.morado{background:#ede9fe;color:#4c1d95;} @media(prefers-color-scheme:dark){.morado{background:#2e1065;color:#c4b5fd;}}
+.teal{background:#ccfbf1;color:#134e4a;} @media(prefers-color-scheme:dark){.teal{background:#042f2e;color:#5eead4;}}
+.naranja{background:#ffedd5;color:#7c2d12;} @media(prefers-color-scheme:dark){.naranja{background:#431407;color:#fed7aa;}}
+.gris{background:#f1f5f9;color:#334155;} @media(prefers-color-scheme:dark){.gris{background:#1e293b;color:#94a3b8;}}
+.rosa{background:#fce7f3;color:#831843;} @media(prefers-color-scheme:dark){.rosa{background:#4a044e;color:#f0abfc;}}
+.dot-azul{background:#1e3a8a;} .dot-verde{background:#14532d;} .dot-rojo{background:#991b1b;} .dot-amarillo{background:#713f12;}
+.dot-morado{background:#4c1d95;} .dot-teal{background:#134e4a;} .dot-naranja{background:#7c2d12;} .dot-gris{background:#334155;} .dot-rosa{background:#831843;}
+.def-azul{border-color:#1e3a8a;} .def-verde{border-color:#14532d;} .def-rojo{border-color:#991b1b;} .def-amarillo{border-color:#713f12;}
+.def-morado{border-color:#4c1d95;} .def-teal{border-color:#134e4a;} .def-naranja{border-color:#7c2d12;}
+/* Quiz */
+#quiz-section{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px;}
+.qhead{background:#0f1e3a;color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px;}
+.qhead h2{font-family:'Oswald',sans-serif;font-size:14px;margin:0 0 3px;}
+.qhead p{font-size:11px;color:#b8c4dd;margin:0;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;margin:6px 0 14px;}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s;}
+.qprog{font-size:12px;color:var(--color-text-secondary);display:flex;justify-content:space-between;}
+.qcard{border:.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px 14px;margin-bottom:12px;}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin:0 0 4px;}
+.qtext{font-size:13px;font-weight:600;margin:0 0 10px;}
+.qopts{display:flex;flex-direction:column;}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--color-text-primary);font-family:inherit;}
+.qbtn:hover:not(:disabled){border-color:var(--color-border-secondary);}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn:disabled{opacity:.6;cursor:not-allowed;pointer-events:none;}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;}
+.qfeedback.correct{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.incorrect{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+@media(prefers-color-scheme:dark){
+  .qbtn.correct{background:#14532d;color:#86efac;}
+  .qbtn.incorrect{background:#450a0a;color:#fca5a5;}
+  .qfeedback.correct{background:#0d2818;color:#86efac;}
+  .qfeedback.incorrect{background:#2a0a0a;color:#fca5a5;}
+}
+#results-panel{display:none;border-radius:10px;padding:14px 16px;margin-top:10px;font-size:13px;text-align:center;}
+#results-panel.low{background:#fee2e2;color:#991b1b;}
+#results-panel.mid{background:#fef9c3;color:#713f12;}
+#results-panel.high{background:#dcfce7;color:#14532d;}
+#reset-btn{margin-top:10px;background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer;color:var(--color-text-primary);}
+@media(max-width:700px){.cv{grid-template-columns:1fr;}.block.s2,.block.s3{grid-column:1/-1;}.two,.three{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<div class="titlebar">
+  <h1>Python para el procesamiento de datos meteorológicos</h1>
+  <p class="sub">Sesión 01 · Introducción a la programación en Python para meteorología (parte 1) · Ponente: Ricardo Passuni Meza</p>
+  <span class="pill">Python básico</span><span class="pill">NumPy</span><span class="pill">Pandas</span><span class="pill">Meteorología aplicada</span>
+</div>
+
+<div class="sbar azul">🔵 BLOQUE 1 · FUNDAMENTOS DEL LENGUAJE PYTHON</div>
+
+<div class="block s3">
+  <span class="bh azul">Por qué Python en meteorología (Diap. 1–4)</span>
+  <div class="def def-azul">Python es un lenguaje interpretado, de alto nivel, creado a finales de los años 80 por Guido van Rossum. "Interpretado" significa que no necesitas compilar el código antes de ejecutarlo: el intérprete lee y ejecuta línea por línea, lo cual acelera enormemente el ciclo de prueba-y-error típico del análisis de datos científicos.</div>
+  <div class="item"><span class="dot dot-azul"></span>Su sintaxis usa indentación obligatoria en vez de llaves {}, lo que fuerza a escribir código legible casi por diseño: dos personas que programan el mismo algoritmo en Python producen bloques visualmente similares.</div>
+  <div class="item"><span class="dot dot-azul"></span>Su verdadero poder para meteorología no está en el lenguaje puro, sino en su ecosistema científico: NumPy para arreglos numéricos, Pandas para tablas, Xarray para datos con múltiples dimensiones (como salidas de modelos WRF), Matplotlib para graficar y Cartopy para mapas georreferenciados.</div>
+  <div class="item"><span class="dot dot-azul"></span>Es multiplataforma: el mismo script corre en Windows, Linux o macOS sin modificaciones, lo cual es clave cuando se comparte código entre estaciones de trabajo y servidores de cómputo científico (por ejemplo, un clúster que corre WRF en Linux).</div>
+  <div class="flow">
+    <div class="fbox">Dato crudo (estación, satélite, modelo)</div><span class="farrow">→</span>
+    <div class="fbox">Python + librerías</div><span class="farrow">→</span>
+    <div class="fbox">Información procesada (gráfico, tabla, alerta)</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: confundir "lenguaje interpretado" con "lenguaje lento por definición". Python en sí es más lento que C, pero NumPy y Pandas ejecutan sus operaciones internamente en C precompilado, por lo que el cuello de botella real casi nunca está en las librerías científicas bien usadas, sino en bucles `for` escritos manualmente sobre datos grandes.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué se afirma que Python es "de alto nivel" y qué implicancia práctica tiene esto para alguien que procesa datos meteorológicos sin formación previa en programación de bajo nivel.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh azul">Tipos de datos primitivos (Diap. 6)</span>
+  <div class="def def-azul">Un tipo de dato primitivo es la unidad más básica de información que Python reconoce de forma nativa. Toda variable meteorológica que registres (temperatura, humedad, una bandera de alerta) se apoya en uno de estos cuatro tipos.</div>
+  <div class="two">
+    <div class="mini" style="border-top:3px solid #1e3a8a;"><b>Entero (int)</b><br>Números sin parte decimal. Ej: <code>HR = 98</code>. Útil para conteos (número de estaciones, día del mes).</div>
+    <div class="mini" style="border-top:3px solid #1e3a8a;"><b>Flotante (float)</b><br>Números con decimales. Ej: <code>t = 24.6</code>. Es el tipo natural para casi toda variable física continua como temperatura o presión.</div>
+    <div class="mini" style="border-top:3px solid #1e3a8a;"><b>Cadena (string)</b><br>Texto entre comillas. Ej: <code>estacion = 'Von Humboldt'</code>. Sirve para identificar estaciones, unidades o etiquetas.</div>
+    <div class="mini" style="border-top:3px solid #1e3a8a;"><b>Booleano (bool)</b><br>Solo <code>True</code> o <code>False</code>. Ej: <code>alerta = True</code>. Es el resultado natural de cualquier comparación lógica (¿la temperatura supera el umbral?).</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: guardar un valor de humedad relativa "98%" como texto ("98%") en vez de como número (98 o 0.98). Si queda como string, Python no podrá promediarlo, compararlo ni graficarlo sin antes convertirlo explícitamente.</div>
+  <div class="exam">🎯 EXAMEN: Si divide 7 % 2 en Python, ¿qué tipo de dato retorna el resultado y por qué la operación módulo tiene sentido físico al trabajar con ciclos horarios (0–23h)?</div>
+</div>
+
+<div class="block">
+  <span class="bh amarillo">Operadores (Diap. 7)</span>
+  <div class="def def-amarillo">Los operadores son símbolos que combinan valores para producir un resultado. Se dividen en aritméticos (producen números) y de comparación (producen booleanos).</div>
+  <div class="rx">3.5 // 2 = 1.0 (división entera)<br>7 % 2 = 1 (módulo/resto)<br>2 ** 6 = 64 (potencia)</div>
+  <div class="item"><span class="dot dot-amarillo"></span>La división entera (//) descarta la parte decimal; el módulo (%) devuelve solo el resto. Juntos permiten, por ejemplo, convertir un total de horas en días y horas sobrantes.</div>
+  <div class="warn">⚠️ ERROR COMÚN: usar / cuando se necesita // para obtener un índice entero (por ejemplo, al calcular a qué "bin" horario pertenece un dato), lo que produce un float que luego falla al indexar una lista.</div>
+  <div class="exam">🎯 EXAMEN: ¿Cuál es la diferencia práctica entre == y = en Python, y qué error de programación (no de sintaxis) genera confundirlos dentro de un condicional?</div>
+</div>
+
+<div class="sbar verde">🟢 BLOQUE 2 · LÓGICA DE PROGRAMACIÓN</div>
+
+<div class="block s2">
+  <span class="bh verde">Estructuras de control: condicionales (Diap. 8)</span>
+  <div class="def def-verde">Los condicionales permiten que el programa tome decisiones distintas según el estado de los datos, replicando el razonamiento de un meteorólogo que aplica reglas ("si la temperatura supera 30°C, emitir alerta").</div>
+  <div class="rx">if temperatura > 30:<br>&nbsp;&nbsp;&nbsp;&nbsp;alerta = 'Ola de calor'<br>elif temperatura < 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;alerta = 'Frío intenso'<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;alerta = 'Normal'</div>
+  <div class="item"><span class="dot dot-verde"></span>Python evalúa las condiciones en orden y ejecuta solo el primer bloque cuya condición sea verdadera; el resto se ignora aunque también fueran técnicamente ciertas.</div>
+  <div class="item"><span class="dot dot-verde"></span><code>elif</code> es la contracción de "else if": permite encadenar múltiples condiciones sin anidar bloques `if` uno dentro de otro, lo que mantiene el código legible.</div>
+  <div class="warn">⚠️ ERROR COMÚN: olvidar los dos puntos ":" al final de la línea del if/elif/else, o mezclar indentación con espacios y tabulaciones, lo cual en Python es un error de sintaxis (no solo de estilo).</div>
+  <div class="exam">🎯 EXAMEN: Diseñe una estructura condicional que clasifique la intensidad de precipitación en "llovizna", "moderada" y "fuerte" según umbrales típicos de mm/h usados en boletines de SENAMHI.</div>
+</div>
+
+<div class="block">
+  <span class="bh verde">Bucles (Diap. 8)</span>
+  <div class="def def-verde">Un bucle repite una acción sobre una secuencia de datos o mientras se cumpla una condición, evitando escribir la misma línea de código decenas o miles de veces.</div>
+  <div class="rx">for dia in temperaturas:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(dia)</div>
+  <div class="item"><span class="dot dot-verde"></span><code>for</code> recorre una secuencia finita conocida de antemano (una lista de 365 temperaturas diarias).</div>
+  <div class="item"><span class="dot dot-verde"></span><code>while</code> se repite mientras una condición sea verdadera, útil cuando no se sabe de antemano cuántas iteraciones harán falta (por ejemplo, leer datos hasta encontrar el fin de archivo).</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué un bucle `while` mal construido puede generar un bucle infinito, y qué elemento de la condición debe cambiar dentro del cuerpo del bucle para evitarlo?</div>
+</div>
+
+<div class="sbar teal">🩵 BLOQUE 3 · ESTRUCTURAS DE DATOS Y FUNCIONES</div>
+
+<div class="block s2">
+  <span class="bh teal">Tipos de datos compuestos (Diap. 9)</span>
+  <div class="def def-teal">Un dato compuesto agrupa varios valores primitivos bajo una sola variable. Son la base para representar series meteorológicas completas en vez de un solo valor aislado.</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #134e4a;"><b>Lista [ ]</b><br>Ordenada, mutable (se puede modificar tras crearla), permite duplicados. Ideal para una serie temporal que va creciendo, como temperaturas horarias de un día.</div>
+    <div class="mini" style="border-top:3px solid #134e4a;"><b>Tupla ( )</b><br>Ordenada pero inmutable: una vez creada no cambia. Útil para coordenadas fijas de una estación (latitud, longitud) que no deben alterarse por error.</div>
+    <div class="mini" style="border-top:3px solid #134e4a;"><b>Diccionario { }</b><br>Pares clave-valor, sin orden posicional garantizado antes de Python 3.7. Ideal para asociar cada ciudad con su temperatura: <code>{'Lima': 24, 'Bogotá': 22}</code>.</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: intentar modificar una tupla con `tupla_1[0] = 5`, lo que lanza un TypeError porque las tuplas son inmutables por diseño (a diferencia de las listas).</div>
+  <div class="exam">🎯 EXAMEN: Si necesita almacenar la temperatura de 10 ciudades peruanas y luego consultar rápidamente el valor de "Arequipa" sin recorrer toda la colección, ¿qué estructura de datos es más eficiente y por qué?</div>
+</div>
+
+<div class="block">
+  <span class="bh teal">Funciones (Diap. 12)</span>
+  <div class="def def-teal">Una función encapsula un bloque de código que realiza una tarea específica y solo se ejecuta cuando es llamada, evitando repetir lógica y facilitando pruebas aisladas.</div>
+  <div class="rx">def celsius_a_kelvin(temp_c):<br>&nbsp;&nbsp;&nbsp;&nbsp;return temp_c + 273.15</div>
+  <div class="item"><span class="dot dot-teal"></span>El parámetro (<code>temp_c</code>) es una variable local que solo existe dentro de la función; el valor real se le pasa al invocarla, ej. <code>celsius_a_kelvin(24.6)</code>.</div>
+  <div class="item"><span class="dot dot-teal"></span><code>return</code> entrega el resultado a quien llamó la función; sin él, la función devuelve <code>None</code> aunque internamente calcule algo.</div>
+  <div class="exam">🎯 EXAMEN: Escriba (en pseudocódigo o Python) una función que reciba una lista de temperaturas y devuelva cuántas superan los 0°C, justificando su relevancia para detectar heladas.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh naranja">Ejercicios prácticos 01 y 02 (Diap. 5 y 11)</span>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #7c2d12;"><b>Ejercicio 01</b><br>Crear un código que reciba la temperatura de varios días y determine si cada una está por encima o por debajo del promedio. Combina: lista de datos + cálculo de promedio (suma/cantidad) + condicional que compara cada valor contra ese promedio.</div>
+    <div class="mini" style="border-left:3px solid #7c2d12;"><b>Ejercicio 02</b><br>Crear una lista de temperaturas para diferentes ciudades y escribir una función que calcule el promedio. Refuerza la idea de encapsular el cálculo del promedio en una función reutilizable en vez de repetir la fórmula cada vez.</div>
+  </div>
+  <div class="rx">temperaturas = [24.6, 22.1, 26.3, 19.8]<br>promedio = sum(temperaturas) / len(temperaturas)<br># promedio = 23.2</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué `len()` es indispensable al calcular un promedio de forma genérica, en vez de dividir siempre entre un número fijo de días.</div>
+</div>
+
+<div class="sbar morado">🟣 BLOQUE 4 · NUMPY: CÓMPUTO NUMÉRICO VECTORIZADO</div>
+
+<div class="block s2">
+  <span class="bh morado">Qué es NumPy y por qué es rápido (Diap. 14–15)</span>
+  <div class="def def-morado">NumPy es el paquete fundamental para computación científica en Python. Su objeto central es el array (arreglo) multidimensional, que almacena datos numéricos homogéneos de forma mucho más compacta y eficiente que una lista de Python.</div>
+  <div class="item"><span class="dot dot-morado"></span>Un array 1D es una fila de valores (ej. una serie horaria de temperatura); un array 2D es una tabla (ej. temperatura por estación y por día); un array 3D agrega una tercera dimensión, típicamente usada para representar campos meteorológicos con latitud, longitud y tiempo, como en salidas de modelos numéricos.</div>
+  <div class="item"><span class="dot dot-morado"></span>La vectorización es la ausencia de bucles explícitos: en vez de recorrer cada elemento con un `for`, NumPy aplica la operación a todo el arreglo de una sola vez, delegando el trabajo a código C precompilado "detrás de escena".</div>
+  <div class="item"><span class="dot dot-morado"></span>Esto no es solo una ganancia estética: para un arreglo de un millón de datos (por ejemplo, salidas horarias de WRF durante varios años), un bucle `for` en Python puro puede tardar órdenes de magnitud más que la misma operación vectorizada en NumPy.</div>
+  <div class="warn">⚠️ ERROR COMÚN: escribir bucles `for` manuales sobre arrays de NumPy en vez de usar operaciones vectorizadas (ej. `array + 273.15` en vez de recorrer elemento por elemento), lo que anula la principal ventaja de rendimiento de la librería.</div>
+  <div class="exam">🎯 EXAMEN: Explique con sus propias palabras por qué se dice que un array de NumPy "consume menos memoria" que una lista de Python equivalente, y qué relación tiene esto con que los datos sean homogéneos (todos del mismo tipo).</div>
+</div>
+
+<div class="block">
+  <span class="bh morado">Dimensiones de un array</span>
+  <div class="rx">1D → shape (4,)<br>2D → shape (2, 3)<br>3D → shape (4, 3, 2)</div>
+  <div class="item"><span class="dot dot-morado"></span>El "shape" indica cuántos elementos tiene el arreglo en cada dimensión; conocerlo es el primer paso antes de operar sobre cualquier dato meteorológico matricial.</div>
+  <div class="exam">🎯 EXAMEN: Un modelo WRF entrega un campo de precipitación con shape (24, 100, 120). ¿Qué representa probablemente cada una de esas tres dimensiones?</div>
+</div>
+
+<div class="sbar rosa">🩷 BLOQUE 5 · PANDAS: DATOS TABULARES Y ETIQUETADOS</div>
+
+<div class="block s2">
+  <span class="bh rosa">Qué es Pandas y su estructura de datos (Diap. 17–20)</span>
+  <div class="def def-rosa">Pandas es el paquete fundamental para trabajar con datos "relacionales" o etiquetados: aquellos que naturalmente se organizan en filas y columnas, como una hoja de cálculo o una tabla de estaciones meteorológicas.</div>
+  <div class="item"><span class="dot dot-rosa"></span>Está construido sobre NumPy, por lo que hereda su velocidad, pero añade etiquetas (nombres de columnas, índices de fila) que hacen el código mucho más legible: en vez de referirse a "la columna 3", se referencia como <code>df['temperatura']</code>.</div>
+  <div class="item"><span class="dot dot-rosa"></span><b>Series</b> es la estructura unidimensional (una sola columna con índice); <b>DataFrame</b> es la estructura bidimensional (varias columnas alineadas por el mismo índice), equivalente conceptual a un data.frame de R o a una hoja de Excel.</div>
+  <div class="item"><span class="dot dot-rosa"></span>Cuando se suman dos Series con el mismo índice, Pandas alinea automáticamente los valores por etiqueta antes de operar, no por posición, lo que evita errores silenciosos al combinar datos de fuentes distintas.</div>
+  <div class="warn">⚠️ ERROR COMÚN: asumir que Pandas alinea los datos por posición (como una lista) en vez de por índice/etiqueta; si dos DataFrames tienen índices distintos, una suma directa puede generar valores NaN inesperados en vez de un error visible.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué diferencia estructural existe entre una Series y un DataFrame de Pandas, y por qué un registro diario de temperatura, presión y humedad para una sola estación se representa mejor como DataFrame que como Series?</div>
+</div>
+
+<div class="block">
+  <span class="bh rosa">Fortalezas de Pandas para meteorología</span>
+  <div class="item"><span class="dot dot-rosa"></span>Manejo nativo de datos faltantes (NaN), algo constante en series meteorológicas reales con sensores que fallan o se desconectan.</div>
+  <div class="item"><span class="dot dot-rosa"></span>Funcionalidad específica de series temporales: generación de rangos de fechas, remuestreo de frecuencia (ej. de datos horarios a promedios diarios) y estadísticas de ventana móvil.</div>
+  <div class="item"><span class="dot dot-rosa"></span>Lectura directa de CSV, Excel y otros formatos tabulares comunes en boletines y bases de datos hidrometeorológicas.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la "funcionalidad de series temporales" de Pandas (fechas, remuestreo, ventanas móviles) resulta especialmente relevante para analizar comunicados como los de ENFEN o registros WRF de precipitación?</div>
+</div>
+
+<div class="block s3">
+  <span class="bh naranja">Ejercicio práctico final (Diap. 21)</span>
+  <div class="def def-naranja">Crear un DataFrame con datos de temperatura, presión y humedad para 5 ciudades durante 7 días, y luego: (1) calcular el promedio diario de temperatura por ciudad, (2) filtrar los días en que la temperatura superó un umbral, (3) identificar la ciudad con la temperatura más alta de la semana.</div>
+  <div class="item"><span class="dot dot-naranja"></span>Este ejercicio integra todo lo visto: estructuras compuestas (para construir los datos), funciones/operaciones vectorizadas de Pandas (para el promedio), condicionales aplicados como filtro booleano sobre el DataFrame, y una operación de búsqueda del máximo.</div>
+  <div class="rx">promedio_diario = df.groupby('ciudad')['temperatura'].mean()<br>dias_calidos = df[df['temperatura'] > umbral]<br>ciudad_max = df.loc[df['temperatura'].idxmax(), 'ciudad']</div>
+  <div class="exam">🎯 EXAMEN: Describa, en lenguaje natural, los pasos necesarios para responder "¿qué ciudad tuvo el día más caluroso de la semana?" usando un DataFrame de Pandas, sin escribir código.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh gris">Tabla integradora de repaso</span>
+  <table class="tbl">
+    <tr><th>Concepto</th><th>Tipo</th><th>Ejemplo típico</th><th>Librería asociada</th><th>Uso en meteorología</th></tr>
+    <tr><td>int / float</td><td>Primitivo</td><td>t = 24.6</td><td>Python base</td><td>Valor puntual de una variable física</td></tr>
+    <tr><td>Lista</td><td>Compuesto mutable</td><td>[24.6, 22.1]</td><td>Python base</td><td>Serie temporal simple</td></tr>
+    <tr><td>Diccionario</td><td>Compuesto clave-valor</td><td>{'Lima': 24}</td><td>Python base</td><td>Dato por ciudad/estación</td></tr>
+    <tr><td>if / elif / else</td><td>Control de flujo</td><td>if t > 30:</td><td>Python base</td><td>Reglas de alerta</td></tr>
+    <tr><td>Array</td><td>Numérico vectorizado</td><td>np.array([...])</td><td>NumPy</td><td>Campos de modelo (lat, lon, tiempo)</td></tr>
+    <tr><td>DataFrame</td><td>Tabular etiquetado</td><td>df['temperatura']</td><td>Pandas</td><td>Registros multi-estación/multi-variable</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: la progresión pedagógica de esta sesión es intencional: Python base da la lógica (variables, control de flujo, funciones); NumPy vectoriza esa lógica para grandes volúmenes numéricos; Pandas añade etiquetas y estructura tabular sobre NumPy. Cada capa se apoya en la anterior, por lo que dominar bien los tipos de dato primitivos y las estructuras de control es prerrequisito real para usar bien NumPy y Pandas después.</div>
+</div>
+
+<div id="quiz-section" class="block s3">
+  <div class="qhead">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="qprog"><span id="qprog-text">Pregunta 0 de 10</span><span id="qprog-pct">0% de aciertos</span></div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" id="progress-fill"></div></div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Por qué se dice que Python es un lenguaje "interpretado" y qué ventaja práctica tiene esto para el análisis exploratorio de datos meteorológicos?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Porque necesita compilarse una sola vez y luego corre más rápido que C</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) Porque el código se ejecuta línea por línea sin compilación previa, permitiendo probar y corregir rápido</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) Porque solo funciona dentro de un navegador web</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Porque traduce automáticamente el código a Fortran</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Se registra la humedad relativa de una estación como la cadena "98%" en vez de como número. ¿Qué problema genera esto?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Ninguno, Python promedia cadenas automáticamente</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) Solo afecta la visualización, no los cálculos</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="true">C) No podrá promediarse, compararse ni graficarse sin convertirla antes a un tipo numérico</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Python la convierte automáticamente a booleano</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Cuál es el resultado de 3.5 // 2 en Python y qué operación representa ese operador?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) 1.75, división normal</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) 1.0, división entera (descarta la parte decimal)</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) 1, módulo o resto</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) 7.0, potencia</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre listas y tuplas es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Ambas están ordenadas e indexadas</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Las listas son mutables y las tuplas no</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Las tuplas se pueden modificar después de creadas, igual que las listas</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Ambas permiten valores duplicados</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Se desea guardar la temperatura de 10 ciudades y consultar rápidamente el valor de una ciudad específica por su nombre. ¿Qué estructura conviene usar?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Una tupla, porque es inmutable</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) Un diccionario, porque permite acceder al valor directamente por su clave (nombre de ciudad)</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Un booleano, porque solo hay dos estados posibles</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Un entero, porque las temperaturas son valores únicos</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">En la función <code>def celsius_a_kelvin(temp_c): return temp_c + 273.15</code>, ¿qué ocurre si se elimina la palabra clave `return`?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) La función lanza un error de sintaxis inmediatamente</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) La función se ejecuta pero no entrega ningún valor utilizable; el resultado de llamarla es None</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Python calcula el resultado y lo imprime automáticamente en pantalla</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) La conversión se hace igual, solo cambia el nombre de la variable</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿Por qué las operaciones vectorizadas de NumPy son generalmente mucho más rápidas que un bucle `for` escrito en Python puro sobre el mismo arreglo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Porque NumPy usa menos decimales de precisión</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Porque NumPy ejecuta el código en la nube automáticamente</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) Porque la operación se delega a código C precompilado que opera sobre todo el arreglo sin el overhead de un bucle interpretado elemento por elemento</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Porque NumPy convierte automáticamente los datos a texto antes de procesarlos</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Un campo de precipitación de un modelo numérico tiene shape (24, 100, 120). ¿Qué representa más probablemente cada dimensión?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Tres variables meteorológicas distintas sin relación espacial ni temporal</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) 24 horas (tiempo) y una grilla espacial de 100 x 120 puntos (latitud x longitud)</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) 24 estaciones meteorológicas con 100 sensores y 120 unidades cada una</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Un error de formato, los arrays de NumPy no pueden tener 3 dimensiones</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Qué diferencia principal existe entre una Series y un DataFrame de Pandas?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) La Series solo admite números enteros y el DataFrame solo texto</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) La Series es unidimensional (una columna con índice) y el DataFrame es bidimensional (varias columnas alineadas por el mismo índice)</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) No hay diferencia real, son sinónimos en Pandas</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) El DataFrame no puede tener datos faltantes y la Series sí</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">En el ejercicio práctico final, se busca identificar la ciudad con la temperatura más alta de la semana a partir de un DataFrame. ¿Qué tipo de operación es esta principalmente?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Una conversión de tipos de dato primitivo a compuesto</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) Una operación de definición de funciones anidadas</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) Una búsqueda del valor máximo dentro de una columna y la identificación de la fila/etiqueta asociada a ese valor</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Una operación exclusivamente de NumPy que Pandas no puede realizar</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="results-panel"></div>
+  <button id="reset-btn" onclick="reiniciarQuiz()">🔄 Reiniciar Quiz</button>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS:</span>
+  <span class="fc">Passuni Meza, R. — Taller Virtual de Python para el Procesamiento de Datos Meteorológicos, Sesión 01 (Introducción a la programación en Python para meteorología, parte 1)</span>
+</div>
+
+</div>
+
+<script>
+const feedbacks = {
+  1:{correct:"El intérprete lee y ejecuta el código línea por línea sin necesidad de compilar todo el programa antes, lo que acelera enormemente el ciclo de prueba-y-error típico del análisis exploratorio de datos científicos."},
+  2:{correct:"Un valor guardado como texto (string) no puede sumarse, promediarse ni graficarse como número hasta convertirlo explícitamente con una función como float(), lo que puede pasar desapercibido y generar errores silenciosos."},
+  3:{correct:"El operador // realiza división entera, descartando la parte decimal del resultado. 3.5 // 2 da 1.0, mientras que 3.5 / 2 (división normal) daría 1.75."},
+  4:{correct:"Las tuplas son inmutables por diseño: una vez creadas, no se pueden modificar sus elementos. Intentarlo genera un TypeError. Esto las distingue claramente de las listas."},
+  5:{correct:"Un diccionario asocia claves (nombres de ciudad) con valores (temperaturas), permitiendo acceso directo sin recorrer toda la colección, a diferencia de una lista donde habría que buscar por posición."},
+  6:{correct:"Sin `return`, la función ejecuta su lógica interna pero no entrega ningún valor a quien la llamó; el resultado de la llamada es implícitamente None, aunque el cálculo se haya hecho correctamente."},
+  7:{correct:"NumPy delega las operaciones a código C precompilado que procesa el arreglo completo de una sola vez, evitando el overhead que tiene el intérprete de Python al ejecutar un bucle `for` elemento por elemento."},
+  8:{correct:"En salidas de modelos meteorológicos es común que la primera dimensión represente el tiempo (24 horas) y las siguientes dos representen la grilla espacial (latitud y longitud), es decir, filas y columnas del dominio del modelo."},
+  9:{correct:"Series es la estructura unidimensional de Pandas (una columna con índice); DataFrame es bidimensional, compuesto por varias Series (columnas) que comparten el mismo índice de filas."},
+  10:{correct:"Encontrar la ciudad con la temperatura más alta implica localizar el valor máximo de una columna y luego identificar la etiqueta de fila (o categoría) asociada a ese valor máximo, típicamente con funciones como idxmax()."}
+};
+let respondidas = 0, aciertos = 0;
+
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn) return;
+  const q = btn.dataset.q;
+  const card = document.getElementById('q'+q);
+  const allBtns = card.querySelectorAll('.qbtn');
+  const isCorrect = btn.dataset.correct === 'true';
+
+  allBtns.forEach(b=>{
+    b.disabled = true;
+    if(b.dataset.correct === 'true'){
+      b.classList.add('correct');
+      if(!b.textContent.startsWith('✅ ')) b.textContent = '✅ ' + b.textContent;
+    } else if(b === btn){
+      b.classList.add('incorrect');
+      b.textContent = '❌ ' + b.textContent;
+    }
+  });
+
+  const fb = document.getElementById('fb'+q);
+  fb.style.display = 'block';
+  if(isCorrect){
+    fb.className = 'qfeedback correct';
+    fb.innerHTML = '<b>✅ ¡Correcto!</b> ' + feedbacks[q].correct;
+    aciertos++;
+  } else {
+    const correctBtn = card.querySelector('[data-correct="true"]');
+    const letra = correctBtn.dataset.opt.toUpperCase();
+    fb.className = 'qfeedback incorrect';
+    fb.innerHTML = '<b>❌ Incorrecto. La respuesta correcta es '+letra+'.</b> ' + feedbacks[q].correct;
+  }
+
+  respondidas++;
+  document.getElementById('qprog-text').textContent = 'Pregunta ' + respondidas + ' de 10';
+  const pct = Math.round((aciertos/respondidas)*100);
+  document.getElementById('qprog-pct').textContent = pct + '% de aciertos';
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  if(respondidas === 10){
+    const panel = document.getElementById('results-panel');
+    panel.style.display = 'block';
+    let cls = 'low', msg = 'Necesitas repasar el material';
+    if(aciertos >= 8){cls='high'; msg='¡Excelente dominio del tema!';}
+    else if(aciertos >= 5){cls='mid'; msg='¡Buen avance, sigue repasando!';}
+    panel.className = cls;
+    panel.innerHTML = '<b>'+aciertos+' / 10 correctas</b><br>'+msg;
+  }
+});
+
+function reiniciarQuiz(){
+  respondidas = 0; aciertos = 0;
+  for(let i=1;i<=10;i++){
+    const card = document.getElementById('q'+i);
+    card.querySelectorAll('.qbtn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('correct','incorrect');
+      b.textContent = b.textContent.replace('✅ ','').replace('❌ ','');
+    });
+    const fb = document.getElementById('fb'+i);
+    fb.style.display = 'none';
+    fb.innerHTML = '';
+  }
+  document.getElementById('qprog-text').textContent = 'Pregunta 0 de 10';
+  document.getElementById('qprog-pct').textContent = '0% de aciertos';
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('results-panel').style.display = 'none';
+}
+</script>
+</body>
+</html>
