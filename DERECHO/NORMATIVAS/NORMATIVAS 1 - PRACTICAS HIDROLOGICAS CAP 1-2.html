@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Guía de Prácticas Hidrológicas — Cap. 1 y 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-background-primary:#ffffff;
+  --color-background-secondary:#f4f5f7;
+  --color-background-tertiary:#e9eaed;
+  --color-text-primary:#1a1d23;
+  --color-text-secondary:#5a5f6b;
+  --color-border-tertiary:#d8dae0;
+  --color-border-secondary:#c3c6cd;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --color-background-primary:#1c1f26;
+    --color-background-secondary:#20242c;
+    --color-background-tertiary:#15171c;
+    --color-text-primary:#e8e9ec;
+    --color-text-secondary:#a4a8b3;
+    --color-border-tertiary:#33373f;
+    --color-border-secondary:#454a54;
+  }
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary);background:var(--color-background-tertiary);}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);}
+.titlebar{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:12px;padding:14px 18px;}
+.titlebar h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin:0 0 4px;}
+.titlebar p{font-size:11px;margin:0 0 8px;color:#c9d3e6;}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;}
+.pill{font-size:11px;padding:2px 9px;border-radius:20px;background:rgba(255,255,255,.12);color:#dbe4f5;}
+.sbar{grid-column:1/-1;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;padding:8px 12px;border-radius:8px;margin-top:4px;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.def{border-left:3px solid; padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:8px 0;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;}
+@media(prefers-color-scheme:dark){.warn{background:#3a2410;color:#fdba74;}}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:7px 10px;margin-top:8px;}
+@media(prefers-color-scheme:dark){.exam{background:#2e2504;color:#fde68a;}}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:8px 0;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0;}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:7px;font-size:11px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:9px 0;}
+.tbl{width:100%;border-collapse:collapse;font-size:10.5px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 6px;border-bottom:0.5px solid var(--color-border-secondary);text-align:left;}
+.tbl td{padding:5px 6px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.footer{grid-column:1/-1;background:#0f1e3a;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;}
+/* colores */
+.c-azul{background:#dbeafe;color:#1e3a8a;} .c-azul .bh{background:#dbeafe;color:#1e3a8a;} .def.c-azul{border-color:#1e3a8a;}
+.c-verde{background:#dcfce7;color:#14532d;} .c-verde .bh{background:#dcfce7;color:#14532d;} .def.c-verde{border-color:#14532d;}
+.c-rojo{background:#fee2e2;color:#991b1b;} .c-rojo .bh{background:#fee2e2;color:#991b1b;} .def.c-rojo{border-color:#991b1b;}
+.c-amarillo{background:#fef9c3;color:#713f12;} .c-amarillo .bh{background:#fef9c3;color:#713f12;} .def.c-amarillo{border-color:#713f12;}
+.c-morado{background:#ede9fe;color:#4c1d95;} .c-morado .bh{background:#ede9fe;color:#4c1d95;} .def.c-morado{border-color:#4c1d95;}
+.c-teal{background:#ccfbf1;color:#134e4a;} .c-teal .bh{background:#ccfbf1;color:#134e4a;} .def.c-teal{border-color:#134e4a;}
+.c-naranja{background:#ffedd5;color:#7c2d12;} .c-naranja .bh{background:#ffedd5;color:#7c2d12;} .def.c-naranja{border-color:#7c2d12;}
+.c-gris{background:#f1f5f9;color:#334155;} .c-gris .bh{background:#f1f5f9;color:#334155;} .def.c-gris{border-color:#334155;}
+@media(prefers-color-scheme:dark){
+.c-azul{background:#1e3a5f;color:#93c5fd;} .c-azul .bh{background:#1e3a5f;color:#93c5fd;}
+.c-verde{background:#14532d;color:#86efac;} .c-verde .bh{background:#14532d;color:#86efac;}
+.c-rojo{background:#450a0a;color:#fca5a5;} .c-rojo .bh{background:#450a0a;color:#fca5a5;}
+.c-amarillo{background:#422006;color:#fef08a;} .c-amarillo .bh{background:#422006;color:#fef08a;}
+.c-morado{background:#2e1065;color:#c4b5fd;} .c-morado .bh{background:#2e1065;color:#c4b5fd;}
+.c-teal{background:#042f2e;color:#5eead4;} .c-teal .bh{background:#042f2e;color:#5eead4;}
+.c-naranja{background:#431407;color:#fed7aa;} .c-naranja .bh{background:#431407;color:#fed7aa;}
+.c-gris{background:#1e293b;color:#94a3b8;} .c-gris .bh{background:#1e293b;color:#94a3b8;}
+}
+.dot-azul{background:#1e3a8a;} .dot-verde{background:#14532d;} .dot-rojo{background:#991b1b;} .dot-amarillo{background:#713f12;}
+.dot-morado{background:#4c1d95;} .dot-teal{background:#134e4a;} .dot-naranja{background:#7c2d12;} .dot-gris{background:#334155;}
+@media(prefers-color-scheme:dark){
+.dot-azul{background:#93c5fd;} .dot-verde{background:#86efac;} .dot-rojo{background:#fca5a5;} .dot-amarillo{background:#fef08a;}
+.dot-morado{background:#c4b5fd;} .dot-teal{background:#5eead4;} .dot-naranja{background:#fed7aa;} .dot-gris{background:#94a3b8;}
+}
+/* Quiz */
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px;}
+.quiz-head{background:#0f1e3a;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px;}
+.quiz-head h3{font-family:'Oswald',sans-serif;font-size:14px;margin:0 0 3px;}
+.quiz-head p{font-size:11px;margin:0;color:#c9d3e6;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;margin:8px 0 14px;}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s;}
+.qprog{font-size:11.5px;color:var(--color-text-secondary);display:flex;justify-content:space-between;}
+.qcard{border-top:0.5px solid var(--color-border-tertiary);padding-top:14px;margin-top:14px;}
+.qnum{font-family:'Oswald',sans-serif;font-size:11px;color:var(--color-text-secondary);margin:0 0 4px;}
+.qtext{font-size:13px;font-weight:600;margin:0 0 8px;}
+.qopts{display:flex;flex-direction:column;}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--color-text-primary);font-family:inherit;}
+.qbtn:hover:not(:disabled){border-color:var(--color-border-secondary);}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn:disabled{opacity:.6;cursor:not-allowed;pointer-events:none;}
+.qfeedback{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;}
+.qfeedback.correct{background:#f0fdf4;border-left:3px solid #16a34a;}
+.qfeedback.incorrect{background:#fef2f2;border-left:3px solid #dc2626;}
+#results-panel{display:none;margin-top:16px;padding:14px;border-radius:10px;text-align:center;}
+#results-panel h3{font-family:'Oswald',sans-serif;margin:0 0 4px;}
+#restart-btn{margin-top:10px;background:#0f1e3a;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:12px;}
+@media(max-width:640px){.cv{grid-template-columns:1fr;}.block.s2,.block.s3{grid-column:1/-1;}.two,.three{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<div class="titlebar">
+  <h1>Guía de Prácticas Hidrológicas — OMM-Nº 168</h1>
+  <p>Volumen I · Capítulo 1: Introducción · Capítulo 2: Métodos de observación · 6ª edición, OMM/UNESCO</p>
+  <div class="pill-row">
+    <span class="pill">Ciclo hidrológico</span>
+    <span class="pill">Diseño de redes</span>
+    <span class="pill">Exactitud y errores</span>
+    <span class="pill">Calidad del agua</span>
+    <span class="pill">SIG y teledetección</span>
+  </div>
+</div>
+
+<div class="sbar c-azul">🔵 SECCIÓN 1 — FUNDAMENTOS, ALCANCE Y ESTRUCTURA DE LA GUÍA (Cap. 1)</div>
+
+<div class="block">
+  <div class="bh c-azul">Definición de hidrología (§1.1)</div>
+  <div class="def c-azul">La hidrología estudia la presencia, distribución espacial y temporal, y las propiedades del agua en la Tierra, sobre y bajo la superficie, así como su interacción con el entorno físico.</div>
+  <div class="item"><span class="dot dot-azul"></span>No es solo "medir agua": es la ciencia base para evaluar y gestionar recursos hídricos, y para entender crecidas, sequías, erosión y polución.</div>
+  <div class="item"><span class="dot dot-azul"></span>La OMM la reguló desde 1961 porque sin datos homogéneos y confiables, las decisiones de gestión (presas, riego, agua potable) se vuelven arbitrarias entre países que comparten cuencas.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la falta de homogeneidad en la recopilación de datos hidrológicos entre distintos organismos genera desconfianza institucional?</div>
+</div>
+
+<div class="block">
+  <div class="bh c-gris">Estructura de la Guía (§1.3)</div>
+  <div class="def c-gris">La Guía se divide en dos volúmenes por razones prácticas, no porque hidrología "pura" y gestión de recursos sean disciplinas separadas.</div>
+  <div class="two">
+    <div class="mini"><b>Vol. I</b><br>"De la medición a la información hidrológica". Redes, instrumentos, observación, tratamiento y almacenamiento de datos (10 capítulos).</div>
+    <div class="mini"><b>Vol. II</b><br>"Gestión de recursos hídricos y aplicación de prácticas hidrológicas". Predicción, modelización, valores extremos (7 capítulos).</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Qué justifica que el Capítulo 5 del Vol. I (medición de agua superficial y sedimentos) se remita a manuales específicos (WMO-No. 519 y 686) en vez de detallarlo íntegramente?</div>
+</div>
+
+<div class="block">
+  <div class="bh c-naranja">Sistema HOMS (§1.4)</div>
+  <div class="def c-naranja">HOMS (Sistema de Hidrología Operativa para Fines Múltiples) es un mecanismo de transferencia tecnológica entre países desde 1981: más de 180 componentes probados en la práctica.</div>
+  <div class="item"><span class="dot dot-naranja"></span>Un componente HOMS puede ser un plano de instrumento, un procedimiento, o un software — siempre validado por quien lo creó, lo que garantiza aplicabilidad real, no solo teórica.</div>
+  <div class="item"><span class="dot dot-naranja"></span>Relevancia para Perú: el SENAMHI podría adoptar componentes HOMS ya probados en vez de "reinventar" protocolos de medición desde cero.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el hecho de que cada componente HOMS haya sido "utilizado en aplicaciones prácticas por sus creadores" es una garantía de calidad más fuerte que una norma puramente teórica?</div>
+</div>
+
+<div class="sbar c-azul">🔵 SECCIÓN 2 — EL CICLO HIDROLÓGICO Y LOS SISTEMAS DE INFORMACIÓN (§2.1–2.2)</div>
+
+<div class="block s2">
+  <div class="bh c-azul">El ciclo hidrológico como objeto de observación (§2.1)</div>
+  <div class="def c-azul">El agua se desplaza entre atmósfera, océanos y tierra en un ciclo dinámico. La hidrología tradicionalmente solo cubre la <b>fase terrestre</b> del ciclo y su interacción con océano y atmósfera — no el ciclo completo.</div>
+  <div class="item"><span class="dot dot-azul"></span>Dos ecuaciones de continuidad (masa y energía) sostienen toda la medición hidrológica en movimiento: sin ellas no se puede "cerrar" un balance hídrico.</div>
+  <div class="rx">Ecuación de continuidad del caudal:<br>Q = A · V<br>Q: caudal (m³/s) · A: área de sección transversal (m²) · V: velocidad media (m/s)</div>
+  <div class="rx">Balance hídrico de un lago/embalse:<br>P + I − O − E = ΔS<br>P: precipitación · I: entrada superficial/subterránea · O: salida · E: evaporación · ΔS: variación de volumen</div>
+  <div class="item"><span class="dot dot-azul"></span>Aplicación práctica: si se miden P, I, O y ΔS, la evaporación E se despeja algebraicamente — así es como muchos programas de estimación de evaporación en embalses peruanos (p. ej. reservorios andinos) obtienen E sin instrumentos directos.</div>
+  <div class="warn">⚠️ ERROR COMÚN: confundir Q = AV (caudal instantáneo en un cauce) con el balance P+I−O−E=ΔS (balance de almacenamiento en un cuerpo de agua). Son ecuaciones de continuidad de masa aplicadas a sistemas distintos.</div>
+  <div class="exam">🎯 EXAMEN: En un embalse andino donde se conocen P, I y O pero no se mide directamente la evaporación, explique cómo se obtendría E y qué supuestos introduce ese cálculo indirecto.</div>
+</div>
+
+<div class="block">
+  <div class="bh c-teal">Sistema de información hidrológica (§2.2.2)</div>
+  <div class="def c-teal">No basta con recolectar datos: sin un sistema que los transfiera, analice e integre a decisiones, los datos de campo "carecen prácticamente de valor".</div>
+  <div class="flow">
+    <div class="fbox">Diseño de red</div><span class="farrow">→</span>
+    <div class="fbox">Obtención de datos</div><span class="farrow">→</span>
+    <div class="fbox">Gestión de datos</div><span class="farrow">→</span>
+    <div class="fbox">Tecnología de análisis</div><span class="farrow">→</span>
+    <div class="fbox">Tecnología de decisión</div><span class="farrow">→</span>
+    <div class="fbox">Impacto</div>
+  </div>
+  <div class="item"><span class="dot dot-teal"></span>La garantía de calidad atraviesa todo el proceso, no es un paso final aislado.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué un sistema de gestión de datos "robusto" puede a la vez ser una ventaja y una desventaja para un servicio hidrológico con pocos recursos?</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-gris">Aplicaciones y tipos de información hidrológica (§2.2.3–2.2.4)</div>
+  <div class="three">
+    <div class="mini"><b>Evaluación de recursos</b><br>Cantidad, calidad, distribución temporal/espacial y potencial de desarrollo hídrico de un país o cuenca.</div>
+    <div class="mini"><b>Diseño de proyectos</b><br>Presas, irrigación, hidroeléctricas — requieren series de máximos, mínimos y percentiles, no solo promedios.</div>
+    <div class="mini"><b>Seguridad frente a extremos</b><br>Avisos de crecida y sequía: exigen datos en tiempo real, no solo históricos.</div>
+  </div>
+  <div class="item"><span class="dot dot-gris"></span>Los datos convencionales cubren: precipitación, niveles/caudales, aguas subterráneas, evapotranspiración, sedimentos y calidad del agua — como estadísticas (medias, máximos, percentiles, desviación típica, hidrogramas).</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la predicción de crecidas exige "síntesis de datos" mediante modelos de propagación de flujo y no basta con el registro histórico de niveles?</div>
+</div>
+
+<div class="sbar c-amarillo">🟡 SECCIÓN 3 — SÍMBOLOS, EXACTITUD Y TEORÍA DE ERRORES (§2.3)</div>
+
+<div class="block">
+  <div class="bh c-gris">Normalización de unidades (§2.3.1)</div>
+  <div class="def c-gris">La OMM normaliza símbolos y unidades (ISO 1993) para que datos de distintos países sean comparables sin ambigüedad.</div>
+  <div class="item"><span class="dot dot-gris"></span>Ejemplos clave: Q (caudal, m³/s), P (precipitación, mm), θ (temperatura, °C), Rh (radio hidráulico, m).</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué riesgo práctico existe si dos países de una cuenca transfronteriza usan sistemas de unidades distintos sin conversión estandarizada?</div>
+</div>
+
+<div class="block">
+  <div class="bh c-rojo">Tipos de error (§2.3.3.3)</div>
+  <div class="three">
+    <div class="mini" style="border-top:3px solid #991b1b;"><b>Espurio</b><br>Valor erróneo conocido (falla humana o del instrumento). Se elimina descartando el dato.</div>
+    <div class="mini" style="border-top:3px solid #7c2d12;"><b>Sistemático</b><br>Constante o sigue una ley conocida. Se corrige o se elimina calibrando/ajustando el instrumento.</div>
+    <div class="mini" style="border-top:3px solid #713f12;"><b>Aleatorio</b><br>Impredecible en magnitud y signo. No se elimina, solo se reduce repitiendo mediciones.</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: creer que "más mediciones" corrige el error sistemático. Solo el error aleatorio se reduce promediando observaciones; el sistemático requiere recalibración del instrumento.</div>
+  <div class="exam">🎯 EXAMEN: Un limnímetro mal nivelado desde su instalación produce lecturas siempre 3 cm por encima del valor real. Clasifique el error y explique por qué promediar 50 lecturas no lo resuelve.</div>
+</div>
+
+<div class="block">
+  <div class="bh c-amarillo">Incertidumbre y nivel de confianza (§2.3.3.2)</div>
+  <div class="rx">e = ± α·σy ≈ α·sy<br>e: incertidumbre · α: parámetro según nivel de confianza · sy: desviación típica muestral</div>
+  <div class="item"><span class="dot dot-amarillo"></span>Para 95% de confianza, α = 1,960. Esto significa que el valor verdadero cae dentro de Qm ± 0,10·Qm el 95% de las veces si la incertidumbre porcentual es 10%.</div>
+  <div class="item"><span class="dot dot-amarillo"></span>La OMM exige reportar caudal como "Q = ... ; Incertidumbre aleatoria (er)95 = ...%" — nunca un número "seco" sin su margen de error.</div>
+  <div class="exam">🎯 EXAMEN: Si (er)95 = 5% para un caudal medido Qm = 120 m³/s, calcule el intervalo dentro del cual se espera esté el valor verdadero el 95% de las veces.</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-amarillo">Exactitud recomendada de mediciones hidrológicas (Tabla I.2.5)</div>
+  <table class="tbl">
+    <tr><th>Variable</th><th>Incertidumbre (IC 95%)</th><th>Comentario</th></tr>
+    <tr><td>Precipitación</td><td>3 a 7%</td><td>El % superior aplica a condiciones difíciles (viento fuerte, nieve)</td></tr>
+    <tr><td>Caudal</td><td>5%</td><td>Estándar de referencia para diseño de proyectos hídricos</td></tr>
+    <tr><td>Evaporación puntual</td><td>2 a 5%, 0,5 mm</td><td>Depende del método (tanque vs. balance energético)</td></tr>
+    <tr><td>Sedimentos en suspensión</td><td>10%</td><td>El transporte de fondo tiene un margen mucho mayor: 25%</td></tr>
+    <tr><td>Temperatura del agua</td><td>0,1 a 0,5 °C</td><td>Crítico para estudios de vida acuática y cambio climático</td></tr>
+  </table>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el transporte de carga de fondo (25% de incertidumbre) es notablemente menos exacto que la concentración de sedimentos en suspensión (10%)?</div>
+</div>
+
+<div class="sbar c-morado">🟣 SECCIÓN 4 — DISEÑO Y DENSIDAD DE REDES HIDROLÓGICAS (§2.4)</div>
+
+<div class="block">
+  <div class="bh c-morado">Concepto y preguntas del diseño de red (§2.4.1.1)</div>
+  <div class="def c-morado">Una red de datos hidrológicos responde a 5 preguntas: qué variables observar, dónde, con qué frecuencia, por cuánto tiempo, y con qué exactitud.</div>
+  <div class="item"><span class="dot dot-morado"></span>El diseño de red rara vez se basa en optimización económica pura: las decisiones de recursos hídricos casi nunca esperan "más datos" antes de decidir.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el diseño de una red hidrológica no puede basarse únicamente en el análisis costo-beneficio económico de los datos?</div>
+</div>
+
+<div class="block">
+  <div class="bh c-morado">Red mínima vs. red básica (§2.4.1.3)</div>
+  <div class="two">
+    <div class="mini"><b>Red mínima</b><br>Número mínimo de estaciones para evitar deficiencias graves en la gestión de recursos hídricos. No sirve para planes de desarrollo detallados.</div>
+    <div class="mini"><b>Red básica</b><br>Amplía la mínima con estaciones principales (permanentes) y secundarias (temporales, correlacionadas con las de base).</div>
+  </div>
+  <div class="item"><span class="dot dot-morado"></span>Las estaciones secundarias se trasladan una vez establecida una correlación estable con la estación de base — así se optimiza el costo sin perder cobertura espacial.</div>
+  <div class="exam">🎯 EXAMEN: Explique la lógica de "rotar" estaciones secundarias hacia nuevos emplazamientos una vez establecida su correlación con la estación de base.</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-morado">Densidad mínima de estaciones por unidad fisiográfica (Tabla I.2.6, km² por estación)</div>
+  <table class="tbl">
+    <tr><th>Unidad fisiográfica</th><th>Precipitación (no reg.)</th><th>Caudal</th><th>Calidad del agua</th></tr>
+    <tr><td>Costa</td><td>900</td><td>2 750</td><td>55 000</td></tr>
+    <tr><td>Montaña</td><td>250</td><td>1 000</td><td>20 000</td></tr>
+    <tr><td>Planicie interior</td><td>575</td><td>1 875</td><td>37 500</td></tr>
+    <tr><td>Polos / tierras áridas</td><td>10 000</td><td>20 000</td><td>200 000</td></tr>
+  </table>
+  <div class="warn">⚠️ CASO PERÚ: la costa árida y la sierra (montaña) de Perú requieren densidades de red muy distintas — 900 km²/estación en costa frente a 250 km²/estación en montaña por la mayor variabilidad espacial de la precipitación andina.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la densidad mínima recomendada de estaciones pluviométricas en zonas montañosas (250 km²) es casi 40 veces mayor que en regiones polares/áridas (10 000 km²)?</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-morado">Estaciones de propósito especial (§2.4.1.4.1–2.4.1.4.4)</div>
+  <div class="three">
+    <div class="mini"><b>De referencia</b><br>Un país o región natural debería tener una, en áreas poco alteradas por el hombre, para series largas y comparables en el tiempo.</div>
+    <div class="mini"><b>Cuencas representativas</b><br>Estudian simultáneamente precipitación y escorrentía; compensan la baja densidad de la red mínima en zonas de crecimiento económico.</div>
+    <div class="mini"><b>De proyecto</b><br>Vida limitada, fin específico (investigación, antes/después de una obra). Su calidad depende del objetivo, no de la permanencia.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué una estación de referencia debe instalarse en un área "poco influida por cambios antropogénicos" y qué se pierde si esto no se cumple?</div>
+</div>
+
+<div class="sbar c-pink">🩷 SECCIÓN 5 — CALIDAD DEL AGUA: DISEÑO DE MUESTREO (§2.4.3)</div>
+
+<div class="block">
+  <div class="bh c-pink">Clasificación de variables de calidad (§2.4.3.1)</div>
+  <div class="two">
+    <div class="mini"><b>Estables</b><br>No varían materialmente con el tiempo (p. ej. sólidos disueltos totales).</div>
+    <div class="mini"><b>No estables</b><br>Varían rápido y no pueden estabilizarse — deben medirse in situ (p. ej. pH, OD, temperatura).</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el oxígeno disuelto (OD) debe medirse siempre in situ y nunca en una muestra transportada al laboratorio?</div>
+</div>
+
+<div class="block">
+  <div class="bh c-pink">Ubicación de puntos de muestreo en ríos (§2.4.3.2)</div>
+  <div class="flow">
+    <div class="fbox">Vertido industrial</div><span class="farrow">→</span>
+    <div class="fbox">Zona de mezcla incompleta</div><span class="farrow">→</span>
+    <div class="fbox">Punto de mezcla completa</div><span class="farrow">→</span>
+    <div class="fbox">Muestreo representativo</div>
+  </div>
+  <div class="item"><span class="dot dot-pink"></span>La distancia hasta el mezclado completo es proporcional a la velocidad de la corriente y al cuadrado del ancho del canal — en ríos anchos y rápidos puede tardar muchos km.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué en un río ancho y de flujo rápido la mezcla lateral de un vertido puede tardar "muchos kilómetros" en completarse, mientras la mezcla vertical ocurre casi de inmediato?</div>
+</div>
+
+<div class="block">
+  <div class="bh c-naranja">Frecuencia de muestreo según fuente (§2.4.3.4)</div>
+  <div class="two">
+    <div class="mini"><b>Fuente puntual</b><br>Muestrear en flujo bajo (estiaje): la polución está menos diluida y su impacto es más visible.</div>
+    <div class="mini"><b>Fuente difusa</b><br>Muestrear en crecida: la escorrentía arrastra nutrientes/plaguicidas agrícolas hacia el cauce.</div>
+  </div>
+  <div class="warn">⚠️ CASO PERÚ: en cuencas como el Rímac, un vertido minero puntual (aguas arriba) exige muestreo en estiaje, mientras que el arrastre agrícola difuso en el valle exige muestreo durante avenidas — la estrategia de muestreo no es única para toda la cuenca.</div>
+  <div class="exam">🎯 EXAMEN: Para la cuenca del Rímac, justifique por qué la estrategia de muestreo de calidad del agua debe diferenciar entre contaminación puntual minera y contaminación difusa agrícola.</div>
+</div>
+
+<div class="sbar c-teal">🩵 SECCIÓN 6 — RECOPILACIÓN, TRANSMISIÓN Y MANTENIMIENTO DE DATOS (§2.5)</div>
+
+<div class="block">
+  <div class="bh c-teal">Identificación y descripción de estaciones (§2.5.2)</div>
+  <div class="def c-teal">Cada estación permanente necesita un identificador único y un archivo descriptivo detallado (ubicación, canal, márgenes, lecho, mapa, GPS).</div>
+  <div class="item"><span class="dot dot-teal"></span>Una descripción como "5 metros al noroeste del sauce joven" es inaceptable: se exigen referencias permanentes y verificables (puentes, coordenadas UTM/GPS).</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la Guía rechaza explícitamente referencias de ubicación basadas en elementos no permanentes (como un árbol joven)?</div>
+</div>
+
+<div class="block">
+  <div class="bh c-teal">Sistemas de transmisión de datos (§2.5.6.1)</div>
+  <div class="flow">
+    <div class="fbox">Manual (correo/radio)</div><span class="farrow">→</span>
+    <div class="fbox">Semiautomática (interrogación)</div><span class="farrow">→</span>
+    <div class="fbox">Automática temporizada</div><span class="farrow">→</span>
+    <div class="fbox">Automática continua/eventos</div>
+  </div>
+  <div class="item"><span class="dot dot-teal"></span>Las redes celulares y de Internet han reducido drásticamente el costo de la telemetría en zonas antes consideradas "lejanas" — relevante para estaciones andinas remotas en Perú.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué ventaja ofrece un "indicador automático de eventos" (p. ej. transmitir cada vez que el nivel cambia 1 cm) frente a la transmisión temporizada fija en la predicción de crecidas repentinas?</div>
+</div>
+
+<div class="block">
+  <div class="bh c-rojo">Mantenimiento y frecuencia de visitas (§2.5.3–2.5.4)</div>
+  <div class="item"><span class="dot dot-rojo"></span>Un período demasiado largo entre visitas produce fallos no detectados y pérdida de datos; visitas muy frecuentes son costosas — hay que buscar un equilibrio costo/calidad.</div>
+  <div class="item"><span class="dot dot-rojo"></span>Antes de la temporada de crecidas debe existir un "plan de acción sobre crecidas" con acceso mejorado, equipo a prueba de crecidas y provisiones.</div>
+  <div class="warn">⚠️ ERROR COMÚN: asumir que automatizar una estación elimina la necesidad de mantenimiento regular. La Guía insiste en que el mantenimiento sigue siendo esencial para asegurar la calidad de los datos, incluso con telemetría.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la introducción de registradores automáticos y transmisión satelital no elimina la necesidad de visitas periódicas de mantenimiento?</div>
+</div>
+
+<div class="sbar c-verde">🟢 SECCIÓN 7 — CARACTERÍSTICAS FISIOGRÁFICAS, SIG Y NUEVAS TECNOLOGÍAS (§2.6)</div>
+
+<div class="block">
+  <div class="bh c-verde">Clasificación de Horton de cursos de agua (§2.6.4.2)</div>
+  <div class="def c-verde">Ordena jerárquicamente una red de drenaje: un curso elemental es orden 1; un curso con afluente de orden 1 es orden 2; un curso con afluente de orden x es orden x+1.</div>
+  <div class="rx">Ley de confluencia: Nx = N1 · Rc^(1−x)<br>Ley de longitud: lmx = Rl^(x−1) · lm1<br>Rc: cociente de confluencia · Rl: cociente de longitud · Nx: nº de cauces de orden x</div>
+  <div class="item"><span class="dot dot-verde"></span>Schumm corrigió la ambigüedad de Horton: asigna sistemáticamente orden x a los tramos formados por la unión de dos afluentes de orden x−1, sin depender de cuál afluente es más largo.</div>
+  <div class="exam">🎯 EXAMEN: Explique la diferencia entre la clasificación de Horton y la de Schumm en el tratamiento de una confluencia de dos cauces de igual orden.</div>
+</div>
+
+<div class="block">
+  <div class="bh c-verde">Forma de la cuenca: Gravelius e hipsometría (§2.6.5.1)</div>
+  <div class="rx">Coeficiente de compactación de Gravelius:<br>C = 0,282 · P · A^(−1/2)<br>P: perímetro (km) · A: área de la cuenca (km²)</div>
+  <div class="item"><span class="dot dot-verde"></span>C = 1 indica una cuenca circular (más propensa a crecidas súbitas concentradas); valores mayores indican cuencas alargadas, con respuesta hidrológica más lenta y distribuida.</div>
+  <div class="item"><span class="dot dot-verde"></span>La curva hipsométrica (% de área vs. elevación) resume el relieve de la cuenca y permite calcular la elevación media sin medir cada punto.</div>
+  <div class="exam">🎯 EXAMEN: Dos cuencas tienen la misma área pero distinto coeficiente de Gravelius (una circular, otra alargada). ¿Cuál tendría un hidrograma de crecida más "picudo" y por qué?</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-verde">SIG y nuevas tecnologías de observación (§2.6.7–2.6.8)</div>
+  <div class="three">
+    <div class="mini"><b>SIG</b><br>Integra redes, cuencas y estaciones; permite cartografía de escorrentía y control de calidad interpolada en tiempo real.</div>
+    <div class="mini"><b>Teledetección</b><br>Radar (precipitación cuantitativa), microondas pasivas (humedad del suelo, nieve), lidar (topografía de alta exactitud).</div>
+    <div class="mini"><b>ADCP / hidroacústica</b><br>Perfilador de corriente Doppler: mide caudal desde una embarcación en movimiento sin necesidad de vadeo, reduciendo riesgo para el personal.</div>
+  </div>
+  <div class="warn">⚠️ CASO PERÚ: el modelo de elevación digital SRTM (90 m, ~30 m de exactitud vertical) es una opción de bajo costo donde no existe cartografía nacional de mayor detalle en cuencas andinas remotas.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el uso de un ADCP montado en una embarcación no tripulada reduce significativamente el riesgo del personal frente al aforo tradicional con molinete durante una crecida?</div>
+</div>
+
+<div class="block s3">
+  <div class="bh c-gris">Tabla integradora — Conceptos clave de repaso final</div>
+  <table class="tbl">
+    <tr><th>Tema</th><th>Concepto clave</th><th>Fórmula / valor</th><th>Aplicación práctica</th><th>Error común a evitar</th></tr>
+    <tr><td>Ciclo hidrológico</td><td>Balance de masa</td><td>P+I−O−E=ΔS</td><td>Estimar evaporación en embalses</td><td>Confundir con Q=AV</td></tr>
+    <tr><td>Errores</td><td>Sistemático vs. aleatorio</td><td>e=±α·sy</td><td>Calibración de instrumentos</td><td>Creer que promediar corrige error sistemático</td></tr>
+    <tr><td>Redes</td><td>Red mínima vs. básica</td><td>Tabla I.2.6</td><td>Priorizar estaciones en cuencas andinas</td><td>Igual densidad en costa y sierra</td></tr>
+    <tr><td>Calidad del agua</td><td>Mezcla completa</td><td>∝ V·ancho²</td><td>Ubicar puntos de muestreo aguas abajo</td><td>Muestrear antes de mezcla completa</td></tr>
+    <tr><td>Fisiografía</td><td>Coef. de Gravelius</td><td>C=0,282·P·A⁻¹ᐟ²</td><td>Predecir forma del hidrograma</td><td>Ignorar forma al comparar cuencas de igual área</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: todos los conceptos de esta guía convergen en un mismo principio — ningún dato hidrológico tiene valor sin su incertidumbre asociada y sin una red diseñada específicamente para el objetivo que se persigue.</div>
+</div>
+
+<div id="quiz-section">
+  <div class="quiz-head">
+    <h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="qprog"><span id="qprog-text">Pregunta 0 de 10</span><span id="qprog-pct">0% de aciertos</span></div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" id="stat-fill"></div></div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Qué representa la ecuación Q = A · V en hidrología?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) El balance hídrico de un embalse</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) El caudal instantáneo en una sección transversal de un cauce</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) La incertidumbre de una medición hidrométrica</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) El coeficiente de compactación de una cuenca</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Un instrumento mal calibrado desde su instalación arroja siempre lecturas 2 cm por encima del valor real. Este error se clasifica como:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Aleatorio</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) Espurio</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="true">C) Sistemático</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) De histéresis</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">Según la Tabla I.2.6, ¿por qué la densidad mínima recomendada de estaciones pluviométricas en montaña (250 km²/estación) es mucho mayor que en costa (900 km²/estación)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Porque en montaña hay más población</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) Porque la precipitación varía mucho más espacialmente en terreno montañoso</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Porque los instrumentos en montaña son más baratos</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Porque la costa no requiere datos de precipitación</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">Para muestrear el impacto de un vertido minero puntual aguas arriba de una cuenca, ¿en qué condición de flujo conviene muestrear?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Durante crecidas, para captar el pico de arrastre</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) En flujo bajo (estiaje), cuando la dilución es menor</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Es indiferente, la concentración no cambia con el caudal</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Solo durante el deshielo</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el HOMS es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Transfiere tecnología hidrológica probada entre países</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) Existe desde 1981</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) Solo incluye software de modelación numérica</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Cada componente ha sido usado en aplicaciones prácticas por su creador</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Si (er)95 = 5% para un caudal medido Qm = 100 m³/s, ¿cuál es el intervalo de confianza al 95%?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) 95 a 105 m³/s</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) 90 a 110 m³/s</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) 95 a 105 m³/s (Qm ± 0,05·Qm)</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) 50 a 150 m³/s</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿En qué se diferencia la clasificación de Schumm respecto de la de Horton para ordenar cursos de agua?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Schumm usa el caudal en vez de la longitud del cauce</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) Schumm asigna sistemáticamente orden x+1 a la unión de dos cauces de orden x, sin privilegiar al afluente más largo</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) Schumm solo aplica a cuencas áridas</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) No existe diferencia real entre ambas</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Una cuenca con coeficiente de compactación de Gravelius cercano a 1 (forma circular) tiende a producir:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Un hidrograma de crecida muy alargado en el tiempo</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) Un hidrograma de crecida más concentrado y picudo</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) Nula escorrentía superficial</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Una densidad de drenaje siempre menor a 1</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Por qué la Guía recomienda un identificador de estación basado en referencias permanentes (puentes, coordenadas GPS) y no en elementos como "un sauce joven"?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Porque los árboles atraen rayos</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) Porque elementos no permanentes pueden desaparecer o cambiar, perdiendo la trazabilidad de la ubicación</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Porque los árboles no son visibles en fotografías aéreas</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Porque la Guía prohíbe el uso de vegetación en cualquier descripción</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál es la principal ventaja de usar un ADCP en una embarcación no tripulada para aforo de caudales en crecida?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Es más barato que un molinete tradicional</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) No requiere calibración</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) Reduce la exposición del personal a condiciones de riesgo (alta velocidad, residuos, hielo)</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Elimina la necesidad de conocer la geometría del cauce</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div id="results-panel">
+    <h3 id="results-title"></h3>
+    <p id="results-text"></p>
+    <button id="restart-btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<div class="footer">
+  <div>
+    <span class="ft">REFERENCIAS:</span><br>
+    <span class="fc">OMM/UNESCO, 1992: Glosario Hidrológico Internacional, OMM-Nº385 · OMM, 1994: Guía de Prácticas Hidrológicas, 5ª ed., OMM-Nº168 · OMM, 1988: Reglamento Técnico, Vol. III–Hidrología, OMM-Nº49 · WMO-No.519: Manual on Stream Gauging · WMO-No.680: Manual on Water Quality Monitoring · WMO-No.324: Casebook on Hydrological Network Design Practice · ISO 1993: Standards Handbook, Quantities and Units</span>
+  </div>
+</div>
+
+</div>
+
+<script>
+const answered = {};
+let correctCount = 0;
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.disabled) return;
+  const q = btn.dataset.q;
+  if(answered[q]) return;
+  answered[q] = true;
+  const isCorrect = btn.dataset.correct === 'true';
+  const group = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  group.forEach(b=>{
+    b.disabled = true;
+    if(b.dataset.correct === 'true'){
+      b.classList.add('correct');
+      if(b.textContent.indexOf('✅')===-1) b.textContent = '✅ ' + b.textContent;
+    } else if(b === btn){
+      b.classList.add('incorrect');
+      b.textContent = '❌ ' + b.textContent;
+    }
+  });
+  const fb = document.getElementById('fb'+q);
+  const explanations = {
+    1:"Q = A·V relaciona el caudal con el área de la sección transversal del cauce y la velocidad media del flujo — es la ecuación base para aforar corrientes.",
+    2:"Un error constante desde la instalación, causado por un defecto del instrumento (nivelación, calibración), es sistemático: no varía con el número de repeticiones y solo se corrige recalibrando.",
+    3:"La lluvia orográfica y la variabilidad vertical del terreno hacen que la precipitación cambie mucho en distancias cortas en montaña, exigiendo más estaciones por km².",
+    4:"En flujo bajo la dilución del contaminante es menor, por lo que su concentración —y por tanto su detección— es más representativa del impacto real de la fuente puntual.",
+    5:"El HOMS incluye planos de construcción de equipos, informes de procedimientos y software — no se limita a modelos numéricos.",
+    6:"Qm ± 0,05·Qm = 100 ± 5 = intervalo de 95 a 105 m³/s.",
+    7:"Horton asigna el orden más alto al afluente más largo en una confluencia ambigua; Schumm elimina esa ambigüedad asignando sistemáticamente x+1 a la unión de dos cauces de orden x.",
+    8:"Una cuenca circular concentra la escorrentía de todos los puntos en tiempos de viaje similares hacia la salida, generando un pico de crecida más alto y estrecho.",
+    9:"Los elementos naturales no permanentes pueden desaparecer, crecer o ser removidos, haciendo imposible relocalizar la estación con exactitud años después.",
+    10:"El aforo en crecida con métodos tradicionales expone al personal a corrientes de alta velocidad, residuos flotantes y hielo; automatizar la embarcación elimina esa exposición directa."
+  };
+  if(isCorrect){
+    fb.className = 'qfeedback correct';
+    fb.innerHTML = '✅ ¡Correcto! ' + explanations[q];
+    correctCount++;
+  } else {
+    const correctLetter = document.querySelector('.qbtn[data-q="'+q+'"][data-correct="true"]').dataset.opt.toUpperCase();
+    fb.className = 'qfeedback incorrect';
+    fb.innerHTML = '❌ Incorrecto. La respuesta correcta es '+correctLetter+'. ' + explanations[q];
+  }
+  fb.style.display = 'block';
+  const totalAnswered = Object.keys(answered).length;
+  document.getElementById('qprog-text').textContent = 'Pregunta '+totalAnswered+' de 10';
+  document.getElementById('qprog-pct').textContent = Math.round((correctCount/totalAnswered)*100)+'% de aciertos';
+  document.getElementById('stat-fill').style.width = (totalAnswered/10*100)+'%';
+  if(totalAnswered === 10){
+    const panel = document.getElementById('results-panel');
+    panel.style.display = 'block';
+    const title = document.getElementById('results-title');
+    const text = document.getElementById('results-text');
+    text.textContent = correctCount+' / 10 correctas';
+    if(correctCount <= 4){ panel.style.background = '#fee2e2'; title.style.color='#991b1b'; title.textContent='Necesitas repasar el material'; }
+    else if(correctCount <= 7){ panel.style.background = '#fef9c3'; title.style.color='#713f12'; title.textContent='¡Buen avance, sigue repasando!'; }
+    else { panel.style.background = '#dcfce7'; title.style.color='#14532d'; title.textContent='¡Excelente dominio del tema!'; }
+  }
+});
+function resetQuiz(){
+  for(const k in answered) delete answered[k];
+  correctCount = 0;
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.disabled = false;
+    b.classList.remove('correct','incorrect');
+    b.textContent = b.textContent.replace('✅ ','').replace('❌ ','');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f=>{ f.style.display='none'; f.className='qfeedback'; });
+  document.getElementById('qprog-text').textContent = 'Pregunta 0 de 10';
+  document.getElementById('qprog-pct').textContent = '0% de aciertos';
+  document.getElementById('stat-fill').style.width = '0%';
+  document.getElementById('results-panel').style.display = 'none';
+}
+</script>
+</body>
+</html>
