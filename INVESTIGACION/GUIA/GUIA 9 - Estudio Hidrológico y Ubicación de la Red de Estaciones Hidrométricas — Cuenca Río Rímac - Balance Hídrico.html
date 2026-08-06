@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Balance Hídrico Cuenca Rímac — Canvas de Repaso</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+:root{
+  --color-background-primary:#ffffff; --color-background-secondary:#f4f5f7; --color-background-tertiary:#e9eaee;
+  --color-text-primary:#14181f; --color-text-secondary:#5b6270;
+  --color-border-tertiary:#d8dae0; --color-border-secondary:#c3c6cf;
+}
+@media(prefers-color-scheme:dark){
+  :root{ --color-background-primary:#181a20; --color-background-secondary:#20232b; --color-background-tertiary:#14161b;
+    --color-text-primary:#e9eaee; --color-text-secondary:#a6acba; --color-border-tertiary:#33374280; --color-border-secondary:#454b59; }
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary);background:var(--color-background-tertiary);}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);}
+@media(max-width:640px){.cv{grid-template-columns:1fr}}
+.titlebar{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:12px;padding:14px 18px;}
+.titlebar h1{font-family:'Oswald';font-size:20px;font-weight:700;margin:0 0 3px;}
+.titlebar .sub{font-size:11px;color:#b6c6dd;margin-bottom:8px;}
+.titlebar .pill{background:rgba(255,255,255,.12);color:#cfe0f5;}
+.sbar{grid-column:1/-1;font-family:'Oswald';font-size:13px;font-weight:700;border-radius:8px;padding:7px 12px;margin-top:2px;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;} .block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald';font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:8px 0 3px;}
+.rx-note{font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:7px 10px;margin-top:8px;}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;} .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+@media(max-width:640px){.two,.three{grid-template-columns:1fr}}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0;}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:6px;font-size:11px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);text-align:left;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;}
+@media(max-width:640px){.dual{grid-template-columns:1fr}}
+.dual-tech{background:#e0f2fe;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#0c4a6e;}
+.dual-plain{background:#dcfce7;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#14532d;}
+@media(prefers-color-scheme:dark){ .dual-tech{background:#082f49;color:#7dd3fc;} .dual-plain{background:#14532d;color:#86efac;} }
+.dual-label{font-family:'Oswald';font-size:10px;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 4px;opacity:.85;}
+.dual p{margin:0;}
+.blue-l{background:#dbeafe;color:#1e3a8a;} .blue-h{border-left-color:#1e3a8a;}
+.green-l{background:#dcfce7;color:#14532d;} .green-h{border-left-color:#14532d;}
+.red-l{background:#fee2e2;color:#991b1b;} .red-h{border-left-color:#991b1b;}
+.yellow-l{background:#fef9c3;color:#713f12;} .yellow-h{border-left-color:#713f12;}
+.purple-l{background:#ede9fe;color:#4c1d95;} .purple-h{border-left-color:#4c1d95;}
+.teal-l{background:#ccfbf1;color:#134e4a;} .teal-h{border-left-color:#134e4a;}
+.orange-l{background:#ffedd5;color:#7c2d12;} .orange-h{border-left-color:#7c2d12;}
+.gray-l{background:#f1f5f9;color:#334155;} .gray-h{border-left-color:#334155;}
+.pink-l{background:#fce7f3;color:#831843;} .pink-h{border-left-color:#831843;}
+.petrol-l{background:#e0f2fe;color:#0c4a6e;} .petrol-h{border-left-color:#0c4a6e;}
+@media(prefers-color-scheme:dark){
+  .blue-l{background:#1e3a5f;color:#93c5fd;} .blue-h{border-left-color:#93c5fd;}
+  .green-l{background:#14532d;color:#86efac;} .green-h{border-left-color:#86efac;}
+  .red-l{background:#450a0a;color:#fca5a5;} .red-h{border-left-color:#fca5a5;}
+  .yellow-l{background:#422006;color:#fef08a;} .yellow-h{border-left-color:#fef08a;}
+  .purple-l{background:#2e1065;color:#c4b5fd;} .purple-h{border-left-color:#c4b5fd;}
+  .teal-l{background:#042f2e;color:#5eead4;} .teal-h{border-left-color:#5eead4;}
+  .orange-l{background:#431407;color:#fed7aa;} .orange-h{border-left-color:#fed7aa;}
+  .gray-l{background:#1e293b;color:#94a3b8;} .gray-h{border-left-color:#94a3b8;}
+  .pink-l{background:#4a044e;color:#f0abfc;} .pink-h{border-left-color:#f0abfc;}
+  .petrol-l{background:#082f49;color:#7dd3fc;} .petrol-h{border-left-color:#7dd3fc;}
+}
+.dotblue{background:#1e3a8a;} .dotgreen{background:#14532d;} .dotred{background:#991b1b;}
+.dotyellow{background:#713f12;} .dotpurple{background:#4c1d95;} .dotteal{background:#134e4a;}
+.dotorange{background:#7c2d12;} .dotgray{background:#334155;} .dotpink{background:#831843;} .dotpetrol{background:#0c4a6e;}
+.footer{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;}
+.ft{font-family:'Oswald';font-size:12px;color:#7dd3fc;} .fc{font-size:11px;color:#94a3b8;}
+.qhead{background:#0a2540;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:10px;}
+.qhead h3{font-family:'Oswald';font-size:14px;margin:0 0 2px;} .qhead p{font-size:11px;color:#b6c6dd;margin:0;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;margin:8px 0 12px;}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s;}
+.qprog{font-size:11.5px;color:var(--color-text-secondary);display:flex;justify-content:space-between;}
+.qcard{border-top:0.5px solid var(--color-border-tertiary);padding-top:12px;margin-top:12px;}
+.qnum{font-family:'Oswald';font-size:10px;text-transform:uppercase;color:var(--color-text-secondary);margin:0 0 4px;}
+.qtext{font-size:12.5px;font-weight:600;margin:0 0 8px;}
+.qopts{display:flex;flex-direction:column;}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3';}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn.disabled{opacity:.65;cursor:not-allowed;pointer-events:none;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+.qresults{display:none;border-radius:10px;padding:14px;margin-top:14px;text-align:center;font-size:13px;}
+.qresults.low{background:#fee2e2;color:#991b1b;} .qresults.mid{background:#fef9c3;color:#713f12;} .qresults.high{background:#dcfce7;color:#14532d;}
+.qresults button{margin-top:8px;background:#0a2540;color:#fff;border:none;border-radius:7px;padding:7px 14px;font-size:12px;cursor:pointer;font-family:'Oswald';}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<div class="titlebar">
+  <h1>⚖️ Modelación, disponibilidad, demanda y balance hídrico — Cuenca del Río Rímac</h1>
+  <div class="sub">Estudio Hidrológico y Ubicación de la Red de Estaciones Hidrométricas — Cuenca Río Rímac | ANA-DCPRH-ALA Chillón Rímac Lurín | Vol. I, Cap. VI–IX (pp. 156–184), Lima, dic. 2010</div>
+  <span class="pill">Transferencia hidrológica</span><span class="pill">Disponibilidad hídrica</span><span class="pill">Trasvases</span><span class="pill">Demanda agrícola/poblacional</span><span class="pill">Balance hídrico</span>
+</div>
+
+<!-- ============ MODELACIÓN ============ -->
+<div class="sbar blue-l">🔵 Cap. VI — Modelación hidrológica: transferencia de caudales (pp. 156–160)</div>
+
+<div class="block s3">
+  <span class="bh blue-l">Por qué generar caudales donde no hay estación</span>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>Las subcuencas Alto Río Rímac y Quebrada Párac carecen de estación hidrométrica propia, pero sí cuentan con área de drenaje y precipitación areal conocidas. El estudio aplica el método de transferencia hidrológica por similitud, que asume que la relación adimensional Q/(P·A) se mantiene aproximadamente constante entre una subcuenca con información (Chosica) y una sin información, siempre que ambas compartan condiciones climáticas e hidrogeológicas similares dentro de la misma cuenca madre.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Es como estimar cuánta agua corre por una quebrada pequeña sin medidor, usando como referencia un río cercano que sí tiene medidor. Si sabes que las dos zonas reciben lluvia parecida y tienen tamaños distintos, puedes "escalar" el caudal conocido al tamaño de la zona sin medir, usando el área y la lluvia como factores de ajuste.</p>
+    </div>
+  </div>
+  <div class="rx">Q_S/(P_S·A_S) = Q_C/(P_C·A_C) &nbsp;→&nbsp; Q_S = (A_S/A_C)·(P_S/P_C)·Q_C</div>
+  <div class="rx-note">Q: caudal (m³/s) | P: precipitación media anual (mm) | A: área de drenaje (km²) | Subíndice S: subcuenca sin información | Subíndice C: cuenca con información (Chosica).</div>
+  <div class="two">
+    <div class="mini blue-l"><b>Subcuenca Alto Río Rímac</b><br>A = 169.81 km² · P = 644.2 mm<br>Q_AltoRímac = 0.0953 × Q_Chosica</div>
+    <div class="mini teal-l"><b>Subcuenca Quebrada Párac</b><br>A = 130.43 km² · P = 614.2 mm<br>Q_Párac = 0.0698 × Q_Chosica</div>
+  </div>
+  <div class="warn">⚠️ ERROR COMÚN: aplicar transferencia hidrológica entre cuencas con climas o litologías muy distintas invalida el supuesto de similitud; el método solo es confiable entre subcuencas de la misma cuenca madre con comportamiento hidrológico comparable, como ocurre aquí dentro de la Rímac.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué supuesto físico permite transferir el caudal de la estación Chosica a las subcuencas Alto Río Rímac y Quebrada Párac, que no tienen estación propia?</div>
+</div>
+
+<!-- ============ DISPONIBILIDAD ============ -->
+<div class="sbar teal-l">🩵 Cap. VII — Disponibilidad hídrica de la cuenca (pp. 168–175)</div>
+
+<div class="block s3">
+  <span class="bh teal-l">Fuentes de agua: superficial, subterránea, regulada y trasvasada</span>
+  <div class="item"><span class="dot dotteal"></span><b>Régimen del río:</b> típico de costa peruana — intermitente y torrentoso, con avenidas en ene–mar y estiaje abr–dic. Descarga media máxima histórica en Chosica: 145.67 m³/s (1935); mínima: 1.53 m³/s (1973); media anual del periodo 1912–2009: 27.34 m³/s (862.2 hm³/año).</div>
+  <div class="item"><span class="dot dotteal"></span><b>Aguas subterráneas:</b> explotación en pico de 12.4 m³/s en 1997 (sobreexplotación, ya que el límite de equilibrio es 6.00 m³/s), reducida a ~9 m³/s en 2001. Balance de la napa: entradas 9.71 m³/s, salidas 10.91 m³/s → balance −1.19 m³/s (déficit crónico del acuífero de Lima).</div>
+  <div class="item"><span class="dot dotteal"></span><b>Almacenamiento en represas:</b> 21 lagunas represadas, 282.35 hm³ totales — Marcapomacocha (157.05 hm³, cuenca del Mantaro), Santa Eulalia (77.00 hm³, cuenca propia) y Yuracmayo (48.30 hm³, cuenca propia).</div>
+  <div class="item"><span class="dot dotteal"></span><b>Trasvases (Marca I, II, III):</b> Marca I (túnel trasandino Marcapomacocha–Milloc, 10 km, en operación desde 1962, deriva 6–8 m³/s desde el Mantaro hacia el Santa Eulalia); Marca II (proyecto Pomacocha–Río Blanco, 4.0 m³/s adicionales, entrada estimada 2018); Marca III (afianzamiento del sistema Marcapomacocha, hasta 3.0 m³/s adicionales en estiaje).</div>
+  <div class="flow">
+    <div class="fbox">Cuenca Mantaro (Atlántico)</div><span class="farrow">→</span>
+    <div class="fbox">Túnel trasandino (Marca I)</div><span class="farrow">→</span>
+    <div class="fbox">Laguna Milloc / Sheque</div><span class="farrow">→</span>
+    <div class="fbox">Río Santa Eulalia → río Rímac</div><span class="farrow">→</span>
+    <div class="fbox">Centrales hidroeléctricas y Lima</div>
+  </div>
+  <div class="rx">Disponibilidad total = Caudal Chosica (75%) + Túnel Trasandino (prom.) = 642.48 + 139.45 = 781.93 hm³/año</div>
+  <div class="rx-note">La disponibilidad hídrica se calcula al 75% de persistencia (Cap. V) más el aporte promedio del trasvase, no con el caudal promedio simple — coherencia directa con el criterio conservador de diseño visto en el capítulo anterior.</div>
+  <div class="warn">⚠️ ERROR COMÚN: la cuenca Rímac recibe agua "externa" (trasvasada desde el Mantaro, vertiente del Atlántico) que no proviene de su propia precipitación; ignorar esto en un balance hídrico "natural" de la cuenca sobreestima el recurso propio del Pacífico.</div>
+  <div class="exam">🎯 EXAMEN: Explique el papel del sistema Marca I en el régimen de estiaje del río Rímac y por qué se le considera un aporte "externo" a la cuenca del Pacífico.</div>
+</div>
+
+<!-- ============ DEMANDA ============ -->
+<div class="sbar orange-l">🟠 Cap. VIII — Uso y demanda de agua en la cuenca (pp. 175–182)</div>
+
+<div class="block s3">
+  <span class="bh orange-l">Quién consume el agua de la cuenca más explotada del Perú</span>
+  <div class="def orange-h">La cuenca Rímac abastece a más de 8.5 millones de habitantes (Lima Metropolitana) y concentra el uso múltiple más intenso del país: poblacional, agrícola, minero, industrial e hidroenergético.</div>
+  <div class="two">
+    <div class="mini blue-l"><b>Uso poblacional (SEDAPAL)</b><br>501.44 hm³/año — 78.97% de la demanda total. Capacidad de producción: Planta La Atarjea 15.90 m³/s + Planta Chillón 0.72 m³/s + pozos 4.22 m³/s = 20.84 m³/s.</div>
+    <div class="mini green-l"><b>Uso agrícola</b><br>105.15 hm³/año — 16.56% de la demanda. Área bajo riego: 4358.27 ha (de 4370.08 ha totales), concentrada en 13 comisiones de regantes de Lima.</div>
+  </div>
+  <div class="two" style="margin-top:7px;">
+    <div class="mini gray-l"><b>Uso minero</b><br>27.46 hm³/año — 4.32% de la demanda. Centros en la parte alta: Casapalca, Tamboraque y otros; 7 minas activas y 20 abandonadas.</div>
+    <div class="mini pink-l"><b>Uso industrial</b><br>0.95 hm³/año — 0.15% de la demanda. 13 plantas industriales vierten directamente al río entre La Atarjea y Chosica.</div>
+  </div>
+  <div class="item" style="margin-top:8px;"><span class="dot dotorange"></span><b>Uso no consuntivo — hidroenergía:</b> 5 centrales escalonadas en los ríos Rímac y Santa Eulalia (Huinco, Matucana, Callahuanca, Moyopampa, Huampaní), potencia total 559.5 MW, caudal nominal 101.5 m³/s. El agua no se consume, pasa de central en central por túneles y canales.</div>
+  <div class="item"><span class="dot dotorange"></span><b>Proyección de demanda poblacional:</b> de 23.67 m³/s en 2009 a 34.31 m³/s en 2040, impulsada por el crecimiento poblacional (de 8.86 a 12.49 millones de habitantes proyectados en el mismo periodo).</div>
+  <div class="warn">⚠️ ERROR COMÚN: sumar la demanda hidroenergética (101.5 m³/s) directamente a la demanda consuntiva total es incorrecto — el uso hidroeléctrico es no consuntivo, el agua vuelve al cauce después de generar energía, y no compite por el mismo volumen que el uso poblacional o agrícola en el balance hídrico.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el uso hidroeléctrico no se contabiliza en el balance de oferta-demanda consuntiva del Cuadro 9.1, a pesar de tener el mayor caudal nominal de todos los usos (101.5 m³/s)?</div>
+</div>
+
+<!-- ============ BALANCE HÍDRICO ============ -->
+<div class="sbar red-l">🔴 Cap. IX — Balance hídrico de la cuenca en situación actual (pp. 183–184)</div>
+
+<div class="block s3">
+  <span class="bh red-l">Oferta menos demanda: dónde y cuándo hay déficit</span>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>El balance hídrico se contabiliza en el punto de control Chosica mediante la ecuación general Balance = Q − D, donde Q es la oferta hídrica (caudal al 75% de persistencia más el aporte promedio del trasvase) y D la demanda consuntiva total (agrícola + poblacional + minera + industrial). El caudal medido ya integra implícitamente precipitación, evapotranspiración e infiltración de la cuenca alta, por lo que estas variables no se contabilizan por separado en la ecuación de balance en este punto de control.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Es una cuenta simple: cuánta agua entra menos cuánta agua se usa. Si entra más de lo que se usa, hay superávit (sobra); si entra menos, hay déficit (falta). El estudio hace esta cuenta mes a mes, porque en la cuenca Rímac no llueve igual todo el año: hay meses con mucha agua y meses con muy poca.</p>
+    </div>
+  </div>
+  <div class="rx">Balance Hídrico = Q − D</div>
+  <div class="rx-note">Q: oferta hídrica (m³/s o hm³) | D: demanda hídrica total (m³/s o hm³). Un valor positivo indica superávit; negativo, déficit.</div>
+  <table class="tbl">
+    <tr><th>Periodo</th><th>Oferta (hm³)</th><th>Demanda (hm³)</th><th>Balance</th><th>Situación</th></tr>
+    <tr><td>Dic – may (avenidas)</td><td>alta (hasta 135/mes en mar)</td><td>~53–57/mes</td><td>hasta +77.6 hm³ (mar)</td><td>Superávit</td></tr>
+    <tr><td>Jun – nov (estiaje)</td><td>baja (~42–46/mes)</td><td>~50–54/mes</td><td>hasta −8.2 hm³ (jul)</td><td>Déficit (12.5–16.3%)</td></tr>
+    <tr><td><b>Total anual</b></td><td><b>781.92</b></td><td><b>635.00</b></td><td><b>+146.92</b></td><td><b>Superávit anual</b></td></tr>
+  </table>
+  <div class="warn">⚠️ ERROR COMÚN: un superávit anual (+146.92 hm³) no significa ausencia de problemas hídricos — la cuenca presenta déficit real en 6 de 12 meses (jun–nov), justo el periodo de mayor estiaje, cuando la demanda poblacional se mantiene casi constante todo el año pero la oferta natural cae drásticamente.</div>
+  <div class="exam">🎯 EXAMEN: Si el balance hídrico anual de la cuenca Rímac es positivo (+146.92 hm³), ¿por qué el estudio de todos modos identifica un problema de déficit hídrico en la cuenca? Fundamente con los meses críticos.</div>
+</div>
+
+<!-- ============ TABLA INTEGRADORA ============ -->
+<div class="block s3">
+  <span class="bh gray-l">📊 Tabla integradora — Repaso rápido antes del examen</span>
+  <table class="tbl">
+    <tr><th>Componente</th><th>Valor anual</th><th>% del total (oferta o demanda)</th><th>Fuente / método</th><th>Observación clave</th></tr>
+    <tr><td>Oferta natural (Chosica, 75%)</td><td>642.48 hm³</td><td>82.2% de la oferta</td><td>Persistencia Weibull</td><td>Régimen intermitente, estacional</td></tr>
+    <tr><td>Aporte túnel trasandino</td><td>139.45 hm³</td><td>17.8% de la oferta</td><td>Trasvase Marca I (Mantaro)</td><td>Agua externa a la cuenca del Pacífico</td></tr>
+    <tr><td>Demanda poblacional</td><td>501.44 hm³</td><td>78.97% de la demanda</td><td>SEDAPAL</td><td>Casi constante todo el año</td></tr>
+    <tr><td>Demanda agrícola</td><td>105.15 hm³</td><td>16.56% de la demanda</td><td>ALA Chillón-Rímac-Lurín</td><td>Muy estacional, pico en verano</td></tr>
+    <tr><td>Demanda minera + industrial</td><td>28.41 hm³</td><td>4.47% de la demanda</td><td>ALA Chillón-Rímac-Lurín</td><td>Constante todo el año</td></tr>
+    <tr><td>Uso hidroenergético</td><td>101.5 m³/s nominal</td><td>No consuntivo</td><td>EDEGEL</td><td>No compite en el balance de demanda</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: el balance hídrico de la Rímac depende críticamente del trasvase Marca I (17.8% de la oferta total) — sin ese aporte externo desde el Mantaro, el déficit de estiaje sería mucho más severo y probablemente el balance anual completo sería negativo.</div>
+</div>
+
+<!-- ============ QUIZ ============ -->
+<div class="block s3" id="quiz-section">
+  <div class="qhead"><h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3><p>Marca tu respuesta y descubre si es correcta</p></div>
+  <div class="qprog"><span id="qprogtext">Pregunta 0 de 10 respondidas</span><span id="qscoretext">0% de aciertos</span></div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" id="qbar"></div></div>
+
+  <div class="qcard" id="q1"><p class="qnum">Pregunta 1 / 10</p><p class="qtext">¿Qué método se usa para generar caudales en las subcuencas Alto Río Rímac y Quebrada Párac, que no tienen estación hidrométrica propia?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Método de Thiessen</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) Método de transferencia hidrológica por similitud (relación Q/PA)</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) Fórmula de Weibull</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Modelo Penman-Monteith</button>
+    </div><div class="qfeedback" id="fb1"></div></div>
+
+  <div class="qcard" id="q2"><p class="qnum">Pregunta 2 / 10</p><p class="qtext">¿Cuál es el caudal medio anual del río Rímac en la estación Chosica para el periodo de registro 1912-2009?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) 145.67 m³/s</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) 27.34 m³/s</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) 1.53 m³/s</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) 101.5 m³/s</button>
+    </div><div class="qfeedback" id="fb2"></div></div>
+
+  <div class="qcard" id="q3"><p class="qnum">Pregunta 3 / 10</p><p class="qtext">¿Qué representa el sistema Marca I para el río Rímac?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Una represa construida dentro de la propia cuenca Rímac</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) Un trasvase de agua desde la cuenca del Mantaro (vertiente del Atlántico) hacia la del Rímac (vertiente del Pacífico) mediante un túnel trasandino</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Una planta de tratamiento de agua potable de SEDAPAL</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) El sistema de pozos de explotación de agua subterránea de Lima</button>
+    </div><div class="qfeedback" id="fb3"></div></div>
+
+  <div class="qcard" id="q4"><p class="qnum">Pregunta 4 / 10</p><p class="qtext">¿Cuál de los siguientes usos de agua es el de MAYOR demanda consuntiva en la cuenca Rímac?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Uso agrícola</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) Uso poblacional</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) Uso minero</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Uso industrial</button>
+    </div><div class="qfeedback" id="fb4"></div></div>
+
+  <div class="qcard" id="q5"><p class="qnum">Pregunta 5 / 10</p><p class="qtext">¿Por qué el uso hidroeléctrico (101.5 m³/s nominal) no se suma a la demanda total en el balance hídrico del Cuadro 9.1?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Porque las centrales hidroeléctricas están fuera de la cuenca</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) Porque es un uso no consuntivo: el agua pasa por las turbinas y vuelve al cauce, sin ser "consumida"</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Porque EDEGEL no reporta información al estudio</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Porque su caudal es menor al de uso poblacional</button>
+    </div><div class="qfeedback" id="fb5"></div></div>
+
+  <div class="qcard" id="q6"><p class="qnum">Pregunta 6 / 10</p><p class="qtext">Según el balance hídrico de la cuenca Rímac (Cuadro 9.1), ¿en qué periodo del año se presenta déficit hídrico?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Diciembre a mayo</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) Junio a noviembre</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Todo el año presenta déficit</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) No existe déficit en ningún mes del año</button>
+    </div><div class="qfeedback" id="fb6"></div></div>
+
+  <div class="qcard" id="q7"><p class="qnum">Pregunta 7 / 10</p><p class="qtext">¿Cuál es la principal diferencia entre "disponibilidad hídrica" (Cap. VII) y "demanda hídrica" (Cap. VIII)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Son sinónimos y se calculan con la misma fórmula</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) La disponibilidad es la oferta de agua que existe en la cuenca (caudal natural, trasvases, subterránea); la demanda es el requerimiento de los distintos usuarios (poblacional, agrícola, minero, industrial)</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) La disponibilidad solo incluye agua subterránea</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) La demanda solo incluye el uso agrícola</button>
+    </div><div class="qfeedback" id="fb7"></div></div>
+
+  <div class="qcard" id="q8"><p class="qnum">Pregunta 8 / 10</p><p class="qtext">¿Cuál afirmación sobre la explotación de aguas subterráneas en la cuenca Rímac es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Alcanzó una sobreexplotación de 12.4 m³/s en 1997</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) El límite de explotación en equilibrio se estima en 6.00 m³/s</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) El balance de la napa muestra superávit constante (más entradas que salidas)</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) SEDAPAL monitorea el acuífero desde hace más de 20 años</button>
+    </div><div class="qfeedback" id="fb8"></div></div>
+
+  <div class="qcard" id="q9"><p class="qnum">Pregunta 9 / 10</p><p class="qtext">Si una subcuenca sin información tiene un área 20% mayor y una precipitación 10% mayor que la cuenca de referencia con información, ¿qué le ocurre al caudal transferido según el método de similitud (Q_S/(P_S·A_S) = Q_C/(P_C·A_C))?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Se mantiene igual al caudal de la cuenca de referencia</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) Aumenta proporcionalmente al producto de los factores de área y precipitación (1.2 × 1.1 = 1.32 veces el caudal de referencia)</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Disminuye porque a mayor área, menor caudal</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) No se puede calcular sin datos de evapotranspiración</button>
+    </div><div class="qfeedback" id="fb9"></div></div>
+
+  <div class="qcard" id="q10"><p class="qnum">Pregunta 10 / 10</p><p class="qtext">En el contexto de la gestión hídrica de Lima, ¿qué implicancia práctica tiene que el balance hídrico anual sea positivo (+146.92 hm³) pero con déficit en 6 meses del año?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Ninguna, el superávit anual garantiza que nunca falte agua</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) Se requiere infraestructura de almacenamiento (represas, trasvases) para trasladar el superávit de avenidas hacia los meses de déficit de estiaje</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Significa que la demanda poblacional debe eliminarse en época de estiaje</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Indica que el estudio tiene un error de cálculo</button>
+    </div><div class="qfeedback" id="fb10"></div></div>
+
+  <div class="qresults" id="qresults">
+    <p id="qresultsText" style="font-weight:600;margin:0 0 4px;"></p>
+    <p id="qresultsScore" style="margin:0;"></p>
+    <button onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- ============ REFERENCIAS ============ -->
+<div class="block s3" id="refs-institucionales">
+  <span class="bh petrol-l">🔗 PARA PROFUNDIZAR — FUENTES INSTITUCIONALES</span>
+  <div class="three">
+    <div class="mini petrol-l"><b>🔗 SEDAPAL</b> — sedapal.com.pe (verificar vigencia)<br>Plan Maestro Optimizado de Agua y Alcantarillado para Lima-Callao, fuente original de proyecciones de demanda poblacional citadas en el capítulo.</div>
+    <div class="mini petrol-l"><b>🔗 COES-SINAC</b> — coes.org.pe (verificar vigencia)<br>Operación actual del sistema hidroeléctrico Rímac-Santa Eulalia y coordinación de trasvases Mantaro-Rímac.</div>
+    <div class="mini petrol-l"><b>🔗 ANA — Autoridad Nacional del Agua</b> — gob.pe/ana (verificar vigencia)<br>Autor original del estudio; normativa vigente sobre balance hídrico de cuencas en Perú (Ley N.° 29338, Ley de Recursos Hídricos).</div>
+  </div>
+  <div class="three" style="margin-top:7px;">
+    <div class="mini petrol-l"><b>🔗 CENEPRED / INDECI</b> — gob.pe/indeci<br>Gestión de riesgo asociado a déficit hídrico y competencia por el recurso en la cuenca más explotada del país.</div>
+    <div class="mini petrol-l"><b>🔗 FAO — Water balance methodologies</b> — fao.org (verificar vigencia)<br>Referencia metodológica internacional para balance oferta-demanda a nivel de cuenca.</div>
+    <div class="mini petrol-l"><b>🔗 SENAMHI Perú</b> — senamhi.gob.pe<br>Datos hidrométricos actualizados de la estación Chosica para contrastar con los valores históricos del estudio.</div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS DEL DOCUMENTO:</span>
+  <span class="fc">ANA-DCPRH-ALA Chillón Rímac Lurín (2010). Estudio Hidrológico y Ubicación de la Red de Estaciones Hidrométricas en la Cuenca del Río Rímac, Vol. I, Cap. VI "Modelación Hidrológica", Cap. VII "Disponibilidad Hídrica", Cap. VIII "Uso y Demanda de Agua" y Cap. IX "Balance Hídrico", pp. 156–184. · Fuente de datos: SEDAPAL, EDEGEL, ALA Chillón-Rímac-Lurín, Plan de Cultivo y Riego 2009-2010</span>
+</div>
+
+</div>
+<script>
+const totalQ = 10; let answered = 0; let correctCount = 0;
+const feedbackText = {
+1:{ok:"El método de transferencia hidrológica asume que la relación adimensional caudal/(precipitación×área) es similar entre subcuencas hidrológicamente análogas, permitiendo escalar el caudal conocido de Chosica a las subcuencas sin estación.",
+   bad:"La respuesta correcta es B). Thiessen se usa para precipitación areal, Weibull para persistencia, y Penman-Monteith para ETP; ninguno de esos genera caudales en cuencas sin información hidrométrica."},
+2:{ok:"Correcto: 27.34 m³/s es el caudal medio anual del periodo histórico 1912-2009 en Chosica, equivalente a 862.2 hm³/año, el valor de referencia para toda la disponibilidad hídrica de la cuenca.",
+   bad:"La respuesta correcta es B) 27.34 m³/s. 145.67 m³/s fue la descarga máxima histórica (1935); 1.53 m³/s la mínima histórica (1973); 101.5 m³/s es el caudal nominal hidroeléctrico total, no el caudal medio del río."},
+3:{ok:"Correcto: Marca I es un túnel trasandino de 10 km que deriva agua de la laguna Marcapomacocha (cuenca del Mantaro, vertiente del Atlántico) hacia la laguna Milloc (cuenca del Rímac, vertiente del Pacífico), aumentando el caudal de estiaje del Santa Eulalia.",
+   bad:"La respuesta correcta es B). Marca I es un trasvase intercuencas, no una obra dentro de la propia Rímac ni una infraestructura de SEDAPAL ni de pozos."},
+4:{ok:"Correcto: el uso poblacional representa 501.44 hm³/año (78.97% de la demanda total), muy por encima del agrícola (16.56%), minero (4.32%) e industrial (0.15%).",
+   bad:"La respuesta correcta es B) Uso poblacional, con 78.97% de la demanda total — la cuenca Rímac abastece a más de 8.5 millones de habitantes de Lima Metropolitana."},
+5:{ok:"Correcto: el uso hidroeléctrico es no consuntivo — el agua atraviesa las turbinas de las 5 centrales en cascada y regresa al cauce, por lo que no reduce el volumen disponible para otros usos y no se resta en la ecuación de balance oferta-demanda consuntiva.",
+   bad:"La respuesta correcta es B). El agua usada para generar electricidad no se pierde del sistema; solo los usos consuntivos (poblacional, agrícola, minero, industrial) se restan de la oferta en el balance hídrico."},
+6:{ok:"Correcto: junio a noviembre corresponde al periodo de estiaje, cuando la oferta hídrica natural cae (menor precipitación en la cuenca alta) mientras la demanda poblacional se mantiene casi constante, generando déficit de hasta 16.33% en julio.",
+   bad:"La respuesta correcta es B) Junio a noviembre. Diciembre a mayo, en cambio, coincide con el periodo de avenidas donde la oferta supera ampliamente la demanda (superávit de hasta 57.4% en marzo)."},
+7:{ok:"Correcto: la disponibilidad hídrica (Cap. VII) es la oferta —cuánta agua existe y de dónde proviene—; la demanda (Cap. VIII) es cuánta agua requieren los distintos usuarios. El balance hídrico del Cap. IX las compara.",
+   bad:"La respuesta correcta es B). No son sinónimos: disponibilidad = oferta (cuánta agua hay); demanda = requerimiento de los usuarios (cuánta agua se necesita)."},
+8:{ok:"Correcto, es FALSA: el balance de la napa muestra déficit, no superávit — las salidas (10.91 m³/s) superan a las entradas (9.71 m³/s), dando un balance de -1.19 m³/s, evidencia de sobreexplotación crónica del acuífero.",
+   bad:"La respuesta correcta es C). Es falsa porque el balance de la napa es negativo (-1.19 m³/s): las salidas por bombeo superan a las entradas por infiltración, reflejando la situación crítica de sobreexplotación del acuífero de Lima."},
+9:{ok:"Correcto: según Q_S = (A_S/A_C)·(P_S/P_C)·Q_C, si A_S/A_C=1.2 y P_S/P_C=1.1, el caudal transferido es 1.2×1.1=1.32 veces el caudal de la cuenca de referencia — el caudal escala proporcionalmente al producto de ambos factores.",
+   bad:"La respuesta correcta es B). El caudal transferido es directamente proporcional tanto al área como a la precipitación de la subcuenca sin información, relativas a la cuenca de referencia; en este caso el factor combinado es 1.32."},
+10:{ok:"Correcto: un balance anual positivo esconde una fuerte estacionalidad; sin infraestructura de regulación (represas, trasvases) que almacene el superávit de avenidas y lo libere en estiaje, la cuenca sufriría escasez real en junio-noviembre pese a tener 'suficiente' agua en el balance anual.",
+   bad:"La respuesta correcta es B). El superávit anual no es utilizable directamente en los meses de déficit sin infraestructura de almacenamiento y regulación (como las represas de Santa Eulalia y Yuracmayo, y el propio sistema de trasvases)."}
+};
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn'); if(!btn || btn.classList.contains('disabled')) return;
+  const q = btn.dataset.q; const isCorrect = btn.dataset.correct === 'true';
+  document.querySelectorAll('.qbtn[data-q="'+q+'"]').forEach(b=>{
+    b.classList.add('disabled');
+    if(b.dataset.correct === 'true'){ b.classList.add('correct'); if(!b.textContent.startsWith('✅')) b.textContent = '✅ ' + b.textContent; }
+    else if(b === btn && !isCorrect){ b.classList.add('incorrect'); if(!b.textContent.startsWith('❌')) b.textContent = '❌ ' + b.textContent; }
+  });
+  const fb = document.getElementById('fb'+q); fb.style.display = 'block';
+  if(isCorrect){ fb.className = 'qfeedback ok'; fb.innerHTML = '✅ ¡Correcto! ' + feedbackText[q].ok; correctCount++; }
+  else { fb.className = 'qfeedback bad'; fb.innerHTML = '❌ Incorrecto. ' + feedbackText[q].bad; }
+  answered++;
+  document.getElementById('qprogtext').textContent = 'Pregunta ' + answered + ' de ' + totalQ + ' respondidas';
+  document.getElementById('qscoretext').textContent = Math.round((correctCount/answered)*100) + '% de aciertos';
+  document.getElementById('qbar').style.width = Math.round((answered/totalQ)*100) + '%';
+  if(answered === totalQ){
+    const res = document.getElementById('qresults'); res.style.display = 'block';
+    let cls, msg;
+    if(correctCount <= 4){cls='low'; msg='Necesitas repasar el material.';}
+    else if(correctCount <= 7){cls='mid'; msg='¡Buen avance, sigue repasando!';}
+    else {cls='high'; msg='¡Excelente dominio del tema!';}
+    res.className = 'qresults ' + cls;
+    document.getElementById('qresultsText').textContent = msg;
+    document.getElementById('qresultsScore').textContent = correctCount + ' / ' + totalQ + ' correctas';
+  }
+});
+function resetQuiz(){
+  answered = 0; correctCount = 0;
+  document.querySelectorAll('.qbtn').forEach(b=>{ b.classList.remove('correct','incorrect','disabled'); b.textContent = b.textContent.replace('✅ ','').replace('❌ ',''); });
+  document.querySelectorAll('.qfeedback').forEach(f=>{f.style.display='none';});
+  document.getElementById('qprogtext').textContent = 'Pregunta 0 de 10 respondidas';
+  document.getElementById('qscoretext').textContent = '0% de aciertos';
+  document.getElementById('qbar').style.width = '0%';
+  document.getElementById('qresults').style.display = 'none';
+}
+</script>
+</body>
+</html>

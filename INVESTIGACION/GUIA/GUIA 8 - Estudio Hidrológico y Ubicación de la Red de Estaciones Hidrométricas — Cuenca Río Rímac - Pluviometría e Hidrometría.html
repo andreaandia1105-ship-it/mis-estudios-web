@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pluviometría e Hidrometría Cuenca Rímac — Canvas de Repaso</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+:root{
+  --color-background-primary:#ffffff; --color-background-secondary:#f4f5f7; --color-background-tertiary:#e9eaee;
+  --color-text-primary:#14181f; --color-text-secondary:#5b6270;
+  --color-border-tertiary:#d8dae0; --color-border-secondary:#c3c6cf;
+}
+@media(prefers-color-scheme:dark){
+  :root{ --color-background-primary:#181a20; --color-background-secondary:#20232b; --color-background-tertiary:#14161b;
+    --color-text-primary:#e9eaee; --color-text-secondary:#a6acba; --color-border-tertiary:#33374280; --color-border-secondary:#454b59; }
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary);background:var(--color-background-tertiary);}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);}
+@media(max-width:640px){.cv{grid-template-columns:1fr}}
+.titlebar{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:12px;padding:14px 18px;}
+.titlebar h1{font-family:'Oswald';font-size:20px;font-weight:700;margin:0 0 3px;}
+.titlebar .sub{font-size:11px;color:#b6c6dd;margin-bottom:8px;}
+.titlebar .pill{background:rgba(255,255,255,.12);color:#cfe0f5;}
+.sbar{grid-column:1/-1;font-family:'Oswald';font-size:13px;font-weight:700;border-radius:8px;padding:7px 12px;margin-top:2px;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;} .block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald';font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:8px 0 3px;}
+.rx-note{font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:7px 10px;margin-top:8px;}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;} .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+@media(max-width:640px){.two,.three{grid-template-columns:1fr}}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0;}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:6px;font-size:11px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);text-align:left;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;}
+@media(max-width:640px){.dual{grid-template-columns:1fr}}
+.dual-tech{background:#e0f2fe;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#0c4a6e;}
+.dual-plain{background:#dcfce7;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#14532d;}
+@media(prefers-color-scheme:dark){ .dual-tech{background:#082f49;color:#7dd3fc;} .dual-plain{background:#14532d;color:#86efac;} }
+.dual-label{font-family:'Oswald';font-size:10px;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 4px;opacity:.85;}
+.dual p{margin:0;}
+.blue-l{background:#dbeafe;color:#1e3a8a;} .blue-h{border-left-color:#1e3a8a;}
+.green-l{background:#dcfce7;color:#14532d;} .green-h{border-left-color:#14532d;}
+.red-l{background:#fee2e2;color:#991b1b;} .red-h{border-left-color:#991b1b;}
+.yellow-l{background:#fef9c3;color:#713f12;} .yellow-h{border-left-color:#713f12;}
+.purple-l{background:#ede9fe;color:#4c1d95;} .purple-h{border-left-color:#4c1d95;}
+.teal-l{background:#ccfbf1;color:#134e4a;} .teal-h{border-left-color:#134e4a;}
+.orange-l{background:#ffedd5;color:#7c2d12;} .orange-h{border-left-color:#7c2d12;}
+.gray-l{background:#f1f5f9;color:#334155;} .gray-h{border-left-color:#334155;}
+.pink-l{background:#fce7f3;color:#831843;} .pink-h{border-left-color:#831843;}
+.petrol-l{background:#e0f2fe;color:#0c4a6e;} .petrol-h{border-left-color:#0c4a6e;}
+@media(prefers-color-scheme:dark){
+  .blue-l{background:#1e3a5f;color:#93c5fd;} .blue-h{border-left-color:#93c5fd;}
+  .green-l{background:#14532d;color:#86efac;} .green-h{border-left-color:#86efac;}
+  .red-l{background:#450a0a;color:#fca5a5;} .red-h{border-left-color:#fca5a5;}
+  .yellow-l{background:#422006;color:#fef08a;} .yellow-h{border-left-color:#fef08a;}
+  .purple-l{background:#2e1065;color:#c4b5fd;} .purple-h{border-left-color:#c4b5fd;}
+  .teal-l{background:#042f2e;color:#5eead4;} .teal-h{border-left-color:#5eead4;}
+  .orange-l{background:#431407;color:#fed7aa;} .orange-h{border-left-color:#fed7aa;}
+  .gray-l{background:#1e293b;color:#94a3b8;} .gray-h{border-left-color:#94a3b8;}
+  .pink-l{background:#4a044e;color:#f0abfc;} .pink-h{border-left-color:#f0abfc;}
+  .petrol-l{background:#082f49;color:#7dd3fc;} .petrol-h{border-left-color:#7dd3fc;}
+}
+.dotblue{background:#1e3a8a;} .dotgreen{background:#14532d;} .dotred{background:#991b1b;}
+.dotyellow{background:#713f12;} .dotpurple{background:#4c1d95;} .dotteal{background:#134e4a;}
+.dotorange{background:#7c2d12;} .dotgray{background:#334155;} .dotpink{background:#831843;} .dotpetrol{background:#0c4a6e;}
+.footer{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;}
+.ft{font-family:'Oswald';font-size:12px;color:#7dd3fc;} .fc{font-size:11px;color:#94a3b8;}
+.qhead{background:#0a2540;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:10px;}
+.qhead h3{font-family:'Oswald';font-size:14px;margin:0 0 2px;} .qhead p{font-size:11px;color:#b6c6dd;margin:0;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;margin:8px 0 12px;}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s;}
+.qprog{font-size:11.5px;color:var(--color-text-secondary);display:flex;justify-content:space-between;}
+.qcard{border-top:0.5px solid var(--color-border-tertiary);padding-top:12px;margin-top:12px;}
+.qnum{font-family:'Oswald';font-size:10px;text-transform:uppercase;color:var(--color-text-secondary);margin:0 0 4px;}
+.qtext{font-size:12.5px;font-weight:600;margin:0 0 8px;}
+.qopts{display:flex;flex-direction:column;}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3';}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn.disabled{opacity:.65;cursor:not-allowed;pointer-events:none;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+.qresults{display:none;border-radius:10px;padding:14px;margin-top:14px;text-align:center;font-size:13px;}
+.qresults.low{background:#fee2e2;color:#991b1b;} .qresults.mid{background:#fef9c3;color:#713f12;} .qresults.high{background:#dcfce7;color:#14532d;}
+.qresults button{margin-top:8px;background:#0a2540;color:#fff;border:none;border-radius:7px;padding:7px 14px;font-size:12px;cursor:pointer;font-family:'Oswald';}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<div class="titlebar">
+  <h1>🌊 Pluviometría e Hidrometría — Cuenca del Río Rímac</h1>
+  <div class="sub">Estudio Hidrológico y Ubicación de la Red de Estaciones Hidrométricas — Cuenca Río Rímac | ANA-DCPRH-ALA Chillón Rímac Lurín | Vol. I, Cap. IV–V (pp. 119–155), Lima, dic. 2010</div>
+  <span class="pill">Red pluviométrica</span><span class="pill">Análisis de consistencia</span><span class="pill">Doble masa</span><span class="pill">Test T y F</span><span class="pill">Polígonos de Thiessen</span><span class="pill">Persistencia Weibull</span>
+</div>
+
+<!-- ============ PLUVIOMETRÍA: CONSISTENCIA ============ -->
+<div class="sbar teal-l">🩵 4.3 Análisis de consistencia de la información pluviométrica (pp. 121–136)</div>
+
+<div class="block s3">
+  <span class="bh teal-l">Por qué se depura la información antes de modelar</span>
+  <div class="def teal-h">Antes de usar cualquier serie histórica en un modelo hidrológico hay que garantizar que sea homogénea, consistente y confiable: los pluviómetros pueden fallar, moverse de sitio o cambiar de operador, generando errores que no son parte del clima real sino del proceso de medición.</div>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>El estudio aplica tres filtros secuenciales: (1) análisis visual de hidrogramas para detectar picos, saltos y tendencias anómalas; (2) análisis de doble masa, comparando el volumen acumulado de cada estación contra el acumulado promedio de un grupo homogéneo, donde un quiebre de pendiente delata inconsistencia sistemática (cambio de exposición del instrumento, reubicación, etc.); (3) análisis estadístico formal de saltos mediante prueba T de Student (consistencia de la media) y prueba F de Fisher (consistencia de la varianza), ambas al 95% de confianza. Solo si |Tc|>Tt o Fc>Ft se corrige la serie.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Es como revisar las cuentas de un negocio antes de sacar conclusiones: primero se mira el gráfico a simple vista buscando algo raro, luego se compara cada estación contra el promedio de sus vecinas —si una empieza a desviarse de golpe, algo cambió en el instrumento, no en el clima—, y finalmente se hace una prueba estadística formal para confirmar si esa diferencia es real o solo azar. Solo si la prueba dice "sí es real" se corrige el dato.</p>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="fbox">Hidrograma visual</div><span class="farrow">→</span>
+    <div class="fbox">Doble masa (quiebres)</div><span class="farrow">→</span>
+    <div class="fbox">Prueba T (media)</div><span class="farrow">→</span>
+    <div class="fbox">Prueba F (varianza)</div><span class="farrow">→</span>
+    <div class="fbox">Serie homogénea 95%</div>
+  </div>
+  <div class="rx">Doble masa: Σ Pi (estación) vs. Σ Pi (promedio del grupo) — un quiebre de pendiente = periodo dudoso</div>
+  <div class="rx-note">El criterio de decisión es: |Tc| &lt; Tt → NO se corrige (diferencia de medias no significativa); Fc &lt; Ft → NO se corrige (diferencia de varianzas no significativa). Resultado del estudio: toda la red es consistente al 95%, salvo la estación Santa Eulalia, que sí requirió corrección.</div>
+  <div class="warn">⚠️ ERROR COMÚN: un "salto" o "quiebre" detectado NO siempre es un error de medición — puede ser un cambio real del clima (por ejemplo, un evento El Niño extremo). Por eso el análisis visual y de doble masa siempre se complementan con la prueba estadística formal antes de decidir si se corrige.</div>
+  <div class="exam">🎯 EXAMEN: Explique la diferencia entre lo que detecta la prueba T de Student y lo que detecta la prueba F de Fisher en el análisis de consistencia de una serie pluviométrica, y por qué ambas son necesarias.</div>
+</div>
+
+<div class="two">
+  <div class="mini blue-l"><b>4.1 Generalidades</b><br>La precipitación es la fuente primaria de agua superficial; su cuantificación areal es el punto de partida obligatorio para modelar el proceso precipitación–escorrentía.</div>
+  <div class="mini blue-l"><b>4.2 Red de estaciones</b><br>27 estaciones meteorológicas (19 dentro de la cuenca Rímac, 8 en cuencas vecinas de apoyo), agrupadas en 4 grupos para el análisis de consistencia.</div>
+</div>
+
+<!-- ============ PRECIPITACIÓN AREAL ============ -->
+<div class="sbar green-l">🟢 4.4–4.5 Completación de datos y precipitación areal — Método de Thiessen (pp. 136–142)</div>
+
+<div class="block s3">
+  <span class="bh green-l">De la lluvia puntual a la lluvia de toda la cuenca</span>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>Existen tres métodos convencionales para el cálculo de precipitación areal: aritmético, isoyetas y polígonos de Thiessen. El estudio adopta Thiessen: se triangulan las estaciones más próximas, se trazan las mediatrices de cada lado del triángulo y estas definen polígonos de influencia alrededor de cada estación, ponderando la precipitación registrada por el área relativa de cada polígono dentro de la cuenca o subcuenca de interés.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Imagina que cada estación "vota" por el territorio más cercano a ella. El método de Thiessen dibuja esas zonas de influencia y calcula un promedio ponderado: la lluvia de las estaciones que cubren más territorio pesa más en el resultado final. Así se obtiene un número representativo de "cuánto llovió en toda la cuenca", no solo en un punto.</p>
+    </div>
+  </div>
+  <div class="rx">Pm = (1/At) × Σ (Pi × Ai), i = 1…n</div>
+  <div class="rx-note">Pm: precipitación areal de la cuenca (mm) | Pi: precipitación registrada en la estación i (mm) | Ai: área de influencia de la estación i (km²) | At: área total de la cuenca o subcuenca (km²) | n: número de estaciones.</div>
+  <div class="three">
+    <div class="mini"><b>Subcuenca Río Blanco</b><br>235.75 km² · 4 estaciones · San Cristóbal domina con 64.4% del área.</div>
+    <div class="mini"><b>Subcuenca Alto Río Rímac</b><br>169.81 km² · Casapalca aporta 81% del peso.</div>
+    <div class="mini"><b>Subcuenca Santa Eulalia</b><br>1077.38 km² · 12 estaciones, la más repartida de la red.</div>
+  </div>
+  <div class="mini gray-l" style="margin-top:7px;"><b>Cuenca húmeda hasta estación Chosica (906 msnm):</b> área total 2318.22 km², calculada con 18 estaciones ponderadas por polígonos de Thiessen. No se calcula precipitación areal aguas abajo de Chosica porque esa franja es la cuenca seca (litoral árido), sin precipitación significativa.</div>
+  <div class="warn">⚠️ ERROR COMÚN: aplicar un simple promedio aritmético de todas las estaciones sin ponderar por área sobreestima la lluvia real de la cuenca, porque en la Rímac hay muchas más estaciones en la parte alta (húmeda) que en la baja (árida), sesgando el promedio simple hacia valores altos.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el estudio no calcula la precipitación areal para toda la cuenca Rímac, sino solo hasta la estación hidrométrica Chosica?</div>
+</div>
+
+<!-- ============ HIDROMETRÍA ============ -->
+<div class="sbar purple-l">🟣 5.1–5.2 Hidrometría — Red de estaciones (pp. 143–146)</div>
+
+<div class="block s3">
+  <span class="bh purple-l">Del pluviómetro al caudal: qué mide una estación hidrométrica</span>
+  <div class="def purple-h">La hidrometría mide, registra y analiza el volumen de agua que circula por una sección de río en la unidad de tiempo (caudal, m³/s). A diferencia de la pluviometría (entrada de agua al sistema), la hidrometría mide la salida/tránsito del agua ya convertida en escorrentía superficial.</div>
+  <div class="three">
+    <div class="mini blue-l"><b>Chosica — río Rímac</b><br>906 msnm · Distrito Chaclacayo. Registro 1912–2009 (98 años): 1912–1964 caudales naturales, 1965–2009 caudales regulados. Administrada por SENAMHI. Mide toda la cuenca húmeda.</div>
+    <div class="mini teal-l"><b>Sheque — río Santa Eulalia</b><br>Distrito Carampoma. Registro continuo 1965–2009 (45 años), caudales naturales. Administrada por EDEGEL. Mide la subcuenca Santa Eulalia.</div>
+    <div class="mini orange-l"><b>Tamboraque — río Rímac</b><br>Distrito Matucana. Registro continuo 1965–2009 (45 años), caudales naturales. Administrada por EDEGEL.</div>
+  </div>
+  <div class="item" style="margin-top:8px;"><span class="dot dotpurple"></span><b>Naturalización de caudales:</b> los caudales registrados en Chosica desde 1965 están regulados por el Túnel Trasandino (trasvase de la cuenca del Mantaro). Para obtener el caudal "natural" de la cuenca Rímac se resta el caudal del Túnel Trasandino al caudal registrado en Chosica — solo así el dato refleja la hidrología propia de la cuenca, sin la intervención humana del trasvase.</div>
+  <div class="warn">⚠️ ERROR COMÚN: usar directamente el caudal registrado en Chosica sin naturalizar para estudios de disponibilidad hídrica "natural" de la cuenca sobreestima el recurso propio de la Rímac, porque incluye agua trasvasada artificialmente desde la cuenca del Mantaro.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué es necesario "naturalizar" los caudales de la estación Chosica antes de usarlos en un balance hídrico de la cuenca Rímac?</div>
+</div>
+
+<!-- ============ PERSISTENCIA ============ -->
+<div class="sbar orange-l">🟠 5.6 Análisis de persistencia de las descargas medias — Fórmula de Weibull (pp. 152–155)</div>
+
+<div class="block s3">
+  <span class="bh orange-l">Cuánta agua puedo garantizar, y con qué probabilidad</span>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>La disponibilidad hídrica para fines de riego se define convencionalmente al 75% de persistencia (probabilidad de excedencia), siguiendo recomendaciones nacionales e internacionales. El estudio aplica la fórmula empírica de posición de graficación de Weibull, ordenando descendentemente los caudales medios mensuales y asignando a cada valor su probabilidad de excedencia empírica, calculada para 50%, 75%, 90% y 95% en las tres estaciones hidrométricas.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Es la diferencia entre "cuánta agua hay en promedio" y "cuánta agua puedo garantizar casi siempre". Si ordenas todos los caudales mensuales históricos de mayor a menor, el caudal "al 75% de persistencia" es aquel que se ha igualado o superado 75 de cada 100 veces — un valor conservador que sirve para planificar riego sin quedarse corto en años secos.</p>
+    </div>
+  </div>
+  <div class="rx">P(X ≥ xm) = m / (n + 1)</div>
+  <div class="rx-note">n: número total de datos de la muestra | m: posición del valor ordenado descendentemente al que se calcula la probabilidad de excedencia P. Fórmula de Weibull, la más usada en hidrología para persistencia de caudales.</div>
+  <table class="tbl">
+    <tr><th>Estación</th><th>Promedio anual (m³/s)</th><th>P75% (m³/s)</th><th>P95% (m³/s)</th><th>Vol. anual promedio (hm³)</th></tr>
+    <tr><td>Chosica</td><td>27.34</td><td>20.49</td><td>13.62</td><td>856.87</td></tr>
+    <tr><td>Sheque</td><td>7.37</td><td>5.34</td><td>2.90</td><td>230.85</td></tr>
+    <tr><td>Tamboraque</td><td>12.12</td><td>9.46</td><td>6.98</td><td>380.34</td></tr>
+  </table>
+  <div class="warn">⚠️ ERROR COMÚN: confundir el caudal "promedio" con el caudal "al 75% de persistencia" — el primero sobreestima la disponibilidad real para diseño de sistemas de riego, porque incluye años muy húmedos que no ocurren la mayoría del tiempo.</div>
+  <div class="exam">🎯 EXAMEN: Con base en el Cuadro de persistencia de Chosica, explique por qué el caudal de diseño para un proyecto de riego se elige al 75% y no al 50% de persistencia.</div>
+</div>
+
+<!-- ============ TABLA INTEGRADORA ============ -->
+<div class="block s3">
+  <span class="bh gray-l">📊 Tabla integradora — Repaso rápido antes del examen</span>
+  <table class="tbl">
+    <tr><th>Etapa / concepto</th><th>Escala</th><th>Método principal</th><th>Variable clave</th><th>Resultado en la cuenca</th></tr>
+    <tr><td>Consistencia pluviométrica</td><td>Puntual (estación)</td><td>Doble masa + prueba T/F</td><td>Media, desviación estándar</td><td>Red consistente 95%, excepto Santa Eulalia</td></tr>
+    <tr><td>Precipitación areal</td><td>Cuenca / subcuenca</td><td>Polígonos de Thiessen</td><td>Área de influencia (km²)</td><td>2318.22 km² de cuenca húmeda hasta Chosica</td></tr>
+    <tr><td>Red hidrométrica</td><td>Sección de río</td><td>Medición directa de caudal</td><td>Caudal (m³/s)</td><td>3 estaciones: Chosica, Sheque, Tamboraque</td></tr>
+    <tr><td>Naturalización</td><td>Estación Chosica</td><td>Resta de trasvase (T. Trasandino)</td><td>Caudal natural vs. regulado</td><td>Serie natural 1965–2009</td></tr>
+    <tr><td>Persistencia</td><td>Mensual, por estación</td><td>Fórmula de Weibull</td><td>Probabilidad de excedencia</td><td>P75% Chosica = 20.49 m³/s</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: todo el capítulo sigue una misma lógica de tres pasos aplicada dos veces (pluviometría e hidrometría): depurar la serie → espacializarla o resumirla estadísticamente → usarla con un criterio de probabilidad definido (75% para diseño). Esa secuencia es la misma que se repetirá en el balance hídrico del Cap. VI-IX.</div>
+</div>
+
+<!-- ============ QUIZ ============ -->
+<div class="block s3" id="quiz-section">
+  <div class="qhead"><h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3><p>Marca tu respuesta y descubre si es correcta</p></div>
+  <div class="qprog"><span id="qprogtext">Pregunta 0 de 10 respondidas</span><span id="qscoretext">0% de aciertos</span></div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" id="qbar"></div></div>
+
+  <div class="qcard" id="q1"><p class="qnum">Pregunta 1 / 10</p><p class="qtext">¿Cuál es el orden correcto de los tres filtros del análisis de consistencia pluviométrica aplicados en el estudio?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Prueba F → prueba T → hidrograma visual</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) Hidrograma visual → doble masa → prueba T/F</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) Doble masa → hidrograma visual → Weibull</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Thiessen → doble masa → hidrograma visual</button>
+    </div><div class="qfeedback" id="fb1"></div></div>
+
+  <div class="qcard" id="q2"><p class="qnum">Pregunta 2 / 10</p><p class="qtext">En el análisis de doble masa, ¿qué indica un "quiebre" (cambio de pendiente) en el diagrama de una estación?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Que la estación registró un año particularmente lluvioso</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Un posible periodo de inconsistencia, ya sea por error sistemático o cambio físico en la medición</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Que la estación debe eliminarse definitivamente de la red</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Que la cuenca cambió de clima permanentemente</button>
+    </div><div class="qfeedback" id="fb2"></div></div>
+
+  <div class="qcard" id="q3"><p class="qnum">Pregunta 3 / 10</p><p class="qtext">¿Qué prueba estadística se usa para verificar la consistencia de la media de una serie, y cuál para la desviación estándar?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="true">A) T de Student para la media; F de Fisher para la desviación estándar</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) F de Fisher para la media; T de Student para la desviación estándar</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) Weibull para ambas</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) Chi-cuadrado para ambas</button>
+    </div><div class="qfeedback" id="fb3"></div></div>
+
+  <div class="qcard" id="q4"><p class="qnum">Pregunta 4 / 10</p><p class="qtext">¿Cuál método de cálculo de precipitación areal utiliza el estudio para la cuenca Rímac?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Método aritmético simple</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) Método de isoyetas</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) Polígonos de Thiessen</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Kriging geoestadístico</button>
+    </div><div class="qfeedback" id="fb4"></div></div>
+
+  <div class="qcard" id="q5"><p class="qnum">Pregunta 5 / 10</p><p class="qtext">¿Por qué el estudio NO calcula precipitación areal para toda la cuenca Rímac, sino solo hasta la estación Chosica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) Porque no hay estaciones aguas abajo de Chosica</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) Porque aguas abajo de Chosica la cuenca es árida y no hay precipitación significativa que aportar al balance</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) Porque Chosica es la desembocadura del río al mar</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) Por falta de información cartográfica de esa zona</button>
+    </div><div class="qfeedback" id="fb5"></div></div>
+
+  <div class="qcard" id="q6"><p class="qnum">Pregunta 6 / 10</p><p class="qtext">Si dos estaciones tienen la misma precipitación puntual pero áreas de influencia (polígonos de Thiessen) muy distintas, ¿qué ocurre en el cálculo de precipitación areal?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Ambas estaciones pesan igual en el promedio final</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) La estación con mayor área de influencia tiene mayor peso (Ai/At) en el promedio ponderado final</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Se descarta automáticamente la estación con menor área</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) El área de influencia no afecta el cálculo, solo la altitud</button>
+    </div><div class="qfeedback" id="fb6"></div></div>
+
+  <div class="qcard" id="q7"><p class="qnum">Pregunta 7 / 10</p><p class="qtext">¿En qué se diferencia un caudal "natural" de un caudal "regulado" en la estación Chosica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Son sinónimos, ambos términos describen lo mismo</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) El caudal natural refleja solo la hidrología propia de la cuenca; el regulado incluye el aporte del trasvase del Túnel Trasandino desde la cuenca del Mantaro</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) El caudal natural es siempre mayor que el regulado</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) El caudal regulado solo existe antes de 1965</button>
+    </div><div class="qfeedback" id="fb7"></div></div>
+
+  <div class="qcard" id="q8"><p class="qnum">Pregunta 8 / 10</p><p class="qtext">¿Cuál afirmación sobre las tres estaciones hidrométricas de la cuenca Rímac es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Chosica tiene el registro histórico más largo (desde 1912)</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) Sheque mide la subcuenca del río Santa Eulalia</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) Las tres estaciones son administradas por SENAMHI</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Tamboraque se ubica en el distrito de Matucana</button>
+    </div><div class="qfeedback" id="fb8"></div></div>
+
+  <div class="qcard" id="q9"><p class="qnum">Pregunta 9 / 10</p><p class="qtext">Según el Cuadro de persistencia de la estación Chosica, ¿qué caudal se garantiza el 75% del tiempo (promedio anual)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) 37.40 m³/s</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) 20.49 m³/s</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) 13.62 m³/s</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) 27.34 m³/s</button>
+    </div><div class="qfeedback" id="fb9"></div></div>
+
+  <div class="qcard" id="q10"><p class="qnum">Pregunta 10 / 10</p><p class="qtext">En el contexto de gestión de riego en el valle del Rímac (Lima), ¿por qué se usa la persistencia al 75% en lugar del caudal promedio para planificar disponibilidad hídrica?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Porque el 75% siempre coincide con el promedio</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) Porque el promedio incluye años muy húmedos que no ocurren la mayor parte del tiempo, y usar el 75% da una garantía más realista y conservadora para el diseño</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) Porque es una exigencia exclusiva de EDEGEL para generación eléctrica</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Porque a mayor persistencia, mayor es el caudal disponible</button>
+    </div><div class="qfeedback" id="fb10"></div></div>
+
+  <div class="qresults" id="qresults">
+    <p id="qresultsText" style="font-weight:600;margin:0 0 4px;"></p>
+    <p id="qresultsScore" style="margin:0;"></p>
+    <button onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- ============ REFERENCIAS ============ -->
+<div class="block s3" id="refs-institucionales">
+  <span class="bh petrol-l">🔗 PARA PROFUNDIZAR — FUENTES INSTITUCIONALES</span>
+  <div class="three">
+    <div class="mini petrol-l"><b>🔗 SENAMHI Perú</b> — senamhi.gob.pe<br>Datos actualizados de la estación Chosica y boletines hidrológicos vigentes de la cuenca Rímac.</div>
+    <div class="mini petrol-l"><b>🔗 ANA — Autoridad Nacional del Agua</b> — gob.pe/ana (verificar vigencia)<br>Autor original del estudio; normativa y metodologías oficiales de análisis hidrométrico en Perú.</div>
+    <div class="mini petrol-l"><b>🔗 WMO/OMM — Guide to Hydrological Practices</b> — wmo.int<br>Estándar internacional de análisis de consistencia (doble masa, pruebas T y F) usado como referencia metodológica.</div>
+  </div>
+  <div class="three" style="margin-top:7px;">
+    <div class="mini petrol-l"><b>🔗 COES-SINAC</b> — coes.org.pe (verificar vigencia)<br>Contexto de operación del trasvase Mantaro-Rímac (Túnel Trasandino) para generación eléctrica y su efecto en la naturalización de caudales.</div>
+    <div class="mini petrol-l"><b>🔗 COMET Program (UCAR/MetEd)</b> — meted.ucar.edu<br>Cursos gratuitos sobre análisis de series hidrológicas y control de calidad de datos.</div>
+    <div class="mini petrol-l"><b>🔗 IGP</b> — gob.pe/igp<br>Estudios de variabilidad interanual de caudales andinos y su relación con El Niño/La Niña.</div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS DEL DOCUMENTO:</span>
+  <span class="fc">ANA-DCPRH-ALA Chillón Rímac Lurín (2010). Estudio Hidrológico y Ubicación de la Red de Estaciones Hidrométricas en la Cuenca del Río Rímac, Vol. I, Cap. IV "Pluviometría" y Cap. V "Hidrometría", pp. 119–155. · Método de Thiessen (precipitación areal) · Pruebas T de Student y F de Fisher (consistencia) · Fórmula de Weibull (persistencia)</span>
+</div>
+
+</div>
+<script>
+const totalQ = 10; let answered = 0; let correctCount = 0;
+const feedbackText = {
+1:{ok:"El orden lógico es: primero detectar anomalías a simple vista (hidrograma), luego confirmarlas comparando contra un grupo de estaciones (doble masa), y finalmente validarlas formalmente con pruebas estadísticas T y F antes de decidir si se corrige.",
+   bad:"La respuesta correcta es B). El proceso siempre va de lo visual a lo estadístico: hidrograma visual → doble masa → prueba T/F, nunca al revés."},
+2:{ok:"Correcto: un quiebre en el diagrama de doble masa señala un cambio en la relación entre la estación y el grupo de referencia, que puede deberse a un error sistemático (reubicación, cambio de instrumento) o a un cambio físico real; por eso se investiga antes de corregir.",
+   bad:"La respuesta correcta es B). El quiebre es una señal de alerta que requiere investigación, no una conclusión automática ni un motivo para eliminar la estación."},
+3:{ok:"Correcto: la prueba T de Student compara medias de dos periodos; la prueba F de Fisher compara varianzas (desviación estándar al cuadrado). Ambas se aplican juntas porque una serie puede tener la media consistente pero la varianza no, o viceversa.",
+   bad:"La respuesta correcta es A). T de Student evalúa la media; F de Fisher evalúa la dispersión (desviación estándar). Confundirlas es un error común en el análisis de consistencia."},
+4:{ok:"Correcto: el estudio usa polígonos de Thiessen, ponderando cada estación por su área de influencia calculada mediante triangulación y mediatrices.",
+   bad:"La respuesta correcta es C) Polígonos de Thiessen. Es el método más usado quenponderan geométricamente el área de influencia de cada estación."},
+5:{ok:"Correcto: aguas abajo de Chosica la cuenca es seca (árida, litoral desértico) y no aporta precipitación significativa al balance, por lo que calcular su precipitación areal no tendría valor práctico.",
+   bad:"La respuesta correcta es B). La cuenca húmeda termina en Chosica; de ahí hacia el mar, la precipitación es prácticamente nula y no se calcula."},
+6:{ok:"Correcto: el factor de ponderación en Thiessen es Ai/At, por lo que una estación con mayor área de influencia domina el promedio areal final, independientemente de que su valor puntual sea igual al de otra estación.",
+   bad:"La respuesta correcta es B). El área de influencia (Ai) determina el peso de cada estación en la fórmula Pm = (1/At)·Σ(Pi×Ai); a mayor área, mayor influencia en el resultado."},
+7:{ok:"Correcto: el caudal natural es el que tendría el río sin intervención humana; el regulado incluye el trasvase artificial del Túnel Trasandino desde la cuenca del Mantaro, por lo que hay que restarlo para obtener el valor 'propio' de la cuenca Rímac.",
+   bad:"La respuesta correcta es B). Naturalizar significa restar el aporte externo (trasvase) del caudal regulado registrado, para aislar la hidrología genuina de la cuenca Rímac."},
+8:{ok:"Correcto, es FALSA: Chosica es administrada por SENAMHI, pero Sheque y Tamboraque son administradas por EDEGEL, no por SENAMHI.",
+   bad:"La respuesta correcta es C). Es falsa porque solo Chosica es administrada por SENAMHI; Sheque y Tamboraque son operadas por EDEGEL, la empresa de generación eléctrica."},
+9:{ok:"Correcto: el caudal promedio anual al 75% de persistencia en Chosica es 20.49 m³/s, un valor conservador usado para diseño de disponibilidad hídrica confiable.",
+   bad:"La respuesta correcta es B) 20.49 m³/s. El valor de 37.40 m³/s es el promedio simple (no garantizado); 13.62 m³/s corresponde al 95% de persistencia, un escenario aún más conservador."},
+10:{ok:"Correcto: el promedio se ve inflado por años muy húmedos que no representan la condición típica; el 75% de persistencia garantiza un caudal que se iguala o supera la mayoría del tiempo, evitando sobredimensionar sistemas de riego que fallarían en años secos.",
+   bad:"La respuesta correcta es B). Usar el promedio simple para planificar riego es riesgoso porque sobreestima el agua realmente disponible la mayor parte del tiempo; el 75% de persistencia es el estándar recomendado por ser más conservador y realista."}
+};
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn'); if(!btn || btn.classList.contains('disabled')) return;
+  const q = btn.dataset.q; const isCorrect = btn.dataset.correct === 'true';
+  document.querySelectorAll('.qbtn[data-q="'+q+'"]').forEach(b=>{
+    b.classList.add('disabled');
+    if(b.dataset.correct === 'true'){ b.classList.add('correct'); if(!b.textContent.startsWith('✅')) b.textContent = '✅ ' + b.textContent; }
+    else if(b === btn && !isCorrect){ b.classList.add('incorrect'); if(!b.textContent.startsWith('❌')) b.textContent = '❌ ' + b.textContent; }
+  });
+  const fb = document.getElementById('fb'+q); fb.style.display = 'block';
+  if(isCorrect){ fb.className = 'qfeedback ok'; fb.innerHTML = '✅ ¡Correcto! ' + feedbackText[q].ok; correctCount++; }
+  else { fb.className = 'qfeedback bad'; fb.innerHTML = '❌ Incorrecto. ' + feedbackText[q].bad; }
+  answered++;
+  document.getElementById('qprogtext').textContent = 'Pregunta ' + answered + ' de ' + totalQ + ' respondidas';
+  document.getElementById('qscoretext').textContent = Math.round((correctCount/answered)*100) + '% de aciertos';
+  document.getElementById('qbar').style.width = Math.round((answered/totalQ)*100) + '%';
+  if(answered === totalQ){
+    const res = document.getElementById('qresults'); res.style.display = 'block';
+    let cls, msg;
+    if(correctCount <= 4){cls='low'; msg='Necesitas repasar el material.';}
+    else if(correctCount <= 7){cls='mid'; msg='¡Buen avance, sigue repasando!';}
+    else {cls='high'; msg='¡Excelente dominio del tema!';}
+    res.className = 'qresults ' + cls;
+    document.getElementById('qresultsText').textContent = msg;
+    document.getElementById('qresultsScore').textContent = correctCount + ' / ' + totalQ + ' correctas';
+  }
+});
+function resetQuiz(){
+  answered = 0; correctCount = 0;
+  document.querySelectorAll('.qbtn').forEach(b=>{ b.classList.remove('correct','incorrect','disabled'); b.textContent = b.textContent.replace('✅ ','').replace('❌ ',''); });
+  document.querySelectorAll('.qfeedback').forEach(f=>{f.style.display='none';});
+  document.getElementById('qprogtext').textContent = 'Pregunta 0 de 10 respondidas';
+  document.getElementById('qscoretext').textContent = '0% de aciertos';
+  document.getElementById('qbar').style.width = '0%';
+  document.getElementById('qresults').style.display = 'none';
+}
+</script>
+</body>
+</html>

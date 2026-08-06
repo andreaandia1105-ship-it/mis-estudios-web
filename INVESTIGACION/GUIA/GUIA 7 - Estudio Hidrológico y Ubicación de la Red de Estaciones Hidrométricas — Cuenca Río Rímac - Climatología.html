@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Climatología Cuenca Rímac — Canvas de Repaso</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+:root{
+  --color-background-primary:#ffffff;
+  --color-background-secondary:#f4f5f7;
+  --color-background-tertiary:#e9eaee;
+  --color-text-primary:#14181f;
+  --color-text-secondary:#5b6270;
+  --color-border-tertiary:#d8dae0;
+  --color-border-secondary:#c3c6cf;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --color-background-primary:#181a20;
+    --color-background-secondary:#20232b;
+    --color-background-tertiary:#14161b;
+    --color-text-primary:#e9eaee;
+    --color-text-secondary:#a6acba;
+    --color-border-tertiary:#33374280;
+    --color-border-secondary:#454b59;
+  }
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary);background:var(--color-background-tertiary);}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);}
+@media(max-width:640px){.cv{grid-template-columns:1fr}}
+
+.titlebar{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:12px;padding:14px 18px;}
+.titlebar h1{font-family:'Oswald';font-size:20px;font-weight:700;margin:0 0 3px;}
+.titlebar .sub{font-size:11px;color:#b6c6dd;margin-bottom:8px;}
+.titlebar .pill{background:rgba(255,255,255,.12);color:#cfe0f5;}
+
+.sbar{grid-column:1/-1;font-family:'Oswald';font-size:13px;font-weight:700;border-radius:8px;padding:7px 12px;margin-top:2px;}
+
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;}
+.block.s3{grid-column:1/-1;}
+
+.bh{font-family:'Oswald';font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:8px 0 3px;}
+.rx-note{font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;}
+
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:7px 10px;margin-top:8px;}
+
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+@media(max-width:640px){.two,.three{grid-template-columns:1fr}}
+
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0;}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:6px;font-size:11px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;}
+
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);text-align:left;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;}
+@media(max-width:640px){.dual{grid-template-columns:1fr}}
+.dual-tech{background:#e0f2fe;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#0c4a6e;}
+.dual-plain{background:#dcfce7;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#14532d;}
+@media(prefers-color-scheme:dark){
+  .dual-tech{background:#082f49;color:#7dd3fc;}
+  .dual-plain{background:#14532d;color:#86efac;}
+}
+.dual-label{font-family:'Oswald';font-size:10px;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 4px;opacity:.85;}
+.dual p{margin:0;}
+
+/* Color light/dark pairs */
+.blue-l{background:#dbeafe;color:#1e3a8a;} .blue-h{border-left-color:#1e3a8a;}
+.green-l{background:#dcfce7;color:#14532d;} .green-h{border-left-color:#14532d;}
+.red-l{background:#fee2e2;color:#991b1b;} .red-h{border-left-color:#991b1b;}
+.yellow-l{background:#fef9c3;color:#713f12;} .yellow-h{border-left-color:#713f12;}
+.purple-l{background:#ede9fe;color:#4c1d95;} .purple-h{border-left-color:#4c1d95;}
+.teal-l{background:#ccfbf1;color:#134e4a;} .teal-h{border-left-color:#134e4a;}
+.orange-l{background:#ffedd5;color:#7c2d12;} .orange-h{border-left-color:#7c2d12;}
+.gray-l{background:#f1f5f9;color:#334155;} .gray-h{border-left-color:#334155;}
+.pink-l{background:#fce7f3;color:#831843;} .pink-h{border-left-color:#831843;}
+.petrol-l{background:#e0f2fe;color:#0c4a6e;} .petrol-h{border-left-color:#0c4a6e;}
+@media(prefers-color-scheme:dark){
+  .blue-l{background:#1e3a5f;color:#93c5fd;} .blue-h{border-left-color:#93c5fd;}
+  .green-l{background:#14532d;color:#86efac;} .green-h{border-left-color:#86efac;}
+  .red-l{background:#450a0a;color:#fca5a5;} .red-h{border-left-color:#fca5a5;}
+  .yellow-l{background:#422006;color:#fef08a;} .yellow-h{border-left-color:#fef08a;}
+  .purple-l{background:#2e1065;color:#c4b5fd;} .purple-h{border-left-color:#c4b5fd;}
+  .teal-l{background:#042f2e;color:#5eead4;} .teal-h{border-left-color:#5eead4;}
+  .orange-l{background:#431407;color:#fed7aa;} .orange-h{border-left-color:#fed7aa;}
+  .gray-l{background:#1e293b;color:#94a3b8;} .gray-h{border-left-color:#94a3b8;}
+  .pink-l{background:#4a044e;color:#f0abfc;} .pink-h{border-left-color:#f0abfc;}
+  .petrol-l{background:#082f49;color:#7dd3fc;} .petrol-h{border-left-color:#7dd3fc;}
+}
+.dotblue{background:#1e3a8a;} .dotgreen{background:#14532d;} .dotred{background:#991b1b;}
+.dotyellow{background:#713f12;} .dotpurple{background:#4c1d95;} .dotteal{background:#134e4a;}
+.dotorange{background:#7c2d12;} .dotgray{background:#334155;} .dotpink{background:#831843;}
+.dotpetrol{background:#0c4a6e;}
+
+.footer{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;}
+.ft{font-family:'Oswald';font-size:12px;color:#7dd3fc;}
+.fc{font-size:11px;color:#94a3b8;}
+
+/* QUIZ */
+.qhead{background:#0a2540;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:10px;}
+.qhead h3{font-family:'Oswald';font-size:14px;margin:0 0 2px;}
+.qhead p{font-size:11px;color:#b6c6dd;margin:0;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;margin:8px 0 12px;}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s;}
+.qprog{font-size:11.5px;color:var(--color-text-secondary);display:flex;justify-content:space-between;}
+.qcard{border-top:0.5px solid var(--color-border-tertiary);padding-top:12px;margin-top:12px;}
+.qnum{font-family:'Oswald';font-size:10px;text-transform:uppercase;color:var(--color-text-secondary);margin:0 0 4px;}
+.qtext{font-size:12.5px;font-weight:600;margin:0 0 8px;}
+.qopts{display:flex;flex-direction:column;}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3';}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn.disabled{opacity:.65;cursor:not-allowed;pointer-events:none;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+.qresults{display:none;border-radius:10px;padding:14px;margin-top:14px;text-align:center;font-size:13px;}
+.qresults.low{background:#fee2e2;color:#991b1b;}
+.qresults.mid{background:#fef9c3;color:#713f12;}
+.qresults.high{background:#dcfce7;color:#14532d;}
+.qresults button{margin-top:8px;background:#0a2540;color:#fff;border:none;border-radius:7px;padding:7px 14px;font-size:12px;cursor:pointer;font-family:'Oswald';}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<div class="titlebar">
+  <h1>🌡️ Climatología de la Cuenca del Río Rímac</h1>
+  <div class="sub">Estudio Hidrológico y Ubicación de la Red de Estaciones Hidrométricas — Cuenca Río Rímac | ANA-DCPRH-ALA Chillón Rímac Lurín | Vol. I, Cap. III (pp. 83–118), Lima, dic. 2010</div>
+  <span class="pill">Precipitación</span><span class="pill">Temperatura</span><span class="pill">Humedad relativa</span><span class="pill">Evaporación</span><span class="pill">Viento</span><span class="pill">ETP</span><span class="pill">Thornthwaite</span>
+</div>
+
+<!-- ================= PRECIPITACIÓN ================= -->
+<div class="sbar teal-l">🩵 3.1.1 Precipitación (Diap./pp. 83–89)</div>
+
+<div class="block s3">
+  <span class="bh teal-l">Qué es y por qué importa</span>
+  <div class="def teal-h">La precipitación es la primera variable del ciclo hidrológico: es la entrada de agua al sistema cuenca. Sin cuantificarla bien, ningún balance hídrico, diseño de embalse o estimación de caudal de diseño tiene fundamento.</div>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>La red pluviométrica de la cuenca Rímac está compuesta por 27 estaciones (19 dentro de la cuenca, 8 en cuencas vecinas usadas como apoyo regional para completar series). La precipitación total anual varía entre 0.6 mm (estación Rímac, 35 msnm, litoral desértico) y 874.6 mm (San Cristóbal, 4700 msnm), evidenciando un gradiente altitudinal fuertemente no lineal asociado al frente orográfico andino, donde la advección de humedad amazónica-alto andina se ve modulada por la Corriente de Humboldt en la franja costera.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Imagina la cuenca como una escalera: en el escalón de abajo (Lima, costa) casi no llueve porque el mar frío enfría el aire y no lo deja subir para formar nubes de lluvia. Subiendo la escalera hacia la sierra, el aire húmedo se ve obligado a subir, se enfría y suelta su agua como lluvia. Por eso en la costa cae menos de 1 mm al año y en la parte alta puede llover casi 900 mm.</p>
+    </div>
+  </div>
+  <div class="item"><span class="dot dotteal"></span><b>Régimen estacional:</b> el periodo lluvioso (dic–mar) concentra el 72.52% de la precipitación anual promedio de todas las estaciones; el periodo seco/invierno (may–set) apenas alcanza el 7.15%; los meses de transición (abr, oct–nov) explican el 20.33% restante. Este patrón bimodal marcado es típico del régimen tropical de vertiente occidental peruana, dominado por la Zona de Convergencia Intertropical y la posición estacional del Anticiclón del Pacífico Sur.</div>
+  <div class="item"><span class="dot dotteal"></span><b>Precipitación máxima en 24 h:</b> analizada en las 27 estaciones (serie 1964–2009), el valor histórico más alto registrado es 89.9 mm en la estación Santiago de Tuna (año 1970). Este dato es la base para el diseño de obras de drenaje y para el análisis de máximas avenidas del Cap. X.</div>
+  <div class="rx">P_areal = f(isoyetas, Thiessen) &nbsp;|&nbsp; Rango cuenca: 0.6 – 874.6 mm/año</div>
+  <div class="rx-note">La precipitación areal (no puntual) se obtiene interpolando entre estaciones — no basta con una sola estación para representar toda la cuenca.</div>
+  <div class="warn">⚠️ ERROR COMÚN: no confundir "precipitación total anual" (mm acumulados en un año, variable de balance) con "precipitación máxima en 24 h" (evento extremo puntual, variable de diseño hidráulico). Son dos análisis con propósitos distintos aunque usen el mismo instrumento (pluviómetro).</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la precipitación anual varía de 0.6 mm en la parte baja a 874.6 mm en la parte alta de la cuenca Rímac, y qué mecanismo físico-orográfico lo explica.</div>
+</div>
+
+<!-- ================= TEMPERATURA ================= -->
+<div class="sbar orange-l">🟠 3.1.2 Temperatura (Diap./pp. 90–103)</div>
+
+<div class="block s3">
+  <span class="bh orange-l">Regímenes medio, máximo y mínimo</span>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>Se ajustaron regresiones lineales simples Tmed = a + bH (H = altitud en msnm) para las tres variables térmicas, dado que la temperatura es la variable climática con mayor correlación espacial estable en el tiempo (series casi invariantes), lo que permite completar estaciones sin registro histórico continuo. Los coeficientes obtenidos: Tmed = 19.94 − 0.00132H (R²=0.29); Tmáx = 22.46 − 0.00079H (R²=0.12); Tmín = 16.64 − 0.00165H (R²=0.30). El gradiente térmico vertical resultante (~0.66°C/100m para la media) es más suave que el gradiente adiabático seco estándar (0.98°C/100m), lo que refleja el efecto amortiguador de la humedad advectada y la influencia marina en las estaciones bajas.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Como en cualquier montaña, mientras más subes, más frío hace. Con los datos de varias estaciones se calculó "cuánto baja la temperatura por cada metro que subes" mediante una línea de tendencia. Así, aunque en un pueblo alto no haya termómetro instalado, se puede estimar su temperatura solo sabiendo su altitud. El ajuste no es perfecto (R² bajo) porque otros factores —cercanía al mar, exposición al sol, vientos locales— también influyen.</p>
+    </div>
+  </div>
+  <div class="two">
+    <div class="mini blue-l"><b>Temperatura media</b><br>Más baja en julio, más alta nov–mar (centrada en enero). 12 estaciones analizadas (13–4479 msnm).</div>
+    <div class="mini red-l"><b>Temperatura máxima</b><br>Media anual 25.0°C; máxima mensual en feb (29.9°C); mínima mensual en jul (18.6°C).</div>
+  </div>
+  <div class="mini gray-l" style="margin-top:7px;"><b>Temperatura mínima — casos extremos</b><br>Matucana 10°C, Milloc y Mina Colqui 9.5°C; en la cuenca vecina del Mantaro, Marcapomacocha registra −1.6°C, el valor más bajo de toda la red.</div>
+  <div class="rx">T = a + b·H</div>
+  <div class="rx-note">T en °C, H en msnm. Válida solo dentro del rango altitudinal muestreado (13–4479 msnm); extrapolar por encima de 4800 msnm (línea de nieve) subestima el enfriamiento real.</div>
+  <div class="warn">⚠️ ERROR COMÚN: un R² bajo (0.12–0.30) no invalida la regresión para fines de completación de datos; simplemente indica que la altitud NO es el único factor —falta incorporar continentalidad, orientación de laderas y cercanía al mar— pero sigue siendo la mejor variable predictora disponible con la información existente.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el gradiente térmico vertical calculado para la cuenca Rímac (~0.66 °C/100 m) es menor que el gradiente adiabático seco teórico (0.98 °C/100 m)?</div>
+</div>
+
+<!-- ================= HR, EVAP, SOL, VIENTO ================= -->
+<div class="sbar purple-l">🟣 3.1.3–3.1.6 Humedad, evaporación, horas de sol y viento (pp. 104–112)</div>
+
+<div class="block">
+  <span class="bh purple-l">Humedad relativa</span>
+  <div class="def purple-h">7 estaciones con registro (2 en cuencas vecinas); completadas por regresión HR = 83.14 − 0.00091H (R²=0.08, muy baja dependencia altitudinal).</div>
+  <div class="item"><span class="dot dotpurple"></span>Máximo: Campo de Marte CGFAP, marzo, 89%.</div>
+  <div class="item"><span class="dot dotpurple"></span>Mínimo: Matucana, julio, 57%.</div>
+  <div class="item"><span class="dot dotpurple"></span>Ciclo diario inverso a la temperatura: sube de noche, baja de día.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué la humedad relativa es alta y estable cerca del litoral, pero baja y muy oscilante tierra adentro?</div>
+</div>
+
+<div class="block">
+  <span class="bh orange-l">Evaporación y horas de sol</span>
+  <div class="def orange-h">La evaporación depende directamente de la radiación solar que calienta el suelo y libera humedad; las horas de sol miden la insolación diaria efectiva.</div>
+  <div class="item"><span class="dot dotorange"></span>Evaporación máxima: Matucana, 1567.2 mm/año.</div>
+  <div class="item"><span class="dot dotorange"></span>Evaporación mínima: Campo de Marte, 464.3 mm/año.</div>
+  <div class="item"><span class="dot dotorange"></span>Horas de sol: máx. Matucana (5.28 h/día); mín. Hipólito Unanue (3.84 h/día), acentuadas nov–abr.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué Matucana presenta a la vez la mayor evaporación y las mayores horas de sol de la red?</div>
+</div>
+
+<div class="block">
+  <span class="bh blue-l">Viento</span>
+  <div class="def blue-h">Generado por gradientes de presión atmosférica producidos por calentamiento diferencial de superficies. 8 estaciones con registro.</div>
+  <div class="item"><span class="dot dotblue"></span>Máximo: Las Palmas, noviembre, 6 m/s.</div>
+  <div class="item"><span class="dot dotblue"></span>Mínimo: Campo de Marte, junio, 0.8 m/s.</div>
+  <div class="item"><span class="dot dotblue"></span>Se intensifica de agosto a diciembre en toda la red.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué relación existe entre el ciclo estacional del viento (más fuerte ago–dic) y el ciclo de precipitación (más intensa dic–mar) en la cuenca?</div>
+</div>
+
+<!-- ================= ETP ================= -->
+<div class="sbar green-l">🟢 3.1.7 Evapotranspiración potencial — ETP (pp. 112–115)</div>
+
+<div class="block s3">
+  <span class="bh green-l">Definición y método Penman-Monteith FAO</span>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>La ETP representa la pérdida de agua de una superficie completamente cubierta de vegetación bajo condiciones hídricas no limitantes, integrando el forzante energético (radiación neta) y el forzante aerodinámico (déficit de presión de vapor, viento). El estudio calcula la ETo mediante Penman-Monteith FAO-56 —estándar de referencia de la OMM/FAO— procesado en software CropWat 4.3, superior a métodos empíricos simplificados (Thornthwaite, Hargreaves) porque acopla simultáneamente temperatura máxima/mínima, humedad relativa, viento y horas de sol en una única ecuación físicamente consistente.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>La ETP responde a la pregunta: "si hubiera pasto bien regado en todo este lugar, ¿cuánta agua perdería al aire cada día por el calor, el viento y el sol?" No es la evaporación real del suelo desnudo, sino un valor de referencia que sirve para calcular cuánta agua necesitan realmente los cultivos o para estimar cuánta agua "se pierde" hacia la atmósfera en el balance de la cuenca.</p>
+    </div>
+  </div>
+  <div class="rx">ETo = [0.408·Δ·(Rn−G) + γ·(900/(T+273))·u2·(es−ea)] / [Δ + γ·(1+0.34·u2)]</div>
+  <div class="rx-note">ETo: mm/día | Rn, G: MJ/m²/día | T: °C a 2 m | u2: m/s a 2 m | es−ea: kPa (déficit de presión de vapor) | Δ: kPa/°C | γ: constante psicrométrica, kPa/°C. Válida para superficie de referencia (pasto), no para cultivos específicos sin coeficiente Kc.</div>
+  <div class="three">
+    <div class="mini"><b>Campo de Marte</b><br>159 msnm · 981.8 mm/año</div>
+    <div class="mini"><b>Hipólito Unanue</b><br>70 msnm · 965.0 mm/año</div>
+    <div class="mini"><b>Manchay Bajo</b><br>148 msnm · 1146.2 mm/año</div>
+  </div>
+  <div class="mini gray-l" style="margin-top:7px;"><b>Matucana</b> · 2479 msnm · 1276.8 mm/año — mayor ETP anual de las 4 estaciones evaluadas, coherente con sus mayores horas de sol y menor humedad relativa relativa.</div>
+  <div class="warn">⚠️ ERROR COMÚN: confundir evaporación de tanque (medida directa con un instrumento físico, Cap. 3.1.4) con evapotranspiración potencial (variable calculada con una ecuación que asume cobertura vegetal). No son intercambiables sin aplicar un coeficiente de tanque.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el estudio prefiere el método Penman-Monteith FAO sobre métodos empíricos más simples para estimar la ETP de la cuenca Rímac?</div>
+</div>
+
+<!-- ================= CLASIFICACIÓN CLIMÁTICA ================= -->
+<div class="sbar pink-l">🩷 3.2 Clasificación climática — Sistema Thornthwaite (pp. 116–118)</div>
+
+<div class="block s3">
+  <span class="bh pink-l">Índices de precipitación y temperatura efectiva</span>
+  <div class="def pink-h">Thornthwaite clasifica el clima combinando dos índices adimensionales: la Precipitación Efectiva (PE, relaciona precipitación y temperatura anual) y la Temperatura Efectiva (TE = 5.4·T). Cada combinación PE–TE ubica a una estación en una "provincia de humedad" (A: muy húmedo … E: árido) y una "provincia de temperatura" (A′: tropical … F′: glacial).</div>
+  <div class="rx">PE = f(Pi, Ti) &nbsp;&nbsp;|&nbsp;&nbsp; TE = 5.4 × T</div>
+  <div class="rx-note">Pi: precipitación total anual (mm) | Ti, T: temperatura media anual (°C). PE típico en la cuenca: 0.35 (árido, litoral) a 64.4 (húmedo, cabecera).</div>
+  <div class="three">
+    <div class="mini gray-l"><b>Aeropuerto / Campo de Marte / Chosica</b><br>Árido-mesotérmico (desecado). Biotemperatura 18.8–20.3°C.</div>
+    <div class="mini gray-l"><b>Autisha (2171 msnm)</b><br>Árido-mesotérmico templado. Biotemperatura 15–17°C.</div>
+    <div class="mini teal-l"><b>Carampoma (3489 msnm)</b><br>Sub húmedo-mesotérmico. Biotemperatura 14–15°C.</div>
+  </div>
+  <div class="two" style="margin-top:7px;">
+    <div class="mini teal-l"><b>Casapalca (4214 msnm)</b><br>Sub húmedo-mesotérmico, suelos húmedos.</div>
+    <div class="mini blue-l"><b>Laguna Pirhua (4750 msnm)</b><br>Húmedo-mesotérmico, suelos muy húmedos.</div>
+  </div>
+  <div class="item" style="margin-top:8px;"><span class="dot dotpink"></span><b>Síntesis territorial:</b> la cuenca se divide en dos grandes climas — clima seco (0–3000 msnm, 1201.85 km², 34.3% del área total) y clima húmedo (>3000 msnm hasta la divisoria, 2302.1 km², 65.7% del área total).</div>
+  <div class="warn">⚠️ ERROR COMÚN: la clasificación de Thornthwaite se basa en promedios anuales de precipitación y temperatura, por lo que NO captura la estacionalidad marcada de la cuenca (72.5% de lluvia concentrada en 4 meses); dos lugares con el mismo PE anual pueden tener regímenes de riesgo hídrico muy distintos.</div>
+  <div class="exam">🎯 EXAMEN: Según el sistema de Thornthwaite, ¿qué porcentaje del área de la cuenca Rímac corresponde a clima húmedo y a qué altitud comienza esta zona? Relacione esto con la ubicación de las principales fuentes de agua superficial de la cuenca.</div>
+</div>
+
+<!-- ================= TABLA INTEGRADORA ================= -->
+<div class="block s3">
+  <span class="bh gray-l">📊 Tabla integradora — Repaso rápido antes del examen</span>
+  <table class="tbl">
+    <tr><th>Variable</th><th>Rango en la cuenca</th><th>Ubicación del extremo</th><th>Instrumento / método</th><th>Uso principal</th></tr>
+    <tr><td>Precipitación anual</td><td>0.6 – 874.6 mm</td><td>Rímac (min) / San Cristóbal (max)</td><td>Pluviómetro, isoyetas</td><td>Balance hídrico, oferta</td></tr>
+    <tr><td>Pmáx 24 h</td><td>hasta 89.9 mm</td><td>Santiago de Tuna (1970)</td><td>Pluviómetro, serie 1964–2009</td><td>Diseño de drenaje, avenidas</td></tr>
+    <tr><td>Temperatura media anual</td><td>~9.5 – 20°C</td><td>Milloc/Mina Colqui (min) / costa (max)</td><td>Termómetro, regresión T-altitud</td><td>Clasificación climática, ETP</td></tr>
+    <tr><td>Temperatura mínima extrema</td><td>hasta −1.6°C</td><td>Marcapomacocha (cuenca Mantaro)</td><td>Termómetro</td><td>Riesgo de heladas altoandinas</td></tr>
+    <tr><td>Humedad relativa</td><td>57 – 89%</td><td>Matucana (min) / Campo de Marte (max)</td><td>Higrómetro</td><td>ETP, clasificación climática</td></tr>
+    <tr><td>Evaporación anual</td><td>464.3 – 1567.2 mm</td><td>Campo de Marte (min) / Matucana (max)</td><td>Tanque evaporimétrico</td><td>Disponibilidad hídrica</td></tr>
+    <tr><td>Horas de sol</td><td>3.84 – 5.57 h/día</td><td>Hipólito Unanue (min) / Marcapomacocha (max)</td><td>Heliógrafo</td><td>ETP</td></tr>
+    <tr><td>Viento medio</td><td>0.8 – 6 m/s</td><td>Campo de Marte (min) / Las Palmas (max)</td><td>Anemómetro</td><td>ETP, dispersión</td></tr>
+    <tr><td>ETP anual</td><td>965 – 1276.8 mm</td><td>Hipólito Unanue (min) / Matucana (max)</td><td>Penman-Monteith FAO (CropWat)</td><td>Balance hídrico, demanda agrícola</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: casi todas las variables climáticas de la cuenca (temperatura, HR, evaporación, ETP) están gobernadas por el mismo eje altitudinal — la parte baja (litoral) es árida, cálida y de humedad estable; la parte alta es fría, húmeda y de mayor amplitud térmica. Entender este gradiente es la clave para interpretar cualquier tabla del capítulo.</div>
+</div>
+
+<!-- ================= QUIZ ================= -->
+<div class="block s3" id="quiz-section">
+  <div class="qhead">
+    <h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="qprog"><span id="qprogtext">Pregunta 0 de 10 respondidas</span><span id="qscoretext">0% de aciertos</span></div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" id="qbar"></div></div>
+
+  <div class="qcard" id="q1">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">¿Qué porcentaje de la precipitación total anual promedio se concentra en el periodo diciembre–marzo en la cuenca Rímac?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) 20.33%</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) 72.52%</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) 7.15%</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) 50.00%</button>
+    </div>
+    <div class="qfeedback" id="fb1"></div>
+  </div>
+
+  <div class="qcard" id="q2">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Una estación ubicada a 4200 msnm en la cuenca Rímac presentará, en comparación con una estación costera, típicamente:</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="true">A) Mayor precipitación, menor temperatura media y mayor amplitud térmica</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="false">B) Menor precipitación y mayor temperatura media</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Igual precipitación pero mayor humedad relativa estable</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Mayor temperatura media y menor precipitación</button>
+    </div>
+    <div class="qfeedback" id="fb2"></div>
+  </div>
+
+  <div class="qcard" id="q3">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Cuál es la diferencia esencial entre la evaporación (Cap. 3.1.4) y la evapotranspiración potencial ETP (Cap. 3.1.7)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) Son sinónimos, se usan indistintamente</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="false">B) La evaporación se mide en mm y la ETP en mm/día, sin otra diferencia</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="true">C) La evaporación es una medición directa de una superficie de agua libre (tanque); la ETP es un valor calculado que asume una superficie vegetal de referencia</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) La ETP solo aplica en zonas áridas y la evaporación solo en zonas húmedas</button>
+    </div>
+    <div class="qfeedback" id="fb3"></div>
+  </div>
+
+  <div class="qcard" id="q4">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre el método de estimación de ETP usado en el estudio es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Se usó el método de Penman-Monteith FAO</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="false">B) El cálculo se procesó con el software CropWat 4.3</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="true">C) El método solo requiere datos de temperatura, sin considerar viento ni humedad</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) Se consideraron 4 estaciones: Campo de Marte, Hipólito Unanue, Manchay Bajo y Matucana</button>
+    </div>
+    <div class="qfeedback" id="fb4"></div>
+  </div>
+
+  <div class="qcard" id="q5">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Según la clasificación climática de Thornthwaite aplicada a la cuenca, ¿qué área aproximada corresponde a clima húmedo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) 1,201.85 km² (34.3%)</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="true">B) 2,302.1 km² (65.7%)</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="false">C) 3,503.95 km² (100%)</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) 647.6 km² (18.5%)</button>
+    </div>
+    <div class="qfeedback" id="fb5"></div>
+  </div>
+
+  <div class="qcard" id="q6">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">Si un sondeo de campo reporta para una estación: 3800 msnm, precipitación anual 705 mm concentrada en dic–mar, temperatura media 13.7°C, ¿qué tipo de estación es más probable, según los patrones del capítulo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Estación litoral árida tipo Aeropuerto Internacional</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="true">B) Estación de cabecera de cuenca, clima sub húmedo/húmedo mesotérmico tipo Pariacancha o Laguna Pirhua</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="false">C) Estación de valle medio, régimen semiárido tipo Chosica</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) No es posible que exista una estación con esas condiciones en la cuenca</button>
+    </div>
+    <div class="qfeedback" id="fb6"></div>
+  </div>
+
+  <div class="qcard" id="q7">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">¿En qué se diferencian las ecuaciones de regresión Tmed = a + bH y HR = a + bH usadas en el estudio?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Son idénticas, solo cambia el nombre de la variable dependiente</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="true">B) La regresión de temperatura vs. altitud tiene mayor R² (mejor ajuste) que la de humedad relativa vs. altitud, porque la HR depende más de la cercanía al mar que de la altitud</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="false">C) La ecuación de HR no existe en el estudio</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Ambas tienen R² superior a 0.90</button>
+    </div>
+    <div class="qfeedback" id="fb7"></div>
+  </div>
+
+  <div class="qcard" id="q8">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">En el contexto de Lima y la costa central peruana, ¿qué papel juega la Corriente de Humboldt en el régimen climático descrito en este capítulo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) Aumenta la precipitación costera al aportar humedad cálida</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="true">B) Enfría la superficie del mar, estabiliza la atmósfera baja e inhibe la formación de nubes de desarrollo vertical, contribuyendo a la aridez casi total de la costa (0.6–10 mm/año)</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="false">C) No tiene ninguna influencia sobre el clima de la cuenca</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) Es la causa directa de las heladas en la parte alta de la cuenca</button>
+    </div>
+    <div class="qfeedback" id="fb8"></div>
+  </div>
+
+  <div class="qcard" id="q9">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes variables meteorológicas NO forma parte de la ecuación de Penman-Monteith FAO usada para calcular la ETP en el estudio?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Radiación neta (Rn)</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="false">B) Velocidad del viento a 2 m (u2)</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="true">C) Presión atmosférica en superficie (hPa)</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Déficit de presión de vapor (es − ea)</button>
+    </div>
+    <div class="qfeedback" id="fb9"></div>
+  </div>
+
+  <div class="qcard" id="q10">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">¿Cuál afirmación sobre la clasificación climática de Thornthwaite es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Usa dos índices: precipitación efectiva (PE) y temperatura efectiva (TE)</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="false">B) TE se calcula como 5.4 multiplicado por la temperatura media anual</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="true">C) Captura con precisión la estacionalidad mensual de la lluvia, no solo el promedio anual</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) Clasifica la cuenca en dos grandes climas: seco y húmedo</button>
+    </div>
+    <div class="qfeedback" id="fb10"></div>
+  </div>
+
+  <div class="qresults" id="qresults">
+    <p id="qresultsText" style="font-weight:600;margin:0 0 4px;"></p>
+    <p id="qresultsScore" style="margin:0;"></p>
+    <button onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- ================= REFERENCIAS INSTITUCIONALES ================= -->
+<div class="block s3" id="refs-institucionales">
+  <span class="bh petrol-l">🔗 PARA PROFUNDIZAR — FUENTES INSTITUCIONALES</span>
+  <div class="three">
+    <div class="mini petrol-l"><b>🔗 SENAMHI Perú</b> — senamhi.gob.pe<br>Datos históricos actualizados de las mismas estaciones citadas (Chosica, Campo de Marte, etc.) y boletines climáticos vigentes de la cuenca Rímac.</div>
+    <div class="mini petrol-l"><b>🔗 IGP — Instituto Geofísico del Perú</b> — gob.pe/igp<br>Investigación sobre variabilidad climática andina, El Niño y su efecto en el régimen de precipitación de la vertiente del Pacífico.</div>
+    <div class="mini petrol-l"><b>🔗 AMS — Glossary of Meteorology</b> — ametsoc.org (verificar vigencia)<br>Definiciones formales de evapotranspiración, clasificación climática y gradiente térmico para contrastar terminología técnica.</div>
+  </div>
+  <div class="three" style="margin-top:7px;">
+    <div class="mini petrol-l"><b>🔗 FAO — Manual Penman-Monteith (FAO-56)</b> — fao.org (verificar vigencia)<br>Documento técnico original de la ecuación de ETo usada en el capítulo; útil para revisar la deducción física completa.</div>
+    <div class="mini petrol-l"><b>🔗 COMET Program (UCAR/MetEd)</b> — meted.ucar.edu<br>Cursos gratuitos sobre climatología de montaña y balance de energía superficial, con certificación.</div>
+    <div class="mini petrol-l"><b>🔗 NASA Earth Observatory</b> — earthobservatory.nasa.gov<br>Explicaciones visuales del efecto orográfico y la Corriente de Humboldt sobre la costa peruana.</div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS DEL DOCUMENTO:</span>
+  <span class="fc">ANA-DCPRH-ALA Chillón Rímac Lurín (2010). Estudio Hidrológico y Ubicación de la Red de Estaciones Hidrométricas en la Cuenca del Río Rímac, Vol. I, Cap. III "Climatología de la Cuenca", pp. 83–118. · Método Thornthwaite (clasificación climática) · Penman-Monteith FAO-56 / CropWat 4.3 (ETP)</span>
+</div>
+
+</div>
+
+<script>
+const totalQ = 10;
+let answered = 0;
+let correctCount = 0;
+const feedbackText = {
+  1:{ok:"La estación lluviosa dic–mar concentra el grueso de la precipitación anual (72.52%) por el desplazamiento estacional de la Zona de Convergencia Intertropical y el debilitamiento del anticiclón del Pacífico Sur, que permite mayor advección de humedad hacia los Andes.",
+      bad:"La respuesta correcta es B) 72.52%. El periodo seco (may–set) apenas llega a 7.15% y los meses de transición (abr, oct–nov) a 20.33%. Recuerda que el régimen es fuertemente estacional, no uniforme."},
+  2:{ok:"El gradiente altitudinal produce mayor precipitación orográfica en altura, temperaturas más bajas por el enfriamiento adiabático, y mayor amplitud térmica diaria por la menor humedad y menor efecto amortiguador marino.",
+      bad:"La respuesta correcta es A). En altura hay más precipitación (efecto orográfico), menor temperatura media (gradiente térmico) y mayor amplitud térmica diaria (menos humedad amortiguadora que en la costa)."},
+  3:{ok:"Correcto: la evaporación es una medición física directa con tanque evaporimétrico sobre una lámina de agua libre; la ETP es un cálculo teórico que representa la pérdida de agua de una superficie vegetal de referencia bien regada, integrando variables energéticas y aerodinámicas.",
+      bad:"La respuesta correcta es C). No son intercambiables: la evaporación mide agua libre con instrumento; la ETP se calcula con una ecuación que asume cobertura vegetal, por lo que requiere un coeficiente de tanque para relacionarlas."},
+  4:{ok:"Correcto, es FALSA: el método Penman-Monteith FAO sí requiere radiación, temperatura, humedad Y viento simultáneamente; ese es justamente su valor frente a métodos empíricos más simples que solo usan temperatura (como Thornthwaite o Hargreaves).",
+      bad:"La respuesta correcta es C). Es falsa porque Penman-Monteith SÍ integra viento y humedad relativa además de temperatura; ese acoplamiento es lo que lo hace más preciso que métodos que solo usan temperatura."},
+  5:{ok:"Correcto: el clima húmedo cubre 2,302.1 km² (65.7% del área total de 3,503.95 km²), desde los 3000 msnm hasta la divisoria de aguas.",
+      bad:"La respuesta correcta es B) 2,302.1 km² (65.7%). El área restante, 1,201.85 km² (34.3%), corresponde al clima seco, entre el nivel del mar y los 3000 msnm."},
+  6:{ok:"Correcto: esos valores (altitud alta, precipitación moderada-alta concentrada en verano, temperatura fría) coinciden con estaciones de cabecera como Pariacancha o Laguna Pirhua, clasificadas como húmedo-mesotérmico según Thornthwaite.",
+      bad:"La respuesta correcta es B). Los valores dados (3800 msnm, 705 mm/año, 13.7°C) son característicos de estaciones altas y húmedas de cabecera de cuenca, no de zonas litorales ni de valle medio."},
+  7:{ok:"Correcto: la temperatura tiene mayor correlación con la altitud (R²≈0.29–0.30) porque responde principalmente al gradiente térmico vertical; la humedad relativa depende más de la cercanía al mar y la advección de aire húmedo, por lo que su R² con la altitud es mucho menor (≈0.08).",
+      bad:"La respuesta correcta es B). Ambas son regresiones lineales contra altitud, pero difieren en su bondad de ajuste: temperatura R²≈0.29–0.30 vs. humedad relativa R²≈0.08, porque la HR depende de otros factores además de la altura."},
+  8:{ok:"Correcto: la Corriente de Humboldt (fría) enfría la capa superficial del aire costero, generando una fuerte inversión térmica que impide el desarrollo vertical de nubes de lluvia, explicando por qué la costa limeña recibe menos de 10 mm de lluvia al año pese a la humedad ambiental alta.",
+      bad:"La respuesta correcta es B). La Corriente de Humboldt, al ser fría, estabiliza la atmósfera baja e inhibe la convección, por eso la costa es árida a pesar de tener humedad relativa alta (efecto de niebla/garúa, no de lluvia)."},
+  9:{ok:"Correcto: la ecuación de Penman-Monteith FAO no incluye directamente la presión atmosférica en superficie como variable de entrada explícita; usa radiación neta, temperatura, viento y déficit de presión de vapor.",
+      bad:"La respuesta correcta es C). La presión atmosférica en superficie no es una variable de entrada explícita de la ecuación; sí lo son la radiación neta, la temperatura, el viento a 2 m y el déficit de presión de vapor."},
+  10:{ok:"Correcto, es FALSA: Thornthwaite trabaja con promedios ANUALES de precipitación y temperatura, por lo que dos lugares con el mismo promedio anual pueden tener regímenes de lluvia muy distintos (uno estacional marcado, otro uniforme) y el método no lo distingue.",
+      bad:"La respuesta correcta es C). Es falsa porque el método usa promedios anuales, no la distribución mensual; por eso no diferencia entre un régimen fuertemente estacional (como el de la cuenca Rímac) y uno de lluvias uniformes con el mismo total anual."}
+};
+
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn');
+  if(!btn || btn.classList.contains('disabled')) return;
+  const q = btn.dataset.q;
+  const isCorrect = btn.dataset.correct === 'true';
+  const allBtns = document.querySelectorAll('.qbtn[data-q="'+q+'"]');
+  allBtns.forEach(b=>{
+    b.classList.add('disabled');
+    if(b.dataset.correct === 'true'){
+      b.classList.add('correct');
+      if(!b.textContent.startsWith('✅')) b.textContent = '✅ ' + b.textContent;
+    } else if(b === btn && !isCorrect){
+      b.classList.add('incorrect');
+      if(!b.textContent.startsWith('❌')) b.textContent = '❌ ' + b.textContent;
+    }
+  });
+  const fb = document.getElementById('fb'+q);
+  fb.style.display = 'block';
+  if(isCorrect){
+    fb.className = 'qfeedback ok';
+    fb.innerHTML = '✅ ¡Correcto! ' + feedbackText[q].ok;
+    correctCount++;
+  } else {
+    fb.className = 'qfeedback bad';
+    fb.innerHTML = '❌ Incorrecto. ' + feedbackText[q].bad;
+  }
+  answered++;
+  document.getElementById('qprogtext').textContent = 'Pregunta ' + answered + ' de ' + totalQ + ' respondidas';
+  const pct = Math.round((correctCount/answered)*100);
+  document.getElementById('qscoretext').textContent = pct + '% de aciertos';
+  document.getElementById('qbar').style.width = Math.round((answered/totalQ)*100) + '%';
+  if(answered === totalQ){
+    const res = document.getElementById('qresults');
+    res.style.display = 'block';
+    let cls, msg;
+    if(correctCount <= 4){cls='low'; msg='Necesitas repasar el material.';}
+    else if(correctCount <= 7){cls='mid'; msg='¡Buen avance, sigue repasando!';}
+    else {cls='high'; msg='¡Excelente dominio del tema!';}
+    res.className = 'qresults ' + cls;
+    document.getElementById('qresultsText').textContent = msg;
+    document.getElementById('qresultsScore').textContent = correctCount + ' / ' + totalQ + ' correctas';
+  }
+});
+
+function resetQuiz(){
+  answered = 0; correctCount = 0;
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.classList.remove('correct','incorrect','disabled');
+    b.textContent = b.textContent.replace('✅ ','').replace('❌ ','');
+  });
+  document.querySelectorAll('.qfeedback').forEach(f=>{f.style.display='none';});
+  document.getElementById('qprogtext').textContent = 'Pregunta 0 de 10 respondidas';
+  document.getElementById('qscoretext').textContent = '0% de aciertos';
+  document.getElementById('qbar').style.width = '0%';
+  document.getElementById('qresults').style.display = 'none';
+}
+</script>
+</body>
+</html>

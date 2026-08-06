@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Eventos Hidrológicos Extremos Cuenca Rímac — Canvas de Repaso</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+:root{
+  --color-background-primary:#ffffff; --color-background-secondary:#f4f5f7; --color-background-tertiary:#e9eaee;
+  --color-text-primary:#14181f; --color-text-secondary:#5b6270;
+  --color-border-tertiary:#d8dae0; --color-border-secondary:#c3c6cf;
+}
+@media(prefers-color-scheme:dark){
+  :root{ --color-background-primary:#181a20; --color-background-secondary:#20232b; --color-background-tertiary:#14161b;
+    --color-text-primary:#e9eaee; --color-text-secondary:#a6acba; --color-border-tertiary:#33374280; --color-border-secondary:#454b59; }
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary);background:var(--color-background-tertiary);}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);}
+@media(max-width:640px){.cv{grid-template-columns:1fr}}
+.titlebar{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:12px;padding:14px 18px;}
+.titlebar h1{font-family:'Oswald';font-size:20px;font-weight:700;margin:0 0 3px;}
+.titlebar .sub{font-size:11px;color:#b6c6dd;margin-bottom:8px;}
+.titlebar .pill{background:rgba(255,255,255,.12);color:#cfe0f5;}
+.sbar{grid-column:1/-1;font-family:'Oswald';font-size:13px;font-weight:700;border-radius:8px;padding:7px 12px;margin-top:2px;}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px;}
+.block.s2{grid-column:span 2;} .block.s3{grid-column:1/-1;}
+.bh{font-family:'Oswald';font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px;}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:5px;}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:8px 0 3px;}
+.rx-note{font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px;}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:7px 10px;margin-top:8px;}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px;} .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+@media(max-width:640px){.two,.three{grid-template-columns:1fr}}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0;}
+.fbox{background:var(--color-background-secondary);padding:5px 9px;border-radius:6px;font-size:11px;}
+.farrow{color:var(--color-text-secondary);font-size:15px;}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary);text-align:left;}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0;}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;}
+@media(max-width:640px){.dual{grid-template-columns:1fr}}
+.dual-tech{background:#e0f2fe;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#0c4a6e;}
+.dual-plain{background:#dcfce7;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#14532d;}
+@media(prefers-color-scheme:dark){ .dual-tech{background:#082f49;color:#7dd3fc;} .dual-plain{background:#14532d;color:#86efac;} }
+.dual-label{font-family:'Oswald';font-size:10px;text-transform:uppercase;letter-spacing:0.5px;margin:0 0 4px;opacity:.85;}
+.dual p{margin:0;}
+.blue-l{background:#dbeafe;color:#1e3a8a;} .blue-h{border-left-color:#1e3a8a;}
+.green-l{background:#dcfce7;color:#14532d;} .green-h{border-left-color:#14532d;}
+.red-l{background:#fee2e2;color:#991b1b;} .red-h{border-left-color:#991b1b;}
+.yellow-l{background:#fef9c3;color:#713f12;} .yellow-h{border-left-color:#713f12;}
+.purple-l{background:#ede9fe;color:#4c1d95;} .purple-h{border-left-color:#4c1d95;}
+.teal-l{background:#ccfbf1;color:#134e4a;} .teal-h{border-left-color:#134e4a;}
+.orange-l{background:#ffedd5;color:#7c2d12;} .orange-h{border-left-color:#7c2d12;}
+.gray-l{background:#f1f5f9;color:#334155;} .gray-h{border-left-color:#334155;}
+.pink-l{background:#fce7f3;color:#831843;} .pink-h{border-left-color:#831843;}
+.petrol-l{background:#e0f2fe;color:#0c4a6e;} .petrol-h{border-left-color:#0c4a6e;}
+@media(prefers-color-scheme:dark){
+  .blue-l{background:#1e3a5f;color:#93c5fd;} .blue-h{border-left-color:#93c5fd;}
+  .green-l{background:#14532d;color:#86efac;} .green-h{border-left-color:#86efac;}
+  .red-l{background:#450a0a;color:#fca5a5;} .red-h{border-left-color:#fca5a5;}
+  .yellow-l{background:#422006;color:#fef08a;} .yellow-h{border-left-color:#fef08a;}
+  .purple-l{background:#2e1065;color:#c4b5fd;} .purple-h{border-left-color:#c4b5fd;}
+  .teal-l{background:#042f2e;color:#5eead4;} .teal-h{border-left-color:#5eead4;}
+  .orange-l{background:#431407;color:#fed7aa;} .orange-h{border-left-color:#fed7aa;}
+  .gray-l{background:#1e293b;color:#94a3b8;} .gray-h{border-left-color:#94a3b8;}
+  .pink-l{background:#4a044e;color:#f0abfc;} .pink-h{border-left-color:#f0abfc;}
+  .petrol-l{background:#082f49;color:#7dd3fc;} .petrol-h{border-left-color:#7dd3fc;}
+}
+.dotblue{background:#1e3a8a;} .dotgreen{background:#14532d;} .dotred{background:#991b1b;}
+.dotyellow{background:#713f12;} .dotpurple{background:#4c1d95;} .dotteal{background:#134e4a;}
+.dotorange{background:#7c2d12;} .dotgray{background:#334155;} .dotpink{background:#831843;} .dotpetrol{background:#0c4a6e;}
+.footer{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;}
+.ft{font-family:'Oswald';font-size:12px;color:#7dd3fc;} .fc{font-size:11px;color:#94a3b8;}
+.qhead{background:#0a2540;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:10px;}
+.qhead h3{font-family:'Oswald';font-size:14px;margin:0 0 2px;} .qhead p{font-size:11px;color:#b6c6dd;margin:0;}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;margin:8px 0 12px;}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s;}
+.qprog{font-size:11.5px;color:var(--color-text-secondary);display:flex;justify-content:space-between;}
+.qcard{border-top:0.5px solid var(--color-border-tertiary);padding-top:12px;margin-top:12px;}
+.qnum{font-family:'Oswald';font-size:10px;text-transform:uppercase;color:var(--color-text-secondary);margin:0 0 4px;}
+.qtext{font-size:12.5px;font-weight:600;margin:0 0 8px;}
+.qopts{display:flex;flex-direction:column;}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-secondary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--color-text-primary);font-family:'Source Sans 3';}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b;}
+.qbtn.disabled{opacity:.65;cursor:not-allowed;pointer-events:none;}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;display:none;}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d;}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b;}
+.qresults{display:none;border-radius:10px;padding:14px;margin-top:14px;text-align:center;font-size:13px;}
+.qresults.low{background:#fee2e2;color:#991b1b;} .qresults.mid{background:#fef9c3;color:#713f12;} .qresults.high{background:#dcfce7;color:#14532d;}
+.qresults button{margin-top:8px;background:#0a2540;color:#fff;border:none;border-radius:7px;padding:7px 14px;font-size:12px;cursor:pointer;font-family:'Oswald';}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<div class="titlebar">
+  <h1>⛈️ Eventos Hidrológicos Extremos — Cuenca del Río Rímac</h1>
+  <div class="sub">Estudio Hidrológico y Ubicación de la Red de Estaciones Hidrométricas — Cuenca Río Rímac | ANA-DCPRH-ALA Chillón Rímac Lurín | Vol. I, Cap. X (pp. 185–218), Lima, dic. 2010</div>
+  <span class="pill">Análisis de frecuencia</span><span class="pill">Gumbel / LogNormal / LogPearson</span><span class="pill">Método SCS</span><span class="pill">Método de Fuller</span><span class="pill">Sequías — IPE</span><span class="pill">Método RUN</span>
+</div>
+
+<!-- ============ CAUDALES MÁXIMOS ============ -->
+<div class="sbar red-l">🔴 10.1 Análisis de caudales máximos — avenidas del río Rímac (pp. 185–194)</div>
+
+<div class="block s3">
+  <span class="bh red-l">De caudal medio diario a caudal de diseño</span>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>El análisis de frecuencia de eventos extremos asume independencia temporal de las ocurrencias anuales máximas, permitiendo ajustar funciones de distribución de probabilidad (Log-Normal 2P, Log-Normal 3P, Gumbel, Log-Pearson III) a la serie de máximos anuales (1912–2009, 98 años) y extrapolar magnitudes para periodos de retorno Tr no observados directamente. Dado que los caudales de SENAMHI son medios diarios (promedio de 3-4 lecturas), se convierten a instantáneos mediante el método de Fuller, empírico y dependiente del área de drenaje.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Es como estimar "cada cuántos años puede repetirse una crecida así de grande" usando 98 años de historia del río. El caudal que SENAMHI registra es un promedio del día, no el pico real del momento más fuerte, así que primero hay que "inflar" ese promedio con una fórmula (Fuller) para saber cuál fue el pico instantáneo real, y luego usar estadística para proyectar qué tan grande podría ser una crecida dentro de 100, 500 o 1000 años.</p>
+    </div>
+  </div>
+  <div class="rx">Qinst = 1.26 × Qmáx &nbsp;(Fórmula de Fuller para A = 2318.22 km²)</div>
+  <div class="rx-note">Qinst: caudal máximo instantáneo (m³/s) | Qmáx: caudal máximo medio diario (m³/s) | Fórmula general: Qinst = Qmáx·(1 + 2.66/A^0.33), A en km². El factor 1.26 es específico del área de la cuenca Rímac a la altura de Chosica.</div>
+  <div class="flow">
+    <div class="fbox">Caudal medio diario</div><span class="farrow">→</span>
+    <div class="fbox">Método de Fuller (×1.26)</div><span class="farrow">→</span>
+    <div class="fbox">Caudal instantáneo</div><span class="farrow">→</span>
+    <div class="fbox">Ajuste de distribución de probabilidad</div><span class="farrow">→</span>
+    <div class="fbox">Caudal de diseño por Tr</div>
+  </div>
+  <div class="item"><span class="dot dotred"></span><b>Selección de distribución:</b> la serie se ajusta mejor a Gumbel (menor error estándar), pero el estudio adopta Log-Normal de 2 parámetros por ser más conservadora (da caudales de diseño mayores, más seguros para estructuras hidráulicas).</div>
+  <table class="tbl">
+    <tr><th>Periodo de retorno (Tr)</th><th>Caudal instantáneo (m³/s) — LogNormal 2P</th></tr>
+    <tr><td>2 años</td><td>154.0</td></tr>
+    <tr><td>20 años</td><td>329.0</td></tr>
+    <tr><td>100 años</td><td>452.0</td></tr>
+    <tr><td>500 años</td><td>584.0</td></tr>
+    <tr><td>1000 años</td><td>646.0</td></tr>
+  </table>
+  <div class="warn">⚠️ ERROR COMÚN: elegir la distribución que da el caudal más alto no siempre es "lo correcto" académicamente (la de mejor ajuste estadístico es Gumbel), pero en ingeniería de diseño se prioriza la seguridad de la estructura sobre el ajuste estadístico puro; por eso el estudio justifica explícitamente el criterio conservador.</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el estudio elige la distribución Log-Normal de 2 parámetros para el diseño, si la distribución Gumbel presenta mejor ajuste estadístico (menor error estándar)?</div>
+</div>
+
+<!-- ============ SCS SUBCUENCAS ============ -->
+<div class="sbar orange-l">🟠 10.1.2 Máximas avenidas en subcuencas sin aforo — Método SCS (pp. 194–204)</div>
+
+<div class="block s3">
+  <span class="bh orange-l">Hidrograma unitario sintético del Soil Conservation Service</span>
+  <div class="def orange-h">Las subcuencas Río Blanco, Alto Río Rímac, Quebrada Párac y Santa Eulalia no tienen estación de aforo, por lo que sus avenidas de diseño se calculan de forma indirecta a partir de la precipitación máxima en 24 horas y las características geomorfológicas de cada subcuenca, mediante el método del hidrograma unitario sintético SCS.</div>
+  <div class="item"><span class="dot dotorange"></span><b>Número de Curva (CN):</b> parámetro adimensional que representa la capacidad de escurrimiento de una cuenca según su suelo, cobertura vegetal y condición de humedad antecedente. Un CN alto genera más escorrentía directa (superficie poco permeable o saturada); un CN bajo, menos escorrentía (suelo permeable, buena cobertura vegetal). El estudio adoptó CN = 80 para las subcuencas analizadas, correspondiente a grupo hidrológico C-D típico de cuencas andinas del Perú.</div>
+  <table class="tbl">
+    <tr><th>Subcuenca</th><th>Tr = 100 años (m³/s)</th><th>Tr = 500 años (m³/s)</th><th>Tr = 1000 años (m³/s)</th></tr>
+    <tr><td>Río Blanco</td><td>73.70</td><td>108.00</td><td>124.80</td></tr>
+    <tr><td>Alto Río Rímac</td><td>93.00</td><td>147.00</td><td>171.70</td></tr>
+    <tr><td>Quebrada Párac</td><td>67.90</td><td>108.00</td><td>124.60</td></tr>
+    <tr><td>Río Santa Eulalia</td><td>265.80</td><td>399.20</td><td>457.90</td></tr>
+  </table>
+  <div class="warn">⚠️ ERROR COMÚN: confundir el método de transferencia hidrológica del Cap. VI (para caudales medios mensuales) con el método SCS del Cap. X (para caudales máximos de avenida) — ambos generan caudales en subcuencas sin aforo, pero responden a preguntas distintas: disponibilidad promedio vs. evento extremo de diseño.</div>
+  <div class="exam">🎯 EXAMEN: ¿Qué representa físicamente el Número de Curva (CN) en el método SCS, y por qué un valor CN = 80 implica mayor escorrentía que uno de CN = 50?</div>
+</div>
+
+<!-- ============ SEQUÍAS ============ -->
+<div class="sbar teal-l">🩵 10.2 Análisis de sequías (pp. 204–216)</div>
+
+<div class="block s3">
+  <span class="bh teal-l">Tipos de sequía y el Índice de Precipitación Estandarizada (IPE)</span>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>El IPE (McKee et al., 1993) ajusta una distribución Gamma de dos parámetros a la serie de precipitación de referencia (1964–2009) y la transforma en una distribución normal estandarizada (media 0, varianza 1). A diferencia del PDSI, el IPE depende únicamente de precipitación, permitiendo cálculo multiescala (1 a 24 meses) y comparabilidad espacial, aunque sacrifica sensibilidad a variables de suelo y temperatura.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>El IPE convierte "cuánto llovió este año" en un número comparable con cualquier otro año o lugar: 0 es normal, negativo es más seco de lo usual, positivo es más húmedo. Así se puede decir con precisión "este año fue el segundo más seco en 46 años" sin depender de la memoria de la gente ni de comparaciones subjetivas.</p>
+    </div>
+  </div>
+  <div class="two">
+    <div class="mini blue-l"><b>Sequía meteorológica</b><br>Definida solo por déficit de precipitación respecto a lo normal, sin considerar temperatura ni suelo.</div>
+    <div class="mini teal-l"><b>Sequía hidrológica</b><br>Déficit de caudales o niveles de agua superficial/subterránea por debajo de un umbral, en escala regional.</div>
+  </div>
+  <div class="two" style="margin-top:7px;">
+    <div class="mini green-l"><b>Sequía agrícola</b><br>Impacto del déficit de humedad del suelo sobre el rendimiento de cultivos ("sequía edáfica").</div>
+    <div class="mini pink-l"><b>Sequía socioeconómica</b><br>Efecto de la escasez de lluvia sobre energía hidroeléctrica, agua potable e industria.</div>
+  </div>
+  <div class="rx">IPE = (P observada − μ ajustada Gamma) / σ ajustada Gamma</div>
+  <div class="rx-note">Media 0, desviación estándar 1. IPE ≤ −1: sequía; IPE ≤ −2: sequía extrema (frecuencia teórica 1 en 50 años). Serie de referencia 1964–2009, precipitación areal anual de la cuenca (μ=495.4 mm, σ=110.4 mm).</div>
+  <table class="tbl">
+    <tr><th>Periodo de sequía</th><th>Duración</th><th>Suma IPE</th><th>Clasificación</th></tr>
+    <tr><td>1968–1969</td><td>2 años</td><td>−2.66</td><td>Extremadamente seco</td></tr>
+    <tr><td>1978–1980</td><td>3 años</td><td>−2.66</td><td>Extremadamente seco</td></tr>
+    <tr><td>1990–1992</td><td>3 años</td><td>−5.61</td><td><b>Extremadamente seco (la más intensa)</b></td></tr>
+    <tr><td>1995–1997</td><td>3 años</td><td>−1.71</td><td>Muy seco</td></tr>
+  </table>
+  <div class="item"><span class="dot dotteal"></span><b>Sequía hidrológica (caudales, 1912–2009):</b> 16 años secos, 63 normales, 19 húmedos. El año más crítico fue 1992 (12.04 m³/s medio anual, IPE de precipitación asociado −2.60, el más bajo de toda la serie).</div>
+  <div class="item"><span class="dot dotteal"></span><b>Método de RUN:</b> caracteriza la sequía crítica mediante tres parámetros — duración (número de intervalos consecutivos bajo el umbral), magnitud (suma de déficits) e intensidad (I = magnitud/duración).</div>
+  <div class="warn">⚠️ ERROR COMÚN: un año clasificado como "sequía meteorológica" (déficit de lluvia) no siempre coincide exactamente con un año de "sequía hidrológica" (déficit de caudal), porque el caudal integra el efecto acumulado de varios meses o años previos de precipitación en el suelo y los acuíferos — el sistema tiene memoria hidrológica.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el IPE se calcula ajustando primero una distribución Gamma y no una distribución Normal directamente a los datos de precipitación.</div>
+</div>
+
+<!-- ============ TABLA INTEGRADORA ============ -->
+<div class="block s3">
+  <span class="bh gray-l">📊 Tabla integradora — Repaso rápido antes del examen</span>
+  <table class="tbl">
+    <tr><th>Tipo de evento extremo</th><th>Variable analizada</th><th>Método principal</th><th>Resultado más severo registrado</th><th>Uso práctico</th></tr>
+    <tr><td>Avenida — río Rímac (Chosica)</td><td>Caudal instantáneo máximo</td><td>LogNormal 2P (conservador)</td><td>646 m³/s a Tr=1000 años</td><td>Diseño de defensas ribereñas</td></tr>
+    <tr><td>Avenida — subcuencas sin aforo</td><td>Precipitación máx. 24h + CN</td><td>Hidrograma unitario SCS</td><td>457.9 m³/s (Santa Eulalia, Tr=1000)</td><td>Diseño de obras en cabecera</td></tr>
+    <tr><td>Sequía meteorológica</td><td>Precipitación areal anual</td><td>IPE (McKee et al. 1993)</td><td>1990–1992, IPE acumulado −5.61</td><td>Alerta temprana agrícola</td></tr>
+    <tr><td>Sequía hidrológica</td><td>Caudal medio anual</td><td>Método RUN (duración/magnitud/intensidad)</td><td>1992, 12.04 m³/s (mínimo histórico anual)</td><td>Planificación de reservas y trasvases</td></tr>
+  </table>
+  <div class="warn">⚠️ DATO INTEGRADOR CLAVE: la sequía hidrológica más severa (1992) coincide con el mínimo del IPE de precipitación (1990-1992), confirmando que —a diferencia de un solo mes o año aislado— cuando el déficit de lluvia se sostiene por varios años consecutivos sí se traduce directamente en un colapso del caudal disponible, el escenario más crítico para la gestión del agua en Lima.</div>
+</div>
+
+<!-- ============ QUIZ ============ -->
+<div class="block s3" id="quiz-section">
+  <div class="qhead"><h3>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h3><p>Marca tu respuesta y descubre si es correcta</p></div>
+  <div class="qprog"><span id="qprogtext">Pregunta 0 de 10 respondidas</span><span id="qscoretext">0% de aciertos</span></div>
+  <div class="stat-bar-wrap"><div class="stat-bar-fill" id="qbar"></div></div>
+
+  <div class="qcard" id="q1"><p class="qnum">Pregunta 1 / 10</p><p class="qtext">¿Para qué se utiliza el método de Fuller en el análisis de máximas avenidas del río Rímac?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="1" data-opt="a" data-correct="false">A) Para calcular la precipitación areal de la cuenca</button>
+      <button class="qbtn" data-q="1" data-opt="b" data-correct="true">B) Para convertir caudales máximos medios diarios en caudales máximos instantáneos</button>
+      <button class="qbtn" data-q="1" data-opt="c" data-correct="false">C) Para estimar la evapotranspiración potencial</button>
+      <button class="qbtn" data-q="1" data-opt="d" data-correct="false">D) Para calcular el Índice de Precipitación Estandarizada</button>
+    </div><div class="qfeedback" id="fb1"></div></div>
+
+  <div class="qcard" id="q2"><p class="qnum">Pregunta 2 / 10</p><p class="qtext">¿Por qué el estudio usa la distribución Log-Normal de 2 parámetros para el diseño, en lugar de la distribución Gumbel que tiene mejor ajuste estadístico?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="2" data-opt="a" data-correct="false">A) Porque Gumbel no está disponible en el software FLFREQ</button>
+      <button class="qbtn" data-q="2" data-opt="b" data-correct="true">B) Porque Log-Normal 2P da resultados más conservadores (caudales de diseño más altos), priorizando la seguridad de las estructuras hidráulicas</button>
+      <button class="qbtn" data-q="2" data-opt="c" data-correct="false">C) Porque es la única distribución que se puede usar con series de menos de 30 años</button>
+      <button class="qbtn" data-q="2" data-opt="d" data-correct="false">D) Porque Gumbel solo aplica a datos de precipitación, no de caudal</button>
+    </div><div class="qfeedback" id="fb2"></div></div>
+
+  <div class="qcard" id="q3"><p class="qnum">Pregunta 3 / 10</p><p class="qtext">¿Qué representa el Número de Curva (CN) en el método del hidrograma unitario sintético SCS?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="3" data-opt="a" data-correct="false">A) El periodo de retorno de la avenida de diseño</button>
+      <button class="qbtn" data-q="3" data-opt="b" data-correct="true">B) La capacidad de escurrimiento de la cuenca según su suelo, cobertura vegetal y humedad antecedente</button>
+      <button class="qbtn" data-q="3" data-opt="c" data-correct="false">C) El área total de la subcuenca en km²</button>
+      <button class="qbtn" data-q="3" data-opt="d" data-correct="false">D) La pendiente media del cauce principal</button>
+    </div><div class="qfeedback" id="fb3"></div></div>
+
+  <div class="qcard" id="q4"><p class="qnum">Pregunta 4 / 10</p><p class="qtext">¿Cuál es la diferencia esencial entre sequía meteorológica y sequía hidrológica, según la clasificación del capítulo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="4" data-opt="a" data-correct="false">A) Son sinónimos, ambas se calculan con el IPE</button>
+      <button class="qbtn" data-q="4" data-opt="b" data-correct="true">B) La meteorológica se define solo por déficit de precipitación; la hidrológica por déficit de caudales o reservorios de agua respecto a un nivel normal</button>
+      <button class="qbtn" data-q="4" data-opt="c" data-correct="false">C) La hidrológica solo ocurre en la costa y la meteorológica solo en la sierra</button>
+      <button class="qbtn" data-q="4" data-opt="d" data-correct="false">D) La meteorológica afecta solo a la agricultura</button>
+    </div><div class="qfeedback" id="fb4"></div></div>
+
+  <div class="qcard" id="q5"><p class="qnum">Pregunta 5 / 10</p><p class="qtext">Según el Cuadro 10.11, ¿cuál fue el periodo de sequía meteorológica más intenso registrado en la cuenca Rímac (1964-2009)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="5" data-opt="a" data-correct="false">A) 1968-1969</button>
+      <button class="qbtn" data-q="5" data-opt="b" data-correct="false">B) 1978-1980</button>
+      <button class="qbtn" data-q="5" data-opt="c" data-correct="true">C) 1990-1992</button>
+      <button class="qbtn" data-q="5" data-opt="d" data-correct="false">D) 2004-2005</button>
+    </div><div class="qfeedback" id="fb5"></div></div>
+
+  <div class="qcard" id="q6"><p class="qnum">Pregunta 6 / 10</p><p class="qtext">Si un IPE anual calculado para la cuenca Rímac es de -2.3, ¿cómo se clasificaría ese año según la Tabla 10.1?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="6" data-opt="a" data-correct="false">A) Ligeramente seco</button>
+      <button class="qbtn" data-q="6" data-opt="b" data-correct="false">B) Moderadamente seco</button>
+      <button class="qbtn" data-q="6" data-opt="c" data-correct="true">C) Extremadamente seco (sequía extrema, frecuencia teórica 1 en 50 años)</button>
+      <button class="qbtn" data-q="6" data-opt="d" data-correct="false">D) Normal</button>
+    </div><div class="qfeedback" id="fb6"></div></div>
+
+  <div class="qcard" id="q7"><p class="qnum">Pregunta 7 / 10</p><p class="qtext">¿Cuál afirmación sobre el método SCS aplicado a las subcuencas de la cuenca Rímac es FALSA?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="7" data-opt="a" data-correct="false">A) Se usa porque las subcuencas Río Blanco, Alto Río Rímac, Quebrada Párac y Santa Eulalia no tienen estación de aforo</button>
+      <button class="qbtn" data-q="7" data-opt="b" data-correct="false">B) Usa como entrada la precipitación máxima en 24 horas de cada subcuenca</button>
+      <button class="qbtn" data-q="7" data-opt="c" data-correct="true">C) Requiere caudales históricos medidos para calibrar directamente el modelo</button>
+      <button class="qbtn" data-q="7" data-opt="d" data-correct="false">D) Utiliza el parámetro Número de Curva (CN) como indicador de la capacidad de escurrimiento</button>
+    </div><div class="qfeedback" id="fb7"></div></div>
+
+  <div class="qcard" id="q8"><p class="qnum">Pregunta 8 / 10</p><p class="qtext">Según la sequía hidrológica (caudales medios anuales, 1912-2009), ¿cuál fue el año con el caudal medio anual más bajo?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="8" data-opt="a" data-correct="false">A) 1968</button>
+      <button class="qbtn" data-q="8" data-opt="b" data-correct="false">B) 1990</button>
+      <button class="qbtn" data-q="8" data-opt="c" data-correct="true">C) 1992 (12.04 m³/s)</button>
+      <button class="qbtn" data-q="8" data-opt="d" data-correct="false">D) 1997</button>
+    </div><div class="qfeedback" id="fb8"></div></div>
+
+  <div class="qcard" id="q9"><p class="qnum">Pregunta 9 / 10</p><p class="qtext">En el contexto de la gestión de riesgos en Lima, ¿por qué es importante calcular el caudal de diseño para periodos de retorno tan largos como 500 o 1000 años, si la vida útil de una obra hidráulica es mucho menor?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="9" data-opt="a" data-correct="false">A) Porque las normas exigen usar siempre el periodo de retorno más largo posible sin justificación técnica</button>
+      <button class="qbtn" data-q="9" data-opt="b" data-correct="true">B) Porque estructuras críticas (defensas ribereñas, presas) requieren un margen de seguridad mayor, dado que su falla tendría consecuencias catastróficas e irreversibles</button>
+      <button class="qbtn" data-q="9" data-opt="c" data-correct="false">C) Porque a mayor periodo de retorno, menor es el caudal de diseño resultante</button>
+      <button class="qbtn" data-q="9" data-opt="d" data-correct="false">D) Porque el periodo de retorno determina directamente el costo de la obra sin relación con el riesgo</button>
+    </div><div class="qfeedback" id="fb9"></div></div>
+
+  <div class="qcard" id="q10"><p class="qnum">Pregunta 10 / 10</p><p class="qtext">¿Qué relación existe entre la sequía meteorológica de 1990-1992 (IPE acumulado -5.61) y el mínimo histórico de caudal registrado en 1992 (12.04 m³/s)?</p>
+    <div class="qopts">
+      <button class="qbtn" data-q="10" data-opt="a" data-correct="false">A) Ninguna, son fenómenos completamente independientes</button>
+      <button class="qbtn" data-q="10" data-opt="b" data-correct="true">B) El déficit de precipitación sostenido por 3 años consecutivos se tradujo en un colapso del caudal disponible, mostrando cómo una sequía meteorológica prolongada deriva en sequía hidrológica</button>
+      <button class="qbtn" data-q="10" data-opt="c" data-correct="false">C) El caudal mínimo de 1992 fue causado por el trasvase Marca I, no por falta de lluvia</button>
+      <button class="qbtn" data-q="10" data-opt="d" data-correct="false">D) La relación solo se cumple para sequías de un año de duración</button>
+    </div><div class="qfeedback" id="fb10"></div></div>
+
+  <div class="qresults" id="qresults">
+    <p id="qresultsText" style="font-weight:600;margin:0 0 4px;"></p>
+    <p id="qresultsScore" style="margin:0;"></p>
+    <button onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+  </div>
+</div>
+
+<!-- ============ REFERENCIAS ============ -->
+<div class="block s3" id="refs-institucionales">
+  <span class="bh petrol-l">🔗 PARA PROFUNDIZAR — FUENTES INSTITUCIONALES</span>
+  <div class="three">
+    <div class="mini petrol-l"><b>🔗 SENAMHI Perú</b> — senamhi.gob.pe<br>Boletines actualizados de sequías y monitoreo del IPE para distintas regiones del Perú.</div>
+    <div class="mini petrol-l"><b>🔗 CENEPRED</b> — gob.pe/cenepred (verificar vigencia)<br>Mapas de peligro por inundación y sequía a nivel nacional, basados en periodos de retorno como los calculados en este capítulo.</div>
+    <div class="mini petrol-l"><b>🔗 USDA-NRCS — TR-55 (método SCS)</b> — nrcs.usda.gov (verificar vigencia)<br>Manual técnico original del método del hidrograma unitario sintético y las tablas de Número de Curva.</div>
+  </div>
+  <div class="three" style="margin-top:7px;">
+    <div class="mini petrol-l"><b>🔗 NOAA — U.S. Drought Monitor / SPI</b> — drought.gov (verificar vigencia)<br>Referencia internacional del Índice de Precipitación Estandarizada (SPI/IPE) y su interpretación operativa.</div>
+    <div class="mini petrol-l"><b>🔗 WMO/OMM — SPI User Guide</b> — wmo.int<br>Guía oficial de la Organización Meteorológica Mundial para el cálculo e interpretación del SPI/IPE.</div>
+    <div class="mini petrol-l"><b>🔗 ENFEN Perú</b> — gob.pe/enfen<br>Contexto de variabilidad interanual (El Niño/La Niña) asociada a los periodos de sequía y avenida extrema identificados en este capítulo.</div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS DEL DOCUMENTO:</span>
+  <span class="fc">ANA-DCPRH-ALA Chillón Rímac Lurín (2010). Estudio Hidrológico y Ubicación de la Red de Estaciones Hidrométricas en la Cuenca del Río Rímac, Vol. I, Cap. X "Eventos Hidrológicos Extremos", pp. 185–218. · Método de Fuller (caudales instantáneos) · Distribuciones Gumbel, LogNormal 2P/3P, LogPearson III (FLFREQ) · Hidrograma unitario sintético SCS (CN=80) · IPE — McKee et al. (1993) · Método RUN — Saldarriaga (1970), Millán (1972), Salas (1978)</span>
+</div>
+
+</div>
+<script>
+const totalQ = 10; let answered = 0; let correctCount = 0;
+const feedbackText = {
+1:{ok:"El método de Fuller convierte el caudal medio diario (registrado por SENAMHI como promedio de varias lecturas) en el caudal instantáneo real, el valor que efectivamente debe soportar una estructura hidráulica en el momento pico de la crecida.",
+   bad:"La respuesta correcta es B). Fuller ajusta caudales medios diarios a instantáneos en función del área de la cuenca; no interviene en precipitación areal, ETP ni en el cálculo del IPE."},
+2:{ok:"Correcto: aunque Gumbel se ajusta mejor estadísticamente (menor error estándar), el estudio prioriza el criterio conservador de ingeniería, usando la distribución que arroja caudales de diseño más altos para dar mayor margen de seguridad a las estructuras hidráulicas.",
+   bad:"La respuesta correcta es B). La elección no es por limitaciones de software ni de longitud de serie, sino por un criterio deliberado de conservadurismo en el diseño de obras hidráulicas."},
+3:{ok:"Correcto: el CN es un parámetro adimensional (0-100) que resume cómo el suelo, la vegetación y la humedad antecedente de una cuenca condicionan cuánta lluvia se convierte en escorrentía directa versus cuánta se infiltra.",
+   bad:"La respuesta correcta es B). El CN no es periodo de retorno, ni área, ni pendiente — es un índice de la capacidad de escurrimiento de la superficie de la cuenca."},
+4:{ok:"Correcto: la sequía meteorológica se define únicamente con datos de precipitación (déficit de lluvia); la sequía hidrológica incorpora disponibilidad de agua superficial/subterránea y su comparación con el suministro normal del sistema.",
+   bad:"La respuesta correcta es B). No son sinónimos ni se calculan igual: la meteorológica usa solo precipitación (IPE); la hidrológica usa caudales o niveles de reservorios frente a un umbral normal."},
+5:{ok:"Correcto: el periodo 1990-1992 tuvo el IPE acumulado más negativo (-5.61), clasificado como extremadamente seco, la sequía meteorológica más intensa de toda la serie 1964-2009 analizada en el estudio.",
+   bad:"La respuesta correcta es C) 1990-1992, con un IPE acumulado de -5.61, muy por debajo de los otros periodos (1968-1969: -2.66; 1978-1980: -2.66; 2004-2005 no listado entre los más severos)."},
+6:{ok:"Correcto: según la Tabla 10.1, un IPE de -2 o menor corresponde a 'Extremadamente Seco (sequía extrema)', con una frecuencia teórica de ocurrencia de 1 en 50 años.",
+   bad:"La respuesta correcta es C). Un IPE de -2.3 cae en el rango '-2 o menor', clasificado como extremadamente seco; el rango -1.50 a -1.99 sería 'muy seco', y -1.00 a -1.49 'moderadamente seco'."},
+7:{ok:"Correcto, es FALSA: el método SCS se aplica precisamente porque estas subcuencas NO tienen caudales históricos medidos; se basa en precipitación máxima, geomorfología de la cuenca y el Número de Curva, no en calibración directa con aforos.",
+   bad:"La respuesta correcta es C). Es falsa porque el método SCS es una alternativa para cuando NO existen caudales históricos medidos, usando en su lugar precipitación y parámetros geomorfológicos como el CN."},
+8:{ok:"Correcto: 1992 registró el caudal medio anual más bajo de toda la serie histórica (12.04 m³/s), coincidiendo con el punto más crítico de la sequía meteorológica 1990-1992.",
+   bad:"La respuesta correcta es C) 1992, con 12.04 m³/s — el valor más bajo de toda la serie 1912-2009, incluso menor que los años secos de 1968 y 1990."},
+9:{ok:"Correcto: usar periodos de retorno largos (500-1000 años) para estructuras críticas asegura un margen de seguridad amplio, porque el costo de que fallen (pérdida de vidas, daños catastróficos e irreversibles) es mucho mayor que el costo adicional de sobredimensionar la obra.",
+   bad:"La respuesta correcta es B). El periodo de retorno se elige según el nivel de riesgo aceptable para el tipo de estructura: cuanto más crítica y costosa sea una falla, mayor es el Tr de diseño usado, sin relación con la vida útil nominal de la obra."},
+10:{ok:"Correcto: cuando el déficit de precipitación se sostiene por varios años consecutivos (no un solo mes o año aislado), el sistema hidrológico —suelo, acuíferos, lagunas— pierde su capacidad de amortiguar el déficit y el caudal colapsa; por eso el mínimo histórico de caudal (1992) coincide con el final del periodo de sequía meteorológica más intensa (1990-1992).",
+   bad:"La respuesta correcta es B). La relación es clara: una sequía meteorológica de varios años consecutivos agota las reservas de agua del sistema y se manifiesta como sequía hidrológica; el mínimo caudal de 1992 no es coincidencia, es la consecuencia directa de 3 años de déficit sostenido de lluvia."}
+};
+document.getElementById('quiz-section').addEventListener('click', function(e){
+  const btn = e.target.closest('.qbtn'); if(!btn || btn.classList.contains('disabled')) return;
+  const q = btn.dataset.q; const isCorrect = btn.dataset.correct === 'true';
+  document.querySelectorAll('.qbtn[data-q="'+q+'"]').forEach(b=>{
+    b.classList.add('disabled');
+    if(b.dataset.correct === 'true'){ b.classList.add('correct'); if(!b.textContent.startsWith('✅')) b.textContent = '✅ ' + b.textContent; }
+    else if(b === btn && !isCorrect){ b.classList.add('incorrect'); if(!b.textContent.startsWith('❌')) b.textContent = '❌ ' + b.textContent; }
+  });
+  const fb = document.getElementById('fb'+q); fb.style.display = 'block';
+  if(isCorrect){ fb.className = 'qfeedback ok'; fb.innerHTML = '✅ ¡Correcto! ' + feedbackText[q].ok; correctCount++; }
+  else { fb.className = 'qfeedback bad'; fb.innerHTML = '❌ Incorrecto. ' + feedbackText[q].bad; }
+  answered++;
+  document.getElementById('qprogtext').textContent = 'Pregunta ' + answered + ' de ' + totalQ + ' respondidas';
+  document.getElementById('qscoretext').textContent = Math.round((correctCount/answered)*100) + '% de aciertos';
+  document.getElementById('qbar').style.width = Math.round((answered/totalQ)*100) + '%';
+  if(answered === totalQ){
+    const res = document.getElementById('qresults'); res.style.display = 'block';
+    let cls, msg;
+    if(correctCount <= 4){cls='low'; msg='Necesitas repasar el material.';}
+    else if(correctCount <= 7){cls='mid'; msg='¡Buen avance, sigue repasando!';}
+    else {cls='high'; msg='¡Excelente dominio del tema!';}
+    res.className = 'qresults ' + cls;
+    document.getElementById('qresultsText').textContent = msg;
+    document.getElementById('qresultsScore').textContent = correctCount + ' / ' + totalQ + ' correctas';
+  }
+});
+function resetQuiz(){
+  answered = 0; correctCount = 0;
+  document.querySelectorAll('.qbtn').forEach(b=>{ b.classList.remove('correct','incorrect','disabled'); b.textContent = b.textContent.replace('✅ ','').replace('❌ ',''); });
+  document.querySelectorAll('.qfeedback').forEach(f=>{f.style.display='none';});
+  document.getElementById('qprogtext').textContent = 'Pregunta 0 de 10 respondidas';
+  document.getElementById('qscoretext').textContent = '0% de aciertos';
+  document.getElementById('qbar').style.width = '0%';
+  document.getElementById('qresults').style.display = 'none';
+}
+</script>
+</body>
+</html>
