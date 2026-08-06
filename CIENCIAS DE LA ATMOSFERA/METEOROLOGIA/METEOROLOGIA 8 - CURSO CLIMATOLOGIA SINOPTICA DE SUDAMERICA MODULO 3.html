@@ -1,0 +1,591 @@
+<h2 class="sr-only">Canvas de estudio sobre baroclinicidad, ondas baroclínicas, ciclones extratropicales, frentes, ciclogénesis y sistemas sinópticos de Sudamérica extratropical, con quiz interactivo de diez preguntas.</h2>
+<style>
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.cv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:4px 0}
+.cv .full{grid-column:1/-1}.cv .s2{grid-column:span 2}
+.bar{background:var(--surface-2);border:0.5px solid var(--border-strong);border-radius:12px;padding:14px 18px}
+.sec{background:var(--bg-accent);color:var(--text-accent);border-radius:var(--radius);padding:7px 12px;font-size:14px;font-weight:500}
+.block{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:14px 16px;min-width:0}
+.bh{display:inline-block;font-size:12px;font-weight:500;padding:3px 10px;border-radius:var(--radius);margin-bottom:9px}
+.def{border-left:3px solid var(--border-accent);border-radius:0;padding:8px 12px;font-size:13px;background:var(--surface-1);color:var(--text-primary);line-height:1.6;margin-bottom:9px}
+.item{display:flex;gap:8px;font-size:13px;line-height:1.6;margin-bottom:7px;color:var(--text-primary)}
+.dot{flex:0 0 6px;width:6px;height:6px;border-radius:50%;margin-top:8px;background:var(--text-muted)}
+.rx{background:#0b0b0b;color:#85B7EB;font-family:var(--font-mono);font-size:12px;padding:9px 12px;border-radius:var(--radius);text-align:center;line-height:1.7}
+.rx-note{font-size:12px;color:var(--text-secondary);margin:6px 0 9px;line-height:1.6}
+.warn{background:var(--bg-warning);color:var(--text-warning);border-left:3px solid var(--border-warning);border-radius:0;padding:8px 12px;font-size:12px;line-height:1.6;margin-top:9px}
+.exam{background:var(--bg-accent);color:var(--text-accent);border:0.5px solid var(--border-accent);border-radius:var(--radius);padding:8px 12px;font-size:12px;line-height:1.6;margin-top:9px}
+.mini{background:var(--surface-1);border-radius:var(--radius);padding:9px 11px;font-size:12px;line-height:1.6;color:var(--text-primary)}
+.mini b{font-weight:500}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.dual{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:9px 0}
+.dual-tech{background:var(--bg-accent);color:#042C53;border-radius:var(--radius);padding:9px 11px;font-size:12px;line-height:1.6}
+.dual-plain{background:var(--bg-success);color:#173404;border-radius:var(--radius);padding:9px 11px;font-size:12px;line-height:1.6}
+.dual-label{font-size:11px;font-weight:500;letter-spacing:.4px;margin:0 0 4px;text-transform:uppercase}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:12px;margin:8px 0}
+.fbox{background:var(--surface-1);border:0.5px solid var(--border);border-radius:var(--radius);padding:5px 9px;color:var(--text-primary)}
+.farrow{color:var(--text-muted);font-size:15px}
+.pill{display:inline-block;font-size:12px;padding:3px 10px;border-radius:20px;margin:2px 3px 2px 0;background:var(--surface-1);color:var(--text-secondary);border:0.5px solid var(--border)}
+.tbl{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+.tbl th{background:var(--surface-1);padding:7px 8px;text-align:left;font-weight:500;border-bottom:0.5px solid var(--border);color:var(--text-secondary)}
+.tbl td{padding:7px 8px;border-bottom:0.5px solid var(--border);vertical-align:top;color:var(--text-primary)}
+.qcard{border:0.5px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:var(--surface-1)}
+.qnum{font-size:12px;color:var(--text-muted);margin:0 0 4px}
+.qtext{font-size:13px;margin:0 0 9px;line-height:1.6;color:var(--text-primary)}
+.qbtn{display:block;width:100%;text-align:left;background:var(--surface-2);border:0.5px solid var(--border);border-radius:var(--radius);padding:8px 12px;font-size:12.5px;margin-bottom:5px;cursor:pointer;color:var(--text-primary);line-height:1.5}
+.qbtn:hover{border-color:var(--border-strong)}
+.qbtn.ok{background:var(--bg-success);color:#173404;border-color:var(--border-success)}
+.qbtn.bad{background:var(--bg-danger);color:#501313;border-color:var(--border-danger)}
+.qbtn.dis{opacity:.55;pointer-events:none}
+.qfb{display:none;border-left:3px solid var(--border-accent);background:var(--surface-2);padding:8px 12px;font-size:12px;line-height:1.6;margin-top:8px;color:var(--text-primary)}
+.pbar{width:100%;height:10px;background:var(--surface-1);border-radius:20px;overflow:hidden}
+.pfill{height:100%;width:0;background:var(--fill-success);border-radius:20px;transition:width .3s}
+.foot{background:var(--surface-1);border-radius:12px;padding:12px 16px;font-size:12px;color:var(--text-secondary);line-height:1.7}
+@media(max-width:640px){.cv{grid-template-columns:1fr}.cv .s2{grid-column:auto}.dual,.two,.three{grid-template-columns:1fr}}
+</style>
+
+<div class="cv">
+
+<div class="bar full">
+  <div style="font-size:20px;font-weight:500;color:var(--text-primary)">Módulo 1 · Climatología sinóptica de Sudamérica</div>
+  <div style="font-size:13px;color:var(--text-secondary);margin-top:4px">Tema 2 — Climatología sinóptica extratropical y subtropical · SENAMHI / Climandes · N. Quispe Gutiérrez y J. M. Gálvez Chavarri (SRG/NOAA)</div>
+  <div style="margin-top:8px">
+    <span class="pill">2.1 Ondas baroclínicas</span><span class="pill">Ciclones extratropicales</span><span class="pill">Frentes</span><span class="pill">Ciclogénesis</span><span class="pill">2.2 Sudamérica extratropical</span><span class="pill">Hemisferio Sur vs Norte</span>
+  </div>
+</div>
+
+<div class="sec full">Sección 1 — Geostrofía y baroclinicidad (fundamento físico)</div>
+
+<div class="block s2">
+  <span class="bh" style="background:var(--bg-accent);color:var(--text-accent)">Geostrofía — el punto de partida</span>
+  <div class="def">Balance exacto entre la fuerza del gradiente de presión y la fuerza de Coriolis. Cuando solo actúan estas dos fuerzas, el viento no sopla de alta a baja presión: sopla <b>paralelo a las isobaras</b>. Es la simplificación que permite "leer el viento" directamente del campo de presión.</div>
+  <div class="rx">f·v = (1/ρ)·∂P/∂x &nbsp;&nbsp;|&nbsp;&nbsp; f·u = −(1/ρ)·∂P/∂y<br>f = 2Ω·sen(φ)</div>
+  <div class="rx-note">f = parámetro de Coriolis (s⁻¹); Ω = 7.292×10⁻⁵ s⁻¹; φ = latitud. <b>f = 0 en el Ecuador, negativo en el HS y positivo en el HN.</b> Ejemplo: en Lima (12°S), f ≈ −3.03×10⁻⁵ s⁻¹; en Punta Arenas (53°S), f ≈ −1.16×10⁻⁴ s⁻¹, casi 4 veces mayor en magnitud. ρ ≈ 1.2 kg/m³ en superficie, 0.9 kg/m³ en 700 hPa. Válido en atmósfera libre de latitudes medias/altas; <b>no válido</b> cerca del Ecuador ni dentro de la capa límite.</div>
+  <div class="dual">
+    <div class="dual-tech"><p class="dual-label">Para meteorólogos</p>El balance geostrófico es de primer orden en latitudes medias (Ro = U/fL ≪ 1). Al haber solo dos términos, cualquier forzante adicional (fricción, curvatura, aceleración local) genera una componente ageostrófica que es precisamente la que produce convergencia/divergencia y, por tanto, movimiento vertical. La fricción en la capa límite introduce un ángulo de cruce isobárico (espiral de Ekman) que fuerza convergencia en las bajas y divergencia en las altas.</div>
+    <div class="dual-plain"><p class="dual-label">Para no meteorólogos</p>Imagina una canica que rueda por una pendiente, pero la Tierra gira debajo de ella. En vez de bajar en línea recta hacia el fondo, la canica termina dando vueltas alrededor de la pendiente. Por eso el viento no va directo de la zona de alta presión a la de baja: rodea el sistema. Solo cuando algo la frena —como el rozamiento con las montañas o el suelo— la canica logra "cortar camino" hacia el centro.</div>
+  </div>
+  <div class="item"><span class="dot"></span><span><b>Qué rompe la geostrofía:</b> (1) la fricción, máxima sobre orografía compleja como los Andes y dentro de la capa límite; (2) valores bajos de Coriolis en el trópico. Por eso funciona mejor en latitudes medias y altas y sobre océano (menos fricción que sobre continente).</span></div>
+  <div class="item"><span class="dot"></span><span><b>El giro cambia de signo entre hemisferios.</b> En el HS la geostrofía da giro <b>antihorario en anticiclones</b> y <b>horario en bajas presiones</b>. En el HN ocurre exactamente lo opuesto: horario en altas, antihorario en bajas. Este es el error de signo más frecuente en exámenes.</span></div>
+  <div class="warn">⚠️ Error común: creer que la fuerza de Coriolis "empuja" el aire. No es una fuerza real, es un efecto del sistema de referencia rotante. No hace trabajo ni cambia la velocidad del viento, solo su dirección.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué el balance geostrófico deja de ser una aproximación válida en la costa central del Perú y qué consecuencias tiene para el trazado de líneas de corriente en 850 hPa.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:var(--bg-warning);color:var(--text-warning)">Referencia OMM / AMS</span>
+  <div class="item"><span class="dot"></span><span>La <b>OMM (WMO)</b> fija la normativa internacional: convenciones de análisis de superficie, simbología frontal, códigos SYNOP/TEMP y las normales climatológicas de 30 años. Los frentes que dibuja SENAMHI siguen la simbología estandarizada por la OMM.</span></div>
+  <div class="item"><span class="dot"></span><span>El <b>AMS Glossary</b> (American Meteorological Society) es la fuente de las definiciones formales que cita este módulo: <i>geostrophic balance</i>, <i>baroclinic disturbance</i>, <i>extratropical cyclone</i>, <i>polar front</i>, <i>quasi-stationary front</i>.</span></div>
+  <div class="item"><span class="dot"></span><span><b>WPC International Desks (NOAA)</b> aportó las figuras y el marco conceptual adaptado al Hemisferio Sur. <b>SENAMHI</b> es la autoridad operativa nacional en Perú.</span></div>
+  <div class="warn">⚠️ Casi toda la literatura clásica (Wallace &amp; Hobbs, Ahrens, modelo Noruego) está escrita para el HN. Todos los esquemas de este módulo están <b>adaptados al HS</b>: verifique siempre el hemisferio de la figura antes de interpretarla.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:var(--bg-accent);color:var(--text-accent)">Baroclinicidad — definición (Diap. baroclinicidad 1–3)</span>
+  <div class="def">Grado de <b>desalineamiento entre los campos de presión y de densidad</b>. Si los gradientes no son paralelos existe un ángulo entre ellos, y ese ángulo obliga al viento a cruzar las isotermas → aparece <b>advección térmica</b>. Baroclinicidad ⟺ advección térmica.</div>
+  <div class="rx">Baroclinicidad ∼ ∇p × ∇ρ &nbsp;≈&nbsp; ∇p × ∇T</div>
+  <div class="rx-note">∇p en hPa/100 km, ∇T en °C/100 km. El producto vectorial es máximo cuando los gradientes son perpendiculares (90°) y <b>nulo cuando son paralelos</b> (caso barotrópico). En la tropósfera el campo de densidad sigue muy de cerca al de temperatura, por eso se sustituye ρ por T. Un gradiente frontal típico en el cono sur: 8–12 °C en 200 km.</div>
+  <div class="dual">
+    <div class="dual-tech"><p class="dual-label">Para meteorólogos</p>La baroclinicidad es la reserva de <b>energía potencial disponible</b> del flujo. El desbalance de masa asociado al desalineamiento ∇p × ∇T se convierte en energía cinética vía circulación térmica directa, generando vorticidad ciclónica. Cuantitativamente se evalúa con el viento térmico (cizalla vertical proporcional al gradiente térmico de capa) o con el gradiente de espesor.</div>
+    <div class="dual-plain"><p class="dual-label">Para no meteorólogos</p>Piensa en una botella con aceite y agua puesta de lado: el sistema está "torcido" y no puede quedarse así, tiende a reacomodarse. En la atmósfera, cuando el aire frío y el cálido están mal acomodados uno junto al otro, el aire se mueve para arreglarlo. Ese movimiento es el viento, y si el desorden es grande, el reacomodo es violento: tormenta.</div>
+  </div>
+  <div class="item"><span class="dot"></span><span><b>Baroclínico vs barotrópico.</b> En un sistema barotrópico las isotermas son paralelas a las isobaras: hay viento pero <b>no</b> transporte de masas de temperatura distinta. Es lo típico del trópico, donde los gradientes térmicos son débiles. Ejemplos barotrópicos sudamericanos: la <b>Baja del Chaco</b> (Saulo et al., 2004) y la <b>Alta de Bolivia</b>, donde una dorsal en altura se asocia a una baja en niveles bajos, sin inclinación del eje.</span></div>
+  <div class="item"><span class="dot"></span><span><b>La baroclinicidad también puede ser baja en latitudes altas:</b> en vaguadas polares muy grandes la masa se homogeneiza y en oclusiones la mezcla diluye los gradientes → estructura barotrópica en pleno extratrópico.</span></div>
+  <div class="flow"><span class="fbox">Gradiente térmico</span><span class="farrow">→</span><span class="fbox">Advección térmica</span><span class="farrow">→</span><span class="fbox">Desestabilización</span><span class="farrow">→</span><span class="fbox">Ascensos y vorticidad</span><span class="farrow">→</span><span class="fbox">Profundización de la baja</span><span class="farrow">→</span><span class="fbox">Más advección (retroalimentación +)</span></div>
+  <div class="warn">⚠️ Error común: confundir "gradiente térmico intenso" con "baroclinicidad alta". Puede existir un gradiente térmico muy fuerte y ser <b>barotrópico</b>, si es paralelo al gradiente de presión. Lo que importa es el <b>ángulo</b>, no la magnitud sola.</div>
+  <div class="exam">🎯 EXAMEN: Defina baroclinicidad e indique cómo la identificaría en (a) una carta de 850 hPa y (b) un corte vertical. Justifique por qué el espesor 1000–500 hPa es la variable más apropiada.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:var(--bg-success);color:var(--text-success)">Cómo identificarla</span>
+  <div class="two" style="margin-bottom:8px">
+    <div class="mini"><b>En el plano</b><br>Regiones donde las isotermas (o isohipsas de espesor) <b>cortan</b> a las isohipsas de geopotencial de 850 hPa. Mayor intercepción + gradientes más apretados = mayor baroclinicidad.</div>
+    <div class="mini"><b>En corte vertical</b><br>Graficar T junto a θ (temperatura potencial). Donde las curvas se interceptan hay baroclinicidad; donde son paralelas, barotropía (ej. región del APS).</div>
+    <div class="mini"><b>Advección térmica</b><br>Opción cuantitativa (líneas negras en los cortes). Ojo: en altura sale muy alta por los chorros; cerca de superficie los valores son bajos aunque haya baroclinicidad.</div>
+    <div class="mini"><b>Espesor</b><br>Diferencia de altura geopotencial entre dos niveles (1000–850 y 1000–500 hPa). Proporcional a la <b>T media de la capa</b>; más robusto que T de un solo nivel.</div>
+  </div>
+  <div class="rx">h = z₂ − z₁ = (R·T̄ / g) · ln(p₁/p₂)</div>
+  <div class="rx-note">Ecuación hipsométrica. R = 287 J·kg⁻¹·K⁻¹ (aire seco), g = 9.81 m/s², T̄ = temperatura media de la capa (K), h en metros geopotenciales (MGP). Explica por qué la tropósfera es más profunda en el trópico que en los polos. Referencias operativas del cono sur: espesor 1000–500 hPa <b>&lt; 5280 MGP</b> ⇒ riesgo de nevadas.</div>
+  <div class="warn">⚠️ Los gradientes de espesor no siempre están en superficie: pueden ubicarse en capas elevadas. Por eso <b>siempre complementar el análisis en el plano con secciones verticales</b>.</div>
+  <div class="exam">🎯 EXAMEN: Un pronosticador observa espesor 1000–500 hPa de 5240 MGP sobre Magallanes con precipitación pronosticada. ¿Qué fase esperaría y por qué?</div>
+</div>
+
+<div class="sec full">Sección 2 — Onda baroclínica: estructura vertical e inclinación</div>
+
+<div class="block s2">
+  <span class="bh" style="background:var(--bg-pro);color:var(--text-pro)">Onda baroclínica — definición y estructura</span>
+  <div class="def">Perturbación migratoria de escala sinóptica de latitudes medias y altas, asociada a bajas presiones y a gradientes térmicos. Es el mecanismo por el que la atmósfera <b>convierte energía potencial (baroclinicidad) en energía cinética (viento)</b>.</div>
+  <div class="dual">
+    <div class="dual-tech"><p class="dual-label">Para meteorólogos</p>La onda baroclínica exhibe <b>inclinación del eje con la altura hacia el aire frío</b> (hacia el oeste-suroeste en el HS). Esta inclinación es la condición necesaria para el crecimiento por inestabilidad baroclínica (Charney/Eady): permite flujo de calor meridional hacia el polo y conversión de energía potencial disponible a cinética. La vaguada de altura induce, flujo abajo, una vaguada/baja de nivel bajo desplazada ~1000 km al este.</div>
+    <div class="dual-plain"><p class="dual-label">Para no meteorólogos</p>La perturbación no es una columna vertical recta: está <b>inclinada</b>, como una torre de Pisa. Lo que ves en superficie no está justo debajo de lo que ocurre a 10 km de altura, sino desplazado unos 1000 km. Esa inclinación es justamente lo que le permite al sistema seguir alimentándose y crecer; cuando se endereza, el sistema deja de fortalecerse.</div>
+  </div>
+  <div class="item"><span class="dot"></span><span>La mayor energía cinética está en niveles altos y medios, donde el flujo es rápido (chorros). Por dinámica y termodinámica, ese flujo <b>induce</b> perturbaciones en niveles bajos: vaguadas de altura inducen vaguadas bajas por delante; dorsales de altura inducen dorsales bajas por delante.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Señales en cartas sinópticas:</b> (1) inclinación de vaguadas con la altura; (2) gradientes térmicos no paralelos a los de presión; (3) cizalla de viento (cambio de velocidad y/o dirección en la vertical u horizontal).</span></div>
+  <div class="item"><span class="dot"></span><span><b>Onda barotrópica (contraste):</b> sin inclinación del eje con la altura y con advección térmica ≈ 0, aunque existan circulaciones en nivel bajo. Común en el trópico y subtrópico.</span></div>
+  <div class="warn">⚠️ Error común: asumir que la baja de superficie está siempre bajo la vaguada de altura. Solo ocurre en sistemas <b>ocluidos/maduros</b> (que ya se enderezaron y son casi barotrópicos). En la fase de intensificación están claramente desfasados.</div>
+  <div class="exam">🎯 EXAMEN: Explique físicamente por qué la inclinación del eje con la altura es condición necesaria para la intensificación de un ciclón extratropical, y qué ocurre cuando el sistema se "endereza".</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:var(--bg-neutral,var(--surface-1));color:var(--text-secondary)">Figura 1 — corte vertical (HS)</span>
+  <svg width="100%" viewBox="0 0 680 300" role="img"><title>Inclinación de la onda baroclínica con la altura en el Hemisferio Sur</title><desc>Corte vertical esquemático que muestra dorsales y vaguadas en 250 y 500 hPa desplazadas hacia el oeste respecto de las bajas y altas de superficie, con zonas cálidas y frías alternadas.</desc>
+    <rect x="40" y="30" width="600" height="180" rx="8" fill="none" stroke="var(--border)" stroke-width="0.5"/>
+    <rect x="120" y="30" width="140" height="180" fill="#E24B4A" opacity="0.12"/>
+    <rect x="340" y="30" width="140" height="180" fill="#E24B4A" opacity="0.12"/>
+    <rect x="260" y="30" width="80" height="180" fill="#378ADD" opacity="0.14"/>
+    <rect x="480" y="30" width="90" height="180" fill="#378ADD" opacity="0.14"/>
+    <path d="M50 70 Q140 42 220 70 Q300 98 380 70 Q460 42 540 70 Q600 88 632 78" fill="none" stroke="#5F5E5A" stroke-width="1.2"/>
+    <path d="M50 120 Q150 92 235 120 Q320 148 400 120 Q480 92 560 120 Q605 134 632 128" fill="none" stroke="#5F5E5A" stroke-width="1.2"/>
+    <path d="M50 170 Q160 144 255 170 Q345 196 425 170 Q505 144 585 170 Q612 178 632 176" fill="none" stroke="#5F5E5A" stroke-width="1.2"/>
+    <text class="ts" x="648" y="72" text-anchor="end" style="font-size:12px" fill="var(--text-secondary)">250 hPa</text>
+    <text class="ts" x="648" y="122" text-anchor="end" style="font-size:12px" fill="var(--text-secondary)">500 hPa</text>
+    <text class="ts" x="648" y="172" text-anchor="end" style="font-size:12px" fill="var(--text-secondary)">850 hPa</text>
+    <text x="140" y="56" style="font-size:12px" fill="var(--text-secondary)">Dorsal</text>
+    <text x="290" y="56" style="font-size:12px" fill="var(--text-secondary)">Vaguada</text>
+    <text x="185" y="200" style="font-size:12px" fill="#A32D2D">Cálido</text>
+    <text x="285" y="200" style="font-size:12px" fill="#185FA5">Frío</text>
+    <rect x="40" y="215" width="600" height="30" rx="6" fill="var(--surface-1)" stroke="var(--border)" stroke-width="0.5"/>
+    <text x="150" y="235" style="font-size:13px;font-weight:500" fill="var(--text-primary)">L</text>
+    <text x="270" y="235" style="font-size:13px;font-weight:500" fill="var(--text-primary)">H</text>
+    <text x="400" y="235" style="font-size:13px;font-weight:500" fill="var(--text-primary)">L</text>
+    <text x="520" y="235" style="font-size:13px;font-weight:500" fill="var(--text-primary)">H</text>
+    <text x="55" y="235" style="font-size:12px" fill="var(--text-secondary)">Superficie</text>
+    <text x="340" y="272" text-anchor="middle" style="font-size:12px" fill="var(--text-secondary)">El eje se inclina con la altura hacia el aire frío: la vaguada de altura precede a la baja de superficie</text>
+  </svg>
+</div>
+
+<div class="sec full">Sección 3 — Ciclón extratropical</div>
+
+<div class="block s2">
+  <span class="bh" style="background:var(--bg-danger);color:var(--text-danger)">Ciclón extratropical (AMS, 2017)</span>
+  <div class="def">Sistema de <b>baja presión cerrado</b> de latitudes medias y altas, con <b>núcleo frío en altura</b> y distribución <b>asimétrica</b> de masas de aire en niveles bajos. Se forma en ondas baroclínicas y se alimenta de la liberación de energía potencial (baroclinicidad) cuando interaccionan masas de propiedades térmicas distintas. Tiene frentes asociados en superficie.</div>
+  <div class="dual">
+    <div class="dual-tech"><p class="dual-label">Para meteorólogos</p>Se forma a lo largo del frente polar cuando una vaguada de onda corta o un jet streak de altura induce, flujo abajo, caída de geopotencial en nivel bajo. La advección diferencial (cálida en el sector delantero, fría en el trasero) más la divergencia de altura profundizan el sistema. Núcleo frío en altura ⇒ intensificación con la altura hasta la tropopausa. Fase madura: oclusión, punto triple y máxima vorticidad ciclónica.</div>
+    <div class="dual-plain"><p class="dual-label">Para no meteorólogos</p>Es una tormenta gigante en forma de remolino, de cientos a más de mil kilómetros de diámetro, que se alimenta del choque entre una masa de aire frío y una de aire cálido. A diferencia de un huracán —que se alimenta del calor del mar y es cálido en todo su interior—, este es <b>frío en su parte alta</b> y necesita el contraste de temperaturas para vivir. Cuando ese contraste se acaba, la tormenta se muere.</div>
+  </div>
+  <div class="item"><span class="dot"></span><span><b>Contraste clave con el ciclón tropical:</b> el tropical es <b>barotrópico</b> y de <b>núcleo cálido</b> en toda la columna; el extratropical es <b>baroclínico</b> y de <b>núcleo frío</b> en altura. Por eso el tropical no tiene frentes.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Identificación satelital:</b> forma de <b>coma en el HN</b> y de <b>coma invertida en el HS</b>. Siguiendo las bandas nubosas se aprecia la rotación opuesta entre hemisferios (horaria en el HS, antihoraria en el HN).</span></div>
+  <div class="item"><span class="dot"></span><span><b>Etapas de formación (modelo Noruego adaptado al HS):</b> (I) frente polar estacionario con gradiente térmico definido; (II) vaguada/chorro de altura induce baja en nivel bajo y arranca la advección diferencial —cálida en el lado delantero, fría en el trasero—; (III) el sistema se ondula, se intensifica y finalmente ocluye. Muere cuando los gradientes térmicos se diluyen o la dinámica de altura genera frontólisis/ciclólisis.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Modelo Shapiro–Keyser</b> (alternativa al Noruego, también en el material): en lugar de oclusión clásica el frente frío fractura al cálido, se forma un "seclusión cálida" rodeada de aire frío. Frecuente en ciclones oceánicos explosivos.</span></div>
+  <div class="warn">⚠️ Error común: llamar "ciclón" solo al huracán. En terminología OMM/AMS, <b>ciclón</b> = cualquier circulación cerrada de baja presión; el extratropical es tan ciclón como el tropical, pero con física distinta.</div>
+  <div class="exam">🎯 EXAMEN: Compare estructural y energéticamente un ciclón tropical y uno extratropical (núcleo térmico, fuente de energía, presencia de frentes, estructura vertical del eje).</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:var(--bg-neutral,var(--surface-1));color:var(--text-secondary)">Figura 2 — ciclón maduro (HS)</span>
+  <svg width="100%" viewBox="0 0 680 340" role="img"><title>Estructura de un ciclón extratropical maduro del Hemisferio Sur con sus tres frentes</title><desc>Esquema con baja ocluida, frente ocluido, frente frío hacia el suroeste, frente cálido hacia el este, punto triple y sectores cálido y frío.</desc>
+    <rect x="40" y="30" width="600" height="250" rx="10" fill="var(--surface-1)" stroke="var(--border)" stroke-width="0.5"/>
+    <path d="M420 60 Q520 70 620 92" fill="none" stroke="#F0997B" opacity="0.35" stroke-width="26"/>
+    <text x="540" y="52" style="font-size:12px" fill="#993C1D">Sector cálido</text>
+    <circle cx="250" cy="150" r="9" fill="none" stroke="#534AB7" stroke-width="1.5"/>
+    <text x="250" y="155" text-anchor="middle" style="font-size:12px;font-weight:500" fill="#534AB7">L</text>
+    <text x="250" y="132" text-anchor="middle" style="font-size:12px" fill="var(--text-secondary)">Baja ocluida</text>
+    <path d="M259 150 Q310 165 355 178" fill="none" stroke="#7F77DD" stroke-width="2.5"/>
+    <text x="300" y="200" style="font-size:12px" fill="#3C3489">Frente ocluido</text>
+    <path d="M355 178 Q300 235 210 262" fill="none" stroke="#378ADD" stroke-width="2.5"/>
+    <text x="200" y="235" style="font-size:12px" fill="#185FA5">Frente frío</text>
+    <path d="M355 178 Q470 168 618 160" fill="none" stroke="#E24B4A" stroke-width="2.5"/>
+    <text x="500" y="190" style="font-size:12px" fill="#A32D2D">Frente cálido</text>
+    <circle cx="355" cy="178" r="4" fill="#5F5E5A"/>
+    <text x="362" y="160" style="font-size:12px" fill="var(--text-primary)">Punto triple</text>
+    <text x="110" y="110" style="font-size:12px" fill="#185FA5">Sector frío (cúmulos de aire frío)</text>
+    <text x="80" y="300" style="font-size:12px" fill="var(--text-secondary)">Sur ↓ &nbsp;·&nbsp; Oeste ←</text>
+    <text x="640" y="300" text-anchor="end" style="font-size:12px" fill="var(--text-secondary)">Rotación horaria (HS) &nbsp;·&nbsp; nube en coma invertida</text>
+  </svg>
+</div>
+
+<div class="block full">
+  <span class="bh" style="background:var(--bg-accent);color:var(--text-accent)">Nubosidad asociada al ciclón maduro</span>
+  <div class="three">
+    <div class="mini"><b>Frente frío → Cumulonimbos (Cb)</b><br>Pendiente frontal pronunciada y avance más rápido que el cálido ⇒ ascensos intensos y convección profunda. Escala: mesoescala embebida en sinóptica; horas.</div>
+    <div class="mini"><b>Frente cálido → Ns, As, Cs, Ci</b><br>Ascenso isentrópico suave sobre la masa fría ⇒ nubosidad estratiforme y lluvia persistente <b>en el lado frío</b> (por delante del frente en superficie). Escala: sinóptica; 12–36 h.</div>
+    <div class="mini"><b>Oclusión → nube en coma</b><br>Zona de mezcla con ascenso del aire cálido. Nubosidad circular, varias bandas de precipitación. Escala: sinóptica; días.</div>
+    <div class="mini"><b>Detrás del frente frío → Cu de aire frío</b><br>Patrón "craquelado" o celular en satélite. Masa muy fría sobre mar relativamente cálido ⇒ inestabilidad convectiva. Muy común en océanos polares del HS.</div>
+    <div class="mini"><b>Punto triple</b><br>Intersección de los tres frentes, casi siempre por delante (flujo abajo) de la baja ocluida. Región de mal tiempo y ascensos intensos.</div>
+    <div class="mini"><b>Vaguada de altura y masas</b><br>La vaguada fría de 500 hPa se ubica sobre la masa fría de 1000 hPa (lado sur/oeste del frente); la masa cálida queda al este/norte, entre la vaguada y la dorsal de altura.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Dada una imagen IR con una estructura de coma invertida y celdas craqueladas al oeste de ella, ubique el frente frío, el frente cálido y el punto triple, y justifique cada trazado.</div>
+</div>
+
+<div class="sec full">Sección 4 — Frentes: definición y los cuatro tipos</div>
+
+<div class="block s2">
+  <span class="bh" style="background:var(--bg-accent);color:var(--text-accent)">Frentes — generalidades (Wallace &amp; Hobbs, 2006)</span>
+  <div class="def">Bandas angostas y elongadas que <b>dividen dos masas de aire de características distintas</b>. Se asocian a ciclones extratropicales y se ubican a lo largo de <b>vaguadas del campo de presión reducida al nivel del mar</b>. Pueden extenderse a regiones muy alejadas del ciclón que los generó: un ciclón frente al sur de Brasil puede mantener una estructura frontal hasta la Amazonía de Brasil y Perú.</div>
+  <div class="dual">
+    <div class="dual-tech"><p class="dual-label">Para meteorólogos</p>El frente es una zona frontal de espesor finito (≈50–200 km) con máximo de gradiente térmico y de vorticidad relativa ciclónica, y con discontinuidad en el campo de viento (línea de cortante). Se traza <b>siempre en el lado cálido del gradiente de espesor</b>, consecuencia de la inclinación de la superficie frontal con la altura. Su clasificación depende del signo de la advección térmica normal a la frontera.</div>
+    <div class="dual-plain"><p class="dual-label">Para no meteorólogos</p>Un frente es la "frontera" entre dos masas de aire con distinta temperatura y humedad, como la línea donde se juntan el agua fría y el agua caliente de una tina. Esa frontera no es vertical: está tumbada, como una rampa. Por eso las nubes y la lluvia no aparecen justo encima de la línea que se dibuja en el mapa, sino desplazadas hacia un costado.</div>
+  </div>
+  <div class="item"><span class="dot"></span><span><b>Frente polar</b> (escuela Escandinava, AMS 2017): frontera <b>semi-permanente y semi-continua</b> en zonas extratropicales que separa masas de aire distintas. Está presente la mayor parte del tiempo y puede analizarse como un cinturón continuo de frentes, pero ocasionalmente se interrumpe.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Complicación orográfica:</b> el análisis se dificulta donde el ascenso/descenso modifica la masa. Caso emblemático: <b>la Patagonia</b>, donde la compresión adiabática puede calentar el aire post-frontal por encima del pre-frontal.</span></div>
+  <div class="warn">⚠️ Error común: asignar una vaguada a cada frente. Cuando hay varios frentes cercanos la vaguada de presión al nivel del mar se <b>ensancha</b> y no se resuelve individualmente. Ahí lo decisivo es reconocer el <b>cambio de masa</b> (espesor, Td, razón de mezcla).</div>
+  <div class="exam">🎯 EXAMEN: ¿Por qué el frente se traza siempre en el lado cálido del gradiente de espesor, independientemente del tipo de frente? Argumente con la estructura tridimensional de la superficie frontal.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:var(--bg-warning);color:var(--text-warning)">Línea de cortante (shear line)</span>
+  <div class="item"><span class="dot"></span><span>Línea angosta a lo largo de la cual hay un <b>cambio brusco en la componente horizontal del viento paralela a la línea</b>; máximo de cortante horizontal / confluencia direccional.</span></div>
+  <div class="item"><span class="dot"></span><span><b>No es lo mismo que un frente.</b> El frente es una transición de <b>densidad</b>; la shear line es una transición de <b>viento</b>. Sobre continente van paralelos, pero al norte de ~35°S en Sudamérica (o sobre el Golfo de México en Norteamérica) la shear line <b>acelera y se adelanta</b> al frente, que queda rezagado y se debilita sobre aguas cálidas.</span></div>
+  <div class="item"><span class="dot"></span><span>Rasgos que distinguen un frente verdadero: vaguada de presión + cambio de dirección del viento + <b>discontinuidad de humedad</b> + cambio en el tipo de nube/precipitación.</span></div>
+  <div class="warn">⚠️ La franja de nubosidad que parece "continuar" el frente frío hacia el norte suele ser en realidad la shear line. Verifique siempre Td / razón de mezcla antes de prolongar un frente hacia latitudes tropicales.</div>
+  <div class="exam">🎯 EXAMEN: Distinga frente y línea de cortante e indique tres variables que usaría para separarlos en un análisis sobre el sureste de Brasil.</div>
+</div>
+
+<div class="block full">
+  <span class="bh" style="background:var(--bg-success);color:var(--text-success)">Los cuatro tipos de frente — la clasificación depende del tipo de advección térmica</span>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #378ADD;border-radius:0"><b>Frente frío (▲ azules)</b><br>Advección fría: una masa fría y densa reemplaza a otra de menor densidad. Suele enfriar al pasar. Se ubica en la región oeste de la baja de superficie, bajo la vaguada de altura. El aire cálido y ligero es forzado a ascender <b>violentamente</b> ⇒ Cb y chubascos.<br><i>Excepción sudamericana:</i> al descender de los Andes hacia la Patagonia, la compresión adiabática calienta el aire post-frontal y la temperatura <b>sube</b> tras el pasaje.</div>
+    <div class="mini" style="border-left:3px solid #E24B4A;border-radius:0"><b>Frente cálido (● rojos)</b><br>Advección cálida: masa menos densa avanza hacia región más densa. Calentamiento y humedecimiento al pasar. El ascenso es <b>suave</b> sobre la cuña fría ⇒ nubosidad estratiforme (Ns, As, Cs) y lluvia persistente <b>flujo abajo</b>, en la región fría.<br><i>Contexto regional:</i> en el norte/centro de Argentina, Uruguay, Paraguay y sur de Brasil el flujo cálido ascendente corresponde muchas veces a la salida del <b>SALLJ</b>.</div>
+    <div class="mini" style="border-left:3px solid #888780;border-radius:0"><b>Frente estacionario (▲● alternados)</b><br><b>No hay advección térmica a través de la frontera</b>, aunque la frontera existe. Los vientos son <b>paralelos</b> al frente (mismo sentido u opuestos) y no lo cruzan. Se forma cuando un frente frío o cálido deja de avanzar, y conecta frentes fríos y cálidos a lo largo del frente polar al cruzar altas presiones.<br>Puede trasladarse (ej. de oeste a este) pero no hacia masas distintas. AMS: cuasi-estacionario = traslación &lt; 5 kt.</div>
+    <div class="mini" style="border-left:3px solid #7F77DD;border-radius:0"><b>Frente ocluido (▲● morados)</b><br>Se forma cuando el frente frío <b>alcanza</b> al cálido: el aire delante del cálido rota y asciende sobre la masa más fría, despegándose de la superficie. Es una <b>zona de mezcla</b>, así que la advección puede ser cálida o fría, aunque tiende a dominar la fría. Nace del <b>punto triple</b>.<br>Se asocia a bajas muy profundas, gradientes apretados y vientos fuertes; nube en coma vista desde satélite.</div>
+  </div>
+  <div class="flow"><span class="fbox">Frente estacionario</span><span class="farrow">→</span><span class="fbox">Ondulación (baja incipiente)</span><span class="farrow">→</span><span class="fbox">Frentes frío + cálido definidos</span><span class="farrow">→</span><span class="fbox">Frente frío alcanza al cálido</span><span class="farrow">→</span><span class="fbox">Oclusión y punto triple</span><span class="farrow">→</span><span class="fbox">Frontólisis / ciclólisis</span></div>
+  <div class="warn">⚠️ Error común: pensar que "frente ocluido" = frente en disipación. La oclusión marca la fase de <b>máxima intensidad</b> de la baja (presión mínima, vientos máximos). Lo que se debilita es la baroclinicidad, no el viento.</div>
+  <div class="exam">🎯 EXAMEN: Un observatorio en Uruguay registra viento persistente del NE, y a 150 km al sur otro registra viento del SW, sin cambio de temperatura en ninguno. ¿Qué tipo de frente hay entre ellos y por qué?</div>
+</div>
+
+<div class="block s2">
+  <span class="bh" style="background:var(--bg-pro);color:var(--text-pro)">Impactos del frente ocluido en el cono sur</span>
+  <div class="item"><span class="dot"></span><span><b>Precipitación:</b> deja más lluvia que un frente frío simple porque, al tener forma circular y varias bandas, los sistemas precipitantes pasan <b>dos o más veces</b> sobre una misma localidad. Un frente frío o cálido tarda minutos u horas en pasar; una oclusión, mucho más. Por eso las <b>nevadas más intensas del cono sur</b> se asocian a oclusiones.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Viento (Charpentier, 2015):</b> la región más peligrosa es la <b>parte trasera/oeste</b> de la oclusión, por <b>descenso isentrópico</b>: el viento, al moverse sobre superficies de θ constante, es forzado a descender desde ~850 hPa hasta la superficie, trayendo consigo las velocidades altas de niveles superiores ⇒ rachas fuertes. Caso documentado: daños por viento en <b>Punta Arenas</b>, análisis en la superficie isentrópica de 279 K.</span></div>
+  <div class="warn">⚠️ El descenso isentrópico no es "aire que baja porque sí": es el flujo siguiendo superficies inclinadas de temperatura potencial en regiones de baroclinicidad. Sin gradiente de θ en superficie, no hay mecanismo.</div>
+  <div class="exam">🎯 EXAMEN: Explique el descenso isentrópico en la retaguardia de una oclusión y por qué genera rachas destructivas en Magallanes.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:var(--bg-neutral,var(--surface-1));color:var(--text-secondary)">Espacio sugerido para imagen</span>
+  <div class="mini" style="border:0.5px dashed var(--border-strong);background:transparent"><b>Figura recomendada:</b> análisis de superficie del <i>South American Desk</i> (WPC/NOAA) con isobaras, frentes y ZCIT.<br><br>Disponible en: <a href="http://www.wpc.ncep.noaa.gov/international/sampssfc00.gif">wpc.ncep.noaa.gov/international/sampssfc00.gif</a> (verificar vigencia)<br><br>Úsela para practicar: identificar frentes fríos, cálidos, estacionarios y ocluidos, y comprobar que cada uno se ubica sobre una vaguada del campo de PNMM.</div>
+</div>
+
+<div class="sec full">Sección 5 — Ciclogénesis, bombogénesis y regiones ciclogenéticas de Sudamérica</div>
+
+<div class="block s2">
+  <span class="bh" style="background:var(--bg-danger);color:var(--text-danger)">Ciclogénesis — definición y mecanismo</span>
+  <div class="def">Generación o intensificación de un ciclón por <b>disminución de la presión superficial</b> como respuesta a procesos troposféricos. La ciclogénesis de latitud media ocurre típicamente cuando una vaguada de <b>longitud de onda intermedia (2500–5000 km)</b> interactúa con una zona frontal de superficie, en presencia de cizalla vertical e inestabilidad térmica.</div>
+  <div class="dual">
+    <div class="dual-tech"><p class="dual-label">Para meteorólogos</p>Cuadrat y Pita (1997/2004): en el tramo dorsal→vaguada el viento del gradiente es subgeostrófico y el aire se agolpa (convergencia en altura ⇒ subsidencia ⇒ espiral anticiclónica); en el tramo vaguada→dorsal es supergeostrófico y el aire se acelera (divergencia en altura ⇒ ascenso compensatorio ⇒ espiral ciclónica). <b>La divergencia en altura es la causa principal de la ciclogénesis en superficie.</b> Jusem y Atlas (1989) mostraron que la advección horizontal de densidad domina la profundización sobre el Río de la Plata; advecciones cálidas en niveles altos, asociadas al hundimiento de la tropopausa, aportan al campo de tendencias negativas (Vigliarolo, 1998).</div>
+    <div class="dual-plain"><p class="dual-label">Para no meteorólogos</p>Piensa en un tubo de pasta dental: si en un punto sale más aire del que entra, la presión ahí abajo cae. Eso es exactamente lo que hace la corriente de vientos a 9 km de altura por delante de una vaguada: "chupa" aire hacia afuera. Como sale más aire arriba del que entra, la presión en el suelo baja, y para compensar el aire de abajo empieza a subir y a girar. Así nace la tormenta: se construye <b>de arriba hacia abajo</b>.</div>
+  </div>
+  <div class="item"><span class="dot"></span><span><b>Tabla 1 — factores que reducen la presión superficial:</b> (1) flujo de aire divergente en niveles altos, que reduce la masa sobre la superficie; (2) flujo de aire caliente y húmedo en nivel bajo y medio; (3) liberación de <b>calor latente</b> por convección en el sector cálido del sistema.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Condiciones simultáneas típicas:</b> frente estacionario (o frío/cálido de lento desplazamiento) en superficie; advección cálida del norte y fría del sur (en HS); parte delantera de vaguada <b>difluente</b> en altura acercándose; desviación de la trayectoria usual del ciclón; descenso/ascenso de la tropopausa; subsidencia en niveles bajos de la estratósfera (100–250 hPa); pérdida de masa en la región subsidente.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Rol de la orografía (Seluchi, 1998):</b> los sistemas montañosos favorecen la ciclogénesis <b>a sotavento</b> de los obstáculos. En Sudamérica, los Andes son el obstáculo dominante: por eso las vaguadas se intensifican al cruzar la cordillera.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Ciclogénesis tipo coma</b> (An Introduction to Satellite Image Interpretation, 1997): empieza con una <b>nube tipo hoja</b> (leaf cloud) y termina con un sistema nuboso en forma de coma. Etapas: inicial → inicial de coma → oclusión → corte (cut-off).</span></div>
+  <div class="warn">⚠️ Error común: atribuir la ciclogénesis únicamente a la convergencia en superficie. La convergencia en superficie es <b>consecuencia</b>, no causa: el disparador es la divergencia en altura asociada a la vaguada/chorro.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué la divergencia en altura es la causa principal de la ciclogénesis superficial, apoyándose en el comportamiento sub/supergeostrófico del viento entre dorsal y vaguada.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:var(--bg-danger);color:var(--text-danger)">Ciclogénesis explosiva (bombogénesis)</span>
+  <div class="def">Caída brusca de la presión de en torno a <b>24 hPa en menos de 24 horas</b>, con vientos fuertes e intensas precipitaciones. Sanders y Gyakum (1980), citados por Possia (2004).</div>
+  <div class="rx">|dp/dt| × (sen 60° / sen φ) ≥ 24 hPa / 24 h</div>
+  <div class="rx-note">dp/dt = tasa de caída de presión en hPa/24 h; φ = latitud media a la que se produce. El factor sen60°/senφ <b>normaliza por latitud</b>, porque una misma caída de presión no tiene el mismo impacto dinámico en todas las latitudes. Ejemplo (caso 12–13 abril 2014, Río de la Plata): P₀₀ₕ = 1005 hPa → P₂₄ₕ = 975 hPa, es decir 30 hPa/24 h; a φ ≈ 38°S el factor es sen60/sen38 ≈ 1.41, y 30 × 1.41 ≈ 42 ≥ 24 ⇒ <b>bomba</b> confirmada. Nota: a latitudes bajas el criterio es más exigente, no menos.</div>
+  <div class="item"><span class="dot"></span><span>La ciclogénesis inició sobre el continente y a las 24 h presentó un núcleo de <b>975 hPa</b> sobre el Atlántico.</span></div>
+  <div class="warn">⚠️ El umbral crudo de "24 hPa/24 h" solo aplica exactamente a 60° de latitud. Aplicarlo sin la corrección por sen φ sobreestima el número de bombas en latitudes medias-bajas.</div>
+  <div class="exam">🎯 EXAMEN: Una baja se profundiza 22 hPa en 24 h a 45°S. ¿Califica como ciclogénesis explosiva? Muestre el cálculo.</div>
+</div>
+
+<div class="block full">
+  <span class="bh" style="background:var(--bg-accent);color:var(--text-accent)">Distribución de la ciclogénesis en Sudamérica</span>
+  <div class="two">
+    <div class="mini"><b>Golfo de San Matías (42.5°S, 62.5°W)</b><br>Máximo presente todo el año. Mayor ocurrencia en <b>verano</b>, con pico en <b>diciembre</b> (Gan y Rao, 1991).</div>
+    <div class="mini"><b>Uruguay / región ciclogenética del litoral (~31.5°S, 55.0°W)</b><br>El núcleo más intenso ocurre en <b>invierno</b>, con máximo en <b>junio y julio</b> (Necco 1982; Lichtenstein 1989; Seluchi 1995).</div>
+  </div>
+  <div class="item" style="margin-top:8px"><span class="dot"></span><span><b>Diferencia invierno/verano en el litoral:</b> en verano <b>no</b> se verifican ondas largas en la tropósfera media ni la perturbación ciclónica fría que incursiona desde el Pacífico cruzando los Andes en invierno. En cambio, en verano se intensifica la <b>zona baroclínica en 30–35°S</b>, que luego es alcanzada por una vaguada en altura (Seluchi, 1995).</span></div>
+  <div class="item"><span class="dot"></span><span><b>Vaguadas de invierno ciclogenéticas (Dal Piva, Gan y Rao, 2009).</b> Analizaron 5 inviernos (1999–2003) y hallaron <b>38 casos</b> (≈7–8/año) de vaguadas de 500 hPa cruzando la cordillera con ciclogénesis en Uruguay y regiones adyacentes, divididos en dos compuestos: <b>B (25 casos)</b> y <b>C (13 casos)</b>.</span></div>
+  <div class="two">
+    <div class="mini" style="border-left:3px solid #1D9E75;border-radius:0"><b>Compuesto B — el más común (25 casos)</b><br>Vaguada inicial <b>menos intensa</b>; masa al este de los Andes sobre Argentina <b>más cálida</b> (menor PNMM, mayor espesor, patrón de dorsal en altura). El frente frío termina cruzando São Paulo hasta el este de Bolivia. Efectos menores en el campo de presión frente a Perú. En Chile: lluvias en el <b>sur</b>.</div>
+    <div class="mini" style="border-left:3px solid #BA7517;border-radius:0"><b>Compuesto C (13 casos)</b><br>Vaguada <b>más intensa</b> en el Pacífico; no cruza progresivamente, primero pasa una onda corta que se intensifica al salir de la costa. Ciclón y frente más intensos. El frente ingresa hasta <b>Rondônia</b> y sigue más al norte; dorsal polar más extendida con vientos del sur ⇒ empuja el frente hasta la Amazonía occidental. Acercamiento del APS a la costa peruana. En Chile: lluvias en el <b>centro y centro-sur (Biobío–Coquimbo)</b>, más prolongadas.</div>
+  </div>
+  <div class="warn">⚠️ Relevancia para Perú: el compuesto C es el escenario asociado a <b>friajes</b> más profundos en la Amazonía peruana (Marengo, 1983; Marengo et al., 1997; Quispe, 2005) y a acercamientos del APS a la costa.</div>
+  <div class="exam">🎯 EXAMEN: Contraste los compuestos B y C de Dal Piva et al. (2009) en términos de intensidad de la vaguada, estructura térmica sobre Argentina, alcance del frente frío e impacto en Chile y en la Amazonía peruana.</div>
+</div>
+
+<div class="sec full">Sección 6 — Sudamérica extratropical (Tema 2.2): geografía y controles semipermanentes</div>
+
+<div class="block s2">
+  <span class="bh" style="background:var(--bg-success);color:var(--text-success)">Geografía y divisiones</span>
+  <div class="def">Sudamérica extratropical = región al sur de ~20–25°S donde los sistemas frontales de nivel bajo juegan un rol importante en el clima. El límite norte <b>no es una latitud única</b>: depende de los Andes.</div>
+  <div class="item"><span class="dot"></span><span><b>Al oeste de los Andes</b> los frentes difícilmente llegan a 28°S ⇒ límite norte = desierto de Atacama y Altiplano (~27–28°S).</span></div>
+  <div class="item"><span class="dot"></span><span><b>Al este de los Andes</b> los frentes se aceleran y llegan hasta Bolivia y en ocasiones Perú ⇒ límite norte = sur de la Amazonía/Santa Cruz y Pantanal (~18–19°S), Mato Grosso do Sul, Paraná y la Serra do Mar.</span></div>
+  <div class="three" style="margin-top:8px">
+    <div class="mini" style="border-top:3px solid #7F77DD"><b>CPA — Cuenca del Pacífico y Andes</b><br>Todo Chile desde Coquimbo hacia el sur. Precipitaciones de origen frontal; vegetación abundante en el sur por ingreso frecuente de humedad del oeste.</div>
+    <div class="mini" style="border-top:3px solid #BA7517"><b>PT — Patagonia y Tierra del Fuego</b><br>Al sur de ~40°S, al este de la cordillera. Región de sotavento: la <b>más seca</b> junto con el centro-norte de Chile.</div>
+    <div class="mini" style="border-top:3px solid #639922"><b>CRP — Cuenca del Río de la Plata</b><br>Desde el Río Colorado hasta el sur de Bolivia, todo Paraguay, Uruguay, NE de Argentina y sur de Brasil. Influencias tropicales + dinámica extratropical ⇒ el <b>tiempo más severo de Sudamérica</b>.</div>
+  </div>
+  <div class="exam">🎯 EXAMEN: Justifique por qué el límite norte de "Sudamérica extratropical" es ~10° de latitud más al norte al este de los Andes que al oeste.</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:var(--bg-accent);color:var(--text-accent)">Controles semipermanentes (850 hPa)</span>
+  <div class="item"><span class="dot"></span><span><b>APS</b> — Anticiclón del Pacífico Sur y <b>AAS</b> — Anticiclón del Atlántico Sur (mejor definidos en 1000 hPa).</span></div>
+  <div class="item"><span class="dot"></span><span><b>SALLJ</b> — chorro de capas bajas sudamericano: rol clave en el transporte de humedad amazónica hacia el sur.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Vaguada costera (VC)</b> frente o sobre la costa de Chile.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Vientos del oeste</b> intensos al sur de 45°S, con pico en Tierra del Fuego (~50°S).</span></div>
+  <div class="warn">⚠️ Dato contraintuitivo de examen: los <b>oestes del extremo sur son MÁS intensos en verano</b> que en invierno. Razones: (1) migración austral del APS en verano; (2) en invierno los procesos baroclínicos hacen rotar más el viento, y al promediar mensualmente las velocidades resultan menores. No es que sople menos, es que sopla más variable.</div>
+  <div class="exam">🎯 EXAMEN: Explique por qué los promedios mensuales de viento del oeste en Magallanes son mayores en enero que en julio, pese a que el invierno es la época más tormentosa.</div>
+</div>
+
+<div class="block full">
+  <span class="bh" style="background:var(--bg-warning);color:var(--text-warning)">Ciclo anual en 850 hPa — las cuatro regiones clave (NCEP/NCAR Reanalysis)</span>
+  <div class="two">
+    <div class="mini"><b>1 · Vientos del cono sur</b><br>Mayores en <b>verano</b>. APS al norte de 34°S en enero vs. al norte de 30°S en julio. En enero los patrones sinópticos son más persistentes; en julio alternan bajas y altas.</div>
+    <div class="mini"><b>2 · Vientos del centro de Chile</b><br>Verano: componente <b>sur</b> dominante (APS migrado al sur) ⇒ advección fría del sur y bloqueo de los oestes ⇒ limita la precipitación. Invierno: ingreso más frecuente de <b>oestes</b> con frentes fríos ⇒ convergencia de humedad en la costa y lluvias invernales incluso bastante al norte.</div>
+    <div class="mini"><b>3 · Centro y norte de Argentina (CRP)</b><br>Verano: viento variable con componente <b>NE</b> por la Baja del Chaco; los vientos del este resaltan la convergencia de humedad contra los Andes ⇒ lluvias estivales en el interior. Invierno: predomina <b>oeste/noroeste</b> por vaguadas extratropicales que cruzan la cordillera y se mezclan hasta superficie por turbulencia diurna (aire seco por compresión adiabática).</div>
+    <div class="mini"><b>4 · SALLJ</b><br><b>Enero:</b> entre el sur de Perú/Acre-Amazonas y el sur de Bolivia/norte de Paraguay ⇒ convergencia y lluvias en Bolivia/Paraguay. <b>Julio:</b> se forma en el sur de Bolivia y se extiende hasta el sureste de Brasil ⇒ convección intensa en NE de Argentina/Uruguay/sur de Brasil y formación de nimboestratos por <b>ascenso isentrópico</b> sobre la pendiente del frente cálido.</div>
+  </div>
+  <div class="item" style="margin-top:8px"><span class="dot"></span><span><b>Chorros de altura:</b> el chorro subtropical (STJ) y el polar (PJ) <b>migran hacia el norte en invierno</b> (julio) y hacia el sur en verano (enero). Esta migración explica por qué la dinámica frontal alcanza latitudes más bajas durante los meses fríos.</span></div>
+  <div class="exam">🎯 EXAMEN: Relacione la posición estacional del SALLJ con la distribución de la convección severa en la CRP, e indique en qué mes esperaría nimboestratos por ascenso isentrópico en el sur de Brasil.</div>
+</div>
+
+<div class="sec full">Sección 7 — Humedad: agua precipitable y conexiones subtropicales (ríos atmosféricos)</div>
+
+<div class="block s2">
+  <span class="bh" style="background:var(--bg-accent);color:var(--text-accent)">Agua precipitable (PW) y conexión subtropical (CS)</span>
+  <div class="def"><b>Agua precipitable:</b> contenido total de vapor de agua en una columna atmosférica; equivale al agua líquida que se acumularía si todo ese vapor se convirtiera en lluvia (se mide en mm). <b>Conexión subtropical / río atmosférico:</b> corredor elongado y angosto por el que transita una cantidad considerable de vapor entre dos regiones remotas.</div>
+  <div class="rx">W = (1/ρg) ∫<sub>p₁</sub><sup>p₂</sup> x·dp</div>
+  <div class="rx-note">W = agua precipitable (mm o kg/m²); x = razón de mezcla (kg/kg o g/kg); g = 9.81 m/s²; ρ = densidad del agua líquida (1000 kg/m³); p₁ = superficie, p₂ = tope. <b>Umbrales operativos para Chile (WPC International Desks):</b> ~15 mm ⇒ precipitación muy ligera si la hay; <b>&gt;20 mm</b> ⇒ incremento significativo; <b>&gt;30 mm</b> ⇒ potencial de lluvias localmente intensas por forzamiento orográfico andino; <b>&gt;40 mm</b> es raro pero ha ocurrido; <b>≥50 mm</b> = masa tropical de humedad profunda, y ahí lo decisivo pasa a ser la dinámica, la estabilidad y el gatillador.</div>
+  <div class="dual">
+    <div class="dual-tech"><p class="dual-label">Para meteorólogos</p>La CS se forma en el flanco polar-oeste de los anticiclones subtropicales semipermanentes de nivel bajo, donde el flujo del oeste transporta masa húmeda subtropical hacia latitudes medias de las cuencas occidentales. En el HS se origina en la <b>Polinesia</b>, se asocia a vientos del NW en 925–850 hPa y termina en el sur de Chile. Zhu y Newell (1998) y ESRL/NOAA: <b>30–50%</b> de la precipitación de costas oeste extratropicales ocurre en unos pocos eventos de CS al año. Análogo del HN: el "Pineapple Express" (Higgins et al., 2000).</div>
+    <div class="dual-plain"><p class="dual-label">Para no meteorólogos</p>Es literalmente <b>un río en el cielo</b>: una franja estrecha y larguísima que arrastra enormes cantidades de vapor de agua desde los trópicos hasta latitudes frías. No es agua líquida, es vapor, pero cuando choca con una cordillera se ve obligado a subir, se enfría y descarga. Unos pocos de estos "ríos" al año pueden traer casi la mitad de toda la lluvia anual de un lugar como el sur de Chile.</div>
+  </div>
+  <div class="item"><span class="dot"></span><span><b>El gradiente Pacífico–Patagonia.</b> Al llegar a los Andes, el ascenso orográfico genera lluvias persistentes en el lado oeste (<b>50–100 mm</b> en casos extremos en el sur de Chile). Al cruzar, la masa ya perdió gran parte del vapor y desciende adiabáticamente al este ⇒ se calienta, la HR cae aún más y la Patagonia permanece seca. Este es el mecanismo del contraste extremo de precipitación en apenas ~100 km.</span></div>
+  <div class="item"><span class="dot"></span><span><b>No todos los frentes traen CS.</b> Los frentes del <b>sur/suroeste</b> suelen ser secos (masa polar marítima). Los del <b>oeste directo con vientos fuertes</b> son los que traen las CS más importantes, con efectos entre Aysén y —en casos extremos— el centro de Chile. En casos <b>muy raros</b> la CS se establece desde la costa peruana: ejemplo, los <b>aluviones del desierto de Atacama en marzo de 2015</b>.</span></div>
+  <div class="item"><span class="dot"></span><span><b>El análogo al este de los Andes:</b> el río atmosférico que transporta humedad amazónica hacia el Atlántico sur es el <b>SALLJ</b>, o la <b>ZCAS</b> (Zona de Convergencia del Atlántico Sur).</span></div>
+  <div class="warn">⚠️ Error común: usar el agua precipitable como predictor único de lluvia. PW alto es condición <b>necesaria pero no suficiente</b>: hace falta además dinámica (vaguada, divergencia de chorro), un gatillador y duración del evento.</div>
+  <div class="exam">🎯 EXAMEN: Un pronóstico muestra PW = 34 mm y vientos de 45 kt del NW en 925 hPa aproximándose a Valdivia. ¿Qué escenario de precipitación esperaría en la CPA y en la Patagonia argentina, y por qué difieren tanto?</div>
+</div>
+
+<div class="block">
+  <span class="bh" style="background:var(--bg-neutral,var(--surface-1));color:var(--text-secondary)">Figura 3 — efecto Foehn andino</span>
+  <svg width="100%" viewBox="0 0 680 260" role="img"><title>Ascenso orográfico en la vertiente pacífica y compresión adiabática sobre Patagonia</title><desc>Corte oeste-este a través de los Andes: aire húmedo del Pacífico asciende y precipita, cruza la cordillera y desciende calentándose y secándose sobre la Patagonia.</desc>
+    <path d="M40 200 L250 200 L340 70 L430 200 L640 200 Z" fill="#888780" opacity="0.28"/>
+    <rect x="40" y="200" width="600" height="14" fill="#378ADD" opacity="0.3"/>
+    <text x="90" y="228" style="font-size:12px" fill="var(--text-secondary)">Pacífico (oeste)</text>
+    <text x="600" y="228" text-anchor="end" style="font-size:12px" fill="var(--text-secondary)">Patagonia (este)</text>
+    <path d="M60 160 Q160 150 250 120" fill="none" stroke="#1D9E75" stroke-width="2"/>
+    <path d="M250 120 Q300 92 335 66" fill="none" stroke="#1D9E75" stroke-width="2"/>
+    <path d="M345 66 Q420 110 520 165" fill="none" stroke="#D85A30" stroke-width="2"/>
+    <ellipse cx="215" cy="112" rx="34" ry="14" fill="#85B7EB" opacity="0.55"/>
+    <ellipse cx="285" cy="86" rx="30" ry="13" fill="#85B7EB" opacity="0.55"/>
+    <line x1="205" y1="126" x2="200" y2="146" stroke="#185FA5" stroke-width="1.2"/>
+    <line x1="220" y1="126" x2="215" y2="146" stroke="#185FA5" stroke-width="1.2"/>
+    <line x1="235" y1="126" x2="230" y2="146" stroke="#185FA5" stroke-width="1.2"/>
+    <text x="120" y="132" style="font-size:12px" fill="#0F6E56">Aire húmedo, ascenso</text>
+    <text x="150" y="176" style="font-size:12px" fill="#185FA5">Lluvia 50–100 mm</text>
+    <text x="470" y="140" style="font-size:12px" fill="#993C1D">Descenso adiabático</text>
+    <text x="470" y="160" style="font-size:12px" fill="#993C1D">calienta y seca (HR ↓)</text>
+    <text x="340" y="48" text-anchor="middle" style="font-size:12px" fill="var(--text-secondary)">Andes</text>
+  </svg>
+  <div class="mini" style="margin-top:8px">Este mismo mecanismo explica por qué en la Patagonia la temperatura muchas veces <b>sube</b> tras el pasaje de un frente frío, complicando su identificación. La advección fría solo se restaura cuando el frente alcanza el Atlántico o entra a la Pampa Húmeda.</div>
+</div>
+
+<div class="sec full">Sección 8 — Aplicaciones al pronóstico climático estacional</div>
+
+<div class="block full">
+  <span class="bh" style="background:var(--bg-pro);color:var(--text-pro)">Señales a buscar en los pronósticos (WPC International Desks)</span>
+  <table class="tbl">
+    <colgroup><col style="width:14%"><col style="width:21%"><col style="width:21%"><col style="width:22%"><col style="width:22%"></colgroup>
+    <tr><th>Región</th><th>Precipitación bajo lo normal</th><th>Precipitación sobre lo normal</th><th>Temperatura bajo lo normal</th><th>Temperatura sobre lo normal</th></tr>
+    <tr>
+      <td><b>Cuenca del Pacífico / Chile</b></td>
+      <td>Dorsales en nivel medio sobre o al oeste de Chile (dorsales de bloqueo al sur, típicas de fase cálida del ENSO); anomalías de viento del este en nivel bajo; baja humedad y lejanía de fuentes; ausencia de chorros, baroclinicidad limitada; TSM bajo lo normal.</td>
+      <td>Vaguadas de nivel medio al oeste o suroeste con vientos fuertes en nivel medio; PW y viento en 850/925 hPa altos; conexiones subtropicales; convergencia de humedad entre 925–600 hPa; chorros de altura (la salida derecha estimula lluvias); transporte de humedad desde Argentina con este húmedo en nivel medio; TSM sobre lo normal.</td>
+      <td>Vaguadas en nivel medio sobre los Andes; vientos de gran alcance del sur en nivel bajo (masas antárticas), estimulados por dorsales alargadas desde el mar de Bellingshausen hasta el Pacífico frente a Chile.</td>
+      <td>Dorsales en nivel medio sobre o al oeste de Chile (bloqueo durante El Niño); anomalías de viento del este en nivel bajo ⇒ descensos y compresión adiabática; anomalías positivas de TSM; vientos bajos del norte a escala sinóptica (advección cálida).</td>
+    </tr>
+    <tr>
+      <td><b>Patagonia y Tierra del Fuego</b></td>
+      <td>Compresión adiabática (evaluar velocidad y dirección del flujo respecto a los Andes); bajo contenido de humedad; dorsales de bloqueo (secan el extremo sur pero pueden favorecer lluvia en el norte de Patagonia por flujo del este); ausencia de chorros; TSM bajo lo normal.</td>
+      <td>Vaguadas de nivel medio al oeste/suroeste; conexiones subtropicales profundas del oeste o de gran alcance del noreste; <b>vientos del este en la zona sur de oclusiones</b> (evaluar ascenso adiabático según topografía); chorros de altura en región divergente y posibles acoplamientos; TSM sobre lo normal, especialmente en el Atlántico si hay flujo del este.</td>
+      <td>Flujo de gran alcance del sur favorecido por dorsal alargada sobre el mar de Bellingshausen y la costa sur de Chile (aire directamente antártico); patrón de vaguada de altura sobre la región o el Atlántico sur inmediatamente al este (advección fría del suroeste); anomalías negativas de TSM.</td>
+      <td>Compresión adiabática con vientos fuertes perpendiculares a la cordillera y masas cálidas desde el Pacífico; dorsales de nivel medio sobre o al oeste de Chile (bloqueo en El Niño); anomalías positivas de TSM.</td>
+    </tr>
+    <tr>
+      <td><b>CRP (Río de la Plata)</b></td>
+      <td>Ausencia de SALLJ o SALLJ desplazado; predominio de la Alta de Bolivia sin ondulación frontal; baroclinicidad débil en 30–35°S.</td>
+      <td>Frentes como fuente de velocidades verticales + masa cálida y húmeda que remonta el frente; SALLJ activo (o Pampero del sur); alta cizalla; dinámica de altura: región divergente de vaguadas, chorros de altura, periferia de la Alta de Bolivia, advección de vorticidad ciclónica y caídas de geopotencial.</td>
+      <td>Incursiones de aire frío tras frentes que aceleran al este de los Andes (friajes cuando alcanzan la Amazonía).</td>
+      <td>Predominio de la Baja del Chaco y flujo del norte/noreste persistente.</td>
+    </tr>
+  </table>
+  <div class="warn">⚠️ Dato integrador clave: en toda la tabla se repite la misma tríada. Para que llueva se necesitan simultáneamente <b>(1) humedad</b> (PW, conexión subtropical, SALLJ), <b>(2) dinámica de altura</b> (vaguada, divergencia de chorro, advección de vorticidad ciclónica) y <b>(3) forzante/ascenso</b> (frente, orografía, convergencia en nivel bajo). Si falta cualquiera de las tres, no hay evento significativo por más que las otras dos sean extremas.</div>
+  <div class="exam">🎯 EXAMEN: Para un trimestre JJA con El Niño en desarrollo, elabore el razonamiento físico de un pronóstico de precipitación para el centro de Chile y para la Patagonia, indicando qué señales de circulación buscaría en los modelos.</div>
+</div>
+
+<div class="block full">
+  <span class="bh" style="background:var(--bg-neutral,var(--surface-1));color:var(--text-secondary)">Tabla integradora final — repaso rápido antes del examen</span>
+  <table class="tbl">
+    <colgroup><col style="width:15%"><col style="width:17%"><col style="width:14%"><col style="width:18%"><col style="width:18%"><col style="width:18%"></colgroup>
+    <tr><th>Fenómeno</th><th>Escala espacial</th><th>Escala temporal</th><th>Variable clave</th><th>Señal diagnóstica</th><th>Diferencia HS vs HN</th></tr>
+    <tr><td>Baroclinicidad</td><td>Sinóptica (10³ km)</td><td>Días</td><td>Espesor 1000–500 hPa</td><td>∇T no paralelo a ∇p; T y θ se cruzan en el corte</td><td>Concepto idéntico; cambia el signo de f y el sentido del giro</td></tr>
+    <tr><td>Onda baroclínica</td><td>Sinóptica (2500–5000 km)</td><td>3–7 días</td><td>Geopotencial 500 hPa</td><td>Eje inclinado con la altura; baja de superficie ~1000 km al este de la vaguada</td><td>El eje se inclina hacia el <b>sur</b> con la altura en HS; hacia el norte en HN</td></tr>
+    <tr><td>Ciclón extratropical</td><td>500–2000 km</td><td>3–6 días</td><td>PNMM + espesor</td><td>Baja cerrada, núcleo frío en altura, tres frentes</td><td>Giro <b>horario</b> y coma <b>invertida</b> en HS; antihorario y coma normal en HN</td></tr>
+    <tr><td>Frente frío</td><td>10²–10³ km de largo, 50–200 km de ancho</td><td>Horas</td><td>Td, razón de mezcla, T</td><td>Advección fría; Cb y chubascos; vaguada de PNMM</td><td>Avanza hacia el <b>norte</b> (ecuador) en HS; hacia el sur en HN</td></tr>
+    <tr><td>Frente cálido</td><td>Similar, pendiente más suave</td><td>12–36 h</td><td>Espesor, PW</td><td>Ns/As/Cs; lluvia estratiforme flujo abajo</td><td>Avanza hacia el <b>sur</b> (polo) en HS</td></tr>
+    <tr><td>Frente ocluido</td><td>Circular, varias bandas</td><td>1–3 días</td><td>θ en 850 hPa, PNMM</td><td>Nube en coma; punto triple por delante; descenso isentrópico en la retaguardia</td><td>Punto triple al este/norte de la baja en HS</td></tr>
+    <tr><td>Ciclogénesis explosiva</td><td>Sinóptica</td><td>&lt; 24 h</td><td>dp/dt normalizado por sen φ</td><td>≥24 hPa/24 h a 60°; caso 2014: 30 hPa/24 h</td><td>Criterio idéntico, solo cambia el signo de la latitud</td></tr>
+    <tr><td>Conexión subtropical</td><td>Corredor de 10³ km × 10² km</td><td>1–3 días</td><td>Agua precipitable (mm)</td><td>PW &gt;20 mm con vientos NW fuertes en 925 hPa</td><td>Origen en la <b>Polinesia</b> en HS; "Pineapple Express" desde Hawái en HN</td></tr>
+    <tr><td>SALLJ</td><td>Continental</td><td>Días a estacional</td><td>Viento en 850 hPa</td><td>Máximo de viento del norte al este de los Andes</td><td>Análogo del Great Plains LLJ del HN, con signo invertido</td></tr>
+  </table>
+</div>
+
+<div class="sec full">Quiz de repaso — 10 preguntas de opción múltiple</div>
+
+<div class="block full" id="quiz-section">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px">
+    <div style="font-size:15px;font-weight:500;color:var(--text-primary)">Marca tu respuesta y descubre si es correcta</div>
+    <div style="font-size:13px;color:var(--text-secondary)"><span id="qcount">0</span> / 10 respondidas · <span id="qscore">0</span> aciertos</div>
+  </div>
+  <div class="pbar" style="margin-bottom:14px"><div class="pfill" id="qfill"></div></div>
+
+  <div class="qcard">
+    <p class="qnum">Pregunta 1 / 10</p>
+    <p class="qtext">En el Hemisferio Sur, bajo balance geostrófico puro, ¿cómo giran los anticiclones y las bajas presiones?</p>
+    <div><button class="qbtn" data-q="1" data-c="0">A) Anticiclones horario, bajas antihorario</button><button class="qbtn" data-q="1" data-c="1">B) Anticiclones antihorario, bajas horario</button><button class="qbtn" data-q="1" data-c="0">C) Ambos antihorario</button><button class="qbtn" data-q="1" data-c="0">D) El sentido depende solo de la latitud, no del hemisferio</button></div>
+    <div class="qfb" id="fb1"></div>
+  </div>
+
+  <div class="qcard">
+    <p class="qnum">Pregunta 2 / 10</p>
+    <p class="qtext">Sobre el norte de Argentina se observa un gradiente de temperatura muy intenso, pero las isotermas son perfectamente paralelas a las isohipsas de 850 hPa. ¿Qué se concluye?</p>
+    <div><button class="qbtn" data-q="2" data-c="0">A) Baroclinicidad máxima, porque el gradiente térmico es fuerte</button><button class="qbtn" data-q="2" data-c="0">B) Hay advección cálida intensa</button><button class="qbtn" data-q="2" data-c="1">C) La región es barotrópica: sin advección térmica pese al gradiente fuerte</button><button class="qbtn" data-q="2" data-c="0">D) Es imposible: un gradiente térmico fuerte siempre implica baroclinicidad</button></div>
+    <div class="qfb" id="fb2"></div>
+  </div>
+
+  <div class="qcard">
+    <p class="qnum">Pregunta 3 / 10</p>
+    <p class="qtext">¿Cuál de las siguientes afirmaciones sobre la onda baroclínica es FALSA?</p>
+    <div><button class="qbtn" data-q="3" data-c="0">A) Su eje se inclina con la altura</button><button class="qbtn" data-q="3" data-c="0">B) Convierte energía potencial en energía cinética</button><button class="qbtn" data-q="3" data-c="1">C) La baja de superficie se ubica exactamente bajo la vaguada de altura durante la intensificación</button><button class="qbtn" data-q="3" data-c="0">D) Las vaguadas de altura inducen vaguadas de nivel bajo por delante de ellas</button></div>
+    <div class="qfb" id="fb3"></div>
+  </div>
+
+  <div class="qcard">
+    <p class="qnum">Pregunta 4 / 10</p>
+    <p class="qtext">¿Qué diferencia estructural fundamental separa a un ciclón tropical de uno extratropical?</p>
+    <div><button class="qbtn" data-q="4" data-c="0">A) El tropical es más grande en diámetro</button><button class="qbtn" data-q="4" data-c="0">B) El extratropical solo ocurre sobre continente</button><button class="qbtn" data-q="4" data-c="0">C) El tropical tiene núcleo frío en altura y el extratropical núcleo cálido</button><button class="qbtn" data-q="4" data-c="1">D) El tropical es barotrópico y de núcleo cálido en toda la columna; el extratropical es baroclínico y de núcleo frío en altura</button></div>
+    <div class="qfb" id="fb4"></div>
+  </div>
+
+  <div class="qcard">
+    <p class="qnum">Pregunta 5 / 10</p>
+    <p class="qtext">Dos estaciones a ambos lados de una frontera registran vientos paralelos a ella, de sentidos opuestos, y no hay cambio de temperatura al cruzarla. ¿Qué tipo de frente es?</p>
+    <div><button class="qbtn" data-q="5" data-c="0">A) Frente frío en debilitamiento</button><button class="qbtn" data-q="5" data-c="1">B) Frente estacionario</button><button class="qbtn" data-q="5" data-c="0">C) Frente ocluido</button><button class="qbtn" data-q="5" data-c="0">D) Frente cálido</button></div>
+    <div class="qfb" id="fb5"></div>
+  </div>
+
+  <div class="qcard">
+    <p class="qnum">Pregunta 6 / 10</p>
+    <p class="qtext">¿Por qué las oclusiones dejan las nevadas más intensas del cono sur de Sudamérica?</p>
+    <div><button class="qbtn" data-q="6" data-c="0">A) Porque siempre traen masas de aire más frías que un frente frío</button><button class="qbtn" data-q="6" data-c="1">B) Por la mayor duración del evento: al ser circulares y con varias bandas, los sistemas precipitantes pasan dos o más veces sobre una localidad</button><button class="qbtn" data-q="6" data-c="0">C) Porque la advección cálida domina y aumenta el contenido de humedad</button><button class="qbtn" data-q="6" data-c="0">D) Porque se forman solo sobre la cordillera</button></div>
+    <div class="qfb" id="fb6"></div>
+  </div>
+
+  <div class="qcard">
+    <p class="qnum">Pregunta 7 / 10</p>
+    <p class="qtext">Una baja se profundiza de 1005 a 975 hPa en 24 h a 38°S. Aplicando el criterio de Sanders y Gyakum, ¿califica como ciclogénesis explosiva?</p>
+    <div><button class="qbtn" data-q="7" data-c="0">A) No, porque 30 hPa no supera el umbral en esa latitud</button><button class="qbtn" data-q="7" data-c="1">C) Sí: 30 × (sen60°/sen38°) ≈ 42 hPa/24 h, muy por encima de 24</button><button class="qbtn" data-q="7" data-c="0">C) Solo si además hay vientos mayores a 64 kt</button><button class="qbtn" data-q="7" data-c="0">D) El criterio no aplica en el Hemisferio Sur</button></div>
+    <div class="qfb" id="fb7"></div>
+  </div>
+
+  <div class="qcard">
+    <p class="qnum">Pregunta 8 / 10</p>
+    <p class="qtext">Según Cuadrat y Pita, ¿cuál es la causa principal de la ciclogénesis en superficie?</p>
+    <div><button class="qbtn" data-q="8" data-c="0">A) El calentamiento diurno de la superficie continental</button><button class="qbtn" data-q="8" data-c="0">B) La convergencia de humedad en nivel bajo</button><button class="qbtn" data-q="8" data-c="0">C) La fricción con la orografía andina</button><button class="qbtn" data-q="8" data-c="1">D) La divergencia del aire en altura, que retira masa de la columna y hace caer la presión superficial</button></div>
+    <div class="qfb" id="fb8"></div>
+  </div>
+
+  <div class="qcard">
+    <p class="qnum">Pregunta 9 / 10</p>
+    <p class="qtext">Un modelo pronostica agua precipitable de 32 mm con vientos intensos del NW en 925 hPa aproximándose al sur de Chile. ¿Qué se espera a ambos lados de los Andes?</p>
+    <div><button class="qbtn" data-q="9" data-c="0">A) Lluvias intensas en ambos lados por igual</button><button class="qbtn" data-q="9" data-c="1">B) Lluvias persistentes y potencialmente fuertes en la vertiente pacífica, y Patagonia seca por compresión adiabática al descender</button><button class="qbtn" data-q="9" data-c="0">C) Lluvias solo en Patagonia, porque el frente ya cruzó</button><button class="qbtn" data-q="9" data-c="0">D) Nada significativo: 32 mm es un valor bajo de agua precipitable</button></div>
+    <div class="qfb" id="fb9"></div>
+  </div>
+
+  <div class="qcard">
+    <p class="qnum">Pregunta 10 / 10</p>
+    <p class="qtext">Sobre el sureste de Brasil se observa una franja nubosa que parece prolongar un frente frío hacia el norte, pero sin discontinuidad de humedad ni cambio de masa. ¿Qué es más probable?</p>
+    <div><button class="qbtn" data-q="10" data-c="0">A) Un frente cálido en formación</button><button class="qbtn" data-q="10" data-c="0">B) La ZCIT desplazada al sur</button><button class="qbtn" data-q="10" data-c="1">C) Una línea de cortante (shear line) que se adelantó al frente, ya debilitado</button><button class="qbtn" data-q="10" data-c="0">D) Un frente ocluido tropical</button></div>
+    <div class="qfb" id="fb10"></div>
+  </div>
+
+  <div id="qresult" style="display:none;border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.6;margin-top:6px"></div>
+  <button onclick="resetQuiz()" style="margin-top:10px">Reiniciar quiz</button>
+</div>
+
+<div class="block full" id="refs-institucionales">
+  <span class="bh" style="background:var(--bg-accent);color:var(--text-accent)">Para profundizar — fuentes institucionales</span>
+  <div class="three">
+    <div class="mini"><b><a href="https://wmo.int">Organización Meteorológica Mundial (OMM/WMO)</a></b><br>La autoridad normativa global: define la simbología frontal estandarizada, las normales climatológicas y los códigos de observación que usa SENAMHI. <i>Normas y publicaciones técnicas. (Verificar vigencia)</i></div>
+    <div class="mini"><b><a href="https://www.ametsoc.org">American Meteorological Society — Glossary</a></b><br>Fuente directa de las definiciones citadas en este módulo: <i>baroclinic disturbance, extratropical cyclone, polar front, quasi-stationary front, precipitable water</i>. <i>Glosario. (Verificar vigencia)</i></div>
+    <div class="mini"><b><a href="https://www.senamhi.gob.pe">SENAMHI Perú</a></b><br>Institución que dicta este curso. Boletines sinópticos, avisos de friaje y datos históricos nacionales para contrastar los conceptos con casos reales. <i>Datos y boletines. (Verificar vigencia)</i></div>
+    <div class="mini"><b><a href="https://www.weather.gov">NOAA / National Weather Service — JetStream</a></b><br>Material didáctico sobre masas de aire, frentes y ciclones de latitud media. El WPC International Desks (NOAA) es coautor de las figuras del módulo. <i>Curso en línea. (Verificar vigencia)</i></div>
+    <div class="mini"><b><a href="https://www.meted.ucar.edu">COMET Program — MetEd (UCAR)</a></b><br>Módulos gratuitos en español sobre análisis frontal, ciclogénesis, ríos atmosféricos y análisis isentrópico. Directamente aplicable a este tema. <i>Cursos con certificación. (Verificar vigencia)</i></div>
+    <div class="mini"><b><a href="https://www.esrl.noaa.gov/psd/atmrivers/">ESRL/NOAA — Ríos atmosféricos</a></b><br>Referencia citada en el módulo para conexiones subtropicales: climatologías, seguimiento y el estadístico del 30–50% de precipitación en costas oeste. <i>Datos e investigación. (Verificar vigencia)</i></div>
+    <div class="mini"><b><a href="https://www.gob.pe/igp">Instituto Geofísico del Perú (IGP)</a></b><br>Investigación sobre El Niño costero e interacción océano-atmósfera; útil para el contexto ENSO de la tabla de pronóstico estacional. <i>Investigación. (Verificar vigencia)</i></div>
+    <div class="mini"><b><a href="https://www.gob.pe/enfen">ENFEN</a></b><br>Comunicados oficiales sobre El Niño/La Niña costero, marco obligatorio para interpretar las señales de TSM en el pronóstico estacional peruano. <i>Informes técnicos. (Verificar vigencia)</i></div>
+    <div class="mini"><b><a href="https://www.aemet.es">AEMET (España)</a></b><br>Glosario y material didáctico en español, útil para consolidar terminología frontal y sinóptica. <i>Glosario. (Verificar vigencia)</i></div>
+  </div>
+</div>
+
+<div class="foot full">
+  <b style="color:var(--text-primary)">Referencias del PDF:</b> AMS Glossary (2017) · Wallace &amp; Hobbs (2006), <i>An Introductory Survey to Atmospheric Sciences</i>, 483 pp. · Cuadrat y Pita (1997, 2004), <i>Climatología</i>, 4ª ed., Cátedra · Saulo, Seluchi y Nicolini (2004), <i>A Case Study of a Chaco Low-Level Jet Event</i>, MWR 132, 2669–2683 · Dal Piva, Gan y Rao (2009), <i>Energetics of Winter Troughs Entering South America</i>, MWR 138, 1084–1102 · Gan y Rao (1991) · Necco (1982) · Lichtenstein (1989) · Seluchi (1995, 1998) · Seluchi y Chou (1999) · Jusem y Atlas (1989) · Vigliarolo (1998) · Possia, Vidal y Campetella (2011) · Sanders y Gyakum (1980) · Charpentier (2015) · Zhu &amp; Newell (1998) · Higgins et al. (2000) · Marengo (1983); Marengo, Cornejo, Satyamurty y Nobre (1997) · Quispe (2005) · Conway y Maryland Space Grants Consortium (1997), <i>An Introduction to Satellite Image Interpretation</i> · Ludgens &amp; Tarbuck (2004) · USAFETAC/TN-92/004 · NCEP/NCAR Reanalysis · USGS-GTOPO30 DEM · WPC International Desks (NOAA) · Modelo GFS (EMC/NOAA).
+</div>
+
+</div>
+
+<script>
+(function(){
+  var FB = {
+    1:{ok:"Correcto. En el HS el parámetro de Coriolis es negativo, lo que invierte el sentido del giro respecto al HN: anticiclones antihorario y bajas horario. En el HN ocurre lo opuesto.",bad:"La respuesta correcta es B. Como f &lt; 0 en el HS, el balance entre gradiente de presión y Coriolis produce giro antihorario en los anticiclones y horario en las bajas — exactamente al revés que en el HN."},
+    2:{ok:"Correcto. La baroclinicidad depende del ángulo entre ∇p y ∇T, no de la magnitud del gradiente. Gradientes fuertes pero paralelos ⇒ producto vectorial nulo ⇒ barotrópico, sin advección térmica.",bad:"La respuesta correcta es C. Baroclinicidad ∼ ∇p × ∇T: si los gradientes son paralelos el producto vectorial es cero, por intensos que sean. El viento sopla a lo largo de las isotermas y no transporta masas de temperatura distinta."},
+    3:{ok:"Correcto. Durante la intensificación la vaguada de altura precede a la baja de superficie unos 1000 km. Solo cuando el sistema ocluye y se 'endereza' quedan aproximadamente en fase — y ahí deja de intensificarse.",bad:"La respuesta correcta es C, que es la afirmación falsa. En la fase de intensificación el eje está inclinado y la baja de superficie queda desplazada ~1000 km al este de la vaguada de altura. La superposición vertical caracteriza al sistema ocluido, casi barotrópico."},
+    4:{ok:"Correcto. Esa diferencia lo explica todo: sin gradientes térmicos horizontales el ciclón tropical no tiene frentes, y su energía viene del calor latente del océano, no de la baroclinicidad.",bad:"La respuesta correcta es D. El ciclón tropical es barotrópico y cálido en toda la columna (energía del calor latente oceánico, sin frentes). El extratropical es baroclínico, con núcleo frío en altura, y se alimenta de la liberación de energía potencial del contraste térmico."},
+    5:{ok:"Correcto. La condición definitoria del frente estacionario no es que esté quieto, sino que los vientos no cruzan la frontera: sin componente normal, no hay advección térmica a través de ella.",bad:"La respuesta correcta es B. Vientos paralelos al frente (en el mismo sentido o en sentidos opuestos) implican ausencia de componente normal y por tanto ausencia de advección térmica. Puede incluso trasladarse, pero no hacia masas de aire distintas."},
+    6:{ok:"Correcto. Un frente frío o cálido pasa en minutos u horas; una oclusión, con forma circular y varias bandas, hace que los sistemas precipitantes pasen dos o más veces, generando muchos periodos de acumulación.",bad:"La respuesta correcta es B. La clave es la duración, no la temperatura: la geometría circular de la oclusión y sus múltiples bandas hacen que la precipitación pase repetidamente sobre la misma localidad. Además suelen asociarse a bajas profundas y vientos fuertes que refuerzan el forzamiento orográfico."},
+    7:{ok:"Correcto. El factor sen60°/senφ normaliza por latitud. A 38°S vale ≈1.41, y 30 × 1.41 ≈ 42 hPa/24 h, muy por encima del umbral de 24. Corresponde al caso del 12–13 abril 2014 en el Río de la Plata.",bad:"La respuesta correcta es la opción con el cálculo: 30 hPa × (sen60°/sen38°) ≈ 30 × 1.41 ≈ 42 ≥ 24 ⇒ sí califica. El criterio de Sanders y Gyakum es puramente barométrico y normalizado por latitud; no exige un umbral de viento ni está restringido a un hemisferio."},
+    8:{ok:"Correcto. En el tramo vaguada→dorsal el viento es supergeostrófico y el aire se acelera, generando divergencia en altura. Al retirarse masa de la columna, la presión en superficie cae y el aire de abajo asciende formando la espiral ciclónica.",bad:"La respuesta correcta es D. La convergencia en superficie es consecuencia, no causa: primero la divergencia en altura retira masa de la columna, la presión superficial cae y el ascenso compensatorio genera la circulación ciclónica. Cuadrat y Pita lo vinculan al comportamiento sub/supergeostrófico entre dorsal y vaguada."},
+    9:{ok:"Correcto. Con PW &gt;30 mm y viento fuerte del NW, el forzamiento orográfico descarga la humedad en la vertiente pacífica (50–100 mm en casos extremos). Al este, la masa ya seca desciende, se calienta adiabáticamente y la HR cae aún más.",bad:"La respuesta correcta es B. PW de 32 mm es un valor alto que activa el potencial de lluvias localmente intensas por forzamiento andino. El contraste extremo entre ambas vertientes se debe al ascenso orográfico al oeste y a la compresión adiabática al descender sobre la Patagonia."},
+    10:{ok:"Correcto. Al norte de ~35°S la línea de cortante acelera y se adelanta al frente, que queda rezagado y se debilita sobre aguas cálidas. La banda nubosa asociada suele confundirse con la continuación del frente frío.",bad:"La respuesta correcta es C. El frente es una discontinuidad de densidad (con cambio de Td, razón de mezcla y tipo de nube); la shear line es solo una discontinuidad de viento. Sin cambio de masa, lo que se observa es la línea de cortante adelantada, no la prolongación del frente."}
+  };
+  var done=0, score=0;
+  var sec=document.getElementById('quiz-section');
+  sec.addEventListener('click',function(e){
+    var b=e.target.closest('.qbtn'); if(!b||b.classList.contains('dis'))return;
+    var q=b.getAttribute('data-q'); var right=b.getAttribute('data-c')==='1';
+    var btns=sec.querySelectorAll('.qbtn[data-q="'+q+'"]');
+    btns.forEach(function(x){
+      x.classList.add('dis');
+      if(x.getAttribute('data-c')==='1'){x.classList.add('ok');x.textContent='✔ '+x.textContent;}
+    });
+    if(!right){b.classList.remove('ok');b.classList.add('bad');b.textContent='✕ '+b.textContent.replace(/^✔ /,'');}
+    var fb=document.getElementById('fb'+q);
+    fb.style.display='block';
+    fb.style.borderLeftColor= right? 'var(--border-success)':'var(--border-danger)';
+    fb.innerHTML=(right?'<b>Correcto. </b>':'<b>Incorrecto. </b>')+FB[q][right?'ok':'bad'];
+    done++; if(right)score++;
+    document.getElementById('qcount').textContent=done;
+    document.getElementById('qscore').textContent=score;
+    document.getElementById('qfill').style.width=Math.round(done*10)+'%';
+    if(done===10){
+      var r=document.getElementById('qresult'); r.style.display='block';
+      var msg, bg, col;
+      if(score<=4){msg='Necesitas repasar el material. Vuelve sobre las secciones de baroclinicidad, tipos de frente y ciclogénesis.';bg='var(--bg-danger)';col='#501313';}
+      else if(score<=7){msg='Buen avance, sigue repasando. Revisa especialmente las preguntas que fallaste y sus explicaciones.';bg='var(--bg-warning)';col='#412402';}
+      else{msg='Excelente dominio del tema. Estás en condiciones de enfrentar las preguntas abiertas de cada bloque.';bg='var(--bg-success)';col='#173404';}
+      r.style.background=bg; r.style.color=col;
+      r.innerHTML='<b>Resultado: '+score+' / 10 correctas.</b> '+msg;
+    }
+  });
+  window.resetQuiz=function(){
+    done=0;score=0;
+    sec.querySelectorAll('.qbtn').forEach(function(x){
+      x.classList.remove('dis','ok','bad');
+      x.textContent=x.textContent.replace(/^[✔✕]\s/,'');
+    });
+    sec.querySelectorAll('.qfb').forEach(function(f){f.style.display='none';f.innerHTML='';});
+    document.getElementById('qcount').textContent='0';
+    document.getElementById('qscore').textContent='0';
+    document.getElementById('qfill').style.width='0%';
+    document.getElementById('qresult').style.display='none';
+  };
+})();
+</script>

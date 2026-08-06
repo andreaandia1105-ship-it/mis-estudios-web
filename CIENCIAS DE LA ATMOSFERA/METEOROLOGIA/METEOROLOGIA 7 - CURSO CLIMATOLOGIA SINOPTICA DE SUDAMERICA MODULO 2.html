@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canvas — Corrientes en chorro de la alta tropósfera (Módulo 1, Tema 1.3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --color-background-primary:#ffffff;
+ --color-background-secondary:#f6f8fb;
+ --color-background-tertiary:#e9eef5;
+ --color-text-primary:#0f172a;
+ --color-text-secondary:#5b6b7f;
+ --color-border-tertiary:#dfe6ee;
+ --color-border-secondary:#c3cedb;
+ --navy:#0a2540;
+ --sky:#7dd3fc;
+}
+@media(prefers-color-scheme:dark){
+ :root{
+  --color-background-primary:#111a26;
+  --color-background-secondary:#18232f;
+  --color-background-tertiary:#0b131c;
+  --color-text-primary:#e6edf5;
+  --color-text-secondary:#9fb0c3;
+  --color-border-tertiary:#26333f;
+  --color-border-secondary:#33424f;
+ }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--color-background-tertiary);font-family:'Source Sans 3',system-ui,sans-serif;color:var(--color-text-primary);-webkit-text-size-adjust:100%}
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);max-width:1500px;margin:0 auto}
+@media(max-width:640px){.cv{grid-template-columns:1fr}}
+@media(max-width:1000px) and (min-width:641px){.cv{grid-template-columns:1fr 1fr}.block.s3,.block.s2{grid-column:1/-1}}
+
+.titlebar{grid-column:1/-1;background:var(--navy);color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:20px;margin:0 0 3px;line-height:1.25}
+.titlebar .sub{font-size:11px;color:#b9cbe0;margin:0 0 8px}
+.titlebar .pill{background:rgba(255,255,255,.12);color:#e2f1ff}
+
+.secbar{grid-column:1/-1;font-family:'Oswald',sans-serif;font-weight:700;font-size:13px;letter-spacing:.4px;padding:7px 12px;border-radius:8px;margin-top:4px}
+.sb-a{background:#dbeafe;color:#1e3a8a}
+.sb-b{background:#ede9fe;color:#4c1d95}
+.sb-c{background:#ffedd5;color:#7c2d12}
+.sb-d{background:#f1f5f9;color:#334155}
+@media(prefers-color-scheme:dark){
+ .sb-a{background:#1e3a5f;color:#93c5fd}
+ .sb-b{background:#2e1065;color:#c4b5fd}
+ .sb-c{background:#431407;color:#fed7aa}
+ .sb-d{background:#1e293b;color:#94a3b8}
+}
+
+.block{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+@media(max-width:640px){.block.s2,.block.s3{grid-column:1/-1}}
+
+.bh{font-family:'Oswald',sans-serif;font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.3px;padding:3px 9px;border-radius:6px;display:inline-block;margin:0 0 8px}
+.b-blue{background:#dbeafe;color:#1e3a8a}
+.b-green{background:#dcfce7;color:#14532d}
+.b-red{background:#fee2e2;color:#991b1b}
+.b-yellow{background:#fef9c3;color:#713f12}
+.b-purple{background:#ede9fe;color:#4c1d95}
+.b-teal{background:#ccfbf1;color:#134e4a}
+.b-orange{background:#ffedd5;color:#7c2d12}
+.b-gray{background:#f1f5f9;color:#334155}
+.b-pink{background:#fce7f3;color:#831843}
+.b-petrol{background:#e0f2fe;color:#0c4a6e}
+@media(prefers-color-scheme:dark){
+ .b-blue{background:#1e3a5f;color:#93c5fd}
+ .b-green{background:#14532d;color:#86efac}
+ .b-red{background:#450a0a;color:#fca5a5}
+ .b-yellow{background:#422006;color:#fef08a}
+ .b-purple{background:#2e1065;color:#c4b5fd}
+ .b-teal{background:#042f2e;color:#5eead4}
+ .b-orange{background:#431407;color:#fed7aa}
+ .b-gray{background:#1e293b;color:#94a3b8}
+ .b-pink{background:#4a044e;color:#f0abfc}
+ .b-petrol{background:#082f49;color:#7dd3fc}
+}
+
+.def{border-left:3px solid #2563eb;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;line-height:1.55;background:var(--color-background-secondary);margin:0 0 8px}
+.def.g{border-left-color:#16a34a}.def.r{border-left-color:#dc2626}.def.y{border-left-color:#eab308}
+.def.p{border-left-color:#7c3aed}.def.t{border-left-color:#0d9488}.def.o{border-left-color:#ea580c}
+.def.pe{border-left-color:#0284c7}.def.pk{border-left-color:#db2777}
+
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin:0 0 6px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex:0 0 6px;background:#2563eb}
+.dot.g{background:#16a34a}.dot.r{background:#dc2626}.dot.y{background:#eab308}.dot.p{background:#7c3aed}
+.dot.t{background:#0d9488}.dot.o{background:#ea580c}.dot.pe{background:#0284c7}.dot.gr{background:#64748b}
+
+.rx{background:#0f172a;color:#7dd3fc;font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;overflow-x:auto}
+.rx-note{font-size:11px;color:var(--color-text-secondary);margin:5px 0 8px;line-height:1.5}
+
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;line-height:1.5;margin:8px 0 0}
+@media(prefers-color-scheme:dark){.warn{background:#2a1508;color:#fed7aa}}
+
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;line-height:1.5;margin:8px 0 0}
+.exam b{font-weight:600}
+@media(prefers-color-scheme:dark){.exam{background:#26200a;color:#fde68a;border-color:#a16207}}
+
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.mini b{display:block;margin-bottom:2px}
+.mt-b{border-top:3px solid #2563eb}.mt-g{border-top:3px solid #16a34a}.mt-r{border-top:3px solid #dc2626}
+.mt-y{border-top:3px solid #eab308}.mt-p{border-top:3px solid #7c3aed}.mt-t{border-top:3px solid #0d9488}
+.mt-o{border-top:3px solid #ea580c}.mt-pe{border-top:3px solid #0284c7}.mt-pk{border-top:3px solid #db2777}
+.ml-b{border-left:3px solid #2563eb}.ml-o{border-left:3px solid #ea580c}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+@media(max-width:640px){.two,.three{grid-template-columns:1fr}}
+
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);padding:5px 8px;border-radius:7px;font-size:11px;line-height:1.35}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+
+.num-badge{width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex:0 0 20px}
+.nb-b{background:#dbeafe;color:#1e3a8a}.nb-g{background:#dcfce7;color:#14532d}.nb-r{background:#fee2e2;color:#991b1b}
+.nb-y{background:#fef9c3;color:#713f12}.nb-p{background:#ede9fe;color:#4c1d95}
+
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px;background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.pl-b{background:#dbeafe;color:#1e3a8a}.pl-r{background:#fee2e2;color:#991b1b}.pl-t{background:#ccfbf1;color:#134e4a}
+.pl-o{background:#ffedd5;color:#7c2d12}.pl-p{background:#ede9fe;color:#4c1d95}.pl-g{background:#dcfce7;color:#14532d}
+@media(prefers-color-scheme:dark){
+ .pl-b{background:#1e3a5f;color:#93c5fd}.pl-r{background:#450a0a;color:#fca5a5}.pl-t{background:#042f2e;color:#5eead4}
+ .pl-o{background:#431407;color:#fed7aa}.pl-p{background:#2e1065;color:#c4b5fd}.pl-g{background:#14532d;color:#86efac}
+}
+
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .3s}
+
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:.5px solid var(--color-border-secondary);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);vertical-align:top;line-height:1.45}
+.tblwrap{overflow-x:auto}
+
+.divh{border:none;border-top:.5px solid var(--color-border-tertiary);margin:7px 0}
+
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+@media(max-width:640px){.dual{grid-template-columns:1fr}}
+.dual-tech{background:#e0f2fe;color:#0c4a6e;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.55}
+.dual-plain{background:#dcfce7;color:#14532d;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.55}
+@media(prefers-color-scheme:dark){
+ .dual-tech{background:#082f49;color:#bae6fd}
+ .dual-plain{background:#14532d;color:#bbf7d0}
+}
+.dual-label{font-family:'Oswald',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 4px;opacity:.85}
+.dual p{margin:0}
+
+.hemi{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}
+@media(max-width:640px){.hemi{grid-template-columns:1fr}}
+.hem-n{background:#fef9c3;color:#713f12;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.hem-s{background:#ede9fe;color:#4c1d95;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+@media(prefers-color-scheme:dark){.hem-n{background:#422006;color:#fef08a}.hem-s{background:#2e1065;color:#c4b5fd}}
+.hem-label{font-family:'Oswald',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 4px;opacity:.85}
+
+.imgph{border:1.5px dashed var(--color-border-secondary);border-radius:9px;padding:10px;font-size:11px;color:var(--color-text-secondary);background:var(--color-background-secondary);line-height:1.5;margin:8px 0}
+.imgph b{color:var(--color-text-primary)}
+
+.fig{width:100%;height:auto;display:block;margin:6px 0 2px}
+.figcap{font-size:10.5px;color:var(--color-text-secondary);line-height:1.45;margin:0 0 6px;text-align:center}
+.sv-t{font-family:'Source Sans 3',sans-serif;font-size:11px;fill:var(--color-text-primary)}
+.sv-s{font-family:'Source Sans 3',sans-serif;font-size:10px;fill:var(--color-text-secondary)}
+.sv-h{font-family:'Oswald',sans-serif;font-size:12px;fill:var(--color-text-primary)}
+.sv-line{stroke:var(--color-border-secondary);stroke-width:1;fill:none}
+
+#quiz-section{grid-column:1/-1;background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.qhead{background:var(--navy);color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px}
+.qhead h2{font-family:'Oswald',sans-serif;font-size:14px;margin:0 0 2px;font-weight:700}
+.qhead p{margin:0;font-size:11px;color:#b9cbe0}
+.qprog{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:11.5px;color:var(--color-text-secondary)}
+.qprog .bar{flex:1}
+.qcard{border:.5px solid var(--color-border-tertiary);border-radius:10px;padding:11px 13px;margin-bottom:10px;background:var(--color-background-primary)}
+.qnum{font-family:'Oswald',sans-serif;font-size:11px;color:var(--color-text-secondary);margin:0 0 4px;text-transform:uppercase;letter-spacing:.5px}
+.qtext{font-size:12.5px;line-height:1.55;margin:0 0 8px;font-weight:600}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;font-family:inherit;color:var(--color-text-primary);line-height:1.45}
+.qbtn:hover{border-color:var(--color-border-secondary)}
+.qbtn.ok{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.bad{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.dis{opacity:.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.55}
+.fb-ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.fb-bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+@media(prefers-color-scheme:dark){.fb-ok{background:#0c2417;color:#bbf7d0}.fb-bad{background:#2a0d0d;color:#fecaca}}
+#qresult{border-radius:10px;padding:12px 14px;font-size:12.5px;margin-top:10px;line-height:1.6}
+.res-low{background:#fee2e2;color:#991b1b}.res-mid{background:#fef9c3;color:#713f12}.res-hi{background:#dcfce7;color:#14532d}
+#qreset{margin-top:10px;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer;font-family:'Oswald',sans-serif;letter-spacing:.4px}
+
+.footer{grid-column:1/-1;background:var(--navy);color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:var(--sky);letter-spacing:.4px}
+.fc{font-size:11px;color:#94a3b8;line-height:1.6}
+a{color:#0369a1}
+@media(prefers-color-scheme:dark){a{color:#7dd3fc}}
+</style>
+</head>
+<body>
+<div class="cv">
+
+<div class="titlebar">
+  <h1>🌪️ CORRIENTES EN CHORRO DE LA ALTA TROPÓSFERA — Tema 1.3</h1>
+  <p class="sub">Curso: Pronóstico Climático Estacional · Módulo 1: Climatología sinóptica de Sudamérica · SENAMHI–Climandes · N. Quispe Gutiérrez (SENAMHI) y J. M. Gálvez Chavarri (SRG/NOAA) · con E. Villegas, T. García, E. Yacolca (SENAMHI) · Diapositivas 1–43</p>
+  <span class="pill">Definición OMM / OACI</span><span class="pill">Tipos: SJ, PN, PS</span><span class="pill">Divergencia cruzada</span><span class="pill">Circulaciones transversales</span><span class="pill">Acoplamiento y ciclogénesis</span><span class="pill">Andes</span><span class="pill">El Niño</span><span class="pill">Hemisferio Norte vs Sur</span>
+</div>
+
+<div class="secbar sb-a">🔵 SECCIÓN 1 — QUÉ ES UNA CORRIENTE EN CHORRO: DEFINICIÓN, ENERGÍA Y TIPOS (Diap. 2–12)</div>
+
+<div class="block s2">
+  <span class="bh b-blue">Definición oficial OMM / OACI (Diap. 3)</span>
+  <div class="def">
+    Una <b>corriente en chorro</b> (jet stream) no es "un viento fuerte cualquiera en altura": es un <b>filamento de aire cuasi-horizontal, largo, estrecho y aplanado</b>, concentrado cerca de la tropopausa, cuya firma diagnóstica es la <b>fuerte cizalladura de viento</b> a su alrededor. Lo que la define no es solo la velocidad del núcleo, sino el <b>cambio brusco de velocidad</b> en la vertical y en la horizontal a los costados del núcleo.
+  </div>
+  <div class="item"><span class="dot"></span><span><b>OMM (WMO):</b> corriente de aire fuerte (<b>&gt;60 kt</b>) y estrecha a lo largo de la alta tropósfera o en la estratósfera, caracterizada por fuerte cizalladura vertical del viento (<b>&gt;10–20 kt/km</b>). Ésta es la definición normativa: la OMM es el organismo del sistema de Naciones Unidas que estandariza definiciones, unidades y prácticas meteorológicas que luego adopta el SENAMHI.</span></div>
+  <div class="item"><span class="dot pe"></span><span><b>OACI (ICAO):</b> definición operativa <i>de apoyo a la aviación</i>: corrientes de <b>&gt;70 kt</b> con un <b>núcleo máximo ≥90 kt</b>. Es más restrictiva porque su propósito es distinto: emitir cartas SIGWX y avisos de turbulencia en ruta, no describir el clima.</span></div>
+  <div class="item"><span class="dot o"></span><span><b>Uso operacional:</b> como vientos menores ya tienen impacto en aviación y en el tiempo, en la práctica se analizan chorros con <b>35–55 kt</b>. En Sudamérica esto importa: un "chorro débil" de 45 kt sobre el Altiplano igual organiza divergencia y precipitación.</span></div>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>El chorro es la manifestación del <b>viento térmico</b>: el máximo de viento zonal se ubica donde se acumula verticalmente el gradiente horizontal de temperatura (zona baroclínica), justo bajo el quiebre de la tropopausa. El eje del chorro coincide con el máximo de |V| en isotacas y con el gradiente máximo de altura geopotencial en 250–200 hPa; su borde frío coincide con lenguas de alta vorticidad potencial (intrusión estratosférica).</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Imagina dos habitaciones pegadas, una fría y una caliente, separadas por una pared delgada. Cuanto más grande la diferencia de temperatura, más fuerte el "chiflón" que corre por la rendija. En la atmósfera esa rendija está a ~10 km de altura y el chiflón es el chorro: un río de aire angosto y velocísimo que corre justo por donde el aire frío del polo choca con el aire cálido del trópico.</p>
+    </div>
+  </div>
+  <div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir el <b>chorro</b> (jet stream: el cinturón completo, de miles de km) con el <b>jet streak</b> (núcleo de vientos máximos <i>dentro</i> del chorro, de cientos de km). El pronóstico dinámico se hace con el jet streak, no con el chorro entero. Tampoco confundas <b>cizalladura vertical</b> (kt/km, define el chorro) con <b>velocidad del núcleo</b> (kt, define el umbral OACI).</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Compare las definiciones de corriente en chorro de la OMM y de la OACI. ¿Por qué difieren los umbrales y qué implicancia tiene esa diferencia para un pronosticador climático de SENAMHI frente a uno de aeronáutica?</div>
+</div>
+
+<div class="block">
+  <span class="bh b-petrol">Umbrales y conversión de unidades</span>
+  <div class="rx">1 kt = 0.5144 m/s = 1.852 km/h<br>60 kt ≈ 30.9 m/s | 70 kt ≈ 36.0 m/s<br>90 kt ≈ 46.3 m/s | 150 kt ≈ 77.2 m/s</div>
+  <p class="rx-note">Unidad OMM para viento en altura: <b>m/s</b> en el SI; <b>kt (nudos)</b> en práctica aeronáutica y en cartas WPC/NOAA. Niveles: hPa. Geopotencial: mgp (metros geopotenciales).</p>
+  <div class="two">
+    <div class="mini mt-b"><b>Cizalladura vertical</b>&gt;10–20 kt/km. Ej.: 120 kt en 250 hPa y 40 kt en 500 hPa (~5 km de separación) → 16 kt/km. Cumple criterio OMM.</div>
+    <div class="mini mt-o"><b>Escala del fenómeno</b>Longitud: 5 000–10 000 km. Ancho: 100–500 km. Espesor: 1–3 km. Escala: <b>macroescala/sinóptica, días a semanas</b>.</div>
+  </div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Un sondeo registra 35 m/s en 500 hPa y 62 m/s en 250 hPa. Convierta a nudos, estime la cizalladura vertical media en kt/km y discuta si el criterio OMM se cumple.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh b-purple">Sección meridional: dónde vive cada chorro (Diap. 6)</span>
+  <div class="def p">
+    Un corte del polo al ecuador muestra las <b>tres celdas de circulación meridional</b> (Polar, Ferrel y Hadley) y revela el hecho clave: <b>los chorros se ubican en las fronteras entre celdas</b>, exactamente donde la tropopausa <b>salta bruscamente de altura</b>. Ese salto es la firma de un gradiente térmico troposférico intenso concentrado en una banda angosta de latitud.
+  </div>
+  <svg class="fig" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Corte meridional del polo al ecuador con las celdas Polar, Ferrel y Hadley, la tropopausa escalonada y los tres chorros">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round"/>
+      </marker>
+    </defs>
+    <line x1="58" y1="60" x2="58" y2="340" class="sv-line"/>
+    <line x1="58" y1="340" x2="875" y2="340" class="sv-line"/>
+    <text class="sv-s" x="52" y="119" text-anchor="end">15 km</text>
+    <text class="sv-s" x="52" y="194" text-anchor="end">10 km</text>
+    <text class="sv-s" x="52" y="269" text-anchor="end">5 km</text>
+    <text class="sv-s" x="52" y="344" text-anchor="end">0</text>
+    <text class="sv-s" x="70" y="362">Polo Sur (90°S)</text>
+    <text class="sv-s" x="330" y="362" text-anchor="middle">≈60°S</text>
+    <text class="sv-s" x="600" y="362" text-anchor="middle">≈30°S</text>
+    <text class="sv-s" x="870" y="362" text-anchor="end">Ecuador</text>
+
+    <polyline points="60,215 235,215 262,196 405,196 432,178 620,178 655,100 870,100" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="7 4"/>
+    <text class="sv-s" x="760" y="92" fill="#dc2626">Tropopausa (salta de altura en cada chorro)</text>
+    <text class="sv-s" x="120" y="150">ESTRATÓSFERA — aire seco y rico en ozono</text>
+
+    <line x1="110" y1="225" x2="110" y2="330" stroke="#60a5fa" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="340" y1="330" x2="340" y2="212" stroke="#ef4444" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="600" y1="192" x2="600" y2="330" stroke="#60a5fa" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="835" y1="330" x2="835" y2="118" stroke="#ef4444" stroke-width="2" marker-end="url(#ar)"/>
+
+    <text class="sv-s" x="200" y="300" text-anchor="middle">Celda Polar</text>
+    <text class="sv-s" x="470" y="300" text-anchor="middle">Celda de Ferrel</text>
+    <text class="sv-s" x="720" y="300" text-anchor="middle">Celda de Hadley</text>
+    <text class="sv-s" x="340" y="332" text-anchor="middle" fill="#b91c1c">Frente polar</text>
+    <text class="sv-s" x="600" y="332" text-anchor="middle" fill="#1d4ed8">Anticiclón subtropical</text>
+    <text class="sv-s" x="835" y="332" text-anchor="middle" fill="#b91c1c">ZCIT</text>
+
+    <ellipse cx="250" cy="234" rx="30" ry="15" fill="#a78bfa" stroke="#5b21b6" stroke-width="1"/>
+    <text class="sv-t" x="250" y="238" text-anchor="middle" fill="#2e1065">PS</text>
+    <text class="sv-s" x="250" y="268" text-anchor="middle">Polar sur / antártico ~300 hPa</text>
+
+    <ellipse cx="428" cy="208" rx="30" ry="15" fill="#60a5fa" stroke="#1e40af" stroke-width="1"/>
+    <text class="sv-t" x="428" y="212" text-anchor="middle" fill="#0c2c63">PN</text>
+    <text class="sv-s" x="428" y="242" text-anchor="middle">Polar norte ~250 hPa</text>
+
+    <ellipse cx="652" cy="150" rx="30" ry="15" fill="#fb923c" stroke="#9a3412" stroke-width="1"/>
+    <text class="sv-t" x="652" y="154" text-anchor="middle" fill="#431407">SJ</text>
+    <text class="sv-s" x="652" y="184" text-anchor="middle">Subtropical ~200 hPa</text>
+
+    <line x1="300" y1="140" x2="272" y2="216" stroke="#7c3aed" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+    <text class="sv-s" x="306" y="136" fill="#7c3aed">Intrusión estratosférica (lado frío)</text>
+  </svg>
+  <p class="figcap">Figura A (elaboración propia según el esquema de la diap. 6). Los chorros dividen las celdas meridionales y se sitúan en los quiebres de la tropopausa. En el hemisferio norte el esquema es el espejo exacto: mismos tres chorros, con "polar norte"/"polar sur" renombrados como polar y ártico.</p>
+  <div class="two">
+    <div class="mini mt-p"><b>¿Por qué la tropopausa "salta"?</b>La altura de la tropopausa depende del espesor de la columna troposférica, y el espesor depende de la temperatura media de la capa. Aire tropical cálido = columna gruesa (tropopausa a 16–17 km); aire polar frío = columna delgada (8–9 km). Donde ambas masas se encuentran hay un escalón, y ese escalón <b>es</b> la zona baroclínica que alimenta al chorro.</div>
+    <div class="mini mt-t"><b>Intrusiones estratosféricas</b>En el flanco frío de los chorros polares baja aire estratosférico, seco y con alta vorticidad potencial y <b>alto contenido de ozono</b>. Por eso se detecta con los canales satelitales de absorción de ozono. Señal de baroclinicidad intensa → tormentas fuertes y turbulencia.</div>
+  </div>
+  <div class="warn">⚠️ <b>ERROR COMÚN:</b> pensar que "el chorro está en la tropopausa". El núcleo está <b>justo debajo</b> del quiebre de tropopausa; la estratósfera, muy estable, actúa como <b>techo</b> que impide que el chorro se profundice hacia arriba (idea que reaparece en el efecto de los Andes, diap. 33).</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Explique físicamente por qué el chorro polar se ubica a menor altitud que el subtropical y relacione su respuesta con el espesor de la capa 1000–500 hPa y con la posición de la tropopausa.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh b-yellow">Fuentes de energía: el viento térmico (Diap. 5)</span>
+  <div class="def y">
+    La <b>fuente de energía principal</b> de un chorro de altura es la <b>intensidad del gradiente horizontal de temperatura</b> de la tropósfera que tiene debajo. Regla de oro del módulo: <b>gradiente más apretado → chorro más intenso</b>. La relación cuantitativa es la ecuación del <b>viento térmico</b>: el viento geostrófico no cambia con la altura por capricho, sino exactamente en proporción al gradiente térmico de la capa.
+  </div>
+  <div class="rx">∂V<sub>g</sub>/∂z = −(g / f·T) · k̂ × ∇<sub>h</sub>T<br><br>|Δu| ≈ (g / |f|·T̄) · |∂T/∂y| · Δz<br><br>V<sub>T</sub> = V<sub>g</sub>(nivel sup.) − V<sub>g</sub>(nivel inf.) ∥ isotermas de espesor</div>
+  <p class="rx-note"><b>Variables:</b> g = 9.81 m/s² · f = 2Ω·senφ (s⁻¹; en el HS <b>f &lt; 0</b>) · T̄ = temperatura media de la capa (K, ~250 K en la tropósfera media) · ∂T/∂y = gradiente meridional de temperatura (K/m; típico 1–10 K por 100 km en una zona frontal) · Δz = espesor de la capa (m). <b>Validez:</b> aproximación geostrófica — buena en latitudes medias-altas (Ro ≪ 1); <b>no vale</b> en el ecuador (f→0) ni dentro de convección profunda.</p>
+  <div class="mini ml-b" style="margin-bottom:8px"><b>Ejemplo numérico resuelto (caso HS, 45°S)</b>
+    Datos: ∂T/∂y = 10 K / 500 km = 2×10⁻⁵ K/m · T̄ = 250 K · |f| a 45°S = 1.03×10⁻⁴ s⁻¹ · capa de 500 a 250 hPa ≈ Δz = 5 000 m.<br>
+    |Δu| = (9.81 / (1.03×10⁻⁴ × 250)) × 2×10⁻⁵ × 5 000 = <b>≈ 38 m/s ≈ 74 kt</b> de cizalladura entre 500 y 250 hPa.<br>
+    Si en 500 hPa hay 25 kt, en 250 hPa habrá ≈ 99 kt → <b>cumple OMM y casi el umbral OACI</b>. Y la cizalladura es 74 kt / 5 km ≈ <b>15 kt/km</b>: exactamente el rango 10–20 kt/km de la definición OMM. La definición y la física son la misma cosa.
+  </div>
+  <div class="two">
+    <div class="mini mt-b"><b>Chorros polares (PN y PS)</b>Energía = <b>gradiente térmico horizontal puro</b>, muy intenso y presente <b>desde la superficie</b>. Por eso se asocian a <b>frentes en superficie</b> y a ciclones extratropicales. Escala: sinóptica, días.</div>
+    <div class="mini mt-o"><b>Chorro subtropical (SJ)</b>Energía = <b>en parte</b> gradiente térmico de la tropósfera media-alta <b>+ en parte conservación del momento angular</b> del flujo que sale de los anticiclones subtropicales de altura hacia el polo. Por eso <b>no</b> tiene frente en superficie.</div>
+  </div>
+  <div class="hemi">
+    <div class="hem-n"><p class="hem-label">🌎 Hemisferio Norte</p>f &gt; 0 y Coriolis desvía a la <b>derecha</b>. El flujo que sale hacia el norte del anticiclón subtropical se curva hacia el este → chorro del oeste acelerado en la <b>periferia norte</b> de las dorsales subtropicales. El chorro polar del HN es más intenso en invierno boreal (DEF) y más ondulado por el contraste continente–océano (Norteamérica, Eurasia).</div>
+    <div class="hem-s"><p class="hem-label">🌏 Hemisferio Sur</p>f &lt; 0 y Coriolis desvía a la <b>izquierda</b>. El flujo que sale hacia el sur de los anticiclones subtropicales se curva hacia el este → vientos del oeste acelerados en la <b>periferia sur</b> de dorsales como la <b>Alta de Bolivia</b>. El cinturón de oestes del HS es más zonal y continuo (menos tierra) y el chorro polar sur/antártico es un rasgo permanente del Océano Austral.</div>
+  </div>
+  <div class="warn">⚠️ <b>ERROR COMÚN:</b> decir "en el HS el aire gira al revés, entonces el chorro sopla del este". <b>No.</b> En ambos hemisferios el chorro medio es <b>del oeste</b>, porque en ambos la tropósfera es más cálida en el ecuador que en el polo. Lo que se invierte es el <b>signo de f</b>, y con él la <b>geometría izquierda/derecha</b> de la divergencia, no el sentido del flujo.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>A partir de la ecuación del viento térmico, justifique por qué los chorros de ambos hemisferios son predominantemente del oeste, y explique qué condición térmica debería darse para que se desarrolle un chorro del este.</div>
+</div>
+
+<div class="block">
+  <span class="bh b-teal">Cinturones semi-continuos y chorros del este (Diap. 4)</span>
+  <div class="item"><span class="dot t"></span><span>Los chorros son <b>cinturones semi-continuos</b> que dan la vuelta al globo <b>de oeste a este</b>. "Semi-continuo" significa que se rompen, se bifurcan en ramales y se recomponen: no es una cinta perfecta.</span></div>
+  <div class="item"><span class="dot p"></span><span>Alteran fuertemente su dirección ante <b>dorsales y vaguadas de altura intensas</b>: el flujo se vuelve meridional (ondas de Rossby de gran amplitud) y puede llegar a desarrollarse un <b>chorro del este</b>.</span></div>
+  <div class="item"><span class="dot r"></span><span><b>¿Dónde aparecen chorros del este?</b> (i) en <b>patrones de bloqueo</b> extratropicales, donde el flujo se parte y retrocede; (ii) en <b>latitudes tropicales/ecuatoriales</b>, en respuesta a la intensificación de las <b>dorsales subtropicales de altura</b> — el flujo del lado ecuatorial de una dorsal es del este.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Rol climático:</b> ayudan a <b>identificar masas de aire</b>, y con ello a delimitar dónde son probables anomalías de temperatura y precipitación. Ésta es la razón por la que el tema está en un curso de <b>pronóstico climático estacional</b> y no solo de tiempo.</span></div>
+  <div class="imgph">📷 <b>Espacio sugerido — Figura diap. 4:</b> isotacas y líneas de flujo en 250 hPa (modelo GFS) del 22-mar-2017. Reproducible en vivo desde <a href="https://earth.nullschool.net">earth.nullschool.net</a> → capa "wind" → altura 250 hPa. Captura la pantalla con el hemisferio sur centrado para ver el cinturón completo de oestes.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>¿Bajo qué configuración sinóptica puede desarrollarse un chorro del este en latitudes extratropicales y cuál es el mecanismo en latitudes ecuatoriales? Diferencie ambos casos.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh b-gray">Los tres tipos de chorro por hemisferio — tabla de identificación (Diap. 8–9)</span>
+  <div class="def">
+    En <b>cada hemisferio existen tres corrientes en chorro</b>: una <b>subtropical (SJ)</b> y dos <b>polares</b> — el <b>polar norte (PN)</b> y el <b>polar sur o antártico (PS)</b>, nomenclatura usada en el hemisferio sur; su equivalente en el hemisferio norte es el chorro polar y el <b>chorro ártico</b>. La identificación operativa se hace cruzando tres campos: <b>nivel de presión</b>, <b>temperatura potencial (θ)</b> y <b>altura geopotencial en 250 hPa</b>.
+  </div>
+  <div class="tblwrap">
+  <table class="tbl">
+    <tr><th>Criterio (según WPC Int. Desks / COMET-MetEd, Hem. Sur)</th><th>SUBTROPICAL (SJ)</th><th>POLAR / POLAR NORTE (PN)</th><th>POLAR SUR (ANTÁRTICO, PS)</th></tr>
+    <tr><td>Altura geopotencial asociada en 250 hPa</td><td>10 560 mgp o más</td><td>10 200 – 10 400 mgp</td><td>10 800 mgp o menos <i>(valor tal como figura en la tabla del PDF)</i></td></tr>
+    <tr><td>Temperatura potencial θ (K)</td><td>340 – 360</td><td>325 – 340</td><td>310 – 325</td></tr>
+    <tr><td>Nivel de presión del núcleo</td><td>200 hPa o por encima</td><td>~250 hPa</td><td>~300 hPa o por debajo</td></tr>
+    <tr><td>¿Frente en superficie asociado?</td><td>No (gradiente solo en tropósfera media y alta)</td><td>Sí, gradiente térmico intenso hasta la superficie</td><td>Sí; separa masas polares de masas antárticas (árticas en el HN)</td></tr>
+    <tr><td>Intensidad relativa</td><td>Más débil que los polares</td><td>Más intenso (gradiente térmico más fuerte)</td><td>Intenso; frecuentemente combinado con el PN</td></tr>
+    <tr><td>Efecto típico en el tiempo</td><td>Afecta localmente si hay convección; inestabilidad convectiva en su flanco polar</td><td>Ciclones extratropicales, frentes, tormentas, turbulencia</td><td>Irrupciones de aire antártico, friajes y heladas en Sudamérica</td></tr>
+  </table>
+  </div>
+  <div class="warn">⚠️ <b>OJO CON LA TABLA:</b> físicamente el PS —el más frío y bajo— debería asociarse a geopotenciales <b>menores</b> que el PN (10 200–10 400 mgp), por lo que "10 800 o menos" resulta poco coherente y muy probablemente sea una errata de <b>10 080</b> mgp en el material original. Reprodúcelo como está en el PDF si te lo piden literal, pero <b>consulta con el docente</b>: en un examen conceptual lo que se evalúa es el orden SJ &gt; PN &gt; PS en geopotencial y en θ.</div>
+  <div class="three">
+    <div class="mini mt-o"><b>SJ — Subtropical</b>~25–35° de latitud. Núcleo en 200 hPa o más alto porque la tropósfera tropical es más gruesa. Con θ = 340–360 K está inmerso en aire cálido. Sobre Sudamérica es el chorro que responde a la <b>Alta de Bolivia</b> y a <b>El Niño</b>. Escala: sinóptica a planetaria, semanas.</div>
+    <div class="mini mt-b"><b>PN — Polar (norte)</b>~40–55°S. Núcleo ~250 hPa: más bajo que el SJ porque hacia los polos la tropósfera "se hace más llana" por las menores temperaturas. Acompaña al <b>frente polar</b> en superficie y marca el cinturón de ciclones extratropicales.</div>
+    <div class="mini mt-p"><b>PS — Polar sur / antártico</b>~55–70°S. Núcleo ~300 hPa o más abajo. Separa la <b>masa polar</b> de la <b>masa antártica</b>. Su desplazamiento hacia el norte es el precursor sinóptico de las irrupciones frías que llegan hasta el sur del Perú y la Amazonía (friaje).</div>
+  </div>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>La estratificación de los tres chorros en θ (310–325 / 325–340 / 340–360 K) refleja que cada uno se ancla sobre una superficie isentrópica distinta. Como θ se conserva en flujo adiabático, seguir la superficie isentrópica del chorro permite rastrear la masa de aire y diagnosticar advección térmica; el descenso de superficies isentrópicas altas por el flanco frío marca la intrusión de PV estratosférica.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Piensa en la atmósfera como una torta de capas, donde cada capa tiene su propia "densidad de calor". Los tres chorros no son tres cintas cualquiera: cada uno corre por su propia capa de la torta. El de arriba (subtropical) corre por la capa caliente; el de más abajo (antártico) corre por la capa fría. Si sabes en qué capa está el chorro, sabes qué tipo de aire viene detrás de él.</p>
+    </div>
+  </div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Un análisis en 250 hPa sobre el sur de Sudamérica muestra un máximo de isotacas de 95 kt sobre geopotenciales de 10 300 mgp, con θ ≈ 330 K y un frente bien definido en 1000 hPa debajo. Clasifique el chorro justificando cada criterio.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh b-petrol">Cómo se detectan en un corte transversal — 4 campos diagnósticos (Diap. 7 y 10)</span>
+  <div class="def pe">
+    El corte transversal (sección vertical perpendicular al flujo, <b>cortando el núcleo</b>) es la herramienta estándar del análisis de chorros. No basta un campo: se cruzan cuatro, y cada uno responde una pregunta distinta.
+  </div>
+  <div class="item"><span class="num-badge nb-b">1</span><span><b>Isotacas (verde):</b> localizan directamente los <b>núcleos de viento máximo</b>. Cuidado: distintos ramales suelen aparecer <b>conectados</b> en el campo de isotacas; hay que buscar el eje de mayores vientos, que en latitudes altas está a <b>altitudes más bajas</b>.</span></div>
+  <div class="item"><span class="num-badge nb-y">2</span><span><b>Temperatura potencial θ (negro):</b> el chorro se ubica donde los <b>contornos se separan (se abren) hacia el aire cálido</b>, es decir hacia la región tropical. Es el campo que revela la baroclinicidad: contornos inclinados y apretados = zona frontal.</span></div>
+  <div class="item"><span class="num-badge nb-p">3</span><span><b>Vorticidad relativa (azul/roja):</b> los chorros van acompañados de <b>máximos de vorticidad en sus regiones laterales</b> (por la cizalladura horizontal a ambos lados del núcleo: ciclónica del lado polar, anticiclónica del lado tropical en el HN; invertido en el HS por el signo de f).</span></div>
+  <div class="item"><span class="num-badge nb-r">4</span><span><b>Vorticidad potencial PV (rosa):</b> el campo más valioso. Revela las <b>intrusiones estratosféricas</b> en la parte <b>fría</b> de cada chorro. Alta PV bajando = tropopausa dinámica descendida = baroclinicidad intensa y potencial de tiempo severo.</span></div>
+  <hr class="divh">
+  <div class="item"><span class="dot gr"></span><span><b>Los chorros interactúan.</b> Pueden aparecer como una <b>banda de 10–20° de latitud</b> de vientos fuertes; dentro de ella se identifican núcleos separados. <b>No siempre están los tres</b>: a veces dos se acercan y se <b>combinan</b> — algo particularmente común entre los dos polares (PN+PS en un solo chorro polar).</span></div>
+  <div class="imgph">📷 <b>Espacio sugerido — Figuras diap. 7 y 10:</b> corte transversal GFS con isotacas (verde), θ (negro), vorticidad relativa (azul/roja) y PV (rosa), con SJ, PN y PS rotulados. Puedes regenerar cortes equivalentes en las cartas de los <a href="https://www.wpc.ncep.noaa.gov/international/">WPC International Desks</a> o con sondeos de la <a href="https://weather.uwyo.edu/upperair/sounding.html">Universidad de Wyoming</a>.</div>
+  <div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir <b>vorticidad relativa</b> (ζ, dinámica horizontal, útil para ver los flancos del chorro) con <b>vorticidad potencial</b> (PV, cantidad conservativa que combina vorticidad absoluta y estratificación, útil para ver de dónde <i>viene</i> el aire). Sólo la PV te dice que el aire es estratosférico.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Describa el procedimiento para identificar y clasificar corrientes en chorro en un corte transversal, indicando qué información aporta cada uno de los cuatro campos y por qué la vorticidad potencial es indispensable.</div>
+</div>
+
+<div class="block">
+  <span class="bh b-pink">Chorros, masas de aire y trayectoria de ciclones (Diap. 11–12)</span>
+  <div class="def pk">
+    Un chorro es una <b>frontera entre masas de aire</b>. En los productos RGB del satélite Himawari se ve la masa <b>tropical en tonos verdes</b> extendiéndose al <b>norte</b> del chorro (lado ecuatorial, en el HS) y la masa <b>polar en rojos y lilas</b> al <b>sur</b>. Esa separación es la que hace del chorro un <b>predictor climático</b>.
+  </div>
+  <div class="flow">
+    <span class="fbox">Posición del chorro</span><span class="farrow">→</span>
+    <span class="fbox">Frontera de masas de aire</span><span class="farrow">→</span>
+    <span class="fbox">Cinturón de tránsito de ciclones extratropicales</span><span class="farrow">→</span>
+    <span class="fbox">Regiones de mal tiempo y lluvia</span><span class="farrow">→</span>
+    <span class="fbox">Anomalías de T y PP pronosticables</span>
+  </div>
+  <div class="item"><span class="dot r"></span><span>Las <b>intrusiones estratosféricas</b> del lado frío, ricas en <b>ozono</b>, se capturan con el canal satelital sensible al ozono del Himawari (se ven en rojo). Son un marcador visual de <b>dinámica intensa</b>: donde aparecen, hay ciclogénesis o profundización en curso.</span></div>
+  <div class="imgph">📷 <b>Espacio sugerido — Figura diap. 12:</b> producto RGB de masas de aire (Himawari, cortesía U. de Wisconsin) + isotacas de 200 hPa. Alternativa en vivo: <a href="https://www.ssec.wisc.edu/">CIMSS/SSEC – U. Wisconsin</a> (RGB Airmass) o el visor de <a href="https://www.senamhi.gob.pe/">SENAMHI</a> para el sector sudamericano.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Explique por qué conocer la posición probable del chorro en una escala estacional aumenta la confianza de un pronóstico de anomalías de temperatura, y no solo de precipitación.</div>
+</div>
+
+<div class="secbar sb-b">🟣 SECCIÓN 2 — DINÁMICA: DIVERGENCIA CRUZADA, CIRCULACIONES TRANSVERSALES, ACOPLAMIENTO Y FRENTES (Diap. 13–29)</div>
+
+<div class="block">
+  <span class="bh b-purple">Jet streaks: núcleos de vientos máximos (Diap. 14)</span>
+  <div class="def p">
+    Dentro del chorro se desarrollan <b>regiones elongadas de vientos máximos</b> llamadas <b>jet streaks</b> o núcleos de máximo. Se organizan <b>a lo largo del flujo</b> y aparecen donde los gradientes térmicos horizontales son más intensos. Son la unidad de análisis dinámico: el chorro dice <i>dónde</i>, el jet streak dice <i>cuándo y cuánto</i>.
+  </div>
+  <div class="item"><span class="dot p"></span><span><b>Importancia 1 — estimulan las velocidades verticales</b> y por tanto el tiempo asociado (nubosidad, convección, precipitación).</span></div>
+  <div class="item"><span class="dot p"></span><span><b>Importancia 2 — informan sobre la propagación</b> del chorro: los núcleos se mueven flujo abajo por un mecanismo propio (diap. 23), no solo arrastrados por el flujo medio.</span></div>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>El jet streak rompe la geostrofía a lo largo del flujo: la aceleración/desaceleración del viento genera una componente <b>ageostrófica transversal</b> V<sub>ag</sub> = (1/f)·k̂ × dV/dt. Esa componente, por continuidad de masa, obliga a divergencia/convergencia en altura y a movimiento vertical debajo, con forzamiento cuasi-geostrófico coherente con la ecuación ω.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Es como una autopista donde de pronto hay un tramo con límite de velocidad más alto. Los autos que entran aceleran y se separan entre sí (se "abre" el tránsito = divergencia); los que salen frenan y se apelotonan (= convergencia). Donde el aire se separa arriba, se succiona aire desde abajo y se forman nubes y lluvia.</p>
+    </div>
+  </div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Defina jet streak y explique por qué su localización, y no la del chorro completo, es la información crítica para pronosticar precipitación.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh b-purple">Esquema de divergencia cruzada — el modelo de los 4 cuadrantes (Diap. 15–17)</span>
+  <div class="def p">
+    Los vientos fuertes del núcleo <b>combinados con la rotación de la Tierra</b> generan un patrón <b>cruzado</b> (en diagonal) de divergencia y convergencia en la periferia del jet streak. Es el modelo conceptual más rentable del tema: con solo ubicar el núcleo y saber en qué hemisferio estás, puedes anticipar dónde habrá ascensos y precipitación.
+  </div>
+  <div class="hemi">
+    <div class="hem-s"><p class="hem-label">🌏 Hemisferio Sur (Sudamérica)</p><b>Divergencia:</b> entrada <b>izquierda</b> (la que apunta al <b>trópico</b>) y salida <b>derecha</b> (la que apunta al <b>polo</b>).<br><b>Convergencia:</b> los cuadrantes opuestos (entrada derecha y salida izquierda).</div>
+    <div class="hem-n"><p class="hem-label">🌎 Hemisferio Norte</p><b>Divergencia:</b> entrada <b>derecha</b> y salida <b>izquierda</b> — que, mirando flujo abajo, son igualmente la entrada del lado del <b>ecuador</b> y la salida del lado del <b>polo</b>.<br><b>Convergencia:</b> los cuadrantes opuestos.</div>
+  </div>
+  <div class="mini ml-o" style="margin-bottom:8px"><b>🔑 Regla única para no memorizar dos esquemas</b>En ambos hemisferios: <b>DIVERGENCIA en la entrada del lado ecuatorial y en la salida del lado polar</b>. Lo que cambia entre hemisferios es solo cómo se llama ese lado ("izquierda" o "derecha") cuando miras en la dirección del flujo, porque el signo de f invierte la geometría. La física es idéntica.</div>
+  <svg class="fig" viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Modelo de divergencia cruzada de cuatro cuadrantes comparado entre hemisferio sur y hemisferio norte">
+    <defs>
+      <marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round"/>
+      </marker>
+    </defs>
+
+    <text class="sv-h" x="230" y="26" text-anchor="middle">HEMISFERIO SUR (Sudamérica)</text>
+    <rect x="45" y="40" width="375" height="235" rx="10" fill="none" stroke="#c3cedb" stroke-width="1" stroke-dasharray="5 4"/>
+    <text class="sv-s" x="232" y="58" text-anchor="middle">↑ hacia el TRÓPICO (norte)</text>
+    <text class="sv-s" x="232" y="268" text-anchor="middle">↓ hacia el POLO (sur)</text>
+    <line x1="60" y1="160" x2="408" y2="160" stroke="#334155" stroke-width="2.5" marker-end="url(#ar2)"/>
+    <ellipse cx="232" cy="160" rx="92" ry="24" fill="none" stroke="#334155" stroke-width="1.2"/>
+    <ellipse cx="232" cy="160" rx="52" ry="13" fill="none" stroke="#334155" stroke-width="1.2"/>
+    <text class="sv-s" x="66" y="152">ENTRADA</text>
+    <text class="sv-s" x="404" y="152" text-anchor="end">SALIDA</text>
+    <rect x="80" y="74" width="130" height="34" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width=".8"/>
+    <text class="sv-t" x="145" y="95" text-anchor="middle" fill="#991b1b">DIVERGENCIA</text>
+    <rect x="255" y="74" width="130" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width=".8"/>
+    <text class="sv-t" x="320" y="95" text-anchor="middle" fill="#1e3a8a">CONVERGENCIA</text>
+    <rect x="80" y="212" width="130" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width=".8"/>
+    <text class="sv-t" x="145" y="233" text-anchor="middle" fill="#1e3a8a">CONVERGENCIA</text>
+    <rect x="255" y="212" width="130" height="34" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width=".8"/>
+    <text class="sv-t" x="320" y="233" text-anchor="middle" fill="#991b1b">DIVERGENCIA</text>
+    <line x1="145" y1="132" x2="145" y2="112" stroke="#dc2626" stroke-width="2" marker-end="url(#ar2)"/>
+    <line x1="320" y1="188" x2="320" y2="208" stroke="#dc2626" stroke-width="2" marker-end="url(#ar2)"/>
+
+    <text class="sv-h" x="670" y="26" text-anchor="middle">HEMISFERIO NORTE (espejo)</text>
+    <rect x="485" y="40" width="375" height="235" rx="10" fill="none" stroke="#c3cedb" stroke-width="1" stroke-dasharray="5 4"/>
+    <text class="sv-s" x="672" y="58" text-anchor="middle">↑ hacia el POLO (norte)</text>
+    <text class="sv-s" x="672" y="268" text-anchor="middle">↓ hacia el TRÓPICO (sur)</text>
+    <line x1="500" y1="160" x2="848" y2="160" stroke="#334155" stroke-width="2.5" marker-end="url(#ar2)"/>
+    <ellipse cx="672" cy="160" rx="92" ry="24" fill="none" stroke="#334155" stroke-width="1.2"/>
+    <ellipse cx="672" cy="160" rx="52" ry="13" fill="none" stroke="#334155" stroke-width="1.2"/>
+    <text class="sv-s" x="506" y="152">ENTRADA</text>
+    <text class="sv-s" x="844" y="152" text-anchor="end">SALIDA</text>
+    <rect x="520" y="74" width="130" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width=".8"/>
+    <text class="sv-t" x="585" y="95" text-anchor="middle" fill="#1e3a8a">CONVERGENCIA</text>
+    <rect x="695" y="74" width="130" height="34" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width=".8"/>
+    <text class="sv-t" x="760" y="95" text-anchor="middle" fill="#991b1b">DIVERGENCIA</text>
+    <rect x="520" y="212" width="130" height="34" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width=".8"/>
+    <text class="sv-t" x="585" y="233" text-anchor="middle" fill="#991b1b">DIVERGENCIA</text>
+    <rect x="695" y="212" width="130" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width=".8"/>
+    <text class="sv-t" x="760" y="233" text-anchor="middle" fill="#1e3a8a">CONVERGENCIA</text>
+    <line x1="585" y1="188" x2="585" y2="208" stroke="#dc2626" stroke-width="2" marker-end="url(#ar2)"/>
+    <line x1="760" y1="132" x2="760" y2="112" stroke="#dc2626" stroke-width="2" marker-end="url(#ar2)"/>
+
+    <text class="sv-s" x="450" y="305" text-anchor="middle">Rojo = divergencia en altura → ascenso y precipitación debajo · Azul = convergencia en altura → subsidencia · Flechas: hacia el cuadrante divergente equivalente</text>
+  </svg>
+  <p class="figcap">Figura B (elaboración propia según diap. 16). En ambos hemisferios la divergencia queda en la <b>entrada del lado ecuatorial</b> y en la <b>salida del lado polar</b>; la etiqueta izquierda/derecha se intercambia porque cambia el signo de f.</p>
+  <div class="item"><span class="dot p"></span><span><b>Condición de aplicación:</b> el modelo de divergencia cruzada vale para <b>máximos de chorro en flujo recto (sin curvatura)</b>. Si el flujo es curvo, el modelo se aplica <b>solo al lado cóncavo</b> del máximo, donde se resalta; el lado convexo queda dominado por la vorticidad de curvatura.</span></div>
+  <div class="item"><span class="dot"></span><span><b>Consecuencia:</b> los cuadrantes divergentes en altura se asocian a <b>movimientos verticales ascendentes</b> en la tropósfera situada por debajo (continuidad de masa). Esta distribución alimenta las <b>circulaciones transversales</b> y se produce por <b>vientos ageostróficos transversales</b> generados por los cambios de cizalla a lo largo del flujo.</span></div>
+  <div class="rx">∂ω/∂p = −∇·V<sub>h</sub>  (continuidad)<br>DIV en 250 hPa &gt; 0 → ω &lt; 0 debajo → ASCENSO</div>
+  <p class="rx-note"><b>Unidades:</b> divergencia en 10⁻⁵ s⁻¹ (valores significativos: 1–5 ×10⁻⁵ s⁻¹) · ω en Pa/s o hPa/h (ω = −5 hPa/h ya es ascenso fuerte de escala sinóptica). <b>Rango válido:</b> escala sinóptica, aproximación cuasi-geostrófica; no describe ascensos convectivos individuales.</p>
+  <div class="warn">⚠️ <b>ERROR COMÚN:</b> aplicar el esquema del hemisferio norte (el de los libros de texto de EE.UU. y de muchos apuntes en internet) a un caso de Argentina o Chile. En Sudamérica <b>la divergencia está en la entrada izquierda y en la salida derecha</b>. Aplicar el esquema equivocado invierte el pronóstico de lluvia.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Dibuje el esquema de divergencia cruzada para el hemisferio sur, indique los cuatro cuadrantes y explique qué modificación hace la curvatura del flujo sobre la validez del modelo.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh b-teal">Circulaciones transversales: entrada DIRECTA vs. salida INDIRECTA (Diap. 18–22)</span>
+  <div class="def t">
+    El patrón de divergencia/convergencia no queda flotando en altura: <b>cierra un circuito vertical</b> perpendicular al eje del chorro. Ese circuito se llama <b>circulación transversal (ageostrófica)</b> y tiene <b>signo opuesto</b> en la entrada y en la salida del jet streak. Entender esta pareja es entender por qué un chorro <b>se debilita por donde entra</b> y <b>se intensifica por donde sale</b>.
+  </div>
+  <svg class="fig" viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Circulación transversal directa en la entrada del chorro e indirecta en la salida">
+    <defs>
+      <marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round"/>
+      </marker>
+    </defs>
+    <text class="sv-h" x="232" y="24" text-anchor="middle">ENTRADA → circulación DIRECTA</text>
+    <rect x="45" y="36" width="375" height="250" rx="10" fill="none" stroke="#c3cedb" stroke-dasharray="5 4"/>
+    <text class="sv-s" x="40" y="94" text-anchor="end">200 hPa</text>
+    <text class="sv-s" x="40" y="174" text-anchor="end">500 hPa</text>
+    <text class="sv-s" x="40" y="254" text-anchor="end">1000 hPa</text>
+    <ellipse cx="232" cy="90" rx="38" ry="17" fill="#e0f2fe" stroke="#0c4a6e" stroke-width="1"/>
+    <text class="sv-t" x="232" y="94" text-anchor="middle" fill="#0c4a6e">Máximo</text>
+    <text class="sv-s" x="110" y="120" text-anchor="middle" fill="#991b1b">DIV</text>
+    <text class="sv-s" x="355" y="120" text-anchor="middle" fill="#1e3a8a">CON</text>
+    <line x1="110" y1="243" x2="110" y2="150" stroke="#dc2626" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <line x1="355" y1="150" x2="355" y2="243" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <line x1="128" y1="142" x2="337" y2="142" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar3)"/>
+    <line x1="337" y1="252" x2="128" y2="252" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar3)"/>
+    <text class="sv-s" x="110" y="272" text-anchor="middle" fill="#b91c1c">Aire cálido (trópico) ASCIENDE</text>
+    <text class="sv-s" x="355" y="272" text-anchor="middle" fill="#1d4ed8">Aire frío (polo) DESCIENDE</text>
+
+    <text class="sv-h" x="672" y="24" text-anchor="middle">SALIDA → circulación INDIRECTA</text>
+    <rect x="485" y="36" width="375" height="250" rx="10" fill="none" stroke="#c3cedb" stroke-dasharray="5 4"/>
+    <ellipse cx="672" cy="90" rx="38" ry="17" fill="#e0f2fe" stroke="#0c4a6e" stroke-width="1"/>
+    <text class="sv-t" x="672" y="94" text-anchor="middle" fill="#0c4a6e">Máximo</text>
+    <text class="sv-s" x="550" y="120" text-anchor="middle" fill="#1e3a8a">CON</text>
+    <text class="sv-s" x="795" y="120" text-anchor="middle" fill="#991b1b">DIV</text>
+    <line x1="550" y1="150" x2="550" y2="243" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <line x1="795" y1="243" x2="795" y2="150" stroke="#dc2626" stroke-width="2.5" marker-end="url(#ar3)"/>
+    <line x1="777" y1="142" x2="568" y2="142" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar3)"/>
+    <line x1="568" y1="252" x2="777" y2="252" stroke="#64748b" stroke-width="1.6" marker-end="url(#ar3)"/>
+    <text class="sv-s" x="550" y="272" text-anchor="middle" fill="#1d4ed8">Aire cálido DESCIENDE</text>
+    <text class="sv-s" x="795" y="272" text-anchor="middle" fill="#b91c1c">Aire frío ASCIENDE</text>
+
+    <text class="sv-s" x="232" y="310" text-anchor="middle">Restaura el equilibrio → ↓ baroclinicidad → FRONTÓLISIS → el chorro se debilita</text>
+    <text class="sv-s" x="672" y="310" text-anchor="middle">Aprieta el gradiente → ↑ baroclinicidad → FRONTOGÉNESIS → ciclogénesis</text>
+  </svg>
+  <p class="figcap">Figura C (elaboración propia según diap. 18–21). Corte perpendicular al eje del chorro. Nota: en la entrada la lluvia se genera <b>del lado cálido/tropical</b>; en la salida, <b>del lado frío/polar</b>.</p>
+  <div class="two">
+    <div class="mini mt-g"><b>Entrada — circulación DIRECTA</b>La dinámica fuerza a <b>ascender el aire cálido</b> y a <b>descender el aire frío</b>. Termodinámicamente es "directa" porque convierte energía potencial en cinética, como haría la naturaleza por sí sola: <b>tiende a restaurar el equilibrio</b>. Resultado: <b>disminuye la baroclinicidad</b> (afloja el gradiente térmico debajo del chorro) → <b>frontólisis</b> y <b>debilitamiento eventual del chorro</b>. Aun así, los ascensos de la entrada izquierda (HS) <b>favorecen convección intensa y precipitación</b> — es una de las configuraciones que justifica pronosticar lluvias por encima de lo normal.</div>
+    <div class="mini mt-r"><b>Salida — circulación INDIRECTA</b>La dinámica fuerza a <b>ascender el aire frío</b> y a <b>descender el aire cálido</b>: contra natura, por eso "indirecta". Aunque los efectos térmicos y dinámicos <b>compiten</b>, el balance neto <b>aprieta el gradiente térmico</b> → <b>aumenta la baroclinicidad</b> → más <b>advección térmica</b> y <b>ascensos intensos</b> → <b>tormentas fuertes, precipitación por encima de lo normal, ciclogénesis y frontogénesis</b>. Es el lado "peligroso" del jet streak.</div>
+  </div>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>Ambas ramas son la respuesta ageostrófica que mantiene el balance de viento térmico ante la aceleración/desaceleración a lo largo del flujo (ecuación de Sawyer–Eliassen). En la entrada la circulación es térmicamente directa (w' y T' anticorrelacionados con el gradiente → frontólisis, conversión APE→KE); en la salida es indirecta (KE→APE), con frontogénesis y forzamiento ascendente máximo en el flanco frío, coherente con el término de deformación del vector Q.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>En la entrada del "tramo rápido" el aire caliente sube y el frío baja: es lo que pasaría solo, como el humo caliente que sube por una chimenea. Eso mezcla y suaviza el contraste de temperatura, así que el río de aire pierde fuerza allí. En la salida ocurre lo contrario: el aire frío es obligado a subir, como si empujaras una pelota bajo el agua. Ese esfuerzo aumenta el contraste, y de ahí salen las tormentas fuertes y las bajas que se profundizan.</p>
+    </div>
+  </div>
+  <div class="imgph">📷 <b>Espacio sugerido — Figuras diap. 19, 21 y 22:</b> (a) corte con θ en rojo y flechas ageostróficas para entrada; (b) el mismo corte para la salida; (c) animación de <b>vapor de agua</b> mostrando la salida derecha del chorro sobre el <b>noreste de Patagonia y La Pampa / sur de Buenos Aires</b>, con los cumulonimbos en manchas blancas. Fuente reproducible: imágenes GOES-East de vapor de agua en <a href="https://www.goes.noaa.gov/">NOAA</a> o el visor del <a href="https://www.smn.gob.ar/">SMN Argentina</a>.</div>
+  <div class="warn">⚠️ <b>ERROR COMÚN:</b> asumir que "divergente = siempre tormenta". El cuadrante divergente <b>fuerza el ascenso</b>, pero la tormenta necesita además <b>humedad e inestabilidad</b> en niveles bajos. Sin flujo húmedo (p. ej. sin el chorro de bajos niveles sudamericano) el mismo forzamiento puede dar solo nubosidad alta.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Compare las circulaciones transversales de la entrada y de la salida de un máximo de chorro: sentido de la circulación, efecto sobre la baroclinicidad, sobre el propio chorro y sobre el tiempo asociado.</div>
+</div>
+
+<div class="block">
+  <span class="bh b-yellow">Propagación de los máximos de chorro (Diap. 23)</span>
+  <div class="def y">
+    Consecuencia directa del par entrada/salida: como la <b>entrada diluye</b> el gradiente térmico (frontólisis → vientos más débiles) y la <b>salida lo aprieta</b> (frontogénesis → vientos más fuertes), el <b>máximo se corre flujo abajo</b> por sí mismo.
+  </div>
+  <div class="flow">
+    <span class="fbox">Frontólisis en la entrada</span><span class="farrow">→</span>
+    <span class="fbox">Vientos se debilitan atrás</span><span class="farrow">→</span>
+    <span class="fbox">Frontogénesis en la salida</span><span class="farrow">→</span>
+    <span class="fbox">Vientos se intensifican adelante</span><span class="farrow">→</span>
+    <span class="fbox">El núcleo se propaga hacia el este</span>
+  </div>
+  <div class="item"><span class="dot y"></span><span>En la tropósfera extratropical, entonces, el movimiento del chorro tiene <b>dos componentes</b>: (1) <b>advección</b> por la corriente del oeste y (2) <b>propagación</b> propia del máximo. Un pronóstico que solo advecta el núcleo <b>lo atrasa</b>.</span></div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Explique por qué el desplazamiento de un jet streak no puede explicarse únicamente por advección del flujo medio y qué proceso añade la componente de propagación.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh b-red">Acoplamiento de chorros (Diap. 24–27)</span>
+  <div class="def r">
+    Hay <b>acoplamiento</b> cuando las regiones de divergencia (o de convergencia) de <b>dos chorros distintos entran en fase</b>, es decir, se sobreponen espacialmente. El efecto no es aditivo simple: la divergencia (o convergencia) resultante se <b>intensifica</b> y además <b>crece en área</b>.
+  </div>
+  <svg class="fig" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Esquema de acoplamiento de chorros en el lado divergente para el hemisferio sur">
+    <defs>
+      <marker id="ar4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round"/>
+      </marker>
+    </defs>
+    <text class="sv-s" x="60" y="30">↑ Norte (trópico)</text>
+    <text class="sv-s" x="60" y="288">↓ Sur (polo)</text>
+    <line x1="70" y1="80" x2="470" y2="80" stroke="#334155" stroke-width="10" stroke-opacity=".25"/>
+    <line x1="70" y1="80" x2="480" y2="80" stroke="#334155" stroke-width="2" marker-end="url(#ar4)"/>
+    <text class="sv-t" x="130" y="66">Chorro del NORTE</text>
+    <text class="sv-s" x="392" y="66" text-anchor="middle">salida derecha (lado polar) = DIV</text>
+    <line x1="330" y1="230" x2="800" y2="230" stroke="#334155" stroke-width="10" stroke-opacity=".25"/>
+    <line x1="330" y1="230" x2="810" y2="230" stroke="#334155" stroke-width="2" marker-end="url(#ar4)"/>
+    <text class="sv-t" x="700" y="256">Chorro del SUR</text>
+    <text class="sv-s" x="420" y="256" text-anchor="middle">entrada izquierda (lado tropical) = DIV</text>
+    <ellipse cx="450" cy="155" rx="105" ry="52" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text class="sv-t" x="450" y="150" text-anchor="middle" fill="#991b1b">ACOPLAMIENTO</text>
+    <text class="sv-s" x="450" y="168" text-anchor="middle" fill="#991b1b">divergencia en fase</text>
+    <line x1="410" y1="94" x2="430" y2="104" stroke="#dc2626" stroke-width="2" marker-end="url(#ar4)"/>
+    <line x1="430" y1="216" x2="450" y2="208" stroke="#dc2626" stroke-width="2" marker-end="url(#ar4)"/>
+    <rect x="600" y="52" width="255" height="106" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width=".8"/>
+    <text class="sv-t" x="616" y="76" fill="#991b1b">Consecuencias del lado divergente</text>
+    <text class="sv-s" x="616" y="98" fill="#991b1b">• Ciclogénesis explosiva</text>
+    <text class="sv-s" x="616" y="118" fill="#991b1b">• Ascensos intensos y lluvias fuertes</text>
+    <text class="sv-s" x="616" y="138" fill="#991b1b">• Tiempo severo en algunos escenarios</text>
+  </svg>
+  <p class="figcap">Figura D (elaboración propia según diap. 24–26), hemisferio sur. Favorecido por <b>vaguadas de inclinación negativa</b>: la parte tropical (norte, en Sudamérica) de la vaguada va <b>por delante</b> de la parte polar respecto del flujo medio.</p>
+  <div class="two">
+    <div class="mini mt-r"><b>Acoplamiento DIVERGENTE (el peligroso)</b>Se sobrepone la <b>salida divergente</b> de un chorro con la <b>entrada divergente</b> de otro ubicado a latitudes mayores. Resultado: <b>ciclogénesis explosiva</b>, ascensos intensos, precipitaciones fuertes y tiempo severo.</div>
+    <div class="mini mt-b"><b>Acoplamiento CONVERGENTE</b>Se sobreponen las regiones convergentes: se intensifica y expande la <b>subsidencia</b>. Asociado a bloqueos, tiempo estable y seco, y a la consolidación de anticiclones.</div>
+  </div>
+  <div class="item"><span class="dot r"></span><span><b>Caso sudamericano (diap. 26):</b> el acoplamiento divergente ocurre <b>todo el año</b> pero <b>predomina de otoño a primavera</b>. Con suficiente <b>baroclinicidad en superficie</b> y <b>humedad</b> en la parte tropical del sistema, se dispara <b>ciclogénesis explosiva</b> frente a las costas de <b>Argentina, Uruguay y sur de Brasil</b>. Los vientos afectan sobre todo las costas <b>sur y este de Uruguay</b> y <b>sur y este de la provincia de Buenos Aires</b>.</span></div>
+  <div class="item"><span class="dot pk"></span><span><b>Sudestada:</b> si el ciclón se forma sobre Uruguay o se mueve hacia allí, coloca al <b>Río de la Plata</b> bajo vientos fuertes y persistentes del <b>sureste</b>, que <b>apilan el agua</b> en El Tigre y Buenos Aires → <b>inundaciones costeras</b>. Es el ejemplo clásico de cómo un proceso de la <b>alta tropósfera</b> termina en un <b>impacto socioeconómico</b> en superficie.</span></div>
+  <div class="item"><span class="dot gr"></span><span><b>Complicación real (diap. 27):</b> al oeste de la zona de acoplamiento las interacciones se vuelven complejas porque hay <b>varios chorros</b> con <b>geometrías distintas</b> y porque los <b>Andes distorsionan</b> el modelo de divergencia cruzada.</span></div>
+  <div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir <b>acoplamiento</b> (dos chorros distintos con sus divergencias en fase) con <b>chorros combinados</b> (dos chorros que se fusionan en un solo núcleo, típico de PN+PS). El primero es un mecanismo <b>dinámico de intensificación</b>; el segundo, un rasgo de <b>identificación</b> en el análisis.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Defina acoplamiento de chorros, explique qué configuración de vaguada lo favorece y describa la secuencia física que conduce a una ciclogénesis explosiva y a una sudestada en el Río de la Plata.</div>
+</div>
+
+<div class="block">
+  <span class="bh b-blue">Relación con los frentes (Diap. 28–29)</span>
+  <div class="def">
+    Los chorros se asocian a <b>frentes</b> y a <b>ciclones extratropicales</b> por una única razón física: debajo de ellos hay <b>regiones de gran baroclinicidad</b>. Frente y chorro son dos manifestaciones —una en superficie y otra en altura— del mismo gradiente térmico.
+  </div>
+  <div class="item"><span class="dot"></span><span>Los <b>chorros polares</b> se ligan a <b>frentes de superficie</b>; el <b>subtropical</b>, a frentes de la <b>tropósfera media y alta</b> (por eso no se ve en el análisis de superficie).</span></div>
+  <div class="item"><span class="dot"></span><span>La sección transversal se lee cruzando <b>temperatura</b> y <b>temperatura potencial</b>: la baroclinicidad es máxima donde ambos campos son <b>más perpendiculares entre sí</b>. Allí se sitúa el chorro, sobre una <b>columna profunda</b> de baroclinicidad.</span></div>
+  <div class="item"><span class="dot"></span><span>El frente de nivel bajo también se ubica sobre esa región y <b>se inclina con la altura</b> hacia el chorro, extendiéndose a latitudes menores cerca de la superficie.</span></div>
+  <div class="item"><span class="dot g"></span><span><b>Valor para el pronóstico climático:</b> pronosticar la <b>trayectoria del chorro</b> ≈ pronosticar la <b>trayectoria de los ciclones extratropicales</b> y la <b>distribución de frentes</b>, y con ello el potencial de temperaturas y precipitaciones por encima o por debajo de lo normal.</span></div>
+  <div class="exam"><b>🎯 EXAMEN: </b>¿Por qué el chorro subtropical no se asocia a un frente en superficie mientras el polar sí, si ambos responden a gradientes térmicos? Fundamente con la distribución vertical del gradiente.</div>
+</div>
+
+<div class="secbar sb-c">🟠 SECCIÓN 3 — EFECTOS EN EL CLIMA: APLICACIONES AL PRONÓSTICO EN SUDAMÉRICA Y EL NIÑO (Diap. 30–43)</div>
+
+<div class="block s2">
+  <span class="bh b-orange">Efectos en el clima de Sudamérica y posiciones típicas del chorro (Diap. 31–32)</span>
+  <div class="def o">
+    Los chorros tienen un rol mayor en Sudamérica, <b>especialmente en la porción extratropical</b>. Su aporte al pronóstico climático estacional es triple: (1) <b>definen el cinturón de tránsito</b> de los ciclones extratropicales y de las regiones baroclínicas, por lo que marcan las zonas de precipitación y mal tiempo; (2) <b>dividen masas de aire y modulan la posición de los frentes</b>, lo que mejora la confianza en pronósticos de <b>anomalías de temperatura</b>; (3) <b>estimulan las precipitaciones sobre los Andes</b>.
+  </div>
+  <div class="two">
+    <div class="mini mt-r"><b>Chorro ZONAL cruzando el continente</b>Un chorro extendido oeste–este sobre Sudamérica tropical <b>bloquea la humedad al norte de 22°–28°S</b> (la latitud exacta depende de la posición del chorro y de las ondulaciones). Como <b>limita el transporte norte–sur por debajo de él</b>, favorece un <b>frente estacionario</b> debajo y se asocia a un <b>patrón seco en Argentina y Uruguay</b>.</div>
+    <div class="mini mt-g"><b>AUSENCIA de chorro cruzando el continente</b>Sin la barrera dinámica, se habilita el <b>transporte húmedo hacia el sur</b>: entran masas tropicales desde el trópico sudamericano hacia Argentina y Uruguay, permitiendo el <b>intercambio de masas tropicales y extratropicales</b> y <b>mayor contenido de humedad</b> — patrón húmedo.</div>
+  </div>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>El chorro zonal actúa como <b>guía de ondas</b> (waveguide) y como frontera de PV que inhibe el intercambio meridional de masa por debajo del nivel del jet, favoreciendo el anclaje de un frente cuasi-estacionario y suprimiendo la advección de aire tropical húmedo hacia la cuenca del Plata. Su ausencia relaja la restricción y permite acoplamiento del chorro de bajos niveles sudamericano con la región subtropical.</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>El chorro funciona como una <b>cerca</b> de aire en altura, atravesada de oeste a este. Con la cerca puesta, la humedad del Amazonas no puede bajar hacia el sur y Argentina se seca. Cuando la cerca no está, la humedad pasa libremente hacia el sur y llueve más. Por eso el pronóstico estacional se fija en <b>dónde estará la cerca</b> los próximos meses.</p>
+    </div>
+  </div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Explique el mecanismo por el cual un chorro zonal sobre Sudamérica tropical se asocia a un patrón seco en Argentina y Uruguay, y qué cambia cuando ese chorro no está presente.</div>
+</div>
+
+<div class="block">
+  <span class="bh b-petrol">Aplicación operativa: lluvias en Chile (Diap. 35–36)</span>
+  <div class="item"><span class="dot pe"></span><span><b>Configuración A:</b> la <b>salida divergente</b> del chorro ingresa al continente <b>desde el Pacífico</b> → lluvias en el centro y sur de Chile. Acumulados mayores si hay <b>conexiones de humedad subtropical desde la Polinesia</b> (ríos atmosféricos).</span></div>
+  <div class="item"><span class="dot pe"></span><span><b>Configuración B (más intensa):</b> la divergencia queda en el <b>lado cóncavo</b> del máximo y se ve reforzada, además de la <b>dinámica de la vaguada</b> que se aproxima.</span></div>
+  <div class="item"><span class="dot o"></span><span>Trabajo de referencia: <b>David Romero (DMC Chile / WPC International Desks, 2015)</b>, sobre patrones asociados a la <b>emisión de alertas por lluvias fuertes</b> en el sur de Chile.</span></div>
+  <div class="item"><span class="dot r"></span><span>La cantidad de lluvia depende también del <b>flujo de niveles bajos</b> (chorro del oeste o noroeste) y del <b>contenido de vapor de agua</b> en capas bajas: el chorro de altura <b>forza</b>, la humedad <b>alimenta</b>. Un chorro intenso también sugiere <b>masa muy fría al sur</b> → sirve para anomalías térmicas.</span></div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Un pronóstico estacional sitúa la salida divergente del chorro subtropical ingresando desde el Pacífico hacia el centro-sur de Chile. ¿Qué variables adicionales debe evaluar antes de pronosticar precipitación por encima de lo normal?</div>
+</div>
+
+<div class="block s3">
+  <span class="bh b-orange">Los chorros y los Andes — la corrección regional obligatoria (Diap. 33–34)</span>
+  <div class="def o">
+    Sudamérica tiene una particularidad que <b>ningún libro del hemisferio norte cubre</b>: la cordillera de los Andes se eleva, en el centro y norte de Chile y Argentina, hasta <b>600–500 hPa</b> en promedio. La tropopausa, muy estable, está cerca de <b>250 hPa</b> y actúa como <b>barrera superior</b>. El chorro queda <b>encajonado</b> entre ambas y, por <b>conservación de masa</b>, se ve <b>forzado a acelerarse</b> para cruzar.
+  </div>
+  <svg class="fig" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Corte oeste-este del efecto de los Andes sobre el chorro, con divergencia al oeste y convergencia al este">
+    <defs>
+      <marker id="ar5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round"/>
+      </marker>
+    </defs>
+    <text class="sv-s" x="40" y="94" text-anchor="end">250 hPa</text>
+    <text class="sv-s" x="40" y="174" text-anchor="end">500 hPa</text>
+    <text class="sv-s" x="40" y="254" text-anchor="end">1000 hPa</text>
+    <line x1="50" y1="90" x2="860" y2="90" stroke="#dc2626" stroke-width="2" stroke-dasharray="7 4"/>
+    <text class="sv-s" x="860" y="80" text-anchor="end" fill="#dc2626">Tropopausa ≈ 250 hPa: techo estable</text>
+    <line x1="50" y1="250" x2="860" y2="250" class="sv-line"/>
+    <polygon points="380,250 460,176 505,166 545,180 620,250" fill="#5f5e5a" fill-opacity=".55" stroke="#334155" stroke-width="1"/>
+    <text class="sv-t" x="500" y="270" text-anchor="middle">ANDES (600–500 hPa)</text>
+    <line x1="70" y1="132" x2="370" y2="132" stroke="#0c4a6e" stroke-width="7" stroke-opacity=".35"/>
+    <line x1="380" y1="128" x2="600" y2="128" stroke="#0c4a6e" stroke-width="13" stroke-opacity=".55"/>
+    <line x1="610" y1="132" x2="835" y2="132" stroke="#0c4a6e" stroke-width="7" stroke-opacity=".35"/>
+    <line x1="70" y1="132" x2="850" y2="132" stroke="#0c4a6e" stroke-width="2" marker-end="url(#ar5)"/>
+    <text class="sv-s" x="120" y="122">flujo del oeste</text>
+    <text class="sv-s" x="470" y="118" text-anchor="middle" fill="#0c4a6e">ACELERACIÓN forzada</text>
+    <ellipse cx="300" cy="180" rx="90" ry="34" fill="#dbeafe" stroke="#2563eb" stroke-width="1" stroke-dasharray="5 4"/>
+    <text class="sv-t" x="300" y="176" text-anchor="middle" fill="#1e3a8a">DIVERGENCIA</text>
+    <text class="sv-s" x="300" y="194" text-anchor="middle" fill="#1e3a8a">al oeste y sobre la cordillera</text>
+    <ellipse cx="720" cy="185" rx="90" ry="34" fill="#fee2e2" stroke="#dc2626" stroke-width="1" stroke-dasharray="5 4"/>
+    <text class="sv-t" x="720" y="181" text-anchor="middle" fill="#991b1b">CONVERGENCIA</text>
+    <text class="sv-s" x="720" y="199" text-anchor="middle" fill="#991b1b">al este de los Andes</text>
+    <text class="sv-s" x="230" y="234" text-anchor="middle">Chile: lluvias en cordillera y vertiente occidental</text>
+    <text class="sv-s" x="740" y="234" text-anchor="middle">Argentina/Bolivia: tiempo limitado + turbulencia</text>
+    <text class="sv-s" x="450" y="292" text-anchor="middle">Señal máxima entre 500 y 300 hPa — analizar solo 200 hPa NO cuantifica este proceso</text>
+  </svg>
+  <p class="figcap">Figura E (elaboración propia según diap. 33–34). Corte oeste–este a la latitud del centro-norte de Chile y Argentina.</p>
+  <div class="three">
+    <div class="mini mt-b"><b>Al oeste y sobre la cordillera</b>La <b>aceleración</b> del flujo genera <b>divergencia en altura</b> → ascensos → <b>estimula precipitaciones sobre la cordillera</b> y en partes altas de la <b>vertiente occidental chilena</b>.</div>
+    <div class="mini mt-r"><b>Al este de la cordillera</b>El flujo <b>se frena</b> → <b>convergencia en altura</b> → subsidencia → <b>limita el tiempo</b> sobre el lado argentino y boliviano, y genera <b>turbulencia de montaña</b>.</div>
+    <div class="mini mt-y"><b>⚠️ Regla práctica de diagnóstico</b>El patrón se define mejor entre <b>300 y 500 hPa</b>. Analizar la divergencia en <b>200 hPa</b> —práctica muy común— <b>no ayuda a cuantificar</b> este proceso porque la señal está por debajo de ese nivel.</div>
+  </div>
+  <div class="warn">⚠️ <b>ERROR COMÚN:</b> aplicar directamente el modelo de divergencia cruzada sobre el sector andino. Los Andes <b>distorsionan</b> el esquema de cuadrantes: hay que superponer el efecto orográfico (aceleración/desaceleración) al efecto del jet streak. En el pronóstico peruano y chileno, esta corrección no es opcional.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Explique, invocando conservación de masa, por qué el flujo se acelera al cruzar los Andes y por qué el nivel de análisis de la divergencia debe bajarse de 200 hPa a la capa 500–300 hPa en esta región.</div>
+</div>
+
+<div class="block">
+  <span class="bh b-purple">Configuraciones típicas y la Alta de Bolivia (Diap. 37–38)</span>
+  <div class="item"><span class="num-badge nb-p">C</span><span><b>Chorro anticiclónico asociado a la Alta de Bolivia / dorsal subtropical en verano.</b> La <b>entrada izquierda</b> queda sobre el <b>Altiplano</b> → precipitaciones altiplánicas. También favorece lluvias en el <b>sureste de Brasil</b>.</span></div>
+  <div class="item"><span class="num-badge nb-p">D</span><span>Misma dorsal, pero con la <b>salida derecha</b> posicionada sobre <b>Paraguay, noreste de Argentina y sur de Brasil</b> → precipitaciones allí. <b>Más crítico durante el pasaje de vaguadas de onda corta</b>: puede producir <b>tiempo severo</b>.</span></div>
+  <div class="item"><span class="num-badge nb-b">E</span><span>Regiones divergentes sobre el <b>Altiplano y el Río de la Plata</b> simultáneamente → lluvias en ambas. <b>En invierno puede favorecer nevadas en el Altiplano</b> — relevante para las alertas de SENAMHI por heladas y nevadas altoandinas.</span></div>
+  <div class="item"><span class="num-badge nb-r">F</span><span><b>Chorros acoplados en el lado divergente</b> → muy favorable para <b>tiempo extremo en Argentina y Uruguay</b> y para <b>ciclogénesis explosiva</b>.</span></div>
+  <div class="imgph">📷 <b>Espacio sugerido — Figuras diap. 32, 36, 37 y 38:</b> los seis esquemas de posición de chorro sobre Sudamérica (A–F) con las elipses grises del chorro y las zonas "D" de divergencia. Son croquis simples: conviene <b>redibujarlos a mano</b> sobre un mapa mudo de Sudamérica — el ejercicio de dibujarlos es en sí mismo la mejor preparación para el examen.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Dada una Alta de Bolivia bien desarrollada en enero, ubique la entrada y salida del chorro anticiclónico asociado e indique qué regiones de Sudamérica esperaría con precipitación por encima de lo normal.</div>
+</div>
+
+<div class="block s2">
+  <span class="bh b-pink">TSM, El Niño y la intensificación del chorro subtropical (Diap. 39–43)</span>
+  <div class="def pk">
+    La cadena causal que conecta el <b>océano</b> con la <b>alta tropósfera</b> es una de las ideas más rentables del módulo para el <b>pronóstico estacional</b>: si se pueden pronosticar las <b>anomalías de TSM</b>, se pueden pronosticar dorsales y vaguadas, y con ellas el <b>rango de posiciones probables de los chorros</b> a escala de meses.
+  </div>
+  <div class="flow">
+    <span class="fbox">Calentamiento del Pacífico (El Niño)</span><span class="farrow">→</span>
+    <span class="fbox">Convección profunda + calor latente</span><span class="farrow">→</span>
+    <span class="fbox">La tropósfera se calienta y se "infla"</span><span class="farrow">→</span>
+    <span class="fbox">Se fortalecen dorsales de altura entre 5° y 20°</span><span class="farrow">→</span>
+    <span class="fbox">Gradiente de geopotencial en 20°–30°</span><span class="farrow">→</span>
+    <span class="fbox">Chorros subtropicales acelerados</span>
+  </div>
+  <div class="item"><span class="dot pk"></span><span><b>Paso 1 — inflado térmico.</b> Al calentarse el Pacífico se calienta la tropósfera; si además hay <b>convección profunda</b> sobre el área cálida, el <b>calor latente</b> liberado por las tormentas la calienta aún más. Una columna más cálida es una columna <b>más gruesa</b>: sube el geopotencial en altura.</span></div>
+  <div class="item"><span class="dot pk"></span><span><b>Paso 2 — geostrofía.</b> Ese abultamiento fortalece las dorsales de altura entre <b>5° y 20°</b> de latitud y crea un <b>gradiente de geopotencial en 20°–30°</b>, en cuya periferia el viento geostrófico se acelera: <b>chorro subtropical intensificado</b>.</span></div>
+  <div class="item"><span class="dot o"></span><span><b>Evidencia del PDF:</b> anomalías de geopotencial en 200/250 hPa de <b>marzo de 1983</b> y <b>marzo de 1998</b> (los dos Niños extraordinarios). En ambos se intensificaron los chorros subtropicales; por ser marzo, los gradientes fueron <b>más intensos en el hemisferio norte</b>, que estaba en invierno — con un gradiente extremo en el <b>norte de México</b>.</span></div>
+  <div class="hemi">
+    <div class="hem-s"><p class="hem-label">🌏 Impactos en el Hemisferio Sur</p>Chorro subtropical más intenso → tiempo estimulado en <b>centro y norte de Chile y Argentina, Paraguay, Uruguay y sur de Brasil</b>; ocasionalmente <b>Perú, Bolivia y centro/sureste de Brasil</b>. En <b>invierno</b>: precipitación frontal intensificada en el centro y sur de <b>Chile, entre Puerto Montt y La Serena</b>. En <b>primavera y verano</b>, con masas más inestables: lluvias intensas y <b>tiempo severo</b> en el noreste de Argentina, Uruguay, Paraguay y sur de Brasil. Ejemplo documentado: primavera 1997–verano 1998, lluvias por encima de lo normal en <b>Paraguay, Misiones y sur de Brasil</b> con el chorro acelerado a través del centro de Chile y centro-norte de Argentina hasta Uruguay.</div>
+    <div class="hem-n"><p class="hem-label">🌎 Impactos en el Hemisferio Norte</p>Regiones más sensibles: <b>todo México, el Golfo de México, el noroeste del Caribe y Centroamérica</b>. Efecto típico: <b>mayor precipitación en invierno</b> por activación de <b>frentes y ondas baroclínicas</b> y sus ciclones extratropicales asociados. Precipitaciones frontales invernales intensificadas en estados del <b>Golfo de México y Golfo de Honduras</b> (afecta a Guatemala, México, Belice y Honduras); en algunos casos <b>líneas de cortante prefrontales</b> estimulan lluvia en la costa sur del Caribe centroamericano. También se observó exceso de lluvia desde el norte de Centroamérica, Yucatán, hasta <b>Cuba y Florida</b> en 1997-98.</div>
+  </div>
+  <div class="dual">
+    <div class="dual-tech">
+      <p class="dual-label">🎓 Para meteorólogos</p>
+      <p>El forzamiento diabático tropical (calor latente en la ZCIT del Pacífico central-oriental) genera una respuesta tipo Gill con anticiclones gemelos en altura; el aumento del espesor 1000–200 hPa eleva el geopotencial en la banda 5°–20°, intensificando el gradiente meridional de Φ en 20°–30° y, por balance geostrófico, el jet subtropical. La respuesta se propaga a extratrópicos como tren de ondas de Rossby (PSA en el HS, PNA en el HN).</p>
+    </div>
+    <div class="dual-plain">
+      <p class="dual-label">🗣️ Para no meteorólogos</p>
+      <p>Cuando el mar del Pacífico se calienta, el aire encima se calienta y se hincha, como un globo o como el pan que leva. Ese bulto de aire empuja al río de viento que corre a su alrededor y lo hace más rápido. Ese río más rápido pasa por encima de Chile, Argentina y el sur de Brasil, y por donde pasa deja más tormentas. Lo mismo ocurre en el norte, sobre México y el Caribe.</p>
+    </div>
+  </div>
+  <div class="warn">⚠️ <b>ERROR COMÚN (muy peruano):</b> asumir que "El Niño = lluvias en todo el Perú por el chorro". El mecanismo descrito aquí intensifica el chorro <b>subtropical</b> y estimula el tiempo principalmente en <b>latitudes subtropicales</b>; las lluvias extremas de la <b>costa norte del Perú</b> responden principalmente al <b>calentamiento costero del mar</b> (El Niño costero, evaluado por el <b>ENFEN</b> con el índice ICEN) y a la convección local, que son procesos distintos aunque relacionados.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Describa paso a paso el encadenamiento físico que va del calentamiento del Pacífico durante El Niño a la intensificación de los chorros subtropicales, y explique por qué en marzo la señal fue más fuerte en el hemisferio norte que en el sur.</div>
+</div>
+
+<div class="block">
+  <span class="bh b-gray">TSM como predictor de la posición del chorro (Diap. 40)</span>
+  <div class="item"><span class="dot gr"></span><span>Los <b>calentamientos superficiales</b> estimulan el desarrollo o la intensificación de <b>dorsales de altura sobre ellos</b>. Estas dorsales <b>incrementan el gradiente de geopotencial en su periferia</b> → <b>aceleración de los vientos</b>.</span></div>
+  <div class="item"><span class="dot gr"></span><span><b>Caso documentado:</b> el calentamiento del mar de <b>febrero de 2017</b> favoreció una <b>dorsal en 250 hPa</b> sobre esa zona y con ella la <b>intensificación del chorro subtropical al sur de Chile</b>.</span></div>
+  <div class="item"><span class="dot o"></span><span><b>Mensaje operativo:</b> si las anomalías de TSM permiten pronosticar la <b>posición de vaguadas y dorsales</b>, permiten acotar el <b>rango de posiciones potenciales del chorro</b>. El <b>análisis de ondas troposféricas</b> (Rossby, Kelvin, MJO) es igualmente importante.</span></div>
+  <div class="exam"><b>🎯 EXAMEN: </b>¿Cómo se usa un campo de anomalías de TSM para acotar la posición probable de una corriente en chorro en un pronóstico estacional? Explique el encadenamiento TSM → dorsal → gradiente → viento.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh b-blue">☯️ Hemisferio Norte vs. Hemisferio Sur — todo lo que se invierte (y lo que no)</span>
+  <div class="def">
+    Este bloque no está explícito en el PDF pero es imprescindible: la bibliografía dominante (NWS, AMS, Ahrens, Wallace &amp; Hobbs) está escrita para el hemisferio norte, y el examen puede evaluar exactamente esta traducción.
+  </div>
+  <div class="tblwrap">
+  <table class="tbl">
+    <tr><th>Aspecto</th><th>Hemisferio Norte</th><th>Hemisferio Sur (Sudamérica)</th><th>¿Se invierte?</th></tr>
+    <tr><td>Parámetro de Coriolis f = 2Ω·senφ</td><td>f &gt; 0</td><td>f &lt; 0</td><td>✅ Sí (raíz de todo lo demás)</td></tr>
+    <tr><td>Desviación por Coriolis</td><td>A la derecha del movimiento</td><td>A la izquierda del movimiento</td><td>✅ Sí</td></tr>
+    <tr><td>Dirección media del chorro</td><td>Del oeste</td><td>Del oeste</td><td>❌ No — el ecuador es cálido en ambos</td></tr>
+    <tr><td>Divergencia en jet streak recto</td><td>Entrada derecha y salida izquierda</td><td>Entrada <b>izquierda</b> y salida <b>derecha</b></td><td>✅ Sí (la etiqueta), ❌ no (la física: siempre entrada ecuatorial y salida polar)</td></tr>
+    <tr><td>Circulación en la entrada / salida</td><td>Directa / indirecta</td><td>Directa / indirecta</td><td>❌ No</td></tr>
+    <tr><td>Nombres de los tres chorros</td><td>Subtropical, polar, <b>ártico</b></td><td>Subtropical, <b>polar norte (PN)</b>, <b>polar sur o antártico (PS)</b></td><td>Solo la nomenclatura</td></tr>
+    <tr><td>Flanco frío del chorro</td><td>Hacia el norte</td><td>Hacia el sur</td><td>✅ Sí (es el lado polar en cada caso)</td></tr>
+    <tr><td>Vorticidad ciclónica</td><td>Antihoraria (ζ &gt; 0)</td><td>Horaria (ζ &lt; 0 en convención estándar)</td><td>✅ Sí</td></tr>
+    <tr><td>Estación de máxima intensidad</td><td>Invierno boreal (DEF)</td><td>Invierno austral (JJA)</td><td>✅ Sí (desfase de 6 meses)</td></tr>
+    <tr><td>Continuidad del cinturón de oestes</td><td>Más ondulado (Rockies, Himalaya, contrastes continente-océano)</td><td>Más zonal y continuo (dominio oceánico), salvo por la barrera andina</td><td>Diferencia estructural, no inversión</td></tr>
+    <tr><td>Vaguada que favorece acoplamiento</td><td>Inclinación negativa: parte tropical (sur) adelantada</td><td>Inclinación negativa: parte tropical (<b>norte</b>) adelantada</td><td>Espejo del mismo concepto</td></tr>
+  </table>
+  </div>
+  <div class="warn">⚠️ <b>ERROR COMÚN:</b> "todo se invierte en el hemisferio sur". No: <b>solo se invierte lo que depende del signo de f y de dónde está el polo</b>. El sentido oeste→este del chorro, el carácter directo/indirecto de las circulaciones y la relación divergencia→ascenso <b>son idénticos</b> en ambos hemisferios.</div>
+  <div class="exam"><b>🎯 EXAMEN: </b>Un texto estadounidense afirma: "la divergencia se localiza en la entrada derecha y la salida izquierda del jet streak". Reescriba correctamente el enunciado para un pronosticador en Lima y explique qué principio físico permanece invariante entre ambas formulaciones.</div>
+</div>
+
+<div class="block s3">
+  <span class="bh b-petrol">🏛️ Quién define y quién opera: el marco institucional del tema</span>
+  <div class="three">
+    <div class="mini mt-pe"><b>OMM / WMO</b>Organismo especializado de la ONU. <b>Es quien manda</b> en materia de definiciones, estándares de observación (Vol. I del Reglamento Técnico), nomenclatura y el Marco Mundial para los Servicios Climáticos (GFCS, cuyo logo aparece en la portada del módulo). La definición de corriente en chorro usada en la diap. 3 es la suya.</div>
+    <div class="mini mt-pe"><b>OACI / ICAO</b>Organización de Aviación Civil Internacional. Define umbrales <b>operativos para la aviación</b> (70 kt / núcleo 90 kt) y regula la emisión de cartas de tiempo significativo. Su definición <b>no reemplaza</b> a la de la OMM: coexiste con otro propósito.</div>
+    <div class="mini mt-pe"><b>SENAMHI (Perú)</b>Servicio meteorológico nacional; miembro de la OMM. Autor institucional del módulo. Emite pronósticos, avisos y boletines climáticos nacionales y participa del <b>ENFEN</b>.</div>
+    <div class="mini mt-pe"><b>NOAA / NWS / WPC</b>Los <b>WPC International Desks</b> (NCEP/NOAA) son la fuente principal de las figuras y los modelos conceptuales del módulo, y capacitan a pronosticadores de América Latina. Proveen también el modelo <b>GFS</b> usado en casi todas las figuras.</div>
+    <div class="mini mt-pe"><b>CPTEC/INPE (Brasil)</b>Centro regional de previsión de tiempo y estudios climáticos; socio del curso y referencia sinóptica para Sudamérica.</div>
+    <div class="mini mt-pe"><b>ENFEN / IGP (Perú)</b><b>ENFEN</b>: comité multisectorial oficial que declara los estados de alerta de El Niño/La Niña costero (índice ICEN). <b>IGP</b>: investigación científica sobre El Niño y la atmósfera.</div>
+  </div>
+  <div class="item"><span class="dot pe"></span><span><b>Climandes</b> fue un proyecto de cooperación entre <b>SENAMHI y MeteoSwiss</b>, financiado por la <b>COSUDE</b> (Agencia Suiza para el Desarrollo), dentro del <b>GFCS de la OMM</b>: por eso los logos suizos, de la OMM y del GFCS conviven en la portada del módulo.</span></div>
+  <div class="exam"><b>🎯 EXAMEN: </b>La OMM y la OACI definen la corriente en chorro con umbrales distintos. Explique por qué dos organismos internacionales sostienen definiciones diferentes del mismo fenómeno sin que ello constituya una contradicción científica.</div>
+</div>
+
+<div class="secbar sb-d">⚫ TABLA INTEGRADORA — REPASO RÁPIDO ANTES DEL EXAMEN</div>
+
+<div class="block s3">
+  <span class="bh b-gray">Todos los conceptos del tema en una sola vista</span>
+  <div class="tblwrap">
+  <table class="tbl">
+    <tr><th>Fenómeno / concepto</th><th>Escala espacial</th><th>Escala temporal</th><th>Variable clave</th><th>Nivel de análisis</th><th>Herramienta / instrumento</th><th>Efecto en Sudamérica</th></tr>
+    <tr><td><b>Chorro subtropical (SJ)</b></td><td>Planetaria (10 000 km); ancho 100–500 km</td><td>Semanas a estacional</td><td>Isotacas; θ = 340–360 K; Φ ≥ 10 560 mgp</td><td>200 hPa o superior</td><td>Modelo GFS, reanálisis NCEP/NCAR, radiosondeo</td><td>Lluvias en Altiplano, Paraguay, NE Argentina, S Brasil; se acelera con El Niño</td></tr>
+    <tr><td><b>Chorro polar / polar norte (PN)</b></td><td>Sinóptica–planetaria</td><td>Días a semanas</td><td>θ = 325–340 K; Φ = 10 200–10 400 mgp; frente en superficie</td><td>250 hPa</td><td>GFS, cartas WPC, satélite RGB de masas de aire</td><td>Cinturón de ciclones extratropicales y frentes; lluvias en Chile centro-sur</td></tr>
+    <tr><td><b>Chorro polar sur / antártico (PS)</b></td><td>Sinóptica</td><td>Días</td><td>θ = 310–325 K; separa masa polar de antártica</td><td>300 hPa o inferior</td><td>GFS, vorticidad potencial, canal de ozono</td><td>Irrupciones frías, friajes, heladas altoandinas</td></tr>
+    <tr><td><b>Jet streak (núcleo máximo)</b></td><td>Mesoescala–sinóptica (300–1 500 km)</td><td>Horas a días</td><td>Máximo de isotacas; viento ageostrófico</td><td>250–200 hPa</td><td>Isotacas GFS; divergencia en capa 400–200 hPa</td><td>Organiza dónde se produce la lluvia dentro del chorro</td></tr>
+    <tr><td><b>Divergencia cruzada</b></td><td>Sinóptica</td><td>12–48 h</td><td>∇·V (10⁻⁵ s⁻¹)</td><td>250 hPa (400–200 hPa en capa)</td><td>Campo de divergencia del modelo</td><td>HS: DIV en entrada izquierda y salida derecha</td></tr>
+    <tr><td><b>Circulación transversal directa (entrada)</b></td><td>Sinóptica (corte vertical)</td><td>Horas a días</td><td>Baroclinicidad ↓; ω &lt; 0 lado cálido</td><td>1000–200 hPa</td><td>Corte transversal θ + flechas ageostróficas</td><td>Convección en la entrada izquierda; frontólisis</td></tr>
+    <tr><td><b>Circulación transversal indirecta (salida)</b></td><td>Sinóptica (corte vertical)</td><td>Horas a días</td><td>Baroclinicidad ↑; ω &lt; 0 lado frío</td><td>1000–200 hPa</td><td>Vapor de agua satelital; corte θ</td><td>Tormentas en Patagonia, La Pampa, S Buenos Aires</td></tr>
+    <tr><td><b>Acoplamiento de chorros</b></td><td>Sinóptica (dos chorros)</td><td>1–3 días</td><td>Superposición de regiones divergentes</td><td>250 hPa</td><td>Isotacas + divergencia 400–200 hPa</td><td>Ciclogénesis explosiva y <b>sudestada</b> en el Río de la Plata</td></tr>
+    <tr><td><b>Efecto de los Andes</b></td><td>Regional (cordillera)</td><td>Horas a días</td><td>Aceleración por conservación de masa</td><td><b>500–300 hPa</b> (no 200)</td><td>Sección vertical oeste–este; isotacas + divergencia</td><td>Lluvia en cordillera y Chile; subsidencia y turbulencia al este</td></tr>
+    <tr><td><b>Propagación del máximo</b></td><td>Sinóptica</td><td>Días</td><td>Frontólisis atrás / frontogénesis adelante</td><td>250 hPa</td><td>Secuencia temporal de isotacas</td><td>Corrige el timing del pronóstico de lluvia</td></tr>
+    <tr><td><b>TSM → dorsal → chorro (El Niño)</b></td><td>Planetaria (cuenca del Pacífico)</td><td>Meses a estacional</td><td>Anomalía de TSM; espesor y Φ en 250 hPa</td><td>Superficie del mar + 250/200 hPa</td><td>OISST (NOAA), reanálisis, ENFEN/IGP</td><td>SJ acelerado → lluvias en Chile, Argentina, Paraguay, Uruguay, S Brasil</td></tr>
+  </table>
+  </div>
+  <div class="warn">🔑 <b>DATO INTEGRADOR CLAVE:</b> todo el tema se reduce a una sola cadena — <b>gradiente térmico → viento térmico → chorro → jet streak → divergencia cruzada → circulación transversal → movimiento vertical → tiempo y clima</b>. Si en el examen te bloqueas, recorre esa cadena desde el principio: cada pregunta del tema es un eslabón de ella. Y verifica siempre en qué <b>hemisferio</b> y sobre qué <b>orografía</b> estás parado.</div>
+</div>
+
+<div id="quiz-section">
+  <div class="qhead">
+    <h2>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</h2>
+    <p>Marca tu respuesta y descubre si es correcta</p>
+  </div>
+  <div class="qprog">
+    <span id="qcount">Pregunta 0 de 10</span>
+    <span class="bar"><span class="stat-bar-wrap"><span class="stat-bar-fill" id="qbar" style="width:0%"></span></span></span>
+    <span id="qscore">0 % de aciertos</span>
+  </div>
+  <div id="qlist"></div>
+  <div id="qresult" style="display:none"></div>
+  <button id="qreset" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+</div>
+
+<div class="block s3" id="refs-institucionales">
+  <span class="bh b-petrol">🔗 Para profundizar — fuentes institucionales</span>
+  <p style="font-size:11.5px;color:var(--color-text-secondary);margin:0 0 8px;line-height:1.5">Solo las fuentes realmente relevantes a este tema. Las URLs corresponden a portales institucionales estables, pero <b>no puedo verificar su vigencia en este momento</b>: si alguna no carga, busca la institución por su nombre. <i>(verificar vigencia)</i></p>
+  <div class="three">
+    <div class="mini mt-pe"><b>🔗 OMM / WMO — wmo.int</b><a href="https://wmo.int">https://wmo.int</a><br>De dónde sale la definición oficial de corriente en chorro usada en la diap. 3 y los estándares de unidades y niveles. <i>Tipo: normativa e informes.</i></div>
+    <div class="mini mt-pe"><b>🔗 COMET / MetEd (UCAR) — meted.ucar.edu</b><a href="https://www.meted.ucar.edu/norlat/jetstreaks/">Módulo "Jet Streaks"</a> (citado en diap. 3, 14 y 17)<br>El curso gratuito que desarrolla el modelo de los cuatro cuadrantes paso a paso, con animaciones. <i>Tipo: curso con certificación, en español e inglés.</i></div>
+    <div class="mini mt-pe"><b>🔗 WPC International Desks (NOAA/NCEP)</b><a href="https://www.wpc.ncep.noaa.gov/international/">wpc.ncep.noaa.gov/international</a><br>Fuente directa de casi todas las figuras y modelos conceptuales del módulo, incluido el trabajo de Romero (2015) para Chile. <i>Tipo: presentaciones y cartas operativas.</i></div>
+    <div class="mini mt-pe"><b>🔗 NWS JetStream — weather.gov</b><a href="https://www.weather.gov/jetstream/">weather.gov/jetstream</a><br>Glosario y escuela en línea del NWS; incluye la página sobre impactos de ENSO citada en la diap. 41. <i>Tipo: glosario y material didáctico.</i></div>
+    <div class="mini mt-pe"><b>🔗 SENAMHI Perú</b><a href="https://www.senamhi.gob.pe">senamhi.gob.pe</a><br>Autor del módulo. Boletines climáticos, avisos meteorológicos y datos históricos nacionales para contrastar los conceptos con casos peruanos. <i>Tipo: datos y boletines.</i></div>
+    <div class="mini mt-pe"><b>🔗 ENFEN — gob.pe/enfen</b><a href="https://www.gob.pe/enfen">gob.pe/enfen</a><br>Comunicados oficiales sobre El Niño/La Niña costero (índice ICEN), imprescindibles para el bloque de chorros y El Niño. <i>Tipo: informes técnicos oficiales.</i></div>
+    <div class="mini mt-pe"><b>🔗 IGP — gob.pe/igp</b><a href="https://www.gob.pe/igp">gob.pe/igp</a><br>Investigación peruana sobre El Niño y dinámica atmosférica; boletines técnicos ENFEN-IGP. <i>Tipo: investigación.</i></div>
+    <div class="mini mt-pe"><b>🔗 NOAA PSL (ex ESRL) — psl.noaa.gov</b><a href="https://psl.noaa.gov/">psl.noaa.gov</a><br>Generador de composiciones y anomalías del reanálisis NCEP/NCAR: es la herramienta con la que se hicieron las figuras de 1983, 1998 y 2017 del módulo. <i>Tipo: datos y gráficos on-line.</i></div>
+    <div class="mini mt-pe"><b>🔗 earth.nullschool.net</b><a href="https://earth.nullschool.net">earth.nullschool.net</a><br>Visualización en vivo del viento en 250 hPa: la forma más rápida de <b>ver</b> los chorros hoy y practicar identificación. <i>Tipo: visor operativo (también windy.com).</i></div>
+    <div class="mini mt-pe"><b>🔗 AMS Glossary of Meteorology</b><a href="https://glossary.ametsoc.org/">glossary.ametsoc.org</a><br>Definiciones formales de jet stream, jet streak, baroclinicity, frontogenesis y vorticidad potencial. <i>Tipo: glosario académico de referencia.</i></div>
+    <div class="mini mt-pe"><b>🔗 Universidad de Wyoming — sondeos</b><a href="https://weather.uwyo.edu/upperair/sounding.html">weather.uwyo.edu/upperair</a><br>Radiosondeos reales de estaciones sudamericanas para verificar cizalladura vertical y niveles del chorro. <i>Tipo: datos observacionales.</i></div>
+    <div class="mini mt-pe"><b>🔗 CPTEC/INPE (Brasil)</b><a href="https://www.cptec.inpe.br/">cptec.inpe.br</a><br>Análisis sinópticos y productos satelitales del sector sudamericano; socio del curso. <i>Tipo: productos operativos regionales.</i></div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="ft">REFERENCIAS DEL PDF:</span>
+  <span class="fc">Quispe Gutiérrez, N. y Gálvez Chavarri, J. M. — <i>Módulo 1: Climatología sinóptica de Sudamérica, Tema 1.3: Corrientes en chorro de la tropósfera alta</i>, Curso de Pronóstico Climático Estacional, SENAMHI–Climandes (con E. Villegas Paredes, T. García Vilca y E. Yacolca Arévalo). · WPC International Desks Presentations (NOAA/NCEP) — fuente principal de figuras y modelos conceptuales. · COMET–MetEd (UCAR): "Jet Streaks". · Encyclopaedia Britannica (fuentes de energía). · NOAA/ESRL–PSL, NOAA NVVL, NCEP/NCAR Reanalysis, OISST. · Universidad de Wisconsin (CIMSS) y satélite Himawari. · earth.nullschool.net. · Romero, D. (DMC Chile / WPC International Desks, 2015). · Definiciones: OMM y OACI.</span>
+</div>
+
+</div>
+
+<script>
+const QUIZ=[
+{q:"Según la definición de la OMM adoptada en el módulo, ¿qué dos criterios definen una corriente en chorro de la alta tropósfera?",
+ o:["Vientos superiores a 100 kt y núcleo situado exactamente en la tropopausa",
+    "Vientos del oeste en 500 hPa y presencia de un frente en superficie",
+    "Vientos fuertes (&gt;60 kt) en una banda estrecha y fuerte cizalladura vertical (&gt;10–20 kt/km)",
+    "Vientos de más de 70 kt con núcleo máximo mayor a 90 kt"],
+ c:2,
+ e:"La OMM define el chorro por la combinación de intensidad (&gt;60 kt) y, sobre todo, por la fuerte cizalladura vertical (&gt;10–20 kt/km) en la alta tropósfera o estratósfera. La opción D es la definición de la OACI, más restrictiva y pensada como apoyo a la aviación; ambas coexisten con propósitos distintos."},
+{q:"En el hemisferio sur, para un máximo de chorro en flujo recto, ¿dónde se ubican los máximos de divergencia en altura?",
+ o:["En la entrada izquierda (lado tropical) y en la salida derecha (lado polar)",
+    "En la entrada derecha y en la salida izquierda",
+    "En el centro del núcleo de vientos máximos",
+    "Solo en la salida, porque la entrada siempre es convergente"],
+ c:0,
+ e:"En el HS la dinámica sitúa la divergencia en la entrada izquierda —la que apunta hacia el trópico— y en la salida derecha —la que apunta hacia el polo—; los cuadrantes opuestos son convergentes. La opción B es el esquema del hemisferio norte: la física es la misma (divergencia en la entrada ecuatorial y la salida polar), lo que cambia es la etiqueta izquierda/derecha porque cambia el signo de f."},
+{q:"¿Cuál es la fuente de energía principal de los chorros polares?",
+ o:["La liberación de calor latente en las tormentas del frente polar",
+    "La fricción con la superficie terrestre en latitudes altas",
+    "La conservación del momento angular del flujo que sale de los anticiclones subtropicales",
+    "La intensidad del gradiente horizontal de temperatura de la tropósfera"],
+ c:3,
+ e:"Los chorros polares se alimentan del gradiente térmico horizontal: cuanto más apretado el gradiente, más intenso el chorro, según la relación del viento térmico. La conservación del momento angular (opción C) contribuye en parte a los chorros SUBTROPICALES, junto con el gradiente térmico de la tropósfera media y alta."},
+{q:"¿Cuál de las siguientes afirmaciones sobre el chorro subtropical es FALSA?",
+ o:["Su núcleo suele ubicarse en 200 hPa o por encima",
+    "Se asocia a un frente en superficie con gradiente térmico intenso en la tropósfera baja",
+    "Se le asocian temperaturas potenciales de 340–360 K",
+    "Suele ser más débil que los chorros polares"],
+ c:1,
+ e:"Es falsa: el chorro subtropical NO se asocia a un gradiente en la tropósfera baja; sus gradientes se definen mejor en la tropósfera media y alta, y por eso no tiene frente en superficie. Sí lo tienen los chorros polares. Aun así, el aire frío en tropósfera media bajo el subtropical puede generar inestabilidad convectiva en su flanco polar."},
+{q:"En la región de ENTRADA de un máximo de chorro se desarrolla una circulación transversal. ¿Cuál es su naturaleza y su consecuencia?",
+ o:["Directa: asciende el aire cálido y desciende el frío; disminuye la baroclinicidad → frontólisis y debilitamiento del chorro",
+    "Indirecta: asciende el aire frío y desciende el cálido; aumenta la baroclinicidad → ciclogénesis",
+    "Directa: asciende el aire frío; aumenta la baroclinicidad → frontogénesis",
+    "No se desarrolla circulación transversal en la entrada, solo en la salida"],
+ c:0,
+ e:"En la entrada la circulación es térmicamente DIRECTA: el aire cálido asciende y el frío desciende, tal como ocurriría de forma espontánea. Al hacerlo tiende a restaurar el equilibrio, afloja el gradiente térmico (frontólisis) y debilita el chorro. Aun así los ascensos del lado cálido favorecen convección y precipitación. La opción B describe la SALIDA."},
+{q:"¿Por qué los máximos de chorro se propagan flujo abajo, además de ser advectados por la corriente del oeste?",
+ o:["Porque la rotación de la Tierra los empuja hacia el este a la velocidad de rotación",
+    "Porque la fricción con la tropopausa frena la parte trasera del núcleo",
+    "Porque la frontólisis en la entrada debilita los vientos detrás mientras la frontogénesis en la salida los intensifica delante",
+    "Porque las intrusiones estratosféricas aportan momento hacia adelante"],
+ c:2,
+ e:"Las circulaciones transversales modifican la baroclinicidad de forma asimétrica: la entrada diluye el gradiente (vientos más débiles atrás) y la salida lo aprieta (vientos más fuertes adelante). El resultado neto es que el núcleo se corre flujo abajo por sí mismo, añadiendo una componente de propagación a la advección."},
+{q:"El acoplamiento de chorros más peligroso ocurre cuando:",
+ o:["Dos chorros se combinan en un único núcleo de vientos máximos",
+    "La salida divergente de un chorro se sobrepone con la entrada divergente de otro ubicado a latitudes mayores",
+    "Las regiones convergentes de dos chorros entran en fase sobre el océano",
+    "Un chorro del este se superpone a un chorro del oeste sobre la cordillera"],
+ c:1,
+ e:"El acoplamiento del lado divergente sobrepone dos regiones de divergencia, que se intensifican y expanden en área. Es el escenario de ciclogénesis explosiva, ascensos intensos y precipitación fuerte, favorecido por vaguadas de inclinación negativa. El acoplamiento convergente (opción C) intensifica la subsidencia; combinarse en un solo núcleo (opción A) es un rasgo de identificación, no un mecanismo dinámico."},
+{q:"Al analizar el efecto de los Andes sobre la divergencia asociada al chorro, ¿en qué capa debe evaluarse la señal?",
+ o:["En 100 hPa, sobre la tropopausa",
+    "En superficie, entre 1000 y 850 hPa",
+    "Únicamente en 200 hPa, como es práctica común",
+    "Entre 500 y 300 hPa, porque es allí donde el patrón se define mejor"],
+ c:3,
+ e:"Como los Andes alcanzan 600–500 hPa y la tropopausa actúa de techo cerca de 250 hPa, la aceleración forzada y su divergencia/convergencia asociadas se definen mejor entre 500 y 300 hPa. Analizar solo 200 hPa —práctica común— no permite cuantificar el proceso: la señal está por debajo de ese nivel."},
+{q:"¿Cuál es el encadenamiento físico correcto por el que El Niño intensifica los chorros subtropicales?",
+ o:["El calentamiento del mar enfría la estratósfera y baja la tropopausa, acelerando el viento",
+    "El calentamiento del mar aumenta la fricción superficial y transfiere momento a la alta tropósfera",
+    "El calentamiento y el calor latente de la convección inflan la tropósfera, fortalecen las dorsales entre 5° y 20°, y el gradiente de geopotencial resultante en 20°–30° acelera el chorro",
+    "El calentamiento desplaza la ZCIT al sur, lo que arrastra mecánicamente al chorro polar"],
+ c:2,
+ e:"La secuencia es: calentamiento del Pacífico + calor latente de la convección profunda → la columna troposférica se calienta y se expande → sube el geopotencial y se fortalecen las dorsales de altura entre 5° y 20° → aparece un gradiente de geopotencial entre 20° y 30° → por balance geostrófico los vientos se aceleran justo en la banda del chorro subtropical."},
+{q:"En el contexto sudamericano, un chorro zonal cruzando el continente en latitudes tropicales se asocia típicamente a:",
+ o:["Bloqueo del transporte de humedad al norte de 22°–28°S y patrón seco en Argentina y Uruguay",
+    "Ingreso libre de masas húmedas tropicales hacia Argentina y Uruguay",
+    "Nevadas garantizadas en el Altiplano peruano y boliviano",
+    "Ciclogénesis explosiva inmediata frente a las costas de Uruguay"],
+ c:0,
+ e:"El chorro zonal limita el transporte norte–sur por debajo de él: bloquea la humedad al norte de aproximadamente 22°–28°S, favorece un frente estacionario debajo y se asocia a un patrón seco en Argentina y Uruguay. La situación opuesta (opción B) corresponde justamente a la AUSENCIA de chorro cruzando el continente."}
+];
+const LET=["A","B","C","D"];
+let answered=0,correct=0;
+function buildQuiz(){
+ const list=document.getElementById("qlist");
+ list.innerHTML=QUIZ.map((q,i)=>`<div class="qcard" id="q${i}">
+   <p class="qnum">Pregunta ${i+1} / 10</p>
+   <p class="qtext">${q.q}</p>
+   <div class="qopts">${q.o.map((op,j)=>`<button class="qbtn" data-q="${i}" data-opt="${j}" data-correct="${j===q.c}">${LET[j]}) ${op}</button>`).join("")}</div>
+   <div class="qfeedback" id="fb${i}" style="display:none"></div>
+ </div>`).join("");
+}
+function updateProgress(){
+ document.getElementById("qcount").textContent=`Pregunta ${answered} de 10`;
+ const pct=answered?Math.round(correct/answered*100):0;
+ document.getElementById("qscore").textContent=`${pct} % de aciertos`;
+ document.getElementById("qbar").style.width=(answered*10)+"%";
+}
+function showResult(){
+ const box=document.getElementById("qresult");
+ box.style.display="block";
+ let cls,msg;
+ if(correct<=4){cls="res-low";msg="Necesitas repasar el material. Vuelve a la cadena: gradiente térmico → viento térmico → chorro → jet streak → divergencia cruzada → circulación transversal → movimiento vertical.";}
+ else if(correct<=7){cls="res-mid";msg="¡Buen avance, sigue repasando! Revisa sobre todo los bloques donde fallaste y presta atención al hemisferio en cada enunciado.";}
+ else{cls="res-hi";msg="¡Excelente dominio del tema! Ya puedes pasar a resolver las preguntas abiertas 🎯 EXAMEN de cada bloque, que es el formato de la evaluación escrita.";}
+ box.className=cls;
+ box.innerHTML=`<b>Resultado final: ${correct} / 10 correctas.</b><br>${msg}`;
+}
+function initEvents(){
+ document.getElementById("qlist").addEventListener("click",function(ev){
+  const b=ev.target.closest(".qbtn");
+  if(!b||b.classList.contains("dis"))return;
+  const qi=+b.dataset.q,q=QUIZ[qi],card=document.getElementById("q"+qi);
+  if(card.dataset.done)return;
+  card.dataset.done="1";
+  const ok=b.dataset.correct==="true";
+  card.querySelectorAll(".qbtn").forEach(btn=>{
+   const isC=btn.dataset.correct==="true";
+   if(isC){btn.classList.add("ok");btn.innerHTML="✅ "+btn.innerHTML;}
+   else if(btn===b){btn.classList.add("bad");btn.innerHTML="❌ "+btn.innerHTML;}
+   btn.classList.add("dis");
+  });
+  const fb=document.getElementById("fb"+qi);
+  fb.style.display="block";
+  fb.className="qfeedback "+(ok?"fb-ok":"fb-bad");
+  fb.innerHTML=(ok?"✅ <b>¡Correcto!</b> ":`❌ <b>Incorrecto. La respuesta correcta es ${LET[q.c]}.</b> `)+q.e;
+  answered++;if(ok)correct++;
+  updateProgress();
+  if(answered===10)showResult();
+ });
+}
+function resetQuiz(){
+ answered=0;correct=0;
+ buildQuiz();
+ document.getElementById("qresult").style.display="none";
+ updateProgress();
+}
+buildQuiz();initEvents();updateProgress();
+</script>
+</body>
+</html>
