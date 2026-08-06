@@ -1,0 +1,857 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+.cv{--bl-b:#dbeafe;--bl-f:#1e3a8a;--gr-b:#dcfce7;--gr-f:#14532d;--rd-b:#fee2e2;--rd-f:#991b1b;--yl-b:#fef9c3;--yl-f:#713f12;--pu-b:#ede9fe;--pu-f:#4c1d95;--tl-b:#ccfbf1;--tl-f:#134e4a;--or-b:#ffedd5;--or-f:#7c2d12;--gy-b:#f1f5f9;--gy-f:#334155;--pk-b:#fce7f3;--pk-f:#831843;--pt-b:#e0f2fe;--pt-f:#0c4a6e;display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--surface-0);border-radius:14px;font-family:'Source Sans 3',var(--font-sans);color:var(--text-primary);line-height:1.5}
+@media(prefers-color-scheme:dark){.cv{--bl-b:#1e3a5f;--bl-f:#93c5fd;--gr-b:#14532d;--gr-f:#86efac;--rd-b:#450a0a;--rd-f:#fca5a5;--yl-b:#422006;--yl-f:#fef08a;--pu-b:#2e1065;--pu-f:#c4b5fd;--tl-b:#042f2e;--tl-f:#5eead4;--or-b:#431407;--or-f:#fed7aa;--gy-b:#1e293b;--gy-f:#94a3b8;--pk-b:#4a044e;--pk-f:#f0abfc;--pt-b:#082f49;--pt-f:#7dd3fc}}
+@media(max-width:640px){.cv{grid-template-columns:1fr}.cv .s2,.cv .s3{grid-column:auto}.cv .dual{grid-template-columns:1fr}}
+.cv .tbar{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:12px;padding:13px 16px}
+.cv .tbar h1{font-family:Oswald;font-size:20px;font-weight:700;margin:0;color:#fff;line-height:1.25}
+.cv .tbar p{font-size:11px;margin:4px 0 0;color:#b8cbe0}
+.cv .sbar{grid-column:1/-1;font-family:Oswald;font-size:13px;font-weight:700;padding:6px 11px;border-radius:8px;margin-top:4px}
+.cv .block{background:var(--surface-2);border:0.5px solid var(--border);border-radius:11px;padding:12px 13px}
+.cv .s2{grid-column:span 2}.cv .s3{grid-column:1/-1}
+.cv .bh{font-family:Oswald;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.4px}
+.cv .def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--surface-1);margin-bottom:8px}
+.cv .item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:6px}
+.cv .dot{width:6px;height:6px;border-radius:50%;margin-top:6px;flex:none}
+.cv .rx{background:#0f172a;color:#7dd3fc;font-family:var(--font-mono);font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.7;margin:6px 0 3px;overflow-x:auto}
+.cv .rx-note{font-size:11px;color:var(--text-secondary);margin:0 0 8px}
+.cv .warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:8px 0 0}
+.cv .exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:7px 10px;margin-top:9px}
+.cv .exam b{font-weight:600}
+.cv .mini{background:var(--surface-1);border-radius:8px;padding:8px 10px;font-size:11.5px;border-top:3px solid}
+.cv .mini b{display:block;margin-bottom:3px;font-weight:600}
+.cv .two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.cv .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.cv .flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:6px 0}
+.cv .fbox{background:var(--surface-1);padding:5px 9px;border-radius:7px;font-size:11px;border:0.5px solid var(--border)}
+.cv .farrow{color:var(--text-secondary);font-size:15px}
+.cv .pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.cv .sbw{width:100%;background:var(--surface-1);border-radius:20px;height:11px;overflow:hidden;margin:3px 0 7px}
+.cv .sbf{height:100%;border-radius:20px}
+.cv table.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.cv .tbl th{background:var(--surface-1);padding:5px 7px;border-bottom:0.5px solid var(--border);text-align:left;font-weight:600}
+.cv .tbl td{padding:5px 7px;border-bottom:0.5px solid var(--border);vertical-align:top}
+.cv .divh{border:none;border-top:0.5px solid var(--border);margin:8px 0}
+.cv .dual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.cv .dual-tech{background:var(--pt-b);color:var(--pt-f);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.cv .dual-plain{background:var(--gr-b);color:var(--gr-f);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.cv .dual-label{font-family:Oswald;font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 4px;opacity:.85}
+.cv .dual p{margin:0}
+.cv .imgslot{border:1.5px dashed var(--border-strong);border-radius:9px;padding:10px;font-size:11px;color:var(--text-secondary);text-align:center;margin:8px 0;background:var(--surface-1)}
+.cv .imgslot b{color:var(--text-primary);font-weight:600}
+.cv h4{font-family:Oswald;font-size:12px;margin:10px 0 5px;font-weight:500}
+.cv .qcard{border:0.5px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:9px;background:var(--surface-1)}
+.cv .qnum{font-family:Oswald;font-size:10px;text-transform:uppercase;color:var(--text-secondary);margin:0 0 4px;letter-spacing:.5px}
+.cv .qtext{font-size:12.5px;margin:0 0 8px;font-weight:600}
+.cv .qbtn{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--text-primary);font-family:inherit;display:block}
+.cv .qbtn:hover{border-color:var(--border-strong)}
+.cv .qbtn.ok{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.cv .qbtn.bad{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.cv .qopts.done .qbtn{opacity:.65;cursor:not-allowed;pointer-events:none}
+.cv .qopts.done .qbtn.ok{opacity:1}
+.cv .qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px}
+.cv .fb-ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.cv .fb-bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.cv .ftr{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
+.cv .ft{font-family:Oswald;font-size:12px;color:#7dd3fc}
+.cv .fc{font-size:11px;color:#94a3b8}
+</style>
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Canvas visual de resumen del Estudio Hidrológico de la Cuenca del Río Rímac (ANA, 2010), con conceptos explicados en dos niveles, fórmulas, diagramas y un quiz de diez preguntas.</h2>
+<div class="cv">
+
+<div class="tbar">
+<h1>🌊 ESTUDIO HIDROLÓGICO DE LA CUENCA DEL RÍO RÍMAC — Volumen I (ANA, 2010)</h1>
+<p>Evaluación de los Recursos Hídricos · Autoridad Nacional del Agua – DCPRH – ALA Chillón Rímac Lurín · Lima, diciembre 2010 · 226 pp.</p>
+<div style="margin-top:7px">
+<span class="pill" style="background:#1e3a5f;color:#93c5fd">Geomorfología</span>
+<span class="pill" style="background:#042f2e;color:#5eead4">Climatología</span>
+<span class="pill" style="background:#2e1065;color:#c4b5fd">Pluviometría</span>
+<span class="pill" style="background:#082f49;color:#7dd3fc">Hidrometría</span>
+<span class="pill" style="background:#422006;color:#fef08a">Modelación</span>
+<span class="pill" style="background:#4a044e;color:#f0abfc">Balance hídrico</span>
+<span class="pill" style="background:#450a0a;color:#fca5a5">Avenidas y sequías</span>
+</div>
+</div>
+
+<div class="sbar" style="background:var(--bl-b);color:var(--bl-f)">🔵 BLOQUE I — MARCO INSTITUCIONAL, OBJETIVOS Y METODOLOGÍA (Cap. I, pp. 7–14)</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--bl-b);color:var(--bl-f)">Qué es un estudio hidrológico de cuenca (Cap. I)</span>
+<div class="def" style="border-color:#1e3a8a">No es un inventario de datos: es la <b>caracterización cuantitativa del funcionamiento de una cuenca como sistema</b>, desde la entrada (precipitación) hasta la salida (caudal en un punto de control), para poder decidir cuánta agua hay, cuándo la hay y cuánta se puede comprometer legalmente.</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos / hidrólogos</p><p>La cuenca se trata como un volumen de control con una ecuación de continuidad P − ET − ΔS = Q. El estudio cierra ese balance con series homogeneizadas, transforma la variable estocástica de entrada (P areal por Thiessen) en la de salida (Q), y le asigna un nivel de excedencia (persistencia 75%) para diseño. Sirve además de insumo normativo para otorgar derechos de uso bajo la Ley 29338.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Imagina la cuenca como un embudo gigante con un caño abajo. La lluvia que cae en la parte alta es lo que entra; el sol y las plantas se llevan una parte; el resto sale por el caño (el río en Chosica). Este estudio mide cuánta agua entra, cuánta se pierde y cuánta sale <i>en un año normal, en uno bueno y en uno malo</i>, para que Lima sepa con cuánta agua puede contar de verdad.</p></div>
+</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span><b>ANA</b> (creada por la Ley de Recursos Hídricos N° 29338) es el ente rector y máxima autoridad técnico-normativa; la <b>ALA Chillón Rímac Lurín</b> administra el agua en campo. Por eso el estudio no es académico: es un instrumento de gestión con efectos legales.</span></div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span><b>SENAMHI</b> (MINAM) aporta y opera la red meteorológica e hidrométrica; <b>EDEGEL</b> opera Sheque y Tamboraque por interés hidroenergético; <b>SEDAPAL</b> aporta la demanda poblacional. Cada dato del estudio tiene un dueño institucional, y eso explica los sesgos (p. ej. estaciones donde hay centrales, no donde hay más lluvia).</span></div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span>Justificación: en la cuenca vive Lima Metropolitana. Es <b>la cuenca más intensamente explotada del Perú</b>, con 6 488 221 habitantes (Censo 2007) en 51 distritos de Lima, Callao y Huarochirí.</span></div>
+<div class="exam"><b>🎯 EXAMEN: </b>Explique por qué un estudio hidrológico de cuenca es un instrumento de gestión y no solo un documento técnico, señalando qué decisiones administrativas dependen directamente de la disponibilidad al 75% de persistencia.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--gy-b);color:var(--gy-f)">Ficha técnica de la cuenca</span>
+<table class="tbl">
+<tr><td>Superficie total</td><td><b>3 503,95 km²</b></td></tr>
+<tr><td>Cuenca húmeda (&gt;2500 msnm)</td><td>2 302,1 km² (65,7%)</td></tr>
+<tr><td>Perímetro</td><td>419,5 km</td></tr>
+<tr><td>Rango altitudinal</td><td>0 – 4 700 msnm (abra Anticona, Ticlio)</td></tr>
+<tr><td>Latitud</td><td>11°36′52″ – 12°05′47″ <b>Sur</b></td></tr>
+<tr><td>Longitud</td><td>76°11′05″ – 77°04′36″ Oeste</td></tr>
+<tr><td>Código Pfafstetter</td><td>137554 (nivel 6)</td></tr>
+<tr><td>Unidades nivel 7</td><td>9 subcuencas</td></tr>
+<tr><td>Formadores</td><td>R. Santa Eulalia + R. San Mateo (confluyen en Chosica)</td></tr>
+<tr><td>Estaciones meteorológicas</td><td>27 (19 internas + 8 vecinas)</td></tr>
+<tr><td>Estaciones hidrométricas</td><td>3 (Chosica, Sheque, Tamboraque)</td></tr>
+<tr><td>Periodo de análisis</td><td>P: 1964–2009 · Q: 1912–2009</td></tr>
+</table>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--gy-b);color:var(--gy-f)">Metodología del trabajo — cadena lógica del estudio (§1.5)</span>
+<div class="flow">
+<span class="fbox">Recopilación (ANA, SENAMHI, SEDAPAL, EDEGEL, IGN)</span><span class="farrow">→</span>
+<span class="fbox">Campo: reconocimiento y aforos</span><span class="farrow">→</span>
+<span class="fbox">SIG: delimitación y parámetros</span><span class="farrow">→</span>
+<span class="fbox">Consistencia de series</span><span class="farrow">→</span>
+<span class="fbox">Completación / extensión</span><span class="farrow">→</span>
+<span class="fbox">P areal (Thiessen)</span><span class="farrow">→</span>
+<span class="fbox">Persistencia y modelación</span><span class="farrow">→</span>
+<span class="fbox">Oferta vs demanda</span><span class="farrow">→</span>
+<span class="fbox">Eventos extremos</span><span class="farrow">→</span>
+<span class="fbox">Propuesta de red</span>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> pensar que el orden es arbitrario. No lo es: <b>nunca se modela con series inconsistentes</b>. Si aplicas un modelo lluvia-escorrentía a una serie con saltos no corregidos, propagas el error sistemático a la disponibilidad hídrica y terminas sobre- o sub-dimensionando obras (el propio informe lo advierte en §4.3).</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Ordene y justifique las cinco etapas del procesamiento de una serie hidrometeorológica antes de su uso en modelación, indicando qué error se comete si se omite cada una.</div>
+</div>
+
+<div class="sbar" style="background:var(--pu-b);color:var(--pu-f)">🟣 BLOQUE II — DESCRIPCIÓN FÍSICA Y GEOMORFOLOGÍA DE LA CUENCA (Cap. II, pp. 15–82)</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--pu-b);color:var(--pu-f)">Delimitación Pfafstetter (§2.4)</span>
+<div class="def" style="border-color:#4c1d95">Sistema de codificación jerárquico de unidades de drenaje desarrollado por <b>Otto Pfafstetter (1989)</b>, difundido por Kristine Verdin (1997) y adoptado por el <b>USGS</b> como estándar internacional. El Perú lo usa oficialmente para codificar todas sus unidades hidrográficas.</div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span><b>Regla de dígitos:</b> se identifican los 4 mayores afluentes por área y se les asignan dígitos <b>pares (2,4,6,8)</b> desde la desembocadura hacia la naciente; las áreas restantes son <b>intercuencas</b> con dígitos <b>impares (1,3,5,7,9)</b>; las cuencas cerradas reciben <b>0</b>. Cada nivel añade un dígito, por eso 137554 (nivel 6) → 1375541…1375549 (nivel 7).</span></div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span><b>Por qué importa:</b> el código es topológicamente auto-explicativo — solo mirándolo sabes dónde está la unidad y qué drena aguas arriba. Permite que ANA, SENAMHI y el IGN hablen el mismo idioma espacial sin ambigüedad de nombres locales.</span></div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span><b>Cuenca vs intercuenca vs cuenca interna:</b> la cuenca no recibe drenaje de ninguna otra área; la intercuenca sí recibe de aguas arriba; la interna no entrega flujo a ninguna otra unidad (endorreica).</span></div>
+<div class="imgslot">📌 <b>ESPACIO PARA IMAGEN 1</b> — inserta aquí la <b>Figura N° 2.7 “Mapa de delimitación hidrográfica método Pfafstetter – Nivel 7”</b> (pág. 31 del PDF). Alternativa: Figura N° 2.6, codificación de Sudamérica (pág. 30).</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Dado el código 1375544, indique a qué nivel corresponde, qué tipo de unidad representa (cuenca o intercuenca) y explique la lógica del último dígito.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--pu-b);color:var(--pu-f)">Las 9 unidades nivel 7</span>
+<table class="tbl">
+<tr><th>Unidad</th><th>km²</th><th>%</th></tr>
+<tr><td>Río Santa Eulalia</td><td>1077,38</td><td>30,75</td></tr>
+<tr><td>Qda. Jicamarca</td><td>492,31</td><td>14,05</td></tr>
+<tr><td>Bajo río Rímac</td><td>441,03</td><td>12,59</td></tr>
+<tr><td>Jicamarca–Sta. Eulalia</td><td>267,60</td><td>7,64</td></tr>
+<tr><td>Río Blanco</td><td>235,75*</td><td>≈6,7</td></tr>
+<tr><td>Alto río Rímac</td><td>169,81*</td><td>≈4,8</td></tr>
+<tr><td>Qda. Párac</td><td>130,43*</td><td>≈3,7</td></tr>
+<tr><td colspan="3" style="border:none;color:var(--text-secondary)">*áreas de drenaje usadas en Thiessen (Cuadro 4.12). Completan Santa Eulalia–Párac y Párac–Alto Rímac.</td></tr>
+</table>
+<div class="warn">⚠️ Santa Eulalia sola aporta casi un tercio del área y concentra <b>336 de las 630 fuentes de agua superficial</b> inventariadas (53,3%): es el corazón regulado de la cuenca.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--pt-b);color:var(--pt-f)">Perfil conceptual de la cuenca: de Ticlio al Pacífico</span>
+<svg width="100%" viewBox="0 0 680 250" role="img"><title>Perfil altitudinal esquemático de la cuenca del río Rímac</title><desc>Corte de oeste a este desde el Pacífico hasta Ticlio a 4700 msnm, mostrando la ubicación de las estaciones y el límite de cuenca húmeda a 2500 metros.</desc>
+<path d="M40 210 L150 205 L240 195 L330 160 L420 120 L510 85 L600 62 L640 55" fill="none" stroke="#888780" stroke-width="1.5"/>
+<path d="M40 210 L150 205 L240 195 L330 160 L420 120 L510 85 L600 62 L640 55 L640 220 L40 220 Z" fill="#B4B2A9" opacity="0.18"/>
+<line x1="40" y1="220" x2="640" y2="220" stroke="#888780" stroke-width="0.5"/>
+<line x1="40" y1="178" x2="640" y2="178" stroke="#1D9E75" stroke-width="0.5" stroke-dasharray="4 4"/>
+<text class="ts" x="46" y="172" style="font-size:11px" fill="#0F6E56">Límite cuenca húmeda ≈ 2500 msnm — 65,7% del área aporta escorrentía</text>
+<circle cx="90" cy="208" r="4" fill="#378ADD"/><text x="90" y="238" text-anchor="middle" style="font-size:11px" fill="var(--text-secondary)">La Atarjea</text>
+<circle cx="240" cy="195" r="4" fill="#378ADD"/><text x="240" y="238" text-anchor="middle" style="font-size:11px" fill="var(--text-secondary)">Chosica 906</text>
+<circle cx="330" cy="160" r="4" fill="#EF9F27"/><text x="330" y="238" text-anchor="middle" style="font-size:11px" fill="var(--text-secondary)">Sta. Eulalia</text>
+<circle cx="470" cy="103" r="4" fill="#EF9F27"/><text x="470" y="238" text-anchor="middle" style="font-size:11px" fill="var(--text-secondary)">Tamboraque</text>
+<circle cx="600" cy="62" r="4" fill="#D85A30"/><text x="600" y="238" text-anchor="middle" style="font-size:11px" fill="var(--text-secondary)">Ticlio 4700</text>
+<text x="90" y="196" text-anchor="middle" style="font-size:11px" fill="#0C447C">P ≈ 0–10 mm/año</text>
+<text x="330" y="146" text-anchor="middle" style="font-size:11px" fill="#0C447C">P ≈ 285 mm</text>
+<text x="590" y="46" text-anchor="middle" style="font-size:11px" fill="#0C447C">P ≈ 875 mm</text>
+<text x="152" y="120" style="font-size:12px" fill="var(--text-secondary)">Desierto costero: inversión térmica + Humboldt = casi cero lluvia</text>
+<text x="152" y="138" style="font-size:12px" fill="var(--text-secondary)">Sierra: humedad amazónica advectada del este en verano austral</text>
+</svg>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> creer que “la cuenca del Rímac recibe X mm de lluvia”. La precipitación varía <b>de 0,6 mm/año (estación Rímac, 35 msnm) a 874,6 mm/año (San Cristóbal, 4700 msnm)</b>: un factor de ~1400. Cualquier promedio simple sobre toda la cuenca es físicamente absurdo; por eso solo se calcula P areal <b>aguas arriba de Chosica</b> (2318,22 km², P = 495,4 mm).</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--bl-b);color:var(--bl-f)">Parámetros de FORMA (§2.5.3.1)</span>
+<div class="def" style="border-color:#1e3a8a">La forma controla el <b>tiempo de concentración</b>: cuán sincronizadamente llegan al punto de salida las gotas caídas en distintos puntos de la cuenca.</div>
+<div class="rx">Kc = 0,28 · P / √A</div>
+<p class="rx-note">Kc: coef. de compacidad de Gravelius (adimensional, ≥1) · P: perímetro (km) · A: área (km²). Kc≈1 → circular, crecidas rápidas e intensas; Kc≈2 → alargada, hidrograma atenuado y prolongado.</p>
+<div class="rx">Ff = A / L²</div>
+<p class="rx-note">Ff: factor de forma · L: longitud del cauce principal (km). Referencia (Mintegui et al., 1993): círculo 0,79; cuadrado con salida central 1,0; con salida en esquina 0,5.</p>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span><b>Rímac: Kc = 2,00 y Ff = 0,22</b> → cuenca marcadamente <b>alargada</b>, menos expuesta a crecientes súbitas que una redondeada. Pero las subcuencas altas tienen Kc de 1,30–1,44 (Párac–Alto Rímac, Qda. Párac) → <b>casi circulares y sí muy propensas a crecidas</b>. Ahí nacen los huaicos.</span></div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span>Rectángulo equivalente: 193,10 × 18,15 km. Ancho promedio 27,58 km; longitud del río principal 127,02 km.</span></div>
+<div class="exam"><b>🎯 EXAMEN: </b>Dos subcuencas tienen igual área y precipitación, pero Kc = 1,25 y Kc = 2,10. Describa cualitativamente ambos hidrogramas de crecida y justifique físicamente la diferencia.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--or-b);color:var(--or-f)">Parámetros de RELIEVE (§2.5.3.2)</span>
+<div class="def" style="border-color:#7c2d12">El relieve pesa <b>más que la forma</b> sobre la escorrentía: a mayor pendiente, menor tiempo de concentración y mayor energía erosiva del flujo.</div>
+<div class="rx">Hm = Σ(Cᵢ · aᵢ) / A</div>
+<p class="rx-note">Hm: altitud media (msnm) · Cᵢ: cota media entre dos curvas de nivel · aᵢ: área entre ellas (km²). Es la ordenada media de la curva hipsométrica.</p>
+<div class="two">
+<div class="mini" style="border-color:#7c2d12"><b>Curva hipsométrica</b>Área acumulada sobre cada cota. Su concavidad indica la “edad” geomorfológica: convexa = cuenca joven con gran potencial erosivo.</div>
+<div class="mini" style="border-color:#7c2d12"><b>Polígono de frecuencias</b>% de área por franja altitudinal. En el Rímac la moda está entre <b>4400 y 5000 msnm</b>: la mayor parte del área está en puna alta.</div>
+</div>
+<div class="item" style="margin-top:7px"><span class="dot" style="background:#7c2d12"></span><span>Altitud media <b>3150 msnm</b>; altitud de frecuencia media (mediana) <b>3372,41 msnm</b> (1751,98 km² por encima = 50%); pendiente media de cuenca <b>0,0293 m/m</b>; pendiente del cauce principal <b>0,0445 m/m</b>.</span></div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span><span>Coef. de masividad Cm = 0,0004 (Hm/A) y orográfico Co = 0,0007 (Cm·E): valores bajos porque el área es grande; sirven para comparar relieve entre subcuencas, no en términos absolutos.</span></div>
+<div class="exam"><b>🎯 EXAMEN: </b>¿Por qué la altitud media influye en el régimen hidrológico de una cuenca andina más allá de la pendiente? Mencione al menos dos variables meteorológicas mediadoras.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--tl-b);color:var(--tl-f)">Parámetros de RED HIDROGRÁFICA (§2.5.3.3)</span>
+<div class="rx">Dd = LT / A&nbsp;&nbsp;·&nbsp;&nbsp;E = A / LT&nbsp;&nbsp;·&nbsp;&nbsp;Ct = N°R₁ / A</div>
+<p class="rx-note">Dd: densidad de drenaje (km/km²) · LT: longitud total de cauces · E: extensión media del escurrimiento (km²/km) · Ct: coef. de torrencialidad (ríos de 1er orden/km²).</p>
+<div class="item"><span class="dot" style="background:#134e4a"></span><span><b>Dd = 0,66 km/km².</b> Criterio de Monsalve (1999): &lt;0,5 drenaje pobre; hasta 3,5 excepcionalmente bien drenada. El Rímac es de <b>drenaje regular, moderadamente propenso a crecientes</b>. Subcuencas: 0,33–1,06.</span></div>
+<div class="item"><span class="dot" style="background:#134e4a"></span><span><b>E = 1,51 km²/km</b>: distancia media en línea recta que una gota debe recorrer por ladera antes de alcanzar un cauce. Cuanto menor E, más rápido pasa el flujo a la red, donde la velocidad es mucho mayor.</span></div>
+<div class="item"><span class="dot" style="background:#134e4a"></span><span><b>Orden de Strahler: 6</b> (subcuencas 3–6). Ríos <b>perennes</b> — llevan agua todo el año, a diferencia de los intermitentes (solo en lluvias) y efímeros (solo durante la tormenta: las quebradas de huaico).</span></div>
+<div class="rx">Tc = 0,01947 · L⁰·⁷⁷ · S⁻⁰·³⁸⁵&nbsp;&nbsp;(Kirpich)</div>
+<p class="rx-note">Tc en minutos · L en metros · S en m/m. <b>Rímac: Tc = 9,17 h</b>; subcuencas 0,52–4,43 h. Válida para cuencas rurales con flujo predominante en cauce; subestima Tc en cuencas urbanizadas o muy planas.</p>
+<div class="exam"><b>🎯 EXAMEN: </b>Calcule e interprete el tiempo de concentración de una subcuenca de L = 20 000 m y S = 0,10 m/m mediante Kirpich, y explique qué implica ese valor para un sistema de alerta temprana de huaicos.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--bl-b);color:var(--bl-f)">Concepto clave del bloque: tiempo de concentración</span>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos / hidrólogos</p><p>Tc es el tiempo que tarda la partícula hidráulicamente más lejana en alcanzar la sección de control; equivale al tiempo en que toda la cuenca contribuye simultáneamente al caudal. Determina la duración crítica de la tormenta de diseño: para T dado, la intensidad crítica se lee en la curva IDF con d = Tc. Con Tc = 9,17 h en Chosica y Tc ≈ 0,5–4,4 h en las subcuencas altas, el sistema tiene <b>respuestas desacopladas</b>: las quebradas responden a celdas convectivas de escala horaria mientras el colector principal integra el evento sinóptico completo.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Es el tiempo que le toma a una gota caída en el punto más lejano llegar hasta donde medimos el río. En las quebraditas altas ese viaje dura menos de una hora: por eso un aguacero fuerte se convierte en huaico casi de inmediato y casi no hay tiempo de avisar. En cambio, para que la crecida se note en Chosica pasan unas nueve horas: ahí sí existe una ventana real para alertar a la gente río abajo.</p></div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir Tc con el tiempo al pico (Tp) del hidrograma. Tc es una propiedad geométrica-hidráulica de la cuenca; Tp depende además de la distribución temporal de la lluvia efectiva. En el método SCS, Tp = D/2 + TR, y TR ≈ 0,6·Tc.</div>
+</div>
+
+<div class="sbar" style="background:var(--tl-b);color:var(--tl-f)">🩵 BLOQUE III — CLIMATOLOGÍA DE LA CUENCA (Cap. III, pp. 83–118)</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--tl-b);color:var(--tl-f)">Precipitación: régimen estacional y variación espacial (§3.1.1)</span>
+<div class="def" style="border-color:#134e4a"><b>La precipitación es la primera variable hidrológica</b>: es la entrada natural de agua al balance de la cuenca. En el Rímac su régimen es netamente <b>unimodal de verano austral</b>, controlado por la migración estacional de la circulación tropical.</div>
+<div class="three">
+<div class="mini" style="border-color:#134e4a"><b>Lluvioso: DIC–MAR</b><b style="display:inline">72,52%</b> del total anual (promedio de las 27 estaciones). Coincide con el verano austral.</div>
+<div class="mini" style="border-color:#134e4a"><b>Seco: MAY–SET</b>Solo <b>7,15%</b>. El informe lo llama “invierno”, correcto para el hemisferio sur.</div>
+<div class="mini" style="border-color:#134e4a"><b>Transición: ABR, OCT–NOV</b><b style="display:inline">20,33%</b>. Meses de instalación y retirada del régimen húmedo.</div>
+</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>El máximo DEF-M responde al desplazamiento austral de la ZCIT y al establecimiento de la <b>Alta de Bolivia</b>, un anticiclón cálido en niveles altos (≈200 hPa) sobre el Altiplano que genera flujo del este en la troposfera superior y advecta humedad amazónica sobre la vertiente occidental. En invierno austral domina el <b>Anticiclón del Pacífico Sur (APS)</b> con subsidencia, inversión térmica de subsidencia reforzada por la Corriente de Humboldt y estratocúmulos de capa límite: cielo cubierto pero sin precipitación medible (garúa &lt; 0,1 mm/h).</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>En verano, la “fábrica de lluvia” del continente se corre hacia el sur y empuja el aire húmedo de la Amazonía por encima de los Andes: llueve fuerte en la sierra, y ese agua baja al Rímac. En invierno esa fábrica se va al norte y sobre la costa se instala una tapa de aire caliente encima de aire frío del mar. Esa tapa impide que las nubes crezcan: por eso Lima está nublada gris meses enteros y aun así no llueve — es garúa, no lluvia.</p></div>
+</div>
+<div class="rx">P(H) ≈ f(altitud) → gradiente pluviométrico ascendente</div>
+<p class="rx-note">Isoyetas trazadas entre 0,6 mm (estación Rímac, 35 msnm) y 874,6 mm (San Cristóbal, 4700 msnm). Los valores altos siempre en la parte alta, por ascenso orográfico del flujo húmedo del este.</p>
+<div class="exam"><b>🎯 EXAMEN: </b>Explique por qué en la cuenca del Rímac la precipitación aumenta con la altitud mientras la temperatura disminuye, e indique qué mecanismo dinámico produce el máximo de verano austral.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--tl-b);color:var(--tl-f)">Estaciones extremas (Cuadro 3.1)</span>
+<table class="tbl">
+<tr><th>Estación</th><th>msnm</th><th>P anual</th></tr>
+<tr><td>San Cristóbal</td><td>4700</td><td><b>874,6</b></td></tr>
+<tr><td>Milloc</td><td>4398</td><td>863,2</td></tr>
+<tr><td>Mina Colqui</td><td>4600</td><td>726,4</td></tr>
+<tr><td>Pariacancha</td><td>3800</td><td>704,6</td></tr>
+<tr><td>Casapalca</td><td>4214</td><td>647,6</td></tr>
+<tr><td>Río Blanco</td><td>3550</td><td>525,3</td></tr>
+<tr><td>Matucana</td><td>2479</td><td>285,2</td></tr>
+<tr><td>Santa Eulalia</td><td>982</td><td>33,4</td></tr>
+<tr><td>Chosica (PLU)</td><td>850</td><td>23,3</td></tr>
+<tr><td>Aeropuerto Int.</td><td>13</td><td>10,3</td></tr>
+<tr><td>Rímac</td><td>35</td><td><b>0,6</b></td></tr>
+</table>
+<div class="warn">⚠️ Pmáx en 24 h del periodo 1964–2009: <b>89,9 mm en Santiago de Tuna</b>. Un solo día puede aportar más lluvia que un año entero en la costa.</div>
+<div class="imgslot">📌 <b>IMAGEN 2</b> — pega aquí la <b>Figura N° 3.3, mapa de isoyetas de precipitación total anual</b> (pág. 87).</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--or-b);color:var(--or-f)">Temperatura: regresiones altitudinales (§3.1.2)</span>
+<div class="def" style="border-color:#7c2d12">Ante la escasez de estaciones con registro térmico, el estudio <b>estimó los faltantes por regresión lineal contra la altitud</b>. Este es el procedimiento estándar en cuencas de montaña, y hay que saber leerlo críticamente.</div>
+<div class="rx">T̄ = −0,00132·H + 19,945&nbsp;&nbsp;(R² = 0,292)<br>Tmín = −0,00165·H + 16,641&nbsp;&nbsp;(R² = 0,304)</div>
+<p class="rx-note">T en °C · H en msnm. Los coeficientes equivalen a gradientes de <b>−1,32 °C/1000 m (media)</b> y <b>−1,65 °C/1000 m (mínimas)</b>.</p>
+<div class="item"><span class="dot" style="background:#7c2d12"></span><span><b>Lectura crítica indispensable:</b> el gradiente adiabático saturado típico es ~6 °C/km y el gradiente ambiental medio ~6,5 °C/km. Los −1,3 °C/km del ajuste son <b>anómalamente bajos</b> y el R² ≈ 0,29 indica que la altitud explica menos del 30% de la varianza. Causa: la muestra mezcla estaciones costeras bajo inversión térmica (donde subir de altura puede significar <i>calentarse</i>) con estaciones de sierra. Es un caso de manual de <b>inversión térmica costera contaminando una regresión</b>.</span></div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span><span><b>Régimen:</b> mínimas en <b>julio</b>, máximas de noviembre a marzo, centradas en enero — coherente con el ciclo solar del hemisferio sur. Máxima media anual 25,0 °C; máxima absoluta mensual 29,9 °C en febrero; mínima 18,6 °C en julio.</span></div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> no confundir “temperatura media de las máximas” (promedio mensual de las Tmáx diarias) con “temperatura máxima absoluta” (el récord). El estudio trabaja con la primera; los extremos absolutos son mucho mayores.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>El ajuste T̄ = −0,00132·H + 19,94 tiene R² = 0,29. Discuta la validez de extrapolarlo a 4700 msnm y proponga una estratificación que mejore el ajuste.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--pt-b);color:var(--pt-f)">HR · Evaporación · Sol · Viento</span>
+<div class="mini" style="border-color:#0c4a6e"><b>Humedad relativa (§3.1.3)</b>Máx. 89% (Campo de Marte, marzo) — costa siempre húmeda por el mar; mín. 57% (Matucana, julio). Baja de día y sube de noche al enfriarse el aire sin cambiar el contenido de vapor.</div>
+<div class="mini" style="border-color:#0c4a6e;margin-top:7px"><b>Evaporación de tanque (§3.1.4)</b><b style="display:inline">Matucana 1567,2 mm/año</b> vs Campo de Marte 464,3 mm. Paradoja aparente: evapora más arriba porque hay más radiación, menos nubosidad baja y aire más seco.</div>
+<div class="mini" style="border-color:#0c4a6e;margin-top:7px"><b>Horas de sol (§3.1.5)</b>Marcapomacocha 5,57 h/día y Matucana 5,28 h vs Hipólito Unanue 3,84 h. En la sierra el máximo es en <b>invierno seco</b> (jul: 7,0–7,7 h); en la costa el mínimo es en invierno (jul: 0,87 h) por el manto de estratocúmulos.</div>
+<div class="mini" style="border-color:#0c4a6e;margin-top:7px"><b>Viento (§3.1.6)</b>Generado por gradientes de presión debidos al calentamiento diferencial. Máx. 6,0 m/s (Las Palmas, noviembre); mín. 0,8 m/s (Campo de Marte, junio). Máximos entre agosto y diciembre.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--yl-b);color:var(--yl-f)">Evapotranspiración potencial — Penman-Monteith FAO (§3.1.7)</span>
+<div class="def" style="border-color:#713f12">ETP es la pérdida de agua de una superficie <b>completamente cubierta de vegetación y sin limitación hídrica</b>. Es la salida atmosférica del balance: lo que la atmósfera “pide”, no lo que el suelo entrega.</div>
+<div class="rx">ETo = [0,408·Δ·(Rn−G) + γ·(900/(T+273))·u₂·(es−ea)] / [Δ + γ·(1+0,34·u₂)]</div>
+<p class="rx-note">ETo mm/día · Rn radiación neta MJ m⁻² d⁻¹ · G flujo de calor del suelo MJ m⁻² d⁻¹ (≈0 a paso diario) · T temperatura media a 2 m (°C) · u₂ viento a 2 m (m/s) · es−ea déficit de presión de vapor (kPa) · Δ pendiente de la curva de presión de vapor (kPa/°C) · γ constante psicrométrica (≈0,067 kPa/°C a nivel del mar). Ecuación de referencia de la FAO (Boletín 56) y recomendada por la OMM. Calculado en el estudio con <b>CropWat 4.3</b>.</p>
+<h4>Ejemplo numérico guiado (estación Matucana, 2479 msnm, setiembre)</h4>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>Paso 1 — datos:</b> Tmáx ≈ 24 °C, Tmín ≈ 9 °C → T̄ = 16,5 °C; HR = 63%; u₂ = 2,9 m/s; n = 6,59 h de sol.</span></div>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>Paso 2 — presión de vapor:</b> es(T) = 0,6108·exp[17,27T/(T+237,3)] → es ≈ 1,88 kPa; ea = es·HR/100 ≈ 1,18 kPa → <b>DPV ≈ 0,70 kPa</b> (aire seco, alto poder evaporante).</span></div>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>Paso 3 — resultado del informe:</b> ETo = <b>4,05 mm/día</b> en setiembre → <b>121,5 mm/mes</b> y <b>1276,8 mm/año</b>, el máximo de las cuatro estaciones evaluadas.</span></div>
+<div class="two" style="margin-top:7px">
+<div class="mini" style="border-color:#713f12"><b>ETP anual por estación</b>Matucana 1276,8 · Manchay Bajo 1146,2 · Campo de Marte 981,8 · Hipólito Unanue 965,0 mm.</div>
+<div class="mini" style="border-color:#713f12"><b>Contraste clave</b>En Matucana la ETP anual (1277 mm) <b>cuadruplica</b> la lluvia anual (285 mm): déficit hídrico climático estructural.</div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir <b>evaporación de tanque</b> (medida, superficie de agua libre, Cuadro 3.11) con <b>ETP</b> (calculada, superficie vegetada de referencia) y con <b>ETreal</b> (limitada por el agua disponible y el cierre estomático). Nunca son intercambiables ni se suman.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>¿Por qué Penman-Monteith es preferible a Thornthwaite o Hargreaves en esta cuenca? Identifique qué variables incorpora que los métodos empíricos de temperatura ignoran.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--gy-b);color:var(--gy-f)">Clasificación de Thornthwaite (§3.2)</span>
+<div class="rx">PE = Σ 115·(Pᵢ/Tᵢ − 10)^(10/9)&nbsp;&nbsp;·&nbsp;&nbsp;TE = 5,4·T</div>
+<p class="rx-note">PE índice de precipitación efectiva · TE índice de temperatura efectiva · P mm · T °C. Ambos adimensionales.</p>
+<table class="tbl">
+<tr><th>Índice PE</th><th>Provincia humedad</th></tr>
+<tr><td>&gt;128</td><td>A Muy húmedo</td></tr>
+<tr><td>64–127</td><td>B Húmedo</td></tr>
+<tr><td>32–63</td><td>C Sub húmedo</td></tr>
+<tr><td>16–31</td><td>D Semiárido</td></tr>
+<tr><td>&lt;16</td><td>E Árido</td></tr>
+<tr><th>Índice TE</th><th>Provincia térmica</th></tr>
+<tr><td>&gt;128</td><td>A′ Tropical</td></tr>
+<tr><td>64–127</td><td><b>B′ Mesotérmico</b></td></tr>
+<tr><td>32–63</td><td>C′ Microtérmico</td></tr>
+<tr><td>16–31 / 1–15 / 0</td><td>D′ Taiga / E′ Tundra / F′ Glacial</td></tr>
+</table>
+<div class="item" style="margin-top:7px"><span class="dot" style="background:#334155"></span><span><b>Resultado:</b> la cuenca es <b>húmedo – sub húmedo – árido, mesotérmico</b>. Clima seco de 0 a 3000 m (1201,85 km², 34,3%) y húmedo sobre 3000 m (2302,1 km², 65,7%).</span></div>
+<div class="item"><span class="dot" style="background:#334155"></span><span>Referencia complementaria: clasificación de <b>Holdridge</b> — cuenca alta como <i>Páramo muy húmedo Sub-Alpino</i> (3800–4800 m), y hasta 8 zonas de vida en total (§2.6).</span></div>
+</div>
+
+<div class="sbar" style="background:var(--pk-b);color:var(--pk-f)">🩷 BLOQUE III-BIS — HEMISFERIO SUR vs HEMISFERIO NORTE: lo que cambia y lo que no</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--pk-b);color:var(--pk-f)">Por qué esta cuenca no se puede leer con manuales del hemisferio norte</span>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>El parámetro de Coriolis f = 2Ω·sen(φ) <b>cambia de signo</b> al cruzar el ecuador. En el HS, φ&lt;0 → f&lt;0: la desviación inercial es hacia la <b>izquierda</b>, el flujo geostrófico rodea las bajas en sentido <b>horario</b> y las altas en antihorario; la vorticidad relativa ciclónica es <b>negativa</b>. El transporte de Ekman costero bajo vientos del sur del APS genera surgencia frente al Perú (Humboldt), que enfría la SST, refuerza la inversión de subsidencia y bloquea la convección profunda en la costa. En altura, el equivalente austral del Alta Tibetana es la <b>Alta de Bolivia</b>, en fase con el verano austral.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Como la Tierra gira, el aire que se mueve se “tuerce” — pero hacia lados opuestos en cada mitad del planeta. Por eso las tormentas giran al revés aquí que en Europa o EE. UU. Además, aquí las estaciones están invertidas: nuestro verano lluvioso es de diciembre a marzo, justo cuando en el hemisferio norte es invierno. Y frente a nuestra costa el mar es frío, lo que apaga las nubes de lluvia: por eso Lima es un desierto pegado a un océano.</p></div>
+</div>
+<svg width="100%" viewBox="0 0 680 210" role="img"><title>Comparación de la rotación de sistemas de presión y estacionalidad entre hemisferios</title><desc>Esquema con la ZCIT en el centro; en el hemisferio norte las bajas giran antihorario y el máximo de lluvia es en junio a agosto; en el hemisferio sur giran horario y el máximo es de diciembre a marzo.</desc>
+<line x1="40" y1="105" x2="640" y2="105" stroke="#D85A30" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="345" y="99" text-anchor="middle" style="font-size:11px" fill="#993C1D">Zona de Convergencia Intertropical (ZCIT) — migra con el sol</text>
+<circle cx="180" cy="55" r="26" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<path d="M180 33 A22 22 0 1 0 200 46" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrH)"/>
+<text x="180" y="59" text-anchor="middle" style="font-size:11px" fill="#0C447C">Baja HN</text>
+<text x="180" y="20" text-anchor="middle" style="font-size:12px" fill="var(--text-secondary)">Hemisferio norte · f &gt; 0 · giro antihorario</text>
+<circle cx="180" cy="160" r="26" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<path d="M180 138 A22 22 0 1 1 160 151" fill="none" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrH)"/>
+<text x="180" y="164" text-anchor="middle" style="font-size:11px" fill="#04342C">Baja HS</text>
+<text x="180" y="200" text-anchor="middle" style="font-size:12px" fill="var(--text-secondary)">Hemisferio sur · f &lt; 0 · giro horario</text>
+<defs><marker id="arrH" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect x="300" y="24" width="330" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="316" y="46" style="font-size:12px" fill="#0C447C">Monzón y máximo pluvial boreal: JUN–AGO</text>
+<text x="316" y="66" style="font-size:12px" fill="#185FA5">Año hidrológico USGS: 1 oct – 30 sep</text>
+<rect x="300" y="130" width="330" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="316" y="152" style="font-size:12px" fill="#04342C">Máximo pluvial andino austral: DIC–MAR (72,5%)</text>
+<text x="316" y="172" style="font-size:12px" fill="#0F6E56">Año hidrológico Perú (SENAMHI): 1 sep – 31 ago</text>
+</svg>
+<div class="three">
+<div class="mini" style="border-color:#831843"><b>1. Estacionalidad invertida</b>“Invierno” en el informe = mayo a setiembre. Si trasladas literalmente un esquema del HN, colocarás el estiaje en el mes equivocado y todo el balance mensual se desfasará medio año.</div>
+<div class="mini" style="border-color:#831843"><b>2. Año hidrológico distinto</b>El estudio ordena sus cuadros de <b>agosto a julio</b>, arrancando en el mínimo de escorrentía. En el HN el water year va de octubre a setiembre. Comparar series sin homologar el año hidrológico produce sesgos artificiales.</div>
+<div class="mini" style="border-color:#831843"><b>3. Lo que NO cambia</b>Las leyes físicas: continuidad, Penman-Monteith, Weibull, Gumbel, SCS y el IPE son <b>hemisféricamente neutros</b>. Lo que cambia es el calendario y el signo de la rotación, no la termodinámica.</div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> asumir que El Niño “trae sequía” o “trae lluvia” de forma uniforme. En el Perú, El Niño costero intensifica lluvias en la costa norte mientras coexiste con <b>déficit en la sierra sur y central</b> — el propio informe documenta que en los años 80, junto al Niño costero, hubo una sequía severa en la sierra con pérdidas de 200–300 millones de dólares. Fenómeno monitoreado por <b>ENFEN</b> (IGP, SENAMHI, IMARPE, DHN, ANA, INDECI).</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Un informe técnico extranjero define el periodo de estiaje de una cuenca andina peruana entre julio y setiembre del “año hidrológico octubre–setiembre”. Identifique los dos errores de transposición hemisférica y corrija la definición.</div>
+</div>
+
+<div class="sbar" style="background:var(--pu-b);color:var(--pu-f)">🟣 BLOQUE IV — PLUVIOMETRÍA: CONSISTENCIA Y PRECIPITACIÓN AREAL (Cap. IV, pp. 119–143)</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--pu-b);color:var(--pu-f)">Análisis de consistencia: los tres métodos (§4.3)</span>
+<div class="def" style="border-color:#4c1d95">Técnica que permite <b>detectar, identificar, cuantificar, corregir y eliminar los errores sistemáticos</b> de no homogeneidad e inconsistencia de una serie hidrometeorológica. Sin ella, “la inconsistencia de datos puede producir un sobre y sub-diseño de estructuras hidráulicas”.</div>
+<div class="three">
+<div class="mini" style="border-color:#4c1d95"><b>1. Visual de hidrogramas</b>Se plotea la serie y se buscan <b>picos anómalos, saltos y tendencias</b>. Es cualitativo pero irreemplazable: identifica si un cambio es un fenómeno natural real o un error de instrumento/observador. Se trabajó con 4 grupos de estaciones.</div>
+<div class="mini" style="border-color:#4c1d95"><b>2. Doble masa</b>Acumulado de la estación (Y) vs acumulado promedio del grupo (X). Un <b>quiebre de pendiente</b> delata cambio de instrumento, reubicación o cambio de observador. La estación base es la de menos quiebres. Se usaron 3 grupos.</div>
+<div class="mini" style="border-color:#4c1d95"><b>3. Estadístico</b>Prueba de <b>saltos</b> (media y desviación) y de <b>tendencias</b> sobre los periodos que la doble masa marcó como dudosos. Es el que decide numéricamente si se corrige o no.</div>
+</div>
+<svg width="100%" viewBox="0 0 680 200" role="img"><title>Diagrama de doble masa con quiebre de pendiente</title><desc>Curva acumulada de una estación frente al promedio del grupo: tramo inicial con una pendiente y tramo final con pendiente distinta, indicando el periodo dudoso que debe corregirse.</desc>
+<line x1="70" y1="165" x2="640" y2="165" stroke="#888780" stroke-width="0.5"/>
+<line x1="70" y1="30" x2="70" y2="165" stroke="#888780" stroke-width="0.5"/>
+<text x="355" y="190" text-anchor="middle" style="font-size:12px" fill="var(--text-secondary)">Precipitación anual acumulada del grupo (mm)</text>
+<text x="20" y="100" style="font-size:12px" fill="var(--text-secondary)">Acum.</text><text x="20" y="116" style="font-size:12px" fill="var(--text-secondary)">estación</text>
+<polyline points="70,165 180,132 290,99 360,78" fill="none" stroke="#378ADD" stroke-width="2"/>
+<polyline points="360,78 460,66 550,54 630,44" fill="none" stroke="#E24B4A" stroke-width="2"/>
+<circle cx="360" cy="78" r="4" fill="#E24B4A"/>
+<line x1="360" y1="78" x2="360" y2="165" stroke="#888780" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text x="366" y="100" style="font-size:12px" fill="#A32D2D">Quiebre: cambia la pendiente</text>
+<text x="366" y="118" style="font-size:12px" fill="#A32D2D">→ periodo dudoso a corregir</text>
+<text x="120" y="122" style="font-size:12px" fill="#185FA5">Periodo confiable</text>
+</svg>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span><b>Resultado en el Rímac:</b> las series <b>no presentan saltos ni tendencias significativos</b> al 95% de probabilidad; la única corregida fue <b>Santa Eulalia</b>. Río Blanco mostró tendencia aparente, atribuida a un registro corto que no captura el ciclo de años húmedos/secos, por lo que no se corrigió.</span></div>
+<div class="exam"><b>🎯 EXAMEN: </b>En un diagrama de doble masa la estación A muestra un quiebre nítido en 1985. Enumere tres causas físicas o administrativas posibles y describa el procedimiento de corrección del tramo dudoso.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--yl-b);color:var(--yl-f)">Pruebas estadísticas (§4.3)</span>
+<div class="rx">t = (x̄₁ − x̄₂) / [Sp·√(1/n₁ + 1/n₂)]</div>
+<p class="rx-note"><b>T de Student</b>: consistencia en la <b>media</b>. Compara las medias de los dos periodos separados por el quiebre. H₀: μ₁ = μ₂. Si |t| &lt; t_crítico(α=0,05) → no se corrige.</p>
+<div class="rx">F = S₁² / S₂²&nbsp;&nbsp;(S₁² &gt; S₂²)</div>
+<p class="rx-note"><b>F de Fisher</b>: consistencia en la <b>desviación estándar</b>. H₀: σ₁² = σ₂². Todo el análisis se resuelve al <b>95% de probabilidad</b>.</p>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>Tendencias:</b> se evalúa la significancia del coeficiente de correlación R de la serie contra el tiempo, también con la prueba T de Student. El informe recuerda que “la tendencia en la desviación se presenta en datos semanales o mensuales, pero no en anuales”.</span></div>
+<div class="warn">⚠️ Al grupo 4 (estaciones costeras: Campo de Marte, Rímac, Ñaña…) <b>no se le aplicó el análisis estadístico</b>: registros cortos y valores de precipitación casi nulos hacen inestables los estadísticos. Un test formal sobre series de ~2 mm/año no es informativo.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--tl-b);color:var(--tl-f)">Precipitación areal: polígonos de Thiessen (§4.5)</span>
+<div class="def" style="border-color:#134e4a">Es la precipitación que <b>cae sobre la cuenca como unidad</b>, no en un punto. Se puede obtener por media aritmética, isoyetas o Thiessen; el estudio usó <b>Thiessen</b>, considerando además la gradiente de pluviosidad.</div>
+<div class="rx">Pm = Σ(Pᵢ · Aᵢ) / At</div>
+<p class="rx-note">Pm precipitación areal (mm) · Pᵢ precipitación de la estación i · Aᵢ área de influencia del polígono i (km²) · At área total · n estaciones. Los pesos Aᵢ/At suman exactamente 1.</p>
+<h4>Ejemplo resuelto: subcuenca Río Blanco (Cuadro 4.12)</h4>
+<table class="tbl">
+<tr><th>Estación</th><th>Aᵢ (km²)</th><th>Factor</th><th>Pᵢ anual</th></tr>
+<tr><td>San Cristóbal</td><td>151,92</td><td>0,6444</td><td>874,6</td></tr>
+<tr><td>Río Blanco</td><td>50,50</td><td>0,2142</td><td>525,3</td></tr>
+<tr><td>San José de Párac</td><td>28,29</td><td>0,1200</td><td>612,1</td></tr>
+<tr><td>Casapalca</td><td>5,04</td><td>0,0214</td><td>647,6</td></tr>
+<tr><td><b>Total</b></td><td><b>235,75</b></td><td><b>1,0000</b></td><td>—</td></tr>
+</table>
+<p class="rx-note" style="margin-top:6px">Pm = 0,6444·874,6 + 0,2142·525,3 + 0,1200·612,1 + 0,0214·647,6 ≈ <b>759 mm/año</b>. Nótese cómo San Cristóbal, con casi 2/3 del peso, domina el resultado: <b>la geometría de la red condiciona el número final</b>.</p>
+<svg width="100%" viewBox="0 0 680 190" role="img"><title>Construcción de polígonos de Thiessen</title><desc>Estaciones unidas por triángulos y mediatrices que definen polígonos de influencia dentro del contorno de la cuenca.</desc>
+<path d="M60 30 L300 20 L340 90 L280 170 L90 160 Z" fill="none" stroke="#888780" stroke-width="1.5"/>
+<circle cx="130" cy="70" r="4" fill="#D85A30"/><circle cx="250" cy="60" r="4" fill="#D85A30"/><circle cx="180" cy="140" r="4" fill="#D85A30"/>
+<line x1="130" y1="70" x2="250" y2="60" stroke="#B4B2A9" stroke-width="0.5" stroke-dasharray="3 3"/>
+<line x1="130" y1="70" x2="180" y2="140" stroke="#B4B2A9" stroke-width="0.5" stroke-dasharray="3 3"/>
+<line x1="250" y1="60" x2="180" y2="140" stroke="#B4B2A9" stroke-width="0.5" stroke-dasharray="3 3"/>
+<line x1="190" y1="20" x2="190" y2="103" stroke="#534AB7" stroke-width="1.5"/>
+<line x1="190" y1="103" x2="70" y2="140" stroke="#534AB7" stroke-width="1.5"/>
+<line x1="190" y1="103" x2="320" y2="150" stroke="#534AB7" stroke-width="1.5"/>
+<text x="380" y="45" style="font-size:12px" fill="var(--text-secondary)">1. Se unen las estaciones más próximas formando triángulos</text>
+<text x="380" y="70" style="font-size:12px" fill="var(--text-secondary)">2. Se trazan las mediatrices de cada lado</text>
+<text x="380" y="95" style="font-size:12px" fill="var(--text-secondary)">3. Las mediatrices delimitan el polígono de cada estación</text>
+<text x="380" y="120" style="font-size:12px" fill="var(--text-secondary)">4. El peso de cada estación = su área dentro de la cuenca</text>
+<text x="380" y="145" style="font-size:12px" fill="#3C3489">Ventaja: objetivo y reproducible. Límite: ignora el relieve</text>
+<text x="380" y="165" style="font-size:12px" fill="#3C3489">— por eso aquí se corrigió con la gradiente pluviométrica</text>
+</svg>
+<div class="exam"><b>🎯 EXAMEN: </b>Compare Thiessen e isoyetas para estimar la precipitación areal en una cuenca de montaña con fuerte gradiente altitudinal. ¿Cuál recomendaría y bajo qué condición de densidad de red?</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--gy-b);color:var(--gy-f)">Completación y extensión (§4.4)</span>
+<div class="item"><span class="dot" style="background:#334155"></span><span>Software <b>HEC-4 Monthly Streamflow Simulation</b> (Hydrologic Engineering Center, USACE). Rellena vacíos aprovechando la <b>correlación cruzada entre estaciones vecinas</b> y preserva la estructura estadística (media, desviación, correlación serial) de cada serie.</span></div>
+<div class="item"><span class="dot" style="background:#334155"></span><span>Resultado: <b>27 series mensuales completas y homogéneas 1964–2009</b> (46 años), base de todo lo que sigue: Thiessen, IPE y modelación.</span></div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> tratar el dato completado igual que el observado. Un valor generado por correlación <b>reduce artificialmente la varianza</b> de la serie; por eso jamás se completa antes de haber verificado la consistencia, y por eso los datos rellenados aparecen marcados en azul en los cuadros del informe.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Justifique por qué la completación de datos debe ejecutarse después —y nunca antes— del análisis de saltos y tendencias.</div>
+</div>
+
+<div class="sbar" style="background:var(--pt-b);color:var(--pt-f)">🟦 BLOQUE V — HIDROMETRÍA Y PERSISTENCIA (Cap. V, pp. 144–155)</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--pt-b);color:var(--pt-f)">Red hidrométrica y naturalización de caudales (§5.2–5.3)</span>
+<div class="def" style="border-color:#0c4a6e"><b>Hidrometría:</b> medir, registrar, calcular y analizar los volúmenes de agua que circulan por una sección transversal en la unidad de tiempo. <b>Caudal (m³/s):</b> volumen por unidad de tiempo a través de una sección.</div>
+<table class="tbl">
+<tr><th>Estación</th><th>Río</th><th>Registro</th><th>Operador</th><th>Naturaleza</th></tr>
+<tr><td><b>Chosica</b> (906 msnm)</td><td>Rímac</td><td>1912–2009 (98 años)</td><td>SENAMHI</td><td>Natural 1912–64; <b>regulado</b> 1965–2009</td></tr>
+<tr><td>Sheque</td><td>Santa Eulalia</td><td>1965–2009 (45 años)</td><td>EDEGEL</td><td>Natural</td></tr>
+<tr><td>Tamboraque</td><td>Rímac (San Mateo)</td><td>1965–2009 (45 años)</td><td>EDEGEL</td><td>Natural</td></tr>
+</table>
+<div class="rx">Q<sub>naturalizado</sub> = Q<sub>Chosica registrado</sub> − Q<sub>Túnel Trasandino</sub></div>
+<p class="rx-note">Naturalizar = devolver la serie a las condiciones que habría tenido <b>sin intervención humana</b>. Aquí se resta el trasvase del Mantaro (operativo desde 1965). Sin este paso, la serie mezclaría dos regímenes distintos y sería estadísticamente no homogénea.</p>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos / hidrólogos</p><p>La serie de Chosica es no estacionaria por intervención antrópica: el trasvase introduce un salto en la media del estiaje desde 1965. La naturalización restituye la estacionariedad exigida por el análisis de frecuencia (los estimadores de Weibull, Gumbel y LN2 asumen muestra i.i.d. de una población invariante). Una vez naturalizada y validada, se re-incorpora el aporte regulado en la fase de oferta.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Desde 1965 se le echa agua extra al río trayéndola por un túnel desde el otro lado de la cordillera. Si mezclamos los años con túnel y sin túnel, es como medir la altura de un grupo de personas dejando a la mitad con zapatos altos: el promedio ya no dice nada. Por eso primero se descuenta esa agua extra, se estudia el río “como sería solo”, y recién al final se vuelve a sumar el aporte del túnel.</p></div>
+</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Defina la naturalización de caudales y explique por qué es un requisito previo al análisis de frecuencia en cuencas con trasvases o embalses.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--yl-b);color:var(--yl-f)">Persistencia: fórmula de Weibull (§5.6)</span>
+<div class="rx">P(X ≥ xm) = m / (n + 1)</div>
+<p class="rx-note">m: posición del valor en la lista ordenada de mayor a menor · n: número total de datos · P: probabilidad de <b>excedencia</b>. Universalmente usada para fines de riego. El “+1” evita asignar probabilidad 1,0 al mínimo observado.</p>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>Criterio nacional e internacional: 75% de persistencia</b> para determinar disponibilidad de agua de riego. Significa: el caudal que es <b>igualado o superado en 3 de cada 4 años</b>. No es un promedio: es un compromiso conservador de garantía de suministro.</span></div>
+<h4>Estación Chosica (Cuadro 5.3–5.4)</h4>
+<table class="tbl">
+<tr><th>Nivel</th><th>Q̄ anual (m³/s)</th><th>Vol. anual (hm³)</th></tr>
+<tr><td>Promedio</td><td>27,34</td><td>856,87</td></tr>
+<tr><td>P(50%)</td><td>25,54</td><td>801,21</td></tr>
+<tr><td><b>P(75%)</b></td><td><b>20,49</b></td><td><b>642,48</b></td></tr>
+<tr><td>P(90%)</td><td>15,92</td><td>500,05</td></tr>
+<tr><td>P(95%)</td><td>13,62</td><td>428,21</td></tr>
+</table>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir <b>persistencia</b> (probabilidad de excedencia de un caudal medio mensual, para diseño de <i>oferta</i>) con <b>periodo de retorno</b> (recurrencia de un evento extremo, para diseño de <i>defensas</i>). El 75% no equivale a “T = 1,33 años” de una avenida: son universos estadísticos distintos, uno de mínimos operativos y otro de máximos.</div>
+</div>
+
+<div class="sbar" style="background:var(--yl-b);color:var(--yl-f)">🟡 BLOQUE VI — MODELACIÓN HIDROLÓGICA (Cap. VI, pp. 156–168)</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--yl-b);color:var(--yl-f)">Método de transferencia hidrológica (§6.3–6.4)</span>
+<div class="def" style="border-color:#713f12">Cuando una subcuenca <b>no tiene estación de aforo</b> pero sí se conocen su área y su precipitación areal, se transfiere la información de una cuenca aforada vecina mediante parámetros adimensionales. Es una regionalización por similitud hidrológica.</div>
+<div class="rx">Qc /(Ac·Pc) = Qs /(As·Ps)&nbsp;&nbsp;⟹&nbsp;&nbsp;Qs = (As/Ac)·(Ps/Pc)·Qc</div>
+<p class="rx-note">Qs caudal de la cuenca <b>sin</b> información (m³/s) · Qc caudal de la cuenca <b>con</b> información · As, Ac áreas (km²) · Ps, Pc precipitaciones medias anuales (mm). Supuesto fuerte: ambas cuencas comparten el mismo <b>coeficiente de escorrentía</b> (misma geología, cobertura, pendiente y régimen).</p>
+<h4>Aplicación resuelta paso a paso</h4>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>Cuenca patrón</b> — Rímac en Chosica: Ac = 2318,22 km², Pc = 495,4 mm.</span></div>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>Alto Río Rímac:</b> As = 169,81 km², Ps = 644,2 mm → (169,81/2318,22)·(644,2/495,4) = 0,07326 · 1,3004 = <b>0,0953</b> ⟹ Q = 0,0953·Q<sub>Rímac</sub></span></div>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>Quebrada Párac:</b> As = 130,43 km², Ps = 614,2 mm → 0,05626 · 1,2398 = <b>0,0698</b> ⟹ Q = 0,0698·Q<sub>Rímac</sub></span></div>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>Verificación numérica:</b> con Q(75%) anual en Chosica = 642,48 hm³ → Alto Rímac ≈ 61,27 hm³ y Q. Párac ≈ 61,27 hm³ (Cuadro 7.1). Coinciden porque los productos área × precipitación son casi iguales pese a tener áreas distintas.</span></div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos / hidrólogos</p><p>Es un modelo lluvia-escorrentía de parámetro concentrado y estructura lineal, sin calibración interna: el coeficiente de transferencia absorbe implícitamente el coeficiente de escorrentía, la ET y las pérdidas. Su validez cae cuando las cuencas difieren en zona de vida, litología o grado de regulación. El informe lo usa <b>solo</b> para dos subcuencas no aforadas, no para toda la cuenca, precisamente porque Sheque, Tamboraque y Chosica ya proveen observación directa.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Es una regla de tres con dos factores. Si una subcuenca vecina tiene la décima parte del terreno y llueve un 30% más que en la cuenca medida, entonces su río llevará aproximadamente la décima parte del caudal multiplicado por ese 30% extra. Funciona bien si las dos zonas se parecen; si una es de roca desnuda y la otra de bofedales, la regla falla.</p></div>
+</div>
+<div class="warn">⚠️ Por qué la lluvia manda: “la información de precipitación es <b>más confiable</b> que la hidrométrica”, porque en época de crecida los aforos no se hacen con procedimientos estandarizados y a menudo se extrapola la curva altura-caudal fuera de su rango calibrado. De ahí el interés en modelos lluvia-escorrentía.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Enuncie los supuestos del método de transferencia hidrológica y evalúe su validez para transferir información desde una cuenca de puna húmeda hacia una subcuenca árida de la misma vertiente.</div>
+</div>
+
+<div class="sbar" style="background:var(--gr-b);color:var(--gr-f)">🟢 BLOQUE VII — OFERTA, DEMANDA Y BALANCE HÍDRICO (Cap. VII–IX, pp. 169–184)</div>
+
+<div class="block">
+<span class="bh" style="background:var(--gr-b);color:var(--gr-f)">Oferta hídrica (Cap. VII)</span>
+<div class="def" style="border-color:#14532d">Régimen <b>irregular y torrentoso</b> típico de la costa: avenidas enero–marzo, estiaje el resto del año. Extremos históricos en Chosica: <b>145,67 m³/s (1935)</b> vs <b>1,53 m³/s (1973)</b> — casi dos órdenes de magnitud.</div>
+<table class="tbl">
+<tr><th>Fuente</th><th>hm³/año</th></tr>
+<tr><td>Q(75%) Rímac en Chosica</td><td>642,48</td></tr>
+<tr><td>Túnel Trasandino (promedio)</td><td>139,45</td></tr>
+<tr><td><b>Disponibilidad total</b></td><td><b>781,92</b></td></tr>
+</table>
+<h4>Regulación y trasvases (§7.5–7.6)</h4>
+<div class="item"><span class="dot" style="background:#14532d"></span><span><b>Marcapomacocha (Mantaro):</b> 5 lagunas, <b>157,05 hm³</b> — trasvase interoceánico de la vertiente del Atlántico al Pacífico.</span></div>
+<div class="item"><span class="dot" style="background:#14532d"></span><span><b>Santa Eulalia:</b> 15 lagunas represadas, <b>77,00 hm³</b> (cuenca propia).</span></div>
+<div class="item"><span class="dot" style="background:#14532d"></span><span><b>Yuracmayo:</b> 1 represa, <b>48,30 hm³</b>. <b>Total: 21 unidades, 282,35 hm³</b> (EDEGEL, set. 2010).</span></div>
+<div class="item"><span class="dot" style="background:#14532d"></span><span><b>Marca I</b> (túnel trasandino de 10 km, iniciado 1957): +6 m³/s (hasta 8) al Santa Eulalia, alimenta la C.H. Huinco con 1200 m de caída. <b>Marca III</b> aporta de noviembre a mayo. <b>Marca II</b> (Pomacocha–Río Blanco, otro túnel de 10 km) añadiría <b>+4,0 m³/s</b>; el informe lo proyectaba para 2018.</span></div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--pk-b);color:var(--pk-f)">Demanda hídrica (Cap. VIII)</span>
+<div class="def" style="border-color:#831843">Total actual: <b>635,0 hm³/año</b>. La distinción clave es <b>consuntivo</b> (el agua se consume y no retorna en el mismo punto) vs <b>no consuntivo</b> (se usa y se devuelve al cauce).</div>
+<p style="font-size:11.5px;margin:6px 0 2px"><b>Poblacional — 501,44 hm³ (79,0%)</b></p><div class="sbw"><div class="sbf" style="width:79%;background:#D4537E"></div></div>
+<p style="font-size:11.5px;margin:0 0 2px"><b>Agrícola — 105,15 hm³ (16,56%)</b></p><div class="sbw"><div class="sbf" style="width:16.6%;background:#639922"></div></div>
+<p style="font-size:11.5px;margin:0 0 2px"><b>Minero — 27,46 hm³ (4,3%)</b></p><div class="sbw"><div class="sbf" style="width:4.3%;background:#BA7517"></div></div>
+<p style="font-size:11.5px;margin:0 0 2px"><b>Industrial — 0,95 hm³ (0,15%)</b></p><div class="sbw"><div class="sbf" style="width:1.5%;background:#888780"></div></div>
+<div class="item"><span class="dot" style="background:#831843"></span><span><b>No consuntivo:</b> 5 centrales hidroeléctricas — Huinco 258,4 MW, Matucana 120, Callahuanca 80,7, Moyopampa 69, Huampaní 31,4 = <b>559,5 MW con 101,5 m³/s nominales</b>. También piscicultura (10,88 hm³, truchas en río Blanco y Santa Eulalia).</span></div>
+<div class="item"><span class="dot" style="background:#831843"></span><span><b>Agricultura en retroceso:</b> de 9000 ha regadas en 1975 a <b>4358,27 ha</b> (2405 usuarios, 13 comisiones de regantes), desplazadas por la expansión urbana de Lima.</span></div>
+<div class="item"><span class="dot" style="background:#831843"></span><span><b>Producción SEDAPAL:</b> Atarjea 15,90 + Chillón 0,72 + pozos 4,22 = <b>20,84 m³/s</b>. Demanda proyectada: 23,67 m³/s (2009) → 28,69 (2020) → <b>34,31 m³/s (2040)</b>.</span></div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--bl-b);color:var(--bl-f)">Balance hídrico (Cap. IX)</span>
+<div class="rx">Balance = Q − D</div>
+<p class="rx-note">Q oferta hídrica en el punto de control (hm³/mes) · D demanda total (hm³/mes). Punto de control: <b>estación Chosica</b>. Las variables del ciclo (P, ET, infiltración, aportes subterráneos) <b>ya están implícitas</b> en el caudal medido — por eso no aparecen en la ecuación.</p>
+<table class="tbl">
+<tr><th>Concepto</th><th>hm³/año</th></tr>
+<tr><td>Oferta total</td><td>781,92</td></tr>
+<tr><td>Demanda total</td><td>635,00</td></tr>
+<tr><td><b>Balance anual</b></td><td><b>+146,92 (18,79%)</b></td></tr>
+</table>
+<div class="item" style="margin-top:7px"><span class="dot" style="background:#1e3a8a"></span><span><b>Superávit: diciembre–mayo</b> (máximo en marzo: +77,64 hm³, 57,41%). <b>Déficit: junio–noviembre</b> (máximo en julio: −8,16 hm³, 16,33%; agosto −7,90). Demanda atendida: 83,67% en julio, 100% de diciembre a mayo.</span></div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> concluir “hay superávit anual, entonces no hay problema de agua”. El superávit es <b>anual y agregado</b>; el déficit es <b>estacional y real</b>. El agua sobrante de marzo no sirve en agosto salvo que exista <b>capacidad de regulación</b> — que es exactamente la función de los 282,35 hm³ embalsados. El balance temporal, no el anual, es el que justifica las represas.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--bl-b);color:var(--bl-f)">Balance mensual oferta vs demanda — estación Chosica (Cuadro 9.1)</span>
+<svg width="100%" viewBox="0 0 680 250" role="img"><title>Balance hídrico mensual de la cuenca del Rímac en la estación Chosica</title><desc>Barras de oferta y demanda por mes de agosto a julio: la oferta supera a la demanda de diciembre a mayo con máximo en marzo, y queda por debajo de junio a noviembre.</desc>
+<line x1="46" y1="200" x2="660" y2="200" stroke="#888780" stroke-width="0.5"/>
+<line x1="46" y1="20" x2="46" y2="200" stroke="#888780" stroke-width="0.5"/>
+<text x="14" y="26" style="font-size:11px" fill="var(--text-secondary)">140</text>
+<text x="18" y="115" style="font-size:11px" fill="var(--text-secondary)">70</text>
+<text x="26" y="204" style="font-size:11px" fill="var(--text-secondary)">0</text>
+<g fill="#378ADD">
+<rect x="56" y="145" width="18" height="55"/><rect x="107" y="145" width="18" height="55"/><rect x="158" y="141" width="18" height="59"/><rect x="209" y="140" width="18" height="60"/><rect x="260" y="127" width="18" height="73"/><rect x="311" y="100" width="18" height="100"/><rect x="362" y="65" width="18" height="135"/><rect x="413" y="27" width="18" height="173"/><rect x="464" y="89" width="18" height="111"/><rect x="515" y="129" width="18" height="71"/><rect x="566" y="142" width="18" height="58"/><rect x="617" y="146" width="18" height="54"/>
+</g>
+<g fill="#D4537E">
+<rect x="76" y="135" width="18" height="65"/><rect x="127" y="135" width="18" height="65"/><rect x="178" y="133" width="18" height="67"/><rect x="229" y="134" width="18" height="66"/><rect x="280" y="131" width="18" height="69"/><rect x="331" y="127" width="18" height="73"/><rect x="382" y="132" width="18" height="68"/><rect x="433" y="126" width="18" height="74"/><rect x="484" y="130" width="18" height="70"/><rect x="535" y="132" width="18" height="68"/><rect x="586" y="137" width="18" height="63"/><rect x="637" y="136" width="18" height="64"/>
+</g>
+<g style="font-size:11px" fill="var(--text-secondary)" text-anchor="middle">
+<text x="75" y="216">Ago</text><text x="126" y="216">Sep</text><text x="177" y="216">Oct</text><text x="228" y="216">Nov</text><text x="279" y="216">Dic</text><text x="330" y="216">Ene</text><text x="381" y="216">Feb</text><text x="432" y="216">Mar</text><text x="483" y="216">Abr</text><text x="534" y="216">May</text><text x="585" y="216">Jun</text><text x="636" y="216">Jul</text>
+</g>
+<text x="150" y="242" text-anchor="middle" style="font-size:12px" fill="#A32D2D">◀ Déficit jun–nov (año hidrológico ago–jul)</text>
+<text x="430" y="242" text-anchor="middle" style="font-size:12px" fill="#0F6E56">Superávit dic–may: máximo en marzo (+77,64 hm³) ▶</text>
+<rect x="500" y="30" width="11" height="11" fill="#378ADD"/><text x="518" y="40" style="font-size:12px" fill="var(--text-secondary)">Oferta</text>
+<rect x="575" y="30" width="11" height="11" fill="#D4537E"/><text x="593" y="40" style="font-size:12px" fill="var(--text-secondary)">Demanda</text>
+</svg>
+<div class="exam"><b>🎯 EXAMEN: </b>La cuenca del Rímac presenta superávit anual de 146,92 hm³ y a la vez déficit de junio a noviembre. Explique la aparente contradicción y proponga dos medidas estructurales y una no estructural para resolverla.</div>
+</div>
+
+<div class="sbar" style="background:var(--rd-b);color:var(--rd-f)">🔴 BLOQUE VIII — EVENTOS HIDROLÓGICOS EXTREMOS (Cap. X, pp. 185–218)</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--rd-b);color:var(--rd-f)">Máximas avenidas: análisis de frecuencia (§10.1)</span>
+<div class="def" style="border-color:#991b1b">Los extremos no se pronostican de forma determinista, así que se adopta un <b>enfoque probabilístico</b>: si los eventos son temporalmente independientes, el análisis de frecuencia describe la probabilidad de ocurrencia futura.</div>
+<div class="rx">T = 1 / P(X ≥ x)</div>
+<p class="rx-note">T periodo de retorno (años) · P probabilidad de excedencia <b>en un solo año</b>. T = número promedio de años en que se espera igualar o exceder el evento una vez. Para T &gt; 10 años, la diferencia entre series anuales y parciales es despreciable.</p>
+<div class="two">
+<div class="mini" style="border-color:#991b1b"><b>Tipos de serie</b>Duración <b>completa</b> (todos los eventos) · duración <b>parcial</b> (sobre un umbral) · <b>máximos anuales</b> (un valor por año). El estudio usa máximos anuales: hay base teórica para extrapolar, que las series parciales no tienen por falta de independencia.</div>
+<div class="mini" style="border-color:#991b1b"><b>Distribuciones probadas</b>Log Normal 2P y 3P, <b>Gumbel</b> y <b>Log Pearson III</b>. Estimación por momentos ordinarios (MMO) y máxima verosimilitud (MV); se menciona L-momentos como mejora moderna para valores extremos.</div>
+</div>
+<h4>Resultado adoptado: Log Normal 2P por máxima verosimilitud (Cuadro 10.4)</h4>
+<table class="tbl">
+<tr><th>T (años)</th><td>2</td><td>5</td><td>10</td><td>20</td><td>50</td><td><b>100</b></td><td>200</td><td>500</td><td>1000</td></tr>
+<tr><th>Q máx (m³/s)</th><td>154</td><td>227</td><td>278</td><td>329</td><td>398</td><td><b>452</b></td><td>507</td><td>584</td><td>646</td></tr>
+</table>
+<div class="item" style="margin-top:7px"><span class="dot" style="background:#991b1b"></span><span><b>Por qué LN2 y no Gumbel:</b> se elige por menor error estándar de ajuste en el rango de diseño. Nota crítica: Gumbel da 406 m³/s para T=100 y Log Pearson III hasta 464 — una <b>dispersión de casi 60 m³/s entre modelos igualmente “válidos”</b>. Esa incertidumbre de modelo es tan importante como el número elegido.</span></div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> “T = 100 años significa que ocurre una vez cada siglo”. Falso: significa <b>1% de probabilidad cada año</b>. La probabilidad de que ocurra al menos una vez en 50 años es 1 − 0,99⁵⁰ = <b>39,5%</b>. Puede ocurrir dos años seguidos sin contradecir nada.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Una defensa ribereña en Chosica se diseña para T = 100 años (452 m³/s) con vida útil de 40 años. Calcule el riesgo de falla hidrológica R = 1 − (1 − 1/T)ⁿ e interprete el resultado.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--or-b);color:var(--or-f)">Hidrograma unitario SCS (§10.1.2.1)</span>
+<div class="def" style="border-color:#7c2d12">Método del <b>U.S. Soil Conservation Service</b> (1982) para estimar avenidas en <b>cuencas sin aforo</b>. Construye un hidrograma triangular sintético a partir de la geometría de la cuenca y lo convoluciona con la lluvia efectiva.</div>
+<div class="rx">S = 1000/CN − 10&nbsp;&nbsp;(pulg)<br>TR = L⁰·⁸·(S+1)¹·⁶⁷ / (13,9·I⁰·⁵)<br>D = 0,40·TR&nbsp;·&nbsp;Tp = D/2 + TR&nbsp;·&nbsp;Tb = 2,67·Tp<br>Qp = 0,208·Pe·A / Tp</div>
+<p class="rx-note">CN Número de Curva (complejo suelo-vegetación-uso, 30–100) · S retención potencial máxima (pulg) · L longitud del cauce (km) · I pendiente (%) · Pe lluvia efectiva (mm) · A área (km²) · Qp caudal pico (m³/s). <b>El estudio adoptó CN = 80</b>: alto escurrimiento, coherente con suelos delgados y escasa cobertura de la puna.</p>
+<svg width="100%" viewBox="0 0 680 170" role="img"><title>Hidrograma unitario triangular del SCS</title><desc>Triángulo con rama ascendente hasta el caudal pico en el tiempo pico y rama descendente hasta el tiempo base, igual a 2,67 veces el tiempo pico.</desc>
+<line x1="60" y1="130" x2="640" y2="130" stroke="#888780" stroke-width="0.5"/>
+<line x1="60" y1="20" x2="60" y2="130" stroke="#888780" stroke-width="0.5"/>
+<polygon points="60,130 220,35 640,130" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.5"/>
+<line x1="220" y1="35" x2="220" y2="130" stroke="#BA7517" stroke-width="0.5" stroke-dasharray="3 3"/>
+<circle cx="220" cy="35" r="4" fill="#854F0B"/>
+<text x="228" y="32" style="font-size:12px" fill="#854F0B">Qp = 0,208·Pe·A/Tp</text>
+<text x="220" y="148" text-anchor="middle" style="font-size:12px" fill="var(--text-secondary)">Tp</text>
+<text x="640" y="148" text-anchor="end" style="font-size:12px" fill="var(--text-secondary)">Tb = 2,67·Tp</text>
+<text x="24" y="30" style="font-size:12px" fill="var(--text-secondary)">Q</text>
+<rect x="60" y="6" width="64" height="8" fill="#378ADD"/>
+<text x="132" y="15" style="font-size:12px" fill="#185FA5">D = duración de la lluvia efectiva = 0,40·TR</text>
+</svg>
+<h4>Qmáx instantáneo por subcuenca (Cuadro 10.9, m³/s)</h4>
+<table class="tbl">
+<tr><th>T</th><th>Sta. Eulalia</th><th>Alto Rímac</th><th>R. Blanco</th><th>Q. Párac</th></tr>
+<tr><td>20</td><td>142,6</td><td>59,6</td><td>40,9</td><td>37,2</td></tr>
+<tr><td>50</td><td>210,7</td><td>73,0</td><td>58,7</td><td>54,2</td></tr>
+<tr><td><b>100</b></td><td><b>265,8</b></td><td>93,0</td><td>73,7</td><td>67,9</td></tr>
+<tr><td>500</td><td>399,2</td><td>147,0</td><td>108,0</td><td>108,0</td></tr>
+<tr><td>1000</td><td>457,9</td><td>171,7</td><td>124,8</td><td>124,6</td></tr>
+</table>
+<div class="warn">⚠️ Los picos de las subcuencas <b>no se suman aritméticamente</b> para obtener el pico del Rímac: cada una tiene distinto tiempo de concentración, así que sus máximos no coinciden en el tiempo. Sumarlos sobreestima gravemente la avenida y encarece el diseño.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--rd-b);color:var(--rd-f)">Sequías: definición, tipos e Índice de Precipitación Estandarizado (§10.2)</span>
+<div class="def" style="border-color:#991b1b">Sequía (Heim, 2002): <b>“ausencia prolongada o insuficiencia acentuada de precipitación”</b>, o un periodo de condiciones anormalmente secas lo bastante largo como para causar un serio desequilibrio hidrológico. A diferencia de una avenida, es un <b>fenómeno de desarrollo lento, sin inicio nítido</b> — por eso hace falta un índice que defina cuándo empieza y cuándo termina.</div>
+<div class="two">
+<div class="mini" style="border-color:#991b1b"><b>Meteorológica</b>Solo datos de <b>precipitación</b>. Es la primera en aparecer. Escala: semanas a meses.</div>
+<div class="mini" style="border-color:#991b1b"><b>Hidrológica</b>Déficit en <b>caudales, embalses y acuíferos</b>. Aparece con retraso respecto a la meteorológica. Escala: meses a años.</div>
+<div class="mini" style="border-color:#991b1b"><b>Agrícola</b>Déficit de <b>humedad del suelo</b> durante el ciclo del cultivo (“sequía edáfica”). Es el <i>impacto</i> de las dos anteriores.</div>
+<div class="mini" style="border-color:#991b1b"><b>Socioeconómica</b>Cuando el déficit afecta a <b>comunidades y economía</b>: agua potable, hidroelectricidad, industria.</div>
+</div>
+<div class="rx">IPE = (P − μ) / σ&nbsp;&nbsp;tras ajuste Gamma(2p) → normal estandarizada N(0,1)</div>
+<p class="rx-note"><b>IPE / SPI</b>, McKee et al. (1993). Etapa 1: ajustar una distribución Gamma de 2 parámetros a la serie de referencia (aquí 1964–2009). Etapa 2: transformar a normal estandarizada de media 0 y varianza 1. Requiere <b>mínimo 30 años</b> de registro. Escalas de 1 a 24 meses. Negativo = déficit; positivo = superávit.</p>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>El IPE es una transformación equiprobabilística: mapea el cuantil empírico de la precipitación acumulada a su equivalente en la normal estándar, de modo que un IPE = −2 corresponde al percentil 2,3 en cualquier localidad y en cualquier escala temporal. Esa estandarización es su fortaleza (comparabilidad espacial) y su limitación (no distingue regiones intrínsecamente más propensas a sequía, y se desestabiliza en escalas cortas sobre regímenes de baja precipitación estacional — exactamente el caso de la costa del Rímac en invierno). Es el índice recomendado por la OMM para sequía meteorológica.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>El IPE convierte la lluvia de un periodo en una nota comparable con cualquier otro lugar. Cero es exactamente lo normal para ese sitio y ese mes. Menos uno significa “bastante menos lluvia de lo habitual”; menos dos, “de lo peor que se ha visto”. Así se puede comparar una sequía en la puna con una en la selva, aunque una reciba diez veces más lluvia que la otra.</p></div>
+</div>
+<table class="tbl">
+<tr><th>IPE</th><th>Categoría</th><th>Frecuencia teórica</th></tr>
+<tr><td>≤ −2,00</td><td>Extremadamente seco</td><td>1 en 50 años</td></tr>
+<tr><td>−1,50 a −1,99</td><td>Muy seco (severa)</td><td>1 en 20 años</td></tr>
+<tr><td>−1,00 a −1,49</td><td>Moderadamente seco</td><td>1 en 10 años</td></tr>
+<tr><td>−0,50 a −0,99</td><td>Ligeramente seco</td><td>—</td></tr>
+<tr><td>−0,49 a 0,49</td><td>Normal</td><td>1 en 3 años</td></tr>
+<tr><td>≥ 2,00</td><td>Extremadamente húmedo</td><td>1 en 50 años</td></tr>
+</table>
+<div class="exam"><b>🎯 EXAMEN: </b>Diferencie sequía meteorológica, hidrológica y agrícola en términos de variable de definición, escala temporal y desfase entre ellas. ¿Por qué el IPE de 12 meses se aproxima más a la sequía hidrológica que el de 3 meses?</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--gy-b);color:var(--gy-f)">Resultados de sequías en el Rímac</span>
+<h4>Meteorológica — IPE, precipitación areal 1964–2009</h4>
+<table class="tbl">
+<tr><th>Periodo</th><th>Años</th><th>ΣIPE</th><th>Clase</th></tr>
+<tr><td>1968–1969</td><td>2</td><td>−2,66</td><td>Extremo</td></tr>
+<tr><td>1978–1980</td><td>3</td><td>−2,66</td><td>Extremo</td></tr>
+<tr><td>1987–1988</td><td>2</td><td>−1,11</td><td>Moderado</td></tr>
+<tr><td><b>1990–1992</b></td><td>3</td><td><b>−5,61</b></td><td><b>Extremo</b></td></tr>
+<tr><td>1995–1997</td><td>3</td><td>−1,71</td><td>Muy seco</td></tr>
+<tr><td>2004–2005</td><td>2</td><td>−1,36</td><td>Moderado</td></tr>
+</table>
+<h4>Hidrológica — método RUN (Yevjevich)</h4>
+<div class="rx">Zt = (Xt − X̄)/S&nbsp;·&nbsp;M = Σ run negativo&nbsp;·&nbsp;I = M/D</div>
+<p class="rx-note">Zt serie estandarizada de caudales anuales · <b>Duración D</b> = años consecutivos con Zt&lt;0 · <b>Magnitud M</b> = suma de déficits · <b>Intensidad I</b> = M/D (Saldarriaga 1970, Millán 1972, Salas 1978).</p>
+<table class="tbl">
+<tr><th>Periodo</th><th>D</th><th>M</th><th>I</th></tr>
+<tr><td><b>1988–1992</b></td><td>5</td><td>−8,04</td><td><b>−1,61</b></td></tr>
+<tr><td>1956–1958</td><td>3</td><td>−3,14</td><td>−1,05</td></tr>
+<tr><td>1964–1971</td><td>8</td><td>−8,09</td><td>−1,01</td></tr>
+<tr><td>1973–1980</td><td>8</td><td>−5,47</td><td>−0,68</td></tr>
+</table>
+<div class="item" style="margin-top:7px"><span class="dot" style="background:#334155"></span><span>En 1912–2009: <b>16 años secos, 63 normales, 19 húmedos</b>. El mínimo absoluto fue <b>1992 con 12,04 m³/s</b> medios anuales.</span></div>
+<div class="warn">⚠️ La sequía más <b>intensa</b> (1988–1992, I = −1,61) no es la más <b>larga</b> (1964–1971, 8 años). Duración, magnitud e intensidad son tres atributos independientes: una sequía larga y suave puede ser menos dañina que una corta y aguda, o al revés, según la capacidad de regulación del sistema.</div>
+</div>
+
+<div class="sbar" style="background:var(--pt-b);color:var(--pt-f)">🟦 BLOQUE IX — RED HIDROMÉTRICA Y ESTÁNDARES DE LA OMM (Cap. XI, pp. 219–221)</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--pt-b);color:var(--pt-f)">Criterios de la OMM para ubicar una estación de aforo</span>
+<div class="def" style="border-color:#0c4a6e">El estudio se apoya explícitamente en la <b>Guía de Prácticas Hidrológicas de la Organización Meteorológica Mundial (OMM/WMO-N.° 168)</b>. La OMM es el organismo de Naciones Unidas que normaliza mediciones, unidades y métodos; sus estándares (junto al Reglamento Técnico Vol. III – Hidrología) son los que hacen comparables los datos peruanos con los del resto del mundo.</div>
+<div class="three">
+<div class="mini" style="border-color:#0c4a6e"><b>1. Tramo recto</b>≈100 m aguas arriba y abajo. Asegura flujo paralelo y perfil de velocidades predecible.</div>
+<div class="mini" style="border-color:#0c4a6e"><b>2. Cauce único</b>Toda la corriente confinada en un solo cauce para todos los niveles; sin corrientes subterráneas que escapen a la medición.</div>
+<div class="mini" style="border-color:#0c4a6e"><b>3. Lecho estable</b>Sin socavación ni relleno ni plantas acuáticas: si la sección cambia, la curva altura-caudal deja de ser válida.</div>
+<div class="mini" style="border-color:#0c4a6e"><b>4. Orillas permanentes</b>Altas para contener crecidas y libres de arbustos.</div>
+<div class="mini" style="border-color:#0c4a6e"><b>5. Control natural</b>Afloramiento rocoso, cañón estable, caída o cascada insumergible → <b>relación nivel-caudal estable</b>. Si no existe, se construye un control artificial.</div>
+<div class="mini" style="border-color:#0c4a6e"><b>6. Sin remansos</b>Lejos de confluencias y del efecto de marea, que introducirían influencia variable sobre el nivel.</div>
+</div>
+<div class="item" style="margin-top:7px"><span class="dot" style="background:#0c4a6e"></span><span><b>Por qué todo apunta a lo mismo:</b> cada criterio protege la <b>univocidad de la curva altura-caudal</b>. La estación mide un nivel (h) con un limnímetro o limnígrafo; el caudal se infiere de h. Si la relación h→Q se desplaza, todos los registros históricos quedan sesgados. El informe reconoce que “estas recomendaciones no siempre se pueden cumplir”, por lo que se busca el sitio con las mejores condiciones posibles.</span></div>
+<div class="exam"><b>🎯 EXAMEN: </b>Explique qué es la curva altura-caudal y por qué los seis criterios de la OMM para la selección del sitio de aforo apuntan, en el fondo, a preservar su estabilidad.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--gr-b);color:var(--gr-f)">Propuesta de la red (§11.2)</span>
+<div class="item"><span class="dot" style="background:#14532d"></span><span><b>Ricardo Palma</b> — nueva estación <b>limnimétrica</b> (mira); requiere limpieza de cauce y protección de riberas.</span></div>
+<div class="item"><span class="dot" style="background:#14532d"></span><span><b>Santa Eulalia</b> — nueva estación limnimétrica, mismas obras de acondicionamiento.</span></div>
+<div class="item"><span class="dot" style="background:#14532d"></span><span><b>Chosica</b> — mejoramiento mediante convenio <b>ANA–SENAMHI</b>: estación limnigráfica digital, cambio de poza y miras. Presupuesto: <b>S/ 34 682,50</b>.</span></div>
+<div class="item"><span class="dot" style="background:#14532d"></span><span>Ambos puntos coinciden con secciones de <b>control de calidad de agua de SEDAPAL</b>: una misma sección sirve para cantidad y calidad, lo que abarata la operación.</span></div>
+<hr class="divh">
+<p style="font-size:11.5px;margin:0 0 6px"><b>Lectura crítica de densidad de red</b></p>
+<div class="item"><span class="dot" style="background:#14532d"></span><span>3 estaciones hidrométricas / 3504 km² ≈ <b>1 cada 1170 km²</b>. La OMM sugiere, como orden de magnitud mínimo para zonas montañosas, del orden de 1 estación de caudal cada ~1000 km² y densidades pluviométricas bastante mayores. Con 27 pluviómetros (≈130 km²/estación) la red de lluvia es razonable, pero <b>la red de caudales estaba justo en el límite inferior</b>: de ahí la propuesta. <span style="color:var(--text-secondary)">(cifras de densidad OMM citadas como orden de magnitud; verificar la edición vigente de WMO-N.° 168)</span></span></div>
+</div>
+
+<div class="sbar" style="background:var(--gy-b);color:var(--gy-f)">⚫ TABLA INTEGRADORA FINAL — todo el estudio en una vista</div>
+
+<div class="block s3">
+<table class="tbl">
+<tr><th>Componente</th><th>Método / índice</th><th>Variable clave</th><th>Escala temporal</th><th>Resultado en el Rímac</th><th>Fuente / instrumento</th></tr>
+<tr><td><b>Delimitación</b></td><td>Pfafstetter (1989) + SIG</td><td>Topología del drenaje</td><td>Estática</td><td>3503,95 km²; código 137554; 9 UH nivel 7</td><td>Cartas IGN 1:100 000, ArcGIS 9.3</td></tr>
+<tr><td><b>Forma</b></td><td>Gravelius, factor de forma</td><td>Perímetro y área</td><td>Estática</td><td>Kc = 2,00 (alargada); Ff = 0,22</td><td>SIG</td></tr>
+<tr><td><b>Relieve</b></td><td>Curva hipsométrica</td><td>Altitud vs área</td><td>Estática</td><td>Hm = 3150 msnm; S = 0,0293 m/m</td><td>Modelo digital de elevación</td></tr>
+<tr><td><b>Red de drenaje</b></td><td>Strahler, Kirpich</td><td>Longitud de cauces</td><td>Horas</td><td>Orden 6; Dd = 0,66 km/km²; Tc = 9,17 h</td><td>SIG</td></tr>
+<tr><td><b>Precipitación</b></td><td>Thiessen ponderado</td><td>P mensual (mm)</td><td>Mensual / anual</td><td>0,6–874,6 mm; 72,5% en dic–mar</td><td>27 pluviómetros (SENAMHI)</td></tr>
+<tr><td><b>Temperatura</b></td><td>Regresión T vs altitud</td><td>T media, máx, mín (°C)</td><td>Mensual</td><td>−1,32 °C/1000 m; R² = 0,29</td><td>Termómetros de abrigo</td></tr>
+<tr><td><b>ETP</b></td><td>Penman-Monteith FAO</td><td>Rn, T, HR, u₂ (mm/día)</td><td>Diaria → anual</td><td>965–1276,8 mm/año</td><td>CropWat 4.3</td></tr>
+<tr><td><b>Clima</b></td><td>Thornthwaite (PE, TE)</td><td>P y T anuales</td><td>Climatológica</td><td>Árido a húmedo, mesotérmico B′</td><td>Índices adimensionales</td></tr>
+<tr><td><b>Consistencia</b></td><td>Doble masa, T-Student, F-Fisher</td><td>Media y desviación</td><td>Serie completa</td><td>Homogénea al 95%; solo Sta. Eulalia corregida</td><td>Análisis estadístico</td></tr>
+<tr><td><b>Caudales</b></td><td>Weibull m/(n+1)</td><td>Q medio mensual (m³/s)</td><td>Mensual, 98 años</td><td>Q(75%) = 20,49 m³/s = 642,48 hm³</td><td>Limnígrafo Chosica (SENAMHI)</td></tr>
+<tr><td><b>Modelación</b></td><td>Transferencia hidrológica</td><td>A y P areal</td><td>Mensual</td><td>Q = 0,0953·Q y 0,0698·Q</td><td>Parámetros adimensionales</td></tr>
+<tr><td><b>Balance</b></td><td>Q − D en punto de control</td><td>Volumen (hm³)</td><td>Mensual → anual</td><td>+146,92 hm³/año; déficit jun–nov</td><td>Estación Chosica</td></tr>
+<tr><td><b>Avenidas</b></td><td>Log Normal 2P (MV); SCS</td><td>Q máx instantáneo</td><td>T = 2 a 1000 años</td><td>452 m³/s para T = 100</td><td>Serie de máximos anuales</td></tr>
+<tr><td><b>Sequía meteorol.</b></td><td>IPE / SPI (McKee, 1993)</td><td>P acumulada</td><td>1–24 meses</td><td>1990–1992, ΣIPE = −5,61</td><td>Ajuste Gamma 2p</td></tr>
+<tr><td><b>Sequía hidrol.</b></td><td>Método RUN (Yevjevich)</td><td>Q anual estandarizado</td><td>Años</td><td>1988–1992: D=5, M=−8,04, I=−1,61</td><td>Serie 1912–2009</td></tr>
+</table>
+<div class="warn">⚠️ <b>DATO INTEGRADOR CLAVE:</b> todo el estudio descansa sobre <b>un solo punto de control real</b> — la estación Chosica. Ahí se mide el 100% de la escorrentía de la cuenca húmeda, se naturaliza la serie, se calcula la persistencia, se cierra el balance y se ajustan las distribuciones de máximas. Si esa estación falla o su curva altura-caudal se desplaza, <b>toda la cadena de resultados se desplaza con ella</b>. Esa fragilidad es, precisamente, la justificación técnica de proponer nuevas estaciones en Ricardo Palma y Santa Eulalia.</div>
+<div class="imgslot">📌 <b>IMAGEN 3</b> — pega aquí el <b>esquema hidráulico del sistema hídrico (§8.4, pág. 182, fuente EDEGEL)</b>: muestra en un solo gráfico Marcapomacocha → túnel trasandino → Santa Eulalia → cascada de centrales → Chosica → La Atarjea. Complementa con la <b>Figura 3.26</b> (ubicación de estaciones meteorológicas, pág. 118) y la <b>Figura 4.8</b> (polígonos de Thiessen, pág. 138).</div>
+</div>
+
+<div class="sbar" style="background:#0a2540;color:#7dd3fc">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+
+<div class="block s3" id="quiz-section">
+<div style="background:#0a2540;color:#fff;border-radius:9px;padding:10px 14px;margin-bottom:11px">
+<p style="font-family:Oswald;font-size:14px;margin:0;color:#fff">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</p>
+<p style="font-size:11px;margin:3px 0 0;color:#94a3b8">Marca tu respuesta y descubre si es correcta</p>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span id="qprog">Pregunta 0 de 10</span><span id="qscore">0% de aciertos</span></div>
+<div class="sbw"><div class="sbf" id="qbar" style="width:0%;background:#16a34a"></div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 1 / 10</p><p class="qtext">La cuenca del río Rímac tiene un coeficiente de compacidad Kc = 2,00. ¿Qué implica hidrológicamente?</p><div class="qopts" data-q="1">
+<button class="qbtn" data-c="0">A) Es una cuenca circular con crecidas muy rápidas e intensas</button>
+<button class="qbtn" data-c="0">B) Su tiempo de concentración es mínimo respecto a otra de igual área</button>
+<button class="qbtn" data-c="1">C) Es alargada, con hidrograma atenuado y recesión prolongada</button>
+<button class="qbtn" data-c="0">D) El área de la cuenca duplica a la del círculo equivalente</button>
+</div><div class="qfeedback" style="display:none"></div><div class="qexp">Kc relaciona el perímetro con el de un círculo de igual área. Kc≈1 es circular (todas las gotas llegan casi a la vez: pico alto y breve); Kc≈2 indica forma alargada, donde los aportes llegan escalonados y el pico se atenúa. Ojo: las subcuencas altas del Rímac tienen Kc de 1,30–1,44 y sí son propensas a crecidas.</div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 2 / 10</p><p class="qtext">En el hemisferio sur, ¿qué característica distingue el régimen pluviométrico de la cuenca alta del Rímac respecto a una cuenca montañosa del hemisferio norte a latitud equivalente?</p><div class="qopts" data-q="2">
+<button class="qbtn" data-c="1">A) El máximo pluvial ocurre en diciembre–marzo (verano austral), no en junio–agosto</button>
+<button class="qbtn" data-c="0">B) La precipitación disminuye con la altitud por efecto Coriolis</button>
+<button class="qbtn" data-c="0">C) No existe estacionalidad marcada porque está cerca del ecuador</button>
+<button class="qbtn" data-c="0">D) La evapotranspiración potencial es máxima en julio</button>
+</div><div class="qfeedback" style="display:none"></div><div class="qexp">El 72,52% de la lluvia anual cae entre diciembre y marzo, cuando la ZCIT migra al sur y se establece la Alta de Bolivia, que advecta humedad amazónica sobre los Andes. Coriolis afecta el sentido de giro de los sistemas, no el gradiente vertical de precipitación; y la ETP en la sierra es máxima justamente en la estación seca por mayor insolación.</div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 3 / 10</p><p class="qtext">¿Cuál afirmación sobre la naturalización de caudales en la estación Chosica es FALSA?</p><div class="qopts" data-q="3">
+<button class="qbtn" data-c="0">A) Consiste en restar los caudales del Túnel Trasandino a los registrados</button>
+<button class="qbtn" data-c="0">B) Se aplicó al periodo 1965–2009, cuando el trasvase ya operaba</button>
+<button class="qbtn" data-c="0">C) Busca obtener una serie estadísticamente homogénea para el análisis de frecuencia</button>
+<button class="qbtn" data-c="1">D) Elimina definitivamente el aporte del trasvase del cálculo de disponibilidad hídrica</button>
+</div><div class="qfeedback" style="display:none"></div><div class="qexp">La naturalización es un paso <i>metodológico intermedio</i>: se descuenta el trasvase para analizar el río en condiciones naturales y homogéneas, pero luego los 139,45 hm³ del Túnel Trasandino se <b>vuelven a sumar</b> en la oferta (642,48 + 139,45 = 781,92 hm³/año).</div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 4 / 10</p><p class="qtext">Una subcuenca sin aforo tiene As = 130,43 km² y Ps = 614,2 mm; la cuenca patrón tiene Ac = 2318,22 km² y Pc = 495,4 mm. ¿Cuál es el coeficiente de transferencia hidrológica?</p><div class="qopts" data-q="4">
+<button class="qbtn" data-c="0">A) 0,0563 — solo la relación de áreas</button>
+<button class="qbtn" data-c="1">B) 0,0698 — el producto de la relación de áreas por la de precipitaciones</button>
+<button class="qbtn" data-c="0">C) 1,2398 — solo la relación de precipitaciones</button>
+<button class="qbtn" data-c="0">D) 0,0453 — la relación de áreas dividida entre la de precipitaciones</button>
+</div><div class="qfeedback" style="display:none"></div><div class="qexp">Qs = (As/Ac)·(Ps/Pc)·Qc = (130,43/2318,22)·(614,2/495,4) = 0,05626 × 1,2398 = 0,0698. El método <b>multiplica</b> ambos factores adimensionales: la subcuenca es pequeña pero recibe más lluvia, y ambos efectos se combinan.</div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 5 / 10</p><p class="qtext">El balance hídrico de la cuenca arroja +146,92 hm³/año, pero con déficit de junio a noviembre. ¿Qué conclusión es correcta?</p><div class="qopts" data-q="5">
+<button class="qbtn" data-c="1">A) El excedente ocurre en meses de avenida y solo es aprovechable si existe capacidad de regulación</button>
+<button class="qbtn" data-c="0">B) El déficit estacional es un error de cálculo, ya que el balance anual es positivo</button>
+<button class="qbtn" data-c="0">C) La demanda supera a la oferta en términos anuales</button>
+<button class="qbtn" data-c="0">D) El déficit se debe a que no se contabilizaron las aguas subterráneas del acuífero de Lima</button>
+</div><div class="qfeedback" style="display:none"></div><div class="qexp">Es la lección central del capítulo IX: el superávit es <b>anual y agregado</b>, el déficit es <b>estacional y real</b>. El agua de marzo (+77,64 hm³) no sirve en julio (−8,16 hm³) salvo que se almacene. Ese es el rol de los 282,35 hm³ regulados en lagunas y represas.</div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 6 / 10</p><p class="qtext">En un diagrama de doble masa, la aparición de un “quiebre” de pendiente indica principalmente:</p><div class="qopts" data-q="6">
+<button class="qbtn" data-c="0">A) Que la estación registró una sequía severa en ese periodo</button>
+<button class="qbtn" data-c="0">B) Que la serie debe descartarse por completo</button>
+<button class="qbtn" data-c="1">C) Un posible error sistemático: cambio de instrumento, reubicación o de observador</button>
+<button class="qbtn" data-c="0">D) Que la precipitación areal fue mal calculada por Thiessen</button>
+</div><div class="qfeedback" style="display:none"></div><div class="qexp">La doble masa compara el acumulado de una estación contra el acumulado promedio del grupo. Un evento climático real afecta a <i>todas</i> las estaciones y no altera la pendiente relativa; un quiebre en una sola estación delata un cambio en las condiciones de medición. La serie no se descarta: se corrige el tramo dudoso previa verificación con las pruebas T y F.</div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 7 / 10</p><p class="qtext">Un caudal máximo instantáneo de 452 m³/s se asocia a un periodo de retorno T = 100 años. ¿Qué significa exactamente?</p><div class="qopts" data-q="7">
+<button class="qbtn" data-c="0">A) Que ocurrirá exactamente una vez cada 100 años calendario</button>
+<button class="qbtn" data-c="1">B) Que tiene 1% de probabilidad de ser igualado o excedido en cualquier año dado</button>
+<button class="qbtn" data-c="0">C) Que la última vez que ocurrió fue hace 100 años</button>
+<button class="qbtn" data-c="0">D) Que la persistencia de ese caudal es del 100%</button>
+</div><div class="qfeedback" style="display:none"></div><div class="qexp">T es el inverso de la probabilidad anual de excedencia: T=100 → P=0,01 por año. Nada impide que ocurra dos años seguidos. De hecho, en 50 años de vida útil el riesgo de que ocurra al menos una vez es 1−(0,99)⁵⁰ = 39,5%.</div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 8 / 10</p><p class="qtext">Se registra un IPE de −1,70 para un periodo de tres años en la cuenca. ¿Cómo se clasifica y qué implica?</p><div class="qopts" data-q="8">
+<button class="qbtn" data-c="0">A) Normal; el valor está dentro del rango −2 a +2</button>
+<button class="qbtn" data-c="0">B) Extremadamente seco, con frecuencia teórica de 1 en 50 años</button>
+<button class="qbtn" data-c="0">C) Moderadamente húmedo, porque el signo negativo indica acumulación</button>
+<button class="qbtn" data-c="1">D) Muy seco (sequía severa), con frecuencia teórica aproximada de 1 en 20 años</button>
+</div><div class="qfeedback" style="display:none"></div><div class="qexp">El rango −1,50 a −1,99 corresponde a “muy seco / sequía severa”, con frecuencia teórica de 1 en 20 años. Es el caso del periodo 1995–1997 en el Rímac. Los valores negativos siempre indican déficit respecto a la normal de la localidad.</div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 9 / 10</p><p class="qtext">La estación Matucana (2479 msnm) registra evaporación de tanque de 1567,2 mm/año, muy superior a Campo de Marte (159 msnm) con 464,3 mm. ¿Cuál es la explicación física?</p><div class="qopts" data-q="9">
+<button class="qbtn" data-c="0">A) A mayor altitud hay mayor presión atmosférica, que fuerza la evaporación</button>
+<button class="qbtn" data-c="0">B) Matucana está en la cuenca húmeda, donde hay más agua disponible para evaporar</button>
+<button class="qbtn" data-c="1">C) En altura hay mayor radiación incidente, menor nubosidad baja y menor humedad relativa: mayor déficit de presión de vapor</button>
+<button class="qbtn" data-c="0">D) El tanque de Matucana está mal calibrado según el informe</button>
+</div><div class="qfeedback" style="display:none"></div><div class="qexp">La evaporación la manda la demanda atmosférica, no la oferta de agua. La costa está cubierta por estratocúmulos de la inversión térmica (Campo de Marte: 0,87 h de sol en julio) y tiene HR de hasta 89%; Matucana recibe 7 h de sol en julio y baja a 57% de HR. Mayor radiación + aire más seco = mayor déficit de presión de vapor = más evaporación.</div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 10 / 10</p><p class="qtext">Según los criterios de la OMM adoptados en el estudio, ¿por qué se exige un “control natural inalterable” (afloramiento rocoso, cañón estable o cascada) en el sitio de aforo?</p><div class="qopts" data-q="10">
+<button class="qbtn" data-c="1">A) Para mantener estable la relación nivel-caudal, de la que depende toda la serie histórica</button>
+<button class="qbtn" data-c="0">B) Para proteger el limnígrafo de la corrosión del agua</button>
+<button class="qbtn" data-c="0">C) Porque la OMM exige que las estaciones estén en roca por razones sísmicas</button>
+<button class="qbtn" data-c="0">D) Para poder aplicar la fórmula de Kirpich en el cálculo del tiempo de concentración</button>
+</div><div class="qfeedback" style="display:none"></div><div class="qexp">La estación mide un nivel (h) y de él se infiere el caudal mediante la curva altura-caudal. Si el lecho se socava o se rellena, la misma altura corresponde a un caudal distinto y toda la serie histórica queda sesgada. Los seis criterios de la Guía de Prácticas Hidrológicas (OMM-N.° 168) apuntan a preservar esa univocidad.</div></div>
+
+<div id="qresult" style="display:none;border-radius:10px;padding:12px 15px;margin-top:8px;font-size:12.5px"></div>
+<button id="qreset" style="margin-top:9px;font-size:12px">🔄 Reiniciar quiz</button>
+</div>
+
+<div class="sbar" style="background:var(--pt-b);color:var(--pt-f)">🔗 PARA PROFUNDIZAR — FUENTES INSTITUCIONALES</div>
+
+<div class="block s3" id="refs-institucionales">
+<div class="three">
+<div class="mini" style="border-color:#0c4a6e"><b>🔗 ANA — Autoridad Nacional del Agua</b><a href="https://www.gob.pe/ana">gob.pe/ana</a><br>Autor del estudio. Aquí están los estudios hidrológicos de las demás cuencas, el Registro Administrativo de Derechos de Uso de Agua y el Observatorio del Agua. <i>Tipo: informes y datos oficiales.</i></div>
+<div class="mini" style="border-color:#0c4a6e"><b>🔗 SENAMHI Perú</b><a href="https://www.senamhi.gob.pe">senamhi.gob.pe</a><br>Opera la estación Chosica y la red pluviométrica usada en todo el capítulo IV. Datos históricos, boletines hidrológicos y avisos de nivel del Rímac. <i>Tipo: datos y pronósticos.</i></div>
+<div class="mini" style="border-color:#0c4a6e"><b>🔗 OMM / WMO</b><a href="https://wmo.int">wmo.int</a><br>Guía de Prácticas Hidrológicas (N.° 168), citada en el capítulo XI para la ubicación de estaciones, y guía del SPI/IPE (N.° 1090). Define además la normal climatológica de 30 años. <i>Tipo: normas y guías.</i></div>
+<div class="mini" style="border-color:#0c4a6e;margin-top:7px"><b>🔗 IGP — Instituto Geofísico del Perú</b><a href="https://www.gob.pe/igp">gob.pe/igp</a><br>Investigación sobre El Niño costero, variabilidad de lluvias andinas y peligros geofísicos en la cuenca del Rímac. <i>Tipo: investigación.</i></div>
+<div class="mini" style="border-color:#0c4a6e;margin-top:7px"><b>🔗 ENFEN</b><a href="https://www.gob.pe/enfen">gob.pe/enfen</a><br>Comunicados oficiales sobre el estado de El Niño / La Niña costero — clave para interpretar los años húmedos y secos identificados por el IPE. <i>Tipo: informes técnicos.</i></div>
+<div class="mini" style="border-color:#0c4a6e;margin-top:7px"><b>🔗 INDECI</b><a href="https://www.gob.pe/indeci">gob.pe/indeci</a><br>Gestión del riesgo de huaicos y avenidas en Chosica y la quebrada Jicamarca: la traducción social de los caudales de T=100 años. <i>Tipo: gestión de riesgo.</i></div>
+<div class="mini" style="border-color:#0c4a6e;margin-top:7px"><b>🔗 FAO — Riego y Drenaje 56</b><a href="https://www.fao.org/land-water/databases-and-software/cropwat/es/">fao.org · CropWat</a><br>Documento original de Penman-Monteith FAO y el software usado en §3.1.7 para calcular la ETP. <i>Tipo: metodología y software.</i></div>
+<div class="mini" style="border-color:#0c4a6e;margin-top:7px"><b>🔗 USACE — HEC</b><a href="https://www.hec.usace.army.mil">hec.usace.army.mil</a><br>Desarrollador del HEC-4 usado para completar las series (§4.4) y de HEC-HMS/HEC-RAS, sucesores modernos para modelar avenidas. <i>Tipo: software.</i></div>
+<div class="mini" style="border-color:#0c4a6e;margin-top:7px"><b>🔗 NRCS (ex SCS) — USDA</b><a href="https://www.nrcs.usda.gov">nrcs.usda.gov</a><br>Fuente original del método del hidrograma unitario sintético y de las tablas de Número de Curva (CN) aplicadas en §10.1.2. <i>Tipo: manual técnico.</i></div>
+</div>
+<p style="font-size:11px;color:var(--text-secondary);margin:9px 0 0">Nota de honestidad: los enlaces corresponden a los portales institucionales vigentes al momento de elaborar este canvas; los portales estatales peruanos migraron a gob.pe y sus rutas internas cambian con frecuencia <b>(verificar vigencia)</b>. Todas las cifras del canvas provienen del PDF del estudio; las lecturas críticas (R² de las regresiones, densidad de red OMM, contexto hemisférico) son análisis complementario, no texto del informe.</p>
+</div>
+
+<div class="ftr">
+<span class="ft">REFERENCIAS DEL PDF:</span>
+<span class="fc">ANA–DCPRH–ALA Chillón Rímac Lurín (2010), <i>Estudio Hidrológico y Ubicación de la Red de Estaciones Hidrométricas en la Cuenca del Río Rímac</i>, Vol. I, 226 pp. · Monsalve S., G. (1999) <i>Hidrología en la Ingeniería</i>, 2.ª ed. · McKee et al. (1993) IPE/SPI · Pfafstetter, O. (1989) · Heim, R. (2002) · Salas, J. (1978, 2005) · Mintegui et al. (1993) · Martínez et al. (1996) · Saldarriaga (1970), Millán (1972) · Aliaga A., S. V. (1983) <i>Tratamiento de datos hidrometeorológicos</i> · SEDAPAL, <i>Plan Maestro Optimizado</i> (2009) · EDEGEL (2010) · OMM, <i>Guía de Prácticas Hidrológicas</i> · U.S. SCS (1982) · Junta de Usuarios del Rímac, Plan de Cultivo y Riego 2009–2010.</span>
+</div>
+
+</div>
+<script>
+(function(){
+var root=document.getElementById('quiz-section');if(!root)return;
+var done=0,ok=0;
+function upd(){document.getElementById('qprog').textContent='Pregunta '+done+' de 10';var p=done?Math.round(ok/done*100):0;document.getElementById('qscore').textContent=p+'% de aciertos ('+ok+'/'+done+')';document.getElementById('qbar').style.width=(done*10)+'%';}
+root.addEventListener('click',function(e){
+var b=e.target.closest('.qbtn');if(!b)return;
+var box=b.parentElement;if(box.classList.contains('done'))return;
+var card=box.closest('.qcard');var good=b.dataset.c==='1';
+var btns=box.querySelectorAll('.qbtn');var letter='';
+btns.forEach(function(x,i){if(x.dataset.c==='1'){x.classList.add('ok');x.textContent='✅ '+x.textContent;letter=['A','B','C','D'][i];}});
+if(!good){b.classList.add('bad');b.textContent='❌ '+b.textContent.replace('❌ ','');}
+box.classList.add('done');
+var fb=card.querySelector('.qfeedback');var exp=card.querySelector('.qexp').innerHTML;
+fb.className='qfeedback '+(good?'fb-ok':'fb-bad');
+fb.innerHTML=(good?'✅ <b>¡Correcto!</b> ':'❌ <b>Incorrecto.</b> La respuesta correcta es '+letter+'. ')+exp;
+fb.style.display='block';
+done++;if(good)ok++;upd();
+if(done===10){var r=document.getElementById('qresult');var t,bg,c;
+if(ok<=4){bg='#fee2e2';c='#991b1b';t='Necesitas repasar el material. Vuelve a los bloques de persistencia, balance y eventos extremos.';}
+else if(ok<=7){bg='#fef9c3';c='#713f12';t='¡Buen avance, sigue repasando! Refuerza las fórmulas y las diferencias conceptuales marcadas con ⚠️.';}
+else{bg='#dcfce7';c='#14532d';t='¡Excelente dominio del tema! Estás listo para el examen.';}
+r.style.background=bg;r.style.color=c;r.innerHTML='<b>Puntaje final: '+ok+' / 10 correctas.</b> '+t;r.style.display='block';r.scrollIntoView({behavior:'smooth',block:'nearest'});}
+});
+document.getElementById('qreset').addEventListener('click',function(){
+root.querySelectorAll('.qopts').forEach(function(box,qi){box.classList.remove('done');
+box.querySelectorAll('.qbtn').forEach(function(x){x.classList.remove('ok','bad');x.textContent=x.textContent.replace('✅ ','').replace('❌ ','');});});
+root.querySelectorAll('.qfeedback').forEach(function(f){f.style.display='none';});
+document.getElementById('qresult').style.display='none';done=0;ok=0;upd();});
+root.querySelectorAll('.qexp').forEach(function(x){x.style.display='none';});
+upd();
+})();
+</script>
