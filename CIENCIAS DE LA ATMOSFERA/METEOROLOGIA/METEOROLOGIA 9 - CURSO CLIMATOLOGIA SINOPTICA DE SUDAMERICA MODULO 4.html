@@ -1,0 +1,709 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px 0;font-family:'Source Sans 3',var(--font-sans);color:var(--text-primary);
+--c-blu-b:#dbeafe;--c-blu-t:#1e3a8a;--c-grn-b:#dcfce7;--c-grn-t:#14532d;--c-red-b:#fee2e2;--c-red-t:#991b1b;
+--c-yel-b:#fef9c3;--c-yel-t:#713f12;--c-pur-b:#ede9fe;--c-pur-t:#4c1d95;--c-tea-b:#ccfbf1;--c-tea-t:#134e4a;
+--c-ora-b:#ffedd5;--c-ora-t:#7c2d12;--c-gry-b:#f1f5f9;--c-gry-t:#334155;--c-pnk-b:#fce7f3;--c-pnk-t:#831843;
+--c-pet-b:#e0f2fe;--c-pet-t:#0c4a6e;--warnb:#fff7ed;--warnt:#7c2d12;--exb:#fefce8;--ext:#713f12;--exbd:#facc15}
+@media(prefers-color-scheme:dark){.cv{--c-blu-b:#1e3a5f;--c-blu-t:#93c5fd;--c-grn-b:#14532d;--c-grn-t:#86efac;--c-red-b:#450a0a;--c-red-t:#fca5a5;
+--c-yel-b:#422006;--c-yel-t:#fef08a;--c-pur-b:#2e1065;--c-pur-t:#c4b5fd;--c-tea-b:#042f2e;--c-tea-t:#5eead4;
+--c-ora-b:#431407;--c-ora-t:#fed7aa;--c-gry-b:#1e293b;--c-gry-t:#94a3b8;--c-pnk-b:#4a044e;--c-pnk-t:#f0abfc;
+--c-pet-b:#082f49;--c-pet-t:#7dd3fc;--warnb:#2a1a0a;--warnt:#fed7aa;--exb:#2a2408;--ext:#fef08a;--exbd:#a16207}}
+@media(max-width:640px){.cv{grid-template-columns:1fr}.dual{grid-template-columns:1fr!important}}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.tbar{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:12px;padding:14px 18px}
+.tbar h1{font-family:Oswald;font-size:20px;font-weight:700;margin:0;color:#fff;line-height:1.25}
+.tbar p{font-size:11px;margin:5px 0 0;color:#cbd5e1}
+.sbar{grid-column:1/-1;font-family:Oswald;font-size:13px;font-weight:700;letter-spacing:.4px;padding:7px 12px;border-radius:8px;margin-top:6px}
+.block{background:var(--surface-2);border:0.5px solid var(--border);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}.block.s3{grid-column:1/-1}
+@media(max-width:640px){.block.s2,.block.s3{grid-column:span 1}}
+.bh{font-family:Oswald;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.3px}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0;font-size:12px;background:var(--surface-1);line-height:1.55;margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:6px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:var(--font-mono);font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0 3px;overflow-x:auto}
+.rx-note{font-size:11px;color:var(--text-secondary);line-height:1.5;margin-bottom:6px}
+.warn{background:var(--warnb);border-left:3px solid #f97316;border-radius:0;font-size:11.5px;color:var(--warnt);padding:7px 10px;line-height:1.5;margin:7px 0}
+.exam{background:var(--exb);border:1px solid var(--exbd);border-radius:8px;font-size:11.5px;color:var(--ext);padding:8px 10px;line-height:1.5;margin-top:8px}
+.exam b{font-weight:600}
+.mini{background:var(--surface-1);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.mini b{display:block;margin-bottom:3px;font-weight:600}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+@media(max-width:640px){.two,.three{grid-template-columns:1fr}}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--surface-1);padding:5px 8px;border-radius:6px;font-size:11px;line-height:1.35}
+.farrow{color:var(--text-secondary);font-size:15px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.dual-tech{background:var(--c-pet-b);color:var(--c-pet-t);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.dual-plain{background:var(--c-grn-b);color:var(--c-grn-t);border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5}
+.dual-label{font-family:Oswald;font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 4px;opacity:.85}
+.dual p{margin:0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--surface-1);padding:5px 7px;border-bottom:0.5px solid var(--border);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--border);vertical-align:top;line-height:1.45}
+.divh{border:none;border-top:0.5px solid var(--border);margin:7px 0}
+.stat-bar-wrap{width:100%;background:var(--surface-1);border-radius:20px;height:11px;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;transition:width .3s}
+.qhead{background:#0a2540;color:#fff;border-radius:10px;padding:11px 14px;margin-bottom:12px}
+.qhead h3{font-family:Oswald;font-size:14px;margin:0;color:#fff;font-weight:500}
+.qhead p{font-size:11px;margin:3px 0 0;color:#94a3b8}
+.qcard{border-top:0.5px solid var(--border);padding:12px 0}
+.qnum{font-family:Oswald;font-size:11px;color:var(--text-secondary);margin:0 0 4px;letter-spacing:.5px}
+.qtext{font-size:12.5px;margin:0 0 8px;line-height:1.5;font-weight:500}
+.qbtn{background:var(--surface-1);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--text-primary);font-family:inherit;line-height:1.4;display:block}
+.qbtn:hover{border-color:var(--border-strong)}
+.qbtn.ok{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.bad{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qopts.done .qbtn{pointer-events:none}
+.qopts.done .qbtn:not(.ok):not(.bad){opacity:.6}
+.qfeedback{border-left:3px solid;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5;border-radius:0}
+.fb-ok{background:#f0fdf4;border-color:#16a34a;color:#14532d}
+.fb-bad{background:#fef2f2;border-color:#dc2626;color:#991b1b}
+.ftr{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
+.ft{font-family:Oswald;font-size:12px;color:#7dd3fc;letter-spacing:.5px}
+.fc{font-size:11px;color:#94a3b8;line-height:1.6;flex:1;min-width:220px}
+.cv a{color:inherit}
+</style>
+<h2 class="sr-only">Canvas de resumen del Módulo 1, Tema 2.2: sistemas sinópticos en Sudamérica extratropical, con diagramas, tablas comparativas y un quiz de 10 preguntas.</h2>
+<div class="cv">
+
+<div class="tbar">
+<h1>Módulo 1 · Tema 2.2 — Sistemas sinópticos en Sudamérica extratropical</h1>
+<p>Curso: Pronóstico Climático Estacional · SENAMHI – CLIMANDES · N. Quispe Gutiérrez (SENAMHI) y J. M. Gálvez Chavarri (SRG/NOAA) · con E. Villegas, T. García, E. Yacolca (SENAMHI)</p>
+<div style="margin-top:8px">
+<span class="pill" style="background:#1e3a5f;color:#93c5fd">Geografía y controles semipermanentes</span>
+<span class="pill" style="background:#134e4a;color:#5eead4">Cuenca del Pacífico</span>
+<span class="pill" style="background:#431407;color:#fed7aa">Patagonia y Tierra del Fuego</span>
+<span class="pill" style="background:#2e1065;color:#c4b5fd">Cuenca del Río de la Plata</span>
+<span class="pill" style="background:#450a0a;color:#fca5a5">Tiempo severo</span>
+</div>
+</div>
+
+<div class="sbar" style="background:var(--c-blu-b);color:var(--c-blu-t)"><i class="ti ti-map-2" aria-hidden="true"></i> 2.2.1 · Generalidades de la región (diap. 3–12)</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--c-blu-b);color:var(--c-blu-t)">A. Geografía de Sudamérica extratropical (diap. 3–4)</span>
+<div class="def" style="border-left-color:#1e3a8a">Sudamérica extratropical no se define por un paralelo fijo sino por un criterio <b>dinámico</b>: es la región donde los <b>sistemas frontales de niveles bajos</b> ejercen control sobre el clima. Por eso su límite norte es <b>asimétrico</b> respecto a los Andes, y ese es el concepto que hay que dominar.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><b>Al oeste de los Andes (cuenca del Pacífico):</b> los frentes difícilmente superan los ~28°S. El límite norte se fija en el desierto de Atacama y el Altiplano (~27°–28°S). Razón física: el Anticiclón del Pacífico Sur (APS) bloquea, y el mar frío (Corriente de Humboldt) estabiliza la capa baja, cortando la baroclinicidad que alimenta los sistemas.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><b>Al este de los Andes:</b> los frentes se <b>aceleran</b> y llegan hasta el sur de la Amazonía / Santa Cruz de la Sierra y el Pantanal (~18°–19°S), Mato Grosso do Sul, Paraná y la Serra do Mar. En ocasiones alcanzan Perú y el oeste amazónico. La cordillera actúa como pared que canaliza el aire frío hacia el norte por su flanco oriental.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><b>Lectura de la vegetación (Landsat/Google Earth):</b> la CPA del sur de Chile y la CRP (NE de Argentina, Uruguay, Paraguay, sur de Brasil) son verdes porque reciben humedad frontal del oeste y humedad amazónica/atlántica respectivamente. Las zonas más secas son la Patagonia (sotavento) y el centro-norte de Chile (subsidencia del APS).</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">Para meteorólogos</p><p>La barrera orográfica andina (≈4–6 km, con número de Froude bajo en incursiones frías someras) impone un bloqueo del flujo que fuerza el aire frío post-frontal a canalizarse meridionalmente por el flanco oriental. El resultado es una <b>asimetría zonal en la latitud de penetración frontal</b>: ~28°S al oeste vs ~18°S al este. La OMM/WMO define el frente como la zona de transición entre masas de aire de distinta densidad; aquí esa zona queda geométricamente deformada por la orografía.</p></div>
+<div class="dual-plain"><p class="dual-label">Para no meteorólogos</p><p>Los Andes funcionan como el muro de un canal. El aire frío que viene del sur es pesado y bajo: no logra treparlo, así que se desvía y corre hacia el norte pegado al lado este de la montaña, como agua que sigue una acequia. Por eso los frentes fríos llegan mucho más al norte del lado argentino/boliviano que del lado chileno, aunque salgan del mismo lugar.</p></div>
+</div>
+<div class="warn"><b>ERROR COMÚN:</b> creer que "extratropical" equivale a "más allá de 23,5°S (trópico de Capricornio)". Aquí es un criterio de <b>procesos</b>, no astronómico: la CRP tiene influencia tropical buena parte del año y aun así se clasifica como extratropical porque la ciclogénesis y los frentes gobiernan su tiempo severo.</div>
+<div class="exam"><b>EXAMEN:</b> Explique por qué el límite norte de Sudamérica extratropical se ubica ~10° de latitud más al norte al este de los Andes que al oeste. Fundamente en términos de bloqueo orográfico, profundidad de la masa fría y baroclinicidad.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--c-gry-b);color:var(--c-gry-t)">Divisiones geográficas (diap. 4)</span>
+<div class="def" style="border-left-color:#334155">Se divide en tres regiones <b>según los procesos que controlan su climatología sinóptica</b>, no según fronteras políticas.</div>
+<div class="mini" style="border-left:3px solid #0d9488"><b>CPA — Cuenca del Pacífico y Andes</b>Chile desde Coquimbo hacia el sur. Dominan frentes del oeste, conexiones subtropicales y forzamiento orográfico de barlovento. Escala sinóptica, días.</div>
+<div class="mini" style="border-left:3px solid #ea580c;margin-top:7px"><b>PT — Patagonia y Tierra del Fuego</b>Al sur de ~40°S, al este de la cordillera. Dominan compresión adiabática, secamiento y vaguada térmica de sotavento. Semiárida.</div>
+<div class="mini" style="border-left:3px solid #7c3aed;margin-top:7px"><b>CRP — Cuenca del Río de la Plata</b>Desde el Río Colorado hasta el sur de Bolivia, todo Paraguay, Mato Grosso do Sul y Paraná. Encuentro de masas tropicales con dinámica extratropical: ciclogénesis y tiempo severo.</div>
+<div class="exam"><b>EXAMEN:</b> Justifique la inclusión de la CRP dentro de "Sudamérica extratropical" pese a su marcada influencia tropical estacional.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--c-pur-b);color:var(--c-pur-t)">B. Controles semipermanentes del clima en 850 hPa (diap. 5)</span>
+<div class="def" style="border-left-color:#4c1d95">Los <b>controles semipermanentes</b> son los sistemas que persisten en el promedio climatológico (meses a estaciones) y que definen el "fondo" sobre el cual actúan los frentes (horas a días). Distinguirlos es la base del pronóstico estacional: lo semipermanente da la <b>climatología</b>, lo frontal da la <b>variabilidad</b>.</div>
+<svg width="100%" viewBox="0 0 680 330" role="img"><title>Esquema de los controles semipermanentes en 850 hPa sobre Sudamérica extratropical</title><desc>Diagrama esquemático que ubica el anticiclón del Pacífico Sur, el anticiclón del Atlántico Sur, el chorro de capas bajas sudamericano, la vaguada costera y el cinturón de vientos del oeste.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<path d="M300 30 L318 90 L330 150 L318 210 L300 260 L286 290" fill="none" stroke="#888780" stroke-width="9" stroke-linecap="round" opacity="0.55"/>
+<text class="ts" x="336" y="150">Andes</text>
+<g class="c-blue"><ellipse cx="140" cy="120" rx="72" ry="46" stroke-width="0.5"/><text class="th" x="140" y="114" text-anchor="middle">APS</text><text class="ts" x="140" y="132" text-anchor="middle">Alta del Pacífico</text></g>
+<g class="c-red"><ellipse cx="540" cy="120" rx="72" ry="46" stroke-width="0.5"/><text class="th" x="540" y="114" text-anchor="middle">AAS</text><text class="ts" x="540" y="132" text-anchor="middle">Alta del Atlántico</text></g>
+<g class="c-green"><rect x="356" y="34" width="130" height="52" rx="8" stroke-width="0.5"/><text class="th" x="421" y="54" text-anchor="middle">SALLJ</text><text class="ts" x="421" y="72" text-anchor="middle">Transporte de humedad</text></g>
+<line x1="400" y1="86" x2="450" y2="140" stroke="#1D9E75" stroke-width="2" marker-end="url(#arrow)"/>
+<g class="c-teal"><rect x="196" y="176" width="96" height="38" rx="8" stroke-width="0.5"/><text class="th" x="244" y="195" text-anchor="middle">Vaguada costera</text></g>
+<g class="c-amber"><rect x="60" y="248" width="560" height="46" rx="8" stroke-width="0.5"/><text class="th" x="340" y="264" text-anchor="middle">Cinturón de vientos del oeste</text><text class="ts" x="340" y="282" text-anchor="middle">Máximo al sur de 45°S, pico en Tierra del Fuego (~50°S)</text></g>
+<line x1="150" y1="170" x2="196" y2="192" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="490" y1="150" x2="440" y2="180" stroke="#A32D2D" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>
+<div class="three" style="margin-top:9px">
+<div class="mini" style="border-top:3px solid #1e3a8a"><b>APS y AAS</b>Anticiclones subtropicales de ambos océanos. Se definen con más nitidez en 1000 hPa que en 850 hPa. Controlan subsidencia, inversión térmica costera y dirección del flujo de nivel bajo. Escala planetaria, permanentes con migración estacional.</div>
+<div class="mini" style="border-top:3px solid #16a34a"><b>SALLJ / LLJ</b>Chorro de capas bajas sudamericano. Es el <b>río atmosférico continental</b> que transporta humedad amazónica hacia el sureste. Máximo en verano (enero), también intenso en invierno y primavera; mínimo en otoño. Escala sinóptica, días.</div>
+<div class="mini" style="border-top:3px solid #0d9488"><b>Vaguada costera (VC)</b>Vaguada térmica frente o sobre la costa de Chile, asociada al contraste tierra-mar y al bloqueo andino. Modula la nubosidad estratiforme costera y la advección de nivel bajo.</div>
+</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">Para meteorólogos</p><p>El SALLJ es un máximo de viento en la capa 850–925 hPa, canalizado entre la vertiente oriental andina y la circulación del AAS. Su convergencia de humedad (−∇·qV) en la región de salida alimenta la CCM/ZCAS. Su posición climatológica migra: en enero se ubica entre el sur de Perú–Acre/Amazonas y el sur de Bolivia/norte de Paraguay; en julio se forma en el sur de Bolivia y se extiende hasta el sureste de Brasil, favoreciendo convección intensa y nimboestratos por ascenso isentrópico sobre la pendiente del frente cálido.</p></div>
+<div class="dual-plain"><p class="dual-label">Para no meteorólogos</p><p>Imagine una cinta transportadora de aire húmedo, muy cerca del suelo, que recoge humedad de la Amazonía y la lleva hacia el sureste. Donde esa cinta "se frena" o choca con aire frío, la humedad se acumula y llueve fuerte. En verano la cinta descarga sobre Bolivia y Paraguay; en invierno se estira más al sur y descarga sobre el sur de Brasil y el noreste argentino.</p></div>
+</div>
+<div class="exam"><b>EXAMEN:</b> Diferencie "control semipermanente" de "sistema transitorio" y explique cómo el promedio mensual de viento en 850 hPa puede subestimar la intensidad real de los oestes en invierno en el cono sur.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--c-ora-b);color:var(--c-ora-t)">Ciclo anual de las circulaciones en 850 hPa — enero vs julio (diap. 6–8)</span>
+<div class="def" style="border-left-color:#7c2d12">Cuatro regiones concentran la señal estacional. El resultado más contraintuitivo del módulo: <b>los oestes del extremo sur son MÁS intensos en verano que en invierno</b>.</div>
+<table class="tbl">
+<tr><th style="width:22%">Región</th><th>Enero (verano austral)</th><th>Julio (invierno austral)</th></tr>
+<tr><td><b>1. Cono sur</b><br>(Aysén, Magallanes, Santa Cruz, Chubut)</td><td>Oestes <b>más intensos y persistentes</b> al sur de 45°S. El APS migra al sur (norte de 34°S) y los patrones sinópticos persisten.</td><td>Oestes <b>más débiles en el promedio</b>. El APS migra al norte (norte de 30°S) y, sobre todo, aumenta la <b>alternancia baja-alta</b>: los vientos rotan más y el promedio vectorial baja.</td></tr>
+<tr><td><b>2. Centro de Chile</b></td><td>Componente <b>sur</b> dominante por el APS desplazado al sur. Advección fría marítima → limita lluvias.</td><td>Componente <b>sur y oeste</b>: el APS retrocede al norte y entran vaguadas extratropicales y frentes fríos → lluvias invernales.</td></tr>
+<tr><td><b>3. Centro y norte de Argentina (CRP)</b></td><td>Vientos variables con predominio del <b>noreste</b> por la <b>Baja del Chaco</b>. Convergencia de humedad contra los Andes → lluvias de verano.</td><td>Predominio del <b>oeste-noroeste</b>: los oestes que cruzan la cordillera con las vaguadas se mezclan hasta superficie por turbulencia diurna. Sin Baja del Chaco. Compresión adiabática → más seco.</td></tr>
+<tr><td><b>4. SALLJ</b></td><td>Entre sur de Perú–Acre/Amazonas y sur de Bolivia/norte de Paraguay. Convergencia → lluvia en Bolivia/Paraguay.</td><td>Se forma en el sur de Bolivia y se extiende hasta el sureste de Brasil. Convergencia → SE de Paraguay/sur de Brasil.</td></tr>
+</table>
+<div class="warn"><b>ERROR COMÚN:</b> interpretar un <b>promedio mensual de viento bajo</b> como "hubo poco viento". En invierno los procesos baroclínicos del hemisferio sur hacen que el viento <b>rote</b> mucho en dirección; al promediar vectores que se cancelan, la magnitud media cae aunque haya rachas fuertes. Promedio bajo ≠ calma: puede significar <b>alta variabilidad</b>.</div>
+<div class="exam"><b>EXAMEN:</b> En el noroeste de Argentina, ¿por qué la componente este de verano favorece precipitación mientras la componente noroeste de invierno la inhibe? Explique con convergencia de humedad y compresión adiabática.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--c-pet-b);color:var(--c-pet-t)">Ciclo anual de los chorros de altura (diap. 9)</span>
+<div class="def" style="border-left-color:#0c4a6e">Sobre Sudamérica coexisten el <b>chorro subtropical (STJ)</b> y el <b>chorro polar (PJ)</b>. Ambos <b>migran hacia el norte en invierno</b> (julio), siguiendo el desplazamiento del gradiente térmico meridional.</div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><b>Enero:</b> STJ y PJ desplazados al sur; el continente subtropical queda bajo influencia de la Alta de Bolivia.</div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><b>Julio:</b> el PJ en particular sube en latitud; STJ intenso sobre el centro-norte de Argentina/Chile. Mayor baroclinicidad → más ciclogénesis y más frentes que penetran al norte.</div>
+<div class="rx">V_g térmico ∝ (∂T/∂y) · Δz  →  jet donde ∂T/∂y es máximo</div>
+<div class="rx-note">Viento térmico: la cizalla vertical del viento geostrófico es proporcional al gradiente horizontal de temperatura. Unidades: ∂T/∂y en K/100 km (típico 0,5–2 K/100 km en zona frontal); jet de 30–70 m/s (60–140 kt) en 250–200 hPa. Válido bajo geostrofía e hidrostática; no aplica en el ecuador (f→0).</div>
+<div class="warn"><b>HEMISFERIO SUR vs NORTE:</b> en el HS el aire frío está al <b>sur</b>, por lo que el viento térmico apunta al <b>oeste con el aire frío a la derecha</b> del flujo; la circulación ciclónica es <b>horaria</b> (f&lt;0). Todos los esquemas de cuadrantes de jet y de nubosidad frontal del HN deben <b>reflejarse en espejo</b> antes de aplicarlos aquí.</div>
+<div class="exam"><b>EXAMEN:</b> Deduzca, a partir de la ecuación del viento térmico, por qué el chorro polar migra hacia latitudes menores durante el invierno austral.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--c-pur-b);color:var(--c-pur-t)">Vaguadas de invierno ciclogenéticas cerca de Uruguay — Dal Piva, Gan y Rao (2009) (diap. 10–12)</span>
+<div class="def" style="border-left-color:#4c1d95">Estudio de cinco inviernos (1999–2003): se identificaron <b>38 casos</b> de vaguadas de 500 hPa cruzando la cordillera y produciendo ciclogénesis en Uruguay o alrededores, es decir <b>~7 a 8 casos por año</b>. Se agruparon en dos compuestos: <b>B (25 casos, el más común)</b> y <b>C (13 casos)</b>.</div>
+<div class="flow">
+<span class="fbox">Vaguada de 500 hPa en el Pacífico</span><span class="farrow">→</span>
+<span class="fbox">Cruce/intensificación sobre los Andes</span><span class="farrow">→</span>
+<span class="fbox">Vaguada frontal en superficie sobre Argentina</span><span class="farrow">→</span>
+<span class="fbox">Ciclogénesis rápida en Uruguay</span><span class="farrow">→</span>
+<span class="fbox">Frente frío avanza al norte</span>
+</div>
+<div class="two">
+<div class="mini" style="border-left:3px solid #7c3aed"><b>Compuesto B (25 casos — el más frecuente)</b>Inicia con una vaguada <b>menos intensa</b>. La masa al este de los Andes sobre Argentina está <b>más cálida</b>: presiones al nivel del mar menores, espesores mayores y patrón de dorsal en altura. Ese contraste térmico en el sector cálido alimenta el desarrollo baroclínico. El frente frío termina cruzando São Paulo hasta el este de Bolivia. Efectos menores en el campo de presión del Pacífico. <b>Para Chile: lluvias en el sur.</b></div>
+<div class="mini" style="border-left:3px solid #be123c"><b>Compuesto C (13 casos)</b>Vaguada <b>más intensa</b> en el Pacífico, que no cruza progresivamente sino que primero atraviesa una onda corta que se intensifica al salir de la costa. Ciclón y frente <b>más intensos</b>. El frente ingresa hasta Rondônia y sigue más al norte; la dorsal polar se extiende más al norte con vientos del sur que empujan el frente hasta la Amazonía occidental. Constituye un <b>acercamiento del APS a la costa del Perú</b>. <b>Para Chile: lluvias en el centro y centro-sur (Biobío–Coquimbo), más prolongadas</b> por la persistencia de vaguadas en el Pacífico oriental y el lento ascenso de las presiones.</div>
+</div>
+<div class="warn"><b>ERRATA/PRECISIÓN DE LA FUENTE:</b> el PDF indica "Monthly Weather Review, Volume 138" para un trabajo fechado 2009; el volumen 138 corresponde a 2010 (publicación en línea 2009). Además, en la diapositiva 12 el texto dice que el contraste térmico "desarrolla un ciclón y frente más intensos en el caso C" mientras describe la masa más cálida en el caso B: al estudiar, quédese con el resultado observado (C = sistema más intenso y frente que penetra más al norte), que es el que sostienen los paneles.</div>
+<div class="exam"><b>EXAMEN:</b> Compare los compuestos B y C de Dal Piva et al. (2009) en términos de intensidad de la vaguada, penetración latitudinal del frente frío e impacto diferenciado en la precipitación de Chile. ¿Cuál de los dos es más relevante para el pronóstico en la costa peruana y por qué?</div>
+</div>
+
+<div class="sbar" style="background:var(--c-tea-b);color:var(--c-tea-t)"><i class="ti ti-cloud-rain" aria-hidden="true"></i> 2.2.2 · Cuenca del Pacífico: frentes y conexiones subtropicales (diap. 13–29)</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--c-yel-b);color:var(--c-yel-t)">Agua precipitable, W (diap. 14)</span>
+<div class="def" style="border-left-color:#713f12">Contenido <b>total</b> de vapor de agua en una columna atmosférica, expresado como la lámina de agua líquida que se acumularía si todo ese vapor condensara y precipitara. Se mide en <b>mm</b>. Es una variable de <b>disponibilidad</b>, no de mecanismo: dice cuánta munición hay, no si se disparará.</div>
+<div class="rx">W = (1 / ρ g) ∫<sub>p1</sub><sup>p2</sup> x dp</div>
+<div class="rx-note"><b>W</b> = agua precipitable [mm o kg m⁻²] · <b>x</b> = razón de mezcla [kg/kg; típico 1–20 g/kg] · <b>ρ</b> = densidad del agua líquida [1000 kg m⁻³] · <b>g</b> = 9,81 m s⁻² · <b>p1</b> = presión en superficie (~1013 hPa) · <b>p2</b> = nivel donde el vapor es despreciable (~300–200 hPa). Válida para toda la columna troposférica; en la práctica &gt;90 % de W está por debajo de 500 hPa, así que es muy sensible a la humedad de niveles bajos y prácticamente ciega a la estratósfera.</div>
+<div class="mini" style="border-left:3px solid #ca8a04"><b>Ejemplo numérico resuelto</b>Capa 1000→700 hPa (Δp = 300 hPa = 30 000 Pa) con razón de mezcla media x̄ = 12 g/kg = 0,012 kg/kg.<br>W = (1/ρg)·x̄·Δp = (0,012 × 30 000) / (1000 × 9,81) = 360 / 9810 = <b>0,0367 m ≈ 36,7 mm</b> solo en esa capa.<br>Interpretación operativa: ese valor supera el umbral de 30 mm, así que en la CPA chilena hay <b>potencial de lluvias localmente intensas</b> si el forzamiento orográfico y la dinámica de altura acompañan.</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">Para meteorólogos</p><p>W es la integral vertical de la razón de mezcla escalada por ρ y g. Existe correlación estadística entre W y el monto precipitado (ESRL/NOAA), pero la eficiencia de precipitación depende además del forzamiento sinóptico (divergencia en altura, advección de vorticidad ciclónica), de la estabilidad y de la duración del evento. Definición formal en el Glossary of Meteorology de la AMS (2017).</p></div>
+<div class="dual-plain"><p class="dual-label">Para no meteorólogos</p><p>Es "cuánta agua hay guardada en el aire" sobre un punto, medida como la altura que alcanzaría en un balde si toda esa humedad cayera de golpe. Tener mucha agua guardada no garantiza lluvia: hace falta algo que la haga subir y condensar. Es como tener el tanque lleno pero necesitar que alguien abra la llave.</p></div>
+</div>
+<div class="two">
+<div class="mini" style="border-top:3px solid #38bdf8"><b>Umbrales prácticos (WPC International Desks)</b>~15 mm → precipitaciones muy ligeras, si ocurren.<br>&gt;20 mm → realce significativo de precipitación en Chile.<br>&gt;30 mm → potencial de lluvias localmente intensas por forzamiento orográfico andino.<br>~50 mm → masas tropicales de humedad profunda.<br>&gt;40 mm en Chile → raro, pero ha ocurrido.</div>
+<div class="mini" style="border-top:3px solid #f43f5e"><b>Qué evaluar cuando W &gt; 50 mm</b>Ya no basta la humedad: hay que evaluar <b>dinámica</b> (divergencia del chorro, lado divergente de la vaguada), <b>estabilidad</b> (CAPE, perfil térmico) y el <b>gatillador</b> (frente, orografía, convergencia). Sin gatillador, agua precipitable alta puede terminar en cielo cubierto sin lluvia.</div>
+</div>
+<div class="warn"><b>ERROR COMÚN:</b> confundir <b>agua precipitable</b> con <b>precipitación pronosticada</b>. W = 40 mm no significa "van a caer 40 mm": la columna se puede reponer continuamente por advección (y llover mucho más que 40 mm), o no precipitar nada si falta forzamiento. Tampoco confunda W (columna integrada, mm) con <b>humedad relativa</b> (adimensional, de un nivel) ni con <b>razón de mezcla</b> (g/kg, de un nivel).</div>
+<div class="exam"><b>EXAMEN:</b> Un sondeo en Puerto Montt reporta W = 34 mm con vientos del NW de 45 kt en 925 hPa. Discuta si esta información es suficiente para emitir un aviso de lluvias intensas y qué variables adicionales evaluaría.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--c-tea-b);color:var(--c-tea-t)">Columna de vapor y agua precipitable</span>
+<svg width="100%" viewBox="0 0 680 300" role="img"><title>Comparación entre una columna seca y una columna húmeda y su equivalente en agua precipitable</title><desc>Dos columnas troposféricas: la izquierda con humedad solo en niveles bajos genera 15 milímetros de agua precipitable; la derecha, húmeda en toda la columna, genera 50 milímetros.</desc>
+<rect x="120" y="40" width="90" height="200" rx="4" fill="none" stroke="#888780" stroke-width="0.5"/>
+<rect x="120" y="180" width="90" height="60" fill="#378ADD" opacity="0.75"/>
+<rect x="120" y="130" width="90" height="50" fill="#85B7EB" opacity="0.5"/>
+<text class="ts" x="165" y="262" text-anchor="middle">Húmedo solo abajo</text>
+<rect x="42" y="196" width="46" height="44" rx="3" fill="none" stroke="#888780" stroke-width="0.5"/>
+<rect x="42" y="226" width="46" height="14" fill="#378ADD"/>
+<text class="th" x="65" y="188" text-anchor="middle">15 mm</text>
+<rect x="440" y="40" width="90" height="200" rx="4" fill="none" stroke="#888780" stroke-width="0.5"/>
+<rect x="440" y="120" width="90" height="120" fill="#378ADD" opacity="0.85"/>
+<rect x="440" y="70" width="90" height="50" fill="#85B7EB" opacity="0.6"/>
+<text class="ts" x="485" y="262" text-anchor="middle">Húmedo en toda la columna</text>
+<rect x="580" y="150" width="52" height="90" rx="3" fill="none" stroke="#888780" stroke-width="0.5"/>
+<rect x="580" y="192" width="52" height="48" fill="#378ADD"/>
+<text class="th" x="606" y="142" text-anchor="middle">50 mm</text>
+<line x1="216" y1="218" x2="96" y2="218" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="536" y1="196" x2="574" y2="196" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text class="ts" x="340" y="100" text-anchor="middle">Misma altura de columna,</text>
+<text class="ts" x="340" y="120" text-anchor="middle">distinta integral de vapor</text>
+<text class="ts" x="340" y="150" text-anchor="middle">El pluviómetro dibujado equivale</text>
+<text class="ts" x="340" y="170" text-anchor="middle">al vapor condensado por completo</text>
+</svg>
+<div class="exam"><b>EXAMEN:</b> Dibuje y explique por qué dos columnas con la misma humedad relativa en superficie pueden tener valores de agua precipitable muy distintos.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--c-tea-b);color:var(--c-tea-t)">Conexión subtropical (CS) / río atmosférico (diap. 15–16)</span>
+<div class="def" style="border-left-color:#134e4a">Corredor <b>elongado y angosto</b> por el que transita una cantidad considerable de vapor de agua entre dos regiones remotas (Zhu y Newell, 1998). En sentido estricto, una CS es un río atmosférico que transporta una masa de origen <b>tropical o subtropical</b> hacia una región <b>extratropical</b>. Ejemplo clásico del hemisferio norte: el <b>"Pineapple Express"</b> (Higgins et al., 2000).</div>
+<div class="item"><span class="dot" style="background:#0d9488"></span><b>Dato clave para el examen:</b> del <b>30 al 50 %</b> de la precipitación en costas oeste extratropicales ocurre en <b>unos pocos eventos de CS por año</b> (Zhu y Newell 1998; ESRL/NOAA). Es decir, la climatología de lluvia de Chile está dominada por un puñado de eventos, no por lluvia distribuida.</div>
+<div class="item"><span class="dot" style="background:#0d9488"></span><b>Dónde se forman:</b> en el <b>flanco polar-oeste</b> de los anticiclones subtropicales semipermanentes de nivel bajo. Ahí los vientos del oeste transportan masas húmedas hacia latitudes medias y altas de las <b>cuencas occidentales</b> de los continentes.</div>
+<div class="item"><span class="dot" style="background:#0d9488"></span><b>Consecuencia:</b> pueden causar <b>inundaciones extensivas</b> (ESRL/NOAA).</div>
+<div class="two">
+<div class="mini" style="border-left:3px solid #185FA5"><b>Hemisferio Norte</b>Origen: Hawái/Pacífico tropical central ("Pineapple Express"). Flujo del <b>suroeste</b> en nivel bajo. Destino: costa oeste de EE. UU./Canadá (California, Oregón, Columbia Británica). Flanco polar del anticiclón del Pacífico Norte.</div>
+<div class="mini" style="border-left:3px solid #A32D2D"><b>Hemisferio Sur</b>Origen: <b>Polinesia</b>. Flujo del <b>noroeste</b> en nivel bajo. Destino: <b>sur de Chile</b> / cuenca Pacífica de los Andes. La masa húmeda logra cruzar la cordillera, pero <b>modificada</b>: ya perdió agua como lluvia en el sur de Chile.</div>
+</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">Para meteorólogos</p><p>La CS es una banda estrecha de alto transporte integrado de vapor (IVT), anclada al sector cálido de un frente frío que se aproxima desde el cuadrante oeste. Al interceptar la barrera andina, el ascenso forzado orográfico convierte el IVT en precipitación con alta eficiencia. Se detecta operativamente en campos satelitales de agua precipitable derivados de microondas (RAMSDIS/CIRA) y en simulaciones del GFS (EMC/NOAA). Otra CS regional es la de origen amazónico, cuyo vehículo es el SALLJ y cuya expresión organizada es la ZCAS.</p></div>
+<div class="dual-plain"><p class="dual-label">Para no meteorólogos</p><p>Es literalmente un río, pero de vapor de agua y en el aire: angosto, largo y cargado. Nace cerca del trópico y desemboca en una costa de latitud media. Cuando ese río choca con una montaña, se "vacía" de golpe. Unos pocos de estos ríos al año explican hasta la mitad de la lluvia anual de esas costas.</p></div>
+</div>
+<div class="warn"><b>ERROR COMÚN:</b> pensar que "río atmosférico" es un fenómeno exclusivo del hemisferio norte o de California. Es un concepto <b>global</b>; en el hemisferio sur la fuente es la Polinesia y el destino el sur de Chile. Tampoco confundir <b>CS</b> (mecanismo de transporte) con <b>frente</b> (zona baroclínica): la CS se ubica <b>en el sector cálido</b> del frente frío, no sobre el frente.</div>
+<div class="exam"><b>EXAMEN:</b> Explique por qué las conexiones subtropicales se generan preferentemente en la periferia polar-occidental de los anticiclones subtropicales, y contraste el caso del Pacífico Norte con el del Pacífico Sur.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--c-tea-b);color:var(--c-tea-t)">CS en el modelo GFS y frentes con/sin conexión (diap. 17–18)</span>
+<div class="item"><span class="dot" style="background:#0d9488"></span><b>Firma en el GFS:</b> agua precipitable en colores + vientos de 925 hPa &gt; 25 kt. Las CS robustas se asocian a vientos <b>intensos del oeste y noroeste</b>, que no solo transportan la masa sino que <b>resaltan la convergencia</b> de humedad contra la vertiente Pacífica de los Andes. Montos de 50–100 mm en casos extremos.</div>
+<div class="item"><span class="dot" style="background:#dc2626"></span><b>Frentes SIN conexión:</b> vienen del <b>sur o suroeste</b>, con masa <b>polar marítima</b>, secos. Algunos del oeste/noroeste también llegan secos por lejanía de la fuente de vapor o por valores bajos en ella.</div>
+<div class="item"><span class="dot" style="background:#16a34a"></span><b>Frentes CON conexión:</b> los que vienen <b>directamente del oeste</b> con vientos fuertes. Efecto significativo entre Aysén y, en ocasiones extremas, el centro de Chile.</div>
+<div class="mini" style="border-left:3px solid #ea580c;margin-top:7px"><b>Caso peruano/Atacama</b>En casos <b>muy raros</b> la CS se establece desde la costa peruana. Es poco común porque en esas latitudes rara vez hay forzante profunda asociada a vaguada de altura y/o frentes. Ejemplo documentado: los <b>aluviones del desierto de Atacama en marzo de 2015</b>.</div>
+<div class="exam"><b>EXAMEN:</b> ¿Por qué las conexiones subtropicales que alcanzan la costa peruana son excepcionales? Relacione con la latitud, el APS y la profundidad del forzamiento dinámico.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--c-pur-b);color:var(--c-pur-t)">Partes de los frentes que afectan al sur de Chile (diap. 19–20)</span>
+<div class="def" style="border-left-color:#4c1d95">Los frentes del sur de Chile son distintos entre sí por las combinaciones de <b>baroclinicidad</b>, <b>contenido de humedad</b> y <b>estructura dinámica</b> de la tropósfera. En imágenes IR (10,3 µm, GOES-13) se identifican como <b>trenes o cadenas semicontinuas</b>.</div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><b>Ciclones extratropicales maduros</b> (con oclusión) ocurren característicamente en el <b>sur de Chile</b>. En la imagen de referencia había tres simultáneos.</div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><b>Cambio de masa en el lado frío:</b> se detecta como cambio de tipo de nubosidad sobre el océano. Las masas más frías aparecen como <b>patrones craquelados</b> = campos de cúmulos de aire frío, generados por inestabilidad convectiva entre la superficie del mar (relativamente cálida) y la masa fría encima.</div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><b>Punto triple:</b> la mayor nubosidad se concentra cerca de él. Las nubes de desarrollo más profundo se ubican a lo largo del frente frío acercándose al punto triple, y a veces a lo largo y flujo abajo del frente cálido.</div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><b>Efecto pantalla:</b> los frentes del norte <b>bloquean el transporte de humedad hacia el sur</b>. Por eso los frentes del sur producen menos precipitación y nubes menos profundas; además, la tropósfera polar es más llana (tropopausa baja).</div>
+<div class="divh"></div>
+<div class="mini" style="border-left:3px solid #0ea5e9"><b>Pasaje de baja ocluida (diap. 20)</b>Genera <b>más precipitación que un frente frío simple</b>. Cuatro razones: (1) <b>mayor duración</b> — el frente ocluido puede pasar sobre una localidad más de una vez; (2) áreas de precipitación <b>más extensas</b> que las de frentes fríos, cálidos o estacionarios, asociadas a máximos amplios de vapor y saturación; (3) suelen asociarse a <b>bajas profundas</b> con vientos fuertes que estimulan el forzamiento orográfico; (4) <b>las nevadas más intensas del cono sur se asocian al pasaje de oclusiones</b>.</div>
+<div class="warn"><b>HEMISFERIO SUR vs NORTE — esquema de nubosidad frontal:</b> los esquemas clásicos (modelo noruego, Bjerknes) se dibujan para el HN, con el ciclón girando en sentido antihorario y el sector cálido al sureste. En el HS el ciclón gira en sentido <b>horario</b> y el sector cálido queda al <b>noreste</b>. Si aplica el esquema del HN sin reflejarlo, ubicará mal el frente cálido, la lengua de humedad y el punto triple. El material del curso presenta el esquema NCSU/AVSTOP <b>ya adaptado al hemisferio sur</b>.</div>
+<div class="exam"><b>EXAMEN:</b> Explique por qué el pasaje de una baja ocluida genera acumulados de precipitación mayores que el de un frente frío simple, y por qué las nevadas más intensas del cono sur se asocian a oclusiones.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--c-gry-b);color:var(--c-gry-t)">Advección térmica y trazado de frentes (diap. 21–22)</span>
+<div class="def" style="border-left-color:#334155">Se analiza con el campo de <b>espesor 1000–850 hPa</b> superpuesto a la presión reducida al nivel del mar, asumiendo <b>geostrofía</b>. El espesor es proporcional a la temperatura media de la capa.</div>
+<div class="three">
+<div class="mini" style="border-top:3px solid #dc2626"><b>Flecha roja</b>Advección <b>cálida</b>: viento transportando mayores espesores.</div>
+<div class="mini" style="border-top:3px solid #0ea5e9"><b>Flecha celeste</b>Advección <b>fría</b>: viento transportando menores espesores.</div>
+<div class="mini" style="border-top:3px solid #94a3b8"><b>Flecha blanca/gris</b>Advección <b>neutra</b>: viento paralelo al gradiente de espesor (sin componente cruzando isotermas).</div>
+</div>
+<div class="rx">Adv T = − V · ∇T ;  Adv &gt; 0 (cálida) si V cruza isotermas de cálido a frío</div>
+<div class="rx-note"><b>V</b> = viento geostrófico [m/s] · <b>∇T</b> = gradiente de temperatura o de espesor [K/100 km o mgp/100 km]. Rango típico en zona frontal activa: 2–8 K/6 h. Válida bajo geostrofía; falla en la Patagonia (efectos ageostróficos y orográficos) y cerca del ecuador.</div>
+<div class="item"><span class="dot" style="background:#334155"></span><b>Regla de oro del trazado:</b> los frentes <b>siempre</b> se trazan en el <b>lado cálido</b> del gradiente de espesor, por la <b>inclinación frontal</b> con la altura. En superficie, por densidad, el aire frío se ubica del lado cálido del gradiente de espesor sin importar el tipo de frente.</div>
+<div class="item"><span class="dot" style="background:#334155"></span><b>Advección cálida de gran alcance</b> en la periferia sur del APS. Con vaguadas y frentes al sur, el gradiente de presión se aprieta, los oestes se aceleran y se estimula la convergencia de humedad en la cuenca Pacífica de Chile <b>después</b> del paso del frente cálido, porque la lengua de humedad se ubica a lo largo del frente frío.</div>
+<div class="exam"><b>EXAMEN:</b> ¿Por qué el frente se traza sobre el lado cálido del gradiente de espesor y no sobre el eje del gradiente? Fundamente con la inclinación de la superficie frontal y la densidad del aire.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--c-ora-b);color:var(--c-ora-t)">Predictores de lluvia en el sur y centro de Chile — trabajo de D. Romero (DMC) en WPC International Desks (diap. 23–26)</span>
+<div class="def" style="border-left-color:#7c2d12">Compuestos de altura geopotencial en 500 hPa para eventos que <b>alcanzaron umbral de aviso</b> en Valdivia, Puerto Montt, Futaleufú y Puerto Aysén. Resultado central: la lluvia invernal del sur de Chile se asocia a <b>vaguadas en altura al oeste o suroeste de la estación</b> y a vientos fuertes en nivel medio (gradiente apretado).</div>
+<div class="flow">
+<span class="fbox">Vaguada de altura al W/SW</span><span class="farrow">→</span>
+<span class="fbox">Salida de jet streak &gt;70 kt: divergencia en altura</span><span class="farrow">→</span>
+<span class="fbox">CS + viento NNW-WNW 30-55 kt en 850-925 hPa (r ≈ 6-9 g/kg)</span><span class="farrow">→</span>
+<span class="fbox">Convergencia &gt;10⁻⁵ s⁻¹ y ascenso orográfico</span><span class="farrow">→</span>
+<span class="fbox">Lluvia intensa en valle y cordillera</span>
+</div>
+<div class="two">
+<div class="mini" style="border-top:3px solid #ea580c"><b>Los tres predictores que importan</b>(1) <b>Salida del chorro de altura</b> y estimulación de la divergencia por la cordillera → ascensos en altura. (2) <b>Conexión subtropical</b>: humedad + vientos fuertes = convergencia. (3) <b>Dirección del viento</b>: componente del <b>oeste</b> realzada = más lluvia en el valle; con componente más del norte la lluvia se concentra en la vertiente y el valle recibe menos.</div>
+<div class="mini" style="border-top:3px solid #7c3aed"><b>Caso Puerto Montt (el atípico)</b>Vaguada intensa <b>al este de los Andes</b> con inclinación negativa costa afuera de la Patagonia → sugiere <b>oclusiones rezagadas</b> cruzando la región. Además, una dorsal de nivel medio sobre el centro de Chile aprieta el gradiente de geopotencial sobre la estación, intensificando el viento.</div>
+</div>
+<div class="divh"></div>
+<span class="bh" style="background:var(--c-red-b);color:var(--c-red-t)">Frentes en el centro de Chile (diap. 25–26)</span>
+<div class="item"><span class="dot" style="background:#991b1b"></span><b>No llegan muy seguido.</b> Tres causas: bloqueo del <b>APS</b>; <b>advección cálida limitada</b>, que no alcanza a estimular la baroclinicidad; y la <b>temperatura fría del mar</b>, que estabiliza los niveles bajos e inhibe la intensificación de los sistemas. Súmese la influencia compleja de los Andes.</div>
+<div class="item"><span class="dot" style="background:#991b1b"></span>Los <b>procesos ageostróficos</b> son importantes y <b>rompen las reglas del trazado tradicional de frentes</b>. No espere que el modelo conceptual noruego funcione limpio aquí.</div>
+<div class="item"><span class="dot" style="background:#991b1b"></span><b>Para lluvia intensa en la costa</b> se necesita: CS desde el Pacífico subtropical + convergencia de humedad en nivel bajo asociada al frente frío y estimulada por la orografía de Chile.</div>
+<div class="item"><span class="dot" style="background:#991b1b"></span><b>La dinámica de altura manda:</b> (1) lado divergente de la vaguada, (2) divergencia asociada al chorro, (3) estimulación local de divergencia por aceleración del flujo sobre los Andes.</div>
+<div class="item"><span class="dot" style="background:#991b1b"></span><b>Doble máximo de lluvia:</b> el forzamiento orográfico suele ser mayor <b>de 850 hPa hacia arriba</b>, por lo que se genera un fuerte gradiente costa-cordillera y <b>dos máximos</b>: uno en la cordillera de la Costa y otro en los Andes. La lluvia en la costa misma depende más directamente de la convergencia de humedad del frente frío y de la convergencia del viento con la orografía costera.</div>
+<div class="exam"><b>EXAMEN:</b> Enumere y justifique físicamente los tres mecanismos de divergencia en altura que favorecen precipitación intensa en el centro de Chile, e indique por qué se observan dos máximos de precipitación transversales a la costa.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--c-yel-b);color:var(--c-yel-t)">Aplicaciones en el pronóstico climático — Cuenca del Pacífico (diap. 27–29)</span>
+<table class="tbl">
+<tr><th style="width:14%">Variable</th><th style="width:43%">Señales de anomalía POR DEBAJO</th><th>Señales de anomalía POR ENCIMA</th></tr>
+<tr><td><b>Precipitación</b></td><td>Compresión adiabática (evaluar velocidad y dirección del flujo bajo respecto a los Andes) · Bajo contenido de humedad, lejanía de fuentes · Dorsales en nivel medio; al sur, dorsales de <b>bloqueo</b> especialmente en fase cálida del ENSO (secan el extremo sur pero pueden aumentar lluvia en el norte de Patagonia por flujos del este) · Ausencia o lejanía de chorros, baroclinicidad limitada · TSM por debajo de lo normal</td><td>Vaguadas de nivel medio al oeste o suroeste, mejor con vientos fuertes en nivel medio · Agua precipitable y velocidad del viento en 850/925 hPa; conexiones de humedad subtropical · Dirección, velocidad y razón de mezcla entre 925 y 600 hPa para convergencia de humedad · Chorros de altura: buscar región divergente; su <b>salida derecha</b> puede estimular lluvias significativamente · Transporte de humedad desde Argentina (vientos del este húmedos cruzando en nivel medio) · Anomalías + de TSM, agua precipitable y vientos del NW en 850 al norte de Chile · Temperaturas en nivel medio y alto: inestabilidad por el cruce de la vaguada, puede estimular cumulonimbus</td></tr>
+<tr><td><b>Temperatura</b></td><td>Vaguadas en nivel medio sobre los Andes · Vientos de gran alcance del sur en nivel bajo, que transportan masas de origen <b>antártico</b>, estimulados por dorsales alargadas desde el mar de Bellingshausen hasta el Pacífico frente a Chile · Anomalías negativas de TSM</td><td>Dorsales en nivel medio sobre o al oeste de Chile; al sur, dorsales de bloqueo especialmente durante <b>El Niño</b> · Anomalías de vientos del este en nivel bajo: estimulan descensos, compresión adiabática y calentamiento · Anomalías positivas de TSM · Anomalías de vientos bajos del norte a escala sinóptica (calentamiento por advección cálida)</td></tr>
+</table>
+<div class="warn"><b>OJO CON EL HEMISFERIO — cuadrantes de jet:</b> en el HN la divergencia máxima está en la <b>salida izquierda</b> y la entrada derecha del jet streak. En el <b>HS</b> la circulación ageostrófica transversal se invierte y la divergencia máxima queda en la <b>salida derecha</b> y la entrada izquierda. El material del curso lo dice explícitamente para Chile ("su salida derecha puede estimular las lluvias significativamente"): si memoriza el esquema del HN, invertirá el diagnóstico.</div>
+<div class="exam"><b>EXAMEN:</b> Un pronóstico estacional para el centro-sur de Chile muestra dorsales de bloqueo persistentes al sur y TSM por debajo de lo normal. ¿Qué anomalía de precipitación y de temperatura esperaría, y cómo se modifica el diagnóstico si el ENSO está en fase cálida?</div>
+</div>
+
+<div class="sbar" style="background:var(--c-ora-b);color:var(--c-ora-t)"><i class="ti ti-mountain" aria-hidden="true"></i> 2.2.3 · Frentes en Patagonia y Tierra del Fuego (diap. 30–36)</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--c-ora-b);color:var(--c-ora-t)">Compresión adiabática y el problema de identificar frentes (diap. 30–32)</span>
+<div class="def" style="border-left-color:#7c2d12">La Patagonia y gran parte de Tierra del Fuego están a <b>sotavento</b> de los Andes. Ahí domina la compresión adiabática, el calentamiento y el desarrollo de una <b>vaguada térmica</b> que <b>interfiere con el análisis e identificación de los frentes</b>. Este es el punto conceptual más difícil de la sección.</div>
+<svg width="100%" viewBox="0 0 680 290" role="img"><title>Corte transversal del efecto foehn sobre los Andes hacia la Patagonia</title><desc>El aire húmedo del Pacífico asciende por barlovento, precipita y libera calor latente; al descender por sotavento se calienta por compresión adiabática y la humedad relativa cae, dejando la Patagonia seca.</desc>
+<path d="M40 240 L250 240 L340 96 L430 240 L640 240" fill="#5F5E5A" opacity="0.28" stroke="#5F5E5A" stroke-width="0.5"/>
+<text class="th" x="340" y="126" text-anchor="middle">Andes</text>
+<rect x="44" y="222" width="200" height="18" fill="#378ADD" opacity="0.5"/>
+<text class="ts" x="144" y="236" text-anchor="middle">Pacífico</text>
+<path d="M70 200 Q170 190 262 128" fill="none" stroke="#185FA5" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M418 128 Q510 190 610 206" fill="none" stroke="#993C1D" stroke-width="2" marker-end="url(#arrow)"/>
+<g class="c-blue"><rect x="52" y="42" width="190" height="56" rx="8" stroke-width="0.5"/><text class="th" x="147" y="62" text-anchor="middle">Barlovento (CPA)</text><text class="ts" x="147" y="80" text-anchor="middle">Ascenso, lluvia, calor latente</text></g>
+<g class="c-coral"><rect x="440" y="42" width="190" height="56" rx="8" stroke-width="0.5"/><text class="th" x="535" y="62" text-anchor="middle">Sotavento (Patagonia)</text><text class="ts" x="535" y="80" text-anchor="middle">Descenso, calentamiento, HR baja</text></g>
+<ellipse cx="200" cy="150" rx="30" ry="14" fill="#85B7EB" opacity="0.7"/>
+<ellipse cx="245" cy="142" rx="24" ry="12" fill="#85B7EB" opacity="0.7"/>
+<line x1="196" y1="166" x2="196" y2="184" stroke="#185FA5" stroke-width="1.2"/>
+<line x1="210" y1="166" x2="210" y2="188" stroke="#185FA5" stroke-width="1.2"/>
+<line x1="224" y1="166" x2="224" y2="182" stroke="#185FA5" stroke-width="1.2"/>
+<text class="ts" x="560" y="236" text-anchor="middle">Solo nubes medias y altas</text>
+<text class="ts" x="340" y="272" text-anchor="middle">Γ húmeda ≈ 5-6 °C/km al subir · Γ seca = 9,8 °C/km al bajar → la masa vuelve más cálida y mucho más seca</text>
+</svg>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">Para meteorólogos</p><p>Efecto föehn: en barlovento la parcela asciende saturada siguiendo la adiabática <b>saturada</b> (Γ<sub>s</sub> ≈ 5–6 °C/km), liberando calor latente de condensación, por lo que se enfría menos de lo que dicta la adiabática seca. Al descender por sotavento, ya con menor razón de mezcla, sigue la adiabática <b>seca</b> (Γ<sub>d</sub> = 9,8 °C/km). El resultado es un incremento neto de θ y una caída drástica de HR. Esto limita la precipitación en Patagonia y solo permite el pasaje de nubes medias y altas.</p></div>
+<div class="dual-plain"><p class="dual-label">Para no meteorólogos</p><p>El aire sube por el lado chileno, se enfría, llueve y deja el agua allí. Cuando baja por el lado argentino ya viene seco, y al bajar se comprime y se calienta, igual que se calienta el aire dentro de un inflador de bicicleta cuando lo aprieta. Llega abajo más caliente y mucho más seco que cuando empezó: por eso la Patagonia es semiárida aunque esté al lado de una de las regiones más lluviosas del continente.</p></div>
+</div>
+<div class="warn"><b>ERROR COMÚN, Y ES CRÍTICO:</b> el <b>nivel de calentamiento</b> por compresión adiabática puede hacer que el aire <b>detrás</b> del frente frío alcance temperaturas <b>mayores</b> que el aire cálido ubicado <b>delante</b> del frente. Es decir: en Patagonia el "frente frío" puede aparecer como advección cálida. Esto complica y a veces invalida la ubicación de frentes con criterios térmicos de superficie. La advección fría <b>recién se restaura</b> cuando el frente se mueve sobre el Atlántico o ingresa a la Cuenca del Río de la Plata, en la Pampa Húmeda.</div>
+<div class="exam"><b>EXAMEN:</b> Explique por qué en la Patagonia el aire post-frontal puede resultar más cálido que el pre-frontal, y qué campos alternativos utilizaría para localizar el frente en esa región.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--c-blu-b);color:var(--c-blu-t)">Baja clipper (diap. 33)</span>
+<div class="def" style="border-left-color:#1e3a8a">Ciclón extratropical que se mueve <b>rápidamente (30 a 50 nudos)</b> en la parte <b>trasera u oeste</b> de vaguadas amplias en latitudes altas.</div>
+<div class="two">
+<div class="mini" style="border-left:3px solid #185FA5"><b>Hemisferio Norte</b>Se llama <b>"Alberta Clipper"</b>, por su formación sobre la provincia de Alberta, Canadá. Masa continental ártica.</div>
+<div class="mini" style="border-left:3px solid #A32D2D"><b>Hemisferio Sur</b>Rotan alrededor de una vaguada amplia que cruza el <b>pasaje de Drake / Península Antártica</b>. Masa <b>cuasi-continental/antártica</b>, de origen polar sur.</div>
+</div>
+<div class="item" style="margin-top:7px"><span class="dot" style="background:#1e3a8a"></span>Se asocian a incursiones de masas de aire <b>muy frías</b> y a temperaturas <b>por debajo de lo normal</b>. Rápidas y con poca humedad: dan frío marcado más que lluvia abundante.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span>Prevalecen en los meses de <b>invierno</b>, pero son posibles en los meses de <b>transición</b> (otoño/primavera).</div>
+<div class="warn"><b>Conexión con Perú:</b> las incursiones de masa polar canalizadas al este de los Andes son el mecanismo detrás de los <b>friajes o surazos</b> en la Amazonía peruana (Madre de Dios, Ucayali, Loreto), donde la temperatura puede caer 10–15 °C en horas. SENAMHI emite avisos específicos por este fenómeno.</div>
+<div class="exam"><b>EXAMEN:</b> Compare la baja clipper sudamericana con el Alberta Clipper del hemisferio norte en cuanto a origen de la masa de aire, trayectoria e impacto en temperatura.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--c-yel-b);color:var(--c-yel-t)">Precipitaciones y aplicaciones al pronóstico — Patagonia y Tierra del Fuego (diap. 34–36)</span>
+<div class="two">
+<div class="mini" style="border-left:3px solid #16a34a"><b>Cuándo SÍ llueve o nieva en Patagonia</b>El flujo al <b>sur de las oclusiones</b>, de componente <b>este</b> o tierra adentro, favorece precipitación en Patagonia y Tierra del Fuego: ese flujo del este sube la topografía patagónica por el lado "equivocado" y sortea el secamiento föehn.<br>Si la masa es muy fría (<b>espesor 1000–500 hPa &lt; 5280 mgp</b>), las oclusiones pueden dejar <b>nevadas intensas</b>.<br>También favorece el <b>flujo del norte</b> cuando hay suficiente humedad en el centro de Argentina y una baja frente al sur de Chile.</div>
+<div class="mini" style="border-left:3px solid #dc2626"><b>Cuándo NO llueve</b>Flujo del oeste perpendicular a la cordillera con velocidad alta = compresión adiabática máxima = HR mínima. Dorsales en nivel medio. Ausencia o lejanía de chorros (baroclinicidad limitada). Lejanía de las fuentes de humedad. TSM por debajo de lo normal.</div>
+</div>
+<table class="tbl" style="margin-top:9px">
+<tr><th style="width:14%">Variable</th><th style="width:43%">POR DEBAJO</th><th>POR ENCIMA</th></tr>
+<tr><td><b>Precipitación</b></td><td>Compresión adiabática (evaluar velocidad y dirección del flujo bajo respecto a los Andes) · Bajo contenido de humedad · Dorsales en nivel medio; dorsales de bloqueo al sur en fase cálida del ENSO — <b>secan el extremo sur pero pueden aumentar la lluvia en el norte de Patagonia por flujos del este</b> · Ausencia o lejanía de chorros · TSM por debajo de lo normal</td><td>Vaguadas de nivel medio al oeste o suroeste, mejor con vientos fuertes en nivel medio; CS del oeste profundas o de gran alcance del noreste · Vientos del este en la zona sur de oclusiones (evaluar humedad y ascenso adiabático según la topografía patagónica) · Chorros de altura: región divergente y posibles <b>acoplamientos</b> · TSM por encima de lo normal, especialmente en el Atlántico si hay flujo del este</td></tr>
+<tr><td><b>Temperatura</b></td><td>Flujo de gran alcance del sur, favorecido por dorsal alargada sobre el mar de Bellingshausen y la costa sur de Chile: transporta aire directamente de la <b>Antártida</b> · Patrón de vaguada de altura sobre la región o sobre el Atlántico sur inmediatamente al este, que favorece la advección fría desde el suroeste · Anomalías negativas de TSM</td><td>Evaluar la <b>compresión adiabática</b> según velocidad y dirección del viento respecto a los Andes y las características termodinámicas de la masa que llega del Pacífico: el calentamiento se favorece con vientos fuertes <b>perpendiculares</b> a la cordillera y masas con temperatura por encima de lo normal · Dorsales en nivel medio sobre o al oeste de Chile; al sur, dorsales de bloqueo especialmente durante El Niño · Anomalías positivas de TSM</td></tr>
+</table>
+<div class="warn"><b>Matiz que suele preguntarse:</b> una dorsal de bloqueo NO produce el mismo signo de anomalía en toda la Patagonia. <b>Seca el extremo sur</b> pero puede <b>aumentar</b> la precipitación en el norte de Patagonia al inducir flujos del este. El pronóstico estacional debe ser espacialmente diferenciado.</div>
+<div class="exam"><b>EXAMEN:</b> ¿Por qué el flujo de componente ESTE es el que favorece precipitación en Patagonia, al contrario de lo que ocurre en la cuenca del Pacífico chilena? Relacione con la orientación de la pendiente topográfica y el sentido del ascenso adiabático.</div>
+</div>
+
+<div class="sbar" style="background:var(--c-red-b);color:var(--c-red-t)"><i class="ti ti-bolt" aria-hidden="true"></i> 2.2.4 · Cuenca del Río de la Plata (CRP): ciclogénesis y tiempo severo (diap. 37–52)</div>
+
+<div class="block">
+<span class="bh" style="background:var(--c-gry-b);color:var(--c-gry-t)">CRP: geografía (diap. 37)</span>
+<div class="def" style="border-left-color:#334155">Región al este de los Andes entre <b>~40°S y ~20°S</b> cuya mayor parte drena al Río de la Plata. Incluye centro-norte de Argentina, todo Uruguay, todo Paraguay, Rio Grande do Sul, Santa Catarina, Paraná y sur de Mato Grosso do Sul.</div>
+<div class="item"><span class="dot" style="background:#334155"></span><b>Por qué importa:</b> es donde interaccionan <b>masas de aire de origen tropical</b> con <b>sistemas sinópticos de latitudes medias</b>. Por eso <b>es la región de Sudamérica que experimenta el tiempo más severo</b>.</div>
+<div class="item"><span class="dot" style="background:#334155"></span><b>Relieve:</b> principalmente <b>plana</b> — condición que favorece el desarrollo de sistemas convectivos organizados. Hay colinas y sierras en Uruguay, sur de Brasil y sureste de Paraguay; se incluye la <b>Sierra de Córdoba</b>. Límite occidental: la Cordillera de los Andes.</div>
+<div class="exam"><b>EXAMEN:</b> Explique por qué la CRP concentra el tiempo severo más intenso de Sudamérica, integrando geografía, fuentes de humedad y dinámica extratropical.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--c-pur-b);color:var(--c-pur-t)">Frentes y ciclogénesis: importancia de detectar la frontera (diap. 38–41)</span>
+<div class="def" style="border-left-color:#4c1d95">Los frentes son <b>fuentes de velocidades verticales</b>, por lo que estimulan la precipitación. Las vaguadas y frentes de la CRP aportan <b>convergencia en nivel bajo</b> y, en el caso de frentes, <b>baroclinicidad</b>. El encuentro de masas tropicales con dinámica extratropical la hace una región <b>favorable para la ciclogénesis</b>.</div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><b>Además del frente, importan tres cosas:</b> (1) que la masa <b>cálida y húmeda remonte</b> el frente; (2) el <b>contenido de humedad</b> de esa masa; (3) la <b>dinámica</b>.</div>
+<div class="three">
+<div class="mini" style="border-top:3px solid #16a34a"><b>Chorro de capas bajas</b>Del <b>norte (SALLJ)</b>, que aporta humedad amazónica, o del <b>sur (Pampero)</b>, que aporta aire frío y actúa como gatillador.</div>
+<div class="mini" style="border-top:3px solid #ca8a04"><b>Nivel de cizalla</b>La cizalla vertical del viento organiza la convección. Determina si habrá celdas aisladas, multicelda, línea o supercelda.</div>
+<div class="mini" style="border-top:3px solid #7c3aed"><b>Dinámica de altura</b>Región divergente de vaguadas · chorros de altura · <b>periferia de la Alta de Bolivia</b> · advección de vorticidad ciclónica en altura · caídas de geopotencial.</div>
+</div>
+<div class="divh"></div>
+<div class="item"><span class="dot" style="background:#dc2626"></span><b>Ejemplo de frentes (diap. 39):</b> los sistemas se desarrollan cuando vaguadas de altura cruzan los Andes del norte y centro de Argentina. La <b>alta polar sobre el norte de Paraguay</b> permitió el ingreso del frente hasta Bolivia; la baja ocluida se ubicó sobre el sur de Brasil. Ocurre <b>principalmente en meses fríos</b>: en meses cálidos las vaguadas cruzan más al sur y la dinámica frontal se define mejor al sur de 30°S. Reglas de trazado: el frente en el <b>lado cálido</b> del gradiente, usualmente sobre el <b>eje de la vaguada</b>, con la <b>oclusión rezagada</b> respecto al punto triple.</div>
+<div class="warn"><b>TRAMPA DE ANÁLISIS (diap. 40–41):</b> el gradiente térmico asociado a la <b>cordillera de los Andes en Perú y Bolivia</b> se parece mucho al gradiente térmico de un <b>frente real</b> que se mueve por Paraná y Mato Grosso do Sul. Ambos aparecen como "líneas muy juntas" en el campo de temperatura de la capa límite. <b>Es esencial conocer el terreno</b> para no trazar un frente donde solo hay una montaña. Consejo operativo: el campo de <b>espesor 1000–850 hPa</b> es mejor que la temperatura cercana a superficie para ubicar el cambio de masa, porque representa la temperatura promedio de toda la capa; la temperatura de superficie ayuda a ubicar la cordillera, pero para el frente conviene trazar sobre la presión superficial.</div>
+<div class="exam"><b>EXAMEN:</b> Un mapa de temperatura de la capa límite muestra dos zonas de gradiente apretado sobre Sudamérica. Describa el procedimiento para determinar cuál corresponde a un frente y cuál a la orografía.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--c-pnk-b);color:var(--c-pnk-t)">Tipos de interacción tropical con frentes — Siqueira y Machado (2004) (diap. 42)</span>
+<div class="def" style="border-left-color:#831843">Clasificación construida con imágenes de satélite <b>infrarrojas</b>, analizando la <b>frecuencia de topes fríos</b> (proxy de convección profunda) en los días previos y posteriores a cada evento frontal. Publicado en <i>Journal of Climate</i>, Vol. 17, 1754–1766.</div>
+<div class="three">
+<div class="mini" style="border-top:3px solid #be185d"><b>Tipo 1</b>Frecuente a lo largo de <b>todo el año</b>, especialmente en verano austral. Penetración de frentes fríos en Sudamérica <b>subtropical</b> donde <b>interaccionan con convección tropical</b>. Es el acoplamiento clásico frente–trópico.</div>
+<div class="mini" style="border-top:3px solid #be185d"><b>Tipo 2</b>Más frecuente en <b>verano</b>. Regiones extensas de <b>convección profunda en el oeste de Brasil</b>. Puede asociarse a frentes, pero si <b>persiste más de 4 días</b> se considera <b>ZCAS</b> (Zona de Convergencia del Atlántico Sur).</div>
+<div class="mini" style="border-top:3px solid #be185d"><b>Tipo 3</b>Más frecuente en verano austral, con <b>muy poca interacción</b> con la convección tropical. El frente pasa sin acoplarse al trópico.</div>
+</div>
+<div class="warn"><b>ERRATA DEL PDF:</b> la diapositiva 42 describe el tipo 3 como "más frecuente durante el verano austral", igual que el tipo 2, lo que hace ambigua la distinción estacional. Lo que sí distingue inequívocamente al tipo 3 es la <b>ausencia de interacción con la convección tropical</b>; en la clasificación original los eventos tipo 3 son además los menos numerosos (~25 casos frente a ~662 y 198 de los tipos 1 y 2). Use el criterio de interacción, no el estacional, para responder.</div>
+<div class="exam"><b>EXAMEN:</b> Describa el criterio observacional que empleó Siqueira y Machado (2004) para clasificar eventos frontales y explique la diferencia conceptual entre un evento tipo 2 y la ZCAS.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--c-red-b);color:var(--c-red-t)">Tiempo severo en la CRP (diap. 43–45)</span>
+<div class="def" style="border-left-color:#991b1b">Se desarrolla cuando se combina <b>inestabilidad extrema</b> con <b>dinámica que favorece ascensos de capa profunda</b>. La CRP es la región del mundo donde se desarrollan los <b>sistemas convectivos de mesoescala más grandes del planeta</b>.</div>
+<div class="item"><span class="dot" style="background:#991b1b"></span><b>Evidencia satelital:</b> el mosaico global de descargas eléctricas (NSSTC Lightning Team, en relámpagos/km²/año) muestra a la CRP entre las regiones de mayor ocurrencia de rayos del mundo. El centro y norte de la CRP supera los <b>20 rayos/km²/año</b> y en el <b>sureste de Paraguay/Corrientes supera los 40</b>.</div>
+<div class="item"><span class="dot" style="background:#991b1b"></span><b>Manifestaciones:</b> granizo, vientos intensos y electrificación/rayería. Los vientos pueden ser en <b>línea recta</b> (<i>straight-line winds</i>) o, en ocasiones aisladas, <b>tornados</b>.</div>
+<div class="warn"><b>ERROR COMÚN:</b> asumir que "mucha rayería = tiempo severo". <b>Los rayos no definen el tiempo severo</b>; se relacionan con cumulonimbus y solo en algunas ocasiones con severidad. Son un <b>proxy</b> útil de la climatología convectiva, no un criterio de aviso.</div>
+<div class="exam"><b>EXAMEN:</b> Justifique por qué la climatología global de descargas eléctricas es un proxy adecuado de la convección profunda pero insuficiente como criterio de tiempo severo.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--c-pet-b);color:var(--c-pet-t)">Definición de mesoescala y tipos de sistemas convectivos (diap. 44–49)</span>
+<div class="def" style="border-left-color:#0c4a6e">La <b>mesoescala</b> describe sistemas atmosféricos de <b>2 a 2000 km</b> en la horizontal. Se ubica <b>entre la escala sinóptica y la microescala</b>. Vaguadas y trenes de frentes son <b>sinópticos</b>; los sistemas de la lista de abajo son mesoescalares. Referencia: UCAR/COMET-MetEd (2017), Tabla 7.1.</div>
+<table class="tbl">
+<tr><th>Nomenclatura</th><th>Escala espacial</th><th>Escala temporal</th><th>Fenómenos característicos</th></tr>
+<tr><td>Meso-α (alfa)</td><td>200 – 2000 km</td><td>6 – 36 h</td><td>Máximos de corriente en chorro, huracanes pequeños, anticiclones débiles, <b>complejos convectivos de mesoescala (CCM)</b></td></tr>
+<tr><td>Meso-β (beta)</td><td>20 – 200 km</td><td>30 min – 6 h</td><td>Campos de viento locales, vientos de ladera, brisas de tierra y de mar, tormentas convectivas grandes, la mayoría de los <b>SCM</b></td></tr>
+<tr><td>Meso-γ (gamma)</td><td>2 – 20 km</td><td>3 – 30 min</td><td>La mayoría de las tormentas convectivas, cumulonimbus grandes, tornados excepcionalmente grandes</td></tr>
+</table>
+<div class="three" style="margin-top:9px">
+<div class="mini" style="border-top:3px solid #dc2626"><b>Supercelda</b>Celda de tormenta de <b>alta organización</b> y <b>larga duración (&gt; 1 hora)</b>. Corriente ascendente <b>inclinada con la altura y en rotación</b> (mesociclón), de hasta <b>10 millas (~16 km) de diámetro</b>. Los <b>tornados más grandes y violentos</b> se originan de superceldas. Requiere inestabilidad extrema <b>y</b> cizalla vertical del viento; por eso son más frecuentes en la CRP que en cualquier otra región de Sudamérica. Meso-γ a meso-β, horas.</div>
+<div class="mini" style="border-top:3px solid #ea580c"><b>Línea de inestabilidad (turbonada)</b>SCM que se forma <b>150–300 km POR DELANTE</b> de un frente progresivo. Estructura <b>elongada</b>. Produce precipitación intensa, tiempo severo, ráfagas, cambio rápido de temperatura y dirección del viento e <b>incremento de presión</b>. Se forma en la pampa húmeda o el extremo norte de Patagonia y se desplaza hasta Paraguay y sur de Brasil; a veces llega a Mato Grosso do Sul y São Paulo. Meso-β, horas.</div>
+<div class="mini" style="border-top:3px solid #7c3aed"><b>Complejo convectivo de mesoescala (CCM)</b>SCM de estructura <b>circular</b>: aglomeración persistente de tormentas que cubre áreas grandes, <b>comparables al área de Uruguay</b>. Emerge de otros sistemas convectivos durante la <b>tarde/noche</b> y se <b>intensifica durante la madrugada</b> (máximo nocturno, ligado al SALLJ nocturno). Deja precipitaciones intensas, especialmente en el noreste de la CRP. Meso-α, 6–36 h.</div>
+</div>
+<div class="warn"><b>ERROR COMÚN — el más preguntado de esta sección:</b> confundir el paso de una <b>línea de inestabilidad</b> con el paso de un <b>frente frío</b>. Ambos dan ráfagas, caída de temperatura, giro del viento y salto de presión. <b>La clave discriminante es la temperatura de rocío (isodrosotermas):</b> con una línea de inestabilidad el <b>cambio del punto de rocío es pequeño</b>, porque no hay cambio de masa de aire — solo aire enfriado por evaporación en el <i>outflow</i>. Con un frente frío real el rocío cae marcadamente, porque sí cambia la masa. Evolución clásica en la región: al inicio las nubes más profundas están sobre el frente frío, pero con el tiempo la línea acapara la masa más húmeda y pasa a tener las nubes más profundas.</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">Para meteorólogos</p><p>La discriminación frente vs línea de inestabilidad se basa en que el frente es una <b>frontera de masas</b> (discontinuidad en θ<sub>e</sub> y en q), mientras que la línea es una <b>frontera de outflow</b> generada por la piscina fría (<i>cold pool</i>) de enfriamiento evaporativo. El salto de presión en la línea es la <b>alta mesoescalar</b> asociada a la piscina fría, no una advección de masa densa de origen polar. De ahí que ΔT<sub>d</sub> sea pequeño.</p></div>
+<div class="dual-plain"><p class="dual-label">Para no meteorólogos</p><p>Ambos "se sienten" igual: sopla de golpe, baja la temperatura y cambia el viento. Pero el frente trae aire de otro lugar, más seco y frío de verdad; la línea de tormentas solo trae aire enfriado por la lluvia que se evapora, como cuando uno se refresca al mojarse. Por eso el termómetro de humedad (punto de rocío) casi no se mueve con la línea, y sí se mueve mucho con el frente.</p></div>
+</div>
+<div class="exam"><b>EXAMEN:</b> Una estación registra en 20 minutos: ráfaga de 60 km/h, caída de 8 °C, giro del viento y alza de presión de 3 hPa, con el punto de rocío casi constante. ¿Pasó un frente frío o una línea de inestabilidad? Justifique.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--c-ora-b);color:var(--c-ora-t)">Climatología del CCM (diap. 50) — Velasco y Fritsch</span>
+<div class="item"><span class="dot" style="background:#7c2d12"></span>Ocurren principalmente en los <b>meses cálidos</b>, entre <b>noviembre y abril</b>.</div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span><b>Máxima frecuencia a finales de la primavera: noviembre y diciembre</b> (no en pleno verano).</div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span>En verano se forman <b>más al oeste</b>, hasta el pie de los Andes y el Chaco.</div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span>Mayor ocurrencia sobre el <b>noreste de Argentina, Uruguay, Paraguay y sur de Brasil</b>, con un <b>máximo secundario en el este de Bolivia</b>.</div>
+<div class="two" style="margin-top:6px">
+<div class="mini"><b>Frecuencia relativa por temporada</b><div style="margin-top:5px;font-size:11px">Nov–Dic (máx)<div class="stat-bar-wrap" style="margin:2px 0 5px"><div class="stat-bar-fill" style="width:100%;background:#dc2626"></div></div>Ene–Abr<div class="stat-bar-wrap" style="margin:2px 0 5px"><div class="stat-bar-fill" style="width:65%;background:#ea580c"></div></div>May–Oct<div class="stat-bar-wrap" style="margin:2px 0 0"><div class="stat-bar-fill" style="width:12%;background:#64748b"></div></div></div></div>
+<div class="mini"><b>Por qué el pico en primavera tardía</b>Coinciden el <b>máximo de inestabilidad</b> (calentamiento continental creciente) con una <b>cizalla vertical aún alta</b> heredada del régimen baroclínico invernal. En pleno verano la baroclinicidad se debilita y los sistemas se desorganizan más.</div>
+</div>
+<div class="exam"><b>EXAMEN:</b> Explique por qué la máxima frecuencia de CCM ocurre a fines de primavera y no en pleno verano, y por qué estos sistemas se intensifican durante la madrugada.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--c-yel-b);color:var(--c-yel-t)">Aplicaciones en el pronóstico climático — CRP (diap. 51–52)</span>
+<table class="tbl">
+<tr><th style="width:14%">Variable</th><th style="width:43%">POR DEBAJO</th><th>POR ENCIMA</th></tr>
+<tr><td><b>Precipitación</b></td><td><b>Frente estacionario</b> en secciones medias del continente y/o <b>chorro de altura zonal</b>: bloquea el ingreso de humedad de la Amazonía · Dorsales en nivel medio: subsidencia · Anomalías del oeste y suroeste en vientos de nivel bajo: estimulan la compresión adiabática y el transporte de masas <b>secas</b> desde el interior de Argentina · TSM por debajo de lo normal</td><td><b>Chorro de capas bajas transportando humedad desde el norte</b>: buscar la <b>convergencia del chorro</b> · Vientos de componente <b>este</b> en nivel bajo: transportan humedad hacia el interior de Argentina (común en época cálida) · Vientos del este en la zona sur de oclusiones en el Atlántico, especialmente en regiones costeras · Patrones de chorros de altura: región divergente y posibles <b>acoplamientos</b> · TSM por encima de lo normal en el Atlántico, sobre todo si hay flujo del este</td></tr>
+<tr><td><b>Temperatura</b></td><td>Flujo de gran alcance del sur, favorecido por dorsal alargada sobre el mar de Bellingshausen y la costa sur de Chile: aire directamente antártico · <b>Formación de dorsal polar en el interior de Argentina</b>: favorece el transporte de masas frías del sur · Vaguada de altura sobre la región o sobre el Atlántico sur inmediatamente al este: advección fría desde el suroeste · Anomalías negativas de TSM</td><td>Dorsales de nivel medio: favorecen subsidencia y calentamiento. Las bajas de nivel bajo también reflejan, especialmente en verano, potencial de calentamiento · Advección cálida del norte (evaluar las propiedades de la masa advectada) · Anomalías de vientos del oeste en nivel bajo: compresión adiabática resaltada y transporte de masas cálidas y secas desde el interior de la CRP hacia el este · Anomalías positivas de TSM en el Atlántico</td></tr>
+</table>
+<div class="warn"><b>Idea integradora del pronóstico estacional:</b> en las tres subregiones el diagnóstico se reduce a responder cuatro preguntas — ¿de dónde viene la <b>humedad</b>?, ¿hay <b>forzamiento dinámico</b> (vaguada, chorro divergente)?, ¿el flujo <b>sube o baja</b> topografía?, ¿cómo está la <b>TSM</b>? Lo que cambia entre CPA, PT y CRP es el <b>signo</b> con que cada respuesta contribuye: el flujo del oeste moja la CPA y seca la PT y la CRP; el flujo del este seca la CPA y moja la PT y la CRP.</div>
+<div class="exam"><b>EXAMEN:</b> Un frente estacionario persistente en el centro del continente y un chorro de altura marcadamente zonal coexisten durante un trimestre. ¿Qué anomalía de precipitación pronosticaría para la CRP y cuál es el mecanismo físico?</div>
+</div>
+
+<div class="sbar" style="background:var(--c-gry-b);color:var(--c-gry-t)"><i class="ti ti-table" aria-hidden="true"></i> Tabla integradora final — repaso rápido antes del examen</div>
+
+<div class="block s3">
+<table class="tbl">
+<tr><th>Fenómeno / sistema</th><th>Región</th><th>Escala espacial</th><th>Escala temporal</th><th>Variable clave a monitorear</th><th>Herramienta / fuente</th></tr>
+<tr><td><b>APS / AAS</b></td><td>Ambos océanos</td><td>Planetaria (&gt;2000 km)</td><td>Semipermanente, migración estacional</td><td>Presión al nivel del mar; posición latitudinal del centro</td><td>NCEP/NCAR Reanalysis; cartas de superficie</td></tr>
+<tr><td><b>SALLJ / chorro de capas bajas</b></td><td>Este de los Andes, Bolivia→CRP</td><td>Sinóptica (1000–2000 km)</td><td>Días; ciclo diurno con máximo nocturno</td><td>Viento y razón de mezcla en 850/925 hPa; convergencia de humedad</td><td>Reanálisis, GFS (EMC/NOAA)</td></tr>
+<tr><td><b>Conexión subtropical (río atmosférico)</b></td><td>Polinesia → sur de Chile (CPA)</td><td>Sinóptica, banda angosta y larga</td><td>1–3 días</td><td><b>Agua precipitable</b> (&gt;20, &gt;30, &gt;40 mm) y viento en 925 hPa</td><td>Satélite microondas RAMSDIS/CIRA; GFS; ESRL/NOAA</td></tr>
+<tr><td><b>Vaguada ciclogenética tipo B / C</b></td><td>Pacífico → Uruguay</td><td>Sinóptica</td><td>48–72 h (±24 h del compuesto)</td><td>Geopotencial 500 hPa; espesor; PNM</td><td>Dal Piva, Gan y Rao (2009), MWR</td></tr>
+<tr><td><b>Frente frío / baja ocluida</b></td><td>CPA, PT, CRP</td><td>Sinóptica</td><td>Horas a días</td><td><b>Espesor 1000–850 hPa</b>; punto de rocío; PNM</td><td>Satélite IR GOES; modelo GFS; WPC Int. Desks</td></tr>
+<tr><td><b>Baja clipper</b></td><td>Drake / Patagonia / friaje amazónico</td><td>Sinóptica</td><td>Rápida: 30–50 kt de desplazamiento</td><td>Temperatura; espesor 1000–500 hPa</td><td>Análisis de frentes sobre PNM</td></tr>
+<tr><td><b>Efecto föehn / compresión adiabática</b></td><td>Patagonia y Tierra del Fuego</td><td>Mesoescala a sinóptica</td><td>Horas a días</td><td>Humedad relativa; θ; dirección y velocidad del viento respecto a los Andes</td><td>GFS; sondeos; cortes verticales</td></tr>
+<tr><td><b>Supercelda</b></td><td>CRP</td><td>Meso-γ a meso-β (2–200 km)</td><td>&gt; 1 hora</td><td>CAPE + <b>cizalla vertical</b>; mesociclón</td><td>Radar Doppler; NSSL/NOAA</td></tr>
+<tr><td><b>Línea de inestabilidad (turbonada)</b></td><td>Pampa húmeda → Paraguay/sur de Brasil</td><td>Meso-β (20–200 km), elongada</td><td>30 min – 6 h</td><td><b>Punto de rocío</b> (cambio pequeño); salto de presión</td><td>Satélite IR GOES-13; radar</td></tr>
+<tr><td><b>Complejo convectivo de mesoescala (CCM)</b></td><td>NE Argentina, Uruguay, Paraguay, sur de Brasil</td><td>Meso-α (200–2000 km), circular</td><td>6–36 h, máximo de madrugada</td><td>Temperatura de tope de nube (IR); área de topes fríos</td><td>Velasco y Fritsch; GOES; NSSTC Lightning</td></tr>
+<tr><td><b>ZCAS</b></td><td>Oeste/centro de Brasil hacia el Atlántico</td><td>Sinóptica a planetaria</td><td><b>&gt; 4 días</b> de persistencia</td><td>Bandas persistentes de convección; OLR</td><td>Siqueira y Machado (2004), J. Climate</td></tr>
+</table>
+<div class="warn"><b>DATO INTEGRADOR CLAVE:</b> toda esta unidad se sostiene sobre una sola idea física — <b>los Andes rompen la simetría zonal</b>. La misma masa de aire produce lluvia récord en el sur de Chile (barlovento, ascenso, calor latente), semidesierto en la Patagonia (sotavento, subsidencia, föehn) y los sistemas convectivos más grandes del planeta en la CRP (planicie + SALLJ + baroclinicidad). Si en el examen le preguntan "¿por qué?", la respuesta casi siempre empieza por la cordillera y termina en la fuente de humedad.</div>
+</div>
+
+<div class="sbar" style="background:var(--c-grn-b);color:var(--c-grn-t)"><i class="ti ti-clipboard-check" aria-hidden="true"></i> Quiz interactivo de repaso</div>
+
+<div class="block s3" id="quiz-section">
+<div class="qhead">
+<h3>Quiz de repaso — 10 preguntas de opción múltiple</h3>
+<p>Marca tu respuesta y descubre si es correcta. La retroalimentación explica el concepto físico.</p>
+</div>
+<div style="display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--text-secondary);margin-bottom:6px">
+<span id="qprog">Pregunta 0 de 10</span><span style="flex:1"></span><span id="qscore">0 % de aciertos</span>
+</div>
+<div class="stat-bar-wrap"><div class="stat-bar-fill" id="qbar" style="width:0%"></div></div>
+
+<div class="qcard">
+<p class="qnum">Pregunta 1 / 10</p>
+<p class="qtext">¿Por qué el límite norte de Sudamérica extratropical se ubica alrededor de 18°–19°S al este de los Andes pero solo hasta ~27°–28°S al oeste?</p>
+<div class="qopts" data-q="1">
+<button class="qbtn" data-c="0">A) Porque la radiación solar es mayor al oeste de la cordillera, lo que disuelve los frentes antes.</button>
+<button class="qbtn" data-c="1">B) Porque la cordillera bloquea la masa fría somera y la canaliza hacia el norte por su flanco oriental, donde los frentes se aceleran.</button>
+<button class="qbtn" data-c="0">C) Porque el Anticiclón del Atlántico Sur empuja los frentes hacia el sur al este de los Andes.</button>
+<button class="qbtn" data-c="0">D) Porque el criterio es astronómico y coincide con el trópico de Capricornio en ambos flancos.</button>
+</div>
+<div class="qfeedback" style="display:none"></div>
+<div class="qexp" hidden>La masa fría post-frontal es densa y somera: no supera la barrera andina. Al quedar confinada al este, se canaliza meridionalmente y penetra mucho más al norte, llegando al Pantanal e incluso a Perú y el oeste amazónico. Al oeste, el APS y el mar frío la frenan en Atacama.</div>
+</div>
+
+<div class="qcard">
+<p class="qnum">Pregunta 2 / 10</p>
+<p class="qtext">Los vientos del oeste en el extremo sur de Chile y Argentina son más intensos en verano que en invierno. ¿Cuál es la explicación correcta?</p>
+<div class="qopts" data-q="2">
+<button class="qbtn" data-c="0">A) En invierno el gradiente térmico meridional desaparece, por lo que no hay viento térmico.</button>
+<button class="qbtn" data-c="0">B) En verano el chorro polar se desplaza hacia el ecuador y refuerza los oestes en superficie.</button>
+<button class="qbtn" data-c="1">C) En verano el APS migra al sur y los patrones sinópticos persisten; en invierno hay más alternancia baja-alta, el viento rota más y el promedio mensual baja.</button>
+<button class="qbtn" data-c="0">D) En invierno la mayor cobertura de hielo antártico reduce la fricción y desacelera el flujo.</button>
+</div>
+<div class="qfeedback" style="display:none"></div>
+<div class="qexp" hidden>Son dos efectos sumados. El APS se ubica al norte de 34°S en enero y al norte de 30°S en julio. Además, los procesos baroclínicos invernales del hemisferio sur hacen que la dirección del viento varíe mucho; al promediar vectores que se cancelan, la velocidad media resulta menor aunque haya episodios intensos.</div>
+</div>
+
+<div class="qcard">
+<p class="qnum">Pregunta 3 / 10</p>
+<p class="qtext">Se calcula el agua precipitable de la capa 1000–700 hPa con razón de mezcla media de 12 g/kg. ¿Cuál es el valor aproximado y cómo se interpreta?</p>
+<div class="qopts" data-q="3">
+<button class="qbtn" data-c="0">A) ≈ 3,7 mm; humedad despreciable, no se espera precipitación.</button>
+<button class="qbtn" data-c="0">B) ≈ 12 mm; equivale directamente a la razón de mezcla en milímetros.</button>
+<button class="qbtn" data-c="1">C) ≈ 37 mm; supera el umbral de 30 mm, con potencial de lluvia localmente intensa si hay forzamiento y ascenso orográfico.</button>
+<button class="qbtn" data-c="0">D) ≈ 360 mm; corresponde al monto de precipitación pronosticado para el evento.</button>
+</div>
+<div class="qfeedback" style="display:none"></div>
+<div class="qexp" hidden>W = (x̄·Δp)/(ρ·g) = (0,012 × 30 000)/(1000 × 9,81) = 0,0367 m ≈ 36,7 mm. El agua precipitable indica disponibilidad de humedad, no monto de lluvia: la columna puede reponerse por advección y llover más, o no llover si falta gatillador.</div>
+</div>
+
+<div class="qcard">
+<p class="qnum">Pregunta 4 / 10</p>
+<p class="qtext">¿Cuál de las siguientes afirmaciones sobre las conexiones subtropicales (ríos atmosféricos) es FALSA?</p>
+<div class="qopts" data-q="4">
+<button class="qbtn" data-c="0">A) Entre el 30 y el 50 % de la precipitación en costas oeste extratropicales ocurre en pocos eventos de CS por año.</button>
+<button class="qbtn" data-c="0">B) Se forman en el flanco polar-oeste de los anticiclones subtropicales semipermanentes de nivel bajo.</button>
+<button class="qbtn" data-c="1">C) Se ubican sobre el sector frío de los frentes fríos, detrás de la superficie frontal.</button>
+<button class="qbtn" data-c="0">D) En el hemisferio sur se originan en la Polinesia, se asocian a vientos del noroeste en nivel bajo y terminan en el sur de Chile.</button>
+</div>
+<div class="qfeedback" style="display:none"></div>
+<div class="qexp" hidden>Las CS se ubican en el SECTOR CÁLIDO de los frentes fríos que se aproximan desde el cuadrante oeste. El sector frío post-frontal es precisamente donde falta la conexión: allí domina masa polar marítima seca y aparecen los campos craquelados de cúmulos de aire frío.</div>
+</div>
+
+<div class="qcard">
+<p class="qnum">Pregunta 5 / 10</p>
+<p class="qtext">En un análisis en el sur de Chile, ¿dónde se debe trazar el frente respecto al campo de espesor 1000–850 hPa?</p>
+<div class="qopts" data-q="5">
+<button class="qbtn" data-c="0">A) Exactamente sobre el eje del gradiente máximo de espesor.</button>
+<button class="qbtn" data-c="1">B) En el lado cálido del gradiente de espesor, por la inclinación frontal con la altura.</button>
+<button class="qbtn" data-c="0">C) En el lado frío del gradiente, donde se ubica la masa polar en superficie.</button>
+<button class="qbtn" data-c="0">D) Sobre la dorsal de espesor, coincidiendo con la advección neutra.</button>
+</div>
+<div class="qfeedback" style="display:none"></div>
+<div class="qexp" hidden>La superficie frontal está inclinada, de modo que su intersección con el suelo cae del lado cálido del gradiente térmico de la capa. Por efectos de densidad, en superficie el aire frío se ubica del lado cálido del gradiente de espesor, sin importar el tipo de frente. Además el frente suele coincidir con el eje de una vaguada en el campo de PNM.</div>
+</div>
+
+<div class="qcard">
+<p class="qnum">Pregunta 6 / 10</p>
+<p class="qtext">En la Patagonia, el aire ubicado detrás de un frente frío puede registrar temperaturas mayores que el aire delante del frente. ¿Cuál es la causa y cuándo se restaura la advección fría?</p>
+<div class="qopts" data-q="6">
+<button class="qbtn" data-c="0">A) Un error de calibración de las estaciones patagónicas; nunca se restaura la advección fría.</button>
+<button class="qbtn" data-c="0">B) La radiación solar intensa del verano austral; se restaura al anochecer.</button>
+<button class="qbtn" data-c="0">C) La liberación de calor latente en el propio frente; se restaura al pasar sobre los Andes.</button>
+<button class="qbtn" data-c="1">D) La compresión adiabática de sotavento calienta la masa post-frontal; la advección fría se restaura cuando el frente alcanza el Atlántico o ingresa a la CRP, en la Pampa Húmeda.</button>
+</div>
+<div class="qfeedback" style="display:none"></div>
+<div class="qexp" hidden>La masa que cruza los Andes ya perdió vapor por precipitación en barlovento y al descender sigue la adiabática seca (9,8 °C/km), llegando más cálida y con humedad relativa muy baja. Esto complica la ubicación de frentes con criterios térmicos de superficie en toda la Patagonia.</div>
+</div>
+
+<div class="qcard">
+<p class="qnum">Pregunta 7 / 10</p>
+<p class="qtext">Una estación de la pampa húmeda registra ráfagas fuertes, caída rápida de temperatura, giro del viento y aumento de presión, pero el punto de rocío casi no cambia. ¿Qué pasó?</p>
+<div class="qopts" data-q="7">
+<button class="qbtn" data-c="0">A) Pasó un frente frío clásico; el rocío nunca cambia con los frentes.</button>
+<button class="qbtn" data-c="1">B) Pasó una línea de inestabilidad: el enfriamiento proviene de la piscina fría por evaporación, no de un cambio de masa de aire.</button>
+<button class="qbtn" data-c="0">C) Pasó una baja ocluida, que por definición no modifica la humedad.</button>
+<button class="qbtn" data-c="0">D) Pasó una conexión subtropical, que produce salto de presión sin cambio de humedad.</button>
+</div>
+<div class="qfeedback" style="display:none"></div>
+<div class="qexp" hidden>Este es el criterio discriminante del curso. La línea de inestabilidad se forma 150–300 km por delante del frente progresivo y su outflow imita el paso frontal en viento, temperatura y presión. Pero como no hay cambio de masa de aire, las isodrosotermas apenas se mueven. En un frente frío real el punto de rocío cae marcadamente.</div>
+</div>
+
+<div class="qcard">
+<p class="qnum">Pregunta 8 / 10</p>
+<p class="qtext">Según la tabla de mesoescala (UCAR/COMET-MetEd), ¿en qué categoría y con qué escala temporal se clasifica un complejo convectivo de mesoescala (CCM)?</p>
+<div class="qopts" data-q="8">
+<button class="qbtn" data-c="0">A) Meso-γ, 3 a 30 minutos.</button>
+<button class="qbtn" data-c="0">B) Meso-β, 30 minutos a 6 horas.</button>
+<button class="qbtn" data-c="1">C) Meso-α, 6 a 36 horas.</button>
+<button class="qbtn" data-c="0">D) Escala sinóptica, 2 a 5 días.</button>
+</div>
+<div class="qfeedback" style="display:none"></div>
+<div class="qexp" hidden>Meso-α cubre 200–2000 km y 6–36 h, junto con máximos de corriente en chorro y huracanes pequeños. El CCM tiene estructura circular, cubre áreas comparables al territorio de Uruguay, emerge de la convección de tarde-noche y se intensifica durante la madrugada.</div>
+</div>
+
+<div class="qcard">
+<p class="qnum">Pregunta 9 / 10</p>
+<p class="qtext">Para pronosticar precipitación por encima de lo normal en la CRP, ¿cuál conjunto de señales buscaría?</p>
+<div class="qopts" data-q="9">
+<button class="qbtn" data-c="0">A) Frente estacionario en el centro del continente, chorro de altura zonal y dorsales en nivel medio.</button>
+<button class="qbtn" data-c="0">B) Anomalías del oeste y suroeste en nivel bajo con TSM del Atlántico por debajo de lo normal.</button>
+<button class="qbtn" data-c="0">C) Compresión adiabática intensa desde el interior de Argentina y ausencia de chorros de altura.</button>
+<button class="qbtn" data-c="1">D) Chorro de capas bajas transportando humedad desde el norte con convergencia, vientos del este en nivel bajo, chorro de altura con región divergente y TSM del Atlántico por encima de lo normal.</button>
+</div>
+<div class="qfeedback" style="display:none"></div>
+<div class="qexp" hidden>Las opciones A, B y C son precisamente las señales de precipitación POR DEBAJO. El frente estacionario y el chorro zonal bloquean el ingreso de humedad amazónica, y las anomalías del oeste transportan masas secas del interior argentino con compresión adiabática.</div>
+</div>
+
+<div class="qcard">
+<p class="qnum">Pregunta 10 / 10</p>
+<p class="qtext">En el contexto peruano, ¿cuál de estas afirmaciones es correcta respecto a lo estudiado en esta unidad?</p>
+<div class="qopts" data-q="10">
+<button class="qbtn" data-c="0">A) Las conexiones subtropicales que alcanzan la costa peruana son frecuentes, porque el APS favorece flujo del oeste todo el año.</button>
+<button class="qbtn" data-c="1">B) Las CS hacia la costa peruana son muy raras por la escasez de forzante profunda asociada a vaguadas de altura o frentes en esas latitudes; los aluviones de Atacama de marzo de 2015 son un caso excepcional documentado.</button>
+<button class="qbtn" data-c="0">C) Los frentes nunca alcanzan territorio peruano porque los Andes los bloquean por completo en ambos flancos.</button>
+<button class="qbtn" data-c="0">D) El gradiente térmico de los Andes en Perú y Bolivia no se confunde nunca con un gradiente frontal en los campos de modelo.</button>
+</div>
+<div class="qfeedback" style="display:none"></div>
+<div class="qexp" hidden>La opción C es falsa: al este de los Andes los frentes llegan ocasionalmente hasta Perú y el oeste amazónico, produciendo friajes. La D también es falsa: el módulo advierte expresamente que el gradiente orográfico andino en Perú y Bolivia se asemeja al gradiente frontal, por lo que es esencial conocer el terreno antes de trazar un frente.</div>
+</div>
+
+<div id="qresult" style="display:none;border-radius:10px;padding:12px 14px;margin-top:12px;font-size:12.5px;line-height:1.6"></div>
+<button onclick="resetQuiz()" style="margin-top:10px;width:auto;padding:8px 16px;font-size:12px;cursor:pointer"><i class="ti ti-refresh" aria-hidden="true"></i> Reiniciar quiz</button>
+</div>
+
+<div class="sbar" style="background:var(--c-pet-b);color:var(--c-pet-t)"><i class="ti ti-link" aria-hidden="true"></i> Para profundizar — fuentes institucionales</div>
+
+<div class="block s3" id="refs-institucionales">
+<div class="three">
+<div class="mini" style="border-left:3px solid #0c4a6e"><b>OMM / WMO <i class="ti ti-external-link" aria-hidden="true"></i></b><a href="https://wmo.int">wmo.int</a><br>Es la autoridad normativa: define oficialmente frente, masa de aire, escalas atmosféricas y los estándares de observación y codificación que SENAMHI aplica. Consúltela para la terminología formal exigida en el examen.<br><i>Tipo: normas y definiciones oficiales.</i></div>
+<div class="mini" style="border-left:3px solid #0c4a6e"><b>AMS — Glossary of Meteorology <i class="ti ti-external-link" aria-hidden="true"></i></b><a href="https://glossary.ametsoc.org">glossary.ametsoc.org</a><br>Fuente citada directamente por el PDF para <i>precipitable water</i>. Úsela para las definiciones de supercelda, squall line, MCC y oclusión. <i>(verificar vigencia del enlace específico de la diapositiva 14)</i><br><i>Tipo: glosario técnico.</i></div>
+<div class="mini" style="border-left:3px solid #0c4a6e"><b>ESRL/NOAA — Atmospheric Rivers <i class="ti ti-external-link" aria-hidden="true"></i></b><a href="https://psl.noaa.gov/">psl.noaa.gov</a><br>Origen del dato de que el 30–50 % de la precipitación en costas oeste extratropicales viene de pocos eventos. El PDF cita esrl.noaa.gov/psd/atmrivers, hoy migrado al portal PSL. <i>(verificar vigencia)</i><br><i>Tipo: datos e informes.</i></div>
+<div class="mini" style="border-left:3px solid #0c4a6e"><b>NOAA / WPC International Desks <i class="ti ti-external-link" aria-hidden="true"></i></b><a href="https://www.wpc.ncep.noaa.gov/international/">wpc.ncep.noaa.gov/international</a><br>Es la fuente de la mayor parte de este módulo: los modelos conceptuales de frentes, los predictores de lluvia y los esquemas de pronóstico de anomalías provienen de sus pasantías y presentaciones.<br><i>Tipo: material de capacitación operativa.</i></div>
+<div class="mini" style="border-left:3px solid #0c4a6e"><b>NSSL / NOAA — Thunderstorm types <i class="ti ti-external-link" aria-hidden="true"></i></b><a href="https://www.nssl.noaa.gov/education/svrwx101/thunderstorms/types/">nssl.noaa.gov/education/svrwx101</a><br>Fuente citada para supercelda y CCM. Explica multicelda, supercelda y línea de turbonada con esquemas y video.<br><i>Tipo: recurso educativo.</i></div>
+<div class="mini" style="border-left:3px solid #0c4a6e"><b>COMET / MetEd (UCAR) <i class="ti ti-external-link" aria-hidden="true"></i></b><a href="https://www.meted.ucar.edu">meted.ucar.edu</a><br>Origen de la Tabla 7.1 de escalas mesoescalares citada en la diapositiva 44. Su libro de meteorología tropical está en español y es gratuito con registro.<br><i>Tipo: curso con certificación.</i></div>
+<div class="mini" style="border-left:3px solid #f97316"><b>SENAMHI Perú <i class="ti ti-external-link" aria-hidden="true"></i></b><a href="https://www.senamhi.gob.pe">senamhi.gob.pe</a><br>Institución que dicta el curso. Aquí encontrará los avisos por friaje y surazo en la Amazonía, que son la manifestación peruana de las incursiones frías descritas en la sección de baja clipper.<br><i>Tipo: pronósticos, boletines y datos nacionales.</i></div>
+<div class="mini" style="border-left:3px solid #f97316"><b>ENFEN <i class="ti ti-external-link" aria-hidden="true"></i></b><a href="https://www.gob.pe/enfen">gob.pe/enfen</a><br>Relevante para la parte de aplicaciones al pronóstico: el módulo menciona repetidamente el efecto de la fase cálida del ENSO sobre las dorsales de bloqueo en el extremo sur.<br><i>Tipo: informes técnicos oficiales.</i></div>
+<div class="mini" style="border-left:3px solid #f97316"><b>DMC Chile e IGP <i class="ti ti-external-link" aria-hidden="true"></i></b><a href="https://www.meteochile.gob.cl">meteochile.gob.cl</a> · <a href="https://www.gob.pe/igp">gob.pe/igp</a><br>La DMC aportó las climatologías de estaciones (Valdivia, Puerto Montt, Futaleufú, Puerto Aysén) usadas en los compuestos de David Romero. El IGP complementa con investigación sobre El Niño.<br><i>Tipo: datos regionales e investigación.</i></div>
+</div>
+<div class="warn" style="margin-top:9px"><b>Nota de honestidad:</b> los enlaces citados dentro del PDF corresponden a 2017 y varios han migrado (por ejemplo, ESRL/PSD pasó a NOAA PSL, y glossary.ametsoc.org ya no usa la ruta /wiki/). Los dominios raíz listados arriba siguen siendo los correctos, pero conviene <b>verificar la vigencia</b> de cada ruta específica antes de citarla en un trabajo.</div>
+</div>
+
+<div class="ftr">
+<span class="ft">REFERENCIAS DEL PDF:</span>
+<span class="fc">USAFETAC/TN-92/004 · WPC International Desks (NOAA) · USGS-GTOPO30 DEM · NCEP/NCAR Reanalysis · Google Earth / Landsat · Dal Piva, E., Gan, M. A. y Rao, V. B. (2009/2010): <i>Energetics of Winter Troughs Entering South America</i>, Monthly Weather Review, 138, 1084–1102 · Siqueira, J. R. y Machado, L. A. T. (2004): <i>Influence of the Frontal Systems on the Day-to-Day Convection Variability over South America</i>, Journal of Climate, 17, 1754–1766 · Zhu, Y. y Newell, R. E. (1998) · Higgins, R. W. et al. (2000) · Velasco, I. y Fritsch, J. M.: <i>Mesoscale Convective Complexes</i> · AMS (2017), <i>Precipitable water</i> — Glossary of Meteorology · ESRL/NOAA, <i>Atmospheric Rivers</i> · NSSL (2017), <i>Thunderstorm Types</i> · UCAR MetEd (2017), <i>Mesoescala</i> · RAMSDIS/CIRA (GOES-13) · Modelo GFS (EMC/NOAA) · NSSTC Lightning Team · Climatologías de la DMC (Chile) · NCSU y AVSTOP.com (esquema de nubosidad frontal adaptado al hemisferio sur)</span>
+</div>
+
+</div>
+<script>
+(function(){
+var sec=document.getElementById('quiz-section');
+var answered=0,correct=0;
+sec.addEventListener('click',function(e){
+  var b=e.target.closest('.qbtn'); if(!b) return;
+  var opts=b.parentElement; if(opts.classList.contains('done')) return;
+  var card=opts.closest('.qcard');
+  var btns=Array.prototype.slice.call(opts.querySelectorAll('.qbtn'));
+  var ok=b.getAttribute('data-c')==='1';
+  var right=btns.filter(function(x){return x.getAttribute('data-c')==='1';})[0];
+  var letter=['A','B','C','D'][btns.indexOf(right)];
+  btns.forEach(function(x){
+    if(x.getAttribute('data-c')==='1'){x.classList.add('ok');x.textContent='\u2705 '+x.textContent;}
+    else if(x===b){x.classList.add('bad');x.textContent='\u274C '+x.textContent;}
+  });
+  opts.classList.add('done');
+  var exp=card.querySelector('.qexp').textContent;
+  var fb=card.querySelector('.qfeedback');
+  fb.className='qfeedback '+(ok?'fb-ok':'fb-bad');
+  fb.textContent=(ok?'\u00A1Correcto! ':'Incorrecto. La respuesta correcta es '+letter+'. ')+exp;
+  fb.style.display='block';
+  answered++; if(ok) correct++;
+  document.getElementById('qprog').textContent='Pregunta '+answered+' de 10';
+  document.getElementById('qscore').textContent=Math.round(correct/answered*100)+' % de aciertos';
+  document.getElementById('qbar').style.width=(answered*10)+'%';
+  if(answered===10){
+    var r=document.getElementById('qresult'),msg,bg,col;
+    if(correct<=4){msg='Necesitas repasar el material. Vuelve sobre las secciones de agua precipitable, conexi\u00F3n subtropical y compresi\u00F3n adiab\u00E1tica.';bg='#fee2e2';col='#991b1b';}
+    else if(correct<=7){msg='\u00A1Buen avance, sigue repasando! Revisa especialmente las tablas de pron\u00F3stico de anomal\u00EDas y la distinci\u00F3n entre l\u00EDnea de inestabilidad y frente fr\u00EDo.';bg='#fef9c3';col='#713f12';}
+    else{msg='\u00A1Excelente dominio del tema! Est\u00E1s en condiciones de explicar la asimetr\u00EDa andina y aplicar los predictores en el pron\u00F3stico estacional.';bg='#dcfce7';col='#14532d';}
+    r.style.background=bg;r.style.color=col;
+    r.innerHTML='<b>Puntaje: '+correct+' / 10 correctas.</b><br>'+msg;
+    r.style.display='block';
+  }
+});
+window.resetQuiz=function(){
+  answered=0;correct=0;
+  sec.querySelectorAll('.qopts').forEach(function(o){
+    o.classList.remove('done');
+    o.querySelectorAll('.qbtn').forEach(function(x){
+      x.classList.remove('ok','bad');
+      x.textContent=x.textContent.replace(/^[\u2705\u274C]\s*/,'');
+    });
+  });
+  sec.querySelectorAll('.qfeedback').forEach(function(f){f.style.display='none';f.textContent='';});
+  document.getElementById('qresult').style.display='none';
+  document.getElementById('qprog').textContent='Pregunta 0 de 10';
+  document.getElementById('qscore').textContent='0 % de aciertos';
+  document.getElementById('qbar').style.width='0%';
+};
+})();
+</script>

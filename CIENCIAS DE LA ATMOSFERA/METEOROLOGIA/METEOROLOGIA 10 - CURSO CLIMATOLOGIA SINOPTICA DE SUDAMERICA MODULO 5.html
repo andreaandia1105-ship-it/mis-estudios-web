@@ -1,0 +1,653 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary,var(--surface-0));font-family:'Source Sans 3',var(--font-sans);color:var(--color-text-primary,var(--text-primary));border-radius:12px}
+.cv *{box-sizing:border-box}
+.tbar{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:12px;padding:14px 18px}
+.tbar h1{font-family:'Oswald';font-size:20px;font-weight:700;margin:0 0 3px;color:#fff;line-height:1.2}
+.tbar p{font-size:11px;margin:0;color:#cbd5e1}
+.tbar .pill{background:#1e3a5f;color:#7dd3fc;font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:5px 3px 0 0}
+.sbar{grid-column:1/-1;font-family:'Oswald';font-size:13px;font-weight:700;padding:6px 12px;border-radius:8px;margin-top:4px}
+.block{background:var(--color-background-primary,var(--surface-2));border:0.5px solid var(--color-border-tertiary,var(--border));border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}.block.s3{grid-column:1/-1}
+.bh{font-family:'Oswald';font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.4px}
+.def{border-left:3px solid #2563eb;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary,var(--surface-1));margin-bottom:8px;line-height:1.5}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:6px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:var(--font-mono,monospace);font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0 3px}
+.rx-note{font-size:11px;color:var(--color-text-secondary,var(--text-secondary));margin:0 0 8px;line-height:1.45}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin:8px 0;line-height:1.45}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:7px 10px;margin-top:9px;line-height:1.45}
+.exam b{font-weight:600}
+.mini{background:var(--color-background-secondary,var(--surface-1));border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.45}
+.mini b{display:block;margin-bottom:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--color-background-secondary,var(--surface-1));padding:4px 8px;border-radius:6px;font-size:11px;line-height:1.3}
+.farrow{color:var(--color-text-secondary,var(--text-secondary));font-size:15px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary,var(--surface-1));padding:5px 7px;border-bottom:0.5px solid var(--color-border-secondary,var(--border-strong));text-align:left;font-family:'Oswald';font-weight:500}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary,var(--border));vertical-align:top;line-height:1.4}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary,var(--border));margin:7px 0}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.dual-tech{background:#e0f2fe;color:#0c4a6e;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.45}
+.dual-plain{background:#dcfce7;color:#14532d;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.45}
+.dual-label{font-family:'Oswald';font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 4px;opacity:.85}
+.dual p{margin:0}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary,var(--surface-1));border-radius:20px;height:11px;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:20px}
+.svgbox{background:var(--color-background-secondary,var(--surface-1));border-radius:9px;padding:6px;margin:8px 0}
+.cap{font-size:10.5px;color:var(--color-text-secondary,var(--text-secondary));text-align:center;margin:3px 0 0;line-height:1.35}
+.qcard{border:0.5px solid var(--color-border-tertiary,var(--border));border-radius:10px;padding:10px 12px;margin-bottom:9px;background:var(--color-background-secondary,var(--surface-1))}
+.qnum{font-family:'Oswald';font-size:10.5px;color:#0284c7;margin:0 0 3px;text-transform:uppercase;letter-spacing:.5px}
+.qtext{font-size:12.5px;margin:0 0 8px;line-height:1.5;font-weight:600}
+.qbtn{background:var(--color-background-primary,var(--surface-2));border:1px solid var(--color-border-tertiary,var(--border));border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;font-family:inherit;color:inherit;line-height:1.4}
+.qbtn:hover{border-color:#0284c7}
+.qbtn.ok{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.bad{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.dis{opacity:.6;cursor:not-allowed;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.fb-ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.fb-bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.ftr{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:'Oswald';font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8;line-height:1.5}
+.cv a{color:#0284c7}
+@media(prefers-color-scheme:dark){
+.def{background:#1e293b}
+.warn{background:#431407;color:#fed7aa;border-left-color:#f97316}
+.exam{background:#422006;color:#fef08a;border-color:#a16207}
+.dual-tech{background:#082f49;color:#7dd3fc}
+.dual-plain{background:#14532d;color:#86efac}
+.qbtn.ok{background:#14532d;color:#86efac;border-color:#16a34a}
+.qbtn.bad{background:#450a0a;color:#fca5a5;border-color:#dc2626}
+.fb-ok{background:#052e16;color:#86efac}
+.fb-bad{background:#450a0a;color:#fca5a5}
+}
+@media(max-width:640px){.cv{grid-template-columns:1fr}.block.s2,.block.s3{grid-column:1/-1}.dual,.two,.three{grid-template-columns:1fr}}
+</style>
+
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Canvas de estudio del Módulo 1: sistemas sinópticos de Sudamérica subtropical, chorro de capas bajas, Baja del Chaco, chorro de barrera, ZCAS y aplicaciones al pronóstico climático estacional, con quiz de diez preguntas.</h2>
+
+<div class="cv">
+
+<div class="tbar">
+<h1>🌊 MÓDULO 1 — CLIMATOLOGÍA SINÓPTICA DE SUDAMÉRICA · TEMAS 2.3 y 2.4</h1>
+<p>Sistemas sinópticos en Sudamérica subtropical · Zona de Convergencia del Atlántico Sur y líneas de cortante</p>
+<p>Curso: Pronóstico Climático Estacional — SENAMHI / Proyecto CLIMANDES (COSUDE–MeteoSwiss) · N. Quispe Gutiérrez (SENAMHI) y J. M. Gálvez Chavarri (SRG/NOAA) · Colab.: E. Villegas, T. García, E. Yacolca</p>
+<span class="pill">SALLJ / LLJ</span><span class="pill">Baja del Chaco – BNOA</span><span class="pill">Eventos CJE</span><span class="pill">Chorro de barrera</span><span class="pill">Frentes y surgencias</span><span class="pill">ZCAS</span><span class="pill">Alta de Bolivia</span><span class="pill">OLR y pronóstico estacional</span>
+</div>
+
+<div class="sbar" style="background:#ffedd5;color:#7c2d12">🟠 SECCIÓN 1 — GENERALIDADES: GEOGRAFÍA Y CONTROLES SEMI-PERMANENTES (Diap. 3–4)</div>
+
+<div class="block s2">
+<span class="bh" style="background:#dbeafe;color:#1e3a8a">Definición de la región subtropical sudamericana (Diap. 3)</span>
+<div class="def" style="border-left-color:#2563eb">Sudamérica subtropical no se define por una latitud única, sino por una <b>frontera curva</b>: ~30°S en el sur, subiendo hasta ~10°S en la Amazonía occidental y ~15°S en el Cerrado del centro de Brasil. Esa curvatura no es un capricho cartográfico: refleja hasta dónde penetran hacia el ecuador los procesos <b>extratropicales</b> (frentes, vaguadas migratorias) canalizados por la barrera andina.</div>
+<div class="item"><span class="dot" style="background:#2563eb"></span><div><b>¿Por qué la frontera sube hacia el oeste?</b> Los Andes actúan como pared meridional de &gt;4000 m. Las masas frías del sur, al no poder cruzar hacia el Pacífico, se canalizan por el corredor oriental andino y avanzan hasta latitudes tropicales (7–10°S). En el este, sin barrera, el aire frío se modifica térmicamente sobre el continente y se detiene antes (~15°S).</div></div>
+<div class="item"><span class="dot" style="background:#2563eb"></span><div><b>Interacción trópico–extratrópico:</b> es la firma de la región. La humedad es de origen tropical (Amazonía, Atlántico), pero el forzamiento dinámico que la levanta es extratropical (vaguadas de onda corta, frentes). Esa combinación produce los sistemas convectivos de mesoescala (SCM/CCM) más grandes del planeta.</div></div>
+<div class="item"><span class="dot" style="background:#2563eb"></span><div><b>Estacionalidad seca definida:</b> mayo–setiembre (invierno austral). En ese período el Alta de Bolivia colapsa, los oestes subtropicales bajan de latitud y las incursiones frontales dominan, pero con poca humedad disponible: mucho frío, poca lluvia.</div></div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>Región de acoplamiento trópico-extratrópico donde la baroclinicidad de latitudes medias interactúa con una masa de aire ecuatorial de alta θₑ. El bloqueo orográfico andino impone canalización meridional del flujo de capas bajas y conserva la vorticidad potencial de las incursiones frías, permitiendo su penetración hasta ~7–10°S.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Es la zona donde chocan dos mundos: el aire caliente y húmedo de la selva y el aire frío que sube desde la Patagonia. Los Andes funcionan como la pared de un pasillo: el aire frío no puede pasar al Pacífico, así que se desliza pegado a la cordillera y llega mucho más al norte de lo que llegaría en terreno plano. Ese choque es el que produce las tormentas grandes.</p></div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir "subtropical" con la <b>alta subtropical</b> (anticiclón del Pacífico Sur). Aquí "subtropical" designa la <b>franja latitudinal de transición</b> (~15–30°S), no un sistema de presión. Otro error: asumir simetría con el Hemisferio Norte — allí las Rocosas también canalizan aire frío, pero <b>no</b> existe un continente estrecho con un océano frío al oeste ni una selva ecuatorial pegada a la barrera, por lo que los "friajes" no tienen análogo exacto en Norteamérica.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Explique físicamente por qué el límite norte de Sudamérica subtropical se ubica hacia los 10°S en la Amazonía occidental y hacia los 15°S en el Cerrado brasileño. ¿Qué rol cumple la cordillera de los Andes en esa asimetría zonal?</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#f1f5f9;color:#334155">Marco institucional del módulo</span>
+<div class="mini" style="border-left:3px solid #0284c7"><b>OMM / WMO</b>Define el marco normativo del pronóstico climático estacional. El curso se enmarca en el <b>GFCS</b> (Marco Mundial para los Servicios Climáticos) de la OMM, que exige que un SMHN entregue productos climáticos operativos, verificables y orientados a usuarios.</div>
+<div class="mini" style="border-left:3px solid #f59e0b;margin-top:6px"><b>SENAMHI (Perú)</b>Servicio Meteorológico e Hidrológico Nacional. Es el emisor oficial del pronóstico estacional peruano; este módulo es su material de capacitación interna.</div>
+<div class="mini" style="border-left:3px solid #16a34a;margin-top:6px"><b>NOAA / WPC International Desks</b>Fuente de casi todos los esquemas conceptuales del PDF. Los "International Desks" del Weather Prediction Center capacitan pronosticadores latinoamericanos.</div>
+<div class="mini" style="border-left:3px solid #7c3aed;margin-top:6px"><b>AMS · CPTEC/INPE · MeteoSwiss</b>La AMS aporta las definiciones formales (Glossary: <i>barrier jet</i>, <i>SACZ</i>); CPTEC/INPE (Brasil) aporta imágenes satelitales y análisis de ZCAS; MeteoSwiss y COSUDE financian y co-ejecutan CLIMANDES.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>¿Qué es el GFCS de la OMM y por qué un módulo de climatología sinóptica regional forma parte de un curso de pronóstico climático estacional?</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#ede9fe;color:#4c1d95">Los cinco sistemas que modulan la climatología sinóptica subtropical (Diap. 4)</span>
+<div class="def" style="border-left-color:#7c3aed">La diapositiva 4 es el <b>mapa mental de todo el tema 2.3</b>: cinco sistemas que, combinados, explican casi toda la variabilidad de lluvia y temperatura de la región. No son independientes — forman una <b>cadena acoplada</b>: la baja termal succiona, el chorro transporta, la vaguada de altura levanta, la ZCAS redistribuye, y el resultado es la región de tiempo severo.</div>
+<div class="svgbox">
+<svg width="100%" viewBox="0 0 680 400" role="img"><title>Esquema de los cinco sistemas sinópticos de Sudamérica subtropical</title><desc>Silueta esquemática del continente con la cordillera de los Andes, el chorro de capas bajas desde la Amazonía hacia la cuenca del Plata, las bajas del Chaco y del noroeste argentino, la banda de la ZCAS y la región de tiempo severo.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<path d="M150 40 L250 30 L330 60 L360 130 L330 210 L300 290 L250 350 L215 355 L200 300 L175 210 L160 130 Z" fill="#94a3b8" opacity="0.18" stroke="#64748b" stroke-width="0.5"/>
+<path d="M160 45 L175 130 L192 215 L212 300 L222 352" fill="none" stroke="#b45309" stroke-width="7" opacity="0.55" stroke-linecap="round"/>
+<text class="ts" x="120" y="180" text-anchor="middle" style="font-size:12px" fill="#92400e">Andes</text>
+<ellipse cx="290" cy="95" rx="62" ry="42" fill="#5eead4" opacity="0.3"/>
+<text class="ts" x="290" y="98" text-anchor="middle" style="font-size:12px" fill="#134e4a">Amazonía</text>
+<path d="M255 130 C232 175, 228 225, 240 275" fill="none" stroke="#0891b2" stroke-width="5" marker-end="url(#arrow)" opacity="0.85"/>
+<text class="ts" x="196" y="255" text-anchor="end" style="font-size:12px" fill="#0e7490">SALLJ</text>
+<line class="leader" x1="200" y1="251" x2="234" y2="240" stroke="#0e7490" stroke-width="0.5" stroke-dasharray="3 3"/>
+<circle cx="228" cy="196" r="17" fill="#fecaca" stroke="#b91c1c" stroke-width="0.5"/>
+<text class="ts" x="228" y="200" text-anchor="middle" style="font-size:11px" fill="#7f1d1d">BC</text>
+<circle cx="221" cy="262" r="15" fill="#fecaca" stroke="#b91c1c" stroke-width="0.5"/>
+<text class="ts" x="221" y="266" text-anchor="middle" style="font-size:11px" fill="#7f1d1d">BNOA</text>
+<path d="M282 118 C330 158, 385 200, 445 245" fill="none" stroke="#7c3aed" stroke-width="16" opacity="0.28" stroke-linecap="round"/>
+<text class="ts" x="392" y="176" style="font-size:12px" fill="#4c1d95">ZCAS</text>
+<ellipse cx="300" cy="292" rx="52" ry="34" fill="#f0abfc" opacity="0.4"/>
+<text class="ts" x="300" y="296" text-anchor="middle" style="font-size:11px" fill="#701a75">Tiempo severo</text>
+<text class="ts" x="470" y="292" style="font-size:12px" fill="#701a75">Cuenca del Plata:</text>
+<text class="ts" x="470" y="310" style="font-size:12px" fill="#701a75">frontogénesis y ciclogénesis</text>
+<line class="leader" x1="352" y1="292" x2="462" y2="288" stroke="#701a75" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text class="ts" x="470" y="120" style="font-size:12px" fill="#134e4a">Fuente de humedad</text>
+<text class="ts" x="470" y="138" style="font-size:12px" fill="#134e4a">tropical continental</text>
+<line class="leader" x1="352" y1="100" x2="462" y2="116" stroke="#134e4a" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text class="ts" x="470" y="210" style="font-size:12px" fill="#4c1d95">Banda NO–SE de</text>
+<text class="ts" x="470" y="228" style="font-size:12px" fill="#4c1d95">convergencia y nubosidad</text>
+<line class="leader" x1="420" y1="228" x2="462" y2="214" stroke="#4c1d95" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text class="ts" x="40" y="378" style="font-size:12px" fill="#64748b">Esquema original, no a escala. BC = Baja del Chaco · BNOA = Baja del noroeste argentino</text>
+</svg>
+<p class="cap">Figura A (diagrama original SVG). Reconstrucción conceptual del esquema de la diap. 4 (fuente original: WPC International Desks / USAFETAC TN-92/004).</p>
+</div>
+<div class="three">
+<div class="mini" style="border-top:3px solid #0891b2"><b>1. SALLJ / chorro de capas bajas</b>Núcleo de viento del norte máximo cerca de 850 hPa. Fluye desde la Amazonía a la cuenca del Plata, pegado al este de los Andes. Es la <b>cinta transportadora de humedad</b> tropical hacia el extratrópico. Escala: sinóptica, persiste horas a días con máximo nocturno.</div>
+<div class="mini" style="border-top:3px solid #dc2626"><b>2–3. Baja del Chaco y BNOA</b>Bajas <b>termales</b> (núcleo cálido) de nivel bajo, definidas en verano. Nacen de compresión adiabática del oeste que cruza los Andes + calentamiento sensible. Aceleran el SALLJ y fuerzan convergencia de humedad. Escala: sinóptica/submesoescala, días.</div>
+<div class="mini" style="border-top:3px solid #7c3aed"><b>4. ZCAS</b>Banda NO–SE de convergencia en nivel bajo, nubosidad y lluvia, desde la Amazonía occidental al sureste de Brasil y Atlántico SO. Época cálida, dura &gt;3–4 días. Modula la lluvia de gran parte de Brasil. Escala: sinóptica, subestacional.</div>
+</div>
+<div class="two" style="margin-top:7px">
+<div class="mini" style="border-top:3px solid #d946ef"><b>5. Región de precipitaciones intensas y tiempo severo</b>Desde el sureste de Paraguay, por el noreste argentino y sur de Brasil, hasta la cuenca del Plata. Aquí <b>coinciden</b> humedad tropical (traída por el SALLJ) y dinámica extratropical (vaguadas, frentes) → región favorable para <b>frontogénesis y ciclogénesis</b>. Es una de las zonas de granizo y sistemas convectivos más intensos del mundo.</div>
+<div class="mini" style="border-top:3px solid #334155"><b>Comparación con el Hemisferio Norte</b>La analogía directa es el <b>Great Plains Low-Level Jet</b> de EE.UU.: mismo mecanismo (barrera montañosa al oeste, fuente de humedad cálida al sur, baja termal en la meseta mexicana), misma consecuencia (SCM nocturnos en el Medio Oeste). La diferencia: en el HN el chorro es del <b>sur</b> y gira a la derecha; en el HS es del <b>norte</b> y gira a la izquierda, porque el parámetro de Coriolis cambia de signo.</div>
+</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Describa cómo se acoplan entre sí los cinco sistemas de la figura. Si la Baja del Chaco se intensifica, ¿qué respuesta espera en el SALLJ y en la precipitación del noreste argentino, y por qué?</div>
+</div>
+
+<div class="sbar" style="background:#ccfbf1;color:#134e4a">🩵 SECCIÓN 2 — CHORRO DE CAPAS BAJAS: SALLJ (Diap. 5–10)</div>
+
+<div class="block s2">
+<span class="bh" style="background:#ccfbf1;color:#134e4a">¿Qué es el SALLJ y por qué existe? (Diap. 5–6)</span>
+<div class="def" style="border-left-color:#0d9488">El <b>South American Low-Level Jet (SALLJ)</b> es un máximo de viento del norte confinado a la baja tropósfera (núcleo ~850 hPa, es decir ~1.5 km), orientado meridionalmente y anclado al flanco oriental de los Andes. Transporta calor sensible, calor latente y vapor de agua desde la Amazonía hacia el sur, alimentando la convección de la cuenca del Plata.</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>Máximo de viento meridional (v &gt; u) en la capa límite superior, con núcleo en ~850 hPa y cizalladura vertical negativa por encima. Su existencia responde al balance entre el gradiente de presión meso-escalar inducido por el bloqueo orográfico, la advección de vorticidad y el desacople nocturno de la capa límite (mecanismo de Blackadar: oscilación inercial al cesar la mezcla turbulenta), que explica el máximo entre 00 y 06 UTC local.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Es un "río de viento" invisible que corre a un kilómetro y medio de altura, pegado al costado este de los Andes, y que baja desde la selva hasta Argentina. Funciona como una manguera: recoge la humedad que evapora la Amazonía y la descarga miles de kilómetros al sur. De noche corre más rápido, porque desaparece el "roce" con el suelo que durante el día lo frena.</p></div>
+</div>
+<hr class="divh">
+<div style="font-family:'Oswald';font-size:11.5px;margin-bottom:5px;letter-spacing:.4px">MECANISMOS PROPUESTOS POR C. VERA ET AL. (2006, BAMS — SALLJEX)</div>
+<div class="two">
+<div class="mini"><b>1) Deflexión del flujo amazónico</b>La circulación que cruza la cuenca del Amazonas es desviada meridionalmente al encontrar la cordillera. Es el mecanismo de "canalización" pura.</div>
+<div class="mini"><b>2) Forzamiento local topográfico</b>Dinámica seca en la vertiente oriental andina, posiblemente asistida por convección húmeda en las laderas (liberación de calor latente que refuerza el gradiente térmico).</div>
+<div class="mini"><b>3) Forzamiento externo transitorio</b>Variaciones del campo de presión en el norte de Argentina asociadas a perturbaciones migratorias en los oestes: el chorro responde a la llegada de vaguadas.</div>
+<div class="mini"><b>4) Propagación desde el Atlántico norte</b>Ráfagas de bajo nivel del Atlántico norte que se propagan hacia la cuenca del Plata atravesando la cuenca amazónica.</div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> tratar estos cuatro mecanismos como excluyentes ("¿cuál es el correcto?"). Vera et al. (2006) los proponen como <b>coexistentes</b>: distintos eventos de SALLJ tienen distinta mezcla de forzantes. Un evento tipo CJE está dominado por (3), mientras que el chorro climatológico de verano lo está por (1) y (2).</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Enumere y explique físicamente los cuatro mecanismos propuestos por Vera et al. (2006) para el desarrollo del SALLJ. ¿Cuál de ellos explica mejor la variabilidad sinóptica (día a día) del chorro y cuál su existencia climatológica?</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#fef9c3;color:#713f12">Criterio 1 de Bonner (1968) — identificación objetiva</span>
+<div class="def" style="border-left-color:#ca8a04">Para que un perfil vertical de viento se clasifique como chorro de capas bajas, Bonner impuso <b>dos condiciones simultáneas</b>: una de <b>intensidad</b> y otra de <b>cizalladura</b>. Fue diseñado sobre las Grandes Planicies de Norteamérica y luego adoptado en Sudamérica.</div>
+<div class="rx">CRITERIO 1 DE BONNER (1968)<br>(a) V_máx ≥ 12 m/s  en z ≤ 1.5 km (~850 hPa)<br>(b) ΔV = V_máx − V_mín ≥ 6 m/s<br>hasta z ≤ 3 km (~700 hPa)<br>(c) además: |v| &gt; |u| (viento meridional dominante)</div>
+<p class="rx-note">V en m/s (1 m/s ≈ 1.94 kt); z en km; niveles en hPa. V_mín se busca en el <b>primer mínimo por encima</b> del máximo, no en cualquier mínimo. Rango de validez: capa límite y baja tropósfera; el criterio no aplica a chorros de altura.</p>
+<div style="font-family:'Oswald';font-size:11.5px;margin:6px 0 4px">EJEMPLO RESUELTO — CASO 05 OCT 2014 (PDF, Diap. 6)</div>
+<div class="mini">Del sondeo del caso: V<sub>máx</sub> ≈ <b>24.6 m/s</b> en 850 hPa; V<sub>mín</sub> superior ≈ <b>18.3 m/s</b> en 700 hPa.<br>→ (a) 24.6 ≥ 12 ✅<br>→ (b) ΔV = 24.6 − 18.3 = <b>6.3 m/s</b> ≥ 6 ✅<br>→ (c) el corte transversal en 25°S muestra flujo del <b>norte</b> (meridional) dominante ✅<br><b>Conclusión: SÍ clasifica como LLJ.</b> Nótese lo ajustado del margen: 6.3 vs 6.0 m/s. Un error de ±0.5 m/s en el reanálisis cambiaría la clasificación — de ahí la importancia de conocer la incertidumbre del dato.</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir "chorro de capas bajas" con "viento fuerte en superficie". El LLJ exige un <b>máximo aislado en la vertical</b> con disminución por encima; un perfil que crece monótonamente con la altura (típico de un frente o de un gradiente sinóptico) <b>no</b> es un chorro aunque sople a 20 m/s.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Un sondeo registra 14 m/s en 850 hPa y 10 m/s en 700 hPa, con componente zonal mayor que la meridional. ¿Cumple el criterio 1 de Bonner? Justifique condición por condición.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#ccfbf1;color:#134e4a">Estructura termodinámica del SALLJ — caso de estudio 05 oct 2014 (Diap. 7–9)</span>
+<div class="def" style="border-left-color:#0d9488">El PDF diagnostica el mismo evento con <b>cuatro variables</b> en corte transversal a 25°S. La lógica pedagógica es acumulativa: primero se demuestra que hay chorro (viento), luego que es <b>cálido</b> (θ), luego que es <b>cálido y húmedo</b> (θₑ), y finalmente se cuantifica la humedad (relación de mezcla). Ese es exactamente el orden de razonamiento que se espera en un examen.</div>
+<div class="svgbox">
+<svg width="100%" viewBox="0 0 680 330" role="img"><title>Corte vertical esquemático del chorro de capas bajas en 25 grados sur</title><desc>Diagrama de presión contra longitud mostrando la cordillera de los Andes, el núcleo del chorro cerca de 850 hectopascales al este de la cordillera, y el perfil vertical de viento con máximo en 850 y mínimo en 700 hectopascales.</desc>
+<defs><marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<line x1="90" y1="40" x2="90" y2="270" stroke="#94a3b8" stroke-width="0.5"/>
+<line x1="90" y1="270" x2="400" y2="270" stroke="#94a3b8" stroke-width="0.5"/>
+<text class="ts" x="82" y="46" text-anchor="end" style="font-size:12px" fill="#64748b">400</text>
+<text class="ts" x="82" y="120" text-anchor="end" style="font-size:12px" fill="#64748b">600</text>
+<text class="ts" x="82" y="174" text-anchor="end" style="font-size:12px" fill="#64748b">700</text>
+<text class="ts" x="82" y="228" text-anchor="end" style="font-size:12px" fill="#64748b">850</text>
+<text class="ts" x="82" y="274" text-anchor="end" style="font-size:12px" fill="#64748b">1000</text>
+<text class="ts" x="40" y="300" style="font-size:12px" fill="#64748b">hPa</text>
+<text class="ts" x="110" y="292" style="font-size:12px" fill="#64748b">70°W</text>
+<text class="ts" x="360" y="292" style="font-size:12px" fill="#64748b">55°W</text>
+<path d="M100 270 L118 150 L134 270 Z" fill="#78716c" opacity="0.55"/>
+<text class="ts" x="118" y="140" text-anchor="middle" style="font-size:12px" fill="#57534e">Andes</text>
+<ellipse cx="176" cy="228" rx="42" ry="26" fill="#ef4444" opacity="0.35"/>
+<ellipse cx="176" cy="228" rx="24" ry="15" fill="#dc2626" opacity="0.45"/>
+<text class="ts" x="176" y="232" text-anchor="middle" style="font-size:12px" fill="#7f1d1d">24.6 m/s</text>
+<text class="ts" x="230" y="196" style="font-size:12px" fill="#7f1d1d">Núcleo del LLJ</text>
+<line class="leader" x1="202" y1="216" x2="228" y2="200" stroke="#7f1d1d" stroke-width="0.5" stroke-dasharray="3 3"/>
+<path d="M150 250 C210 248, 280 246, 350 244" fill="none" stroke="#0891b2" stroke-width="2" marker-end="url(#arrow2)" opacity="0.6"/>
+<text class="ts" x="250" y="266" style="font-size:12px" fill="#0e7490">Flujo del norte, θₑ alta</text>
+<line x1="470" y1="40" x2="470" y2="270" stroke="#94a3b8" stroke-width="0.5"/>
+<path d="M478 268 L500 250 L560 228 L520 174 L500 120 L488 60" fill="none" stroke="#0f766e" stroke-width="2"/>
+<circle cx="560" cy="228" r="4" fill="#dc2626"/>
+<circle cx="520" cy="174" r="4" fill="#2563eb"/>
+<text class="ts" x="572" y="232" style="font-size:12px" fill="#7f1d1d">máx 24.6</text>
+<text class="ts" x="532" y="166" style="font-size:12px" fill="#1e3a8a">mín 18.3</text>
+<text class="ts" x="470" y="300" style="font-size:12px" fill="#64748b">Perfil vertical de viento → ΔV = 6.3 m/s ≥ 6 ✓</text>
+<text class="ts" x="40" y="318" style="font-size:12px" fill="#64748b">Diagrama original, esquemático, basado en los valores citados en el PDF (caso 05 oct 2014).</text>
+</svg>
+<p class="cap">Figura B (diagrama original SVG). Corte esquemático a 25°S: núcleo del chorro adyacente a los Andes y perfil vertical que satisface el criterio de Bonner.</p>
+</div>
+<div class="three">
+<div class="mini" style="border-top:3px solid #f97316"><b>Temperatura potencial θ (Diap. 8 sup.)</b>Al recorrer el corte de oeste a este se comprueba que θ <b>aumenta hacia el núcleo</b> y decrece al alejarse: sobre la capa del LLJ hay un <b>sistema caliente</b>. Esto confirma que el flujo del norte es advección cálida y no un simple viento fuerte.</div>
+<div class="mini" style="border-top:3px solid #dc2626"><b>Temperatura potencial equivalente θₑ (Diap. 8 inf.)</b>Los máximos de θₑ (calor sensible + calor <b>latente</b>) se extienden hasta ~700 hPa. Esto indica una capa profunda de aire cálido y húmedo — condición previa indispensable para convección profunda organizada.</div>
+<div class="mini" style="border-top:3px solid #0d9488"><b>Relación de mezcla r (Diap. 9)</b>En el núcleo de máximo viento (850 hPa) se miden <b>r &gt; 12 g/kg</b>. Esa combinación de r alta con V alta es lo que hace del SALLJ un transportador de humedad eficiente: el flujo de humedad va como el producto r·V.</div>
+</div>
+<div class="rx">FLUJO DE HUMEDAD INTEGRADO (transporte del SALLJ)<br>Q = (1/g) ∫ r · V dp<br>Estimación puntual: q_flux = r · V<br>= 12 g/kg × 24.6 m/s ≈ 295 g·m·kg⁻¹·s⁻¹</div>
+<p class="rx-note">r en g/kg (típico 8–18 g/kg en el núcleo amazónico–chaqueño); V en m/s; p en Pa; g = 9.81 m/s². Q se expresa en kg·m⁻¹·s⁻¹. Válida en la capa 1000–700 hPa donde se concentra el 80–90 % del transporte; no aplicable por encima de 500 hPa, donde r es despreciable. <b>Regla práctica:</b> si duplica V y mantiene r, duplica el transporte; por eso una aceleración del chorro produce lluvias desproporcionadas río abajo.</p>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir <b>relación de mezcla</b> (r, masa de vapor por masa de aire seco, g/kg — conservativa ante cambios de T y p) con <b>humedad relativa</b> (HR, %, depende fuertemente de T). Un aire con r = 12 g/kg tiene HR ≈ 100 % a 17 °C pero solo ≈ 55 % a 27 °C. En análisis de transporte de humedad <b>siempre</b> se usa r o q, nunca HR. Igualmente: θ ≠ θₑ — θ ignora el calor latente, θₑ lo incluye; solo θₑ es conservativa en procesos húmedos.</div>
+<div class="two">
+<div class="mini" style="border-left:3px solid #0284c7"><b>Consecuencia observable (Diap. 9, GOES-13)</b>El flujo hacia el sur entre 65° y 55°W adviene aire cálido y muy húmedo; combinado con la circulación divergente de la alta tropósfera, dispara <b>complejos convectivos de mesoescala (CCM/MCC)</b>. La imagen satelital es el eslabón final de la cadena: no se ve el chorro, se ve <b>lo que el chorro produce</b>.</div>
+<div class="mini" style="border-left:3px solid #334155"><b>Hemisferio Sur vs. Hemisferio Norte</b>El Great Plains LLJ (HN) sopla del <b>sur</b> y también tiene máximo nocturno por oscilación inercial de Blackadar; ambos alimentan SCM nocturnos. Diferencias clave del SALLJ: (i) su fuente de humedad es <b>continental</b> (evapotranspiración amazónica), no oceánica como el Golfo de México; (ii) su curvatura inercial es <b>antihoraria</b> (f &lt; 0); (iii) puede persistir todo el año, no solo en la estación cálida.</div>
+</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Dado un corte transversal a 25°S con máximo de viento del norte de 24 m/s en 850 hPa, θₑ máxima extendiéndose hasta 700 hPa y r &gt; 12 g/kg en el núcleo, ¿qué tipo de sistema está diagnosticando y qué implicancias tiene para la convección aguas abajo? Fundamente usando el concepto de flujo de humedad.</div>
+</div>
+
+<div class="sbar" style="background:#fee2e2;color:#991b1b">🔴 SECCIÓN 3 — BAJA DEL CHACO (BC) Y BAJA DEL NOROESTE ARGENTINO (BNOA) (Diap. 11–18)</div>
+
+<div class="block s2">
+<span class="bh" style="background:#fee2e2;color:#991b1b">Definición, génesis y estructura vertical (Diap. 11–12)</span>
+<div class="def" style="border-left-color:#dc2626">La <b>Baja del Chaco (BC)</b> y la <b>Baja del Noroeste Argentino (BNOA)</b> son <b>sistemas distintos</b>, aunque suelen aparecer conectados en los mapas. Ambas son <b>bajas termales de nivel bajo</b> — es decir, de <b>núcleo cálido</b> — que se forman en el centro de Sudamérica <b>a sotavento</b> (al este) de los Andes, y son más frecuentes e intensas en los meses cálidos, especialmente en verano.</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>Bajas térmicas barotrópicas de núcleo cálido: el núcleo termal y el centro de circulación están colocados verticalmente. Su génesis combina (i) compresión adiabática del flujo del oeste que desciende a sotavento andino, y (ii) calentamiento sensible superficial favorecido por alta insolación y disponibilidad hídrica edáfica limitada (partición de flujos en superficie sesgada hacia H frente a LE). El eje cálido se inclina hacia el norte con la altura, desde ~25°S en niveles bajos hasta ~15°S en la alta tropósfera, donde se conecta con la <b>Alta de Bolivia</b> / dorsal subtropical de altura.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Son zonas de baja presión que se forman porque el aire de esa región está <b>caliente</b>, no porque haya una tormenta. Dos cosas la calientan: el aire que baja por el costado este de los Andes se comprime y se calienta (como el aire que sale caliente de un inflador de bicicleta), y el sol calienta el suelo seco del Chaco. El aire caliente pesa menos, la presión baja, y el aire de alrededor es succionado hacia adentro. Esa succión es la que "jala" la humedad del norte.</p></div>
+</div>
+<hr class="divh">
+<div class="two">
+<div class="mini" style="border-top:3px solid #dc2626"><b>Estructura vertical (corte en 63°W, Seluchi y Saulo, 2012)</b>Núcleo cálido en nivel bajo con <b>barotropía</b>: las líneas de temperatura y de temperatura potencial corren paralelas. El eje se inclina hacia el norte con la altura y termina bajo la Alta de Bolivia. Mucha humedad en la porción <b>norte</b> de la BC; al <b>sur</b> de la baja, en cambio, la atmósfera es marcadamente <b>baroclínica</b> — allí ya empieza Sudamérica extratropical.</div>
+<div class="mini" style="border-top:3px solid #b91c1c"><b>Diferencias BC vs. BNOA</b>La <b>BNOA</b> ha sido más estudiada (Seluchi y Saulo, 2009): se ubica más al sur, en el noroeste argentino, y su génesis por compresión adiabática está mejor documentada. La <b>BC</b>, más al norte (Chaco boliviano-paraguayo), tiene un proceso pendiente de estudio: el <b>calentamiento por compresión adiabática asociado al propio chorro de capas bajas del norte</b>. El PDF lo señala explícitamente como problema abierto de investigación.</div>
+</div>
+<div class="flow">
+<span class="fbox">Oestes de nivel medio cruzan los Andes</span><span class="farrow">→</span><span class="fbox">Subsidencia y compresión adiabática a sotavento</span><span class="farrow">→</span><span class="fbox">+ calentamiento sensible (suelo seco, alta insolación)</span><span class="farrow">→</span><span class="fbox">Descenso de presión: baja termal de núcleo cálido</span><span class="farrow">→</span><span class="fbox">Gradiente de presión → aceleración del SALLJ</span><span class="farrow">→</span><span class="fbox">Convergencia de humedad y convección</span>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> asumir que "baja presión = lluvia". Una baja <b>termal</b> de núcleo cálido, por sí sola, se asocia a <b>subsidencia en altura, cielo despejado y calor</b>. Solo produce lluvia cuando logra <b>importar humedad</b> (vía flujos del este/noreste o del SALLJ) y cuando existe forzamiento dinámico de altura que la profundice. Segundo error: llamar "BNOA" a la BC — el PDF insiste en que son <b>sistemas distintos</b> aunque compartan génesis. Tercero: confundir <b>barotrópico</b> (isotermas paralelas a isobaras, núcleo y circulación alineados) con <b>baroclínico</b> (isotermas cortan isobaras, el eje se inclina y hay energía disponible para ciclogénesis).</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Explique por qué la Baja del Chaco se describe como un sistema <b>barotrópico de núcleo cálido</b> y qué implica que su eje se incline hacia el norte con la altura hasta conectarse con la Alta de Bolivia. ¿Qué diferencia estructural existe entre esta baja y un ciclón extratropical de la cuenca del Plata?</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#fce7f3;color:#831843">Rol en las precipitaciones (Diap. 13)</span>
+<div class="def" style="border-left-color:#be185d">El sistema BC–BNOA estimula la lluvia de gran parte de Argentina por <b>dos vías</b>: (1) aceleran el chorro del norte que trae la humedad, y (2) generan <b>períodos de flujo del este</b> en el norte argentino.</div>
+<div class="item"><span class="dot" style="background:#be185d"></span><div><b>La clave del punto (2):</b> durante gran parte del año la componente del viento bajo en el noroeste argentino es del <b>oeste</b> — aire que ya descendió los Andes, seco y comprimido, lo que <b>limita</b> las precipitaciones. Cuando se desarrolla la BC, la circulación ciclónica invierte localmente esa componente a <b>este/noreste</b>, y recién entonces entra humedad al pie de cordillera.</div></div>
+<div class="item"><span class="dot" style="background:#be185d"></span><div>Los vientos convergen al <b>pie de la cordillera</b> y en el <b>Chaco alto</b> (norte de Argentina, Paraguay, sur de Bolivia). Ese es el punto donde la orografía suma ascenso forzado a la convergencia.</div></div>
+<div class="item"><span class="dot" style="background:#be185d"></span><div><b>En invierno el mecanismo se apaga:</b> la BC/BNOA es débil o poco frecuente, y los <b>oestes de nivel medio son fuertes</b> y mezclan la capa. Los flujos de humedad del norte asociados al LLJ ya no ingresan al noroeste argentino. Esto explica la estación seca de mayo–setiembre.</div></div>
+<div class="exam"><b>🎯 EXAMEN: </b>¿Por qué el desarrollo de la Baja del Chaco es condición casi necesaria para lluvias significativas en el noroeste argentino, y por qué ese mecanismo se debilita durante el invierno austral?</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#fee2e2;color:#991b1b">Eventos Chaco Jet (CJE): el dato cuantitativo más importante del tema (Diap. 14–18)</span>
+<div class="def" style="border-left-color:#dc2626">Un <b>CJE (Chaco Jet Event)</b> es un evento acoplado <b>baja–chorro</b>: la intensificación de la BC/BNOA acelera el SALLJ, que a su vez incrementa el transporte de humedad del norte y la convergencia de humedad en la cuenca del Plata (Salio, Nicolini y Saulo, 2002).</div>
+<div class="two">
+<div>
+<div style="font-family:'Oswald';font-size:11.5px;margin-bottom:6px">CONTRIBUCIÓN DE LOS CJE A LA LLUVIA — VERANO AUSTRAL</div>
+<div style="font-size:11.5px;margin-bottom:3px">Frecuencia: solo <b>17 %</b> de los días de verano</div>
+<div class="stat-bar-wrap" style="margin-bottom:8px"><div class="stat-bar-fill" style="width:17%;background:#0891b2"></div></div>
+<div style="font-size:11.5px;margin-bottom:3px">Aporte a la lluvia del NE argentino: hasta <b>55 %</b></div>
+<div class="stat-bar-wrap" style="margin-bottom:8px"><div class="stat-bar-fill" style="width:55%;background:#dc2626"></div></div>
+<div style="font-size:11.5px;margin-bottom:3px">Centro Paraguay → Río de la Plata: <b>&gt; 40 %</b></div>
+<div class="stat-bar-wrap" style="margin-bottom:8px"><div class="stat-bar-fill" style="width:40%;background:#f59e0b"></div></div>
+<div style="font-size:11.5px;margin-bottom:3px">Sur Paraguay → NE Argentina → N Uruguay: <b>&gt; 50 %</b></div>
+<div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:50%;background:#be185d"></div></div>
+<div class="rx" style="margin-top:9px">EFICIENCIA PLUVIOMÉTRICA DE LOS CJE<br>E = (% lluvia aportada) / (% días de ocurrencia)<br>E = 55 % / 17 % ≈ <b>3.2</b></div>
+<p class="rx-note">Adimensional. E = 1 significaría que el evento llueve como un día promedio. <b>E ≈ 3.2</b> quiere decir que un día con CJE llueve, en promedio, <b>más de tres veces</b> lo que un día ordinario de verano. Rango de validez: verano austral (DEF), noreste argentino; no extrapolable a invierno ni a la Amazonía occidental.</p>
+</div>
+<div>
+<div class="mini" style="border-top:3px solid #7c3aed;margin-bottom:7px"><b>Patrón sinóptico de un CJE (Diap. 16)</b>Tres firmas simultáneas:<br>(1) <b>Aceleración del chorro</b> desde Bolivia hasta la cuenca del Plata.<br>(2) <b>Fortalecimiento y migración al oeste</b> del eje de dorsal que se extiende desde el Atlántico/SE de Brasil hacia el oeste de la Amazonía. Al presionar hacia el oeste, aprieta el gradiente y acelera el chorro.<br>(3) <b>Patrón de vaguada sobre la Patagonia</b> (en días de verano promedio la vaguada del sur está sobre el sur de Chile). Como las vaguadas de 850 hPa se ubican al este de las de 500 hPa, esto implica una <b>vaguada de altura sobre Patagonia/Andes del centro de Chile</b>.</div>
+<div class="mini" style="border-top:3px solid #0284c7"><b>Firma en 300 hPa (Diap. 17)</b>Se confirma la vaguada de altura sobre Patagonia y se identifica la <b>entrada divergente del chorro subtropical de altura</b> sobre el norte de Argentina y la cuenca del Plata. Esa divergencia en altura es la que "succiona" desde arriba y permite que la convergencia de bajo nivel del CJE se traduzca en ascenso profundo.</div>
+</div>
+</div>
+<hr class="divh">
+<div class="two">
+<div class="mini" style="border-left:3px solid #f97316"><b>Cizalla ciclónica: cómo ubicar la baja desde el campo de viento</b>El PDF señala que la intensificación de la baja del Chaco se refleja en <b>cizalla ciclónica en el flanco derecho del chorro</b> (vientos disminuyendo en intensidad hacia la derecha del flujo). En el <b>Hemisferio Sur</b>, mirando en la dirección del flujo, la vorticidad ciclónica (negativa, antihoraria) está a la <b>izquierda</b>... pero con un chorro <b>del norte</b> (que viaja hacia el sur), el flanco derecho apunta al <b>oeste</b>, hacia el continente: allí está la baja. <b>Practique esto con las manos antes del examen.</b></div>
+<div class="mini" style="border-left:3px solid #334155"><b>⚠️ Inversión hemisférica del cuadrante divergente</b>En el <b>HN</b>, la divergencia de un jet streak está en la <b>entrada derecha</b> y la <b>salida izquierda</b>. En el <b>HS</b> se invierten: <b>entrada izquierda y salida derecha</b> son las regiones divergentes (por el cambio de signo de f en el balance ageostrófico). Sin embargo, el PDF habla de "<b>entrada divergente</b>" y de "<b>salida derecha</b>" del chorro de capas bajas asociada a rotación ciclónica y convergencia. Distinga siempre: chorro de <b>altura</b> → cuadrantes de divergencia; chorro de <b>capas bajas</b> → la salida es región de <b>convergencia</b> (el aire se frena y se acumula). Son dos reglas distintas y es el error más caro del tema.</div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> memorizar "17 % y 55 %" sin entender qué comparan. El 17 % es <b>frecuencia temporal</b> (días con CJE sobre días de verano); el 55 % es <b>aporte pluviométrico</b> (mm de CJE sobre mm totales del verano) y es <b>regional</b>: máximo en el noreste argentino y norte de Uruguay, no uniforme en toda Sudamérica.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Los eventos CJE ocurren en solo el 17 % de los días del verano austral pero aportan hasta el 55 % de la precipitación del noreste argentino (Salio et al., 2002). Interprete físicamente esta desproporción, describiendo el patrón sinóptico completo en 850 hPa y en 300 hPa que acompaña a un CJE.</div>
+</div>
+
+<div class="sbar" style="background:#ede9fe;color:#4c1d95">🟣 SECCIÓN 4 — FRENTES Y SURGENCIAS AL ESTE DE LOS ANDES: CHORRO DE BARRERA (Diap. 19–24)</div>
+
+<div class="block s2">
+<span class="bh" style="background:#ede9fe;color:#4c1d95">Chorro de barrera (barrier jet) — mecanismo de mesoescala (Diap. 19)</span>
+<div class="def" style="border-left-color:#7c3aed">Definición AMS (2017, <i>Glossary of Meteorology</i>): mecanismo de <b>mesoescala</b> que se desarrolla cuando un flujo sinóptico <b>estable (estratificado)</b> se aproxima a una barrera orográfica y es <b>bloqueado</b> por ella. Al no poder ascender, la masa se apila contra la barrera y el flujo se reajusta geostróficamente, terminando <b>paralelo</b> a la cordillera. Al este de los Andes eso significa flujo de <b>sur a norte</b>.</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>Con número de Froude Fr = U/(N·h) &lt; 1, el flujo carece de energía cinética para superar la barrera y se produce bloqueo. La componente normal se decelera, generando acumulación de masa y una dorsal de presión mesoescalar a lo largo de la barrera. El gradiente de presión resultante, opuesto al flujo incidente, es equilibrado por Coriolis, resultando en un chorro en ajuste cuasi-geostrófico paralelo a la cordillera. En el HS, con f &lt; 0, el flujo bloqueado desde el sureste gira hacia el <b>norte</b> a lo largo del flanco oriental andino.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Imagine agua fría corriendo hacia un muro. El agua no puede saltarlo, así que se acumula contra el muro y se desvía corriendo <b>a lo largo</b> del muro. Eso hace el aire frío contra los Andes: como es denso y estable, no sube; se amontona, aumenta la presión al pie de la cordillera, y ese amontonamiento lo empuja a correr pegado a la montaña, acelerándose en un corredor angosto hacia el norte.</p></div>
+</div>
+<div class="svgbox">
+<svg width="100%" viewBox="0 0 680 250" role="img"><title>Evolución en tres tiempos del chorro de barrera al este de los Andes</title><desc>Tres paneles esquemáticos: el flujo estable se aproxima a la barrera, se apila generando alta presión al pie de la cordillera, y finalmente se genera un chorro paralelo a la barrera dirigido hacia el norte.</desc>
+<defs><marker id="arrow3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="ts" x="40" y="34" style="font-size:12px" fill="#4c1d95">t = 1  ·  flujo estable se aproxima</text>
+<path d="M60 180 L110 80 L160 180 Z" fill="#c2410c" opacity="0.5"/>
+<line x1="215" y1="140" x2="168" y2="140" stroke="#1e293b" stroke-width="4" marker-end="url(#arrow3)"/>
+<text class="ts" x="120" y="205" text-anchor="middle" style="font-size:12px" fill="#7f1d1d">L</text>
+<text class="ts" x="185" y="172" style="font-size:12px" fill="#1e3a8a">H</text>
+<text class="ts" x="270" y="34" style="font-size:12px" fill="#4c1d95">t = 2  ·  apilamiento y dorsal</text>
+<path d="M290 180 L340 80 L390 180 Z" fill="#c2410c" opacity="0.5"/>
+<path d="M445 140 L398 140" stroke="#1e293b" stroke-width="4" marker-end="url(#arrow3)" fill="none"/>
+<path d="M400 118 C424 118, 440 128, 448 140" fill="none" stroke="#64748b" stroke-width="0.5"/>
+<path d="M400 128 C420 128, 434 136, 442 148" fill="none" stroke="#64748b" stroke-width="0.5"/>
+<text class="ts" x="350" y="205" text-anchor="middle" style="font-size:12px" fill="#7f1d1d">L</text>
+<text class="ts" x="415" y="172" style="font-size:12px" fill="#1e3a8a">H mesoescalar</text>
+<text class="ts" x="500" y="34" style="font-size:12px" fill="#4c1d95">t = 3  ·  chorro paralelo</text>
+<path d="M520 180 L570 80 L620 180 Z" fill="#c2410c" opacity="0.5"/>
+<path d="M600 175 C592 145, 588 118, 586 96" fill="none" stroke="#16a34a" stroke-width="6" marker-end="url(#arrow3)" opacity="0.85"/>
+<text class="ts" x="612" y="120" style="font-size:12px" fill="#14532d">chorro</text>
+<text class="ts" x="580" y="205" text-anchor="middle" style="font-size:12px" fill="#7f1d1d">L</text>
+<text class="ts" x="40" y="235" style="font-size:12px" fill="#64748b">Diagrama original SVG. H = alta mesoescalar por apilamiento · L = baja al oeste de la cordillera · flecha verde = chorro de barrera hacia el norte.</text>
+</svg>
+<p class="cap">Figura C (diagrama original SVG). Evolución conceptual del chorro de barrera, según el esquema de la diap. 19 (WPC International Desks).</p>
+</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Deduzca, paso a paso, por qué un flujo estable bloqueado por los Andes termina soplando paralelo a la cordillera y desde el sur hacia el norte. Incluya en su razonamiento el rol de la estratificación, el apilamiento de masa y la fuerza de Coriolis en el Hemisferio Sur.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#e0f2fe;color:#0c4a6e">Caso real: 30 ene – 2 feb 2016 (Diap. 20–22)</span>
+<div class="item"><span class="dot" style="background:#0284c7"></span><div><b>30–31 ene:</b> se desarrolla un ciclón extratropical con frentes progresivos. En solo <b>24 horas</b> el frente frío se organiza y alcanza el <b>centro de Bolivia</b> (18 UTC del 31).</div></div>
+<div class="item"><span class="dot" style="background:#0284c7"></span><div><b>1 feb:</b> los vientos detrás del frente en Paraguay se debilitan, <b>pero</b> se genera un chorro de barrera de <b>&gt; 50 kt</b> en el centro del Perú, intensificado por una dorsal angosta y bien definida a lo largo del flanco oriental andino de Bolivia y Perú.</div></div>
+<div class="item"><span class="dot" style="background:#0284c7"></span><div><b>2 feb:</b> el chorro se debilita a ~20 kt y alcanza los <b>7°S</b> por la mañana. En total: <b>tres días</b> de duración y penetración hasta latitudes plenamente tropicales.</div></div>
+<div class="item"><span class="dot" style="background:#0284c7"></span><div><b>Chorros acoplados y ciclogénesis (Diap. 22):</b> el disparo inicial ocurre donde la <b>salida derecha</b> de un chorro de altura asociado a la periferia de la <b>Alta de Bolivia</b> interactúa con la <b>entrada divergente</b> de otro chorro ubicado al sureste. Ese acoplamiento genera ascensos intensos, caída rápida de presión en superficie, aceleración del viento y el empuje inicial del frente frío hacia Paraguay y el sur de Bolivia.</div></div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> el chorro de barrera <b>no</b> es el frente frío ni el SALLJ. Es <b>mesoescalar</b> (corredor angosto, decenas–cientos de km, horas–días), corre <b>del sur al norte</b> pegado a la cordillera y es <b>frío</b>; el SALLJ es <b>sinóptico</b>, corre <b>del norte al sur</b> y es <b>cálido y húmedo</b>. Se dan en el mismo corredor geográfico y en sentidos opuestos.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Describa el mecanismo de acoplamiento de chorros que explica la ciclogénesis explosiva del caso del 30 de enero de 2016. ¿Qué papel juega la Alta de Bolivia en ese acoplamiento?</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:#ede9fe;color:#4c1d95">Surgencias de escala sinóptica y su diagnóstico (Diap. 23–24)</span>
+<div class="def" style="border-left-color:#7c3aed"><b>No todas las surgencias desarrollan chorro de barrera.</b> Existe una surgencia de <b>escala sinóptica</b>, más común en los <b>meses fríos</b>, en la que un frente frío grande, con su vaguada de nivel medio asociada, avanza hacia el norte empujado por dorsales de nivel bajo que se desarrollan en el centro-norte de Argentina. Ese frente puede alcanzar el <b>sur del Perú</b>, Amazonas y Mato Grosso, hasta los <b>9°S</b>.</div>
+<div class="two">
+<div class="mini" style="border-top:3px solid #7c3aed"><b>Diagnóstico: ¿frente o línea de cortante?</b>El criterio del PDF es <b>evaluar el cambio de masa</b>. Una <b>línea de cortante</b> se asocia a <b>secamiento</b> pero <b>no</b> a un cambio de temperatura; un <b>frente</b> implica cambio de masa de aire, es decir, cambio térmico además del cambio de viento. Operativamente: si la temperatura de los 15 hPa más cercanos a superficie no cambia al pasar la discontinuidad, es cortante, no frente.</div>
+<div class="mini" style="border-top:3px solid #0284c7"><b>Receta de pronóstico de surgencias (Diap. 24)</b>La intensidad de una surgencia del sur se evalúa por <b>dos parámetros</b>: (1) la intensidad de la <b>vaguada de altura</b> que cruza los Andes desde el suroeste; (2) la intensidad de la <b>dorsal de nivel bajo</b> (alta polar) en el oeste/noroeste argentino que se forma tras el paso de la vaguada. La <b>dorsal de altura</b> en la parte trasera de la vaguada es clave: estimula la advección fría del sur, lo que amplifica y enfría la vaguada — un ciclo de retroalimentación positiva.</div>
+</div>
+<div class="flow">
+<span class="fbox">Vaguada de altura cruza los Andes desde el SO</span><span class="farrow">→</span><span class="fbox">Subsidencia y advección fría en su retaguardia</span><span class="farrow">→</span><span class="fbox">Dorsal de nivel bajo (alta polar) en NO de Argentina</span><span class="farrow">→</span><span class="fbox">Vientos del sur empujan el frente hacia el norte</span><span class="farrow">→</span><span class="fbox">Surgencia / friaje en selva peruana, N Bolivia, O Brasil</span>
+</div>
+<div class="two">
+<div class="mini" style="border-left:3px solid #f97316"><b>Contexto peruano: el friaje</b>Este es exactamente el patrón que SENAMHI monitorea para emitir avisos de <b>friaje</b> en la selva peruana (Loreto, Ucayali, Madre de Dios). Un friaje típico baja la temperatura mínima de ~22 °C a 12–14 °C en 24–48 h, con impactos en salud (IRA en niños y adultos mayores), acuicultura y agricultura. INDECI y los gobiernos regionales activan planes multisectoriales de heladas y friaje sobre esta base sinóptica.</div>
+<div class="mini" style="border-left:3px solid #334155"><b>Hemisferio Sur vs. Hemisferio Norte</b>El análogo del HN son los <b>cold air outbreaks</b> que descienden por las Grandes Planicies hasta Texas y el Golfo de México, también canalizados por las Rocosas. Diferencias: (i) en el HN el aire frío viene del <b>norte</b> y en el HS del <b>sur</b>; (ii) los Andes son más altos y continuos que las Rocosas, lo que produce un canal más estrecho y una penetración latitudinal proporcionalmente <b>mayor</b> (hasta 7°S); (iii) en el HS el aire frío llega a una <b>selva ecuatorial</b> —un contraste térmico que no tiene equivalente en Norteamérica.</div>
+</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Diferencie una surgencia de escala sinóptica de un chorro de barrera en términos de escala espacial, escala temporal, estacionalidad y mecanismo físico. Además, explique qué variable debe evaluar para distinguir un frente frío de una línea de cortante.</div>
+</div>
+
+<div class="sbar" style="background:#ede9fe;color:#4c1d95">🟣 SECCIÓN 5 — ZONA DE CONVERGENCIA DEL ATLÁNTICO SUR, ZCAS (Tema 2.4, Diap. 35–40)</div>
+
+<div class="block s2">
+<span class="bh" style="background:#ccfbf1;color:#134e4a">Definición y características de la ZCAS (Diap. 35)</span>
+<div class="def" style="border-left-color:#0d9488">Definición <b>AMS (2017)</b>: máximo local de nubosidad, precipitación y convergencia de nivel bajo, en una franja orientada de <b>noroeste a sureste</b> que se extiende a través del sureste de Brasil y el Atlántico Sur occidental. En español: ZCAS o ZACS; en inglés SACZ. Se extiende desde el oeste de la Amazonía (incluso Perú y Ecuador) hasta el Atlántico suroeste.</div>
+<div class="two">
+<div class="mini" style="border-top:3px solid #0d9488"><b>Criterios operativos de identificación</b>• Máximo en nubosidad, precipitación y convergencia de <b>nivel bajo</b>.<br>• Época <b>cálida</b>, especialmente <b>noviembre–marzo</b>.<br>• Se analiza como ZCAS solo si <b>perdura más de 3–4 días</b> — la persistencia es parte de la definición, no un detalle.<br>• <b>Circulación termal directa</b> (asciende el aire cálido, desciende el frío: convierte energía potencial en cinética).</div>
+<div class="mini" style="border-top:3px solid #7c3aed"><b>Forzantes</b>• Estimulada por <b>pulsos divergentes de altura de la MJO</b> (Oscilación de Madden–Julian) — el vínculo entre la escala intraestacional y la sinóptica.<br>• Requiere una <b>vaguada de nivel medio y alto inmediatamente al suroeste</b> (Diap. 37): esa vaguada aporta la dinámica de ascenso. Las lluvias ocurren en la franja <b>noreste</b> del eje de vaguada en 850 hPa (Liebmann et al., 2004).<br>• Se asocia a vaguada de altura inducida a <b>sotavento de los Andes</b>: una <b>onda de Rossby estacionaria de número de onda 6</b> (Robertson y Mechoso, 2000). Ese modo explica el <b>23 %</b> de la varianza del flujo de 200 hPa en verano (EFM).</div>
+</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>Banda de convergencia cuasi-estacionaria NO–SE resultante del acoplamiento entre el forzamiento diabático amazónico y un tren de ondas de Rossby estacionario (k = 6) inducido a sotavento andino. Presenta circulación termal directa, máximo de convergencia de humedad en 850 hPa al noreste del eje de vaguada, y ventilación en altura provista por la Alta de Bolivia y por el lado divergente de la vaguada al suroeste. Modula el régimen de precipitación de forma dipolar con la cuenca del Plata.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Es una banda de nubes larguísima, en diagonal, que va desde la selva peruana y boliviana hasta el mar frente a Brasil, y que se queda quieta durante varios días seguidos llorando lluvia. Funciona como una cinta de nubes anclada: mientras esté ahí, llueve mucho debajo de ella y —muy importante— <b>deja de llover al sur de ella</b>, porque la banda intercepta la humedad que venía viajando hacia el sur.</p></div>
+</div>
+<div class="svgbox">
+<svg width="100%" viewBox="0 0 680 290" role="img"><title>Esquema de la ZCAS y su dipolo de precipitación con la cuenca del Plata</title><desc>Banda diagonal noroeste a sureste desde la Amazonía occidental hasta el Atlántico, con la Alta de Bolivia proporcionando divergencia en altura, una vaguada al suroeste, y la cuenca del Plata con precipitación bajo lo normal.</desc>
+<path d="M150 40 L250 30 L330 60 L360 130 L330 210 L300 265 L250 275 L215 260 L190 200 L162 120 Z" fill="#94a3b8" opacity="0.16" stroke="#64748b" stroke-width="0.5"/>
+<path d="M215 90 C282 130, 355 178, 445 232" fill="none" stroke="#7c3aed" stroke-width="26" opacity="0.3" stroke-linecap="round"/>
+<text class="ts" x="300" y="140" style="font-size:12px" fill="#4c1d95">Eje ZCAS</text>
+<circle cx="240" cy="118" r="26" fill="none" stroke="#dc2626" stroke-width="1" stroke-dasharray="4 3"/>
+<text class="ts" x="240" y="122" text-anchor="middle" style="font-size:12px" fill="#7f1d1d">AB</text>
+<text class="ts" x="470" y="80" style="font-size:12px" fill="#7f1d1d">Alta de Bolivia (AB):</text>
+<text class="ts" x="470" y="98" style="font-size:12px" fill="#7f1d1d">divergencia en 200 hPa</text>
+<line class="leader" x1="266" y1="112" x2="462" y2="88" stroke="#7f1d1d" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text class="ts" x="470" y="150" style="font-size:12px" fill="#4c1d95">Banda de nubosidad,</text>
+<text class="ts" x="470" y="168" style="font-size:12px" fill="#4c1d95">lluvia y convergencia</text>
+<line class="leader" x1="380" y1="184" x2="462" y2="158" stroke="#4c1d95" stroke-width="0.5" stroke-dasharray="3 3"/>
+<path d="M232 226 C252 210, 276 202, 300 200" fill="none" stroke="#0891b2" stroke-width="1" stroke-dasharray="5 4"/>
+<text class="ts" x="470" y="216" style="font-size:12px" fill="#1e3a8a">Vaguada de altura al SO:</text>
+<text class="ts" x="470" y="234" style="font-size:12px" fill="#1e3a8a">dinámica de ascenso</text>
+<line class="leader" x1="272" y1="238" x2="462" y2="224" stroke="#1e3a8a" stroke-width="0.5" stroke-dasharray="3 3"/>
+<ellipse cx="272" cy="252" rx="42" ry="19" fill="#fca5a5" opacity="0.45"/>
+<text class="ts" x="272" y="256" text-anchor="middle" style="font-size:12px" fill="#7f1d1d">Plata: seco</text>
+<text class="ts" x="40" y="276" style="font-size:12px" fill="#64748b">Diagrama original SVG, esquemático. Con ZCAS activa: lluvia sobre la banda, déficit al sur (dipolo ZCAS–Cuenca del Plata).</text>
+</svg>
+<p class="cap">Figura D (diagrama original SVG). Estructura conceptual de la ZCAS y su dipolo con la cuenca del Plata (síntesis de diap. 35–39).</p>
+</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Defina la ZCAS según la AMS e indique qué tres condiciones deben cumplirse para que un evento se clasifique como tal. ¿Qué papel juega la MJO y qué papel la vaguada de altura al suroeste?</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#fce7f3;color:#831843">El dipolo ZCAS ↔ cuenca del Plata (Diap. 39)</span>
+<div class="def" style="border-left-color:#be185d">Liebmann et al. (2004) demostraron que el <b>SALLJ y la ZCAS producen patrones de precipitación distintos y en cierta medida opuestos</b>. Entender este dipolo es la clave del pronóstico estacional de la región.</div>
+<div class="mini" style="border-left:3px solid #0891b2"><b>Régimen SALLJ activo</b>Lluvias en la <b>Cuenca del Río de la Plata</b>, por convergencia de humedad en nivel bajo. La humedad amazónica viaja hasta el extratrópico sin ser interceptada.</div>
+<div class="mini" style="border-left:3px solid #7c3aed;margin-top:6px"><b>Régimen ZCAS activo</b>Lluvias en el <b>sureste y centro de Brasil</b>, y precipitación <b>por debajo de lo normal en la cuenca del Plata</b>: la ZCAS bloquea el transporte de humedad hacia el sur y además <b>consume</b> el vapor de agua disponible al precipitarlo.</div>
+<div class="warn">⚠️ <b>MATIZ IMPORTANTE (no lo omita en el examen):</b> la estructura de la ZCAS <b>varía entre eventos</b>. Si se extiende hasta los Andes, el bloqueo de humedad hacia el sur es fuerte. Si se limita a Rondonia/Mato Grosso, el bloqueo es menor y <b>sí</b> puede llover en la cuenca del Plata. El dipolo es una tendencia, no una ley determinista.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Explique el mecanismo físico por el cual una ZCAS persistente produce anomalías negativas de precipitación en la cuenca del Río de la Plata, y bajo qué condiciones ese bloqueo puede no ocurrir.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#e0f2fe;color:#0c4a6e">Ejemplos observados y comparación con la ZCPS (Diap. 36, 38, 40)</span>
+<div class="three">
+<div class="mini" style="border-top:3px solid #0284c7"><b>Evento febrero 2013 (GOES-12, canal IR 10.3 μm)</b>ZCAS extendida desde la Amazonía de <b>Perú y Ecuador</b> hasta São Paulo, Paraná y Santa Catarina. Se observa un <b>complejo convectivo de mesoescala (CCM) en el centro del Perú</b>: la ZCAS favorece convección organizada incluso en territorio peruano. La ventilación (divergencia en altura) la proporcionan la <b>Alta de Bolivia</b> y el lado divergente de la vaguada de altura al suroeste.</div>
+<div class="mini" style="border-top:3px solid #0284c7"><b>Evento noviembre 2014 (GOES-12)</b>Desde Rondonia y el norte de Bolivia hasta Minas Gerais y sur de Bahía. <b>Siempre</b> asociada a un frente en el Atlántico (frío en azul, cálido en rojo, ocluido débil en morado; el análisis de la oclusión es debatible y se evalúa por baroclinicidad y por la presencia de un centro de bajas presiones definido). <b>Dato crítico:</b> pese a la presencia de la ZCAS, <b>no</b> se desarrolló convección al oeste de Rondonia — la convección depende también del contenido de humedad y de otros sistemas en la tropósfera.</div>
+<div class="mini" style="border-top:3px solid #334155"><b>ZCAS (HS) vs. sus análogos globales</b>La ZCAS es la <b>contraparte atlántica</b> de la <b>Zona de Convergencia del Pacífico Sur (ZCPS/SPCZ)</b>: ambas son bandas diagonales de convergencia del HS, ancladas a un continente/piscina cálida y orientadas hacia el sureste. En el <b>Hemisferio Norte</b>, los análogos funcionales son las <b>bandas frontales cuasi-estacionarias monzónicas</b> — Mei-yu (China), Baiu (Japón) —, que también son bandas persistentes de lluvia alimentadas por un chorro de capas bajas. Diferencia esencial: <b>Mei-yu/Baiu son baroclínicas y de verano boreal; la ZCAS es esencialmente una zona de convergencia tropical-subtropical con acoplamiento a un frente en su extremo sureste</b>.</div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir ZCAS con ZCIT (Zona de Convergencia Intertropical). La <b>ZCIT</b> es zonal (este–oeste), planetaria, permanente y sigue la migración estacional del máximo de calentamiento solar. La <b>ZCAS</b> es <b>diagonal (NO–SE)</b>, regional, episódica (dura días), propia de la estación cálida, y requiere una vaguada extratropical al suroeste. Segundo error frecuente: escribir "ZACS" y "ZCAS" como sistemas distintos — <b>son el mismo sistema</b>; el PDF usa ambas grafías (una errata del material original que conviene señalar).</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Compare la ZCAS con la ZCIT en términos de orientación, escala espacial, escala temporal, mecanismo de forzamiento y estacionalidad. ¿Por qué un evento de ZCAS puede producir un complejo convectivo de mesoescala en el centro del Perú?</div>
+</div>
+
+<div class="sbar" style="background:#fef9c3;color:#713f12">🟡 SECCIÓN 6 — APLICACIONES EN EL PRONÓSTICO CLIMÁTICO (Diap. 25–32 y 41–45)</div>
+
+<div class="block s2">
+<span class="bh" style="background:#fef9c3;color:#713f12">Diagnóstico con OLR y circulaciones de altura: año húmedo vs. seco (Diap. 25–27, 41–42)</span>
+<div class="def" style="border-left-color:#ca8a04">La <b>OLR (Outgoing Longwave Radiation)</b>, radiación emitida en onda larga, es el proxy satelital estándar de convección profunda en el trópico. Un tope de nube alto es <b>frío</b>, y un cuerpo frío emite poca radiación de onda larga (ley de Stefan–Boltzmann). Por lo tanto: <b>OLR baja = topes fríos = convección profunda = lluvia</b>.</div>
+<div class="rx">LEY DE STEFAN–BOLTZMANN APLICADA A LA OLR<br>OLR = σ · T_tope⁴ ;  σ = 5.67×10⁻⁸ W·m⁻²·K⁻⁴<br><br>Tope cálido (superficie, T = 300 K): OLR ≈ 459 W/m²<br>Tope frío (yunque, T = 210 K): OLR ≈ 110 W/m²</div>
+<p class="rx-note">T en K; OLR en W/m². Valores tropicales observados: 240–280 W/m² en cielo despejado; &lt; 180–200 W/m² indica convección profunda organizada. Las anomalías se calculan contra la climatología <b>1981–2010</b> (norma OMM de 30 años). Válida como aproximación de cuerpo negro; en la práctica interviene la emisividad y la ventana atmosférica.</p>
+<div class="two">
+<div class="mini" style="border-top:3px solid #0d9488"><b>Verano 2001 = HÚMEDO</b>Anomalías de OLR <b>negativas</b> en áreas amplias → muchos topes de nube fríos → convección profunda frecuente.<br><b>200 hPa:</b> vientos débiles, cerca del núcleo de la <b>Alta de Bolivia</b>; divergencia débil pero presente.<br><b>500 hPa:</b> vientos débiles del <b>noreste</b>, en la periferia oeste de una dorsal centrada al este de Río de Janeiro (transporte de humedad del NE), más una vaguada de onda corta al suroeste de Paraguay que deja al sur de Bolivia y Paraguay en la <b>zona divergente</b>.</div>
+<div class="mini" style="border-top:3px solid #b45309"><b>Verano 2002 = SECO</b>Anomalías de OLR <b>positivas</b> → menos topes fríos → menos convección profunda.<br><b>200 hPa:</b> predominio de vientos del <b>oeste-suroeste</b>, asociados al lado <b>convergente</b> de una vaguada de altura (posición promedio sobre Santa Catarina–Paraná) y por tanto a subsidencia.<br><b>500 hPa:</b> anomalías de vientos del oeste en toda la región; la región queda en el <b>lado oeste</b> de una vaguada, que se asocia a subsidencia y secamiento.</div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> invertir el signo de la OLR. <b>OLR negativa (anómalamente baja) = MÁS lluvia</b>; OLR positiva = menos lluvia. Es contraintuitivo porque "positivo" suena a "más". Segundo error: leer un compuesto de 60 días como si fuera un mapa sinóptico. El PDF advierte explícitamente que son <b>promedios de 60 días</b> — capturan el patrón dominante, no eventos individuales.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Explique por qué una anomalía negativa de OLR sobre la Amazonía occidental indica precipitación por encima de lo normal. Fundamente desde la física de emisión de cuerpo negro y describa el patrón de circulación en 200 y 500 hPa que esperaría acompañándola.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#fef9c3;color:#713f12">Pronóstico de temperaturas en invierno (Diap. 30)</span>
+<div class="item"><span class="dot" style="background:#2563eb"></span><div><b>Inviernos FRÍOS (2000, 2003):</b> domina una <b>vaguada de altura</b> sobre Uruguay–Paraguay o sobre el noroeste argentino y el Altiplano. Una vaguada que <b>ya cruzó</b> los Andes (o cuya parte sur lo hizo) se asocia a un ciclón extratropical en la cuenca del Plata, con frentes fríos avanzando hacia regiones medias del continente. Esa posición favorece el transporte de masas frías extratropicales hacia latitudes subtropicales.</div></div>
+<div class="item"><span class="dot" style="background:#dc2626"></span><div><b>Inviernos CÁLIDOS (2001, 2008):</b> la vaguada de altura queda <b>lejos, sobre el Pacífico</b>, y domina una <b>dorsal de altura</b> sobre Paraguay–Uruguay o sobre Bolivia/noroeste argentino. Las dorsales estimulan subsidencia → secamiento y calentamiento.</div></div>
+<div class="warn">⚠️ <b>MATIZ CAUSAL (el PDF es explícitamente honesto en esto):</b> las dorsales de altura estimulan el calentamiento, pero <b>también son respuesta</b> a un calentamiento ya existente en la tropósfera (una columna cálida se expande y eleva las superficies de geopotencial). Mirando solo las figuras <b>no queda claro quién estimula a quién</b>. Ambos procesos se asocian a temperaturas por encima de lo normal. No afirme causalidad unidireccional en un examen.</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Discuta el problema de causalidad entre dorsales de altura y anomalías cálidas de temperatura. ¿Por qué no puede establecerse una dirección causal única a partir de compuestos de reanálisis?</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#dcfce7;color:#14532d">Las cuatro "recetas" de pronóstico — checklist operativo consolidado (Diap. 28–29, 31–32, 43–45)</span>
+<div class="def" style="border-left-color:#16a34a">Estas listas son el <b>producto operativo</b> del módulo: la traducción de toda la climatología sinóptica anterior en indicadores accionables. Son lo que un pronosticador de SENAMHI revisa cuando elabora un pronóstico estacional. <b>Estúdielas como pares antagónicos</b>, no como listas sueltas.</div>
+<table class="tbl">
+<thead><tr><th style="width:15%">Variable / región</th><th style="width:42.5%">🟢 POR ENCIMA DE LO NORMAL (anomalías positivas de lluvia / calor)</th><th style="width:42.5%">🔴 POR DEBAJO DE LO NORMAL (anomalías negativas)</th></tr></thead>
+<tbody>
+<tr><td><b>Precipitación<br>Sudamérica subtropical</b><br>(Diap. 28–29)</td><td>• Región de <b>convergencia del SALLJ</b>: cuanto mayor, mejor. La <b>salida derecha</b> del chorro de capas bajas se asocia a rotación ciclónica y convergencia.<br>• Lado <b>divergente (este)</b> de vaguada de altura; se necesita vaguada al oeste o <b>sobre</b> los Andes, no al este.<br>• Regiones <b>divergentes</b> de chorros de altura.<br>• Frente en superficie (génesis de convección, ascenso isentrópico).<br>• Líneas de cortante, y regiones al <b>norte</b> de ellas.<br>• Alto contenido de vapor de agua en la <b>región de origen</b> (Amazonía).<br>• <b>Ausencia de ZCAS</b>, o ZCAS desplazada al sur de su posición normal.</td><td>• Anomalías de <b>vientos del oeste</b> en toda la tropósfera → compresión adiabática + advección de aire seco del Pacífico.<br>• Lado <b>convergente (oeste)</b> de vaguada de altura → descensos y surgencia del sur que seca la capa.<br>• Pasaje de frentes y surgencias → secamiento al sur del eje (¡ojo: <b>después</b> de un evento inicial de lluvias!).<br>• <b>Dorsales de nivel medio</b> → subsidencia.<br>• La <b>entrada</b> del SALLJ es región de divergencia en nivel bajo y descensos → seca.<br>• Bajo contenido de vapor en la Amazonía.<br>• <b>ZCAS presente</b>: bloquea y consume el vapor del norte.</td></tr>
+<tr><td><b>Precipitación<br>Oeste de la Amazonía</b><br>(Diap. 43–44)</td><td>• Presencia de <b>ZCAS</b> (estimula lluvia <b>sobre</b> ella y al norte) + ventilación de la <b>Alta de Bolivia</b> + humedad de capa profunda.<br>• Eje y regiones al <b>norte</b> de surgencias del sur y líneas de cortante.<br>• Convergencia de los <b>alisios</b> y vaguadas en 850 hPa.<br>• Vientos <b>divergentes del este</b> en altura, favorecidos por un máximo de vientos del este al oeste de la región (costa de Perú y Ecuador).<br>• Vientos del <b>este en nivel medio</b>: transporte de humedad favorable a convección tropical profunda.<br>• <b>Fase fría del ENSO (La Niña)</b>: estimula el ramal ascendente de la circulación de Walker sobre la Amazonía.</td><td>• <b>ZCAS</b> presente: seca las regiones al <b>sur</b> de ella.<br>• Frentes y surgencias: secamiento al sur del eje.<br>• Dorsales de nivel medio → subsidencia.<br>• <b>Entrada del SALLJ</b>: divergencia en nivel bajo y descensos.<br>• Advección de aire <b>seco</b> desde Colombia y Venezuela, favorecida por vientos del norte fuertes, altas presiones en el sur del Caribe/delta del Orinoco y sequías en Colombia y Venezuela.<br>• Vientos del <b>oeste en nivel medio</b>: transporte de aire seco desde el Pacífico medio.</td></tr>
+<tr><td><b>Temperatura<br>Sudamérica subtropical</b><br>(Diap. 31–32)</td><td><b>CÁLIDO:</b> dorsal sobre la región o sobre noroeste argentino/Altiplano, con vaguadas <b>lejos</b> sobre el Pacífico y la región en el <b>sector cálido</b>. Poca humedad en la tropósfera + señal de dorsal en nivel medio y alto sugiere calentamiento por <b>calor sensible</b>. Vientos de nivel bajo del <b>norte y/u oeste</b> (compresión adiabática). Bajas del Chaco/BNOA <b>intensas</b>.</td><td><b>FRÍO:</b> vaguada de altura ubicada <b>sobre o inmediatamente al oeste</b> de la región → favorece el ingreso de frentes fríos. Este es el patrón de los <b>friajes en la selva peruana</b>, oeste de Brasil y norte de Bolivia. En <b>verano</b>, además: nubosidad y precipitación por encima de lo normal pueden causar anomalías negativas de temperatura (buscar patrones que favorezcan lluvia).</td></tr>
+<tr><td><b>Temperatura<br>Oeste de la Amazonía</b><br>(Diap. 45)</td><td><b>CÁLIDO:</b> mayor radiación solar (menor nubosidad y secamiento) <b>pero sin</b> advección de aire frío del sur — típicamente la zona sur de la ZCAS o de una línea de cortante. Dorsales en altura y nivel medio, especialmente en <b>invierno y primavera</b>. Vientos del norte que transportan masas cálidas y secas desde Colombia (enero–febrero); si llueve poco en el oriente colombiano y llanos venezolanos, el calentamiento sensible allí es alto y la advección cálida se potencia.</td><td><b>FRÍO:</b> mayor cobertura nubosa y precipitación (enfría sobre todo la <b>temperatura máxima</b>). Mayor frecuencia de <b>surgencias del sur</b> — evaluar la dorsal polar de nivel bajo en el noroeste argentino e incluso sur de Bolivia. <b>Vaguada en altura</b>, especialmente al suroeste, que estimula las surgencias del sur y la convección al este de los Andes.</td></tr>
+</tbody>
+</table>
+<div class="warn">⚠️ <b>ERROR COMÚN Y CRÍTICO:</b> el PDF advierte que <b>el secamiento tras un frente ocurre generalmente DESPUÉS de un evento inicial de lluvias</b>. Un pronosticador que vea "frente entrando" y prediga solo "seco" se equivocará en las primeras 24–48 h. La secuencia correcta es: <b>lluvia frontal → secamiento post-frontal</b>. Segundo error crítico: la ZCAS aparece <b>en ambas columnas</b> según la región — favorece lluvia <b>sobre ella y al norte</b>, y la inhibe <b>al sur</b>. La pregunta correcta nunca es "¿hay ZCAS?" sino "<b>¿dónde estoy respecto al eje de la ZCAS?</b>". Tercer error: confundir <b>entrada</b> del SALLJ (divergencia en nivel bajo → seca) con <b>salida</b> del SALLJ (convergencia → llueve).</div>
+<div class="two">
+<div class="mini" style="border-left:3px solid #f97316"><b>Anclaje peruano — cómo usar esto en SENAMHI</b>Para la <b>selva peruana</b>: friaje = vaguada de altura al SO + dorsal polar en nivel bajo en el NO argentino. Para la <b>sierra sur y Altiplano</b>: lluvia = Alta de Bolivia bien constituida y desplazada al sur + vientos del este en nivel medio; sequía = Alta desplazada al norte/este y oestes en nivel medio. Para la <b>costa central (Lima)</b>: estos sistemas no producen lluvia directa; la variabilidad costera responde a la inversión térmica sobre el Pacífico frío (Corriente de Humboldt) y al ENSO costero — dominio de ENFEN e IGP, no de este módulo.</div>
+<div class="mini" style="border-left:3px solid #334155"><b>Marco OMM: ¿qué significa "por encima / por debajo de lo normal"?</b>La OMM define el pronóstico estacional en <b>terciles</b> respecto de una <b>normal climatológica de 30 años</b> (actualmente 1991–2020; los compuestos de este PDF usan 1981–2010). El producto no es un valor determinista sino una <b>probabilidad por categoría</b> (bajo / normal / sobre lo normal). Toda esta sección de "recetas" sirve precisamente para justificar físicamente <b>por qué</b> se desplaza la probabilidad hacia un tercil, que es lo que la OMM exige documentar en un boletín climático.</div>
+</div>
+<div class="exam"><b>🎯 EXAMEN: </b>Un pronosticador observa para el próximo trimestre: anomalías de viento del oeste en toda la tropósfera, dorsal de nivel medio sobre el noroeste argentino y ZCAS persistente al norte de la región de interés. ¿Qué pronóstico de precipitación y de temperatura emitiría, y con qué argumentos físicos lo justificaría ante un comité técnico?</div>
+</div>
+
+<div class="sbar" style="background:#f1f5f9;color:#334155">⚫ TABLA INTEGRADORA FINAL — TODO EL MÓDULO EN UNA VISTA</div>
+
+<div class="block s3">
+<table class="tbl">
+<thead><tr><th>Sistema</th><th>Escala espacial</th><th>Escala temporal</th><th>Nivel / variable clave</th><th>Estación</th><th>Efecto dominante</th><th>Herramienta de diagnóstico</th></tr></thead>
+<tbody>
+<tr><td><b>SALLJ / LLJ</b></td><td>Sinóptica (10³ km, meridional)</td><td>Horas–días; máximo nocturno</td><td>850 hPa · viento meridional v, r (g/kg), θₑ</td><td>Todo el año; máx. verano</td><td>Transporte de humedad amazónica al extratrópico</td><td>Criterio 1 de Bonner; cortes transversales de reanálisis</td></tr>
+<tr><td><b>Baja del Chaco / BNOA</b></td><td>Sinóptica–submeso (10²–10³ km)</td><td>Días; ciclo diurno marcado</td><td>Superficie–850 hPa · presión, T, θ (barotropía)</td><td>Verano (meses cálidos)</td><td>Succión y aceleración del SALLJ; flujos del E/NE</td><td>Mapas de presión a nivel del mar; cortes verticales de θ</td></tr>
+<tr><td><b>Eventos CJE</b></td><td>Sinóptica acoplada baja+chorro</td><td>17 % de los días de verano austral</td><td>850 hPa (chorro) + 300 hPa (entrada divergente)</td><td>Verano austral (DEF)</td><td>Hasta 55 % de la lluvia del NE argentino; E ≈ 3.2</td><td>Compuestos de anomalías (Salio et al., 2002)</td></tr>
+<tr><td><b>Chorro de barrera</b></td><td><b>Mesoescala</b> (10¹–10² km, corredor angosto)</td><td>1–3 días</td><td>850 hPa · isotacas, dorsal mesoescalar de presión</td><td>Asociado a incursiones frontales (todo el año)</td><td>Aceleración de vientos del sur; lluvia extrema &gt;100 mm/12 h</td><td>Isotacas de 850 hPa (GFS); AMS Glossary</td></tr>
+<tr><td><b>Surgencia sinóptica / friaje</b></td><td>Sinóptica (10³ km)</td><td>Días</td><td>1000 hPa (T, viento) + 500 hPa (líneas de flujo)</td><td>Meses fríos (invierno austral)</td><td>Ingreso de aire frío hasta 7–9°S; friaje amazónico</td><td>Intensidad de vaguada de altura + dorsal de nivel bajo</td></tr>
+<tr><td><b>ZCAS</b></td><td>Sinóptica–subcontinental, banda NO–SE</td><td>&gt; 3–4 días (subestacional; MJO)</td><td>850 hPa (convergencia) + 200 hPa (divergencia, AB)</td><td>Época cálida: noviembre–marzo</td><td>Lluvia sobre la banda y al norte; déficit al sur (dipolo)</td><td>Imágenes IR/vapor de agua (GOES); EOF-1 de 200 hPa (23 % var.)</td></tr>
+<tr><td><b>Alta de Bolivia</b></td><td>Sinóptica de altura (dorsal subtropical)</td><td>Estacional, con variabilidad intraestacional</td><td>200 hPa · geopotencial, divergencia</td><td>Verano austral</td><td>Ventilación en altura; permite convección profunda</td><td>Compuestos de viento en 200 hPa (NCEP/NCAR)</td></tr>
+<tr><td><b>OLR (diagnóstico)</b></td><td>Regional a global</td><td>Pentadas a estacional</td><td>Tope de nube · W/m² (σT⁴)</td><td>Aplicable todo el año</td><td>Proxy de convección profunda: OLR baja = lluvia</td><td>NOAA Interpolated OLR; anomalías vs. 1981–2010</td></tr>
+</tbody>
+</table>
+<div class="warn">⚠️ <b>DATO INTEGRADOR CLAVE:</b> todos los sistemas de esta tabla se organizan en torno a <b>un solo hecho geográfico</b>: la barrera andina. Los Andes (a) canalizan hacia el sur la humedad tropical (SALLJ), (b) generan por subsidencia a sotavento las bajas termales (BC/BNOA), (c) bloquean el aire frío y lo obligan a correr hacia el norte (chorro de barrera y friajes), (d) inducen a sotavento la onda de Rossby estacionaria que ancla la ZCAS, y (e) sostienen en altura la Alta de Bolivia por calentamiento del Altiplano. <b>Si en el examen puede explicar el rol de los Andes en cada uno de los cinco puntos, domina el módulo.</b> Y el segundo hecho integrador: casi todo se decide por <b>dónde está la vaguada de altura</b> — al oeste/sobre los Andes → lluvia; al este de la región → seco.</div>
+</div>
+
+<div class="sbar" style="background:#0a2540;color:#7dd3fc">📝 QUIZ INTERACTIVO DE REPASO</div>
+
+<div class="block s3" id="quiz-section">
+<div style="background:#0a2540;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:10px">
+<div style="font-family:'Oswald';font-size:14px">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</div>
+<div style="font-size:11px;color:#94a3b8;margin-top:2px">Marca tu respuesta y descubre si es correcta</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+<span style="font-size:11.5px;font-family:'Oswald'" id="qprog">Pregunta 0 de 10</span>
+<div class="stat-bar-wrap" style="flex:1"><div class="stat-bar-fill" id="qbar" style="width:0%;background:#16a34a"></div></div>
+<span style="font-size:11.5px;font-family:'Oswald'" id="qscore">0 / 10 · 0 %</span>
+</div>
+
+<div class="qcard" id="q1"><p class="qnum">Pregunta 1 / 10</p><p class="qtext">Según el criterio 1 de Bonner (1968), ¿cuál de las siguientes condiciones debe cumplir un perfil vertical para clasificarse como chorro de capas bajas?</p><div class="qopts">
+<button class="qbtn" data-q="1" data-correct="false">A) Velocidad ≥ 20 m/s en 700 hPa y viento zonal mayor que el meridional</button>
+<button class="qbtn" data-q="1" data-correct="false">B) Velocidad ≥ 12 m/s en 500 hPa y aumento monótono del viento con la altura</button>
+<button class="qbtn" data-q="1" data-correct="true">C) Velocidad ≥ 12 m/s en los primeros 1.5 km y disminución de al menos 6 m/s hasta el mínimo más cercano por encima (hasta 3 km)</button>
+<button class="qbtn" data-q="1" data-correct="false">D) Velocidad ≥ 6 m/s en 850 hPa y cizalladura nula por encima del núcleo</button>
+</div><div class="qfeedback" id="fb1" style="display:none"></div></div>
+
+<div class="qcard" id="q2"><p class="qnum">Pregunta 2 / 10</p><p class="qtext">La Baja del Chaco y la Baja del Noroeste Argentino se describen como sistemas "barotrópicos de núcleo cálido". ¿Qué significa esto físicamente?</p><div class="qopts">
+<button class="qbtn" data-q="2" data-correct="false">A) Que su centro es frío en superficie y cálido en altura, como un ciclón extratropical maduro</button>
+<button class="qbtn" data-q="2" data-correct="true">B) Que su núcleo termal y su núcleo de circulación están colocados, con líneas de temperatura y de temperatura potencial esencialmente paralelas</button>
+<button class="qbtn" data-q="2" data-correct="false">C) Que se forman por liberación de calor latente en la convección profunda del Chaco</button>
+<button class="qbtn" data-q="2" data-correct="false">D) Que presentan fuerte inclinación del eje con la altura hacia el oeste, típica de sistemas en desarrollo</button>
+</div><div class="qfeedback" id="fb2" style="display:none"></div></div>
+
+<div class="qcard" id="q3"><p class="qnum">Pregunta 3 / 10</p><p class="qtext">Según Salio et al. (2002), los eventos Chaco Jet (CJE) ocurren en solo el 17 % de los días del verano austral. ¿Qué porcentaje de la precipitación del noreste argentino llegan a producir?</p><div class="qopts">
+<button class="qbtn" data-q="3" data-correct="false">A) Aproximadamente el mismo 17 %, porque su aporte es proporcional a su frecuencia</button>
+<button class="qbtn" data-q="3" data-correct="false">B) Cerca del 25 %</button>
+<button class="qbtn" data-q="3" data-correct="false">C) Menos del 10 %, ya que son eventos secos de viento</button>
+<button class="qbtn" data-q="3" data-correct="true">D) Hasta el 55 %, es decir, una eficiencia pluviométrica más de tres veces superior a la de un día ordinario</button>
+</div><div class="qfeedback" id="fb3" style="display:none"></div></div>
+
+<div class="qcard" id="q4"><p class="qnum">Pregunta 4 / 10</p><p class="qtext">¿Cuál de las siguientes afirmaciones sobre el chorro de barrera es FALSA?</p><div class="qopts">
+<button class="qbtn" data-q="4" data-correct="false">A) Se genera cuando un flujo estable y estratificado es bloqueado por una barrera orográfica</button>
+<button class="qbtn" data-q="4" data-correct="true">B) Es un sistema de escala sinóptica, equivalente al SALLJ pero de sentido contrario</button>
+<button class="qbtn" data-q="4" data-correct="false">C) El apilamiento de masa contra la barrera genera una dorsal de presión a lo largo de la cordillera</button>
+<button class="qbtn" data-q="4" data-correct="false">D) Al este de los Andes produce una aceleración de los vientos del sur, con flujo dirigido de sur a norte</button>
+</div><div class="qfeedback" id="fb4" style="display:none"></div></div>
+
+<div class="qcard" id="q5"><p class="qnum">Pregunta 5 / 10</p><p class="qtext">Un análisis muestra una discontinuidad en el campo de viento sobre la Amazonía, con secamiento marcado detrás de ella pero sin cambio apreciable en la temperatura de los niveles cercanos a superficie. ¿Qué está diagnosticando?</p><div class="qopts">
+<button class="qbtn" data-q="5" data-correct="false">A) Un frente frío clásico en fase de frontogénesis</button>
+<button class="qbtn" data-q="5" data-correct="true">B) Una línea de cortante, ya que no hay cambio de masa de aire</button>
+<button class="qbtn" data-q="5" data-correct="false">C) Un chorro de barrera en su fase de máxima intensidad</button>
+<button class="qbtn" data-q="5" data-correct="false">D) El eje de la ZCAS en su extremo noroccidental</button>
+</div><div class="qfeedback" id="fb5" style="display:none"></div></div>
+
+<div class="qcard" id="q6"><p class="qnum">Pregunta 6 / 10</p><p class="qtext">Según la definición de la AMS (2017) recogida en el PDF, la Zona de Convergencia del Atlántico Sur (ZCAS) se caracteriza por:</p><div class="qopts">
+<button class="qbtn" data-q="6" data-correct="false">A) Una banda zonal este-oeste de convergencia que sigue el máximo de calentamiento solar durante todo el año</button>
+<button class="qbtn" data-q="6" data-correct="true">B) Un máximo local de nubosidad, precipitación y convergencia de nivel bajo en una franja orientada de noroeste a sureste sobre el sureste de Brasil y el Atlántico Sur occidental</button>
+<button class="qbtn" data-q="6" data-correct="false">C) Un máximo de divergencia en altura asociado exclusivamente a la Alta de Bolivia</button>
+<button class="qbtn" data-q="6" data-correct="false">D) Una banda de subsidencia sobre el Atlántico que inhibe la convección en el sureste de Brasil</button>
+</div><div class="qfeedback" id="fb6" style="display:none"></div></div>
+
+<div class="qcard" id="q7"><p class="qnum">Pregunta 7 / 10</p><p class="qtext">Se desarrolla una ZCAS intensa y persistente que se extiende hasta los Andes. ¿Qué efecto espera sobre la precipitación en la cuenca del Río de la Plata?</p><div class="qopts">
+<button class="qbtn" data-q="7" data-correct="true">A) Precipitación por debajo de lo normal, porque la ZCAS bloquea el transporte de humedad hacia el sur y además consume el vapor de agua disponible</button>
+<button class="qbtn" data-q="7" data-correct="false">B) Precipitación por encima de lo normal, porque la ZCAS refuerza el SALLJ hacia la cuenca</button>
+<button class="qbtn" data-q="7" data-correct="false">C) Ningún efecto, porque la ZCAS es un sistema exclusivamente de altura</button>
+<button class="qbtn" data-q="7" data-correct="false">D) Precipitación por encima de lo normal solo si la ZCAS dura menos de 24 horas</button>
+</div><div class="qfeedback" id="fb7" style="display:none"></div></div>
+
+<div class="qcard" id="q8"><p class="qnum">Pregunta 8 / 10</p><p class="qtext">Un mapa de anomalías de OLR muestra valores marcadamente NEGATIVOS sobre el oeste de la Amazonía durante enero-febrero. ¿Qué se concluye?</p><div class="qopts">
+<button class="qbtn" data-q="8" data-correct="false">A) Menor frecuencia de topes de nube fríos y, por tanto, condiciones más secas de lo normal</button>
+<button class="qbtn" data-q="8" data-correct="false">B) Aumento de la radiación solar en superficie por reducción de nubosidad</button>
+<button class="qbtn" data-q="8" data-correct="true">C) Mayor presencia de topes de nube fríos, asociados a convección profunda y por tanto a un verano más húmedo de lo normal</button>
+<button class="qbtn" data-q="8" data-correct="false">D) Un enfriamiento de la superficie oceánica adyacente, sin relación con la convección</button>
+</div><div class="qfeedback" id="fb8" style="display:none"></div></div>
+
+<div class="qcard" id="q9"><p class="qnum">Pregunta 9 / 10</p><p class="qtext">En el contexto peruano: ¿qué configuración sinóptica es la más favorable para la ocurrencia de friajes en la selva peruana, el oeste de Brasil y el norte de Bolivia?</p><div class="qopts">
+<button class="qbtn" data-q="9" data-correct="false">A) Una dorsal de altura centrada sobre el noroeste de Argentina y el Altiplano, con vaguadas lejanas sobre el Pacífico</button>
+<button class="qbtn" data-q="9" data-correct="false">B) Una Alta de Bolivia intensa y bien centrada sobre el sur de Bolivia, con vientos del este en nivel medio</button>
+<button class="qbtn" data-q="9" data-correct="true">C) Una vaguada de altura ubicada sobre o inmediatamente al oeste de la región, acompañada de una dorsal de nivel bajo (alta polar) en el oeste y noroeste de Argentina</button>
+<button class="qbtn" data-q="9" data-correct="false">D) Una ZCAS persistente ubicada al norte de la región, con convergencia de humedad en 850 hPa</button>
+</div><div class="qfeedback" id="fb9" style="display:none"></div></div>
+
+<div class="qcard" id="q10"><p class="qnum">Pregunta 10 / 10</p><p class="qtext">Para pronosticar precipitación POR ENCIMA de lo normal en Sudamérica subtropical, ¿cuál de los siguientes indicadores debe buscar el pronosticador?</p><div class="qopts">
+<button class="qbtn" data-q="10" data-correct="false">A) Anomalías de vientos del oeste en toda la tropósfera y dorsales de nivel medio sobre la región</button>
+<button class="qbtn" data-q="10" data-correct="false">B) La región de entrada del SALLJ sobre el área de interés, por su convergencia en nivel bajo</button>
+<button class="qbtn" data-q="10" data-correct="true">C) La región de convergencia (salida) del chorro de capas bajas y el lado divergente (este) de una vaguada de altura ubicada al oeste o sobre los Andes</button>
+<button class="qbtn" data-q="10" data-correct="false">D) El lado convergente (oeste) de una vaguada de altura situada sobre la región</button>
+</div><div class="qfeedback" id="fb10" style="display:none"></div></div>
+
+<div id="qresult" style="display:none;border-radius:10px;padding:12px 14px;margin-top:6px;font-size:12.5px;line-height:1.5"></div>
+<button id="qreset" style="margin-top:10px;background:var(--color-background-secondary,var(--surface-1));border:1px solid var(--color-border-tertiary,var(--border));border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer;font-family:inherit;color:inherit">🔄 Reiniciar Quiz</button>
+</div>
+
+<div class="block s3" id="refs-institucionales">
+<span class="bh" style="background:#e0f2fe;color:#0c4a6e">🔗 Para profundizar — fuentes institucionales</span>
+<div class="three">
+<div class="mini" style="border-left:3px solid #0284c7"><b>Organización Meteorológica Mundial (OMM/WMO) 🔗</b><a href="https://wmo.int">wmo.int</a><br>Marco normativo del pronóstico climático estacional: definición de normales climatológicas (1991–2020), terciles y verificación de pronósticos probabilísticos. Es la institución que "manda" en estándares. <i>Tipo: normas e informes. (verificar vigencia)</i></div>
+<div class="mini" style="border-left:3px solid #f59e0b"><b>SENAMHI Perú 🔗</b><a href="https://www.senamhi.gob.pe">senamhi.gob.pe</a><br>Institución que produce este módulo. Boletines climáticos mensuales y estacionales, avisos de friaje y datos históricos nacionales para contrastar las "recetas" de las diap. 28–32 y 43–45. <i>Tipo: datos y boletines operativos.</i></div>
+<div class="mini" style="border-left:3px solid #16a34a"><b>NOAA / Weather Prediction Center 🔗</b><a href="https://www.weather.gov">weather.gov</a><br>Los <b>WPC International Desks</b> son la fuente de casi todos los esquemas conceptuales del PDF (SALLJ, chorro de barrera, surgencias, listas de pronóstico). También el glosario JetStream. <i>Tipo: material de capacitación y glosario. (verificar vigencia)</i></div>
+<div class="mini" style="border-left:3px solid #7c3aed"><b>AMS — Glossary of Meteorology 🔗</b><a href="https://www.ametsoc.org">ametsoc.org</a><br>Definiciones formales citadas literalmente en el PDF: <i>barrier jet</i> y <i>South Atlantic Convergence Zone</i>. Úselo para redactar definiciones de examen con rigor terminológico. <i>Tipo: glosario de referencia.</i></div>
+<div class="mini" style="border-left:3px solid #0891b2"><b>NOAA / PSL — Reanálisis y compuestos 🔗</b><a href="https://psl.noaa.gov">psl.noaa.gov</a><br>Herramienta de compuestos NCEP/NCAR con la que se generaron todas las figuras de años húmedos vs. secos (200 y 500 hPa) y las anomalías de OLR. Puede reproducir usted mismo los mapas de las diap. 25–27 y 41–42. <i>Nota: el PDF cita el antiguo dominio esrl.noaa.gov, hoy migrado a psl.noaa.gov. (verificar vigencia)</i></div>
+<div class="mini" style="border-left:3px solid #dc2626"><b>IGP — Instituto Geofísico del Perú 🔗</b><a href="https://www.gob.pe/igp">gob.pe/igp</a><br>Investigación sobre El Niño y dinámica atmosférica andina/amazónica. Relevante para la fase del ENSO como modulador de la circulación de Walker sobre la Amazonía (diap. 44). <i>Tipo: investigación.</i></div>
+<div class="mini" style="border-left:3px solid #be185d"><b>ENFEN 🔗</b><a href="https://www.gob.pe/enfen">gob.pe/enfen</a><br>Comunicados oficiales sobre El Niño/La Niña costero. Complementa el módulo: la fase fría del ENSO estimula el ramal ascendente de Walker sobre la Amazonía, favoreciendo lluvias en el oeste amazónico. <i>Tipo: informes técnicos oficiales.</i></div>
+<div class="mini" style="border-left:3px solid #0d9488"><b>CPTEC / INPE (Brasil) 🔗</b><a href="https://www.cptec.inpe.br">cptec.inpe.br</a><br>Centro de referencia mundial para el análisis operativo de la ZCAS. Sus imágenes GOES e informes son la fuente de los ejemplos de febrero 2013 y noviembre 2014 del PDF. <i>Tipo: imágenes satelitales y análisis. (verificar vigencia)</i></div>
+<div class="mini" style="border-left:3px solid #f97316"><b>COMET / MetEd (UCAR) 🔗</b><a href="https://www.meted.ucar.edu">meted.ucar.edu</a><br>Módulos gratuitos en español sobre chorros de bajo nivel, chorros de barrera, convección de mesoescala y meteorología de los Andes. Es el complemento didáctico natural de este material. <i>Tipo: curso con certificación.</i></div>
+</div>
+</div>
+
+<div class="ftr">
+<span class="ft">REFERENCIAS DEL PDF:</span>
+<span class="fc">Vera, C., Baez, Douglas, Emmanuel, Marengo, Meitin, Nicolini, Nogues-Paegle, Paegle, Penalba, Salio, Saulo, Silva Dias, Silva Dias y Zipser (2006), <i>The South American Low-Level Jet Experiment</i>, BAMS · Marengo, Soares, Saulo y Nicolini (2004), <i>Climatology of the Low-Level Jet East of the Andes as Derived from the NCEP–NCAR Reanalyses</i>, J. Climate 17(12), 2261–2280 · Bonner, W. D. (1968), <i>Climatology of the low level jet</i>, Mon. Wea. Rev. 96, 833–850 · Bonner y Paegle (1970), Mon. Wea. Rev. 98, 735–744 · Seluchi y Saulo (2009/2012), <i>Baixa do Noroeste Argentino e Baixa do Chaco</i>, RBMET · Salio, Nicolini y Saulo (2002), <i>Chaco low-level jet events characterization during the austral summer season</i>, JGR · Liebmann et al. (2004), <i>Subseasonal Variations of Rainfall in South America…</i>, J. Climate 17 · Robertson y Mechoso (2000), <i>Interannual and Interdecadal Variability of the SACZ</i> · Kodama 1993; Figueroa et al. 1995; Casarin y Kousky 1986; Nogués-Paegle y Mo 1997; Lenters y Cook 1999 · AMS Glossary (2017): <i>Barrier jet</i>, <i>South Atlantic Convergence Zone</i> · EUMETRAIN (2017) · Earth Null School (2017) · NCEP/NCAR Reanalysis (ESRL/PSL–NOAA) · Modelo GFS (EMC/NOAA) · USAFETAC/TN-92/004 · USGS-GTOPO30 DEM · WPC International Desks · INPE/CPTEC · Google Earth.</span>
+</div>
+
+</div>
+
+<script>
+(function(){
+var sec=document.getElementById('quiz-section');
+if(!sec)return;
+var FB={
+1:{ok:'La condición es doble: intensidad (≥12 m/s en los primeros 1.5 km) y cizalladura (disminución ≥6 m/s hasta el mínimo más cercano por encima, hasta 3 km), más el requisito de que el viento meridional supere al zonal. En el caso del 05 oct 2014: 24.6 m/s en 850 y 18.3 m/s en 700 → ΔV = 6.3 m/s, apenas por encima del umbral.',letter:'C'},
+2:{ok:'Barotropía significa que el núcleo termal y el núcleo de circulación coinciden verticalmente, con isotermas y líneas de temperatura potencial esencialmente paralelas. Es lo opuesto a un ciclón extratropical, que es baroclínico y cuyo eje se inclina hacia el aire frío con la altura. Por eso la BC no genera ciclogénesis por sí sola: no dispone de energía potencial baroclínica.',letter:'B'},
+3:{ok:'La eficiencia pluviométrica E = 55/17 ≈ 3.2 significa que un día con CJE llueve más de tres veces lo que un día promedio de verano. La causa física: la baja termal acelera el chorro, el chorro aumenta el flujo de humedad (que crece como r·V) y la entrada divergente del chorro subtropical de altura aporta la succión que convierte esa convergencia en ascenso profundo.',letter:'D'},
+4:{ok:'El chorro de barrera es un fenómeno de MESOESCALA (corredor angosto, decenas a cientos de km, 1–3 días), frío y dirigido de sur a norte. El SALLJ es sinóptico, cálido, húmedo y va del norte al sur. Comparten el corredor geográfico pero no la escala, ni la temperatura, ni el sentido.',letter:'B'},
+5:{ok:'El criterio operativo del PDF es evaluar el cambio de masa. Una línea de cortante se asocia a secamiento pero no a cambio de temperatura; un frente implica sustitución de masa de aire y por tanto cambio térmico además del cambio de viento.',letter:'B'},
+6:{ok:'La orientación NO–SE es la firma distintiva de la ZCAS y la diferencia de la ZCIT, que es zonal. La definición de la AMS integra los tres elementos: nubosidad, precipitación y convergencia de nivel bajo, en esa franja diagonal que va del sureste de Brasil al Atlántico Sur occidental.',letter:'B'},
+7:{ok:'Es el dipolo ZCAS–cuenca del Plata descrito por Liebmann et al. (2004): la banda intercepta y precipita la humedad que de otro modo viajaría hacia el sur por el SALLJ. El bloqueo es más fuerte cuanto más al oeste se extienda la ZCAS; si se limita a Rondonia/Mato Grosso, el efecto es menor.',letter:'A'},
+8:{ok:'Por la ley de Stefan–Boltzmann (OLR = σT⁴), un tope de nube alto y frío emite poca radiación de onda larga. Anomalía negativa de OLR = topes más fríos y frecuentes = convección profunda = lluvia por encima de lo normal. Es el diagnóstico del verano húmedo de 2001 en el PDF.',letter:'C'},
+9:{ok:'El friaje requiere que la vaguada de altura esté sobre o inmediatamente al oeste de la región, para favorecer el ingreso de frentes fríos, junto con una dorsal de nivel bajo (alta polar) que empuje los vientos del sur hacia el norte del continente. Es el patrón que SENAMHI monitorea para los avisos de friaje amazónico.',letter:'C'},
+10:{ok:'La SALIDA del chorro de capas bajas es donde el flujo se frena y converge (rotación ciclónica y convergencia de humedad); la ENTRADA, en cambio, es región de divergencia en nivel bajo y descensos, y estimula secamiento. A eso hay que sumar el lado divergente (este) de una vaguada de altura ubicada al oeste o sobre los Andes, no al este de la cordillera.',letter:'C'}
+};
+var answered=0,correct=0;
+function upd(){
+document.getElementById('qprog').textContent='Pregunta '+answered+' de 10';
+document.getElementById('qbar').style.width=(answered*10)+'%';
+var pct=answered?Math.round(correct/answered*100):0;
+document.getElementById('qscore').textContent=correct+' / 10 · '+pct+' %';
+}
+sec.addEventListener('click',function(e){
+var b=e.target.closest('.qbtn');
+if(!b||b.classList.contains('dis'))return;
+var q=b.getAttribute('data-q');
+var card=document.getElementById('q'+q);
+var isOk=b.getAttribute('data-correct')==='true';
+card.querySelectorAll('.qbtn').forEach(function(x){
+if(x.getAttribute('data-correct')==='true'){x.classList.add('ok');if(x.textContent.indexOf('✅')<0)x.textContent='✅ '+x.textContent.trim();}
+x.classList.add('dis');
+});
+if(!isOk){b.classList.remove('ok');b.classList.add('bad');b.textContent='❌ '+b.textContent.replace('✅ ','').trim();}
+var fb=document.getElementById('fb'+q);
+fb.style.display='block';
+fb.className='qfeedback '+(isOk?'fb-ok':'fb-bad');
+fb.innerHTML=(isOk?'<b>✅ ¡Correcto! </b>':'<b>❌ Incorrecto. La respuesta correcta es '+FB[q].letter+'. </b>')+FB[q].ok;
+answered++;if(isOk)correct++;
+upd();
+if(answered===10){
+var r=document.getElementById('qresult');r.style.display='block';
+var msg,bg,col;
+if(correct<=4){bg='#fee2e2';col='#991b1b';msg='Necesitas repasar el material. Vuelve sobre el criterio de Bonner, el acoplamiento baja–chorro y el dipolo ZCAS–cuenca del Plata.';}
+else if(correct<=7){bg='#fef9c3';col='#713f12';msg='¡Buen avance, sigue repasando! Enfócate en las diferencias de escala (chorro de barrera vs. SALLJ) y en las listas de pronóstico de las diapositivas 28–32 y 43–45.';}
+else{bg='#dcfce7';col='#14532d';msg='¡Excelente dominio del tema! Ya puedes explicar el módulo completo articulándolo en torno al rol de la cordillera de los Andes.';}
+r.style.background=bg;r.style.color=col;
+r.innerHTML='<b style="font-family:Oswald;font-size:14px">Puntaje final: '+correct+' / 10</b><br>'+msg;
+}
+});
+document.getElementById('qreset').addEventListener('click',function(){
+answered=0;correct=0;
+sec.querySelectorAll('.qbtn').forEach(function(x){
+x.classList.remove('ok','bad','dis');
+x.textContent=x.textContent.replace('✅ ','').replace('❌ ','');
+});
+sec.querySelectorAll('.qfeedback').forEach(function(f){f.style.display='none';f.innerHTML='';});
+document.getElementById('qresult').style.display='none';
+upd();
+});
+upd();
+})();
+</script>
