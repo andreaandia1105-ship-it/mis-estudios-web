@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inglés · Estudio Interactivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f14;--bg2:#13161e;--bg3:#1a1e29;--bg4:#222840;
+  --green:#4ade80;--green2:#22c55e;--yellow:#fbbf24;--red:#f87171;
+  --blue:#60a5fa;--purple:#a78bfa;--pink:#f472b6;--teal:#2dd4bf;
+  --text:#f1f5f9;--muted:#94a3b8;--border:#2a3050;
+  --card:#161b2e;--card2:#1e2540;
+  --font:'DM Sans',sans-serif;--serif:'Playfair Display',serif;--mono:'DM Mono',monospace;
+  --r:14px;--r2:20px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,15,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;gap:8px}
+.nav-logo{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--blue);margin-right:auto;cursor:pointer}
+.nav-logo span{color:var(--text)}
+.nav-btn{background:none;border:none;color:var(--muted);font-family:var(--font);font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;cursor:pointer;transition:.2s;white-space:nowrap}
+.nav-btn:hover{color:var(--text);background:var(--bg3)}
+.nav-btn.active{color:var(--blue);background:rgba(96,165,250,.1)}
+
+/* SECTIONS */
+.section{display:none;padding:80px 24px 40px;max-width:1100px;margin:0 auto;min-height:100vh}
+.section.show{display:block}
+
+/* HOME */
+.hero{text-align:center;padding:60px 0 40px}
+.hero h1{font-family:var(--serif);font-size:clamp(38px,7vw,80px);font-weight:900;line-height:1.1;margin-bottom:16px}
+.hero h1 em{color:var(--blue);font-style:normal}
+.hero p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto 36px;line-height:1.7}
+.badge-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.badge{background:var(--bg3);border:1px solid var(--border);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;color:var(--muted)}
+.badge.g{border-color:rgba(96,165,250,.4);color:var(--blue);background:rgba(96,165,250,.07)}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.home-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:24px;cursor:pointer;transition:.25s;text-align:left;position:relative}
+.home-card:hover{border-color:var(--blue);transform:translateY(-3px);background:var(--card2)}
+.home-card.disabled{opacity:.55;cursor:default}
+.home-card.disabled:hover{transform:none;border-color:var(--border);background:var(--card)}
+.hc-icon{font-size:32px;margin-bottom:14px}
+.hc-title{font-family:var(--serif);font-size:18px;font-weight:700;margin-bottom:6px}
+.hc-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.hc-tag{display:inline-block;margin-top:12px;font-size:11px;font-weight:600;color:var(--blue);background:rgba(96,165,250,.1);padding:3px 10px;border-radius:12px}
+.hc-tag.soon{color:var(--muted);background:var(--bg3)}
+
+/* HEADINGS */
+.sec-title{font-family:var(--serif);font-size:clamp(26px,5vw,40px);font-weight:700;margin-bottom:6px}
+.sec-sub{color:var(--muted);font-size:14px;margin-bottom:32px}
+
+/* PROGRESS BAR */
+.prog-outer{background:var(--bg3);border-radius:99px;height:8px;overflow:hidden;margin-bottom:6px}
+.prog-inner{height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));border-radius:99px;transition:.5s}
+.prog-label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:16px}
+
+/* FLASHCARDS */
+.fc-controls{display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-controls select{background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:var(--font);font-size:13px;padding:8px 12px;border-radius:10px;cursor:pointer}
+.fc-scene{perspective:1000px;width:100%;max-width:520px;margin:0 auto 24px;height:300px}
+.fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:.6s;cursor:pointer}
+.fc-card.flipped{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center}
+.fc-front{background:var(--card);border:2px solid var(--border)}
+.fc-back{background:var(--card2);border:2px solid var(--blue);transform:rotateY(180deg)}
+.fc-lang{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.fc-word{font-family:var(--serif);font-size:clamp(26px,5vw,40px);font-weight:700;line-height:1.2;margin-bottom:8px}
+.fc-word.en{color:var(--blue)}
+.fc-pron{font-family:var(--mono);font-size:14px;color:var(--teal);margin-bottom:4px}
+.fc-hint{font-size:13px;color:var(--muted);line-height:1.5}
+.fc-ex{font-size:13px;color:var(--yellow);font-style:italic;margin-top:10px}
+.fc-nav{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+.btn{background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:var(--font);font-size:14px;font-weight:500;padding:10px 22px;border-radius:10px;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--card2);border-color:var(--blue)}
+.btn.primary{background:var(--blue);color:#0d0f14;border-color:var(--blue);font-weight:600}
+.btn.primary:hover{background:#7cb4fb}
+.btn.danger{border-color:var(--red);color:var(--red)}
+.btn.danger:hover{background:rgba(248,113,113,.1)}
+.fc-counter{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.fc-tip{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
+
+/* ADD WORD PANEL */
+.add-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;margin-top:36px}
+.add-panel h3{font-family:var(--serif);font-size:19px;margin-bottom:4px}
+.add-panel .sub{font-size:13px;color:var(--muted);margin-bottom:18px}
+.add-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.add-grid .full{grid-column:1/-1}
+.add-grid label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}
+.add-grid input{width:100%;background:var(--bg3);border:1.5px solid var(--border);color:var(--text);font-family:var(--font);font-size:14px;padding:9px 12px;border-radius:9px;outline:none;transition:.2s}
+.add-grid input:focus{border-color:var(--blue)}
+.add-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.add-msg{font-size:12px;color:var(--green);display:none}
+
+.my-list{margin-top:20px;display:flex;flex-direction:column;gap:8px;max-height:340px;overflow-y:auto}
+.my-item{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:12px}
+.my-item-main{flex:1;min-width:0}
+.my-item-en{font-weight:600;font-size:14px;color:var(--blue)}
+.my-item-meta{font-size:12px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.my-item-del{background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;padding:4px 8px;border-radius:6px;flex-shrink:0}
+.my-item-del:hover{background:rgba(248,113,113,.1)}
+.my-empty{font-size:13px;color:var(--muted);text-align:center;padding:20px 0}
+
+/* EMPTY / PLACEHOLDER SECTIONS */
+.empty-panel{background:var(--card);border:1px dashed var(--border);border-radius:var(--r2);padding:60px 24px;text-align:center}
+.empty-panel .ic{font-size:40px;margin-bottom:14px;opacity:.7}
+.empty-panel h3{font-family:var(--serif);font-size:22px;margin-bottom:8px}
+.empty-panel p{font-size:14px;color:var(--muted);max-width:420px;margin:0 auto;line-height:1.7}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade{animation:fadeIn .35s ease both}
+.section.show .home-card{animation:fadeIn .35s ease both}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:4px}
+
+@media(max-width:520px){.add-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="go('home')">🇬🇧 <span>English</span></div>
+  <button class="nav-btn active" onclick="go('home')">Inicio</button>
+  <button class="nav-btn" onclick="go('flash')">Flashcards</button>
+  <button class="nav-btn" onclick="go('gram')">Gramática</button>
+  <button class="nav-btn" onclick="go('sim')">Test</button>
+  <button class="nav-btn" onclick="go('game')">Juegos</button>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div id="sec-home" class="section show">
+  <div class="hero fade">
+    <h1>Studio<br><em>English</em></h1>
+    <p>Aplicación interactiva de estudio de inglés. Por ahora incluye vocabulario en flashcards (con espacio para tus propias palabras diarias); las demás secciones se irán completando.</p>
+    <div class="badge-row">
+      <span class="badge g">🃏 Flashcards activo</span>
+      <span class="badge">✏️ Gramática — próximamente</span>
+      <span class="badge">📋 Test — próximamente</span>
+      <span class="badge">🎮 Juegos — próximamente</span>
+    </div>
+  </div>
+  <div class="home-grid">
+    <div class="home-card" onclick="go('flash')">
+      <div class="hc-icon">🃏</div>
+      <div class="hc-title">Flashcards</div>
+      <div class="hc-desc">Vocabulario base + tus propias palabras agregadas a diario. Voltea la tarjeta, escucha la pronunciación y practica.</div>
+      <span class="hc-tag">Disponible</span>
+    </div>
+    <div class="home-card disabled" onclick="go('gram')">
+      <div class="hc-icon">✏️</div>
+      <div class="hc-title">Ejercicios de gramática</div>
+      <div class="hc-desc">Espacio reservado para completar más adelante.</div>
+      <span class="hc-tag soon">Próximamente</span>
+    </div>
+    <div class="home-card disabled" onclick="go('sim')">
+      <div class="hc-icon">📋</div>
+      <div class="hc-title">Simulador de test</div>
+      <div class="hc-desc">Espacio reservado para completar más adelante.</div>
+      <span class="hc-tag soon">Próximamente</span>
+    </div>
+    <div class="home-card disabled" onclick="go('game')">
+      <div class="hc-icon">🎮</div>
+      <div class="hc-title">Juegos de repaso</div>
+      <div class="hc-desc">Espacio reservado para completar más adelante.</div>
+      <span class="hc-tag soon">Próximamente</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FLASHCARDS ===== -->
+<div id="sec-flash" class="section">
+  <div class="sec-title">🃏 Flashcards</div>
+  <div class="sec-sub">Haz clic en la tarjeta para ver la traducción · Usa las flechas para avanzar</div>
+  <div class="fc-controls">
+    <label style="font-size:13px;color:var(--muted)">Mazo:</label>
+    <select id="fc-cat" onchange="initFlash()">
+      <option value="0">📚 Todo mezclado</option>
+      <option value="1">📖 Vocabulario base</option>
+      <option value="2">📝 Mis palabras (diario)</option>
+    </select>
+    <button class="btn" onclick="shuffleFlash()">🔀 Mezclar</button>
+    <button class="btn" onclick="speakCurrent()">🔊 Escuchar</button>
+  </div>
+  <div class="prog-label"><span id="fc-prog-txt">Tarjeta 1 de 1</span><span id="fc-known">✅ 0 sabidas</span></div>
+  <div class="prog-outer"><div class="prog-inner" id="fc-prog-bar" style="width:3%"></div></div>
+  <div class="fc-scene">
+    <div class="fc-card" id="fc-card" onclick="flipCard()">
+      <div class="fc-front">
+        <div class="fc-lang">English 🇬🇧</div>
+        <div class="fc-word en" id="fc-en"></div>
+        <div class="fc-pron" id="fc-pron"></div>
+        <div class="fc-hint" id="fc-cat-label"></div>
+      </div>
+      <div class="fc-back">
+        <div class="fc-lang">Español 🇪🇸</div>
+        <div class="fc-word" id="fc-es"></div>
+        <div class="fc-ex" id="fc-ex"></div>
+      </div>
+    </div>
+  </div>
+  <div class="fc-tip">👆 Toca la tarjeta para voltear</div>
+  <div class="fc-nav" style="margin-top:16px">
+    <button class="btn danger" onclick="markCard(false)" title="No la sabía">✗ No sabía</button>
+    <button class="btn" onclick="prevCard()">← Anterior</button>
+    <span class="fc-counter" id="fc-cnt">1 / 1</span>
+    <button class="btn" onclick="nextCard()">Siguiente →</button>
+    <button class="btn primary" onclick="markCard(true)" title="La sabía">✓ Sabía</button>
+  </div>
+
+  <!-- ===== ADD YOUR OWN WORD ===== -->
+  <div class="add-panel">
+    <h3>➕ Agregar palabra del día</h3>
+    <div class="sub">Aquí vas guardando el vocabulario nuevo que quieras practicar. Se guarda en este navegador y aparece en el mazo "Mis palabras (diario)".</div>
+    <div class="add-grid">
+      <div>
+        <label>Palabra en inglés *</label>
+        <input type="text" id="in-en" placeholder="e.g. Deadline">
+      </div>
+      <div>
+        <label>Traducción al español *</label>
+        <input type="text" id="in-es" placeholder="Ej: Fecha límite">
+      </div>
+      <div>
+        <label>Pronunciación aprox.</label>
+        <input type="text" id="in-pron" placeholder="/ˈded.laɪn/ (DED-lain)">
+      </div>
+      <div>
+        <label>Ejemplo</label>
+        <input type="text" id="in-ex" placeholder="The deadline is Friday.">
+      </div>
+    </div>
+    <div class="add-actions">
+      <button class="btn primary" onclick="addMyWord()">Guardar palabra</button>
+      <button class="btn" onclick="clearAddForm()">Limpiar</button>
+      <span class="add-msg" id="add-msg">✅ Guardada</span>
+    </div>
+    <div class="my-list" id="my-list"></div>
+  </div>
+</div>
+
+<!-- ===== GRAMÁTICA (vacío) ===== -->
+<div id="sec-gram" class="section">
+  <div class="sec-title">✏️ Ejercicios de gramática</div>
+  <div class="sec-sub">Sección por completar</div>
+  <div class="empty-panel">
+    <div class="ic">🚧</div>
+    <h3>Aún sin contenido</h3>
+    <p>Este espacio está reservado para los ejercicios de gramática en inglés. Se completará más adelante.</p>
+  </div>
+</div>
+
+<!-- ===== TEST (vacío) ===== -->
+<div id="sec-sim" class="section">
+  <div class="sec-title">📋 Simulador de test</div>
+  <div class="sec-sub">Sección por completar</div>
+  <div class="empty-panel">
+    <div class="ic">🚧</div>
+    <h3>Aún sin contenido</h3>
+    <p>Este espacio está reservado para el simulador de examen. Se completará más adelante.</p>
+  </div>
+</div>
+
+<!-- ===== JUEGOS (vacío) ===== -->
+<div id="sec-game" class="section">
+  <div class="sec-title">🎮 Juegos de repaso</div>
+  <div class="sec-sub">Sección por completar</div>
+  <div class="empty-panel">
+    <div class="ic">🚧</div>
+    <h3>Aún sin contenido</h3>
+    <p>Este espacio está reservado para juegos de repaso (unir pares, verdadero/falso, cloze). Se completará más adelante.</p>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA — vocabulario base
+// ============================================================
+const VOCAB_BASE = [
+  {en:"Science",       es:"Ciencia",                    pron:"/ˈsaɪ.əns/ (SAI-ens)",  ex:"Science is very important."},
+  {en:"Weather",       es:"Clima / Tiempo atmosférico",  pron:"/ˈweð.ər/ (WUE-der)",   ex:"The weather is nice today."},
+  {en:"Office",        es:"Oficina",                     pron:"/ˈɒf.ɪs/ (O-fis)",      ex:"He is at the office."},
+  {en:"Today",         es:"Hoy",                         pron:"/təˈdeɪ/ (tuh-DEI)",    ex:"Today is Monday."},
+  {en:"Ready",         es:"Listo / Preparado",           pron:"/ˈred.i/ (RE-di)",      ex:"We are ready."},
+];
+
+// ============================================================
+// STORAGE — "Mis palabras" (localStorage, persiste en este navegador)
+// ============================================================
+const MY_WORDS_KEY = "en_myWords_v1";
+function loadMyWords(){
+  try{
+    const raw = localStorage.getItem(MY_WORDS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){ return []; }
+}
+function saveMyWords(list){
+  try{ localStorage.setItem(MY_WORDS_KEY, JSON.stringify(list)); }catch(e){}
+}
+let MY_WORDS = loadMyWords();
+
+function addMyWord(){
+  const en = document.getElementById('in-en').value.trim();
+  const es = document.getElementById('in-es').value.trim();
+  const pron = document.getElementById('in-pron').value.trim();
+  const ex = document.getElementById('in-ex').value.trim();
+  if(!en || !es){
+    alert('Por favor completa al menos la palabra en inglés y su traducción.');
+    return;
+  }
+  MY_WORDS.push({en, es, pron, ex, added: new Date().toISOString().slice(0,10)});
+  saveMyWords(MY_WORDS);
+  clearAddForm();
+  renderMyList();
+  const msg = document.getElementById('add-msg');
+  msg.style.display = 'inline';
+  setTimeout(()=>{ msg.style.display='none'; }, 1800);
+  // si el mazo actual incluye "mis palabras", refrescar
+  const cat = document.getElementById('fc-cat').value;
+  if(cat==='0' || cat==='2') initFlash();
+}
+function clearAddForm(){
+  document.getElementById('in-en').value='';
+  document.getElementById('in-es').value='';
+  document.getElementById('in-pron').value='';
+  document.getElementById('in-ex').value='';
+}
+function deleteMyWord(idx){
+  MY_WORDS.splice(idx,1);
+  saveMyWords(MY_WORDS);
+  renderMyList();
+  const cat = document.getElementById('fc-cat').value;
+  if(cat==='0' || cat==='2') initFlash();
+}
+function renderMyList(){
+  const box = document.getElementById('my-list');
+  if(!MY_WORDS.length){
+    box.innerHTML = '<div class="my-empty">Todavía no agregaste palabras propias. Usa el formulario de arriba ☝️</div>';
+    return;
+  }
+  let html = '';
+  // mostrar más recientes primero
+  for(let i=MY_WORDS.length-1;i>=0;i--){
+    const w = MY_WORDS[i];
+    html += `<div class="my-item">
+      <div class="my-item-main">
+        <div class="my-item-en">${escapeHtml(w.en)} — <span style="color:var(--text);font-weight:400">${escapeHtml(w.es)}</span></div>
+        <div class="my-item-meta">${w.pron ? escapeHtml(w.pron)+' · ' : ''}${w.added || ''}</div>
+      </div>
+      <button class="my-item-del" onclick="deleteMyWord(${i})" title="Eliminar">🗑</button>
+    </div>`;
+  }
+  box.innerHTML = html;
+}
+function escapeHtml(s){
+  return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// ============================================================
+// NAV
+// ============================================================
+function go(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
+  document.getElementById('sec-'+id).classList.add('show');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const navMap={home:0,flash:1,gram:2,sim:3,game:4};
+  document.querySelectorAll('.nav-btn')[navMap[id]].classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='flash'){ initFlash(); renderMyList(); }
+}
+
+// ============================================================
+// FLASHCARDS
+// ============================================================
+let fcDeck=[], fcIdx=0, fcKnown=0, fcFlipped=false;
+
+function getDeck(cat){
+  if(cat==='1') return [...VOCAB_BASE];
+  if(cat==='2') return [...MY_WORDS];
+  return [...VOCAB_BASE, ...MY_WORDS]; // todo mezclado
+}
+
+function initFlash(){
+  const cat = document.getElementById('fc-cat').value;
+  fcDeck = getDeck(cat);
+  fcIdx = 0; fcKnown = 0; fcFlipped = false;
+  renderCard();
+}
+function shuffleFlash(){
+  for(let i=fcDeck.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [fcDeck[i],fcDeck[j]]=[fcDeck[j],fcDeck[i]];
+  }
+  fcIdx = 0; fcFlipped = false;
+  renderCard();
+}
+function renderCard(){
+  const card = document.getElementById('fc-card');
+  card.classList.remove('flipped');
+  fcFlipped = false;
+  if(!fcDeck.length){
+    document.getElementById('fc-en').textContent = '—';
+    document.getElementById('fc-pron').textContent = '';
+    document.getElementById('fc-cat-label').textContent = 'No hay tarjetas en este mazo todavía';
+    document.getElementById('fc-es').textContent = '';
+    document.getElementById('fc-ex').textContent = '';
+    document.getElementById('fc-cnt').textContent = '0 / 0';
+    document.getElementById('fc-prog-txt').textContent = 'Tarjeta 0 de 0';
+    document.getElementById('fc-prog-bar').style.width = '0%';
+    document.getElementById('fc-known').textContent = '✅ 0 sabidas';
+    return;
+  }
+  const w = fcDeck[fcIdx];
+  document.getElementById('fc-en').textContent = w.en;
+  document.getElementById('fc-pron').textContent = w.pron || '';
+  document.getElementById('fc-cat-label').textContent = 'Toca para ver la traducción';
+  document.getElementById('fc-es').textContent = w.es;
+  document.getElementById('fc-ex').textContent = w.ex ? '“'+w.ex+'”' : '';
+  document.getElementById('fc-cnt').textContent = (fcIdx+1)+' / '+fcDeck.length;
+  document.getElementById('fc-prog-txt').textContent = 'Tarjeta '+(fcIdx+1)+' de '+fcDeck.length;
+  document.getElementById('fc-prog-bar').style.width = Math.round(((fcIdx+1)/fcDeck.length)*100)+'%';
+  document.getElementById('fc-known').textContent = '✅ '+fcKnown+' sabidas';
+}
+function flipCard(){
+  fcFlipped = !fcFlipped;
+  document.getElementById('fc-card').classList.toggle('flipped', fcFlipped);
+}
+function nextCard(){
+  if(!fcDeck.length) return;
+  fcIdx = (fcIdx+1) % fcDeck.length;
+  renderCard();
+}
+function prevCard(){
+  if(!fcDeck.length) return;
+  fcIdx = (fcIdx-1+fcDeck.length) % fcDeck.length;
+  renderCard();
+}
+function markCard(known){
+  if(!fcDeck.length) return;
+  if(known) fcKnown++;
+  nextCard();
+}
+function speakCurrent(){
+  if(!fcDeck.length) return;
+  const w = fcDeck[fcIdx];
+  if('speechSynthesis' in window){
+    const u = new SpeechSynthesisUtterance(w.en);
+    u.lang = 'en-US';
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+initFlash();
+renderMyList();
+</script>
+</body>
+</html>

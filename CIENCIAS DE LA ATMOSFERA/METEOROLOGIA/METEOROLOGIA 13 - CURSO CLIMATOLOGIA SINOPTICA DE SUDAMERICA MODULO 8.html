@@ -1,0 +1,837 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+.cv{--b1:#dbeafe;--b2:#1e3a8a;--g1:#dcfce7;--g2:#14532d;--r1:#fee2e2;--r2:#991b1b;--y1:#fef9c3;--y2:#713f12;--p1:#ede9fe;--p2:#4c1d95;--t1:#ccfbf1;--t2:#134e4a;--o1:#ffedd5;--o2:#7c2d12;--n1:#f1f5f9;--n2:#334155;--k1:#fce7f3;--k2:#831843;--s1:#e0f2fe;--s2:#0c4a6e;--bgp:var(--surface-2);--bgs:var(--surface-1);--bdr:var(--border);--tp:var(--text-primary);--tsx:var(--text-secondary);display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--surface-0);border-radius:14px;font-family:'Source Sans 3',sans-serif;color:var(--tp);line-height:1.5}
+@media(prefers-color-scheme:dark){.cv{--b1:#1e3a5f;--b2:#93c5fd;--g1:#14532d;--g2:#86efac;--r1:#450a0a;--r2:#fca5a5;--y1:#422006;--y2:#fef08a;--p1:#2e1065;--p2:#c4b5fd;--t1:#042f2e;--t2:#5eead4;--o1:#431407;--o2:#fed7aa;--n1:#1e293b;--n2:#94a3b8;--k1:#4a044e;--k2:#f0abfc;--s1:#082f49;--s2:#7dd3fc}}
+@media(max-width:640px){.cv{grid-template-columns:1fr}}
+.cv .full{grid-column:1/-1}
+.title{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:12px;padding:13px 16px}
+.title h1{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;margin:0;color:#fff}
+.title p{font-size:11px;margin:3px 0 0;color:#cbd5e1}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;background:#173a5e;color:#7dd3fc;margin:5px 4px 0 0}
+.sec{grid-column:1/-1;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;padding:6px 11px;border-radius:8px;margin-top:4px}
+.block{background:var(--bgp);border:0.5px solid var(--bdr);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}.block.s3{grid-column:1/-1}
+@media(max-width:640px){.block.s2,.block.s3{grid-column:1}}
+.bh{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px;letter-spacing:.3px}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--bgs);margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:6px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:var(--font-mono),monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:6px 0}
+.rx-note{font-size:11px;color:var(--tsx);margin-bottom:8px}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0;padding:7px 10px;font-size:11.5px;color:#7c2d12;margin:8px 0}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;padding:7px 10px;font-size:11.5px;color:#713f12;margin-top:9px}
+.mini{background:var(--bgs);border-radius:8px;padding:8px 10px;font-size:11.5px;border-top:3px solid;margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+@media(max-width:640px){.two,.three{grid-template-columns:1fr}}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.fbox{background:var(--bgs);padding:4px 8px;border-radius:6px;font-size:11px;border:0.5px solid var(--bdr)}
+.farrow{color:var(--tsx);font-size:15px}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+@media(max-width:640px){.dual{grid-template-columns:1fr}}
+.dual-tech{background:var(--s1);color:var(--s2);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.dual-plain{background:var(--g1);color:var(--g2);border-radius:8px;padding:8px 10px;font-size:11.5px}
+.dual-label{font-family:'Oswald',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 4px;opacity:.85}
+.dual p{margin:0}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--bgs);padding:5px 7px;border-bottom:0.5px solid var(--bdr);text-align:left;font-weight:600}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--bdr);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--bdr);margin:7px 0}
+.qhead{background:#0a2540;color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:10px}
+.qhead b{font-family:'Oswald',sans-serif;font-size:14px;color:#fff}
+.qhead span{display:block;font-size:11px;color:#94a3b8;margin-top:2px}
+.bar{width:100%;background:var(--bgs);border-radius:20px;height:11px;overflow:hidden;margin:5px 0 12px}
+.fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s}
+.qcard{border-top:0.5px solid var(--bdr);padding-top:10px;margin-top:10px}
+.qnum{font-family:'Oswald',sans-serif;font-size:11px;color:var(--tsx);margin:0 0 3px}
+.qtext{font-size:12.5px;margin:0 0 7px;font-weight:600}
+.qbtn{background:var(--bgs);border:1px solid var(--bdr);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;transition:all .2s;color:var(--tp);font-family:inherit;display:block}
+.qbtn:hover{border-color:var(--border-strong)}
+.qbtn.ok{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.no{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.dis{opacity:.6;cursor:not-allowed;pointer-events:none}
+.qfb{display:none;border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:8px}
+.qfb.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfb.no{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.foot{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:'Oswald',sans-serif;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.cv b{font-weight:600}
+</style>
+
+<h2 class="sr-only">Canvas de estudio sobre El Niño-Oscilación del Sur: historia, oscilación del sur, acoplamiento océano-atmósfera, ondas Kelvin, tipos de eventos, índices de monitoreo y quiz de repaso.</h2>
+
+<div class="cv">
+
+<div class="title">
+<h1>🌊 4.2 EL NIÑO–OSCILACIÓN DEL SUR (ENOS / ENSO)</h1>
+<p>Curso: Pronóstico Climático Estacional · Módulo 1: Climatología Sinóptica de Sudamérica · Tema 3: Climatología Sinóptica Tropical</p>
+<p>N. Quispe Gutiérrez (SENAMHI) y J. M. Gálvez Chavarri (SRG/NOAA) · Colab.: E. Villegas, T. García, E. Yacolca (SENAMHI) · Proyecto CLIMANDES (COSUDE–MeteoSwiss–OMM–GFCS–CPTEC)</p>
+<span class="tag">El Niño (EN)</span><span class="tag">Oscilación del Sur (OS)</span><span class="tag">Circulación de Walker</span><span class="tag">Ondas Kelvin</span><span class="tag">MJO</span><span class="tag">ONI · ICEN · MEI · EMI</span><span class="tag">Canónico vs Modoki</span><span class="tag">Niño costero</span>
+</div>
+
+<!-- ═══════ SECCIÓN 1 ═══════ -->
+<div class="sec" style="background:var(--b1);color:var(--b2)">🔵 1. INTRODUCCIÓN — ¿QUÉ ES EL ENSO Y POR QUÉ IMPORTA?</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--b1);color:var(--b2)">Definición del ENSO (Diap. Contenido–Introducción)</span>
+<div class="def" style="border-color:#1e3a8a">El <b>ENSO</b> no es "una corriente" ni "una lluvia": es un <b>modo acoplado océano-atmósfera</b> de variabilidad interanual centrado en el Pacífico tropical, cuya señal se propaga por teleconexiones a casi todo el planeta. Se compone de <b>dos procesos que fueron descubiertos por separado</b>: El Niño (EN, la componente <i>oceánica</i>, costera en su origen) y la Oscilación del Sur (OS, la componente <i>atmosférica</i>, de escala planetaria).</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span><b>El acople es la clave.</b> Jakob Bjerknes (años 60) fue quien unió ambas piezas: mostró que el calentamiento del mar y el colapso del gradiente de presión Indonesia–Pacífico oriental se retroalimentan. Antes de él, EN y OS eran literatura científica separada (L'Heureux, 2014).</span></div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span><b>Pero no siempre van juntos.</b> El caso peruano del <b>Niño costero 2017</b> es el contraejemplo canónico: calentamiento extremo en el Pacífico oriental <i>sin</i> señal coherente en el IOS ni en el Pacífico central. Por eso hablar solo de "El Niño" es ambiguo si no se especifica <i>qué región y qué índice</i>.</span></div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span><b>Por qué es de interés mundial:</b> las fases extremas modifican las circulaciones globales (Walker + Hadley + chorros) y con ello precipitación y temperatura en todos los continentes. Perú y Ecuador están entre los países más sensibles del planeta.</span></div>
+
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>ENSO = primer modo acoplado de variabilidad interanual del sistema océano-atmósfera tropical. La componente oceánica se expresa en anomalías de TSM y de profundidad de la termoclina (isoterma de 20 °C); la componente atmosférica en anomalías de PNMM (IOS), viento zonal en 850 hPa y OLR. El acople opera vía retroalimentación de Bjerknes: ΔTSM → Δgradiente zonal de presión → Δalisios → Δafloramiento y Δadvección → ΔTSM.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Imagina una bañera larguísima (el Pacífico) donde un ventilador (los vientos alisios) empuja el agua caliente hacia un extremo. Si el ventilador se debilita, el agua caliente se devuelve y se reparte. Al cambiar dónde está el agua caliente, cambia dónde llueve — y como el aire de todo el planeta está conectado, también cambia el clima muy lejos de ahí. El agua y el viento se empujan mutuamente: no hay "uno que manda".</p></div>
+</div>
+
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> decir "el ENSO es un fenómeno oceánico". Es <b>acoplado</b>: si el océano se calentara pero la atmósfera no respondiera (sin cambio en Walker, sin IOS negativo), no habría ENSO — habría una anomalía térmica local. Eso es exactamente lo que ocurrió en 1925 y 2017 (Niño costero).</div>
+<div class="exam">🎯 EXAMEN: Defina el ENSO como fenómeno acoplado y explique, con al menos dos argumentos físicos, por qué el evento de 2017 en la costa peruana no puede clasificarse como un ENSO cálido canónico pese a las anomalías extremas de TSM.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--k1);color:var(--k2)">Impacto socioeconómico en Perú (Diap. Interés mundial)</span>
+<div class="def" style="border-color:#831843">Cifra dura que el PDF exige memorizar: los eventos de <b>1983 y 1998 costaron al Perú el 7 % y el 4.5 % del PBI</b> respectivamente (CAF, 2000; Takahashi, 2015).</div>
+<div class="item"><span class="dot" style="background:#831843"></span><span>El mecanismo de daño no es el calentamiento en sí, sino la <b>lluvia extrema sobre una costa árida</b>: cuencas sin cobertura vegetal, quebradas secas activadas (huaicos), infraestructura diseñada para un clima desértico.</span></div>
+<div class="item"><span class="dot" style="background:#831843"></span><span>Cadena de impacto: <b>pesca</b> (colapso de anchoveta por hundimiento de la termoclina), <b>agricultura</b>, <b>salud</b> (dengue, malaria, EDA), <b>transporte</b> y <b>energía</b>.</span></div>
+<div class="item"><span class="dot" style="background:#831843"></span><span>Institucionalmente, esto justifica que Perú tenga un comité multisectorial dedicado (<b>ENFEN</b>) y no solo un servicio meteorológico: el ENSO es materia de <b>gestión de riesgo de desastres</b> (INDECI/CENEPRED).</span></div>
+<div class="exam">🎯 EXAMEN: Explique por qué un mismo valor de anomalía de TSM produce pérdidas económicas muy distintas en Perú según el mes del año en que ocurre.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--o1);color:var(--o2)">Cada evento ENSO es diferente (Diap. Introducción)</span>
+<div class="def" style="border-color:#7c2d12">No existe "el" Niño: existe una familia de eventos. La variabilidad de impactos depende de <b>tres factores</b> que hay que citar juntos en un examen.</div>
+<div class="three">
+<div class="mini" style="border-color:#f59e0b"><b>1. Estacionalidad</b><br>El mismo calentamiento produce efectos distintos según el mes. En Ecuador y Perú, <b>marzo</b> es el mes de impactos máximos (el mar ya está naturalmente cálido y la ZCIT está en su posición más austral). En <b>Chile</b>, la ventana sensible es <b>mayo–agosto</b> (invierno austral, chorro subtropical).</div>
+<div class="mini" style="border-color:#f59e0b"><b>2. Estructura de las anomalías</b><br>Importa <i>dónde</i> está el calentamiento y qué circulaciones lo acompañan, no solo su magnitud. El super Niño 2015-16 fue enorme en Niño 3.4 pero el calentamiento costero de marzo 2016 fue débil → pocos impactos extremos en Perú.</div>
+<div class="mini" style="border-color:#f59e0b"><b>3. Interacción con otras oscilaciones</b><br>MJO, PDO, IOD, AAO/SAM y ondas planetarias modulan la expresión regional. Un mismo ONI puede dar climas opuestos según con qué otro modo coincida.</div>
+</div>
+<div class="warn">⚠️ <b>DATO CONTRAINTUITIVO DEL PDF:</b> <b>marzo de 1987</b> (un Niño solo moderado) tuvo anomalías costeras <b>mayores</b> que marzo de 2016 (el "super Niño"), con inundaciones en la costa central que en 2016 no ocurrieron. Conclusión: <b>la magnitud del índice global no predice el impacto local peruano.</b></div>
+<div class="exam">🎯 EXAMEN: El evento 2015-16 fue uno de los ENSO más intensos del registro instrumental y, sin embargo, no generó impactos catastróficos en la costa peruana. Justifique físicamente esta aparente contradicción.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--s1);color:var(--s2)">Cada región es sensible a un aspecto distinto</span>
+<div class="def" style="border-color:#0c4a6e">Lo que dispara lluvias en Perú y Ecuador es el <b>calentamiento costero de febrero–marzo</b>, <b>no</b> el calentamiento del Pacífico central que define el ENSO clásico.</div>
+<div class="flow"><span class="fbox">Calentamiento Pacífico central</span><span class="farrow">→</span><span class="fbox">Predictor <i>útil pero imperfecto</i></span><span class="farrow">→</span><span class="fbox">Calentamiento costero</span><span class="farrow">→</span><span class="fbox">Lluvias en costa norte</span></div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><span>Ejemplo del PDF: entre <b>dic-2016 y jun-2017</b> el Pacífico oriental se calentó de forma extrema y se disipó en abril <b>sin</b> evolucionar a un ENSO clásico.</span></div>
+<div class="exam">🎯 EXAMEN: ¿Por qué el monitoreo operativo peruano no puede basarse exclusivamente en el índice ONI (región Niño 3.4)?</div>
+</div>
+
+<!-- ═══════ SECCIÓN 2 ═══════ -->
+<div class="sec" style="background:var(--o1);color:var(--o2)">🟠 2. 4.2.1 EL NIÑO (EN) — LA COMPONENTE OCEÁNICA</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--o1);color:var(--o2)">Historia y origen del término (Diap. 4.2.1)</span>
+<div class="def" style="border-color:#7c2d12">"El Niño" designa los cambios en océano y atmósfera de la <b>costa norte del Perú y sur del Ecuador</b> que suelen sentirse a <b>fines de diciembre</b> — de ahí el nombre, por el Niño Jesús. Es un término de origen <b>local y pesquero</b>, no científico.</div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span><span><b>Cambios observados por los pescadores:</b> (a) calentamiento del mar, (b) <b>disminución de la pesca</b> — porque la termoclina se hunde y el afloramiento deja de traer nutrientes —, (c) desarrollo de lluvias en una costa normalmente árida.</span></div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span><span><b>Cronología del término:</b> observado por pescadores peruanos y ecuatorianos (Carranza, 1892; Carrillo, 1893); <b>introducido a la comunidad científica en 1891</b> tras el calentamiento y las lluvias de ese verano (Takahashi y Martínez, 2017). Schott (1931) lo describe en la literatura alemana; Woodman (1999) modela estadísticamente las precipitaciones de la costa norte.</span></div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span><span><b>Geometría del avance:</b> el frente de aguas cálidas ingresa <b>desde el norte</b> (Ecuador → Perú) durante diciembre, pero <b>rara vez cruza los 4 °S</b> en condiciones normales (Fuente: WPC International Desks). Ejemplo documentado: avance del frente entre el 25-nov y el 25-dic de 2013 (NAVO/IMARPE).</span></div>
+<div class="warn">⚠️ <b>ERROR COMÚN CRÍTICO — Corriente vs. Fenómeno:</b> la <b>Corriente del Niño</b> es <b>normal</b> y ocurre casi todos los años (contracorriente cálida que baja desde el norte cada verano austral). El <b>Fenómeno de El Niño</b> es la <b>anomalía</b>: una intrusión anormalmente intensa de esa corriente, con impactos sensibles. Confundirlos es el error clásico de examen.</div>
+<div class="exam">🎯 EXAMEN: Distinga Corriente del Niño de Fenómeno de El Niño e indique qué criterio operacional utiliza el ENFEN para declarar la segunda condición.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--n1);color:var(--n2)">Eventos históricos del siglo XX</span>
+<div class="def" style="border-color:#334155">Eventos más significativos por impactos: <b>1925, 1983 y 1998</b>. En <b>2017</b> ocurrió otro evento significativo (costero).</div>
+<div class="item"><span class="dot" style="background:#334155"></span><span>Takahashi y Martínez (2017) muestran ~9 índices simultáneos: manifestaciones costeras (Quinn et al., 1987), lluvias de Guayaquil, descargas de los ríos <b>Zaña</b> y <b>Virú</b>, anillos de <i>Prosopis pallida</i> (Rodríguez et al., 2005), TSM de <b>Puerto Chicama</b>, nivel del mar en <b>Balboa (Panamá)</b>, índice de la lengua fría y el <b>SOI</b>.</span></div>
+<div class="item"><span class="dot" style="background:#334155"></span><span><b>Lectura clave:</b> 1982-83 y 1997-98 muestran señal coherente en <b>todos</b> los índices (afectaron toda la cuenca). <b>1925 solo aparece en los índices locales</b> — sin cambio en SOI ni en la lengua fría. Es la evidencia histórica de que existe un "Niño costero" independiente.</span></div>
+<div class="exam">🎯 EXAMEN: ¿Qué implicancia tiene, para la reconstrucción paleoclimática de eventos El Niño, el hecho de que 1925 no aparezca en el SOI?</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--p1);color:var(--p2)">La estructura del calentamiento importa: modos E y C (Takahashi et al., 2011)</span>
+<div class="def" style="border-color:#4c1d95">Mediante <b>funciones ortogonales empíricas (EOF)</b> aplicadas a la TSM del Pacífico, Takahashi et al. (2011) identificaron dos patrones cuyos impactos sobre la precipitación peruana son <b>opuestos</b>: el modo <b>E</b> (Eastern Pacific) y el modo <b>C</b> (Central Pacific).</div>
+<div class="two">
+<div class="mini" style="border-color:#dc2626"><b>Modo E — Pacífico oriental</b><br>Calentamiento frente a la costa de Perú/Ecuador. Estimula precipitaciones <b>por encima de lo normal en casi toda la vertiente Pacífica peruana</b>. Es el modo que genera desastres. Escala: interanual, meses; anomalías máximas cerca de la costa.</div>
+<div class="mini" style="border-color:#2563eb"><b>Modo C — Pacífico central</b><br>Calentamiento central sin calentamiento costero. Estimula <b>sequías</b> en la vertiente Pacífica peruana, por reorganización de la circulación de Walker (subsidencia sobre el occidente sudamericano) entre otros procesos.</div>
+</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>La descomposición en EOF del campo de TSMA del Pacífico tropical no es ortogonal en el espacio físico: E y C son rotaciones de EOF1/EOF2 que separan la varianza costera de la central. Un calentamiento en Niño 3.4 sin proyección sobre E implica un desplazamiento hacia el oeste del máximo de calentamiento diabático, con reubicación del ramal ascendente de Walker sobre el Pacífico central y subsidencia compensatoria sobre el occidente sudamericano → déficit pluviométrico en la vertiente occidental andina.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Piensa en una fogata que calienta el aire encima de ella y lo hace subir. Si la fogata (el agua caliente) está justo frente a la costa peruana, el aire sube <i>ahí</i> y llueve en Perú. Si la fogata está en medio del océano, el aire sube allá lejos, y sobre el Perú lo que ocurre es lo contrario: el aire baja, se seca, y en vez de lluvias hay sequía. Es el mismo "El Niño" del noticiero, pero con el fuego movido de sitio.</p></div>
+</div>
+<div class="warn">⚠️ Los calentamientos en el Pacífico central <b>pueden</b> usarse como predictor de calentamientos costeros, pero <b>2017 demostró que no siempre se relacionan</b>. Nunca extrapolar Niño 3.4 → costa peruana de forma automática.</div>
+<div class="exam">🎯 EXAMEN: Describa el método EOF aplicado por Takahashi et al. (2011) y explique por qué los modos E y C generan anomalías de precipitación de signo contrario en la vertiente occidental de los Andes.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--s1);color:var(--s2)">📐 Diagrama original 1 — Condiciones normales vs. condiciones El Niño en el Pacífico ecuatorial</span>
+<svg width="100%" viewBox="0 0 680 470" role="img" aria-label="Corte zonal del Pacífico ecuatorial en condiciones normales y durante El Niño">
+<title>Corte zonal del Pacífico ecuatorial: condiciones normales y El Niño</title>
+<desc>Panel superior: alisios fuertes, piscina cálida al oeste, termoclina inclinada, afloramiento frente a Sudamérica. Panel inferior: alisios debilitados, agua cálida redistribuida, termoclina aplanada, afloramiento reducido.</desc>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<text x="40" y="22" font-size="14" font-weight="500" fill="#0c4a6e">Condiciones normales (La Niña es su exageración)</text>
+<rect x="40" y="32" width="600" height="72" rx="6" fill="#cfe4f7" stroke="#185FA5" stroke-width="0.5"/>
+<text x="52" y="50" font-size="12" fill="#042C53">Atmósfera</text>
+<path d="M120 96 Q140 44 175 44 Q210 44 225 96" fill="none" stroke="#5F5E5A" stroke-width="2"/>
+<text x="130" y="70" font-size="12" fill="#2C2C2A">Convección</text>
+<line x1="240" y1="48" x2="520" y2="48" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ar)"/>
+<text x="330" y="42" font-size="12" fill="#2C2C2A">flujo del oeste en altura</text>
+<line x1="545" y1="52" x2="545" y2="96" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ar)"/>
+<text x="556" y="78" font-size="12" fill="#2C2C2A">subsidencia</text>
+<line x1="520" y1="112" x2="240" y2="112" stroke="#A32D2D" stroke-width="2" marker-end="url(#ar)"/>
+<text x="330" y="128" font-size="12" fill="#A32D2D">alisios fuertes (del este)</text>
+
+<path d="M40 140 L640 140 L640 235 L40 235 Z" fill="#3B8BD4" opacity="0.30"/>
+<path d="M40 140 L640 140 L640 172 Q400 186 40 208 Z" fill="#E8593C" opacity="0.42"/>
+<path d="M40 208 Q400 186 640 172" fill="none" stroke="#042C53" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="120" y="163" font-size="12" fill="#4A1B0C">Piscina cálida (~29–30 °C)</text>
+<text x="452" y="222" font-size="12" fill="#042C53">Lengua fría</text>
+<text x="300" y="203" font-size="12" fill="#042C53">Termoclina profunda al oeste</text>
+<line x1="620" y1="226" x2="620" y2="176" stroke="#0F6E56" stroke-width="2" marker-end="url(#ar)"/>
+<text x="500" y="253" font-size="12" fill="#0F6E56">Afloramiento de Ekman</text>
+<rect x="640" y="130" width="14" height="112" fill="#5F5E5A" opacity="0.55"/>
+<text x="596" y="128" font-size="12" fill="#2C2C2A">Sudamérica</text>
+<text x="44" y="128" font-size="12" fill="#2C2C2A">Indonesia</text>
+
+<text x="40" y="300" font-size="14" font-weight="500" fill="#993C1D">Condiciones El Niño (fase cálida del ENSO)</text>
+<rect x="40" y="310" width="600" height="72" rx="6" fill="#f7e0d6" stroke="#993C1D" stroke-width="0.5"/>
+<path d="M78 374 Q92 336 112 336 Q132 336 142 374" fill="none" stroke="#888780" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="62" y="330" font-size="12" fill="#4A1B0C">Subsidencia (sequía)</text>
+<path d="M290 374 Q312 322 350 322 Q388 322 402 374" fill="none" stroke="#5F5E5A" stroke-width="2.4"/>
+<text x="292" y="352" font-size="12" fill="#2C2C2A">Convección relocalizada</text>
+<path d="M560 374 Q578 336 600 336 Q622 336 630 374" fill="none" stroke="#5F5E5A" stroke-width="2"/>
+<text x="520" y="330" font-size="12" fill="#2C2C2A">Lluvias en costa</text>
+<line x1="430" y1="392" x2="330" y2="392" stroke="#A32D2D" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+<text x="300" y="408" font-size="12" fill="#A32D2D">alisios debilitados o revertidos</text>
+
+<path d="M40 418 L640 418 L640 452 L40 452 Z" fill="#3B8BD4" opacity="0.22"/>
+<path d="M40 418 L640 418 L640 444 Q400 440 40 442 Z" fill="#E8593C" opacity="0.42"/>
+<path d="M40 442 Q400 440 640 444" fill="none" stroke="#042C53" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="230" y="436" font-size="12" fill="#4A1B0C">Agua cálida y nivel del mar mejor distribuidos · termoclina aplanada</text>
+<rect x="640" y="408" width="14" height="52" fill="#5F5E5A" opacity="0.55"/>
+</svg>
+<div class="rx-note">Diagrama original construido para este canvas (no reproduce figuras protegidas del PDF). Esquema conceptual basado en NOAA/CPC y WPC International Desks. Profundidad de la termoclina típica: ~150–200 m en el Pacífico occidental y ~30–50 m frente a Sudamérica en condiciones normales.</div>
+</div>
+
+<!-- ═══════ SECCIÓN 3 ═══════ -->
+<div class="sec" style="background:var(--p1);color:var(--p2)">🟣 3. 4.2.2 OSCILACIÓN DEL SUR (OS) — LA COMPONENTE ATMOSFÉRICA</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--p1);color:var(--p2)">Historia: Sir Gilbert Walker (Diap. 4.2.2)</span>
+<div class="def" style="border-color:#4c1d95">La <b>Oscilación del Sur</b> (Southern Oscillation, SO) es un <b>patrón coherente de oscilación de la presión</b> entre Indonesia y el Pacífico tropical oriental, descubierto por <b>Sir Gilbert Walker en 1904</b> (Enciclopedia Británica, 2017). Describe cambios a <b>escala global</b> en el campo de presión, asociados a cambios en la circulación que hoy lleva su nombre.</div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span><b>Contexto histórico imprescindible:</b> Walker no buscaba El Niño. Como Director General de Observatorios de la India, buscaba <b>predecir el monzón indio</b> tras la hambruna de 1899, correlacionando fluctuaciones troposféricas globales. El ENSO fue, en cierto sentido, un hallazgo colateral de la predicción monzónica.</span></div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span>La OS es un <b>"balancín" (seesaw) de masa atmosférica</b>: cuando la presión sube en un extremo del Pacífico, baja en el otro. Es una oscilación de <b>redistribución</b>, no de creación de masa.</span></div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>La OS es el primer modo de variabilidad de la PNMM tropical, con estructura dipolar zonal y nodo cerca de la línea de cambio de fecha. Su expresión dinámica es la modulación de la celda de Walker: la anomalía de gradiente zonal de presión altera el forzamiento del viento zonal ecuatorial en niveles bajos, con respuesta tipo Gill (Kelvin al este, Rossby al oeste) al calentamiento diabático anómalo.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Es un sube y baja de aire pesado y aire liviano entre Australia/Indonesia y Tahití. Cuando en un lado el aire "pesa" más de lo normal, en el otro pesa menos — nunca los dos a la vez. Ese balanceo decide de qué lado del océano se forman las tormentas.</p></div>
+</div>
+<div class="exam">🎯 EXAMEN: Explique qué buscaba originalmente Gilbert Walker y por qué la Oscilación del Sur se considera un fenómeno de escala planetaria y no regional.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--y1);color:var(--y2)">Cálculo del IOS / SOI</span>
+<div class="def" style="border-color:#713f12">El <b>IOS (Índice de Oscilación del Sur)</b> se basa en dos estaciones: <b>Darwin (Australia)</b> y <b>Tahití (Pacífico tropical)</b>. <b>No es una simple resta de presiones</b>: es un índice <b>normalizado</b> por anomalías y desviaciones estándar respecto a la climatología.</div>
+<div class="rx">SOI = 10 × [ P<sub>diff</sub> − P<sub>diff,av</sub> ] / SD(P<sub>diff</sub>)<br><br>P<sub>diff</sub> = PNMM(Tahití) − PNMM(Darwin)</div>
+<div class="rx-note"><b>Unidades:</b> PNMM en hPa; P<sub>diff,av</sub> = promedio de largo plazo del mes en cuestión (hPa); SD(P<sub>diff</sub>) = desviación estándar de largo plazo del mismo mes (hPa). El SOI resulta <b>adimensional</b> (multiplicado por 10 por convención). <b>Rango típico:</b> −35 a +35; |SOI| &gt; 8 sostenido ≈ evento significativo. <b>Válido</b> a escala mensual/estacional, no diaria: en escala diaria el ruido sinóptico domina.</div>
+<div class="rx">Ejemplo resuelto (mes de enero)<br>P(Tahití)=1012.5 hPa · P(Darwin)=1010.8 hPa<br>P<sub>diff</sub> = 1.7 hPa · P<sub>diff,av</sub> = 3.5 hPa · SD = 1.2 hPa<br>SOI = 10 × (1.7 − 3.5)/1.2 = <b>−15.0</b></div>
+<div class="rx-note">Resultado: SOI fuertemente negativo → menor presión en Tahití y mayor en Darwin → alisios debilitados → <b>condición tipo El Niño</b>.</div>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>SOI positivo:</b> menor presión en Darwin, mayor en Tahití → más convección y lluvia en Australia/Indonesia, condiciones más secas en el Pacífico central y oriental (≈ <b>La Niña</b>).</span></div>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>SOI negativo:</b> lo opuesto (≈ <b>El Niño</b>).</span></div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> confundir el signo. Regla nemotécnica: <b>SOI negativo = El Niño</b> (Ni<b>ñ</b>o ≈ <b>n</b>egativo). Y no confundir "anomalía de presión" con "presión": el SOI trabaja con anomalías estandarizadas, por eso es adimensional.</div>
+<div class="exam">🎯 EXAMEN: Deduzca el valor del SOI dados P(Tahití)=1013.9, P(Darwin)=1008.2, P<sub>diff,av</sub>=3.5 y SD=1.2 hPa, e interprete el resultado en términos de fase del ENSO.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--p1);color:var(--p2)">📐 Diagrama original 2 — El "balancín" Darwin–Tahití y el signo del IOS</span>
+<svg width="100%" viewBox="0 0 680 260" role="img" aria-label="Esquema del balancín de presión entre Darwin y Tahití según el signo del IOS">
+<title>Balancín de presión Darwin–Tahití</title>
+<desc>Dos escenarios: IOS positivo con baja presión en Darwin y alta en Tahití (La Niña), e IOS negativo con el patrón invertido (El Niño).</desc>
+<g class="c-blue"><rect x="40" y="40" width="290" height="180" rx="10" stroke-width="0.5"/></g>
+<text x="185" y="64" text-anchor="middle" font-size="14" font-weight="500" fill="#0C447C">IOS positivo → La Niña</text>
+<line x1="70" y1="150" x2="300" y2="150" stroke="#185FA5" stroke-width="2"/>
+<polygon points="185,150 175,168 195,168" fill="#185FA5"/>
+<circle cx="90" cy="122" r="20" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="90" y="127" text-anchor="middle" font-size="14" fill="#042C53">B</text>
+<circle cx="282" cy="98" r="20" fill="#F5C4B3" stroke="#993C1D" stroke-width="0.5"/>
+<text x="282" y="103" text-anchor="middle" font-size="14" fill="#4A1B0C">A</text>
+<line x1="70" y1="150" x2="300" y2="126" stroke="#185FA5" stroke-width="3"/>
+<text x="90" y="192" text-anchor="middle" font-size="12" fill="#042C53">Darwin</text>
+<text x="282" y="192" text-anchor="middle" font-size="12" fill="#042C53">Tahití</text>
+<text x="185" y="210" text-anchor="middle" font-size="12" fill="#042C53">Alisios fuertes · lluvia en Indonesia</text>
+
+<g class="c-coral"><rect x="350" y="40" width="290" height="180" rx="10" stroke-width="0.5"/></g>
+<text x="495" y="64" text-anchor="middle" font-size="14" font-weight="500" fill="#712B13">IOS negativo → El Niño</text>
+<line x1="380" y1="150" x2="610" y2="150" stroke="#993C1D" stroke-width="2"/>
+<polygon points="495,150 485,168 505,168" fill="#993C1D"/>
+<circle cx="400" cy="98" r="20" fill="#F5C4B3" stroke="#993C1D" stroke-width="0.5"/>
+<text x="400" y="103" text-anchor="middle" font-size="14" fill="#4A1B0C">A</text>
+<circle cx="592" cy="122" r="20" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="592" y="127" text-anchor="middle" font-size="14" fill="#042C53">B</text>
+<line x1="380" y1="126" x2="610" y2="150" stroke="#993C1D" stroke-width="3"/>
+<text x="400" y="192" text-anchor="middle" font-size="12" fill="#4A1B0C">Darwin</text>
+<text x="592" y="192" text-anchor="middle" font-size="12" fill="#4A1B0C">Tahití</text>
+<text x="495" y="210" text-anchor="middle" font-size="12" fill="#4A1B0C">Alisios débiles · lluvia en Pacífico central</text>
+</svg>
+<div class="rx-note">A = alta presión relativa · B = baja presión relativa. Diagrama original. Referencia conceptual: NOAA/NCEI, Southern Oscillation Index.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--t1);color:var(--t2)">Correlaciones del IOS con otras variables (Trenberth y Caron, 2000; WPC, 2017)</span>
+<div class="def" style="border-color:#134e4a">Un IOS positivo (fase fría) no solo significa "altas presiones en el Pacífico oriental". Su firma global es amplia y <b>hemisféricamente asimétrica</b>.</div>
+<div class="three">
+<div class="mini" style="border-color:#0891b2"><b>Campo de presión (PNMM)</b><br>IOS positivo → altas en el Pacífico oriental y central, pero también <b>bajas presiones en el Atlántico</b> y en el extremo sureste del Pacífico frente al sur de Chile.</div>
+<div class="mini" style="border-color:#dc2626"><b>Campo de temperatura</b><br>Temperaturas <b>por debajo de lo normal</b> en toda la costa oeste de las Américas y en gran parte de Sudamérica.</div>
+<div class="mini" style="border-color:#16a34a"><b>Campo de precipitación</b><br>Déficit: Pacífico tropical central/oriental, centro de Chile, centro de Argentina, sur de EE.UU. y norte de México. Superávit: Indonesia/Australia, NE de Sudamérica, Caribe y Centroamérica.</div>
+</div>
+<div class="warn">⚠️ <b>DATO PERUANO CLAVE:</b> en el Perú la señal de precipitación es <b>opuesta entre norte y sur</b>. Un <b>IOS positivo</b> (La Niña) → <b>menor</b> precipitación en el norte y <b>mayor</b> en el sur (altiplano). Por eso una misma fase del ENSO puede ser sequía en Piura y excedente en Puno simultáneamente. Nunca hablar de "el impacto del ENSO en el Perú" en singular.</div>
+<div class="exam">🎯 EXAMEN: Explique el mecanismo físico por el cual una fase fría del ENSO produce anomalías de precipitación de signo opuesto entre la costa norte peruana y el altiplano sur.</div>
+</div>
+
+<!-- ═══════ SECCIÓN 4 ═══════ -->
+<div class="sec" style="background:var(--t1);color:var(--t2)">🩵 4. 4.2.3 EL NIÑO–OSCILACIÓN DEL SUR (ENOS) — EL SISTEMA ACOPLADO</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--t1);color:var(--t2)">La relación EN–OS y el modelo de Bjerknes</span>
+<div class="def" style="border-color:#134e4a">Recién a <b>fines de los años 1950</b> se notó que las fases negativas del IOS solían coincidir con calentamientos del mar en la costa peruana. La <b>conexión física</b> se estableció a <b>principios de los 60</b>, cuando <b>Jacob Bjerknes</b> formuló el primer modelo conceptual de las interacciones océano-atmósfera de los episodios El Niño.</div>
+<div class="item"><span class="dot" style="background:#134e4a"></span><span><b>Dónde vive la señal:</b> el IOS se relaciona <b>mejor</b> con calentamientos en el <b>Pacífico ecuatorial central</b>. Las correlaciones con la TSM de la costa sudamericana son altas pero <b>menores en magnitud</b>. Por eso el ENSO tiene su señal <b>mejor definida en el Pacífico ecuatorial central</b> (región Niño 3.4).</span></div>
+<div class="item"><span class="dot" style="background:#134e4a"></span><span><b>Signo de las correlaciones:</b> son <b>negativas</b> (TSM del Pacífico central vs. SOI). Fase cálida = TSM sobre lo normal en Niño 3.4 + presiones bajo lo normal ahí = <b>IOS negativo</b>. Fase fría (La Niña) = enfriamiento + <b>IOS positivo</b>. Fuente: NOAA-ESRL, reanálisis NCEP/NCAR 1948–2015.</span></div>
+<div class="flow"><span class="fbox">↓ Alisios</span><span class="farrow">→</span><span class="fbox">↓ Afloramiento</span><span class="farrow">→</span><span class="fbox">↑ TSM este</span><span class="farrow">→</span><span class="fbox">↓ Gradiente zonal de presión</span><span class="farrow">→</span><span class="fbox">↓ Alisios (retroalimentación positiva)</span></div>
+<div class="rx-note"><b>Retroalimentación de Bjerknes:</b> ciclo que se amplifica a sí mismo. Explica el <i>crecimiento</i> del evento; su <i>terminación</i> requiere las ondas Rossby reflejadas en el borde occidental (mecanismo del "oscilador retardado"), conocimiento complementario no detallado en el PDF pero exigible en examen.</div>
+<div class="exam">🎯 EXAMEN: Formule la retroalimentación de Bjerknes indicando explícitamente qué la hace positiva, y explique qué mecanismo es necesario para que el sistema no permanezca indefinidamente en fase cálida.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--b1);color:var(--b2)">Condiciones normales: los cuatro pilares</span>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span><b>1. Asimetría zonal de presión:</b> bajas al oeste, altas al este → alisios del este sobre toda la cuenca, que <b>convergen (desaceleran)</b> en el Pacífico occidental.</span></div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span><b>2. Circulación de Walker:</b> convergencia + inestabilidad sobre agua cálida → <b>convección profunda</b> al oeste; en altura vientos del oeste que <b>convergen sobre el Pacífico oriental</b> → amplia región de <b>subsidencia</b> que refuerza las altas presiones y los propios alisios.</span></div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span><b>3. Inclinación del nivel del mar:</b> más alto al oeste (los vientos <b>apilan</b> el agua), más bajo frente a Sudamérica. Termoclina profunda al oeste, somera al este.</span></div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><span><b>4. Transporte de Ekman:</b> el viento + rotación terrestre generan transporte neto de masa. En la costa sudamericana el transporte es <b>hacia el oeste</b> (mar afuera) → deja un vacío que se llena con <b>surgencia de aguas frías subsuperficiales</b>.</span></div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>El transporte de Ekman integrado es perpendicular al esfuerzo del viento, 90° a la izquierda en el HS. En el afloramiento <b>ecuatorial</b>, la frontera no es la costa sino el <b>cambio de signo del parámetro de Coriolis</b> (f = 0 en el ecuador): los alisios del este generan divergencia de Ekman a ambos lados del ecuador (hacia el N en el HN, hacia el S en el HS), forzando bombeo de Ekman ascendente sobre el ecuador → lengua fría.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Cuando el viento sopla paralelo a la costa, no arrastra el agua hacia donde sopla, sino de costado — hacia mar adentro, porque la Tierra gira. Al irse el agua de la superficie, tiene que subir agua desde abajo para llenar el hueco, y el agua de abajo está fría y llena de nutrientes. Eso es lo que hace que el mar peruano sea frío y tan rico en pesca.</p></div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> creer que el afloramiento ecuatorial se debe a la costa. En el ecuador <b>no hay costa</b>: la "pared" que fuerza la divergencia es el <b>cambio de signo de Coriolis</b>.</div>
+<div class="exam">🎯 EXAMEN: Explique por qué el afloramiento ecuatorial ocurre en pleno océano abierto y qué papel juega el parámetro de Coriolis en ello.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--r1);color:var(--r2)">Qué cambia durante el ENSO cálido: se rompe la asimetría</span>
+<div class="two">
+<div class="mini" style="border-color:#0ea5e9"><b>En el océano</b><br>↑ Nivel del mar y ↑ profundidad de la termoclina en el <b>Pacífico oriental</b>. La TSM sube por dos vías: (a) cambios en el sistema de afloramiento (sigue aflorando, pero <b>agua ya tibia</b> porque la capa cálida es más profunda) y (b) advección. Escala: interanual, 6–18 meses.</div>
+<div class="mini" style="border-color:#a855f7"><b>En la atmósfera</b><br>La convección más intensa se <b>relocaliza al Pacífico central</b>; se desarrolla un <b>ramal subsidente sobre Indonesia/Australia</b> (sequías) y <b>otro sobre la Amazonía y el Atlántico occidental tropical</b>. Escala: sinóptica–planetaria, semanas a meses.</div>
+</div>
+<div class="item"><span class="dot" style="background:#991b1b"></span><span><b>Perú y Ecuador:</b> las lluvias extremas costeras no son solo por el calentamiento local del mar, sino por la <b>interacción de sistemas sinópticos con la costa y la cordillera</b> (forzamiento orográfico, convergencia costera). El calentamiento aporta la humedad y la inestabilidad; la sinóptica aporta el disparo.</span></div>
+<div class="warn">⚠️ <b>MATIZ IMPORTANTE:</b> durante El Niño el afloramiento <b>no desaparece</b> necesariamente; lo que cambia es que <b>el agua que aflora ya no es fría</b>, porque la termoclina está más profunda. Decir "El Niño apaga el afloramiento" es una simplificación incorrecta.</div>
+<div class="exam">🎯 EXAMEN: Un pronosticador observa alisios normales frente a Perú pero TSM 4 °C sobre lo normal. Explique cómo es posible y qué variable subsuperficial debería consultar para confirmarlo.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--n1);color:var(--n2)">🌐 Contraste hemisférico — cómo se ve el ENSO en el HS vs. el HN</span>
+<div class="def" style="border-color:#334155">Este es el eje transversal del curso. El ENSO es <b>ecuatorialmente simétrico en su núcleo oceánico</b>, pero sus <b>teleconexiones son marcadamente asimétricas</b> porque cada hemisferio tiene su propia estación, su propia geometría continental y su propio signo de Coriolis.</div>
+<table class="tbl">
+<tr><th>Aspecto</th><th>Hemisferio Sur (HS)</th><th>Hemisferio Norte (HN)</th><th>Por qué difieren</th></tr>
+<tr><td><b>Signo de Coriolis</b></td><td>f &lt; 0. Giro <b>horario</b> en ciclones, <b>antihorario</b> en anticiclones. Transporte de Ekman 90° a la <b>izquierda</b> del viento.</td><td>f &gt; 0. Giro <b>antihorario</b> en ciclones. Transporte de Ekman 90° a la <b>derecha</b>.</td><td>El cambio de signo en el ecuador es lo que permite la existencia de ondas Kelvin ecuatoriales atrapadas.</td></tr>
+<tr><td><b>Anticiclón semipermanente</b></td><td><b>APS</b> (Anticiclón del Pacífico Sur) — <b>modula fuertemente</b> los alisios del Pacífico oriental y central, y con ello el afloramiento peruano.</td><td>Anticiclón del Pacífico Norte — afecta los vientos del Pacífico central <b>en menor grado</b>.</td><td>La geometría continental sudamericana y la Corriente de Humboldt hacen que el APS tenga un rol dominante en el ENSO oriental.</td></tr>
+<tr><td><b>Estación en DJF</b></td><td><b>Verano austral.</b> Impactos máximos en Perú/Ecuador; ZCIT en su posición más al sur; MCS frecuentes en el Río de la Plata.</td><td><b>Invierno boreal.</b> Máximo de teleconexiones extratropicales: lluvias sobre el Golfo de México, ciclones extratropicales frecuentes.</td><td>La respuesta extratropical al ENSO es máxima en el <b>invierno</b> de cada hemisferio, porque el chorro es más intenso.</td></tr>
+<tr><td><b>Estación en JJA</b></td><td><b>Invierno austral.</b> Lluvias en centro de Chile (chorro subtropical + dorsal de bloqueo en Tierra del Fuego → flujo dividido).</td><td><b>Verano boreal.</b> Señal más débil; se expresa sobre todo en la actividad de ciclones tropicales del Atlántico (inhibida por cizalladura).</td><td>Simetría estacional invertida: cuando un hemisferio tiene su ventana sensible, el otro está en su mínimo.</td></tr>
+<tr><td><b>Análogo del chorro</b></td><td>Chorro subtropical del HS se <b>intensifica y se acerca al ecuador</b> → lluvias en Chile central, Argentina, Uruguay, sur de Brasil y sur de Paraguay.</td><td>Chorro subtropical del HN se intensifica → lluvias en <b>California, norte de México, Golfo de México y norte del Caribe</b> en invierno.</td><td>Mismo mecanismo (dorsal de altura → ↑ gradiente de geopotencial), efecto espejado respecto al ecuador.</td></tr>
+<tr><td><b>Nomenclatura estacional</b></td><td>DJF = verano; JJA = invierno. <b>"Verano austral"</b>.</td><td>DJF = invierno; JJA = verano. <b>"Invierno boreal"</b>.</td><td>Fuente de errores en literatura: la OMM recomienda usar trimestres (DJF, MAM, JJA, SON) en vez de "verano/invierno".</td></tr>
+</table>
+<div class="warn">⚠️ <b>ERROR COMÚN EN EXÁMENES:</b> escribir "durante el verano" sin especificar hemisferio. En un texto sobre Sudamérica, "verano" es DJF; en un paper de la NOAA, "summer" es JJA. Por eso la <b>OMM/WMO</b> estandariza el uso de <b>trimestres (DJF/MAM/JJA/SON)</b> y de "verano austral / invierno boreal".</div>
+<div class="exam">🎯 EXAMEN: Compare la respuesta del chorro subtropical al ENSO cálido en ambos hemisferios, indicando región afectada, estación de máxima señal y mecanismo dinámico común.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--p1);color:var(--p2)">Fortalecimiento de los chorros subtropicales (Diap. 4.2.3)</span>
+<div class="def" style="border-color:#4c1d95">Secuencia causal de cuatro pasos que hay que saber recitar en orden:</div>
+<div class="flow"><span class="fbox">1. Calor anómalo</span><span class="farrow">→</span><span class="fbox">2. Expansión de la tropósfera</span><span class="farrow">→</span><span class="fbox">3. Dorsales de altura</span><span class="farrow">→</span><span class="fbox">4. ↑ Gradiente de geopotencial</span><span class="farrow">→</span><span class="fbox">5. Chorros intensos y más ecuatoriales</span></div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span><b>Física del paso 2:</b> una columna más cálida es menos densa → mayor espesor geopotencial entre dos niveles de presión → la superficie de 200 hPa se eleva. Es <b>hipsometría pura</b>, no advección.</span></div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span><b>Física del paso 4–5:</b> por <b>viento térmico</b>, un gradiente meridional de espesor más intenso en el subtrópico implica mayor cizalladura vertical del viento zonal → chorro más veloz. Al desplazarse el máximo de gradiente hacia el ecuador, el chorro también se desplaza.</span></div>
+<div class="rx">|V<sub>g</sub>| = (g/f) · |∇<sub>p</sub> Z| ; ∂u<sub>g</sub>/∂ln p = −(R/f) · (∂T/∂y)<sub>p</sub></div>
+<div class="rx-note"><b>Variables:</b> V<sub>g</sub> = viento geostrófico (m/s); g = 9.81 m/s²; f = parámetro de Coriolis (s⁻¹, <b>negativo en el HS</b>); Z = altura geopotencial (m geopotenciales, mgp); R = 287 J·kg⁻¹·K⁻¹; T = temperatura (K); p = presión (hPa). <b>Rango típico del chorro subtropical:</b> 40–70 m/s en 200 hPa; durante ENSO cálido puede superar 80 m/s. <b>Validez:</b> flujo cuasi-geostrófico en latitudes medias; <b>no válida cerca del ecuador</b> (f → 0).</div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span><b>Consecuencia de humedad (no solo de baroclinicidad):</b> los chorros intensos también modifican los <b>vientos de nivel bajo</b>, que son los que transportan la mayor parte de la humedad troposférica. Chile y California reciben más lluvia porque aumenta el cruce de ciclones extratropicales <b>y</b> porque las masas de aire llegan más húmedas.</span></div>
+<div class="exam">🎯 EXAMEN: A partir de la ecuación del viento térmico, deduzca por qué el calentamiento del Pacífico ecuatorial intensifica el chorro subtropical. Especifique el signo de f en el hemisferio sur.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--o1);color:var(--o2)">Circulaciones de altura anómalas: las 6 regiones</span>
+<div class="item"><span class="dot" style="background:#16a34a"></span><span><b>1. Centro de Chile y California:</b> transporte profundo de humedad subtropical → <b>más lluvia</b>.</span></div>
+<div class="item"><span class="dot" style="background:#f59e0b"></span><span><b>2. México/Centroamérica:</b> oestes y noroestes secos + mayor subsidencia → <b>menos lluvia</b>. Caribe/Atlántico tropical: más cizalladura → <b>menos ciclones tropicales</b>.</span></div>
+<div class="item"><span class="dot" style="background:#16a34a"></span><span><b>3. Pacífico este:</b> calentamiento profundo estimula convección e <b>inhibe la cizalladura</b> → activación de la ZCIT y formación de ciclones.</span></div>
+<div class="item"><span class="dot" style="background:#f59e0b"></span><span><b>4. NE de Brasil:</b> los sudestes favorecen transporte de aire seco y estable del Anticiclón del Atlántico → <b>secamiento</b>.</span></div>
+<div class="item"><span class="dot" style="background:#16a34a"></span><span><b>5. NE de Argentina y sur de Brasil:</b> patrón <b>divergente en altura</b> → realza la convección profunda.</span></div>
+<div class="item"><span class="dot" style="background:#f59e0b"></span><span><b>6. Sur de Chile:</b> <b>dorsal de bloqueo</b> → <b>flujo dividido</b>: menos sistemas al sur de Chile, más al centro.</span></div>
+<div class="exam">🎯 EXAMEN: Explique el concepto de "flujo dividido" y su efecto sobre la distribución latitudinal de precipitación en Chile durante un ENSO cálido.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--y1);color:var(--y2)">Los efectos dependen de la estación: DJF vs. JJA en Sudamérica</span>
+<table class="tbl">
+<tr><th>Región</th><th>DJF (verano austral / invierno boreal)</th><th>JJA (invierno austral / verano boreal)</th><th>Mecanismo dominante</th></tr>
+<tr><td><b>Oeste de Perú y Ecuador</b></td><td><b>↑ Precipitación</b> (calentamiento natural del mar en verano + banda sur de la ZCIT que en eventos extremos <b>ingresa a la costa</b>)</td><td>Señal débil; ZCIT desplazada muy al norte</td><td>Estacionalidad de la ZCIT + calentamiento costero</td></tr>
+<tr><td><b>Cuenca del Río de la Plata / sur de Brasil</b></td><td><b>↑ Precipitación</b> (SALLJ más intenso + vaguadas de altura cruzando los Andes desde el Pacífico)</td><td><b>↑ Precipitación</b> (frentes activos + chorros de capas bajas y de altura intensos)</td><td>Chorro subtropical + transporte de humedad amazónica</td></tr>
+<tr><td><b>Amazonía y NE de Brasil</b></td><td><b>↓ Precipitación</b> (ramal subsidente de Walker sobre la región)</td><td>↓ Precipitación (persiste el ramal descendente)</td><td>Reorganización de la circulación de Walker</td></tr>
+<tr><td><b>Centro de Chile</b></td><td>Señal moderada</td><td><b>↑ Precipitación</b> (chorro subtropical intenso + masas húmedas del Pacífico subtropical + <b>dorsal de bloqueo</b> en el SE de Tierra del Fuego → flujo dividido)</td><td>Desvío de trayectorias extratropicales hacia el centro de Chile</td></tr>
+<tr><td><b>Golfo de México (HN)</b></td><td><b>↑ Precipitación</b> (intensificación del chorro de altura + pasaje frecuente de ciclones extratropicales y sus frentes)</td><td>Señal débil</td><td>Máximo de teleconexión en el invierno boreal</td></tr>
+<tr><td><b>Norte de Sudamérica, Centroamérica, sur de México</b></td><td>↓ Precipitación</td><td><b>↓ Precipitación</b> (↑ cizalladura: oestes en altura + estes en nivel bajo, + ramal descendente de Walker)</td><td>Cizalladura vertical inhibe la convección organizada</td></tr>
+</table>
+<div class="warn">⚠️ La <b>ZCIT</b> del PDF aparece a veces como <b>"ZCIT-NET"</b> (Zona de Convergencia Intertropical del Pacífico Nororiental / <i>Near-Equatorial Trough</i>). No confundirla con la ZCAS (Zona de Convergencia del Atlántico Sur), que es un fenómeno distinto del HS.</div>
+<div class="exam">🎯 EXAMEN: Justifique por qué en DJF los impactos del ENSO en Sudamérica se concentran en el trópico occidental, mientras que en JJA se concentran en latitudes extratropicales.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--p1);color:var(--p2)">Tipos: El Niño Canónico vs. El Niño Modoki</span>
+<div class="def" style="border-color:#4c1d95">El análisis de <b>EOF</b> sobre la TSM del Pacífico identificó <b>dos modos</b> de variabilidad, con estructuras y consecuencias radicalmente distintas. "Modoki" es japonés: <i>"parecido, pero diferente"</i> (JAMSTEC).</div>
+<div class="two">
+<div class="mini" style="border-color:#dc2626"><b>El Niño Canónico (tradicional) — EOF1</b><br><b>~45 %</b> de la varianza de TSM del Pacífico. <b>Primer modo</b>. Calentamiento clásico de la región de la <b>lengua fría</b>: Pacífico tropical central <b>y oriental</b>. Debilitamiento o desaparición de la lengua fría. El calentamiento <b>llega hasta la costa de Sudamérica</b>, con anomalías máximas cerca de la costa. Eventos: <b>1982-83, 1997-98, 2015-16</b>. <br><b>Impactos:</b> precipitación sobre lo normal en todo el Pacífico tropical y en las costas oeste de latitudes medias de las Américas.</div>
+<div class="mini" style="border-color:#7c3aed"><b>El Niño Modoki — EOF2</b><br><b>~12 %</b> de la varianza. <b>Segundo modo</b>. Estructura de <b>tripolo</b>: calentamiento en el <b>Pacífico central</b> y <b>enfriamientos</b> en el Pacífico oriental <b>y</b> en el occidental extremo. <br><b>Impactos:</b> estimula un <b>secamiento del Pacífico oriental</b>; para Perú y Ecuador implica precipitaciones <b>por debajo</b> de lo normal. Los campos de temperatura también difieren.</div>
+</div>
+<div class="warn">⚠️ <b>PARADOJA QUE HAY QUE SABER:</b> <b>La Niña Modoki</b> se asocia a precipitaciones <b>por encima</b> de lo normal en Ecuador y Perú, por la presencia de calentamiento costero junto al enfriamiento en la región Niño 4. Es decir: <b>una "Niña" puede llover más que un "Niño"</b> en la costa peruana. Esto desmonta la equivalencia automática "Niño = lluvia, Niña = sequía".</div>
+<div class="exam">🎯 EXAMEN: Explique por qué El Niño Modoki puede asociarse a déficit de precipitación en la vertiente occidental peruana, mientras La Niña Modoki puede asociarse a superávit.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--o1);color:var(--o2)">Impactos en Sudamérica (Tedeschi, 2017 · IGP)</span>
+<div class="def" style="border-color:#7c2d12">Tedeschi (2017) analizó calentamientos <b>Central</b>, <b>Oriental</b> y <b>Mixto</b> en dos ventanas estacionales (Dic–Feb y Mar–May).</div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span><span><b>DJF con calentamiento oriental:</b> patrón <b>clásico</b> — lluvias extremas en Perú, Ecuador y el Río de la Plata; déficit en la Amazonía y el NE de Brasil.</span></div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span><span><b>Calentamientos mixtos:</b> señal parecida pero con sutilezas — más bien estimulan precipitación <b>por debajo</b> de lo normal en gran parte de Perú y Ecuador, mientras el superávit en Argentina/Uruguay/Paraguay <b>cubre áreas mayores</b>.</span></div>
+<div class="item"><span class="dot" style="background:#7c2d12"></span><span><b>Conclusión general:</b> en MAM los efectos son distintos, pero en todos los casos las <b>anomalías son más intensas y mejor definidas</b> durante calentamientos del <b>Pacífico oriental</b>.</span></div>
+<div class="exam">🎯 EXAMEN: Sintetice, según Tedeschi (2017), qué tipo de calentamiento genera las anomalías de precipitación más intensas en Sudamérica y por qué.</div>
+</div>
+
+<!-- ═══════ SECCIÓN 5 ═══════ -->
+<div class="sec" style="background:var(--g1);color:var(--g2)">🟢 5. 4.2.4 EVOLUCIÓN DEL ENOS — ACOPLAMIENTO, ONDAS KELVIN Y MJO</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--g1);color:var(--g2)">Acoplamiento océano-atmósfera: el circuito cerrado</span>
+<div class="def" style="border-color:#14532d"><b>Acoplamiento</b> significa que ambos sistemas <b>se regulan mutuamente</b> y contribuyen simultáneamente al <b>desarrollo</b> y luego a la <b>disipación</b> de las fases extremas. No hay causa y efecto lineal: hay un bucle.</div>
+<div class="two">
+<div class="mini" style="border-color:#f97316"><b>Vientos superficiales → TSM (dos vías)</b><br>(a) <b>Empujan corrientes</b> → regulan la TSM por <b>redistribución horizontal</b> de masas de agua.<br>(b) <b>Regulan el afloramiento</b> → regulan la TSM por <b>redistribución vertical</b> de masas de agua.</div>
+<div class="mini" style="border-color:#0ea5e9"><b>TSM → vientos superficiales</b><br>La TSM afecta la <b>estructura termal de la tropósfera</b> a través de <b>flujos de calor sensible y latente</b>. Los cambios en las circulaciones troposféricas producen cambios en los vientos superficiales... que afectan la TSM. <b>Y el ciclo continúa.</b></div>
+</div>
+<div class="flow"><span class="fbox">Vientos superficiales</span><span class="farrow">→</span><span class="fbox">Corrientes + afloramiento</span><span class="farrow">→</span><span class="fbox">TSM</span><span class="farrow">→</span><span class="fbox">Flujos de calor sensible/latente</span><span class="farrow">→</span><span class="fbox">Estructura termal troposférica</span><span class="farrow">→</span><span class="fbox">↻ vuelve a vientos</span></div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>El acople es bidireccional y opera con dos tiempos característicos distintos: el ajuste atmosférico a una anomalía de TSM es de días a semanas (respuesta baroclínica tipo Gill/Matsuno), mientras que el ajuste oceánico al forzamiento de viento es de semanas a meses (propagación de Kelvin ~2.5–3 m/s y de Rossby ~0.8 m/s). Esta separación de escalas temporales es lo que da al ENSO su periodicidad cuasi-cuadrienal (2–7 años).</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>El mar y el aire son como dos bailarines que se guían mutuamente: ninguno lleva la cuenta solo. Pero uno de los dos (el mar) se mueve mucho más lento que el otro (el aire). Ese desfase — que el aire reaccione en días y el mar en meses — es justamente lo que hace que El Niño tarde años en volver, en lugar de encenderse y apagarse cada semana.</p></div>
+</div>
+<div class="exam">🎯 EXAMEN: Explique qué significa "acoplamiento" en el contexto del ENOS y por qué la diferencia de escalas temporales entre océano y atmósfera es relevante para la predictibilidad estacional.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--s1);color:var(--s2)">¿Qué sistemas afectan los vientos del Pacífico ecuatorial?</span>
+<div class="def" style="border-color:#0c4a6e">Listados en <b>orden de importancia</b> según el PDF, y con la razón de por qué cada uno está en la lista.</div>
+<div class="item"><span class="dot" style="background:#dc2626"></span><span><b>1. Oscilación de Madden-Julian (MJO) — la más importante.</b> Porque afecta directamente la generación de <b>ondas Kelvin oceánicas</b>, esenciales en la migración de calentamientos desde Indonesia hasta Sudamérica.</span></div>
+<div class="item"><span class="dot" style="background:#ea580c"></span><span><b>2. Anticiclón del Pacífico Sur (APS).</b> Porque <b>regula los alisios</b> del Pacífico oriental y central.</span></div>
+<div class="item"><span class="dot" style="background:#0891b2"></span><span><b>3. Posición de la ZCIT-NET.</b> La convección asociada regula los vientos en mesoescala, lo que puede regular la generación de Kelvin. <b>Su rol es mayor cuando está cerca al ecuador</b>, especialmente en el Pacífico occidental.</span></div>
+<div class="item"><span class="dot" style="background:#7c3aed"></span><span><b>4. Ciclones tropicales de latitudes bajas.</b> Poco frecuentes, pero muy efectivos: <b>generan vientos del oeste cerca al ecuador</b>.</span></div>
+<div class="item"><span class="dot" style="background:#2563eb"></span><span><b>5. Vaguadas extratropicales amplias del invierno asiático.</b> Pueden generar <b>pulsos de vientos del oeste</b> que estimulan Kelvin.</span></div>
+<div class="item"><span class="dot" style="background:#64748b"></span><span><b>6. Anticiclón del Pacífico Norte.</b> Afecta los vientos del Pacífico central <b>en menor grado</b>. (Contraste hemisférico: el del HS pesa mucho más para el ENSO oriental.)</span></div>
+<div class="exam">🎯 EXAMEN: Ordene y justifique los sistemas que modulan el viento superficial ecuatorial del Pacífico según su capacidad de generar ondas Kelvin oceánicas.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--t1);color:var(--t2)">¿Qué es una onda Kelvin oceánica? (Diap. 4.2.4)</span>
+<div class="def" style="border-color:#134e4a">Una <b>onda Kelvin</b> es una onda que se propaga <b>hacia el este</b> a lo largo del ecuador <b>porque depende del cambio de signo de Coriolis para su propagación</b>. En el océano, además de propagarse, <b>transporta masas cálidas</b> desde Indonesia hacia Sudamérica.</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>Onda de gravedad ecuatorialmente atrapada, sin componente meridional de velocidad (v ≡ 0), con estructura gaussiana en latitud de escala igual al radio de deformación ecuatorial de Rossby (L<sub>e</sub> ≈ 250–350 km). Su propagación es exclusivamente hacia el este porque el guía de ondas requiere que f cambie de signo. La Kelvin <b>subsidente (downwelling)</b> profundiza la termoclina y eleva el nivel del mar; la <b>aflorante (upwelling)</b> hace lo opuesto. Fase c ≈ 2.5–3 m/s en el modo baroclínico 1.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Es como una ola gigantísima y muy lenta que viaja por debajo de la superficie del mar, pegada al ecuador como si el ecuador fuera un riel. No se ve desde un barco: es apenas unos centímetros de subida del nivel del mar, pero por debajo empuja decenas de metros de agua tibia. Tarda dos o tres meses en cruzar el Pacífico y, cuando llega a la costa peruana, es cuando el mar se calienta.</p></div>
+</div>
+<div class="two">
+<div class="mini" style="border-color:#0ea5e9"><b>Dónde se ve mejor</b><br>Se definen mejor a lo largo de la <b>termoclina</b> y en el <b>nivel del mar</b>. <b>No son evidentes sin datos de boyas y altimetría satelital</b> — de ahí la importancia de TAO/TRITON y TOPEX/Poseidon. Sin esos datos, "es casi imposible detectarlas".</div>
+<div class="mini" style="border-color:#f97316"><b>Magnitud del ejemplo del PDF</b><br>La onda Kelvin de <b>22-feb-2014</b> se asoció a anomalías de temperatura subsuperficial de <b>+5 °C</b>. Sabiendo dónde se encuentra, <b>puede estimarse cuándo llegará</b> a la costa de Sudamérica → herramienta de pronóstico con semanas de anticipación.</div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> pensar que "onda Kelvin = calentamiento". Existen <b>ondas Kelvin frías (aflorantes)</b>, generadas por <b>aceleraciones</b> de los alisios. Las Kelvin se propagan por la termoclina y el nivel del mar porque son <b>superficies extremadamente estables</b>, y las ondas requieren superficies estables para propagarse.</div>
+<div class="exam">🎯 EXAMEN: ¿Por qué las ondas Kelvin ecuatoriales solo pueden propagarse hacia el este? Relacione su respuesta con el comportamiento del parámetro de Coriolis en el ecuador.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--t1);color:var(--t2)">📐 Diagrama original 3 — Formación y propagación de una onda Kelvin (6 pasos)</span>
+<svg width="100%" viewBox="0 0 680 320" role="img" aria-label="Secuencia de seis pasos de la formación y propagación de una onda Kelvin oceánica">
+<title>Formación y propagación de una onda Kelvin oceánica</title>
+<desc>Seis cortes zonales: condiciones normales, frenado o reversión de alisios, abultamiento del mar, inicio de propagación, transporte de masa y propagación silenciosa hacia el este.</desc>
+<defs><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<g><rect x="30" y="30" width="196" height="110" rx="8" fill="#0f2b3d" stroke="#185FA5" stroke-width="0.5"/>
+<path d="M36 68 L220 96 L220 134 L36 134 Z" fill="#1D9E75" opacity="0.55"/>
+<path d="M36 68 L220 96" stroke="#9FE1CB" stroke-width="1.5" fill="none"/>
+<line x1="200" y1="52" x2="60" y2="52" stroke="#FAC775" stroke-width="1.5" marker-end="url(#ar2)"/>
+<text x="128" y="46" text-anchor="middle" font-size="12" fill="#FAEEDA">1. Condiciones normales</text>
+<text x="128" y="126" text-anchor="middle" font-size="12" fill="#E1F5EE">Termoclina inclinada</text></g>
+
+<g><rect x="242" y="30" width="196" height="110" rx="8" fill="#0f2b3d" stroke="#185FA5" stroke-width="0.5"/>
+<path d="M248 68 L432 96 L432 134 L248 134 Z" fill="#1D9E75" opacity="0.55"/>
+<path d="M248 68 L432 96" stroke="#9FE1CB" stroke-width="1.5" fill="none"/>
+<line x1="262" y1="52" x2="360" y2="52" stroke="#E24B4A" stroke-width="2" marker-end="url(#ar2)"/>
+<text x="340" y="46" text-anchor="middle" font-size="12" fill="#FCEBEB">2. Alisios se frenan o revierten</text>
+<text x="340" y="126" text-anchor="middle" font-size="12" fill="#E1F5EE">Pulso del oeste</text></g>
+
+<g><rect x="454" y="30" width="196" height="110" rx="8" fill="#0f2b3d" stroke="#185FA5" stroke-width="0.5"/>
+<path d="M460 74 Q505 62 545 78 L644 100 L644 134 L460 134 Z" fill="#1D9E75" opacity="0.55"/>
+<path d="M460 74 Q505 62 545 78 L644 100" stroke="#9FE1CB" stroke-width="1.5" fill="none"/>
+<text x="552" y="46" text-anchor="middle" font-size="12" fill="#FAEEDA">3. Abultamiento del mar</text>
+<text x="552" y="126" text-anchor="middle" font-size="12" fill="#E1F5EE">Termoclina se profundiza</text></g>
+
+<g><rect x="30" y="164" width="196" height="110" rx="8" fill="#0f2b3d" stroke="#185FA5" stroke-width="0.5"/>
+<path d="M36 206 L120 198 Q160 190 200 214 L220 224 L220 264 L36 264 Z" fill="#1D9E75" opacity="0.55"/>
+<path d="M36 206 L120 198 Q160 190 200 214 L220 224" stroke="#9FE1CB" stroke-width="1.5" fill="none"/>
+<line x1="120" y1="238" x2="200" y2="238" stroke="#FAC775" stroke-width="1.5" marker-end="url(#ar2)"/>
+<text x="128" y="180" text-anchor="middle" font-size="12" fill="#FAEEDA">4. Inicio de la propagación</text></g>
+
+<g><rect x="242" y="164" width="196" height="110" rx="8" fill="#0f2b3d" stroke="#185FA5" stroke-width="0.5"/>
+<path d="M248 202 L320 208 Q360 196 400 224 L432 232 L432 264 L248 264 Z" fill="#1D9E75" opacity="0.55"/>
+<path d="M248 202 L320 208 Q360 196 400 224 L432 232" stroke="#9FE1CB" stroke-width="1.5" fill="none"/>
+<line x1="330" y1="246" x2="415" y2="246" stroke="#FAC775" stroke-width="1.5" marker-end="url(#ar2)"/>
+<text x="340" y="180" text-anchor="middle" font-size="12" fill="#FAEEDA">5. Transporte de masa</text></g>
+
+<g><rect x="454" y="164" width="196" height="110" rx="8" fill="#0f2b3d" stroke="#185FA5" stroke-width="0.5"/>
+<path d="M460 200 L540 212 Q590 200 626 232 L644 238 L644 264 L460 264 Z" fill="#1D9E75" opacity="0.55"/>
+<path d="M460 200 L540 212 Q590 200 626 232 L644 238" stroke="#9FE1CB" stroke-width="1.5" fill="none"/>
+<line x1="580" y1="182" x2="500" y2="182" stroke="#E24B4A" stroke-width="1.5" marker-end="url(#ar2)"/>
+<text x="552" y="256" text-anchor="middle" font-size="12" fill="#E1F5EE">Alisios normales, la onda sigue</text>
+<text x="552" y="180" text-anchor="middle" font-size="12" fill="#FCEBEB">6. Propagación silenciosa</text></g>
+
+<text x="340" y="300" text-anchor="middle" font-size="12" fill="var(--text-secondary)">La MJO puede generar estos pulsos del oeste · velocidad ≈ 2.5–3 m/s · travesía del Pacífico ≈ 2–3 meses</text>
+</svg>
+<div class="rx-note">Diagrama original. En el paso 6 lo notable es que <b>aunque los vientos hayan regresado a lo normal (del este), la onda sigue propagándose "silenciosamente"</b> a lo largo de la termoclina — el océano tiene memoria que la atmósfera ya perdió. Esa es la base física de la predictibilidad estacional del ENSO.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--s1);color:var(--s2)">Ondas Kelvin vistas en el nivel del mar (altimetría)</span>
+<div class="def" style="border-color:#0c4a6e">Criterio operacional de identificación: <b>¿Kelvin o no Kelvin?</b> → confirmar que los cambios en la <b>profundidad de la termoclina</b> coincidan con cambios <b>simultáneos</b> en el <b>nivel medio del mar</b>. Si solo cambia una de las dos, probablemente no es Kelvin.</div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><span><b>TOPEX/Poseidon:</b> satélite de órbita polar de la <b>NASA</b> que mide cambios del nivel del mar. Fue el que permitió ver el inicio del ENSO extremo de <b>1997-98</b>: anomalías positivas (rojo) formándose en el Pacífico occidental ecuatorial y propagándose coherentemente hacia Sudamérica.</span></div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><span><b>Detalle sutil pero examinable:</b> al llegar a la costa, las Kelvin <b>dejan de usar el ecuador como frontera</b> de propagación y usan <b>la costa del continente y la termoclina costera</b> como medio → se propagan hacia latitudes mayores a lo largo de Sudamérica. Son las <b>ondas Kelvin costeras atrapadas</b>.</span></div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><span><b>Trenes de Kelvin y "mega-Kelvin":</b> el caso del 20-mar-1997 → costa sudamericana el 28-abr-1997 parecía anormalmente veloz. En realidad, la <b>génesis continuó por días al este</b> de la región inicial → se formó un <b>tren de ondas</b> superpuestas que se manifiesta como una región <b>elongada</b> del abultamiento. Una Kelvin discreta suele tomar <b>al menos dos meses</b> en cruzar esa distancia.</span></div>
+<div class="warn">⚠️ <b>ERROR DE INTERPRETACIÓN:</b> ver un abultamiento que "cruza rápido" y concluir que la onda viaja más rápido de lo teórico. Lo que ocurre es <b>génesis sucesiva</b>, no aceleración. La velocidad de fase de la Kelvin es una constante física, no una variable libre.</div>
+<div class="exam">🎯 EXAMEN: Un analista observa un abultamiento del nivel del mar que cruza el Pacífico en 5 semanas. Explique por qué esto no contradice la velocidad teórica de la onda Kelvin.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--y1);color:var(--y2)">Diagnóstico Hovmöller: los 3 paneles de 1997-98</span>
+<div class="def" style="border-color:#713f12">El diagnóstico estándar (NOAA/PMEL) combina <b>tres campos</b> en diagramas Hovmöller (tiempo vs. longitud, promediados 2°S–2°N).</div>
+<div class="three">
+<div class="mini" style="border-color:#dc2626"><b>Panel 1: viento zonal</b><br>Las anomalías del oeste (<i>westerly wind bursts</i>) en rojo son <b>el disparador</b>. En un evento maduro se van formando <b>cada vez más al este</b>, por cambios en Walker → las Kelvin pueden generarse ya en el <b>Pacífico central</b>.</div>
+<div class="mini" style="border-color:#0ea5e9"><b>Panel 2: profundidad de la isoterma de 20 °C</b><br>Es <b>el mejor proxy de la termoclina</b>. Cada pulso del oeste genera una profundización que se propaga hacia Sudamérica. Aquí las Kelvin se ven con máxima claridad.</div>
+<div class="mini" style="border-color:#f97316"><b>Panel 3: TSM</b><br><b>Evolución distinta</b> a los otros dos: las anomalías intensas <b>aparecen en la costa sudamericana</b> y luego son <b>advectadas hacia el oeste</b> por las corrientes superficiales. El calor entra por abajo y por el este, y se reparte después.</div>
+</div>
+<div class="item"><span class="dot" style="background:#713f12"></span><span><b>Por qué aflora el calentamiento al llegar a la costa:</b> porque <b>la termoclina se acerca a la superficie</b> allí, así que la anomalía subsuperficial se hace superficial (y por tanto climáticamente eficaz).</span></div>
+<div class="exam">🎯 EXAMEN: ¿Por qué la profundidad de la isoterma de 20 °C es una variable diagnóstica preferida frente a la TSM para anticipar un evento El Niño?</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--p1);color:var(--p2)">Convección, MJO y Anticiclón del Pacífico Sur: los moduladores del viento</span>
+<div class="two">
+<div class="mini" style="border-color:#7c3aed"><b>La convección modula los vientos (bidireccional)</b><br>Sobre la <b>lengua fría</b> (producto del afloramiento ecuatorial + advección de agua fría desde Sudamérica) la masa de aire es <b>estable</b> → no hay convección profunda, y mientras la lengua fría esté establecida es <b>muy difícil</b> que la haya. Al calentarse el mar, la atmósfera se <b>inestabiliza</b> y la convección se desarrolla. Esa convección genera <b>descenso local de presión</b> → convergencia → <b>vientos del oeste al oeste de la convección</b> (→ Kelvin cálida) <b>y vientos del este al este de ella</b> (→ Kelvin fría o aflorante). Escala: mesoescala a sinóptica, horas a días.</div>
+<div class="mini" style="border-color:#dc2626"><b>El rol de la MJO</b><br>La <b>fase divergente en altura</b> de la MJO estimula convección, convergencia en nivel bajo y pulsos del oeste al oeste de la convección. <b>Condición necesaria:</b> que la convección (ZCIT-NET y/o piscina cálida occidental) esté <b>cerca al ecuador</b>. Por eso la generación de Kelvin, especialmente en el Pacífico central, es favorecida en <b>verano y otoño austral</b>; en <b>invierno austral</b> la ZCIT-NET está <b>demasiado al norte</b>. Las fases de la MJO que estimulan los pulsos del oeste son la <b>6, 7 y 8</b> (fase divergente cruzando el Pacífico). Escala: intraestacional, 30–60 días.</div>
+</div>
+<div class="flow"><span class="fbox">MJO divergente en altura</span><span class="farrow">→</span><span class="fbox">Convección</span><span class="farrow">→</span><span class="fbox">Pulsos del oeste</span><span class="farrow">→</span><span class="fbox">Onda Kelvin</span><span class="farrow">→</span><span class="fbox">Costa de Sudamérica</span></div>
+<div class="divh"></div>
+<div class="def" style="border-color:#7c2d12"><b>Importancia del Anticiclón del Pacífico Sur (APS):</b> el APS modula los alisios; los alisios modulan las corrientes y el afloramiento de aguas frías. <b>Mensaje central del PDF:</b> <i>el APS modula la TSM del Pacífico oriental. Un APS intenso lo enfría, y viceversa.</i></div>
+<div class="three">
+<div class="mini" style="border-color:#0ea5e9"><b>(a)</b> Mayor afloramiento costero y/o ecuatorial</div>
+<div class="mini" style="border-color:#0ea5e9"><b>(b)</b> Mayor transporte de agua fría hacia el ecuador</div>
+<div class="mini" style="border-color:#0ea5e9"><b>(c)</b> Mayor mezcla con aguas frías subsuperficiales</div>
+</div>
+<div class="warn">⚠️ <b>ASIMETRÍA HEMISFÉRICA CLAVE:</b> el APS (hemisferio sur) es <b>determinante</b> para el ENSO del Pacífico oriental; el Anticiclón del Pacífico Norte solo lo afecta <b>en menor grado</b>. La razón es geográfica: es el APS el que sostiene la Corriente de Humboldt y el afloramiento peruano-chileno.</div>
+<div class="exam">🎯 EXAMEN: Un debilitamiento sostenido del APS antecede a un calentamiento costero. Explique la cadena física completa que conecta ambos hechos, nombrando los tres procesos de enfriamiento que se atenúan.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--b1);color:var(--b2)">El Niño vs. La Niña</span>
+<div class="def" style="border-color:#1e3a8a"><b>La Niña es la contraparte de El Niño</b>: enfriamiento del Pacífico ecuatorial y valores <b>positivos</b> del IOS (altas presiones en el Pacífico oriental). Pero atención al matiz conceptual del PDF: <b>en realidad es una exacerbación de las condiciones normales</b>, no un estado opuesto e independiente.</div>
+<table class="tbl">
+<tr><th>Variable</th><th>El Niño (fase cálida)</th><th>La Niña (fase fría)</th></tr>
+<tr><td>TSM Pacífico ecuatorial central</td><td>Sobre lo normal</td><td>Bajo lo normal</td></tr>
+<tr><td>IOS / SOI</td><td><b>Negativo</b></td><td><b>Positivo</b></td></tr>
+<tr><td>Alisios</td><td>Debilitados o revertidos</td><td>Intensificados</td></tr>
+<tr><td>Termoclina en el este</td><td>Profunda</td><td>Muy somera</td></tr>
+<tr><td>Nivel del mar en el este</td><td>Elevado</td><td>Deprimido</td></tr>
+<tr><td>Convección profunda</td><td>Pacífico central</td><td>Pacífico occidental (reforzada)</td></tr>
+<tr><td>Lengua fría</td><td>Debilitada o ausente</td><td>Intensificada y extendida al oeste</td></tr>
+<tr><td>Costa norte del Perú</td><td>Lluvias (si hay calentamiento costero)</td><td>Déficit en el norte, superávit en el sur andino</td></tr>
+</table>
+<div class="rx-note">Eventos comparados en el PDF (anomalías de TSM): El Niño 23-dic-1982 y 21-dic-1997 · La Niña 22-dic-1988 y 20-dic-1998. Fuente: NOAA/ESRL/PSD, WPC International Desks.</div>
+<div class="warn">⚠️ <b>ASIMETRÍA REAL:</b> El Niño y La Niña <b>no son simétricos</b>. Los eventos cálidos alcanzan amplitudes mayores (+3 a +4 °C) que los fríos (−2 a −2.5 °C) y tienen distinta duración típica. Tratar a La Niña como "El Niño con signo cambiado" es un error frecuente.</div>
+<div class="exam">🎯 EXAMEN: Discuta la afirmación "La Niña es simplemente el opuesto de El Niño", señalando al menos dos asimetrías físicas u observacionales que la matizan.</div>
+</div>
+
+<!-- ═══════ SECCIÓN 6 ═══════ -->
+<div class="sec" style="background:var(--y1);color:var(--y2)">🟡 6. 4.2.5 ÍNDICES Y SISTEMAS PARA EL MONITOREO DEL ENOS</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--y1);color:var(--y2)">📐 Diagrama original 4 — Regiones de monitoreo del ENSO en el Pacífico ecuatorial</span>
+<svg width="100%" viewBox="0 0 680 300" role="img" aria-label="Mapa esquemático de las regiones Niño 4, Niño 3.4, Niño 3 y Niño 1+2 en el Pacífico ecuatorial">
+<title>Regiones de monitoreo del ENSO</title>
+<desc>Ubicación relativa de las cajas Niño 4, Niño 3.4, Niño 3 y Niño 1+2 respecto al ecuador y a las costas de Australasia y Sudamérica.</desc>
+<line x1="40" y1="140" x2="640" y2="140" stroke="var(--text-secondary)" stroke-width="0.5" stroke-dasharray="4 4"/>
+<text x="46" y="134" font-size="12" fill="var(--text-secondary)">Ecuador (0°)</text>
+
+<rect x="30" y="96" width="34" height="120" rx="4" fill="#888780" opacity="0.5"/>
+<text x="47" y="234" text-anchor="middle" font-size="12" fill="var(--text-secondary)">Australasia</text>
+<rect x="612" y="90" width="34" height="140" rx="4" fill="#888780" opacity="0.5"/>
+<text x="600" y="248" text-anchor="middle" font-size="12" fill="var(--text-secondary)">Sudamérica</text>
+
+<rect x="86" y="112" width="176" height="56" rx="4" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="174" y="134" text-anchor="middle" font-size="14" font-weight="500" fill="#0C447C">Niño 4</text>
+<text x="174" y="154" text-anchor="middle" font-size="12" fill="#185FA5">160°E – 150°W</text>
+
+<rect x="352" y="112" width="180" height="56" rx="4" fill="#F5C4B3" stroke="#993C1D" stroke-width="0.5"/>
+<text x="442" y="134" text-anchor="middle" font-size="14" font-weight="500" fill="#712B13">Niño 3</text>
+<text x="442" y="154" text-anchor="middle" font-size="12" fill="#993C1D">150°W – 90°W</text>
+
+<rect x="262" y="100" width="180" height="80" rx="4" fill="none" stroke="#26215C" stroke-width="2.5"/>
+<text x="352" y="92" text-anchor="middle" font-size="14" font-weight="500" fill="#3C3489">Niño 3.4 · 170°W – 120°W</text>
+
+<rect x="556" y="140" width="56" height="66" rx="4" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="584" y="168" text-anchor="middle" font-size="12" font-weight="500" fill="#173404">Niño</text>
+<text x="584" y="184" text-anchor="middle" font-size="12" font-weight="500" fill="#173404">1+2</text>
+
+<line x1="352" y1="196" x2="352" y2="228" stroke="#3C3489" stroke-width="1"/>
+<text x="352" y="244" text-anchor="middle" font-size="12" fill="#3C3489">EE.UU./NOAA da el mayor peso a Niño 3.4</text>
+<text x="352" y="262" text-anchor="middle" font-size="12" fill="#3C3489">(efectos globales · variabilidad coherente)</text>
+
+<line x1="584" y1="212" x2="584" y2="228" stroke="#3B6D11" stroke-width="1"/>
+<text x="584" y="280" text-anchor="middle" font-size="12" fill="#3B6D11">Niño 1+2: 0°–10°S, 90°W–80°W</text>
+<text x="584" y="264" text-anchor="middle" font-size="12" fill="#3B6D11">afecta directo a Sudamérica</text>
+</svg>
+<div class="rx-note">Diagrama esquemático original (proporciones no cartográficas). <b>Niño 1+2</b> es <b>muy variable y muy difícil de predecir</b> — y es precisamente la región que le importa al Perú. <b>Niño 3</b> es adyacente a 1+2 pero <b>simétrica respecto al ecuador</b>. <b>Niño 3.4</b> se creó como región adicional porque las mayores correlaciones entre calentamiento, SOI e impactos se concentran entre 170°W y 120°W. Fuente: NOAA/NCEI.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--s1);color:var(--s2)">Red de boyas TAO/TRITON</span>
+<div class="def" style="border-color:#0c4a6e">Cronología del sistema observacional que hizo posible todo lo anterior:</div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><span><b>1976</b> — NOAA <b>PMEL</b> (Pacific Marine and Environmental Laboratory) instala su primera boya ecuatorial con correntómetro.</span></div>
+<div class="item"><span class="dot" style="background:#dc2626"></span><span><b>1982-83</b> — El Niño <b>demuestra claramente</b> la necesidad de mediciones en el Pacífico. Este evento tomó al mundo por sorpresa: fue detectado <i>después</i> de haber empezado.</span></div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><span><b>1983-84</b> — Instalación de las boyas ancladas <b>ATLAS</b>. Datos de viento y subsuperficiales en <b>tiempo real desde 1984</b>.</span></div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><span><b>1985</b> — Inicio del programa <b>TOGA</b> (Tropical Ocean Global Atmosphere, un programa de la <b>OMM/WMO</b> bajo el WCRP) y expansión de ATLAS a 10 boyas. La red crece con el ingreso de <b>Japón (1990)</b> y <b>Corea (1992)</b>.</span></div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><span><b>Cobertura y limitaciones:</b> boyas distribuidas principalmente entre <b>10°N y 10°S</b>. Proyecto <b>costoso</b> (manutención) y con <b>problemas de vandalismo</b> en el océano. Complemento: boyas <b>Argo</b>, que son <b>móviles</b> (derivantes), no ancladas.</span></div>
+<div class="warn">⚠️ El deterioro de la red TAO/TRITON hacia 2012-2014 (por falta de mantenimiento de buques) degradó temporalmente el monitoreo del ENSO. La <b>continuidad observacional</b> es una vulnerabilidad real, no teórica.</div>
+<div class="exam">🎯 EXAMEN: Explique por qué el evento 1982-83 se considera un punto de inflexión en la historia del monitoreo del ENSO.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--y1);color:var(--y2)">a) Índice del Niño Oceánico (ONI)</span>
+<div class="def" style="border-color:#713f12">El <b>ONI</b> es uno de los índices principales para el monitoreo de El Niño. Se basa en el promedio de <b>anomalías de TSM de la región Niño 3.4</b>. Punto crítico: <b>NO considera condiciones atmosféricas</b> — es puramente oceánico.</div>
+<div class="rx">ONI = media móvil de 3 meses centrados de<br>TSMA promediada areal en Niño 3.4 (5°N–5°S, 170°W–120°W)<br>base de datos: ERSST.v4 · climatología de 30 años</div>
+<div class="rx-note"><b>Unidades:</b> °C. <b>Umbrales NOAA/CPC:</b> |ONI| ≥ 0.5 °C durante <b>5 trimestres superpuestos consecutivos</b> → evento. Débil 0.5–0.9; moderado 1.0–1.4; fuerte 1.5–1.9; muy fuerte ≥ 2.0. <b>Rango histórico:</b> ≈ −2.0 a +2.6 °C. <b>Actualización de la climatología:</b> cada 5 años (climatologías de 30 años móviles), para evitar que el calentamiento global contamine la señal interanual.</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>El ONI aplica un filtro pasa-baja (media móvil trimestral centrada) sobre la TSMA areal de Niño 3.4, referida a climatologías móviles de 30 años actualizadas quinquenalmente. La actualización quinquenal desacopla la tendencia secular de calentamiento del modo interanual: sin ella, el índice mostraría un sesgo cálido creciente y sobrediagnosticaría eventos El Niño en las últimas décadas.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>El ONI mide cuánto se aparta la temperatura del mar de "lo normal" en una zona fija del Pacífico central, suavizando el dato en ventanas de tres meses para que no lo distorsione un día caluroso. Y cada cinco años se redefine qué es "lo normal", porque el planeta se está calentando: si no lo hicieran, en algún momento todos los años parecerían "El Niño".</p></div>
+</div>
+<div class="warn">⚠️ <b>ERROR COMÚN:</b> usar el ONI para diagnosticar la costa peruana. Al no incorporar la atmósfera ni la región 1+2, el ONI <b>no capturó</b> el Niño costero 2017. Para el Perú, el índice de referencia oficial es el <b>ICEN</b>.</div>
+<div class="exam">🎯 EXAMEN: Explique por qué el ONI actualiza su climatología cada 5 años y qué sesgo se introduciría si se mantuviera una climatología fija de 1971-2000.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--k1);color:var(--k2)">b) Índice Costero El Niño (ICEN) — Perú 🇵🇪</span>
+<div class="def" style="border-color:#831843"><b>Conocimiento complementario obligatorio:</b> el ICEN aparece en el <b>índice de contenidos</b> del PDF (4.2.5.b) pero <b>no se desarrolla en el cuerpo del documento</b>. Como es el índice oficial peruano, lo incluyo aquí porque es material seguro de examen.</div>
+<div class="rx">ICEN = media móvil de 3 meses de la TSMA<br>en la región <b>Niño 1+2</b> (0°–10°S, 90°W–80°W)</div>
+<div class="rx-note"><b>Unidades:</b> °C. Datos: ERSST.v3b / v5. <b>Categorías ENFEN:</b> Fría fuerte ≤ −1.4 · Fría moderada −1.4 a −1.2 · Fría débil −1.2 a −1.0 · <b>Neutra −1.0 a +0.4</b> · Cálida débil +0.4 a +1.0 · Cálida moderada +1.0 a +1.7 · Cálida fuerte +1.7 a +3.0 · <b>Cálida extraordinaria &gt; +3.0</b>. Existe además el <b>ICEN-tmp</b> (temporal, para monitoreo en tiempo real, antes de la consolidación del dato).</div>
+<div class="item"><span class="dot" style="background:#831843"></span><span><b>Quién lo emite:</b> el <b>ENFEN</b> (Comité Multisectorial encargado del Estudio Nacional del Fenómeno El Niño), integrado por <b>SENAMHI, IMARPE, IGP, DHN-Marina, ANA e INDECI</b>. Es el índice con validez oficial para declarar <b>estado de alerta</b> en el Perú.</span></div>
+<div class="warn">⚠️ <b>ONI ≠ ICEN.</b> Distinta región (3.4 vs. 1+2), distintos umbrales, distinta institución y distinto propósito. Un ONI neutro con ICEN "cálido fuerte" es exactamente el escenario de 2017. Confundirlos es el error más costoso en un contexto operativo peruano.</div>
+<div class="exam">🎯 EXAMEN: Compare ONI e ICEN en región, umbral, institución responsable y utilidad operativa para el Perú, usando 2017 como caso de estudio.</div>
+</div>
+
+<div class="block s2">
+<span class="bh" style="background:var(--s1);color:var(--s2)">c) Índice Multivariado del ENSO (MEI)</span>
+<div class="def" style="border-color:#0c4a6e">El <b>MEI</b> es un <b>EOF</b> que considera <b>seis campos</b> grillados de la base de datos <b>ICOADS</b> en el Pacífico. Su cálculo es el <b>primer Componente Principal (PC) NO rotado</b> del análisis multivariado de los seis campos combinados → representa el <b>modo principal de variabilidad</b> del Pacífico. Se computa de manera <b>bimestral</b> (dic/ene, ene/feb, feb/mar…).</div>
+<div class="three">
+<div class="mini" style="border-color:#0ea5e9"><b>P</b> — presión reducida al nivel del mar (hPa)<br><b>S</b> — temperatura de la superficie del mar (°C)</div>
+<div class="mini" style="border-color:#0ea5e9"><b>A</b> — temperatura superficial del aire (°C)<br><b>C</b> — total de nubosidad (%)</div>
+<div class="mini" style="border-color:#0ea5e9"><b>U</b> — viento zonal (m/s)<br><b>V</b> — viento meridional (m/s)</div>
+</div>
+<div class="rx-note">Varianza explicada por EOF1 en el ejemplo del PDF (feb/mar, 1950–2014): <b>25.7 %</b>. Valor adimensional (unidades de desviación estándar), típicamente entre −3 y +3.</div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><span><b>Estructura del MEI positivo (= El Niño), campo por campo:</b> presiones <b>sobre</b> lo normal en Indonesia/Australia y <b>bajo</b> lo normal en el Pacífico oriental; anomalías de viento del <b>oeste</b> en el Pacífico occidental y central; anomalías de viento meridional <b>del norte</b> en el Pacífico norte — <b>consistentes con la migración de la ZCIT-NET y su convección hacia el sur</b> al calentarse el Pacífico ecuatorial; temperaturas sobre lo normal en el Pacífico oriental <b>tanto del mar como del aire</b> (mayor correlación con la del mar); y nubosidad sobre lo normal en el Pacífico ecuatorial central y frente a las costas americanas.</span></div>
+<div class="item"><span class="dot" style="background:#0c4a6e"></span><span><b>Ventaja frente al ONI:</b> al ser multivariado, <b>captura el acoplamiento</b> — no puede dar señal si el océano se calienta pero la atmósfera no responde. Es el índice más fiel al concepto físico de "ENSO".</span></div>
+<div class="exam">🎯 EXAMEN: Justifique por qué un índice multivariado como el MEI es conceptualmente más coherente con la definición de ENSO que un índice puramente oceánico como el ONI, y señale una desventaja práctica del MEI.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:var(--p1);color:var(--p2)">d) Índice del Niño Modoki (EMI)</span>
+<div class="def" style="border-color:#4c1d95">Suma algebraica ponderada del promedio de anomalías de TSM en <b>tres áreas</b>, diseñada para aislar el patrón de <b>tripolo</b>. Mayor peso al área central; menor a las laterales.</div>
+<div class="rx">EMI = TSMA<sub>A</sub> − 0.5 · TSMA<sub>B</sub> − 0.5 · TSMA<sub>C</sub></div>
+<div class="rx-note"><b>Cajas (JAMSTEC):</b> <b>A</b> = 165°E–140°W, 10°S–10°N (central) · <b>B</b> = 110°W–70°W, 15°S–5°N (Pacífico oriental) · <b>C</b> = 125°E–145°E, 10°S–20°N (Indonesia/Nueva Guinea). <b>Unidades:</b> °C. <b>Ejemplo numérico:</b> si TSMA<sub>A</sub>=+1.2, TSMA<sub>B</sub>=−0.4 y TSMA<sub>C</sub>=−0.6 → EMI = 1.2 − 0.5(−0.4) − 0.5(−0.6) = <b>+1.7 °C</b> → Modoki bien desarrollado.</div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span><b>EMI positivo = Niño Modoki:</b> calentamiento en el Pacífico ecuatorial central y enfriamiento en las regiones laterales → <b>precipitaciones por debajo de lo normal en Perú y Ecuador</b>.</span></div>
+<div class="item"><span class="dot" style="background:#4c1d95"></span><span><b>EMI negativo = Niña Modoki:</b> precipitaciones <b>por encima</b> de lo normal en Ecuador y Perú, por el calentamiento costero junto con enfriamiento en Niño 4.</span></div>
+<div class="warn">⚠️ El signo negativo de los coeficientes <b>no es arbitrario</b>: es lo que hace que el índice responda al <b>contraste</b> (tripolo) y no a un calentamiento uniforme de toda la cuenca. Un calentamiento global uniforme da EMI ≈ 0.</div>
+<div class="exam">🎯 EXAMEN: Calcule el EMI para TSMA<sub>A</sub>=+0.8, TSMA<sub>B</sub>=+1.4, TSMA<sub>C</sub>=−0.2 °C e interprete el resultado. ¿Qué tipo de evento sugiere?</div>
+</div>
+
+<!-- ═══════ TABLA INTEGRADORA ═══════ -->
+<div class="sec" style="background:var(--n1);color:var(--n2)">⚫ 7. TABLA INTEGRADORA FINAL — REPASO RÁPIDO ANTES DEL EXAMEN</div>
+
+<div class="block s3">
+<span class="bh" style="background:var(--n1);color:var(--n2)">Síntesis de todos los conceptos del tema 4.2</span>
+<table class="tbl">
+<tr><th>Fenómeno / concepto</th><th>Escala espacial</th><th>Escala temporal</th><th>Variable clave</th><th>Instrumento / dato</th><th>Institución de referencia</th></tr>
+<tr><td><b>ENSO (acoplado)</b></td><td>Cuenca del Pacífico + teleconexiones globales</td><td>Interanual (2–7 años); evento 9–18 meses</td><td>TSMA + PNMM + viento zonal</td><td>ERSST.v4/v5, reanálisis</td><td>OMM/WMO · NOAA-CPC</td></tr>
+<tr><td><b>El Niño (EN)</b></td><td>Pacífico oriental / costa Perú-Ecuador</td><td>Estacional; pico DEF</td><td>TSM costera, nivel del mar</td><td>OISST, NAVO, boyas costeras</td><td>ENFEN · IMARPE · SENAMHI</td></tr>
+<tr><td><b>Oscilación del Sur (OS)</b></td><td>Planetaria (Darwin–Tahití)</td><td>Mensual a interanual</td><td>PNMM (hPa)</td><td>Estaciones sinópticas</td><td>NOAA-NCEI · BoM</td></tr>
+<tr><td><b>Circulación de Walker</b></td><td>Zonal, todo el Pacífico ecuatorial</td><td>Estacional a interanual</td><td>Viento zonal, OLR, ω</td><td>Reanálisis, satélite IR</td><td>NOAA · ECMWF</td></tr>
+<tr><td><b>Onda Kelvin oceánica</b></td><td>Atrapada ecuatorialmente (L≈250–350 km)</td><td>2–3 meses de travesía; c≈2.5–3 m/s</td><td>Prof. isoterma 20 °C, nivel del mar</td><td>TAO/TRITON, TOPEX/Poseidon, Argo</td><td>NOAA-PMEL · NASA-JPL</td></tr>
+<tr><td><b>Transporte / afloramiento de Ekman</b></td><td>Costero y ecuatorial</td><td>Días a estacional</td><td>Esfuerzo del viento (τ), f</td><td>Escaterómetro, boyas</td><td>NOAA · IMARPE</td></tr>
+<tr><td><b>MJO</b></td><td>Global tropical, se propaga al este</td><td>Intraestacional (30–60 días); fases 6-7-8</td><td>OLR, viento en 200/850 hPa</td><td>Índice RMM, satélite</td><td>NOAA-CPC · BoM</td></tr>
+<tr><td><b>Anticiclón del Pacífico Sur (APS)</b></td><td>Sinóptica–planetaria, HS</td><td>Estacional, con variabilidad sinóptica</td><td>PNMM, intensidad de alisios</td><td>Cartas sinópticas, reanálisis</td><td>SENAMHI · DHN</td></tr>
+<tr><td><b>Chorro subtropical</b></td><td>Subtropical, ambos hemisferios</td><td>Estacional (máximo en invierno de cada hemisferio)</td><td>Viento en 200 hPa, geopotencial</td><td>Radiosondeo, reanálisis</td><td>NOAA-WPC · ECMWF</td></tr>
+<tr><td><b>Modos E y C</b></td><td>Pacífico oriental vs. central</td><td>Interanual</td><td>TSMA (EOF rotados)</td><td>ERSST, HadISST</td><td>IGP (Takahashi et al., 2011)</td></tr>
+<tr><td><b>Niño Canónico vs. Modoki</b></td><td>Cuenca completa vs. tripolo central</td><td>Interanual (~45 % vs. ~12 % de varianza)</td><td>TSMA (EOF1 vs. EOF2)</td><td>HadISSTA 1979–2004</td><td>JAMSTEC</td></tr>
+<tr><td><b>ONI</b></td><td>Niño 3.4 (170°W–120°W)</td><td>Media móvil de 3 meses centrados</td><td>TSMA (°C)</td><td>ERSST.v4</td><td>NOAA-CPC</td></tr>
+<tr><td><b>ICEN</b></td><td>Niño 1+2 (0–10°S, 90°W–80°W)</td><td>Media móvil de 3 meses</td><td>TSMA (°C)</td><td>ERSST</td><td><b>ENFEN (Perú)</b></td></tr>
+<tr><td><b>MEI</b></td><td>Pacífico tropical (6 campos)</td><td>Bimestral</td><td>PC1 no rotado (adimensional)</td><td>ICOADS</td><td>NOAA-PSL</td></tr>
+<tr><td><b>EMI (Modoki)</b></td><td>3 cajas (central + 2 laterales)</td><td>Mensual</td><td>TSMA ponderada (°C)</td><td>HadISST</td><td>JAMSTEC</td></tr>
+</table>
+<div class="warn">⚠️ <b>DATO INTEGRADOR CLAVE:</b> ningún índice único describe el ENSO por completo. El <b>ONI</b> mide el océano central, el <b>SOI</b> mide la atmósfera, el <b>MEI</b> mide el acoplamiento, el <b>EMI</b> mide la estructura y el <b>ICEN</b> mide lo que le importa al Perú. <b>El pronosticador competente los lee juntos</b>, y la discrepancia entre ellos es en sí misma información diagnóstica — como lo demostró 2017.</div>
+</div>
+
+<!-- ═══════ QUIZ ═══════ -->
+<div class="block s3" id="quiz-section" style="border-radius:14px;padding:16px 18px">
+<div class="qhead"><b>📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE</b><span>Marca tu respuesta y descubre si es correcta</span></div>
+<div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--tsx)"><span id="qprog">Pregunta 0 de 10</span><span id="qscore">0 % de aciertos</span></div>
+<div class="bar"><div class="fill" id="qfill"></div></div>
+
+<div class="qcard"><p class="qnum">Pregunta 1 / 10</p><p class="qtext">¿Cuál es la diferencia esencial entre la Corriente del Niño y el Fenómeno de El Niño?</p><div>
+<button class="qbtn" data-q="1" data-c="0">A) La Corriente ocurre en el hemisferio norte y el Fenómeno en el hemisferio sur</button>
+<button class="qbtn" data-q="1" data-c="1">B) La Corriente es un rasgo normal que ocurre casi todos los años; el Fenómeno es la anomalía de una intrusión intensa con impactos sensibles</button>
+<button class="qbtn" data-q="1" data-c="0">C) La Corriente es atmosférica y el Fenómeno es oceánico</button>
+<button class="qbtn" data-q="1" data-c="0">D) Son sinónimos; la diferencia es únicamente de traducción del inglés</button></div>
+<div class="qfb" id="fb1"></div><input type="hidden" id="e1" value="Carranza (1891) describió El Niño como la intrusión anómala de aguas cálidas desde el norte. La contracorriente cálida existe casi todos los veranos australes (es la Corriente); lo que llamamos Fenómeno es su intensificación anómala, capaz de producir lluvias e inundaciones en una costa normalmente árida."></div>
+
+<div class="qcard"><p class="qnum">Pregunta 2 / 10</p><p class="qtext">Un valor del SOI de −18 durante varios meses consecutivos indica:</p><div>
+<button class="qbtn" data-q="2" data-c="0">A) Alta presión en Tahití y baja en Darwin, con alisios reforzados (La Niña)</button>
+<button class="qbtn" data-q="2" data-c="0">B) Un error de cálculo, porque el SOI no admite valores negativos</button>
+<button class="qbtn" data-q="2" data-c="1">C) Baja presión relativa en Tahití y alta en Darwin, alisios debilitados: condición tipo El Niño</button>
+<button class="qbtn" data-q="2" data-c="0">D) Condiciones neutras, ya que el umbral significativo del SOI es |SOI| &gt; 40</button></div>
+<div class="qfb" id="fb2"></div><input type="hidden" id="e2" value="El SOI es (Tahití − Darwin) normalizado. Negativo = el gradiente zonal de presión se colapsa: sube la presión al oeste y baja al este, los alisios pierden fuerza, se frena el afloramiento y la termoclina se hunde en el este. Regla: Niño = negativo."></div>
+
+<div class="qcard"><p class="qnum">Pregunta 3 / 10</p><p class="qtext">¿Por qué existe afloramiento en pleno ecuador oceánico, lejos de cualquier costa?</p><div>
+<button class="qbtn" data-q="3" data-c="0">A) Porque la ZCIT genera convergencia superficial que succiona agua desde el fondo</button>
+<button class="qbtn" data-q="3" data-c="0">B) Porque la termoclina es más profunda en el ecuador que en los trópicos</button>
+<button class="qbtn" data-q="3" data-c="0">C) Porque las ondas Kelvin arrastran agua fría hacia la superficie al propagarse</button>
+<button class="qbtn" data-q="3" data-c="1">D) Porque el parámetro de Coriolis cambia de signo en el ecuador: los alisios del este generan transporte de Ekman divergente a ambos lados, forzando bombeo ascendente</button></div>
+<div class="qfb" id="fb3"></div><input type="hidden" id="e3" value="El transporte de Ekman se desvía a la derecha del viento en el HN y a la izquierda en el HS. Con alisios del este a ambos lados del ecuador, el transporte apunta hacia el norte al norte del ecuador y hacia el sur al sur: divergencia neta sobre el ecuador, compensada por surgencia. La frontera no es la costa, es f = 0."></div>
+
+<div class="qcard"><p class="qnum">Pregunta 4 / 10</p><p class="qtext">Según Takahashi et al. (2011), un calentamiento del Pacífico central sin calentamiento costero (modo C) tiende a producir en la vertiente Pacífica peruana:</p><div>
+<button class="qbtn" data-q="4" data-c="0">A) Lluvias extremas, idénticas a las del modo E</button>
+<button class="qbtn" data-q="4" data-c="1">B) Sequías, por reorganización de la circulación de Walker entre otros procesos</button>
+<button class="qbtn" data-q="4" data-c="0">C) Ningún efecto detectable, porque la señal se limita al Pacífico occidental</button>
+<button class="qbtn" data-q="4" data-c="0">D) Heladas en la costa, por el desplazamiento del anticiclón hacia el sur</button></div>
+<div class="qfb" id="fb4"></div><input type="hidden" id="e4" value="Al desplazarse el máximo de calentamiento diabático hacia el Pacífico central, el ramal ascendente de Walker se relocaliza allí y sobre el occidente sudamericano queda una rama subsidente compensatoria. Aire descendente = aire que se calienta adiabáticamente y se seca: inhibición convectiva y déficit pluviométrico."></div>
+
+<div class="qcard"><p class="qnum">Pregunta 5 / 10</p><p class="qtext">¿Cuál de las siguientes afirmaciones sobre las ondas Kelvin oceánicas es FALSA?</p><div>
+<button class="qbtn" data-q="5" data-c="0">A) Se propagan exclusivamente hacia el este a lo largo del ecuador</button>
+<button class="qbtn" data-q="5" data-c="1">B) Todas las ondas Kelvin producen calentamiento al llegar a la costa de Sudamérica</button>
+<button class="qbtn" data-q="5" data-c="0">C) Se detectan mejor en la profundidad de la termoclina y en el nivel del mar que en la TSM</button>
+<button class="qbtn" data-q="5" data-c="0">D) Tardan típicamente 2 a 3 meses en cruzar el Pacífico desde el occidente hasta Sudamérica</button></div>
+<div class="qfb" id="fb5"></div><input type="hidden" id="e5" value="Existen ondas Kelvin aflorantes (upwelling) que enfrían: son generadas por aceleraciones de los alisios y elevan la termoclina. Solo las subsidentes (downwelling), generadas por pulsos del oeste, profundizan la termoclina y calientan. Las otras tres afirmaciones son correctas."></div>
+
+<div class="qcard"><p class="qnum">Pregunta 6 / 10</p><p class="qtext">En qué fases de la MJO se estimulan preferentemente los pulsos de vientos del oeste que generan ondas Kelvin?</p><div>
+<button class="qbtn" data-q="6" data-c="0">A) Fases 1, 2 y 3, cuando la convección está sobre el océano Índico</button>
+<button class="qbtn" data-q="6" data-c="0">B) Fases 4 y 5, cuando la convección está sobre el continente marítimo</button>
+<button class="qbtn" data-q="6" data-c="1">C) Fases 6, 7 y 8, cuando la fase divergente en altura cruza el Pacífico</button>
+<button class="qbtn" data-q="6" data-c="0">D) En cualquier fase, ya que la MJO no tiene preferencia longitudinal</button></div>
+<div class="qfb" id="fb6"></div><input type="hidden" id="e6" value="La divergencia en altura de las fases 6-7-8 sitúa la convección sobre el Pacífico, generando convergencia en niveles bajos y vientos del oeste al oeste del núcleo convectivo. Además hace falta que la ZCIT-NET esté cerca del ecuador: por eso la génesis de Kelvin se favorece en verano y otoño australes, y no en invierno austral."></div>
+
+<div class="qcard"><p class="qnum">Pregunta 7 / 10</p><p class="qtext">Un pronosticador en Lima observa ONI = +2.3 °C (Niño muy fuerte) pero ICEN neutro en marzo. ¿Qué debería esperar para la costa norte peruana?</p><div>
+<button class="qbtn" data-q="7" data-c="1">A) Impactos de lluvia limitados, porque lo que dispara las lluvias costeras es el calentamiento frente a la costa, no el del Pacífico central</button>
+<button class="qbtn" data-q="7" data-c="0">B) Inundaciones catastróficas garantizadas, proporcionales al valor del ONI</button>
+<button class="qbtn" data-q="7" data-c="0">C) Un descenso brusco de la temperatura del aire en toda la costa</button>
+<button class="qbtn" data-q="7" data-c="0">D) Nada, porque marzo está fuera de la temporada sensible del Perú</button></div>
+<div class="qfb" id="fb7"></div><input type="hidden" id="e7" value="Es exactamente el caso del super Niño 2015-16: ONI récord y pocos impactos extremos en Perú, porque el calentamiento costero de marzo de 2016 fue mucho menor que el de 1983 o 1998. Marzo sí es el mes de máxima sensibilidad para Perú y Ecuador, lo que refuerza la conclusión: el índice global no predice el impacto local."></div>
+
+<div class="qcard"><p class="qnum">Pregunta 8 / 10</p><p class="qtext">Durante un ENSO cálido en JJA (invierno austral), la precipitación en el centro de Chile aumenta principalmente por:</p><div>
+<button class="qbtn" data-q="8" data-c="0">A) El ingreso directo de la ZCIT hasta latitudes medias del Pacífico sur</button>
+<button class="qbtn" data-q="8" data-c="0">B) Un aumento del afloramiento costero frente a Valparaíso</button>
+<button class="qbtn" data-q="8" data-c="0">C) La intensificación del SALLJ que transporta humedad amazónica hacia el oeste</button>
+<button class="qbtn" data-q="8" data-c="1">D) La intensificación del chorro subtropical, el ingreso de masas húmedas del Pacífico subtropical y una dorsal de bloqueo en el SE de Tierra del Fuego que produce flujo dividido</button></div>
+<div class="qfb" id="fb8"></div><input type="hidden" id="e8" value="Los tres factores actúan juntos. El bloqueo austral desvía las trayectorias de los sistemas extratropicales hacia el centro de Chile en lugar de dejarlos pasar por el sur (flujo dividido), mientras el chorro intensificado aumenta la baroclinicidad y el transporte de humedad en niveles bajos. El SALLJ transporta humedad hacia el Río de la Plata, no hacia Chile."></div>
+
+<div class="qcard"><p class="qnum">Pregunta 9 / 10</p><p class="qtext">¿Qué distingue conceptualmente al MEI del ONI?</p><div>
+<button class="qbtn" data-q="9" data-c="0">A) El MEI se calcula solo con datos satelitales y el ONI solo con boyas</button>
+<button class="qbtn" data-q="9" data-c="1">B) El MEI combina seis variables océano-atmosféricas mediante EOF y por tanto captura el acoplamiento; el ONI usa solo TSM y no considera la atmósfera</button>
+<button class="qbtn" data-q="9" data-c="0">C) El MEI se aplica al Atlántico tropical y el ONI al Pacífico</button>
+<button class="qbtn" data-q="9" data-c="0">D) El MEI es mensual y el ONI es diario</button></div>
+<div class="qfb" id="fb9"></div><input type="hidden" id="e9" value="El MEI es el primer PC no rotado de seis campos del ICOADS (P, TSM, temperatura del aire, nubosidad, viento zonal y meridional) y se computa de forma bimestral. Como el ENSO es por definición un fenómeno acoplado, un índice multivariado es más fiel a la definición física; el ONI, puramente oceánico, es más simple pero puede dar falsos positivos o negativos de acoplamiento."></div>
+
+<div class="qcard"><p class="qnum">Pregunta 10 / 10</p><p class="qtext">Una Niña Modoki (EMI negativo) puede asociarse en Ecuador y Perú a:</p><div>
+<button class="qbtn" data-q="10" data-c="0">A) Sequía severa, ya que toda fase fría implica déficit hídrico</button>
+<button class="qbtn" data-q="10" data-c="0">B) Ausencia total de señal, porque el Modoki solo afecta al Pacífico occidental</button>
+<button class="qbtn" data-q="10" data-c="0">C) Heladas costeras por la intensificación de la lengua fría hasta los 80°W</button>
+<button class="qbtn" data-q="10" data-c="1">D) Precipitaciones por encima de lo normal, por el calentamiento costero acompañado de enfriamiento en la región Niño 4</button></div>
+<div class="qfb" id="fb10"></div><input type="hidden" id="e10" value="El tripolo invertido de la Niña Modoki coloca agua cálida junto a la costa y agua fría en el Pacífico central. Como lo que dispara la lluvia en la costa peruana es el calentamiento costero, una 'Niña' puede llover más que un 'Niño'. Es el argumento definitivo contra la equivalencia automática Niño = lluvia, Niña = sequía."></div>
+
+<div id="qres" style="display:none;border-radius:10px;padding:12px 14px;margin-top:14px;font-size:12.5px"></div>
+<button id="qreset" style="margin-top:12px;background:var(--bgs);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer;color:var(--tp);font-family:inherit">🔄 Reiniciar quiz</button>
+</div>
+
+<!-- ═══════ REFERENCIAS INSTITUCIONALES ═══════ -->
+<div class="block s3" id="refs-institucionales">
+<span class="bh" style="background:var(--s1);color:var(--s2)">🔗 Para profundizar — fuentes institucionales relevantes a este tema</span>
+<div class="three">
+<div class="mini" style="border-color:#0c4a6e"><b>Organización Meteorológica Mundial (OMM/WMO) 🔗</b><br><a href="https://wmo.int">wmo.int</a><br>Es la autoridad normativa: define los estándares de observación, la nomenclatura oficial de los trimestres estacionales y coordina los <b>Foros Regionales del Clima</b> y los boletines <b>El Niño/La Niña Update</b>. TOGA nació bajo su programa WCRP. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#0c4a6e"><b>SENAMHI Perú 🔗</b><br><a href="https://www.senamhi.gob.pe">senamhi.gob.pe</a><br>Institución autora del curso. Boletines climáticos, pronóstico estacional y datos históricos nacionales. Es el punto de entrada para los productos operativos peruanos del ENSO. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#0c4a6e"><b>ENFEN 🔗</b><br><a href="https://www.gob.pe/enfen">gob.pe/enfen</a><br>Comité Multisectorial que emite los <b>comunicados oficiales</b> y define el <b>ICEN</b> y sus categorías. Es la fuente que hay que citar en un examen para cualquier afirmación sobre el estado oficial del ENSO en el Perú. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#0891b2"><b>NOAA Climate Prediction Center 🔗</b><br><a href="https://www.cpc.ncep.noaa.gov">cpc.ncep.noaa.gov</a><br>Define y publica el <b>ONI</b>, el diagnóstico ENSO mensual y el monitoreo de la MJO. Origen de la mayoría de las figuras conceptuales del PDF. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#0891b2"><b>NOAA PMEL — TAO/TRITON 🔗</b><br><a href="https://www.pmel.noaa.gov/tao/">pmel.noaa.gov/tao</a><br>Datos en tiempo real de la red de boyas ecuatoriales: viento, TSM y perfiles subsuperficiales. Es donde se ven las ondas Kelvin en la isoterma de 20 °C. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#0891b2"><b>climate.gov — ENSO Blog 🔗</b><br><a href="https://www.climate.gov/news-features/blogs/enso">climate.gov/enso</a><br>Fuente directa de L'Heureux (2014), "El Niño in a nutshell", citada en varias diapositivas. Divulgación rigurosa y actualizada. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#7c2d12"><b>IGP — Instituto Geofísico del Perú 🔗</b><br><a href="https://www.gob.pe/igp">gob.pe/igp</a><br>Publicaciones de <b>Takahashi</b> (modos E y C) y de <b>Tedeschi (2017)</b> sobre tipos de El Niño e influencia en América del Sur, ambas citadas en el PDF. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#7c2d12"><b>JAMSTEC — El Niño Modoki 🔗</b><br><a href="http://www.jamstec.go.jp/frcgc/research/d1/iod/">jamstec.go.jp — IOD/Modoki</a><br>Fuente original del concepto Modoki y del índice EMI, con las coordenadas exactas de las tres cajas. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#0891b2"><b>NASA — TOPEX/Poseidon y altimetría 🔗</b><br><a href="https://sealevel.jpl.nasa.gov/">sealevel.jpl.nasa.gov</a><br>Serie histórica de nivel del mar que permitió observar la propagación de las Kelvin durante 1997-98. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#831843"><b>AMS Glossary of Meteorology 🔗</b><br><a href="https://glossary.ametsoc.org">glossary.ametsoc.org</a><br>Definiciones formales y arbitrales de "El Niño", "Southern Oscillation", "Kelvin wave" y "Walker circulation". Útil cuando el profesor pide la definición canónica. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#831843"><b>COMET / MetEd (UCAR) 🔗</b><br><a href="https://www.meted.ucar.edu">meted.ucar.edu</a><br>Módulos gratuitos con certificación sobre ENSO, climatología tropical y pronóstico estacional, varios en español. <i>(verificar vigencia)</i></div>
+<div class="mini" style="border-color:#831843"><b>IMARPE 🔗</b><br><a href="https://www.gob.pe/imarpe">gob.pe/imarpe</a><br>Procesamiento de TSM costera (la figura NAVO de 2013 del PDF es suya) y evaluación del impacto del ENSO sobre la anchoveta. <i>(verificar vigencia)</i></div>
+</div>
+</div>
+
+<div class="foot">
+<span class="ft">REFERENCIAS DEL PDF:</span>
+<span class="fc">L'Heureux (2014) · Carranza (1891) · Carrillo (1893) · Schott (1931) · Woodman (1999) · Quinn et al. (1987) · Rodríguez et al. (2005) · Takahashi (2014, 2015) · Takahashi et al. (2011) · Takahashi y Martínez (2017) · Tedeschi (2017) · Trenberth y Caron (2000) · CAF (2000) · Enciclopedia Britannica (2017) · NOAA/CPC · NOAA/ESRL · NOAA/PMEL · NOAA/NVVL (OISST) · WPC International Desks (2017) · JAMSTEC · NASA TOPEX/Poseidon · Programa TAO/TRITON · Curso SENAMHI–CLIMANDES, Módulo 1, Tema 3, 4.2</span>
+</div>
+</div>
+
+<script>
+(function(){
+  var sec=document.getElementById('quiz-section');
+  if(!sec) return;
+  var ans=0, ok=0;
+  function upd(){
+    document.getElementById('qprog').textContent='Pregunta '+ans+' de 10';
+    var pct=ans?Math.round(ok/ans*100):0;
+    document.getElementById('qscore').textContent=pct+' % de aciertos';
+    document.getElementById('qfill').style.width=(ans*10)+'%';
+  }
+  sec.addEventListener('click',function(e){
+    var b=e.target.closest('.qbtn');
+    if(!b||b.classList.contains('dis')) return;
+    var q=b.getAttribute('data-q');
+    var group=sec.querySelectorAll('.qbtn[data-q="'+q+'"]');
+    var correct=b.getAttribute('data-c')==='1';
+    var letters=['A','B','C','D'], goodLetter='';
+    group.forEach(function(x,i){
+      x.classList.add('dis');
+      if(x.getAttribute('data-c')==='1'){x.classList.add('ok');x.textContent='✅ '+x.textContent;goodLetter=letters[i];}
+      else if(x===b){x.classList.add('no');x.textContent='❌ '+x.textContent;}
+    });
+    var fb=document.getElementById('fb'+q);
+    var exp=document.getElementById('e'+q).value;
+    fb.className='qfb '+(correct?'ok':'no');
+    fb.innerHTML=(correct?'✅ ¡Correcto! ':'❌ Incorrecto. La respuesta correcta es '+goodLetter+'. ')+exp;
+    fb.style.display='block';
+    ans++; if(correct) ok++;
+    upd();
+    if(ans===10){
+      var r=document.getElementById('qres');
+      var msg,bg,col;
+      if(ok<=4){msg='Necesitas repasar el material.';bg='#fee2e2';col='#991b1b';}
+      else if(ok<=7){msg='¡Buen avance, sigue repasando!';bg='#fef9c3';col='#713f12';}
+      else{msg='¡Excelente dominio del tema!';bg='#dcfce7';col='#14532d';}
+      r.style.background=bg;r.style.color=col;
+      r.innerHTML='<b>Puntaje final: '+ok+' / 10 correctas.</b> '+msg;
+      r.style.display='block';
+    }
+  });
+  document.getElementById('qreset').addEventListener('click',function(){
+    ans=0;ok=0;
+    sec.querySelectorAll('.qbtn').forEach(function(x){
+      x.classList.remove('dis','ok','no');
+      x.textContent=x.textContent.replace(/^(✅ |❌ )/,'');
+    });
+    sec.querySelectorAll('.qfb').forEach(function(f){f.style.display='none';});
+    document.getElementById('qres').style.display='none';
+    upd();
+  });
+  upd();
+})();
+</script>

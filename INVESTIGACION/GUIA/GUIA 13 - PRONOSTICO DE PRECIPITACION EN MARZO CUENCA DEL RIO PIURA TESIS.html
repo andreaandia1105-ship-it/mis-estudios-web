@@ -1,0 +1,524 @@
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+.cv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;padding:12px;background:var(--color-background-tertiary);font-family:'Source Sans 3',sans-serif;color:var(--color-text-primary)}
+@media(max-width:640px){.cv{grid-template-columns:1fr}}
+.titlebar{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:12px;padding:14px 18px}
+.titlebar h1{font-family:Oswald;font-size:20px;font-weight:700;margin:0 0 4px}
+.titlebar p{font-size:11px;margin:0 0 8px;opacity:.85}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px 4px 0 0;background:rgba(255,255,255,.15)}
+.sec{grid-column:1/-1;font-family:Oswald;font-size:13px;font-weight:700;padding:7px 12px;border-radius:8px;margin-top:4px}
+.block{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:11px;padding:12px 13px}
+.block.s2{grid-column:span 2}
+.block.s3{grid-column:1/-1}
+@media(max-width:640px){.block.s2{grid-column:1/-1}}
+.bh{font-family:Oswald;font-size:12px;text-transform:uppercase;padding:3px 9px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.def{border-left:3px solid;padding:7px 10px;border-radius:0 7px 7px 0;font-size:12px;background:var(--color-background-secondary);margin-bottom:8px}
+.item{display:flex;gap:7px;font-size:12px;line-height:1.5;margin-bottom:6px}
+.dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rx{background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11px;padding:7px 11px;border-radius:7px;text-align:center;line-height:1.6;margin:8px 0 2px}
+.rx-note{font-size:11px;color:var(--color-text-secondary);text-align:center;margin-bottom:8px}
+.warn{background:#fff7ed;border-left:3px solid #f97316;border-radius:0 8px 8px 0;font-size:11.5px;color:#7c2d12;padding:7px 10px;margin-top:8px}
+.exam{background:#fefce8;border:1px solid #facc15;border-radius:8px;font-size:11.5px;color:#713f12;padding:8px 10px;margin-top:8px}
+.mini{background:var(--color-background-secondary);border-radius:8px;padding:8px 10px;font-size:11.5px;margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+@media(max-width:640px){.three{grid-template-columns:1fr}}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.fbox{background:var(--color-background-secondary);padding:6px 9px;border-radius:7px;font-size:11px}
+.farrow{color:var(--color-text-secondary);font-size:15px}
+.pill2{font-size:11px;padding:2px 8px;border-radius:20px;display:inline-block;margin:2px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--color-background-secondary);padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);text-align:left}
+.tbl td{padding:5px 7px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.divh{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:7px 0}
+.footer{grid-column:1/-1;background:#0a2540;color:#fff;border-radius:10px;padding:11px 18px;display:flex;gap:12px;flex-wrap:wrap}
+.ft{font-family:Oswald;font-size:12px;color:#7dd3fc}
+.fc{font-size:11px;color:#94a3b8}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+@media(max-width:640px){.dual{grid-template-columns:1fr}}
+.dual-tech{background:#e0f2fe;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#0c4a6e}
+.dual-plain{background:#dcfce7;border-radius:8px;padding:8px 10px;font-size:11.5px;color:#14532d}
+@media(prefers-color-scheme:dark){.dual-tech{background:#082f49;color:#7dd3fc}.dual-plain{background:#14532d;color:#86efac}}
+.dual-label{font-family:Oswald;font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;opacity:.85}
+.imgph{background:var(--color-background-secondary);border:1px dashed var(--color-border-secondary);border-radius:8px;padding:14px;font-size:11px;color:var(--color-text-secondary);text-align:center;margin-top:8px}
+.qcontainer{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:14px;padding:16px 18px}
+.qhead{background:#0a2540;color:#fff;border-radius:8px;padding:10px 14px;font-family:Oswald;font-size:14px;margin-bottom:10px}
+.qhead p{font-size:11px;margin:4px 0 0;opacity:.8;font-family:'Source Sans 3'}
+.stat-bar-wrap{width:100%;background:var(--color-background-secondary);border-radius:20px;height:11px;overflow:hidden;margin:6px 0 14px}
+.stat-bar-fill{height:100%;border-radius:20px;background:#16a34a;width:0%;transition:width .3s}
+.qcard{margin-bottom:16px;padding-bottom:14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qnum{font-size:11px;color:var(--color-text-secondary);margin:0 0 4px}
+.qtext{font-size:13px;font-weight:600;margin:0 0 8px}
+.qbtn{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:8px 12px;font-size:12px;text-align:left;cursor:pointer;width:100%;margin-bottom:5px;display:block;color:var(--color-text-primary)}
+.qbtn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.qbtn.incorrect{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qbtn.disabled{opacity:.6;pointer-events:none}
+.qfeedback{border-radius:0 8px 8px 0;padding:8px 11px;font-size:11.5px;margin-top:6px}
+.qfeedback.ok{background:#f0fdf4;border-left:3px solid #16a34a;color:#14532d}
+.qfeedback.bad{background:#fef2f2;border-left:3px solid #dc2626;color:#991b1b}
+.results{border-radius:10px;padding:14px;text-align:center;font-size:13px;margin-top:10px;display:none}
+.restart{margin-top:10px;background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:8px;padding:7px 14px;font-size:12px;cursor:pointer}
+</style>
+<div class="cv">
+
+<div class="titlebar">
+<h1>🌧️ Pronóstico de precipitación en marzo — cuenca del río Piura con IA</h1>
+<p>Tesis de maestría — UNALM, Escuela de Posgrado, Maestría en Meteorología Aplicada · José Esteban Obregón Yataco · Lima, 2026 · Asesor: Mg.Sc. Eusebio Cisneros</p>
+<span class="pill">Reanálisis ERA5 / ERA5-Land</span><span class="pill">PISCO-SENAMHI</span><span class="pill">Descubrimiento causal PCMCI+</span><span class="pill">Red neuronal convolucional</span><span class="pill">ENOS / ZCIT</span>
+</div>
+
+<div class="sec" style="background:#ffedd5;color:#7c2d12">🟠 1. CONTEXTO CLIMÁTICO DE PIURA</div>
+
+<div class="block s2">
+<span class="bh" style="background:#ffedd5;color:#7c2d12">Climas de Piura (Diap. climatología, p.3-5)</span>
+<div class="def" style="border-color:#f97316">Piura, en el norte árido del Perú, tiene 11 tipos climáticos según SENAMHI (2021), desde árido costero hasta lluvioso de sierra. El clima domina el ciclo hidrológico de la cuenca y su fuerte dependencia del fenómeno El Niño.</div>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>El gradiente climático de Piura sigue la clasificación de Thornthwaite: E(d)A' cálido árido en la costa (0-500 msnm), D(i,p)B' semiárido en la zona media, hasta A(r)B'/B(r)C' lluvioso-templado en Ayabaca (2633 msnm). La precipitación anual va de 235 mm en la costa (Miraflores) a 1355 mm en la sierra, concentrada en verano austral (ene-abr).</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Imagina Piura como una rampa: abajo, cerca del mar, casi no llueve en todo el año (apenas 235 mm); subiendo hacia la sierra, en Ayabaca, llueve casi 6 veces más (1355 mm). Ambos lugares concentran casi toda su lluvia entre enero y abril — el resto del año es prácticamente seco.</p></div>
+</div>
+<div class="two">
+<div class="mini" style="border-top:3px solid #f97316"><b>Miraflores (costa, 34 msnm)</b><br>Temp. máx 27.5-34°C, precip. anual 235 mm, lluvia concentrada ene-abr (40-60 mm/mes).</div>
+<div class="mini" style="border-top:3px solid #f97316"><b>Ayabaca (sierra, 2633 msnm)</b><br>Temp. máx 16.5-19°C, precip. anual 1355 mm, lluvia concentrada feb-abr (200-300 mm/mes).</div>
+</div>
+<div class="exam">🎯 EXAMEN: Explique por qué la variabilidad de la precipitación en la costa de Piura es mucho más sensible a eventos El Niño que la de la sierra.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#ffedd5;color:#7c2d12">Área de estudio</span>
+<div class="item"><span class="dot" style="background:#f97316"></span>Dominio: 81°W-79.5°W, 4.5°S-6°S (cuenca del río Piura, delimitada con shapefile de la ANA).</div>
+<div class="item"><span class="dot" style="background:#f97316"></span>La cuenca abastece de agua a la región; sufre racionamiento en sequías e inundaciones/huaicos en crecidas — de ahí la importancia de pronosticar con antelación.</div>
+<div class="imgph">📍 Espacio sugerido: mapa de la cuenca del río Piura (Fig. 5, fuente ANA 2017) — mostrar reservorios, polders y sistema de alerta temprana.</div>
+</div>
+
+<div class="sec" style="background:#e0f2fe;color:#0c4a6e">🟦 2. FUENTES DE DATOS (INSTRUMENTACIÓN)</div>
+
+<div class="block">
+<span class="bh" style="background:#e0f2fe;color:#0c4a6e">ERA5 (Diap. 6)</span>
+<div class="def" style="border-color:#0284c7">Reanálisis climático del ECMWF: datos horarios, malla 0.25°x0.25°, 37 niveles de presión, desde 1940, con actualización diaria (ERA5T a 5 días).</div>
+<div class="item"><span class="dot" style="background:#0284c7"></span>Combina modelo físico + observaciones globales → producto "globalmente completo y coherente".</div>
+<div class="item"><span class="dot" style="background:#0284c7"></span>Usado en la tesis para TSM, agua precipitable total (tcw) y vientos zonal/meridional a 10m.</div>
+<div class="exam">🎯 EXAMEN: ¿Por qué un pronóstico estacional (meses) tiene mayor incertidumbre que uno del tiempo (días)?</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#e0f2fe;color:#0c4a6e">ERA5-Land (Diap. 7)</span>
+<div class="def" style="border-color:#0284c7">Versión de mayor resolución de ERA5 para variables terrestres (9 km), forzada por variables atmosféricas de ERA5 (temperatura, humedad) con corrección de gradiente vertical por altitud.</div>
+<div class="item"><span class="dot" style="background:#0284c7"></span>No asimila observaciones directamente, pero las recibe indirectamente vía el "forzamiento atmosférico".</div>
+<div class="item"><span class="dot" style="background:#0284c7"></span>Ventaja clave: datos desde 1950 (vs. 1981 de PISCO) → más años para entrenar el modelo de IA.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#e0f2fe;color:#0c4a6e">PISCO mensual v2.1 (Diap. 8)</span>
+<div class="def" style="border-color:#0284c7">Producto grillado de precipitación de SENAMHI (0.1° resolución) desde 1981, que fusiona estaciones pluviométricas, radar/climatología y estimaciones satelitales infrarrojas (CHIRP).</div>
+<div class="item"><span class="dot" style="background:#0284c7"></span>Mejor desempeño en costa Pacífico y flanco occidental andino — justo la zona del río Piura.</div>
+<div class="rx">PISCOp v2.1 → https://piscoprec.github.io/</div>
+<div class="rx-note">Producto público, base para estudios hidrológicos y gestión del agua en Perú.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#e0f2fe;color:#0c4a6e">Comparación ERA5-Land vs PISCO (paso metodológico 1 y resultado 4.1)</span>
+<div class="flow">
+<div class="fbox">Promedio espacial de la cuenca (ambos productos)</div><span class="farrow">→</span>
+<div class="fbox">Comparar series de tiempo 1981-2024 (Fig. 6)</div><span class="farrow">→</span>
+<div class="fbox">ERA5-Land reproduce bien PISCO</div><span class="farrow">→</span>
+<div class="fbox">Se elige ERA5-Land (más años, 1950-2024)</div>
+</div>
+<div class="warn">⚠️ ERROR COMÚN: pensar que "más resolución" siempre significa "mejor dato". Aquí PISCO tiene mejor resolución (0.1° vs 9km≈0.08°, similares) pero menos años; la decisión metodológica prioriza la longitud del registro porque el modelo de IA necesita máxima cantidad de observaciones para entrenar.</div>
+<div class="imgph">📈 Espacio sugerido: Figura 6 del PDF — series de tiempo de precipitación 1981-2024, ERA5-Land (rojo) vs PISCO (azul).</div>
+</div>
+
+<div class="sec" style="background:#ede9fe;color:#4c1d95">🟣 3. VARIABILIDAD CLIMÁTICA, ZCIT Y HEMISFERIOS</div>
+
+<div class="block s2">
+<span class="bh" style="background:#ede9fe;color:#4c1d95">Variabilidad climática (Diap. 9)</span>
+<div class="def" style="border-color:#7c3aed">Oscilaciones del estado promedio del clima y sus propiedades estadísticas (desviación estándar, frecuencia de extremos), en escalas más amplias que el tiempo diario. Según el IPCC (2021), puede ser interna (procesos naturales del sistema climático) o externa (forzamientos naturales o antropogénicos).</div>
+<div class="item"><span class="dot" style="background:#7c3aed"></span>Diferencia clave con "tiempo meteorológico": la variabilidad climática opera en escalas de meses a décadas, no de horas a días.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#ede9fe;color:#4c1d95">ZCIT — definición base</span>
+<div class="def" style="border-color:#7c3aed">Banda zonal angosta de fuerte convergencia de viento de bajo nivel, nubosidad y precipitación intensa, producto de calentamiento solar, evaporación y convección sobre océanos tropicales (Potter y Colman, 2003).</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#ede9fe;color:#4c1d95">Asimetría Norte-Sur de la ZCIT — hemisferio norte vs. hemisferio sur</span>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos</p><p>Sobre el Pacífico ecuatorial y el Atlántico, la ZCIT reside preferentemente en el cinturón 4°-12°N con pico de precipitación anual cerca de 7°N (Philander et al., 1996). Esta asimetría se explica por la geografía continente-océano (más continente en el HN, más océano en el HS) y por el mecanismo viento-evaporación-TSM (WES feedback, Xie y Philander, 1994): la convección preferente sobre agua cálida en un hemisferio genera vientos superficiales cruzando hacia el otro hemisferio, enfriando por evaporación las aguas del HS y reforzando el estado inicial. En el Pacífico Sur oriental, la baja TSM por afloramiento costero, la inversión térmica reforzada por subsidencia, y las nubes bajas estratocúmulo mantienen fría la región, impidiendo que la ZCIT se establezca de forma permanente en el hemisferio sur — salvo una banda débil y estacional frente a la costa norte peruana entre abril-mayo.</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>La franja de lluvias más intensa del planeta (ZCIT) normalmente "vive" al norte del ecuador porque ahí el agua del mar está más caliente. En el hemisferio sur, sobre todo frente a las costas de Perú y Chile, el agua es fría (por corrientes que suben agua profunda), así que la banda de lluvias casi nunca se instala ahí — excepto un episodio corto y débil entre abril y mayo, y de forma anómala e intensa durante eventos El Niño costero fuerte, cuando el mar frente a Piura se calienta lo suficiente como para "atraer" esa banda lluviosa hacia el sur.</p></div>
+</div>
+<div class="flow">
+<div class="fbox">Convección preferente sobre agua cálida en un hemisferio</div><span class="farrow">→</span>
+<div class="fbox">Vientos superficiales cruzan hacia el otro hemisferio</div><span class="farrow">→</span>
+<div class="fbox">Enfriamiento por evaporación en el HS</div><span class="farrow">→</span>
+<div class="fbox">ZCIT se refuerza en el hemisferio de partida (feedback WES)</div>
+</div>
+<div class="warn">⚠️ ERROR COMÚN: creer que la ZCIT siempre está exactamente sobre el ecuador geográfico. En realidad su posición climatológica media está desplazada hacia el hemisferio norte casi todo el año, y solo se acerca al hemisferio sur en episodios específicos (El Niño costero, abril-mayo frente a Perú).</div>
+<div class="exam">🎯 EXAMEN: Explique el mecanismo "viento-evaporación-TSM" (WES feedback) y por qué es clave para entender un evento El Niño costero como el de 1925, 2017 o 2023.</div>
+<div class="imgph">🗺️ Espacio sugerido: mapa climatológico de posición media de la ZCIT (JJA vs DJF) mostrando su sesgo hacia el hemisferio norte.</div>
+</div>
+
+<div class="sec" style="background:#ffedd5;color:#7c2d12">🟠 4. EL NIÑO / ENOS — CASO PERÚ</div>
+
+<div class="block s2">
+<span class="bh" style="background:#ffedd5;color:#7c2d12">ENOS: fuente principal de predictibilidad climática (Diap. 10-14)</span>
+<div class="def" style="border-color:#f97316">ENOS produce señal dominante en múltiples regiones remotas del planeta (incluyendo Andes y Amazonía peruanos), tiene dinámica lenta y ha sido intensamente estudiado, lo que permite pronósticos con meses de anticipación. La región clave donde la TSM regula ENOS es Niño 3.4.</div>
+<div class="item"><span class="dot" style="background:#f97316"></span>El calentamiento de la costa peruana <b>no es parte esencial</b> de la dinámica de ENOS global, aunque puede afectarlo (Takahashi y Martínez, 2016).</div>
+<div class="item"><span class="dot" style="background:#f97316"></span>El caudal del río Piura se predice mejor con la diferencia TSM(Niño 1+2) − TSM(Tw, Pacífico centro-occidental), no solo con Niño 1+2: el río no sube solo por calentamiento costero, sino también por enfriamiento del extremo occidental.</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#ffedd5;color:#7c2d12">El Niño global vs. El Niño costero</span>
+<div class="two">
+<div class="mini" style="border-top:3px solid #f97316"><b>El Niño global (FEN)</b><br>Capa oceánica afectada &gt;100m, dinámica lenta (ondas Kelvin/Rossby cruzando el Pacífico), predecible con meses de antelación vía debilitamiento de alisios en agosto.</div>
+<div class="mini" style="border-top:3px solid #f97316"><b>El Niño costero</b><br>Capa afectada de ~30m, dinámica rápida (semanas), ligado al debilitamiento de alisios del sur + intensificación de la ZCIT sur (mecanismo WES). Estudiado a fondo solo para 1925, con similitudes a 2017 y 2023.</div>
+</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#ffedd5;color:#7c2d12">Caso 2015-2016: cuando El Niño global y el costero "se desacoplan"</span>
+<div class="item"><span class="dot" style="background:#f97316"></span>En agosto de 2015 se cumplió el criterio de vientos alisios débiles → se pronosticó El Niño global con calentamiento costero (Takahashi y Dewitte, 2016).</div>
+<div class="item"><span class="dot" style="background:#f97316"></span>El calentamiento costero de enero 2016 se cumplió, pero <b>no</b> generó las lluvias intensas esperadas: el intenso calentamiento en el Pacífico central tuvo un efecto opuesto y dominante sobre las lluvias (L'Heureux et al., 2016).</div>
+<div class="warn">⚠️ ERROR COMÚN: asumir que "TSM alta en la costa de Perú" siempre implica "lluvias fuertes en Piura". El caso 2016 demuestra que el patrón espacial completo del calentamiento (costa vs. Pacífico central-occidental) importa más que un solo índice puntual.</div>
+<div class="exam">🎯 EXAMEN: ¿Por qué el pronóstico de El Niño costero es metodológicamente más difícil que el de El Niño global, según la tesis?</div>
+</div>
+
+<div class="block s3" style="grid-column:1/-1">
+<span class="bh" style="background:#ffedd5;color:#7c2d12">Tabla 1 — eventos El Niño / La Niña costera (fuente: IGP, resumen)</span>
+<table class="tbl">
+<tr><th>Evento</th><th>Años representativos</th><th>Intensidad notable</th><th>Relevancia para el modelo</th></tr>
+<tr><td>El Niño extraordinario</td><td>1983, 1998</td><td>Muy fuerte, TSM/precip. muy anómalas</td><td>Incluidos en entrenamiento (1950-1985, 2018-2024); el modelo subestima su magnitud en validación</td></tr>
+<tr><td>El Niño costero</td><td>1925, 2017, 2023</td><td>Fuerte a nivel local, corta duración</td><td>2017 cae en validación (1986-2017): el modelo detecta el patrón pero sub-estima fuertemente los valores (BIAS alto)</td></tr>
+<tr><td>Años neutros</td><td>1988, 1990, 1991, 1995, 2011</td><td>AEP normal a ligeramente negativa</td><td>El modelo pronostica bien estos años, con BIAS cercano a cero</td></tr>
+<tr><td>El Niño moderado</td><td>1992, 2002, 2008, 2012, 2016</td><td>Moderado</td><td>El modelo acierta el signo, con sub o sobre-estimaciones ligeras</td></tr>
+</table>
+</div>
+
+<div class="sec" style="background:#dbeafe;color:#1e3a8a">🔵 5. REDES NEURONALES ARTIFICIALES</div>
+
+<div class="block s2">
+<span class="bh" style="background:#dbeafe;color:#1e3a8a">La neurona artificial (Fig. 3, Diap. 15)</span>
+<div class="dual">
+<div class="dual-tech"><p class="dual-label">🎓 Para meteorólogos / técnico</p><p>Cada neurona recibe entradas xᵢ ponderadas por pesos ωᵢ, suma los productos, añade un sesgo b, y aplica una función de activación φ(·) (sigmoide, ReLU, tangente hiperbólica) para producir la salida y. Las capas se organizan jerárquicamente: entrada (ingesta de predictores), ocultas (modelan no linealidades) y salida (regresión o clasificación).</p></div>
+<div class="dual-plain"><p class="dual-label">🗣️ Para no meteorólogos</p><p>Piensa en una neurona artificial como una pequeña calculadora: recibe varios números de entrada, cada uno "pesado" según su importancia (como una nota ponderada), los suma, ajusta el resultado un poco, y decide qué número entregar. Miles de estas calculadoras conectadas en capas —imitando cómo las neuronas biológicas reciben señales por las dendritas y las envían por el axón— aprenden a reconocer patrones complejos, como qué condiciones de enero anticipan lluvias en marzo.</p></div>
+</div>
+<div class="rx">y = φ( Σ(xᵢ · ωᵢ) + b )</div>
+<div class="rx-note">xᵢ = entradas (predictores); ωᵢ = pesos (importancia aprendida); b = sesgo; φ = función de activación (ReLU en la CNN de esta tesis)</div>
+<div class="imgph">🧠 Espacio sugerido: Figura 3 del PDF — esquema de neurona (entradas, pesos, sesgo, función sumatoria, activación, salida).</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#dbeafe;color:#1e3a8a">Entrenamiento (Diap. 17-18)</span>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><b>Función de pérdida:</b> mide la discrepancia predicción-real. Regresión → MSE/RMSE; clasificación → entropía cruzada.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><b>Optimizador:</b> descenso de gradiente (variantes), con retropropagación (backpropagation) vía regla de la cadena.</div>
+<div class="item"><span class="dot" style="background:#1e3a8a"></span><b>Época y batch:</b> con 100 datos, batch=50 y 2 épocas → 4 actualizaciones de pesos totales.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#dbeafe;color:#1e3a8a">Regularización — evitar el sobreajuste (overfitting)</span>
+<div class="three">
+<div class="mini" style="border-left:3px solid #1e3a8a"><b>L1</b><br>Penaliza por el valor absoluto de los pesos; fuerza algunos a cero → útil para selección de variables.</div>
+<div class="mini" style="border-left:3px solid #1e3a8a"><b>L2</b><br>Penaliza por el cuadrado de los pesos; suaviza sin anular variables.</div>
+<div class="mini" style="border-left:3px solid #1e3a8a"><b>Dropout</b><br>Desactiva aleatoriamente un % de neuronas durante el entrenamiento, evitando codependencia entre ellas.</div>
+</div>
+<div class="exam">🎯 EXAMEN: ¿Por qué la CNN de esta tesis usa RMSE como función de pérdida y no entropía cruzada?</div>
+</div>
+
+<div class="sec" style="background:#fef9c3;color:#713f12">🟡 6. DESCUBRIMIENTO CAUSAL E INFERENCIA CAUSAL</div>
+
+<div class="block s2">
+<span class="bh" style="background:#fef9c3;color:#713f12">¿Por qué correlación no basta? (Diap. 19-22)</span>
+<div class="def" style="border-color:#eab308">El descubrimiento causal identifica relaciones causales entre variables (no solo asociación), mientras que la inferencia causal cuantifica la magnitud del efecto. En un grafo causal, los nodos son variables climáticas y las flechas representan relaciones causales directas.</div>
+<div class="two">
+<div class="mini" style="border-left:3px solid #eab308"><b>Cadena (A→B→C)</b><br>Un cambio en A afecta indirectamente a C a través de B.</div>
+<div class="mini" style="border-left:3px solid #eab308"><b>Horquilla / confounding (A←B→C)</b><br>B causa A y C; la relación observada entre A y C es espuria.</div>
+<div class="mini" style="border-left:3px solid #eab308"><b>Colisionador (A→C←B)</b><br>A y B independientes causan C; clave para independencias condicionales.</div>
+<div class="mini" style="border-left:3px solid #eab308"><b>Variable latente</b><br>Factor no medido que puede confundir relaciones observadas (ej. variabilidad oceánica profunda no medida).</div>
+</div>
+<div class="warn">⚠️ ERROR COMÚN: tratar "correlación estadística significativa" como sinónimo de "causa". La sección 4.2 de la tesis encontró 8 predictores correlacionados, pero solo 4 sobrevivieron el filtro causal (sección 4.3).</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#fef9c3;color:#713f12">Algoritmos PC y PCMCI+ (Diap. 21-22)</span>
+<div class="item"><span class="dot" style="background:#eab308"></span><b>PC (Peter-Clark):</b> parte de un grafo completo no dirigido, elimina aristas vía pruebas de independencia, y orienta las conexiones restantes.</div>
+<div class="item"><span class="dot" style="background:#eab308"></span><b>PCMCI (Runge et al.):</b> diseñado para series temporales con dependencia causal cíclica; combina pruebas de independencia condicional y filtrado en dos etapas.</div>
+<div class="item"><span class="dot" style="background:#eab308"></span><b>PCMCI+:</b> mejora la detección de causalidades débiles en presencia de ruido/autocorrelación — el usado en esta tesis.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#fef9c3;color:#713f12">Aplicación en la tesis — grafo causal resumido (Fig. 15, sección 4.3)</span>
+<div class="flow">
+<div class="fbox">8 predictores estadísticos de enero (Spearman R>0.5, p&lt;0.01)</div><span class="farrow">→</span>
+<div class="fbox">Grafo causal físico previo + PCMCI+</div><span class="farrow">→</span>
+<div class="fbox">Solo 4 sobreviven con relación causal directa a la precip. de marzo</div>
+</div>
+<div class="item"><span class="dot" style="background:#dc2626"></span><b>Relación inversa (flecha azul):</b> SST⁻ en el Pacífico central (anomalía negativa de TSM asociada a más lluvia).</div>
+<div class="item"><span class="dot" style="background:#dc2626"></span><b>Relaciones directas (flecha roja):</b> SST⁺ en el Pacífico suroriental, viento zonal u10⁺ en el Pacífico central, viento meridional v10⁻ en la costa norte del Perú.</div>
+<div class="item"><span class="dot" style="background:#eab308"></span>Las relaciones entre predictores con lag de 1 año se consideraron espurias (poca memoria interanual) y se ignoraron para la selección final.</div>
+<div class="exam">🎯 EXAMEN: Según el grafo causal descubierto, ¿qué combinación de condiciones oceánico-atmosféricas en enero maximiza la probabilidad de lluvias fuertes en marzo sobre la cuenca del Piura?</div>
+<div class="imgph">🔗 Espacio sugerido: Figura 15 del PDF — grafo causal PCMCI+ (nodos SST⁺, SST⁻, u10⁺, v10⁻, v10⁻⁻, tcw, flechas rojas/azules hacia prec_mar).</div>
+</div>
+
+<div class="sec" style="background:#dcfce7;color:#14532d">🟢 7. METODOLOGÍA Y RESULTADOS DEL MODELO CONVOLUCIONAL</div>
+
+<div class="block s2">
+<span class="bh" style="background:#dcfce7;color:#14532d">Arquitectura de la CNN (sección 3.2.4)</span>
+<div class="def" style="border-color:#16a34a">Red convolucional con 4 canales de entrada (uno por predictor causal, cada uno como "imagen" 38x111), 3 capas convolucionales (32/64/128 filtros, kernel 3x3, stride 1, activación ReLU) + 2 capas densas ocultas (128/64 neuronas, activación lineal), salida = mapa de precipitación 11x17.</div>
+<div class="item"><span class="dot" style="background:#16a34a"></span><b>Función de pérdida:</b> RMSE. <b>Optimizador:</b> Adam (Estimación Adaptativa de Momentos).</div>
+<div class="item"><span class="dot" style="background:#16a34a"></span><b>Split temporal:</b> entrenamiento 1950-1985 + 2018-2024; validación 1986-2017 (periodo no visto por el modelo — prueba real de generalización).</div>
+</div>
+
+<div class="block">
+<span class="bh" style="background:#dcfce7;color:#14532d">Métricas de validación</span>
+<div class="item"><span class="dot" style="background:#16a34a"></span>Coeficiente de correlación de Spearman con IC 95%.</div>
+<div class="item"><span class="dot" style="background:#16a34a"></span>RMSE espacial.</div>
+<div class="item"><span class="dot" style="background:#16a34a"></span>BIAS (sesgo) espacial pronosticado − observado.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#dcfce7;color:#14532d">Resultados clave (sección 4.4)</span>
+<div class="two">
+<div class="mini" style="border-top:3px solid #16a34a"><b>Entrenamiento (1950-1985, 2018-2024)</b><br>Ajuste homogéneo, Spearman entre 0.84 y &gt;0.94 a lo largo de la cuenca.</div>
+<div class="mini" style="border-top:3px solid #16a34a"><b>Validación (1986-2017)</b><br>Spearman &gt;0.5 en gran parte de la cuenca (excepto zona suroriental); mejor desempeño en la zona baja/suroccidental (costa).</div>
+</div>
+<div class="warn">⚠️ Limitación importante: en El Niño extraordinario (1998) y El Niño costero (2017) el modelo detecta correctamente el patrón espacial pero sub-estima significativamente la magnitud — hay margen de mejora en eventos extremos.</div>
+<div class="exam">🎯 EXAMEN: ¿Por qué el estudio recomienda generar un ensamble de al menos 15 miembros en vez de usar un solo entrenamiento del modelo?</div>
+<div class="imgph">📊 Espacio sugerido: Figura 17 del PDF — serie de tiempo de anomalía de precipitación observada vs. pronosticada (1950-2024), con tramos de entrenamiento y validación diferenciados por color.</div>
+</div>
+
+<div class="block s3">
+<span class="bh" style="background:#dcfce7;color:#14532d">Conclusión metodológica central de la tesis</span>
+<div class="flow">
+<div class="fbox">8 predictores estadísticos</div><span class="farrow">→</span>
+<div class="fbox">Filtro causal PCMCI+</div><span class="farrow">→</span>
+<div class="fbox">4 predictores causales</div><span class="farrow">→</span>
+<div class="fbox">CNN entrenada con variables "efectivas" no "redundantes"</div>
+</div>
+<div class="item"><span class="dot" style="background:#16a34a"></span>Wu et al. (2025) y Li et al. (2022) mostraron que eliminar entradas no causales antes de entrenar mejora la precisión del modelo convolucional — criterio replicado en esta tesis.</div>
+</div>
+
+<div class="block s3" style="grid-column:1/-1">
+<span class="bh" style="background:#f1f5f9;color:#334155">📋 TABLA INTEGRADORA FINAL — repaso rápido</span>
+<table class="tbl">
+<tr><th>Concepto</th><th>Escala temporal</th><th>Escala espacial</th><th>Variable/índice clave</th><th>Rol en la tesis</th></tr>
+<tr><td>ENOS (El Niño global)</td><td>Interanual (meses-años)</td><td>Global/remoto</td><td>TSM región Niño 3.4</td><td>Contexto de predictibilidad, no predictor directo</td></tr>
+<tr><td>El Niño costero</td><td>Semanas (rápido)</td><td>Local/costa norte Perú</td><td>TSM Niño 1+2 − Tw</td><td>Explica eventos como 2017, no modelado explícitamente</td></tr>
+<tr><td>ZCIT sur</td><td>Estacional (abr-may) / evento</td><td>Costa ecuatorial-norperuana</td><td>Posición/intensidad de la banda</td><td>Mecanismo físico de fondo (WES feedback)</td></tr>
+<tr><td>Predictores estadísticos</td><td>Enero (mes fijo)</td><td>Pacífico tropical oriental</td><td>SST, u10, v10, tcw (8 variables)</td><td>Insumo bruto antes del filtro causal</td></tr>
+<tr><td>Predictores causales</td><td>Enero → marzo (lag 2 meses)</td><td>Pacífico central/suroriental, costa norte</td><td>SST⁻, SST⁺, u10⁺, v10⁻</td><td>Entrada final de la CNN (4 canales)</td></tr>
+<tr><td>Modelo CNN</td><td>Pronóstico mensual (marzo)</td><td>Cuenca del río Piura, 11x17</td><td>RMSE, Spearman, BIAS</td><td>Producto final del estudio</td></tr>
+</table>
+<div class="warn">⚠️ Dato integrador clave: el valor agregado de esta tesis no está en "usar IA para pronosticar lluvia" (ya existen modelos estadísticos, Rivas et al. 2024; Sulca &amp; Takahashi 2025), sino en usar descubrimiento causal como filtro de variables antes de alimentar la red neuronal — reduciendo de 8 a 4 predictores con respaldo físico-causal, no solo estadístico.</div>
+</div>
+
+<div class="block s3" id="refs-institucionales">
+<span class="bh" style="background:#e0f2fe;color:#0c4a6e">🔗 PARA PROFUNDIZAR — FUENTES INSTITUCIONALES</span>
+<div class="three">
+<div class="mini" style="border-left:3px solid #0284c7"><b>🔗 OMM / WMO</b> (verificar vigencia)<br>Estándares globales y definiciones oficiales de reanálisis, variabilidad climática y pronóstico estacional — la autoridad normativa detrás de ERA5 y de la terminología usada en toda la tesis.<br>https://wmo.int</div>
+<div class="mini" style="border-left:3px solid #0284c7"><b>🔗 ECMWF</b> (verificar vigencia)<br>Fuente directa de ERA5 y ERA5-Land, y del modelo AIFS de IA mencionado en el resumen de la tesis como referencia del uso operativo de IA en pronóstico.<br>https://www.ecmwf.int</div>
+<div class="mini" style="border-left:3px solid #0284c7"><b>🔗 IGP (Instituto Geofísico del Perú)</b> (verificar vigencia)<br>Fuente de la Tabla 1 (eventos El Niño/La Niña costera) y de la investigación de Takahashi sobre ENOS y El Niño costero citada extensamente.<br>https://www.gob.pe/igp</div>
+<div class="mini" style="border-left:3px solid #0284c7"><b>🔗 SENAMHI Perú</b> (verificar vigencia)<br>Fuente del producto PISCO y de la clasificación climática de Piura (2021) usada en el marco teórico.<br>https://www.senamhi.gob.pe</div>
+<div class="mini" style="border-left:3px solid #0284c7"><b>🔗 ANA (Autoridad Nacional del Agua)</b> (verificar vigencia)<br>Fuente del shapefile de la cuenca del río Piura y del mapa de infraestructura hídrica (Fig. 5).<br>https://www.gob.pe (ANA)</div>
+<div class="mini" style="border-left:3px solid #0284c7"><b>🔗 COMET Program (UCAR/MetEd)</b> (verificar vigencia)<br>Cursos gratuitos sobre ENOS, reanálisis y redes causales aplicadas a clima, útiles para reforzar el marco teórico de la tesis.<br>https://www.meted.ucar.edu</div>
+</div>
+</div>
+
+<div class="block s3" id="quiz-section">
+<div class="qcontainer">
+<div class="qhead">📝 QUIZ DE REPASO — 10 PREGUNTAS DE OPCIÓN MÚLTIPLE<p>Marca tu respuesta y descubre si es correcta</p></div>
+<p style="font-size:11px;color:var(--color-text-secondary);margin:0 0 4px" id="qprogress">Pregunta 0 de 10 respondidas — 0% de aciertos</p>
+<div class="stat-bar-wrap"><div class="stat-bar-fill" id="qbar"></div></div>
+
+<div class="qcard" id="q1">
+<p class="qnum">Pregunta 1 / 10</p>
+<p class="qtext">¿Por qué se eligió ERA5-Land en vez de PISCO como predictando principal, a pesar de que ambos representan bien la precipitación de la cuenca?</p>
+<div class="qopts">
+<button class="qbtn" data-q="1" data-correct="false">A) Porque PISCO no cubre la zona de Piura</button>
+<button class="qbtn" data-q="1" data-correct="true">B) Porque ERA5-Land tiene datos desde 1950, más años para entrenar y validar el modelo de IA</button>
+<button class="qbtn" data-q="1" data-correct="false">C) Porque ERA5-Land tiene mejor resolución espacial que PISCO</button>
+<button class="qbtn" data-q="1" data-correct="false">D) Porque PISCO no está disponible públicamente</button>
+</div>
+<div class="qfeedback" id="fb1"></div>
+</div>
+
+<div class="qcard" id="q2">
+<p class="qnum">Pregunta 2 / 10</p>
+<p class="qtext">¿Qué representa físicamente la asimetría norte-sur de la ZCIT sobre el Pacífico tropical?</p>
+<div class="qopts">
+<button class="qbtn" data-q="2" data-correct="false">A) La ZCIT siempre se ubica exactamente sobre el ecuador geográfico</button>
+<button class="qbtn" data-q="2" data-correct="true">B) La ZCIT reside preferentemente entre 4°-12°N por la asimetría continente-océano y el feedback viento-evaporación-TSM que mantiene fría el agua del hemisferio sur</button>
+<button class="qbtn" data-q="2" data-correct="false">C) La ZCIT se ubica en el hemisferio sur todo el año por la Corriente de Humboldt</button>
+<button class="qbtn" data-q="2" data-correct="false">D) La asimetría se debe únicamente a la rotación terrestre (efecto Coriolis)</button>
+</div>
+<div class="qfeedback" id="fb2"></div>
+</div>
+
+<div class="qcard" id="q3">
+<p class="qnum">Pregunta 3 / 10</p>
+<p class="qtext">Según la tesis, ¿en qué se diferencia principalmente "El Niño global" de "El Niño costero"?</p>
+<div class="qopts">
+<button class="qbtn" data-q="3" data-correct="false">A) El Niño costero afecta una capa oceánica más profunda (&gt;100 m)</button>
+<button class="qbtn" data-q="3" data-correct="true">B) El Niño costero afecta una capa oceánica delgada (~30 m) y tiene dinámica rápida (semanas), mientras El Niño global afecta capas más profundas con dinámica lenta</button>
+<button class="qbtn" data-q="3" data-correct="false">C) Ambos son fenómenos idénticos, solo cambia el nombre según la región</button>
+<button class="qbtn" data-q="3" data-correct="false">D) El Niño costero solo ocurre en años sin ENOS activo</button>
+</div>
+<div class="qfeedback" id="fb3"></div>
+</div>
+
+<div class="qcard" id="q4">
+<p class="qnum">Pregunta 4 / 10</p>
+<p class="qtext">De los 8 predictores estadísticamente significativos de enero, ¿cuántos y cuáles resultaron tener relación causal directa con la precipitación de marzo según PCMCI+?</p>
+<div class="qopts">
+<button class="qbtn" data-q="4" data-correct="false">A) Los 8, todos con la misma importancia causal</button>
+<button class="qbtn" data-q="4" data-correct="true">B) Solo 4: SST⁻ (Pacífico central), SST⁺ (Pacífico suroriental), u10⁺ (Pacífico central) y v10⁻ (costa norte de Perú)</button>
+<button class="qbtn" data-q="4" data-correct="false">C) Solo 2, ambos relacionados con temperatura superficial del mar</button>
+<button class="qbtn" data-q="4" data-correct="false">D) Ninguno; todas las relaciones resultaron espurias</button>
+</div>
+<div class="qfeedback" id="fb4"></div>
+</div>
+
+<div class="qcard" id="q5">
+<p class="qnum">Pregunta 5 / 10</p>
+<p class="qtext">¿Cuál de las siguientes afirmaciones sobre las estructuras causales fundamentales es FALSA?</p>
+<div class="qopts">
+<button class="qbtn" data-q="5" data-correct="false">A) En una cadena A→B→C, un cambio en A afecta indirectamente a C</button>
+<button class="qbtn" data-q="5" data-correct="true">B) En una horquilla (confounding) A←B→C, A causa directamente a C</button>
+<button class="qbtn" data-q="5" data-correct="false">C) En un colisionador A→C←B, A y B son causas independientes de C</button>
+<button class="qbtn" data-q="5" data-correct="false">D) Una variable latente es un factor no medido que puede generar una relación observada espuria</button>
+</div>
+<div class="qfeedback" id="fb5"></div>
+</div>
+
+<div class="qcard" id="q6">
+<p class="qnum">Pregunta 6 / 10</p>
+<p class="qtext">En la arquitectura de la red convolucional de la tesis, ¿qué función de activación se usó en las capas convolucionales y cuál en las capas densas finales?</p>
+<div class="qopts">
+<button class="qbtn" data-q="6" data-correct="false">A) Sigmoide en ambas</button>
+<button class="qbtn" data-q="6" data-correct="true">B) ReLU en las convolucionales, lineal en las densas</button>
+<button class="qbtn" data-q="6" data-correct="false">C) Tangente hiperbólica en ambas</button>
+<button class="qbtn" data-q="6" data-correct="false">D) Softmax en las convolucionales, ReLU en las densas</button>
+</div>
+<div class="qfeedback" id="fb6"></div>
+</div>
+
+<div class="qcard" id="q7">
+<p class="qnum">Pregunta 7 / 10</p>
+<p class="qtext">Si un modelo de pronóstico muestra Spearman de 0.90 en entrenamiento pero solo 0.5 en validación, ¿qué se puede concluir según el marco de la tesis?</p>
+<div class="qopts">
+<button class="qbtn" data-q="7" data-correct="false">A) El modelo es perfecto y no necesita más evaluación</button>
+<button class="qbtn" data-q="7" data-correct="true">B) Hay una caída de desempeño esperable al pasar a datos no vistos; hay que revisar dónde (espacialmente) es más débil el ajuste, como hizo la tesis en la zona suroriental de la cuenca</button>
+<button class="qbtn" data-q="7" data-correct="false">C) Los datos de validación están mal etiquetados</button>
+<button class="qbtn" data-q="7" data-correct="false">D) El RMSE necesariamente debe subir a más de 10</button>
+</div>
+<div class="qfeedback" id="fb7"></div>
+</div>
+
+<div class="qcard" id="q8">
+<p class="qnum">Pregunta 8 / 10</p>
+<p class="qtext">Dado que en marzo de 2017 (El Niño costero) el modelo pronosticó correctamente el signo de la anomalía pero con un BIAS alto, ¿qué se puede concluir sobre el desempeño del modelo en eventos extremos?</p>
+<div class="qopts">
+<button class="qbtn" data-q="8" data-correct="false">A) El modelo falla completamente en detectar cualquier señal de El Niño</button>
+<button class="qbtn" data-q="8" data-correct="true">B) El modelo detecta correctamente el patrón espacial pero sub-estima la magnitud en eventos costeros extremos, sugiriendo margen de mejora ahí</button>
+<button class="qbtn" data-q="8" data-correct="false">C) El BIAS alto indica que los datos de entrada estaban corruptos</button>
+<button class="qbtn" data-q="8" data-correct="false">D) El modelo sobre-estima siempre los eventos El Niño costero</button>
+</div>
+<div class="qfeedback" id="fb8"></div>
+</div>
+
+<div class="qcard" id="q9">
+<p class="qnum">Pregunta 9 / 10</p>
+<p class="qtext">¿Cuál es el aporte metodológico central que distingue a esta tesis de un modelo estadístico convencional (regresión logística o múltiple) para pronosticar precipitación?</p>
+<div class="qopts">
+<button class="qbtn" data-q="9" data-correct="false">A) Usar únicamente datos de estaciones meteorológicas en tierra</button>
+<button class="qbtn" data-q="9" data-correct="true">B) Aplicar un algoritmo de descubrimiento causal (PCMCI+) como filtro de variables antes de entrenar la red neuronal convolucional</button>
+<button class="qbtn" data-q="9" data-correct="false">C) Pronosticar con 10 años de anticipación en vez de 2 meses</button>
+<button class="qbtn" data-q="9" data-correct="false">D) No usar ningún dato oceánico, solo variables terrestres</button>
+</div>
+<div class="qfeedback" id="fb9"></div>
+</div>
+
+<div class="qcard" id="q10">
+<p class="qnum">Pregunta 10 / 10</p>
+<p class="qtext">En el contexto de Lima/Rímac (fuera del área de estudio de esta tesis), ¿qué elemento metodológico de este trabajo sería más directamente adaptable, según lo discutido?</p>
+<div class="qopts">
+<button class="qbtn" data-q="10" data-correct="false">A) Usar los mismos 4 predictores causales sin volver a calcularlos, porque son universales para toda cuenca peruana</button>
+<button class="qbtn" data-q="10" data-correct="true">B) El framework completo (comparación de fuentes de datos → correlación estadística → filtro causal PCMCI+ → CNN), pero recalculando el mes-predictor óptimo y las variables relevantes para el régimen andino-costero del Rímac</button>
+<button class="qbtn" data-q="10" data-correct="false">C) Ninguno, porque el Rímac no tiene ningún vínculo con ENOS</button>
+<button class="qbtn" data-q="10" data-correct="false">D) Solo la arquitectura de red neuronal, ignorando el paso de descubrimiento causal</button>
+</div>
+<div class="qfeedback" id="fb10"></div>
+</div>
+
+<div class="results" id="qresults">
+<p id="qresultstext"></p>
+<button class="restart" id="qrestart">🔄 Reiniciar quiz</button>
+</div>
+</div>
+</div>
+
+<div class="footer">
+<span class="ft">REFERENCIAS DEL PDF:</span>
+<span class="fc">SENAMHI (2021) · IGP / Takahashi (2004, 2014, 2016, 2018) · Hersbach et al. (2020) ERA5 · Muñoz Sabater (2019) ERA5-Land · Aybar et al. (2019) PISCO · Runge et al. PCMCI+ · Xie &amp; Philander (1994) WES feedback · L'Heureux et al. (2016) · Wu et al. (2025); Li et al. (2022) descubrimiento causal en CNN</span>
+</div>
+
+</div>
+<script>
+(function(){
+var answered={};
+var correctCount=0;
+var container=document.currentScript.parentElement;
+container.addEventListener('click',function(e){
+var btn=e.target.closest('.qbtn');
+if(!btn)return;
+var q=btn.getAttribute('data-q');
+if(answered[q])return;
+answered[q]=true;
+var group=container.querySelectorAll('.qbtn[data-q="'+q+'"]');
+var isCorrect=btn.getAttribute('data-correct')==='true';
+group.forEach(function(b){
+b.classList.add('disabled');
+if(b.getAttribute('data-correct')==='true'){b.classList.add('correct');b.textContent='✅ '+b.textContent;}
+else if(b===btn){b.classList.add('incorrect');b.textContent='❌ '+b.textContent;}
+});
+var fb=document.getElementById('fb'+q);
+fb.style.display='block';
+var explanations={
+'1':'ERA5-Land se prefirió porque, a pesar de que PISCO también representa bien la lluvia local, ERA5-Land se extiende desde 1950 (33 años más que PISCO), lo cual enriquece sustancialmente el entrenamiento de un modelo de IA que necesita máxima cantidad de observaciones.',
+'2':'La asimetría norte-sur de la ZCIT responde a la mayor proporción de continente en el hemisferio norte y al feedback viento-evaporación-TSM (WES), que mantiene fría el agua del Pacífico Sur oriental por afloramiento costero e inversión térmica, impidiendo que la ZCIT se instale allí de forma permanente.',
+'3':'El Niño global involucra una capa oceánica profunda (&gt;100 m) con dinámica lenta gobernada por ondas Kelvin/Rossby; El Niño costero involucra solo ~30 m de profundidad con dinámica rápida (semanas), ligada al debilitamiento local de alisios del sur y a la ZCIT sur.',
+'4':'El filtro causal PCMCI+ redujo los 8 predictores estadísticos a solo 4 con relación causal directa: SST⁻ (Pacífico central), SST⁺ (Pacífico suroriental), u10⁺ (viento zonal, Pacífico central) y v10⁻ (viento meridional, costa norte de Perú).',
+'5':'En una horquilla (fork/confounding) A←B→C, B es la causa común de A y C; A y C no tienen relación causal directa entre sí, solo aparecen correlacionados por compartir la causa B — justamente lo que un algoritmo causal debe detectar y descartar.',
+'6':'Todas las capas convolucionales usaron ReLU (Rectified Linear Unit), mientras que las capas densas finales usaron activación lineal, apropiada para una tarea de regresión (pronosticar un valor continuo de precipitación, no una clase).',
+'7':'Una caída de Spearman de entrenamiento a validación es normal y esperable; lo importante metodológicamente es diagnosticar espacialmente dónde el modelo generaliza peor (en este caso, la zona suroriental de la cuenca), para orientar mejoras futuras.',
+'8':'El patrón espacial correcto con magnitud sub-estimada es un resultado parcial: el modelo capta la física general del evento pero no su intensidad completa, lo cual es una limitación conocida a mejorar, por ejemplo con ensambles de múltiples entrenamientos.',
+'9':'El aporte central es usar descubrimiento causal (PCMCI+) como paso de preprocesamiento para seleccionar variables con respaldo físico-causal, no solo estadístico, antes de entrenar la CNN — un enfoque menos común que la regresión estadística tradicional.',
+'10':'El framework metodológico completo es trasladable (comparación de fuentes de datos, correlación estadística, filtro causal, CNN), pero cada paso debe re-ejecutarse con datos y física propios del Rímac, ya que su régimen es más andino-orográfico que el de Piura y el mes-predictor óptimo probablemente difiera de enero→marzo.'
+};
+fb.className='qfeedback '+(isCorrect?'ok':'bad');
+fb.textContent=(isCorrect?'✅ ¡Correcto! ':'❌ Incorrecto. ')+explanations[q];
+if(isCorrect)correctCount++;
+var answeredCount=Object.keys(answered).length;
+document.getElementById('qprogress').textContent='Pregunta '+answeredCount+' de 10 respondidas — '+Math.round(correctCount/10*100)+'% de aciertos';
+document.getElementById('qbar').style.width=(answeredCount/10*100)+'%';
+if(answeredCount===10){
+var res=document.getElementById('qresults');
+res.style.display='block';
+var msg;
+if(correctCount<=4){res.style.background='#fee2e2';msg='Necesitas repasar el material.';}
+else if(correctCount<=7){res.style.background='#fef9c3';msg='¡Buen avance, sigue repasando!';}
+else{res.style.background='#dcfce7';msg='¡Excelente dominio del tema!';}
+document.getElementById('qresultstext').textContent=correctCount+' / 10 correctas — '+msg;
+}
+});
+document.getElementById('qrestart').addEventListener('click',function(){
+answered={};correctCount=0;
+container.querySelectorAll('.qbtn').forEach(function(b){
+b.classList.remove('correct','incorrect','disabled');
+b.textContent=b.textContent.replace('✅ ','').replace('❌ ','');
+});
+container.querySelectorAll('.qfeedback').forEach(function(f){f.style.display='none';f.textContent='';});
+document.getElementById('qprogress').textContent='Pregunta 0 de 10 respondidas — 0% de aciertos';
+document.getElementById('qbar').style.width='0%';
+document.getElementById('qresults').style.display='none';
+});
+})();
+</script>
